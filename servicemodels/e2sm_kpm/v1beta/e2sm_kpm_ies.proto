@@ -1,0 +1,465 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+*/
+
+////////////////////// e2sm-kpm-ies.proto //////////////////////
+// Protobuf generated from /e2sm-kpm-v01.00.00.asn1 by asn1c-0.9.29
+// E2SM-KPM-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) 53148 e2(1) version1(1) e2sm(2) e2sm-KPMMON-IEs(2) }
+
+syntax = "proto3";
+
+package e2sm_kpm.v1beta1;
+option go_package = "github.com/onosproject/onos-e2t/api/e2sm_kpm/v1beta1/e2sm-kpm-ies";
+
+import "validate/v1/validate.proto";
+
+// enumerated from e2sm-kpm-v01.00.asn1:244
+enum NiType {
+    NI_TYPE_X2_U = 0;
+    NI_TYPE_XN_U = 1;
+    NI_TYPE_F1_U = 2;
+};
+
+// enumerated from e2sm-kpm-v01.00.asn1:257
+enum RtPeriodIe {
+    RT_PERIOD_IE_MS10 = 0;
+    RT_PERIOD_IE_MS20 = 1;
+    RT_PERIOD_IE_MS32 = 2;
+    RT_PERIOD_IE_MS40 = 3;
+    RT_PERIOD_IE_MS60 = 4;
+    RT_PERIOD_IE_MS64 = 5;
+    RT_PERIOD_IE_MS70 = 6;
+    RT_PERIOD_IE_MS80 = 7;
+    RT_PERIOD_IE_MS128 = 8;
+    RT_PERIOD_IE_MS160 = 9;
+    RT_PERIOD_IE_MS256 = 10;
+    RT_PERIOD_IE_MS320 = 11;
+    RT_PERIOD_IE_MS512 = 12;
+    RT_PERIOD_IE_MS640 = 13;
+    RT_PERIOD_IE_MS1024 = 14;
+    RT_PERIOD_IE_MS1280 = 15;
+    RT_PERIOD_IE_MS2048 = 16;
+    RT_PERIOD_IE_MS2560 = 17;
+    RT_PERIOD_IE_MS5120 = 18;
+    RT_PERIOD_IE_MS10240 = 19;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:22
+message GlobalKpmnodeId {
+    // choice from e2sm-kpm-v01.00.asn1:22
+    oneof global_kpmnode_id {
+        GlobalKpmnodeGnbId g_nb = 1;
+        GlobalKpmnodeEnGnbId en_g_nb = 2;
+        GlobalKpmnodeNgEnbId ng_e_nb = 3;
+        GlobalKpmnodeEnbId e_nb = 4;
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:32
+message GlobalKpmnodeGnbId {
+    GlobalgNbId global_g_nb_id = 1;
+    GnbCuUpId g_nb_cu_up_id = 2;
+    GnbDuId g_nb_du_id = 3;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:39
+message GlobalgNbId {
+    PlmnIdentity plmn_id = 1;
+    GnbIdChoice gnb_id = 2;
+};
+
+// range of Integer from e2sm-kpm-v01.00.asn1:44
+message GnbCuUpId {
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}];
+};
+
+// range of Integer from e2sm-kpm-v01.00.asn1:45
+message GnbDuId {
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:48
+message GnbIdChoice {
+    // choice from e2sm-kpm-v01.00.asn1:48
+    oneof gnb_id_choice {
+        bytes gnb_id = 1 [(validate.v1.rules).bytes.len = 4]; //22-32
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:55
+message GlobalKpmnodeEnGnbId {
+    GlobalenGnbId global_g_nb_id = 1;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:60
+message GlobalenGnbId {
+    PlmnIdentity p_lmn_identity = 1;
+    EngnbId g_nb_id = 2;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:66
+message EngnbId {
+    // choice from e2sm-kpm-v01.00.asn1:66
+    oneof engnb_id {
+        bytes g_nb_id = 1 [(validate.v1.rules).bytes.len = 4]; //22-32
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:73
+message GlobalKpmnodeNgEnbId {
+    GlobalngeNbId global_ng_e_nb_id = 1;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:78
+message GlobalngeNbId {
+    PlmnIdentity plmn_id = 1;
+    EnbIdChoice enb_id = 2;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:84
+message EnbIdChoice {
+    // choice from e2sm-kpm-v01.00.asn1:84
+    oneof enb_id_choice {
+        bytes enb_id_macro = 1 [(validate.v1.rules).bytes.len = 3]; //20
+        bytes enb_id_shortmacro = 2 [(validate.v1.rules).bytes.len = 3]; //18
+        bytes enb_id_longmacro = 3 [(validate.v1.rules).bytes.len = 3]; //21;
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:93
+message GlobalKpmnodeEnbId {
+    GlobalEnbId global_e_nb_id = 1;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:98
+message GlobalEnbId {
+    PlmnIdentity p_lmn_identity = 1;
+    EnbId e_nb_id = 2;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:104
+message EnbId {
+    // choice from e2sm-kpm-v01.00.asn1:104
+    oneof enb_id {
+        bytes macro_e_nb_id = 1 [(validate.v1.rules).bytes.len = 3]; //20
+        bytes home_e_nb_id = 2 [(validate.v1.rules).bytes.len = 4]; //28
+        bytes short_macro_e_nb_id = 3 [(validate.v1.rules).bytes.len = 3]; //18
+        bytes long_macro_e_nb_id = 4 [(validate.v1.rules).bytes.len = 3]; //21
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:113
+message Nrcgi {
+    PlmnIdentity p_lmn_identity = 1;
+    NrcellIdentity n_rcell_identity = 2;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:122
+message Snssai {
+    bytes s_st = 1 [(validate.v1.rules).bytes.len = 1];;
+    bytes s_d = 2 [(validate.v1.rules).bytes.len = 3];;
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:132
+message MaxofMessageProtocolTests {
+    int32 value = 1 [(validate.v1.rules).int32.const = 15];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:133
+message MaxofRicstyles {
+    int32 value = 1 [(validate.v1.rules).int32.const = 63];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:134
+message MaxnoofQci {
+    int32 value = 1 [(validate.v1.rules).int32.const = 256];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:135
+message MaxnoofQoSflows {
+    int32 value = 1 [(validate.v1.rules).int32.const = 64];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:136
+message MaxnoofSliceItems {
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:137
+message MaxnoofContainerListItems {
+    int32 value = 1 [(validate.v1.rules).int32.const = 3];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:138
+message MaxCellingNbdu {
+    int32 value = 1 [(validate.v1.rules).int32.const = 512];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:139
+message MaxofContainers {
+    int32 value = 1 [(validate.v1.rules).int32.const = 8];
+};
+
+// constant Integer from e2sm-kpm-v01.00.asn1:140
+message MaxPlmn {
+    int32 value = 1 [(validate.v1.rules).int32.const = 12];
+};
+
+// range of Integer from e2sm-kpm-v01.00.asn1:144
+message RicStyleType {
+    int32 value = 1;
+};
+
+// range of Integer from e2sm-kpm-v01.00.asn1:158
+message RicFormatType {
+    int32 value = 1;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:159
+message E2SmKpmEventTriggerDefinition {
+    // choice from e2sm-kpm-v01.00.asn1:159
+    oneof e2_sm_kpm_event_trigger_definition {
+        E2SmKpmEventTriggerDefinitionFormat1 event_definition_format1 = 1;
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:165
+message E2SmKpmEventTriggerDefinitionFormat1 {
+    repeated TriggerConditionIeItem policy_test_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 15}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:175
+message E2SmKpmActionDefinition {
+    RicStyleType ric_style_type = 1;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:185
+message E2SmKpmIndicationHeader {
+    // choice from e2sm-kpm-v01.00.asn1:185
+    oneof e2_sm_kpm_indication_header {
+        E2SmKpmIndicationHeaderFormat1 indication_header_format1 = 1;
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:191
+message E2SmKpmIndicationHeaderFormat1 {
+    GlobalKpmnodeId id_global_kpmnode_id = 1;
+    Nrcgi n_rcgi = 2;
+    PlmnIdentity p_lmn_identity = 3;
+    Snssai slice_id = 4;
+    int32 five_qi = 5 [(validate.v1.rules).int32 = {gte: 0, lte: 255}];
+    int32 qci = 6 [(validate.v1.rules).int32 = {gte: 0, lte: 255}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:206
+message E2SmKpmIndicationMessage {
+    // choice from e2sm-kpm-v01.00.asn1:206
+    oneof e2_sm_kpm_indication_message {
+        RicStyleType ric_style_type = 1;
+        E2SmKpmIndicationMessageFormat1 indication_message_format1 = 2;
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:213
+message E2SmKpmIndicationMessageFormat1 {
+    repeated PmContainersList pm_containers = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 512}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:218
+message PmContainersList {
+    PfContainer performance_container = 1;
+    RanContainer the_rancontainer = 2;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:229
+message E2SmKpmRanfunctionDescription {
+    RanfunctionName ran_function_name = 1;
+    E2SmKpmRanfunctionItem001 e2_sm_kpm_ranfunction_item = 2;
+
+    message E2SmKpmRanfunctionItem001 {
+        repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+        repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:253
+message TriggerConditionIeItem {
+    RtPeriodIe report_period_ie = 1;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:262
+message RanfunctionName {
+    string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+    string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}];
+    string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+    int32 ran_function_instance = 4;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:270
+message RicEventTriggerStyleList {
+    RicStyleType ric_event_trigger_style_type = 1;
+    RicStyleName ric_event_trigger_style_name = 2;
+    RicFormatType ric_event_trigger_format_type = 3;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:277
+message RicReportStyleList {
+    RicStyleType ric_report_style_type = 1;
+    RicStyleName ric_report_style_name = 2;
+    RicFormatType ric_indication_header_format_type = 3;
+    RicFormatType ric_indication_message_format_type = 4;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:285
+message PfContainer {
+    // choice from e2sm-kpm-v01.00.asn1:285
+    oneof pf_container {
+        OduPfContainer o_du = 1;
+        OcucpPfContainer o_cu_cp = 2;
+        OcuupPfContainer o_cu_up = 3;
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:303
+message OduPfContainer {
+    repeated CellResourceReportListItem cell_resource_report_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 512}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:308
+message CellResourceReportListItem {
+    Nrcgi n_rcgi = 1;
+    int32 dl_totalof_available_prbs = 2 [(validate.v1.rules).int32 = {gte: 0, lte: 273}];
+    int32 ul_totalof_available_prbs = 3 [(validate.v1.rules).int32 = {gte: 0, lte: 273}];;
+    repeated ServedPlmnPerCellListItem served_plmn_per_cell_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 12}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:316
+message ServedPlmnPerCellListItem {
+    PlmnIdentity p_lmn_identity = 1;
+    FgcDuPmContainer du_pm_5_gc = 2;
+    EpcDuPmContainer du_pm_epc = 3;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:323
+message FgcDuPmContainer {
+    repeated SlicePerPlmnPerCellListItem slice_per_plmn_per_cell_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:328
+message SlicePerPlmnPerCellListItem {
+    Snssai slice_id = 1;
+    repeated FqiperslicesPerPlmnPerCellListItem f_qiperslices_per_plmn_per_cell_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 64}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:334
+message FqiperslicesPerPlmnPerCellListItem {
+    int32 five_qi = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}];
+    int32 dl_prbusage = 2 [(validate.v1.rules).int32 = {gte: 0, lte: 273}];
+    int32 ul_prbusage = 3 [(validate.v1.rules).int32 = {gte: 0, lte: 273}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:341
+message EpcDuPmContainer {
+    repeated PerQcireportListItem per_qcireport_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 256}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:346
+message PerQcireportListItem {
+    int32 qci = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 273}];
+    int32 dl_prbusage = 2 [(validate.v1.rules).int32 = {gte: 0, lte: 100}];
+    int32 ul_prbusage = 3 [(validate.v1.rules).int32 = {gte: 0, lte: 100}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:358
+message OcucpPfContainer {
+    GnbCuCpName g_nb_cu_cp_name = 1;
+    CuCpResourceStatus001 cu_cp_resource_status = 2;
+
+    message CuCpResourceStatus001 {
+        int32 number_of_active_ues = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 65536}];
+    }
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:369
+message OcuupPfContainer {
+    GnbCuUpName g_nb_cu_up_name = 1;
+    repeated PfContainerListItem pf_container_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 3}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:375
+message PfContainerListItem {
+    NiType interface_type = 1;
+    CuupmeasurementContainer o_cu_up_pm_container = 2;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:381
+message CuupmeasurementContainer {
+    repeated PlmnIdList plmn_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 12}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:386
+message PlmnIdList {
+    PlmnIdentity p_lmn_identity = 1;
+    FgcCuupPmFormat cu_up_pm_5_gc = 2;
+    EpcCuupPmFormat cu_up_pm_epc = 3;
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:393
+message FgcCuupPmFormat {
+    repeated SliceToReportListItem slice_to_report_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:398
+message SliceToReportListItem {
+    Snssai slice_id = 1;
+    repeated FqiperslicesPerPlmnListItem f_qiperslices_per_plmn_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 64}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:404
+message FqiperslicesPerPlmnListItem {
+    int32 five_qi = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}];
+    int64 p_dcpbytes_dl = 2 [(validate.v1.rules).int64 = {gte: 0, lte: 10000000000}];
+    int64 p_dcpbytes_ul = 3 [(validate.v1.rules).int64 = {gte: 0, lte: 10000000000}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:411
+message EpcCuupPmFormat {
+    repeated PerQcireportListItemFormat per_qcireport_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 256}];
+};
+
+// sequence from e2sm-kpm-v01.00.asn1:416
+message PerQcireportListItemFormat {
+    int32 qci = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}];
+    int64 p_dcpbytes_dl = 2 [(validate.v1.rules).int64 = {gte: 0, lte: 10000000000}];
+    int64 p_dcpbytes_ul = 3 [(validate.v1.rules).int64 = {gte: 0, lte: 10000000000}];
+};
+
+message PlmnIdentity {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3];
+}
+
+message NrcellIdentity {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 5]; //36
+}
+
+message RanContainer {
+    bytes value = 1;
+}
+
+message RicStyleName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
+
+message GnbCuCpName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
+
+message GnbDuName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
+
+message GnbCuUpName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
