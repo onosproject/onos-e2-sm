@@ -1,0 +1,623 @@
+////////////////////// e2sm-ni-ies.proto //////////////////////
+// Protobuf generated from /e2sm-ni-v01.00.00.asn1 by asn1c-0.9.29
+// E2SM-NI-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) 53148 e2(1) version1(1) e2sm(2) e2sm-NI-IEs(1) }
+
+syntax = "proto3";
+
+package e2sm_ni.v1beta1;
+option go_package = "github.com/onosproject/onos-e2t/api/e2sm_ni/v1beta1/e2sm-ni-ies";
+
+import "validate/v1/validate.proto";
+
+// enumerated from e2sm-ni-v01.00.asn1:106
+enum Criticality {
+    CRITICALITY_REJECT = 0;
+    CRITICALITY_IGNORE = 1;
+    CRITICALITY_NOTIFY = 2;
+};
+
+// enumerated from e2sm-ni-v01.00.asn1:108
+enum Presence {
+    PRESENCE_OPTIONAL = 0;
+    PRESENCE_CONDITIONAL = 1;
+    PRESENCE_MANDATORY = 2;
+};
+
+// enumerated from e2sm-ni-v01.00.asn1:362
+enum NiDirection {
+    NI_DIRECTION_INCOMING = 0;
+    NI_DIRECTION_OUTGOING = 1;
+    NI_DIRECTION_BOTH = 2;
+};
+
+// enumerated from e2sm-ni-v01.00.asn1:406
+enum TypeOfMessage {
+    TYPE_OF_MESSAGE_NOTHING = 0;
+    TYPE_OF_MESSAGE_INITIATING_MESSAGE = 1;
+    TYPE_OF_MESSAGE_SUCCESSFUL_OUTCOME = 2;
+    TYPE_OF_MESSAGE_UNSUCCESSFUL_OUTCOME = 3;
+};
+
+// enumerated from e2sm-ni-v01.00.asn1:419
+enum NiProtocolIeTest {
+    NI_PROTOCOL_IE_TEST_EQUAL = 0;
+    NI_PROTOCOL_IE_TEST_GREATERTHAN = 1;
+    NI_PROTOCOL_IE_TEST_LESSTHAN = 2;
+    NI_PROTOCOL_IE_TEST_CONTAINS = 3;
+    NI_PROTOCOL_IE_TEST_PRESENT = 4;
+};
+
+// enumerated from e2sm-ni-v01.00.asn1:440
+enum NiType {
+    NI_TYPE_S1 = 0;
+    NI_TYPE_X2 = 1;
+    NI_TYPE_NG = 2;
+    NI_TYPE_XN = 3;
+    NI_TYPE_F1 = 4;
+    NI_TYPE_E1 = 5;
+};
+
+// enumerated from e2sm-ni-v01.00.asn1:490
+enum RanparameterTestCondition {
+    RANPARAMETER_TEST_CONDITION_EQUAL = 0;
+    RANPARAMETER_TEST_CONDITION_GREATERTHAN = 1;
+    RANPARAMETER_TEST_CONDITION_LESSTHAN = 2;
+    RANPARAMETER_TEST_CONDITION_CONTAINS = 3;
+    RANPARAMETER_TEST_CONDITION_PRESENT = 4;
+};
+
+// enumerated from e2sm-ni-v01.00.asn1:499
+enum RanparameterType {
+    RANPARAMETER_TYPE_INTEGER = 0;
+    RANPARAMETER_TYPE_ENUMERATED = 1;
+    RANPARAMETER_TYPE_BOOLEAN = 2;
+    RANPARAMETER_TYPE_BIT_STRING = 3;
+    RANPARAMETER_TYPE_OCTET_STRING = 4;
+    RANPARAMETER_TYPE_PRINTABLE_STRING = 5;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:25
+message GlobalEnbId {
+    PlmnIdentity p_lmn_identity = 1;
+    EnbId e_nb_id = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:31
+message EnbId {
+    // choice from e2sm-ni-v01.00.asn1:31
+    oneof enb_id {
+        bytes macro_e_nb_id = 1 [(validate.v1.rules).bytes.len = 3]; //20
+        bytes home_e_nb_id = 2 [(validate.v1.rules).bytes.len = 4]; //28
+        bytes short_macro_e_nb_id = 3 [(validate.v1.rules).bytes.len = 3]; //18
+        bytes long_macro_e_nb_id = 4 [(validate.v1.rules).bytes.len = 3]; //21
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:39
+message GlobalenGnbId {
+    PlmnIdentity p_lmn_identity = 1;
+    EngnbId g_nb_id = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:45
+message EngnbId {
+    // choice from e2sm-ni-v01.00.asn1:45
+    oneof engnb_id {
+        bytes g_nb_id = 1 [(validate.v1.rules).bytes.len = 4]; //22-32;
+    }
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:54
+message GnbCuUpId {
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}];
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:59
+message GnbDuId {
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:67
+message GlobalgNbId {
+    PlmnIdentity plmn_id = 1;
+    GnbIdChoice gnb_id = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:72
+message GnbIdChoice {
+    // choice from e2sm-ni-v01.00.asn1:72
+    oneof gnb_id_choice {
+        bytes gnb_id = 1 [(validate.v1.rules).bytes.len = 4]; //22-32;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:78
+message GlobalngeNbId {
+    PlmnIdentity plmn_id = 1;
+    EnbIdChoice enb_id = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:84
+message EnbIdChoice {
+    // choice from e2sm-ni-v01.00.asn1:84
+    oneof enb_id_choice {
+        bytes enb_id_macro = 1 [(validate.v1.rules).bytes.len = 3]; //20
+        bytes enb_id_shortmacro = 2 [(validate.v1.rules).bytes.len = 3]; //18
+        bytes enb_id_longmacro = 3 [(validate.v1.rules).bytes.len = 3]; //21;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:91
+message GlobalNgRannodeId {
+    // choice from e2sm-ni-v01.00.asn1:91
+    oneof global_ng_rannode_id {
+        GlobalgNbId g_nb = 1;
+        GlobalngeNbId ng_e_nb = 2;
+    }
+};
+
+// constant Integer from e2sm-ni-v01.00.asn1:104
+message MaxProtocolIes {
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535];
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:110
+message ProcedureCode {
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}];
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:112
+message ProtocolIeId {
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 65535}];
+};
+
+// constant Integer from e2sm-ni-v01.00.asn1:122
+message MaxofInterfaceProtocolTests {
+    int32 value = 1 [(validate.v1.rules).int32.const = 15];
+};
+
+// constant Integer from e2sm-ni-v01.00.asn1:123
+message MaxofRanueGroups {
+    int32 value = 1 [(validate.v1.rules).int32.const = 255];
+};
+
+// constant Integer from e2sm-ni-v01.00.asn1:124
+message MaxofActionParameters {
+    int32 value = 1 [(validate.v1.rules).int32.const = 255];
+};
+
+// constant Integer from e2sm-ni-v01.00.asn1:125
+message MaxofRanparameters {
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535];
+};
+
+// constant Integer from e2sm-ni-v01.00.asn1:126
+message MaxofNitypes {
+    int32 value = 1 [(validate.v1.rules).int32.const = 63];
+};
+
+// constant Integer from e2sm-ni-v01.00.asn1:127
+message MaxofRicstyles {
+    int32 value = 1 [(validate.v1.rules).int32.const = 63];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:141
+message E2SmNiEventTriggerDefinition {
+    // choice from e2sm-ni-v01.00.asn1:141
+    oneof e2_sm_ni_event_trigger_definition {
+        E2SmNiEventTriggerDefinitionFormat1 event_definition_format1 = 1;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:147
+message E2SmNiEventTriggerDefinitionFormat1 {
+    NiType interface_type = 1;
+    NiIdentifier interface_id = 2;
+    NiDirection interface_direction = 3;
+    NiMessageType interface_message_type = 4;
+    repeated NiProtocolIeItem interface_protocol_ie_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 15}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:162
+message E2SmNiActionDefinition {
+    RicStyleType ric_style_type = 1;
+    E2SmNiActionDefinitionFormat action_definition_format = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:168
+message E2SmNiActionDefinitionFormat {
+    // choice from e2sm-ni-v01.00.asn1:168
+    oneof e2_sm_ni_action_definition_format {
+        E2SmNiActionDefinitionFormat1 action_definition_format1 = 1;
+        E2SmNiActionDefinitionFormat2 action_definition_format2 = 2;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:175
+message E2SmNiActionDefinitionFormat1 {
+    repeated RanparameterItem action_parameter_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 255}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:182
+message E2SmNiActionDefinitionFormat2 {
+    repeated RanueGroupItem ran_uegroup_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 255}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:194
+message E2SmNiIndicationHeader {
+    // choice from e2sm-ni-v01.00.asn1:194
+    oneof e2_sm_ni_indication_header {
+        E2SmNiIndicationHeaderFormat1 indication_header_format1 = 1;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:200
+message E2SmNiIndicationHeaderFormat1 {
+    NiType interface_type = 1;
+    NiIdentifier interface_id = 2;
+    NiDirection interface_direction = 3;
+    NiTimeStamp timestamp = 4;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:215
+message E2SmNiIndicationMessage {
+    // choice from e2sm-ni-v01.00.asn1:215
+    oneof e2_sm_ni_indication_message {
+        E2SmNiIndicationMessageFormat1 indication_message_format1 = 1;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:221
+message E2SmNiIndicationMessageFormat1 {
+    NiMessage interface_message = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:232
+message E2SmNiCallProcessId {
+    // choice from e2sm-ni-v01.00.asn1:232
+    oneof e2_sm_ni_call_process_id {
+        E2SmNiCallProcessIdFormat1 call_process_id_format1 = 1;
+        E2SmNiCallProcessIdFormat2 call_process_id_format2 = 2;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:239
+message E2SmNiCallProcessIdFormat1 {
+    RancallProcessIdNumber call_process_id = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:244
+message E2SmNiCallProcessIdFormat2 {
+    RancallProcessIdString call_process_id = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:256
+message E2SmNiControlHeader {
+    // choice from e2sm-ni-v01.00.asn1:256
+    oneof e2_sm_ni_control_header {
+        E2SmNiControlHeaderFormat1 control_header_format1 = 1;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:261
+message E2SmNiControlHeaderFormat1 {
+    NiType interface_type = 1;
+    NiIdentifier interface_id = 2;
+    NiDirection interface_direction = 3;
+    RicControlMessagePriority ric_control_message_priority = 4;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:277
+message E2SmNiControlMessage {
+    // choice from e2sm-ni-v01.00.asn1:277
+    oneof e2_sm_ni_control_message {
+        E2SmNiControlMessageFormat1 control_message_format1 = 1;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:283
+message E2SmNiControlMessageFormat1 {
+    NiMessage interface_message = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:295
+message E2SmNiControlOutcome {
+    // choice from e2sm-ni-v01.00.asn1:295
+    oneof e2_sm_ni_control_outcome {
+        E2SmNiControlOutcomeFormat1 control_outcome_format1 = 1;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:301
+message E2SmNiControlOutcomeFormat1 {
+    repeated RanparameterItem outcome_element_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:313
+message E2SmNiRanfunctionDescription {
+    RanfunctionName ran_function_name = 1;
+    repeated E2SmNiRanfunctionItem ni_type_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:319
+message E2SmNiRanfunctionItem {
+    NiType interface_type = 1;
+    repeated RicEventTriggerStyleList ric_event_trigger_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+    repeated RicReportStyleList ric_report_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+    repeated RicInsertStyleList ric_insert_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+    repeated RicControlStyleList ric_control_style_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+    repeated RicPolicyStyleList ric_policy_style_list = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+};
+
+// reference from e2sm-ni-v01.00.asn1:342
+//message GlobalEnbId {
+//    GlobalEnbId001 value = 1;
+//};
+
+// reference from e2sm-ni-v01.00.asn1:343
+message GlobalEnGnbId {
+    GlobalenGnbId value = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:344
+message GlobalGnbDuId {
+    GlobalNgRanId global_ng_ran_id = 1;
+    GnbDuId g_nb_du_id = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:349
+message GlobalGnbCuUpId {
+    GlobalNgRanId global_ng_ran_id = 1;
+    GnbCuUpId g_nb_cu_up_id = 2;
+};
+
+// reference from e2sm-ni-v01.00.asn1:361
+message GlobalNgRanId {
+    GlobalNgRannodeId value = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:371
+message NiIdentifier {
+    // choice from e2sm-ni-v01.00.asn1:371
+    oneof ni_identifier {
+        GlobalEnbId global_e_nb_id = 1;
+        GlobalEnGnbId global_en_g_nb_id = 2;
+        GlobalNgRanId global_ng_ran_id = 3;
+        GlobalGnbDuId global_g_nb_du_id = 4;
+        GlobalGnbCuUpId global_g_nb_cu_up_id = 5;
+    }
+};
+
+// sequence from e2sm-ni-v01.00.asn1:384
+message NiMessageType {
+    // choice from e2sm-ni-v01.00.asn1:384
+    oneof ni_message_type {
+        NiMessageTypeS1 s1_message_type = 1;
+        NiMessageTypeX2 x2_message_type = 2;
+        NiMessageTypeNg ng_message_type = 3;
+        NiMessageTypeXn xn_message_type = 4;
+        NiMessageTypeF1 f1_message_type = 5;
+        NiMessageTypeE1 e1_message_type = 6;
+    }
+};
+
+// reference from e2sm-ni-v01.00.asn1:394
+message NiMessageTypeS1 {
+    NiMessageTypeApproach1 value = 1;
+};
+
+// reference from e2sm-ni-v01.00.asn1:395
+message NiMessageTypeX2 {
+    NiMessageTypeApproach1 value = 1;
+};
+
+// reference from e2sm-ni-v01.00.asn1:396
+message NiMessageTypeNg {
+    NiMessageTypeApproach1 value = 1;
+};
+
+// reference from e2sm-ni-v01.00.asn1:397
+message NiMessageTypeXn {
+    NiMessageTypeApproach1 value = 1;
+};
+
+// reference from e2sm-ni-v01.00.asn1:398
+message NiMessageTypeF1 {
+    NiMessageTypeApproach1 value = 1;
+};
+
+// reference from e2sm-ni-v01.00.asn1:400
+message NiMessageTypeE1 {
+    NiMessageTypeApproach1 value = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:401
+message NiMessageTypeApproach1 {
+    ProcedureCode procedure_code = 1;
+    TypeOfMessage type_of_message = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:410
+message NiProtocolIeItem {
+    NiProtocolIeId interface_protocol_ie_id = 1;
+    NiProtocolIeTest interface_protocol_ie_test = 2;
+    NiProtocolIeValue interface_protocol_ie_value = 3;
+};
+
+// reference from e2sm-ni-v01.00.asn1:418
+message NiProtocolIeId {
+    ProtocolIeId value = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:428
+message NiProtocolIeValue {
+    // choice from e2sm-ni-v01.00.asn1:428
+    oneof ni_protocol_ie_value {
+        int32 value_int = 1;
+        int32 value_enum = 2;
+        bool value_bool = 3;
+        bytes value_bit_s = 4;
+        bytes value_oct_s = 5;
+        int32 value_prt_s = 6;
+    }
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:456
+message RancallProcessIdNumber {
+    int32 value = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:459
+message RanfunctionName {
+    string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+    string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}];
+    string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+    int32 ran_function_instance = 4;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:468
+message RanimperativePolicy {
+    repeated RanparameterItem ran_imperative_policy_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:473
+message RanparameterItem {
+    RanparameterId ran_parameter_id = 1;
+    RanparameterValue ran_parameter_value = 2;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:479
+message RanparameterDefItem {
+    RanparameterId ran_parameter_id = 1;
+    RanparameterName ran_parameter_name = 2;
+    RanparameterType ran_parameter_type = 3;
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:485
+message RanparameterId {
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 65535}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:509
+message RanparameterValue {
+    // choice from e2sm-ni-v01.00.asn1:509
+    oneof ranparameter_value {
+        int32 value_int = 1;
+        int32 value_enum = 2;
+        bool value_bool = 3;
+        bytes value_bit_s = 4;
+        bytes value_oct_s = 5;
+        int32 value_prt_s = 6;
+    }
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:519
+message RanueGroupId {
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:522
+message RanueGroupItem {
+    RanueGroupId ran_uegroup_id = 1;
+    RanueGroupDefinition ran_uegroup_definition = 2;
+    RanimperativePolicy ran_policy = 3;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:531
+message RanueGroupDefinition {
+    repeated RanueGroupDefItem ran_uegroup_def_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:537
+message RanueGroupDefItem {
+    RanparameterId ran_parameter_id = 1;
+    RanparameterTestCondition ran_parameter_test = 2;
+    RanparameterValue ran_parameter_value = 3;
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:546
+message RicControlMessagePriority {
+    int32 value = 1;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:547
+message RicControlStyleList {
+    RicStyleType ric_control_style_type = 1;
+    RicStyleName ric_control_style_name = 2;
+    RicFormatType ric_control_format_type = 3;
+    RicFormatType ric_control_header_format_type = 4;
+    RicFormatType ric_control_message_format_type = 5;
+    RicFormatType ric_call_process_idformat_type = 6;
+    RicFormatType ric_control_outcome_format_type = 7;
+    repeated RanparameterDefItem ric_control_outcome_ran_para_def_list = 8 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:559
+message RicEventTriggerStyleList {
+    RicStyleType ric_event_trigger_style_type = 1;
+    RicStyleName ric_event_trigger_style_name = 2;
+    RicFormatType ric_event_trigger_format_type = 3;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:565
+message RicInsertStyleList {
+    RicStyleType ric_insert_style_type = 1;
+    RicStyleName ric_insert_style_name = 2;
+    RicFormatType ric_insert_action_format_type = 3;
+    repeated RanparameterDefItem ric_insert_ran_parameter_def_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}];
+    RicFormatType ric_indication_header_format_type = 5;
+    RicFormatType ric_indication_message_format_type = 6;
+    RicFormatType ric_call_process_idformat_type = 7;
+};
+
+// sequence from e2sm-ni-v01.00.asn1:575
+message RicPolicyStyleList {
+    RicStyleType ric_policy_style_type = 1;
+    RicStyleName ric_policy_style_name = 2;
+    RicFormatType ric_policy_action_format_type = 3;
+    repeated RanparameterDefItem ric_policy_ran_parameter_def_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}];
+};
+
+// sequence from e2sm-ni-v01.00.asn1:583
+message RicReportStyleList {
+    RicStyleType ric_report_style_type = 1;
+    RicStyleName ric_report_style_name = 2;
+    RicFormatType ric_report_action_format_type = 3;
+    repeated RanparameterDefItem ric_report_ran_parameter_def_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}];
+    RicFormatType ric_indication_header_format_type = 5;
+    RicFormatType ric_indication_message_format_type = 6;
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:594
+message RicFormatType {
+    int32 value = 1;
+};
+
+// range of Integer from e2sm-ni-v01.00.asn1:596
+message RicStyleType {
+    int32 value = 1;
+};
+
+message PlmnIdentity {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3];
+}
+
+message NiTimeStamp {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 8];
+}
+
+message NiMessage {
+    bytes value = 1;
+}
+
+message RancallProcessIdString {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
+
+message RanparameterName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
+
+message RicStyleName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
