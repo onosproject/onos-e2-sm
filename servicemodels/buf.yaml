@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+version: v1beta1
+lint:
+  use:
+    - DEFAULT
+    - FILE_LOWER_SNAKE_CASE
+  except:
+    - ENUM_ZERO_VALUE_SUFFIX
+    - PACKAGE_SAME_GO_PACKAGE
