@@ -13,3 +13,18 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+build/_output/onos-e2-sm
+vendor
+**/_output
+*.DS_Store
+coverage.txt
+*.coverprofile
+.idea
+.vscode
+*.o
+*.a
+.project
+.cproject
+.eclipse
+.settings/

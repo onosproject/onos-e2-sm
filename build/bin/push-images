@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+make images
+docker push onosproject/onos-e2-sm:latest
+
