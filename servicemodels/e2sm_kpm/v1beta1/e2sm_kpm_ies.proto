@@ -84,7 +84,7 @@ message GnbDuId {
 message GnbIdChoice {
     // choice from e2sm-kpm-v01.00.asn1:48
     oneof gnb_id_choice {
-        bytes gnb_id = 1 [(validate.v1.rules).bytes.len = 4]; //22-32
+        BitString gnb_id = 1; //22-32
     }
 };
 
@@ -103,7 +103,7 @@ message GlobalenGnbId {
 message EngnbId {
     // choice from e2sm-kpm-v01.00.asn1:66
     oneof engnb_id {
-        bytes g_nb_id = 1 [(validate.v1.rules).bytes.len = 4]; //22-32
+        BitString g_nb_id = 1; //22-32
     }
 };
 
@@ -122,9 +122,9 @@ message GlobalngeNbId {
 message EnbIdChoice {
     // choice from e2sm-kpm-v01.00.asn1:84
     oneof enb_id_choice {
-        bytes enb_id_macro = 1 [(validate.v1.rules).bytes.len = 3]; //20
-        bytes enb_id_shortmacro = 2 [(validate.v1.rules).bytes.len = 3]; //18
-        bytes enb_id_longmacro = 3 [(validate.v1.rules).bytes.len = 3]; //21;
+        BitString enb_id_macro = 1; //20
+        BitString enb_id_shortmacro = 2; //18
+        BitString enb_id_longmacro = 3; //21;
     }
 };
 
@@ -143,10 +143,10 @@ message GlobalEnbId {
 message EnbId {
     // choice from e2sm-kpm-v01.00.asn1:104
     oneof enb_id {
-        bytes macro_e_nb_id = 1 [(validate.v1.rules).bytes.len = 3]; //20
-        bytes home_e_nb_id = 2 [(validate.v1.rules).bytes.len = 4]; //28
-        bytes short_macro_e_nb_id = 3 [(validate.v1.rules).bytes.len = 3]; //18
-        bytes long_macro_e_nb_id = 4 [(validate.v1.rules).bytes.len = 3]; //21
+        BitString macro_e_nb_id = 1; //20
+        BitString home_e_nb_id = 2; //28
+        BitString short_macro_e_nb_id = 3; //18
+        BitString long_macro_e_nb_id = 4; //21
     }
 };
 
@@ -441,7 +441,7 @@ message PlmnIdentity {
 }
 
 message NrcellIdentity {
-    bytes value = 1 [(validate.v1.rules).bytes.len = 5]; //36
+    BitString value = 1; //36
 }
 
 message RanContainer {
@@ -462,4 +462,9 @@ message GnbDuName {
 
 message GnbCuUpName {
     string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
+
+message BitString {
+    uint64 value = 1;
+    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64];
 }
