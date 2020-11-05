@@ -123,7 +123,7 @@ func CreateE2SmKpmIndicationMsg(plmnID string, cellIdentityValue uint64, cellIde
 	}
 
 	if err := e2smKpmPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2ApPDU %s", err.Error())
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
 	}
 	return &e2smKpmPdu, nil
 }
