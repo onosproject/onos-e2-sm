@@ -29,12 +29,12 @@ func CreateE2SmKpmIndicationMsg(plmnID string, cellIdentityValue uint64, cellIde
 			NRcellIdentity: &e2sm_kpm_ies.NrcellIdentity{
 				Value: &e2sm_kpm_ies.BitString{
 					Value: cellIdentityValue, //uint64
-					Len:   cellIdentityLen, //uint32
+					Len:   cellIdentityLen,   //uint32
 				},
 			},
 		},
 		DlTotalofAvailablePrbs: dlTotalAvlblProbs, //int32
-		UlTotalofAvailablePrbs: ulTotalAvlbProbs, //int32
+		UlTotalofAvailablePrbs: ulTotalAvlbProbs,  //int32
 		ServedPlmnPerCellList:  make([]*e2sm_kpm_ies.ServedPlmnPerCellListItem, 0),
 	}
 
@@ -59,14 +59,14 @@ func CreateE2SmKpmIndicationMsg(plmnID string, cellIdentityValue uint64, cellIde
 	}
 
 	fQuipSlPerPlmnPerCell := e2sm_kpm_ies.FqiperslicesPerPlmnPerCellListItem{
-		FiveQi:     fiveQi, //int32
+		FiveQi:     fiveQi,     //int32
 		DlPrbusage: dlPrbusage, //int32
 		UlPrbusage: ulPrbusage, //int32
 	}
 	slicePerPlmn.FQiperslicesPerPlmnPerCellList = append(slicePerPlmn.FQiperslicesPerPlmnPerCellList, &fQuipSlPerPlmnPerCell)
 
 	perQcireportItem := e2sm_kpm_ies.PerQcireportListItem{
-		Qci:        qCi, //int32
+		Qci:        qCi,           //int32
 		DlPrbusage: qciDlPrbusage, //int32
 		UlPrbusage: qciUlPrbusage, //int32
 	}
