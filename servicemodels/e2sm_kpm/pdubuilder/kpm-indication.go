@@ -8,7 +8,9 @@ import (
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 )
 
-func CreateE2SmKpmIndicationMsg(plmnID string, SSt string, SD string, ranContainer string) (*e2sm_kpm_ies.E2SmKpmIndicationMessage, error) {
+func CreateE2SmKpmIndicationMsg(plmnID string, cellIdentityValue uint64, cellIdentityLen uint32, dlTotalAvlblProbs int32,
+	ulTotalAvlbProbs int32, fiveQi int32, dlPrbusage int32, ulPrbusage int32, qCi int32, qciUlPrbusage int32,
+	qciDlPrbusage int32, SSt string, SD string, gNbCuName string, cuCpNumberActvts int32, ranContainer string) (*e2sm_kpm_ies.E2SmKpmIndicationMessage, error) {
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("error: Plmn ID should be 3 chars")
 	}
@@ -26,13 +28,13 @@ func CreateE2SmKpmIndicationMsg(plmnID string, SSt string, SD string, ranContain
 			},
 			NRcellIdentity: &e2sm_kpm_ies.NrcellIdentity{
 				Value: &e2sm_kpm_ies.BitString{
-					Value: 0, //uint64
-					Len:   0, //uint32
+					Value: cellIdentityValue, //uint64
+					Len:   cellIdentityLen, //uint32
 				},
 			},
 		},
-		DlTotalofAvailablePrbs: 0, //int32
-		UlTotalofAvailablePrbs: 0, //int32
+		DlTotalofAvailablePrbs: dlTotalAvlblProbs, //int32
+		UlTotalofAvailablePrbs: ulTotalAvlbProbs, //int32
 		ServedPlmnPerCellList:  make([]*e2sm_kpm_ies.ServedPlmnPerCellListItem, 0),
 	}
 
@@ -57,16 +59,16 @@ func CreateE2SmKpmIndicationMsg(plmnID string, SSt string, SD string, ranContain
 	}
 
 	fQuipSlPerPlmnPerCell := e2sm_kpm_ies.FqiperslicesPerPlmnPerCellListItem{
-		FiveQi:     0, //int32
-		DlPrbusage: 0, //int32
-		UlPrbusage: 0, //int32
+		FiveQi:     fiveQi, //int32
+		DlPrbusage: dlPrbusage, //int32
+		UlPrbusage: ulPrbusage, //int32
 	}
 	slicePerPlmn.FQiperslicesPerPlmnPerCellList = append(slicePerPlmn.FQiperslicesPerPlmnPerCellList, &fQuipSlPerPlmnPerCell)
 
 	perQcireportItem := e2sm_kpm_ies.PerQcireportListItem{
-		Qci:        0, //int32
-		DlPrbusage: 0, //int32
-		UlPrbusage: 0, //int32
+		Qci:        qCi, //int32
+		DlPrbusage: qciDlPrbusage, //int32
+		UlPrbusage: qciUlPrbusage, //int32
 	}
 	serverPlmCells.DuPmEpc.PerQcireportList = append(serverPlmCells.DuPmEpc.PerQcireportList, &perQcireportItem)
 	serverPlmCells.DuPm_5Gc.SlicePerPlmnPerCellList = append(serverPlmCells.DuPm_5Gc.SlicePerPlmnPerCellList, &slicePerPlmn)
@@ -77,7 +79,7 @@ func CreateE2SmKpmIndicationMsg(plmnID string, SSt string, SD string, ranContain
 	}
 	oduContainer.CellResourceReportList = append(oduContainer.CellResourceReportList, &cellResourceReport)
 
-	containers := e2sm_kpm_ies.PmContainersList{
+	containerOdu1 := e2sm_kpm_ies.PmContainersList{
 		PerformanceContainer: &e2sm_kpm_ies.PfContainer{
 			PfContainer: &e2sm_kpm_ies.PfContainer_ODu{
 				ODu: &oduContainer,
@@ -93,7 +95,28 @@ func CreateE2SmKpmIndicationMsg(plmnID string, SSt string, SD string, ranContain
 			PmContainers: make([]*e2sm_kpm_ies.PmContainersList, 0),
 		},
 	}
-	e2SmIindicationMsg.IndicationMessageFormat1.PmContainers = append(e2SmIindicationMsg.IndicationMessageFormat1.PmContainers, &containers)
+	e2SmIindicationMsg.IndicationMessageFormat1.PmContainers = append(e2SmIindicationMsg.IndicationMessageFormat1.PmContainers, &containerOdu1)
+
+	ocucpContainer := e2sm_kpm_ies.OcucpPfContainer{
+		GNbCuCpName: &e2sm_kpm_ies.GnbCuCpName{
+			Value: gNbCuName, //string
+		},
+		CuCpResourceStatus: &e2sm_kpm_ies.OcucpPfContainer_CuCpResourceStatus001{
+			NumberOfActiveUes: cuCpNumberActvts, //int32
+		},
+	}
+
+	containerOcuCp1 := e2sm_kpm_ies.PmContainersList{
+		PerformanceContainer: &e2sm_kpm_ies.PfContainer{
+			PfContainer: &e2sm_kpm_ies.PfContainer_OCuCp{
+				OCuCp: &ocucpContainer,
+			},
+		},
+		TheRancontainer: &e2sm_kpm_ies.RanContainer{
+			Value: []byte(ranContainer),
+		},
+	}
+	e2SmIindicationMsg.IndicationMessageFormat1.PmContainers = append(e2SmIindicationMsg.IndicationMessageFormat1.PmContainers, &containerOcuCp1)
 
 	e2smKpmPdu := e2sm_kpm_ies.E2SmKpmIndicationMessage{
 		E2SmKpmIndicationMessage: &e2SmIindicationMsg,
