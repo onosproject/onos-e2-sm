@@ -17,5 +17,6 @@ The E2AP (E2 Application Protocol) is not a Service Model, and so is kept comple
 ## Note
 Current implementation of E2SM KPM model in `CGO` gives an error related to the `GO` pointers referencing bunch of `C` files. 
 You can verify it running `go test -v ./..` in `servicemodels/e2sm_kpm/kpmctypes/`.
+To avoid this disable checking with `GODEBUG=cgocheck=0` or just run `GODEBUG=cgocheck=0 go test ./...`.
 
 **Work is in progress.**
