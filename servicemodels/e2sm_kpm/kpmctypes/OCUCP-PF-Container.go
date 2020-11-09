@@ -29,7 +29,6 @@ func xerEncodeOCUCPPFContainer(oCuCpContainer *e2sm_kpm_ies.OcucpPfContainer) ([
 }
 
 func newOCUCPPFContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Container_t, error) {
-<<<<<<< HEAD
 	var nUEs = C.long(oCuCpC.GetCuCpResourceStatus().NumberOfActiveUes)
 
 	gnbNameCP, err := newGnbCuCpName(oCuCpC.GNbCuCpName)
@@ -41,19 +40,6 @@ func newOCUCPPFContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Con
 	// TODO: Fix an issue with Go pointers (see output of 'go test -v ./...' command)
 	ocucpC := C.OCUCP_PF_Container_t{
 		gNB_CU_CP_Name: gnbNameCP,
-=======
-	//var pr C.OCUCP_PF_Container
-	var nUEs = C.long(oCuCpC.GetCuCpResourceStatus().NumberOfActiveUes)
-
-	//gnbNameCP, err := newGnbCuCpName(oCuCpC.GNbCuCpName)
-
-	//if err != nil {
-	//	return nil, err
-	//}
-
-	ocucpC := C.OCUCP_PF_Container_t{
-		//gNB_CU_CP_Name: gnbNameCP,
->>>>>>> f416016... [SDRAN-42] Adding encoding of lower level KPMIndication message
 		cu_CP_Resource_Status: C.struct_OCUCP_PF_Container__cu_CP_Resource_Status{
 			numberOfActive_UEs: &nUEs,
 		},
