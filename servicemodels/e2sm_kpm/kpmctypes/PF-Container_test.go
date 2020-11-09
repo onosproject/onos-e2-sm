@@ -30,5 +30,5 @@ func Test_xerEncodePFContainer(t *testing.T) {
 
 	xer, err := xerEncodePFContainer(pfContainer)
 	assert.NilError(t, err)
-	t.Logf("OCUCP-PF-Container XER\n%s", string(xer))
+	t.Logf("PF-Container XER\n%s", string(xer))
 }
