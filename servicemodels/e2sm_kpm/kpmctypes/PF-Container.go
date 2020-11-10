@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -31,14 +32,13 @@ func xerEncodePFContainer(pfContainer *e2sm_kpm_ies.PfContainer) ([]byte, error)
 	return bytes, nil
 }
 
-
 func newPfContainer(pfContainer *e2sm_kpm_ies.PfContainer) (*C.PF_Container_t, error) {
-	var present C.PF_Container_PR
+	var pr C.PF_Container_PR
 	choiceC := [8]byte{}
 
 	switch choice := pfContainer.PfContainer.(type) {
 	case *e2sm_kpm_ies.PfContainer_OCuCp:
-		present = C.PF_Container_PR_oCU_CP
+		pr = C.PF_Container_PR_oCU_CP
 
 		im, err := newOCUCPPFContainer(choice.OCuCp)
 		if err != nil {
@@ -50,13 +50,12 @@ func newPfContainer(pfContainer *e2sm_kpm_ies.PfContainer) (*C.PF_Container_t, e
 	}
 
 	pfContainerC := C.PF_Container_t{
-		present: present,
+		present: pr,
 		choice:  choiceC,
 	}
 
 	return &pfContainerC, nil
 }
-
 
 //func decodeOCUCPPFContainer(gnbIDcC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
 //	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
