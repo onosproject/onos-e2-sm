@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -18,18 +19,17 @@ import (
 
 func xerEncodeE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1 *e2sm_kpm_ies.E2SmKpmIndicationMessage_IndicationMessageFormat1) ([]byte, error) {
 
-	pmContainersListCP, err := newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1)
+	e2SmKpmIndicationMsgFormat1CP, err := newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1)
 	if err != nil {
 		return nil, err
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_PM_Containers_List, unsafe.Pointer(pmContainersListCP))
+	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationMessage_Format1, unsafe.Pointer(e2SmKpmIndicationMsgFormat1CP))
 	if err != nil {
 		return nil, err
 	}
 	return bytes, nil
 }
-
 
 func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1 *e2sm_kpm_ies.E2SmKpmIndicationMessage_IndicationMessageFormat1) (*C.E2SM_KPM_IndicationMessage_Format1_t, error) {
 	pmContainersListC := new(C.E2SM_KPM_IndicationMessage_Format1_t)
@@ -46,7 +46,6 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1 *e2sm_kpm_ie
 
 	return pmContainersListC, nil
 }
-
 
 //func decodeOCUCPPFContainer(gnbIDcC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
 //	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
