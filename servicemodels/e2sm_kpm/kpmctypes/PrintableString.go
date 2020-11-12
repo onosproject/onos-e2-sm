@@ -21,10 +21,12 @@ func newPrintableString(msg string) *C.PrintableString_t {
 	return prntStrC
 }
 
-// TODO: Investigate more
-func decodePrintableString(octC *C.PrintableString_t) string {
+func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 
-	bytes := decodeOctetString(octC)
+	bytes, err := decodeOctetString(octC)
+	if err != nil {
+		return "", err
+	}
 	//bytes := C.GoBytes(unsafe.Pointer(octC.buf), C.int(octC.size))
-	return bytes
+	return bytes, nil
 }

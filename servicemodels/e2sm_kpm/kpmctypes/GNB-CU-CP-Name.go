@@ -21,3 +21,16 @@ func newGnbCuCpName(gnbCuCpNamec *e2sm_kpm_ies.GnbCuCpName) (*C.GNB_CU_CP_Name_t
 
 	return gnbcucpcnameC, nil
 }
+
+func decodeGnbCuCpName(gnbCuCpNameC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbCuCpName, error) {
+
+	gnbNamePS, err := decodePrintableString(gnbCuCpNameC)
+	if err != nil {
+		return nil, err
+	}
+	gnbName := &e2sm_kpm_ies.GnbCuCpName{
+		Value: gnbNamePS,
+	}
+
+	return gnbName, nil
+}

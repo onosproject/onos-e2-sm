@@ -11,7 +11,10 @@ package kpmctypes
 //#include <assert.h>
 //#include "OCTET_STRING.h"
 import "C"
-import "unsafe"
+import (
+	"fmt"
+	"unsafe"
+)
 
 // TODO: Change the argument to a []byte
 func newOctetString(msg string) *C.OCTET_STRING_t {
@@ -23,8 +26,13 @@ func newOctetString(msg string) *C.OCTET_STRING_t {
 	return &octStrC
 }
 
-func decodeOctetString(octC *C.OCTET_STRING_t) string {
+func decodeOctetString(octC *C.OCTET_STRING_t) (string, error) {
+	size := uint64(octC.size)
+	//TODO: Doublecheck with specification
+	if size > 8 {
+		return "", fmt.Errorf("max size is 8 bytes (64 bits) got %d", size)
+	}
 
 	bytes := C.GoBytes(unsafe.Pointer(octC.buf), C.int(octC.size))
-	return string(bytes)
+	return string(bytes), nil
 }
