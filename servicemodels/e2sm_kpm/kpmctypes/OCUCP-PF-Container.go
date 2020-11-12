@@ -48,6 +48,12 @@ func newOCUCPPFContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Con
 	return &ocucpC, nil
 }
 
-//func decodeOCUCPPFContainer(gnbIDcC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
-//	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
-//}
+func decodeOCUCPPFContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_ies.OcucpPfContainer) {
+	oCuCpContainer := new(e2sm_kpm_ies.OcucpPfContainer)
+
+	oCuCpContainer.GNbCuCpName = decodeGnbCuCpName(oCuCpContainerC.gNB_CU_CP_Name)
+	//TODO: Implement decodeCuCpResourceStatus
+	//oCuCpContainer.CuCpResourceStatus, err = decodeCuCpResouceStatus(oCuCpContainerC.cu_CP_Resource_Status)
+
+	return oCuCpContainer
+}

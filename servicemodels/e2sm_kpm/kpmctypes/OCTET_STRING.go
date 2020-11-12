@@ -11,7 +11,9 @@ package kpmctypes
 //#include <assert.h>
 //#include "OCTET_STRING.h"
 import "C"
-import "unsafe"
+import (
+	"unsafe"
+)
 
 // TODO: Change the argument to a []byte
 func newOctetString(msg string) *C.OCTET_STRING_t {
