@@ -11,7 +11,6 @@ package kpmctypes
 //#include "OCUCP-PF-Container.h"
 import "C"
 import (
-	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -49,18 +48,12 @@ func newOCUCPPFContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Con
 	return &ocucpC, nil
 }
 
-func decodeOCUCPPFContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_ies.OcucpPfContainer, error) {
+func decodeOCUCPPFContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_ies.OcucpPfContainer) {
 	oCuCpContainer := new(e2sm_kpm_ies.OcucpPfContainer)
-	var err error
-	oCuCpContainer.GNbCuCpName, err = decodeGnbCuCpName(oCuCpContainerC.gNB_CU_CP_Name)
-	if err != nil {
-		return nil, err
-	}
+
+	oCuCpContainer.GNbCuCpName = decodeGnbCuCpName(oCuCpContainerC.gNB_CU_CP_Name)
 	//TODO: Implement decodeCuCpResourceStatus
 	//oCuCpContainer.CuCpResourceStatus, err = decodeCuCpResouceStatus(oCuCpContainerC.cu_CP_Resource_Status)
-	//if err != nil {
-	//	return nil, err
-	//}
 
-	return oCuCpContainer, nil
+	return oCuCpContainer
 }
