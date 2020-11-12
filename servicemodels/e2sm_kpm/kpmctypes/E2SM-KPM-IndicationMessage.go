@@ -51,7 +51,7 @@ func newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndic
 		return nil, fmt.Errorf("newE2SmKpmIndicationMessage() %T not yet implemented", choice)
 	}
 
-	e2SmKpmIndicationMsgC := C.PF_Container_t{
+	e2SmKpmIndicationMsgC := C.E2SM_KPM_IndicationMessage_t{
 		present: present,
 		//TODO: Implement RicStyleType
 		//ric_Style_Type: nil,
