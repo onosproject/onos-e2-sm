@@ -1,0 +1,55 @@
+<E2SM-KPM-RANfunction-Description>
+    <ranFunction-Name>
+        <ranFunction-ShortName></ranFunction-ShortName>
+        <ranFunction-E2SM-OID>OID123</ranFunction-E2SM-OID>
+        <ranFunction-Description>KPM monitor</ranFunction-Description>
+        <ranFunction-Instance>1</ranFunction-Instance>
+    </ranFunction-Name>
+    <e2SM-KPM-RANfunction-Item>
+        <ric-EventTriggerStyle-List>
+            <RIC-EventTriggerStyle-List>
+                <ric-EventTriggerStyle-Type>1</ric-EventTriggerStyle-Type>
+                <ric-EventTriggerStyle-Name>Periodic report</ric-EventTriggerStyle-Name>
+                <ric-EventTriggerFormat-Type>5</ric-EventTriggerFormat-Type>
+            </RIC-EventTriggerStyle-List>
+        </ric-EventTriggerStyle-List>
+        <ric-ReportStyle-List>
+            <RIC-ReportStyle-List>
+                <ric-ReportStyle-Type>1</ric-ReportStyle-Type>
+                <ric-ReportStyle-Name>O-DU Measurement Container for the 5GC connected deployment</ric-ReportStyle-Name>
+                <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
+                <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
+            </RIC-ReportStyle-List>
+            <RIC-ReportStyle-List>
+                <ric-ReportStyle-Type>2</ric-ReportStyle-Type>
+                <ric-ReportStyle-Name>O-DU Measurement Container for the EPC connected deployment</ric-ReportStyle-Name>
+                <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
+                <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
+            </RIC-ReportStyle-List>
+            <RIC-ReportStyle-List>
+                <ric-ReportStyle-Type>3</ric-ReportStyle-Type>
+                <ric-ReportStyle-Name>O-CU-CP Measurement Container for the 5GC connected deployment</ric-ReportStyle-Name>
+                <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
+                <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
+            </RIC-ReportStyle-List>
+            <RIC-ReportStyle-List>
+                <ric-ReportStyle-Type>4</ric-ReportStyle-Type>
+                <ric-ReportStyle-Name>O-CU-CP Measurement Container for the EPC connected deployment</ric-ReportStyle-Name>
+                <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
+                <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
+            </RIC-ReportStyle-List>
+            <RIC-ReportStyle-List>
+                <ric-ReportStyle-Type>5</ric-ReportStyle-Type>
+                <ric-ReportStyle-Name>O-CU-UP Measurement Container for the 5GC connected deployment</ric-ReportStyle-Name>
+                <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
+                <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
+            </RIC-ReportStyle-List>
+            <RIC-ReportStyle-List>
+                <ric-ReportStyle-Type>6</ric-ReportStyle-Type>
+                <ric-ReportStyle-Name>O-CU-UP Measurement Container for the EPC connected deployment</ric-ReportStyle-Name>
+                <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
+                <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
+            </RIC-ReportStyle-List>
+        </ric-ReportStyle-List>
+    </e2SM-KPM-RANfunction-Item>
+</E2SM-KPM-RANfunction-Description>
