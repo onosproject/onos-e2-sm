@@ -12,7 +12,6 @@ import (
 
 func Test_xerEncodeOCUCPPFContainer(t *testing.T) {
 
-	//c := &e2sm_kpm_ies.PfContainer_OCuCp{
 		oCuCp := &e2sm_kpm_ies.OcucpPfContainer{
 			GNbCuCpName: &e2sm_kpm_ies.GnbCuCpName{
 				Value: "0xAB", //string -- PrintableString(SIZE(1..150,...))
@@ -21,7 +20,6 @@ func Test_xerEncodeOCUCPPFContainer(t *testing.T) {
 				NumberOfActiveUes: 1, //int32 -- INTEGER (1..65536, ...)
 			},
 		}
-	//}
 
 	xer, err := xerEncodeOCUCPPFContainer(oCuCp)
 	assert.NilError(t, err)

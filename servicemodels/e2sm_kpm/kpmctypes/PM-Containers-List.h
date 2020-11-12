@@ -14,6 +14,7 @@
 /* Including external dependencies */
 #include "RAN-Container.h"
 #include "constr_SEQUENCE.h"
+#include "PF-Container.h"
 
 #ifdef __cplusplus
 extern "C" {
