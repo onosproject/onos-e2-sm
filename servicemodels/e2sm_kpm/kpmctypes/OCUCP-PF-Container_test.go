@@ -21,7 +21,7 @@ func Test_xerEncodeOCUCPPFContainer(t *testing.T) {
 			},
 		}
 
-	xer, err := xerEncodeOCUCPPFContainer(oCuCp)
+	xer, err := xerEncodeOCuCpPfContainer(oCuCp)
 	assert.NilError(t, err)
 	t.Logf("OCUCP-PF-Container XER\n%s", string(xer))
 }
