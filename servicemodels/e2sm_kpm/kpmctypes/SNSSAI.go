@@ -1,0 +1,56 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package kpmctypes
+
+//#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
+//#cgo LDFLAGS: -lm
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <assert.h>
+//#include "SNSSAI.h"
+import "C"
+import (
+	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"unsafe"
+)
+
+func xerEncodeSnssai(snssai *e2sm_kpm_ies.Snssai) ([]byte, error) {
+
+	snssaiCP, err := newSnssai(snssai)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_SNSSAI, unsafe.Pointer(snssaiCP))
+	if err != nil {
+		return nil, err
+	}
+	return bytes, nil
+}
+
+func newSnssai(snssai *e2sm_kpm_ies.Snssai) (*C.SNSSAI_t, error) {
+
+	sst := newOctetString(string(snssai.SSt))
+	sd := newOctetString(string(snssai.SD))
+
+	snssaiC := C.SNSSAI_t{
+		sST: sst,
+		sD:  sd,
+	}
+
+	return snssaiC, nil
+}
+
+func decodeSnssai(snssaiC *C.SNSSAI_t) (*e2sm_kpm_ies.Snssai, error) {
+	snssai := new(e2sm_kpm_ies.Snssai)
+
+	sst := decodeOctetString(snssaiC.sSt)
+	snssai.SSt = []byte(sst)
+
+	sd :=decodeOctetString(snssaiC.sD)
+	snssai.SD = []byte(sd)
+
+	return snssai, nil
+}
