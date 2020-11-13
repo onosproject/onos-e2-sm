@@ -46,7 +46,7 @@ func newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndic
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	//case *e2sm_kpm_ies.E2SmKpmIndicationMessage_RicStyleType:
-	//some routine
+		//TODO: Implement RicStyleType
 	default:
 		return nil, fmt.Errorf("newE2SmKpmIndicationMessage() %T not yet implemented", choice)
 	}
@@ -61,6 +61,21 @@ func newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndic
 	return &e2SmKpmIndicationMsgC, nil
 }
 
-//func decodeOCUCPPFContainer(gnbIDcC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
-//	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
-//}
+func decodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsgC *C.E2SM_KPM_IndicationMessage_t) (*e2sm_kpm_ies.E2SmKpmIndicationMessage, error) {
+	e2SmKpmIndicationMsg := new(e2sm_kpm_ies.E2SmKpmIndicationMessage)
+
+	switch e2SmKpmIndicationMsgC.present {
+	case C.E2SM_KPM_IndicationMessage_PR_indicationMessage_Format1:
+		e2SmKpmIndicationMsgFormat1, err := decodeE2SmKpmIndicationMessageFormat1Bytes(e2SmKpmIndicationMsgC.choice)
+		if err != nil {
+			return nil, err
+		}
+
+		e2SmKpmIndicationMsg.E2SmKpmIndicationMessage = e2SmKpmIndicationMsgFormat1
+
+	default:
+		return nil, fmt.Errorf("decodeE2SmKpmIndicationMessage() %v not yet implemented", e2SmKpmIndicationMsgC.present)
+	}
+
+	return e2SmKpmIndicationMsg, nil
+}

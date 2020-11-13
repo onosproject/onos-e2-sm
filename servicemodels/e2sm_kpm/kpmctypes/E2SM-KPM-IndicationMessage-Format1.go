@@ -10,8 +10,10 @@ package kpmctypes
 //#include <stdlib.h>
 //#include <assert.h>
 //#include "E2SM-KPM-IndicationMessage-Format1.h"
+//#include "PM-Containers-List.h"
 import "C"
 import (
+	"encoding/binary"
 	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
@@ -47,6 +49,35 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1 *e2sm_kpm_ie
 	return pmContainersListC, nil
 }
 
-//func decodeOCUCPPFContainer(gnbIDcC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
-//	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
-//}
+func decodeE2SmKpmIndicationMessageFormat1(e2SmIindicationMsgFormat1C *C.E2SM_KPM_IndicationMessage_Format1_t) (*e2sm_kpm_ies.E2SmKpmIndicationMessage_IndicationMessageFormat1, error) {
+	e2SmIindicationMsgFormat1 := &e2sm_kpm_ies.E2SmKpmIndicationMessage_IndicationMessageFormat1{
+		IndicationMessageFormat1: &e2sm_kpm_ies.E2SmKpmIndicationMessageFormat1{
+			PmContainers: make([]*e2sm_kpm_ies.PmContainersList, 0),
+		},
+	}
+
+	ieCount := int(e2SmIindicationMsgFormat1C.pm_Containers.list.count)
+	//fmt.Printf("RanFunctionListC %T List %T %v Array %T %v Deref %v\n", rflC, rflC.list, rflC.list, rflC.list.array, *rflC.list.array, *(rflC.list.array))
+	for i := 0; i < ieCount; i++ {
+		offset := unsafe.Sizeof(unsafe.Pointer(*e2SmIindicationMsgFormat1C.pm_Containers.list.array)) * uintptr(i)
+		pmContainersListItemC := *(**C.PM_Containers_List_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmIindicationMsgFormat1C.pm_Containers.list.array)) + offset))
+		//fmt.Printf("Value %T %p %v\n", rfiIeC, rfiIeC, rfiIeC)
+		pmContainersListItem, err := decodePmContainersListItem(pmContainersListItemC)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmKpmIndicationMessageFormat1() %s", err.Error())
+		}
+		e2SmIindicationMsgFormat1.IndicationMessageFormat1.PmContainers = append(e2SmIindicationMsgFormat1.IndicationMessageFormat1.PmContainers, pmContainersListItem)
+	}
+
+	return e2SmIindicationMsgFormat1, nil
+}
+
+func decodeE2SmKpmIndicationMessageFormat1Bytes(array [8]byte) (*e2sm_kpm_ies.E2SmKpmIndicationMessage_IndicationMessageFormat1, error) {
+	eSmKpmIndicationMsgFormat1C := (*C.E2SM_KPM_IndicationMessage_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+	result, err := decodeE2SmKpmIndicationMessageFormat1(eSmKpmIndicationMsgFormat1C)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
