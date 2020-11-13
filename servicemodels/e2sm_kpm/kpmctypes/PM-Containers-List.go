@@ -48,6 +48,20 @@ func newPmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersList) (*
 }
 
 
-//func decodeOCUCPPFContainer(gnbIDcC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
-//	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
-//}
+func decodePmContainersListItem(pmContainersListC *C.PM_Containers_List_t) (*e2sm_kpm_ies.PmContainersList, error) {
+	pmContainersListItem := new(e2sm_kpm_ies.PmContainersList)
+	performanceContainer, err := decodePfContainer(pmContainersListC.performanceContainer)
+	if err != nil {
+		return nil, err
+	}
+	pmContainersListItem.PerformanceContainer = performanceContainer
+
+	//TODO: Implement decodeTheRancontainer function
+	//theRancontainer, err := decodeTheRancontainer(pmContainersListC.theRANContainer)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//pmContainersListItem.TheRancontainer = theRancontainer
+
+	return pmContainersListItem, nil
+}
