@@ -11,12 +11,13 @@ package kpmctypes
 //#include "OCUCP-PF-Container.h"
 import "C"
 import (
+	"encoding/binary"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
 
-func xerEncodeOCUCPPFContainer(oCuCpContainer *e2sm_kpm_ies.OcucpPfContainer) ([]byte, error) {
-	oCuCpContainerCP, err := newOCUCPPFContainer(oCuCpContainer)
+func xerEncodeOCuCpPfContainer(oCuCpContainer *e2sm_kpm_ies.OcucpPfContainer) ([]byte, error) {
+	oCuCpContainerCP, err := newOCuCpPfContainer(oCuCpContainer)
 	if err != nil {
 		return nil, err
 	}
@@ -28,7 +29,7 @@ func xerEncodeOCUCPPFContainer(oCuCpContainer *e2sm_kpm_ies.OcucpPfContainer) ([
 	return bytes, nil
 }
 
-func newOCUCPPFContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Container_t, error) {
+func newOCuCpPfContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Container_t, error) {
 	var nUEs = C.long(oCuCpC.GetCuCpResourceStatus().NumberOfActiveUes)
 
 	gnbNameCP, err := newGnbCuCpName(oCuCpC.GNbCuCpName)
@@ -48,7 +49,7 @@ func newOCUCPPFContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Con
 	return &ocucpC, nil
 }
 
-func decodeOCUCPPFContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_ies.OcucpPfContainer) {
+func decodeOCuCpPfContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_ies.OcucpPfContainer) {
 	oCuCpContainer := new(e2sm_kpm_ies.OcucpPfContainer)
 
 	oCuCpContainer.GNbCuCpName = decodeGnbCuCpName(oCuCpContainerC.gNB_CU_CP_Name)
@@ -56,4 +57,10 @@ func decodeOCUCPPFContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_
 	//oCuCpContainer.CuCpResourceStatus, err = decodeCuCpResouceStatus(oCuCpContainerC.cu_CP_Resource_Status)
 
 	return oCuCpContainer
+}
+
+func decodeOCuCpContainerBytes(array [8]byte) (*e2sm_kpm_ies.OcucpPfContainer) {
+	oCuCpPfContainerC := (*C.OCUCP_PF_Container_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+
+	return decodeOCuCpPfContainer(oCuCpPfContainerC)
 }

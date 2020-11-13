@@ -40,7 +40,7 @@ func newPfContainer(pfContainer *e2sm_kpm_ies.PfContainer) (*C.PF_Container_t, e
 	case *e2sm_kpm_ies.PfContainer_OCuCp:
 		pr = C.PF_Container_PR_oCU_CP
 
-		im, err := newOCUCPPFContainer(choice.OCuCp)
+		im, err := newOCuCpPfContainer(choice.OCuCp)
 		if err != nil {
 			return nil, err
 		}
@@ -57,6 +57,20 @@ func newPfContainer(pfContainer *e2sm_kpm_ies.PfContainer) (*C.PF_Container_t, e
 	return &pfContainerC, nil
 }
 
-//func decodeOCUCPPFContainer(gnbIDcC *C.GNB_CU_CP_Name_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
-//	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
-//}
+func decodePfContainer(pfContainerC *C.PF_Container_t) (*e2sm_kpm_ies.PfContainer, error) {
+	pfContainer := new(e2sm_kpm_ies.PfContainer)
+
+	switch pfContainerC.present {
+	case C.PF_Container_PR_oCU_CP:
+		oCuCpPfContainer := decodeOCuCpContainerBytes(pfContainerC.choice)
+
+		pfContainer.PfContainer = &e2sm_kpm_ies.PfContainer_OCuCp{
+			OCuCp: oCuCpPfContainer,
+		}
+
+	default:
+		return nil, fmt.Errorf("decodePfContainer() %v not yet implemented", pfContainerC.present)
+	}
+
+	return pfContainer, nil
+}
