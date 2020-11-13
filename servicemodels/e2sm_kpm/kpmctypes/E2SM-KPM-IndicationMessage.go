@@ -45,9 +45,8 @@ func newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndic
 			return nil, err
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
-	//TODO: Implement RicStyleType
 	//case *e2sm_kpm_ies.E2SmKpmIndicationMessage_RicStyleType:
-	//some routine
+		//TODO: Implement RicStyleType
 	default:
 		return nil, fmt.Errorf("newE2SmKpmIndicationMessage() %T not yet implemented", choice)
 	}
