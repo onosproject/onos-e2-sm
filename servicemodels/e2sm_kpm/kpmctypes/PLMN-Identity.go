@@ -18,10 +18,7 @@ import (
 
 func xerEncodePlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) ([]byte, error) {
 
-	plmnIDCP, err := newPlmnIdentity(plmnID)
-	if err != nil {
-		return nil, err
-	}
+	plmnIDCP := newPlmnIdentity(plmnID)
 
 	bytes, err := encodeXer(&C.asn_DEF_PLMN_Identity, unsafe.Pointer(plmnIDCP))
 	if err != nil {
@@ -30,18 +27,18 @@ func xerEncodePlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) ([]byte, error) {
 	return bytes, nil
 }
 
-func newPlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) (*C.PLMN_Identity_t, error) {
+func newPlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) (*C.PLMN_Identity_t) {
 
 	plmnIDC := newOctetString(string(plmnID.Value))
 
-	return plmnIDC, nil
+	return plmnIDC
 }
 
-func decodePlmnIdentity(plmnIDC *C.PLMN_Identity_t) (*e2sm_kpm_ies.PlmnIdentity, error) {
+func decodePlmnIdentity(plmnIDC *C.PLMN_Identity_t) (*e2sm_kpm_ies.PlmnIdentity) {
 	plmnID := new(e2sm_kpm_ies.PlmnIdentity)
 
 	plmnIDO := decodeOctetString(plmnIDC)
 	plmnID.Value = []byte(plmnIDO)
 
-	return plmnID, nil
+	return plmnID
 }
