@@ -55,6 +55,24 @@ func newGnbIDChoice(gnbIDc *e2sm_kpm_ies.GnbIdChoice) (*C.GNB_ID_Choice_t, error
 	return &gnbidcC, nil
 }
 
-func decodeGnbIDChoice(gnbIDcC *C.GNB_ID_Choice_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
-	return nil, fmt.Errorf("decodeGnbIDChoice() not yet implemented")
+func decodeGnbIDChoice(gnbIDC *C.GNB_ID_Choice_t) (*e2sm_kpm_ies.GnbIdChoice, error) {
+	result := new(e2sm_kpm_ies.GnbIdChoice)
+
+	switch gnbIDC.present {
+	case C.GNB_ID_Choice_PR_gnb_ID:
+		//fmt.Printf("GNB_ID_Choice_t %+v\n", gnbIDC.choice)
+		gnbIDstructC := newBitStringFromArray(gnbIDC.choice)
+
+		bitString, err := decodeBitString(gnbIDstructC)
+		if err != nil {
+			return nil, err
+		}
+		result.GnbIdChoice = &e2sm_kpm_ies.GnbIdChoice_GnbId{
+			GnbId: bitString,
+		}
+	default:
+		return nil, fmt.Errorf("decodeGnbIDChoice() %v not yet implemented", gnbIDC.present)
+	}
+
+	return result, nil
 }
