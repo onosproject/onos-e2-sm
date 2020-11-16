@@ -8,7 +8,7 @@ package kpmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "GNB-DU-ID.h"
+//#include "GNB-CU-UP-ID.h"
 import "C"
 import (
 	"fmt"
@@ -17,31 +17,31 @@ import (
 	"unsafe"
 )
 
-func xerEncodeGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
-	gnbDuIdCP := newGnbDuId(gnbDuId)
+func xerEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
+	gnbCuUpIdCP := newGnbCuUpId(gnbCuUpId)
 
-	bytes, err := encodeXer(&C.asn_DEF_GNB_DU_ID, unsafe.Pointer(gnbDuIdCP))
+	bytes, err := encodeXer(&C.asn_DEF_GNB_CU_UP_ID, unsafe.Pointer(gnbCuUpIdCP))
 	if err != nil {
 		return nil, err
 	}
 	return bytes, nil
 }
 
-func newGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) (*C.GNB_DU_ID_t) {
+func newGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) (*C.GNB_CU_UP_ID_t) {
 
 	// TODO: Check whether basis is decimal. Also consider putting out basis as a parameter
-	gnbDuIdC := newInteger(strconv.FormatInt(gnbDuId.Value, 10))
-	return gnbDuIdC
+	gnbCuUpIdC := newInteger(strconv.FormatInt(gnbCuUpId.Value, 10))
+	return gnbCuUpIdC
 }
 
-func decodeGnbDuId(gnbDuIdC *C.GNB_DU_ID_t) (*e2sm_kpm_ies.GnbDuId, error) {
-	gnbDuId := new(e2sm_kpm_ies.GnbDuId)
-	resultStr := decodeInteger(gnbDuIdC)
+func decodeGnbCuUpId(gnbCuUpIdC *C.GNB_CU_UP_ID_t) (*e2sm_kpm_ies.GnbCuUpId, error) {
+	gnbCuUpId := new(e2sm_kpm_ies.GnbCuUpId)
+	resultStr := decodeInteger(gnbCuUpIdC)
 	resultInt, err := strconv.ParseInt(resultStr, 10, 64)
 	if err == nil {
-		return nil, fmt.Errorf("decodeGnbDuId error in str-to-int64 convertion %T", err)
+		return nil, fmt.Errorf("decodeGnbCuUpId error in str-to-int64 convertion %T", err)
 	}
-	gnbDuId.Value = resultInt
+	gnbCuUpId.Value = resultInt
 
-	return gnbDuId, nil
+	return gnbCuUpId, nil
 }
