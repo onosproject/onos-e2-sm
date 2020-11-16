@@ -21,5 +21,5 @@ func Test_xerEncodeNRCellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeNRCellIdentity(nrCellIdentity)
 	assert.NilError(t, err)
-	t.Logf("SNSSAI XER\n%s", string(xer))
+	t.Logf("NRCellIdentity XER\n%s", string(xer))
 }

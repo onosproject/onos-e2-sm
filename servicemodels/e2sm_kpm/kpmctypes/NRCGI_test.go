@@ -28,5 +28,5 @@ func Test_xerEncodeNRCGI(t *testing.T) {
 
 	xer, err := xerEncodeNRCGI(nrCGI)
 	assert.NilError(t, err)
-	t.Logf("SNSSAI XER\n%s", string(xer))
+	t.Logf("NRCGI XER\n%s", string(xer))
 }
