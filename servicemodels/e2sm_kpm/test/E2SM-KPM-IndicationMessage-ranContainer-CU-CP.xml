@@ -1,0 +1,52 @@
+<E2SM-KPM-IndicationMessage>
+    <ric-Style-Type>0</ric-Style-Type>
+    <indicationMessage>
+        <indicationMessage-Format1>
+            <pm-Containers>
+                <PM-Containers-List>
+                    <theRANContainer>
+                        <timestamp>
+                            00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+                            00 00 00 00 00 00 00
+                        </timestamp>
+                        <reportContainer>
+                            <oCU-CP-UE>
+                                <cellResourceReportList>
+                                    <CU-CP-Usage-Report-CellResourceReportItem>
+                                        <nRCGI>
+                                            <pLMN-Identity>37 34 37</pLMN-Identity>
+                                            <nRCellIdentity>
+                                                001100010011001000110011001101000011
+                                            </nRCellIdentity>
+                                        </nRCGI>
+                                        <ueResourceReportList>
+                                            <CU-CP-Usage-Report-UeResourceReportItem>
+                                                <c-RNTI>32 32</c-RNTI>
+                                                <serving-Cell-RF-Type>
+                                                    7B 22 72 73 72 70 22 3A 20 31 30 2C 20 22 72 73
+                                                    72 71 22 3A 20 30 2C 20 22 72 73 73 69 6E 72 22
+                                                    3A 20 30 7D
+                                                </serving-Cell-RF-Type>
+                                                <neighbor-Cell-RF>
+                                                    5B 7B 22 43 49 44 22 20 3A 20 22 30 22 2C 20 22
+                                                    43 65 6C 6C 2D 52 46 22 20 3A 20 22 7B 22 72 73
+                                                    72 70 22 3A 20 31 30 2C 20 22 72 73 72 71 22 3A
+                                                    20 30 2C 20 22 72 73 73 69 6E 72 22 3A 20 30 7D
+                                                    7D 2C 7B 22 43 49 44 22 20 3A 20 22 32 22 2C 20
+                                                    22 43 65 6C 6C 2D 52 46 22 20 3A 20 22 7B 22 72
+                                                    73 72 70 22 3A 20 31 30 2C 20 22 72 73 72 71 22
+                                                    3A 20 30 2C 20 22 72 73 73 69 6E 72 22 3A 20 30
+                                                    7D 7D 5D
+                                                </neighbor-Cell-RF>
+                                            </CU-CP-Usage-Report-UeResourceReportItem>
+                                        </ueResourceReportList>
+                                    </CU-CP-Usage-Report-CellResourceReportItem>
+                                </cellResourceReportList>
+                            </oCU-CP-UE>
+                        </reportContainer>
+                    </theRANContainer>
+                </PM-Containers-List>
+            </pm-Containers>
+        </indicationMessage-Format1>
+    </indicationMessage>
+</E2SM-KPM-IndicationMessage>
