@@ -36,17 +36,17 @@ func newSnssai(snssai *e2sm_kpm_ies.Snssai) (*C.SNSSAI_t, error) {
 	sd := newOctetString(string(snssai.SD))
 
 	snssaiC := C.SNSSAI_t{
-		sST: sst,
+		sST: *sst,
 		sD:  sd,
 	}
 
-	return snssaiC, nil
+	return &snssaiC, nil
 }
 
 func decodeSnssai(snssaiC *C.SNSSAI_t) (*e2sm_kpm_ies.Snssai, error) {
 	snssai := new(e2sm_kpm_ies.Snssai)
 
-	sst := decodeOctetString(snssaiC.sSt)
+	sst := decodeOctetString(&snssaiC.sST)
 	snssai.SSt = []byte(sst)
 
 	sd :=decodeOctetString(snssaiC.sD)
