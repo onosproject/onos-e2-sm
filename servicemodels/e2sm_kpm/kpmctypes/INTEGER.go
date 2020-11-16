@@ -10,24 +10,16 @@ package kpmctypes
 //#include <assert.h>
 //#include "INTEGER.h"
 import "C"
-import (
-	"unsafe"
-)
 
-// TODO: Change the argument to a []byte
-func newInteger(msg string) *C.asn_INTEGER_enum_map_t {
+func newInteger(msg string) *C.INTEGER_t {
 
-	intC := C.asn_INTEGER_enum_map_t{
-		nat_value: C.ulong(msg),
-		enum_len: C.ulong(len(msg)),
-		enum_name: C.CString(msg),
-	}
+	intC := newAsnCodecsPrim(msg)
 
-	return &intC
+	return intC
 }
 
-func decodeInteger(intC *C.asn_INTEGER_enum_map_t) string {
+func decodeInteger(intC *C.INTEGER_t) string {
 
-	bytes := C.GoBytes(unsafe.Pointer(intC.enum_len), C.int(intC.nat_value))
-	return string(bytes)
+	bytes := decodeAsnCodecsPrim(intC)
+	return bytes
 }
