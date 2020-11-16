@@ -1,0 +1,41 @@
+<E2SM-KPM-IndicationHeader>
+    <indicationHeader-Format1>
+        <id-GlobalKPMnode-ID>
+            <gNB>
+                <global-gNB-ID>
+                    <plmn-id>37 34 37</plmn-id>
+                    <gnb-id>
+                        <gnb-ID>
+                            10110101110001100111011110001
+                        </gnb-ID>
+                    </gnb-id>
+                </global-gNB-ID>
+                <gNB-CU-UP-ID>32</gNB-CU-UP-ID>
+            </gNB>
+        </id-GlobalKPMnode-ID>
+        <nRCGI>
+            <pLMN-Identity>37 34 37</pLMN-Identity>
+            <nRCellIdentity>
+                001000100101101111010110000000000111
+            </nRCellIdentity>
+        </nRCGI>
+        <pLMN-Identity>37 34 37</pLMN-Identity>
+        <sliceID>
+            <sST>31</sST>
+            <sD>31 30 30</sD>
+        </sliceID>
+        <fiveQI>9</fiveQI>
+        <qci>9</qci>
+        <gNB-Name>
+            <gNB-CU-UP-Name>GNBCUUP5</gNB-CU-UP-Name>
+        </gNB-Name>
+        <global-GNB-ID>
+            <plmn-id>37 34 37</plmn-id>
+            <gnb-id>
+                <gnb-ID>
+                    10110101110001100111011110001
+                </gnb-ID>
+            </gnb-id>
+        </global-GNB-ID>
+    </indicationHeader-Format1>
+</E2SM-KPM-IndicationHeader>

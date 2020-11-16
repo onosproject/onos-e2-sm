@@ -1,0 +1,45 @@
+<E2SM-KPM-IndicationMessage>
+    <ric-Style-Type>0</ric-Style-Type>
+    <indicationMessage>
+        <indicationMessage-Format1>
+            <pm-Containers>
+                <PM-Containers-List>
+                    <performanceContainer>
+                        <oCU-UP>
+                            <gNB-CU-UP-Name>GNBCUUP5</gNB-CU-UP-Name>
+                            <pf-ContainerList>
+                                <PF-ContainerListItem>
+                                    <interface-type><f1-u/></interface-type>
+                                    <o-CU-UP-PM-Container>
+                                        <plmnList>
+                                            <PlmnID-List>
+                                                <pLMN-Identity>37 34 37</pLMN-Identity>
+                                                <cu-UP-PM-5GC>
+                                                    <sliceToReportList>
+                                                        <SliceToReportListItem>
+                                                            <sliceID>
+                                                                <sST>31</sST>
+                                                                <sD>31 30 30</sD>
+                                                            </sliceID>
+                                                            <fQIPERSlicesPerPlmnList>
+                                                                <FQIPERSlicesPerPlmnListItem>
+                                                                    <fiveQI>9</fiveQI>
+                                                                    <pDCPBytesDL>0</pDCPBytesDL>
+                                                                    <pDCPBytesUL>0</pDCPBytesUL>
+                                                                </FQIPERSlicesPerPlmnListItem>
+                                                            </fQIPERSlicesPerPlmnList>
+                                                        </SliceToReportListItem>
+                                                    </sliceToReportList>
+                                                </cu-UP-PM-5GC>
+                                            </PlmnID-List>
+                                        </plmnList>
+                                    </o-CU-UP-PM-Container>
+                                </PF-ContainerListItem>
+                            </pf-ContainerList>
+                        </oCU-UP>
+                    </performanceContainer>
+                </PM-Containers-List>
+            </pm-Containers>
+        </indicationMessage-Format1>
+    </indicationMessage>
+</E2SM-KPM-IndicationMessage>
