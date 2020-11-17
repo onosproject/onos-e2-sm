@@ -22,7 +22,7 @@ func xerEncodeGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
 
 	bytes, err := encodeXer(&C.asn_DEF_GNB_DU_ID, unsafe.Pointer(gnbDuIdCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeGnbDuId() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -39,7 +39,7 @@ func decodeGnbDuId(gnbDuIdC *C.GNB_DU_ID_t) (*e2sm_kpm_ies.GnbDuId, error) {
 	resultStr := decodeInteger(gnbDuIdC)
 	resultInt, err := strconv.ParseInt(resultStr, 10, 64)
 	if err == nil {
-		return nil, fmt.Errorf("decodeGnbDuId error in str-to-int64 convertion %T", err)
+		return nil, fmt.Errorf("decodeGnbDuId() error in str-to-int64 convertion %T", err)
 	}
 	gnbDuId.Value = resultInt
 

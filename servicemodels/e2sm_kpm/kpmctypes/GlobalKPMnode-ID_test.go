@@ -44,5 +44,5 @@ func Test_xerEncodeGlobalKpmNodeId(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmNodeId(idGlobalKpmnodeId)
 	assert.NilError(t, err)
-	t.Logf("GlobalKPMnodeId XER\n%s", string(xer))
+	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
 }

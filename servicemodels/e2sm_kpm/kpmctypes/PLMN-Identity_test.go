@@ -20,5 +20,5 @@ func Test_xerEncodePlmnIdentity(t *testing.T) {
 
 	xer, err := xerEncodePlmnIdentity(plmnIdentity)
 	assert.NilError(t, err)
-	t.Logf("SNSSAI XER\n%s", string(xer))
+	t.Logf("PLMN-Identity XER\n%s", string(xer))
 }

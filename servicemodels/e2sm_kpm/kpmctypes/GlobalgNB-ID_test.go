@@ -30,5 +30,5 @@ func Test_xerEncodeGlobalgNbId(t *testing.T) {
 
 	xer, err := xerEncodeGlobalgNbId(globalGNbId)
 	assert.NilError(t, err)
-	t.Logf("GnbIdChoice XER\n%s", string(xer))
+	t.Logf("GlobalgNB-ID XER\n%s", string(xer))
 }

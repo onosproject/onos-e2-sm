@@ -22,12 +22,12 @@ func xerEncodePFContainer(pfContainer *e2sm_kpm_ies.PfContainer) ([]byte, error)
 
 	pfContainerCP, err := newPfContainer(pfContainer)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodePFContainer() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_PF_Container, unsafe.Pointer(pfContainerCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodePFContainer() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -42,7 +42,7 @@ func newPfContainer(pfContainer *e2sm_kpm_ies.PfContainer) (*C.PF_Container_t, e
 
 		im, err := newOCuCpPfContainer(choice.OCuCp)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("newPfContainer() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:

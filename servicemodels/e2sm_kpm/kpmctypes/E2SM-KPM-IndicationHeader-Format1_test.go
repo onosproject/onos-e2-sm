@@ -25,5 +25,5 @@ func Test_xerEncodeE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationHeaderFormat1(newE2SmKpmPdu.GetIndicationHeaderFormat1())
 	assert.NilError(t, err)
-	t.Logf("E2SM-KPM-IndicationHeader XER\n%s", string(xer))
+	t.Logf("E2SM-KPM-IndicationHeader-Format1 XER\n%s", string(xer))
 }

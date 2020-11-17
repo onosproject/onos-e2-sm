@@ -19,12 +19,12 @@ import (
 func xerEncodeGlobalgNbId(globalgNbId *e2sm_kpm_ies.GlobalgNbId) ([]byte, error) {
 	globalgNbIdCP, err := newGlobalgNbId(globalgNbId)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeGlobalgNbId() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_GlobalgNB_ID, unsafe.Pointer(globalgNbIdCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeGlobalgNbId() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -34,7 +34,7 @@ func newGlobalgNbId(globalgNbId *e2sm_kpm_ies.GlobalgNbId) (*C.GlobalgNB_ID_t, e
 	plmnIDC := newPlmnIdentity(globalgNbId.PlmnId)
 	gnbIDC, err := newGnbIDChoice(globalgNbId.GnbId)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("newGlobalgNbId() %s", err.Error())
 	}
 
 	globalgNbIdC := C.GlobalgNB_ID_t{
@@ -50,7 +50,7 @@ func decodeGlobalgNbId(globalgNbIdC *C.GlobalgNB_ID_t) (*e2sm_kpm_ies.GlobalgNbI
 	plmnID := decodePlmnIdentity(&globalgNbIdC.plmn_id)
 	gnbID, err := decodeGnbIDChoice(&globalgNbIdC.gnb_id)
 	if err == nil {
-		return nil, fmt.Errorf("decodeGnbDuId error in str-to-int64 convertion %T", err)
+		return nil, fmt.Errorf("decodeGlobalgNbId() error in str-to-int64 convertion %T", err)
 	}
 
 	globalgNbId.PlmnId = plmnID

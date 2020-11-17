@@ -12,6 +12,7 @@ package kpmctypes
 //#include "NRCellIdentity.h"
 import "C"
 import (
+	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -22,7 +23,7 @@ func xerEncodeNRCellIdentity(nrCellIdentity *e2sm_kpm_ies.NrcellIdentity) ([]byt
 
 	bytes, err := encodeXer(&C.asn_DEF_NRCellIdentity, unsafe.Pointer(nrCellIdentityCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeNRCellIdentity() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -39,7 +40,7 @@ func decodeNRCellIdentity(nrCellIdentityC *C.NRCellIdentity_t) (*e2sm_kpm_ies.Nr
 
 	nrCellIdentityBs, err := decodeBitString(nrCellIdentityC)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeNRCellIdentity() %s", err.Error())
 	}
 	nrCellIdentity.Value = nrCellIdentityBs
 

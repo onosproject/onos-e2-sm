@@ -20,12 +20,12 @@ import (
 func xerEncodeE2SmKpmIndicationHeader(indicationHeader *e2sm_kpm_ies.E2SmKpmIndicationHeader) ([]byte, error) {
 	indicationHeaderCP, err := newE2SmKpmIndicationHeader(indicationHeader)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationHeader() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationHeader, unsafe.Pointer(indicationHeaderCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationHeader() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -40,11 +40,11 @@ func newE2SmKpmIndicationHeader(indicationHeader *e2sm_kpm_ies.E2SmKpmIndication
 
 		im, err := newE2SmKpmIndicationHeaderFormat1(choice.IndicationHeaderFormat1)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("newE2SmKpmIndicationHeader() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
-		return nil, fmt.Errorf("NEWE2SmKpmIndicationHeader() %T not yet implemented", choice)
+		return nil, fmt.Errorf("newE2SmKpmIndicationHeader() %T not yet implemented", choice)
 	}
 
 	indicationHeaderC := C.E2SM_KPM_IndicationHeader_t{
@@ -62,7 +62,7 @@ func decodeE2SmKpmIndicationHeader(indicationHeaderC *C.E2SM_KPM_IndicationHeade
 	case C.E2SM_KPM_IndicationHeader_PR_indicationHeader_Format1:
 		indicationHeaderFormat1, err := decodeE2SmKpmIndicationHeaderFormat1Bytes(indicationHeaderC.choice)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("decodeE2SmKpmIndicationHeader() %s", err.Error())
 		}
 
 		indicationHeader.E2SmKpmIndicationHeader = &e2sm_kpm_ies.E2SmKpmIndicationHeader_IndicationHeaderFormat1{

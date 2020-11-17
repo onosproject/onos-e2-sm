@@ -12,6 +12,7 @@ package kpmctypes
 //#include "PLMN-Identity.h"
 import "C"
 import (
+	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -22,7 +23,7 @@ func xerEncodePlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) ([]byte, error) {
 
 	bytes, err := encodeXer(&C.asn_DEF_PLMN_Identity, unsafe.Pointer(plmnIDCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodePlmnIdentity() %s", err.Error())
 	}
 	return bytes, nil
 }

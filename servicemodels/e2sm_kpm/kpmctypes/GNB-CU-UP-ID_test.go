@@ -20,5 +20,5 @@ func Test_xerEncodeGnbCuUpId(t *testing.T) {
 
 	xer, err := xerEncodeGnbCuUpId(c)
 	assert.NilError(t, err)
-	t.Logf("GnbIdChoice XER\n%s", string(xer))
+	t.Logf("GNB-CU-UP-ID XER\n%s", string(xer))
 }

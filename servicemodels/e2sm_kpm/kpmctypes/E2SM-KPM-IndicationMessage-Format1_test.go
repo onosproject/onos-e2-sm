@@ -41,5 +41,5 @@ func Test_xerEncodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationMessageFormat1(e2SmIindicationMsg)
 	assert.NilError(t, err)
-	t.Logf("PF-Container XER\n%s", string(xer))
+	t.Logf("E2SM-KPM-IndicationMessage-Format1 XER\n%s", string(xer))
 }

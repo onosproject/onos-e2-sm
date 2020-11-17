@@ -38,5 +38,5 @@ func Test_xerEncodePmContainersListItem(t *testing.T) {
 
 	xer, err := xerEncodePmContainersListItem(pmContainersList)
 	assert.NilError(t, err)
-	t.Logf("PF-Container XER\n%s", string(xer))
+	t.Logf("PM-Containers-List XER\n%s", string(xer))
 }

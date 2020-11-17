@@ -23,12 +23,12 @@ func xerEncodeE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1 *e2sm_
 
 	e2SmKpmIndicationMsgFormat1CP, err := newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessageFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationMessage_Format1, unsafe.Pointer(e2SmKpmIndicationMsgFormat1CP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessageFormat1() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -38,7 +38,7 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMsgFormat1 *e2sm_kpm_ie
 	for _, pmContainersItem := range e2SmKpmIndicationMsgFormat1.IndicationMessageFormat1.GetPmContainers() {
 		pmContainersItemC, err := newPmContainersListItem(pmContainersItem)
 		if err != nil {
-			return nil, fmt.Errorf("newPmContainersListItem() %s", err.Error())
+			return nil, fmt.Errorf("newE2SmKpmIndicationMessageFormat1() %s", err.Error())
 		}
 
 		if _, err = C.asn_sequence_add(unsafe.Pointer(pmContainersListC), unsafe.Pointer(pmContainersItemC)); err != nil {
@@ -76,7 +76,7 @@ func decodeE2SmKpmIndicationMessageFormat1Bytes(array [8]byte) (*e2sm_kpm_ies.E2
 	eSmKpmIndicationMsgFormat1C := (*C.E2SM_KPM_IndicationMessage_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 	result, err := decodeE2SmKpmIndicationMessageFormat1(eSmKpmIndicationMsgFormat1C)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeE2SmKpmIndicationMessageFormat1Bytes() %s", err.Error())
 	}
 
 	return result, nil
