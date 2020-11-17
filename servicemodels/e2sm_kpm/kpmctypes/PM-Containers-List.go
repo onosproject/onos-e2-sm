@@ -11,6 +11,7 @@ package kpmctypes
 //#include "PM-Containers-List.h"
 import "C"
 import (
+	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -19,12 +20,12 @@ func xerEncodePmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersLi
 
 	pmContainersListCP, err := newPmContainersListItem(pmContainersList)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodePmContainersListItem() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_PM_Containers_List, unsafe.Pointer(pmContainersListCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodePmContainersListItem() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -33,9 +34,8 @@ func xerEncodePmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersLi
 func newPmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersList) (*C.PM_Containers_List_t, error) {
 
 	pmContainersListItemCP, err := newPfContainer(pmContainersList.PerformanceContainer)
-
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("newPmContainersListItem() %s", err.Error())
 	}
 
 	pmContainersListC := C.PM_Containers_List_t{
@@ -52,7 +52,7 @@ func decodePmContainersListItem(pmContainersListC *C.PM_Containers_List_t) (*e2s
 	pmContainersListItem := new(e2sm_kpm_ies.PmContainersList)
 	performanceContainer, err := decodePfContainer(pmContainersListC.performanceContainer)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodePmContainersListItem() %s", err.Error())
 	}
 	pmContainersListItem.PerformanceContainer = performanceContainer
 

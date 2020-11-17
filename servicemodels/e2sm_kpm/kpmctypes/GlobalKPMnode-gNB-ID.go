@@ -12,6 +12,7 @@ package kpmctypes
 import "C"
 import (
 	"encoding/binary"
+	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -19,12 +20,12 @@ import (
 func xerEncodeGlobalKpmNodeGnbId(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) ([]byte, error) {
 	gnbCP, err := newGlobalKpmNodeGnbId(gnb)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeGlobalKpmNodeGnbId() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_GlobalKPMnode_gNB_ID, unsafe.Pointer(gnbCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeGlobalKpmNodeGnbId() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -33,7 +34,7 @@ func newGlobalKpmNodeGnbId(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) (*C.GlobalKPMno
 
 	globalGnbId, err := newGlobalgNbId(gnb.GlobalGNbId)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("newGlobalKpmNodeGnbId() %s", err.Error())
 	}
 	gnbCuUpId := newGnbCuUpId(gnb.GNbCuUpId)
 	gnbDuId := newGnbDuId(gnb.GNbDuId)
@@ -52,19 +53,19 @@ func decodeGlobalKpmNodeGnbId(gnbC *C.GlobalKPMnode_gNB_ID_t) (*e2sm_kpm_ies.Glo
 
 	globalGnbId, err := decodeGlobalgNbId(&gnbC.global_gNB_ID)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeGlobalKpmNodeGnbId() %s", err.Error())
 	}
 	gnb.GlobalGNbId = globalGnbId
 
 	gnbCuUpId, err := decodeGnbCuUpId(gnbC.gNB_CU_UP_ID)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeGlobalKpmNodeGnbId() %s", err.Error())
 	}
 	gnb.GNbCuUpId = gnbCuUpId
 
 	gnbDuId, err := decodeGnbDuId(gnbC.gNB_DU_ID)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeGlobalKpmNodeGnbId() %s", err.Error())
 	}
 	gnb.GNbDuId = gnbDuId
 

@@ -12,6 +12,7 @@ package kpmctypes
 import "C"
 import (
 	"encoding/binary"
+	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -19,12 +20,12 @@ import (
 func xerEncodeOCuCpPfContainer(oCuCpContainer *e2sm_kpm_ies.OcucpPfContainer) ([]byte, error) {
 	oCuCpContainerCP, err := newOCuCpPfContainer(oCuCpContainer)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeOCuCpPfContainer() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_OCUCP_PF_Container, unsafe.Pointer(oCuCpContainerCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeOCuCpPfContainer() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -33,9 +34,8 @@ func newOCuCpPfContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Con
 	var nUEs = C.long(oCuCpC.GetCuCpResourceStatus().NumberOfActiveUes)
 
 	gnbNameCP, err := newGnbCuCpName(oCuCpC.GNbCuCpName)
-
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("newOCuCpPfContainer() %s", err.Error())
 	}
 
 	// TODO: Fix an issue with Go pointers (see output of 'go test -v ./...' command)
@@ -54,7 +54,10 @@ func decodeOCuCpPfContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_
 
 	oCuCpContainer.GNbCuCpName = decodeGnbCuCpName(oCuCpContainerC.gNB_CU_CP_Name)
 	//TODO: Implement decodeCuCpResourceStatus
-	//oCuCpContainer.CuCpResourceStatus, err = decodeCuCpResouceStatus(oCuCpContainerC.cu_CP_Resource_Status)
+	nUes := int32(*oCuCpContainerC.cu_CP_Resource_Status.numberOfActive_UEs)
+	oCuCpContainer.CuCpResourceStatus = &e2sm_kpm_ies.OcucpPfContainer_CuCpResourceStatus001{
+		NumberOfActiveUes: nUes,
+	}
 
 	return oCuCpContainer
 }

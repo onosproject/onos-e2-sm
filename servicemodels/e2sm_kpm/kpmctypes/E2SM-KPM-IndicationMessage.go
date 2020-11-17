@@ -22,12 +22,12 @@ func xerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKp
 
 	e2SmKpmIndicationMsgCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessage() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationMessage, unsafe.Pointer(e2SmKpmIndicationMsgCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessage() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -42,7 +42,7 @@ func newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndic
 
 		im, err := newE2SmKpmIndicationMessageFormat1(choice)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("newE2SmKpmIndicationMessage() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	//case *e2sm_kpm_ies.E2SmKpmIndicationMessage_RicStyleType:
@@ -68,7 +68,7 @@ func decodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsgC *C.E2SM_KPM_Indication
 	case C.E2SM_KPM_IndicationMessage_PR_indicationMessage_Format1:
 		e2SmKpmIndicationMsgFormat1, err := decodeE2SmKpmIndicationMessageFormat1Bytes(e2SmKpmIndicationMsgC.choice)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("decodeE2SmKpmIndicationMessage() %s", err.Error())
 		}
 
 		e2SmKpmIndicationMsg.E2SmKpmIndicationMessage = e2SmKpmIndicationMsgFormat1

@@ -23,5 +23,5 @@ func Test_xerEncodeGnbIdChoice(t *testing.T) {
 	
 	xer, err := xerEncodeGnbIdChoice(c)
 	assert.NilError(t, err)
-	t.Logf("GnbIdChoice XER\n%s", string(xer))
+	t.Logf("GNB-ID-Choice XER\n%s", string(xer))
 }

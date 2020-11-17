@@ -12,6 +12,7 @@ package kpmctypes
 import "C"
 import (
 	"encoding/binary"
+	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -19,12 +20,12 @@ import (
 func xerEncodeE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2SmKpmIndicationHeaderFormat1) ([]byte, error) {
 	indicationHeaderFormat1CP, err := newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationHeader_Format1, unsafe.Pointer(indicationHeaderFormat1CP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -33,11 +34,11 @@ func newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2S
 
 	globalKpmNodeId, err := newGlobalKpmNodeId(indicationHeaderFormat1.IdGlobalKpmnodeId)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("newE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
 	nRcgi, err := newNRCGI(indicationHeaderFormat1.NRcgi)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("newE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
 	plmnId := newPlmnIdentity(indicationHeaderFormat1.PLmnIdentity)
 	sliceId := newSnssai(indicationHeaderFormat1.SliceId)
@@ -64,13 +65,13 @@ func decodeE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1C *C.E2SM_KPM_I
 
 	globalKpmNodeId, err := decodeGlobalKpmNodeId(indicationHeaderFormat1C.id_GlobalKPMnode_ID)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
 	indicationHeaderFormat1.IdGlobalKpmnodeId = globalKpmNodeId
 
 	nRcgi, err := decodeNRCGI(indicationHeaderFormat1C.nRCGI)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
 	indicationHeaderFormat1.NRcgi = nRcgi
 

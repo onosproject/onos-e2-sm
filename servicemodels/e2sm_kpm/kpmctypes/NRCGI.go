@@ -12,6 +12,7 @@ package kpmctypes
 //#include "NRCGI.h"
 import "C"
 import (
+	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
 )
@@ -20,12 +21,12 @@ func xerEncodeNRCGI(nrcgi *e2sm_kpm_ies.Nrcgi) ([]byte, error) {
 
 	nrcgiCP, err := newNRCGI(nrcgi)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeNRCGI() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_NRCGI, unsafe.Pointer(nrcgiCP))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("xerEncodeNRCGI() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -51,7 +52,7 @@ func decodeNRCGI(nrcgiC *C.NRCGI_t) (*e2sm_kpm_ies.Nrcgi, error) {
 
 	nrCellIdentity, err := decodeNRCellIdentity(&nrcgiC.nRCellIdentity)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("decodeNRCGI() %s", err.Error())
 	}
 	nrcgi.NRcellIdentity = nrCellIdentity
 
