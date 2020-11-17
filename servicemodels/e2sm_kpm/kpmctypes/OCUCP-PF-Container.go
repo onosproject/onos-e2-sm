@@ -54,7 +54,10 @@ func decodeOCuCpPfContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_
 
 	oCuCpContainer.GNbCuCpName = decodeGnbCuCpName(oCuCpContainerC.gNB_CU_CP_Name)
 	//TODO: Implement decodeCuCpResourceStatus
-	//oCuCpContainer.CuCpResourceStatus, err = decodeCuCpResouceStatus(oCuCpContainerC.cu_CP_Resource_Status)
+	nUes := int32(*oCuCpContainerC.cu_CP_Resource_Status.numberOfActive_UEs)
+	oCuCpContainer.CuCpResourceStatus = &e2sm_kpm_ies.OcucpPfContainer_CuCpResourceStatus001{
+		NumberOfActiveUes: nUes,
+	}
 
 	return oCuCpContainer
 }
