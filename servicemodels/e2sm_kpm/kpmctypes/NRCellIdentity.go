@@ -9,7 +9,7 @@ package kpmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "NRCellidentity.h"
+//#include "NRCellIdentity.h"
 import "C"
 import (
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
