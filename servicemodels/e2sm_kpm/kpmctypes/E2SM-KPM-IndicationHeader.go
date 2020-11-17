@@ -1,0 +1,76 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package kpmctypes
+//#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
+//#cgo LDFLAGS: -lm
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <assert.h>
+//#include "E2SM-KPM-IndicationHeader.h"
+import "C"
+import (
+	"encoding/binary"
+	"fmt"
+	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"unsafe"
+)
+
+func xerEncodeE2SmKpmIndicationHeader(indicationHeader *e2sm_kpm_ies.E2SmKpmIndicationHeader) ([]byte, error) {
+	indicationHeaderCP, err := newE2SmKpmIndicationHeader(indicationHeader)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationHeader, unsafe.Pointer(indicationHeaderCP))
+	if err != nil {
+		return nil, err
+	}
+	return bytes, nil
+}
+
+func newE2SmKpmIndicationHeader(indicationHeader *e2sm_kpm_ies.E2SmKpmIndicationHeader) (*C.E2SM_KPM_IndicationHeader_t, error) {
+	var pr C.E2SM_KPM_IndicationHeader_PR
+	choiceC := [8]byte{}
+
+	switch choice := indicationHeader.E2SmKpmIndicationHeader.(type) {
+	case *e2sm_kpm_ies.E2SmKpmIndicationHeader_IndicationHeaderFormat1:
+		pr = C.E2SM_KPM_IndicationHeader_PR_indicationHeader_Format1
+
+		im, err := newE2SmKpmIndicationHeaderFormat1(choice.IndicationHeaderFormat1)
+		if err != nil {
+			return nil, err
+		}
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+	default:
+		return nil, fmt.Errorf("NEWE2SmKpmIndicationHeader() %T not yet implemented", choice)
+	}
+
+	indicationHeaderC := C.E2SM_KPM_IndicationHeader_t{
+		present: pr,
+		choice:  choiceC,
+	}
+
+	return &indicationHeaderC, nil
+}
+
+func decodeE2SmKpmIndicationHeader(indicationHeaderC *C.E2SM_KPM_IndicationHeader_t) (*e2sm_kpm_ies.E2SmKpmIndicationHeader, error) {
+	indicationHeader := new(e2sm_kpm_ies.E2SmKpmIndicationHeader)
+
+	switch indicationHeaderC.present {
+	case C.E2SM_KPM_IndicationHeader_PR_indicationHeader_Format1:
+		indicationHeaderFormat1, err := decodeE2SmKpmIndicationHeaderFormat1Bytes(indicationHeaderC.choice)
+		if err != nil {
+			return nil, err
+		}
+
+		indicationHeader.E2SmKpmIndicationHeader = &e2sm_kpm_ies.E2SmKpmIndicationHeader_IndicationHeaderFormat1{
+			IndicationHeaderFormat1: indicationHeaderFormat1,
+		}
+	default:
+		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeader() %v not yet implemented", indicationHeaderC.present)
+	}
+
+	return indicationHeader, nil
+}

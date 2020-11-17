@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func Test_xerEncodeE2SmKpmIndicationHeaderFormat1(t *testing.T) {
+func Test_xerEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	var plmnID = "ONF"
 	var gNbCuUpId int64 = 0
@@ -23,7 +23,7 @@ func Test_xerEncodeE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 
 	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(plmnID, gNbCuUpId, gNbDuId, plmnIDnrcgi, sst, sd, fiveQi, qCi)
 
-	xer, err := xerEncodeE2SmKpmIndicationHeaderFormat1(newE2SmKpmPdu.GetIndicationHeaderFormat1())
+	xer, err := xerEncodeE2SmKpmIndicationHeader(newE2SmKpmPdu)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader XER\n%s", string(xer))
 }
