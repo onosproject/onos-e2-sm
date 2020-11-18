@@ -23,7 +23,12 @@ func Test_xerEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(plmnID, gNbCuUpId, gNbDuId, plmnIDnrcgi, sst, sd, fiveQi, qCi)
 
-	xer, err := xerEncodeE2SmKpmIndicationHeader(newE2SmKpmPdu)
+	xer, err := XerEncodeE2SmKpmIndicationHeader(newE2SmKpmPdu)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader XER\n%s", string(xer))
+
+	// TODO: Uncomment this to ensure PER encoding works
+	//per, err := PerEncodeE2SmKpmIndicationHeader(newE2SmKpmPdu)
+	//assert.NilError(t, err)
+	//t.Logf("E2SM-KPM-IndicationHeader PER\n%s", string(per))
 }

@@ -18,6 +18,20 @@ import (
 	"unsafe"
 )
 
+func PerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndicationMessage) ([]byte, error) {
+
+	e2SmKpmIndicationMsgCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_IndicationMessage, unsafe.Pointer(e2SmKpmIndicationMsgCP))
+	if err != nil {
+		return nil, err
+	}
+	return bytes, nil
+}
+
 func xerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndicationMessage) ([]byte, error) {
 
 	e2SmKpmIndicationMsgCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg)

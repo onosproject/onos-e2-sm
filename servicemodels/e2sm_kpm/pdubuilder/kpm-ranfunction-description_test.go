@@ -2,9 +2,10 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package sandbox
+package pdubuilder
 
 import (
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -26,4 +27,6 @@ func TestE2SmKpmRanfunctionDescriptionMsg(t *testing.T) {
 		ricIndicationHeaderFormatType, ricIndicationMessageFormatType)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+
+	kpmctypes.PerEncodeE2SmKpmIndicationMessage(newE2SmKpmPdu)
 }
