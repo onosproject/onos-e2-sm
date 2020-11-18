@@ -20,12 +20,12 @@ import (
 func PerEncodeE2SmKpmIndicationHeader(indicationHeader *e2sm_kpm_ies.E2SmKpmIndicationHeader) ([]byte, error) {
 	indicationHeaderCP, err := newE2SmKpmIndicationHeader(indicationHeader)
 	if err != nil {
-		return nil, fmt.Errorf("XerEncodeE2SmKpmIndicationHeader() %s", err.Error())
+		return nil, fmt.Errorf("PerEncodeE2SmKpmIndicationHeader() %s", err.Error())
 	}
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_IndicationHeader, unsafe.Pointer(indicationHeaderCP))
 	if err != nil {
-		return nil, fmt.Errorf("XerEncodeE2SmKpmIndicationHeader() %s", err.Error())
+		return nil, fmt.Errorf("PerEncodeE2SmKpmIndicationHeader() %s", err.Error())
 	}
 	return bytes, nil
 }
