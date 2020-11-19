@@ -18,7 +18,6 @@ import (
 )
 
 func xerEncodeNRCellIdentity(nrCellIdentity *e2sm_kpm_ies.NrcellIdentity) ([]byte, error) {
-
 	nrCellIdentityCP := newNRCellIdentity(nrCellIdentity)
 
 	bytes, err := encodeXer(&C.asn_DEF_NRCellIdentity, unsafe.Pointer(nrCellIdentityCP))
@@ -28,8 +27,17 @@ func xerEncodeNRCellIdentity(nrCellIdentity *e2sm_kpm_ies.NrcellIdentity) ([]byt
 	return bytes, nil
 }
 
-func newNRCellIdentity(nrCellIdentity *e2sm_kpm_ies.NrcellIdentity) (*C.NRCellIdentity_t) {
+func perEncodeNRCellIdentity(nrCellIdentity *e2sm_kpm_ies.NrcellIdentity) ([]byte, error) {
+	nrCellIdentityCP := newNRCellIdentity(nrCellIdentity)
 
+	bytes, err := encodePerBuffer(&C.asn_DEF_NRCellIdentity, unsafe.Pointer(nrCellIdentityCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeNRCellIdentity() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func newNRCellIdentity(nrCellIdentity *e2sm_kpm_ies.NrcellIdentity) *C.NRCellIdentity_t {
 	nrCellIdentityC := newBitString(nrCellIdentity.Value)
 
 	return nrCellIdentityC

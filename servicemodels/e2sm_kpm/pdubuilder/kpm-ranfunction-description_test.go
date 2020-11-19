@@ -28,5 +28,6 @@ func TestE2SmKpmRanfunctionDescriptionMsg(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 
-	//kpmctypes.PerEncodeE2SmKpmIndicationMessage(newE2SmKpmPdu)
+	// TODO comment back in once function exists
+	//kpmctypes.PerEncodeE2SmKpmRanfunctionDescription(newE2SmKpmPdu)
 }
