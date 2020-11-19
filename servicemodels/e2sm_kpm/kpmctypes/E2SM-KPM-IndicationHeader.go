@@ -87,3 +87,14 @@ func decodeE2SmKpmIndicationHeader(indicationHeaderC *C.E2SM_KPM_IndicationHeade
 
 	return indicationHeader, nil
 }
+
+func PerDecodeE2SmKpmIndicationHeader(bytes []byte) (*e2sm_kpm_ies.E2SmKpmIndicationHeader, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_IndicationHeader)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeE2SmKpmIndicationHeader((*C.E2SM_KPM_IndicationHeader_t)(unsafePtr))
+}

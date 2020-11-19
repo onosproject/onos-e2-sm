@@ -22,7 +22,7 @@ func (sm servicemodel) ServiceModelData() (string, string, string) {
 }
 
 func (sm servicemodel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	perBytes, err := kpmctypes.PerDecodeE2SmKpmIndicationMessage(asn1Bytes)
+	perBytes, err := kpmctypes.PerDecodeE2SmKpmIndicationHeader(asn1Bytes)
 	if err != nil {
 		return nil, fmt.Errorf("error decoding E2SmKpmIndicationHeader to PER %s", err)
 	}
