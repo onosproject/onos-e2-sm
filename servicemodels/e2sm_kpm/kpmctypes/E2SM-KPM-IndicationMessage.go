@@ -32,7 +32,7 @@ func PerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKp
 	return bytes, nil
 }
 
-func xerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndicationMessage) ([]byte, error) {
+func XerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMsg *e2sm_kpm_ies.E2SmKpmIndicationMessage) ([]byte, error) {
 
 	e2SmKpmIndicationMsgCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMsg)
 	if err != nil {
