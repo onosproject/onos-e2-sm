@@ -36,8 +36,8 @@ func CreateE2SmKpmIndicationHeader(plmnID string, gNbCuUpId int64, gNbDuId int64
 								GnbId: &e2sm_kpm_ies.GnbIdChoice{
 									GnbIdChoice: &e2sm_kpm_ies.GnbIdChoice_GnbId{
 										GnbId: &e2sm_kpm_ies.BitString{
-											Value: 0x9bcd4, //uint64
-											Len:   22,      //uint32
+											Value: 0x9bcd4abef, //uint64
+											Len:   36,      //uint32
 										},
 									},
 								},

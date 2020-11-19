@@ -69,8 +69,8 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var plmnID = "ONF"
-	var cellIdentityValue uint64 = 0
-	var cellIdentityLen uint32 = 0
+	var cellIdentityValue uint64 = 0x9bcd4abef
+	var cellIdentityLen uint32 = 36
 	var ulTotalAvlblProbs int32 = 0
 	var dlTotalAvlblProbs int32 = 0
 	var fiveQi int32 = 0
