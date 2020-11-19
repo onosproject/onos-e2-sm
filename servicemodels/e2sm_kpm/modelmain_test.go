@@ -32,7 +32,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
-	assert.Equal(t, 68, len(protoBytes))
+	assert.Equal(t, 71, len(protoBytes))
 
 	asn1Bytes, err := kpmTestSm.IndicationHeaderProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
@@ -59,7 +59,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
-	assert.Equal(t, 68, len(protoBytes))
+	assert.Equal(t, 71, len(protoBytes))
 
 	asn1Bytes, err := kpmTestSm.IndicationHeaderASN1toProto(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
