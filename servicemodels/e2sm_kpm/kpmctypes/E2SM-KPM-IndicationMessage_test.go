@@ -43,7 +43,7 @@ func Test_xerEncodeE2SmKpmIndicationMessage(t *testing.T) {
 		E2SmKpmIndicationMessage: e2SmIindicationMsg,
 	}
 
-	xer, err := xerEncodeE2SmKpmIndicationMessage(e2smKpmPdu)
+	xer, err := XerEncodeE2SmKpmIndicationMessage(e2smKpmPdu)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationMessage XER\n%s", string(xer))
 }

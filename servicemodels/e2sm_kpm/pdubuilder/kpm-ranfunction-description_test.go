@@ -5,7 +5,7 @@
 package pdubuilder
 
 import (
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
+	//"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -28,5 +28,5 @@ func TestE2SmKpmRanfunctionDescriptionMsg(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 
-	kpmctypes.PerEncodeE2SmKpmIndicationMessage(newE2SmKpmPdu)
+	//kpmctypes.PerEncodeE2SmKpmIndicationMessage(newE2SmKpmPdu)
 }

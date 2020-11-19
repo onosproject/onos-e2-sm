@@ -44,8 +44,19 @@ func (sm servicemodel) IndicationMessageASN1toProto([]byte) ([]byte, error) {
 	return nil, fmt.Errorf("not yet implemented")
 }
 
-func (sm servicemodel) IndicationMessageProtoToASN1([]byte) ([]byte, error) {
-	return nil, fmt.Errorf("not yet implemented")
+func (sm servicemodel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+	protoObj := new(e2sm_kpm_ies.E2SmKpmIndicationMessage)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmIndicationMessage %s", err)
+	}
+
+	// TODO: change this to Per when Per is fixed
+	perBytes, err := kpmctypes.XerEncodeE2SmKpmIndicationMessage(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmKpmIndicationMessage to PER %s", err)
+	}
+
+	return perBytes, nil
 }
 
 func (sm servicemodel) RanFuncDescriptionASN1toProto([]byte) ([]byte, error) {
