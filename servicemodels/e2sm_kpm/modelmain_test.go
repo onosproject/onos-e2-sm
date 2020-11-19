@@ -32,7 +32,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
-	assert.Equal(t, 71, len(protoBytes))
+	assert.Equal(t, 68, len(protoBytes))
 
 	asn1Bytes, err := kpmTestSm.IndicationHeaderProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
@@ -40,32 +40,32 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.Equal(t, 248, len(asn1Bytes))
 }
 
-//func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
-//	var plmnID = "ONF"
-//	var gNbCuUpId int64 = 0
-//	var gNbDuId int64 = 0
-//	var plmnIDnrcgi = "onf"
-//	var sst = "1"
-//	var sd = "SD1"
-//	var fiveQi int32 = 0
-//	var qCi int32 = 0
-//
-//	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(plmnID, gNbCuUpId, gNbDuId, plmnIDnrcgi, sst, sd, fiveQi, qCi)
-//	assert.NilError(t, err, "error creating E2SmPDU")
-//
-//	err = newE2SmKpmPdu.Validate()
-//	assert.NilError(t, err, "error validating E2SmPDU")
-//
-//	assert.NilError(t, err)
-//	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
-//	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
-//	assert.Equal(t, 71, len(protoBytes))
-//
-//	asn1Bytes, err := kpmTestSm.IndicationHeaderASN1toProto(protoBytes)
-//	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
-//	assert.Assert(t, asn1Bytes != nil)
-//	assert.Equal(t, 248, len(asn1Bytes))
-//}
+func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
+	var plmnID = "ONF"
+	var gNbCuUpId int64 = 0
+	var gNbDuId int64 = 0
+	var plmnIDnrcgi = "onf"
+	var sst = "1"
+	var sd = "SD1"
+	var fiveQi int32 = 0
+	var qCi int32 = 0
+
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(plmnID, gNbCuUpId, gNbDuId, plmnIDnrcgi, sst, sd, fiveQi, qCi)
+	assert.NilError(t, err, "error creating E2SmPDU")
+
+	err = newE2SmKpmPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
+	assert.Equal(t, 68, len(protoBytes))
+
+	asn1Bytes, err := kpmTestSm.IndicationHeaderASN1toProto(protoBytes)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	assert.Equal(t, 248, len(asn1Bytes))
+}
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var plmnID = "ONF"
