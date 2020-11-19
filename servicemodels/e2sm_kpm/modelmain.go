@@ -21,8 +21,18 @@ func (sm servicemodel) ServiceModelData() (string, string, string) {
 	return smname, smversion, modulename
 }
 
-func (sm servicemodel) IndicationHeaderASN1toProto([]byte) ([]byte, error) {
-	return nil, fmt.Errorf("not yet implemented")
+func (sm servicemodel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	perBytes, err := kpmctypes.PerDecodeE2SmKpmIndicationMessage(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmKpmIndicationHeader to PER %s", err)
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmIndicationHeader %s", err)
+	}
+
+	return protoBytes, nil
 }
 
 func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
