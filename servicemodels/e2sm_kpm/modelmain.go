@@ -31,8 +31,7 @@ func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, e
 		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmIndicationHeader %s", err)
 	}
 
-	// TODO: change this to Per when Per is fixed
-	perBytes, err := kpmctypes.XerEncodeE2SmKpmIndicationHeader(protoObj)
+	perBytes, err := kpmctypes.PerEncodeE2SmKpmIndicationHeader(protoObj)
 	if err != nil {
 		return nil, fmt.Errorf("error encoding E2SmKpmIndicationHeader to PER %s", err)
 	}

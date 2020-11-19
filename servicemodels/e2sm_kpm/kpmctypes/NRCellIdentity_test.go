@@ -14,12 +14,17 @@ func Test_xerEncodeNRCellIdentity(t *testing.T) {
 
 	nrCellIdentity := &e2sm_kpm_ies.NrcellIdentity{
 		Value: &e2sm_kpm_ies.BitString{
-			Value: 0x9bcd4, //uint64
-			Len:   22,      //uint32
+			Value: 0x9bcd4abef, //uint64
+			Len:   36,      //uint32
 		},
 	}
 
 	xer, err := xerEncodeNRCellIdentity(nrCellIdentity)
 	assert.NilError(t, err)
 	t.Logf("NRCellIdentity XER\n%s", string(xer))
+
+	per, err := perEncodeNRCellIdentity(nrCellIdentity)
+	assert.NilError(t, err)
+	t.Logf("NRCellIdentity XER\n%v", per)
+
 }
