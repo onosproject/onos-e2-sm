@@ -38,7 +38,7 @@ func decodeGnbCuUpId(gnbCuUpIdC *C.GNB_CU_UP_ID_t) (*e2sm_kpm_ies.GnbCuUpId, err
 	gnbCuUpId := new(e2sm_kpm_ies.GnbCuUpId)
 	resultStr := decodeInteger(gnbCuUpIdC)
 	resultInt, err := strconv.ParseInt(resultStr, 10, 64)
-	if err == nil {
+	if err != nil {
 		return nil, fmt.Errorf("decodeGnbCuUpId() error in str-to-int64 convertion %T", err)
 	}
 	gnbCuUpId.Value = resultInt
