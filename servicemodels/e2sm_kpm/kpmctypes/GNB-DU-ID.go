@@ -13,7 +13,6 @@ import "C"
 import (
 	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
-	"strconv"
 	"unsafe"
 )
 
@@ -28,15 +27,18 @@ func xerEncodeGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
 }
 
 func newGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) (*C.GNB_DU_ID_t) {
-	// TODO: Check whether basis is decimal. Also consider putting out basis as a parameter
-	gnbDuIdC := newInteger([]byte(strconv.FormatInt(gnbDuId.Value, 10)))
+	fmt.Printf("newGnbDuId -- gnbDuId -- %v\n", gnbDuId)
+	gnbDuIdC := newInteger(gnbDuId.Value)
+	fmt.Printf("newGnbDuId -- gnbDuIdC -- %v\n", gnbDuIdC)
 	return gnbDuIdC
 }
 
 func decodeGnbDuId(gnbDuIdC *C.GNB_DU_ID_t) (*e2sm_kpm_ies.GnbDuId, error) {
 	gnbDuId := new(e2sm_kpm_ies.GnbDuId)
+	fmt.Printf("decodeGnbDuId -- gnbDuIdC -- %v\n", gnbDuIdC)
 	resultStr := decodeInteger(gnbDuIdC)
-	gnbDuId.Value = int64(resultStr)
+	gnbDuId.Value = resultStr
+	fmt.Printf("decodeGnbDuId -- gnbDuId -- %v\n", gnbDuId)
 
 	return gnbDuId, nil
 }

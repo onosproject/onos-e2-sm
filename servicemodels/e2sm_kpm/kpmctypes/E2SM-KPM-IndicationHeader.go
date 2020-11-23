@@ -27,6 +27,7 @@ func PerEncodeE2SmKpmIndicationHeader(indicationHeader *e2sm_kpm_ies.E2SmKpmIndi
 	if err != nil {
 		return nil, fmt.Errorf("PerEncodeE2SmKpmIndicationHeader() %s", err.Error())
 	}
+	fmt.Printf("PerEncodeE2SmKpmIndicationHeader -- bytes -- %v\n", bytes)
 	return bytes, nil
 }
 
@@ -65,6 +66,9 @@ func newE2SmKpmIndicationHeader(indicationHeader *e2sm_kpm_ies.E2SmKpmIndication
 		choice:  choiceC,
 	}
 
+	fmt.Printf("newE2SmKpmIndicationHeader -- indicationHeader -- %v\n", indicationHeader)
+	fmt.Printf("newE2SmKpmIndicationHeader -- indicationHeaderC -- %v\n", indicationHeaderC)
+
 	return &indicationHeaderC, nil
 }
 
@@ -85,6 +89,7 @@ func decodeE2SmKpmIndicationHeader(indicationHeaderC *C.E2SM_KPM_IndicationHeade
 		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeader() %v not yet implemented", indicationHeaderC.present)
 	}
 
+	fmt.Printf("decodeE2SmKpmIndicationHeader -- indicationHeader -- %v\n", indicationHeader)
 	return indicationHeader, nil
 }
 
@@ -96,5 +101,6 @@ func PerDecodeE2SmKpmIndicationHeader(bytes []byte) (*e2sm_kpm_ies.E2SmKpmIndica
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
+	fmt.Printf("PerDecodeE2SmKpmIndicationHeader -- unsafePtr -- %v\n", unsafePtr)
 	return decodeE2SmKpmIndicationHeader((*C.E2SM_KPM_IndicationHeader_t)(unsafePtr))
 }
