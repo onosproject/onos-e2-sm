@@ -30,18 +30,14 @@ func xerEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
 func newGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) (*C.GNB_CU_UP_ID_t) {
 
 	// TODO: Check whether basis is decimal. Also consider putting out basis as a parameter
-	gnbCuUpIdC := newInteger(strconv.FormatInt(gnbCuUpId.Value, 10))
+	gnbCuUpIdC := newInteger([]byte(strconv.FormatInt(gnbCuUpId.Value, 10)))
 	return gnbCuUpIdC
 }
 
 func decodeGnbCuUpId(gnbCuUpIdC *C.GNB_CU_UP_ID_t) (*e2sm_kpm_ies.GnbCuUpId, error) {
 	gnbCuUpId := new(e2sm_kpm_ies.GnbCuUpId)
 	resultStr := decodeInteger(gnbCuUpIdC)
-	resultInt, err := strconv.ParseInt(resultStr, 10, 64)
-	if err != nil {
-		return nil, fmt.Errorf("decodeGnbCuUpId() error in str-to-int64 convertion %T", err)
-	}
-	gnbCuUpId.Value = resultInt
+	gnbCuUpId.Value = int64(resultStr)
 
 	return gnbCuUpId, nil
 }

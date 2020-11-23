@@ -16,17 +16,23 @@ import (
 )
 
 // TODO: Change the argument to a []byte
-func newAsnCodecsPrim(msg string) *C.ASN__PRIMITIVE_TYPE_t {
-	msgBytes := C.CBytes([]byte(msg))
+func newAsnCodecsPrim(msg []byte) *C.ASN__PRIMITIVE_TYPE_t {
+
+	msgBytes := C.CBytes(msg)
 	asnPrimTypeC := C.ASN__PRIMITIVE_TYPE_t{
 		buf:  (*C.uchar)(msgBytes),
 		size: C.ulong(len(msg)),
 	}
+
 	return &asnPrimTypeC
 }
 
-func decodeAsnCodecsPrim(asnPrimTypeC *C.ASN__PRIMITIVE_TYPE_t) string {
+func decodeAsnCodecsPrim(asnPrimTypeC *C.ASN__PRIMITIVE_TYPE_t) []byte {
 
+	if asnPrimTypeC == nil {
+		return nil
+	}
 	bytes := C.GoBytes(unsafe.Pointer(asnPrimTypeC.buf), C.int(asnPrimTypeC.size))
-	return string(bytes)
+
+	return bytes
 }

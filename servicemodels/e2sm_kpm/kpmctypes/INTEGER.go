@@ -10,16 +10,23 @@ package kpmctypes
 //#include <assert.h>
 //#include "INTEGER.h"
 import "C"
+import (
+	"strconv"
+)
 
-func newInteger(msg string) *C.INTEGER_t {
+func newInteger(msg []byte) *C.INTEGER_t {
 
 	intC := newAsnCodecsPrim(msg)
 
 	return intC
 }
 
-func decodeInteger(intC *C.INTEGER_t) string {
+func decodeInteger(intC *C.INTEGER_t) uint64 {
 
 	bytes := decodeAsnCodecsPrim(intC)
-	return bytes
+	// There could possibly occur an issue in parsing str-to-int. Iit happens, output value would be 0.
+	byteToInt, _ := strconv.Atoi(string(bytes))
+
+	return uint64(byteToInt)
+
 }
