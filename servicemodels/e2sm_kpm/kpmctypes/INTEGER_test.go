@@ -35,3 +35,20 @@ func Test_decodeInteger(t *testing.T) {
 	//assert.Equal(t, int(protoBitString.Len), 28, "unexpected bit string length")
 	//assert.Equal(t, protoBitString.Value, uint64(0xf0debc9a), "unexpected bit string value")
 }
+
+func Test_perEncodeDecodeInteger(t *testing.T) {
+
+	var msg int64 = 74721569
+
+	intPer, err := perEncodeInteger(msg)
+	assert.NilError(t, err)
+	assert.Assert(t, intPer != nil)
+	t.Logf("INTEGER PER\n%v", intPer)
+
+	result, err := perDecodeInteger(intPer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != 0)
+	t.Logf("INTEGER PER decoded is \n%v", result)
+
+	assert.Equal(t, msg, result, "Error between the keyboard and the chair?")
+}

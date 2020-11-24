@@ -16,7 +16,6 @@ import (
 	"unsafe"
 )
 
-// TODO: Change the argument to a []byte
 func newAsnCodecsPrim(msg int64) *C.ASN__PRIMITIVE_TYPE_t {
 
 	b := make([]byte, 8)
