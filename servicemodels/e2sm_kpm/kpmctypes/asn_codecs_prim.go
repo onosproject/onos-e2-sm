@@ -15,9 +15,9 @@ import (
 	"unsafe"
 )
 
-// TODO: Change the argument to a []byte
-func newAsnCodecsPrim(msg string) *C.ASN__PRIMITIVE_TYPE_t {
-	msgBytes := C.CBytes([]byte(msg))
+func newAsnCodecsPrim(msg []byte) *C.ASN__PRIMITIVE_TYPE_t {
+
+	msgBytes := C.CBytes(msg)
 	asnPrimTypeC := C.ASN__PRIMITIVE_TYPE_t{
 		buf:  (*C.uchar)(msgBytes),
 		size: C.ulong(len(msg)),
@@ -25,8 +25,11 @@ func newAsnCodecsPrim(msg string) *C.ASN__PRIMITIVE_TYPE_t {
 	return &asnPrimTypeC
 }
 
-func decodeAsnCodecsPrim(asnPrimTypeC *C.ASN__PRIMITIVE_TYPE_t) string {
+func decodeAsnCodecsPrim(asnPrimTypeC *C.ASN__PRIMITIVE_TYPE_t) []byte {
 
-	bytes := C.GoBytes(unsafe.Pointer(asnPrimTypeC.buf), C.int(asnPrimTypeC.size))
-	return string(bytes)
+	return C.GoBytes(unsafe.Pointer(asnPrimTypeC.buf), C.int(asnPrimTypeC.size))
+}
+
+func freeAsnCodecsPrim(asnPrimTypeC *C.ASN__PRIMITIVE_TYPE_t) {
+	C.free(unsafe.Pointer(asnPrimTypeC.buf))
 }

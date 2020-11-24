@@ -22,7 +22,7 @@ import (
 
 func xerEncodeBitString(bs *e2sm_kpm_ies.BitString) ([]byte, error) {
 	bsC := newBitString(bs)
-
+	defer freeBitString(bsC)
 	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func xerEncodeBitString(bs *e2sm_kpm_ies.BitString) ([]byte, error) {
 // PerEncodeGnbID - used only in tests
 func perEncodeBitString(bs *e2sm_kpm_ies.BitString) ([]byte, error) {
 	bsC := newBitString(bs)
-
+	defer freeBitString(bsC)
 	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func newBitString(bs *e2sm_kpm_ies.BitString) *C.BIT_STRING_t {
 		size:        C.ulong(numBytes),
 		bits_unused: C.int(bitsUnused),
 	}
-	fmt.Printf("Bit string %+v\n", bsC)
+	//fmt.Printf("Bit string %+v\n", bsC)
 	return &bsC
 }
 
@@ -114,4 +114,8 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_ies.BitString, error) {
 	}
 
 	return bs, nil
+}
+
+func freeBitString(bsC *C.BIT_STRING_t) {
+	C.free(unsafe.Pointer(bsC.buf))
 }
