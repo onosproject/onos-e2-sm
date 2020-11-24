@@ -29,7 +29,7 @@ func xerEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
 func perEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
 	gnbCuUpIdCP := newGnbCuUpId(gnbCuUpId)
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_INTEGER, unsafe.Pointer(gnbCuUpIdCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_GNB_CU_UP_ID, unsafe.Pointer(gnbCuUpIdCP))
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeGnbCuUpId() %s", err.Error())
 	}

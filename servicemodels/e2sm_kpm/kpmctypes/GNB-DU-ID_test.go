@@ -36,3 +36,24 @@ func Test_decodeGnbDuId(t *testing.T) {
 	assert.NilError(t, err, "Something weird should have happened. Try again")
 	assert.Equal(t, gnbDuId, result.Value, "Something went wrong, comparison is incorrect")
 }
+
+func Test_perEncodeDecodeGnbDuId(t *testing.T) {
+
+	var gnbDuId int64 = 153
+
+	c := &e2sm_kpm_ies.GnbDuId{
+		Value: gnbDuId,
+	}
+
+	gnbDuIdPer, err := perEncodeGnbDuId(c)
+	assert.NilError(t, err)
+	assert.Assert(t, gnbDuIdPer != nil)
+	t.Logf("GNB-DU-ID PER\n%v", gnbDuIdPer)
+
+	result, err := perDecodeGnbDuId(gnbDuIdPer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("GNB-DU-ID PER decoded is \n%v", result)
+
+	assert.Equal(t, gnbDuId, result.Value, "Error between the keyboard and the chair?")
+}
