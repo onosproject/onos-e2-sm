@@ -14,7 +14,6 @@ import "C"
 import (
 	"encoding/binary"
 	"unsafe"
-	"fmt"
 )
 
 // TODO: Change the argument to a []byte
@@ -26,9 +25,9 @@ func newAsnCodecsPrim(msg int64) *C.ASN__PRIMITIVE_TYPE_t {
 	//fmt.Printf("newAsnCodecPrim -- msg -- %v\n", msg)
 	//msgBytes := C.CBytes([]byte(string(msg)))
 	//fmt.Printf("newAsnCodecPrim -- msgBytes -- %v\n", msgBytes)
-	fmt.Printf("newAsnCodecPrim -- b -- %v\n", b)
-	fmt.Printf("newAsnCodecPrim -- msgBytes -- %v\n", msgBytes)
-	fmt.Printf("newAsnCodecPrim -- len(b) -- %v\n", len(b))
+	//fmt.Printf("newAsnCodecPrim -- b -- %v\n", b)
+	//fmt.Printf("newAsnCodecPrim -- msgBytes -- %v\n", msgBytes)
+	//fmt.Printf("newAsnCodecPrim -- len(b) -- %v\n", len(b))
 	asnPrimTypeC := C.ASN__PRIMITIVE_TYPE_t{
 		buf:  (*C.uchar)(msgBytes),
 		size: C.ulong(len(b)),
@@ -42,13 +41,13 @@ func decodeAsnCodecsPrim(asnPrimTypeC *C.ASN__PRIMITIVE_TYPE_t) int64 {
 	//if asnPrimTypeC == nil {
 	//	return nil
 	//}
-	fmt.Printf("decodeAsnCodecsPrim -- asnPrimTypeC -- %v\n", asnPrimTypeC)
+	//fmt.Printf("decodeAsnCodecsPrim -- asnPrimTypeC -- %v\n", asnPrimTypeC)
 	bytes := C.GoBytes(unsafe.Pointer(asnPrimTypeC.buf), C.int(asnPrimTypeC.size))
-	fmt.Printf("decodeAsnCodecsPrim -- bytes -- %v\n", bytes)
-	fmt.Printf("decodeAsnCodecsPrim -- string(bytes) -- %v\n", string(bytes))
-	result := binary.BigEndian.Uint64(bytes)
-	fmt.Printf("decodeAsnCodecsPrim -- result -- %v\n", result)
-	fmt.Printf("decodeAsnCodecsPrim -- int64(result) -- %v\n", int64(result))
+	//fmt.Printf("decodeAsnCodecsPrim -- bytes -- %v\n", bytes)
+	//fmt.Printf("decodeAsnCodecsPrim -- string(bytes) -- %v\n", string(bytes))
+	result := binary.LittleEndian.Uint64(bytes)
+	//fmt.Printf("decodeAsnCodecsPrim -- result -- %v\n", result)
+	//fmt.Printf("decodeAsnCodecsPrim -- int64(result) -- %v\n", int64(result))
 
 	return int64(result)
 }
