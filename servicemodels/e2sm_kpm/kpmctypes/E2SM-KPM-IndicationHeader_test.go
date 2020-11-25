@@ -13,8 +13,8 @@ import (
 func Test_xerEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	var plmnID = "ONF"
-	var gNbCuUpId int64 = 0
-	var gNbDuId int64 = 0
+	var gNbCuUpId int64 = 10
+	var gNbDuId int64 = 20
 	var plmnIDnrcgi = "onf"
 	var sst = "1"
 	var sd = "SD1"

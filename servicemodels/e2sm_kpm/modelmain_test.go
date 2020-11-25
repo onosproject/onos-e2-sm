@@ -37,7 +37,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	asn1Bytes, err := kpmTestSm.IndicationHeaderProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 248, len(asn1Bytes))
+	assert.Equal(t, 31, len(asn1Bytes))
 }
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {

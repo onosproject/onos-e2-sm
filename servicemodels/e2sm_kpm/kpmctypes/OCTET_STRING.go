@@ -30,3 +30,7 @@ func decodeOctetString(octC *C.OCTET_STRING_t) string {
 	bytes := C.GoBytes(unsafe.Pointer(octC.buf), C.int(octC.size))
 	return string(bytes)
 }
+
+func freeOctetString(octC *C.OCTET_STRING_t) {
+	C.free(unsafe.Pointer(octC))
+}
