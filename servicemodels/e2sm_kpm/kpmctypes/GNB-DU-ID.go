@@ -35,3 +35,7 @@ func decodeGnbDuId(gnbDuIdC *C.GNB_DU_ID_t) *e2sm_kpm_ies.GnbDuId {
 		Value: decodeInteger(gnbDuIdC),
 	}
 }
+
+func freeGnbDuId(gnbDuIdC *C.GNB_DU_ID_t) {
+	freeInteger(gnbDuIdC)
+}

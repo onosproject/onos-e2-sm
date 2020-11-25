@@ -19,6 +19,8 @@ import (
 
 func xerEncodeGlobalKpmNodeGnbId(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) ([]byte, error) {
 	gnbCP, err := newGlobalKpmNodeGnbId(gnb)
+	defer freeGlobalKpmNodeGnbId(gnbCP)
+
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGlobalKpmNodeGnbId() %s", err.Error())
 	}
@@ -70,3 +72,7 @@ func decodeGlobalKpmNodeGnbIdBytes(array [8]byte) (*e2sm_kpm_ies.GlobalKpmnodeGn
 	return decodeGlobalKpmNodeGnbId(gnbC)
 }
 
+func freeGlobalKpmNodeGnbId(ptr *C.GlobalKPMnode_gNB_ID_t) {
+	freeGnbCuUpId(ptr.gNB_CU_UP_ID)
+	freeGnbDuId(ptr.gNB_DU_ID)
+}

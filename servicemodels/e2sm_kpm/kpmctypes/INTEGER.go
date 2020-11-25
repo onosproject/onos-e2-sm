@@ -62,6 +62,7 @@ func perDecodeInteger(integerBytes []byte) (int64, error) {
 	return decodeInteger(intC), nil
 }
 
+// It is like a two's complement encoding of a signed number, but not quite the same
 func newInteger(msg int64) *C.INTEGER_t {
 	if msg == 0 {
 		return &C.INTEGER_t{
@@ -99,6 +100,8 @@ func newInteger(msg int64) *C.INTEGER_t {
 	return (*C.INTEGER_t)(newAsnCodecsPrim(asBytes))
 }
 
+// It is like a two's complement decoding of a signed number, but not quite
+// the same for negative values
 func decodeInteger(intC *C.INTEGER_t) int64 {
 	bytes := decodeAsnCodecsPrim(intC)
 
