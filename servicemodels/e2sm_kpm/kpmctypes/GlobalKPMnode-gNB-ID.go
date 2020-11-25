@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -43,8 +44,8 @@ func newGlobalKpmNodeGnbId(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) (*C.GlobalKPMno
 
 	gnbC := C.GlobalKPMnode_gNB_ID_t{
 		global_gNB_ID: *globalGnbId,
-		gNB_CU_UP_ID: gnbCuUpId,
-		gNB_DU_ID: gnbDuId,
+		gNB_CU_UP_ID:  gnbCuUpId,
+		gNB_DU_ID:     gnbDuId,
 	}
 
 	return &gnbC, nil
@@ -58,11 +59,14 @@ func decodeGlobalKpmNodeGnbId(gnbC *C.GlobalKPMnode_gNB_ID_t) (*e2sm_kpm_ies.Glo
 	}
 
 	gnb := e2sm_kpm_ies.GlobalKpmnodeGnbId{
-		GlobalGNbId:          globalGnbId,
-		GNbCuUpId:            decodeGnbCuUpId(gnbC.gNB_CU_UP_ID),
-		GNbDuId:              decodeGnbDuId(gnbC.gNB_DU_ID),
+		GlobalGNbId: globalGnbId,
 	}
-
+	if gnbC.gNB_CU_UP_ID != nil {
+		gnb.GNbCuUpId = decodeGnbCuUpId(gnbC.gNB_CU_UP_ID)
+	}
+	if gnbC.gNB_DU_ID != nil {
+		gnb.GNbDuId = decodeGnbDuId(gnbC.gNB_DU_ID)
+	}
 	return &gnb, nil
 }
 
