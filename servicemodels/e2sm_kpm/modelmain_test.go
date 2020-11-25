@@ -7,6 +7,7 @@ package main
 import (
 	"github.com/golang/protobuf/proto"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdubuilder"
+	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -73,4 +74,34 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	asn1Bytes, err := kpmTestSm.IndicationMessageProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
+}
+
+func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
+	// This value is taken from Shad and passed as a byte array directly to the function
+	// It's the encoding of what's in the file ../test/E2SM-KPM-Indication-Header.xml
+	indicationHeaderAsn1Bytes := []byte{0x3F, 0x08, 0x37, 0x34, 0x37, 0x38, 0xB5, 0xC6, 0x77, 0x88, 0x02, 0x37, 0x34, 0x37, 0x22, 0x5B,
+		0xD6, 0x00, 0x70, 0x37, 0x34, 0x37, 0x98, 0x80, 0x31, 0x30, 0x30, 0x09, 0x09}
+
+	protoBytes, err := kpmTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 74, len(protoBytes))
+	testIH := e2sm_kpm_ies.E2SmKpmIndicationHeader{}
+	proto.Unmarshal(protoBytes, &testIH)
+	assert.DeepEqual(t, []byte{0x37, 0x34, 0x37}, testIH.GetIndicationHeaderFormat1().GetPLmnIdentity().GetValue())
+}
+
+func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
+	// This message is taken from Shad
+	indicationMessageAsn1 := []byte{0x40, 0x00, 0x00, 0x4B, 0x01, 0x00}
+
+	protoBytes, err := kpmTestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 10, len(protoBytes))
+	testIM := e2sm_kpm_ies.E2SmKpmIndicationMessage{}
+	proto.Unmarshal(protoBytes, &testIM)
+	assert.Equal(t, 1, len(testIM.GetIndicationMessageFormat1().GetPmContainers()))
+	pm1 := testIM.GetIndicationMessageFormat1().GetPmContainers()[0]
+	assert.Equal(t, 0, int(pm1.GetPerformanceContainer().GetOCuCp().GetCuCpResourceStatus().GetNumberOfActiveUes()))
 }
