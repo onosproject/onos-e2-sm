@@ -28,14 +28,14 @@ func xerEncodePlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) ([]byte, error) {
 	return bytes, nil
 }
 
-func newPlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) (*C.PLMN_Identity_t) {
+func newPlmnIdentity(plmnID *e2sm_kpm_ies.PlmnIdentity) *C.PLMN_Identity_t {
 
 	plmnIDC := newOctetString(string(plmnID.Value))
 
 	return plmnIDC
 }
 
-func decodePlmnIdentity(plmnIDC *C.PLMN_Identity_t) (*e2sm_kpm_ies.PlmnIdentity) {
+func decodePlmnIdentity(plmnIDC *C.PLMN_Identity_t) *e2sm_kpm_ies.PlmnIdentity {
 	plmnID := new(e2sm_kpm_ies.PlmnIdentity)
 
 	plmnIDO := decodeOctetString(plmnIDC)

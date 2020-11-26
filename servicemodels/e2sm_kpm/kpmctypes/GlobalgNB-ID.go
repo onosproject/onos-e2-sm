@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -39,7 +40,7 @@ func newGlobalgNbId(globalgNbId *e2sm_kpm_ies.GlobalgNbId) (*C.GlobalgNB_ID_t, e
 
 	globalgNbIdC := C.GlobalgNB_ID_t{
 		plmn_id: *plmnIDC,
-		gnb_id: *gnbIDC,
+		gnb_id:  *gnbIDC,
 	}
 
 	return &globalgNbIdC, nil

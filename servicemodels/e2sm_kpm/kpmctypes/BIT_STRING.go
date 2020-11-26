@@ -19,7 +19,6 @@ import (
 	"unsafe"
 )
 
-
 func xerEncodeBitString(bs *e2sm_kpm_ies.BitString) ([]byte, error) {
 	bsC := newBitString(bs)
 	defer freeBitString(bsC)
@@ -46,7 +45,7 @@ func newBitString(bs *e2sm_kpm_ies.BitString) *C.BIT_STRING_t {
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
 	valAsBytes := make([]byte, 8)
 	binary.LittleEndian.PutUint64(valAsBytes, bs.Value)
-	bitsUnused := numBytes * 8 - int(bs.Len)
+	bitsUnused := numBytes*8 - int(bs.Len)
 
 	bsC := C.BIT_STRING_t{
 		buf:         (*C.uchar)(C.CBytes(valAsBytes[:numBytes])),
@@ -98,10 +97,10 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_ies.BitString, error) {
 	//var carry byte
 	//mask := byte(math.Pow(2, float64(size)) - 1)
 	//for i := 0; i < int(size); i++ {
-		//prevCarry := carry << (8 - bitsUnused%8)
-		//carry = bytes[i] & mask
-		//bytes[i] = bytes[i] >> bitsUnused%8
-		//goBytes[i] = bytes[i] | prevCarry
+	//prevCarry := carry << (8 - bitsUnused%8)
+	//carry = bytes[i] & mask
+	//bytes[i] = bytes[i] >> bitsUnused%8
+	//goBytes[i] = bytes[i] | prevCarry
 	//}
 	//fmt.Printf("bit string %x %d %d %+x %+x\n", bufAddr, size, bitsUnused, bytes, goBytes)
 	goBytes := make([]byte, 8)
@@ -110,7 +109,7 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_ies.BitString, error) {
 	}
 	bs := &e2sm_kpm_ies.BitString{
 		Value: binary.LittleEndian.Uint64(goBytes),
-		Len: uint32(size*8 - uint64(bitsUnused)),
+		Len:   uint32(size*8 - uint64(bitsUnused)),
 	}
 
 	return bs, nil
