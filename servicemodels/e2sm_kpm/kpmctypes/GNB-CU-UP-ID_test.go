@@ -51,7 +51,7 @@ func Test_perEncodeGnbCuUpId(t *testing.T) {
 	t.Logf("GNB-CU-UP-ID PER\n%v", gnbCuUpIdPer)
 }
 
-func Test_perEncodeDecodeGnbCuUpId(t *testing.T) {
+func Test_perDecodeGnbCuUpId(t *testing.T) {
 
 	var gnbCuUpId int64 = 153
 
@@ -69,5 +69,5 @@ func Test_perEncodeDecodeGnbCuUpId(t *testing.T) {
 	assert.Assert(t, result != nil)
 	t.Logf("GNB-CU-UP-ID PER decoded is \n%v", result)
 
-	assert.Equal(t, gnbCuUpId, result.Value, "Error between the keyboard and the chair?")
+	assert.Equal(t, gnbCuUpId, result.Value, "Encoded and decoded values are not the same")
 }
