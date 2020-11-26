@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -24,6 +25,27 @@ func xerEncodeGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
 		return nil, fmt.Errorf("xerEncodeGnbDuId() %s", err.Error())
 	}
 	return bytes, nil
+}
+
+func perEncodeGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
+	gnbDuIdCP := newGnbDuId(gnbDuId)
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_GNB_DU_ID, unsafe.Pointer(gnbDuIdCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeGnbDuId() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perDecodeGnbDuId(bytes []byte) (*e2sm_kpm_ies.GnbDuId, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GNB_DU_ID)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeGnbDuId((*C.GNB_DU_ID_t)(unsafePtr)), nil
 }
 
 func newGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) *C.GNB_DU_ID_t {

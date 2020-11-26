@@ -27,6 +27,27 @@ func xerEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
 	return bytes, nil
 }
 
+func perEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
+	gnbCuUpIdCP := newGnbCuUpId(gnbCuUpId)
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_GNB_CU_UP_ID, unsafe.Pointer(gnbCuUpIdCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeGnbCuUpId() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perDecodeGnbCuUpId(bytes []byte) (*e2sm_kpm_ies.GnbCuUpId, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GNB_CU_UP_ID)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeGnbCuUpId((*C.GNB_CU_UP_ID_t)(unsafePtr)), nil
+}
+
 func newGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) *C.GNB_CU_UP_ID_t {
 
 	return newInteger(gnbCuUpId.Value)

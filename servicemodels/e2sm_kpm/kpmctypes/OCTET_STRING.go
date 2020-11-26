@@ -27,6 +27,9 @@ func newOctetString(msg string) *C.OCTET_STRING_t {
 
 func decodeOctetString(octC *C.OCTET_STRING_t) string {
 
+	if octC == nil {
+		return ""
+	}
 	bytes := C.GoBytes(unsafe.Pointer(octC.buf), C.int(octC.size))
 	return string(bytes)
 }
