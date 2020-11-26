@@ -11,16 +11,16 @@ import (
 )
 
 func Test_xerEncodeGnbIdChoice(t *testing.T) {
-	
+
 	c := &e2sm_kpm_ies.GnbIdChoice{
 		GnbIdChoice: &e2sm_kpm_ies.GnbIdChoice_GnbId{
 			GnbId: &e2sm_kpm_ies.BitString{
-				Value:                0xABCDEF9,
-				Len:                  28,
+				Value: 0xABCDEF9,
+				Len:   28,
 			},
 		},
 	}
-	
+
 	xer, err := xerEncodeGnbIdChoice(c)
 	assert.NilError(t, err)
 	t.Logf("GNB-ID-Choice XER\n%s", string(xer))

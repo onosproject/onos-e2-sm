@@ -37,8 +37,8 @@ func newNRCGI(nrcgi *e2sm_kpm_ies.Nrcgi) (*C.NRCGI_t, error) {
 	nrCellIdentity := newNRCellIdentity(nrcgi.NRcellIdentity)
 
 	nrcgiC := C.NRCGI_t{
-		pLMN_Identity: *plmnID,
-		nRCellIdentity:  *nrCellIdentity,
+		pLMN_Identity:  *plmnID,
+		nRCellIdentity: *nrCellIdentity,
 	}
 
 	return &nrcgiC, nil

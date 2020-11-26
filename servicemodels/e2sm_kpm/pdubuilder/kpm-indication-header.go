@@ -58,7 +58,7 @@ func CreateE2SmKpmIndicationHeader(plmnID string, gNbCuUpId int64, gNbDuId int64
 					NRcellIdentity: &e2sm_kpm_ies.NrcellIdentity{
 						Value: &e2sm_kpm_ies.BitString{
 							Value: 0x9bcd4abef, //uint64
-							Len:   36,      //uint32
+							Len:   36,          //uint32
 						},
 					},
 				},

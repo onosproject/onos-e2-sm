@@ -19,7 +19,7 @@ import (
 
 func xerEncodeSnssai(snssai *e2sm_kpm_ies.Snssai) ([]byte, error) {
 
-	snssaiCP:= newSnssai(snssai)
+	snssaiCP := newSnssai(snssai)
 
 	bytes, err := encodeXer(&C.asn_DEF_SNSSAI, unsafe.Pointer(snssaiCP))
 	if err != nil {
@@ -28,7 +28,7 @@ func xerEncodeSnssai(snssai *e2sm_kpm_ies.Snssai) ([]byte, error) {
 	return bytes, nil
 }
 
-func newSnssai(snssai *e2sm_kpm_ies.Snssai) (*C.SNSSAI_t) {
+func newSnssai(snssai *e2sm_kpm_ies.Snssai) *C.SNSSAI_t {
 
 	sst := newOctetString(string(snssai.SSt))
 	sd := newOctetString(string(snssai.SD))
@@ -41,13 +41,13 @@ func newSnssai(snssai *e2sm_kpm_ies.Snssai) (*C.SNSSAI_t) {
 	return &snssaiC
 }
 
-func decodeSnssai(snssaiC *C.SNSSAI_t) (*e2sm_kpm_ies.Snssai) {
+func decodeSnssai(snssaiC *C.SNSSAI_t) *e2sm_kpm_ies.Snssai {
 	snssai := new(e2sm_kpm_ies.Snssai)
 
 	sst := decodeOctetString(&snssaiC.sST)
 	snssai.SSt = []byte(sst)
 
-	sd :=decodeOctetString(snssaiC.sD)
+	sd := decodeOctetString(snssaiC.sD)
 	snssai.SD = []byte(sd)
 
 	return snssai

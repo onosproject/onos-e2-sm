@@ -108,7 +108,7 @@ func decodeInteger(intC *C.INTEGER_t) int64 {
 	ni := big.NewInt(0)
 	ni.SetBytes(bytes)
 
-	if bytes[0] & 0x80 > 0 { // If negative
+	if bytes[0]&0x80 > 0 { // If negative
 		bigBytes := make([]byte, 0)
 		for idx, b := range bytes {
 			b2 := ^b

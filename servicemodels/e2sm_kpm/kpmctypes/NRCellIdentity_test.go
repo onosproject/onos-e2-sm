@@ -15,7 +15,7 @@ func Test_xerEncodeNRCellIdentity(t *testing.T) {
 	nrCellIdentity := &e2sm_kpm_ies.NrcellIdentity{
 		Value: &e2sm_kpm_ies.BitString{
 			Value: 0x9bcd4abef, //uint64
-			Len:   36,      //uint32
+			Len:   36,          //uint32
 		},
 	}
 

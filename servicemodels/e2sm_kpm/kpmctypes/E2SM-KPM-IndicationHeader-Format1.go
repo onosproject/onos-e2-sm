@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -50,11 +51,11 @@ func newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2S
 
 	indicationHeaderFormat1C := C.E2SM_KPM_IndicationHeader_Format1_t{
 		id_GlobalKPMnode_ID: globalKpmNodeId,
-		nRCGI: nRcgi,
-		pLMN_Identity: plmnId,
-		sliceID: sliceId,
-		fiveQI: &fiveQiC,
-		qci: &qCiC,
+		nRCGI:               nRcgi,
+		pLMN_Identity:       plmnId,
+		sliceID:             sliceId,
+		fiveQI:              &fiveQiC,
+		qci:                 &qCiC,
 	}
 
 	return &indicationHeaderFormat1C, nil
@@ -92,4 +93,3 @@ func decodeE2SmKpmIndicationHeaderFormat1Bytes(array [8]byte) (*e2sm_kpm_ies.E2S
 
 	return decodeE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1C)
 }
-

@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -49,7 +50,7 @@ func newOCuCpPfContainer(oCuCpC *e2sm_kpm_ies.OcucpPfContainer) (*C.OCUCP_PF_Con
 	return &ocucpC, nil
 }
 
-func decodeOCuCpPfContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_ies.OcucpPfContainer) {
+func decodeOCuCpPfContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) *e2sm_kpm_ies.OcucpPfContainer {
 	oCuCpContainer := new(e2sm_kpm_ies.OcucpPfContainer)
 
 	oCuCpContainer.GNbCuCpName = decodeGnbCuCpName(oCuCpContainerC.gNB_CU_CP_Name)
@@ -62,7 +63,7 @@ func decodeOCuCpPfContainer(oCuCpContainerC *C.OCUCP_PF_Container_t) (*e2sm_kpm_
 	return oCuCpContainer
 }
 
-func decodeOCuCpContainerBytes(array [8]byte) (*e2sm_kpm_ies.OcucpPfContainer) {
+func decodeOCuCpContainerBytes(array [8]byte) *e2sm_kpm_ies.OcucpPfContainer {
 	oCuCpPfContainerC := (*C.OCUCP_PF_Container_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeOCuCpPfContainer(oCuCpPfContainerC)

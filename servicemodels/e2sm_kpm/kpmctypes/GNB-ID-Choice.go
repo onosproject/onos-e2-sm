@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -49,7 +50,7 @@ func newGnbIDChoice(gnbIDc *e2sm_kpm_ies.GnbIdChoice) (*C.GNB_ID_Choice_t, error
 
 	gnbidcC := C.GNB_ID_Choice_t{
 		present: pr,
-		choice: choiceC,
+		choice:  choiceC,
 	}
 
 	return &gnbidcC, nil

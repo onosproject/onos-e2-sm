@@ -12,14 +12,14 @@ import (
 
 func Test_xerEncodeOCUCPPFContainer(t *testing.T) {
 
-		oCuCp := &e2sm_kpm_ies.OcucpPfContainer{
-			GNbCuCpName: &e2sm_kpm_ies.GnbCuCpName{
-				Value: "0xAB", //string -- PrintableString(SIZE(1..150,...))
-			},
-			CuCpResourceStatus: &e2sm_kpm_ies.OcucpPfContainer_CuCpResourceStatus001{
-				NumberOfActiveUes: 1, //int32 -- INTEGER (1..65536, ...)
-			},
-		}
+	oCuCp := &e2sm_kpm_ies.OcucpPfContainer{
+		GNbCuCpName: &e2sm_kpm_ies.GnbCuCpName{
+			Value: "0xAB", //string -- PrintableString(SIZE(1..150,...))
+		},
+		CuCpResourceStatus: &e2sm_kpm_ies.OcucpPfContainer_CuCpResourceStatus001{
+			NumberOfActiveUes: 1, //int32 -- INTEGER (1..65536, ...)
+		},
+	}
 
 	xer, err := xerEncodeOCuCpPfContainer(oCuCp)
 	assert.NilError(t, err)

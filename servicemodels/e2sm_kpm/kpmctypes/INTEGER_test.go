@@ -38,8 +38,6 @@ func Test_IntegerEncode(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Equal(t, int64(twenty), int20P)
 
-
-
 	xer205, err := xerEncodeInteger(twoHundredAndFive) // 2 bytes because > 128
 	assert.NilError(t, err)
 	assert.Equal(t, "<INTEGER>205</INTEGER>\n", string(xer205))
@@ -55,7 +53,6 @@ func Test_IntegerEncode(t *testing.T) {
 	int205P, err := perDecodeInteger(per205)
 	assert.NilError(t, err)
 	assert.Equal(t, int64(twoHundredAndFive), int205P)
-
 
 	xer333, err := xerEncodeInteger(threeHundredAndThirtyThree) // 2 bytes because > 128 and < 32767
 	assert.NilError(t, err)
@@ -73,7 +70,6 @@ func Test_IntegerEncode(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Equal(t, int64(threeHundredAndThirtyThree), int333P)
 
-
 	xer60000, err := xerEncodeInteger(sixtyThousand) // 3 bytes because > 32767
 	assert.NilError(t, err)
 	assert.Equal(t, "<INTEGER>60000</INTEGER>\n", string(xer60000))
@@ -89,8 +85,6 @@ func Test_IntegerEncode(t *testing.T) {
 	int60000P, err := perDecodeInteger(per60000)
 	assert.NilError(t, err)
 	assert.Equal(t, int64(sixtyThousand), int60000P)
-
-
 
 	xer0, err := xerEncodeInteger(zero)
 	assert.NilError(t, err)
@@ -108,9 +102,6 @@ func Test_IntegerEncode(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Equal(t, int64(zero), int0P)
 
-
-
-
 	xerN21, err := xerEncodeInteger(minusTwentyOne) // 1 byte because less than 128
 	assert.NilError(t, err)
 	assert.Equal(t, "<INTEGER>-21</INTEGER>\n", string(xerN21))
@@ -126,8 +117,6 @@ func Test_IntegerEncode(t *testing.T) {
 	intN21P, err := perDecodeInteger(perN21)
 	assert.NilError(t, err)
 	assert.Equal(t, int64(minusTwentyOne), intN21P)
-
-
 
 	xerN205, err := xerEncodeInteger(minusTwoHundredAndFive) // 2 bytes because > 128
 	assert.NilError(t, err)
@@ -145,8 +134,6 @@ func Test_IntegerEncode(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Equal(t, int64(minusTwoHundredAndFive), intN205P)
 
-
-
 	xerN333, err := xerEncodeInteger(minusThreeHundredAndThirtyThree) // 2 bytes because > 128 and < 32767
 	assert.NilError(t, err)
 	assert.Equal(t, "<INTEGER>-333</INTEGER>\n", string(xerN333))
@@ -162,8 +149,6 @@ func Test_IntegerEncode(t *testing.T) {
 	intN333P, err := perDecodeInteger(perN333)
 	assert.NilError(t, err)
 	assert.Equal(t, int64(minusThreeHundredAndThirtyThree), intN333P)
-
-
 
 	xerN60000, err := xerEncodeInteger(minusSixtyThousand) // 3 bytes because > 32767
 	assert.NilError(t, err)

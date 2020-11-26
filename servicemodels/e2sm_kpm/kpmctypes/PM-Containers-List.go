@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -30,7 +31,6 @@ func xerEncodePmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersLi
 	return bytes, nil
 }
 
-
 func newPmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersList) (*C.PM_Containers_List_t, error) {
 
 	pmContainersListItemCP, err := newPfContainer(pmContainersList.PerformanceContainer)
@@ -46,7 +46,6 @@ func newPmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersList) (*
 
 	return &pmContainersListC, nil
 }
-
 
 func decodePmContainersListItem(pmContainersListC *C.PM_Containers_List_t) (*e2sm_kpm_ies.PmContainersList, error) {
 	pmContainersListItem := new(e2sm_kpm_ies.PmContainersList)

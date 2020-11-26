@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 package kpmctypes
+
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
@@ -49,7 +50,7 @@ func newGlobalKpmNodeId(idGlobalKpmnodeId *e2sm_kpm_ies.GlobalKpmnodeId) (*C.Glo
 
 	idGlobalKpmnodeIdC := C.GlobalKPMnode_ID_t{
 		present: pr,
-		choice: choiceC,
+		choice:  choiceC,
 	}
 
 	return &idGlobalKpmnodeIdC, nil
@@ -75,4 +76,3 @@ func decodeGlobalKpmNodeId(idGlobalKpmnodeIdC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_
 
 	return result, nil
 }
-

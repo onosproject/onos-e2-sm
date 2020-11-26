@@ -11,6 +11,7 @@ package kpmctypes
 //#include <assert.h>
 //#include "PrintableString.h"
 import "C"
+
 //import "unsafe"
 
 // TODO: Change the argument to a []byte
