@@ -45,7 +45,7 @@ func Test_xerEncodeRicReportStyleItem(t *testing.T) {
 	t.Logf("RIC-ReportStyle-List XER\n%s", string(xer))
 }
 
-func Test_xerDecodeRicEReportStyleItem(t *testing.T) {
+func Test_xerDecodeRicReportStyleItem(t *testing.T) {
 
 	ricReportStyleItem := createRicReportStyleItem()
 

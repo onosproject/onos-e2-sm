@@ -40,7 +40,7 @@ func Test_xerDecodeRicFormatType(t *testing.T) {
 	assert.Equal(t, ricFormatType.Value, result.Value, "Encoded and decoded values are not the same")
 }
 
-func Test_perEncodeRicformatType(t *testing.T) {
+func Test_perEncodeRicFormatType(t *testing.T) {
 
 	var ricType int32 = 21
 	ricFormatType := &e2sm_kpm_ies.RicFormatType{
