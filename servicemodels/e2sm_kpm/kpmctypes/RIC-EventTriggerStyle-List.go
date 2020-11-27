@@ -61,14 +61,14 @@ func perDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_kpm_ies.RicEventTrig
 
 func newRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_ies.RicEventTriggerStyleList) *C.RIC_EventTriggerStyle_List_t {
 
-	ricEventTriggerStyleType := newRicStyleType(ricEventTriggerStyleItem.RicEventTriggerStyleType)
-	ricEventTriggerStyleName := newRicStyleName(ricEventTriggerStyleItem.RicEventTriggerStyleName)
-	ricEventTriggerFormatType := newRicFormatType(ricEventTriggerStyleItem.RicEventTriggerFormatType)
+	ricEventTriggerStyleTypeC := newRicStyleType(ricEventTriggerStyleItem.RicEventTriggerStyleType)
+	ricEventTriggerStyleNameC := newRicStyleName(ricEventTriggerStyleItem.RicEventTriggerStyleName)
+	ricEventTriggerFormatTypeC := newRicFormatType(ricEventTriggerStyleItem.RicEventTriggerFormatType)
 
 	ricEventTriggerStyleItemC := C.RIC_EventTriggerStyle_List_t{
-		ric_EventTriggerStyle_Type:  *ricEventTriggerStyleType,
-		ric_EventTriggerStyle_Name:  *ricEventTriggerStyleName,
-		ric_EventTriggerFormat_Type: *ricEventTriggerFormatType,
+		ric_EventTriggerStyle_Type:  *ricEventTriggerStyleTypeC,
+		ric_EventTriggerStyle_Name:  *ricEventTriggerStyleNameC,
+		ric_EventTriggerFormat_Type: *ricEventTriggerFormatTypeC,
 	}
 
 	return &ricEventTriggerStyleItemC

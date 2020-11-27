@@ -22,7 +22,7 @@ func xerEncodeRicReportStyleItem(ricReportStyleItem *e2sm_kpm_ies.RicReportStyle
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_ReportStyle_List, unsafe.Pointer(ricReportStyleItemCP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeRicEventTriggerStyleItem() %s", err.Error())
+		return nil, fmt.Errorf("xerEncodeRicReportStyleItem() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -32,7 +32,7 @@ func perEncodeRicReportStyleItem(ricReportStyleItem *e2sm_kpm_ies.RicReportStyle
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_ReportStyle_List, unsafe.Pointer(ricReportStyleItemCP))
 	if err != nil {
-		return nil, fmt.Errorf("perEncodeRicEventTriggerStyleItem() %s", err.Error())
+		return nil, fmt.Errorf("perEncodeRicReportStyleItem() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -61,16 +61,16 @@ func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_kpm_ies.RicReportStyleList
 
 func newRicReportStyleItem(ricReportStyleItem *e2sm_kpm_ies.RicReportStyleList) *C.RIC_ReportStyle_List_t {
 
-	ricReportStyleType := newRicStyleType(ricReportStyleItem.RicReportStyleType)
-	ricReportStyleName := newRicStyleName(ricReportStyleItem.RicReportStyleName)
-	ricReportStyleIndicationHeaderFormatType := newRicFormatType(ricReportStyleItem.RicIndicationHeaderFormatType)
-	ricReportStyleIndicationMessageFormatType := newRicFormatType(ricReportStyleItem.RicIndicationMessageFormatType)
+	ricReportStyleTypeC := newRicStyleType(ricReportStyleItem.RicReportStyleType)
+	ricReportStyleNameC := newRicStyleName(ricReportStyleItem.RicReportStyleName)
+	ricReportStyleIndicationHeaderFormatTypeC := newRicFormatType(ricReportStyleItem.RicIndicationHeaderFormatType)
+	ricReportStyleIndicationMessageFormatTypeC := newRicFormatType(ricReportStyleItem.RicIndicationMessageFormatType)
 
 	ricReportStyleItemC := C.RIC_ReportStyle_List_t{
-		ric_ReportStyle_Type:             *ricReportStyleType,
-		ric_ReportStyle_Name:             *ricReportStyleName,
-		ric_IndicationHeaderFormat_Type:  *ricReportStyleIndicationHeaderFormatType,
-		ric_IndicationMessageFormat_Type: *ricReportStyleIndicationMessageFormatType,
+		ric_ReportStyle_Type:             *ricReportStyleTypeC,
+		ric_ReportStyle_Name:             *ricReportStyleNameC,
+		ric_IndicationHeaderFormat_Type:  *ricReportStyleIndicationHeaderFormatTypeC,
+		ric_IndicationMessageFormat_Type: *ricReportStyleIndicationMessageFormatTypeC,
 	}
 
 	return &ricReportStyleItemC
