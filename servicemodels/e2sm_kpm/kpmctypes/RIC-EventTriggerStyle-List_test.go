@@ -37,7 +37,7 @@ func Test_xerEncodeRicEventTriggerStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleList)
 	assert.NilError(t, err)
-	assert.Equal(t, 38, len(xer))
+	assert.Equal(t, 259, len(xer))
 	t.Logf("RIC-EventTriggerStyle-List XER\n%s", string(xer))
 }
 
@@ -47,12 +47,14 @@ func Test_xerDecodeRicEventTriggerStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleList)
 	assert.NilError(t, err)
-	assert.Equal(t, 38, len(xer))
+	assert.Equal(t, 259, len(xer))
 	t.Logf("RIC-EventTriggerStyle-List XER\n%s", string(xer))
 
 	result, err := xerDecodeRicEventTriggerStyleItem(xer)
 	assert.NilError(t, err)
-	assert.Equal(t, ricEventTriggerStyleList, result, "Encoded and decoded values are not the same")
+	assert.Equal(t, ricEventTriggerStyleList.RicEventTriggerStyleType.Value, result.RicEventTriggerStyleType.Value, "Encoded and decoded RicStyleType values are not the same")
+	assert.Equal(t, ricEventTriggerStyleList.RicEventTriggerStyleName.Value, result.RicEventTriggerStyleName.Value, "Encoded and decoded RicStyleName values are not the same")
+	assert.Equal(t, ricEventTriggerStyleList.RicEventTriggerFormatType.Value, result.RicEventTriggerFormatType.Value, "Encoded and decoded RicFormatType values are not the same")
 }
 
 func Test_perEncodeRicEventTriggerStyleItem(t *testing.T) {
@@ -61,7 +63,7 @@ func Test_perEncodeRicEventTriggerStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleList)
 	assert.NilError(t, err)
-	assert.Equal(t, 2, len(per))
+	assert.Equal(t, 15, len(per))
 	t.Logf("RIC-EventTriggerStyle-List PER\n%s", string(per))
 }
 
@@ -71,10 +73,12 @@ func Test_perDecodeRicEventTriggerStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleList)
 	assert.NilError(t, err)
-	assert.Equal(t, 2, len(per))
+	assert.Equal(t, 15, len(per))
 	t.Logf("RIC-EventTriggerStyle-List PER\n%s", string(per))
 
 	result, err := perDecodeRicEventTriggerStyleItem(per)
 	assert.NilError(t, err)
-	assert.Equal(t, ricEventTriggerStyleList, result, "Encoded and decoded values are not the same")
+	assert.Equal(t, ricEventTriggerStyleList.RicEventTriggerStyleType.Value, result.RicEventTriggerStyleType.Value, "Encoded and decoded RicStyleType values are not the same")
+	assert.Equal(t, ricEventTriggerStyleList.RicEventTriggerStyleName.Value, result.RicEventTriggerStyleName.Value, "Encoded and decoded RicStyleName values are not the same")
+	assert.Equal(t, ricEventTriggerStyleList.RicEventTriggerFormatType.Value, result.RicEventTriggerFormatType.Value, "Encoded and decoded RicFormatType values are not the same")
 }

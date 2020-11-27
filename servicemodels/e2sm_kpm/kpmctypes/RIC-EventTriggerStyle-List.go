@@ -76,9 +76,9 @@ func newRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_ies.RicEvent
 
 func decodeRicEventTriggerStyleItem(ricEventTriggerStyleItemC *C.RIC_EventTriggerStyle_List_t) *e2sm_kpm_ies.RicEventTriggerStyleList {
 
-	ricStyleType := decodeRicStyleType((*C.RIC_Style_Type_t)(*ricEventTriggerStyleItemC.ric_EventTriggerStyle_Type))
-	ricStyleName := decodeRicStyleName((*C.RIC_Style_Name_t)(*ricEventTriggerStyleItemC.ric_EventTriggerStyle_Name))
-	ricFormatType := decodeRicFormatType((*C.RIC_Format_Type_t)(*ricEventTriggerStyleItemC.ric_EventTriggerFormat_Type))
+	ricStyleType := decodeRicStyleType(&ricEventTriggerStyleItemC.ric_EventTriggerStyle_Type)
+	ricStyleName := decodeRicStyleName(&ricEventTriggerStyleItemC.ric_EventTriggerStyle_Name)
+	ricFormatType := decodeRicFormatType(&ricEventTriggerStyleItemC.ric_EventTriggerFormat_Type)
 
 	ricEventTriggerStyleItem := e2sm_kpm_ies.RicEventTriggerStyleList{
 		RicEventTriggerStyleType:  ricStyleType,
