@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func CreateRicEventTriggerStyleItem() *e2sm_kpm_ies.RicEventTriggerStyleList {
+func createRicEventTriggerStyleItem() *e2sm_kpm_ies.RicEventTriggerStyleList {
 
 	var ricEventStyleType int32 = 13
 	var ricEventStyleName = "ONFevent"
@@ -33,7 +33,7 @@ func CreateRicEventTriggerStyleItem() *e2sm_kpm_ies.RicEventTriggerStyleList {
 
 func Test_xerEncodeRicEventTriggerStyleItem(t *testing.T) {
 
-	ricEventTriggerStyleItem := CreateRicEventTriggerStyleItem()
+	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
 	xer, err := xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem)
 	assert.NilError(t, err)
@@ -43,7 +43,7 @@ func Test_xerEncodeRicEventTriggerStyleItem(t *testing.T) {
 
 func Test_xerDecodeRicEventTriggerStyleItem(t *testing.T) {
 
-	ricEventTriggerStyleItem := CreateRicEventTriggerStyleItem()
+	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
 	xer, err := xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem)
 	assert.NilError(t, err)
@@ -59,7 +59,7 @@ func Test_xerDecodeRicEventTriggerStyleItem(t *testing.T) {
 
 func Test_perEncodeRicEventTriggerStyleItem(t *testing.T) {
 
-	ricEventTriggerStyleItem := CreateRicEventTriggerStyleItem()
+	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
 	per, err := perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem)
 	assert.NilError(t, err)
@@ -69,7 +69,7 @@ func Test_perEncodeRicEventTriggerStyleItem(t *testing.T) {
 
 func Test_perDecodeRicEventTriggerStyleItem(t *testing.T) {
 
-	ricEventTriggerStyleItem := CreateRicEventTriggerStyleItem()
+	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
 	per, err := perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem)
 	assert.NilError(t, err)
