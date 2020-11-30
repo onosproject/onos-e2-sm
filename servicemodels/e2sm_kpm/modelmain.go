@@ -77,12 +77,32 @@ func (sm servicemodel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, 
 	return perBytes, nil
 }
 
-func (sm servicemodel) RanFuncDescriptionASN1toProto([]byte) ([]byte, error) {
-	return nil, fmt.Errorf("not yet implemented")
+func (sm servicemodel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	perBytes, err := kpmctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmKpmRanfunctionDescription to PER %s", err)
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmRanfunctionDescription %s", err)
+	}
+
+	return protoBytes, nil
 }
 
-func (sm servicemodel) RanFuncDescriptionProtoToASN1([]byte) ([]byte, error) {
-	return nil, fmt.Errorf("not yet implemented")
+func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
+	protoObj := new(e2sm_kpm_ies.E2SmKpmRanfunctionDescription)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmRanfunctionDescription %s", err)
+	}
+
+	perBytes, err := kpmctypes.PerEncodeE2SmKpmRanfunctionDescription(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmKpmRanfunctionDescription to PER %s", err)
+	}
+
+	return perBytes, nil
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module

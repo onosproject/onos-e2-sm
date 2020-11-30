@@ -28,7 +28,7 @@ func xerEncodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_
 	return bytes, nil
 }
 
-func perEncodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_ies.E2SmKpmRanfunctionDescription) ([]byte, error) {
+func PerEncodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_ies.E2SmKpmRanfunctionDescription) ([]byte, error) {
 	e2SmKpmRanfunctionDescriptionCP := newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_RANfunction_Description, unsafe.Pointer(e2SmKpmRanfunctionDescriptionCP))
@@ -49,7 +49,7 @@ func xerDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_ies.E2SmKpm
 	return decodeE2SmKpmRanfunctionDescription((*C.E2SM_KPM_RANfunction_Description_t)(unsafePtr)), nil
 }
 
-func perDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_ies.E2SmKpmRanfunctionDescription, error) {
+func PerDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_ies.E2SmKpmRanfunctionDescription, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_RANfunction_Description)
 	if err != nil {
 		return nil, err
