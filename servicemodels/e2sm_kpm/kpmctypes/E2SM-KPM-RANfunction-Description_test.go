@@ -58,7 +58,6 @@ func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 	result, err := xerDecodeE2SmKpmRanfunctionDescription(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	//fmt.Printf("Test_xerDecodeE2SmKpmRanfunctionDescription -- XER was Decoded!\n%v\n", result)
 }
 
 func Test_perEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
@@ -85,5 +84,4 @@ func Test_perDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 	result, err := perDecodeE2SmKpmRanfunctionDescription(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	//fmt.Printf("Test_perDecodeE2SmKpmRanfunctionDescription -- PER was Decoded!\n%v\n", result)
 }
