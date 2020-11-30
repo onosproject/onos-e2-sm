@@ -18,7 +18,7 @@ import (
 )
 
 func xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_ies.RicEventTriggerStyleList) ([]byte, error) {
-	ricEventTriggerStyleItemCP := newRicEventTriggerStyleItem(ricEventTriggerStyleItem)
+	ricEventTriggerStyleItemCP := newRicEventTriggerStyleList(ricEventTriggerStyleItem)
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_EventTriggerStyle_List, unsafe.Pointer(ricEventTriggerStyleItemCP))
 	if err != nil {
@@ -28,7 +28,7 @@ func xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_ies.Ri
 }
 
 func perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_ies.RicEventTriggerStyleList) ([]byte, error) {
-	ricEventTriggerStyleItemCP := newRicEventTriggerStyleItem(ricEventTriggerStyleItem)
+	ricEventTriggerStyleItemCP := newRicEventTriggerStyleList(ricEventTriggerStyleItem)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_EventTriggerStyle_List, unsafe.Pointer(ricEventTriggerStyleItemCP))
 	if err != nil {
@@ -45,7 +45,7 @@ func xerDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_kpm_ies.RicEventTrig
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from XER is nil")
 	}
-	return decodeRicEventTriggerStyleItem((*C.RIC_EventTriggerStyle_List_t)(unsafePtr)), nil
+	return decodeRicEventTriggerStyleListItem((*C.RIC_EventTriggerStyle_List_t)(unsafePtr)), nil
 }
 
 func perDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_kpm_ies.RicEventTriggerStyleList, error) {
@@ -56,34 +56,34 @@ func perDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_kpm_ies.RicEventTrig
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
-	return decodeRicEventTriggerStyleItem((*C.RIC_EventTriggerStyle_List_t)(unsafePtr)), nil
+	return decodeRicEventTriggerStyleListItem((*C.RIC_EventTriggerStyle_List_t)(unsafePtr)), nil
 }
 
-func newRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_ies.RicEventTriggerStyleList) *C.RIC_EventTriggerStyle_List_t {
+func newRicEventTriggerStyleList(ricEventTriggerStyleList *e2sm_kpm_ies.RicEventTriggerStyleList) *C.RIC_EventTriggerStyle_List_t {
 
-	ricEventTriggerStyleTypeC := newRicStyleType(ricEventTriggerStyleItem.RicEventTriggerStyleType)
-	ricEventTriggerStyleNameC := newRicStyleName(ricEventTriggerStyleItem.RicEventTriggerStyleName)
-	ricEventTriggerFormatTypeC := newRicFormatType(ricEventTriggerStyleItem.RicEventTriggerFormatType)
+	ricEventTriggerStyleTypeC := newRicStyleType(ricEventTriggerStyleList.RicEventTriggerStyleType)
+	ricEventTriggerStyleNameC := newRicStyleName(ricEventTriggerStyleList.RicEventTriggerStyleName)
+	ricEventTriggerFormatTypeC := newRicFormatType(ricEventTriggerStyleList.RicEventTriggerFormatType)
 
-	ricEventTriggerStyleItemC := C.RIC_EventTriggerStyle_List_t{
+	ricEventTriggerStyleListC := C.RIC_EventTriggerStyle_List_t{
 		ric_EventTriggerStyle_Type:  *ricEventTriggerStyleTypeC,
 		ric_EventTriggerStyle_Name:  *ricEventTriggerStyleNameC,
 		ric_EventTriggerFormat_Type: *ricEventTriggerFormatTypeC,
 	}
 
-	return &ricEventTriggerStyleItemC
+	return &ricEventTriggerStyleListC
 }
 
-func decodeRicEventTriggerStyleItem(ricEventTriggerStyleItemC *C.RIC_EventTriggerStyle_List_t) *e2sm_kpm_ies.RicEventTriggerStyleList {
+func decodeRicEventTriggerStyleListItem(ricEventTriggerStyleListC *C.RIC_EventTriggerStyle_List_t) *e2sm_kpm_ies.RicEventTriggerStyleList {
 
-	ricStyleType := decodeRicStyleType(&ricEventTriggerStyleItemC.ric_EventTriggerStyle_Type)
-	ricStyleName := decodeRicStyleName(&ricEventTriggerStyleItemC.ric_EventTriggerStyle_Name)
-	ricFormatType := decodeRicFormatType(&ricEventTriggerStyleItemC.ric_EventTriggerFormat_Type)
+	ricStyleType := decodeRicStyleType(&ricEventTriggerStyleListC.ric_EventTriggerStyle_Type)
+	ricStyleName := decodeRicStyleName(&ricEventTriggerStyleListC.ric_EventTriggerStyle_Name)
+	ricFormatType := decodeRicFormatType(&ricEventTriggerStyleListC.ric_EventTriggerFormat_Type)
 
-	ricEventTriggerStyleItem := e2sm_kpm_ies.RicEventTriggerStyleList{
+	ricEventTriggerStyleList := e2sm_kpm_ies.RicEventTriggerStyleList{
 		RicEventTriggerStyleType:  ricStyleType,
 		RicEventTriggerStyleName:  ricStyleName,
 		RicEventTriggerFormatType: ricFormatType,
 	}
-	return &ricEventTriggerStyleItem
+	return &ricEventTriggerStyleList
 }

@@ -18,7 +18,7 @@ import (
 )
 
 func xerEncodeRicReportStyleItem(ricReportStyleItem *e2sm_kpm_ies.RicReportStyleList) ([]byte, error) {
-	ricReportStyleItemCP := newRicReportStyleItem(ricReportStyleItem)
+	ricReportStyleItemCP := newRicReportStyleListItem(ricReportStyleItem)
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_ReportStyle_List, unsafe.Pointer(ricReportStyleItemCP))
 	if err != nil {
@@ -28,7 +28,7 @@ func xerEncodeRicReportStyleItem(ricReportStyleItem *e2sm_kpm_ies.RicReportStyle
 }
 
 func perEncodeRicReportStyleItem(ricReportStyleItem *e2sm_kpm_ies.RicReportStyleList) ([]byte, error) {
-	ricReportStyleItemCP := newRicReportStyleItem(ricReportStyleItem)
+	ricReportStyleItemCP := newRicReportStyleListItem(ricReportStyleItem)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_ReportStyle_List, unsafe.Pointer(ricReportStyleItemCP))
 	if err != nil {
@@ -45,7 +45,7 @@ func xerDecodeRicReportStyleItem(bytes []byte) (*e2sm_kpm_ies.RicReportStyleList
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from XER is nil")
 	}
-	return decodeRicReportStyleItem((*C.RIC_ReportStyle_List_t)(unsafePtr)), nil
+	return decodeRicReportStyleListItem((*C.RIC_ReportStyle_List_t)(unsafePtr)), nil
 }
 
 func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_kpm_ies.RicReportStyleList, error) {
@@ -56,38 +56,38 @@ func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_kpm_ies.RicReportStyleList
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
-	return decodeRicReportStyleItem((*C.RIC_ReportStyle_List_t)(unsafePtr)), nil
+	return decodeRicReportStyleListItem((*C.RIC_ReportStyle_List_t)(unsafePtr)), nil
 }
 
-func newRicReportStyleItem(ricReportStyleItem *e2sm_kpm_ies.RicReportStyleList) *C.RIC_ReportStyle_List_t {
+func newRicReportStyleListItem(ricReportStyleListItem *e2sm_kpm_ies.RicReportStyleList) *C.RIC_ReportStyle_List_t {
 
-	ricReportStyleTypeC := newRicStyleType(ricReportStyleItem.RicReportStyleType)
-	ricReportStyleNameC := newRicStyleName(ricReportStyleItem.RicReportStyleName)
-	ricReportStyleIndicationHeaderFormatTypeC := newRicFormatType(ricReportStyleItem.RicIndicationHeaderFormatType)
-	ricReportStyleIndicationMessageFormatTypeC := newRicFormatType(ricReportStyleItem.RicIndicationMessageFormatType)
+	ricReportStyleTypeC := newRicStyleType(ricReportStyleListItem.RicReportStyleType)
+	ricReportStyleNameC := newRicStyleName(ricReportStyleListItem.RicReportStyleName)
+	ricReportStyleIndicationHeaderFormatTypeC := newRicFormatType(ricReportStyleListItem.RicIndicationHeaderFormatType)
+	ricReportStyleIndicationMessageFormatTypeC := newRicFormatType(ricReportStyleListItem.RicIndicationMessageFormatType)
 
-	ricReportStyleItemC := C.RIC_ReportStyle_List_t{
+	ricReportStyleListItemC := C.RIC_ReportStyle_List_t{
 		ric_ReportStyle_Type:             *ricReportStyleTypeC,
 		ric_ReportStyle_Name:             *ricReportStyleNameC,
 		ric_IndicationHeaderFormat_Type:  *ricReportStyleIndicationHeaderFormatTypeC,
 		ric_IndicationMessageFormat_Type: *ricReportStyleIndicationMessageFormatTypeC,
 	}
 
-	return &ricReportStyleItemC
+	return &ricReportStyleListItemC
 }
 
-func decodeRicReportStyleItem(ricReportStyleItemC *C.RIC_ReportStyle_List_t) *e2sm_kpm_ies.RicReportStyleList {
+func decodeRicReportStyleListItem(ricReportStyleListItemC *C.RIC_ReportStyle_List_t) *e2sm_kpm_ies.RicReportStyleList {
 
-	ricReportStyleType := decodeRicStyleType(&ricReportStyleItemC.ric_ReportStyle_Type)
-	ricReportStyleName := decodeRicStyleName(&ricReportStyleItemC.ric_ReportStyle_Name)
-	ricReportStyleIndicationHeaderFormatType := decodeRicFormatType(&ricReportStyleItemC.ric_IndicationHeaderFormat_Type)
-	ricReportStyleIndicationMessageFormatType := decodeRicFormatType(&ricReportStyleItemC.ric_IndicationMessageFormat_Type)
+	ricReportStyleType := decodeRicStyleType(&ricReportStyleListItemC.ric_ReportStyle_Type)
+	ricReportStyleName := decodeRicStyleName(&ricReportStyleListItemC.ric_ReportStyle_Name)
+	ricReportStyleIndicationHeaderFormatType := decodeRicFormatType(&ricReportStyleListItemC.ric_IndicationHeaderFormat_Type)
+	ricReportStyleIndicationMessageFormatType := decodeRicFormatType(&ricReportStyleListItemC.ric_IndicationMessageFormat_Type)
 
-	ricReportStyleItem := e2sm_kpm_ies.RicReportStyleList{
+	ricReportStyleListItem := e2sm_kpm_ies.RicReportStyleList{
 		RicReportStyleType:             ricReportStyleType,
 		RicReportStyleName:             ricReportStyleName,
 		RicIndicationHeaderFormatType:  ricReportStyleIndicationHeaderFormatType,
 		RicIndicationMessageFormatType: ricReportStyleIndicationMessageFormatType,
 	}
-	return &ricReportStyleItem
+	return &ricReportStyleListItem
 }

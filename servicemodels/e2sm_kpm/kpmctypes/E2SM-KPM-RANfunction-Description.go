@@ -67,24 +67,24 @@ func newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_ie
 
 	e2SmKpmRanfunctionDescriptionC := new(C.E2SM_KPM_RANfunction_Description_t)
 	//ricEventTriggerStyleItemC := new(C.RIC_EventTriggerStyle_List_t)
-	for _, ricEventTriggerStyleItem := range e2SmKpmRanfunctionDescription.E2SmKpmRanfunctionItem.GetRicEventTriggerStyleList() {
-		fmt.Printf("ricEventTriggerStyleItem -- %v\n", ricEventTriggerStyleItem)
-		ricEventTriggerStyleItemC := newRicEventTriggerStyleItem(ricEventTriggerStyleItem)
-		fmt.Printf("ricEventTriggerStyleItemC -- %v\n", ricEventTriggerStyleItemC)
-		//C.asn_sequence_add(unsafe.Pointer(ricEventTriggerStyleItemC), unsafe.Pointer(ricEventTriggerStyleItemC))
-		C.asn_sequence_add(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.e2SM_KPM_RANfunction_Item.ric_EventTriggerStyle_List), unsafe.Pointer(ricEventTriggerStyleItemC))
+	for _, ricEventTriggerStyleListItem := range e2SmKpmRanfunctionDescription.E2SmKpmRanfunctionItem.GetRicEventTriggerStyleList() {
+		fmt.Printf("ricEventTriggerStyleItem -- %v\n", ricEventTriggerStyleListItem)
+		ricEventTriggerStyleListItemC := newRicEventTriggerStyleList(ricEventTriggerStyleListItem)
+		fmt.Printf("ricEventTriggerStyleItemC -- %v\n", ricEventTriggerStyleListItemC)
+		//C.asn_sequence_add(unsafe.Pointer(ricEventTriggerStyleItemC.e2SM_KPM_RANfunction_Item), unsafe.Pointer(ricEventTriggerStyleItemC))
+		C.asn_sequence_add(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.e2SM_KPM_RANfunction_Item.ric_EventTriggerStyle_List), unsafe.Pointer(ricEventTriggerStyleListItemC))
 		fmt.Printf("ricEventTriggerStyleItem was added\n")
 		//if _, err = C.asn_sequence_add(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC), unsafe.Pointer(ricEventTriggerStyleItemC)); err != nil {
 		//	return nil, err
 		//}
 	}
 	//ricReportStyleItemC := new(C.RIC_ReportStyle_List_t)
-	for _, ricReportStyleItem := range e2SmKpmRanfunctionDescription.E2SmKpmRanfunctionItem.GetRicReportStyleList() {
-		fmt.Printf("ricReportStyleItem -- %v\n", ricReportStyleItem)
-		ricReportStyleItemC := newRicReportStyleItem(ricReportStyleItem)
-		fmt.Printf("ricReportStyleItemC -- %v\n", ricReportStyleItemC)
+	for _, ricReportStyleListItem := range e2SmKpmRanfunctionDescription.E2SmKpmRanfunctionItem.GetRicReportStyleList() {
+		fmt.Printf("ricReportStyleItem -- %v\n", ricReportStyleListItem)
+		ricReportStyleListItemC := newRicReportStyleListItem(ricReportStyleListItem)
+		fmt.Printf("ricReportStyleItemC -- %v\n", ricReportStyleListItemC)
 		//C.asn_sequence_add(unsafe.Pointer(ricReportStyleItemC), unsafe.Pointer(ricReportStyleItemC))
-		C.asn_sequence_add(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.e2SM_KPM_RANfunction_Item.ric_ReportStyle_List), unsafe.Pointer(ricReportStyleItemC))
+		C.asn_sequence_add(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.e2SM_KPM_RANfunction_Item.ric_ReportStyle_List), unsafe.Pointer(ricReportStyleListItemC))
 		fmt.Printf("ricReportStyleItem was added \n")
 		//if _, err = C.asn_sequence_add(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC), unsafe.Pointer(ricEventTriggerStyleItemC)); err != nil {
 		//	return nil, err
@@ -108,6 +108,7 @@ func newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_ie
 	//	},
 	//}
 
+	fmt.Printf("Composed e2SmKpmRanfunctionDescriptionC -- %v\n", e2SmKpmRanfunctionDescriptionC)
 	return e2SmKpmRanfunctionDescriptionC
 }
 
