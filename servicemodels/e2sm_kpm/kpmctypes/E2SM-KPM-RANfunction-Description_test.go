@@ -41,24 +41,25 @@ func Test_xerEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmRanfunctionDescription(ranfunctionDescriptionMsg)
 	assert.NilError(t, err)
-	assert.Equal(t, 259, len(xer))
+	assert.Equal(t, 1265, len(xer))
 	t.Logf("E2SM-KPM-RANfunction-Description XER\n%s", string(xer))
 }
 
-//func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
-//
-//	ranfunctionDescriptionMsg, err := createCommonE2SmKpmRanfunctionDescription()
-//	assert.NilError(t, err, "Something went wrong when the E2SmKpmRanfunctionDescription was created")
-//
-//	xer, err := xerEncodeE2SmKpmRanfunctionDescription(ranfunctionDescriptionMsg)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 259, len(xer))
-//	t.Logf("E2SM-KPM-RANfunction-Description XER\n%s", string(xer))
-//
-//	result, err := xerDecodeE2SmKpmRanfunctionDescription(xer)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//}
+func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
+
+	ranfunctionDescriptionMsg, err := createCommonE2SmKpmRanfunctionDescription()
+	assert.NilError(t, err, "Something went wrong when the E2SmKpmRanfunctionDescription was created")
+
+	xer, err := xerEncodeE2SmKpmRanfunctionDescription(ranfunctionDescriptionMsg)
+	assert.NilError(t, err)
+	assert.Equal(t, 1265, len(xer))
+	t.Logf("E2SM-KPM-RANfunction-Description XER\n%s", string(xer))
+
+	result, err := xerDecodeE2SmKpmRanfunctionDescription(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	//fmt.Printf("Test_xerDecodeE2SmKpmRanfunctionDescription -- XER was Decoded!\n%v\n", result)
+}
 
 func Test_perEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
@@ -67,21 +68,22 @@ func Test_perEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmRanfunctionDescription(ranfunctionDescriptionMsg)
 	assert.NilError(t, err)
-	assert.Equal(t, 15, len(per))
+	assert.Equal(t, 63, len(per))
 	t.Logf("E2SM-KPM-RANfunction-Description PER\n%s", string(per))
 }
 
-//func Test_perDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
-//
-//	ranfunctionDescriptionMsg, err := createCommonE2SmKpmRanfunctionDescription()
-//	assert.NilError(t, err, "Something went wrong when the E2SmKpmRanfunctionDescription was created")
-//
-//	per, err := perEncodeE2SmKpmRanfunctionDescription(ranfunctionDescriptionMsg)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 15, len(per))
-//	t.Logf("E2SM-KPM-RANfunction-Description PER\n%s", string(per))
-//
-//	result, err := perDecodeE2SmKpmRanfunctionDescription(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//}
+func Test_perDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
+
+	ranfunctionDescriptionMsg, err := createCommonE2SmKpmRanfunctionDescription()
+	assert.NilError(t, err, "Something went wrong when the E2SmKpmRanfunctionDescription was created")
+
+	per, err := perEncodeE2SmKpmRanfunctionDescription(ranfunctionDescriptionMsg)
+	assert.NilError(t, err)
+	assert.Equal(t, 63, len(per))
+	t.Logf("E2SM-KPM-RANfunction-Description PER\n%s", string(per))
+
+	result, err := perDecodeE2SmKpmRanfunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	//fmt.Printf("Test_perDecodeE2SmKpmRanfunctionDescription -- PER was Decoded!\n%v\n", result)
+}
