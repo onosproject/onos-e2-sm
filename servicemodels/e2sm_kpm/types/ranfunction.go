@@ -5,17 +5,11 @@
 package types
 
 type ShortName string
-
 type Oid string
-
 type Description string
-
 type Instance int32
-
 type StyleType int32
-
 type StyleName string
-
 type FormatType int32
 
 type RanfunctionNameDef struct {
