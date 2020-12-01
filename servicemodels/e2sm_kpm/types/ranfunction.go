@@ -20,21 +20,21 @@ type FormatType int32
 
 type RanfunctionNameDef struct {
 	//RanFunctionShortName ShortName // Do we really need it?
-	RanFunctionE2SmOid Oid
+	RanFunctionE2SmOid     Oid
 	RanFunctionDescription Description
-	RanFunctionInstance Instance
+	RanFunctionInstance    Instance
 }
 
 type RicReportStyleDef struct {
 	//RicReportStyleType StyleType
-	RicReportStyleName StyleName
-	RicIndicationHeaderFormatType FormatType
+	RicReportStyleName             StyleName
+	RicIndicationHeaderFormatType  FormatType
 	RicIndicationMessageFormatType FormatType
 }
 
 type RicEventTriggerDef struct {
 	//RicEventStyleType StyleType
-	RicEventStyleName StyleName
+	RicEventStyleName  StyleName
 	RicEventFormatType FormatType
 }
 
