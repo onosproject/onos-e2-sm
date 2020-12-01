@@ -1,6 +1,6 @@
 <E2SM-KPM-RANfunction-Description>
     <ranFunction-Name>
-        <ranFunction-ShortName></ranFunction-ShortName>
+        <ranFunction-ShortName>1</ranFunction-ShortName>
         <ranFunction-E2SM-OID>OID123</ranFunction-E2SM-OID>
         <ranFunction-Description>KPM monitor</ranFunction-Description>
         <ranFunction-Instance>1</ranFunction-Instance>

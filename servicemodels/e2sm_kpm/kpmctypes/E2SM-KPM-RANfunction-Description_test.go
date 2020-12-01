@@ -55,7 +55,7 @@ func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 	assert.Equal(t, 1265, len(xer))
 	t.Logf("E2SM-KPM-RANfunction-Description XER\n%s", string(xer))
 
-	result, err := xerDecodeE2SmKpmRanfunctionDescription(xer)
+	result, err := XerDecodeE2SmKpmRanfunctionDescription(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 }
