@@ -38,7 +38,7 @@ func PerEncodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_
 	return bytes, nil
 }
 
-func xerDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_ies.E2SmKpmRanfunctionDescription, error) {
+func XerDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_ies.E2SmKpmRanfunctionDescription, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_RANfunction_Description)
 	if err != nil {
 		return nil, err
