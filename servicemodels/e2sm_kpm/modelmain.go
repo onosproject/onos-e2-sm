@@ -6,9 +6,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/golang/protobuf/proto"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"google.golang.org/protobuf/proto"
 )
 
 type servicemodel string
