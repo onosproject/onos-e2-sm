@@ -8,42 +8,33 @@ ONOS_BUILD_VERSION := v0.6.6
 ONOS_PROTOC_VERSION := v0.6.6
 BUF_VERSION := 0.27.1
 
-build/_output/e2sm_kpm.so.1.0.1: # @HELP build the e2sm_kpm.so.1.0.1
-	CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.1 -buildmode=plugin github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm
+build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
+	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
 
-build/_output/e2sm_ni.so.1.0.1: # @HELP build the e2sm_ni.so.1.0.1
-	CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.1 -buildmode=plugin github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ni
+build/_output/e2sm_ni.so.1.0.0: # @HELP build the e2sm_ni.so.1.0.1
+	cd servicemodels/e2sm_ni && CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
 
 PHONY:build
 build: # @HELP build all libraries
-build:
-#	build/_output/e2sm_kpm.so.1.0.1 \
-#	build/_output/e2sm_ni.so.1.0.1
+build: build/_output/e2sm_kpm.so.1.0.0
 
 test: # @HELP run the unit tests and source code validation
-test: license_check
-# build deps linters
-#	go test -race github.com/onosproject/onos-e2-sm/pkg/...
-#	go test -race github.com/onosproject/onos-e2-sm/cmd/...
+test: license_check build
+# linters
+	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 
-coverage: # @HELP generate unit test coverage data
-#coverage: build deps linters license_check
-#	./build/bin/coveralls-coverage
-
-#deps: # @HELP ensure that the required dependencies are in place
-#	go build -v ./...
-#	bash -c "diff -u <(echo -n) <(git diff go.mod)"
-#	bash -c "diff -u <(echo -n) <(git diff go.sum)"
+deps: # @HELP ensure that the required dependencies are in place
+	cd servicemodels/e2sm_kpm
+	go build -v -buildmode=plugin ./modelmain.go
+	bash -c "diff -u <(echo -n) <(git diff go.mod)"
+	bash -c "diff -u <(echo -n) <(git diff go.sum)"
 
 linters: # @HELP examines Go source code and reports coding problems
-	golangci-lint run --timeout 30m
+	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 30m && cd ..
 
 license_check: # @HELP examine and ensure license headers exist
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
 	./../build-tools/licensing/boilerplate.py -v --rootdir=${CURDIR} --boilerplate LicenseRef-ONF-Member-1.0
-
-gofmt: # @HELP run the Go format validation
-	bash -c "diff -u <(echo -n) <(gofmt -d pkg/ cmd/ tests/)"
 
 buflint: #@HELP run the "buf check lint" command on the proto files in 'api'
 	docker run -it -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \

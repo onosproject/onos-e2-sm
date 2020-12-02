@@ -5,9 +5,9 @@
 package main
 
 import (
-	"github.com/golang/protobuf/proto"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdubuilder"
-	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	e2smkpmies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"google.golang.org/protobuf/proto"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -16,15 +16,15 @@ var kpmTestSm servicemodel
 
 func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	var plmnID = "ONF"
-	var gNbCuUpId int64 = 0
-	var gNbDuId int64 = 0
+	var gNbCuUpID int64 = 0
+	var gNbDuID int64 = 0
 	var plmnIDnrcgi = "onf"
 	var sst = "1"
 	var sd = "SD1"
 	var fiveQi int32 = 0
 	var qCi int32 = 0
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(plmnID, gNbCuUpId, gNbDuId, plmnIDnrcgi, sst, sd, fiveQi, qCi)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(plmnID, gNbCuUpID, gNbDuID, plmnIDnrcgi, sst, sd, fiveQi, qCi)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmKpmPdu.Validate()
@@ -86,8 +86,9 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
 	assert.Equal(t, 74, len(protoBytes))
-	testIH := e2sm_kpm_ies.E2SmKpmIndicationHeader{}
-	proto.Unmarshal(protoBytes, &testIH)
+	testIH := e2smkpmies.E2SmKpmIndicationHeader{}
+	err = proto.Unmarshal(protoBytes, &testIH)
+	assert.NilError(t, err)
 	assert.DeepEqual(t, []byte{0x37, 0x34, 0x37}, testIH.GetIndicationHeaderFormat1().GetPLmnIdentity().GetValue())
 }
 
@@ -99,8 +100,9 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 	assert.Equal(t, 10, len(protoBytes))
-	testIM := e2sm_kpm_ies.E2SmKpmIndicationMessage{}
-	proto.Unmarshal(protoBytes, &testIM)
+	testIM := e2smkpmies.E2SmKpmIndicationMessage{}
+	err = proto.Unmarshal(protoBytes, &testIM)
+	assert.NilError(t, err)
 	assert.Equal(t, 1, len(testIM.GetIndicationMessageFormat1().GetPmContainers()))
 	pm1 := testIM.GetIndicationMessageFormat1().GetPmContainers()[0]
 	assert.Equal(t, 0, int(pm1.GetPerformanceContainer().GetOCuCp().GetCuCpResourceStatus().GetNumberOfActiveUes()))
