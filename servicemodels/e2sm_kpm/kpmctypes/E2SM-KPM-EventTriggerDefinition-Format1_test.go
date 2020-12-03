@@ -6,27 +6,28 @@ package kpmctypes
 
 import (
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdubuilder"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createE2SmKpmEventTriggerDefinitionFormat1() *e2sm_kpm_ies.E2SmKpmEventTriggerDefinitionFormat1 {
+func createE2SmKpmEventTriggerDefinitionFormat1() (*e2sm_kpm_ies.E2SmKpmEventTriggerDefinitionFormat1, error) {
 
-	policyTestItem := &e2sm_kpm_ies.TriggerConditionIeItem{
-		ReportPeriodIe: e2sm_kpm_ies.RtPeriodIe_RT_PERIOD_IE_MS10,
-	}
-	e2SmKpmEventTriggerDefinitionFormat1 := &e2sm_kpm_ies.E2SmKpmEventTriggerDefinitionFormat1{
-		PolicyTestList: make([]*e2sm_kpm_ies.TriggerConditionIeItem, 0),
-	}
-	e2SmKpmEventTriggerDefinitionFormat1.PolicyTestList = append(e2SmKpmEventTriggerDefinitionFormat1.PolicyTestList, policyTestItem)
+	var rtPeriod int32 = 12 // range is from 0 to 19
 
-	return e2SmKpmEventTriggerDefinitionFormat1
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
+	if err != nil {
+		return nil, err
+	}
+
+	return newE2SmKpmPdu.GetEventDefinitionFormat1(), nil
 
 }
 
 func Test_xerEncodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
-	e2SmKpmEventTriggerDefinitionFormat1 := createE2SmKpmEventTriggerDefinitionFormat1()
+	e2SmKpmEventTriggerDefinitionFormat1, err := createE2SmKpmEventTriggerDefinitionFormat1()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
@@ -36,7 +37,8 @@ func Test_xerEncodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
 func Test_xerDecodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
-	e2SmKpmEventTriggerDefinitionFormat1 := createE2SmKpmEventTriggerDefinitionFormat1()
+	e2SmKpmEventTriggerDefinitionFormat1, err := createE2SmKpmEventTriggerDefinitionFormat1()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
@@ -51,8 +53,8 @@ func Test_xerDecodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
 //func Test_perEncodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 //
-//	e2SmKpmEventTriggerDefinitionFormat1 := createE2SmKpmEventTriggerDefinitionFormat1()
-//
+//	e2SmKpmEventTriggerDefinitionFormat1, err := createE2SmKpmEventTriggerDefinitionFormat1()
+//	assert.NilError(t, err)
 //	per, err := perEncodeE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1)
 //	assert.NilError(t, err) //ToDo: obtaining "bad file descriptor" there.. ?
 //	assert.Equal(t, 1, len(per))
@@ -61,8 +63,8 @@ func Test_xerDecodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
 //func Test_perDecodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 //
-//	e2SmKpmEventTriggerDefinitionFormat1 := createE2SmKpmEventTriggerDefinitionFormat1()
-//
+//	e2SmKpmEventTriggerDefinitionFormat1, err := createE2SmKpmEventTriggerDefinitionFormat1()
+//	assert.NilError(t, err)
 //	per, err := perEncodeE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1)
 //	assert.NilError(t, err)
 //	assert.Equal(t, 1, len(per))
