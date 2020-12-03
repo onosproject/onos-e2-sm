@@ -107,3 +107,93 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	pm1 := testIM.GetIndicationMessageFormat1().GetPmContainers()[0]
 	assert.Equal(t, 0, int(pm1.GetPerformanceContainer().GetOCuCp().GetCuCpResourceStatus().GetNumberOfActiveUes()))
 }
+
+func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
+	var ranFunctionShortName = "ONF"
+	var ranFunctionE2SmOid = "Oid"
+	var ranFunctionDescription = "OpenNetworking"
+	var ranFunctionInstance int32 = 1
+	var ricEventStyleType int32 = 13
+	var ricEventStyleName = "ONFevent"
+	var ricEventFormatType int32 = 42
+	var ricReportStyleType int32 = 12
+	var ricReportStyleName = "ONFreport"
+	var ricIndicationHeaderFormatType int32 = 21
+	var ricIndicationMessageFormatType int32 = 56
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid, ranFunctionDescription,
+		ranFunctionInstance, ricEventStyleType, ricEventStyleName, ricEventFormatType, ricReportStyleType, ricReportStyleName,
+		ricIndicationHeaderFormatType, ricIndicationMessageFormatType)
+	assert.NilError(t, err, "error creating E2SmPDU")
+	assert.Assert(t, newE2SmKpmPdu != nil)
+
+	err = newE2SmKpmPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmKpmRanfunctionDescription to bytes")
+	assert.Equal(t, 81, len(protoBytes))
+
+	asn1Bytes, err := kpmTestSm.RanFuncDescriptionProtoToASN1(protoBytes)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	assert.Equal(t, 63, len(asn1Bytes))
+}
+
+//func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
+//	// This message is taken as an output from the function above
+//	//ToDo: fill it with correct ASN1 bytes - ask Shad
+//	ranFuncDescriptionAsn1 := []byte{0x00, 0xC0, 0x4F, 0x52, 0x41, 0x4E, 0x2D, 0x45, 0x32, 0x53, 0x4D, 0x2D, 0x4B, 0x50, 0x4D, 0x00,
+//		0x00, 0x12, 0x31, 0x2E, 0x33, 0x2E, 0x36, 0x2E, 0x31, 0x2E, 0x34, 0x2E, 0x31, 0x2E, 0x31, 0x2E,
+//		0x31, 0x2E, 0x32, 0x2E, 0x32, 0x05, 0x00, 0x4B, 0x50, 0x4D, 0x20, 0x6D, 0x6F, 0x6E, 0x69, 0x74,
+//		0x6F, 0x72, 0x60, 0x00, 0x01, 0x01, 0x03, 0x80, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x31,
+//		0x01, 0x01, 0x00, 0x01, 0x06, 0x1E, 0x80, 0x4F, 0x2D, 0x43, 0x55, 0x2D, 0x55, 0x50, 0x20, 0x4D,
+//		0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6D, 0x65, 0x6E, 0x74, 0x20, 0x43, 0x6F, 0x6E, 0x74, 0x61,
+//		0x69, 0x6E, 0x65, 0x72, 0x20, 0x66, 0x6F, 0x72, 0x20, 0x74, 0x68, 0x65, 0x20, 0x45, 0x50, 0x43,
+//		0x20, 0x63, 0x6F, 0x6E, 0x6E, 0x65, 0x63, 0x74, 0x65, 0x64, 0x20, 0x64, 0x65, 0x70, 0x6C, 0x6F,
+//		0x79, 0x6D, 0x65, 0x6E, 0x74, 0x01, 0x01, 0x01, 0x01}
+//
+//	protoBytes, err := kpmTestSm.RanFuncDescriptionASN1toProto(ranFuncDescriptionAsn1)
+//	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+//	assert.Assert(t, protoBytes != nil)
+//	assert.Equal(t, 10, len(protoBytes))
+//	testIM := e2smkpmies.E2SmKpmEventTriggerDefinition{}
+//	err = proto.Unmarshal(protoBytes, &testIM)
+//	assert.NilError(t, err)
+//	assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
+//}
+
+func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
+	var rtPeriod int32 = 12
+	e2SmKpmEventTriggerDefinition, err := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
+	assert.NilError(t, err, "error creating E2SmPDU")
+	assert.Assert(t, e2SmKpmEventTriggerDefinition != nil, "Created E2SmPDU is nil")
+
+	err = e2SmKpmEventTriggerDefinition.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(e2SmKpmEventTriggerDefinition)
+	assert.NilError(t, err, "unexpected error marshalling E2SmKpmEventTriggerDefinition to bytes")
+	assert.Equal(t, 6, len(protoBytes))
+
+	asn1Bytes, err := kpmTestSm.EventTriggerDefinitionProtoToASN1(protoBytes)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	assert.Equal(t, 2, len(asn1Bytes))
+}
+
+//func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
+//	// This message is taken as an output from the function above
+//	//ToDo: fill it with correct ASN1 bytes - ask Shad
+//	eventTriggerDefinitionAsn1 := []byte{0x32, 0x48}
+//
+//	protoBytes, err := kpmTestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
+//	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+//	assert.Assert(t, protoBytes != nil)
+//	assert.Equal(t, 10, len(protoBytes))
+//	testIM := e2smkpmies.E2SmKpmEventTriggerDefinition{}
+//	err = proto.Unmarshal(protoBytes, &testIM)
+//	assert.NilError(t, err)
+//	assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
+//}

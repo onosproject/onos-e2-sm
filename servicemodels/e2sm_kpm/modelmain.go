@@ -106,5 +106,33 @@ func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte,
 	return perBytes, nil
 }
 
+func (sm servicemodel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	perBytes, err := kpmctypes.PerDecodeE2SmKpmEventTriggerDefinition(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmKpmEventTriggerDefinition to PER %s", err)
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmEventTriggerDefinition %s", err)
+	}
+
+	return protoBytes, nil
+}
+
+func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
+	protoObj := new(e2sm_kpm_ies.E2SmKpmEventTriggerDefinition)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmEventTriggerDefinition %s", err)
+	}
+
+	perBytes, err := kpmctypes.PerEncodeE2SmKpmEventTriggerDefinition(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmKpmEventTriggerDefinition to PER %s", err)
+	}
+
+	return perBytes, nil
+}
+
 // ServiceModel is the exported symbol that gives an entry point to this shared module
 var ServiceModel servicemodel
