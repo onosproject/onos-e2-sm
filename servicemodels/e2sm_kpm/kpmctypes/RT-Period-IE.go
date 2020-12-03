@@ -14,57 +14,58 @@ import "C"
 import (
 	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"unsafe"
 )
 
 //ToDo: Solve "Cannot convert rtPeriodIeC (type _Ctype_long) to type unsafe.Pointer"
-//func xerEncodeRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) ([]byte, error) {
-//	rtPeriodIeC, err := newRtPeriodIe(rtPeriodIe)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_RT_Period_IE, unsafe.Pointer(rtPeriodIeC))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeRtPeriodIe() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func perEncodeRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) ([]byte, error) {
-//	rtPeriodIeC, err := newRtPeriodIe(rtPeriodIe)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_RT_Period_IE, unsafe.Pointer(rtPeriodIeC))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeRtPeriodIe() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
+func xerEncodeRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) ([]byte, error) {
+	rtPeriodIeC, err := newRtPeriodIe(rtPeriodIe)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_RT_Period_IE, unsafe.Pointer(&rtPeriodIeC))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeRtPeriodIe() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perEncodeRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) ([]byte, error) {
+	rtPeriodIeC, err := newRtPeriodIe(rtPeriodIe)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_RT_Period_IE, unsafe.Pointer(&rtPeriodIeC))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeRtPeriodIe() %s", err.Error())
+	}
+	return bytes, nil
+}
 
 //ToDo: Decide what to return instead of nil, which cannot be returned since return value is not a pointer anymore
-//func xerDecodeRtPeriodIe(bytes []byte) (e2sm_kpm_ies.RtPeriodIe, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RT_Period_IE)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeRtPeriodIe((*C.RT_Period_IE_t)(unsafePtr)), nil
-//}
-//
-//func perDecodeRtPeriodIe(bytes []byte) (e2sm_kpm_ies.RtPeriodIe, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RT_Period_IE)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeRtPeriodIe((*C.RT_Period_IE_t)(unsafePtr)), nil
-//}
+func xerDecodeRtPeriodIe(bytes []byte) (e2sm_kpm_ies.RtPeriodIe, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RT_Period_IE)
+	if err != nil {
+		return 0, err
+	}
+	if unsafePtr == nil {
+		return 0, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeRtPeriodIe((*C.RT_Period_IE_t)(unsafePtr)), nil
+}
+
+func perDecodeRtPeriodIe(bytes []byte) (e2sm_kpm_ies.RtPeriodIe, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RT_Period_IE)
+	if err != nil {
+		return 0, err
+	}
+	if unsafePtr == nil {
+		return 0, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeRtPeriodIe((*C.RT_Period_IE_t)(unsafePtr)), nil
+}
 
 func newRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) (C.RT_Period_IE_t, error) {
 	var ret C.RT_Period_IE_t
@@ -115,7 +116,7 @@ func newRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) (C.RT_Period_IE_t, error)
 	return ret, nil
 }
 
-func decodeRtPeriodIe(rtPeriodIeC C.RT_Period_IE_t) e2sm_kpm_ies.RtPeriodIe {
+func decodeRtPeriodIe(rtPeriodIeC *C.RT_Period_IE_t) e2sm_kpm_ies.RtPeriodIe {
 
-	return e2sm_kpm_ies.RtPeriodIe(rtPeriodIeC)
+	return e2sm_kpm_ies.RtPeriodIe(int32(*rtPeriodIeC))
 }
