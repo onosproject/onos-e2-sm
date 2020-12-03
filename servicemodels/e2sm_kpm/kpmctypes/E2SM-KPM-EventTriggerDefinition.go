@@ -68,7 +68,6 @@ func XerDecodeE2SmKpmEventTriggerDefinition(bytes []byte) (*e2sm_kpm_ies.E2SmKpm
 	return decodeE2SmKpmEventTriggerDefinition((*C.E2SM_KPM_EventTriggerDefinition_t)(unsafePtr))
 }
 
-
 func newE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_kpm_ies.E2SmKpmEventTriggerDefinition) (*C.E2SM_KPM_EventTriggerDefinition_t, error) {
 	var present C.E2SM_KPM_EventTriggerDefinition_PR
 	choiceC := [8]byte{}
@@ -88,7 +87,7 @@ func newE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_kpm_ie
 
 	e2SmKpmEventTriggerDefinitionC := C.E2SM_KPM_EventTriggerDefinition_t{
 		present: present,
-		choice: choiceC,
+		choice:  choiceC,
 	}
 
 	return &e2SmKpmEventTriggerDefinitionC, nil
