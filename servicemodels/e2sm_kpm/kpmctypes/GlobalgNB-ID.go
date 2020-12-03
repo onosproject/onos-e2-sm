@@ -17,45 +17,45 @@ import (
 	"unsafe"
 )
 
-func xerEncodeGlobalgNbId(globalgNbId *e2sm_kpm_ies.GlobalgNbId) ([]byte, error) {
-	globalgNbIdCP, err := newGlobalgNbId(globalgNbId)
+func xerEncodeGlobalgNbID(globalgNbID *e2sm_kpm_ies.GlobalgNbId) ([]byte, error) {
+	globalgNbIDCP, err := newGlobalgNbID(globalgNbID)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGlobalgNbId() %s", err.Error())
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_GlobalgNB_ID, unsafe.Pointer(globalgNbIdCP))
+	bytes, err := encodeXer(&C.asn_DEF_GlobalgNB_ID, unsafe.Pointer(globalgNbIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGlobalgNbId() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func newGlobalgNbId(globalgNbId *e2sm_kpm_ies.GlobalgNbId) (*C.GlobalgNB_ID_t, error) {
+func newGlobalgNbID(globalgNbID *e2sm_kpm_ies.GlobalgNbId) (*C.GlobalgNB_ID_t, error) {
 
-	plmnIDC := newPlmnIdentity(globalgNbId.PlmnId)
-	gnbIDC, err := newGnbIDChoice(globalgNbId.GnbId)
+	plmnIDC := newPlmnIdentity(globalgNbID.PlmnId)
+	gnbIDC, err := newGnbIDChoice(globalgNbID.GnbId)
 	if err != nil {
 		return nil, fmt.Errorf("newGlobalgNbId() %s", err.Error())
 	}
 
-	globalgNbIdC := C.GlobalgNB_ID_t{
+	globalgNbIDC := C.GlobalgNB_ID_t{
 		plmn_id: *plmnIDC,
 		gnb_id:  *gnbIDC,
 	}
 
-	return &globalgNbIdC, nil
+	return &globalgNbIDC, nil
 }
 
-func decodeGlobalgNbId(globalgNbIdC *C.GlobalgNB_ID_t) (*e2sm_kpm_ies.GlobalgNbId, error) {
-	globalgNbId := new(e2sm_kpm_ies.GlobalgNbId)
-	plmnID := decodePlmnIdentity(&globalgNbIdC.plmn_id)
-	gnbID, err := decodeGnbIDChoice(&globalgNbIdC.gnb_id)
+func decodeGlobalgNbID(globalgNbIDC *C.GlobalgNB_ID_t) (*e2sm_kpm_ies.GlobalgNbId, error) {
+	globalgNbID := new(e2sm_kpm_ies.GlobalgNbId)
+	plmnID := decodePlmnIdentity(&globalgNbIDC.plmn_id)
+	gnbID, err := decodeGnbIDChoice(&globalgNbIDC.gnb_id)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGlobalgNbId() error in str-to-int64 convertion %T", err)
 	}
 
-	globalgNbId.PlmnId = plmnID
-	globalgNbId.GnbId = gnbID
+	globalgNbID.PlmnId = plmnID
+	globalgNbID.GnbId = gnbID
 
-	return globalgNbId, nil
+	return globalgNbID, nil
 }

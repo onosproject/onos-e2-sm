@@ -18,8 +18,8 @@ import (
 	"unsafe"
 )
 
-func xerEncodeGnbIdChoice(gnbIdChoice *e2sm_kpm_ies.GnbIdChoice) ([]byte, error) {
-	gnbIDChoiceC, err := newGnbIDChoice(gnbIdChoice)
+func xerEncodeGnbIDChoice(gnbIDChoice *e2sm_kpm_ies.GnbIdChoice) ([]byte, error) {
+	gnbIDChoiceC, err := newGnbIDChoice(gnbIDChoice)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGnbIdChoice() %s", err.Error())
 	}

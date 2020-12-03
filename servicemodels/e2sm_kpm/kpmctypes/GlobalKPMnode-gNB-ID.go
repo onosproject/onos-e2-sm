@@ -18,9 +18,9 @@ import (
 	"unsafe"
 )
 
-func xerEncodeGlobalKpmNodeGnbId(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) ([]byte, error) {
-	gnbCP, err := newGlobalKpmNodeGnbId(gnb)
-	defer freeGlobalKpmNodeGnbId(gnbCP)
+func xerEncodeGlobalKpmNodeGnbID(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) ([]byte, error) {
+	gnbCP, err := newGlobalKpmNodeGnbID(gnb)
+	defer freeGlobalKpmNodeGnbID(gnbCP)
 
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGlobalKpmNodeGnbId() %s", err.Error())
@@ -33,50 +33,50 @@ func xerEncodeGlobalKpmNodeGnbId(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) ([]byte, 
 	return bytes, nil
 }
 
-func newGlobalKpmNodeGnbId(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) (*C.GlobalKPMnode_gNB_ID_t, error) {
+func newGlobalKpmNodeGnbID(gnb *e2sm_kpm_ies.GlobalKpmnodeGnbId) (*C.GlobalKPMnode_gNB_ID_t, error) {
 
-	globalGnbId, err := newGlobalgNbId(gnb.GlobalGNbId)
+	globalGnbID, err := newGlobalgNbID(gnb.GlobalGNbId)
 	if err != nil {
 		return nil, fmt.Errorf("newGlobalKpmNodeGnbId() %s", err.Error())
 	}
-	gnbCuUpId := newGnbCuUpId(gnb.GNbCuUpId)
-	gnbDuId := newGnbDuId(gnb.GNbDuId)
+	gnbCuUpID := newGnbCuUpID(gnb.GNbCuUpId)
+	gnbDuID := newGnbDuID(gnb.GNbDuId)
 
 	gnbC := C.GlobalKPMnode_gNB_ID_t{
-		global_gNB_ID: *globalGnbId,
-		gNB_CU_UP_ID:  gnbCuUpId,
-		gNB_DU_ID:     gnbDuId,
+		global_gNB_ID: *globalGnbID,
+		gNB_CU_UP_ID:  gnbCuUpID,
+		gNB_DU_ID:     gnbDuID,
 	}
 
 	return &gnbC, nil
 }
 
-func decodeGlobalKpmNodeGnbId(gnbC *C.GlobalKPMnode_gNB_ID_t) (*e2sm_kpm_ies.GlobalKpmnodeGnbId, error) {
+func decodeGlobalKpmNodeGnbID(gnbC *C.GlobalKPMnode_gNB_ID_t) (*e2sm_kpm_ies.GlobalKpmnodeGnbId, error) {
 
-	globalGnbId, err := decodeGlobalgNbId(&gnbC.global_gNB_ID)
+	globalGnbID, err := decodeGlobalgNbID(&gnbC.global_gNB_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGlobalKpmNodeGnbId() %s", err.Error())
 	}
 
 	gnb := e2sm_kpm_ies.GlobalKpmnodeGnbId{
-		GlobalGNbId: globalGnbId,
+		GlobalGNbId: globalGnbID,
 	}
 	if gnbC.gNB_CU_UP_ID != nil {
-		gnb.GNbCuUpId = decodeGnbCuUpId(gnbC.gNB_CU_UP_ID)
+		gnb.GNbCuUpId = decodeGnbCuUpID(gnbC.gNB_CU_UP_ID)
 	}
 	if gnbC.gNB_DU_ID != nil {
-		gnb.GNbDuId = decodeGnbDuId(gnbC.gNB_DU_ID)
+		gnb.GNbDuId = decodeGnbDuID(gnbC.gNB_DU_ID)
 	}
 	return &gnb, nil
 }
 
-func decodeGlobalKpmNodeGnbIdBytes(array [8]byte) (*e2sm_kpm_ies.GlobalKpmnodeGnbId, error) {
+func decodeGlobalKpmNodeGnbIDBytes(array [8]byte) (*e2sm_kpm_ies.GlobalKpmnodeGnbId, error) {
 	gnbC := (*C.GlobalKPMnode_gNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
-	return decodeGlobalKpmNodeGnbId(gnbC)
+	return decodeGlobalKpmNodeGnbID(gnbC)
 }
 
-func freeGlobalKpmNodeGnbId(ptr *C.GlobalKPMnode_gNB_ID_t) {
-	freeGnbCuUpId(ptr.gNB_CU_UP_ID)
-	freeGnbDuId(ptr.gNB_DU_ID)
+func freeGlobalKpmNodeGnbID(ptr *C.GlobalKPMnode_gNB_ID_t) {
+	freeGnbCuUpID(ptr.gNB_CU_UP_ID)
+	freeGnbDuID(ptr.gNB_DU_ID)
 }

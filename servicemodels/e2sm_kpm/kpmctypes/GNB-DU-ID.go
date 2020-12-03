@@ -17,27 +17,27 @@ import (
 	"unsafe"
 )
 
-func xerEncodeGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
-	gnbDuIdCP := newGnbDuId(gnbDuId)
+func xerEncodeGnbDuID(gnbDuID *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
+	gnbDuIDCP := newGnbDuID(gnbDuID)
 
-	bytes, err := encodeXer(&C.asn_DEF_GNB_DU_ID, unsafe.Pointer(gnbDuIdCP))
+	bytes, err := encodeXer(&C.asn_DEF_GNB_DU_ID, unsafe.Pointer(gnbDuIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGnbDuId() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perEncodeGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
-	gnbDuIdCP := newGnbDuId(gnbDuId)
+func perEncodeGnbDuID(gnbDuID *e2sm_kpm_ies.GnbDuId) ([]byte, error) {
+	gnbDuIDCP := newGnbDuID(gnbDuID)
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_GNB_DU_ID, unsafe.Pointer(gnbDuIdCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_GNB_DU_ID, unsafe.Pointer(gnbDuIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeGnbDuId() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perDecodeGnbDuId(bytes []byte) (*e2sm_kpm_ies.GnbDuId, error) {
+func perDecodeGnbDuID(bytes []byte) (*e2sm_kpm_ies.GnbDuId, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GNB_DU_ID)
 	if err != nil {
 		return nil, err
@@ -45,19 +45,19 @@ func perDecodeGnbDuId(bytes []byte) (*e2sm_kpm_ies.GnbDuId, error) {
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
-	return decodeGnbDuId((*C.GNB_DU_ID_t)(unsafePtr)), nil
+	return decodeGnbDuID((*C.GNB_DU_ID_t)(unsafePtr)), nil
 }
 
-func newGnbDuId(gnbDuId *e2sm_kpm_ies.GnbDuId) *C.GNB_DU_ID_t {
-	return newInteger(gnbDuId.Value)
+func newGnbDuID(gnbDuID *e2sm_kpm_ies.GnbDuId) *C.GNB_DU_ID_t {
+	return newInteger(gnbDuID.Value)
 }
 
-func decodeGnbDuId(gnbDuIdC *C.GNB_DU_ID_t) *e2sm_kpm_ies.GnbDuId {
+func decodeGnbDuID(gnbDuIDC *C.GNB_DU_ID_t) *e2sm_kpm_ies.GnbDuId {
 	return &e2sm_kpm_ies.GnbDuId{
-		Value: decodeInteger(gnbDuIdC),
+		Value: decodeInteger(gnbDuIDC),
 	}
 }
 
-func freeGnbDuId(gnbDuIdC *C.GNB_DU_ID_t) {
-	freeInteger(gnbDuIdC)
+func freeGnbDuID(gnbDuIDC *C.GNB_DU_ID_t) {
+	freeInteger(gnbDuIDC)
 }

@@ -15,12 +15,12 @@ func Test_xerEncodeSNSSAI(t *testing.T) {
 	var sst = "ONF"
 	var sd = "ONF"
 
-	sliceId := &e2sm_kpm_ies.Snssai{
+	sliceID := &e2sm_kpm_ies.Snssai{
 		SSt: []byte(sst),
 		SD:  []byte(sd),
 	}
 
-	xer, err := xerEncodeSnssai(sliceId)
+	xer, err := xerEncodeSnssai(sliceID)
 	assert.NilError(t, err)
 	t.Logf("SNSSAI XER\n%s", string(xer))
 }

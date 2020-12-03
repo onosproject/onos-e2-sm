@@ -14,7 +14,7 @@ func Test_xerEncodeGlobalgNbId(t *testing.T) {
 
 	var plmnID = "ONF"
 
-	globalGNbId := &e2sm_kpm_ies.GlobalgNbId{
+	globalGNbID := &e2sm_kpm_ies.GlobalgNbId{
 		PlmnId: &e2sm_kpm_ies.PlmnIdentity{
 			Value: []byte(plmnID),
 		},
@@ -28,7 +28,7 @@ func Test_xerEncodeGlobalgNbId(t *testing.T) {
 		},
 	}
 
-	xer, err := xerEncodeGlobalgNbId(globalGNbId)
+	xer, err := xerEncodeGlobalgNbID(globalGNbID)
 	assert.NilError(t, err)
 	t.Logf("GlobalgNB-ID XER\n%s", string(xer))
 }

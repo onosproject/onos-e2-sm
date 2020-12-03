@@ -12,62 +12,62 @@ import (
 
 func Test_xerEncodeGnbCuUpId(t *testing.T) {
 
-	var gnbCuUpId int64 = 153
+	var gnbCuUpID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbCuUpId{
-		Value: gnbCuUpId,
+		Value: gnbCuUpID,
 	}
 
-	xer, err := xerEncodeGnbCuUpId(c)
+	xer, err := xerEncodeGnbCuUpID(c)
 	assert.NilError(t, err)
 	t.Logf("GNB-CU-UP-ID XER\n%s", string(xer))
 }
 
 func Test_decodeGnbCuUpId(t *testing.T) {
 
-	var gnbCuUpId int64 = 153
+	var gnbCuUpID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbCuUpId{
-		Value: gnbCuUpId,
+		Value: gnbCuUpID,
 	}
 
-	gnbCuUpIdC := newGnbCuUpId(c)
-	result := decodeGnbCuUpId(gnbCuUpIdC)
-	assert.Equal(t, gnbCuUpId, result.Value, "Something went wrong, comparison is incorrect")
+	gnbCuUpIDC := newGnbCuUpID(c)
+	result := decodeGnbCuUpID(gnbCuUpIDC)
+	assert.Equal(t, gnbCuUpID, result.Value, "Something went wrong, comparison is incorrect")
 }
 
 func Test_perEncodeGnbCuUpId(t *testing.T) {
 
-	var gnbCuUpId int64 = 153
+	var gnbCuUpID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbCuUpId{
-		Value: gnbCuUpId,
+		Value: gnbCuUpID,
 	}
 
-	gnbCuUpIdPer, err := perEncodeGnbCuUpId(c)
+	gnbCuUpIDPer, err := perEncodeGnbCuUpID(c)
 	assert.NilError(t, err)
-	assert.Assert(t, gnbCuUpIdPer != nil)
-	assert.Equal(t, 2, len(gnbCuUpIdPer))
-	t.Logf("GNB-CU-UP-ID PER\n%v", gnbCuUpIdPer)
+	assert.Assert(t, gnbCuUpIDPer != nil)
+	assert.Equal(t, 2, len(gnbCuUpIDPer))
+	t.Logf("GNB-CU-UP-ID PER\n%v", gnbCuUpIDPer)
 }
 
 func Test_perDecodeGnbCuUpId(t *testing.T) {
 
-	var gnbCuUpId int64 = 153
+	var gnbCuUpID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbCuUpId{
-		Value: gnbCuUpId,
+		Value: gnbCuUpID,
 	}
 
-	gnbCuUpIdPer, err := perEncodeGnbCuUpId(c)
+	gnbCuUpIDPer, err := perEncodeGnbCuUpID(c)
 	assert.NilError(t, err)
-	assert.Assert(t, gnbCuUpIdPer != nil)
-	t.Logf("GNB-CU-UP-ID PER\n%v", gnbCuUpIdPer)
+	assert.Assert(t, gnbCuUpIDPer != nil)
+	t.Logf("GNB-CU-UP-ID PER\n%v", gnbCuUpIDPer)
 
-	result, err := perDecodeGnbCuUpId(gnbCuUpIdPer)
+	result, err := perDecodeGnbCuUpID(gnbCuUpIDPer)
 	assert.NilError(t, err)
-	assert.Assert(t, result != nil)
+	//assert.Assert(t, result != nil)
 	t.Logf("GNB-CU-UP-ID PER decoded is \n%v", result)
 
-	assert.Equal(t, gnbCuUpId, result.Value, "Encoded and decoded values are not the same")
+	assert.Equal(t, gnbCuUpID, result.Value, "Encoded and decoded values are not the same")
 }

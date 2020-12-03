@@ -18,9 +18,9 @@ import (
 )
 
 func xerEncodeRicStyleName(ricStyleName *e2sm_kpm_ies.RicStyleName) ([]byte, error) {
-	gnbDuIdCP := newRicStyleName(ricStyleName)
+	gnbDuIDCP := newRicStyleName(ricStyleName)
 
-	bytes, err := encodeXer(&C.asn_DEF_RIC_Style_Name, unsafe.Pointer(gnbDuIdCP))
+	bytes, err := encodeXer(&C.asn_DEF_RIC_Style_Name, unsafe.Pointer(gnbDuIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeRicStyleName() %s", err.Error())
 	}
@@ -28,9 +28,9 @@ func xerEncodeRicStyleName(ricStyleName *e2sm_kpm_ies.RicStyleName) ([]byte, err
 }
 
 func perEncodeRicStyleName(ricStyleName *e2sm_kpm_ies.RicStyleName) ([]byte, error) {
-	gnbDuIdCP := newRicStyleName(ricStyleName)
+	gnbDuIDCP := newRicStyleName(ricStyleName)
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_Style_Name, unsafe.Pointer(gnbDuIdCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_Style_Name, unsafe.Pointer(gnbDuIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeRicStyleName() %s", err.Error())
 	}

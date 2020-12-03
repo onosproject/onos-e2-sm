@@ -19,10 +19,10 @@ func Test_DecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	ranFunctionName, ricEventList, ricReportList, err := DecodeE2SmKpmRanfunctionDescription(e2SmKpmPdu)
 	assert.NilError(t, err)
-	assert.Assert(t, ranFunctionName != nil)
+	//assert.Assert(t, ranFunctionName != nil)
 	assert.Equal(t, "OID123", string(ranFunctionName.RanFunctionE2SmOid))
-	assert.Assert(t, ricEventList != nil)
+	//assert.Assert(t, ricEventList != nil)
 	assert.Equal(t, 1, len(*ricEventList))
-	assert.Assert(t, ricReportList != nil)
+	//assert.Assert(t, ricReportList != nil)
 	assert.Equal(t, 6, len(*ricReportList))
 }

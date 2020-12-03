@@ -12,61 +12,61 @@ import (
 
 func Test_xerEncodeGnbDuId(t *testing.T) {
 
-	var gnbDuId int64 = 153
+	var gnbDuID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbDuId{
-		Value: gnbDuId,
+		Value: gnbDuID,
 	}
 
-	xer, err := xerEncodeGnbDuId(c)
+	xer, err := xerEncodeGnbDuID(c)
 	assert.NilError(t, err)
 	t.Logf("GNB-DU-ID XER\n%s", string(xer))
 }
 
 func Test_decodeGnbDuId(t *testing.T) {
 
-	var gnbDuId int64 = 153
+	var gnbDuID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbDuId{
-		Value: gnbDuId,
+		Value: gnbDuID,
 	}
 
-	gnbDuIdC := newGnbDuId(c)
-	result := decodeGnbDuId(gnbDuIdC)
-	assert.Equal(t, gnbDuId, result.Value, "Something went wrong, comparison is incorrect")
+	gnbDuIDC := newGnbDuID(c)
+	result := decodeGnbDuID(gnbDuIDC)
+	assert.Equal(t, gnbDuID, result.Value, "Something went wrong, comparison is incorrect")
 }
 
 func Test_perEncodeGnbDuId(t *testing.T) {
 
-	var gnbDuId int64 = 153
+	var gnbDuID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbDuId{
-		Value: gnbDuId,
+		Value: gnbDuID,
 	}
 
-	gnbDuIdPer, err := perEncodeGnbDuId(c)
+	gnbDuIDPer, err := perEncodeGnbDuID(c)
 	assert.NilError(t, err)
-	assert.Assert(t, gnbDuIdPer != nil)
-	t.Logf("GNB-DU-ID PER\n%v", gnbDuIdPer)
+	assert.Assert(t, gnbDuIDPer != nil)
+	t.Logf("GNB-DU-ID PER\n%v", gnbDuIDPer)
 }
 
 func Test_perDecodeGnbDuId(t *testing.T) {
 
-	var gnbDuId int64 = 153
+	var gnbDuID int64 = 153
 
 	c := &e2sm_kpm_ies.GnbDuId{
-		Value: gnbDuId,
+		Value: gnbDuID,
 	}
 
-	gnbDuIdPer, err := perEncodeGnbDuId(c)
+	gnbDuIDPer, err := perEncodeGnbDuID(c)
 	assert.NilError(t, err)
-	assert.Assert(t, gnbDuIdPer != nil)
-	t.Logf("GNB-DU-ID PER\n%v", gnbDuIdPer)
+	assert.Assert(t, gnbDuIDPer != nil)
+	t.Logf("GNB-DU-ID PER\n%v", gnbDuIDPer)
 
-	result, err := perDecodeGnbDuId(gnbDuIdPer)
+	result, err := perDecodeGnbDuID(gnbDuIDPer)
 	assert.NilError(t, err)
-	assert.Assert(t, result != nil)
+	//assert.Assert(t, result != nil)
 	t.Logf("GNB-DU-ID PER decoded is \n%v", result)
 
-	assert.Equal(t, gnbDuId, result.Value, "Encoded and decoded values are not the same")
+	assert.Equal(t, gnbDuID, result.Value, "Encoded and decoded values are not the same")
 }
