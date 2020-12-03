@@ -17,27 +17,27 @@ import (
 	"unsafe"
 )
 
-func xerEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
-	gnbCuUpIdCP := newGnbCuUpId(gnbCuUpId)
-	defer freeGnbCuUpId(gnbCuUpIdCP)
-	bytes, err := encodeXer(&C.asn_DEF_GNB_CU_UP_ID, unsafe.Pointer(gnbCuUpIdCP))
+func xerEncodeGnbCuUpID(gnbCuUpID *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
+	gnbCuUpIDCP := newGnbCuUpID(gnbCuUpID)
+	defer freeGnbCuUpID(gnbCuUpIDCP)
+	bytes, err := encodeXer(&C.asn_DEF_GNB_CU_UP_ID, unsafe.Pointer(gnbCuUpIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGnbCuUpId() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perEncodeGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
-	gnbCuUpIdCP := newGnbCuUpId(gnbCuUpId)
+func perEncodeGnbCuUpID(gnbCuUpID *e2sm_kpm_ies.GnbCuUpId) ([]byte, error) {
+	gnbCuUpIDCP := newGnbCuUpID(gnbCuUpID)
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_GNB_CU_UP_ID, unsafe.Pointer(gnbCuUpIdCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_GNB_CU_UP_ID, unsafe.Pointer(gnbCuUpIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeGnbCuUpId() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perDecodeGnbCuUpId(bytes []byte) (*e2sm_kpm_ies.GnbCuUpId, error) {
+func perDecodeGnbCuUpID(bytes []byte) (*e2sm_kpm_ies.GnbCuUpId, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GNB_CU_UP_ID)
 	if err != nil {
 		return nil, err
@@ -45,20 +45,20 @@ func perDecodeGnbCuUpId(bytes []byte) (*e2sm_kpm_ies.GnbCuUpId, error) {
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
-	return decodeGnbCuUpId((*C.GNB_CU_UP_ID_t)(unsafePtr)), nil
+	return decodeGnbCuUpID((*C.GNB_CU_UP_ID_t)(unsafePtr)), nil
 }
 
-func newGnbCuUpId(gnbCuUpId *e2sm_kpm_ies.GnbCuUpId) *C.GNB_CU_UP_ID_t {
+func newGnbCuUpID(gnbCuUpID *e2sm_kpm_ies.GnbCuUpId) *C.GNB_CU_UP_ID_t {
 
-	return newInteger(gnbCuUpId.Value)
+	return newInteger(gnbCuUpID.Value)
 }
 
-func decodeGnbCuUpId(gnbCuUpIdC *C.GNB_CU_UP_ID_t) *e2sm_kpm_ies.GnbCuUpId {
+func decodeGnbCuUpID(gnbCuUpIDC *C.GNB_CU_UP_ID_t) *e2sm_kpm_ies.GnbCuUpId {
 	return &e2sm_kpm_ies.GnbCuUpId{
-		Value: decodeInteger(gnbCuUpIdC),
+		Value: decodeInteger(gnbCuUpIDC),
 	}
 }
 
-func freeGnbCuUpId(gnbCuUpIdC *C.GNB_CU_UP_ID_t) {
-	freeInteger(gnbCuUpIdC)
+func freeGnbCuUpID(gnbCuUpIDC *C.GNB_CU_UP_ID_t) {
+	freeInteger(gnbCuUpIDC)
 }

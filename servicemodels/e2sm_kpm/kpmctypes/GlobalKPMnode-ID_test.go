@@ -13,10 +13,10 @@ import (
 func Test_xerEncodeGlobalKpmNodeId(t *testing.T) {
 
 	var plmnID = "ONF"
-	var gNbCuUpId int64 = 123
-	var gNbDuId int64 = 456
+	var gNbCuUpID int64 = 123
+	var gNbDuID int64 = 456
 
-	idGlobalKpmnodeId := &e2sm_kpm_ies.GlobalKpmnodeId{
+	idGlobalKpmnodeID := &e2sm_kpm_ies.GlobalKpmnodeId{
 		GlobalKpmnodeId: &e2sm_kpm_ies.GlobalKpmnodeId_GNb{
 			GNb: &e2sm_kpm_ies.GlobalKpmnodeGnbId{
 				GlobalGNbId: &e2sm_kpm_ies.GlobalgNbId{
@@ -33,16 +33,16 @@ func Test_xerEncodeGlobalKpmNodeId(t *testing.T) {
 					},
 				},
 				GNbCuUpId: &e2sm_kpm_ies.GnbCuUpId{
-					Value: gNbCuUpId,
+					Value: gNbCuUpID,
 				},
 				GNbDuId: &e2sm_kpm_ies.GnbDuId{
-					Value: gNbDuId,
+					Value: gNbDuID,
 				},
 			},
 		},
 	}
 
-	xer, err := xerEncodeGlobalKpmNodeId(idGlobalKpmnodeId)
+	xer, err := xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
 }

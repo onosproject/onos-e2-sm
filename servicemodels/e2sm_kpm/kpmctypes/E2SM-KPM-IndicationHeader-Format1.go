@@ -33,7 +33,7 @@ func xerEncodeE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_i
 
 func newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2SmKpmIndicationHeaderFormat1) (*C.E2SM_KPM_IndicationHeader_Format1_t, error) {
 
-	globalKpmNodeId, err := newGlobalKpmNodeId(indicationHeaderFormat1.IdGlobalKpmnodeId)
+	globalKpmNodeID, err := newGlobalKpmNodeID(indicationHeaderFormat1.IdGlobalKpmnodeId)
 	if err != nil {
 		return nil, fmt.Errorf("newE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
@@ -41,8 +41,8 @@ func newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2S
 	if err != nil {
 		return nil, fmt.Errorf("newE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
-	plmnId := newPlmnIdentity(indicationHeaderFormat1.PLmnIdentity)
-	sliceId := newSnssai(indicationHeaderFormat1.SliceId)
+	plmnID := newPlmnIdentity(indicationHeaderFormat1.PLmnIdentity)
+	sliceID := newSnssai(indicationHeaderFormat1.SliceId)
 	fiveQi := indicationHeaderFormat1.FiveQi
 	qCi := indicationHeaderFormat1.Qci
 
@@ -50,10 +50,10 @@ func newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2S
 	qCiC := C.long(qCi)
 
 	indicationHeaderFormat1C := C.E2SM_KPM_IndicationHeader_Format1_t{
-		id_GlobalKPMnode_ID: globalKpmNodeId,
+		id_GlobalKPMnode_ID: globalKpmNodeID,
 		nRCGI:               nRcgi,
-		pLMN_Identity:       plmnId,
-		sliceID:             sliceId,
+		pLMN_Identity:       plmnID,
+		sliceID:             sliceID,
 		fiveQI:              &fiveQiC,
 		qci:                 &qCiC,
 	}
@@ -64,11 +64,11 @@ func newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2S
 func decodeE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1C *C.E2SM_KPM_IndicationHeader_Format1_t) (*e2sm_kpm_ies.E2SmKpmIndicationHeaderFormat1, error) {
 	indicationHeaderFormat1 := new(e2sm_kpm_ies.E2SmKpmIndicationHeaderFormat1)
 
-	globalKpmNodeId, err := decodeGlobalKpmNodeId(indicationHeaderFormat1C.id_GlobalKPMnode_ID)
+	globalKpmNodeID, err := decodeGlobalKpmNodeID(indicationHeaderFormat1C.id_GlobalKPMnode_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
 	}
-	indicationHeaderFormat1.IdGlobalKpmnodeId = globalKpmNodeId
+	indicationHeaderFormat1.IdGlobalKpmnodeId = globalKpmNodeID
 
 	nRcgi, err := decodeNRCGI(indicationHeaderFormat1C.nRCGI)
 	if err != nil {
@@ -76,11 +76,11 @@ func decodeE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1C *C.E2SM_KPM_I
 	}
 	indicationHeaderFormat1.NRcgi = nRcgi
 
-	plmnId := decodePlmnIdentity(indicationHeaderFormat1C.pLMN_Identity)
-	indicationHeaderFormat1.PLmnIdentity = plmnId
+	plmnID := decodePlmnIdentity(indicationHeaderFormat1C.pLMN_Identity)
+	indicationHeaderFormat1.PLmnIdentity = plmnID
 
-	sliceId := decodeSnssai(indicationHeaderFormat1C.sliceID)
-	indicationHeaderFormat1.SliceId = sliceId
+	sliceID := decodeSnssai(indicationHeaderFormat1C.sliceID)
+	indicationHeaderFormat1.SliceId = sliceID
 
 	indicationHeaderFormat1.FiveQi = int32(*indicationHeaderFormat1C.fiveQI)
 	indicationHeaderFormat1.Qci = int32(*indicationHeaderFormat1C.qci)

@@ -8,7 +8,7 @@ import (
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 )
 
-func CreateE2SmKpmIndicationHeader(plmnID string, gNbCuUpId int64, gNbDuId int64, plmnIDnrcgi string,
+func CreateE2SmKpmIndicationHeader(plmnID string, gNbCuUpID int64, gNbDuID int64, plmnIDnrcgi string,
 	sst string, sd string, fiveQi int32, qCi int32) (*e2sm_kpm_ies.E2SmKpmIndicationHeader, error) {
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("error: Plmn ID should be 3 chars")
@@ -43,10 +43,10 @@ func CreateE2SmKpmIndicationHeader(plmnID string, gNbCuUpId int64, gNbDuId int64
 								},
 							},
 							GNbCuUpId: &e2sm_kpm_ies.GnbCuUpId{
-								Value: gNbCuUpId, //int64
+								Value: gNbCuUpID, //int64
 							},
 							GNbDuId: &e2sm_kpm_ies.GnbDuId{
-								Value: gNbDuId, //int64
+								Value: gNbDuID, //int64
 							},
 						},
 					},
