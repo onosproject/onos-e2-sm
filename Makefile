@@ -4,8 +4,8 @@ export GO111MODULE=on
 .PHONY: build
 
 ONOS_E2_SM_VERSION := latest
-ONOS_BUILD_VERSION := v0.6.6
-ONOS_PROTOC_VERSION := v0.6.6
+ONOS_BUILD_VERSION := v0.6.7
+ONOS_PROTOC_VERSION := v0.6.7
 BUF_VERSION := 0.27.1
 
 build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
@@ -16,7 +16,7 @@ build/_output/e2sm_ni.so.1.0.0: # @HELP build the e2sm_ni.so.1.0.1
 
 PHONY:build
 build: # @HELP build all libraries
-build: build/_output/e2sm_kpm.so.1.0.0
+build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_ni.so.1.0.0
 
 test: # @HELP run the unit tests and source code validation
 test: license_check build
@@ -31,6 +31,7 @@ deps: # @HELP ensure that the required dependencies are in place
 
 linters: # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 30m && cd ..
+	cd servicemodels/e2sm_ni && golangci-lint run --timeout 30m && cd ..
 
 license_check: # @HELP examine and ensure license headers exist
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
@@ -48,27 +49,34 @@ protos: buflint
 		--entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos.sh \
 		onosproject/protoc-go:${ONOS_PROTOC_VERSION}
 
-onos-e2-sm-base-docker: # @HELP build onos-e2-sm base Docker image
-	@go mod vendor
-	docker build . -f build/base/Dockerfile \
-		--build-arg ONOS_BUILD_VERSION=${ONOS_BUILD_VERSION} \
-		--build-arg ONOS_MAKE_TARGET=build \
-		-t onosproject/onos-e2-sm-base:${ONOS_E2_SM_VERSION}
-	@rm -rf vendor
+PHONY: service-model-docker-e2sm_kpm-1.0.0
+service-model-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin Docker image
+#	@go mod vendor
+	docker build . -f build/plugins/Dockerfile \
+		--build-arg PLUGIN_MAKE_TARGET=e2sm_kpm \
+		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+		-t onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
-onos-e2-sm-docker: # @HELP build onos-e2-sm Docker image
-onos-e2-sm-docker: onos-e2-sm-base-docker
-	docker build . -f build/onos-e2-sm/Dockerfile \
-		--build-arg ONOS_E2_SM_BASE_VERSION=${ONOS_E2_SM_VERSION} \
-		-t onosproject/onos-e2-sm:${ONOS_E2_SM_VERSION}
+PHONY: service-model-docker-e2sm_ni-1.0.0
+service-model-docker-e2sm_ni-1.0.0: # @HELP build e2sm_ni 1.0.0 plugin Docker image
+#	@go mod vendor
+	docker build . -f build/plugins/Dockerfile \
+		--build-arg PLUGIN_MAKE_TARGET=e2sm_ni \
+		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+		-t onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
 images: # @HELP build all Docker images
-images: build onos-e2-sm-docker
+images: build service-model-docker-e2sm_kpm-1.0.0 service-model-docker-e2sm_ni-1.0.0
 
 kind: # @HELP build Docker images and add them to the currently configured kind cluster
 kind: images
 	@if [ "`kind get clusters`" = '' ]; then echo "no kind cluster found" && exit 1; fi
-	kind load docker-image onosproject/onos-e2-sm:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 
 all: build images
 
