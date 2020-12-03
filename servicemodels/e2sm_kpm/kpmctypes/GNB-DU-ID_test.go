@@ -65,7 +65,7 @@ func Test_perDecodeGnbDuId(t *testing.T) {
 
 	result, err := perDecodeGnbDuID(gnbDuIDPer)
 	assert.NilError(t, err)
-	assert.Assert(t, result != nil)
+	//assert.Assert(t, result != nil)
 	t.Logf("GNB-DU-ID PER decoded is \n%v", result)
 
 	assert.Equal(t, gnbDuID, result.Value, "Encoded and decoded values are not the same")
