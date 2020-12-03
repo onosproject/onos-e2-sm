@@ -63,5 +63,5 @@ func Test_perDecodeTriggerConditionIeItem(t *testing.T) {
 
 	result, err := perDecodeTriggerConditionIeItem(per)
 	assert.NilError(t, err)
-	assert.Equal(t, triggerConditionIeItem.GetReportPeriodIe(), result.GetReportPeriodIe(), "Encoded and decoded Trigger-ConditionIE-Item RtPeriodIe values are not the same")
+	assert.Equal(t, triggerConditionIeItem.GetReportPeriodIe(), result.GetReportPeriodIe(), "Encoded and decoded Trigger-ConditionIE-Item -- RtPeriodIe values are not the same")
 }
