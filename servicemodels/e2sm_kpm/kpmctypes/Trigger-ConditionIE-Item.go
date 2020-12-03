@@ -80,7 +80,7 @@ func newTriggerConditionIeItem(triggerConditionIeItem *e2sm_kpm_ies.TriggerCondi
 }
 
 func decodeTriggerConditionIeItem(triggerConditionIeItemC *C.Trigger_ConditionIE_Item_t) *e2sm_kpm_ies.TriggerConditionIeItem {
-	rtPeriodIe := decodeRtPeriodIe(triggerConditionIeItemC.report_Period_IE)
+	rtPeriodIe := decodeRtPeriodIe(&triggerConditionIeItemC.report_Period_IE)
 	triggerConditionIeItem := &e2sm_kpm_ies.TriggerConditionIeItem{
 		ReportPeriodIe: rtPeriodIe,
 	}
