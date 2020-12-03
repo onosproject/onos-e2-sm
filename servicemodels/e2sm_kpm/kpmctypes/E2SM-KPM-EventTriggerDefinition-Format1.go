@@ -68,7 +68,10 @@ func perDecodeE2SmKpmEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_kpm_ies.
 }
 
 func newE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1 *e2sm_kpm_ies.E2SmKpmEventTriggerDefinitionFormat1) (*C.E2SM_KPM_EventTriggerDefinition_Format1_t, error) {
-	policyTestListC := new(C.E2SM_KPM_EventTriggerDefinition_Format1_t)
+	policyTestListC := new(C.struct_E2SM_KPM_EventTriggerDefinition_Format1__policyTest_List)
+	format1 := C.E2SM_KPM_EventTriggerDefinition_Format1_t{
+		policyTest_List: policyTestListC,
+	}
 	for _, policyTestItem := range e2SmKpmEventTriggerDefinitionFormat1.GetPolicyTestList() {
 		policyTestItemC, err := newTriggerConditionIeItem(policyTestItem)
 		if err != nil {
@@ -80,7 +83,7 @@ func newE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat
 		}
 	}
 
-	return policyTestListC, nil
+	return &format1, nil
 }
 
 func decodeE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1C *C.E2SM_KPM_EventTriggerDefinition_Format1_t) (*e2sm_kpm_ies.E2SmKpmEventTriggerDefinitionFormat1, error) {
