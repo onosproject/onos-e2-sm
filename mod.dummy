@@ -1,7 +1,8 @@
-module github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm
+module github.com/onosproject/onos-e2t
 
 go 1.15
-
+// Just a dummy go.mod file that's needed to build the modelplugins in Docker
+// contents should match go.mod in sub folders here
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.4.1
 	github.com/golang/protobuf v1.4.3

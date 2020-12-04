@@ -134,5 +134,13 @@ func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]b
 	return perBytes, nil
 }
 
+func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not yet implemented")
+}
+
+func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not yet implemented")
+}
+
 // ServiceModel is the exported symbol that gives an entry point to this shared module
 var ServiceModel servicemodel
