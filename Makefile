@@ -19,8 +19,7 @@ build: # @HELP build all libraries
 build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_ni.so.1.0.0
 
 test: # @HELP run the unit tests and source code validation
-test: license_check build
-# linters
+test: license_check build linters
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 
 deps: # @HELP ensure that the required dependencies are in place

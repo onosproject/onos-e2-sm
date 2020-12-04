@@ -4,13 +4,13 @@ FROM onosproject/golang-build:$PLUGIN_BUILD_VERSION as pluginbuild
 ENV GO111MODULE=on
 ARG PLUGIN_MAKE_TARGET
 ARG PLUGIN_MAKE_VERSION
-COPY Makefile mod.go /go/src/github.com/onosproject/onos-e2t/
+COPY Makefile mod.dummy /go/src/github.com/onosproject/onos-e2t/
 COPY servicemodels/${PLUGIN_MAKE_TARGET}/vendor/ \
 /go/src/github.com/onosproject/onos-e2t/vendor/
 COPY servicemodels/${PLUGIN_MAKE_TARGET}/ \
 /go/src/github.com/onosproject/onos-e2t/vendor/github.com/onosproject/onos-e2-sm/servicemodels/${PLUGIN_MAKE_TARGET}/
 
-RUN cd /go/src/github.com/onosproject/onos-e2t/ && mv mod.go go.mod
+RUN cd /go/src/github.com/onosproject/onos-e2t/ && mv mod.dummy go.mod
 RUN cd /go/src/github.com/onosproject/onos-e2t && \
 CGO_ENABLED=1 go build -o build/_output/${PLUGIN_MAKE_TARGET}.so.${PLUGIN_MAKE_VERSION} \
 -buildmode=plugin github.com/onosproject/onos-e2-sm/servicemodels/${PLUGIN_MAKE_TARGET}

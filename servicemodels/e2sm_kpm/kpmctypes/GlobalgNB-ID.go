@@ -51,7 +51,7 @@ func decodeGlobalgNbID(globalgNbIDC *C.GlobalgNB_ID_t) (*e2sm_kpm_ies.GlobalgNbI
 	plmnID := decodePlmnIdentity(&globalgNbIDC.plmn_id)
 	gnbID, err := decodeGnbIDChoice(&globalgNbIDC.gnb_id)
 	if err != nil {
-		return nil, fmt.Errorf("decodeGlobalgNbId() error in str-to-int64 convertion %T", err)
+		return nil, fmt.Errorf("decodeGlobalgNbId() error in str-to-int64 conversion %v", err)
 	}
 
 	globalgNbID.PlmnId = plmnID
