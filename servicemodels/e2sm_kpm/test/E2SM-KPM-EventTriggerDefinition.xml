@@ -1,0 +1,9 @@
+<E2SM-KPM-EventTriggerDefinition>
+    <eventDefinition-Format1>
+        <policyTest-List>
+            <Trigger-ConditionIE-Item>
+                <report-Period-IE><ms1024/></report-Period-IE>
+            </Trigger-ConditionIE-Item>
+        </policyTest-List>
+    </eventDefinition-Format1>
+</E2SM-KPM-EventTriggerDefinition>

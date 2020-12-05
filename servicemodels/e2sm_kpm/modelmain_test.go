@@ -183,17 +183,18 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	assert.Equal(t, 2, len(asn1Bytes))
 }
 
-//func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
-//	// This message is taken as an output from the function above
-//	//ToDo: fill it with correct ASN1 bytes - ask Shad
-//	eventTriggerDefinitionAsn1 := []byte{0x32, 0x48}
-//
-//	protoBytes, err := kpmTestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
-//	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
-//	assert.Assert(t, protoBytes != nil)
-//	assert.Equal(t, 10, len(protoBytes))
-//	testIM := e2smkpmies.E2SmKpmEventTriggerDefinition{}
-//	err = proto.Unmarshal(protoBytes, &testIM)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
-//}
+func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
+	// This value is taken from Shad and passed as a byte array directly to the function
+	// It's the encoding of what's in the file ../test/E2SM-KPM-EventTriggerDefinition.xml
+	eventTriggerDefinitionAsn1 := []byte{0x20, 0x38, 0x37, 0xDB, 0xFD, 0x7F, 0x00,
+		0x00, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00}
+
+	protoBytes, err := kpmTestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 6, len(protoBytes))
+	testIM := e2smkpmies.E2SmKpmEventTriggerDefinition{}
+	err = proto.Unmarshal(protoBytes, &testIM)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
+}
