@@ -184,8 +184,8 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 }
 
 func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
-	// This message is taken as an output from the function above
-	//ToDo: fill it with correct ASN1 bytes - ask Shad
+	// This value is taken from Shad and passed as a byte array directly to the function
+	// It's the encoding of what's in the file ../test/E2SM-KPM-EventTriggerDefinition.xml
 	eventTriggerDefinitionAsn1 := []byte{0x20, 0x38, 0x37, 0xDB, 0xFD, 0x7F, 0x00,
 		0x00, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00}
 
