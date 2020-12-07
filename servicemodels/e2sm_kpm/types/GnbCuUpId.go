@@ -9,19 +9,15 @@ type GnbCuUpID struct {
 }
 
 type GnbCuUpIDBuilder interface {
-	NewGnbCuUpID()
-	SetValue(value int64)
+	NewGnbCuUpID(value int64)
 	GetValue()
 	GetGnbCuUpID()
 }
 
-func NewGnbCuUpID() *GnbCuUpID {
-	return &GnbCuUpID{}
-}
-
-func (b *GnbCuUpID) SetValue(value int64) *GnbCuUpID {
-	b.Value = value
-	return b
+func NewGnbCuUpID(value int64) *GnbCuUpID {
+	return &GnbCuUpID{
+		Value: value,
+	}
 }
 
 func (b GnbCuUpID) GetValue() int64 {

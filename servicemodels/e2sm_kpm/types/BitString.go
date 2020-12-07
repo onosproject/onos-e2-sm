@@ -10,26 +10,17 @@ type BitString struct {
 }
 
 type BitStringBuilder interface {
-	NewBitString()
-	SetValue(value uint64)
-	SetLen(len uint32)
+	NewBitString(value uint64, len uint32)
 	GetValue()
 	GetLen()
 	GetBitString()
 }
 
-func NewBitString() *BitString {
-	return &BitString{}
-}
-
-func (b *BitString) SetValue(value uint64) *BitString {
-	b.Value = value
-	return b
-}
-
-func (b *BitString) SetLen(len uint32) *BitString {
-	b.Len = len
-	return b
+func NewBitString(value uint64, len uint32) *BitString {
+	return &BitString{
+		Value: value,
+		Len:   len,
+	}
 }
 
 func (b BitString) GetValue() uint64 {

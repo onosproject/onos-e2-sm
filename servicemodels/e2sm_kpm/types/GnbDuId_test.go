@@ -14,30 +14,26 @@ import (
 
 func TestGnbDuID_NewGnbDuID(t *testing.T) {
 
-	variable := NewGnbDuID()
-	assert.Equal(t, reflect.TypeOf(GnbDuID{}), reflect.TypeOf(*variable), "GnbDuID{} types are mismatched")
-}
-
-func TestGnbDuID_SetValue(t *testing.T) {
-
 	var value int64 = 13
-	gnbDuID := NewGnbDuID().SetValue(value)
+	gnbDuID := NewGnbDuID(value)
 
-	assert.Equal(t, gnbDuID.Value, value, "Mismatch of GnbDuID values")
+	assert.Equal(t, reflect.TypeOf(GnbDuID{}), reflect.TypeOf(*gnbDuID), "GnbDuID{} types are mismatched")
+	assert.Equal(t, gnbDuID.Value, value, "GnbDuID{} values are mismatched")
 }
 
 func TestGGnbDuID_GetValue(t *testing.T) {
 
 	var value int64 = 13
-	gnbDuID := NewGnbDuID().SetValue(value)
+	gnbDuID := NewGnbDuID(value)
 
-	assert.Equal(t, gnbDuID.GetValue(), value, "Mismatch of GnbDuID values")
+	assert.Equal(t, gnbDuID.GetValue(), value, "Test_GnbDuID GetValue values mismatch")
 }
 
 func TestGnbDuID_GetGnbCuUpID(t *testing.T) {
 
-	gnbDuID1 := NewGnbDuID().SetValue(13)
+	var value int64 = 13
+	gnbDuID1 := NewGnbDuID(value)
 	gnbDuID2 := gnbDuID1.GetGnbDuID()
 
-	assert.Equal(t, gnbDuID1.GetValue(), gnbDuID2.GetValue(), "Mismatch of GnbDuID values")
+	assert.Equal(t, gnbDuID1.GetValue(), gnbDuID2.GetValue(), "Test_GnbDuID GetGnbCuUpID values mismatch")
 }

@@ -9,19 +9,15 @@ type GnbIDChoice struct {
 }
 
 type GnbIDChoiceBuilder interface {
-	NewGnbIdChoice()
-	SetId(id BitString)
-	GetId()
-	GetGnbIdChoice()
+	NewGnbIDChoice(id *BitString)
+	GetID()
+	GetGnbIDChoice()
 }
 
-func NewGnbIDChoice() *GnbIDChoice {
-	return &GnbIDChoice{}
-}
-
-func (b *GnbIDChoice) SetID(id *BitString) *GnbIDChoice {
-	b.ID = id
-	return b
+func NewGnbIDChoice(id *BitString) *GnbIDChoice {
+	return &GnbIDChoice{
+		ID: id,
+	}
 }
 
 func (b *GnbIDChoice) GetID() *BitString {

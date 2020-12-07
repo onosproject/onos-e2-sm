@@ -14,47 +14,39 @@ import (
 
 func TestBitString_NewBitString(t *testing.T) {
 
-	variable := NewBitString()
-	assert.Equal(t, reflect.TypeOf(BitString{}), reflect.TypeOf(*variable), "BitString{} types are mismatched")
-}
-
-func TestBitString_SetValue(t *testing.T) {
-
 	var value uint64 = 0x9bcd4
-	bs := NewBitString().SetValue(value)
-
-	assert.Equal(t, bs.Value, value, "Mismatch of BitString values")
-}
-
-func TestBitString_SetLen(t *testing.T) {
-
 	var len uint32 = 22
-	bs := NewBitString().SetLen(len)
-
-	assert.Equal(t, bs.Len, len, "Mismatch of BitString length")
+	bs := NewBitString(value, len)
+	assert.Equal(t, reflect.TypeOf(BitString{}), reflect.TypeOf(*bs), "BitString{} types are mismatched")
+	assert.Equal(t, bs.Value, value, "BitString{} values are mismatched")
+	assert.Equal(t, bs.Len, len, "BitString{} lengths are mismatched")
 }
 
 func TestBitString_GetValue(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
-	bs := NewBitString().SetValue(value)
+	var len uint32 = 22
+	bs := NewBitString(value, len)
 
-	assert.Equal(t, bs.GetValue(), value, "Mismatch of BitString values")
+	assert.Equal(t, bs.GetValue(), value, "Test_BitString GetValue BitString values mismatch")
 }
 
 func TestBitString_GetLen(t *testing.T) {
 
+	var value uint64 = 0x9bcd4
 	var len uint32 = 22
-	bs := NewBitString().SetLen(len)
+	bs := NewBitString(value, len)
 
-	assert.Equal(t, bs.GetLen(), len, "Mismatch of BitString length")
+	assert.Equal(t, bs.GetLen(), len, "Test_BitString GetLen BitString lengths mismatch")
 }
 
 func TestBitString_GetBitString(t *testing.T) {
 
-	bs1 := NewBitString().SetValue(0x9bcd4).SetLen(22)
+	var value uint64 = 0x9bcd4
+	var len uint32 = 22
+	bs1 := NewBitString(value, len)
 	bs2 := bs1.GetBitString()
 
-	assert.Equal(t, bs1.GetValue(), bs2.GetValue(), "Mismatch of BitString values")
-	assert.Equal(t, bs1.GetLen(), bs2.GetLen(), "Mismatch of BitString length")
+	assert.Equal(t, bs1.GetValue(), bs2.GetValue(), "Test_BitString GetBitString BitString value mismatch")
+	assert.Equal(t, bs1.GetLen(), bs2.GetLen(), "Test_BitString GetBitString BitString lengths mismatch")
 }

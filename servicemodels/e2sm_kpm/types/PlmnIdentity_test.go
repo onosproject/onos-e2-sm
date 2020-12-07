@@ -12,22 +12,17 @@ import (
 
 func TestPlmnID_NewPlmnId(t *testing.T) {
 
-	plmnID := NewPlmnID()
-	assert.Assert(t, reflect.TypeOf(PlmnIdentity{}) == reflect.TypeOf(*plmnID), "plmnID{} types are mismatched")
-}
-
-func TestPlmnID_SetValue(t *testing.T) {
-
 	value := []byte{0x22, 0x21}
-	plmnID := NewPlmnID().SetValue(value)
+	plmnID := NewPlmnID(value)
 
+	assert.Assert(t, reflect.TypeOf(PlmnIdentity{}) == reflect.TypeOf(*plmnID), "plmnID{} types are mismatched")
 	assert.DeepEqual(t, plmnID.Value, value)
 }
 
 func TestPlmnID_GetValue(t *testing.T) {
 
 	value := []byte{0x22, 0x21}
-	plmnID := NewPlmnID().SetValue(value)
+	plmnID := NewPlmnID(value)
 
 	assert.DeepEqual(t, plmnID.GetValue(), value)
 }
@@ -35,7 +30,7 @@ func TestPlmnID_GetValue(t *testing.T) {
 func TestPlmnID_GetPlmnID(t *testing.T) {
 
 	value := []byte{0x22, 0x21}
-	plmnID1 := NewPlmnID().SetValue(value)
+	plmnID1 := NewPlmnID(value)
 	plmnID2 := plmnID1.GetPlmnID()
 
 	assert.DeepEqual(t, plmnID1.GetValue(), plmnID2.GetValue())

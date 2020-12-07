@@ -10,40 +10,34 @@ import (
 	"testing"
 )
 
-func TestGnbIdChoice_NewGnbIdChoice(t *testing.T) {
-
-	choiceID := NewGnbIDChoice()
-	assert.Equal(t, reflect.TypeOf(GnbIDChoice{}), reflect.TypeOf(*choiceID), "GnbIdChoice{} types are mismatched")
-}
-
-func TestGnbIdChoice_SetId(t *testing.T) {
+func TestGnbIDChoice_NewGnbIDChoice(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
 	var len uint32 = 22
-	choiceID := NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len))
-
-	assert.Equal(t, choiceID.ID.Value, value, "Mismatch of GnbIdChoice ID values")
-	assert.Equal(t, choiceID.ID.Len, len, "Mismatch of GnbIdChoice ID lengths")
+	choiceID := NewGnbIDChoice(NewBitString(value, len))
+	assert.Equal(t, reflect.TypeOf(GnbIDChoice{}), reflect.TypeOf(*choiceID), "GnbIDChoice{} types are mismatched")
+	assert.Equal(t, choiceID.ID.Value, value, "GnbIDChoice{} values are mismatched")
+	assert.Equal(t, choiceID.ID.Len, len, "GnbIDChoice{} lengths are mismatched")
 }
 
-func TestGnbIdChoice_GetId(t *testing.T) {
+func TestGnbIDChoice_GetID(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
 	var len uint32 = 22
-	choiceID := NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len))
+	choiceID := NewGnbIDChoice(NewBitString(value, len))
 	getID := choiceID.GetID()
 
-	assert.Equal(t, getID.GetValue(), value, "Mismatch of GnbIdChoice ID values")
-	assert.Equal(t, getID.GetLen(), len, "Mismatch of GnbIdChoice ID lengths")
+	assert.Equal(t, getID.GetValue(), value, "Test_GnbIDChoice GetID values mismatch")
+	assert.Equal(t, getID.GetLen(), len, "Test_GnbIDChoice GetID values mismatch")
 }
 
-func TestGnbIdChoice_GetGnbIdChoice(t *testing.T) {
+func TestGnbIDChoice_GetGnbIDChoice(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
 	var len uint32 = 22
-	choiceID1 := NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len))
+	choiceID1 := NewGnbIDChoice(NewBitString(value, len))
 	choiceID2 := choiceID1.GetGnbIDChoice()
 
-	assert.Equal(t, choiceID1.GetID().GetValue(), choiceID2.GetID().GetValue(), "Mismatch of GnbIdChoice ID values")
-	assert.Equal(t, choiceID1.GetID().GetLen(), choiceID2.GetID().GetLen(), "Mismatch of GnbIdChoice ID lengths")
+	assert.Equal(t, choiceID1.GetID().GetValue(), choiceID2.GetID().GetValue(), "Test_GnbIDChoice GetGnbIDChoice values mismatch")
+	assert.Equal(t, choiceID1.GetID().GetLen(), choiceID2.GetID().GetLen(), "Test_GnbIDChoice GetGnbIDChoice values mismatch")
 }

@@ -9,19 +9,15 @@ type PlmnIdentity struct {
 }
 
 type PlmnIdentityBuilder interface {
-	NewPlmnID()
-	SetValue(value []byte)
+	NewPlmnID(value []byte)
 	GetValue()
 	GetPlmnID()
 }
 
-func NewPlmnID() *PlmnIdentity {
-	return &PlmnIdentity{}
-}
-
-func (b *PlmnIdentity) SetValue(value []byte) *PlmnIdentity {
-	b.Value = value
-	return b
+func NewPlmnID(value []byte) *PlmnIdentity {
+	return &PlmnIdentity{
+		Value: value,
+	}
 }
 
 func (b *PlmnIdentity) GetValue() []byte {
