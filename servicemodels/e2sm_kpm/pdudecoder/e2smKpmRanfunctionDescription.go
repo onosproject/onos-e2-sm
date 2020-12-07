@@ -6,7 +6,7 @@ package pdudecoder
 
 import (
 	"fmt"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/types"
+	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 )
 

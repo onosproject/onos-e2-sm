@@ -5,7 +5,10 @@
 //nolint
 package main
 
-import "fmt"
+import (
+	"fmt"
+	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
+)
 
 type servicemodel string
 
@@ -51,6 +54,10 @@ func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, er
 
 func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not yet implemented")
+}
+
+func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
+	return nil, nil, nil, fmt.Errorf("not yet implemented")
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module
