@@ -157,10 +157,10 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 //	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 //	assert.Assert(t, protoBytes != nil)
 //	assert.Equal(t, 10, len(protoBytes))
-//	testIM := e2smkpmies.E2SmKpmEventTriggerDefinition{}
+//	testIM := e2smkpmies.E2SmKpmRanfunctionDescription{}
 //	err = proto.Unmarshal(protoBytes, &testIM)
 //	assert.NilError(t, err)
-//	assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
+//	//assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
 //}
 
 func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
@@ -198,3 +198,40 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
 }
+
+func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
+	var ricStyleType int32 = 12
+	e2SmKpmActionDefinition, err := pdubuilder.CreateE2SmKpmActionDefinition(ricStyleType)
+	assert.NilError(t, err, "error creating E2SmPDU")
+	assert.Assert(t, e2SmKpmActionDefinition != nil, "Created E2SmPDU is nil")
+
+	err = e2SmKpmActionDefinition.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(e2SmKpmActionDefinition)
+	assert.NilError(t, err, "unexpected error marshalling E2SmKpmActionDefinition to bytes")
+	assert.Equal(t, 4, len(protoBytes))
+
+	asn1Bytes, err := kpmTestSm.ActionDefinitionProtoToASN1(protoBytes)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	assert.Equal(t, 3, len(asn1Bytes))
+}
+
+//func TestServicemodel_ActionDefinitionASN1toProto(t *testing.T) {
+//	// This value is taken from XxX and passed as a byte array directly to the function
+//	// It's the encoding of what's in the file ../test/E2SM-KPM-EventTriggerDefinition.xml
+//	// TODO: Take real values
+//	actionDefinitionAsn1 := []byte{0x20, 0x38, 0x37, 0xDB, 0xFD, 0x7F, 0x00,
+//		0x00, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00}
+//
+//	protoBytes, err := kpmTestSm.ActionDefinitionASN1toProto(actionDefinitionAsn1)
+//	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+//	assert.Assert(t, protoBytes != nil)
+//	assert.Equal(t, 4, len(protoBytes))
+//	testIM := e2smkpmies.E2SmKpmActionDefinition{}
+//	err = proto.Unmarshal(protoBytes, &testIM)
+//	assert.NilError(t, err)
+//	assert.Equal(t, 1, testIM.GetRicStyleType().GetValue())
+//}
