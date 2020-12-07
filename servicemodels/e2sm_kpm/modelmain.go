@@ -7,7 +7,9 @@ package main
 
 import (
 	"fmt"
+	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdudecoder"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"google.golang.org/protobuf/proto"
 )
@@ -160,6 +162,14 @@ func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, e
 	}
 
 	return perBytes, nil
+}
+
+func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
+	e2SmKpmPdu, err := kpmctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1bytes)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	return pdudecoder.DecodeE2SmKpmRanfunctionDescription(e2SmKpmPdu)
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module
