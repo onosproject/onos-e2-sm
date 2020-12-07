@@ -135,11 +135,31 @@ func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]b
 }
 
 func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not yet implemented")
+	perBytes, err := kpmctypes.PerDecodeE2SmKpmActionDefinition(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmKpmActionDefinitio to PER %s", err)
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmActionDefinition %s", err)
+	}
+
+	return protoBytes, nil
 }
 
 func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not yet implemented")
+	protoObj := new(e2sm_kpm_ies.E2SmKpmActionDefinition)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmActionDefinition %s", err)
+	}
+
+	perBytes, err := kpmctypes.PerEncodeE2SmKpmActionDefinition(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmKpmActionDefinition to PER %s", err)
+	}
+
+	return perBytes, nil
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module
