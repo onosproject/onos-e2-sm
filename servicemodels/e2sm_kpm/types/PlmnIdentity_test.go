@@ -21,8 +21,7 @@ func TestPlmnID_SetValue(t *testing.T) {
 
 	value := []byte{0x22, 0x21}
 
-	plmnID := NewPlmnID()
-	plmnID.SetValue(value)
+	plmnID := NewPlmnID().SetValue(value)
 
 	assert.DeepEqual(t, plmnID.Value, value)
 
@@ -32,8 +31,7 @@ func TestPlmnID_GetValue(t *testing.T) {
 
 	value := []byte{0x22, 0x21}
 
-	plmnID := NewPlmnID()
-	plmnID.SetValue(value)
+	plmnID := NewPlmnID().SetValue(value)
 
 	assert.DeepEqual(t, plmnID.GetValue(), value)
 
@@ -43,8 +41,7 @@ func TestPlmnID_GetPlmnID(t *testing.T) {
 
 	value := []byte{0x22, 0x21}
 
-	plmnID1 := NewPlmnID()
-	plmnID1.SetValue(value)
+	plmnID1 := NewPlmnID().SetValue(value)
 
 	plmnID2 := plmnID1.GetPlmnID()
 

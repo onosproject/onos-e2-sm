@@ -22,22 +22,24 @@ func NewGlobalGnbID() *GlobalGnbID {
 	return &GlobalGnbID{}
 }
 
-func (b *GlobalGnbID) SetPlmnID(plmnID PlmnIdentity) {
-	b.PlmnID = &plmnID
+func (b *GlobalGnbID) SetPlmnID(plmnID *PlmnIdentity) *GlobalGnbID {
+	b.PlmnID = plmnID
+	return b
 }
 
-func (b *GlobalGnbID) SetGnbID(gnbID GnbIDChoice) {
-	b.GnbID = &gnbID
+func (b *GlobalGnbID) SetGnbID(gnbID *GnbIDChoice) *GlobalGnbID {
+	b.GnbID = gnbID
+	return b
 }
 
-func (b GlobalGnbID) GetPlmnID() PlmnIdentity {
-	return *b.PlmnID
+func (b *GlobalGnbID) GetPlmnID() *PlmnIdentity {
+	return b.PlmnID
 }
 
-func (b GlobalGnbID) GetGnbID() GnbIDChoice {
-	return *b.GnbID
+func (b *GlobalGnbID) GetGnbID() *GnbIDChoice {
+	return b.GnbID
 }
 
-func (b GlobalGnbID) GetGlobalGnbID() GlobalGnbID {
+func (b *GlobalGnbID) GetGlobalGnbID() *GlobalGnbID {
 	return b
 }

@@ -15,7 +15,7 @@ import (
 func TestBitString_NewBitString(t *testing.T) {
 
 	variable := NewBitString()
-	assert.Assert(t, reflect.TypeOf(BitString{}) == reflect.TypeOf(*variable), "BitString{} types are mismatched")
+	assert.Equal(t, reflect.TypeOf(BitString{}), reflect.TypeOf(*variable), "BitString{} types are mismatched")
 
 }
 
@@ -23,10 +23,9 @@ func TestBitString_SetValue(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
 
-	bs := NewBitString()
-	bs.SetValue(value)
+	bs := NewBitString().SetValue(value)
 
-	assert.Assert(t, bs.Value == value, "Mismatch of BitString values")
+	assert.Equal(t, bs.Value, value, "Mismatch of BitString values")
 
 }
 
@@ -34,10 +33,9 @@ func TestBitString_SetLen(t *testing.T) {
 
 	var len uint32 = 22
 
-	bs := NewBitString()
-	bs.SetLen(len)
+	bs := NewBitString().SetLen(len)
 
-	assert.Assert(t, bs.Len == len, "Mismatch of BitString length")
+	assert.Equal(t, bs.Len, len, "Mismatch of BitString length")
 
 }
 
@@ -45,10 +43,9 @@ func TestBitString_GetValue(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
 
-	bs := NewBitString()
-	bs.SetValue(value)
+	bs := NewBitString().SetValue(value)
 
-	assert.Assert(t, bs.GetValue() == value, "Mismatch of BitString values")
+	assert.Equal(t, bs.GetValue(), value, "Mismatch of BitString values")
 
 }
 
@@ -56,21 +53,18 @@ func TestBitString_GetLen(t *testing.T) {
 
 	var len uint32 = 22
 
-	bs := NewBitString()
-	bs.SetLen(len)
+	bs := NewBitString().SetLen(len)
 
-	assert.Assert(t, bs.GetLen() == len, "Mismatch of BitString length")
+	assert.Equal(t, bs.GetLen(), len, "Mismatch of BitString length")
 
 }
 
 func TestBitString_GetBitString(t *testing.T) {
 
-	bs1 := NewBitString()
-	bs1.SetValue(0x9bcd4)
-	bs1.SetLen(22)
+	bs1 := NewBitString().SetValue(0x9bcd4).SetLen(22)
 
 	bs2 := bs1.GetBitString()
 
-	assert.Assert(t, bs1.GetValue() == bs2.GetValue(), "Mismatch of BitString values")
-	assert.Assert(t, bs1.GetLen() == bs2.GetLen(), "Mismatch of BitString length")
+	assert.Equal(t, bs1.GetValue(), bs2.GetValue(), "Mismatch of BitString values")
+	assert.Equal(t, bs1.GetLen(), bs2.GetLen(), "Mismatch of BitString length")
 }

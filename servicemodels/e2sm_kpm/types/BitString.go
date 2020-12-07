@@ -22,12 +22,14 @@ func NewBitString() *BitString {
 	return &BitString{}
 }
 
-func (b *BitString) SetValue(value uint64) {
+func (b *BitString) SetValue(value uint64) *BitString {
 	b.Value = value
+	return b
 }
 
-func (b *BitString) SetLen(len uint32) {
+func (b *BitString) SetLen(len uint32) *BitString {
 	b.Len = len
+	return b
 }
 
 func (b BitString) GetValue() uint64 {
@@ -38,9 +40,6 @@ func (b BitString) GetLen() uint32 {
 	return b.Len
 }
 
-func (b BitString) GetBitString() BitString {
-	return BitString{
-		Value: b.Value,
-		Len:   b.Len,
-	}
+func (b *BitString) GetBitString() *BitString {
+	return b
 }

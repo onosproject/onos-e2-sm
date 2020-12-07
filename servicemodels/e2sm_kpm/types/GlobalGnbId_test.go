@@ -13,50 +13,41 @@ import (
 func TestGlobalGnbID_NewGlobalGnbID(t *testing.T) {
 
 	globalGnb := NewGlobalGnbID()
-	assert.Assert(t, reflect.TypeOf(GlobalGnbID{}) == reflect.TypeOf(*globalGnb), "plmnID{} types are mismatched")
+	assert.Equal(t, reflect.TypeOf(GlobalGnbID{}), reflect.TypeOf(*globalGnb), "GlobalGnbID{} types are mismatched")
 
 }
 
 func TestGlobalGnbID_SetPlmnID(t *testing.T) {
 
 	value := []byte{0x22, 0x21}
-	plmnID := NewPlmnID()
-	plmnID.SetValue(value)
 
-	globalGnb := NewGlobalGnbID()
-	globalGnb.SetPlmnID(*plmnID)
+	globalGnb := NewGlobalGnbID().SetPlmnID(NewPlmnID().SetValue(value))
 
-	assert.DeepEqual(t, globalGnb.PlmnID.GetValue(), value)
+	assert.DeepEqual(t, globalGnb.GetPlmnID().GetValue(), value)
 
 }
 
 func TestGlobalGnbID_SetGnbID(t *testing.T) {
 
-	id := BitString{
-		Value: 0x9bcd4,
-		Len:   22,
-	}
+	var value uint64 = 0x9bcd4
+	var len uint32 = 22
 
-	choiceID := NewGnbIDChoice()
-	choiceID.SetID(id)
+	choiceID := NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len))
 
-	globalGnb := NewGlobalGnbID()
-	globalGnb.SetGnbID(*choiceID)
+	globalGnb := NewGlobalGnbID().SetGnbID(NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len)))
 
 	assert.Equal(t, globalGnb.GetGnbID().GetID().GetValue(), choiceID.GetID().GetValue())
 	assert.Equal(t, globalGnb.GetGnbID().GetID().GetLen(), choiceID.GetID().GetLen())
-	assert.Equal(t, globalGnb.GetGnbID().GetID(), choiceID.GetID())
+	assert.DeepEqual(t, globalGnb.GetGnbID().GetID(), choiceID.GetID())
 
 }
 
 func TestGlobalGnbID_GetPlmnID(t *testing.T) {
 
 	value := []byte{0x22, 0x21}
-	plmnID := NewPlmnID()
-	plmnID.SetValue(value)
+	plmnID := NewPlmnID().SetValue(value)
 
-	globalGnb := NewGlobalGnbID()
-	globalGnb.SetPlmnID(*plmnID)
+	globalGnb := NewGlobalGnbID().SetPlmnID(NewPlmnID().SetValue(value))
 
 	assert.DeepEqual(t, globalGnb.GetPlmnID().GetValue(), plmnID.GetValue())
 
@@ -64,43 +55,29 @@ func TestGlobalGnbID_GetPlmnID(t *testing.T) {
 
 func TestGlobalGnbID_GetGnbID(t *testing.T) {
 
-	id := BitString{
-		Value: 0x9bcd4,
-		Len:   22,
-	}
+	var value uint64 = 0x9bcd4
+	var len uint32 = 22
 
-	choiceID := NewGnbIDChoice()
-	choiceID.SetID(id)
+	choiceID := NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len))
 
-	globalGnb := NewGlobalGnbID()
-	globalGnb.SetGnbID(*choiceID)
+	globalGnb := NewGlobalGnbID().SetGnbID(NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len)))
 
-	assert.DeepEqual(t, globalGnb.GetGnbID().GetID().GetValue(), id.GetValue())
-	assert.Equal(t, globalGnb.GetGnbID().GetID().GetLen(), id.GetLen())
+	assert.Equal(t, globalGnb.GetGnbID().GetID().GetValue(), choiceID.GetID().GetValue())
+	assert.Equal(t, globalGnb.GetGnbID().GetID().GetLen(), choiceID.GetID().GetLen())
 
 }
 
 func TestGlobalGnbID_GetGlobalGnbID(t *testing.T) {
 
-	id := BitString{
-		Value: 0x9bcd4,
-		Len:   22,
-	}
+	var value uint64 = 0x9bcd4
+	var len uint32 = 22
 
-	choiceID := NewGnbIDChoice()
-	choiceID.SetID(id)
+	bytes := []byte{0x22, 0x21}
 
-	value := []byte{0x22, 0x21}
-	plmnID := NewPlmnID()
-	plmnID.SetValue(value)
-
-	globalGnb1 := NewGlobalGnbID()
-	globalGnb1.SetGnbID(*choiceID)
-	globalGnb1.SetPlmnID(*plmnID)
-
+	globalGnb1 := NewGlobalGnbID().SetGnbID(NewGnbIDChoice().SetID(NewBitString().SetValue(value).SetLen(len))).SetPlmnID(NewPlmnID().SetValue(bytes))
 	globalGnb2 := globalGnb1.GetGlobalGnbID()
 
-	assert.DeepEqual(t, globalGnb1.GetGnbID().GetID().GetValue(), globalGnb2.GetGnbID().GetID().GetValue())
+	assert.Equal(t, globalGnb1.GetGnbID().GetID().GetValue(), globalGnb2.GetGnbID().GetID().GetValue())
 	assert.Equal(t, globalGnb1.GetGnbID().GetID().GetLen(), globalGnb2.GetGnbID().GetID().GetLen())
 	assert.DeepEqual(t, globalGnb1.GetPlmnID().GetValue(), globalGnb2.GetPlmnID().GetValue())
 

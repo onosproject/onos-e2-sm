@@ -19,14 +19,15 @@ func NewPlmnID() *PlmnIdentity {
 	return &PlmnIdentity{}
 }
 
-func (b *PlmnIdentity) SetValue(value []byte) {
+func (b *PlmnIdentity) SetValue(value []byte) *PlmnIdentity {
 	b.Value = value
+	return b
 }
 
-func (b PlmnIdentity) GetValue() []byte {
+func (b *PlmnIdentity) GetValue() []byte {
 	return b.Value
 }
 
-func (b PlmnIdentity) GetPlmnID() PlmnIdentity {
+func (b *PlmnIdentity) GetPlmnID() *PlmnIdentity {
 	return b
 }
