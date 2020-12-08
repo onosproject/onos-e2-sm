@@ -19,8 +19,10 @@ func TestGlobalGnbID_NewGlobalGnbID(t *testing.T) {
 
 func TestGlobalGnbID_SetPlmnID(t *testing.T) {
 
-	value := []byte{0x22, 0x21}
-	globalGnb := NewGlobalGnbID().SetPlmnID(NewPlmnID(value))
+	value := []byte{0x22, 0x21, 0x20}
+	plmnID, err := NewPlmnID(value)
+	assert.NilError(t, err)
+	globalGnb := NewGlobalGnbID().SetPlmnID(plmnID)
 
 	assert.DeepEqual(t, globalGnb.PlmnID.GetValue(), value)
 }
@@ -39,9 +41,10 @@ func TestGlobalGnbID_SetGnbID(t *testing.T) {
 
 func TestGlobalGnbID_GetPlmnID(t *testing.T) {
 
-	value := []byte{0x22, 0x21}
-	plmnID := NewPlmnID(value)
-	globalGnb := NewGlobalGnbID().SetPlmnID(NewPlmnID(value))
+	value := []byte{0x22, 0x21, 0x20}
+	plmnID, err := NewPlmnID(value)
+	assert.NilError(t, err)
+	globalGnb := NewGlobalGnbID().SetPlmnID(plmnID)
 
 	assert.DeepEqual(t, globalGnb.GetPlmnID().GetValue(), plmnID.GetValue())
 }
@@ -61,8 +64,10 @@ func TestGlobalGnbID_GetGlobalGnbID(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
 	var length uint32 = 22
-	bytes := []byte{0x22, 0x21}
-	globalGnb1 := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, length))).SetPlmnID(NewPlmnID(bytes))
+	bytes := []byte{0x22, 0x21, 0x21}
+	plmnID, err := NewPlmnID(bytes)
+	assert.NilError(t, err)
+	globalGnb1 := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, length))).SetPlmnID(plmnID)
 	globalGnb2 := globalGnb1.GetGlobalGnbID()
 
 	assert.Equal(t, globalGnb1.GetGnbID().GetID().GetValue(), globalGnb2.GetGnbID().GetID().GetValue(), "Test_GlobalGnbID() GetGlobalGnbID values mismatch")

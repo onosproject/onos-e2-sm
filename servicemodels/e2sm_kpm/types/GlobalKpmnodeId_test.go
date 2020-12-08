@@ -23,10 +23,11 @@ func TestGlobalKpmnodeID_NewGlobalKpmnodeID(t *testing.T) {
 
 func TestGlobalKpmnodeID_SetGlobalKpmnodeGnbID(t *testing.T) {
 
-	bytes := []byte{0x22, 0x21}
+	bytes := []byte{0x22, 0x21, 0x20}
 	var value uint64 = 0x9bcd4
 	var length uint32 = 22
-	plmnID := NewPlmnID(bytes)
+	plmnID, err := NewPlmnID(bytes)
+	assert.NilError(t, err)
 	gnbID := NewGnbIDChoice(NewBitString(value, length))
 
 	var gnbCuID int64 = 12
@@ -43,10 +44,11 @@ func TestGlobalKpmnodeID_SetGlobalKpmnodeGnbID(t *testing.T) {
 
 func TestGlobalKpmnodeID_GetGlobalKpmnodeGnbID(t *testing.T) {
 
-	bytes := []byte{0x22, 0x21}
+	bytes := []byte{0x22, 0x21, 0x20}
 	var value uint64 = 0x9bcd4
 	var length uint32 = 22
-	plmnID := NewPlmnID(bytes)
+	plmnID, err := NewPlmnID(bytes)
+	assert.NilError(t, err)
 	gnbID := NewGnbIDChoice(NewBitString(value, length))
 
 	var gnbCuID int64 = 12
@@ -61,10 +63,11 @@ func TestGlobalKpmnodeID_GetGlobalKpmnodeGnbID(t *testing.T) {
 
 func TestGlobalKpmnodeID_GetGlobalKpmnodeID(t *testing.T) {
 
-	bytes := []byte{0x22, 0x21}
+	bytes := []byte{0x22, 0x21, 0x20}
 	var value uint64 = 0x9bcd4
 	var length uint32 = 22
-	plmnID := NewPlmnID(bytes)
+	plmnID, err := NewPlmnID(bytes)
+	assert.NilError(t, err)
 	gnbID := NewGnbIDChoice(NewBitString(value, length))
 
 	var gnbCuID int64 = 12

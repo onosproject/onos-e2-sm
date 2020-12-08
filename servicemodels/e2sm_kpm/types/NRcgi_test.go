@@ -19,8 +19,10 @@ func TestNRcgi_NewNRcgi(t *testing.T) {
 
 func TestNRcgi_SetPlmnID(t *testing.T) {
 
-	value := []byte{0x22, 0x21}
-	nrcgi := NewNRcgi().SetPlmnID(NewPlmnID(value))
+	value := []byte{0x22, 0x21, 0x20}
+	plmnID, err := NewPlmnID(value)
+	assert.NilError(t, err)
+	nrcgi := NewNRcgi().SetPlmnID(plmnID)
 
 	assert.DeepEqual(t, nrcgi.PlmnID.GetValue(), value)
 }
@@ -39,8 +41,9 @@ func TestNRcgi_SetNRcellID(t *testing.T) {
 
 func TestNRcgi_GetPlmnID(t *testing.T) {
 
-	value := []byte{0x22, 0x21}
-	plmnID := NewPlmnID(value)
+	value := []byte{0x22, 0x21, 0x20}
+	plmnID, err := NewPlmnID(value)
+	assert.NilError(t, err)
 	nrcgi := NewNRcgi().SetPlmnID(plmnID)
 
 	assert.DeepEqual(t, nrcgi.GetPlmnID().GetValue(), plmnID.GetValue())
@@ -63,8 +66,10 @@ func TestNRcgi_GetNRcgi(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
 	var length uint32 = 22
-	bytes := []byte{0x22, 0x21}
-	nrcgi1 := NewNRcgi().SetPlmnID(NewPlmnID(bytes)).SetNRcellID(NewNrcellIdentity(NewBitString(value, length)))
+	bytes := []byte{0x22, 0x21, 0x20}
+	plmnID, err := NewPlmnID(bytes)
+	assert.NilError(t, err)
+	nrcgi1 := NewNRcgi().SetPlmnID(plmnID).SetNRcellID(NewNrcellIdentity(NewBitString(value, length)))
 	nrcgi2 := nrcgi1.GetNRcgi()
 
 	assert.DeepEqual(t, nrcgi1, nrcgi2)
