@@ -32,7 +32,7 @@ func (b *E2SmKpmIndicationMessageFormat1) AddPmContainersListItem(pmContainersLi
 //TODO: Probably would be redundant once ODu and OCuUp containers would come -- somehow, could be extended with container type in the future
 // Also may return list of containers which satisfies this condition
 func (b *E2SmKpmIndicationMessageFormat1) RetrievePmContainersListItemOCuCpByCuCpName(pmContainersList []*PmContainersList, gnbCuCpName string) *PmContainersList {
-	for _,ocucpItem := range pmContainersList {
+	for _, ocucpItem := range pmContainersList {
 		if ocucpItem.PerformanceContainer.OCuCp.GNbCuCpName.Value == gnbCuCpName {
 			return ocucpItem
 		}
@@ -43,7 +43,7 @@ func (b *E2SmKpmIndicationMessageFormat1) RetrievePmContainersListItemOCuCpByCuC
 //TODO: Probably would be redundant once ODu and OCuUp containers would come -- somehow, could be extended with container type in the future
 // Also may return list of containers which satisfies this condition
 func (b *E2SmKpmIndicationMessageFormat1) RetrievePmContainersListItemOCuCpByNUEs(pmContainersList []*PmContainersList, numberOfActiveUes int32) *PmContainersList {
-	for _,ocucpItem := range pmContainersList {
+	for _, ocucpItem := range pmContainersList {
 		if ocucpItem.PerformanceContainer.OCuCp.CuCpResourceStatus.NumberOfActiveUes == numberOfActiveUes {
 			return ocucpItem
 		}
@@ -53,7 +53,7 @@ func (b *E2SmKpmIndicationMessageFormat1) RetrievePmContainersListItemOCuCpByNUE
 
 //TODO: May return list of all matched PmContainersList items related to the certain RanContainer
 func (b *E2SmKpmIndicationMessageFormat1) RetrievePmContainersListItemOCuCpByRanContainer(pmContainersList []*PmContainersList, ranContainer []byte) *PmContainersList {
-	for _,ocucpItem := range pmContainersList {
+	for _, ocucpItem := range pmContainersList {
 		if reflect.DeepEqual(ocucpItem.TheRancontainer.Value, ranContainer) {
 			return ocucpItem
 		}
