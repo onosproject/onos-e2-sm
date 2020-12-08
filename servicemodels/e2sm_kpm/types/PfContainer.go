@@ -40,8 +40,6 @@ func (b *PfContainer) SetOCuCp(OCuCp *OCuCpPfContainer) *PfContainer {
 //	return b
 //}
 
-
-
 //func (b *PfContainer) GetODu() *ODuPfContainer {
 //	return b.ODu
 //}
@@ -53,7 +51,6 @@ func (b *PfContainer) GetOCuCp() *OCuCpPfContainer {
 //func (b *PfContainer) GetOCuUp() *OCuUpPfContainer {
 //	return b.OCuUp
 //}
-
 
 func (b *PfContainer) GetPfContainer() *PfContainer {
 	return b

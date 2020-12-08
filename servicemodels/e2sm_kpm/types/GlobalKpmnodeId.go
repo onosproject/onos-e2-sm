@@ -5,7 +5,7 @@
 package types
 
 type GlobalKpmnodeID struct {
-	Gnb  *GlobalKpmnodeGnbID
+	Gnb *GlobalKpmnodeGnbID
 	//EnGnb *GlobalKpmnodeEnGnbID
 	//NgEnb *GlobalKpmnodeNgEnbID
 	//Enb   *GlobalKpmnodeEnbID
