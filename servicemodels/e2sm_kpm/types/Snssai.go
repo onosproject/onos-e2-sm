@@ -20,10 +20,10 @@ type SnssaiBuilder interface {
 
 func NewSnssai(sst []byte, sd []byte) (*Snssai, error) {
 	if len(sst) != 1 {
-		return nil, fmt.Errorf("SSt should be of length 1")
+		return nil, fmt.Errorf("SSt size must be 1 byte")
 	}
 	if len(sd) != 3 {
-		return nil, fmt.Errorf("SD should be of length 3")
+		return nil, fmt.Errorf("SD size must be 3 bytes")
 	}
 	return &Snssai{
 		SSt: sst,
