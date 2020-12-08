@@ -28,9 +28,9 @@ func TestGlobalGnbID_SetPlmnID(t *testing.T) {
 func TestGlobalGnbID_SetGnbID(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
-	var len uint32 = 22
-	choiceID := NewGnbIDChoice(NewBitString(value, len))
-	globalGnb := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, len)))
+	var length uint32 = 22
+	choiceID := NewGnbIDChoice(NewBitString(value, length))
+	globalGnb := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, length)))
 
 	assert.Equal(t, globalGnb.GnbID.ID.GetValue(), choiceID.GetID().GetValue(), "Test_GlobalGnbID() SetGnbID values mismatch")
 	assert.Equal(t, globalGnb.GnbID.ID.GetLen(), choiceID.GetID().GetLen(), "Test_GlobalGnbID() SetGnbID lengths mismatch")
@@ -49,9 +49,9 @@ func TestGlobalGnbID_GetPlmnID(t *testing.T) {
 func TestGlobalGnbID_GetGnbID(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
-	var len uint32 = 22
-	choiceID := NewGnbIDChoice(NewBitString(value, len))
-	globalGnb := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, len)))
+	var length uint32 = 22
+	choiceID := NewGnbIDChoice(NewBitString(value, length))
+	globalGnb := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, length)))
 
 	assert.Equal(t, globalGnb.GetGnbID().GetID().GetValue(), choiceID.GetID().GetValue(), "Test_GlobalGnbID() GetGnbID values mismatch")
 	assert.Equal(t, globalGnb.GetGnbID().GetID().GetLen(), choiceID.GetID().GetLen(), "Test_GlobalGnbID() GetGnbID lengths mismatch")
@@ -60,9 +60,9 @@ func TestGlobalGnbID_GetGnbID(t *testing.T) {
 func TestGlobalGnbID_GetGlobalGnbID(t *testing.T) {
 
 	var value uint64 = 0x9bcd4
-	var len uint32 = 22
+	var length uint32 = 22
 	bytes := []byte{0x22, 0x21}
-	globalGnb1 := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, len))).SetPlmnID(NewPlmnID(bytes))
+	globalGnb1 := NewGlobalGnbID().SetGnbID(NewGnbIDChoice(NewBitString(value, length))).SetPlmnID(NewPlmnID(bytes))
 	globalGnb2 := globalGnb1.GetGlobalGnbID()
 
 	assert.Equal(t, globalGnb1.GetGnbID().GetID().GetValue(), globalGnb2.GetGnbID().GetID().GetValue(), "Test_GlobalGnbID() GetGlobalGnbID values mismatch")

@@ -25,9 +25,9 @@ func TestGlobalKpmnodeID_SetGlobalKpmnodeGnbID(t *testing.T) {
 
 	bytes := []byte{0x22, 0x21}
 	var value uint64 = 0x9bcd4
-	var len uint32 = 22
+	var length uint32 = 22
 	plmnID := NewPlmnID(bytes)
-	gnbID := NewGnbIDChoice(NewBitString(value, len))
+	gnbID := NewGnbIDChoice(NewBitString(value, length))
 
 	var gnbCuID int64 = 12
 	var gnbDuID int64 = 13
@@ -45,14 +45,14 @@ func TestGlobalKpmnodeID_GetGlobalKpmnodeGnbID(t *testing.T) {
 
 	bytes := []byte{0x22, 0x21}
 	var value uint64 = 0x9bcd4
-	var len uint32 = 22
+	var length uint32 = 22
 	plmnID := NewPlmnID(bytes)
-	gnbID := NewGnbIDChoice(NewBitString(value, len))
+	gnbID := NewGnbIDChoice(NewBitString(value, length))
 
 	var gnbCuID int64 = 12
-	var GnbDuID int64 = 13
+	var gnbDuID int64 = 13
 	globalKpmnodeGnbID := NewGlobalKpmnodeGnbID().SetGlobalGnbID(NewGlobalGnbID().SetPlmnID(plmnID).SetGnbID(gnbID)).
-		SetGnbCuUpID(NewGnbCuUpID(gnbCuID)).SetGnbDuID(NewGnbDuID(GnbDuID))
+		SetGnbCuUpID(NewGnbCuUpID(gnbCuID)).SetGnbDuID(NewGnbDuID(gnbDuID))
 	globalKpmnodeID := NewGlobalKpmnodeID().SetGlobalKpmnodeGnbID(globalKpmnodeGnbID)
 	globalKpmnodeGnbID2 := globalKpmnodeID.GetGlobalKpmnodeGnbID()
 
@@ -63,14 +63,14 @@ func TestGlobalKpmnodeID_GetGlobalKpmnodeID(t *testing.T) {
 
 	bytes := []byte{0x22, 0x21}
 	var value uint64 = 0x9bcd4
-	var len uint32 = 22
+	var length uint32 = 22
 	plmnID := NewPlmnID(bytes)
-	gnbID := NewGnbIDChoice(NewBitString(value, len))
+	gnbID := NewGnbIDChoice(NewBitString(value, length))
 
 	var gnbCuID int64 = 12
-	var GnbDuID int64 = 13
+	var gnbDuID int64 = 13
 	globalKpmnodeGnbID := NewGlobalKpmnodeGnbID().SetGlobalGnbID(NewGlobalGnbID().SetPlmnID(plmnID).SetGnbID(gnbID)).
-		SetGnbCuUpID(NewGnbCuUpID(gnbCuID)).SetGnbDuID(NewGnbDuID(GnbDuID))
+		SetGnbCuUpID(NewGnbCuUpID(gnbCuID)).SetGnbDuID(NewGnbDuID(gnbDuID))
 	globalKpmnodeID1 := NewGlobalKpmnodeID().SetGlobalKpmnodeGnbID(globalKpmnodeGnbID)
 	globalKpmnodeID2 := globalKpmnodeID1.GetGlobalKpmnodeID()
 
