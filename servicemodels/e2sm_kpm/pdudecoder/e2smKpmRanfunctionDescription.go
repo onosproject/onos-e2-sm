@@ -21,6 +21,7 @@ func DecodeE2SmKpmRanfunctionDescription(e2smKpmPdu *e2sm_kpm_ies.E2SmKpmRanfunc
 		return nil, nil, nil, fmt.Errorf("error E2SmKpm does not have RanfunctionName")
 	}
 	ranFunctionName := types.RanfunctionNameDef{
+		RanFunctionShortName:   types.ShortName(ranfunctionName.GetRanFunctionShortName()),
 		RanFunctionE2SmOid:     types.Oid(ranfunctionName.GetRanFunctionE2SmOid()),
 		RanFunctionDescription: types.Description(ranfunctionName.RanFunctionDescription),
 		RanFunctionInstance:    types.Instance(ranfunctionName.RanFunctionInstance),
@@ -33,7 +34,7 @@ func DecodeE2SmKpmRanfunctionDescription(e2smKpmPdu *e2sm_kpm_ies.E2SmKpmRanfunc
 	}
 	for _, rEtSIe := range ricEvenTriggerStyleIe {
 		ricEvenTriggerStyleList[types.StyleType(rEtSIe.GetRicEventTriggerStyleType().GetValue())] = types.RicEventTriggerDef{
-			//RicEventStyleType: types.StyleType(rEtSIe.GetRicEventTriggerStyleType().GetValue()),
+			RicEventStyleType:  types.StyleType(rEtSIe.GetRicEventTriggerStyleType().GetValue()),
 			RicEventStyleName:  types.StyleName(rEtSIe.RicEventTriggerStyleName.GetValue()),
 			RicEventFormatType: types.FormatType(rEtSIe.GetRicEventTriggerFormatType().GetValue()),
 		}
@@ -46,7 +47,7 @@ func DecodeE2SmKpmRanfunctionDescription(e2smKpmPdu *e2sm_kpm_ies.E2SmKpmRanfunc
 	}
 	for _, rRsIe := range ricReportStyleIe {
 		ricReportStyleList[types.StyleType(rRsIe.GetRicReportStyleType().GetValue())] = types.RicReportStyleDef{
-			//RicReportStyleType: types.StyleType(rRsIe.GetRicReportStyleType().GetValue()),
+			RicReportStyleType:             types.StyleType(rRsIe.GetRicReportStyleType().GetValue()),
 			RicReportStyleName:             types.StyleName(rRsIe.GetRicReportStyleName().GetValue()),
 			RicIndicationHeaderFormatType:  types.FormatType(rRsIe.GetRicIndicationHeaderFormatType().GetValue()),
 			RicIndicationMessageFormatType: types.FormatType(rRsIe.GetRicIndicationMessageFormatType().GetValue()),
