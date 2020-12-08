@@ -4,7 +4,7 @@
 
 package types
 
-type OcucpPfContainer struct {
+type OCuCpPfContainer struct {
 	GNbCuCpName        *GnbCuCpName
 	CuCpResourceStatus *OcucpPfContainerCuCpResourceStatus001
 }
@@ -18,28 +18,28 @@ type OcucpPfContainerBuilder interface {
 	GetOcucpPfContainer()
 }
 
-func NewOcucpPfContainer() *OcucpPfContainer {
-	return &OcucpPfContainer{}
+func NewOCuCpPfContainer() *OCuCpPfContainer {
+	return &OCuCpPfContainer{}
 }
 
-func (b *OcucpPfContainer) SetGNbCuCpName(gbbCuCpName *GnbCuCpName) *OcucpPfContainer {
+func (b *OCuCpPfContainer) SetGNbCuCpName(gbbCuCpName *GnbCuCpName) *OCuCpPfContainer {
 	b.GNbCuCpName = gbbCuCpName
 	return b
 }
 
-func (b *OcucpPfContainer) SetCuCpResourceStatus(cuCpResourceStatus *OcucpPfContainerCuCpResourceStatus001) *OcucpPfContainer {
+func (b *OCuCpPfContainer) SetCuCpResourceStatus(cuCpResourceStatus *OcucpPfContainerCuCpResourceStatus001) *OCuCpPfContainer {
 	b.CuCpResourceStatus = cuCpResourceStatus
 	return b
 }
 
-func (b *OcucpPfContainer) GetGNbCuCpName() *GnbCuCpName {
+func (b *OCuCpPfContainer) GetGNbCuCpName() *GnbCuCpName {
 	return b.GNbCuCpName
 }
 
-func (b *OcucpPfContainer) GetCuCpResourceStatus() *OcucpPfContainerCuCpResourceStatus001 {
+func (b *OCuCpPfContainer) GetCuCpResourceStatus() *OcucpPfContainerCuCpResourceStatus001 {
 	return b.CuCpResourceStatus
 }
 
-func (b *OcucpPfContainer) GetOcucpPfContainer() *OcucpPfContainer {
+func (b *OCuCpPfContainer) GetOCuCpPfContainer() *OCuCpPfContainer {
 	return b
 }
