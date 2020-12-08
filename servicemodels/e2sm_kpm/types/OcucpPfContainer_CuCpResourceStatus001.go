@@ -4,26 +4,26 @@
 
 package types
 
-type OcucpPfContainer_CuCpResourceStatus001 struct {
+type OcucpPfContainerCuCpResourceStatus001 struct {
 	NumberOfActiveUes int32
 }
 
-type OcucpPfContainer_CuCpResourceStatus001Builder interface {
-	NewOcucpPfContainer_CuCpResourceStatus001(nUEs int32)
+type OcucpPfContainerCuCpResourceStatus001Builder interface {
+	NewOcucpPfContainerCuCpResourceStatus001(nUEs int32)
 	GetNumberOfActiveUes()
-	GetOcucpPfContainer_CuCpResourceStatus001()
+	GetOcucpPfContainerCuCpResourceStatus001()
 }
 
-func NewOcucpPfContainer_CuCpResourceStatus001(nUEs int32) *OcucpPfContainer_CuCpResourceStatus001 {
-	return &OcucpPfContainer_CuCpResourceStatus001{
+func NewOcucpPfContainerCuCpResourceStatus001(nUEs int32) *OcucpPfContainerCuCpResourceStatus001 {
+	return &OcucpPfContainerCuCpResourceStatus001{
 		NumberOfActiveUes: nUEs,
 	}
 }
 
-func (b *OcucpPfContainer_CuCpResourceStatus001) GetNumberOfActiveUes() int32 {
+func (b *OcucpPfContainerCuCpResourceStatus001) GetNumberOfActiveUes() int32 {
 	return b.NumberOfActiveUes
 }
 
-func (b *OcucpPfContainer_CuCpResourceStatus001) GetOcucpPfContainer_CuCpResourceStatus001() *OcucpPfContainer_CuCpResourceStatus001 {
+func (b *OcucpPfContainerCuCpResourceStatus001) GetOcucpPfContainerCuCpResourceStatus001() *OcucpPfContainerCuCpResourceStatus001 {
 	return b
 }
