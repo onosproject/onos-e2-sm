@@ -28,9 +28,19 @@ func (b *E2SmKpmIndicationHeader) SetE2SmKpmIndicationHeaderFormat1(e2SmKpmIndic
 	return b
 }
 
+//func (b *E2SmKpmIndicationHeader) SetE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormatX *E2SmKpmIndicationHeaderFormatX) *E2SmKpmIndicationHeader {
+//	b.E2SmKpmIndicationHeaderFormat1 = nil
+//	b.E2SmKpmIndicationHeaderFormatX = e2SmKpmIndicationHeaderFormatX
+//	return b
+//}
+
 func (b *E2SmKpmIndicationHeader) GetE2SmKpmIndicationHeaderFormat1() *E2SmKpmIndicationHeaderFormat1 {
 	return b.E2SmKpmIndicationHeaderFormat1
 }
+
+//func (b *E2SmKpmIndicationHeader) GetE2SmKpmIndicationHeaderFormatX() *E2SmKpmIndicationHeaderFormatX {
+//	return b.E2SmKpmIndicationHeaderFormatX
+//}
 
 func (b *E2SmKpmIndicationHeader) GetE2SmKpmIndicationHeader() *E2SmKpmIndicationHeader {
 	return b
