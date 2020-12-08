@@ -28,7 +28,7 @@ func TestGnbIDChoice_GetID(t *testing.T) {
 	getID := choiceID.GetID()
 
 	assert.Equal(t, getID.GetValue(), value, "Test_GnbIDChoice GetID values mismatch")
-	assert.Equal(t, getID.GetLen(), length, "Test_GnbIDChoice GetID values mismatch")
+	assert.Equal(t, getID.GetLen(), length, "Test_GnbIDChoice GetID lengths mismatch")
 }
 
 func TestGnbIDChoice_GetGnbIDChoice(t *testing.T) {
@@ -39,5 +39,5 @@ func TestGnbIDChoice_GetGnbIDChoice(t *testing.T) {
 	choiceID2 := choiceID1.GetGnbIDChoice()
 
 	assert.Equal(t, choiceID1.GetID().GetValue(), choiceID2.GetID().GetValue(), "Test_GnbIDChoice GetGnbIDChoice values mismatch")
-	assert.Equal(t, choiceID1.GetID().GetLen(), choiceID2.GetID().GetLen(), "Test_GnbIDChoice GetGnbIDChoice values mismatch")
+	assert.Equal(t, choiceID1.GetID().GetLen(), choiceID2.GetID().GetLen(), "Test_GnbIDChoice GetGnbIDChoice lengths mismatch")
 }
