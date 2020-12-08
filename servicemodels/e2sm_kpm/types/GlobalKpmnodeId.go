@@ -5,8 +5,7 @@
 package types
 
 type GlobalKpmnodeID struct {
-	Gnb  *GlobalKpmnodeGnbID
-	Rest *BitString
+	Gnb *GlobalKpmnodeGnbID
 	//EnGnb *GlobalKpmnodeEnGnbID
 	//NgEnb *GlobalKpmnodeNgEnbID
 	//Enb   *GlobalKpmnodeEnbID
@@ -31,7 +30,6 @@ func NewGlobalKpmnodeID() *GlobalKpmnodeID {
 
 func (b *GlobalKpmnodeID) SetGlobalKpmnodeGnbID(globalKpmGnbID *GlobalKpmnodeGnbID) *GlobalKpmnodeID {
 	b.Gnb = globalKpmGnbID
-	b.Rest = nil
 	//b.EnGnb = nil
 	//b.NgEnb = nil
 	//b.Enb = nil
