@@ -81,13 +81,16 @@ func decodeRanfunctionName(ranfunctionNameC *C.RANfunction_Name_t) *e2sm_kpm_ies
 	ranFunctionShortName := decodePrintableString(&ranfunctionNameC.ranFunction_ShortName)
 	ranFunctionE2SmOid := decodePrintableString(&ranfunctionNameC.ranFunction_E2SM_OID)
 	ranFunctionDescription := decodePrintableString(&ranfunctionNameC.ranFunction_Description)
-	ranFunctionInstance := int32(*ranfunctionNameC.ranFunction_Instance)
 
 	ranfunctionName := e2sm_kpm_ies.RanfunctionName{
 		RanFunctionShortName:   ranFunctionShortName,
 		RanFunctionE2SmOid:     ranFunctionE2SmOid,
 		RanFunctionDescription: ranFunctionDescription,
-		RanFunctionInstance:    ranFunctionInstance,
 	}
+	// instance is optional
+	if ranfunctionNameC.ranFunction_Instance != nil {
+		ranfunctionName.RanFunctionInstance = int32(*ranfunctionNameC.ranFunction_Instance)
+	}
+
 	return &ranfunctionName
 }
