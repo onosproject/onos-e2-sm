@@ -99,7 +99,7 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	protoBytes, err := kpmTestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 10, len(protoBytes))
+	assert.Equal(t, 12, len(protoBytes))
 	testIM := e2smkpmies.E2SmKpmIndicationMessage{}
 	err = proto.Unmarshal(protoBytes, &testIM)
 	assert.NilError(t, err)

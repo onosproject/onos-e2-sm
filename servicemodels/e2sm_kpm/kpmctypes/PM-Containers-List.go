@@ -37,11 +37,11 @@ func newPmContainersListItem(pmContainersList *e2sm_kpm_ies.PmContainersList) (*
 	if err != nil {
 		return nil, fmt.Errorf("newPmContainersListItem() %s", err.Error())
 	}
+	ranContainerCP := newRanContainer(pmContainersList.TheRancontainer)
 
 	pmContainersListC := C.PM_Containers_List_t{
 		performanceContainer: pmContainersListItemCP,
-		// TODO: Implement TheRancontainer
-		//theRANContainer:  nil, //*C.theRANContainer,
+		theRANContainer:      ranContainerCP,
 	}
 
 	return &pmContainersListC, nil
@@ -56,11 +56,8 @@ func decodePmContainersListItem(pmContainersListC *C.PM_Containers_List_t) (*e2s
 	pmContainersListItem.PerformanceContainer = performanceContainer
 
 	//TODO: Implement decodeTheRancontainer function
-	//theRancontainer, err := decodeTheRancontainer(pmContainersListC.theRANContainer)
-	//if err != nil {
-	//	return nil, err
-	//}
-	//pmContainersListItem.TheRancontainer = theRancontainer
+	theRancontainer := decodeRanContainer(pmContainersListC.theRANContainer)
+	pmContainersListItem.TheRancontainer = theRancontainer
 
 	return pmContainersListItem, nil
 }
