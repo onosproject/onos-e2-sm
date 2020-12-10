@@ -14,6 +14,7 @@ func Test_xerEncodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 
 	var testGnbCuCpName = "0xAB"
 	var testNumberOfActiveUes int32 = 1
+	value := []byte{0x22, 0x21}
 
 	containerOcuCp1 := &e2sm_kpm_ies.PmContainersList{
 		PerformanceContainer: &e2sm_kpm_ies.PfContainer{
@@ -29,7 +30,9 @@ func Test_xerEncodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 				//TODO: Implement other types of containers
 			},
 		},
-		//TODO: Implement TheRancontainer
+		TheRancontainer: &e2sm_kpm_ies.RanContainer{
+			Value: value,
+		},
 	}
 
 	e2SmIindicationMsg := &e2sm_kpm_ies.E2SmKpmIndicationMessage_IndicationMessageFormat1{

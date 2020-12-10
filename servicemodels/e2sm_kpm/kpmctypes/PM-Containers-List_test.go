@@ -18,6 +18,7 @@ func Test_xerEncodePmContainersListItem(t *testing.T) {
 
 	var testGnbCuCpName = "0xAB"
 	var testNumberOfActiveUes int32 = 1
+	value := []byte{0x22, 0x21}
 
 	pmContainersList := &e2sm_kpm_ies.PmContainersList{
 		PerformanceContainer: &e2sm_kpm_ies.PfContainer{
@@ -33,7 +34,9 @@ func Test_xerEncodePmContainersListItem(t *testing.T) {
 				//TODO: Implement other types of containers
 			},
 		},
-		//TODO: Implement TheRancontainer
+		TheRancontainer: &e2sm_kpm_ies.RanContainer{
+			Value: value,
+		},
 	}
 
 	xer, err := xerEncodePmContainersListItem(pmContainersList)
