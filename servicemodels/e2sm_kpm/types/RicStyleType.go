@@ -20,7 +20,7 @@ func NewRicStyleType(value int32) *RicStyleType {
 	}
 }
 
-func (b RicStyleType) GetValue() int32 {
+func (b *RicStyleType) GetValue() int32 {
 	return b.Value
 }
 

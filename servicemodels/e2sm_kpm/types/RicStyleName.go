@@ -20,7 +20,7 @@ func NewRicStyleName(value string) *RicStyleName {
 	}
 }
 
-func (b RicStyleName) GetValue() string {
+func (b *RicStyleName) GetValue() string {
 	return b.Value
 }
 
