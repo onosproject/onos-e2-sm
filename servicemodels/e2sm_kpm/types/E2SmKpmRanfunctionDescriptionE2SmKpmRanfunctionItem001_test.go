@@ -43,7 +43,7 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicEvent
 	e2SmKpmRanfunctionItem001 := NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001().
 		AddRicEventTriggerStyleListItem(ricEventTriggerStyleListItem1).AddRicEventTriggerStyleListItem(ricEventTriggerStyleListItem2)
 
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicStyleType(e2SmKpmRanfunctionItem001.RicEventTriggerStyleList, ricStyleType), ricEventTriggerStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicStyleType(ricStyleType), ricEventTriggerStyleListItem1)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicEventTriggerStyleListItemByRicStyleName(t *testing.T) {
@@ -59,7 +59,7 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicEvent
 	e2SmKpmRanfunctionItem001 := NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001().
 		AddRicEventTriggerStyleListItem(ricEventTriggerStyleListItem1).AddRicEventTriggerStyleListItem(ricEventTriggerStyleListItem2)
 
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicStyleName(e2SmKpmRanfunctionItem001.RicEventTriggerStyleList, "FNO"), ricEventTriggerStyleListItem2)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicStyleName("FNO"), ricEventTriggerStyleListItem2)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicEventTriggerStyleListItemByRicFormatType(t *testing.T) {
@@ -75,7 +75,7 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicEvent
 	e2SmKpmRanfunctionItem001 := NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001().
 		AddRicEventTriggerStyleListItem(ricEventTriggerStyleListItem1).AddRicEventTriggerStyleListItem(ricEventTriggerStyleListItem2)
 
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(e2SmKpmRanfunctionItem001.RicEventTriggerStyleList, ricFormatType), ricEventTriggerStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(ricFormatType), ricEventTriggerStyleListItem1)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_AddRicReportStyleListItem(t *testing.T) {
@@ -109,7 +109,7 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicRepor
 	e2SmKpmRanfunctionItem001 := NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001().
 		AddRicReportStyleListItem(ricReportStyleListItem1).AddRicReportStyleListItem(ricReportStyleListItem2)
 
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByRicStyleType(e2SmKpmRanfunctionItem001.RicReportStyleList, ricStyleType), ricReportStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByRicStyleType(ricStyleType), ricReportStyleListItem1)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicReportStyleListItemByRicStyleName(t *testing.T) {
@@ -128,7 +128,7 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicRepor
 	e2SmKpmRanfunctionItem001 := NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001().
 		AddRicReportStyleListItem(ricReportStyleListItem1).AddRicReportStyleListItem(ricReportStyleListItem2)
 
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByRicStyleName(e2SmKpmRanfunctionItem001.RicReportStyleList, ricStyleName), ricReportStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByRicStyleName(ricStyleName), ricReportStyleListItem1)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicReportStyleListItemByIndicationHeader(t *testing.T) {
@@ -147,7 +147,7 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicRepor
 	e2SmKpmRanfunctionItem001 := NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001().
 		AddRicReportStyleListItem(ricReportStyleListItem1).AddRicReportStyleListItem(ricReportStyleListItem2)
 
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationHeader(e2SmKpmRanfunctionItem001.RicReportStyleList, 7), ricReportStyleListItem2)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationHeader(7), ricReportStyleListItem2)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicReportStyleListItemByIndicationMessage(t *testing.T) {
@@ -166,7 +166,7 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_RetrieveRicRepor
 	e2SmKpmRanfunctionItem001 := NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001().
 		AddRicReportStyleListItem(ricReportStyleListItem1).AddRicReportStyleListItem(ricReportStyleListItem2)
 
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(e2SmKpmRanfunctionItem001.RicReportStyleList, indMsgFormatType), ricReportStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(indMsgFormatType), ricReportStyleListItem1)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_GetRicEventTriggerStyleList(t *testing.T) {
@@ -197,8 +197,8 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_GetRicEventTrigg
 	ricEventTriggerStyleList := e2SmKpmRanfunctionItem001.GetRicEventTriggerStyleList()
 
 	assert.Assert(t, ricEventTriggerStyleList != nil)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(ricEventTriggerStyleList, ricFormatType), ricEventTriggerStyleListItem1)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(ricEventTriggerStyleList, 23), ricEventTriggerStyleListItem2)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(ricFormatType), ricEventTriggerStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(23), ricEventTriggerStyleListItem2)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_GetRicReportStyleList(t *testing.T) {
@@ -229,8 +229,8 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_GetRicReportStyl
 	ricReportStyleList := e2SmKpmRanfunctionItem001.GetRicReportStyleList()
 
 	assert.Assert(t, ricReportStyleList != nil)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(ricReportStyleList, indMsgFormatType2), ricReportStyleListItem1)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(ricReportStyleList, 1), ricReportStyleListItem2)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(indMsgFormatType2), ricReportStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(1), ricReportStyleListItem2)
 }
 
 func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_GetE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001(t *testing.T) {
@@ -263,8 +263,8 @@ func TestE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001_GetE2SmKpmRanfun
 
 	assert.Assert(t, ricReportStyleList != nil)
 	assert.Assert(t, ricEventTriggerStyleList != nil)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(ricEventTriggerStyleList, ricFormatType), ricEventTriggerStyleListItem1)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(ricEventTriggerStyleList, 23), ricEventTriggerStyleListItem2)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(ricReportStyleList, indMsgFormatType2), ricReportStyleListItem1)
-	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(ricReportStyleList, 1), ricReportStyleListItem2)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(ricFormatType), ricEventTriggerStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicEventTriggerStyleListItemByRicFormatType(23), ricEventTriggerStyleListItem2)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(indMsgFormatType2), ricReportStyleListItem1)
+	assert.DeepEqual(t, e2SmKpmRanfunctionItem001.RetrieveRicReportStyleListItemByIndicationMessage(1), ricReportStyleListItem2)
 }

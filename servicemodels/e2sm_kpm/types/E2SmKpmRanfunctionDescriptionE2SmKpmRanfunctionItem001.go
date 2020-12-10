@@ -12,14 +12,14 @@ type E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001 struct {
 type E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001Builder interface {
 	NewE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001()
 	AddRicEventTriggerStyleListItem(ricEventTriggerStyleList *RicEventTriggerStyleList)
-	RetrieveRicEventTriggerStyleListItemByRicStyleType(ricEventTriggerStyleList []*RicEventTriggerStyleList, ricStyleType int32)
-	RetrieveRicEventTriggerStyleListItemByRicStyleName(ricEventTriggerStyleList []*RicEventTriggerStyleList, ricStyleName string)
-	RetrieveRicEventTriggerStyleListItemByRicFormatType(ricEventTriggerStyleList []*RicEventTriggerStyleList, ricFormatType int32)
+	RetrieveRicEventTriggerStyleListItemByRicStyleType(ricStyleType int32)
+	RetrieveRicEventTriggerStyleListItemByRicStyleName(ricStyleName string)
+	RetrieveRicEventTriggerStyleListItemByRicFormatType(ricFormatType int32)
 	AddRicReportStyleListItem(ricReportStyleList *RicReportStyleList)
-	RetrieveRicReportStyleListItemByRicStyleType(ricReportStyleList []*RicReportStyleList, ricStyleType int32)
-	RetrieveRicReportStyleListItemByRicStyleName(ricReportStyleList []*RicReportStyleList, ricStyleName string)
-	RetrieveRicReportStyleListItemByIndicationHeader(ricReportStyleList []*RicReportStyleList, indHdrFormatType int32)
-	RetrieveRicReportStyleListItemByIndicationMessage(ricReportStyleList []*RicReportStyleList, indMsgFormatType int32)
+	RetrieveRicReportStyleListItemByRicStyleType(ricStyleType int32)
+	RetrieveRicReportStyleListItemByRicStyleName(ricStyleName string)
+	RetrieveRicReportStyleListItemByIndicationHeader(indHdrFormatType int32)
+	RetrieveRicReportStyleListItemByIndicationMessage(indMsgFormatType int32)
 	GetRicEventTriggerStyleList()
 	GetRicReportStyleList()
 	GetE2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001()
@@ -35,8 +35,8 @@ func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) AddRicEventTrig
 }
 
 //TODO: In the future may return list of items which satisfy this condition
-func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEventTriggerStyleListItemByRicStyleType(ricEventTriggerStyleList []*RicEventTriggerStyleList, ricStyleType int32) *RicEventTriggerStyleList {
-	for _, rEtSlIe := range ricEventTriggerStyleList {
+func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEventTriggerStyleListItemByRicStyleType(ricStyleType int32) *RicEventTriggerStyleList {
+	for _, rEtSlIe := range b.RicEventTriggerStyleList {
 		if rEtSlIe.RicEventTriggerStyleType.Value == ricStyleType {
 			return rEtSlIe
 		}
@@ -45,8 +45,8 @@ func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEven
 }
 
 //TODO: In the future may return list of items which satisfy this condition
-func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEventTriggerStyleListItemByRicStyleName(ricEventTriggerStyleList []*RicEventTriggerStyleList, ricStyleName string) *RicEventTriggerStyleList {
-	for _, rEtSlIe := range ricEventTriggerStyleList {
+func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEventTriggerStyleListItemByRicStyleName(ricStyleName string) *RicEventTriggerStyleList {
+	for _, rEtSlIe := range b.RicEventTriggerStyleList {
 		if rEtSlIe.RicEventTriggerStyleName.Value == ricStyleName {
 			return rEtSlIe
 		}
@@ -55,8 +55,8 @@ func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEven
 }
 
 //TODO: In the future may return list of items which satisfy this condition
-func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEventTriggerStyleListItemByRicFormatType(ricEventTriggerStyleList []*RicEventTriggerStyleList, ricFormatType int32) *RicEventTriggerStyleList {
-	for _, rEtSlIe := range ricEventTriggerStyleList {
+func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicEventTriggerStyleListItemByRicFormatType(ricFormatType int32) *RicEventTriggerStyleList {
+	for _, rEtSlIe := range b.RicEventTriggerStyleList {
 		if rEtSlIe.RicEventTriggerFormatType.Value == ricFormatType {
 			return rEtSlIe
 		}
@@ -70,8 +70,8 @@ func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) AddRicReportSty
 }
 
 //TODO: In the future may return list of items which satisfy this condition
-func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByRicStyleType(ricReportStyleList []*RicReportStyleList, ricStyleType int32) *RicReportStyleList {
-	for _, rRsLIe := range ricReportStyleList {
+func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByRicStyleType(ricStyleType int32) *RicReportStyleList {
+	for _, rRsLIe := range b.RicReportStyleList {
 		if rRsLIe.RicReportStyleType.Value == ricStyleType {
 			return rRsLIe
 		}
@@ -80,8 +80,8 @@ func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicRepo
 }
 
 //TODO: In the future may return list of items which satisfy this condition
-func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByRicStyleName(ricReportStyleList []*RicReportStyleList, ricStyleName string) *RicReportStyleList {
-	for _, rRsLIe := range ricReportStyleList {
+func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByRicStyleName(ricStyleName string) *RicReportStyleList {
+	for _, rRsLIe := range b.RicReportStyleList {
 		if rRsLIe.RicReportStyleName.Value == ricStyleName {
 			return rRsLIe
 		}
@@ -90,8 +90,8 @@ func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicRepo
 }
 
 //TODO: In the future may return list of items which satisfy this condition
-func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByIndicationHeader(ricReportStyleList []*RicReportStyleList, indHdrFormatType int32) *RicReportStyleList {
-	for _, rRsLIe := range ricReportStyleList {
+func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByIndicationHeader(indHdrFormatType int32) *RicReportStyleList {
+	for _, rRsLIe := range b.RicReportStyleList {
 		if rRsLIe.RicIndicationHeaderFormatType.Value == indHdrFormatType {
 			return rRsLIe
 		}
@@ -100,8 +100,8 @@ func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicRepo
 }
 
 //TODO: In the future may return list of items which satisfy this condition
-func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByIndicationMessage(ricReportStyleList []*RicReportStyleList, indMsgFormatType int32) *RicReportStyleList {
-	for _, rRsLIe := range ricReportStyleList {
+func (b *E2SmKpmRanfunctionDescriptionE2SmKpmRanfunctionItem001) RetrieveRicReportStyleListItemByIndicationMessage(indMsgFormatType int32) *RicReportStyleList {
+	for _, rRsLIe := range b.RicReportStyleList {
 		if rRsLIe.RicIndicationMessageFormatType.Value == indMsgFormatType {
 			return rRsLIe
 		}
