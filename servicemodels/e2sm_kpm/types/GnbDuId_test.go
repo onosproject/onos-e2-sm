@@ -21,7 +21,7 @@ func TestGnbDuID_NewGnbDuID(t *testing.T) {
 	assert.Equal(t, gnbDuID.Value, value, "GnbDuID{} values are mismatched")
 }
 
-func TestGGnbDuID_GetValue(t *testing.T) {
+func TestGnbDuID_GetValue(t *testing.T) {
 
 	var value int64 = 13
 	gnbDuID := NewGnbDuID(value)
