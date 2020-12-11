@@ -44,6 +44,14 @@ func newGlobalKpmNodeID(idGlobalKpmnodeID *e2sm_kpm_ies.GlobalKpmnodeId) (*C.Glo
 		}
 
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(globalKpmNodeGnbIDC))))
+	case *e2sm_kpm_ies.GlobalKpmnodeId_ENb:
+		pr = C.GlobalKPMnode_ID_PR_eNB
+		globalKpmNodeEnbIDC, err := newGlobalKPMnodeENbID(choice.ENb)
+		if err != nil {
+			return nil, fmt.Errorf("newGlobalKpmNodeId() %s", err.Error())
+		}
+
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(globalKpmNodeEnbIDC))))
 	default:
 		return nil, fmt.Errorf("newGlobalKpmNodeId() unexpected type %T not yet implemented", choice)
 	}
@@ -69,6 +77,16 @@ func decodeGlobalKpmNodeID(idGlobalKpmnodeIDC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_
 
 		result.GlobalKpmnodeId = &e2sm_kpm_ies.GlobalKpmnodeId_GNb{
 			GNb: gnb,
+		}
+	case C.GlobalKPMnode_ID_PR_eNB:
+
+		enb, err := decodeGlobalKPMnodeENbIDBytes(idGlobalKpmnodeIDC.choice)
+		if err != nil {
+			return nil, fmt.Errorf("decodeGlobalKpmNodeId() %s", err.Error())
+		}
+
+		result.GlobalKpmnodeId = &e2sm_kpm_ies.GlobalKpmnodeId_ENb{
+			ENb: enb,
 		}
 	default:
 		return nil, fmt.Errorf("decodeGlobalKpmNodeId() %v not yet implemented", idGlobalKpmnodeIDC.present)

@@ -12,6 +12,7 @@ package kpmctypes
 //#include "GlobalKPMnode-eNB-ID.h"
 import "C"
 import (
+	"encoding/binary"
 	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
@@ -46,7 +47,7 @@ func newGlobalKPMnodeENbID(globalENbID *e2sm_kpm_ies.GlobalKpmnodeEnbId) (*C.Glo
 
 	globalENbIDC, err := newGlobalENbID(globalENbID.GetGlobalENbId())
 	if err != nil {
-		return nil, fmt.Errorf("newGlobalENbID() error encoding ENbID (C struct was not created succesfully) \n%v", err)
+		return nil, fmt.Errorf("newGlobalENbID() error encoding ENbID (C struct was not created successfully) \n%v", err)
 	}
 
 	globalKPMnodeENbIDC := C.GlobalKPMnode_eNB_ID_t{
@@ -65,4 +66,10 @@ func decodeGlobalKPMnodeENbID(globalENbIDC *C.GlobalKPMnode_eNB_ID_t) (*e2sm_kpm
 	return &e2sm_kpm_ies.GlobalKpmnodeEnbId{
 		GlobalENbId: globalENbID,
 	}, nil
+}
+
+func decodeGlobalKPMnodeENbIDBytes(array [8]byte) (*e2sm_kpm_ies.GlobalKpmnodeEnbId, error) {
+	enbC := (*C.GlobalKPMnode_eNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+
+	return decodeGlobalKPMnodeENbID(enbC)
 }

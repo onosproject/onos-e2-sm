@@ -47,7 +47,7 @@ func newGlobalENbID(globalENbID *e2sm_kpm_ies.GlobalEnbId) (*C.GlobalENB_ID_t, e
 	plmnIDC := newPlmnIdentity(globalENbID.GetPLmnIdentity())
 	enbIDC, err := newENbID(globalENbID.GetENbId())
 	if err != nil {
-		return nil, fmt.Errorf("newGlobalENbID() error encoding ENbID (C struct was not created succesfully) \n%v", err)
+		return nil, fmt.Errorf("newGlobalENbID() error encoding ENbID (C struct was not created successfully) \n%v", err)
 	}
 
 	globalENbIDC := C.GlobalENB_ID_t{

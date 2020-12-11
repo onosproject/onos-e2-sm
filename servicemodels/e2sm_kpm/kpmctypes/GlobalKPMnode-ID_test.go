@@ -12,11 +12,11 @@ import (
 
 func Test_xerEncodeGlobalKpmNodeId(t *testing.T) {
 
-	var plmnID = "ONF"
+	plmnID := []byte{0x21, 0x18}
 	var gNbCuUpID int64 = 123
 	var gNbDuID int64 = 456
 
-	idGlobalKpmnodeID := &e2sm_kpm_ies.GlobalKpmnodeId{
+	idGlobalKpmnodeID1 := &e2sm_kpm_ies.GlobalKpmnodeId{
 		GlobalKpmnodeId: &e2sm_kpm_ies.GlobalKpmnodeId_GNb{
 			GNb: &e2sm_kpm_ies.GlobalKpmnodeGnbId{
 				GlobalGNbId: &e2sm_kpm_ies.GlobalgNbId{
@@ -42,7 +42,31 @@ func Test_xerEncodeGlobalKpmNodeId(t *testing.T) {
 		},
 	}
 
-	xer, err := xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID)
+	idGlobalKpmnodeID2 := &e2sm_kpm_ies.GlobalKpmnodeId{
+		GlobalKpmnodeId: &e2sm_kpm_ies.GlobalKpmnodeId_ENb{
+			ENb: &e2sm_kpm_ies.GlobalKpmnodeEnbId{
+				GlobalENbId: &e2sm_kpm_ies.GlobalEnbId{
+					PLmnIdentity: &e2sm_kpm_ies.PlmnIdentity{
+						Value: plmnID,
+					},
+					ENbId: &e2sm_kpm_ies.EnbId{
+						EnbId: &e2sm_kpm_ies.EnbId_HomeENbId{
+							HomeENbId: &e2sm_kpm_ies.BitString{
+								Value: 0x9bcd4, //uint64
+								Len:   22,      //uint32
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	xer, err := xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID1)
+	assert.NilError(t, err)
+	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
+
+	xer, err = xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID2)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
 }
