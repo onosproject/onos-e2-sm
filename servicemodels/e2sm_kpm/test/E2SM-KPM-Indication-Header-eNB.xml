@@ -1,0 +1,16 @@
+<E2SM-KPM-IndicationHeader>
+    <indicationHeader-Format1>
+        <id-GlobalKPMnode-ID>
+            <eNB>
+                <global-eNB-ID>
+                    <pLMN-Identity>00 02 10</pLMN-Identity>
+                    <eNB-ID>
+                        <macro-eNB-ID>
+                            00000000111000000000
+                        </macro-eNB-ID>
+                    </eNB-ID>
+                </global-eNB-ID>
+            </eNB>
+        </id-GlobalKPMnode-ID>
+    </indicationHeader-Format1>
+</E2SM-KPM-IndicationHeader>
