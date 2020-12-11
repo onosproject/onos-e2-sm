@@ -62,11 +62,59 @@ func Test_xerEncodeGlobalKpmNodeId(t *testing.T) {
 		},
 	}
 
+	idGlobalKpmnodeID3 := &e2sm_kpm_ies.GlobalKpmnodeId{
+		GlobalKpmnodeId: &e2sm_kpm_ies.GlobalKpmnodeId_NgENb{
+			NgENb: &e2sm_kpm_ies.GlobalKpmnodeNgEnbId{
+				GlobalNgENbId: &e2sm_kpm_ies.GlobalngeNbId{
+					PlmnId: &e2sm_kpm_ies.PlmnIdentity{
+						Value: plmnID,
+					},
+					EnbId: &e2sm_kpm_ies.EnbIdChoice{
+						EnbIdChoice: &e2sm_kpm_ies.EnbIdChoice_EnbIdLongmacro{
+							EnbIdLongmacro: &e2sm_kpm_ies.BitString{
+								Value: 0x9bcd4, //uint64
+								Len:   22,      //uint32
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	idGlobalKpmnodeID4 := &e2sm_kpm_ies.GlobalKpmnodeId{
+		GlobalKpmnodeId: &e2sm_kpm_ies.GlobalKpmnodeId_EnGNb{
+			EnGNb: &e2sm_kpm_ies.GlobalKpmnodeEnGnbId{
+				GlobalGNbId: &e2sm_kpm_ies.GlobalenGnbId{
+					PLmnIdentity: &e2sm_kpm_ies.PlmnIdentity{
+						Value: plmnID,
+					},
+					GNbId: &e2sm_kpm_ies.EngnbId{
+						EngnbId: &e2sm_kpm_ies.EngnbId_GNbId{
+							GNbId: &e2sm_kpm_ies.BitString{
+								Value: 0x9bcd4, //uint64
+								Len:   22,      //uint32
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+
 	xer, err := xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID1)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
 
 	xer, err = xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID2)
+	assert.NilError(t, err)
+	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
+
+	xer, err = xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID3)
+	assert.NilError(t, err)
+	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
+
+	xer, err = xerEncodeGlobalKpmNodeID(idGlobalKpmnodeID4)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnode-ID XER\n%s", string(xer))
 }

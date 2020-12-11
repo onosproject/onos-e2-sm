@@ -12,6 +12,7 @@ package kpmctypes
 //#include "GlobalKPMnode-en-gNB-ID.h"
 import "C"
 import (
+	"encoding/binary"
 	"fmt"
 	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"unsafe"
@@ -67,8 +68,8 @@ func decodeGlobalKPMnodeEnGNbID(globalenGNbIDC *C.GlobalKPMnode_en_gNB_ID_t) (*e
 	}, nil
 }
 
-//func decodeGlobalKPMnodeEnGNbIDBytes(array [8]byte) (*e2sm_kpm_ies.GlobalKpmnodeEnGnbId, error) {
-//	enbC := (*C.GlobalKPMnode_en_gNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-//
-//	return decodeGlobalKPMnodeEnGNbID(enbC)
-//}
+func decodeGlobalKPMnodeEnGNbIDBytes(array [8]byte) (*e2sm_kpm_ies.GlobalKpmnodeEnGnbId, error) {
+	enbC := (*C.GlobalKPMnode_en_gNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+
+	return decodeGlobalKPMnodeEnGNbID(enbC)
+}

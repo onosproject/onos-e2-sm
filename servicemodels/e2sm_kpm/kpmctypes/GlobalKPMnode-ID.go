@@ -52,6 +52,22 @@ func newGlobalKpmNodeID(idGlobalKpmnodeID *e2sm_kpm_ies.GlobalKpmnodeId) (*C.Glo
 		}
 
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(globalKpmNodeEnbIDC))))
+	case *e2sm_kpm_ies.GlobalKpmnodeId_NgENb:
+		pr = C.GlobalKPMnode_ID_PR_eNB
+		globalKpmNodeNgeNbIDC, err := newGlobalKPMnodengeNBID(choice.NgENb)
+		if err != nil {
+			return nil, fmt.Errorf("newGlobalKpmNodeId() %s", err.Error())
+		}
+
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(globalKpmNodeNgeNbIDC))))
+	case *e2sm_kpm_ies.GlobalKpmnodeId_EnGNb:
+		pr = C.GlobalKPMnode_ID_PR_eNB
+		globalKpmNodEnGNbIDC, err := newGlobalKPMnodeEnGNbID(choice.EnGNb)
+		if err != nil {
+			return nil, fmt.Errorf("newGlobalKpmNodeId() %s", err.Error())
+		}
+
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(globalKpmNodEnGNbIDC))))
 	default:
 		return nil, fmt.Errorf("newGlobalKpmNodeId() unexpected type %T not yet implemented", choice)
 	}
@@ -87,6 +103,26 @@ func decodeGlobalKpmNodeID(idGlobalKpmnodeIDC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_
 
 		result.GlobalKpmnodeId = &e2sm_kpm_ies.GlobalKpmnodeId_ENb{
 			ENb: enb,
+		}
+	case C.GlobalKPMnode_ID_PR_en_gNB:
+
+		enGNb, err := decodeGlobalKPMnodeEnGNbIDBytes(idGlobalKpmnodeIDC.choice)
+		if err != nil {
+			return nil, fmt.Errorf("decodeGlobalKpmNodeId() %s", err.Error())
+		}
+
+		result.GlobalKpmnodeId = &e2sm_kpm_ies.GlobalKpmnodeId_EnGNb{
+			EnGNb: enGNb,
+		}
+	case C.GlobalKPMnode_ID_PR_ng_eNB:
+
+		ngENb, err := decodeGlobalKPMnodengeNBIDBytes(idGlobalKpmnodeIDC.choice)
+		if err != nil {
+			return nil, fmt.Errorf("decodeGlobalKpmNodeId() %s", err.Error())
+		}
+
+		result.GlobalKpmnodeId = &e2sm_kpm_ies.GlobalKpmnodeId_NgENb{
+			NgENb: ngENb,
 		}
 	default:
 		return nil, fmt.Errorf("decodeGlobalKpmNodeId() %v not yet implemented", idGlobalKpmnodeIDC.present)
