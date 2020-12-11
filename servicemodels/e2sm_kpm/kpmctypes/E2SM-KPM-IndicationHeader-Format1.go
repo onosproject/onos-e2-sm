@@ -64,27 +64,36 @@ func newE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_kpm_ies.E2S
 func decodeE2SmKpmIndicationHeaderFormat1(indicationHeaderFormat1C *C.E2SM_KPM_IndicationHeader_Format1_t) (*e2sm_kpm_ies.E2SmKpmIndicationHeaderFormat1, error) {
 	indicationHeaderFormat1 := new(e2sm_kpm_ies.E2SmKpmIndicationHeaderFormat1)
 
-	globalKpmNodeID, err := decodeGlobalKpmNodeID(indicationHeaderFormat1C.id_GlobalKPMnode_ID)
-	if err != nil {
-		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
+	if indicationHeaderFormat1C.id_GlobalKPMnode_ID != nil { // Is optional
+		globalKpmNodeID, err := decodeGlobalKpmNodeID(indicationHeaderFormat1C.id_GlobalKPMnode_ID)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
+		}
+		indicationHeaderFormat1.IdGlobalKpmnodeId = globalKpmNodeID
 	}
-	indicationHeaderFormat1.IdGlobalKpmnodeId = globalKpmNodeID
-
-	nRcgi, err := decodeNRCGI(indicationHeaderFormat1C.nRCGI)
-	if err != nil {
-		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
+	if indicationHeaderFormat1C.nRCGI != nil { // Is optional
+		nRcgi, err := decodeNRCGI(indicationHeaderFormat1C.nRCGI)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmKpmIndicationHeaderFormat1() %s", err.Error())
+		}
+		indicationHeaderFormat1.NRcgi = nRcgi
 	}
-	indicationHeaderFormat1.NRcgi = nRcgi
 
-	plmnID := decodePlmnIdentity(indicationHeaderFormat1C.pLMN_Identity)
-	indicationHeaderFormat1.PLmnIdentity = plmnID
+	if indicationHeaderFormat1C.pLMN_Identity != nil { // Is optional
+		plmnID := decodePlmnIdentity(indicationHeaderFormat1C.pLMN_Identity)
+		indicationHeaderFormat1.PLmnIdentity = plmnID
+	}
 
-	sliceID := decodeSnssai(indicationHeaderFormat1C.sliceID)
-	indicationHeaderFormat1.SliceId = sliceID
-
-	indicationHeaderFormat1.FiveQi = int32(*indicationHeaderFormat1C.fiveQI)
-	indicationHeaderFormat1.Qci = int32(*indicationHeaderFormat1C.qci)
-
+	if indicationHeaderFormat1C.sliceID != nil { // Is optional
+		sliceID := decodeSnssai(indicationHeaderFormat1C.sliceID)
+		indicationHeaderFormat1.SliceId = sliceID
+	}
+	if indicationHeaderFormat1C.fiveQI != nil { // Is optional
+		indicationHeaderFormat1.FiveQi = int32(*indicationHeaderFormat1C.fiveQI)
+	}
+	if indicationHeaderFormat1C.qci != nil { // Is optional
+		indicationHeaderFormat1.Qci = int32(*indicationHeaderFormat1C.qci)
+	}
 	return indicationHeaderFormat1, nil
 }
 
