@@ -74,4 +74,3 @@ func decodeGlobalKPMnodengeNBIDBytes(array [8]byte) (*e2sm_kpm_ies.GlobalKpmnode
 
 	return decodeGlobalKPMnodengeNBID(enbC)
 }
-
