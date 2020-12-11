@@ -32,6 +32,17 @@ func xerEncodeENbID(enbID *e2sm_kpm_ies.EnbId) ([]byte, error) {
 	return bytes, nil
 }
 
+func xerDecodeENbID(bytes []byte) (*e2sm_kpm_ies.EnbId, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_ENB_ID)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("xerDecodeENbID() pointer decoded from XER is nil")
+	}
+	return decodeENbID((*C.ENB_ID_t)(unsafePtr))
+}
+
 func newENbID(enbID *e2sm_kpm_ies.EnbId) (*C.ENB_ID_t, error) {
 	var pr C.ENB_ID_PR
 	choiceC := [48]byte{}

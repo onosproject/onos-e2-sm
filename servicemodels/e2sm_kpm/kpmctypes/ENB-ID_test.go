@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func Test_xerEncodeENbID(t *testing.T) {
+func Test_xerDecodeENbID(t *testing.T) {
 
 	enbID := &e2sm_kpm_ies.EnbId{
 		EnbId: &e2sm_kpm_ies.EnbId_HomeENbId{
@@ -23,5 +23,9 @@ func Test_xerEncodeENbID(t *testing.T) {
 
 	xer, err := xerEncodeENbID(enbID)
 	assert.NilError(t, err)
-	t.Logf("NRCGI XER\n%s", string(xer))
+	t.Logf("ENb XER\n%s", string(xer))
+
+	result, err := xerDecodeENbID(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
 }
