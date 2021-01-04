@@ -20,7 +20,7 @@ func decodePer(bytes []byte, size int, valueType *C.asn_TYPE_descriptor_t) (unsa
 	var result unsafe.Pointer
 
 	cBytes := C.CBytes(bytes)
-	defer C.free(unsafe.Pointer(cBytes))
+	defer C.free(cBytes)
 	decRetVal, err := C.aper_decode_complete(nil, valueType, &result, cBytes, C.ulong(size))
 	if err != nil {
 		return nil, err

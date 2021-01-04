@@ -97,7 +97,7 @@ func newInteger(msg int64) *C.INTEGER_t {
 		}
 	}
 
-	return (*C.INTEGER_t)(newAsnCodecsPrim(asBytes))
+	return newAsnCodecsPrim(asBytes)
 }
 
 // It is like a two's complement decoding of a signed number, but not quite

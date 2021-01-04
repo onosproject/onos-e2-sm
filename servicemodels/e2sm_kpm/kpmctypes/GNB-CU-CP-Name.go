@@ -18,7 +18,7 @@ import (
 func newGnbCuCpName(gnbCuCpNamec *e2sm_kpm_ies.GnbCuCpName) (*C.GNB_CU_CP_Name_t, error) {
 
 	gnbName := newPrintableString(gnbCuCpNamec.GetValue())
-	gnbcucpcnameC := (*C.GNB_CU_CP_Name_t)(gnbName)
+	gnbcucpcnameC := gnbName
 
 	return gnbcucpcnameC, nil
 }
