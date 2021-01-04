@@ -1,11 +1,14 @@
 linters:
   enable:
     - gofmt
-    - gocyclo
     - golint
     - misspell
     - typecheck
     - errcheck
+    - dogsled
+    - unconvert
+    - nakedret
+    - scopelint
 run:
   skip-dirs:
     - modelplugin

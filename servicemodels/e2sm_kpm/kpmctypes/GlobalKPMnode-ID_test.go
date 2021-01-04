@@ -21,7 +21,7 @@ func Test_xerEncodeGlobalKpmNodeId(t *testing.T) {
 			GNb: &e2sm_kpm_ies.GlobalKpmnodeGnbId{
 				GlobalGNbId: &e2sm_kpm_ies.GlobalgNbId{
 					PlmnId: &e2sm_kpm_ies.PlmnIdentity{
-						Value: []byte(plmnID),
+						Value: plmnID,
 					},
 					GnbId: &e2sm_kpm_ies.GnbIdChoice{
 						GnbIdChoice: &e2sm_kpm_ies.GnbIdChoice_GnbId{
