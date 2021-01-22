@@ -1,0 +1,123 @@
+ASN_MODULE_SRCS=	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/PLMN-Identity.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/EUTRACellIdentity.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/NRCellIdentity.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/EUTRACGI.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/NRCGI.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/CellGlobalID.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/EARFCN.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/PCI.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/PCI-Range.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/Cell-Size.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RIC-Style-Type.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RIC-Style-Name.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RIC-Format-Type.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-EventTriggerDefinition.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-EventTriggerDefinition-Format1.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/Trigger-ConditionIE-Item.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RT-Period-IE.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-ActionDefinition.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationHeader.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationHeader-Format1.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationMessage.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationMessage-Format1.c	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/NRT.c
+
+ASN_MODULE_HDRS=	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/PLMN-Identity.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/EUTRACellIdentity.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/NRCellIdentity.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/EUTRACGI.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/NRCGI.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/CellGlobalID.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/EARFCN.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/PCI.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/PCI-Range.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/Cell-Size.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RIC-Style-Type.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RIC-Style-Name.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RIC-Format-Type.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-EventTriggerDefinition.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-EventTriggerDefinition-Format1.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/Trigger-ConditionIE-Item.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/RT-Period-IE.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-ActionDefinition.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationHeader.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationHeader-Format1.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationMessage.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/E2SM-RC-PRE-IndicationMessage-Format1.h	\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/NRT.h
+
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/OPEN_TYPE.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/OPEN_TYPE.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_CHOICE.h
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/INTEGER.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/INTEGER.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/NativeEnumerated.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/NativeEnumerated.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/NativeInteger.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/NativeInteger.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/PrintableString.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/PrintableString.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/OCTET_STRING.h
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_SEQUENCE_OF.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_SEQUENCE_OF.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_SET_OF.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_SET_OF.c
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_CHOICE.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_SEQUENCE.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_SEQUENCE.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_SEQUENCE_OF.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_SEQUENCE_OF.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_SET_OF.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_SET_OF.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_application.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_application.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_ioc.h
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_system.h
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_codecs.h
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_internal.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_internal.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_random_fill.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_random_fill.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_bit_data.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_bit_data.c
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/OCTET_STRING.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/BIT_STRING.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/BIT_STRING.c
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_codecs_prim.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/asn_codecs_prim.h
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/ber_tlv_length.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/ber_tlv_length.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/ber_tlv_tag.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/ber_tlv_tag.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/ber_decoder.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/ber_decoder.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/der_encoder.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/der_encoder.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_TYPE.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constr_TYPE.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constraints.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/constraints.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/xer_support.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/xer_support.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/xer_decoder.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/xer_decoder.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/xer_encoder.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/xer_encoder.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_support.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_support.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_decoder.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_decoder.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_encoder.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_encoder.c
+ASN_MODULE_HDRS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_opentype.h
+ASN_MODULE_SRCS+=e2sm_rc_pre_v01_asn1/asn1c-gen/per_opentype.c
+
+ASN_MODULE_CFLAGS=-DASN_DISABLE_OER_SUPPORT 
+
+lib_LTLIBRARIES+=libasncodec.la
+libasncodec_la_SOURCES=$(ASN_MODULE_SRCS) $(ASN_MODULE_HDRS)
+libasncodec_la_CPPFLAGS=-I$(top_srcdir)/e2sm_rc_pre_v01_asn1/asn1c-gen/
+libasncodec_la_CFLAGS=$(ASN_MODULE_CFLAGS)
+libasncodec_la_LDFLAGS=-lm
