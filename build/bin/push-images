@@ -4,5 +4,6 @@ set -e
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
 make images
 docker push onosproject/service-model-docker-e2sm_kpm-1.0.0:latest
+docker push onosproject/service-model-ransim-e2sm_kpm-1.0.0:latest
 docker push onosproject/service-model-docker-e2sm_ni-1.0.0:latest
 
