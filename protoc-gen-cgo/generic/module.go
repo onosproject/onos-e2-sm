@@ -215,7 +215,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		buf.String(),
 		0644,
 	)
-	
+
 	return m.Artifacts()
 }
 
@@ -257,11 +257,10 @@ func extractTypeName(fullStr string, delStr string) string {
 
 func extractCstructName(str string) string {
 
-	if strings.Index(str, ":") == -1 {
+	if !strings.Contains(str, ":") {
 		return str
-	} else {
-		return str[:strings.Index(str, ":")]
 	}
+	return str[:strings.Index(str, ":")]
 	//return strings.ReplaceAll(fullStr, "." + delStr + ".", "")
 }
 
