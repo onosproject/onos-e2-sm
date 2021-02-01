@@ -18,8 +18,11 @@ PHONY:build
 build: # @HELP build all libraries
 build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_ni.so.1.0.0
 
+build_protoc_gen_cgo:
+	cd protoc-gen-cgo/ && go build -v -o ./protoc-gen-cgo && cd ..
+
 test: # @HELP run the unit tests and source code validation
-test: license_check build linters
+test: license_check build build_protoc_gen_cgo linters
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 
 deps: # @HELP ensure that the required dependencies are in place
@@ -31,6 +34,7 @@ deps: # @HELP ensure that the required dependencies are in place
 linters: # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 30m && cd ..
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 30m && cd ..
+	cd protoc-gen-cgo/ && golangci-lint run --timeout 30m && cd ..
 
 license_check: # @HELP examine and ensure license headers exist
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
