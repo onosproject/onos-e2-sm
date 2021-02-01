@@ -1,3 +1,9 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+*/
+
 ////////////////////// e2sm-rc-pre-ies.proto //////////////////////
 // Protobuf generated from /e2sm-rc-pre-v1.asn1 by asn1c-0.9.29
 // E2SM-RC-PRE-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1(1) e2sm(2) e2sm-RC-PRE-IEs(2) }

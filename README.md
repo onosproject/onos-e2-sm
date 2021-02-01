@@ -27,6 +27,9 @@ This is the first E2 Service Model to be handled by SD-RAN - it is for extractin
 ### Native Interface (E2SM_NI)
 While the Proto defintions have been created for this Service Model, the Go mapping code has not been implemented in SD-RAN yet
 
+### RAN Control (E2SM_RC_PRE)
+Pre-standard E2 Service model with PCI and Neighbor relation table information from E2 Nodes.
+
 ## Development
 Service models are created from the ASN1 models stored at:
 https://github.com/onosproject/openairinterface5g/tree/develop-onf/openair2/RIC_AGENT/MESSAGES/ASN1/R01

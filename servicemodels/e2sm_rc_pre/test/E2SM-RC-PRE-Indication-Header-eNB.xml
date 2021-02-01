@@ -1,0 +1,12 @@
+<E2SM-RC-PRE-IndicationHeader>
+    <indicationHeader-Format1>
+        <cgi>
+            <eUTRA-CGI>
+                <pLMN-Identity>4F 4E 46</pLMN-Identity>
+                <eUTRACellIdentity>
+                    1010101111010100101111000000
+                </eUTRACellIdentity>
+            </eUTRA-CGI>
+        </cgi>
+    </indicationHeader-Format1>
+</E2SM-RC-PRE-IndicationHeader>

@@ -14,9 +14,12 @@ build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
 build/_output/e2sm_ni.so.1.0.0: # @HELP build the e2sm_ni.so.1.0.1
 	cd servicemodels/e2sm_ni && CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
 
+build/_output/e2sm_rc_pre.so.1.0.0: # @HELP build the e2sm_rc_pre.so.1.0.1
+	cd servicemodels/e2sm_rc_pre && CGO_ENABLED=1 go build -o build/_output/e2sm_rc_pre.so.1.0.0 -buildmode=plugin .
+
 PHONY:build
 build: # @HELP build all libraries
-build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_ni.so.1.0.0
+build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0
 
 build_protoc_gen_cgo:
 	cd protoc-gen-cgo/ && go build -v -o ./protoc-gen-cgo && cd ..
@@ -24,9 +27,16 @@ build_protoc_gen_cgo:
 test: # @HELP run the unit tests and source code validation
 test: license_check build build_protoc_gen_cgo linters
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 
 deps: # @HELP ensure that the required dependencies are in place
 	cd servicemodels/e2sm_kpm
+	go build -v -buildmode=plugin ./modelmain.go
+	bash -c "diff -u <(echo -n) <(git diff go.mod)"
+	bash -c "diff -u <(echo -n) <(git diff go.sum)"
+	cd ../..
+
+	cd servicemodels/e2sm_rc_pre
 	go build -v -buildmode=plugin ./modelmain.go
 	bash -c "diff -u <(echo -n) <(git diff go.mod)"
 	bash -c "diff -u <(echo -n) <(git diff go.sum)"
@@ -35,6 +45,8 @@ linters: # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 30m && cd ..
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 30m && cd ..
 	cd protoc-gen-cgo/ && golangci-lint run --timeout 30m && cd ..
+	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 30m && cd ..
+
 
 license_check: # @HELP examine and ensure license headers exist
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
@@ -82,8 +94,29 @@ service-model-docker-e2sm_ni-1.0.0: # @HELP build e2sm_ni 1.0.0 plugin Docker im
 		-t onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 	@rm -rf vendor
 
+PHONY: service-model-docker-e2sm_rc_pre-1.0.0
+service-model-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin Docker image
+	@cd servicemodels/e2sm_rc_pre && go mod vendor && cd ../..
+	docker build . -f build/plugins/Dockerfile \
+		--build-arg PLUGIN_MAKE_TARGET=e2sm_rc_pre \
+		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+		-t onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+	@rm -rf vendor
+
+PHONY: service-model-ransim-docker-e2sm_rc_pre-1.0.0
+service-model-ransim-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin Docker image for RAN Simulator
+	@cd servicemodels/e2sm_rc_pre && go mod vendor && cd ../..
+	docker build . -f build/plugins/ransim.Dockerfile \
+		--build-arg PLUGIN_MAKE_TARGET=e2sm_rc_pre \
+		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+		-t onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+	@rm -rf vendor
+
 images: # @HELP build all Docker images
-images: build service-model-docker-e2sm_kpm-1.0.0 service-model-ransim-docker-e2sm_kpm-1.0.0 service-model-docker-e2sm_ni-1.0.0
+images: build service-model-docker-e2sm_kpm-1.0.0 service-model-ransim-docker-e2sm_kpm-1.0.0 service-model-docker-e2sm_ni-1.0.0 \
+		service-model-docker-e2sm_rc_pre-1.0.0 service-model-ransim-docker-e2sm_rc_pre-1.0.0
 
 kind: # @HELP build Docker images and add them to the currently configured kind cluster
 kind: images
@@ -91,12 +124,17 @@ kind: images
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+
 
 all: build images
 
 publish: # @HELP publish version on github and dockerhub
 	./../build-tools/publish-version servicemodels/e2sm_kpm/${VERSION} onosproject/service-model-docker-e2sm_kpm-1.0.0 onosproject/service-model-ransim-e2sm_kpm-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_ni/${VERSION} onosproject/service-model-docker-e2sm_ni-1.0.0
+	./../build-tools/publish-version servicemodels/e2sm_rc_pre/${VERSION} onosproject/service-model-docker-e2sm_rc_pre-1.0.0 onosproject/service-model-ransim-e2sm_rc_pre-1.0.0
+
 
 bumponosdeps: # @HELP update "onosproject" go dependencies and push patch to git. Add a version to dependency to make it different to $VERSION
 	./../build-tools/bump-onos-deps ${VERSION}
