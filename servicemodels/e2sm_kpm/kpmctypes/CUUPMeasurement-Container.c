@@ -25,7 +25,7 @@ memb_plmnList_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	if((size >= 1 && size <= 12)) {
 		/* Perform validation of the inner elements */
-		return SEQUENCE_OF_constraint(td, sptr, ctfailcb, app_key);
+		return td->encoding_constraints.general_constraints(td, sptr, ctfailcb, app_key);
 	} else {
 		ASN__CTFAIL(app_key, td, sptr,
 			"%s: constraint failed (%s:%d)",

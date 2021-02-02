@@ -28,8 +28,8 @@ struct ServedPlmnPerCellListItem;
 /* CellResourceReportListItem */
 typedef struct CellResourceReportListItem {
 	NRCGI_t	 nRCGI;
-	long	*dl_TotalofAvailablePRBs	/* OPTIONAL */;
-	long	*ul_TotalofAvailablePRBs	/* OPTIONAL */;
+	long	*dl_TotalofAvailablePRBs;	/* OPTIONAL */
+	long	*ul_TotalofAvailablePRBs;	/* OPTIONAL */
 	struct CellResourceReportListItem__servedPlmnPerCellList {
 		A_SEQUENCE_OF(struct ServedPlmnPerCellListItem) list;
 		

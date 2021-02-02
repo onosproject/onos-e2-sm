@@ -23,8 +23,8 @@ extern "C" {
 /* PerQCIReportListItemFormat */
 typedef struct PerQCIReportListItemFormat {
 	long	 qci;
-	INTEGER_t	*pDCPBytesDL	/* OPTIONAL */;
-	INTEGER_t	*pDCPBytesUL	/* OPTIONAL */;
+	INTEGER_t	*pDCPBytesDL;	/* OPTIONAL */
+	INTEGER_t	*pDCPBytesUL;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

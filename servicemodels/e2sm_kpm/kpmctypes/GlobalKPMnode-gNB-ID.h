@@ -24,8 +24,8 @@ extern "C" {
 /* GlobalKPMnode-gNB-ID */
 typedef struct GlobalKPMnode_gNB_ID {
 	GlobalgNB_ID_t	 global_gNB_ID;
-	GNB_CU_UP_ID_t	*gNB_CU_UP_ID	/* OPTIONAL */;
-	GNB_DU_ID_t	*gNB_DU_ID	/* OPTIONAL */;
+	GNB_CU_UP_ID_t	*gNB_CU_UP_ID;	/* OPTIONAL */
+	GNB_DU_ID_t	*gNB_DU_ID;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

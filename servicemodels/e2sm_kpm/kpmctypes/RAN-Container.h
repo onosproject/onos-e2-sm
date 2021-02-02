@@ -32,6 +32,8 @@ xer_type_decoder_f RAN_Container_decode_xer;
 xer_type_encoder_f RAN_Container_encode_xer;
 per_type_decoder_f RAN_Container_decode_uper;
 per_type_encoder_f RAN_Container_encode_uper;
+per_type_decoder_f RAN_Container_decode_aper;
+per_type_encoder_f RAN_Container_encode_aper;
 
 #ifdef __cplusplus
 }

@@ -23,8 +23,8 @@ extern "C" {
 /* FQIPERSlicesPerPlmnListItem */
 typedef struct FQIPERSlicesPerPlmnListItem {
 	long	 fiveQI;
-	INTEGER_t	*pDCPBytesDL	/* OPTIONAL */;
-	INTEGER_t	*pDCPBytesUL	/* OPTIONAL */;
+	INTEGER_t	*pDCPBytesDL;	/* OPTIONAL */
+	INTEGER_t	*pDCPBytesUL;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

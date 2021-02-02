@@ -26,7 +26,7 @@ struct PF_ContainerListItem;
 
 /* OCUUP-PF-Container */
 typedef struct OCUUP_PF_Container {
-	GNB_CU_UP_Name_t	*gNB_CU_UP_Name	/* OPTIONAL */;
+	GNB_CU_UP_Name_t	*gNB_CU_UP_Name;	/* OPTIONAL */
 	struct OCUUP_PF_Container__pf_ContainerList {
 		A_SEQUENCE_OF(struct PF_ContainerListItem) list;
 		

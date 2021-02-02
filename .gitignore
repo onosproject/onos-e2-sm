@@ -15,6 +15,7 @@
 # vendor/
 
 build/_output/onos-e2-sm
+protoc-gen-cgo/protoc-gen-cgo
 vendor
 **/_output
 *.DS_Store

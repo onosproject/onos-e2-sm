@@ -29,5 +29,5 @@ clean:
 regen: regenerate-from-asn1-source
 
 regenerate-from-asn1-source:
-	/home/scondon/git/vlm/asn1c/asn1c/asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D. e2sm-kpm-v01.00.asn1
+	asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D. e2sm-kpm-v01.00.asn1
 

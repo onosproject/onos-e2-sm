@@ -33,6 +33,8 @@ xer_type_decoder_f GNB_CU_UP_Name_decode_xer;
 xer_type_encoder_f GNB_CU_UP_Name_encode_xer;
 per_type_decoder_f GNB_CU_UP_Name_decode_uper;
 per_type_encoder_f GNB_CU_UP_Name_encode_uper;
+per_type_decoder_f GNB_CU_UP_Name_decode_aper;
+per_type_encoder_f GNB_CU_UP_Name_encode_aper;
 
 #ifdef __cplusplus
 }

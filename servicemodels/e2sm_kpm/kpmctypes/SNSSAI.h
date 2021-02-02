@@ -22,7 +22,7 @@ extern "C" {
 /* SNSSAI */
 typedef struct SNSSAI {
 	OCTET_STRING_t	 sST;
-	OCTET_STRING_t	*sD	/* OPTIONAL */;
+	OCTET_STRING_t	*sD;	/* OPTIONAL */
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;

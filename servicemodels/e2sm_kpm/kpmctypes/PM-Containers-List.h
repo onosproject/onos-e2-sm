@@ -25,8 +25,8 @@ struct PF_Container;
 
 /* PM-Containers-List */
 typedef struct PM_Containers_List {
-	struct PF_Container	*performanceContainer	/* OPTIONAL */;
-	RAN_Container_t	*theRANContainer	/* OPTIONAL */;
+	struct PF_Container	*performanceContainer;	/* OPTIONAL */
+	RAN_Container_t	*theRANContainer;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

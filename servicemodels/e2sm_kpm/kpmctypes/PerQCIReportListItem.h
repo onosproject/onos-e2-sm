@@ -22,8 +22,8 @@ extern "C" {
 /* PerQCIReportListItem */
 typedef struct PerQCIReportListItem {
 	long	 qci;
-	long	*dl_PRBUsage	/* OPTIONAL */;
-	long	*ul_PRBUsage	/* OPTIONAL */;
+	long	*dl_PRBUsage;	/* OPTIONAL */
+	long	*ul_PRBUsage;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
