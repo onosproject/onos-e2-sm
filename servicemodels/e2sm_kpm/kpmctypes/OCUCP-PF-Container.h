@@ -22,9 +22,9 @@ extern "C" {
 
 /* OCUCP-PF-Container */
 typedef struct OCUCP_PF_Container {
-	GNB_CU_CP_Name_t	*gNB_CU_CP_Name	/* OPTIONAL */;
+	GNB_CU_CP_Name_t	*gNB_CU_CP_Name;	/* OPTIONAL */
 	struct OCUCP_PF_Container__cu_CP_Resource_Status {
-		long	*numberOfActive_UEs	/* OPTIONAL */;
+		long	*numberOfActive_UEs;	/* OPTIONAL */
 		
 		/* Context for parsing across buffer boundaries */
 		asn_struct_ctx_t _asn_ctx;

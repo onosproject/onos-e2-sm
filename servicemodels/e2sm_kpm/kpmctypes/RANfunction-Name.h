@@ -25,7 +25,7 @@ typedef struct RANfunction_Name {
 	PrintableString_t	 ranFunction_ShortName;
 	PrintableString_t	 ranFunction_E2SM_OID;
 	PrintableString_t	 ranFunction_Description;
-	long	*ranFunction_Instance	/* OPTIONAL */;
+	long	*ranFunction_Instance;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

@@ -32,6 +32,8 @@ xer_type_decoder_f RIC_Format_Type_decode_xer;
 xer_type_encoder_f RIC_Format_Type_encode_xer;
 per_type_decoder_f RIC_Format_Type_decode_uper;
 per_type_encoder_f RIC_Format_Type_encode_uper;
+per_type_decoder_f RIC_Format_Type_decode_aper;
+per_type_encoder_f RIC_Format_Type_encode_aper;
 
 #ifdef __cplusplus
 }

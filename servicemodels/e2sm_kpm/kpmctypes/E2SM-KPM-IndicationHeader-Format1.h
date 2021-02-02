@@ -27,12 +27,12 @@ struct SNSSAI;
 
 /* E2SM-KPM-IndicationHeader-Format1 */
 typedef struct E2SM_KPM_IndicationHeader_Format1 {
-	struct GlobalKPMnode_ID	*id_GlobalKPMnode_ID	/* OPTIONAL */;
-	struct NRCGI	*nRCGI	/* OPTIONAL */;
-	PLMN_Identity_t	*pLMN_Identity	/* OPTIONAL */;
-	struct SNSSAI	*sliceID	/* OPTIONAL */;
-	long	*fiveQI	/* OPTIONAL */;
-	long	*qci	/* OPTIONAL */;
+	struct GlobalKPMnode_ID	*id_GlobalKPMnode_ID;	/* OPTIONAL */
+	struct NRCGI	*nRCGI;	/* OPTIONAL */
+	PLMN_Identity_t	*pLMN_Identity;	/* OPTIONAL */
+	struct SNSSAI	*sliceID;	/* OPTIONAL */
+	long	*fiveQI;	/* OPTIONAL */
+	long	*qci;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

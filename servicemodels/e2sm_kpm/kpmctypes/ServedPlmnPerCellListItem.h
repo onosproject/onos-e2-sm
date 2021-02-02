@@ -26,8 +26,8 @@ struct EPC_DU_PM_Container;
 /* ServedPlmnPerCellListItem */
 typedef struct ServedPlmnPerCellListItem {
 	PLMN_Identity_t	 pLMN_Identity;
-	struct FGC_DU_PM_Container	*du_PM_5GC	/* OPTIONAL */;
-	struct EPC_DU_PM_Container	*du_PM_EPC	/* OPTIONAL */;
+	struct FGC_DU_PM_Container	*du_PM_5GC;	/* OPTIONAL */
+	struct EPC_DU_PM_Container	*du_PM_EPC;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

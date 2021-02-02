@@ -26,7 +26,7 @@ memb_ric_EventTriggerStyle_List_constraint_3(const asn_TYPE_descriptor_t *td, co
 	
 	if((size >= 1 && size <= 63)) {
 		/* Perform validation of the inner elements */
-		return SEQUENCE_OF_constraint(td, sptr, ctfailcb, app_key);
+		return td->encoding_constraints.general_constraints(td, sptr, ctfailcb, app_key);
 	} else {
 		ASN__CTFAIL(app_key, td, sptr,
 			"%s: constraint failed (%s:%d)",
@@ -52,7 +52,7 @@ memb_ric_ReportStyle_List_constraint_3(const asn_TYPE_descriptor_t *td, const vo
 	
 	if((size >= 1 && size <= 63)) {
 		/* Perform validation of the inner elements */
-		return SEQUENCE_OF_constraint(td, sptr, ctfailcb, app_key);
+		return td->encoding_constraints.general_constraints(td, sptr, ctfailcb, app_key);
 	} else {
 		ASN__CTFAIL(app_key, td, sptr,
 			"%s: constraint failed (%s:%d)",

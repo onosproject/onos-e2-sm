@@ -33,6 +33,8 @@ xer_type_decoder_f PLMN_Identity_decode_xer;
 xer_type_encoder_f PLMN_Identity_encode_xer;
 per_type_decoder_f PLMN_Identity_decode_uper;
 per_type_encoder_f PLMN_Identity_encode_uper;
+per_type_decoder_f PLMN_Identity_decode_aper;
+per_type_encoder_f PLMN_Identity_encode_aper;
 
 #ifdef __cplusplus
 }
