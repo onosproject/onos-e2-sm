@@ -1,12 +1,12 @@
-include e2sm_rc_pre_v01_asn1/asn1c-gen/Makefile.am.libasncodec
+include ./Makefile.am.libasncodec
 
 LIBS += -lm
 CFLAGS += $(ASN_MODULE_CFLAGS) -DASN_PDU_COLLECTION -I.
 ASN_LIBRARY ?= libasncodec.a
 ASN_PROGRAM ?= converter-example
 ASN_PROGRAM_SRCS ?= \
-	e2sm_rc_pre_v01_asn1/asn1c-gen/converter-example.c\
-	e2sm_rc_pre_v01_asn1/asn1c-gen/pdu_collection.c
+	./converter-example.c\
+	./pdu_collection.c
 
 all: $(ASN_PROGRAM)
 
@@ -29,5 +29,5 @@ clean:
 regen: regenerate-from-asn1-source
 
 regenerate-from-asn1-source:
-	../onosproject/asn1c/asn1c/asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D e2sm_rc_pre_v01_asn1/asn1c-gen e2sm-rc-pre-v1.asn1
+	asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D. e2sm-rc-pre-v1.asn1
 
