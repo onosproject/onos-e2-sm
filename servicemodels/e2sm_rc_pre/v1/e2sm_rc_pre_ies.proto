@@ -1,0 +1,216 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+*/
+
+////////////////////// e2sm-rc-pre-ies.proto //////////////////////
+// Protobuf generated from /e2sm-rc-pre-v1.asn1 by asn1c-0.9.29
+// E2SM-RC-PRE-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1(1) e2sm(2) e2sm-RC-PRE-IEs(2) }
+
+syntax = "proto3";
+
+package e2sm_rc_pre.v1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies;e2smrcpreies";
+
+import "validate/v1/validate.proto";
+
+// enumerated from e2sm-rc-pre-v1.asn1:49
+enum CellSize {
+    CELL_SIZE_FEMTO = 0;
+    CELL_SIZE_ENTERPRISE = 1;
+    CELL_SIZE_OUTDOOR_SMALL = 2;
+    CELL_SIZE_MACRO = 3;
+};
+
+// enumerated from e2sm-rc-pre-v1.asn1:96
+enum RtPeriodIe {
+    RT_PERIOD_IE_MS10 = 0;
+    RT_PERIOD_IE_MS20 = 1;
+    RT_PERIOD_IE_MS32 = 2;
+    RT_PERIOD_IE_MS40 = 3;
+    RT_PERIOD_IE_MS60 = 4;
+    RT_PERIOD_IE_MS64 = 5;
+    RT_PERIOD_IE_MS70 = 6;
+    RT_PERIOD_IE_MS80 = 7;
+    RT_PERIOD_IE_MS128 = 8;
+    RT_PERIOD_IE_MS160 = 9;
+    RT_PERIOD_IE_MS256 = 10;
+    RT_PERIOD_IE_MS320 = 11;
+    RT_PERIOD_IE_MS512 = 12;
+    RT_PERIOD_IE_MS640 = 13;
+    RT_PERIOD_IE_MS1024 = 14;
+    RT_PERIOD_IE_MS1280 = 15;
+    RT_PERIOD_IE_MS2048 = 16;
+    RT_PERIOD_IE_MS2560 = 17;
+    RT_PERIOD_IE_MS5120 = 18;
+    RT_PERIOD_IE_MS10240 = 19;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:22
+message Eutracgi {
+    PlmnIdentity p_lmn_identity = 1;
+    EutracellIdentity e_utracell_identity = 2;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:28
+message Nrcgi {
+    PlmnIdentity p_lmn_identity = 1;
+    NrcellIdentity n_rcell_identity = 2;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:34
+message CellGlobalId {
+    // choice from e2sm-rc-pre-v1.asn1:34
+    oneof cell_global_id {
+        Nrcgi nr_cgi = 1;
+        Eutracgi e_utra_cgi = 2;
+    }
+};
+
+// range of Integer from e2sm-rc-pre-v1.asn1:40
+message Earfcn {
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 262143}];
+};
+
+// range of Integer from e2sm-rc-pre-v1.asn1:41
+message Pci {
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 503}];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:44
+message PciRange {
+    Pci lower_pci = 1;
+    Pci upper_pci = 2;
+};
+
+// constant Integer from e2sm-rc-pre-v1.asn1:58
+message MaxofMessageProtocolTests {
+    int32 value = 1 [(validate.v1.rules).int32.const = 15];
+};
+
+// constant Integer from e2sm-rc-pre-v1.asn1:59
+message MaxofRicstyles {
+    int32 value = 1 [(validate.v1.rules).int32.const = 63];
+};
+
+// constant Integer from e2sm-rc-pre-v1.asn1:60
+message MaxPlmn {
+    int32 value = 1 [(validate.v1.rules).int32.const = 12];
+};
+
+// constant Integer from e2sm-rc-pre-v1.asn1:61
+message MaxNr {
+    int32 value = 1 [(validate.v1.rules).int32.const = 4096];
+};
+
+// constant Integer from e2sm-rc-pre-v1.asn1:62
+message MaxEarfcn {
+    int32 value = 1 [(validate.v1.rules).int32.const = 262143];
+};
+
+// constant Integer from e2sm-rc-pre-v1.asn1:63
+message MaxPci {
+    int32 value = 1 [(validate.v1.rules).int32.const = 503];
+};
+
+// constant Integer from e2sm-rc-pre-v1.asn1:64
+message MaxPciRange {
+    int32 value = 1 [(validate.v1.rules).int32.const = 100];
+};
+
+// range of Integer from e2sm-rc-pre-v1.asn1:67
+message RicStyleType {
+    int32 value = 1;
+};
+
+// range of Integer from e2sm-rc-pre-v1.asn1:80
+message RicFormatType {
+    int32 value = 1;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:81
+message E2SmRcPreEventTriggerDefinition {
+    // choice from e2sm-rc-pre-v1.asn1:81
+    oneof e2_sm_rc_pre_event_trigger_definition {
+        E2SmRcPreEventTriggerDefinitionFormat1 event_definition_format1 = 1;
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:87
+message E2SmRcPreEventTriggerDefinitionFormat1 {
+    repeated TriggerConditionIeItem policy_test_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 15}];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:92
+message TriggerConditionIeItem {
+    RtPeriodIe report_period_ie = 1;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:104
+message E2SmRcPreActionDefinition {
+    RicStyleType ric_style_type = 1;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:114
+message E2SmRcPreIndicationHeader {
+    // choice from e2sm-rc-pre-v1.asn1:114
+    oneof e2_sm_rc_pre_indication_header {
+        E2SmRcPreIndicationHeaderFormat1 indication_header_format1 = 1;
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:120
+message E2SmRcPreIndicationHeaderFormat1 {
+    CellGlobalId cgi = 1;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:130
+message E2SmRcPreIndicationMessage {
+    // choice from e2sm-rc-pre-v1.asn1:130
+    oneof e2_sm_rc_pre_indication_message {
+        RicStyleType ric_style_type = 1;
+        E2SmRcPreIndicationMessageFormat1 indication_message_format1 = 2;
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:137
+message E2SmRcPreIndicationMessageFormat1 {
+    CellGlobalId cgi = 1;
+    Earfcn dl_earfcn = 2;
+    CellSize cell_size = 3;
+    repeated PciRange pci_pool = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 100}];
+    Pci pci = 5;
+    repeated Nrt neighbors = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4096}];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:147
+message Nrt {
+    int32 nr_index = 1;
+    CellGlobalId cgi = 2;
+    Earfcn dl_earfcn = 3;
+    CellSize cell_size = 4;
+    Pci pci = 5;
+};
+
+message RicStyleName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+}
+
+message PlmnIdentity {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3];
+}
+
+message EutracellIdentity {
+    BitString value = 1; //28
+}
+
+message NrcellIdentity {
+    BitString value = 1; //36
+}
+
+message BitString {
+    uint64 value = 1;
+    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64];
+}
+

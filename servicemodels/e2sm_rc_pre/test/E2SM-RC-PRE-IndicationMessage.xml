@@ -1,0 +1,19 @@
+<E2SM-RC-PRE-IndicationMessage>
+    <indicationMessage-Format1>
+        <cgi>
+            <eUTRA-CGI>
+                <pLMN-Identity>4F 4E 46</pLMN-Identity>
+                <eUTRACellIdentity>
+                    1010101111010100101111000000
+                </eUTRACellIdentity>
+            </eUTRA-CGI>
+        </cgi>
+        <dl-EARFCN>253</dl-EARFCN>
+        <cell-Size><macro/></cell-Size>
+        <pci-Pool>
+        </pci-Pool>
+        <pci>11</pci>
+        <neighbors>
+        </neighbors>
+    </indicationMessage-Format1>
+</E2SM-RC-PRE-IndicationMessage>

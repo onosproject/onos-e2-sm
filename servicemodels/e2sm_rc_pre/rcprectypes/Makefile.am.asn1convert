@@ -1,0 +1,14 @@
+include e2sm_rc_pre_v01_asn1/asn1c-gen/Makefile.am.libasncodec
+
+bin_PROGRAMS += asn1convert
+asn1convert_CFLAGS = $(ASN_MODULE_CFLAGS) -DASN_PDU_COLLECTION 
+asn1convert_CPPFLAGS = -I$(top_srcdir)/e2sm_rc_pre_v01_asn1/asn1c-gen/
+asn1convert_LDADD = libasncodec.la
+asn1convert_SOURCES = \
+	e2sm_rc_pre_v01_asn1/asn1c-gen/converter-example.c\
+	e2sm_rc_pre_v01_asn1/asn1c-gen/pdu_collection.c
+regen: regenerate-from-asn1-source
+
+regenerate-from-asn1-source:
+	../onosproject/asn1c/asn1c/asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D e2sm_rc_pre_v01_asn1/asn1c-gen e2sm-rc-pre-v1.asn1
+
