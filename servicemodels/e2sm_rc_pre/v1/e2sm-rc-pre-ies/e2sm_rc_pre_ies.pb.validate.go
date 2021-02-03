@@ -1977,6 +1977,386 @@ var _ interface {
 	ErrorName() string
 } = NrtValidationError{}
 
+// Validate checks the field values on E2SmRcPreRanfunctionDescription with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *E2SmRcPreRanfunctionDescription) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetRanFunctionName()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmRcPreRanfunctionDescriptionValidationError{
+				field:  "RanFunctionName",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetE2SmRcPreRanfunctionItem()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmRcPreRanfunctionDescriptionValidationError{
+				field:  "E2SmRcPreRanfunctionItem",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// E2SmRcPreRanfunctionDescriptionValidationError is the validation error
+// returned by E2SmRcPreRanfunctionDescription.Validate if the designated
+// constraints aren't met.
+type E2SmRcPreRanfunctionDescriptionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e E2SmRcPreRanfunctionDescriptionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e E2SmRcPreRanfunctionDescriptionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e E2SmRcPreRanfunctionDescriptionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e E2SmRcPreRanfunctionDescriptionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e E2SmRcPreRanfunctionDescriptionValidationError) ErrorName() string {
+	return "E2SmRcPreRanfunctionDescriptionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e E2SmRcPreRanfunctionDescriptionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sE2SmRcPreRanfunctionDescription.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = E2SmRcPreRanfunctionDescriptionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = E2SmRcPreRanfunctionDescriptionValidationError{}
+
+// Validate checks the field values on RanfunctionName with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *RanfunctionName) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := utf8.RuneCountInString(m.GetRanFunctionShortName()); l < 1 || l > 150 {
+		return RanfunctionNameValidationError{
+			field:  "RanFunctionShortName",
+			reason: "value length must be between 1 and 150 runes, inclusive",
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetRanFunctionE2SmOid()); l < 1 || l > 1000 {
+		return RanfunctionNameValidationError{
+			field:  "RanFunctionE2SmOid",
+			reason: "value length must be between 1 and 1000 runes, inclusive",
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetRanFunctionDescription()); l < 1 || l > 150 {
+		return RanfunctionNameValidationError{
+			field:  "RanFunctionDescription",
+			reason: "value length must be between 1 and 150 runes, inclusive",
+		}
+	}
+
+	// no validation rules for RanFunctionInstance
+
+	return nil
+}
+
+// RanfunctionNameValidationError is the validation error returned by
+// RanfunctionName.Validate if the designated constraints aren't met.
+type RanfunctionNameValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RanfunctionNameValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RanfunctionNameValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RanfunctionNameValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RanfunctionNameValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RanfunctionNameValidationError) ErrorName() string { return "RanfunctionNameValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RanfunctionNameValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRanfunctionName.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RanfunctionNameValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RanfunctionNameValidationError{}
+
+// Validate checks the field values on RicEventTriggerStyleList with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *RicEventTriggerStyleList) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetRicEventTriggerStyleType()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RicEventTriggerStyleListValidationError{
+				field:  "RicEventTriggerStyleType",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetRicEventTriggerStyleName()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RicEventTriggerStyleListValidationError{
+				field:  "RicEventTriggerStyleName",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetRicEventTriggerFormatType()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RicEventTriggerStyleListValidationError{
+				field:  "RicEventTriggerFormatType",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// RicEventTriggerStyleListValidationError is the validation error returned by
+// RicEventTriggerStyleList.Validate if the designated constraints aren't met.
+type RicEventTriggerStyleListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RicEventTriggerStyleListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RicEventTriggerStyleListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RicEventTriggerStyleListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RicEventTriggerStyleListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RicEventTriggerStyleListValidationError) ErrorName() string {
+	return "RicEventTriggerStyleListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RicEventTriggerStyleListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRicEventTriggerStyleList.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RicEventTriggerStyleListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RicEventTriggerStyleListValidationError{}
+
+// Validate checks the field values on RicReportStyleList with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *RicReportStyleList) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetRicReportStyleType()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RicReportStyleListValidationError{
+				field:  "RicReportStyleType",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetRicReportStyleName()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RicReportStyleListValidationError{
+				field:  "RicReportStyleName",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetRicIndicationHeaderFormatType()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RicReportStyleListValidationError{
+				field:  "RicIndicationHeaderFormatType",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetRicIndicationMessageFormatType()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RicReportStyleListValidationError{
+				field:  "RicIndicationMessageFormatType",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// RicReportStyleListValidationError is the validation error returned by
+// RicReportStyleList.Validate if the designated constraints aren't met.
+type RicReportStyleListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RicReportStyleListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RicReportStyleListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RicReportStyleListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RicReportStyleListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RicReportStyleListValidationError) ErrorName() string {
+	return "RicReportStyleListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RicReportStyleListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRicReportStyleList.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RicReportStyleListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RicReportStyleListValidationError{}
+
 // Validate checks the field values on RicStyleName with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
 // is returned.
@@ -2345,3 +2725,125 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = BitStringValidationError{}
+
+// Validate checks the field values on
+// E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001 with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetRicEventTriggerStyleList()); l < 1 || l > 63 {
+		return E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError{
+			field:  "RicEventTriggerStyleList",
+			reason: "value must contain between 1 and 63 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetRicEventTriggerStyleList() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError{
+					field:  fmt.Sprintf("RicEventTriggerStyleList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if l := len(m.GetRicReportStyleList()); l < 1 || l > 63 {
+		return E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError{
+			field:  "RicReportStyleList",
+			reason: "value must contain between 1 and 63 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetRicReportStyleList() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError{
+					field:  fmt.Sprintf("RicReportStyleList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError
+// is the validation error returned by
+// E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001.Validate if the
+// designated constraints aren't met.
+type E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError) ErrorName() string {
+	return "E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sE2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001ValidationError{}

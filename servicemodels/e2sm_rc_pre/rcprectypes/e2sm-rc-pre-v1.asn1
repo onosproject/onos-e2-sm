@@ -152,5 +152,42 @@ NRT ::= SEQUENCE {
     ...
 }
 
+-- ***************************************************************
+-- RAN Function Description OCTET STRING contents
+-- ***************************************************************
+
+-- E2SM-RC-PRE-RANfunction-Description
+E2SM-RC-PRE-RANfunction-Description ::= SEQUENCE{
+	ranFunction-Name	RANfunction-Name,
+    e2SM-RC-PRE-RANfunction-Item SEQUENCE{
+	    ric-EventTriggerStyle-List	SEQUENCE (SIZE(1..maxofRICstyles)) OF RIC-EventTriggerStyle-List OPTIONAL,
+	    ric-ReportStyle-List		SEQUENCE (SIZE(1..maxofRICstyles)) OF RIC-ReportStyle-List OPTIONAL,
+	    ...
+    },
+	...
+}
+
+RANfunction-Name ::= SEQUENCE{
+    ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
+    ranFunction-E2SM-OID		PrintableString(SIZE(1..1000,...)),
+    ranFunction-Description     PrintableString(SIZE(1..150,...)),
+    ranFunction-Instance        INTEGER OPTIONAL,
+    ...
+}
+
+RIC-EventTriggerStyle-List ::= SEQUENCE{
+	ric-EventTriggerStyle-Type			RIC-Style-Type,
+	ric-EventTriggerStyle-Name			RIC-Style-Name,
+	ric-EventTriggerFormat-Type			RIC-Format-Type,
+	...
+}
+
+RIC-ReportStyle-List ::= SEQUENCE{
+	ric-ReportStyle-Type				RIC-Style-Type,
+	ric-ReportStyle-Name				RIC-Style-Name,
+	ric-IndicationHeaderFormat-Type		RIC-Format-Type,
+	ric-IndicationMessageFormat-Type	RIC-Format-Type,
+	...
+}
 
 END

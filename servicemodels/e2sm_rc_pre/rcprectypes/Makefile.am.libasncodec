@@ -21,7 +21,11 @@ ASN_MODULE_SRCS=	\
 	./E2SM-RC-PRE-IndicationHeader-Format1.c	\
 	./E2SM-RC-PRE-IndicationMessage.c	\
 	./E2SM-RC-PRE-IndicationMessage-Format1.c	\
-	./NRT.c
+	./NRT.c	\
+	./E2SM-RC-PRE-RANfunction-Description.c	\
+	./RANfunction-Name.c	\
+	./RIC-EventTriggerStyle-List.c	\
+	./RIC-ReportStyle-List.c
 
 ASN_MODULE_HDRS=	\
 	./PLMN-Identity.h	\
@@ -46,7 +50,11 @@ ASN_MODULE_HDRS=	\
 	./E2SM-RC-PRE-IndicationHeader-Format1.h	\
 	./E2SM-RC-PRE-IndicationMessage.h	\
 	./E2SM-RC-PRE-IndicationMessage-Format1.h	\
-	./NRT.h
+	./NRT.h	\
+	./E2SM-RC-PRE-RANfunction-Description.h	\
+	./RANfunction-Name.h	\
+	./RIC-EventTriggerStyle-List.h	\
+	./RIC-ReportStyle-List.h
 
 ASN_MODULE_HDRS+=./OPEN_TYPE.h
 ASN_MODULE_SRCS+=./OPEN_TYPE.c
