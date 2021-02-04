@@ -80,7 +80,7 @@ static int asn_PER_MAP_RIC_Style_Name_1_c2v(unsigned int code) {
  * This type is implemented using PrintableString,
  * so here we adjust the DEF accordingly.
  */
-static asn_per_constraints_t asn_PER_type_RIC_Style_Name_constr_1 CC_NOTUSED = {
+asn_per_constraints_t asn_PER_type_RIC_Style_Name_constr_1 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 7,  7,  32,  122 }	/* (32..122) */,
 	{ APC_CONSTRAINED | APC_EXTENSIBLE,  8,  8,  1,  150 }	/* (SIZE(1..150,...)) */,
 	asn_PER_MAP_RIC_Style_Name_1_v2c,	/* Value to PER code map */

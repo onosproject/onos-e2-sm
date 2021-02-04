@@ -120,8 +120,8 @@ func decodeE2SmRcPreIndicationMessageFormat1(e2SmIindicationMsgFormat1C *C.E2SM_
 }
 
 func decodeE2SmRcPreIndicationMessageFormat1Bytes(array [8]byte) (*e2sm_rc_pre_ies.E2SmRcPreIndicationMessage_IndicationMessageFormat1, error) {
-	eSmKpmIndicationMsgFormat1C := (*C.E2SM_RC_PRE_IndicationMessage_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-	result, err := decodeE2SmRcPreIndicationMessageFormat1(eSmKpmIndicationMsgFormat1C)
+	e2SmRcPreIndicationMsgFormat1C := (*C.E2SM_RC_PRE_IndicationMessage_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+	result, err := decodeE2SmRcPreIndicationMessageFormat1(e2SmRcPreIndicationMsgFormat1C)
 	if err != nil {
 		return nil, fmt.Errorf("decodeE2SmRcPreIndicationMessageFormat1Bytes() %s", err.Error())
 	}

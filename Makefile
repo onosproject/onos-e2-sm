@@ -30,13 +30,13 @@ test: license_check build build_protoc_gen_cgo linters
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_kpm && go test -race ./...
 
-deps: # @HELP ensure that the required dependencies are in place
+deps_kpm: # @HELP ensure that the required dependencies are in place
 	cd servicemodels/e2sm_kpm
 	go build -v -buildmode=plugin ./modelmain.go
 	bash -c "diff -u <(echo -n) <(git diff go.mod)"
 	bash -c "diff -u <(echo -n) <(git diff go.sum)"
-	cd ../..
 
+deps_rc: # @HELP ensure that the required dependencies are in place
 	cd servicemodels/e2sm_rc_pre
 	go build -v -buildmode=plugin ./modelmain.go
 	bash -c "diff -u <(echo -n) <(git diff go.mod)"
@@ -45,8 +45,8 @@ deps: # @HELP ensure that the required dependencies are in place
 linters: # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 30m && cd ..
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 30m && cd ..
-	cd protoc-gen-cgo/ && golangci-lint run --timeout 30m && cd ..
 	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 30m && cd ..
+	cd protoc-gen-cgo/ && golangci-lint run --timeout 30m && cd ..
 
 
 license_check: # @HELP examine and ensure license headers exist

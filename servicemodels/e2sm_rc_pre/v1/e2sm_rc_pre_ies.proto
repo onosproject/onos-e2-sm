@@ -193,6 +193,40 @@ message Nrt {
     Pci pci = 5;
 };
 
+// sequence from e2sm-rc-pre-v1.asn1:161
+message E2SmRcPreRanfunctionDescription {
+    RanfunctionName ran_function_name = 1;
+    E2SmRcPreRanfunctionItem001 e2_sm_rc_pre_ranfunction_item = 2;
+
+    message E2SmRcPreRanfunctionItem001 {
+        repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+        repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:171
+message RanfunctionName {
+    string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+    string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}];
+    string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+    int32 ran_function_instance = 4;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:179
+message RicEventTriggerStyleList {
+    RicStyleType ric_event_trigger_style_type = 1;
+    RicStyleName ric_event_trigger_style_name = 2;
+    RicFormatType ric_event_trigger_format_type = 3;
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:186
+message RicReportStyleList {
+    RicStyleType ric_report_style_type = 1;
+    RicStyleName ric_report_style_name = 2;
+    RicFormatType ric_indication_header_format_type = 3;
+    RicFormatType ric_indication_message_format_type = 4;
+};
+
 message RicStyleName {
     string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
 }

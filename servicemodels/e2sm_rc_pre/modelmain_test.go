@@ -88,10 +88,41 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	err = proto.Unmarshal(protoBytes, &testIM)
 	assert.NilError(t, err)
 
-	// TODO(ipurush)
 	assert.Equal(t, 1, len(testIM.GetIndicationMessageFormat1().GetNeighbors()))
 	nbr := testIM.GetIndicationMessageFormat1().GetNeighbors()[0]
 	assert.DeepEqual(t, []byte{0x4f, 0x4e, 0x46}, nbr.GetCgi().GetEUtraCgi().GetPLmnIdentity().GetValue())
+}
+
+func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
+	var ranFunctionShortName = "ONF"
+	var ranFunctionE2SmOid = "Oid"
+	var ranFunctionDescription = "OpenNetworking"
+	var ranFunctionInstance int32 = 3
+	var ricEventStyleType int32 = 13
+	var ricEventStyleName = "ONFevent"
+	var ricEventFormatType int32 = 42
+	var ricReportStyleType int32 = 12
+	var ricReportStyleName = "ONFreport"
+	var ricIndicationHeaderFormatType int32 = 21
+	var ricIndicationMessageFormatType int32 = 56
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid, ranFunctionDescription,
+		ranFunctionInstance, ricEventStyleType, ricEventStyleName, ricEventFormatType, ricReportStyleType, ricReportStyleName,
+		ricIndicationHeaderFormatType, ricIndicationMessageFormatType)
+	assert.NilError(t, err, "error creating E2SmPDU")
+	assert.Assert(t, newE2SmRcPrePdu != nil)
+
+	err = newE2SmRcPrePdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreRanfunctionDescription to bytes")
+	assert.Equal(t, 81, len(protoBytes))
+
+	asn1Bytes, err := rcPreTestSm.RanFuncDescriptionProtoToASN1(protoBytes)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	assert.Equal(t, 63, len(asn1Bytes))
 }
 
 func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
