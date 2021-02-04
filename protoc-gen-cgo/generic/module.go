@@ -126,6 +126,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				"dashToUnderscore":     dashToUnderscore,
 				"underscoreToDash":     underscoreToDash,
 				"tolow":                strings.ToLower,
+				"cleanDashes":          cleanDashes,
 			}).ParseFiles("enum.tpl")
 			if err != nil {
 				//fmt.Errorf("couldn't parse template :/ %v", err)
@@ -151,6 +152,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 
 			flds := msg.Descriptor().GetField()
+			//fmt.Fprintf(buf, "%03d. Message Descriptor() %v\n", i, msg.Descriptor())
 
 			for _, fld := range flds {
 				fmt.Fprintf(buf, "%03d. Field() -- %v\n ", i, fld.String())
@@ -169,24 +171,26 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				elemField.MessageName = msg.Name().String()
 				elemField.ProtoFileName = f.Name().Split()[0]
 				elemField.FieldTypeName = extractTypeName(msg.FullyQualifiedName(), msg.Package().ProtoName().String())
+				//fmt.Fprintf(buf, "%03d. Message Descriptor().OneOfDecl() %v\n", i, msg.Descriptor().GetOneofDecl())
 
-				switch extractLabel(fld.GetLabel().String()) {
-				case "OPTIONAL":
-					optional = true
-					fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
-
-				case "REPEATED":
-					repeated = true
-					fieldItems.RepeatedField = append(fieldItems.RepeatedField, elemField)
-
-				case "ONEOF":
+				if msg.Descriptor().GetOneofDecl() != nil {
 					oneof = true
 					fieldItems.OneOfField = append(fieldItems.OneOfField, elemField)
+				} else {
+					switch extractLabel(fld.GetLabel().String()) {
+					case "OPTIONAL":
+						optional = true
+						fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
 
-				default: // If message has only one leaf it is still "OPTIONAL"
-					optional = true
-					fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
+					case "REPEATED":
+						repeated = true
+						fieldItems.RepeatedField = append(fieldItems.RepeatedField, elemField)
 
+					default: // If message has only one leaf it is still "OPTIONAL"
+						optional = true
+						fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
+
+					}
 				}
 
 			}
@@ -213,6 +217,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				"decodeDataType":       decodeDataType,
 				"encodeDataType":       encodeDataType,
 				"checkElementaryType":  checkElementaryType,
+				"cleanDashes":          cleanDashes,
 			}).ParseFiles("message.tpl")
 			if err != nil {
 				//fmt.Errorf("couldn't parse template :/ %v", err)
@@ -308,6 +313,11 @@ func extractCstructFieldName(str string) string {
 func squeezeDoubleDash(str string) string {
 
 	return strings.ReplaceAll(str, "__", "_")
+}
+
+func cleanDashes(str string) string {
+
+	return strings.ReplaceAll(str, "_", "")
 }
 
 func extractDataType(str string) string {
