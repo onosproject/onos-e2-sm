@@ -28,13 +28,13 @@ Here are the parameters you should pass:
 
 ## Additonal changes
 To ensure that this plugin works correctly you should make some changes to source `.proto` file(s). Please add `[json_name="..."]` tag 
-and put in as an argument appropriate `C-struct` name (which was generated with `ASN1C` tool) for all data structures in each `.proto` file
+and put in as an argument appropriate `C-struct Name` (which was generated with `ASN1C` tool) and `C-struct Leaf Name` for all data structures in each `.proto` file
 you want to process.   
 In the end it should look similar to following example:
 
 ```protobuf
-message RicStyleType {
-    int32 value = 1 [json_name = "RIC-Style-Type"];
+message TriggerConditionIeItem {
+  RtPeriodIe report_period_ie = 1 [json_name = "Trigger-ConditionIE-Item:report_Period_IE"];
 };
 ```
 
