@@ -6,6 +6,10 @@ lint:
   use:
     - DEFAULT
     - FILE_LOWER_SNAKE_CASE
+  ignore:
+    - e2sm_kpm/vendor
+    - e2sm_ni/vendor
+    - e2sm_rc_pre/vendor
   except:
     - ENUM_ZERO_VALUE_SUFFIX
     - PACKAGE_SAME_GO_PACKAGE

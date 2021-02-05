@@ -6,7 +6,7 @@ export GO111MODULE=on
 ONOS_E2_SM_VERSION := latest
 ONOS_BUILD_VERSION := v0.6.7
 ONOS_PROTOC_VERSION := v0.6.7
-BUF_VERSION := 0.27.1
+BUF_VERSION := 0.36.0
 
 build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
 	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
@@ -56,7 +56,7 @@ license_check: # @HELP examine and ensure license headers exist
 buflint: #@HELP run the "buf check lint" command on the proto files in 'api'
 	docker run -it -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
 		-w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
-		bufbuild/buf:${BUF_VERSION} check lint
+		bufbuild/buf:${BUF_VERSION} lint
 
 protos: # @HELP compile the protobuf files (using protoc-go Docker)
 protos: buflint
