@@ -15,7 +15,7 @@ import "C"{{else}}import "C"
 {{end}}
 import (
     "fmt"
-    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.ProtoFileName}}/v1beta1/{{dashToUnderscore .ProtoFileName}}" //ToDo - Make imports more dynamic
+    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.ProtoFileName}}/v1/{{dashToUnderscore .ProtoFileName}}" //ToDo - Make imports more dynamic
     "unsafe"
 )
 
@@ -68,9 +68,13 @@ func perDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName
 }
 
 func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
+{{if .FieldList.SingleItem}}
+{{if .Optional}}{{ template "OPTIONAL_ENCODE_SINGLE" . }}{{end}}
+{{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{end}}
+{{else}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{else}}
 {{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
-{{if .Optional}}    {{ template "OPTIONAL_ENCODE" . }}{{end}}
+{{if .Optional}}{{ template "OPTIONAL_ENCODE" . }}{{end}}
 {{lowCaseFirstLetter .MessageName}}C := C.{{dashToUnderscore .CstructName}}_t{
 //ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file{{ $optionalFields := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields }}
 {{.CstructLeafName}}: {{lowCaseFirstLetter .FieldName}}C,{{end}}
@@ -78,19 +82,25 @@ func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}
 {{end}}
 {{ $oneOfFields := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields }} //{{.CstructLeafName}}: {{lowCaseFirstLetter .FieldName}}C,{{end}}
 }{{end}}
+{{end}}
     return &{{lowCaseFirstLetter .MessageName}}C, nil
 }
 
 func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnderscore .CstructName}}_t) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+{{if .FieldList.SingleItem}}
+{{if .Optional}}{{ template "OPTIONAL_DECODE_SINGLE" . }}{{end}}
+{{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{end}}
+{{else}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{else}}
 {{if .Optional}}{{ template "OPTIONAL_DECODE" . }}{{end}}
 {{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}{
 //ToDo - check whether pointers passed correctly with regard to Protobuf's definition{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
-{{.FieldName}}: {{lowCaseFirstLetter .FieldName}},{{end}}
-{{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}{{.FieldName}}: make([]*{{.ProtoFileName}}.{{.DataType}}, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
+{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .FieldName}},{{end}}
+{{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}{{upperCaseFirstLetter .FieldName}}: make([]*{{.ProtoFileName}}.{{.DataType}}, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
 {{end}}
-{{ $oneOfFields1 := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields1 }} //{{.FieldName}}: {{lowCaseFirstLetter .FieldName}}, {{end}}}
+{{ $oneOfFields1 := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields1 }} //{{upperCaseFirstLetter.FieldName}}: {{lowCaseFirstLetter .FieldName}}, {{end}}}
 {{if .Repeated}}{{ template "REPEATED_DECODE" . }}{{end}}{{end}}
+{{end}}
     return &{{lowCaseFirstLetter .MessageName}}, nil
 }
 
@@ -140,8 +150,17 @@ return nil, err
 
 {{ define "OPTIONAL_ENCODE" }}{{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{.FieldName}}){{else}}
-{{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{.FieldName}})
+{{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
+{{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
+if err != nil {
+return nil, fmt.Errorf("encode{{.MessageName}}() %s", err.Error())
+}
+{{end}}{{end}}{{end}}
+
+{{ define "OPTIONAL_ENCODE_SINGLE" }}{{ $fields := .FieldList.OptionalField }}
+{{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
+{{lowCaseFirstLetter .MessageName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
+{{lowCaseFirstLetter .MessageName}}C, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
 return nil, fmt.Errorf("encode{{.MessageName}}() %s", err.Error())
 }
@@ -158,8 +177,8 @@ case C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}
 if err != nil {
 return nil, fmt.Errorf("decode{{.MessageName}}() %s", err.Error())
 }
-{{lowCaseFirstLetter .MessageName}}.{{.MessageName}} = &{{.ProtoFileName}}.{{.MessageName}}_{{.FieldName}}{
-{{.FieldName}}: {{lowCaseFirstLetter .MessageName}}structC,
+{{lowCaseFirstLetter .MessageName}}.{{.MessageName}} = &{{.ProtoFileName}}.{{.MessageName}}_{{upperCaseFirstLetter .FieldName}}{
+{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .MessageName}}structC,
 }{{end}}
 default:
 return nil, fmt.Errorf("decode{{.MessageName}}() %v not yet implemented", {{lowCaseFirstLetter .MessageName}}C.present)
@@ -176,7 +195,7 @@ ie, err := {{decodeDataType .DataType}}(ieC)
 if err != nil {
 return nil, fmt.Errorf("decode{{.MessageName}}() %s", err.Error())
 }
-{{lowCaseFirstLetter .MessageName}}.{{.FieldName}} = append({{lowCaseFirstLetter .MessageName}}.{{.FieldName}}, ie)
+{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}} = append({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}, ie)
 }
 {{end}}{{end}}
 
@@ -200,4 +219,18 @@ return result, nil
 if err != nil {
 return nil, fmt.Errorf("decode{{.MessageName}}() %s", err.Error())
 }
+{{end}}{{end}}{{end}}
+
+{{ define "OPTIONAL_DECODE_SINGLE" }}
+{{ $fields := .FieldList.OptionalField }}
+{{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
+{{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}{
+{{upperCaseFirstLetter .FieldName}}: {{decodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}C),
+}{{else}}
+{{lowCaseFirstLetter .MessageName}} := new({{.ProtoFileName}}.{{.MessageName}})
+{{lowCaseFirstLetter .MessageName}}Value, err := {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C)
+if err != nil {
+return nil, fmt.Errorf("decode{{.MessageName}}() %s", err.Error())
+}
+{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}} = {{lowCaseFirstLetter .MessageName}}Value
 {{end}}{{end}}{{end}}
