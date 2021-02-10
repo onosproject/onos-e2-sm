@@ -31,6 +31,7 @@ type fieldList struct {
 	RepeatedField []elementaryField
 	OneOfField    []elementaryField
 	OptionalField []elementaryField
+	SingleItem    bool
 }
 
 type elementaryField struct {
@@ -144,17 +145,20 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			repeated := false
 			oneof := false
 			var cstructName string
+			var items int = 0
 
 			fieldItems := fieldList{
 				RepeatedField: make([]elementaryField, 0),
 				OneOfField:    make([]elementaryField, 0),
 				OptionalField: make([]elementaryField, 0),
+				SingleItem:    true,
 			}
 
 			flds := msg.Descriptor().GetField()
 			//fmt.Fprintf(buf, "%03d. Message Descriptor() %v\n", i, msg.Descriptor())
 
 			for _, fld := range flds {
+				items++
 				fmt.Fprintf(buf, "%03d. Field() -- %v\n ", i, fld.String())
 
 				var elemField elementaryField
@@ -193,6 +197,10 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					}
 				}
 
+			}
+
+			if items > 1 {
+				fieldItems.SingleItem = false
 			}
 
 			// Filling in data structure to pass to template with correct input
