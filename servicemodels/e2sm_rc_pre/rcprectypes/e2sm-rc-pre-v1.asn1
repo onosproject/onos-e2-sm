@@ -62,6 +62,7 @@ maxNR                              INTEGER ::= 4096
 maxEARFCN                          INTEGER ::= 262143
 maxPCI                             INTEGER ::= 503
 maxPciRange                        INTEGER ::= 100
+maxofRANparameters					  INTEGER ::= 65535
 
 RIC-Style-Type  ::= INTEGER
 RIC-Style-Name  ::= PrintableString(SIZE(1..150,...))
@@ -69,31 +70,71 @@ RIC-Format-Type ::= INTEGER
 
 
 -- **************************************************************
--- E2SM-RC-PRE Service model IEs
+-- E2SM-RC-PRE Common IEs
 -- **************************************************************
+RIC-Control-Message-Priority ::= INTEGER
+
+RANparameter-Item ::= SEQUENCE {
+	ranParameter-ID			RANparameter-ID,
+	ranParameter-Value		RANparameter-Value,
+	...
+}
+
+RANparameter-ID ::= INTEGER (0..maxofRANparameters)
+
+RANparameter-Value ::= CHOICE{
+	valueInt	INTEGER,
+	valueEnum	INTEGER,
+	valueBool	BOOLEAN,
+	valueBitS	BIT STRING,
+	valueOctS	OCTET STRING,
+	valuePrtS	PrintableString,
+	...
+}
+
+RANparameterDef-Item ::= SEQUENCE {
+	ranParameter-ID		RANparameter-ID,
+	ranParameter-Name		RANparameter-Name,
+	ranParameter-Type		RANparameter-Type,
+	...
+}
+
+RANparameter-Name ::= PrintableString(SIZE(1..150,...))
+
+RANparameter-Type ::= ENUMERATED{
+	integer,
+	enumerated,
+	boolean,
+	bit-string,
+	octet-string,
+	printable-string,
+	...
+}
+
+RC-PRE-Trigger-Type ::= ENUMERATED{
+    upon-change,
+    periodic,
+    ...
+}
 
 -- **************************************************************
 -- Event Trigger Definition OCTET STRING contents
 -- **************************************************************
 
 -- E2SM-RC-PRE-EventTriggerDefinition IE
-E2SM-RC-PRE-EventTriggerDefinition ::= CHOICE {
-        eventDefinition-Format1         E2SM-RC-PRE-EventTriggerDefinition-Format1,
-        ...
+E2SM-RC-PRE-EventTriggerDefinition ::= SEQUENCE{
+	eventDefinition-formats			CHOICE{
+		eventDefinition-Format1			E2SM-RC-PRE-EventTriggerDefinition-Format1,
+		...
+	},
+	...
 }
 
--- E2SM-RC-PRE-EventTriggerDefinition IE is used for Event Trigger Definition Format 1
-E2SM-RC-PRE-EventTriggerDefinition-Format1 ::= SEQUENCE {
-        policyTest-List SEQUENCE (SIZE(1..maxofMessageProtocolTests)) OF Trigger-ConditionIE-Item OPTIONAL,
-        ...
+E2SM-RC-PRE-EventTriggerDefinition-Format1 ::= SEQUENCE{
+   triggerType                      RC-PRE-Trigger-Type,
+	reportingPeriod-ms					INTEGER  OPTIONAL,
+	...
 }
-
-Trigger-ConditionIE-Item ::= SEQUENCE {
-        report-Period-IE                RT-Period-IE,
-        ...
-}
-
-RT-Period-IE ::= ENUMERATED { ms10, ms20, ms32, ms40, ms60, ms64, ms70, ms80, ms128, ms160, ms256, ms320, ms512, ms640, ms1024, ms1280, ms2048, ms2560, ms5120, ms10240, ...}
 
 -- **************************************************************
 -- Action Definition OCTET STRING contents
@@ -150,6 +191,59 @@ NRT ::= SEQUENCE {
     cell-Size   Cell-Size,
     pci         PCI,
     ...
+}
+
+-- **************************************************************
+-- Control Header OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-ControlHeader IE
+E2SM-RC-PRE-ControlHeader ::= CHOICE{
+	controlHeader-Format1		E2SM-RC-PRE-ControlHeader-Format1,
+	...
+}
+
+-- E2SM-RC-PRE-ControlHeader Format 1
+E2SM-RC-PRE-ControlHeader-Format1 ::= SEQUENCE{
+	rc-command					   RC-PRE-Command,
+	ric-Control-Message-Priority	RIC-Control-Message-Priority	OPTIONAL,
+	...
+}
+
+RC-PRE-Command::= ENUMERATED {setParameters, ... }
+
+
+-- **************************************************************
+-- Control Message OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-ControlHeader IE
+E2SM-RC-PRE-ControlMessage ::= CHOICE{
+	controlMessage		E2SM-RC-PRE-ControlMessage-Format1,
+	...
+}
+
+-- E2SM-RC-PRE-ControlMessage Format 1
+E2SM-RC-PRE-ControlMessage-Format1 ::= SEQUENCE{
+	parameterType			RANparameterDef-Item,
+   parameterVal         RANparameter-Value,
+	...
+}
+
+-- **************************************************************
+-- Control Outcome OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-ControlOutcome IE
+E2SM-RC-PRE-ControlOutcome ::= CHOICE{
+	controlOutcome-Format1		E2SM-RC-PRE-ControlOutcome-Format1,
+	...
+}
+
+-- E2SM-RC-PRE-ControlOutcome Format 1
+E2SM-RC-PRE-ControlOutcome-Format1 ::= SEQUENCE{
+	outcomeElement-List		SEQUENCE (SIZE(1..maxofRANparameters)) OF RANparameter-Item OPTIONAL,
+	...
 }
 
 -- ***************************************************************

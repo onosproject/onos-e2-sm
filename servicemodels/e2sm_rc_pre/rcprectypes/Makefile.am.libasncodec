@@ -12,16 +12,29 @@ ASN_MODULE_SRCS=	\
 	./RIC-Style-Type.c	\
 	./RIC-Style-Name.c	\
 	./RIC-Format-Type.c	\
+	./RIC-Control-Message-Priority.c	\
+	./RANparameter-Item.c	\
+	./RANparameter-ID.c	\
+	./RANparameter-Value.c	\
+	./RANparameterDef-Item.c	\
+	./RANparameter-Name.c	\
+	./RANparameter-Type.c	\
+	./RC-PRE-Trigger-Type.c	\
 	./E2SM-RC-PRE-EventTriggerDefinition.c	\
 	./E2SM-RC-PRE-EventTriggerDefinition-Format1.c	\
-	./Trigger-ConditionIE-Item.c	\
-	./RT-Period-IE.c	\
 	./E2SM-RC-PRE-ActionDefinition.c	\
 	./E2SM-RC-PRE-IndicationHeader.c	\
 	./E2SM-RC-PRE-IndicationHeader-Format1.c	\
 	./E2SM-RC-PRE-IndicationMessage.c	\
 	./E2SM-RC-PRE-IndicationMessage-Format1.c	\
 	./NRT.c	\
+	./E2SM-RC-PRE-ControlHeader.c	\
+	./E2SM-RC-PRE-ControlHeader-Format1.c	\
+	./RC-PRE-Command.c	\
+	./E2SM-RC-PRE-ControlMessage.c	\
+	./E2SM-RC-PRE-ControlMessage-Format1.c	\
+	./E2SM-RC-PRE-ControlOutcome.c	\
+	./E2SM-RC-PRE-ControlOutcome-Format1.c	\
 	./E2SM-RC-PRE-RANfunction-Description.c	\
 	./RANfunction-Name.c	\
 	./RIC-EventTriggerStyle-List.c	\
@@ -41,16 +54,29 @@ ASN_MODULE_HDRS=	\
 	./RIC-Style-Type.h	\
 	./RIC-Style-Name.h	\
 	./RIC-Format-Type.h	\
+	./RIC-Control-Message-Priority.h	\
+	./RANparameter-Item.h	\
+	./RANparameter-ID.h	\
+	./RANparameter-Value.h	\
+	./RANparameterDef-Item.h	\
+	./RANparameter-Name.h	\
+	./RANparameter-Type.h	\
+	./RC-PRE-Trigger-Type.h	\
 	./E2SM-RC-PRE-EventTriggerDefinition.h	\
 	./E2SM-RC-PRE-EventTriggerDefinition-Format1.h	\
-	./Trigger-ConditionIE-Item.h	\
-	./RT-Period-IE.h	\
 	./E2SM-RC-PRE-ActionDefinition.h	\
 	./E2SM-RC-PRE-IndicationHeader.h	\
 	./E2SM-RC-PRE-IndicationHeader-Format1.h	\
 	./E2SM-RC-PRE-IndicationMessage.h	\
 	./E2SM-RC-PRE-IndicationMessage-Format1.h	\
 	./NRT.h	\
+	./E2SM-RC-PRE-ControlHeader.h	\
+	./E2SM-RC-PRE-ControlHeader-Format1.h	\
+	./RC-PRE-Command.h	\
+	./E2SM-RC-PRE-ControlMessage.h	\
+	./E2SM-RC-PRE-ControlMessage-Format1.h	\
+	./E2SM-RC-PRE-ControlOutcome.h	\
+	./E2SM-RC-PRE-ControlOutcome-Format1.h	\
 	./E2SM-RC-PRE-RANfunction-Description.h	\
 	./RANfunction-Name.h	\
 	./RIC-EventTriggerStyle-List.h	\
@@ -59,6 +85,8 @@ ASN_MODULE_HDRS=	\
 ASN_MODULE_HDRS+=./OPEN_TYPE.h
 ASN_MODULE_SRCS+=./OPEN_TYPE.c
 ASN_MODULE_HDRS+=./constr_CHOICE.h
+ASN_MODULE_HDRS+=./BOOLEAN.h
+ASN_MODULE_SRCS+=./BOOLEAN.c
 ASN_MODULE_HDRS+=./INTEGER.h
 ASN_MODULE_SRCS+=./INTEGER.c
 ASN_MODULE_HDRS+=./NativeEnumerated.h

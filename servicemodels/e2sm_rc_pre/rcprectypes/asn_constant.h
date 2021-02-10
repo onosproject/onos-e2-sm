@@ -16,6 +16,7 @@ extern "C" {
 #define maxEARFCN (262143)
 #define maxPCI (503)
 #define maxPciRange (100)
+#define maxofRANparameters (65535)
 
 
 #ifdef __cplusplus

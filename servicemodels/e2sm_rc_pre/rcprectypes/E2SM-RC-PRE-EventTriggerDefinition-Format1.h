@@ -12,25 +12,18 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "asn_SEQUENCE_OF.h"
-#include "constr_SEQUENCE_OF.h"
+#include "RC-PRE-Trigger-Type.h"
+#include "NativeInteger.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Forward declarations */
-struct Trigger_ConditionIE_Item;
-
 /* E2SM-RC-PRE-EventTriggerDefinition-Format1 */
 typedef struct E2SM_RC_PRE_EventTriggerDefinition_Format1 {
-	struct E2SM_RC_PRE_EventTriggerDefinition_Format1__policyTest_List {
-		A_SEQUENCE_OF(struct Trigger_ConditionIE_Item) list;
-		
-		/* Context for parsing across buffer boundaries */
-		asn_struct_ctx_t _asn_ctx;
-	} *policyTest_List;
+	RC_PRE_Trigger_Type_t	 triggerType;
+	long	*reportingPeriod_ms;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
@@ -43,7 +36,7 @@ typedef struct E2SM_RC_PRE_EventTriggerDefinition_Format1 {
 /* Implementation */
 extern asn_TYPE_descriptor_t asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_Format1;
 extern asn_SEQUENCE_specifics_t asn_SPC_E2SM_RC_PRE_EventTriggerDefinition_Format1_specs_1;
-extern asn_TYPE_member_t asn_MBR_E2SM_RC_PRE_EventTriggerDefinition_Format1_1[1];
+extern asn_TYPE_member_t asn_MBR_E2SM_RC_PRE_EventTriggerDefinition_Format1_1[2];
 
 #ifdef __cplusplus
 }

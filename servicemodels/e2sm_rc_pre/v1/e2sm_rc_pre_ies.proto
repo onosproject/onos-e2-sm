@@ -16,6 +16,7 @@ option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre
 import "validate/v1/validate.proto";
 
 // enumerated from e2sm-rc-pre-v1.asn1:49
+// {Cell-Size}
 enum CellSize {
     CELL_SIZE_FEMTO = 0;
     CELL_SIZE_ENTERPRISE = 1;
@@ -23,228 +24,309 @@ enum CellSize {
     CELL_SIZE_MACRO = 3;
 };
 
-// enumerated from e2sm-rc-pre-v1.asn1:96
-enum RtPeriodIe {
-    RT_PERIOD_IE_MS10 = 0;
-    RT_PERIOD_IE_MS20 = 1;
-    RT_PERIOD_IE_MS32 = 2;
-    RT_PERIOD_IE_MS40 = 3;
-    RT_PERIOD_IE_MS60 = 4;
-    RT_PERIOD_IE_MS64 = 5;
-    RT_PERIOD_IE_MS70 = 6;
-    RT_PERIOD_IE_MS80 = 7;
-    RT_PERIOD_IE_MS128 = 8;
-    RT_PERIOD_IE_MS160 = 9;
-    RT_PERIOD_IE_MS256 = 10;
-    RT_PERIOD_IE_MS320 = 11;
-    RT_PERIOD_IE_MS512 = 12;
-    RT_PERIOD_IE_MS640 = 13;
-    RT_PERIOD_IE_MS1024 = 14;
-    RT_PERIOD_IE_MS1280 = 15;
-    RT_PERIOD_IE_MS2048 = 16;
-    RT_PERIOD_IE_MS2560 = 17;
-    RT_PERIOD_IE_MS5120 = 18;
-    RT_PERIOD_IE_MS10240 = 19;
+// enumerated from e2sm-rc-pre-v1.asn1:105
+// {RANparameter-Type}
+enum RanparameterType {
+    RANPARAMETER_TYPE_INTEGER = 0;
+    RANPARAMETER_TYPE_ENUMERATED = 1;
+    RANPARAMETER_TYPE_BOOLEAN = 2;
+    RANPARAMETER_TYPE_BIT_STRING = 3;
+    RANPARAMETER_TYPE_OCTET_STRING = 4;
+    RANPARAMETER_TYPE_PRINTABLE_STRING = 5;
+};
+
+// enumerated from e2sm-rc-pre-v1.asn1:115
+// {RC-PRE-Trigger-Type}
+enum RcPreTriggerType {
+    RC_PRE_TRIGGER_TYPE_UPON_CHANGE = 0;
+    RC_PRE_TRIGGER_TYPE_PERIODIC = 1;
+};
+
+// enumerated from e2sm-rc-pre-v1.asn1:211
+// {RC-PRE-Command}
+enum RcPreCommand {
+    RC_PRE_COMMAND_SET_PARAMETERS = 0;
 };
 
 // sequence from e2sm-rc-pre-v1.asn1:22
 message Eutracgi {
-    PlmnIdentity p_lmn_identity = 1;
-    EutracellIdentity e_utracell_identity = 2;
+    PlmnIdentity p_lmn_identity = 1 [json_name="EUTRACGI:pLMN_Identity"];
+    EutracellIdentity e_utracell_identity = 2 [json_name="EUTRACGI:eUTRACellIdentity"];
 };
 
 // sequence from e2sm-rc-pre-v1.asn1:28
 message Nrcgi {
-    PlmnIdentity p_lmn_identity = 1;
-    NrcellIdentity n_rcell_identity = 2;
+    PlmnIdentity p_lmn_identity = 1 [json_name="NRCGI:pLMN_Identity"];
+    NrcellIdentity n_rcell_identity = 2 [json_name="NRCGI:nRCellIdentity"];
 };
 
 // sequence from e2sm-rc-pre-v1.asn1:34
 message CellGlobalId {
     // choice from e2sm-rc-pre-v1.asn1:34
     oneof cell_global_id {
-        Nrcgi nr_cgi = 1;
-        Eutracgi e_utra_cgi = 2;
+        Nrcgi nr_cgi = 1 [json_name="CellGlobalID:nr_CGI"];
+        Eutracgi e_utra_cgi = 2 [json_name="CellGlobalID:eUTRA_CGI"];
     }
 };
 
 // range of Integer from e2sm-rc-pre-v1.asn1:40
 message Earfcn {
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 262143}];
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 262143}, json_name="EARFCN:value"];
 };
 
 // range of Integer from e2sm-rc-pre-v1.asn1:41
 message Pci {
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 503}];
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 503}, json_name="PCI:value"];
 };
 
 // sequence from e2sm-rc-pre-v1.asn1:44
 message PciRange {
-    Pci lower_pci = 1;
-    Pci upper_pci = 2;
+    Pci lower_pci = 1 [json_name="PCI-Range:lower_pci"];
+    Pci upper_pci = 2 [json_name="PCI-Range:upper_pci"];
 };
 
 // constant Integer from e2sm-rc-pre-v1.asn1:58
 message MaxofMessageProtocolTests {
-    int32 value = 1 [(validate.v1.rules).int32.const = 15];
+    int32 value = 1 [(validate.v1.rules).int32.const = 15, json_name="MaxofMessageProtocolTests:value"];
 };
 
 // constant Integer from e2sm-rc-pre-v1.asn1:59
 message MaxofRicstyles {
-    int32 value = 1 [(validate.v1.rules).int32.const = 63];
+    int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="MaxofRicStyles:value"];
 };
 
 // constant Integer from e2sm-rc-pre-v1.asn1:60
 message MaxPlmn {
-    int32 value = 1 [(validate.v1.rules).int32.const = 12];
+    int32 value = 1 [(validate.v1.rules).int32.const = 12, json_name="MaxPLMN:value"];
 };
 
 // constant Integer from e2sm-rc-pre-v1.asn1:61
 message MaxNr {
-    int32 value = 1 [(validate.v1.rules).int32.const = 4096];
+    int32 value = 1 [(validate.v1.rules).int32.const = 4096, json_name="MaxNR:value"];
 };
 
 // constant Integer from e2sm-rc-pre-v1.asn1:62
 message MaxEarfcn {
-    int32 value = 1 [(validate.v1.rules).int32.const = 262143];
+    int32 value = 1 [(validate.v1.rules).int32.const = 262143, json_name="MaxEARFCN:value"];
 };
 
 // constant Integer from e2sm-rc-pre-v1.asn1:63
 message MaxPci {
-    int32 value = 1 [(validate.v1.rules).int32.const = 503];
+    int32 value = 1 [(validate.v1.rules).int32.const = 503, json_name="MaxPCI:value"];
 };
 
 // constant Integer from e2sm-rc-pre-v1.asn1:64
 message MaxPciRange {
-    int32 value = 1 [(validate.v1.rules).int32.const = 100];
+    int32 value = 1 [(validate.v1.rules).int32.const = 100, json_name="MaxPCIRange:value"];
 };
 
-// range of Integer from e2sm-rc-pre-v1.asn1:67
+// constant Integer from e2sm-rc-pre-v1.asn1:65
+message MaxofRanparameters {
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="MaxOfRanParameters:value"];
+};
+
+// range of Integer from e2sm-rc-pre-v1.asn1:68
 message RicStyleType {
-    int32 value = 1;
+    int32 value = 1 [json_name="RIC-Style-Type:value"];
 };
 
-// range of Integer from e2sm-rc-pre-v1.asn1:80
+// range of Integer from e2sm-rc-pre-v1.asn1:75
 message RicFormatType {
-    int32 value = 1;
+    int32 value = 1 [json_name="RIC-Format-Type:value"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:81
+// range of Integer from e2sm-rc-pre-v1.asn1:77
+message RicControlMessagePriority {
+    int32 value = 1 [json_name="RIC-Control-Message-Priority:value"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:78
+message RanparameterItem {
+    RanparameterId ran_parameter_id = 1 [json_name="RANparameter_Item:ranParameter_ID"];
+    RanparameterValue ran_parameter_value = 2 [json_name="RANparameter_Item:ranParameter_Value"];
+};
+
+// range of Integer from e2sm-rc-pre-v1.asn1:83
+message RanparameterId {
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 65535}, json_name="RANparameter-ID:value"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:86
+message RanparameterValue {
+    // choice from e2sm-rc-pre-v1.asn1:86
+    oneof ranparameter_value {
+        int32 value_int = 1 [json_name="RANparameter_Value:valueInt"];
+        int32 value_enum = 2 [json_name="RANparameter_Value:valueEnum"];
+        bool value_bool = 3 [json_name="RANparameter_Value:valueBool"];
+        BitString value_bit_s = 4 [json_name="RANparameter_Value:valueBitS"];
+        int32 value_oct_s = 5 [json_name="RANparameter_Value:valueOctS"];
+        int32 value_prt_s = 6 [json_name="RANparameter_Value:valuePrtS"];
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:96
+message RanparameterDefItem {
+    RanparameterId ran_parameter_id = 1 [json_name="RANparameterDef_Item:ranParameter_ID"];
+    RanparameterName ran_parameter_name = 2 [json_name="RANparameterDef_Item:ranParameter_Name"];
+    RanparameterType ran_parameter_type = 3 [json_name="RANparameterDef_Item:ranParameter_Type"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:129
 message E2SmRcPreEventTriggerDefinition {
-    // choice from e2sm-rc-pre-v1.asn1:81
-    oneof e2_sm_rc_pre_event_trigger_definition {
-        E2SmRcPreEventTriggerDefinitionFormat1 event_definition_format1 = 1;
+    oneof e2sm_rc_pre_event_trigger_definition_event_definition_formats {
+        E2SmRcPreEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name="E2SM_RC_PRE_EventTriggerDefinition:E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_Format1"];
     }
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:87
+// sequence from e2sm-rc-pre-v1.asn1:134
 message E2SmRcPreEventTriggerDefinitionFormat1 {
-    repeated TriggerConditionIeItem policy_test_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 15}];
+    RcPreTriggerType trigger_type = 1 [json_name="E2SM_RC_PRE_EventTriggerDefinition_Format1:triggerType"];
+    int32 reporting_period_ms = 2 [json_name="E2SM_RC_PRE_EventTriggerDefinition_Format1:reportingPeriod_ms"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:92
-message TriggerConditionIeItem {
-    RtPeriodIe report_period_ie = 1;
-};
-
-// sequence from e2sm-rc-pre-v1.asn1:104
+// sequence from e2sm-rc-pre-v1.asn1:145
 message E2SmRcPreActionDefinition {
-    RicStyleType ric_style_type = 1;
+    RicStyleType ric_style_type = 1 [json_name="E2SM-RC-PRE-ActionDefinition:ric_Style_Type"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:114
+// sequence from e2sm-rc-pre-v1.asn1:155
 message E2SmRcPreIndicationHeader {
-    // choice from e2sm-rc-pre-v1.asn1:114
+    // choice from e2sm-rc-pre-v1.asn1:155
     oneof e2_sm_rc_pre_indication_header {
-        E2SmRcPreIndicationHeaderFormat1 indication_header_format1 = 1;
+        E2SmRcPreIndicationHeaderFormat1 indication_header_format1 = 1 [json_name="E2SM-RC-PRE-IndicationHeader:indicationHeader_Format1"];
     }
-};
-
-// sequence from e2sm-rc-pre-v1.asn1:120
-message E2SmRcPreIndicationHeaderFormat1 {
-    CellGlobalId cgi = 1;
-};
-
-// sequence from e2sm-rc-pre-v1.asn1:130
-message E2SmRcPreIndicationMessage {
-    // choice from e2sm-rc-pre-v1.asn1:130
-    oneof e2_sm_rc_pre_indication_message {
-        RicStyleType ric_style_type = 1;
-        E2SmRcPreIndicationMessageFormat1 indication_message_format1 = 2;
-    }
-};
-
-// sequence from e2sm-rc-pre-v1.asn1:137
-message E2SmRcPreIndicationMessageFormat1 {
-    CellGlobalId cgi = 1;
-    Earfcn dl_earfcn = 2;
-    CellSize cell_size = 3;
-    repeated PciRange pci_pool = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 100}];
-    Pci pci = 5;
-    repeated Nrt neighbors = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4096}];
-};
-
-// sequence from e2sm-rc-pre-v1.asn1:147
-message Nrt {
-    int32 nr_index = 1;
-    CellGlobalId cgi = 2;
-    Earfcn dl_earfcn = 3;
-    CellSize cell_size = 4;
-    Pci pci = 5;
 };
 
 // sequence from e2sm-rc-pre-v1.asn1:161
-message E2SmRcPreRanfunctionDescription {
-    RanfunctionName ran_function_name = 1;
-    E2SmRcPreRanfunctionItem001 e2_sm_rc_pre_ranfunction_item = 2;
-
-    message E2SmRcPreRanfunctionItem001 {
-        repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
-        repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}];
-    }
+message E2SmRcPreIndicationHeaderFormat1 {
+    CellGlobalId cgi = 1 [json_name="E2SM-RC-PRE-IndicationHeader-Format1:cgi"];
 };
 
 // sequence from e2sm-rc-pre-v1.asn1:171
+message E2SmRcPreIndicationMessage {
+    // choice from e2sm-rc-pre-v1.asn1:171
+    oneof e2_sm_rc_pre_indication_message {
+        RicStyleType ric_style_type = 1 [json_name="E2SM-RC-PRE-IndicationMessage:ric_Style_Type"];
+        E2SmRcPreIndicationMessageFormat1 indication_message_format1 = 2 [json_name="E2SM-RC-PRE-IndicationMessage:indicationMessage_Format1"];
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:178
+message E2SmRcPreIndicationMessageFormat1 {
+    CellGlobalId cgi = 1 [json_name="E2SM-RC-PRE-IndicationMessage-Format1:cgi"];
+    Earfcn dl_earfcn = 2 [json_name="E2SM-RC-PRE-IndicationMessage-Format1:dl_EARFCN"];
+    CellSize cell_size = 3 [json_name="E2SM-RC-PRE-IndicationMessage-Format1:cell_Size"];
+    repeated PciRange pci_pool = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 100}, json_name="E2SM-RC-PRE-IndicationMessage-Format1:pci_Pool"];
+    Pci pci = 5 [json_name="E2SM-RC-PRE-IndicationMessage-Format1:pci"];
+    repeated Nrt neighbors = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4096}, json_name="E2SM-RC-PRE-IndicationMessage-Format1:neighbors"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:188
+message Nrt {
+    int32 nr_index = 1 [json_name="NRT:nrIndex"];
+    CellGlobalId cgi = 2 [json_name="NRT:cgi"];
+    Earfcn dl_earfcn = 3 [json_name="NRT:dl_EARFCN"];
+    CellSize cell_size = 4 [json_name="NRT:cell_Size"];
+    Pci pci = 5 [json_name="NRT:pci"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:202
+message E2SmRcPreControlHeader {
+    // choice from e2sm-rc-pre-v1.asn1:202
+    oneof e2_sm_rc_pre_control_header {
+        E2SmRcPreControlHeaderFormat1 control_header_format1 = 1 [json_name="E2SM-RC-PRE-ControlHeader:controlHeader-Format1"];
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:208
+message E2SmRcPreControlHeaderFormat1 {
+    RcPreCommand rc_command = 1 [json_name="E2SM-RC-PRE-ControlHeader-Format1:rc-command"];
+    RicControlMessagePriority ric_control_message_priority = 2 [json_name="E2SM-RC-PRE-ControlHeader-Format1:ric-Control-Message-Priority"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:222
+message E2SmRcPreControlMessage {
+    // choice from e2sm-rc-pre-v1.asn1:222
+    oneof e2_sm_rc_pre_control_message {
+        E2SmRcPreControlMessageFormat1 control_message = 1 [json_name="E2SM-RC-PRE-ControlMessage:controlMessage"];
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:228
+message E2SmRcPreControlMessageFormat1 {
+    RanparameterDefItem parameter_type = 1 [json_name="E2SM-RC-PRE-ControlMessage-Format1:parameterType"];
+    RanparameterValue parameter_val = 2 [json_name="E2SM-RC-PRE-ControlMessage-Format1:parameterVal"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:239
+message E2SmRcPreControlOutcome {
+    // choice from e2sm-rc-pre-v1.asn1:239
+    oneof e2_sm_rc_pre_control_outcome {
+        E2SmRcPreControlOutcomeFormat1 control_outcome_format1 = 1 [json_name="E2SM-RC-PRE-ControlOutcome:controlOutcome-Format1"];
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:245
+message E2SmRcPreControlOutcomeFormat1 {
+    repeated RanparameterItem outcome_element_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="E2SM-RC-PRE-ControlOutcome-Format1:outcomeElement-List"];
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:253
+message E2SmRcPreRanfunctionDescription {
+    RanfunctionName ran_function_name = 1 [json_name="E2SM_RC_PRE_RANfunction_Description:ranFunction_Name"];
+    E2SmRcPreRanfunctionItem001 e2_sm_rc_pre_ranfunction_item = 2 [json_name="E2SM_RC_PRE_RANfunction_Description:e2SM_RC_PRE_RANfunction_Item"];
+
+    message E2SmRcPreRanfunctionItem001 {
+        repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_RC_PRE_RANfunction_Description__e2SM_RC_PRE_RANfunction_Item:ric_EventTriggerStyle_List"];
+        repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_RC_PRE_RANfunction_Description__e2SM_RC_PRE_RANfunction_Item:ric_ReportStyle_List"];
+    }
+};
+
+// sequence from e2sm-rc-pre-v1.asn1:263
 message RanfunctionName {
-    string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
-    string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}];
-    string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
-    int32 ran_function_instance = 4;
+    string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RANfunction_Name:ranFunction_ShortName"];
+    string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}, json_name="RANfunction_Name:ranFunction_E2SM_OID"];
+    string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RANfunction_Name:ranFunction_Description"];
+    int32 ran_function_instance = 4 [json_name="RANfunction_Name:ranFunction_Instance"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:179
+// sequence from e2sm-rc-pre-v1.asn1:271
 message RicEventTriggerStyleList {
-    RicStyleType ric_event_trigger_style_type = 1;
-    RicStyleName ric_event_trigger_style_name = 2;
-    RicFormatType ric_event_trigger_format_type = 3;
+    RicStyleType ric_event_trigger_style_type = 1 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Type"];
+    RicStyleName ric_event_trigger_style_name = 2 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Name"];
+    RicFormatType ric_event_trigger_format_type = 3 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerFormat_Type"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:186
+// sequence from e2sm-rc-pre-v1.asn1:278
 message RicReportStyleList {
-    RicStyleType ric_report_style_type = 1;
-    RicStyleName ric_report_style_name = 2;
-    RicFormatType ric_indication_header_format_type = 3;
-    RicFormatType ric_indication_message_format_type = 4;
+    RicStyleType ric_report_style_type = 1 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Type"];
+    RicStyleName ric_report_style_name = 2 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Name"];
+    RicFormatType ric_indication_header_format_type = 3 [json_name="RIC_ReportStyle_List:ric_IndicationHeaderFormat_Type"];
+    RicFormatType ric_indication_message_format_type = 4 [json_name="RIC_ReportStyle_List:ric_IndicationMessageFormat_Type"];
 };
+
+message RanparameterName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RANparameter-Name:value"];
+}
 
 message RicStyleName {
-    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}];
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RIC-Style-Name:value"];
 }
 
 message PlmnIdentity {
-    bytes value = 1 [(validate.v1.rules).bytes.len = 3];
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name="PLMN-Identity:value"];
 }
 
 message EutracellIdentity {
-    BitString value = 1; //28
+    BitString value = 1 [json_name="EUTRACellIdentity:value"]; //28
 }
 
 message NrcellIdentity {
-    BitString value = 1; //36
+    BitString value = 1 [json_name="NRCellIdentity:value"]; //36
 }
 
 message BitString {
-    uint64 value = 1;
-    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64];
+    uint64 value = 1 [json_name="BIT_STRING:value"];
+    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name="BIT_STRING:len"];
 }
 
