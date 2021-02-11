@@ -19,11 +19,23 @@ const moduleName = "cgo"
 type msgDataStruct struct {
 	MessageName   string
 	ProtoFileName string
+	PackageName   string
 	CstructName   string
 	FieldList     fieldList
 	Repeated      bool // Since there could be various combinations of such types
 	OneOf         bool // We need to store all of them at the global level
 	Optional      bool // each case should be handled by specific nested template
+	//Dependencies  dependencies
+}
+
+//type dependencies struct {
+//	Multiple         bool
+//	DependenciesList []string
+//}
+
+type basicTypes struct {
+	ProtoFileName string
+	PackageName   string
 }
 
 // Defines data structure to pass to template
@@ -48,6 +60,7 @@ type elementaryField struct {
 type enumDataStruct struct {
 	MessageName   string
 	ProtoFileName string
+	PackageName   string
 	CstructName   string
 	FieldList     []elementaryField
 }
@@ -86,14 +99,19 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	// ToDo: Discuss it with Sean
 
 	// Missing types of structures to handle so far (TO BE UPDATED):
-	// - Message with multiple Options inside --> implement with nested templates
-	// - OneOf structures
-	// - Repeated (generates lists)
-	// - Enums (missing valid C-names of leafs and proper decoding (match data type))
-	// - doesn't support anonymous structs (yet)
+	// - Message with multiple Options inside --> implement with nested templates -- done
+	// - OneOf structures -- done
+	// - Repeated (generates lists) -- done
+	// - Enums (missing valid C-names of leafs and proper decoding (match data type)) -- done
+	// - doesn't support anonymous structs (yet) -- investigating in it --> harder than it seems to
 
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
+
+		basicTypesInfo := basicTypes{
+			ProtoFileName: f.Name().Split()[0],
+			PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(f.Name().Split()[0])))),
+		}
 
 		fmt.Fprintf(buf, "--- %v ---\n", f.Name().Split()[0])
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
@@ -105,10 +123,11 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			enumData := enumDataStruct{
 				MessageName:   enum.Name().String(),
 				ProtoFileName: f.Name().Split()[0],
+				PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(f.Name().Split()[0])))),
 				CstructName:   "",
 				FieldList:     make([]elementaryField, 0),
 			}
-			enumData.CstructName = enum.Name().String() // Don't know how to get it (yet)
+			enumData.CstructName = extractEnumCstructName(enum.SourceCodeInfo().LeadingComments()) //.Name().String() // Don't know how to get it (yet)
 
 			var listItem elementaryField
 
@@ -117,7 +136,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetNumber() %v\n", j, value.GetNumber())
 				listItem.FieldName = value.GetName()
 				listItem.ProtoFileName = f.Name().Split()[0]
-				listItem.CstructLeafName = squeezeDoubleDash(value.GetName()) // Don't know how to obtain (yet)
+				listItem.MessageName = enum.Name().String()
+				listItem.CstructLeafName = adjustEnumLeafName(squeezeDoubleDash(value.GetName()), enumData.CstructName) // Don't know how to obtain (yet)
 				enumData.FieldList = append(enumData.FieldList, listItem)
 			}
 
@@ -128,6 +148,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				"underscoreToDash":     underscoreToDash,
 				"tolow":                strings.ToLower,
 				"cleanDashes":          cleanDashes,
+				"cutIES":               cutIES,
 			}).ParseFiles("enum.tpl")
 			if err != nil {
 				//fmt.Errorf("couldn't parse template :/ %v", err)
@@ -153,6 +174,10 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				OptionalField: make([]elementaryField, 0),
 				SingleItem:    true,
 			}
+			//deps := dependencies{
+			//	Multiple:         false,
+			//	DependenciesList: make([]string, 0),
+			//}
 
 			flds := msg.Descriptor().GetField()
 			//fmt.Fprintf(buf, "%03d. Message Descriptor() %v\n", i, msg.Descriptor())
@@ -163,7 +188,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 				var elemField elementaryField
 
-				elemField.FieldName = fld.GetName()
+				elemField.FieldName = adjustFieldName(fld.GetName())
 				elemField.CstructLeafName = extractCstructFieldName(fld.GetJsonName())
 
 				cstructName = extractCstructName(fld.GetJsonName())
@@ -171,6 +196,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 				elemField.DataType = convertDataType(extractDataType(fld.GetType().String()),
 					extractDependentType(msg.Package().ProtoName().String(), fld.GetTypeName()))
+
+				//deps.DependenciesList = putDependency(deps.DependenciesList, elemField.CstructName)
 
 				elemField.MessageName = msg.Name().String()
 				elemField.ProtoFileName = f.Name().Split()[0]
@@ -202,16 +229,21 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			if items > 1 {
 				fieldItems.SingleItem = false
 			}
+			//if len(deps.DependenciesList) > 1 {
+			//	deps.Multiple = true
+			//}
 
 			// Filling in data structure to pass to template with correct input
 			msgData := msgDataStruct{
 				MessageName:   msg.Name().String(),
 				ProtoFileName: f.Name().Split()[0],
+				PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(f.Name().Split()[0])))),
 				CstructName:   cstructName,
 				FieldList:     fieldItems,
 				OneOf:         oneof,
 				Repeated:      repeated,
 				Optional:      optional,
+				//Dependencies:  deps,
 			}
 			fmt.Fprintf(buf, "%03d. Gathered Message Data -- %v\n ", i, msgData)
 
@@ -226,6 +258,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				"encodeDataType":       encodeDataType,
 				"checkElementaryType":  checkElementaryType,
 				"cleanDashes":          cleanDashes,
+				"cutIES":               cutIES,
 			}).ParseFiles("message.tpl")
 			if err != nil {
 				//fmt.Errorf("couldn't parse template :/ %v", err)
@@ -233,7 +266,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 
 			// Generating new .go file
-			m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+".go", tplMsg, msgData)
+			m.OverwriteGeneratorTemplateFile(msgData.CstructName+".go", tplMsg, msgData)
 		}
 
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
@@ -256,8 +289,24 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		//wc.Close()
 		//io.Copy(os.Stdout, rc)
 
-	}
+		// Printing basic types
+		basicTypesList := getBasicTypes()
+		for _, item := range basicTypesList {
+			basicTpl, err := template.New(item + ".tpl").Funcs(template.FuncMap{
+				"dashToUnderscore": dashToUnderscore,
+				"underscoreToDash": underscoreToDash,
+				"cutIES":           cutIES,
+			}).ParseFiles(item + ".tpl")
+			if err != nil {
+				//fmt.Errorf("couldn't parse template :/ %v", err)
+				panic(err)
+			}
 
+			// Generating new .go file
+			m.OverwriteGeneratorTemplateFile(item+".go", basicTpl, basicTypesInfo)
+		}
+
+	}
 	m.OverwriteCustomFile(
 		"/tmp/report.txt",
 		buf.String(),
@@ -325,12 +374,22 @@ func squeezeDoubleDash(str string) string {
 
 func cleanDashes(str string) string {
 
-	return strings.ReplaceAll(str, "_", "")
+	return strings.ReplaceAll(str, "-", "")
 }
 
 func extractDataType(str string) string {
 
 	return strings.ToLower(strings.ReplaceAll(str, "TYPE_", ""))
+}
+
+func cutIES(str string) string {
+
+	return strings.ToLower(strings.ReplaceAll(str, "_ies", ""))
+}
+
+func cutE2SM(str string) string {
+
+	return strings.ToLower(strings.ReplaceAll(str, "e2sm_", ""))
 }
 
 func extractLabel(str string) string {
@@ -393,4 +452,46 @@ func checkElementaryType(dataType string) bool {
 	default:
 		return false
 	}
+}
+
+func adjustFieldName(fieldName string) string {
+
+	res := ""
+
+	array := strings.Split(fieldName, "_")
+	for _, item := range array {
+		res = res + upperCaseFirstLetter(item)
+	}
+
+	return upperCaseFirstLetter(res)
+}
+
+func adjustEnumLeafName(leafName string, msgName string) string {
+
+	return upperCaseFirstLetter(dashToUnderscore(msgName) +
+		strings.ReplaceAll(strings.ToLower(leafName), strings.ToLower(dashToUnderscore(dashToUnderscore(msgName))), ""))
+}
+
+func extractEnumCstructName(name string) string {
+
+	return name[strings.Index(name, "{")+1 : strings.Index(name, "}")]
+}
+
+//func putDependency(list []string, dependency string) []string {
+//
+//	match := false
+//	for _, item := range list {
+//		if strings.EqualFold(item, dependency) {
+//			match = true
+//		}
+//	}
+//	if !match {
+//		list = append(list, dependency)
+//	}
+//
+//	return list
+//}
+
+func getBasicTypes() []string {
+	return []string{"asn_codecs_prim", "BIT_STRING", "INTEGER", "OCTET_STRING", "PrintableString"}
 }

@@ -2,20 +2,20 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package {{cleanDashes .ProtoFileName}}
+package {{.PackageName}}ctypes
 
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "{{underscoreToDash .CstructName}}.h" //ToDo - if there is a Repeted option, it would require linking additional structure file definition (the one above/before)
-{{if .Repeated}}//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field
+//#include "{{underscoreToDash .CstructName}}.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+{{if .Repeated}}//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
 import "C"{{else}}import "C"
 {{end}}
 import (
     "fmt"
-    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.ProtoFileName}}/v1/{{dashToUnderscore .ProtoFileName}}" //ToDo - Make imports more dynamic
+    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{cutIES .ProtoFileName}}/v1/{{underscoreToDash .ProtoFileName}}" //ToDo - Make imports more dynamic
     "unsafe"
 )
 
@@ -71,6 +71,7 @@ func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}
 {{if .FieldList.SingleItem}}
 {{if .Optional}}{{ template "OPTIONAL_ENCODE_SINGLE" . }}{{end}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{end}}
+{{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{else}}
 {{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
@@ -90,6 +91,7 @@ func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnde
 {{if .FieldList.SingleItem}}
 {{if .Optional}}{{ template "OPTIONAL_DECODE_SINGLE" . }}{{end}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{end}}
+{{if .Repeated}}{{ template "REPEATED_DECODE" . }}{{end}}
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{else}}
 {{if .Optional}}{{ template "OPTIONAL_DECODE" . }}{{end}}
@@ -104,7 +106,7 @@ func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnde
     return &{{lowCaseFirstLetter .MessageName}}, nil
 }
 
-{{if .Repeated}}{{ template "REPEATED_DECODE_BYTES" . }}{{end}}
+{{if .Repeated}}{{ template "DECODE_BYTES" . }}{{end}}
 
 
 
@@ -199,7 +201,7 @@ return nil, fmt.Errorf("decode{{.MessageName}}() %s", err.Error())
 }
 {{end}}{{end}}
 
-{{ define "REPEATED_DECODE_BYTES" }}
+{{ define "DECODE_BYTES" }}
 func decode{{.MessageName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) { //ToDo - Check addressing correct structure in Protobuf
 {{lowCaseFirstLetter .MessageName}}C := (*C.{{dashToUnderscore .MessageName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 result, err := decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C)
