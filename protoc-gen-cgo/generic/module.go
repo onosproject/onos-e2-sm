@@ -33,10 +33,10 @@ type msgDataStruct struct {
 //	DependenciesList []string
 //}
 
-//type basicTypes struct {
-//	ProtoFileName string
-//	PackageName   string
-//}
+type basicTypes struct {
+	ProtoFileName string
+	PackageName   string
+}
 
 // Defines data structure to pass to template
 type fieldList struct {
@@ -99,14 +99,19 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	// ToDo: Discuss it with Sean
 
 	// Missing types of structures to handle so far (TO BE UPDATED):
-	// - Message with multiple Options inside --> implement with nested templates
-	// - OneOf structures
-	// - Repeated (generates lists)
-	// - Enums (missing valid C-names of leafs and proper decoding (match data type))
-	// - doesn't support anonymous structs (yet)
+	// - Message with multiple Options inside --> implement with nested templates -- done
+	// - OneOf structures -- done
+	// - Repeated (generates lists) -- done
+	// - Enums (missing valid C-names of leafs and proper decoding (match data type)) -- done
+	// - doesn't support anonymous structs (yet) -- investigating in it --> harder than it seems to
 
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
+
+		basicTypesInfo := basicTypes{
+			ProtoFileName: f.Name().Split()[0],
+			PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(f.Name().Split()[0])))),
+		}
 
 		fmt.Fprintf(buf, "--- %v ---\n", f.Name().Split()[0])
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
@@ -261,7 +266,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 
 			// Generating new .go file
-			m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+".go", tplMsg, msgData)
+			m.OverwriteGeneratorTemplateFile(msgData.CstructName + ".go", tplMsg, msgData)
 		}
 
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
@@ -284,8 +289,24 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		//wc.Close()
 		//io.Copy(os.Stdout, rc)
 
-	}
+		// Printing basic types
+		basicTypesList := getBasicTypes()
+		for _, item := range basicTypesList {
+			basicTpl, err := template.New(item + ".tpl").Funcs(template.FuncMap{
+				"dashToUnderscore": dashToUnderscore,
+				"underscoreToDash": underscoreToDash,
+				"cutIES":           cutIES,
+			}).ParseFiles(item + ".tpl")
+			if err != nil {
+				//fmt.Errorf("couldn't parse template :/ %v", err)
+				panic(err)
+			}
 
+			// Generating new .go file
+			m.OverwriteGeneratorTemplateFile(item+".go", basicTpl, basicTypesInfo)
+		}
+
+	}
 	m.OverwriteCustomFile(
 		"/tmp/report.txt",
 		buf.String(),
@@ -470,3 +491,7 @@ func extractEnumCstructName(name string) string {
 //
 //	return list
 //}
+
+func getBasicTypes() []string {
+	return []string{"asn_codecs_prim", "BIT_STRING", "INTEGER", "OCTET_STRING", "PrintableString"}
+}
