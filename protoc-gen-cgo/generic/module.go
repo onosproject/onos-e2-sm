@@ -33,10 +33,10 @@ type msgDataStruct struct {
 //	DependenciesList []string
 //}
 
-type basicTypes struct {
-	ProtoFileName string
-	PackageName   string
-}
+//type basicTypes struct {
+//	ProtoFileName string
+//	PackageName   string
+//}
 
 // Defines data structure to pass to template
 type fieldList struct {
