@@ -266,7 +266,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 
 			// Generating new .go file
-			m.OverwriteGeneratorTemplateFile(msgData.CstructName + ".go", tplMsg, msgData)
+			m.OverwriteGeneratorTemplateFile(msgData.CstructName+".go", tplMsg, msgData)
 		}
 
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
