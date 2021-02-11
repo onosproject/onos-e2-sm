@@ -27,7 +27,9 @@ Here are the parameters you should pass:
 - `*.proto` is a path to the source `.proto` file(s) to process
 
 ## Additonal changes
-To ensure that this plugin works correctly you should make some changes to source `.proto` file(s). Please add `[json_name="..."]` tag 
+To ensure that this plugin works correctly you should make some changes to source `.proto` file(s). 
+#### Message
+Please add `[json_name="..."]` tag 
 and put in as an argument appropriate `C-struct Name` (which was generated with `ASN1C` tool) and `C-struct Leaf Name` for all data structures in each `.proto` file
 you want to process.   
 In the end it should look similar to following example:
@@ -38,7 +40,16 @@ message TriggerConditionIeItem {
 };
 ```
 
-This is a temporary solution and would be reconsidered with the future updates.
+#### Enum
+In the header of an `Enum` type should be added a name of the corresponding `.h` file within `{}` parenthesis. See example below:
+```protobuf
+// {RT-Period-IE}
+enum RtPeriodIe {
+  ...
+}
+```
+
+**This is a temporary solution and would be reconsidered with the future updates.**
 
 ## Troubleshooting
 
