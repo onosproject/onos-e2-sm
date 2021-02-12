@@ -273,7 +273,9 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 
 			// Generating new .go file
-			m.OverwriteGeneratorTemplateFile(msgData.CstructName+".go", tplMsg, msgData)
+			if !findWithinBasicTypes(msgData.CstructName) {
+				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+".go", tplMsg, msgData)
+			}
 		}
 
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
@@ -509,4 +511,15 @@ func extractProtoFileName(proto string) string {
 
 func getBasicTypes() []string {
 	return []string{"asn_codecs_prim", "BIT_STRING", "INTEGER", "OCTET_STRING", "PrintableString"}
+}
+
+func findWithinBasicTypes(fileName string) bool {
+
+	for _, item := range getBasicTypes() {
+		if strings.EqualFold(strings.ToLower(underscoreToDash(fileName)), strings.ToLower(underscoreToDash(item))) {
+			return true
+		}
+	}
+
+	return false
 }
