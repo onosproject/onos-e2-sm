@@ -13,7 +13,7 @@ package {{.PackageName}}ctypes
 import "C"
 import (
     "fmt"
-    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{cutIES .ProtoFileName}}/v1beta1/{{underscoreToDash .ProtoFileName}}" //ToDo - Make imports more dynamic
+    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.FullPackageName}}" //ToDo - Make imports more dynamic
     "unsafe"
 )
 

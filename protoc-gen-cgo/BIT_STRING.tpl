@@ -14,7 +14,7 @@ import "C"
 import (
 "encoding/binary"
 "fmt"
-{{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{cutIES .ProtoFileName}}/v1/{{underscoreToDash .ProtoFileName}}"
+{{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.FullPackageName}}" //ToDo - Make imports more dynamic
 "math"
 "unsafe"
 )
