@@ -14,13 +14,16 @@ import "C"
 import (
 "encoding/binary"
 "fmt"
-{{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{cutIES .ProtoFileName}}/v1/{{underscoreToDash .ProtoFileName}}"
+{{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.FullPackageName}}" //ToDo - Make imports more dynamic
 "math"
 "unsafe"
 )
 
 func xerEncodeBitString(bs *{{.ProtoFileName}}.BitString) ([]byte, error) {
-bsC := newBitString(bs)
+bsC, err := newBitString(bs)
+if err != nil {
+return nil, fmt.Errorf("newBitString() %s", err.Error())
+}
 defer freeBitString(bsC)
 bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
 if err != nil {
@@ -31,7 +34,10 @@ return bytes, nil
 
 // PerEncodeGnbID - used only in tests
 func perEncodeBitString(bs *{{.ProtoFileName}}.BitString) ([]byte, error) {
-bsC := newBitString(bs)
+bsC, err := newBitString(bs)
+if err != nil {
+return nil, fmt.Errorf("newBitString() %s", err.Error())
+}
 defer freeBitString(bsC)
 bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
 if err != nil {
@@ -41,7 +47,7 @@ return nil, err
 return bytes, nil
 }
 
-func newBitString(bs *{{.ProtoFileName}}.BitString) *C.BIT_STRING_t {
+func newBitString(bs *{{.ProtoFileName}}.BitString) (*C.BIT_STRING_t, error) {
 numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
 valAsBytes := make([]byte, 8)
 binary.LittleEndian.PutUint64(valAsBytes, bs.Value)
@@ -53,17 +59,17 @@ size:        C.ulong(numBytes),
 bits_unused: C.int(bitsUnused),
 }
 //fmt.Printf("Bit string %+v\n", bsC)
-return &bsC
+return &bsC, nil
 }
 
-func newBitStringFromBytes(valAsBytes []byte, size uint64, bitsUnused int) *C.BIT_STRING_t {
+func newBitStringFromBytes(valAsBytes []byte, size uint64, bitsUnused int) (*C.BIT_STRING_t, error) {
 bsC := C.BIT_STRING_t{
 buf:         (*C.uchar)(C.CBytes(valAsBytes)),
 size:        C.ulong(size),
 bits_unused: C.int(bitsUnused),
 }
 
-return &bsC
+return &bsC, nil
 }
 
 // decodeBitString - byteString in C has 20 bytes

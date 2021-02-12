@@ -15,15 +15,22 @@ import "C"
 //import "unsafe"
 
 // TODO: Change the argument to a []byte
-func newPrintableString(msg string) *C.PrintableString_t {
+func newPrintableString(msg string) (*C.PrintableString_t, error) {
 	// PrintableString is defined via OctetString --> see PrintableString.h
-	prntStrC := newOctetString(msg)
+	prntStrC, err := newOctetString(msg)
+	if err != nil {
+		return nil, fmt.Errorf("newOctetString() %s", err.Error())
+	}
 
-	return prntStrC
+	return prntStrC, nil
 }
 
-func decodePrintableString(octC *C.PrintableString_t) string {
+func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 
-	bytes := decodeOctetString(octC)
-	return bytes
+	bytes, err := decodeOctetString(octC)
+	if err != nil {
+		return "", fmt.Errorf("decodeOctetString() %s", err.Error())
+	}
+
+	return bytes, nil
 }
