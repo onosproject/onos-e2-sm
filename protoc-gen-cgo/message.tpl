@@ -155,7 +155,7 @@ return nil, err
 {{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
 {{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
-return nil, fmt.Errorf("encode{{.MessageName}}() %s", err.Error())
+return nil, fmt.Errorf("new{{.MessageName}}() %s", err.Error())
 }
 {{end}}{{end}}{{end}}
 
@@ -164,7 +164,7 @@ return nil, fmt.Errorf("encode{{.MessageName}}() %s", err.Error())
 {{lowCaseFirstLetter .MessageName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
 {{lowCaseFirstLetter .MessageName}}C, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
-return nil, fmt.Errorf("encode{{.MessageName}}() %s", err.Error())
+return nil, fmt.Errorf("new{{.MessageName}}() %s", err.Error())
 }
 {{end}}{{end}}{{end}}
 

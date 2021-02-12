@@ -109,8 +109,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		m.Push(f.Name().String()).Debug("reporting")
 
 		basicTypesInfo := basicTypes{
-			ProtoFileName: f.Name().Split()[0],
-			PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(f.Name().Split()[0])))),
+			ProtoFileName: extractProtoFileName(f.Name().Split()[0]),
+			PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(extractProtoFileName(f.Name().Split()[0]))))),
 		}
 
 		fmt.Fprintf(buf, "--- %v ---\n", f.Name().Split()[0])
@@ -122,8 +122,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			fmt.Fprintf(buf, "%03d. Enum Descriptor %v\n", i, enum.Descriptor())
 			enumData := enumDataStruct{
 				MessageName:   enum.Name().String(),
-				ProtoFileName: f.Name().Split()[0],
-				PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(f.Name().Split()[0])))),
+				ProtoFileName: basicTypesInfo.ProtoFileName,
+				PackageName:   basicTypesInfo.PackageName,
 				CstructName:   "",
 				FieldList:     make([]elementaryField, 0),
 			}
@@ -135,7 +135,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetName() %v\n", j, value.GetName())
 				fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetNumber() %v\n", j, value.GetNumber())
 				listItem.FieldName = value.GetName()
-				listItem.ProtoFileName = f.Name().Split()[0]
+				listItem.ProtoFileName = basicTypesInfo.ProtoFileName
 				listItem.MessageName = enum.Name().String()
 				listItem.CstructLeafName = adjustEnumLeafName(squeezeDoubleDash(value.GetName()), enumData.CstructName) // Don't know how to obtain (yet)
 				enumData.FieldList = append(enumData.FieldList, listItem)
@@ -180,7 +180,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			//}
 
 			flds := msg.Descriptor().GetField()
-			//fmt.Fprintf(buf, "%03d. Message Descriptor() %v\n", i, msg.Descriptor())
+			fmt.Fprintf(buf, "%03d. Message Descriptor() %v\n", i, msg.Descriptor())
+			fmt.Fprintf(buf, "%03d. Message Name() %v\n", i, extractProtoFileName(f.Name().Split()[0]))
 
 			for _, fld := range flds {
 				items++
@@ -200,7 +201,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				//deps.DependenciesList = putDependency(deps.DependenciesList, elemField.CstructName)
 
 				elemField.MessageName = msg.Name().String()
-				elemField.ProtoFileName = f.Name().Split()[0]
+				elemField.ProtoFileName = basicTypesInfo.ProtoFileName
 				elemField.FieldTypeName = extractTypeName(msg.FullyQualifiedName(), msg.Package().ProtoName().String())
 				//fmt.Fprintf(buf, "%03d. Message Descriptor().OneOfDecl() %v\n", i, msg.Descriptor().GetOneofDecl())
 
@@ -236,8 +237,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			// Filling in data structure to pass to template with correct input
 			msgData := msgDataStruct{
 				MessageName:   msg.Name().String(),
-				ProtoFileName: f.Name().Split()[0],
-				PackageName:   cleanDashes(underscoreToDash(cutE2SM(cutIES(f.Name().Split()[0])))),
+				ProtoFileName: basicTypesInfo.ProtoFileName,
+				PackageName:   basicTypesInfo.PackageName,
 				CstructName:   cstructName,
 				FieldList:     fieldItems,
 				OneOf:         oneof,
@@ -475,6 +476,14 @@ func adjustEnumLeafName(leafName string, msgName string) string {
 func extractEnumCstructName(name string) string {
 
 	return name[strings.Index(name, "{")+1 : strings.Index(name, "}")]
+}
+
+func extractProtoFileName(proto string) string {
+
+	if strings.LastIndex(proto, "/") != 1 {
+		return proto[strings.LastIndex(proto, "/")+1:]
+	}
+	return proto
 }
 
 //func putDependency(list []string, dependency string) []string {

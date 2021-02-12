@@ -19,7 +19,10 @@ import (
 )
 
 func xerEncodeInteger(integer int64) ([]byte, error) {
-	integerCP := newInteger(integer)
+	integerCP, err := newInteger(integer)
+	if err != nil {
+		return nil, fmt.Errorf("newInteger() %s", err.Error())
+	}
 	defer freeInteger(integerCP)
 	bytes, err := encodeXer(&C.asn_DEF_INTEGER, unsafe.Pointer(integerCP))
 	if err != nil {
@@ -29,7 +32,10 @@ func xerEncodeInteger(integer int64) ([]byte, error) {
 }
 
 func perEncodeInteger(integer int64) ([]byte, error) {
-	integerCP := newInteger(integer)
+	integerCP, err := newInteger(integer)
+	if err != nil {
+		return nil, fmt.Errorf("newInteger() %s", err.Error())
+	}
 	defer freeInteger(integerCP)
 	bytes, err := encodePerBuffer(&C.asn_DEF_INTEGER, unsafe.Pointer(integerCP))
 	if err != nil {
@@ -47,7 +53,7 @@ func xerDecodeInteger(integerBytes []byte) (int64, error) {
 		return 0, fmt.Errorf("pointer decoded from XER is nil")
 	}
 	intC := (*C.INTEGER_t)(unsafePtr)
-	return decodeInteger(intC), nil
+	return decodeInteger(intC)
 }
 
 func perDecodeInteger(integerBytes []byte) (int64, error) {
@@ -59,16 +65,16 @@ func perDecodeInteger(integerBytes []byte) (int64, error) {
 		return 0, fmt.Errorf("pointer decoded from XER is nil")
 	}
 	intC := (*C.INTEGER_t)(unsafePtr)
-	return decodeInteger(intC), nil
+	return decodeInteger(intC)
 }
 
 // It is like a two's complement encoding of a signed number, but not quite the same
-func newInteger(msg int64) *C.INTEGER_t {
+func newInteger(msg int64) (*C.INTEGER_t, error) {
 	if msg == 0 {
 		return &C.INTEGER_t{
 			buf:  (*C.uchar)(C.CBytes([]byte{0x0})),
 			size: C.ulong(1),
-		}
+		}, nil
 	}
 
 	absMsg := uint64(math.Abs(float64(msg)))
@@ -97,12 +103,12 @@ func newInteger(msg int64) *C.INTEGER_t {
 		}
 	}
 
-	return newAsnCodecsPrim(asBytes)
+	return newAsnCodecsPrim(asBytes), nil
 }
 
 // It is like a two's complement decoding of a signed number, but not quite
 // the same for negative values
-func decodeInteger(intC *C.INTEGER_t) int64 {
+func decodeInteger(intC *C.INTEGER_t) (int64, error) {
 	bytes := decodeAsnCodecsPrim(intC)
 
 	ni := big.NewInt(0)
@@ -121,7 +127,7 @@ func decodeInteger(intC *C.INTEGER_t) int64 {
 		ni.Neg(ni)
 	}
 
-	return ni.Int64()
+	return ni.Int64(), nil
 }
 
 func freeInteger(intC *C.INTEGER_t) {
