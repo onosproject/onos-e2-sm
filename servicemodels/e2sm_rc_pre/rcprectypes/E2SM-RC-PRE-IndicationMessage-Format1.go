@@ -20,16 +20,16 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmRcPreIndicationMessageFormat1(E2SmRcPreIndicationMsgFormat1 *e2sm_rc_pre_ies.E2SmRcPreIndicationMessage_IndicationMessageFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreIndicationMessageFormat1(E2SmRcPreIndicationMsgFormat1 *e2sm_rc_pre_ies.E2SmRcPreIndicationMessage_IndicationMessageFormat1) ([]byte, error) {
 
 	E2SmRcPreIndicationMsgFormat1CP, err := newE2SmRcPreIndicationMessageFormat1(E2SmRcPreIndicationMsgFormat1)
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationMessageFormat1() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationMessageFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_RC_PRE_IndicationMessage_Format1, unsafe.Pointer(E2SmRcPreIndicationMsgFormat1CP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationMessageFormat1() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationMessageFormat1() %s", err.Error())
 	}
 	return bytes, nil
 }

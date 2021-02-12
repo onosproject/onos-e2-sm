@@ -36,12 +36,12 @@ func XerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e
 
 	E2SmRcPreEventTriggerDefinitionCP, err := newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition)
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition, unsafe.Pointer(E2SmRcPreEventTriggerDefinitionCP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -69,12 +69,12 @@ func XerDecodeE2SmRcPreEventTriggerDefinition(bytes []byte) (*e2sm_rc_pre_ies.E2
 }
 
 func newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition) (*C.E2SM_RC_PRE_EventTriggerDefinition_t, error) {
-	var present C.E2SM_RC_PRE_EventTriggerDefinition_PR
+	var presentC C.E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR
 	choiceC := [8]byte{}
 
-	switch choice := E2SmRcPreEventTriggerDefinition.E2SmRcPreEventTriggerDefinition.(type) {
+	switch choice := E2SmRcPreEventTriggerDefinition.E2SmRcPreEventTriggerDefinitionEventDefinitionFormats.(type) {
 	case *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1:
-		present = C.E2SM_RC_PRE_EventTriggerDefinition_PR_eventDefinition_Format1
+		presentC = C.E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1
 
 		im, err := newE2SmRcPreEventTriggerDefinitionFormat1(choice.EventDefinitionFormat1)
 		if err != nil {
@@ -85,9 +85,13 @@ func newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc
 		return nil, fmt.Errorf("newE2SmRcPreEventTriggerDefinition() %T not yet implemented", choice)
 	}
 
-	E2SmRcPreEventTriggerDefinitionC := C.E2SM_RC_PRE_EventTriggerDefinition_t{
-		present: present,
+	eventDefinitionFormatsC := C.struct_E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats{
+		present: presentC,
 		choice:  choiceC,
+	}
+
+	E2SmRcPreEventTriggerDefinitionC := C.E2SM_RC_PRE_EventTriggerDefinition_t{
+		eventDefinition_formats: eventDefinitionFormatsC,
 	}
 
 	return &E2SmRcPreEventTriggerDefinitionC, nil
@@ -96,19 +100,20 @@ func newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc
 func decodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinitionC *C.E2SM_RC_PRE_EventTriggerDefinition_t) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition, error) {
 	E2SmRcPreEventTriggerDefinition := new(e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition)
 
-	switch E2SmRcPreEventTriggerDefinitionC.present {
-	case C.E2SM_RC_PRE_EventTriggerDefinition_PR_eventDefinition_Format1:
-		E2SmRcPreEventTriggerDefinitionFormat1, err := decodeE2SmRcPreEventTriggerDefinitionFormat1Bytes(E2SmRcPreEventTriggerDefinitionC.choice)
+	eventDefinitionFormatsC := E2SmRcPreEventTriggerDefinitionC.eventDefinition_formats
+	switch eventDefinitionFormatsC.present {
+	case C.E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1:
+		E2SmRcPreEventTriggerDefinitionFormat1, err := decodeE2SmRcPreEventTriggerDefinitionFormat1Bytes(eventDefinitionFormatsC.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmRcPreIndicationMessage() %s", err.Error())
 		}
 
-		E2SmRcPreEventTriggerDefinition.E2SmRcPreEventTriggerDefinition = &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
+		E2SmRcPreEventTriggerDefinition.E2SmRcPreEventTriggerDefinitionEventDefinitionFormats = &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
 			EventDefinitionFormat1: E2SmRcPreEventTriggerDefinitionFormat1,
 		}
 
 	default:
-		return nil, fmt.Errorf("decodeE2SmRcPreEventTriggerDefinition() %v not yet implemented", E2SmRcPreEventTriggerDefinitionC.present)
+		return nil, fmt.Errorf("decodeE2SmRcPreEventTriggerDefinition() not yet implemented")
 	}
 
 	return E2SmRcPreEventTriggerDefinition, nil

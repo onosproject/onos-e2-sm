@@ -24,54 +24,52 @@ func createE2SmRcPreEventTriggerDefinitionFormat1() (*e2sm_rc_pre_ies.E2SmRcPreE
 
 }
 
-func Test_xerEncodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
+func Test_XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 
 	E2SmRcPreEventTriggerDefinitionFormat1, err := createE2SmRcPreEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
 
-	xer, err := xerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
+	xer, err := XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 265, len(xer))
+	assert.Equal(t, 185, len(xer))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 XER\n%s", string(xer))
 }
 
-func Test_xerDecodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
+func Test_XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 
 	E2SmRcPreEventTriggerDefinitionFormat1, err := createE2SmRcPreEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
 
-	xer, err := xerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
+	xer, err := XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 265, len(xer))
+	assert.Equal(t, 185, len(xer))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 XER\n%s", string(xer))
 
-	result, err := xerDecodeE2SmRcPreEventTriggerDefinitionFormat1(xer)
+	result, err := XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	//assert.Equal(t, E2SmRcPreEventTriggerDefinitionFormat1.GetPolicyTestList(), result.GetPolicyTestList(), "Encoded and decoded E2SM-RC-PRE-EventTriggerDefinition-Format1 -- PolicyTestList values are not the same")
 }
 
-func Test_perEncodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
+func Test_PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 
 	E2SmRcPreEventTriggerDefinitionFormat1, err := createE2SmRcPreEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
-	per, err := perEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
+	per, err := PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 2, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 PER\n%s", string(per))
 }
 
-func Test_perDecodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
+func Test_PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 
 	E2SmRcPreEventTriggerDefinitionFormat1, err := createE2SmRcPreEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
-	per, err := perEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
+	per, err := PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 2, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 PER\n%s", string(per))
 
-	result, err := perDecodeE2SmRcPreEventTriggerDefinitionFormat1(per)
+	result, err := PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	//assert.Equal(t, E2SmRcPreEventTriggerDefinitionFormat1, result, "Encoded and decoded E2SM-RC-PRE-EventTriggerDefinition-Format1 -- PolicyTestList values are not the same")
 }

@@ -8,8 +8,8 @@ package main
 import (
 	"fmt"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdudecoder"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
 	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
 	"google.golang.org/protobuf/proto"
 )
@@ -164,12 +164,96 @@ func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, e
 	return perBytes, nil
 }
 
-func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
+func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
 	e2SmRcPrePdu, err := rcprectypes.PerDecodeE2SmRcPreRanfunctionDescription(asn1bytes)
 	if err != nil {
 		return nil, nil, nil, err
 	}
 	return pdudecoder.DecodeE2SmRcPreRanfunctionDescription(e2SmRcPrePdu)
+}
+
+func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	perBytes, err := rcprectypes.PerDecodeE2SmRcPreControlHeader(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmRcPreControlHeader to PER %s", err)
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreControlHeader %s", err)
+	}
+
+	return protoBytes, nil
+}
+
+func (sm servicemodel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
+	protoObj := new(e2sm_rc_pre_ies.E2SmRcPreControlHeader)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreControlHeader %s", err)
+	}
+
+	perBytes, err := rcprectypes.PerEncodeE2SmRcPreControlHeader(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmRcPreControlHeader to PER %s", err)
+	}
+
+	return perBytes, nil
+}
+
+func (sm servicemodel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	perBytes, err := rcprectypes.PerDecodeE2SmRcPreControlMessage(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmRcPreControlMessage to PER %s", err)
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreControlMessage %s", err)
+	}
+
+	return protoBytes, nil
+}
+
+func (sm servicemodel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+	protoObj := new(e2sm_rc_pre_ies.E2SmRcPreControlMessage)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreControlMessage %s", err)
+	}
+
+	perBytes, err := rcprectypes.PerEncodeE2SmRcPreControlMessage(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmRcPreControlMessage to PER %s", err)
+	}
+
+	return perBytes, nil
+}
+
+func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	perBytes, err := rcprectypes.PerDecodeE2SmRcPreControlOutcome(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmRcPreControlOutcome to PER %s", err)
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreControlOutcome %s", err)
+	}
+
+	return protoBytes, nil
+}
+
+func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+	protoObj := new(e2sm_rc_pre_ies.E2SmRcPreControlOutcome)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreControlOutcome %s", err)
+	}
+
+	perBytes, err := rcprectypes.PerEncodeE2SmRcPreControlOutcome(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmRcPreControlOutcome to PER %s", err)
+	}
+
+	return perBytes, nil
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module

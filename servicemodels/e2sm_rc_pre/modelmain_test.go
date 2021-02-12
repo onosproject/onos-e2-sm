@@ -137,28 +137,24 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(e2SmRcPreEventTriggerDefinition)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreEventTriggerDefinition to bytes")
-	assert.Equal(t, 6, len(protoBytes))
+	assert.Equal(t, 4, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.EventTriggerDefinitionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 2, len(asn1Bytes))
+	assert.Equal(t, 3, len(asn1Bytes))
 }
 
 func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
-	// This value is taken from Shad and passed as a byte array directly to the function
-	// It's the encoding of what's in the file ../test/E2SM-RC-PRE-EventTriggerDefinition.xml
-	eventTriggerDefinitionAsn1 := []byte{0x20, 0x38, 0x37, 0xDB, 0xFD, 0x7F, 0x00,
-		0x00, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00}
-
+	eventTriggerDefinitionAsn1 := []byte{0x10, 0x01, 0x0C}
 	protoBytes, err := rcPreTestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 6, len(protoBytes))
+	assert.Equal(t, 4, len(protoBytes))
 	testIM := e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition{}
 	err = proto.Unmarshal(protoBytes, &testIM)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(testIM.GetEventDefinitionFormat1().GetPolicyTestList()))
+	assert.Equal(t, 12, int(testIM.GetEventDefinitionFormat1().GetReportingPeriodMs()))
 }
 
 func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
@@ -179,6 +175,110 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
 	assert.Equal(t, 3, len(asn1Bytes))
+}
+
+func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
+
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader()
+	assert.NilError(t, err, "error creating E2SmPDU")
+
+	err = newE2SmRcPrePdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreControlHeader to bytes")
+	assert.Equal(t, 6, len(protoBytes))
+
+	asn1Bytes, err := rcPreTestSm.ControlHeaderProtoToASN1(protoBytes)
+
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	assert.Equal(t, 3, len(asn1Bytes))
+}
+
+func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
+	ControlHeaderAsn1Bytes := []byte{0x20, 0x01, 0x01}
+
+	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 6, len(protoBytes))
+	testIH := e2sm_rc_pre_ies.E2SmRcPreControlHeader{}
+	err = proto.Unmarshal(protoBytes, &testIH)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, int(testIH.GetControlHeaderFormat1().GetRicControlMessagePriority().GetValue()))
+}
+
+func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
+	var ranParameterName = "PCI"
+	var ranParameterValue int32 = 20
+
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterName, ranParameterValue)
+	assert.NilError(t, err, "error creating E2SmPDU")
+
+	err = newE2SmRcPrePdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreControlMessage to bytes")
+
+	assert.Equal(t, 19, len(protoBytes))
+	asn1Bytes, err := rcPreTestSm.ControlMessageProtoToASN1(protoBytes)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+}
+
+func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
+	ControlMessageAsn1 := []byte{0x00, 0x00, 0x14, 0x01, 0x00, 0x50, 0x43, 0x49, 0x00, 0x06,
+		0x00, 0xc0, 0x00, 0x0c, 0xbb, 0x70}
+
+	protoBytes, err := rcPreTestSm.ControlMessageASN1toProto(ControlMessageAsn1)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 19, len(protoBytes))
+	testIM := e2sm_rc_pre_ies.E2SmRcPreControlMessage{}
+	err = proto.Unmarshal(protoBytes, &testIM)
+	assert.NilError(t, err)
+	assert.Equal(t, 20, int(testIM.GetControlMessage().GetParameterVal().GetValueInt()))
+}
+
+func TestServicemodel_ControlOutcomeProtoToASN1(t *testing.T) {
+	var ranParameterID int32 = 20
+	var ranParameterValue int32 = 10
+
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlOutcome(ranParameterID, ranParameterValue)
+	assert.NilError(t, err, "error creating E2SmPDU")
+
+	err = newE2SmRcPrePdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreControlOutcome to bytes")
+
+	assert.Equal(t, 12, len(protoBytes))
+
+	asn1Bytes, err := rcPreTestSm.ControlOutcomeProtoToASN1(protoBytes)
+
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+}
+
+func TestServicemodel_ControlOutcomeASN1toProto(t *testing.T) {
+
+	ControlOutcomeAsn1 := []byte{0x20, 0x00, 0x00, 0x00, 0x00, 0x14, 0x00, 0x06,
+		0x00, 0xc0, 0x00, 0x0c, 0xbb, 0x40}
+	protoBytes, err := rcPreTestSm.ControlOutcomeASN1toProto(ControlOutcomeAsn1)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 12, len(protoBytes))
+	testIM := e2sm_rc_pre_ies.E2SmRcPreControlOutcome{}
+	err = proto.Unmarshal(protoBytes, &testIM)
+	assert.NilError(t, err)
+
+	assert.Equal(t, 1, len(testIM.GetControlOutcomeFormat1().GetOutcomeElementList()))
+	outcome := testIM.GetControlOutcomeFormat1().GetOutcomeElementList()[0]
+	assert.Equal(t, 20, int(outcome.GetRanParameterValue().GetValueInt()))
 }
 
 //func TestServicemodel_ActionDefinitionASN1toProto(t *testing.T) {

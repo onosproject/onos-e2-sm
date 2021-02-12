@@ -11,13 +11,13 @@ import (
 	"testing"
 )
 
-func Test_xerEncodeE2SmRcPreIndicationHeader(t *testing.T) {
+func Test_XerEncodeE2SmRcPreIndicationHeader(t *testing.T) {
 
 	var plmnID = "ONF"
 
 	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnID)
-	assert.NilError(t, err, "Test_xerEncodeE2SmRcPreIndicationHeader)_ error is not nil")
-	assert.Assert(t, newE2SmRcPrePdu != nil, "Test_xerEncodeE2SmRcPreIndicationHeader() newE2SmRcPrePdu is nil")
+	assert.NilError(t, err, "Test_XerEncodeE2SmRcPreIndicationHeader)_ error is not nil")
+	assert.Assert(t, newE2SmRcPrePdu != nil, "Test_XerEncodeE2SmRcPreIndicationHeader() newE2SmRcPrePdu is nil")
 
 	xer, err := XerEncodeE2SmRcPreIndicationHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
@@ -28,7 +28,7 @@ func Test_xerEncodeE2SmRcPreIndicationHeader(t *testing.T) {
 	t.Logf("E2SM-RC-PRE-IndicationHeader PER\n%v", per)
 }
 
-func Test_perDecodeE2SmRcPreIndicationHeader(t *testing.T) {
+func Test_PerDecodeE2SmRcPreIndicationHeader(t *testing.T) {
 	E2SmRcPreRanfunctionDescription, err := ioutil.ReadFile("../test/E2SM-RC-PRE-Indication-Header-eNB.xml")
 	assert.NilError(t, err, "Unexpected error when loading file")
 	E2SmRcPrePdu, err := XerDecodeE2SmRcPreIndicationHeader(E2SmRcPreRanfunctionDescription)
