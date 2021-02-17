@@ -61,7 +61,6 @@ func perDecodeRicStyleType(bytes []byte) (*e2sm_rc_pre_ies.RicStyleType, error) 
 
 func newRicStyleType(ricStyleType *e2sm_rc_pre_ies.RicStyleType) *C.RIC_Style_Type_t {
 
-	//value := ricStyleType.Value
 	ricStyleTypeC := C.long(ricStyleType.Value)
 
 	return &ricStyleTypeC

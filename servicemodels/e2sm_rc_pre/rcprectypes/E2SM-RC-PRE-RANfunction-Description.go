@@ -19,11 +19,11 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmRcPreRanfunctionDescription(e2SmRcPreRanfunctionDescription *e2sm_rc_pre_ies.E2SmRcPreRanfunctionDescription) ([]byte, error) {
+func XerEncodeE2SmRcPreRanfunctionDescription(e2SmRcPreRanfunctionDescription *e2sm_rc_pre_ies.E2SmRcPreRanfunctionDescription) ([]byte, error) {
 	e2SmRcPreRanfunctionDescriptionCP := newE2SmRcPreRanfunctionDescription(e2SmRcPreRanfunctionDescription)
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_RC_PRE_RANfunction_Description, unsafe.Pointer(e2SmRcPreRanfunctionDescriptionCP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreRanfunctionDescription() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreRanfunctionDescription() %s", err.Error())
 	}
 	return bytes, nil
 }
@@ -33,7 +33,7 @@ func PerEncodeE2SmRcPreRanfunctionDescription(e2SmRcPreRanfunctionDescription *e
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_RC_PRE_RANfunction_Description, unsafe.Pointer(e2SmRcPreRanfunctionDescriptionCP))
 	if err != nil {
-		return nil, fmt.Errorf("perEncodeE2SmRcPreRanfunctionDescription() %s", err.Error())
+		return nil, fmt.Errorf("PerEncodeE2SmRcPreRanfunctionDescription() %s", err.Error())
 	}
 	return bytes, nil
 }

@@ -18,15 +18,15 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreIndicationHeaderFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreIndicationHeaderFormat1) ([]byte, error) {
 	indicationHeaderFormat1CP, err := newE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1)
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationHeaderFormat1() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationHeaderFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_RC_PRE_IndicationHeader_Format1, unsafe.Pointer(indicationHeaderFormat1CP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationHeaderFormat1() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationHeaderFormat1() %s", err.Error())
 	}
 	return bytes, nil
 }

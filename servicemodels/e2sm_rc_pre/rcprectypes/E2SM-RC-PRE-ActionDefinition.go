@@ -23,7 +23,7 @@ func XerEncodeE2SmRcPreActionDefinition(actionDefinition *e2sm_rc_pre_ies.E2SmRc
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_RC_PRE_ActionDefinition, unsafe.Pointer(actionDefinitionCP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreActionDefinition() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreActionDefinition() %s", err.Error())
 	}
 	return bytes, nil
 }

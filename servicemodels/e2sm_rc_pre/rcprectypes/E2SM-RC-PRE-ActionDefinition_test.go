@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func Test_xerEncodeE2SmRcPreActionDefinition(t *testing.T) {
+func Test_XerEncodeE2SmRcPreActionDefinition(t *testing.T) {
 
 	e2SmRcPreActionDefinition, err := pdubuilder.CreateE2SmRcPreActionDefinition(12)
 	assert.NilError(t, err)
@@ -21,7 +21,7 @@ func Test_xerEncodeE2SmRcPreActionDefinition(t *testing.T) {
 	t.Logf("E2SM-RC-PRE-ActionDefinition XER\n%s", string(xer))
 }
 
-func Test_xerDecodeE2SmRcPreActionDefinition(t *testing.T) {
+func Test_XerDecodeE2SmRcPreActionDefinition(t *testing.T) {
 
 	e2SmRcPreActionDefinition, err := pdubuilder.CreateE2SmRcPreActionDefinition(12)
 	assert.NilError(t, err)
@@ -36,7 +36,7 @@ func Test_xerDecodeE2SmRcPreActionDefinition(t *testing.T) {
 	assert.Equal(t, e2SmRcPreActionDefinition.GetRicStyleType().GetValue(), result.GetRicStyleType().GetValue(), "Encoded and decoded values are not the same")
 }
 
-func Test_perEncodeE2SmRcPreActionDefinition(t *testing.T) {
+func Test_PerEncodeE2SmRcPreActionDefinition(t *testing.T) {
 
 	e2SmRcPreActionDefinition, err := pdubuilder.CreateE2SmRcPreActionDefinition(12)
 	assert.NilError(t, err)
@@ -47,7 +47,7 @@ func Test_perEncodeE2SmRcPreActionDefinition(t *testing.T) {
 	t.Logf("E2SM-RC-PRE-ActionDefinition PER\n%s", string(per))
 }
 
-func Test_perDecodeE2SmRcPreActionDefinition(t *testing.T) {
+func Test_PerDecodeE2SmRcPreActionDefinition(t *testing.T) {
 
 	e2SmRcPreActionDefinition, err := pdubuilder.CreateE2SmRcPreActionDefinition(12)
 	assert.NilError(t, err)

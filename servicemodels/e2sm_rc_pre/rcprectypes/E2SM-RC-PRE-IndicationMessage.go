@@ -36,12 +36,12 @@ func XerEncodeE2SmRcPreIndicationMessage(E2SmRcPreIndicationMsg *e2sm_rc_pre_ies
 
 	E2SmRcPreIndicationMsgCP, err := newE2SmRcPreIndicationMessage(E2SmRcPreIndicationMsg)
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_RC_PRE_IndicationMessage, unsafe.Pointer(E2SmRcPreIndicationMsgCP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationMessage() %s", err.Error())
 	}
 	return bytes, nil
 }

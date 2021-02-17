@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func Test_xerEncodeE2SmRcPreIndicationMessageFormat1(t *testing.T) {
+func Test_XerEncodeE2SmRcPreIndicationMessageFormat1(t *testing.T) {
 
 	var plmnID = "ONF"
 
@@ -86,7 +86,7 @@ func Test_xerEncodeE2SmRcPreIndicationMessageFormat1(t *testing.T) {
 	}
 	e2SmIindicationMsg.IndicationMessageFormat1.Neighbors = append(e2SmIindicationMsg.IndicationMessageFormat1.Neighbors, neighbors)
 
-	xer, err := xerEncodeE2SmRcPreIndicationMessageFormat1(e2SmIindicationMsg)
+	xer, err := XerEncodeE2SmRcPreIndicationMessageFormat1(e2SmIindicationMsg)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-IndicationMessage-Format1 XER\n%s", string(xer))
 }

@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func Test_xerEncodeE2SmRcPreIndicationMessage(t *testing.T) {
+func Test_XerEncodeE2SmRcPreIndicationMessage(t *testing.T) {
 	var plmnID = "ONF"
 
 	cgi := &e2sm_rc_pre_ies.CellGlobalId{

@@ -5,23 +5,27 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#ifndef	_Trigger_ConditionIE_Item_H_
-#define	_Trigger_ConditionIE_Item_H_
+#ifndef	_RANparameterDef_Item_H_
+#define	_RANparameterDef_Item_H_
 
 
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "RT-Period-IE.h"
+#include "RANparameter-ID.h"
+#include "RANparameter-Name.h"
+#include "RANparameter-Type.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Trigger-ConditionIE-Item */
-typedef struct Trigger_ConditionIE_Item {
-	RT_Period_IE_t	 report_Period_IE;
+/* RANparameterDef-Item */
+typedef struct RANparameterDef_Item {
+	RANparameter_ID_t	 ranParameter_ID;
+	RANparameter_Name_t	 ranParameter_Name;
+	RANparameter_Type_t	 ranParameter_Type;
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
@@ -29,16 +33,16 @@ typedef struct Trigger_ConditionIE_Item {
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
-} Trigger_ConditionIE_Item_t;
+} RANparameterDef_Item_t;
 
 /* Implementation */
-extern asn_TYPE_descriptor_t asn_DEF_Trigger_ConditionIE_Item;
-extern asn_SEQUENCE_specifics_t asn_SPC_Trigger_ConditionIE_Item_specs_1;
-extern asn_TYPE_member_t asn_MBR_Trigger_ConditionIE_Item_1[1];
+extern asn_TYPE_descriptor_t asn_DEF_RANparameterDef_Item;
+extern asn_SEQUENCE_specifics_t asn_SPC_RANparameterDef_Item_specs_1;
+extern asn_TYPE_member_t asn_MBR_RANparameterDef_Item_1[3];
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* _Trigger_ConditionIE_Item_H_ */
+#endif	/* _RANparameterDef_Item_H_ */
 #include "asn_internal.h"

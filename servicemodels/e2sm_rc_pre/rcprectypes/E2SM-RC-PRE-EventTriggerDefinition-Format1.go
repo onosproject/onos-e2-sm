@@ -10,7 +10,6 @@ package rcprectypes
 //#include <stdlib.h>
 //#include <assert.h>
 //#include "E2SM-RC-PRE-EventTriggerDefinition-Format1.h"
-//#include "Trigger-ConditionIE-Item.h"
 import "C"
 import (
 	"encoding/binary"
@@ -19,33 +18,33 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
 	E2SmRcPreEventTriggerDefinitionFormat1CP, err := newE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_Format1, unsafe.Pointer(E2SmRcPreEventTriggerDefinitionFormat1CP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeTriggerConditionIeItem() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
+func PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
 	E2SmRcPreEventTriggerDefinitionFormat1CP, err := newE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("XerEncodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_Format1, unsafe.Pointer(E2SmRcPreEventTriggerDefinitionFormat1CP))
 	if err != nil {
-		return nil, fmt.Errorf("perEncodeTriggerConditionIeItem() %s", err.Error())
+		return nil, fmt.Errorf("PerEncodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func xerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
+func XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_Format1)
 	if err != nil {
 		return nil, err
@@ -56,7 +55,7 @@ func xerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre
 	return decodeE2SmRcPreEventTriggerDefinitionFormat1((*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t)(unsafePtr))
 }
 
-func perDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
+func PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_Format1)
 	if err != nil {
 		return nil, err
@@ -67,48 +66,41 @@ func perDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre
 	return decodeE2SmRcPreEventTriggerDefinitionFormat1((*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t)(unsafePtr))
 }
 
-func newE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t, error) {
-	policyTestListC := new(C.struct_E2SM_RC_PRE_EventTriggerDefinition_Format1__policyTest_List)
-	format1 := C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t{
-		policyTest_List: policyTestListC,
-	}
-	for _, policyTestItem := range E2SmRcPreEventTriggerDefinitionFormat1.GetPolicyTestList() {
-		policyTestItemC, err := newTriggerConditionIeItem(policyTestItem)
-		if err != nil {
-			return nil, fmt.Errorf("newE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
-		}
+func newE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t, error) {
 
-		if _, err = C.asn_sequence_add(unsafe.Pointer(policyTestListC), unsafe.Pointer(policyTestItemC)); err != nil {
-			return nil, err
-		}
+	triggerTypeC, err := newRcPreTriggerType(&e2SmRcPreEventTriggerDefinitionFormat1.TriggerType)
+	if err != nil {
+		return nil, fmt.Errorf("newE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
-	return &format1, nil
+	reportingPeriodMsC := C.long(e2SmRcPreEventTriggerDefinitionFormat1.ReportingPeriodMs)
+	e2SmRcPreEventTriggerDefinitionFormat1C := C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t{
+		triggerType:        *triggerTypeC,
+		reportingPeriod_ms: &reportingPeriodMsC,
+	}
+
+	return &e2SmRcPreEventTriggerDefinitionFormat1C, nil
 }
 
-func decodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1C *C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
-	E2SmRcPreEventTriggerDefinitionFormat1 := &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1{
-		PolicyTestList: make([]*e2sm_rc_pre_ies.TriggerConditionIeItem, 0),
+func decodeE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1C *C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
+
+	triggerType, err := decodeRcPreTriggerType(&e2SmRcPreEventTriggerDefinitionFormat1C.triggerType)
+	if err != nil {
+		return nil, fmt.Errorf("decodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
-	ieCount := int(E2SmRcPreEventTriggerDefinitionFormat1C.policyTest_List.list.count)
-	//fmt.Printf("RanFunctionListC %T List %T %v Array %T %v Deref %v\n", rflC, rflC.list, rflC.list, rflC.list.array, *rflC.list.array, *(rflC.list.array))
-	for i := 0; i < ieCount; i++ {
-		//ToDo: policyTest_List is defined as a POINTER!! Could cause a problem there
-		offset := unsafe.Sizeof(unsafe.Pointer(*E2SmRcPreEventTriggerDefinitionFormat1C.policyTest_List.list.array)) * uintptr(i)
-		policyTestItemC := *(**C.Trigger_ConditionIE_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(E2SmRcPreEventTriggerDefinitionFormat1C.policyTest_List.list.array)) + offset))
-		//fmt.Printf("Value %T %p %v\n", rfiIeC, rfiIeC, rfiIeC)
-		policyTestItem := decodeTriggerConditionIeItem(policyTestItemC)
-
-		E2SmRcPreEventTriggerDefinitionFormat1.PolicyTestList = append(E2SmRcPreEventTriggerDefinitionFormat1.PolicyTestList, policyTestItem)
+	reportingPeriodMs := int32(*e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms)
+	e2SmRcPreEventTriggerDefinitionFormat1 := e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1{
+		TriggerType:       *triggerType,
+		ReportingPeriodMs: reportingPeriodMs,
 	}
 
-	return E2SmRcPreEventTriggerDefinitionFormat1, nil
+	return &e2SmRcPreEventTriggerDefinitionFormat1, nil
 }
 
 func decodeE2SmRcPreEventTriggerDefinitionFormat1Bytes(array [8]byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
-	E2SmRcPreEventTriggerDefinitionFormat1C := (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-	result, err := decodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1C)
+	e2SmRcPreEventTriggerDefinitionFormat1C := (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+	result, err := decodeE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1C)
 	if err != nil {
 		return nil, fmt.Errorf("decodeE2SmRcPreEventTriggerDefinitionFormat1Bytes() %s", err.Error())
 	}

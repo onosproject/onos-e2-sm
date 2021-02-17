@@ -13,32 +13,42 @@
 
 /* Including external dependencies */
 #include "constr_CHOICE.h"
+#include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Dependencies */
-typedef enum E2SM_RC_PRE_EventTriggerDefinition_PR {
-	E2SM_RC_PRE_EventTriggerDefinition_PR_NOTHING,	/* No components present */
-	E2SM_RC_PRE_EventTriggerDefinition_PR_eventDefinition_Format1
+typedef enum E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR {
+	E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR_NOTHING,	/* No components present */
+	E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1
 	/* Extensions may appear below */
 	
-} E2SM_RC_PRE_EventTriggerDefinition_PR;
+} E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR;
 
 /* Forward declarations */
 struct E2SM_RC_PRE_EventTriggerDefinition_Format1;
 
 /* E2SM-RC-PRE-EventTriggerDefinition */
 typedef struct E2SM_RC_PRE_EventTriggerDefinition {
-	E2SM_RC_PRE_EventTriggerDefinition_PR present;
-	union E2SM_RC_PRE_EventTriggerDefinition_u {
-		struct E2SM_RC_PRE_EventTriggerDefinition_Format1	*eventDefinition_Format1;
-		/*
-		 * This type is extensible,
-		 * possible extensions are below.
-		 */
-	} choice;
+	struct E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats {
+		E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR present;
+		union E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_u {
+			struct E2SM_RC_PRE_EventTriggerDefinition_Format1	*eventDefinition_Format1;
+			/*
+			 * This type is extensible,
+			 * possible extensions are below.
+			 */
+		} choice;
+		
+		/* Context for parsing across buffer boundaries */
+		asn_struct_ctx_t _asn_ctx;
+	} eventDefinition_formats;
+	/*
+	 * This type is extensible,
+	 * possible extensions are below.
+	 */
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;

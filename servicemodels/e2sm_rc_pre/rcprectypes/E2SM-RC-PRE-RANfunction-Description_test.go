@@ -34,23 +34,23 @@ func createCommonE2SmRcPreRanfunctionDescription() (*e2sm_rc_pre_ies.E2SmRcPreRa
 	return newE2SmRcPrePdu, nil
 }
 
-func Test_xerEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
+func Test_XerEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 
 	ranfunctionDescriptionMsg, err := createCommonE2SmRcPreRanfunctionDescription()
 	assert.NilError(t, err, "Something went wrong when the E2SmRcPreRanfunctionDescription was created")
 
-	xer, err := xerEncodeE2SmRcPreRanfunctionDescription(ranfunctionDescriptionMsg)
+	xer, err := XerEncodeE2SmRcPreRanfunctionDescription(ranfunctionDescriptionMsg)
 	assert.NilError(t, err)
 	assert.Equal(t, 1290, len(xer))
 	t.Logf("E2SM-RC-PRE-RANfunction-Description XER\n%s", string(xer))
 }
 
-func Test_xerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
+func Test_XerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 
 	ranfunctionDescriptionMsg, err := createCommonE2SmRcPreRanfunctionDescription()
 	assert.NilError(t, err, "Something went wrong when the E2SmRcPreRanfunctionDescription was created")
 
-	xer, err := xerEncodeE2SmRcPreRanfunctionDescription(ranfunctionDescriptionMsg)
+	xer, err := XerEncodeE2SmRcPreRanfunctionDescription(ranfunctionDescriptionMsg)
 	assert.NilError(t, err)
 	assert.Equal(t, 1290, len(xer))
 	t.Logf("E2SM-RC-PRE-RANfunction-Description XER\n%s", string(xer))
@@ -60,7 +60,7 @@ func Test_xerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 	assert.Assert(t, result != nil)
 }
 
-func Test_perEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
+func Test_PerEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 
 	ranfunctionDescriptionMsg, err := createCommonE2SmRcPreRanfunctionDescription()
 	assert.NilError(t, err, "Something went wrong when the E2SmRcPreRanfunctionDescription was created")
@@ -71,7 +71,7 @@ func Test_perEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 	t.Logf("E2SM-RC-PRE-RANfunction-Description PER\n%x", string(per))
 }
 
-func Test_perDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
+func Test_PerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 
 	ranfunctionDescriptionMsg, err := createCommonE2SmRcPreRanfunctionDescription()
 	assert.NilError(t, err, "Something went wrong when the E2SmRcPreRanfunctionDescription was created")
