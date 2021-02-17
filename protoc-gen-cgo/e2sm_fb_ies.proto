@@ -1,0 +1,159 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+*/
+
+////////////////////// e2sm-fb-ies.proto //////////////////////
+// Protobuf generated from /e2sm-fb-v01.asn1 by asn1c-0.9.29
+// E2SM-FB-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1(1) e2sm(2) e2sm-FB-IEs(2) }
+
+syntax = "proto3";
+
+package e2sm_fb.v1beta1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_fb/v1beta1/e2sm-fb-ies;e2smfbies";
+
+import "validate/v1/validate.proto";
+
+// enumerated from e2sm-fb-v01.asn1:73
+enum RtPeriodIe {
+    RT_PERIOD_IE_MS10 = 0;
+    RT_PERIOD_IE_MS20 = 1;
+    RT_PERIOD_IE_MS32 = 2;
+    RT_PERIOD_IE_MS40 = 3;
+    RT_PERIOD_IE_MS60 = 4;
+    RT_PERIOD_IE_MS64 = 5;
+    RT_PERIOD_IE_MS70 = 6;
+    RT_PERIOD_IE_MS80 = 7;
+    RT_PERIOD_IE_MS128 = 8;
+    RT_PERIOD_IE_MS160 = 9;
+    RT_PERIOD_IE_MS256 = 10;
+    RT_PERIOD_IE_MS320 = 11;
+    RT_PERIOD_IE_MS512 = 12;
+    RT_PERIOD_IE_MS640 = 13;
+    RT_PERIOD_IE_MS1024 = 14;
+    RT_PERIOD_IE_MS1280 = 15;
+    RT_PERIOD_IE_MS2048 = 16;
+    RT_PERIOD_IE_MS2560 = 17;
+    RT_PERIOD_IE_MS5120 = 18;
+    RT_PERIOD_IE_MS10240 = 19;
+};
+
+// sequence from e2sm-fb-v01.asn1:16
+message Ecgi {
+    PlmnIdentity p_lmn_identity = 1 [json_name = "ECGI:PLMN_Identity"];
+    EnbId e_nb_id = 2 [json_name = "ECGI:ENB_ID"];
+};
+
+// sequence from e2sm-fb-v01.asn1:24
+message EnbId {
+    // choice from e2sm-fb-v01.asn1:24
+    oneof enb_id {
+        BitString macro_e_nb_id = 1 [json_name = "ENB-ID:macro_eNB_ID"];
+        BitString home_e_nb_id = 2 [json_name = "ENB-ID:home_eNB_ID"];
+        BitString short_macro_e_nb_id = 3 [json_name = "ENB-ID:short_Macro_eNB_ID"];
+        BitString long_macro_e_nb_id = 4 [json_name = "ENB-ID:long_Macro_eNB_ID"];
+    }
+};
+
+// constant Integer from e2sm-fb-v01.asn1:37
+message MaxofMessageProtocolTests {
+    int32 value = 1 [(validate.v1.rules).int32.const = 15, json_name="MaxOfMessage-Protocol-Tests:value"];
+};
+
+// constant Integer from e2sm-fb-v01.asn1:38
+message MaxofRicstyles {
+    int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="MaxOf-RicStyles:value"];
+};
+
+// constant Integer from e2sm-fb-v01.asn1:39
+message MaxPlmn {
+    int32 value = 1 [(validate.v1.rules).int32.const = 12, json_name="Max-PLMN:value"];
+};
+
+// constant Integer from e2sm-fb-v01.asn1:40
+message MaxNr {
+    int32 value = 1 [(validate.v1.rules).int32.const = 4096, json_name="Max-Nr:value"];
+};
+
+// range of Integer from e2sm-fb-v01.asn1:43
+message RicStyleType {
+    int32 value = 1 [json_name = "RIC-Style-Type:value"];
+};
+
+// range of Integer from e2sm-fb-v01.asn1:57
+message RicFormatType {
+    int32 value = 1 [json_name = "RIC-Format-Type:value"];
+};
+
+// sequence from e2sm-fb-v01.asn1:58
+message E2SmFbEventTriggerDefinition {
+    // choice from e2sm-fb-v01.asn1:58
+    oneof e2_sm_fb_event_trigger_definition {
+        E2SmFbEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "E2SM-FB-EventTriggerDefinition:eventDefinition_Format1"];
+    }
+};
+
+// sequence from e2sm-fb-v01.asn1:64
+message E2SmFbEventTriggerDefinitionFormat1 {
+    repeated TriggerConditionIeItem policy_test_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 15}, json_name="E2SM-FB-EventTriggerDefinition-Format1:struct_Trigger_ConditionIE_Item_policyTest_List"];
+};
+
+// sequence from e2sm-fb-v01.asn1:69
+message TriggerConditionIeItem {
+    RtPeriodIe report_period_ie = 1 [json_name = "Trigger-ConditionIE-Item:report_Period_IE"];
+};
+
+// sequence from e2sm-fb-v01.asn1:81
+message E2SmFbActionDefinition {
+    RicStyleType ric_style_type = 1 [json_name = "E2SM-FB-ActionDefinition:ric_Style_Type"];
+};
+
+// sequence from e2sm-fb-v01.asn1:91
+message E2SmFbIndicationHeader {
+    // choice from e2sm-fb-v01.asn1:91
+    oneof e2_sm_fb_indication_header {
+        E2SmFbIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "E2SM-FB-IndicationHeader-Format1:indicationHeader_Format1"];
+    }
+};
+
+// sequence from e2sm-fb-v01.asn1:97
+message E2SmFbIndicationHeaderFormat1 {
+    Ecgi e_cgi = 1 [json_name = "E2SM-FB-IndicationHeader-Format1:e_Cgi"];
+};
+
+// sequence from e2sm-fb-v01.asn1:107
+message E2SmFbIndicationMessage {
+    // choice from e2sm-fb-v01.asn1:107
+    oneof e2_sm_fb_indication_message {
+        RicStyleType ric_style_type = 1 [json_name = "E2SM-FB-IndicationMessage:ric_Style_Type"];
+        E2SmFbIndicationMessageFormat1 indication_message_format1 = 2 [json_name = "E2SM-FB-IndicationMessage:indicationMessage_Format1"];
+    }
+};
+
+// sequence from e2sm-fb-v01.asn1:114
+message E2SmFbIndicationMessageFormat1 {
+    Ecgi e_cgi = 1 [json_name = "E2SM-FB-IndicationMessage-Format1:ecgi"];
+    int32 d_l_earfcn = 2 [json_name = "E2SM-FB-IndicationMessage-Format1:dl_earfcn"];
+    int32 cell_size = 3 [json_name = "E2SM-FB-IndicationMessage-Format1:cell_size"];
+    int32 p_ci_pool = 4 [json_name = "E2SM-FB-IndicationMessage-Format1:pci_pool"];
+    int32 p_ci = 5 [json_name = "E2SM-FB-IndicationMessage-Format1:pci"];
+    repeated PciNrt p_ci_nrt = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4096}, json_name = "E2SM-FB-IndicationMessage-Format1:pci_nrt"];
+};
+
+// sequence from e2sm-fb-v01.asn1:124
+message PciNrt {
+    int32 n_r = 1 [json_name = "PCI-Nrt:nr"];
+    Ecgi t_ecgi = 2 [json_name = "PCI-Nrt:ecgi"];
+    int32 t_pci = 3 [json_name = "PCI-Nrt:pci"];
+};
+
+message PlmnIdentity {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name = "PLMN-Identity:PLMN_Identity"];
+}
+
+message BitString {
+    uint64 value = 1 [json_name = "BIT_STRING:value"];
+    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name = "BIT_STRING:len"];
+}
+

@@ -1,0 +1,14 @@
+diff --git a/build/bin/compile-protos.sh b/build/bin/compile-protos.sh
+index b6c5125..4317e24 100755
+--- a/build/bin/compile-protos.sh
++++ b/build/bin/compile-protos.sh
+@@ -14,5 +14,9 @@ protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
+   --go_out=. \
+   e2sm_rc_pre/v1/e2sm_rc_pre_ies.proto
+ 
++protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
++  --go_out=. \
++  e2sm_fb/v1beta1/e2sm_fb_ies.proto
++
+ cp -r github.com/onosproject/onos-e2-sm/* .
+ rm -rf github.com

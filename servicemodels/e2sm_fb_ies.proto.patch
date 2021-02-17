@@ -1,0 +1,157 @@
+0a1,6
+> /*
+> SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+> 
+> SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+> */
+> 
+7,8c13,14
+< package e2sm_fb_v01_asn1.v1;
+< option go_package = "e2sm_fb_v01_asn1/v1/e2sm-fb-ies";
+---
+> package e2sm_fb.v1beta1;
+> option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_fb/v1beta1/e2sm-fb-ies;e2smfbies";
+14,33c20,39
+<     RT__PERIOD__IE_MS10 = 0;
+<     RT__PERIOD__IE_MS20 = 1;
+<     RT__PERIOD__IE_MS32 = 2;
+<     RT__PERIOD__IE_MS40 = 3;
+<     RT__PERIOD__IE_MS60 = 4;
+<     RT__PERIOD__IE_MS64 = 5;
+<     RT__PERIOD__IE_MS70 = 6;
+<     RT__PERIOD__IE_MS80 = 7;
+<     RT__PERIOD__IE_MS128 = 8;
+<     RT__PERIOD__IE_MS160 = 9;
+<     RT__PERIOD__IE_MS256 = 10;
+<     RT__PERIOD__IE_MS320 = 11;
+<     RT__PERIOD__IE_MS512 = 12;
+<     RT__PERIOD__IE_MS640 = 13;
+<     RT__PERIOD__IE_MS1024 = 14;
+<     RT__PERIOD__IE_MS1280 = 15;
+<     RT__PERIOD__IE_MS2048 = 16;
+<     RT__PERIOD__IE_MS2560 = 17;
+<     RT__PERIOD__IE_MS5120 = 18;
+<     RT__PERIOD__IE_MS10240 = 19;
+---
+>     RT_PERIOD_IE_MS10 = 0;
+>     RT_PERIOD_IE_MS20 = 1;
+>     RT_PERIOD_IE_MS32 = 2;
+>     RT_PERIOD_IE_MS40 = 3;
+>     RT_PERIOD_IE_MS60 = 4;
+>     RT_PERIOD_IE_MS64 = 5;
+>     RT_PERIOD_IE_MS70 = 6;
+>     RT_PERIOD_IE_MS80 = 7;
+>     RT_PERIOD_IE_MS128 = 8;
+>     RT_PERIOD_IE_MS160 = 9;
+>     RT_PERIOD_IE_MS256 = 10;
+>     RT_PERIOD_IE_MS320 = 11;
+>     RT_PERIOD_IE_MS512 = 12;
+>     RT_PERIOD_IE_MS640 = 13;
+>     RT_PERIOD_IE_MS1024 = 14;
+>     RT_PERIOD_IE_MS1280 = 15;
+>     RT_PERIOD_IE_MS2048 = 16;
+>     RT_PERIOD_IE_MS2560 = 17;
+>     RT_PERIOD_IE_MS5120 = 18;
+>     RT_PERIOD_IE_MS10240 = 19;
+38,39c44,45
+<     PlmnIdentity p_lmn_identity = 1;
+<     EnbId e_nb_id = 2;
+---
+>     PlmnIdentity p_lmn_identity = 1 [json_name = "ECGI:PLMN_Identity"];
+>     EnbId e_nb_id = 2 [json_name = "ECGI:ENB_ID"];
+46,49c52,55
+<         BitString macro_e_nb_id = 1;
+<         BitString home_e_nb_id = 2;
+<         BitString short_macro_e_nb_id = 3;
+<         BitString long_macro_e_nb_id = 4;
+---
+>         BitString macro_e_nb_id = 1 [json_name = "ENB-ID:macro_eNB_ID"];
+>         BitString home_e_nb_id = 2 [json_name = "ENB-ID:home_eNB_ID"];
+>         BitString short_macro_e_nb_id = 3 [json_name = "ENB-ID:short_Macro_eNB_ID"];
+>         BitString long_macro_e_nb_id = 4 [json_name = "ENB-ID:long_Macro_eNB_ID"];
+55c61
+<     int32 value = 1 [(validate.v1.rules).int32.const = 15];
+---
+>     int32 value = 1 [(validate.v1.rules).int32.const = 15, json_name="MaxOfMessage-Protocol-Tests:value"];
+60c66
+<     int32 value = 1 [(validate.v1.rules).int32.const = 63];
+---
+>     int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="MaxOf-RicStyles:value"];
+65c71
+<     int32 value = 1 [(validate.v1.rules).int32.const = 12];
+---
+>     int32 value = 1 [(validate.v1.rules).int32.const = 12, json_name="Max-PLMN:value"];
+70c76
+<     int32 value = 1 [(validate.v1.rules).int32.const = 4096];
+---
+>     int32 value = 1 [(validate.v1.rules).int32.const = 4096, json_name="Max-Nr:value"];
+75c81
+<     int32 value = 1;
+---
+>     int32 value = 1 [json_name = "RIC-Style-Type:value"];
+80c86
+<     int32 value = 1;
+---
+>     int32 value = 1 [json_name = "RIC-Format-Type:value"];
+87c93
+<         E2SmFbEventTriggerDefinitionFormat1 event_definition_format1 = 1;
+---
+>         E2SmFbEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "E2SM-FB-EventTriggerDefinition:eventDefinition_Format1"];
+93c99
+<     repeated TriggerConditionIeItem policy_test_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 15}];
+---
+>     repeated TriggerConditionIeItem policy_test_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 15}, json_name="E2SM-FB-EventTriggerDefinition-Format1:struct_Trigger_ConditionIE_Item_policyTest_List"];
+98c104
+<     RtPeriodIe report_period_ie = 1;
+---
+>     RtPeriodIe report_period_ie = 1 [json_name = "Trigger-ConditionIE-Item:report_Period_IE"];
+103c109
+<     RicStyleType ric_style_type = 1;
+---
+>     RicStyleType ric_style_type = 1 [json_name = "E2SM-FB-ActionDefinition:ric_Style_Type"];
+110c116
+<         E2SmFbIndicationHeaderFormat1 indication_header_format1 = 1;
+---
+>         E2SmFbIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "E2SM-FB-IndicationHeader-Format1:indicationHeader_Format1"];
+116c122
+<     Ecgi ecgi = 1;
+---
+>     Ecgi e_cgi = 1 [json_name = "E2SM-FB-IndicationHeader-Format1:e_Cgi"];
+123,124c129,130
+<         RicStyleType ric_style_type = 1;
+<         E2SmFbIndicationMessageFormat1 indication_message_format1 = 2;
+---
+>         RicStyleType ric_style_type = 1 [json_name = "E2SM-FB-IndicationMessage:ric_Style_Type"];
+>         E2SmFbIndicationMessageFormat1 indication_message_format1 = 2 [json_name = "E2SM-FB-IndicationMessage:indicationMessage_Format1"];
+130,135c136,141
+<     Ecgi ecgi = 1;
+<     int32 dl_earfcn = 2;
+<     int32 cell_size = 3;
+<     int32 pci_pool = 4;
+<     int32 pci = 5;
+<     repeated PciNrt pci_nrt = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4096}];
+---
+>     Ecgi e_cgi = 1 [json_name = "E2SM-FB-IndicationMessage-Format1:ecgi"];
+>     int32 d_l_earfcn = 2 [json_name = "E2SM-FB-IndicationMessage-Format1:dl_earfcn"];
+>     int32 cell_size = 3 [json_name = "E2SM-FB-IndicationMessage-Format1:cell_size"];
+>     int32 p_ci_pool = 4 [json_name = "E2SM-FB-IndicationMessage-Format1:pci_pool"];
+>     int32 p_ci = 5 [json_name = "E2SM-FB-IndicationMessage-Format1:pci"];
+>     repeated PciNrt p_ci_nrt = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4096}, json_name = "E2SM-FB-IndicationMessage-Format1:pci_nrt"];
+140,142c146,148
+<     int32 nr_index = 1;
+<     Ecgi t_ecgi = 2;
+<     int32 t_pci = 3;
+---
+>     int32 n_r = 1 [json_name = "PCI-Nrt:nr"];
+>     Ecgi t_ecgi = 2 [json_name = "PCI-Nrt:ecgi"];
+>     int32 t_pci = 3 [json_name = "PCI-Nrt:pci"];
+143a150,158
+> 
+> message PlmnIdentity {
+>     bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name = "PLMN-Identity:PLMN_Identity"];
+> }
+> 
+> message BitString {
+>     uint64 value = 1 [json_name = "BIT_STRING:value"];
+>     uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name = "BIT_STRING:len"];
+> }

@@ -1,0 +1,41 @@
+cd /home/scondon/go/src/github.com/onosproject/onos-e2-sm
+mkdir -p servicemodels/e2sm_fb/fbctypes
+cp ~/eclipse-workspace/asn1-files/e2sm-fb-v01.asn1 servicemodels/e2sm_fb/fbctypes
+pushd servicemodels/e2sm_fb/fbctypes
+asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D. e2sm-fb-v01.asn1
+
+mkdir -p ../v1beta1
+~/git/vlm/asn1c/asn1c/asn1c -B e2sm-fb-v01.asn1 > ../v1beta1/e2sm_fb_ies.proto
+
+popd
+pushd servicemodels
+patch e2sm_fb/v1beta1/e2sm_fb_ies.proto e2sm_fb_ies.proto.patch
+
+
+popd
+make buflint
+
+patch build/bin/compile-protos.sh compile_protos_patch.patch
+
+make protos
+pushd servicemodels/e2sm_fb
+sudo chown -R $USER:$USER .
+go mod init
+go build -v ./...
+popd
+
+pushd protoc-gen-cgo
+cp ../servicemodels/e2sm_fb/v1beta1/e2sm_fb_ies.proto .
+protoc -I=".:../servicemodels" --plugin="./protoc-gen-cgo" --cgo_out=../servicemodels/e2sm_fb/fbctypes e2sm_fb_ies.proto
+popd
+
+pushd servicemodels/e2sm_fb/fbctypes
+cp ../../e2sm_kpm/kpmctypes/*coder.go .
+sed -i "s/package\ kpmctypes/package\ fbctypes/g" *.go
+sed -i "s/package\ kpmctype/package\ fbctypes/g" *.go
+
+sed -i "s/e2sm_fb_ies\/v1beta1\/e2sm-fb-ies/e2sm_fb\/v1beta1\/e2sm-fb-ies/g" *.go
+
+
+
+
