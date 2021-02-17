@@ -172,5 +172,29 @@ func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.Ra
 	return pdudecoder.DecodeE2SmKpmRanfunctionDescription(e2SmKpmPdu)
 }
 
+func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
 // ServiceModel is the exported symbol that gives an entry point to this shared module
 var ServiceModel servicemodel
