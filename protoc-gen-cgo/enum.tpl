@@ -46,10 +46,10 @@ func perEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} {{.ProtoFileN
 func xerDecode{{.MessageName}}(bytes []byte) ({{.ProtoFileName}}.{{.MessageName}}, error) {
     unsafePtr, err := decodeXer(bytes, &C.asn_DEF_{{dashToUnderscore .CstructName}})
     if err != nil {
-        return nil, err
+        return 0, err
     }
     if unsafePtr == nil {
-        return nil, fmt.Errorf("pointer decoded from XER is nil")
+        return 0, fmt.Errorf("pointer decoded from XER is nil")
     }
     return decode{{.MessageName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr)) //ToDo - change name of C-struct
 }
@@ -57,10 +57,10 @@ func xerDecode{{.MessageName}}(bytes []byte) ({{.ProtoFileName}}.{{.MessageName}
 func perDecode{{.MessageName}}(bytes []byte) ({{.ProtoFileName}}.{{.MessageName}}, error) {
     unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_{{dashToUnderscore .CstructName}})
     if err != nil {
-        return nil, err
+        return 0, err
     }
     if unsafePtr == nil {
-       return nil, fmt.Errorf("pointer decoded from PER is nil")
+       return 0, fmt.Errorf("pointer decoded from PER is nil")
     }
     return decode{{.MessageName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
 }
@@ -69,9 +69,9 @@ func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} {{.ProtoFileName}}.
     var ret C.{{dashToUnderscore .CstructName}}_t
     switch {{lowCaseFirstLetter .MessageName}} { {{with .FieldList}}{{ range . }}
             case {{.ProtoFileName}}.{{.MessageName}}_{{.FieldName}}:
-                ret = C.{{.CstructLeafName}} {{ end }}{{end}}
+                ret = C.{{.CstructLeafName}} //ToDo - double-check correctness of the name {{ end }}{{end}}
     default:
-        return 0, fmt.Errorf("unexpected {{underscoreToDash .CstructName}} %v", {{lowCaseFirstLetter .MessageName}})
+        return 0, fmt.Errorf("unexpected {{underscoreToDash .MessageName}} %v", {{lowCaseFirstLetter .MessageName}})
     }
 
 
@@ -84,4 +84,10 @@ func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnde
     {{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}(int32(*{{lowCaseFirstLetter .MessageName}}C))
 
     return {{lowCaseFirstLetter .MessageName}}, nil
+}
+
+func decode{{.MessageName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) { //ToDo - Check addressing correct structure in Protobuf
+    {{lowCaseFirstLetter .MessageName}}C := (*C.{{dashToUnderscore .MessageName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+
+    return decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C)
 }
