@@ -10,8 +10,8 @@ SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 syntax = "proto3";
 
-package e2sm_kpm_ies_v2_asn.v1;
-option go_package = "e2sm_kpm_ies_v2_asn/v1/e2sm-kpm-ies";
+package e2sm_kpm_ies.v2;
+option go_package = "e2sm_kpm_ies_v2_asn/v2/e2sm-kpm-ies";
 
 import "validate/v1/validate.proto";
 
@@ -98,7 +98,7 @@ message MeasurementLabel {
 
 // range of Integer from e2sm_kpm_ies_v2.asn:91
 message SubscriptionId {
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 4294967296}, json_name="SubscriptionID:value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967296}, json_name="SubscriptionID:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:96
@@ -127,12 +127,12 @@ message GlobalgNbId {
 
 // range of Integer from e2sm_kpm_ies_v2.asn:116
 message GnbCuUpId {
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 68719476735}, json_name="GNB-CU-UP-ID:value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="GNB-CU-UP-ID:value"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:118
 message GnbDuId {
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 68719476735}, json_name="GNB-DU-ID:value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="GNB-DU-ID:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:121
@@ -248,7 +248,7 @@ message MaxnoofMeasurementInfo {
 
 // constant Integer from e2sm_kpm_ies_v2.asn:205
 message MaxnoofLabelInfo {
-    int32 value = 1 [(validate.v1.rules).int32.const = 2147483647, json_name="MaxnoofLabelInfo"];
+    int64 value = 1 [(validate.v1.rules).int64.const = 2147483647, json_name="MaxnoofLabelInfo"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:206
@@ -258,7 +258,7 @@ message MaxnoofMeasurementRecord {
 
 // constant Integer from e2sm_kpm_ies_v2.asn:207
 message MaxnoofMeasurementValue {
-    int32 value = 1 [(validate.v1.rules).int32.const = 2147483647, json_name="MaxnoofMeasurementValue"];
+    int64 value = 1 [(validate.v1.rules).int64.const = 2147483647, json_name="MaxnoofMeasurementValue"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:211
@@ -411,12 +411,12 @@ message RicStyleName {
 
 // Maybe validation part should be added..
 message CellObjectId {
-    string value = 1 [json_name="CellObjectID:value"];
+    string value = 1 [(validate.v1.rules).string = {min_len: 0, max_len: 400}, json_name="CellObjectID:value"];
 }
 
 // Maybe validation part should be added..
 message MeasurementTypeName {
-    string value = 1 [json_name="MeasurementTypeName:value"];
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="MeasurementTypeName:value"];
 }
 
 message PlmnIdentity {
@@ -425,15 +425,15 @@ message PlmnIdentity {
 
 // Maybe validation part should be added..
 message TimeStamp {
-    bytes value = 1 [json_name="TimeStamp:value"];
+    bytes value = 1 [(validate.v1.rules).bytes.len = 4, json_name="TimeStamp:value"];
 }
 
 message EutracellIdentity {
-    BitString value = 1 [json_name="EUTRACellIdentity:value"]; //28
+    BitString value = 1 [(validate.v1.rules).bytes.len = 28, json_name="EUTRACellIdentity:value"]; //28
 }
 
 message NrcellIdentity {
-    BitString value = 1 [json_name="NRCellIdentity:value"]; //36
+    BitString value = 1 [(validate.v1.rules).bytes.len = 36, json_name="NRCellIdentity:value"]; //36
 }
 
 message BitString {
