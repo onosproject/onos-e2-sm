@@ -47,7 +47,7 @@ deps_rc: # @HELP ensure that the required dependencies are in place
 	bash -c "diff -u <(echo -n) <(git diff go.mod)"
 	bash -c "diff -u <(echo -n) <(git diff go.sum)"
 
-linters: # @HELP examines Go source code and reports coding problems
+linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m && cd ..
