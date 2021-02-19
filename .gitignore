@@ -28,3 +28,7 @@ coverage.txt
 .cproject
 .eclipse
 .settings/
+*report*.xml
+*coverage*.xml
+*-output.out
+
