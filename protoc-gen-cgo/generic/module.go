@@ -114,7 +114,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		basicTypesInfo := basicTypes{
 			ProtoFileName:   extractProtoFileName(f.Name().Split()[0]),
 			PackageName:     cleanDashes(underscoreToDash(cutE2SM(cutIES(extractProtoFileName(f.Name().Split()[0]))))),
-			FullPackageName: f.Name().Split()[0],
+			FullPackageName: adjustFullPackageName(f.Name().Split()[0]),
 		}
 
 		fmt.Fprintf(buf, "--- %v ---\n", f.Name().Split()[0])
@@ -172,12 +172,13 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			oneof := false
 			var cstructName string
 			var items int = 0
+			valueFound := false
 
 			fieldItems := fieldList{
 				RepeatedField: make([]elementaryField, 0),
 				OneOfField:    make([]elementaryField, 0),
 				OptionalField: make([]elementaryField, 0),
-				SingleItem:    true,
+				SingleItem:    false,
 			}
 			//deps := dependencies{
 			//	Multiple:         false,
@@ -195,7 +196,10 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				var elemField elementaryField
 
 				elemField.FieldName = adjustFieldName(fld.GetName())
-				elemField.CstructLeafName = extractCstructFieldName(fld.GetJsonName())
+				elemField.CstructLeafName = dashToUnderscore(extractCstructFieldName(fld.GetJsonName()))
+				if strings.Contains(strings.ToLower(elemField.FieldName), "value") {
+					valueFound = true
+				}
 
 				cstructName = extractCstructName(fld.GetJsonName())
 				elemField.CstructName = extractCstructName(fld.GetJsonName())
@@ -229,11 +233,14 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 					}
 				}
-
 			}
 
-			if items > 1 {
-				fieldItems.SingleItem = false
+			// ToDo - Go through the nested types
+			//nstdTypes := msg.Descriptor().GetNestedType()
+			// ...
+
+			if items == 1 && valueFound {
+				fieldItems.SingleItem = true
 			}
 			//if len(deps.DependenciesList) > 1 {
 			//	deps.Multiple = true
@@ -432,6 +439,8 @@ func decodeDataType(dataType string) string {
 		return dataType
 	case "[]byte":
 		return dataType
+	case "string":
+		return "decodePrintableString"
 	case "message": //ToDo: isn't it pointless?? -- missing enum then
 		return "decode" + upperCaseFirstLetter(dataType)
 	default:
@@ -446,6 +455,8 @@ func encodeDataType(dataType string) string {
 		return "C.long"
 	case "[]byte":
 		return dataType
+	case "string":
+		return "decodePrintableString"
 	case "message": //ToDo: isn't it pointless?? -- missing enum then
 		return "new" + upperCaseFirstLetter(dataType)
 	default:
@@ -479,6 +490,12 @@ func adjustEnumLeafName(leafName string, msgName string) string {
 
 	return upperCaseFirstLetter(dashToUnderscore(msgName) +
 		strings.ReplaceAll(strings.ToLower(leafName), strings.ToLower(dashToUnderscore(dashToUnderscore(msgName))), ""))
+}
+
+func adjustFullPackageName(fullPackageName string) string {
+	path := strings.ReplaceAll(fullPackageName, extractProtoFileName(fullPackageName), "")
+	adjustedPackageName := underscoreToDash(extractProtoFileName(fullPackageName))
+	return path + adjustedPackageName
 }
 
 func extractEnumCstructName(name string) string {
