@@ -179,7 +179,9 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 
 func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader()
+	var controlMessagePriority int32 = 1
+
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()
@@ -213,8 +215,9 @@ func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
 func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 	var ranParameterName = "PCI"
 	var ranParameterValue int32 = 20
+	var ranParameterID int32 = 1
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterName, ranParameterValue)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameterValue)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()

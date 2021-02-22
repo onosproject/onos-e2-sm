@@ -11,7 +11,8 @@ import (
 )
 
 func Test_XerEncodeE2SmRcPreControlHeader(t *testing.T) {
-	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader()
+	var controlMessagePriority int32 = 1
+	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority)
 	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader)
@@ -21,8 +22,9 @@ func Test_XerEncodeE2SmRcPreControlHeader(t *testing.T) {
 }
 
 func Test_XerDecodeE2SmRcPreControlHeader(t *testing.T) {
+	var controlMessagePriority int32 = 1
 
-	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader()
+	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority)
 	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader)

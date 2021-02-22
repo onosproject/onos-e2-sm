@@ -11,8 +11,9 @@ import (
 )
 
 func TestE2SmRcPreControlHeader(t *testing.T) {
+	var controlMessagePriority int32 = 1
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreControlHeader()
+	newE2SmRcPrePdu, err := CreateE2SmRcPreControlHeader(controlMessagePriority)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 
