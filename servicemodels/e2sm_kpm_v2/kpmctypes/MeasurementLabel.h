@@ -51,7 +51,7 @@ struct SNSSAI;
 /* MeasurementLabel */
 typedef struct MeasurementLabel {
 	PLMN_Identity_t	*plmnID;	/* OPTIONAL */
-	struct SNSSAI	*sliceID;	/* OPTIONAL */
+	SNSSAI_t	*sliceID;	/* OPTIONAL */
 	FiveQI_t	*fiveQI;	/* OPTIONAL */
 	QCI_t	*qCI;	/* OPTIONAL */
 	QCI_t	*qCImax;	/* OPTIONAL */

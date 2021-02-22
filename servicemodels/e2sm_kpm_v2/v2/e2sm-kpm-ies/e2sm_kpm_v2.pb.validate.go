@@ -3602,7 +3602,13 @@ func (m *MeasurementRecordItem) Validate() error {
 		// no validation rules for Real
 
 	case *MeasurementRecordItem_NoValue:
-		// no validation rules for NoValue
+
+		if val := m.GetNoValue(); val < 0 || val >= 1 {
+			return MeasurementRecordItemValidationError{
+				field:  "NoValue",
+				reason: "value must be inside range [0, 1)",
+			}
+		}
 
 	}
 

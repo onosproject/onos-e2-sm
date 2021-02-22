@@ -296,9 +296,9 @@ message MeasurementRecord {
 message MeasurementRecordItem {
   // choice from e2sm_kpm_ies_v2.asn:229
   oneof measurement_record_item {
-    int32 integer = 1 [json_name="MeasurementRecordItem:integer"];
-    int32 real = 2 [json_name="MeasurementRecordItem:real"];
-    int32 no_value = 3 [json_name="MeasurementRecordItem:noValue"];
+    int64 integer = 1 [json_name="MeasurementRecordItem:integer"];
+    double real = 2 [json_name="MeasurementRecordItem:real"];
+    int32 no_value = 3 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementRecordItem:noValue"];
   }
 };
 
