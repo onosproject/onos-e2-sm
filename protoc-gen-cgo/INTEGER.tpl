@@ -134,7 +134,7 @@ func decodeInteger(intC *C.INTEGER_t) (int64, error) {
 // please split it on slices of 8 bytes and run this function on each slice
 func decodeIntegerBytes(array [8]byte) (int64, error) {
 	intC := (*C.INTEGER_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
-	return decodeInteger(intC), nil
+	return decodeInteger(intC)
 }
 
 func freeInteger(intC *C.INTEGER_t) {

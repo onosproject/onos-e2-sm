@@ -434,13 +434,15 @@ func convertDataType(str string, dependentEncoder string) string {
 
 func decodeDataType(dataType string) string {
 
-	switch dataType {
+	switch strings.ToLower(dataType) {
 	case "int32", "uint32", "uint64":
 		return dataType
-	case "[]byte":
+	case "[]byte": // ToDo - sometimes could be OctetString
 		return dataType
 	case "string":
 		return "decodePrintableString"
+	case "int64":
+		return "decodeInteger"
 	case "message": //ToDo: isn't it pointless?? -- missing enum then
 		return "decode" + upperCaseFirstLetter(dataType)
 	default:
@@ -450,13 +452,15 @@ func decodeDataType(dataType string) string {
 
 func encodeDataType(dataType string) string {
 
-	switch dataType {
+	switch strings.ToLower(dataType) {
 	case "int32", "uint32", "uint64":
 		return "C.long"
-	case "[]byte":
+	case "[]byte": // ToDo - sometimes could be OctetString
 		return dataType
 	case "string":
 		return "decodePrintableString"
+	case "int64":
+		return "newInteger"
 	case "message": //ToDo: isn't it pointless?? -- missing enum then
 		return "new" + upperCaseFirstLetter(dataType)
 	default:

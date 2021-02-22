@@ -12,7 +12,7 @@ package {{.PackageName}}ctypes
 //#include "PrintableString.h"
 import "C"
 
-//import "unsafe"
+import "fmt"
 
 // TODO: Change the argument to a []byte
 func newPrintableString(msg string) (*C.PrintableString_t, error) {

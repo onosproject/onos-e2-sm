@@ -119,7 +119,7 @@ choiceC := [8]byte{} //ToDo - Check if number of bytes is sufficient
 
 switch choice := {{lowCaseFirstLetter .MessageName}}.{{.MessageName}}.(type) { {{ range $fieldIndex, $field := $fields }}
 case *{{.ProtoFileName}}.{{.MessageName}}_{{.FieldName}}:
-pr = C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}} //ToDo - Check if it's correctness of the PR's name
+pr = C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}} //ToDo - Check if it's correct PR's name
 
 im, err := {{encodeDataType .DataType}}(choice.{{.FieldName}})
 if err != nil {
@@ -139,7 +139,7 @@ choice:  choiceC,
 {{ $fields := .FieldList.RepeatedField }}
 {{ range $fieldIndex, $field := $fields }}
 {{lowCaseFirstLetter .FieldName}}C := new(C.struct_{{dashToUnderscore .CstructName}}__{{.CstructLeafName}}) //ToDo - verify correctness of the variable's name
-for _, {{lowCaseFirstLetter .FieldName}}Item := range {{.ProtoFileName}}.{{.MessageName}}.Get{{.FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
+for _, {{lowCaseFirstLetter .FieldName}}Item := range {{lowCaseFirstLetter .MessageName}}.Get{{.FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
 {{lowCaseFirstLetter .FieldName}}ItemC, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .FieldName}}Item)
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())

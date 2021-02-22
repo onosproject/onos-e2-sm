@@ -13,6 +13,8 @@
 
 /* Including external dependencies */
 #include "NativeInteger.h"
+#include "REAL.h"
+#include "INTEGER.h"
 #include "NativeReal.h"
 #include "NULL.h"
 #include "constr_CHOICE.h"
@@ -35,8 +37,8 @@ typedef enum MeasurementRecordItem_PR {
 typedef struct MeasurementRecordItem {
 	MeasurementRecordItem_PR present;
 	union MeasurementRecordItem_u {
-		long	 integer;
-		double	 real;
+		INTEGER_t	 integer;
+		REAL_t	 real;
 		NULL_t	 noValue;
 		/*
 		 * This type is extensible,
