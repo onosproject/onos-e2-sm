@@ -298,7 +298,7 @@ message MeasurementRecordItem {
   oneof measurement_record_item {
     int64 integer = 1 [json_name="MeasurementRecordItem:integer"];
     double real = 2 [json_name="MeasurementRecordItem:real"];
-    int32 no_value = 3 [(validate.v1.rules).int32 = {gte: 0, lte: 1}, json_name="MeasurementRecordItem:noValue"];
+    int32 no_value = 3 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementRecordItem:noValue"];
   }
 };
 
