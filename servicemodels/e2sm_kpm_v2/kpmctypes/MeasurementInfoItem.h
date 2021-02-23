@@ -13,6 +13,7 @@
 
 /* Including external dependencies */
 #include "MeasurementType.h"
+#include "LabelInfoList.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
@@ -25,7 +26,7 @@ struct LabelInfoList;
 /* MeasurementInfoItem */
 typedef struct MeasurementInfoItem {
 	MeasurementType_t	 measType;
-	struct LabelInfoList	*labelInfoList;	/* OPTIONAL */
+	LabelInfoList_t	*labelInfoList;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

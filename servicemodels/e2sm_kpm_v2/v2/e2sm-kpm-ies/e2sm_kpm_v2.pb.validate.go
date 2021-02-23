@@ -3848,7 +3848,21 @@ func (m *E2SmKpmEventTriggerDefinition) Validate() error {
 		return nil
 	}
 
-	// no validation rules for EventDefinitionFormats
+	switch m.E2SmKpmEventTriggerDefinition.(type) {
+
+	case *E2SmKpmEventTriggerDefinition_EventDefinitionFormat1:
+
+		if v, ok := interface{}(m.GetEventDefinitionFormat1()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmKpmEventTriggerDefinitionValidationError{
+					field:  "EventDefinitionFormat1",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	return nil
 }
@@ -3998,7 +4012,21 @@ func (m *E2SmKpmActionDefinition) Validate() error {
 		}
 	}
 
-	// no validation rules for ActionDefinitionFormats
+	switch m.E2SmKpmActionDefinition.(type) {
+
+	case *E2SmKpmActionDefinition_ActionDefinitionFormat1:
+
+		if v, ok := interface{}(m.GetActionDefinitionFormat1()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmKpmActionDefinitionValidationError{
+					field:  "ActionDefinitionFormat1",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	return nil
 }
@@ -4175,7 +4203,21 @@ func (m *E2SmKpmIndicationHeader) Validate() error {
 		return nil
 	}
 
-	// no validation rules for IndicationHeaderFormats
+	switch m.E2SmKpmIndicationHeader.(type) {
+
+	case *E2SmKpmIndicationHeader_IndicationHeaderFormat1:
+
+		if v, ok := interface{}(m.GetIndicationHeaderFormat1()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmKpmIndicationHeaderValidationError{
+					field:  "IndicationHeaderFormat1",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	return nil
 }
@@ -4340,7 +4382,21 @@ func (m *E2SmKpmIndicationMessage) Validate() error {
 		return nil
 	}
 
-	// no validation rules for IndicationMessageFormats
+	switch m.E2SmKpmIndicationMessage.(type) {
+
+	case *E2SmKpmIndicationMessage_IndicationMessageFormat1:
+
+		if v, ok := interface{}(m.GetIndicationMessageFormat1()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmKpmIndicationMessageValidationError{
+					field:  "IndicationMessageFormat1",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	return nil
 }

@@ -167,7 +167,7 @@ message EngnbId {
 // sequence from e2sm_kpm_ies_v2.asn:144
 message GlobalKpmnodeNgEnbId {
   GlobalngeNbId global_ng_e_nb_id = 1 [json_name="GlobalKPMnode-ng-eNB-ID:global_ng_eNB_ID"];
-  GnbDuId g_nb_du_id = 2 [json_name="GlobalKPMnode-gNB-ID:gNB_DU_ID"];
+  GnbDuId g_nb_du_id = 2 [json_name="GlobalKPMnode-ng-eNB-ID:gNB_DU_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:150
@@ -269,7 +269,7 @@ message MeasurementInfoList {
 // sequence from e2sm_kpm_ies_v2.asn:212
 message MeasurementInfoItem {
   MeasurementType meas_type = 1 [json_name="MeasurementInfoItem:measType"];
-  LabelInfoList label_info_list = 2 [json_name="MeasurementInfoList:labelInfoList"];
+  LabelInfoList label_info_list = 2 [json_name="MeasurementInfoItem:labelInfoList"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:219
@@ -315,7 +315,10 @@ message MeasurementInfoActionItem {
 
 // sequence from e2sm_kpm_ies_v2.asn:255
 message E2SmKpmEventTriggerDefinition {
-  int32 event_definition_formats = 1 [json_name="E2SM-KPM-EventTriggerDefinition:eventDefinition_Format1"];
+  // choice from e2sm-kpm-ies_v2.asn1:255
+  oneof e2_sm_kpm_event_trigger_definition {
+    E2SmKpmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name="E2SM-KPM-EventTriggerDefinition:eventDefinition_Format1"];
+  }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:260
@@ -326,7 +329,9 @@ message E2SmKpmEventTriggerDefinitionFormat1 {
 // sequence from e2sm_kpm_ies_v2.asn:269
 message E2SmKpmActionDefinition {
   RicStyleType ric_style_type = 1 [json_name="E2SM-KPM-ActionDefinition:ric_Style_Type"];
-  int32 action_definition_formats = 2 [json_name="E2SM-KPM-ActionDefinition:actionDefinition_Format1"];
+  oneof e2_sm_kpm_action_definition {
+    E2SmKpmActionDefinitionFormat1 action_definition_format1 = 2 [json_name="E2SM-KPM-ActionDefinition:actionDefinition_Format1"];
+  }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:278
@@ -339,7 +344,10 @@ message E2SmKpmActionDefinitionFormat1 {
 
 // sequence from e2sm_kpm_ies_v2.asn:293
 message E2SmKpmIndicationHeader {
-  int32 indication_header_formats = 1 [json_name="E2SM-KPM-IndicationHeader:indicationHeader_Format1"];
+  // choice from e2sm-kpm-v01.00.asn1:293
+  oneof e2_sm_kpm_indication_header {
+    E2SmKpmIndicationHeaderFormat1 indication_header_format1 = 1 [json_name="E2SM-KPM-IndicationHeader:indicationHeader_Format1"];
+  }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:298
@@ -354,7 +362,10 @@ message E2SmKpmIndicationHeaderFormat1 {
 
 // sequence from e2sm_kpm_ies_v2.asn:315
 message E2SmKpmIndicationMessage {
-  int32 indication_message_formats = 1 [json_name="E2SM-KPM-IndicationMessage:indicationMessage_Format1"];
+  // choice from e2sm_kpm_ies_v2.asn:315
+  oneof e2_sm_kpm_indication_message {
+    E2SmKpmIndicationMessageFormat1 indication_message_format1 = 1 [json_name="E2SM-KPM-IndicationMessage:indicationMessage_Format1"];
+  }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:320

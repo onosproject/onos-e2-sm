@@ -170,7 +170,6 @@ return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 
 {{ define "ONEOF_DECODE" }}
 {{ $fields := .FieldList.OneOfField }}
-//This is Decoder part (OneOf)
 {{lowCaseFirstLetter .MessageName}} := new({{.ProtoFileName}}.{{.MessageName}})
 
 switch {{lowCaseFirstLetter .MessageName}}C.present { {{ range $fieldIndex, $field := $fields }}
