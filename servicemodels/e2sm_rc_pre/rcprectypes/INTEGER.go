@@ -12,6 +12,7 @@ package rcprectypes
 //#include "INTEGER.h"
 import "C"
 import (
+	"encoding/binary"
 	"fmt"
 	"math"
 	"math/big"
@@ -126,4 +127,9 @@ func decodeInteger(intC *C.INTEGER_t) int64 {
 
 func freeInteger(intC *C.INTEGER_t) {
 	freeAsnCodecsPrim(intC)
+}
+
+func decodeIntegerBytes(array []byte) (int64, error) {
+	intC := (*C.INTEGER_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+	return decodeInteger(intC), nil
 }

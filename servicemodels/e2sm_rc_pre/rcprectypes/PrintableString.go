@@ -11,6 +11,10 @@ package rcprectypes
 //#include <assert.h>
 //#include "PrintableString.h"
 import "C"
+import (
+	"encoding/binary"
+	"unsafe"
+)
 
 //import "unsafe"
 
@@ -26,4 +30,9 @@ func decodePrintableString(octC *C.PrintableString_t) string {
 
 	bytes := decodeOctetString(octC)
 	return bytes
+}
+
+func decodePrintableStringBytes(array []byte) (string, error) {
+	intC := (*C.PrintableString_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+	return decodePrintableString(intC), nil
 }
