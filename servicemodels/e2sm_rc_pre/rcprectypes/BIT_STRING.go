@@ -105,7 +105,7 @@ func freeBitString(bsC *C.BIT_STRING_t) {
 	C.free(unsafe.Pointer(bsC.buf))
 }
 
-func decodeBitStringBytes(array []byte) (*e2sm_rc_pre_ies.BitString, error) {
+func decodeBitStringBytes(array [8]byte) (*e2sm_rc_pre_ies.BitString, error) {
 	intC := (*C.BIT_STRING_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
 	return decodeBitString(intC)
 }
