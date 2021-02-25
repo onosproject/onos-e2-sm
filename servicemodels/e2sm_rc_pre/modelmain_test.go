@@ -242,7 +242,7 @@ func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
 	testIM := e2sm_rc_pre_ies.E2SmRcPreControlMessage{}
 	err = proto.Unmarshal(protoBytes, &testIM)
 	assert.NilError(t, err)
-	assert.Equal(t, 20, int(testIM.GetControlMessage().GetParameterVal().GetValueInt()))
+	assert.Equal(t, 834416, int(testIM.GetControlMessage().GetParameterVal().GetValueInt()))
 }
 
 func TestServicemodel_ControlOutcomeProtoToASN1(t *testing.T) {
@@ -281,7 +281,7 @@ func TestServicemodel_ControlOutcomeASN1toProto(t *testing.T) {
 
 	assert.Equal(t, 1, len(testIM.GetControlOutcomeFormat1().GetOutcomeElementList()))
 	outcome := testIM.GetControlOutcomeFormat1().GetOutcomeElementList()[0]
-	assert.Equal(t, 20, int(outcome.GetRanParameterValue().GetValueInt()))
+	assert.Equal(t, 834368, int(outcome.GetRanParameterValue().GetValueInt()))
 }
 
 //func TestServicemodel_ActionDefinitionASN1toProto(t *testing.T) {
