@@ -12,7 +12,6 @@ package rcprectypes
 //#include "OCTET_STRING.h"
 import "C"
 import (
-	"encoding/binary"
 	"unsafe"
 )
 
@@ -38,8 +37,8 @@ func decodeOctetString(octC *C.OCTET_STRING_t) string {
 //func freeOctetString(octC *C.OCTET_STRING_t) {
 //	C.free(unsafe.Pointer(octC))
 //}
-
-func decodeOctetStringBytes(array [8]byte) (string, error) {
-	intC := (*C.OCTET_STRING_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
-	return decodeOctetString(intC), nil
-}
+//
+//func decodeOctetStringBytes(array [8]byte) (string, error) {
+//	intC := (*C.OCTET_STRING_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+//	return decodeOctetString(intC), nil
+//}
