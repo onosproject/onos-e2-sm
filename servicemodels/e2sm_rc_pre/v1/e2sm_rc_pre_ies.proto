@@ -159,8 +159,8 @@ message RanparameterValue {
         int32 value_enum = 2 [json_name="RANparameter_Value:valueEnum"];
         bool value_bool = 3 [json_name="RANparameter_Value:valueBool"];
         BitString value_bit_s = 4 [json_name="RANparameter_Value:valueBitS"];
-        int32 value_oct_s = 5 [json_name="RANparameter_Value:valueOctS"];
-        int32 value_prt_s = 6 [json_name="RANparameter_Value:valuePrtS"];
+        string value_oct_s = 5 [json_name="RANparameter_Value:valueOctS"];
+        string value_prt_s = 6 [json_name="RANparameter_Value:valuePrtS"];
     }
 };
 

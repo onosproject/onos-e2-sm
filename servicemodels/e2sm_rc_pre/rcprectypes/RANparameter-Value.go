@@ -16,7 +16,6 @@ import (
 	"encoding/binary"
 	"fmt"
 	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
-	"strconv"
 	"unsafe"
 )
 
@@ -71,19 +70,15 @@ func perDecodeRanparameterValue(bytes []byte) (*e2sm_rc_pre_ies.RanparameterValu
 func newRanparameterValue(ranparameterValue *e2sm_rc_pre_ies.RanparameterValue) (*C.RANparameter_Value_t, error) {
 
 	var pr C.RANparameter_Value_PR
-	choiceC := [48]byte{} //ToDo - Check if number of bytes is sufficient
+	choiceC := [48]byte{}
 
 	switch choice := ranparameterValue.RanparameterValue.(type) {
 	case *e2sm_rc_pre_ies.RanparameterValue_ValueInt:
 		pr = C.RANparameter_Value_PR_valueInt
-
-		im := newInteger(int64(choice.ValueInt))
-		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(&im))))
+		binary.LittleEndian.PutUint32(choiceC[:4], uint32(choice.ValueInt))
 	case *e2sm_rc_pre_ies.RanparameterValue_ValueEnum:
 		pr = C.RANparameter_Value_PR_valueEnum
-
-		im := newInteger(int64(choice.ValueEnum))
-		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(uintptr(unsafe.Pointer(&im))))
+		binary.LittleEndian.PutUint32(choiceC[4:8], uint32(choice.ValueEnum))
 	//case *e2sm_rc_pre_ies.RanparameterValue_ValueBool:
 	//	pr = C.RANparameter_Value_PR_valueBool
 	//
@@ -91,22 +86,22 @@ func newRanparameterValue(ranparameterValue *e2sm_rc_pre_ies.RanparameterValue) 
 	//	if err != nil {
 	//		return nil, fmt.Errorf("newRanparameterValue() %s", err.Error())
 	//	}
-	//	binary.LittleEndian.PutUint64(choiceC[16:24], uint64(uintptr(unsafe.Pointer(im))))
+	//	binary.LittleEndian.PutUint64(choiceC[8:12], uint64(uintptr(unsafe.Pointer(im))))
 	//case *e2sm_rc_pre_ies.RanparameterValue_ValueBitS:
 	//	pr = C.RANparameter_Value_PR_valueBitS
 	//
 	//	im := newBitString(choice.ValueBitS)
-	//	binary.LittleEndian.PutUint64(choiceC[24:32], uint64(uintptr(unsafe.Pointer(&im))))
-	case *e2sm_rc_pre_ies.RanparameterValue_ValueOctS:
-		pr = C.RANparameter_Value_PR_valueOctS
-
-		im := newOctetString(string(choice.ValueOctS))
-		binary.LittleEndian.PutUint64(choiceC[32:40], uint64(uintptr(unsafe.Pointer(&im))))
-	case *e2sm_rc_pre_ies.RanparameterValue_ValuePrtS:
-		pr = C.RANparameter_Value_PR_valuePrtS
-
-		im := newPrintableString(string(choice.ValuePrtS))
-		binary.LittleEndian.PutUint64(choiceC[40:48], uint64(uintptr(unsafe.Pointer(&im))))
+	//	binary.LittleEndian.PutUint64(choiceC[12:20], uint64(uintptr(unsafe.Pointer(&im))))
+	//case *e2sm_rc_pre_ies.RanparameterValue_ValueOctS:
+	//	pr = C.RANparameter_Value_PR_valueOctS
+	//
+	//	im := newOctetString(choice.ValueOctS)
+	//	binary.LittleEndian.PutUint64(choiceC[20:28], uint64(uintptr(unsafe.Pointer(&im))))
+	//case *e2sm_rc_pre_ies.RanparameterValue_ValuePrtS:
+	//	pr = C.RANparameter_Value_PR_valuePrtS
+	//
+	//	im := newPrintableString(choice.ValuePrtS)
+	//	binary.LittleEndian.PutUint64(choiceC[28:36], uint64(uintptr(unsafe.Pointer(&im))))
 	default:
 		return nil, fmt.Errorf("newRanparameterValue() %T not yet implemented", choice)
 	}
@@ -125,46 +120,40 @@ func decodeRanparameterValue(ranparameterValueC *C.RANparameter_Value_t) (*e2sm_
 	switch ranparameterValueC.present {
 	case C.RANparameter_Value_PR_valueInt:
 		// TODO(ilango) - Investigate why decodeInteger fails. Hardcoding ranparameterValue to 20 for now.
-		ranparameterValuestructC, _ := decodeIntegerBytes(ranparameterValueC.choice[0:8])
 		ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValueInt{
-			ValueInt: int32(ranparameterValuestructC), //20,
+			ValueInt: int32(binary.LittleEndian.Uint32(ranparameterValueC.choice[:4])),
 		}
-	//case C.RANparameter_Value_PR_valueEnum:
-	//	ranparameterValuestructC := decodeInteger(ranparameterValueC.choice[8:16])
-	//	ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValueEnum{
-	//		ValueEnum: ranparameterValuestructC,
-	//	}
+	case C.RANparameter_Value_PR_valueEnum:
+		ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValueEnum{
+			ValueEnum: int32(binary.LittleEndian.Uint32(ranparameterValueC.choice[4:8])),
+		}
 	//case C.RANparameter_Value_PR_valueBool:
-	//	ranparameterValuestructC, err := decodeBoolBytes(ranparameterValueC.choice[16:24])
+	//	ranparameterValuestructC, err := decodeBoolBytes(ranparameterValueC.choice[8:12])
 	//	ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValueBool{
 	//		ValueBool: ranparameterValuestructC,
 	//	}
 	//case C.RANparameter_Value_PR_valueBitS:
-	//	ranparameterValuestructC, err := decodeBitStringBytes(ranparameterValueC.choice[24:32])
+	//	ranparameterValuestructC, err := decodeBitStringBytes(ranparameterValueC.choice[12:20])
 	//	if err != nil {
 	//		return nil, fmt.Errorf("decodeRanparameterValue() %s", err.Error())
 	//	}
 	//	ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValueBitS{
 	//		ValueBitS: ranparameterValuestructC,
 	//	}
-	case C.RANparameter_Value_PR_valueOctS:
-		ranparameterValuestructC, _ := decodeOctetStringBytes(ranparameterValueC.choice[32:40])
-		res, err := strconv.ParseInt(ranparameterValuestructC, 10, 32)
-		if err != nil {
-			return nil, err
-		}
-		ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValueOctS{
-			ValueOctS: int32(res),
-		}
-	case C.RANparameter_Value_PR_valuePrtS:
-		ranparameterValuestructC, _ := decodePrintableStringBytes(ranparameterValueC.choice[40:48])
-		res, err := strconv.ParseInt(ranparameterValuestructC, 10, 32)
-		if err != nil {
-			return nil, err
-		}
-		ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValuePrtS{
-			ValuePrtS: int32(res),
-		}
+	//case C.RANparameter_Value_PR_valueOctS:
+	//	var a [8]byte
+	//	copy(a[:], ranparameterValueC.choice[20:28])
+	//	ranparameterValuestructC, _ := decodeOctetStringBytes(a)
+	//	ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValueOctS{
+	//		ValueOctS: ranparameterValuestructC,
+	//	}
+	//case C.RANparameter_Value_PR_valuePrtS:
+	//	var a [8]byte
+	//	copy(a[:], ranparameterValueC.choice[28:36])
+	//	ranparameterValuestructC, _ := decodePrintableStringBytes(a)
+	//	ranparameterValue.RanparameterValue = &e2sm_rc_pre_ies.RanparameterValue_ValuePrtS{
+	//		ValuePrtS: ranparameterValuestructC,
+	//	}
 	default:
 		return nil, fmt.Errorf("decodeRanparameterValue() %v not yet implemented", ranparameterValueC.present)
 	}
