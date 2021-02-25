@@ -238,7 +238,7 @@ func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.ControlMessageASN1toProto(ControlMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 19, len(protoBytes))
+	assert.Equal(t, 21, len(protoBytes))
 	testIM := e2sm_rc_pre_ies.E2SmRcPreControlMessage{}
 	err = proto.Unmarshal(protoBytes, &testIM)
 	assert.NilError(t, err)
@@ -274,7 +274,7 @@ func TestServicemodel_ControlOutcomeASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.ControlOutcomeASN1toProto(ControlOutcomeAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 12, len(protoBytes))
+	assert.Equal(t, 14, len(protoBytes))
 	testIM := e2sm_rc_pre_ies.E2SmRcPreControlOutcome{}
 	err = proto.Unmarshal(protoBytes, &testIM)
 	assert.NilError(t, err)

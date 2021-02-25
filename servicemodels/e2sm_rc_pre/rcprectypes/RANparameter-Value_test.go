@@ -159,14 +159,14 @@ func Test_perEncodeMeasurementRecordItem(t *testing.T) {
 
 	per, err := perEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 8, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("RANparameterValue (Integer) PER\n%s", string(per))
 
 	rpv = createRanparameterValueValueEnum()
 
 	per, err = perEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 7, len(per))
 	t.Logf("RANparameterValue (Enum) PER\n%s", string(per))
 
 	//rpv = createRanparameterValueValueOctS()

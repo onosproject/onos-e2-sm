@@ -19,7 +19,7 @@ func Test_XerEncodeE2SmRcPreControlOutcome(t *testing.T) {
 
 	xer, err := XerEncodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcome)
 	assert.NilError(t, err)
-	assert.Equal(t, 427, len(xer))
+	assert.Equal(t, 417, len(xer))
 	t.Logf("E2SM-RC-PRE-ControlOutcome XER\n%s", string(xer))
 }
 
