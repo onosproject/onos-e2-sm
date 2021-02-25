@@ -20,7 +20,7 @@ func Test_XerEncodeE2SmRcPreControlMessage(t *testing.T) {
 
 	xer, err := XerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage)
 	assert.NilError(t, err)
-	assert.Equal(t, 410, len(xer))
+	assert.Equal(t, 400, len(xer))
 	t.Logf("E2SM-RC-PRE-ControlMessage XER\n%s", string(xer))
 }
 
@@ -34,7 +34,7 @@ func Test_XerDecodeE2SmRcPreControlMessage(t *testing.T) {
 
 	xer, err := XerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage)
 	assert.NilError(t, err)
-	assert.Equal(t, 410, len(xer))
+	assert.Equal(t, 400, len(xer))
 	t.Logf("E2SM-RC-PRE-ControlMessage XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmRcPreControlMessage(xer)
