@@ -8,7 +8,7 @@ import (
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 )
 
-func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion int32, senderName int32, vendorName int32,
+func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, senderName string, vendorName string,
 	globalKpmNodeID e2sm_kpm_v2.GlobalKpmnodeId) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
 
 	if len(timeStamp) != 4 {

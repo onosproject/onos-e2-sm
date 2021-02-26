@@ -10,6 +10,7 @@
 
 
 #include "asn_application.h"
+#include "E2SM-KPM-IndicationHeader-Format1.h"
 
 /* Including external dependencies */
 #include "constr_CHOICE.h"
@@ -35,7 +36,7 @@ typedef struct E2SM_KPM_IndicationHeader {
 	struct E2SM_KPM_IndicationHeader__indicationHeader_formats {
 		E2SM_KPM_IndicationHeader__indicationHeader_formats_PR present;
 		union E2SM_KPM_IndicationHeader__indicationHeader_formats_u {
-			struct E2SM_KPM_IndicationHeader_Format1	*indicationHeader_Format1;
+			E2SM_KPM_IndicationHeader_Format1_t	*indicationHeader_Format1;
 			/*
 			 * This type is extensible,
 			 * possible extensions are below.

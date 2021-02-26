@@ -353,10 +353,10 @@ message E2SmKpmIndicationHeader {
 // sequence from e2sm_kpm_ies_v2.asn:298
 message E2SmKpmIndicationHeaderFormat1 {
   TimeStamp collet_start_time = 1 [json_name="E2SM-KPM-IndicationHeader-Format1:colletStartTime"];
-  int32 file_formatversion = 2 [json_name="E2SM-KPM-IndicationHeader-Format1:fileFormatversion"];
-  int32 sender_name = 3 [json_name="E2SM-KPM-IndicationHeader-Format1:senderName"];
-  int32 sender_type = 4 [json_name="E2SM-KPM-IndicationHeader-Format1:senderType"];
-  int32 vendor_name = 5 [json_name="E2SM-KPM-IndicationHeader-Format1:vendorName"];
+  string file_formatversion = 2 [json_name="E2SM-KPM-IndicationHeader-Format1:fileFormatversion"];
+  string sender_name = 3 [json_name="E2SM-KPM-IndicationHeader-Format1:senderName"];
+  string sender_type = 4 [json_name="E2SM-KPM-IndicationHeader-Format1:senderType"];
+  string vendor_name = 5 [json_name="E2SM-KPM-IndicationHeader-Format1:vendorName"];
   GlobalKpmnodeId kpm_node_id = 6 [json_name="E2SM-KPM-IndicationHeader-Format1:kpmNodeID"];
 };
 
