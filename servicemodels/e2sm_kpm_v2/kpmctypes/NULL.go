@@ -13,7 +13,8 @@ package kpmv2ctypes
 import "C"
 
 func newNull() *C.NULL_t {
-	return *C.int(0)
+	res := C.int(0)
+	return &res
 }
 
 func decodeNull() int32 {

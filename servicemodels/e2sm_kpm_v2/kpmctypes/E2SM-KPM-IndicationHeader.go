@@ -101,7 +101,7 @@ func decodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeaderC *C.E2SM_KPM_Indicati
 
 	e2SmKpmIndicationHeader := new(e2sm_kpm_v2.E2SmKpmIndicationHeader)
 
-	switch e2SmKpmIndicationHeaderC.eventDefinition_formats.present {
+	switch e2SmKpmIndicationHeaderC.indicationHeader_formats.present {
 	case C.E2SM_KPM_IndicationHeader__indicationHeader_formats_PR_indicationHeader_Format1:
 		indicationHeaderFormat1, err := decodeE2SmKpmIndicationHeaderFormat1Bytes(e2SmKpmIndicationHeaderC.indicationHeader_formats.choice)
 		if err != nil {

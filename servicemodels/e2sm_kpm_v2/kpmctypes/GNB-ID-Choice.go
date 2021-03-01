@@ -70,7 +70,7 @@ func perDecodeGnbIDChoice(bytes []byte) (*e2sm_kpm_v2.GnbIdChoice, error) {
 func newGnbIDChoice(gnbIDChoice *e2sm_kpm_v2.GnbIdChoice) (*C.GNB_ID_Choice_t, error) {
 
 	var pr C.GNB_ID_Choice_PR
-	choiceC := [8]byte{}
+	choiceC := [48]byte{}
 
 	switch choice := gnbIDChoice.GnbIdChoice.(type) {
 	case *e2sm_kpm_v2.GnbIdChoice_GnbId:
@@ -99,7 +99,9 @@ func decodeGnbIDChoice(gnbIDchoiceC *C.GNB_ID_Choice_t) (*e2sm_kpm_v2.GnbIdChoic
 
 	switch gnbIDchoiceC.present {
 	case C.GNB_ID_Choice_PR_gnb_ID:
-		gnbID, err := decodeBitStringBytes(gnbIDchoiceC.choice)
+		var a [8]byte
+		copy(a[:], gnbIDchoiceC.choice[0:8])
+		gnbID, err := decodeBitStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
@@ -113,7 +115,7 @@ func decodeGnbIDChoice(gnbIDchoiceC *C.GNB_ID_Choice_t) (*e2sm_kpm_v2.GnbIdChoic
 	return gnbIDchoice, nil
 }
 
-func decodeGnbIDChoiceBytes(array [8]byte) (*e2sm_kpm_v2.GnbIdChoice, error) {
+func decodeGnbIDChoiceBytes(array [48]byte) (*e2sm_kpm_v2.GnbIdChoice, error) {
 	gnbIDChoiceC := (*C.GNB_ID_Choice_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeGnbIDChoice(gnbIDChoiceC)

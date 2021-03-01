@@ -69,7 +69,7 @@ func perDecodeArp(bytes []byte) (*e2sm_kpm_v2.Arp, error) {
 
 func newArp(arp *e2sm_kpm_v2.Arp) (*C.ARP_t, error) {
 
-	arpC := C.long(arp)
+	arpC := C.long(arp.Value)
 
 	return &arpC, nil
 }

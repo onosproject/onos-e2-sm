@@ -80,7 +80,7 @@ func newMeasurementRecord(measurementRecord *e2sm_kpm_v2.MeasurementRecord) (*C.
 		}
 	}
 
-	return &measurementRecordC, nil
+	return measurementRecordC, nil
 }
 
 func decodeMeasurementRecord(measurementRecordC *C.MeasurementRecord_t) (*e2sm_kpm_v2.MeasurementRecord, error) {
@@ -91,7 +91,7 @@ func decodeMeasurementRecord(measurementRecordC *C.MeasurementRecord_t) (*e2sm_k
 	ieCount = int(measurementRecordC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementRecordC.list.array)) * uintptr(i)
-		ieC := *(**C.MeasurementRecordItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementRecordC.value.list.array)) + offset))
+		ieC := *(**C.MeasurementRecordItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementRecordC.list.array)) + offset))
 		ie, err := decodeMeasurementRecordItem(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMeasurementRecordItem() %s", err.Error())

@@ -70,7 +70,7 @@ func perDecodeEngnbID(bytes []byte) (*e2sm_kpm_v2.EngnbId, error) {
 func newEngnbID(engnbID *e2sm_kpm_v2.EngnbId) (*C.ENGNB_ID_t, error) {
 
 	var pr C.ENGNB_ID_PR
-	choiceC := [8]byte{}
+	choiceC := [48]byte{}
 
 	switch choice := engnbID.EngnbId.(type) {
 	case *e2sm_kpm_v2.EngnbId_GNbId:
@@ -100,7 +100,9 @@ func decodeEngnbID(engnbIDC *C.ENGNB_ID_t) (*e2sm_kpm_v2.EngnbId, error) {
 
 	switch engnbIDC.present {
 	case C.ENGNB_ID_PR_gNB_ID:
-		engnbIdstructC, err := decodeBitStringBytes(engnbIDC.choice)
+		var a [8]byte
+		copy(a[:], engnbIDC.choice[0:8])
+		engnbIdstructC, err := decodeBitStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
@@ -114,7 +116,7 @@ func decodeEngnbID(engnbIDC *C.ENGNB_ID_t) (*e2sm_kpm_v2.EngnbId, error) {
 	return engnbID, nil
 }
 
-func decodeEngnbIDBytes(array [8]byte) (*e2sm_kpm_v2.EngnbId, error) { //ToDo - Check addressing correct structure in Protobuf
+func decodeEngnbIDBytes(array [48]byte) (*e2sm_kpm_v2.EngnbId, error) { //ToDo - Check addressing correct structure in Protobuf
 	engnbIDC := (*C.ENGNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeEngnbID(engnbIDC)

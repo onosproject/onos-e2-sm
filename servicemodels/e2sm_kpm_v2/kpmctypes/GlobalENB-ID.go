@@ -80,8 +80,8 @@ func newGlobalEnbID(globalEnbID *e2sm_kpm_v2.GlobalEnbId) (*C.GlobalENB_ID_t, er
 	}
 
 	globalEnbIDC := C.GlobalENB_ID_t{
-		pLMN_Identity: pLmnIdentityC,
-		eNB_ID:        eNbIDC,
+		pLMN_Identity: *pLmnIdentityC,
+		eNB_ID:        *eNbIDC,
 	}
 
 	return &globalEnbIDC, nil
@@ -89,12 +89,12 @@ func newGlobalEnbID(globalEnbID *e2sm_kpm_v2.GlobalEnbId) (*C.GlobalENB_ID_t, er
 
 func decodeGlobalEnbID(globalEnbIDC *C.GlobalENB_ID_t) (*e2sm_kpm_v2.GlobalEnbId, error) {
 
-	pLmnIdentity, err := decodePlmnIdentity(*globalEnbIDC.pLMN_Identity)
+	pLmnIdentity, err := decodePlmnIdentity(&globalEnbIDC.pLMN_Identity)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	eNbID, err := decodeEnbID(*globalEnbIDC.eNB_ID)
+	eNbID, err := decodeEnbID(&globalEnbIDC.eNB_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeEnbID() %s", err.Error())
 	}

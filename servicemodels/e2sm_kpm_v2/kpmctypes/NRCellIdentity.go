@@ -74,7 +74,7 @@ func newNrcellIdentity(nrcellIdentity *e2sm_kpm_v2.NrcellIdentity) (*C.NRCellIde
 		return nil, fmt.Errorf("newBitString() %s", err.Error())
 	}
 
-	return &nrcellIdentityC, nil
+	return nrcellIdentityC, nil
 }
 
 func decodeNrcellIdentity(nrcellIdentityC *C.NRCellIdentity_t) (*e2sm_kpm_v2.NrcellIdentity, error) {

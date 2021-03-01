@@ -74,12 +74,12 @@ func newPlmnIdentity(plmnIdentity *e2sm_kpm_v2.PlmnIdentity) (*C.PLMN_Identity_t
 		return nil, err
 	}
 
-	return &plmnIdentityC, nil
+	return plmnIdentityC, nil
 }
 
 func decodePlmnIdentity(plmnIdentityC *C.PLMN_Identity_t) (*e2sm_kpm_v2.PlmnIdentity, error) {
 
-	plmnID, err := decodeOctetString(*plmnIdentityC)
+	plmnID, err := decodeOctetString(plmnIdentityC)
 	if err != nil {
 		return nil, err
 	}

@@ -10,6 +10,7 @@ package kpmv2ctypes
 //#include <stdlib.h>
 //#include <assert.h>
 //#include "MeasurementInfoList.h"
+//#include "MeasurementInfoItem.h"
 //#include "Cell-Measurement-Object-Item.h"
 import "C"
 
@@ -81,7 +82,7 @@ func newMeasurementInfoList(measurementInfoList *e2sm_kpm_v2.MeasurementInfoList
 		}
 	}
 
-	return &measurementInfoListC, nil
+	return measurementInfoListC, nil
 }
 
 func decodeMeasurementInfoList(measurementInfoListC *C.MeasurementInfoList_t) (*e2sm_kpm_v2.MeasurementInfoList, error) {
@@ -94,7 +95,7 @@ func decodeMeasurementInfoList(measurementInfoListC *C.MeasurementInfoList_t) (*
 	ieCount = int(measurementInfoListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementInfoListC.list.array)) * uintptr(i)
-		ieC := *(**C.Cell_Measurement_Object_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementInfoListC.list.array)) + offset))
+		ieC := *(**C.MeasurementInfoItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementInfoListC.list.array)) + offset))
 		ie, err := decodeMeasurementInfoItem(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMeasurementInfoItem() %s", err.Error())

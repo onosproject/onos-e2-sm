@@ -86,8 +86,8 @@ func newRicKpmnodeItem(ricKpmnodeItem *e2sm_kpm_v2.RicKpmnodeItem) (*C.RIC_KPMNo
 	}
 
 	ricKpmnodeItemC := C.RIC_KPMNode_Item_t{
-		ric_KPMNode_Type:             ricKpmnodeTypeC,
-		cell_Measurement_Object_List: *cellMeasurementObjectListC,
+		ric_KPMNode_Type:             *ricKpmnodeTypeC,
+		cell_Measurement_Object_List: cellMeasurementObjectListC,
 	}
 
 	return &ricKpmnodeItemC, nil
@@ -95,7 +95,7 @@ func newRicKpmnodeItem(ricKpmnodeItem *e2sm_kpm_v2.RicKpmnodeItem) (*C.RIC_KPMNo
 
 func decodeRicKpmnodeItem(ricKpmnodeItemC *C.RIC_KPMNode_Item_t) (*e2sm_kpm_v2.RicKpmnodeItem, error) {
 
-	ricKpmnodeType, err := decodeGlobalKpmnodeID(*ricKpmnodeItemC.ric_KPMNode_Type)
+	ricKpmnodeType, err := decodeGlobalKpmnodeID(&ricKpmnodeItemC.ric_KPMNode_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGlobalKpmnodeID() %s", err.Error())
 	}

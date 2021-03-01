@@ -80,8 +80,8 @@ func newEutracgi(eutracgi *e2sm_kpm_v2.Eutracgi) (*C.EUTRACGI_t, error) {
 	}
 
 	eutracgiC := C.EUTRACGI_t{
-		pLMN_Identity:     pLmnIdentityC,
-		eUTRACellIdentity: eUtracellIdentityC,
+		pLMN_Identity:     *pLmnIdentityC,
+		eUTRACellIdentity: *eUtracellIdentityC,
 	}
 
 	return &eutracgiC, nil
@@ -89,12 +89,12 @@ func newEutracgi(eutracgi *e2sm_kpm_v2.Eutracgi) (*C.EUTRACGI_t, error) {
 
 func decodeEutracgi(eutracgiC *C.EUTRACGI_t) (*e2sm_kpm_v2.Eutracgi, error) {
 
-	pLmnIdentity, err := decodePlmnIdentity(*eutracgiC.pLMN_Identity)
+	pLmnIdentity, err := decodePlmnIdentity(&eutracgiC.pLMN_Identity)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	eUtracellIdentity, err := decodeEutracellIdentity(*eutracgiC.eUTRACellIdentity)
+	eUtracellIdentity, err := decodeEutracellIdentity(&eutracgiC.eUTRACellIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("decodeEutracellIdentity() %s", err.Error())
 	}

@@ -80,7 +80,7 @@ func newMeasurementData(measurementData *e2sm_kpm_v2.MeasurementData) (*C.Measur
 		}
 	}
 
-	return &measurementDataC, nil
+	return measurementDataC, nil
 }
 
 func decodeMeasurementData(measurementDataC *C.MeasurementData_t) (*e2sm_kpm_v2.MeasurementData, error) {

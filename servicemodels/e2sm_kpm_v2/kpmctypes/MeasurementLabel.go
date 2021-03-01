@@ -127,14 +127,14 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 		qCImin:           qCiminC,
 		aRPmax:           aRpmaxC,
 		aRPmin:           aRpminC,
-		bitrateRange:     bitrateRangeC,
-		layerMU_MIMO:     layerMuMimoC,
-		sUM:              sUmC,
-		distBinX:         distBinXC,
-		distBinY:         distBinYC,
-		distBinZ:         distBinZC,
-		preLabelOverride: preLabelOverrideC,
-		startEndInd:      startEndIndC,
+		bitrateRange:     &bitrateRangeC,
+		layerMU_MIMO:     &layerMuMimoC,
+		sUM:              &sUmC,
+		distBinX:         &distBinXC,
+		distBinY:         &distBinYC,
+		distBinZ:         &distBinZC,
+		preLabelOverride: &preLabelOverrideC,
+		startEndInd:      &startEndIndC,
 	}
 
 	return &measurementLabelC, nil
@@ -142,42 +142,42 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 
 func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_v2.MeasurementLabel, error) {
 
-	plmnId, err := decodePlmnIdentity(*measurementLabelC.plmnID)
+	plmnId, err := decodePlmnIdentity(measurementLabelC.plmnID)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	sliceId, err := decodeSnssai(*measurementLabelC.sliceID)
+	sliceId, err := decodeSnssai(measurementLabelC.sliceID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeSnssai() %s", err.Error())
 	}
 
-	fiveQi, err := decodeFiveQi(*measurementLabelC.fiveQI)
+	fiveQi, err := decodeFiveQi(measurementLabelC.fiveQI)
 	if err != nil {
 		return nil, fmt.Errorf("decodeFiveQi() %s", err.Error())
 	}
 
-	qCi, err := decodeQci(*measurementLabelC.qCI)
+	qCi, err := decodeQci(measurementLabelC.qCI)
 	if err != nil {
 		return nil, fmt.Errorf("decodeQci() %s", err.Error())
 	}
 
-	qCimax, err := decodeQci(*measurementLabelC.qCImax)
+	qCimax, err := decodeQci(measurementLabelC.qCImax)
 	if err != nil {
 		return nil, fmt.Errorf("decodeQci() %s", err.Error())
 	}
 
-	qCimin, err := decodeQci(*measurementLabelC.qCImin)
+	qCimin, err := decodeQci(measurementLabelC.qCImin)
 	if err != nil {
 		return nil, fmt.Errorf("decodeQci() %s", err.Error())
 	}
 
-	aRpmax, err := decodeArp(*measurementLabelC.aRPmax)
+	aRpmax, err := decodeArp(measurementLabelC.aRPmax)
 	if err != nil {
 		return nil, fmt.Errorf("decodeArp() %s", err.Error())
 	}
 
-	aRpmin, err := decodeArp(*measurementLabelC.aRPmin)
+	aRpmin, err := decodeArp(measurementLabelC.aRPmin)
 	if err != nil {
 		return nil, fmt.Errorf("decodeArp() %s", err.Error())
 	}

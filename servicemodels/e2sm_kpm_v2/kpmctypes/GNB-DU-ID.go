@@ -74,7 +74,7 @@ func newGnbDuID(gnbDuID *e2sm_kpm_v2.GnbDuId) (*C.GNB_DU_ID_t, error) {
 		return nil, fmt.Errorf("newInteger() %s", err.Error())
 	}
 
-	return &gnbDuIDC, nil
+	return gnbDuIDC, nil
 }
 
 func decodeGnbDuID(gnbDuIDC *C.GNB_DU_ID_t) (*e2sm_kpm_v2.GnbDuId, error) {

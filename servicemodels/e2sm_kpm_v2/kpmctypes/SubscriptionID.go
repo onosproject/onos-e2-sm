@@ -19,26 +19,26 @@ import (
 	"unsafe"
 )
 
-func xerEncodeSubscriptionID(subscriptionId *e2sm_kpm_v2.SubscriptionId) ([]byte, error) {
-	subscriptionIdCP, err := newSubscriptionID(subscriptionId)
+func xerEncodeSubscriptionID(subscriptionID *e2sm_kpm_v2.SubscriptionId) ([]byte, error) {
+	subscriptionIDCP, err := newSubscriptionID(subscriptionID)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeSubscriptionId() %s", err.Error())
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_SubscriptionID, unsafe.Pointer(subscriptionIdCP))
+	bytes, err := encodeXer(&C.asn_DEF_SubscriptionID, unsafe.Pointer(subscriptionIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeSubscriptionId() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perEncodeSubscriptionID(subscriptionId *e2sm_kpm_v2.SubscriptionId) ([]byte, error) {
-	subscriptionIdCP, err := newSubscriptionID(subscriptionId)
+func perEncodeSubscriptionID(subscriptionID *e2sm_kpm_v2.SubscriptionId) ([]byte, error) {
+	subscriptionIDCP, err := newSubscriptionID(subscriptionID)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeSubscriptionId() %s", err.Error())
 	}
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_SubscriptionID, unsafe.Pointer(subscriptionIdCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_SubscriptionID, unsafe.Pointer(subscriptionIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeSubscriptionId() %s", err.Error())
 	}
@@ -67,29 +67,29 @@ func perDecodeSubscriptionID(bytes []byte) (*e2sm_kpm_v2.SubscriptionId, error) 
 	return decodeSubscriptionID((*C.SubscriptionID_t)(unsafePtr))
 }
 
-func newSubscriptionID(subscriptionId *e2sm_kpm_v2.SubscriptionId) (*C.SubscriptionID_t, error) {
+func newSubscriptionID(subscriptionID *e2sm_kpm_v2.SubscriptionId) (*C.SubscriptionID_t, error) {
 
-	subscriptionIdC, err := newInteger(subscriptionId.Value)
+	subscriptionIDC, err := newInteger(subscriptionID.Value)
 	if err != nil {
 		return nil, fmt.Errorf("newInt64() %s", err.Error())
 	}
 
-	return &subscriptionIdC, nil
+	return subscriptionIDC, nil
 }
 
-func decodeSubscriptionID(subscriptionIdC *C.SubscriptionID_t) (*e2sm_kpm_v2.SubscriptionId, error) {
+func decodeSubscriptionID(subscriptionIDC *C.SubscriptionID_t) (*e2sm_kpm_v2.SubscriptionId, error) {
 
-	subscriptionId := new(e2sm_kpm_v2.SubscriptionId)
-	subscriptionIdValue, err := decodeInteger(subscriptionIdC)
+	subscriptionID := new(e2sm_kpm_v2.SubscriptionId)
+	subscriptionIDValue, err := decodeInteger(subscriptionIDC)
 	if err != nil {
-		return nil, fmt.Errorf("decodeInt64() %s", err.Error())
+		return nil, fmt.Errorf("decodeInteger() %s", err.Error())
 	}
-	subscriptionId.Value = subscriptionIdValue
+	subscriptionID.Value = subscriptionIDValue
 
-	return subscriptionId, nil
+	return subscriptionID, nil
 }
 
-func decodeSubscriptionIdBytes(array [8]byte) (*e2sm_kpm_v2.SubscriptionId, error) {
+func decodeSubscriptionIDBytes(array [8]byte) (*e2sm_kpm_v2.SubscriptionId, error) {
 	subscriptionIdC := (*C.SubscriptionID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeSubscriptionID(subscriptionIdC)

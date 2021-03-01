@@ -97,7 +97,7 @@ func newE2SmKpmActionDefinition(e2SmKpmActionDefinition *e2sm_kpm_v2.E2SmKpmActi
 	}
 
 	e2SmKpmActionDefinitionC := C.E2SM_KPM_ActionDefinition_t{
-		ric_Style_Type:           ricStyleTypeC,
+		ric_Style_Type:           *ricStyleTypeC,
 		actionDefinition_formats: e2SmKpmActionDefinitionFormatC,
 	}
 
@@ -108,7 +108,7 @@ func decodeE2SmKpmActionDefinition(e2SmKpmActionDefinitionC *C.E2SM_KPM_ActionDe
 
 	e2SmKpmActionDefinition := new(e2sm_kpm_v2.E2SmKpmActionDefinition)
 
-	ricStyleType, err := decodeRicStyleType(*e2SmKpmActionDefinitionC.ric_Style_Type)
+	ricStyleType, err := decodeRicStyleType(&e2SmKpmActionDefinitionC.ric_Style_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicStyleType() %s", err.Error())
 	}

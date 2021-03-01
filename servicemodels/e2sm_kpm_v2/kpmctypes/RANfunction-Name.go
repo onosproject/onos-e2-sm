@@ -83,10 +83,10 @@ func newRanfunctionName(ranfunctionName *e2sm_kpm_v2.RanfunctionName) (*C.RANfun
 	}
 	ranFunctionInstanceC := C.long(ranfunctionName.RanFunctionInstance)
 	ranfunctionNameC := C.RANfunction_Name_t{
-		ranFunction_ShortName:   ranFunctionShortNameC,
-		ranFunction_E2SM_OID:    ranFunctionE2SmOidC,
-		ranFunction_Decsription: ranFunctionDescriptionC,
-		ranFunction_Instance:    ranFunctionInstanceC,
+		ranFunction_ShortName:   *ranFunctionShortNameC,
+		ranFunction_E2SM_OID:    *ranFunctionE2SmOidC,
+		ranFunction_Description: *ranFunctionDescriptionC,
+		ranFunction_Instance:    &ranFunctionInstanceC,
 	}
 
 	return &ranfunctionNameC, nil
@@ -94,15 +94,15 @@ func newRanfunctionName(ranfunctionName *e2sm_kpm_v2.RanfunctionName) (*C.RANfun
 
 func decodeRanfunctionName(ranfunctionNameC *C.RANfunction_Name_t) (*e2sm_kpm_v2.RanfunctionName, error) {
 
-	ranFunctionShortName, err := decodePrintableString(ranfunctionNameC.ranFunction_ShortName)
+	ranFunctionShortName, err := decodePrintableString(&ranfunctionNameC.ranFunction_ShortName)
 	if err != nil {
 		return nil, err
 	}
-	ranFunctionE2SmOid, err := decodePrintableString(ranfunctionNameC.ranFunction_E2SM_OID)
+	ranFunctionE2SmOid, err := decodePrintableString(&ranfunctionNameC.ranFunction_E2SM_OID)
 	if err != nil {
 		return nil, err
 	}
-	ranFunctionDescription, err := decodePrintableString(ranfunctionNameC.ranFunction_Decsription)
+	ranFunctionDescription, err := decodePrintableString(&ranfunctionNameC.ranFunction_Description)
 	if err != nil {
 		return nil, err
 	}

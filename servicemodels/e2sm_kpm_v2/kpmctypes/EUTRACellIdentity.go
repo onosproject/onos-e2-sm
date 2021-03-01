@@ -74,7 +74,7 @@ func newEutracellIdentity(eutracellIdentity *e2sm_kpm_v2.EutracellIdentity) (*C.
 		return nil, fmt.Errorf("newBitString() %s", err.Error())
 	}
 
-	return &eutracellIdentityC, nil
+	return eutracellIdentityC, nil
 }
 
 func decodeEutracellIdentity(eutracellIdentityC *C.EUTRACellIdentity_t) (*e2sm_kpm_v2.EutracellIdentity, error) {

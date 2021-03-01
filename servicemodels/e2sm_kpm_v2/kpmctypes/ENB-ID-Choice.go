@@ -70,7 +70,7 @@ func perDecodeEnbIDChoice(bytes []byte) (*e2sm_kpm_v2.EnbIdChoice, error) {
 func newEnbIDChoice(enbIDChoice *e2sm_kpm_v2.EnbIdChoice) (*C.ENB_ID_Choice_t, error) {
 
 	var pr C.ENB_ID_Choice_PR
-	choiceC := [8]byte{}
+	choiceC := [48]byte{}
 
 	switch choice := enbIDChoice.EnbIdChoice.(type) {
 	case *e2sm_kpm_v2.EnbIdChoice_EnbIdMacro:
@@ -80,7 +80,7 @@ func newEnbIDChoice(enbIDChoice *e2sm_kpm_v2.EnbIdChoice) (*C.ENB_ID_Choice_t, e
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.EnbIdChoice_EnbIdShortmacro:
 		pr = C.ENB_ID_Choice_PR_enb_ID_shortmacro
 
@@ -88,7 +88,7 @@ func newEnbIDChoice(enbIDChoice *e2sm_kpm_v2.EnbIdChoice) (*C.ENB_ID_Choice_t, e
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.EnbIdChoice_EnbIdLongmacro:
 		pr = C.ENB_ID_Choice_PR_enb_ID_longmacro
 
@@ -96,7 +96,7 @@ func newEnbIDChoice(enbIDChoice *e2sm_kpm_v2.EnbIdChoice) (*C.ENB_ID_Choice_t, e
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[16:24], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newEnbIDChoice() %T not yet implemented", choice)
 	}
@@ -115,7 +115,9 @@ func decodeEnbIDChoice(enbIDChoiceC *C.ENB_ID_Choice_t) (*e2sm_kpm_v2.EnbIdChoic
 
 	switch enbIDChoiceC.present {
 	case C.ENB_ID_Choice_PR_enb_ID_macro:
-		enbIDChoicestructC, err := decodeBitStringBytes(enbIDChoiceC.choice)
+		var a [8]byte
+		copy(a[:], enbIDChoiceC.choice[0:8])
+		enbIDChoicestructC, err := decodeBitStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
@@ -123,7 +125,9 @@ func decodeEnbIDChoice(enbIDChoiceC *C.ENB_ID_Choice_t) (*e2sm_kpm_v2.EnbIdChoic
 			EnbIdMacro: enbIDChoicestructC,
 		}
 	case C.ENB_ID_Choice_PR_enb_ID_shortmacro:
-		enbIDChoicestructC, err := decodeBitStringBytes(enbIDChoiceC.choice)
+		var a [8]byte
+		copy(a[:], enbIDChoiceC.choice[8:16])
+		enbIDChoicestructC, err := decodeBitStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
@@ -131,7 +135,9 @@ func decodeEnbIDChoice(enbIDChoiceC *C.ENB_ID_Choice_t) (*e2sm_kpm_v2.EnbIdChoic
 			EnbIdShortmacro: enbIDChoicestructC,
 		}
 	case C.ENB_ID_Choice_PR_enb_ID_longmacro:
-		enbIDChoicestructC, err := decodeBitStringBytes(enbIDChoiceC.choice)
+		var a [8]byte
+		copy(a[:], enbIDChoiceC.choice[16:24])
+		enbIDChoicestructC, err := decodeBitStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
@@ -145,7 +151,7 @@ func decodeEnbIDChoice(enbIDChoiceC *C.ENB_ID_Choice_t) (*e2sm_kpm_v2.EnbIdChoic
 	return enbIDChoice, nil
 }
 
-func decodeEnbIDChoiceBytes(array [8]byte) (*e2sm_kpm_v2.EnbIdChoice, error) {
+func decodeEnbIDChoiceBytes(array [48]byte) (*e2sm_kpm_v2.EnbIdChoice, error) {
 	enbIDChoiceC := (*C.ENB_ID_Choice_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeEnbIDChoice(enbIDChoiceC)

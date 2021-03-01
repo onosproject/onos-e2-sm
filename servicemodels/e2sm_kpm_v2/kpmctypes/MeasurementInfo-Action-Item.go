@@ -80,8 +80,8 @@ func newMeasurementInfoActionItem(measurementInfoActionItem *e2sm_kpm_v2.Measure
 	}
 
 	measurementInfoActionItemC := C.MeasurementInfo_Action_Item_t{
-		measName: measNameC,
-		measID:   *measIDC,
+		measName: *measNameC,
+		measID:   measIDC,
 	}
 
 	return &measurementInfoActionItemC, nil
@@ -89,7 +89,7 @@ func newMeasurementInfoActionItem(measurementInfoActionItem *e2sm_kpm_v2.Measure
 
 func decodeMeasurementInfoActionItem(measurementInfoActionItemC *C.MeasurementInfo_Action_Item_t) (*e2sm_kpm_v2.MeasurementInfoActionItem, error) {
 
-	measName, err := decodeMeasurementTypeName(measurementInfoActionItemC.measName)
+	measName, err := decodeMeasurementTypeName(&measurementInfoActionItemC.measName)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementTypeName() %s", err.Error())
 	}

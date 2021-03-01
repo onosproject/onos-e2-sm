@@ -10,6 +10,7 @@
 
 
 #include "asn_application.h"
+#include "MeasurementInfo-Action-Item.h"
 
 /* Including external dependencies */
 #include "asn_SEQUENCE_OF.h"

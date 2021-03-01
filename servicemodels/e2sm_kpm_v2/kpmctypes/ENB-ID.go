@@ -70,7 +70,7 @@ func perDecodeEnbID(bytes []byte) (*e2sm_kpm_v2.EnbId, error) {
 func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_t, error) {
 
 	var pr C.ENB_ID_PR
-	choiceC := [8]byte{}
+	choiceC := [48]byte{}
 
 	switch choice := enbID.EnbId.(type) {
 	case *e2sm_kpm_v2.EnbId_MacroENbId:
@@ -80,7 +80,7 @@ func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_t, error) {
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.EnbId_HomeENbId:
 		pr = C.ENB_ID_PR_home_eNB_ID
 
@@ -88,7 +88,7 @@ func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_t, error) {
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newEnbId() %T not yet implemented", choice)
 	}
@@ -108,7 +108,9 @@ func decodeEnbID(enbIDC *C.ENB_ID_t) (*e2sm_kpm_v2.EnbId, error) {
 
 	switch enbIDC.present {
 	case C.ENB_ID_PR_macro_eNB_ID:
-		enbIDstructC, err := decodeBitStringBytes(enbIDC.choice)
+		var a [8]byte
+		copy(a[:], enbIDC.choice[0:8])
+		enbIDstructC, err := decodeBitStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
@@ -116,7 +118,9 @@ func decodeEnbID(enbIDC *C.ENB_ID_t) (*e2sm_kpm_v2.EnbId, error) {
 			MacroENbId: enbIDstructC,
 		}
 	case C.ENB_ID_PR_home_eNB_ID:
-		enbIDstructC, err := decodeBitStringBytes(enbIDC.choice)
+		var a [8]byte
+		copy(a[:], enbIDC.choice[8:16])
+		enbIDstructC, err := decodeBitStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
@@ -130,7 +134,7 @@ func decodeEnbID(enbIDC *C.ENB_ID_t) (*e2sm_kpm_v2.EnbId, error) {
 	return enbID, nil
 }
 
-func decodeEnbIDBytes(array [8]byte) (*e2sm_kpm_v2.EnbId, error) {
+func decodeEnbIDBytes(array [48]byte) (*e2sm_kpm_v2.EnbId, error) {
 	enbIDC := (*C.ENB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeEnbID(enbIDC)

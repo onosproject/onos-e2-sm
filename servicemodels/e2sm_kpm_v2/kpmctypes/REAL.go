@@ -15,7 +15,6 @@ import (
 	"encoding/binary"
 	"fmt"
 	"math"
-	"math/big"
 	"unsafe"
 )
 
@@ -45,7 +44,7 @@ func perEncodeReal(real float64) ([]byte, error) {
 	return bytes, nil
 }
 
-func xerDecodeReal(realBytes []byte) (int64, error) {
+func xerDecodeReal(realBytes []byte) (float64, error) {
 	unsafePtr, err := decodeXer(realBytes, &C.asn_DEF_REAL)
 	if err != nil {
 		return 0, err
@@ -57,7 +56,7 @@ func xerDecodeReal(realBytes []byte) (int64, error) {
 	return decodeReal(realC)
 }
 
-func perDecodeReal(realBytes []byte) (int64, error) {
+func perDecodeReal(realBytes []byte) (float64, error) {
 	unsafePtr, err := decodePer(realBytes, len(realBytes), &C.asn_DEF_REAL)
 	if err != nil {
 		return 0, err
@@ -109,27 +108,13 @@ func newReal(msg float64) (*C.REAL_t, error) {
 
 // It is like a two's complement decoding of a signed number, but not quite
 // the same for negative values
-func decodeReal(realC *C.REAL_t) (int64, error) {
+func decodeReal(realC *C.REAL_t) (float64, error) {
 	bytes := decodeAsnCodecsPrim(realC)
 
-	//ToDo - rework with regard to Float64
-	ni := big.NewInt(0)
-	ni.SetBytes(bytes)
+	a := binary.LittleEndian.Uint64(bytes)
+	b := math.Float64frombits(a)
 
-	if bytes[0]&0x80 > 0 { // If negative
-		bigBytes := make([]byte, 0)
-		for idx, b := range bytes {
-			b2 := ^b
-			if idx == len(bytes)-1 {
-				b2++
-			}
-			bigBytes = append(bigBytes, b2)
-		}
-		ni.SetBytes(bigBytes)
-		ni.Neg(ni)
-	}
-
-	return ni.Int64(), nil
+	return b, nil
 }
 
 // Input value should always be 8 bytes. If you have more than 8 bytes,

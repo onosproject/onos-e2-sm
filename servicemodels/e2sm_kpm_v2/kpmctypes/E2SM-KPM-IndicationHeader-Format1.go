@@ -96,12 +96,12 @@ func newE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1 *e2sm_kpm_
 	}
 
 	e2SmKpmIndicationHeaderFormat1C := C.E2SM_KPM_IndicationHeader_Format1_t{
-		colletStartTime:   colletStartTimeC,
-		fileFormatversion: *fileFormatversionC,
-		senderName:        *senderNameC,
-		senderType:        *senderTypeC,
-		vendorName:        *vendorNameC,
-		kpmNodeID:         *kpmNodeIDC,
+		colletStartTime:   *colletStartTimeC,
+		fileFormatversion: fileFormatversionC,
+		senderName:        senderNameC,
+		senderType:        senderTypeC,
+		vendorName:        vendorNameC,
+		kpmNodeID:         kpmNodeIDC,
 	}
 
 	return &e2SmKpmIndicationHeaderFormat1C, nil
@@ -109,7 +109,7 @@ func newE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1 *e2sm_kpm_
 
 func decodeE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1C *C.E2SM_KPM_IndicationHeader_Format1_t) (*e2sm_kpm_v2.E2SmKpmIndicationHeaderFormat1, error) {
 
-	colletStartTime, err := decodeTimeStamp(e2SmKpmIndicationHeaderFormat1C.colletStartTime)
+	colletStartTime, err := decodeTimeStamp(&e2SmKpmIndicationHeaderFormat1C.colletStartTime)
 	if err != nil {
 		return nil, fmt.Errorf("decodeTimeStamp() %s", err.Error())
 	}

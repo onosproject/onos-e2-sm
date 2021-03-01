@@ -75,7 +75,7 @@ func newLabelInfoItem(labelInfoItem *e2sm_kpm_v2.LabelInfoItem) (*C.LabelInfoIte
 	}
 
 	labelInfoItemC := C.LabelInfoItem_t{
-		measLabel: measLabelC,
+		measLabel: *measLabelC,
 	}
 
 	return &labelInfoItemC, nil
@@ -83,7 +83,7 @@ func newLabelInfoItem(labelInfoItem *e2sm_kpm_v2.LabelInfoItem) (*C.LabelInfoIte
 
 func decodeLabelInfoItem(labelInfoItemC *C.LabelInfoItem_t) (*e2sm_kpm_v2.LabelInfoItem, error) {
 
-	measLabel, err := decodeMeasurementLabel(labelInfoItemC.measLabel)
+	measLabel, err := decodeMeasurementLabel(&labelInfoItemC.measLabel)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementLabel() %s", err.Error())
 	}

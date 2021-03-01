@@ -80,8 +80,8 @@ func newNrcgi(nrcgi *e2sm_kpm_v2.Nrcgi) (*C.NRCGI_t, error) {
 	}
 
 	nrcgiC := C.NRCGI_t{
-		pLMN_Identity:  pLmnIdentityC,
-		nRCellIdentity: nRcellIdentityC,
+		pLMN_Identity:  *pLmnIdentityC,
+		nRCellIdentity: *nRcellIdentityC,
 	}
 
 	return &nrcgiC, nil
@@ -89,12 +89,12 @@ func newNrcgi(nrcgi *e2sm_kpm_v2.Nrcgi) (*C.NRCGI_t, error) {
 
 func decodeNrcgi(nrcgiC *C.NRCGI_t) (*e2sm_kpm_v2.Nrcgi, error) {
 
-	pLmnIdentity, err := decodePlmnIdentity(nrcgiC.pLMN_Identity)
+	pLmnIdentity, err := decodePlmnIdentity(&nrcgiC.pLMN_Identity)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	nRcellIdentity, err := decodeNrcellIdentity(nrcgiC.nRCellIdentity)
+	nRcellIdentity, err := decodeNrcellIdentity(&nrcgiC.nRCellIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("decodeNrcellIdentity() %s", err.Error())
 	}

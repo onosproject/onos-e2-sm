@@ -108,10 +108,10 @@ func newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_v2
 	}
 
 	e2SmKpmRanfunctionDescriptionC := C.E2SM_KPM_RANfunction_Description_t{
-		ranFunction_Name:           ranFunctionNameC,
-		ric_KPM_Node_List:          *ricKpmNodeListC,
-		ric_EventTriggerStyle_List: *ricEventTriggerStyleListC,
-		ric_ReportStyle_List:       *ricReportStyleListC,
+		ranFunction_Name:           *ranFunctionNameC,
+		ric_KPM_Node_List:          ricKpmNodeListC,
+		ric_EventTriggerStyle_List: ricEventTriggerStyleListC,
+		ric_ReportStyle_List:       ricReportStyleListC,
 	}
 
 	return &e2SmKpmRanfunctionDescriptionC, nil
@@ -119,7 +119,7 @@ func newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_v2
 
 func decodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescriptionC *C.E2SM_KPM_RANfunction_Description_t) (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
 
-	ranFunctionName, err := decodeRanfunctionName(*e2SmKpmRanfunctionDescriptionC.ranFunction_Name)
+	ranFunctionName, err := decodeRanfunctionName(&e2SmKpmRanfunctionDescriptionC.ranFunction_Name)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRanfunctionName() %s", err.Error())
 	}

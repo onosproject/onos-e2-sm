@@ -100,12 +100,12 @@ func newRicReportStyleItem(ricReportStyleItem *e2sm_kpm_v2.RicReportStyleItem) (
 	}
 
 	ricReportStyleItemC := C.RIC_ReportStyle_Item_t{
-		ric_ReportStyle_Type:             ricReportStyleTypeC,
-		ric_ReportStyle_Name:             ricReportStyleNameC,
-		ric_ActionFormat_Type:            ricActionFormatTypeC,
-		measInfo_Action_List:             measInfoActionListC,
-		ric_IndicationHeaderFormat_Type:  ricIndicationHeaderFormatTypeC,
-		ric_IndicationMessageFormat_Type: ricIndicationMessageFormatTypeC,
+		ric_ReportStyle_Type:             *ricReportStyleTypeC,
+		ric_ReportStyle_Name:             *ricReportStyleNameC,
+		ric_ActionFormat_Type:            *ricActionFormatTypeC,
+		measInfo_Action_List:             *measInfoActionListC,
+		ric_IndicationHeaderFormat_Type:  *ricIndicationHeaderFormatTypeC,
+		ric_IndicationMessageFormat_Type: *ricIndicationMessageFormatTypeC,
 	}
 
 	return &ricReportStyleItemC, nil
@@ -113,32 +113,32 @@ func newRicReportStyleItem(ricReportStyleItem *e2sm_kpm_v2.RicReportStyleItem) (
 
 func decodeRicReportStyleItem(ricReportStyleItemC *C.RIC_ReportStyle_Item_t) (*e2sm_kpm_v2.RicReportStyleItem, error) {
 
-	ricReportStyleType, err := decodeRicStyleType(*ricReportStyleItemC.ric_ReportStyle_Type)
+	ricReportStyleType, err := decodeRicStyleType(&ricReportStyleItemC.ric_ReportStyle_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicStyleType() %s", err.Error())
 	}
 
-	ricReportStyleName, err := decodeRicStyleName(*ricReportStyleItemC.ric_ReportStyle_Name)
+	ricReportStyleName, err := decodeRicStyleName(&ricReportStyleItemC.ric_ReportStyle_Name)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicStyleName() %s", err.Error())
 	}
 
-	ricActionFormatType, err := decodeRicFormatType(*ricReportStyleItemC.ric_ActionFormat_Type)
+	ricActionFormatType, err := decodeRicFormatType(&ricReportStyleItemC.ric_ActionFormat_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicFormatType() %s", err.Error())
 	}
 
-	measInfoActionList, err := decodeMeasurementInfoActionList(*ricReportStyleItemC.measInfo_Action_List)
+	measInfoActionList, err := decodeMeasurementInfoActionList(&ricReportStyleItemC.measInfo_Action_List)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementInfoActionList() %s", err.Error())
 	}
 
-	ricIndicationHeaderFormatType, err := decodeRicFormatType(*ricReportStyleItemC.ric_IndicationHeaderFormat_Type)
+	ricIndicationHeaderFormatType, err := decodeRicFormatType(&ricReportStyleItemC.ric_IndicationHeaderFormat_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicFormatType() %s", err.Error())
 	}
 
-	ricIndicationMessageFormatType, err := decodeRicFormatType(*ricReportStyleItemC.ric_IndicationMessageFormat_Type)
+	ricIndicationMessageFormatType, err := decodeRicFormatType(&ricReportStyleItemC.ric_IndicationMessageFormat_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicFormatType() %s", err.Error())
 	}

@@ -95,11 +95,11 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1 *e2sm_kp
 	}
 
 	e2SmKpmIndicationMessageFormat1C := C.E2SM_KPM_IndicationMessage_Format1_t{
-		subscriptID:  subscriptIDC,
+		subscriptID:  *subscriptIDC,
 		cellObjID:    cellObjIDC,
 		granulPeriod: granulPeriodC,
 		measInfoList: measInfoListC,
-		measData:     measDataC,
+		measData:     *measDataC,
 	}
 
 	return &e2SmKpmIndicationMessageFormat1C, nil
@@ -107,27 +107,27 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1 *e2sm_kp
 
 func decodeE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1C *C.E2SM_KPM_IndicationMessage_Format1_t) (*e2sm_kpm_v2.E2SmKpmIndicationMessageFormat1, error) {
 
-	subscriptID, err := decodeSubscriptionID(*e2SmKpmIndicationMessageFormat1C.subscriptID)
+	subscriptID, err := decodeSubscriptionID(&e2SmKpmIndicationMessageFormat1C.subscriptID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeSubscriptionId() %s", err.Error())
 	}
 
-	cellObjID, err := decodeCellObjectID(*e2SmKpmIndicationMessageFormat1C.cellObjID)
+	cellObjID, err := decodeCellObjectID(e2SmKpmIndicationMessageFormat1C.cellObjID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellObjectId() %s", err.Error())
 	}
 
-	granulPeriod, err := decodeGranularityPeriod(*e2SmKpmIndicationMessageFormat1C.granulPeriod)
+	granulPeriod, err := decodeGranularityPeriod(e2SmKpmIndicationMessageFormat1C.granulPeriod)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGranularityPeriod() %s", err.Error())
 	}
 
-	measInfoList, err := decodeMeasurementInfoList(*e2SmKpmIndicationMessageFormat1C.measInfoList)
+	measInfoList, err := decodeMeasurementInfoList(e2SmKpmIndicationMessageFormat1C.measInfoList)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementInfoList() %s", err.Error())
 	}
 
-	measData, err := decodeMeasurementData(*e2SmKpmIndicationMessageFormat1C.measData)
+	measData, err := decodeMeasurementData(&e2SmKpmIndicationMessageFormat1C.measData)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementData() %s", err.Error())
 	}

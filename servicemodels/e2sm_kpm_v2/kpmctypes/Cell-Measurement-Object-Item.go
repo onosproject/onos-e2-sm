@@ -80,8 +80,8 @@ func newCellMeasurementObjectItem(cellMeasurementObjectItem *e2sm_kpm_v2.CellMea
 	}
 
 	cellMeasurementObjectItemC := C.Cell_Measurement_Object_Item_t{
-		cell_object_ID: cellObjectIDC,
-		cell_global_ID: cellGlobalIDC,
+		cell_object_ID: *cellObjectIDC,
+		cell_global_ID: *cellGlobalIDC,
 	}
 
 	return &cellMeasurementObjectItemC, nil
@@ -89,12 +89,12 @@ func newCellMeasurementObjectItem(cellMeasurementObjectItem *e2sm_kpm_v2.CellMea
 
 func decodeCellMeasurementObjectItem(cellMeasurementObjectItemC *C.Cell_Measurement_Object_Item_t) (*e2sm_kpm_v2.CellMeasurementObjectItem, error) {
 
-	cellObjectID, err := decodeCellObjectID(*cellMeasurementObjectItemC.cell_object_ID)
+	cellObjectID, err := decodeCellObjectID(&cellMeasurementObjectItemC.cell_object_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellObjectId() %s", err.Error())
 	}
 
-	cellGlobalID, err := decodeCellGlobalID(*cellMeasurementObjectItemC.cell_global_ID)
+	cellGlobalID, err := decodeCellGlobalID(&cellMeasurementObjectItemC.cell_global_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellGlobalId() %s", err.Error())
 	}

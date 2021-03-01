@@ -74,7 +74,7 @@ func newRicStyleName(ricStyleName *e2sm_kpm_v2.RicStyleName) (*C.RIC_Style_Name_
 		return nil, fmt.Errorf("newString() %s", err.Error())
 	}
 
-	return &ricStyleNameC, nil
+	return ricStyleNameC, nil
 }
 
 func decodeRicStyleName(ricStyleNameC *C.RIC_Style_Name_t) (*e2sm_kpm_v2.RicStyleName, error) {

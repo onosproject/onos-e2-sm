@@ -90,10 +90,10 @@ func newE2SmKpmActionDefinitionFormat1(e2SmKpmActionDefinitionFormat1 *e2sm_kpm_
 	}
 
 	e2SmKpmActionDefinitionFormat1C := C.E2SM_KPM_ActionDefinition_Format1_t{
-		cellObjID:    cellObjIDC,
-		measInfoList: measInfoListC,
-		granulPeriod: granulPeriodC,
-		subscriptID:  subscriptIDC,
+		cellObjID:    *cellObjIDC,
+		measInfoList: *measInfoListC,
+		granulPeriod: *granulPeriodC,
+		subscriptID:  *subscriptIDC,
 	}
 
 	return &e2SmKpmActionDefinitionFormat1C, nil
@@ -101,22 +101,22 @@ func newE2SmKpmActionDefinitionFormat1(e2SmKpmActionDefinitionFormat1 *e2sm_kpm_
 
 func decodeE2SmKpmActionDefinitionFormat1(e2SmKpmActionDefinitionFormat1C *C.E2SM_KPM_ActionDefinition_Format1_t) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1, error) {
 
-	cellObjID, err := decodeCellObjectID(*e2SmKpmActionDefinitionFormat1C.cellObjID)
+	cellObjID, err := decodeCellObjectID(&e2SmKpmActionDefinitionFormat1C.cellObjID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellObjectId() %s", err.Error())
 	}
 
-	measInfoList, err := decodeMeasurementInfoList(*e2SmKpmActionDefinitionFormat1C.measInfoList)
+	measInfoList, err := decodeMeasurementInfoList(&e2SmKpmActionDefinitionFormat1C.measInfoList)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementInfoList() %s", err.Error())
 	}
 
-	granulPeriod, err := decodeGranularityPeriod(*e2SmKpmActionDefinitionFormat1C.granulPeriod)
+	granulPeriod, err := decodeGranularityPeriod(&e2SmKpmActionDefinitionFormat1C.granulPeriod)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGranularityPeriod() %s", err.Error())
 	}
 
-	subscriptID, err := decodeSubscriptionID(*e2SmKpmActionDefinitionFormat1C.subscriptID)
+	subscriptID, err := decodeSubscriptionID(&e2SmKpmActionDefinitionFormat1C.subscriptID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeSubscriptionId() %s", err.Error())
 	}

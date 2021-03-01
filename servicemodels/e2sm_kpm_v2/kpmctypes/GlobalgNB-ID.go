@@ -80,8 +80,8 @@ func newGlobalgNbID(globalgNbID *e2sm_kpm_v2.GlobalgNbId) (*C.GlobalgNB_ID_t, er
 	}
 
 	globalgNbIDC := C.GlobalgNB_ID_t{
-		plmn_id: plmnIDC,
-		gnb_id:  gnbIDC,
+		plmn_id: *plmnIDC,
+		gnb_id:  *gnbIDC,
 	}
 
 	return &globalgNbIDC, nil
@@ -89,12 +89,12 @@ func newGlobalgNbID(globalgNbID *e2sm_kpm_v2.GlobalgNbId) (*C.GlobalgNB_ID_t, er
 
 func decodeGlobalgNbID(globalgNbIDC *C.GlobalgNB_ID_t) (*e2sm_kpm_v2.GlobalgNbId, error) {
 
-	plmnID, err := decodePlmnIdentity(*globalgNbIDC.plmn_id)
+	plmnID, err := decodePlmnIdentity(&globalgNbIDC.plmn_id)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	gnbID, err := decodeGnbIDChoice(*globalgNbIDC.gnb_id)
+	gnbID, err := decodeGnbIDChoice(&globalgNbIDC.gnb_id)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGnbIdChoice() %s", err.Error())
 	}

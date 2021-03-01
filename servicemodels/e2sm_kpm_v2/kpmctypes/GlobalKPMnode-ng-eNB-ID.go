@@ -80,8 +80,8 @@ func newGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmnodeNgEn
 	}
 
 	globalKpmnodeNgEnbIDC := C.GlobalKPMnode_ng_eNB_ID_t{
-		global_ng_eNB_ID: globalNgENbIDC,
-		gNB_DU_ID:        *gNbDuIDC,
+		global_ng_eNB_ID: *globalNgENbIDC,
+		gNB_DU_ID:        gNbDuIDC,
 	}
 
 	return &globalKpmnodeNgEnbIDC, nil
@@ -89,7 +89,7 @@ func newGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmnodeNgEn
 
 func decodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbIDC *C.GlobalKPMnode_ng_eNB_ID_t) (*e2sm_kpm_v2.GlobalKpmnodeNgEnbId, error) {
 
-	globalNgENbID, err := decodeGlobalngeNbID(globalKpmnodeNgEnbIDC.global_ng_eNB_ID)
+	globalNgENbID, err := decodeGlobalngeNbID(&globalKpmnodeNgEnbIDC.global_ng_eNB_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGlobalngeNbID() %s", err.Error())
 	}

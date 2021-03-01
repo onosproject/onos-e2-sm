@@ -74,7 +74,7 @@ func newCellObjectID(cellObjectID *e2sm_kpm_v2.CellObjectId) (*C.CellObjectID_t,
 		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 	}
 
-	return &cellObjectIDC, nil
+	return cellObjectIDC, nil
 }
 
 func decodeCellObjectID(cellObjectIDC *C.CellObjectID_t) (*e2sm_kpm_v2.CellObjectId, error) {

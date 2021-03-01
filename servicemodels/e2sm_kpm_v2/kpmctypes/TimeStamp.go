@@ -74,12 +74,12 @@ func newTimeStamp(timeStamp *e2sm_kpm_v2.TimeStamp) (*C.TimeStamp_t, error) {
 		return nil, err
 	}
 
-	return &timeStampC, nil
+	return timeStampC, nil
 }
 
 func decodeTimeStamp(timeStampC *C.TimeStamp_t) (*e2sm_kpm_v2.TimeStamp, error) {
 
-	res, err := decodeOctetString(*timeStampC)
+	res, err := decodeOctetString(timeStampC)
 	if err!= nil {
 		return nil, err
 	}

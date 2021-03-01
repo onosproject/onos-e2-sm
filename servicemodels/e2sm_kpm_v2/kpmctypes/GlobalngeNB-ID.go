@@ -90,11 +90,10 @@ func newGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) (*C.GlobalngeNB_
 	}
 
 	globalngeNbIDC := C.GlobalngeNB_ID_t{
-		//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-		plmn_id:            plmnIDC,
-		enb_id:             enbIDC,
-		short_Macro_eNB_ID: shortMacroENbIDC,
-		long_Macro_eNB_ID:  longMacroENbIDC,
+		plmn_id:            *plmnIDC,
+		enb_id:             *enbIDC,
+		short_Macro_eNB_ID: *shortMacroENbIDC,
+		long_Macro_eNB_ID:  *longMacroENbIDC,
 	}
 
 	return &globalngeNbIDC, nil
@@ -102,28 +101,27 @@ func newGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) (*C.GlobalngeNB_
 
 func decodeGlobalngeNbID(globalngeNbIDC *C.GlobalngeNB_ID_t) (*e2sm_kpm_v2.GlobalngeNbId, error) {
 
-	plmnID, err := decodePlmnIdentity(*globalngeNbIDC.plmn_id)
+	plmnID, err := decodePlmnIdentity(&globalngeNbIDC.plmn_id)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	enbID, err := decodeEnbIdChoice(*globalngeNbIDC.enb_id)
+	enbID, err := decodeEnbIDChoice(&globalngeNbIDC.enb_id)
 	if err != nil {
 		return nil, fmt.Errorf("decodeEnbIdChoice() %s", err.Error())
 	}
 
-	shortMacroENbID, err := decodeBitString(*globalngeNbIDC.short_Macro_eNB_ID)
+	shortMacroENbID, err := decodeBitString(&globalngeNbIDC.short_Macro_eNB_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeBitString() %s", err.Error())
 	}
 
-	longMacroENbID, err := decodeBitString(*globalngeNbIDC.long_Macro_eNB_ID)
+	longMacroENbID, err := decodeBitString(&globalngeNbIDC.long_Macro_eNB_ID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeBitString() %s", err.Error())
 	}
 
 	globalngeNbID := e2sm_kpm_v2.GlobalngeNbId{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		PlmnId:          plmnID,
 		EnbId:           enbID,
 		ShortMacroENbId: shortMacroENbID,

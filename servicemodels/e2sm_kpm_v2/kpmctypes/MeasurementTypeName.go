@@ -74,7 +74,7 @@ func newMeasurementTypeName(measurementTypeName *e2sm_kpm_v2.MeasurementTypeName
 		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 	}
 
-	return &measurementTypeNameC, nil
+	return measurementTypeNameC, nil
 }
 
 func decodeMeasurementTypeName(measurementTypeNameC *C.MeasurementTypeName_t) (*e2sm_kpm_v2.MeasurementTypeName, error) {

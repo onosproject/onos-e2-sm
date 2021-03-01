@@ -85,9 +85,9 @@ func newRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_v2.RicEventT
 	}
 
 	ricEventTriggerStyleItemC := C.RIC_EventTriggerStyle_Item_t{
-		ric_EventTriggerStyle_Type:  ricEventTriggerStyleTypeC,
-		ric_EventTriggerStyle_Name:  ricEventTriggerStyleNameC,
-		ric_EventTriggerFormat_Type: ricEventTriggerFormatTypeC,
+		ric_EventTriggerStyle_Type:  *ricEventTriggerStyleTypeC,
+		ric_EventTriggerStyle_Name:  *ricEventTriggerStyleNameC,
+		ric_EventTriggerFormat_Type: *ricEventTriggerFormatTypeC,
 	}
 
 	return &ricEventTriggerStyleItemC, nil
@@ -95,17 +95,17 @@ func newRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_kpm_v2.RicEventT
 
 func decodeRicEventTriggerStyleItem(ricEventTriggerStyleItemC *C.RIC_EventTriggerStyle_Item_t) (*e2sm_kpm_v2.RicEventTriggerStyleItem, error) {
 
-	ricEventTriggerStyleType, err := decodeRicStyleType(*ricEventTriggerStyleItemC.ric_EventTriggerStyle_Type)
+	ricEventTriggerStyleType, err := decodeRicStyleType(&ricEventTriggerStyleItemC.ric_EventTriggerStyle_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicStyleType() %s", err.Error())
 	}
 
-	ricEventTriggerStyleName, err := decodeRicStyleName(*ricEventTriggerStyleItemC.ric_EventTriggerStyle_Name)
+	ricEventTriggerStyleName, err := decodeRicStyleName(&ricEventTriggerStyleItemC.ric_EventTriggerStyle_Name)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicStyleName() %s", err.Error())
 	}
 
-	ricEventTriggerFormatType, err := decodeRicFormatType(*ricEventTriggerStyleItemC.ric_EventTriggerFormat_Type)
+	ricEventTriggerFormatType, err := decodeRicFormatType(&ricEventTriggerStyleItemC.ric_EventTriggerFormat_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRicFormatType() %s", err.Error())
 	}

@@ -80,7 +80,7 @@ func newMeasurementInfoActionList(measurementInfoActionList *e2sm_kpm_v2.Measure
 		}
 	}
 
-	return &measurementInfoActionListC, nil
+	return measurementInfoActionListC, nil
 }
 
 func decodeMeasurementInfoActionList(measurementInfoActionListC *C.MeasurementInfo_Action_List_t) (*e2sm_kpm_v2.MeasurementInfoActionList, error) {

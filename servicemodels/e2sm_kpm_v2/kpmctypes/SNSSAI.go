@@ -87,11 +87,11 @@ func newSnssai(snssai *e2sm_kpm_v2.Snssai) (*C.SNSSAI_t, error) {
 
 func decodeSnssai(snssaiC *C.SNSSAI_t) (*e2sm_kpm_v2.Snssai, error) {
 
-	sSt, err := decodeOctetString(*snssaiC.sST)
+	sSt, err := decodeOctetString(&snssaiC.sST)
 	if err != nil {
 		return nil, err
 	}
-	sD, err := decodeOctetString(*snssaiC.sD)
+	sD, err := decodeOctetString(snssaiC.sD)
 	if err != nil {
 		return nil, err
 	}

@@ -80,7 +80,7 @@ func newLabelInfoList(labelInfoList *e2sm_kpm_v2.LabelInfoList) (*C.LabelInfoLis
 		}
 	}
 
-	return &labelInfoListC, nil
+	return labelInfoListC, nil
 }
 
 func decodeLabelInfoList(labelInfoListC *C.LabelInfoList_t) (*e2sm_kpm_v2.LabelInfoList, error) {
