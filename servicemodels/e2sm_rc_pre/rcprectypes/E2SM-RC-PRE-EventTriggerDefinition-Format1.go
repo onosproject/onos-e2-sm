@@ -68,7 +68,7 @@ func PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre
 
 func newE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t, error) {
 
-	triggerTypeC, err := newRcPreTriggerType(&e2SmRcPreEventTriggerDefinitionFormat1.TriggerType)
+	triggerTypeC, err :=  newRcPreTriggerType(&e2SmRcPreEventTriggerDefinitionFormat1.TriggerType)
 	if err != nil {
 		return nil, fmt.Errorf("newE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}

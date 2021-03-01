@@ -13,9 +13,9 @@ import (
 
 func createE2SmRcPreEventTriggerDefinitionFormat1() (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 
-	var rtPeriod int32 = 12 // range is from 0 to 19
+	var rtPeriod int32 = 12
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreEventTriggerDefinition(rtPeriod)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func Test_XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 
 	xer, err := XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 185, len(xer))
+	assert.Equal(t, 182, len(xer))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 XER\n%s", string(xer))
 }
 
@@ -42,7 +42,7 @@ func Test_XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 
 	xer, err := XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 185, len(xer))
+	assert.Equal(t, 182, len(xer))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(xer)

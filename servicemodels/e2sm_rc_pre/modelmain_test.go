@@ -127,7 +127,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 
 func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	var rtPeriod int32 = 12
-	e2SmRcPreEventTriggerDefinition, err := pdubuilder.CreateE2SmRcPreEventTriggerDefinition(rtPeriod)
+	e2SmRcPreEventTriggerDefinition, err := pdubuilder.CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, e2SmRcPreEventTriggerDefinition != nil, "Created E2SmPDU is nil")
 
@@ -137,20 +137,19 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(e2SmRcPreEventTriggerDefinition)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreEventTriggerDefinition to bytes")
-	assert.Equal(t, 4, len(protoBytes))
+	assert.Equal(t, 6, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.EventTriggerDefinitionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
-	assert.Assert(t, asn1Bytes != nil)
 	assert.Equal(t, 3, len(asn1Bytes))
 }
 
 func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
-	eventTriggerDefinitionAsn1 := []byte{0x10, 0x01, 0x0C}
+	eventTriggerDefinitionAsn1 := []byte{0x14, 0x01, 0x0c}
 	protoBytes, err := rcPreTestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 4, len(protoBytes))
+	assert.Equal(t, 6, len(protoBytes))
 	testIM := e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition{}
 	err = proto.Unmarshal(protoBytes, &testIM)
 	assert.NilError(t, err)

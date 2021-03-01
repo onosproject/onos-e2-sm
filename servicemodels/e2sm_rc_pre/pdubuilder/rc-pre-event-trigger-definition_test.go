@@ -10,9 +10,9 @@ import (
 )
 
 func TestE2SmRcPreEventTriggerDefinition(t *testing.T) {
-	var rtPeriod int32 = 12 // range is from 0 to 19
+	var rtPeriod int32 = 12
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreEventTriggerDefinition(rtPeriod)
+	newE2SmRcPrePdu, err := CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 }
