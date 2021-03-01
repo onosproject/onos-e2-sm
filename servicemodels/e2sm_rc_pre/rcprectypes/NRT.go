@@ -37,9 +37,10 @@ func newNRT(nrt *e2sm_rc_pre_ies.Nrt) (*C.NRT_t, error) {
 	earfcn := newEARFCN(nrt.DlEarfcn)
 	cellSize, _ := newCellSize(nrt.CellSize)
 	pci := newPCI(nrt.Pci)
+	nrIndex := C.long(nrt.NrIndex)
 
 	nrtC := C.NRT_t{
-		nrIndex:   1,
+		nrIndex:   nrIndex,
 		cgi:       *cgi,
 		dl_EARFCN: *earfcn,
 		cell_Size: cellSize,
@@ -51,7 +52,8 @@ func newNRT(nrt *e2sm_rc_pre_ies.Nrt) (*C.NRT_t, error) {
 
 func decodeNRT(nrtC *C.NRT_t) (*e2sm_rc_pre_ies.Nrt, error) {
 	nrt := new(e2sm_rc_pre_ies.Nrt)
-	nrt.NrIndex = 1
+	nrt.NrIndex = int32(nrtC.nrIndex)
+
 	cgi, _ := decodeCellGlobalID(&nrtC.cgi)
 	nrt.Cgi = cgi
 
