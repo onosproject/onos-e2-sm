@@ -20,8 +20,12 @@
 extern "C" {
 #endif
 
+/* Forward declarations */
+struct CellGlobalID;
+
 /* E2SM-RC-PRE-ControlHeader-Format1 */
 typedef struct E2SM_RC_PRE_ControlHeader_Format1 {
+	struct CellGlobalID	*cgi;	/* OPTIONAL */
 	RC_PRE_Command_t	 rc_command;
 	RIC_Control_Message_Priority_t	*ric_Control_Message_Priority;	/* OPTIONAL */
 	/*
@@ -36,7 +40,7 @@ typedef struct E2SM_RC_PRE_ControlHeader_Format1 {
 /* Implementation */
 extern asn_TYPE_descriptor_t asn_DEF_E2SM_RC_PRE_ControlHeader_Format1;
 extern asn_SEQUENCE_specifics_t asn_SPC_E2SM_RC_PRE_ControlHeader_Format1_specs_1;
-extern asn_TYPE_member_t asn_MBR_E2SM_RC_PRE_ControlHeader_Format1_1[2];
+extern asn_TYPE_member_t asn_MBR_E2SM_RC_PRE_ControlHeader_Format1_1[3];
 
 #ifdef __cplusplus
 }

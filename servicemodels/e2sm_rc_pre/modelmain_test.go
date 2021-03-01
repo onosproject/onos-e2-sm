@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdubuilder"
 	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
 	"google.golang.org/protobuf/proto"
@@ -15,9 +16,14 @@ import (
 var rcPreTestSm servicemodel
 
 func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
-	var plmnID = "ONF"
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnID)
+	cellID := e2sm_rc_pre_ies.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   28,        //uint32
+	}
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnIDBytes, &cellID)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()
@@ -38,9 +44,52 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 }
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
-	var plmnID = "ONF"
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationMsg(plmnID)
+	cellID := e2sm_rc_pre_ies.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   28,        //uint32
+	}
+	var dlEarfcn int32 = 253
+	var pci int32 = 11
+
+	pciPool := &e2sm_rc_pre_ies.PciRange{
+		LowerPci: &e2sm_rc_pre_ies.Pci{
+			Value: 10,
+		},
+		UpperPci: &e2sm_rc_pre_ies.Pci{
+			Value: 20,
+		},
+	}
+
+	neighbors := &e2sm_rc_pre_ies.Nrt{
+		NrIndex: 1,
+		Cgi: &e2sm_rc_pre_ies.CellGlobalId{
+			CellGlobalId: &e2sm_rc_pre_ies.CellGlobalId_EUtraCgi{
+				EUtraCgi: &e2sm_rc_pre_ies.Eutracgi{
+					PLmnIdentity: &e2sm_rc_pre_ies.PlmnIdentity{
+						Value: plmnIDBytes,
+					},
+					EUtracellIdentity: &e2sm_rc_pre_ies.EutracellIdentity{
+						Value: &e2sm_rc_pre_ies.BitString{
+							Value: 0x9bcd4ac, //uint64
+							Len:   28,        //uint32
+						},
+					},
+				},
+			},
+		},
+		Pci: &e2sm_rc_pre_ies.Pci{
+			Value: 11,
+		},
+		CellSize: e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO,
+		DlEarfcn: &e2sm_rc_pre_ies.Earfcn{
+			Value: 253,
+		},
+	}
+
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationMsg(plmnIDBytes, &cellID, dlEarfcn, e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO, pci, pciPool, neighbors)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()
@@ -179,8 +228,15 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 
 	var controlMessagePriority int32 = 1
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority)
+	cellID := e2sm_rc_pre_ies.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   28,        //uint32
+	}
+
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, plmnIDBytes, &cellID)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()
@@ -189,26 +245,28 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreControlHeader to bytes")
-	assert.Equal(t, 6, len(protoBytes))
+	assert.Equal(t, 28, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.ControlHeaderProtoToASN1(protoBytes)
 
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 3, len(asn1Bytes))
+	assert.Equal(t, 10, len(asn1Bytes))
 }
 
 func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
-	ControlHeaderAsn1Bytes := []byte{0x20, 0x01, 0x01}
+	ControlHeaderAsn1Bytes := []byte{0x34, 0x4f, 0x4e, 0x46, 0xab, 0xd4, 0xbc, 0x00, 0x01, 0x01}
 
 	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 6, len(protoBytes))
-	testIH := e2sm_rc_pre_ies.E2SmRcPreControlHeader{}
-	err = proto.Unmarshal(protoBytes, &testIH)
+	assert.Equal(t, 28, len(protoBytes))
+	testCH := e2sm_rc_pre_ies.E2SmRcPreControlHeader{}
+	err = proto.Unmarshal(protoBytes, &testCH)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, int(testIH.GetControlHeaderFormat1().GetRicControlMessagePriority().GetValue()))
+	assert.Equal(t, 1, int(testCH.GetControlHeaderFormat1().GetRicControlMessagePriority().GetValue()))
+	assert.DeepEqual(t, []byte{0x4f, 0x4e, 0x46}, testCH.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetPLmnIdentity().GetValue())
+
 }
 
 func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {

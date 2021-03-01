@@ -205,6 +205,7 @@ E2SM-RC-PRE-ControlHeader ::= CHOICE{
 
 -- E2SM-RC-PRE-ControlHeader Format 1
 E2SM-RC-PRE-ControlHeader-Format1 ::= SEQUENCE{
+    cgi         CellGlobalID       OPTIONAL,
 	rc-command					   RC-PRE-Command,
 	ric-Control-Message-Priority	RIC-Control-Message-Priority	OPTIONAL,
 	...
