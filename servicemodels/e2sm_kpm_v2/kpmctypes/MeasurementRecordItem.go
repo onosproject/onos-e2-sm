@@ -130,7 +130,7 @@ func decodeMeasurementRecordItem(measurementRecordItemC *C.MeasurementRecordItem
 			return nil, fmt.Errorf("decodeRealBytes() %s", err.Error())
 		}
 		measurementRecordItem.MeasurementRecordItem = &e2sm_kpm_v2.MeasurementRecordItem_Real{
-			Real: float64(measRecordItem),
+			Real: measRecordItem,
 		}
 	case C.MeasurementRecordItem_PR_noValue:
 		null := decodeNull()

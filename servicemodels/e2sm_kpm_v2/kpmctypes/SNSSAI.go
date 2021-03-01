@@ -16,6 +16,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	"strconv"
 	"unsafe"
 )
 
@@ -69,11 +70,11 @@ func perDecodeSnssai(bytes []byte) (*e2sm_kpm_v2.Snssai, error) {
 
 func newSnssai(snssai *e2sm_kpm_v2.Snssai) (*C.SNSSAI_t, error) {
 
-	sStC, err := newOctetString(string(snssai.SSt))
+	sStC, err := newOctetString(strconv.FormatInt(int64(snssai.SSt), 10))
 	if err != nil {
 		return nil, err
 	}
-	sDC, err := newOctetString(string(snssai.SD))
+	sDC, err := newOctetString(strconv.FormatInt(int64(snssai.SD), 10))
 	if err != nil {
 		return nil, err
 	}
@@ -91,14 +92,21 @@ func decodeSnssai(snssaiC *C.SNSSAI_t) (*e2sm_kpm_v2.Snssai, error) {
 	if err != nil {
 		return nil, err
 	}
+	sst, err := strconv.ParseInt(sSt, 10, 32)
+	if err != nil {
+		return nil, err
+	}
 	sD, err := decodeOctetString(snssaiC.sD)
 	if err != nil {
 		return nil, err
 	}
+	sd, err := strconv.ParseInt(sD, 10, 32)
+	if err != nil {
+		return nil, err
+	}
 	snssai := e2sm_kpm_v2.Snssai{
-		//ToDo - verify if it's correct conversion
-		SSt: int32(binary.LittleEndian.Uint32([]byte(sSt))),
-		SD:  int32(binary.LittleEndian.Uint32([]byte(sD))),
+		SSt: int32(sst),
+		SD:  int32(sd),
 	}
 
 	return &snssai, nil

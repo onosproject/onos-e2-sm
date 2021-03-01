@@ -17,7 +17,7 @@ func Test_xerEncodeSubscriptionID(t *testing.T) {
 	}
 	xer, err := xerEncodeSubscriptionID(subID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 39, len(xer))
 	t.Logf("SubscriptionID XER\n%s", string(xer))
 }
 
@@ -28,12 +28,13 @@ func Test_xerDecodeSubscriptionID(t *testing.T) {
 	}
 	xer, err := xerEncodeSubscriptionID(subID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 39, len(xer))
 	t.Logf("SubscriptionID XER\n%s", string(xer))
 
 	result, err := xerDecodeSubscriptionID(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("SubscriptionID XER - decoded\n%s", result)
 }
 
 func Test_perEncodeSubscriptionID(t *testing.T) {
@@ -43,7 +44,7 @@ func Test_perEncodeSubscriptionID(t *testing.T) {
 	}
 	per, err := perEncodeSubscriptionID(subID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("SubscriptionID PER\n%s", string(per))
 }
 
@@ -54,10 +55,11 @@ func Test_perDecodeSubscriptionID(t *testing.T) {
 	}
 	per, err := perEncodeSubscriptionID(subID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("SubscriptionID PER\n%s", string(per))
 
 	result, err := perDecodeSubscriptionID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("SubscriptionID PER - decoded\n%s", result)
 }

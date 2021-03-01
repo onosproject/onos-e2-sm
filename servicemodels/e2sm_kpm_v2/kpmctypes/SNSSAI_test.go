@@ -18,7 +18,7 @@ func Test_xerEncodeSnssai(t *testing.T) {
 	}
 	xer, err := xerEncodeSnssai(snssai)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 59, len(xer))
 	t.Logf("Snssai XER\n%s", string(xer))
 }
 
@@ -30,12 +30,13 @@ func Test_xerDecodeSnssai(t *testing.T) {
 	}
 	xer, err := xerEncodeSnssai(snssai)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 59, len(xer))
 	t.Logf("Snssai XER\n%s", string(xer))
 
 	result, err := xerDecodeSnssai(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("Snssai XER - decoded\n%s", result)
 }
 
 func Test_perEncodeSnssai(t *testing.T) {
@@ -64,4 +65,5 @@ func Test_perDecodeSnssai(t *testing.T) {
 	result, err := perDecodeSnssai(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("Snssai PER - decoded\n%v", result)
 }

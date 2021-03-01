@@ -18,7 +18,7 @@ func Test_xerEncodeTimeStamp(t *testing.T) {
 	}
 	xer, err := xerEncodeTimeStamp(timeStamp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 35, len(xer))
 	t.Logf("TimeStamp XER\n%s", string(xer))
 }
 
@@ -30,12 +30,13 @@ func Test_xerDecodeTimeStamp(t *testing.T) {
 	}
 	xer, err := xerEncodeTimeStamp(timeStamp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 35, len(xer))
 	t.Logf("TimeStamp XER\n%s", string(xer))
 
 	result, err := xerDecodeTimeStamp(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("TimeStamp XER - decoded\n%s", result)
 }
 
 func Test_perEncodeTimeStamp(t *testing.T) {
@@ -47,7 +48,7 @@ func Test_perEncodeTimeStamp(t *testing.T) {
 	per, err := perEncodeTimeStamp(timeStamp)
 	assert.NilError(t, err)
 	assert.Equal(t, 4, len(per))
-	t.Logf("TimeStamp PER\n%s", string(per))
+	t.Logf("TimeStamp PER\n%v", per)
 }
 
 func Test_perDecodeTimeStamp(t *testing.T) {
@@ -59,9 +60,10 @@ func Test_perDecodeTimeStamp(t *testing.T) {
 	per, err := perEncodeTimeStamp(timeStamp)
 	assert.NilError(t, err)
 	assert.Equal(t, 4, len(per))
-	t.Logf("TimeStamp PER\n%s", string(per))
+	t.Logf("TimeStamp PER\n%v", per)
 
 	result, err := perDecodeTimeStamp(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("TimeStamp PER - decoded\n%v", result)
 }
