@@ -304,9 +304,19 @@ func (m *Snssai) Validate() error {
 		return nil
 	}
 
-	// no validation rules for SSt
+	if len(m.GetSSt()) != 1 {
+		return SnssaiValidationError{
+			field:  "SSt",
+			reason: "value length must be 1 bytes",
+		}
+	}
 
-	// no validation rules for SD
+	if len(m.GetSD()) != 3 {
+		return SnssaiValidationError{
+			field:  "SD",
+			reason: "value length must be 3 bytes",
+		}
+	}
 
 	return nil
 }

@@ -15,11 +15,11 @@ func createLabelInfoItem() *e2sm_kpm_v2.LabelInfoItem {
 	return &e2sm_kpm_v2.LabelInfoItem{
 		MeasLabel: &e2sm_kpm_v2.MeasurementLabel{
 			PlmnId: &e2sm_kpm_v2.PlmnIdentity{
-				Value: []byte{0x1, 0x2, 0x3},
+				Value: []byte{0x01, 0x02, 0x03},
 			},
 			SliceId: &e2sm_kpm_v2.Snssai{
-				SD:  21,
-				SSt: 22,
+				SD:  []byte{0x01, 0x02, 0x03},
+				SSt: []byte{0x01},
 			},
 			FiveQi: &e2sm_kpm_v2.FiveQi{
 				Value: 23,

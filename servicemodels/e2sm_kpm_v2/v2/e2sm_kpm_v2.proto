@@ -38,8 +38,8 @@ message CellGlobalId {
 
 // sequence from e2sm_kpm_ies_v2.asn:42
 message Snssai {
-  int32 s_st = 1 [json_name="SNSSAI:sST"];
-  int32 s_d = 2 [json_name="SNSSAI:sD"];
+  bytes s_st = 1 [(validate.v1.rules).bytes.len = 1, json_name="SNSSAI:sST"];
+  bytes s_d = 2 [(validate.v1.rules).bytes.len = 3, json_name="SNSSAI:sD"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:47

@@ -17,8 +17,8 @@ func createE2SMKPMActionDefinitionFormat1() *e2sm_kpm_v2.E2SmKpmActionDefinition
 	var granularity int32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
-	var sst int32 = 14
-	var sd int32 = 54
+	sst := []byte{0x01}
+	sd := []byte{0x01, 0x02, 0x03}
 	var fiveQI int32 = 10
 	var qci int32 = 15
 	var qciMin int32 = 1
