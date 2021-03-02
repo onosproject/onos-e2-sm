@@ -4,64 +4,44 @@
 
 package kpmv2ctypes
 
-//func createNrcgi() *e2sm_kpm_v2.Nrcgi {
-//	return &e2sm_kpm_v2.Nrcgi{
-//		PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{
-//			Value: []byte{21, 22, 23},
-//		},
-//		NRcellIdentity: &e2sm_kpm_v2.NrcellIdentity{
-//			Value: &e2sm_kpm_v2.BitString{
-//				Value: 0x9bcd4,
-//				Len:   22,
-//			},
-//		},
-//	}
+//func Test_xerEncodeNull(t *testing.T) {
+//
+//	xer, err := xerEncodeNull(0)
+//	assert.NilError(t, err)
+//	assert.Equal(t, 1, len(xer))
+//	t.Logf("NULL XER\n%s", string(xer))
 //}
 //
-//func Test_xerEncodeNrcgi(t *testing.T) {
+//func Test_xerDecodeNull(t *testing.T) {
 //
-//	nrcgi := createNrcgi()
-//
-//	xer, err := xerEncodeNrcgi(nrcgi)
+//	xer, err := xerEncodeNull(0)
 //	assert.NilError(t, err)
-//	assert.Equal(t, 4, len(xer))
-//	t.Logf("NRCGI XER\n%s", string(xer))
-//}
+//	assert.Equal(t, 1, len(xer))
+//	t.Logf("NULL XER\n%s", string(xer))
 //
-//func Test_xerDecodeNrcgi(t *testing.T) {
-//
-//	nrcgi := createNrcgi()
-//
-//	xer, err := xerEncodeNrcgi(nrcgi)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 4, len(xer))
-//	t.Logf("NRCGI XER\n%s", string(xer))
-//
-//	result, err := xerDecodeNrcgi(xer)
+//	result, err := xerDecodeNull(xer)
 //	assert.NilError(t, err)
 //	assert.Assert(t, result != nil)
+//	t.Logf("NULL XER - decoded\n%s", result)
 //}
 //
-//func Test_perEncodeNrcgi(t *testing.T) {
+//func Test_perEncodeNull(t *testing.T) {
 //
-//	nrcgi := createNrcgi()
-//
-//	per, err := perEncodeNrcgi(nrcgi)
+//	per, err := perEncodeNull(0)
 //	assert.NilError(t, err)
-//	assert.Equal(t, 4, len(per))
-//	t.Logf("NRCGI PER\n%s", string(per))
+//	assert.Equal(t, 1, len(per))
+//	t.Logf("NULL PER - decoded\n%s", string(per))
 //}
 //
-//func Test_perDecodeNrcgi(t *testing.T) {
+//func Test_perDecodeNull(t *testing.T) {
 //
-//	nrcgi := createNrcgi()
-//
-//	per, err := perEncodeNrcgi(nrcgi)
+//	per, err := perEncodeNull(0)
 //	assert.NilError(t, err)
 //	assert.Equal(t, 4, len(per))
-//	t.Logf("NRCGI PER\n%s", string(per))
+//	t.Logf("NULL PER\n%s", string(per))
 //
-//	result, err := perDecodeNrcgi(per)
+//	result, err := perDecodeNull(per)
 //	assert.NilError(t, err)
 //	assert.Assert(t, result != nil)
+//	t.Logf("NULL PER - decoded\n%s", result)
 //}

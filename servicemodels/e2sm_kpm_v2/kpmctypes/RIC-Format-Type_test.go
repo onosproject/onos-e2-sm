@@ -17,7 +17,7 @@ func Test_xerEncodeRicFormatType(t *testing.T) {
 	}
 	xer, err := xerEncodeRicFormatType(ricFormatType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 38, len(xer))
 	t.Logf("RicFormatType XER\n%s", string(xer))
 }
 
@@ -28,12 +28,13 @@ func Test_xerDecodeRicFormatType(t *testing.T) {
 	}
 	xer, err := xerEncodeRicFormatType(ricFormatType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 38, len(xer))
 	t.Logf("RicFormatType XER\n%s", string(xer))
 
 	result, err := xerDecodeRicFormatType(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicFormatType XER - decoded\n%s", result)
 }
 
 func Test_perEncodeRicFormatType(t *testing.T) {
@@ -43,7 +44,7 @@ func Test_perEncodeRicFormatType(t *testing.T) {
 	}
 	per, err := perEncodeRicFormatType(ricFormatType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("RicFormatType PER\n%s", string(per))
 }
 
@@ -54,10 +55,11 @@ func Test_perDecodeRicFormatType(t *testing.T) {
 	}
 	per, err := perEncodeRicFormatType(ricFormatType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("RicFormatType PER\n%s", string(per))
 
 	result, err := perDecodeRicFormatType(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicFormatType PER - decoded\n%s", result)
 }

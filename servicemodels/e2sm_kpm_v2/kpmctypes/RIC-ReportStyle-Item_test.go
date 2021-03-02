@@ -53,7 +53,7 @@ func Test_xerEncodeRicReportStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 578, len(xer))
 	t.Logf("RicReportStyleItem XER\n%s", string(xer))
 }
 
@@ -63,12 +63,13 @@ func Test_xerDecodeRicReportStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 578, len(xer))
 	t.Logf("RicReportStyleItem XER\n%s", string(xer))
 
 	result, err := xerDecodeRicReportStyleItem(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicReportStyleItem XER - decoded\n%s", result)
 }
 
 func Test_perEncodeRicReportStyleItem(t *testing.T) {
@@ -77,7 +78,7 @@ func Test_perEncodeRicReportStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 40, len(per))
 	t.Logf("RicReportStyleItem PER\n%s", string(per))
 }
 
@@ -87,10 +88,11 @@ func Test_perDecodeRicReportStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 40, len(per))
 	t.Logf("RicReportStyleItem PER\n%s", string(per))
 
 	result, err := perDecodeRicReportStyleItem(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicReportStyleItem PER - decoded\n%v", result)
 }

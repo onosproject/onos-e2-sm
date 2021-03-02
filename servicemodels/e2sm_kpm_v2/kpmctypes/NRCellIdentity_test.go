@@ -25,7 +25,7 @@ func Test_xerEncodeNrcellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeNrcellIdentity(nrcID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 62, len(xer))
 	t.Logf("NRCellIdentity XER\n%s", string(xer))
 }
 
@@ -35,12 +35,13 @@ func Test_xerDecodeNrcellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeNrcellIdentity(nrcID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 62, len(xer))
 	t.Logf("NRCellIdentity XER\n%s", string(xer))
 
 	result, err := xerDecodeNrcellIdentity(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("NRCellIdentity XER - decoded\n%s", result)
 }
 
 func Test_perEncodeNrcellidentity(t *testing.T) {
@@ -65,4 +66,5 @@ func Test_perDecodeNrcellIdentity(t *testing.T) {
 	result, err := perDecodeNrcellIdentity(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("NRCellIdentity PER - decoded\n%v", result)
 }

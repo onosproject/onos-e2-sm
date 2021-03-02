@@ -22,7 +22,7 @@ func Test_xerEncodeMeasurementTypeName(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementTypeName(mtn)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 47, len(xer))
 	t.Logf("MeasurementTypeName XER\n%s", string(xer))
 }
 
@@ -32,21 +32,22 @@ func Test_xerDecodeMeasurementTypeName(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementTypeName(mtn)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 47, len(xer))
 	t.Logf("MeasurementTypeName XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementTypeName(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementTypeName XER - decoded\n%s", result)
 }
 
 func Test_perEncodeMeasurementTypeName(t *testing.T) {
 
 	mtn := createMeasurementTypeName()
 
-	per, err := xerEncodeMeasurementTypeName(mtn)
+	per, err := perEncodeMeasurementTypeName(mtn)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("MeasurementTypeName PER\n%s", string(per))
 }
 
@@ -54,12 +55,13 @@ func Test_perDecodeMeasurementTypeName(t *testing.T) {
 
 	mtn := createMeasurementTypeName()
 
-	per, err := xerEncodeMeasurementTypeName(mtn)
+	per, err := perEncodeMeasurementTypeName(mtn)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("MeasurementTypeName PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementTypeName(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementTypeName PER - decoded\n%s", result)
 }

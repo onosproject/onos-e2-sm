@@ -17,7 +17,7 @@ func Test_xerEncodeRicStyleType(t *testing.T) {
 	}
 	xer, err := xerEncodeRicStyleType(ricStyleType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 37, len(xer))
 	t.Logf("RicStyleType XER\n%s", string(xer))
 }
 
@@ -28,12 +28,13 @@ func Test_xerDecodeRicStyleType(t *testing.T) {
 	}
 	xer, err := xerEncodeRicStyleType(ricStyleType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 37, len(xer))
 	t.Logf("RicStyleType XER\n%s", string(xer))
 
 	result, err := xerDecodeRicStyleType(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicStyleType XER - decoded\n%s", result)
 }
 
 func Test_perEncodeRicStyleType(t *testing.T) {
@@ -43,7 +44,7 @@ func Test_perEncodeRicStyleType(t *testing.T) {
 	}
 	per, err := perEncodeRicStyleType(ricStyleType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("RicStyleType PER\n%s", string(per))
 }
 
@@ -54,10 +55,11 @@ func Test_perDecodeRicStyleType(t *testing.T) {
 	}
 	per, err := perEncodeRicStyleType(ricStyleType)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("RicStyleType PER\n%s", string(per))
 
 	result, err := perDecodeRicStyleType(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicStyleType PER - decoded\n%v", result)
 }

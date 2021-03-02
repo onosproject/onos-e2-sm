@@ -31,7 +31,7 @@ func Test_xerEncodeRicEventTriggerStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicEventTriggerStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 254, len(xer))
 	t.Logf("RicEventTriggerStyleItem XER\n%s", string(xer))
 }
 
@@ -41,12 +41,13 @@ func Test_xerDecodeRicEventTriggerStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicEventTriggerStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 254, len(xer))
 	t.Logf("RicEventTriggerStyleItem XER\n%s", string(xer))
 
-	result, err := perDecodeRicEventTriggerStyleItem(xer)
+	result, err := xerDecodeRicEventTriggerStyleItem(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicEventTriggerStyleItem XER - decoded\n%s", result)
 }
 
 func Test_perEncodeRicEventTriggerStyleItem(t *testing.T) {
@@ -55,7 +56,7 @@ func Test_perEncodeRicEventTriggerStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicEventTriggerStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 10, len(per))
 	t.Logf("RicEventTriggerStyleItem PER\n%s", string(per))
 }
 
@@ -65,10 +66,11 @@ func Test_perDecodeRicEventTriggerStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicEventTriggerStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 10, len(per))
 	t.Logf("RicEventTriggerStyleItem PER\n%s", string(per))
 
 	result, err := perDecodeRicEventTriggerStyleItem(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicEventTriggerStyleItem PER - decoded\n%v", result)
 }

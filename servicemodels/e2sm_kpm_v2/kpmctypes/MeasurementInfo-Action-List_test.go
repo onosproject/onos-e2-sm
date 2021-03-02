@@ -35,7 +35,7 @@ func Test_xerEncodeMeasurementInfoActionList(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoActionList(mial)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 191, len(xer))
 	t.Logf("MeasurementInfoActionList XER\n%s", string(xer))
 }
 
@@ -45,12 +45,13 @@ func Test_xerDecodeMeasurementInfoActionList(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoActionList(mial)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 191, len(xer))
 	t.Logf("MeasurementInfoActionList XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementInfoActionList(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementInfoActionList XER - decoded\n%s", result)
 }
 
 func Test_perEncodeMeasurementInfoActionList(t *testing.T) {
@@ -59,7 +60,7 @@ func Test_perEncodeMeasurementInfoActionList(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoActionList(mial)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("MeasurementInfoActionList PER\n%s", string(per))
 }
 
@@ -69,10 +70,11 @@ func Test_perDecodeMeasurementInfoActionList(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoActionList(mial)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("MeasurementInfoActionList PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementInfoActionList(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementInfoActionList PER - decoded\n%v", result)
 }

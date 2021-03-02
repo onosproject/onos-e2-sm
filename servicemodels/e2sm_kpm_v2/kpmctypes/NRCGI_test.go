@@ -30,7 +30,7 @@ func Test_xerEncodeNrcgi(t *testing.T) {
 
 	xer, err := xerEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 135, len(xer))
 	t.Logf("NRCGI XER\n%s", string(xer))
 }
 
@@ -40,12 +40,13 @@ func Test_xerDecodeNrcgi(t *testing.T) {
 
 	xer, err := xerEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 135, len(xer))
 	t.Logf("NRCGI XER\n%s", string(xer))
 
 	result, err := xerDecodeNrcgi(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("NRCGI XER - decode\n%s", result)
 }
 
 func Test_perEncodeNrcgi(t *testing.T) {
@@ -70,4 +71,5 @@ func Test_perDecodeNrcgi(t *testing.T) {
 	result, err := perDecodeNrcgi(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("NRCGI PER - decoded\n%v", result)
 }

@@ -73,7 +73,7 @@ func Test_xerEncodeRicKpmnodeItem(t *testing.T) {
 
 	xer, err := xerEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 936, len(xer))
 	t.Logf("RicKpmNodeItem XER\n%s", string(xer))
 }
 
@@ -83,12 +83,13 @@ func Test_xerDecodeRicKpmnnodeItem(t *testing.T) {
 
 	xer, err := xerEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 936, len(xer))
 	t.Logf("RicKpmNodeItem XER\n%s", string(xer))
 
 	result, err := xerDecodeRicKpmnodeItem(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicKpmNodeItem XER - decoded\n%s", result)
 }
 
 func Test_perEncodeRicKpmnnodeItem(t *testing.T) {
@@ -113,4 +114,5 @@ func Test_perDecodeRicKpmnNodeItem(t *testing.T) {
 	result, err := perDecodeRicKpmnodeItem(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("RicKpmNodeItem PER - decode\n%s", result)
 }

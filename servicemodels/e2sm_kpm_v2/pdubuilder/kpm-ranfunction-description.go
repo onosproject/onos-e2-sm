@@ -8,7 +8,7 @@ import (
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 )
 
-func CreateE2SmKpmRanfunctionDescription(rfSn int32, rfE2SMoid int32, rfd int32, rfi int32, rknl []*e2sm_kpm_v2.RicKpmnodeItem,
+func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd string, rfi int32, rknl []*e2sm_kpm_v2.RicKpmnodeItem,
 	retsl []*e2sm_kpm_v2.RicEventTriggerStyleItem, rrsl []*e2sm_kpm_v2.RicReportStyleItem) (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
 
 	e2SmKpmPdu := e2sm_kpm_v2.E2SmKpmRanfunctionDescription{

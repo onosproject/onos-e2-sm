@@ -70,7 +70,7 @@ func perDecodeMeasurementType(bytes []byte) (*e2sm_kpm_v2.MeasurementType, error
 func newMeasurementType(measurementType *e2sm_kpm_v2.MeasurementType) (*C.MeasurementType_t, error) {
 
 	var pr C.MeasurementType_PR
-	choiceC := [40]byte{}        //ToDo - Check if number of bytes is sufficient
+	choiceC := [40]byte{}
 
 	switch choice := measurementType.MeasurementType.(type) {
 	case *e2sm_kpm_v2.MeasurementType_MeasName:
@@ -88,7 +88,7 @@ func newMeasurementType(measurementType *e2sm_kpm_v2.MeasurementType) (*C.Measur
 		if err != nil {
 			return nil, fmt.Errorf("newMeasurementTypeID() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[8:12], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newMeasurementType() %T not yet implemented", choice)
 	}
@@ -118,7 +118,7 @@ func decodeMeasurementType(measurementTypeC *C.MeasurementType_t) (*e2sm_kpm_v2.
 		}
 	case C.MeasurementType_PR_measID:
 		var a [8]byte
-		copy(a[:], measurementTypeC.choice[8:12])
+		copy(a[:], measurementTypeC.choice[8:16])
 		measurementTypestructC, err := decodeMeasurementTypeIDBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMeasurementTypeIDBytes() %s", err.Error())

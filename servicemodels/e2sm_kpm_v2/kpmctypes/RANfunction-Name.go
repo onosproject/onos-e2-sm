@@ -108,10 +108,9 @@ func decodeRanfunctionName(ranfunctionNameC *C.RANfunction_Name_t) (*e2sm_kpm_v2
 	}
 	ranFunctionInstance := int32(*ranfunctionNameC.ranFunction_Instance)
 	ranfunctionName := e2sm_kpm_v2.RanfunctionName{
-		//ToDo - verify whether to int32 conversion is valid
-		RanFunctionShortName:   int32(binary.LittleEndian.Uint32([]byte(ranFunctionShortName))),
-		RanFunctionE2SmOid:     int32(binary.LittleEndian.Uint32([]byte(ranFunctionE2SmOid))),
-		RanFunctionDescription: int32(binary.LittleEndian.Uint32([]byte(ranFunctionDescription))),
+		RanFunctionShortName:   ranFunctionShortName,
+		RanFunctionE2SmOid:     ranFunctionE2SmOid,
+		RanFunctionDescription: ranFunctionDescription,
 		RanFunctionInstance:    ranFunctionInstance,
 	}
 

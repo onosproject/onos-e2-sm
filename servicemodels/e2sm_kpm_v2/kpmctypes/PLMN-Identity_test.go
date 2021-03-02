@@ -17,7 +17,7 @@ func Test_xerEncodePlmnIdentity(t *testing.T) {
 	}
 	xer, err := xerEncodePlmnIdentity(plmnID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 40, len(xer))
 	t.Logf("PlmnIdentity XER\n%s", string(xer))
 }
 
@@ -28,12 +28,13 @@ func Test_xerDecodePlmnIdentity(t *testing.T) {
 	}
 	xer, err := xerEncodePlmnIdentity(plmnID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 40, len(xer))
 	t.Logf("PlmnIdentity XER\n%s", string(xer))
 
 	result, err := xerDecodePlmnIdentity(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("PlmnIdentity XER - decoded\n%s", result)
 }
 
 func Test_perEncodePlmnIdentity(t *testing.T) {
@@ -43,7 +44,7 @@ func Test_perEncodePlmnIdentity(t *testing.T) {
 	}
 	per, err := perEncodePlmnIdentity(plmnID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("PlmnIdentity PER\n%s", string(per))
 }
 
@@ -54,10 +55,11 @@ func Test_perDecodePlmnIdentity(t *testing.T) {
 	}
 	per, err := perEncodePlmnIdentity(plmnID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("PlmnIdentity PER\n%s", string(per))
 
 	result, err := perDecodePlmnIdentity(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("PlmnIdentity PER - decoded\n%v", result)
 }
