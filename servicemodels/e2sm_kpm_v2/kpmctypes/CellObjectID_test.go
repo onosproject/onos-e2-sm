@@ -23,7 +23,7 @@ func Test_xerEncodeCellObjectID(t *testing.T) {
 
 	xer, err := xerEncodeCellObjectID(objID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 33, len(xer))
 	t.Logf("CellObjectID XER\n%s", string(xer))
 }
 
@@ -33,7 +33,7 @@ func Test_xerDecodeCellObjectID(t *testing.T) {
 
 	xer, err := xerEncodeCellObjectID(objID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 33, len(xer))
 	t.Logf("CellObjectID XER\n%s", string(xer))
 
 	result, err := xerDecodeCellObjectID(xer)
@@ -48,7 +48,7 @@ func Test_perEncodeCellObjectID(t *testing.T) {
 
 	per, err := perEncodeCellObjectID(objID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 6, len(per))
 	t.Logf("CellObjectID PER\n%s", string(per))
 }
 
@@ -58,7 +58,7 @@ func Test_perDecodeCellObjectID(t *testing.T) {
 
 	per, err := perEncodeCellObjectID(objID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 6, len(per))
 	t.Logf("CellObjectID PER\n%s", string(per))
 
 	result, err := perDecodeCellObjectID(per)

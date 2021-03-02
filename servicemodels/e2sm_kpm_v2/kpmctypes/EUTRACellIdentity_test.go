@@ -26,7 +26,7 @@ func Test_xerEncodeEutracellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeEutracellIdentity(eci)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 68, len(xer))
 	t.Logf("EUTRACellIdentity XER\n%s", string(xer))
 }
 
@@ -36,12 +36,13 @@ func Test_xerDecodeEutracellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeEutracellIdentity(eci)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 68, len(xer))
 	t.Logf("EUTRACellIdentity XER\n%s", string(xer))
 
 	result, err := xerDecodeEutracellIdentity(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("EUTRACellIdentity XER - decoded\n%s", result)
 }
 
 func Test_perEncodeEutracellIdentity(t *testing.T) {
@@ -66,4 +67,5 @@ func Test_perDecodeEutracellIdentity(t *testing.T) {
 	result, err := perDecodeEutracellIdentity(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("EUTRACellIdentity PER - decoded\n%s", result)
 }

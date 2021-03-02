@@ -40,7 +40,7 @@ func Test_xerEncodeMeasurementRecordItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 85, len(xer))
 	t.Logf("MeasurementRecordItem (Integer) XER\n%s", string(xer))
 
 	mri = createMeasurementRecordItemReal()
@@ -64,12 +64,13 @@ func Test_xerDecodeMeasurementRecordItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 85, len(xer))
 	t.Logf("MeasurementRecordItem (Integer) XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementRecordItem(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementRecordItem (Integer) XER - result\n%s", result)
 
 	mri = createMeasurementRecordItemReal()
 
@@ -81,6 +82,7 @@ func Test_xerDecodeMeasurementRecordItem(t *testing.T) {
 	result, err = xerDecodeMeasurementRecordItem(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementRecordItem (Real) XER - decoded\n%s", result)
 
 	mri = createMeasurementRecordItemNoValue()
 
@@ -92,6 +94,7 @@ func Test_xerDecodeMeasurementRecordItem(t *testing.T) {
 	result, err = xerDecodeMeasurementRecordItem(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementRecordItem (NoValue) XER - decoded\n%s", result)
 }
 
 func Test_perEncodeMeasurementRecordItem(t *testing.T) {
@@ -100,7 +103,7 @@ func Test_perEncodeMeasurementRecordItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 8, len(per))
 	t.Logf("MeasurementRecordItem (Integer) PER\n%s", string(per))
 
 	mri = createMeasurementRecordItemReal()
@@ -124,12 +127,13 @@ func Test_perDecodeMeasurementRecordItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 8, len(per))
 	t.Logf("MeasurementRecordItem (Integer) PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementRecordItem(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementRecordItem (Integer) PER - decoded\n%s", result)
 
 	mri = createMeasurementRecordItemReal()
 
@@ -141,6 +145,7 @@ func Test_perDecodeMeasurementRecordItem(t *testing.T) {
 	result, err = perDecodeMeasurementRecordItem(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementRecordItem (Real) PER - decoded\n%s", result)
 
 	mri = createMeasurementRecordItemNoValue()
 
@@ -152,4 +157,5 @@ func Test_perDecodeMeasurementRecordItem(t *testing.T) {
 	result, err = perDecodeMeasurementRecordItem(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementRecordItem (NoValue) PER - decoded\n%s", result)
 }

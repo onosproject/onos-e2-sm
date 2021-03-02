@@ -23,7 +23,7 @@ func Test_xerEncodeFiveQi(t *testing.T) {
 
 	xer, err := xerEncodeFiveQi(fqi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 20, len(xer))
 	t.Logf("FiveQi XER\n%s", string(xer))
 }
 
@@ -33,12 +33,13 @@ func Test_xerDecodeFiveQi(t *testing.T) {
 
 	xer, err := xerEncodeFiveQi(fqi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 20, len(xer))
 	t.Logf("FiveQi XER\n%s", string(xer))
 
 	result, err := xerDecodeFiveQi(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("FiveQi XER - decoded\n%s", result)
 }
 
 func Test_perEncodeFiveQi(t *testing.T) {
@@ -47,7 +48,7 @@ func Test_perEncodeFiveQi(t *testing.T) {
 
 	per, err := perEncodeFiveQi(fqi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("FiveQi PER\n%s", string(per))
 }
 
@@ -57,10 +58,11 @@ func Test_perDecodeFiveQi(t *testing.T) {
 
 	per, err := perEncodeFiveQi(fqi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("FiveQi PER\n%s", string(per))
 
 	result, err := perDecodeFiveQi(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("FiveQi PER - decoded\n%s", result)
 }

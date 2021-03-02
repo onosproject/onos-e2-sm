@@ -75,7 +75,7 @@ func Test_xerEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 2666, len(xer))
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 }
 
@@ -85,7 +85,7 @@ func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 2666, len(xer))
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmKpmRanfunctionDescription(xer)

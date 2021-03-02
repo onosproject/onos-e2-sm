@@ -17,7 +17,7 @@ func Test_xerEncodeArp(t *testing.T) {
 	}
 	xer, err := xerEncodeArp(arp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 14, len(xer))
 	t.Logf("ARP XER\n%s", string(xer))
 }
 
@@ -28,12 +28,13 @@ func Test_xerDecodeArp(t *testing.T) {
 	}
 	xer, err := xerEncodeArp(arp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 14, len(xer))
 	t.Logf("ARP XER\n%s", string(xer))
 
 	result, err := xerDecodeArp(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("ARP XER - decoded\n%s", result)
 }
 
 func Test_perEncodeArp(t *testing.T) {
@@ -43,7 +44,7 @@ func Test_perEncodeArp(t *testing.T) {
 	}
 	per, err := xerEncodeArp(arp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 14, len(per))
 	t.Logf("ARP PER\n%s", string(per))
 }
 
@@ -54,10 +55,11 @@ func Test_perDecodeArp(t *testing.T) {
 	}
 	per, err := xerEncodeArp(arp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 14, len(per))
 	t.Logf("ARP PER\n%s", string(per))
 
 	result, err := perDecodeArp(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("ARP PER - decoded\n%s", result)
 }

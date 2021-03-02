@@ -38,7 +38,7 @@ func Test_xerEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 922, len(xer))
 	t.Logf("E2SmKpmIndicationHeader XER\n%s", string(xer))
 }
 
@@ -48,7 +48,7 @@ func Test_xerDecodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 922, len(xer))
 	t.Logf("E2SmKpmIndicationHeader XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmKpmIndicationHeader(xer)

@@ -35,7 +35,7 @@ func Test_xerEncodeCellGlobalID(t *testing.T) {
 
 	xer, err := xerEncodeCellGlobalID(cellGlobalID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 204, len(xer))
 	t.Logf("CellGlobalID XER\n%s", string(xer))
 }
 
@@ -45,7 +45,7 @@ func Test_xerDecodeCellGlobalID(t *testing.T) {
 
 	xer, err := xerEncodeCellGlobalID(cellGlobalID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 204, len(xer))
 	t.Logf("CellGlobalID XER\n%s", string(xer))
 
 	result, err := xerDecodeCellGlobalID(xer)

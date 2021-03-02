@@ -26,7 +26,7 @@ func Test_xerEncodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 259, len(xer))
 	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
 }
 
@@ -36,7 +36,7 @@ func Test_xerDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 259, len(xer))
 	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmKpmEventTriggerDefinition(xer)
@@ -51,7 +51,7 @@ func Test_perEncodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinition PER\n%s", string(per))
 }
 
@@ -61,10 +61,10 @@ func Test_perDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinition PER\n%s", string(per))
 
-	result, err := perDecodeE2SmKpmActionDefinition(per)
+	result, err := perDecodeE2SmKpmEventTriggerDefinition(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmKpmEventTriggerDefinition PER - decoded\n%s", result)

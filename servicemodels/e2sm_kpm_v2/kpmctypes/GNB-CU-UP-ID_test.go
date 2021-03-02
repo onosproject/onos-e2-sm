@@ -23,7 +23,7 @@ func Test_xerEncodeGnbCuUpID(t *testing.T) {
 
 	xer, err := xerEncodeGnbCuUpID(gnbCuUpID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 34, len(xer))
 	t.Logf("GnbCuUpID XER\n%s", string(xer))
 }
 
@@ -33,12 +33,13 @@ func Test_xerDecodeGnbCuUpID(t *testing.T) {
 
 	xer, err := xerEncodeGnbCuUpID(gnbCuUpID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 34, len(xer))
 	t.Logf("GnbCuUpID XER\n%s", string(xer))
 
 	result, err := xerDecodeGnbCuUpID(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GnbCuUpID XER - decoded\n%s", result)
 }
 
 func Test_perEncodeGnbCuUpID(t *testing.T) {
@@ -47,7 +48,7 @@ func Test_perEncodeGnbCuUpID(t *testing.T) {
 
 	per, err := perEncodeGnbCuUpID(gnbCuUpID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("GnbCuUpID PER\n%s", string(per))
 }
 
@@ -57,10 +58,11 @@ func Test_perDecodeGnbCuUpID(t *testing.T) {
 
 	per, err := perEncodeGnbCuUpID(gnbCuUpID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
-	t.Logf("GnbCuUpID XER\n%s", string(per))
+	assert.Equal(t, 3, len(per))
+	t.Logf("GnbCuUpID PER\n%s", string(per))
 
 	result, err := perDecodeGnbCuUpID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GnbCuUpID PER - decoded\n%s", result)
 }

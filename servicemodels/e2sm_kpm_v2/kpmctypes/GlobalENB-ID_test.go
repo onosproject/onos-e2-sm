@@ -33,7 +33,7 @@ func Test_xerEncodeGlobalEnbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalEnbID(globalEnbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 162, len(xer))
 	t.Logf("GlobalEnbID XER\n%s", string(xer))
 }
 
@@ -43,7 +43,7 @@ func Test_xerDecodeGlobalEnbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalEnbID(globalEnbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 162, len(xer))
 	t.Logf("GlobalEnbID XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalEnbID(xer)

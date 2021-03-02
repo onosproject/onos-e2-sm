@@ -17,7 +17,7 @@ func Test_xerEncodeGranularityPeriod(t *testing.T) {
 	}
 	xer, err := xerEncodeGranularityPeriod(gp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 42, len(xer))
 	t.Logf("GranularityPeriod XER\n%s", string(xer))
 }
 
@@ -28,12 +28,13 @@ func Test_xerDecodeGranularityPeriod(t *testing.T) {
 	}
 	xer, err := xerEncodeGranularityPeriod(gp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 42, len(xer))
 	t.Logf("GranularityPeriod XER\n%s", string(xer))
 
 	result, err := xerDecodeGranularityPeriod(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GranularityPeriod XER - decoded\n%s", result)
 }
 
 func Test_perEncodeGranularityPeriod(t *testing.T) {
@@ -43,7 +44,7 @@ func Test_perEncodeGranularityPeriod(t *testing.T) {
 	}
 	per, err := perEncodeGranularityPeriod(gp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("GranularityPeriod PER\n%s", string(per))
 }
 
@@ -54,10 +55,11 @@ func Test_perDecodeGranularityPeriod(t *testing.T) {
 	}
 	per, err := perEncodeGranularityPeriod(gp)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("GranularityPeriod PER\n%s", string(per))
 
 	result, err := perDecodeGranularityPeriod(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GranularityPeriod PER - decoded\n%s", result)
 }

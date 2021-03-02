@@ -40,7 +40,7 @@ func Test_xerEncodeCellMeasurementObjectItem(t *testing.T) {
 
 	xer, err := xerEncodeCellMeasurementObjectItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 344, len(xer))
 	t.Logf("CellMeasurementObjectItem XER\n%s", string(xer))
 }
 
@@ -50,7 +50,7 @@ func Test_xerDecodeCellMeasurementObjectItem(t *testing.T) {
 
 	xer, err := xerEncodeCellMeasurementObjectItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 344, len(xer))
 	t.Logf("CellMeasurementObjectItem XER\n%s", string(xer))
 
 	result, err := xerDecodeCellMeasurementObjectItem(xer)

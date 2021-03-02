@@ -28,7 +28,7 @@ func Test_xerEncodeGnbIDChoice(t *testing.T) {
 
 	xer, err := xerEncodeGnbIDChoice(gnbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 69, len(xer))
 	t.Logf("GnbIDChoice XER\n%s", string(xer))
 }
 
@@ -38,12 +38,13 @@ func Test_xerDecodeGnbIDChoice(t *testing.T) {
 
 	xer, err := xerEncodeGnbIDChoice(gnbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 69, len(xer))
 	t.Logf("GnbIDChoice XER\n%s", string(xer))
 
 	result, err := xerDecodeGnbIDChoice(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GnbIDChoice XER - decoded\n%s", result)
 }
 
 func Test_perEncodeGnbIDChoice(t *testing.T) {
@@ -68,4 +69,5 @@ func Test_perDecodeGnbIDChoice(t *testing.T) {
 	result, err := perDecodeGnbIDChoice(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GnbIDChoice XER - decoded\n%s", result)
 }

@@ -31,7 +31,7 @@ func Test_xerEncodeEutracgi(t *testing.T) {
 
 	xer, err := xerEncodeEutracgi(eutracgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 147, len(xer))
 	t.Logf("EUTRACGI XER\n%s", string(xer))
 }
 
@@ -41,12 +41,13 @@ func Test_xerDecodeEutracgi(t *testing.T) {
 
 	xer, err := xerEncodeEutracgi(eutracgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 147, len(xer))
 	t.Logf("EUTRACGI XER\n%s", string(xer))
 
 	result, err := xerDecodeEutracgi(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("EUTRACGI XER - decoded\n%s", result)
 }
 
 func Test_perEncodeEutracgi(t *testing.T) {
@@ -71,4 +72,5 @@ func Test_perDecodeEutracgi(t *testing.T) {
 	result, err := perDecodeEutracgi(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("EUTRACGI PER - decoded\n%s", result)
 }

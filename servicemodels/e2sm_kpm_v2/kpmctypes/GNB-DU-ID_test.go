@@ -23,7 +23,7 @@ func Test_xerEncodeGnbDuID(t *testing.T) {
 
 	xer, err := xerEncodeGnbDuID(gnbDuID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 28, len(xer))
 	t.Logf("GnbDuID XER\n%s", string(xer))
 }
 
@@ -33,12 +33,13 @@ func Test_xerDecodeGnbDuID(t *testing.T) {
 
 	xer, err := xerEncodeGnbDuID(gnbDuID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 28, len(xer))
 	t.Logf("GnbDuID XER\n%s", string(xer))
 
 	result, err := xerDecodeGnbDuID(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GnbDuID XER - decoded\n%s", result)
 }
 
 func Test_perEncodeGnbDuID(t *testing.T) {
@@ -47,7 +48,7 @@ func Test_perEncodeGnbDuID(t *testing.T) {
 
 	per, err := perEncodeGnbDuID(gnbDuID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("GnbDuID PER\n%s", string(per))
 }
 
@@ -57,10 +58,11 @@ func Test_perDecodeGnbDuID(t *testing.T) {
 
 	per, err := perEncodeGnbDuID(gnbDuID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
-	t.Logf("GnbDuID XER\n%s", string(per))
+	assert.Equal(t, 3, len(per))
+	t.Logf("GnbDuID PER\n%s", string(per))
 
 	result, err := perDecodeGnbDuID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("GnbDuID PER - decoded\n%s", result)
 }
