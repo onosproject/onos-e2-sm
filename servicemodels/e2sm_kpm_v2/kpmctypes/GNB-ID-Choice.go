@@ -72,15 +72,17 @@ func newGnbIDChoice(gnbIDChoice *e2sm_kpm_v2.GnbIdChoice) (*C.GNB_ID_Choice_t, e
 	var pr C.GNB_ID_Choice_PR
 	choiceC := [48]byte{}
 
-	switch choice := gnbIDChoice.GnbIdChoice.(type) {
+	switch choice := gnbIDChoice.GetGnbIdChoice().(type) {
 	case *e2sm_kpm_v2.GnbIdChoice_GnbId:
 		pr = C.GNB_ID_Choice_PR_gnb_ID
 
-		im, err := newBitString(choice.GnbId)
+		bsC, err := newBitString(choice.GnbId)
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
+		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
+		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
 	default:
 		return nil, fmt.Errorf("newGnbIdChoice() %T not yet implemented", choice)
 	}
@@ -99,9 +101,9 @@ func decodeGnbIDChoice(gnbIDchoiceC *C.GNB_ID_Choice_t) (*e2sm_kpm_v2.GnbIdChoic
 
 	switch gnbIDchoiceC.present {
 	case C.GNB_ID_Choice_PR_gnb_ID:
-		var a [8]byte
-		copy(a[:], gnbIDchoiceC.choice[0:8])
-		gnbID, err := decodeBitStringBytes(a)
+		gnbIDstructC := newBitStringFromArray(gnbIDchoiceC.choice)
+
+		gnbID, err := decodeBitString(gnbIDstructC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}

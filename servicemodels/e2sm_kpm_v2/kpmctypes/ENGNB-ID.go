@@ -76,11 +76,13 @@ func newEngnbID(engnbID *e2sm_kpm_v2.EngnbId) (*C.ENGNB_ID_t, error) {
 	case *e2sm_kpm_v2.EngnbId_GNbId:
 		pr = C.ENGNB_ID_PR_gNB_ID
 
-		im, err := newBitString(choice.GNbId)
+		bsC, err := newBitString(choice.GNbId)
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
+		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
+		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
 	default:
 		return nil, fmt.Errorf("newEngnbID() %T not yet implemented", choice)
 	}
@@ -100,14 +102,14 @@ func decodeEngnbID(engnbIDC *C.ENGNB_ID_t) (*e2sm_kpm_v2.EngnbId, error) {
 
 	switch engnbIDC.present {
 	case C.ENGNB_ID_PR_gNB_ID:
-		var a [8]byte
-		copy(a[:], engnbIDC.choice[0:8])
-		engnbIdstructC, err := decodeBitStringBytes(a)
+		engnbIDstructC := newBitStringFromArray(engnbIDC.choice)
+
+		engnbIDCdec, err := decodeBitString(engnbIDstructC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
 		engnbID.EngnbId = &e2sm_kpm_v2.EngnbId_GNbId{
-			GNbId: engnbIdstructC,
+			GNbId: engnbIDCdec,
 		}
 	default:
 		return nil, fmt.Errorf("decodeEngnbID() %v not yet implemented", engnbIDC.present)

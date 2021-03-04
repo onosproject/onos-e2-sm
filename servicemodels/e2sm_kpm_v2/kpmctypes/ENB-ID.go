@@ -76,19 +76,23 @@ func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_t, error) {
 	case *e2sm_kpm_v2.EnbId_MacroENbId:
 		pr = C.ENB_ID_PR_macro_eNB_ID
 
-		im, err := newBitString(choice.MacroENbId)
+		bsC, err := newBitString(choice.MacroENbId)
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
+		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
+		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
 	case *e2sm_kpm_v2.EnbId_HomeENbId:
 		pr = C.ENB_ID_PR_home_eNB_ID
 
-		im, err := newBitString(choice.HomeENbId)
+		bsC, err := newBitString(choice.HomeENbId)
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
+		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
+		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
 	default:
 		return nil, fmt.Errorf("newEnbId() %T not yet implemented", choice)
 	}
@@ -108,24 +112,24 @@ func decodeEnbID(enbIDC *C.ENB_ID_t) (*e2sm_kpm_v2.EnbId, error) {
 
 	switch enbIDC.present {
 	case C.ENB_ID_PR_macro_eNB_ID:
-		var a [8]byte
-		copy(a[:], enbIDC.choice[0:8])
-		enbIDstructC, err := decodeBitStringBytes(a)
+		enbIDstructC := newBitStringFromArray(enbIDC.choice)
+
+		enbIDdec, err := decodeBitString(enbIDstructC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
 		enbID.EnbId = &e2sm_kpm_v2.EnbId_MacroENbId{
-			MacroENbId: enbIDstructC,
+			MacroENbId: enbIDdec,
 		}
 	case C.ENB_ID_PR_home_eNB_ID:
-		var a [8]byte
-		copy(a[:], enbIDC.choice[8:16])
-		enbIDstructC, err := decodeBitStringBytes(a)
+		enbIDstructC := newBitStringFromArray(enbIDC.choice)
+
+		enbIDdec, err := decodeBitString(enbIDstructC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
 		}
 		enbID.EnbId = &e2sm_kpm_v2.EnbId_HomeENbId{
-			HomeENbId: enbIDstructC,
+			HomeENbId: enbIDdec,
 		}
 	default:
 		return nil, fmt.Errorf("decodeEnbID() %v not yet implemented", enbIDC.present)

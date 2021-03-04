@@ -52,21 +52,21 @@ func Test_xerEncodeEnbIDChoice(t *testing.T) {
 
 	xer, err := xerEncodeEnbIDChoice(enbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 81, len(xer))
+	assert.Equal(t, 103, len(xer))
 	t.Logf("EnbIDChoice (Macro) XER\n%s", string(xer))
 
 	enbIDchoice = createEnbIDChoiceShortMacro()
 
 	xer, err = xerEncodeEnbIDChoice(enbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 113, len(xer))
 	t.Logf("EnbIDChoice (ShortMacro) XER\n%s", string(xer))
 
 	enbIDchoice = createEnbIDChoiceLongMacro()
 
 	xer, err = xerEncodeEnbIDChoice(enbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 111, len(xer))
 	t.Logf("EnbIDChoice (LongMacro) XER\n%s", string(xer))
 }
 
@@ -76,7 +76,7 @@ func Test_xerDecodeEnbIDChoice(t *testing.T) {
 
 	xer, err := xerEncodeEnbIDChoice(enbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 81, len(xer))
+	assert.Equal(t, 103, len(xer))
 	t.Logf("EnbIDChoice (Macro) XER\n%s", string(xer))
 
 	result, err := xerDecodeEnbIDChoice(xer)
@@ -88,7 +88,7 @@ func Test_xerDecodeEnbIDChoice(t *testing.T) {
 
 	xer, err = xerEncodeEnbIDChoice(enbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 113, len(xer))
 	t.Logf("EnbIDChoice (ShortMacro) XER\n%s", string(xer))
 
 	result, err = xerDecodeEnbIDChoice(xer)
@@ -100,7 +100,7 @@ func Test_xerDecodeEnbIDChoice(t *testing.T) {
 
 	xer, err = xerEncodeEnbIDChoice(enbIDchoice)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 111, len(xer))
 	t.Logf("EnbIDChoice (LongMacro) XER\n%s", string(xer))
 
 	result, err = xerDecodeEnbIDChoice(xer)

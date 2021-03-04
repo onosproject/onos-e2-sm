@@ -28,7 +28,7 @@ func Test_xerEncodeEngnbID(t *testing.T) {
 
 	xer, err := xerEncodeEngnbID(engnbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 59, len(xer))
+	assert.Equal(t, 81, len(xer))
 	t.Logf("ENGNBID XER\n%s", string(xer))
 }
 
@@ -38,7 +38,7 @@ func Test_xerDecodeEngnbID(t *testing.T) {
 
 	xer, err := xerEncodeEngnbID(engnbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 59, len(xer))
+	assert.Equal(t, 81, len(xer))
 	t.Logf("ENGNBID XER\n%s", string(xer))
 
 	result, err := xerDecodeEngnbID(xer)

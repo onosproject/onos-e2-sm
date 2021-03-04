@@ -33,7 +33,7 @@ func Test_xerEncodeGlobalngeNbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
 	assert.NilError(t, err)
-	assert.Equal(t, 316, len(xer))
+	assert.Equal(t, 338, len(xer))
 	t.Logf("GlobalngeNbID XER\n%s", string(xer))
 }
 
@@ -59,7 +59,7 @@ func Test_xerDecodeGlobalngeNbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
 	assert.NilError(t, err)
-	assert.Equal(t, 316, len(xer))
+	assert.Equal(t, 338, len(xer))
 	t.Logf("GlobalngeNbID XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalngeNbID(xer)
@@ -122,5 +122,5 @@ func Test_perDecodeGlobalngeNbID(t *testing.T) {
 	result, err := perDecodeGlobalngeNbID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("GlobalngeNbID PER - decode\n%s", result)
+	t.Logf("GlobalngeNbID PER - decode\n%v", result)
 }
