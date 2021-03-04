@@ -27,11 +27,11 @@ func TestE2SmKpmIndicationMessage(t *testing.T) {
 	var arpMin int32 = 10
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
-	var sum int32 = 69
+	var sum int32 = 0
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
-	var preLabel int32 = 11
+	var preLabel int32 = 0
 	var startEndIndication int32 = 1
 	var measurementName string = "trial"
 

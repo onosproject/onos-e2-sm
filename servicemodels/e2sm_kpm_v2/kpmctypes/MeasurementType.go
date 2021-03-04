@@ -72,7 +72,7 @@ func newMeasurementType(measurementType *e2sm_kpm_v2.MeasurementType) (*C.Measur
 	var pr C.MeasurementType_PR
 	choiceC := [40]byte{}
 
-	switch choice := measurementType.MeasurementType.(type) {
+	switch choice := measurementType.GetMeasurementType().(type) {
 	case *e2sm_kpm_v2.MeasurementType_MeasName:
 		pr = C.MeasurementType_PR_measName
 
@@ -80,7 +80,8 @@ func newMeasurementType(measurementType *e2sm_kpm_v2.MeasurementType) (*C.Measur
 		if err != nil {
 			return nil, fmt.Errorf("newMeasurementTypeName() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im.buf))))
+		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(im.size))
 	case *e2sm_kpm_v2.MeasurementType_MeasId:
 		pr = C.MeasurementType_PR_measID
 
@@ -88,7 +89,7 @@ func newMeasurementType(measurementType *e2sm_kpm_v2.MeasurementType) (*C.Measur
 		if err != nil {
 			return nil, fmt.Errorf("newMeasurementTypeID() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(*im))
 	default:
 		return nil, fmt.Errorf("newMeasurementType() %T not yet implemented", choice)
 	}
@@ -107,8 +108,8 @@ func decodeMeasurementType(measurementTypeC *C.MeasurementType_t) (*e2sm_kpm_v2.
 
 	switch measurementTypeC.present {
 	case C.MeasurementType_PR_measName:
-		var a [8]byte
-		copy(a[:], measurementTypeC.choice[0:8])
+		var a [16]byte
+		copy(a[:], measurementTypeC.choice[0:])
 		measurementTypestructC, err := decodeMeasurementTypeNameBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMeasurementTypeNameBytes() %s", err.Error())
@@ -118,7 +119,7 @@ func decodeMeasurementType(measurementTypeC *C.MeasurementType_t) (*e2sm_kpm_v2.
 		}
 	case C.MeasurementType_PR_measID:
 		var a [8]byte
-		copy(a[:], measurementTypeC.choice[8:16])
+		copy(a[:], measurementTypeC.choice[0:])
 		measurementTypestructC, err := decodeMeasurementTypeIDBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMeasurementTypeIDBytes() %s", err.Error())

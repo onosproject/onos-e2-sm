@@ -22,7 +22,7 @@ func createCellMeasurementObjectItem() *e2sm_kpm_v2.CellMeasurementObjectItem {
 					EUtracellIdentity: &e2sm_kpm_v2.EutracellIdentity{
 						Value: &e2sm_kpm_v2.BitString{
 							Value: 0x9bcd4,
-							Len:   22,
+							Len:   28,
 						},
 					},
 					PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{
@@ -40,7 +40,7 @@ func Test_xerEncodeCellMeasurementObjectItem(t *testing.T) {
 
 	xer, err := xerEncodeCellMeasurementObjectItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 344, len(xer))
+	assert.Equal(t, 350, len(xer))
 	t.Logf("CellMeasurementObjectItem XER\n%s", string(xer))
 }
 
@@ -50,7 +50,7 @@ func Test_xerDecodeCellMeasurementObjectItem(t *testing.T) {
 
 	xer, err := xerEncodeCellMeasurementObjectItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 344, len(xer))
+	assert.Equal(t, 350, len(xer))
 	t.Logf("CellMeasurementObjectItem XER\n%s", string(xer))
 
 	result, err := xerDecodeCellMeasurementObjectItem(xer)
@@ -65,7 +65,7 @@ func Test_perEncodeCellMeasurementObjectItem(t *testing.T) {
 
 	per, err := perEncodeCellMeasurementObjectItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 14, len(per))
 	t.Logf("CellMeasurementObjectItem PER\n%s", string(per))
 }
 
@@ -75,7 +75,7 @@ func Test_perDecodeCellMeasurementObjectItem(t *testing.T) {
 
 	per, err := perEncodeCellMeasurementObjectItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 14, len(per))
 	t.Logf("CellMeasurementObjectItem PER\n%s", string(per))
 
 	result, err := perDecodeCellMeasurementObjectItem(per)

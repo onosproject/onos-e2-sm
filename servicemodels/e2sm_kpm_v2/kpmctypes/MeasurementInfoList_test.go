@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func createMeasurementInfoList() *e2sm_kpm_v2.MeasurementInfoList {
+func createMeasurementInfoList() (*e2sm_kpm_v2.MeasurementInfoList, error) {
 
 	labelInfoList := &e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),
@@ -38,18 +38,18 @@ func createMeasurementInfoList() *e2sm_kpm_v2.MeasurementInfoList {
 				Value: 1,
 			},
 			ARpmax: &e2sm_kpm_v2.Arp{
-				Value: 50,
+				Value: 15,
 			},
 			ARpmin: &e2sm_kpm_v2.Arp{
 				Value: 1,
 			},
 			BitrateRange:     25,
 			LayerMuMimo:      1,
-			SUm:              11,
+			SUm:              0,
 			DistBinX:         123,
 			DistBinY:         456,
 			DistBinZ:         789,
-			PreLabelOverride: 2,
+			PreLabelOverride: 0,
 			StartEndInd:      1,
 		},
 	}
@@ -71,53 +71,62 @@ func createMeasurementInfoList() *e2sm_kpm_v2.MeasurementInfoList {
 	}
 	res.Value = append(res.Value, list)
 
-	return res
+	if err := labelInfoList.Validate(); err != nil {
+		return nil, err
+	}
+	return res, nil
 }
 
 func Test_xerEncodeMeasurementInfoList(t *testing.T) {
 
-	mii := createMeasurementInfoList()
+	mii, err := createMeasurementInfoList()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 1147, len(xer))
 	t.Logf("MeasurementInfoList XER\n%s", string(xer))
 }
 
 func Test_xerDecodeMeasurementInfoList(t *testing.T) {
 
-	mii := createMeasurementInfoList()
+	mii, err := createMeasurementInfoList()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 1147, len(xer))
 	t.Logf("MeasurementInfoList XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementInfoList(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementInfoList XER - decoded\n%s", result)
 }
 
 func Test_perEncodeMeasurementInfoList(t *testing.T) {
 
-	mii := createMeasurementInfoList()
+	mii, err := createMeasurementInfoList()
+	assert.NilError(t, err)
 
 	per, err := perEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 41, len(per))
 	t.Logf("MeasurementInfoList PER\n%s", string(per))
 }
 
 func Test_perDecodeMeasurementInfoList(t *testing.T) {
 
-	mii := createMeasurementInfoList()
+	mii, err := createMeasurementInfoList()
+	assert.NilError(t, err)
 
 	per, err := perEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 41, len(per))
 	t.Logf("MeasurementInfoList PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementInfoList(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementInfoList PER - decoded\n%s", result)
 }

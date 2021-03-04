@@ -19,7 +19,7 @@ func createEutracgi() *e2sm_kpm_v2.Eutracgi {
 		EUtracellIdentity: &e2sm_kpm_v2.EutracellIdentity{
 			Value: &e2sm_kpm_v2.BitString{
 				Value: 0x9bcd4,
-				Len:   22,
+				Len:   28,
 			},
 		},
 	}
@@ -31,7 +31,7 @@ func Test_xerEncodeEutracgi(t *testing.T) {
 
 	xer, err := xerEncodeEutracgi(eutracgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 147, len(xer))
+	assert.Equal(t, 153, len(xer))
 	t.Logf("EUTRACGI XER\n%s", string(xer))
 }
 
@@ -41,7 +41,7 @@ func Test_xerDecodeEutracgi(t *testing.T) {
 
 	xer, err := xerEncodeEutracgi(eutracgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 147, len(xer))
+	assert.Equal(t, 153, len(xer))
 	t.Logf("EUTRACGI XER\n%s", string(xer))
 
 	result, err := xerDecodeEutracgi(xer)
@@ -56,7 +56,7 @@ func Test_perEncodeEutracgi(t *testing.T) {
 
 	per, err := perEncodeEutracgi(eutracgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 8, len(per))
 	t.Logf("EUTRACGI PER\n%s", string(per))
 }
 
@@ -66,7 +66,7 @@ func Test_perDecodeEutracgi(t *testing.T) {
 
 	per, err := perEncodeEutracgi(eutracgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 8, len(per))
 	t.Logf("EUTRACGI PER\n%s", string(per))
 
 	result, err := perDecodeEutracgi(per)

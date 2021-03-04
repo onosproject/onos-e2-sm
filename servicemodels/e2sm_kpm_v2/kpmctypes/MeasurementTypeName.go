@@ -89,8 +89,11 @@ func decodeMeasurementTypeName(measurementTypeNameC *C.MeasurementTypeName_t) (*
 	return measurementTypeName, nil
 }
 
-func decodeMeasurementTypeNameBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementTypeName, error) {
-	measurementTypeNameC := (*C.MeasurementTypeName_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+func decodeMeasurementTypeNameBytes(array [16]byte) (*e2sm_kpm_v2.MeasurementTypeName, error) {
+	measurementTypeNameC := C.MeasurementTypeName_t{
+		buf:  (*C.uchar)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8])))),
+		size: C.ulong(binary.LittleEndian.Uint64(array[8:16])),
+	}
 
-	return decodeMeasurementTypeName(measurementTypeNameC)
+	return decodeMeasurementTypeName(&measurementTypeNameC)
 }

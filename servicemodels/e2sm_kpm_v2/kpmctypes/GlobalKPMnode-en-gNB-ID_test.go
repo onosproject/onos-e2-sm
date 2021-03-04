@@ -6,46 +6,41 @@ package kpmv2ctypes
 
 import (
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"gotest.tools/assert"
 	"testing"
 )
 
 func Test_xerEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
-		Len: 22,
-	}
+	var bsValue uint64 = 0x9bcde4
+	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32
 	var gnbCuUpID int64 = 42
 
-	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bs, plmnID,gnbCuUpID, gnbDuID)
+	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bsValue, bsLen, plmnID,gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalKpmnodeEnGnbID(enbID.GetEnGNb())
 	assert.NilError(t, err)
-	assert.Equal(t, 325, len(xer))
+	assert.Equal(t, 335, len(xer))
 	t.Logf("GlobalKpmnodeEnGnbID XER\n%s", string(xer))
 }
 
 func Test_xerDecodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
-		Len: 22,
-	}
+	var bsValue uint64 = 0x9bcde4
+	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32
 	var gnbCuUpID int64 = 42
 
-	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bs, plmnID,gnbCuUpID, gnbDuID)
+	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bsValue, bsLen, plmnID,gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalKpmnodeEnGnbID(enbID.GetEnGNb())
 	assert.NilError(t, err)
-	assert.Equal(t, 325, len(xer))
+	assert.Equal(t, 335, len(xer))
 	t.Logf("GlobalKpmnodeEnGnbID XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalKpmnodeEnGnbID(xer)
@@ -56,39 +51,35 @@ func Test_xerDecodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
 func Test_perEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
-		Len: 22,
-	}
+	var bsValue uint64 = 0x9bcde4
+	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32
 	var gnbCuUpID int64 = 42
 
-	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bs, plmnID,gnbCuUpID, gnbDuID)
+	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bsValue, bsLen, plmnID,gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalKpmnodeEnGnbID(enbID.GetEnGNb())
 	assert.NilError(t, err)
-	assert.Equal(t, 12, len(per))
+	assert.Equal(t, 13, len(per))
 	t.Logf("GlobalKpmnodeEnGnbID PER\n%s", string(per))
 }
 
 func Test_perDecodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
-		Len: 22,
-	}
+	var bsValue uint64 = 0x9bcde4
+	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32
 	var gnbCuUpID int64 = 42
 
-	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bs, plmnID,gnbCuUpID, gnbDuID)
+	enbID, err := pdubuilder.CreateGlobalKpmnodeID_enGNbID(bsValue, bsLen, plmnID,gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalKpmnodeEnGnbID(enbID.GetEnGNb())
 	assert.NilError(t, err)
-	assert.Equal(t, 12, len(per))
+	assert.Equal(t, 13, len(per))
 	t.Logf("GlobalKpmnodeEnGnbID PER\n%s", string(per))
 
 	result, err := perDecodeGlobalKpmnodeEnGnbID(per)

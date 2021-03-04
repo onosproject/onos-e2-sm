@@ -86,14 +86,14 @@ message MeasurementLabel {
   Qci q_cimin = 6 [json_name="MeasurementLabel:qCImin"];
   Arp a_rpmax = 7 [json_name="MeasurementLabel:aRPmax"];
   Arp a_rpmin = 8 [json_name="MeasurementLabel:aRPmin"];
-  int32 bitrate_range = 9 [json_name="MeasurementLabel:bitrateRange"];
-  int32 layer_mu_mimo = 10 [json_name="MeasurementLabel:layerMU_MIMO"];
-  int32 s_um = 11 [json_name="MeasurementLabel:sUM"];
-  int32 dist_bin_x = 12 [json_name="MeasurementLabel:distBinX"];
-  int32 dist_bin_y = 13 [json_name="MeasurementLabel:distBinY"];
-  int32 dist_bin_z = 14 [json_name="MeasurementLabel:distBinZ"];
-  int32 pre_label_override = 15 [json_name="MeasurementLabel:preLabelOverride"];
-  int32 start_end_ind = 16 [json_name="MeasurementLabel:startEndInd"];
+  int32 bitrate_range = 9 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:bitrateRange"];
+  int32 layer_mu_mimo = 10 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:layerMU_MIMO"];
+  int32 s_um = 11 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementLabel:sUM"];
+  int32 dist_bin_x = 12 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinX"];
+  int32 dist_bin_y = 13 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinY"];
+  int32 dist_bin_z = 14 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinZ"];
+  int32 pre_label_override = 15 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementLabel:preLabelOverride"];
+  int32 start_end_ind = 16 [(validate.v1.rules).int32 = {gte: 0, lte: 1}, json_name="MeasurementLabel:startEndInd"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:91

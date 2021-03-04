@@ -15,7 +15,7 @@ func Test_xerEncodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 28,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 
@@ -24,7 +24,7 @@ func Test_xerEncodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeEnbID(enbID.GetENb())
 	assert.NilError(t, err)
-	assert.Equal(t, 263, len(xer))
+	assert.Equal(t, 269, len(xer))
 	t.Logf("GlobalKpmnodeEnbID XER\n%s", string(xer))
 }
 
@@ -32,7 +32,7 @@ func Test_xerDecodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 28,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 
@@ -41,7 +41,7 @@ func Test_xerDecodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeEnbID(enbID.GetENb())
 	assert.NilError(t, err)
-	assert.Equal(t, 263, len(xer))
+	assert.Equal(t, 269, len(xer))
 	t.Logf("GlobalKpmnodeEnbID XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalKpmnodeEnbID(xer)
@@ -54,7 +54,7 @@ func Test_perEncodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 28,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 
@@ -63,7 +63,7 @@ func Test_perEncodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	per, err := perEncodeGlobalKpmnodeEnbID(enbID.GetENb())
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("GlobalKpmnodeEnbID PER\n%s", string(per))
 }
 
@@ -71,7 +71,7 @@ func Test_perDecodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 28,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 
@@ -80,7 +80,7 @@ func Test_perDecodeGlobalKpmnodeEnbID(t *testing.T) {
 
 	per, err := perEncodeGlobalKpmnodeEnbID(enbID.GetENb())
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("GlobalKpmnodeEnbID PER\n%s", string(per))
 
 	result, err := perDecodeGlobalKpmnodeEnbID(per)

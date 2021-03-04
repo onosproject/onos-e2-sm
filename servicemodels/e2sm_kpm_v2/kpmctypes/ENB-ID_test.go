@@ -16,7 +16,7 @@ func createEnbIDMacro() *e2sm_kpm_v2.EnbId {
 		EnbId: &e2sm_kpm_v2.EnbId_MacroENbId{
 			MacroENbId: &e2sm_kpm_v2.BitString{
 				Value: 0x9bcd4,
-				Len:   22,
+				Len:   20,
 			},
 		},
 	}
@@ -28,7 +28,7 @@ func createEnbIDHome() *e2sm_kpm_v2.EnbId {
 		EnbId: &e2sm_kpm_v2.EnbId_HomeENbId{
 			HomeENbId: &e2sm_kpm_v2.BitString{
 				Value: 0x9bcd4,
-				Len:   22,
+				Len:   28,
 			},
 		},
 	}
@@ -40,14 +40,14 @@ func Test_xerEncodeEnbID(t *testing.T) {
 
 	xer, err := xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 89, len(xer))
+	assert.Equal(t, 87, len(xer))
 	t.Logf("EnbID (Macro) XER\n%s", string(xer))
 
 	enbID = createEnbIDHome()
 
 	xer, err = xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 87, len(xer))
+	assert.Equal(t, 93, len(xer))
 	t.Logf("EnbID (Home) XER\n%s", string(xer))
 }
 
@@ -57,7 +57,7 @@ func Test_xerDecodeEnbID(t *testing.T) {
 
 	xer, err := xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 89, len(xer))
+	assert.Equal(t, 87, len(xer))
 	t.Logf("EnbID (Macro) XER\n%s", string(xer))
 
 	result, err := xerDecodeEnbID(xer)
@@ -69,7 +69,7 @@ func Test_xerDecodeEnbID(t *testing.T) {
 
 	xer, err = xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 87, len(xer))
+	assert.Equal(t, 93, len(xer))
 	t.Logf("EnbID (Home) XER\n%s", string(xer))
 
 	result, err = xerDecodeEnbID(xer)
@@ -91,7 +91,7 @@ func Test_perEncodeEnbID(t *testing.T) {
 
 	per, err = perEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("EnbID (Home) PER\n%s", string(per))
 }
 
@@ -113,7 +113,7 @@ func Test_perDecodeEnbID(t *testing.T) {
 
 	per, err = perEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("EnbID (Home) PER\n%s", string(per))
 
 	result, err = perDecodeEnbID(per)

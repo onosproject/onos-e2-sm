@@ -15,7 +15,7 @@ func createEutracellIdentity() *e2sm_kpm_v2.EutracellIdentity {
 	return &e2sm_kpm_v2.EutracellIdentity{
 		Value: &e2sm_kpm_v2.BitString{
 			Value: 0x9bcd4,
-			Len:   22,
+			Len:   28,
 		},
 	}
 }
@@ -26,7 +26,7 @@ func Test_xerEncodeEutracellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeEutracellIdentity(eci)
 	assert.NilError(t, err)
-	assert.Equal(t, 68, len(xer))
+	assert.Equal(t, 74, len(xer))
 	t.Logf("EUTRACellIdentity XER\n%s", string(xer))
 }
 
@@ -36,7 +36,7 @@ func Test_xerDecodeEutracellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeEutracellIdentity(eci)
 	assert.NilError(t, err)
-	assert.Equal(t, 68, len(xer))
+	assert.Equal(t, 74, len(xer))
 	t.Logf("EUTRACellIdentity XER\n%s", string(xer))
 
 	result, err := xerDecodeEutracellIdentity(xer)

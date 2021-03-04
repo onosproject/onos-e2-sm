@@ -45,11 +45,11 @@ func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList{
 			},
 			BitrateRange:     25,
 			LayerMuMimo:      1,
-			SUm:              11,
+			SUm:              0,
 			DistBinX:         123,
 			DistBinY:         456,
 			DistBinZ:         789,
-			PreLabelOverride: 2,
+			PreLabelOverride: 0,
 			StartEndInd:      1,
 		},
 	}
@@ -64,7 +64,7 @@ func Test_xerEncodeLabelInfoLabel(t *testing.T) {
 
 	xer, err := xerEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 778, len(xer))
 	t.Logf("LabelInfoList XER\n%s", string(xer))
 }
 
@@ -74,12 +74,13 @@ func Test_xerDecodeLabelInfoList(t *testing.T) {
 
 	xer, err := xerEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 778, len(xer))
 	t.Logf("LabelInfoList XER\n%s", string(xer))
 
 	result, err := xerDecodeLabelInfoList(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("LabelInfoList XER - decoded\n%s", result)
 }
 
 func Test_perEncodeLabelInfoList(t *testing.T) {
@@ -88,7 +89,7 @@ func Test_perEncodeLabelInfoList(t *testing.T) {
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 39, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 }
 
@@ -98,10 +99,11 @@ func Test_perDecodeLabelInfoList(t *testing.T) {
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 39, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 
 	result, err := perDecodeLabelInfoList(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("LabelInfoList PER - decoded\n%v", result)
 }

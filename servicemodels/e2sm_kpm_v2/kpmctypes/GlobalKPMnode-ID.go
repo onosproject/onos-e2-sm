@@ -69,12 +69,12 @@ func perDecodeGlobalKpmnodeID(bytes []byte) (*e2sm_kpm_v2.GlobalKpmnodeId, error
 
 func newGlobalKpmnodeID(globalKpmnodeID *e2sm_kpm_v2.GlobalKpmnodeId) (*C.GlobalKPMnode_ID_t, error) {
 
-	var pr C.GlobalKPMnode_ID_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}         //ToDo - Check if number of bytes is sufficient
+	var pr C.GlobalKPMnode_ID_PR
+	choiceC := [8]byte{}
 
 	switch choice := globalKpmnodeID.GlobalKpmnodeId.(type) {
 	case *e2sm_kpm_v2.GlobalKpmnodeId_GNb:
-		pr = C.GlobalKPMnode_ID_PR_gNB //ToDo - Check if it's correctness of the PR's name
+		pr = C.GlobalKPMnode_ID_PR_gNB
 
 		im, err := newGlobalKpmnodeGnbID(choice.GNb)
 		if err != nil {
@@ -82,7 +82,7 @@ func newGlobalKpmnodeID(globalKpmnodeID *e2sm_kpm_v2.GlobalKpmnodeId) (*C.Global
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.GlobalKpmnodeId_EnGNb:
-		pr = C.GlobalKPMnode_ID_PR_en_gNB //ToDo - Check if it's correctness of the PR's name
+		pr = C.GlobalKPMnode_ID_PR_en_gNB
 
 		im, err := newGlobalKpmnodeEnGnbID(choice.EnGNb)
 		if err != nil {
@@ -90,7 +90,7 @@ func newGlobalKpmnodeID(globalKpmnodeID *e2sm_kpm_v2.GlobalKpmnodeId) (*C.Global
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.GlobalKpmnodeId_NgENb:
-		pr = C.GlobalKPMnode_ID_PR_ng_eNB //ToDo - Check if it's correctness of the PR's name
+		pr = C.GlobalKPMnode_ID_PR_ng_eNB
 
 		im, err := newGlobalKpmnodeNgEnbID(choice.NgENb)
 		if err != nil {
@@ -98,7 +98,7 @@ func newGlobalKpmnodeID(globalKpmnodeID *e2sm_kpm_v2.GlobalKpmnodeId) (*C.Global
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.GlobalKpmnodeId_ENb:
-		pr = C.GlobalKPMnode_ID_PR_eNB //ToDo - Check if it's correctness of the PR's name
+		pr = C.GlobalKPMnode_ID_PR_eNB
 
 		im, err := newGlobalKpmnodeEnbID(choice.ENb)
 		if err != nil {
@@ -124,7 +124,7 @@ func decodeGlobalKpmnodeID(globalKpmnodeIDC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_v2
 
 	switch globalKpmnodeIDC.present {
 	case C.GlobalKPMnode_ID_PR_gNB:
-		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeGnbIDBytes(globalKpmnodeIDC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeGnbIDBytes(globalKpmnodeIDC.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeGlobalKpmnodeGnbIDBytes() %s", err.Error())
 		}
@@ -132,7 +132,7 @@ func decodeGlobalKpmnodeID(globalKpmnodeIDC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_v2
 			GNb: globalKpmnodeIDstructC,
 		}
 	case C.GlobalKPMnode_ID_PR_en_gNB:
-		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeEnGnbIDBytes(globalKpmnodeIDC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeEnGnbIDBytes(globalKpmnodeIDC.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeGlobalKpmnodeEnGnbIDBytes() %s", err.Error())
 		}
@@ -140,7 +140,7 @@ func decodeGlobalKpmnodeID(globalKpmnodeIDC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_v2
 			EnGNb: globalKpmnodeIDstructC,
 		}
 	case C.GlobalKPMnode_ID_PR_ng_eNB:
-		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeNgEnbIDBytes(globalKpmnodeIDC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeNgEnbIDBytes(globalKpmnodeIDC.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeGlobalKpmnodeNgEnbIDBytes() %s", err.Error())
 		}
@@ -148,7 +148,7 @@ func decodeGlobalKpmnodeID(globalKpmnodeIDC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_v2
 			NgENb: globalKpmnodeIDstructC,
 		}
 	case C.GlobalKPMnode_ID_PR_eNB:
-		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeEnbIDBytes(globalKpmnodeIDC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		globalKpmnodeIDstructC, err := decodeGlobalKpmnodeEnbIDBytes(globalKpmnodeIDC.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeGlobalKpmnodeEnbIDBytes() %s", err.Error())
 		}

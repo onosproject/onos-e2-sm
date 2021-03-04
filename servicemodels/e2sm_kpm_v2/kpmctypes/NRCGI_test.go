@@ -18,7 +18,7 @@ func createNrcgi() *e2sm_kpm_v2.Nrcgi {
 		NRcellIdentity: &e2sm_kpm_v2.NrcellIdentity{
 			Value: &e2sm_kpm_v2.BitString{
 				Value: 0x9bcd4,
-				Len:   22,
+				Len:   36,
 			},
 		},
 	}
@@ -30,7 +30,7 @@ func Test_xerEncodeNrcgi(t *testing.T) {
 
 	xer, err := xerEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 135, len(xer))
+	assert.Equal(t, 149, len(xer))
 	t.Logf("NRCGI XER\n%s", string(xer))
 }
 
@@ -40,7 +40,7 @@ func Test_xerDecodeNrcgi(t *testing.T) {
 
 	xer, err := xerEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 135, len(xer))
+	assert.Equal(t, 149, len(xer))
 	t.Logf("NRCGI XER\n%s", string(xer))
 
 	result, err := xerDecodeNrcgi(xer)
@@ -55,7 +55,7 @@ func Test_perEncodeNrcgi(t *testing.T) {
 
 	per, err := perEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("NRCGI PER\n%s", string(per))
 }
 
@@ -65,7 +65,7 @@ func Test_perDecodeNrcgi(t *testing.T) {
 
 	per, err := perEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("NRCGI PER\n%s", string(per))
 
 	result, err := perDecodeNrcgi(per)

@@ -14,7 +14,7 @@ func createNrcellIdentity() *e2sm_kpm_v2.NrcellIdentity {
 	return &e2sm_kpm_v2.NrcellIdentity{
 		Value: &e2sm_kpm_v2.BitString{
 			Value: 0x9bcd4,
-			Len:   22,
+			Len:   36,
 		},
 	}
 }
@@ -25,7 +25,7 @@ func Test_xerEncodeNrcellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeNrcellIdentity(nrcID)
 	assert.NilError(t, err)
-	assert.Equal(t, 62, len(xer))
+	assert.Equal(t, 76, len(xer))
 	t.Logf("NRCellIdentity XER\n%s", string(xer))
 }
 
@@ -35,7 +35,7 @@ func Test_xerDecodeNrcellIdentity(t *testing.T) {
 
 	xer, err := xerEncodeNrcellIdentity(nrcID)
 	assert.NilError(t, err)
-	assert.Equal(t, 62, len(xer))
+	assert.Equal(t, 76, len(xer))
 	t.Logf("NRCellIdentity XER\n%s", string(xer))
 
 	result, err := xerDecodeNrcellIdentity(xer)
@@ -50,7 +50,7 @@ func Test_perEncodeNrcellidentity(t *testing.T) {
 
 	per, err := perEncodeNrcellIdentity(nrcID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("NRCellIdentity PER\n%s", string(per))
 }
 
@@ -60,7 +60,7 @@ func Test_perDecodeNrcellIdentity(t *testing.T) {
 
 	per, err := perEncodeNrcellIdentity(nrcID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("NRCellIdentity PER\n%s", string(per))
 
 	result, err := perDecodeNrcellIdentity(per)

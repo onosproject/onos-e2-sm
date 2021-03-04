@@ -66,7 +66,7 @@ func CreateGlobalKpmnodeID_gNBID(bs e2sm_kpm_v2.BitString, plmnID []byte, gnbCuU
 	}, nil
 }
 
-func CreateGlobalKpmnodeID_enGNbID(bs e2sm_kpm_v2.BitString, plmnID []byte, gnbCuUpID int64,
+func CreateGlobalKpmnodeID_enGNbID(bsValue uint64, bsLen uint32, plmnID []byte, gnbCuUpID int64,
 	gnbDuID int64) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
@@ -79,7 +79,10 @@ func CreateGlobalKpmnodeID_enGNbID(bs e2sm_kpm_v2.BitString, plmnID []byte, gnbC
 				GlobalGNbId: &e2sm_kpm_v2.GlobalenGnbId{
 					GNbId: &e2sm_kpm_v2.EngnbId{
 						EngnbId: &e2sm_kpm_v2.EngnbId_GNbId{
-							GNbId: &bs,
+							GNbId: &e2sm_kpm_v2.BitString{
+								Value: bsValue,
+								Len:   bsLen, // should be 22 to 32
+							},
 						},
 					},
 					PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{

@@ -18,7 +18,7 @@ func createCellGlobalID() *e2sm_kpm_v2.CellGlobalId {
 				EUtracellIdentity: &e2sm_kpm_v2.EutracellIdentity{
 					Value: &e2sm_kpm_v2.BitString{
 						Value: 0x9bcd4,
-						Len:   22,
+						Len:   28,
 					},
 				},
 				PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{
@@ -35,7 +35,7 @@ func Test_xerEncodeCellGlobalID(t *testing.T) {
 
 	xer, err := xerEncodeCellGlobalID(cellGlobalID)
 	assert.NilError(t, err)
-	assert.Equal(t, 204, len(xer))
+	assert.Equal(t, 210, len(xer))
 	t.Logf("CellGlobalID XER\n%s", string(xer))
 }
 
@@ -45,7 +45,7 @@ func Test_xerDecodeCellGlobalID(t *testing.T) {
 
 	xer, err := xerEncodeCellGlobalID(cellGlobalID)
 	assert.NilError(t, err)
-	assert.Equal(t, 204, len(xer))
+	assert.Equal(t, 210, len(xer))
 	t.Logf("CellGlobalID XER\n%s", string(xer))
 
 	result, err := xerDecodeCellGlobalID(xer)
@@ -60,7 +60,7 @@ func Test_perEncodeCellGlobalID(t *testing.T) {
 
 	per, err := perEncodeCellGlobalID(cellGlobalID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 8, len(per))
 	t.Logf("CellGlobalID PER\n%s", string(per))
 }
 
@@ -70,11 +70,11 @@ func Test_perDecodeCellGlobalID(t *testing.T) {
 
 	per, err := perEncodeCellGlobalID(cellGlobalID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 8, len(per))
 	t.Logf("CellGlobalID PER\n%s", string(per))
 
 	result, err := perDecodeCellGlobalID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("CellGlobalID PER - decoded\n%s", result)
+	t.Logf("CellGlobalID PER - decoded\n%v", result)
 }

@@ -15,16 +15,16 @@ func Test_xerEncodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 21,
 	}
 	var gnbDuID int64 = 42
 
@@ -33,7 +33,7 @@ func Test_xerEncodeGlobalngeNbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
 	assert.NilError(t, err)
-	assert.Equal(t, 338, len(xer))
+	assert.Equal(t, 331, len(xer))
 	t.Logf("GlobalngeNbID XER\n%s", string(xer))
 }
 
@@ -41,16 +41,16 @@ func Test_xerDecodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 21,
 	}
 	var gnbDuID int64 = 42
 
@@ -59,7 +59,7 @@ func Test_xerDecodeGlobalngeNbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
 	assert.NilError(t, err)
-	assert.Equal(t, 338, len(xer))
+	assert.Equal(t, 331, len(xer))
 	t.Logf("GlobalngeNbID XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalngeNbID(xer)
@@ -72,16 +72,16 @@ func Test_perEncodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 21,
 	}
 	var gnbDuID int64 = 42
 
@@ -90,7 +90,7 @@ func Test_perEncodeGlobalngeNbID(t *testing.T) {
 
 	per, err := perEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 14, len(per))
 	t.Logf("GlobalngeNbID PER\n%s", string(per))
 }
 
@@ -98,16 +98,16 @@ func Test_perDecodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len: 21,
 	}
 	var gnbDuID int64 = 42
 
@@ -116,7 +116,7 @@ func Test_perDecodeGlobalngeNbID(t *testing.T) {
 
 	per, err := perEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 14, len(per))
 	t.Logf("GlobalngeNbID PER\n%s", string(per))
 
 	result, err := perDecodeGlobalngeNbID(per)

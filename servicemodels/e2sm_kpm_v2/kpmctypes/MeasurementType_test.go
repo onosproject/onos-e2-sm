@@ -36,14 +36,14 @@ func Test_xerEncodeMeasurementType(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementType(mt1)
 	assert.NilError(t, err)
-	assert.Equal(t, 63, len(xer))
+	assert.Equal(t, 66, len(xer))
 	t.Logf("MeasurementType (Name) XER\n%s", string(xer))
 
 	mt2 := createMeasurementType2()
 
 	xer, err = xerEncodeMeasurementType(mt2)
 	assert.NilError(t, err)
-	assert.Equal(t, 60, len(xer))
+	assert.Equal(t, 62, len(xer))
 	t.Logf("MeasurementType (ID) XER\n%s", string(xer))
 }
 
@@ -53,7 +53,7 @@ func Test_xerDecodeMeasurementType(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementType(mt1)
 	assert.NilError(t, err)
-	assert.Equal(t, 63, len(xer))
+	assert.Equal(t, 66, len(xer))
 	t.Logf("MeasurementType (Name) XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementType(xer)
@@ -65,7 +65,7 @@ func Test_xerDecodeMeasurementType(t *testing.T) {
 
 	xer, err = xerEncodeMeasurementType(mt2)
 	assert.NilError(t, err)
-	assert.Equal(t, 60, len(xer))
+	assert.Equal(t, 62, len(xer))
 	t.Logf("MeasurementType (ID) XER\n%s", string(xer))
 
 	result, err = xerDecodeMeasurementType(xer)
@@ -80,7 +80,7 @@ func Test_perEncodeMeasurementType(t *testing.T) {
 
 	per, err := perEncodeMeasurementType(mt1)
 	assert.NilError(t, err)
-	assert.Equal(t, 2, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("MeasurementType (Name)  PER\n%s", string(per))
 
 	mt2 := createMeasurementType2()
@@ -97,7 +97,7 @@ func Test_perDecodeMeasurementType(t *testing.T) {
 
 	per, err := perEncodeMeasurementType(mt1)
 	assert.NilError(t, err)
-	assert.Equal(t, 2, len(per))
+	assert.Equal(t, 5, len(per))
 	t.Logf("MeasurementType (Name) PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementType(per)

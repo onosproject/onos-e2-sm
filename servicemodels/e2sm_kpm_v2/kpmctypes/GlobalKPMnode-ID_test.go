@@ -20,7 +20,7 @@ func createGlobalKpmnodeID1() *e2sm_kpm_v2.GlobalKpmnodeId {
 						GnbIdChoice: &e2sm_kpm_v2.GnbIdChoice_GnbId{
 							GnbId: &e2sm_kpm_v2.BitString{
 								Value: 0x9bcd4,
-								Len:   22,
+								Len:   28,
 							},
 						},
 					},
@@ -49,7 +49,7 @@ func createGlobalKpmnodeID2() *e2sm_kpm_v2.GlobalKpmnodeId {
 						EngnbId: &e2sm_kpm_v2.EngnbId_GNbId{
 							GNbId: &e2sm_kpm_v2.BitString{
 								Value: 0x9bcd4,
-								Len:   22,
+								Len:   28,
 							},
 						},
 					},
@@ -78,7 +78,7 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2.GlobalKpmnodeId {
 						EnbIdChoice: &e2sm_kpm_v2.EnbIdChoice_EnbIdMacro{
 							EnbIdMacro: &e2sm_kpm_v2.BitString{
 								Value: 0x9bcd4,
-								Len:   22,
+								Len:   20,
 							},
 						},
 					},
@@ -87,11 +87,11 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2.GlobalKpmnodeId {
 					},
 					ShortMacroENbId: &e2sm_kpm_v2.BitString{
 						Value: 0x9bcd4,
-						Len: 22,
+						Len: 18,
 					},
 					LongMacroENbId: &e2sm_kpm_v2.BitString{
 						Value: 0x9bcd4,
-						Len: 22,
+						Len: 21,
 					},
 				},
 				GNbDuId: &e2sm_kpm_v2.GnbDuId{
@@ -112,7 +112,7 @@ func createGlobalKpmnodeID4() *e2sm_kpm_v2.GlobalKpmnodeId {
 						EnbId: &e2sm_kpm_v2.EnbId_HomeENbId{
 							HomeENbId: &e2sm_kpm_v2.BitString{
 								Value: 0x9bcd4,
-								Len:   22,
+								Len:   28,
 							},
 						},
 					},
@@ -131,28 +131,28 @@ func Test_xerEncodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 360, len(xer))
+	assert.Equal(t, 366, len(xer))
 	t.Logf("GlobalKpmnodeID (GNb) XER\n%s", string(xer))
 
 	globalKpmnodeID = createGlobalKpmnodeID2()
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 378, len(xer))
+	assert.Equal(t, 384, len(xer))
 	t.Logf("GlobalKpmnodeID (enGNb) XER\n%s", string(xer))
 
 	globalKpmnodeID = createGlobalKpmnodeID3()
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 554, len(xer))
+	assert.Equal(t, 547, len(xer))
 	t.Logf("GlobalKpmnodeID (ngENb) XER\n%s", string(xer))
 
 	globalKpmnodeID = createGlobalKpmnodeID4()
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 308, len(xer))
+	assert.Equal(t, 314, len(xer))
 	t.Logf("GlobalKpmnodeID (ENb) XER\n%s", string(xer))
 }
 
@@ -162,7 +162,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 360, len(xer))
+	assert.Equal(t, 366, len(xer))
 	t.Logf("GlobalKpmnodeID (GNb) XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalKpmnodeID(xer)
@@ -174,7 +174,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 378, len(xer))
+	assert.Equal(t, 384, len(xer))
 	t.Logf("GlobalKpmnodeID (enGNb) XER\n%s", string(xer))
 
 	result, err = xerDecodeGlobalKpmnodeID(xer)
@@ -186,7 +186,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 554, len(xer))
+	assert.Equal(t, 547, len(xer))
 	t.Logf("GlobalKpmnodeID (ngENb) XER\n%s", string(xer))
 
 	result, err = xerDecodeGlobalKpmnodeID(xer)
@@ -198,7 +198,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 308, len(xer))
+	assert.Equal(t, 314, len(xer))
 	t.Logf("GlobalKpmnodeID (ENb) XER\n%s", string(xer))
 
 	result, err = xerDecodeGlobalKpmnodeID(xer)
@@ -213,28 +213,28 @@ func Test_perEncodeGlobalKpmnodeID(t *testing.T) {
 
 	per, err := perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 12, len(per))
 	t.Logf("GlobalKpmnodeID (GNb) PER\n%s", string(per))
 
 	globalKpmnodeID = createGlobalKpmnodeID2()
 
 	per, err = perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 12, len(per))
 	t.Logf("GlobalKpmnodeID (ngENb) PER\n%s", string(per))
 
 	globalKpmnodeID = createGlobalKpmnodeID3()
 
 	per, err = perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 15, len(per))
 	t.Logf("GlobalKpmnodeID (ngENb) PER\n%s", string(per))
 
 	globalKpmnodeID = createGlobalKpmnodeID4()
 
 	per, err = perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("GlobalKpmnodeID (ENb) PER\n%s", string(per))
 }
 
@@ -244,47 +244,47 @@ func Test_perDecodeGlobalKpmnodeID(t *testing.T) {
 
 	per, err := perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 12, len(per))
 	t.Logf("GlobalKpmnodeID (GNb) PER\n%s", string(per))
 
 	result, err := perDecodeGlobalKpmnodeID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("GlobalKpmnodeID (GNb) PER - decoded\n%s", result)
+	t.Logf("GlobalKpmnodeID (GNb) PER - decoded\n%v", result)
 
 	globalKpmnodeID = createGlobalKpmnodeID2()
 
 	per, err = perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 12, len(per))
 	t.Logf("GlobalKpmnodeID (enGNb) PER\n%s", string(per))
 
 	result, err = perDecodeGlobalKpmnodeID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("GlobalKpmnodeID (enGNb) PER - decoded\n%s", result)
+	t.Logf("GlobalKpmnodeID (enGNb) PER - decoded\n%v", result)
 
 	globalKpmnodeID = createGlobalKpmnodeID3()
 
 	per, err = perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 15, len(per))
 	t.Logf("GlobalKpmnodeID (ngENb) PER\n%s", string(per))
 
 	result, err = perDecodeGlobalKpmnodeID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("GlobalKpmnodeID (ngENb) PER - decoded\n%s", result)
+	t.Logf("GlobalKpmnodeID (ngENb) PER - decoded\n%v", result)
 
 	globalKpmnodeID = createGlobalKpmnodeID4()
 
 	per, err = perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("GlobalKpmnodeID (ENb) PER\n%s", string(per))
 
 	result, err = perDecodeGlobalKpmnodeID(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("GlobalKpmnodeID (ENb) PER - decoded\n%s", result)
+	t.Logf("GlobalKpmnodeID (ENb) PER - decoded\n%v", result)
 }
