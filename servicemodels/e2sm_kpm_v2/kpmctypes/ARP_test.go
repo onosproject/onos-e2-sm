@@ -42,9 +42,9 @@ func Test_perEncodeArp(t *testing.T) {
 	arp := &e2sm_kpm_v2.Arp{
 		Value: 15,
 	}
-	per, err := xerEncodeArp(arp)
+	per, err := perEncodeArp(arp)
 	assert.NilError(t, err)
-	assert.Equal(t, 14, len(per))
+	assert.Equal(t, 1, len(per))
 	t.Logf("ARP PER\n%s", string(per))
 }
 
@@ -53,9 +53,9 @@ func Test_perDecodeArp(t *testing.T) {
 	arp := &e2sm_kpm_v2.Arp{
 		Value: 15,
 	}
-	per, err := xerEncodeArp(arp)
+	per, err := perEncodeArp(arp)
 	assert.NilError(t, err)
-	assert.Equal(t, 14, len(per))
+	assert.Equal(t, 1, len(per))
 	t.Logf("ARP PER\n%s", string(per))
 
 	result, err := perDecodeArp(per)
