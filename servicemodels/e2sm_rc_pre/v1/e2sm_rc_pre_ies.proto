@@ -240,38 +240,39 @@ message E2SmRcPreControlHeader {
 
 // sequence from e2sm-rc-pre-v1.asn1:208
 message E2SmRcPreControlHeaderFormat1 {
-    RcPreCommand rc_command = 1 [json_name="E2SM-RC-PRE-ControlHeader-Format1:rc-command"];
-    RicControlMessagePriority ric_control_message_priority = 2 [json_name="E2SM-RC-PRE-ControlHeader-Format1:ric-Control-Message-Priority"];
+    CellGlobalId cgi = 1 [json_name="E2SM-RC-PRE-ControlHeader-Format1:cgi"];;
+    RcPreCommand rc_command = 2 [json_name="E2SM-RC-PRE-ControlHeader-Format1:rc-command"];
+    RicControlMessagePriority ric_control_message_priority = 3 [json_name="E2SM-RC-PRE-ControlHeader-Format1:ric-Control-Message-Priority"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:222
+// sequence from e2sm-rc-pre-v1.asn1:223
 message E2SmRcPreControlMessage {
-    // choice from e2sm-rc-pre-v1.asn1:222
+    // choice from e2sm-rc-pre-v1.asn1:223
     oneof e2_sm_rc_pre_control_message {
         E2SmRcPreControlMessageFormat1 control_message = 1 [json_name="E2SM-RC-PRE-ControlMessage:controlMessage"];
     }
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:228
+// sequence from e2sm-rc-pre-v1.asn1:229
 message E2SmRcPreControlMessageFormat1 {
     RanparameterDefItem parameter_type = 1 [json_name="E2SM-RC-PRE-ControlMessage-Format1:parameterType"];
     RanparameterValue parameter_val = 2 [json_name="E2SM-RC-PRE-ControlMessage-Format1:parameterVal"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:239
+// sequence from e2sm-rc-pre-v1.asn1:240
 message E2SmRcPreControlOutcome {
-    // choice from e2sm-rc-pre-v1.asn1:239
+    // choice from e2sm-rc-pre-v1.asn1:240
     oneof e2_sm_rc_pre_control_outcome {
         E2SmRcPreControlOutcomeFormat1 control_outcome_format1 = 1 [json_name="E2SM-RC-PRE-ControlOutcome:controlOutcome-Format1"];
     }
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:245
+// sequence from e2sm-rc-pre-v1.asn1:246
 message E2SmRcPreControlOutcomeFormat1 {
     repeated RanparameterItem outcome_element_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="E2SM-RC-PRE-ControlOutcome-Format1:outcomeElement-List"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:253
+// sequence from e2sm-rc-pre-v1.asn1:256
 message E2SmRcPreRanfunctionDescription {
     RanfunctionName ran_function_name = 1 [json_name="E2SM_RC_PRE_RANfunction_Description:ranFunction_Name"];
     E2SmRcPreRanfunctionItem001 e2_sm_rc_pre_ranfunction_item = 2 [json_name="E2SM_RC_PRE_RANfunction_Description:e2SM_RC_PRE_RANfunction_Item"];
@@ -282,7 +283,7 @@ message E2SmRcPreRanfunctionDescription {
     }
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:263
+// sequence from e2sm-rc-pre-v1.asn1:266
 message RanfunctionName {
     string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RANfunction_Name:ranFunction_ShortName"];
     string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}, json_name="RANfunction_Name:ranFunction_E2SM_OID"];
@@ -290,14 +291,14 @@ message RanfunctionName {
     int32 ran_function_instance = 4 [json_name="RANfunction_Name:ranFunction_Instance"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:271
+// sequence from e2sm-rc-pre-v1.asn1:274
 message RicEventTriggerStyleList {
     RicStyleType ric_event_trigger_style_type = 1 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Type"];
     RicStyleName ric_event_trigger_style_name = 2 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Name"];
     RicFormatType ric_event_trigger_format_type = 3 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerFormat_Type"];
 };
 
-// sequence from e2sm-rc-pre-v1.asn1:278
+// sequence from e2sm-rc-pre-v1.asn1:281
 message RicReportStyleList {
     RicStyleType ric_report_style_type = 1 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Type"];
     RicStyleName ric_report_style_name = 2 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Name"];

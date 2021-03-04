@@ -5,7 +5,9 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdubuilder"
+	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
 	"gotest.tools/assert"
 	"io/ioutil"
 	"testing"
@@ -13,9 +15,13 @@ import (
 
 func Test_XerEncodeE2SmRcPreIndicationHeader(t *testing.T) {
 
-	var plmnID = "ONF"
-
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnID)
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	cellID := e2sm_rc_pre_ies.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   28,        //uint32
+	}
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnIDBytes, &cellID)
 	assert.NilError(t, err, "Test_XerEncodeE2SmRcPreIndicationHeader)_ error is not nil")
 	assert.Assert(t, newE2SmRcPrePdu != nil, "Test_XerEncodeE2SmRcPreIndicationHeader() newE2SmRcPrePdu is nil")
 

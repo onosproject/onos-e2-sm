@@ -5,13 +5,15 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
 	"gotest.tools/assert"
 	"testing"
 )
 
 func Test_xerEncodeNRT(t *testing.T) {
-	var plmnID = "ONF"
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
 	cellSize := e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO
 	neighbor := &e2sm_rc_pre_ies.Nrt{
 		NrIndex: 1,
@@ -19,7 +21,7 @@ func Test_xerEncodeNRT(t *testing.T) {
 			CellGlobalId: &e2sm_rc_pre_ies.CellGlobalId_EUtraCgi{
 				EUtraCgi: &e2sm_rc_pre_ies.Eutracgi{
 					PLmnIdentity: &e2sm_rc_pre_ies.PlmnIdentity{
-						Value: []byte(plmnID),
+						Value: plmnIDBytes,
 					},
 					EUtracellIdentity: &e2sm_rc_pre_ies.EutracellIdentity{
 						Value: &e2sm_rc_pre_ies.BitString{

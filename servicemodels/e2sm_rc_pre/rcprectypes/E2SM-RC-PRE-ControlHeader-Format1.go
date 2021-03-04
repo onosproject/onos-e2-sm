@@ -68,6 +68,7 @@ func PerDecodeE2SmRcPreControlHeaderFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2Sm
 }
 
 func newE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1) (*C.E2SM_RC_PRE_ControlHeader_Format1_t, error) {
+	cgi, _ := newCellGlobalID(e2SmRcPreControlHeaderFormat1.Cgi)
 
 	rcCommandC, err := newRcPreCommand(&e2SmRcPreControlHeaderFormat1.RcCommand)
 	if err != nil {
@@ -80,6 +81,7 @@ func newE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre
 	}
 
 	e2SmRcPreControlHeaderFormat1C := C.E2SM_RC_PRE_ControlHeader_Format1_t{
+		cgi:                          cgi,
 		rc_command:                   *rcCommandC,
 		ric_Control_Message_Priority: ricControlMessagePriorityC,
 	}
@@ -102,6 +104,14 @@ func decodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1C *C.E2SM_
 	e2SmRcPreControlHeaderFormat1 := e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1{
 		RcCommand:                 *rcCommand,
 		RicControlMessagePriority: ricControlMessagePriority,
+	}
+
+	if e2SmRcPreControlHeaderFormat1C.cgi != nil { // Is optional
+		cgi, err := decodeCellGlobalID(e2SmRcPreControlHeaderFormat1C.cgi)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmRcPreIndicationHeaderFormat1() %s", err.Error())
+		}
+		e2SmRcPreControlHeaderFormat1.Cgi = cgi
 	}
 
 	return &e2SmRcPreControlHeaderFormat1, nil
