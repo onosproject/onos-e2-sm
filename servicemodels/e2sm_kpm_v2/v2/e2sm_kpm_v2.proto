@@ -8,6 +8,7 @@ SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 // Protobuf generated from /e2sm_kpm_ies_v2.asn by asn1c-0.9.29
 // E2SM-KPM-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version2(2) e2sm(2) e2sm-KPMMON-IEs(2) }
 
+// It is KPM 2.0.1 SM
 syntax = "proto3";
 
 package e2sm_kpm_v2.v2;

@@ -912,9 +912,19 @@ func (m *MeasurementLabel) Validate() error {
 		}
 	}
 
-	// no validation rules for BitrateRange
+	if val := m.GetBitrateRange(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "BitrateRange",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for LayerMuMimo
+	if val := m.GetLayerMuMimo(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "LayerMuMimo",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
 	if val := m.GetSUm(); val < 0 || val >= 1 {
 		return MeasurementLabelValidationError{
@@ -923,11 +933,26 @@ func (m *MeasurementLabel) Validate() error {
 		}
 	}
 
-	// no validation rules for DistBinX
+	if val := m.GetDistBinX(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "DistBinX",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for DistBinY
+	if val := m.GetDistBinY(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "DistBinY",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for DistBinZ
+	if val := m.GetDistBinZ(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "DistBinZ",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
 	if val := m.GetPreLabelOverride(); val < 0 || val >= 1 {
 		return MeasurementLabelValidationError{
