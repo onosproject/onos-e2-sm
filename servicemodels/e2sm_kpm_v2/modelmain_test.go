@@ -4,15 +4,15 @@
 
 package main
 
-import (
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
-	"google.golang.org/protobuf/proto"
-	"gotest.tools/assert"
-	"testing"
-)
-
-var kpmv2TestSm servicemodel
+//import (
+//	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
+//	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+//	"google.golang.org/protobuf/proto"
+//	"gotest.tools/assert"
+//	"testing"
+//)
+//
+//var kpmv2TestSm servicemodel
 
 //func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 //	var plmnID = "ONF"

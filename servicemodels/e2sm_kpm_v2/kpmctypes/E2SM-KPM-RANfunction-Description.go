@@ -15,7 +15,6 @@ package kpmv2ctypes
 //#include "RIC-ReportStyle-Item.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -34,18 +33,18 @@ func xerEncodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_
 	return bytes, nil
 }
 
-func perEncodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_v2.E2SmKpmRanfunctionDescription) ([]byte, error) {
-	e2SmKpmRanfunctionDescriptionCP, err := newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription)
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeE2SmKpmRanfunctionDescription() %s", err.Error())
-	}
-
-	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_RANfunction_Description, unsafe.Pointer(e2SmKpmRanfunctionDescriptionCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeE2SmKpmRanfunctionDescription() %s", err.Error())
-	}
-	return bytes, nil
-}
+//func perEncodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_v2.E2SmKpmRanfunctionDescription) ([]byte, error) {
+//	e2SmKpmRanfunctionDescriptionCP, err := newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription)
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeE2SmKpmRanfunctionDescription() %s", err.Error())
+//	}
+//
+//	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_RANfunction_Description, unsafe.Pointer(e2SmKpmRanfunctionDescriptionCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeE2SmKpmRanfunctionDescription() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
 
 func xerDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_RANfunction_Description)
@@ -58,16 +57,16 @@ func xerDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_v2.E2SmKpmR
 	return decodeE2SmKpmRanfunctionDescription((*C.E2SM_KPM_RANfunction_Description_t)(unsafePtr))
 }
 
-func perDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_RANfunction_Description)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeE2SmKpmRanfunctionDescription((*C.E2SM_KPM_RANfunction_Description_t)(unsafePtr))
-}
+//func perDecodeE2SmKpmRanfunctionDescription(bytes []byte) (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_RANfunction_Description)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeE2SmKpmRanfunctionDescription((*C.E2SM_KPM_RANfunction_Description_t)(unsafePtr))
+//}
 
 func newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_v2.E2SmKpmRanfunctionDescription) (*C.E2SM_KPM_RANfunction_Description_t, error) {
 
@@ -165,10 +164,4 @@ func decodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescriptionC *C.E2SM_
 	}
 
 	return &e2SmKpmRanfunctionDescription, nil
-}
-
-func decodeE2SmKpmRanfunctionDescriptionBytes(array [8]byte) (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
-	e2SmKpmRanfunctionDescriptionC := (*C.E2SM_KPM_RANfunction_Description_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescriptionC)
 }

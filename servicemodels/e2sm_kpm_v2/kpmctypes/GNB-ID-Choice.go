@@ -116,9 +116,3 @@ func decodeGnbIDChoice(gnbIDchoiceC *C.GNB_ID_Choice_t) (*e2sm_kpm_v2.GnbIdChoic
 
 	return gnbIDchoice, nil
 }
-
-func decodeGnbIDChoiceBytes(array [48]byte) (*e2sm_kpm_v2.GnbIdChoice, error) {
-	gnbIDChoiceC := (*C.GNB_ID_Choice_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeGnbIDChoice(gnbIDChoiceC)
-}

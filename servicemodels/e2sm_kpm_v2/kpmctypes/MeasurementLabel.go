@@ -69,12 +69,12 @@ func perDecodeMeasurementLabel(bytes []byte) (*e2sm_kpm_v2.MeasurementLabel, err
 
 func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.MeasurementLabel_t, error) {
 
-	plmnIdC, err := newPlmnIdentity(measurementLabel.PlmnId)
+	plmnIDC, err := newPlmnIdentity(measurementLabel.PlmnId)
 	if err != nil {
 		return nil, fmt.Errorf("newPlmnIdentity() %s", err.Error())
 	}
 
-	sliceIdC, err := newSnssai(measurementLabel.SliceId)
+	sliceIDC, err := newSnssai(measurementLabel.SliceId)
 	if err != nil {
 		return nil, fmt.Errorf("newSnssai() %s", err.Error())
 	}
@@ -119,8 +119,8 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 	startEndIndC := C.long(measurementLabel.StartEndInd)
 	measurementLabelC := C.MeasurementLabel_t{
 		//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-		plmnID:           plmnIdC,
-		sliceID:          sliceIdC,
+		plmnID:           plmnIDC,
+		sliceID:          sliceIDC,
 		fiveQI:           fiveQiC,
 		qCI:              qCiC,
 		qCImax:           qCimaxC,
@@ -142,12 +142,12 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 
 func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_v2.MeasurementLabel, error) {
 
-	plmnId, err := decodePlmnIdentity(measurementLabelC.plmnID)
+	plmnID, err := decodePlmnIdentity(measurementLabelC.plmnID)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	sliceId, err := decodeSnssai(measurementLabelC.sliceID)
+	sliceID, err := decodeSnssai(measurementLabelC.sliceID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeSnssai() %s", err.Error())
 	}
@@ -192,8 +192,8 @@ func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_
 	startEndInd := int32(*measurementLabelC.startEndInd)
 	measurementLabel := e2sm_kpm_v2.MeasurementLabel{
 		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
-		PlmnId:           plmnId,
-		SliceId:          sliceId,
+		PlmnId:           plmnID,
+		SliceId:          sliceID,
 		FiveQi:           fiveQi,
 		QCi:              qCi,
 		QCimax:           qCimax,

@@ -13,7 +13,6 @@ package kpmv2ctypes
 //#include "MeasurementInfo-Action-Item.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -56,16 +55,16 @@ func xerDecodeMeasurementInfoActionList(bytes []byte) (*e2sm_kpm_v2.MeasurementI
 	return decodeMeasurementInfoActionList((*C.MeasurementInfo_Action_List_t)(unsafePtr))
 }
 
-func perDecodeMeasurementInfoActionList(bytes []byte) (*e2sm_kpm_v2.MeasurementInfoActionList, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementInfo_Action_List)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeMeasurementInfoActionList((*C.MeasurementInfo_Action_List_t)(unsafePtr))
-}
+//func perDecodeMeasurementInfoActionList(bytes []byte) (*e2sm_kpm_v2.MeasurementInfoActionList, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementInfo_Action_List)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeMeasurementInfoActionList((*C.MeasurementInfo_Action_List_t)(unsafePtr))
+//}
 
 func newMeasurementInfoActionList(measurementInfoActionList *e2sm_kpm_v2.MeasurementInfoActionList) (*C.MeasurementInfo_Action_List_t, error) {
 
@@ -87,8 +86,7 @@ func decodeMeasurementInfoActionList(measurementInfoActionListC *C.MeasurementIn
 
 	measurementInfoActionList := new(e2sm_kpm_v2.MeasurementInfoActionList)
 
-	var ieCount int
-	ieCount = int(measurementInfoActionListC.list.count)
+	var ieCount = int(measurementInfoActionListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementInfoActionListC.list.array)) * uintptr(i)
 		ieC := *(**C.MeasurementInfo_Action_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementInfoActionListC.list.array)) + offset))
@@ -100,10 +98,4 @@ func decodeMeasurementInfoActionList(measurementInfoActionListC *C.MeasurementIn
 	}
 
 	return measurementInfoActionList, nil
-}
-
-func decodeMeasurementInfoActionListBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementInfoActionList, error) {
-	measurementInfoActionListC := (*C.MeasurementInfo_Action_List_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeMeasurementInfoActionList(measurementInfoActionListC)
 }

@@ -13,7 +13,6 @@ package kpmv2ctypes
 //#include "LabelInfoItem.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -86,8 +85,7 @@ func newLabelInfoList(labelInfoList *e2sm_kpm_v2.LabelInfoList) (*C.LabelInfoLis
 func decodeLabelInfoList(labelInfoListC *C.LabelInfoList_t) (*e2sm_kpm_v2.LabelInfoList, error) {
 
 	labelInfoList := new(e2sm_kpm_v2.LabelInfoList)
-	var ieCount int
-	ieCount = int(labelInfoListC.list.count)
+	var ieCount = int(labelInfoListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(labelInfoListC.list.array)) * uintptr(i)
 		ieC := *(**C.LabelInfoItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(labelInfoListC.list.array)) + offset))
@@ -99,10 +97,4 @@ func decodeLabelInfoList(labelInfoListC *C.LabelInfoList_t) (*e2sm_kpm_v2.LabelI
 	}
 
 	return labelInfoList, nil
-}
-
-func decodeLabelInfoListBytes(array [8]byte) (*e2sm_kpm_v2.LabelInfoList, error) {
-	labelInfoListC := (*C.LabelInfoList_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeLabelInfoList(labelInfoListC)
 }

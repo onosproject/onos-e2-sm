@@ -13,61 +13,60 @@ package kpmv2ctypes
 import "C"
 import (
 	"encoding/binary"
-	"fmt"
 	"math"
 	"math/big"
 	"unsafe"
 )
 
-func xerEncodeInteger(integer int64) ([]byte, error) {
-	integerCP, err := newInteger(integer)
-	if err != nil {
-		return nil, fmt.Errorf("newInteger() %s", err.Error())
-	}
-	defer freeInteger(integerCP)
-	bytes, err := encodeXer(&C.asn_DEF_INTEGER, unsafe.Pointer(integerCP))
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeInteger() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func perEncodeInteger(integer int64) ([]byte, error) {
-	integerCP, err := newInteger(integer)
-	if err != nil {
-		return nil, fmt.Errorf("newInteger() %s", err.Error())
-	}
-	defer freeInteger(integerCP)
-	bytes, err := encodePerBuffer(&C.asn_DEF_INTEGER, unsafe.Pointer(integerCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeInteger() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func xerDecodeInteger(integerBytes []byte) (int64, error) {
-	unsafePtr, err := decodeXer(integerBytes, &C.asn_DEF_INTEGER)
-	if err != nil {
-		return 0, err
-	}
-	if unsafePtr == nil {
-		return 0, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	intC := (*C.INTEGER_t)(unsafePtr)
-	return decodeInteger(intC)
-}
-
-func perDecodeInteger(integerBytes []byte) (int64, error) {
-	unsafePtr, err := decodePer(integerBytes, len(integerBytes), &C.asn_DEF_INTEGER)
-	if err != nil {
-		return 0, err
-	}
-	if unsafePtr == nil {
-		return 0, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	intC := (*C.INTEGER_t)(unsafePtr)
-	return decodeInteger(intC)
-}
+//func xerEncodeInteger(integer int64) ([]byte, error) {
+//	integerCP, err := newInteger(integer)
+//	if err != nil {
+//		return nil, fmt.Errorf("newInteger() %s", err.Error())
+//	}
+//	defer freeInteger(integerCP)
+//	bytes, err := encodeXer(&C.asn_DEF_INTEGER, unsafe.Pointer(integerCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeInteger() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func perEncodeInteger(integer int64) ([]byte, error) {
+//	integerCP, err := newInteger(integer)
+//	if err != nil {
+//		return nil, fmt.Errorf("newInteger() %s", err.Error())
+//	}
+//	defer freeInteger(integerCP)
+//	bytes, err := encodePerBuffer(&C.asn_DEF_INTEGER, unsafe.Pointer(integerCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeInteger() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func xerDecodeInteger(integerBytes []byte) (int64, error) {
+//	unsafePtr, err := decodeXer(integerBytes, &C.asn_DEF_INTEGER)
+//	if err != nil {
+//		return 0, err
+//	}
+//	if unsafePtr == nil {
+//		return 0, fmt.Errorf("pointer decoded from XER is nil")
+//	}
+//	intC := (*C.INTEGER_t)(unsafePtr)
+//	return decodeInteger(intC)
+//}
+//
+//func perDecodeInteger(integerBytes []byte) (int64, error) {
+//	unsafePtr, err := decodePer(integerBytes, len(integerBytes), &C.asn_DEF_INTEGER)
+//	if err != nil {
+//		return 0, err
+//	}
+//	if unsafePtr == nil {
+//		return 0, fmt.Errorf("pointer decoded from XER is nil")
+//	}
+//	intC := (*C.INTEGER_t)(unsafePtr)
+//	return decodeInteger(intC)
+//}
 
 // It is like a two's complement encoding of a signed number, but not quite the same
 func newInteger(msg int64) (*C.INTEGER_t, error) {

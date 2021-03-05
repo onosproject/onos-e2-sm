@@ -5,25 +5,24 @@
 //nolint
 package main
 
-import (
-	"fmt"
-	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdudecoder"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
-	"google.golang.org/protobuf/proto"
-)
-
-type servicemodel string
-
-const smname = "e2sm_kpm_v2"
-const smversion = "v2"
-const modulename = "e2sm_kpm_v2.so.2.0"
-
-func (sm servicemodel) ServiceModelData() (string, string, string) {
-	return smname, smversion, modulename
-}
+//import (
+//	"fmt"
+//	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
+//	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
+//	//"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdudecoder"
+//	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+//	"google.golang.org/protobuf/proto"
+//)
+//
+//type servicemodel string
+//
+//const smname = "e2sm_kpm_v2"
+//const smversion = "v2"
+//const modulename = "e2sm_kpm_v2.so.2.0"
+//
+//func (sm servicemodel) ServiceModelData() (string, string, string) {
+//	return smname, smversion, modulename
+//}
 
 //func (sm servicemodel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 //	perBytes, err := kpmctypes.PerDecodeE2SmKpmIndicationHeader(asn1Bytes)
@@ -173,29 +172,29 @@ func (sm servicemodel) ServiceModelData() (string, string, string) {
 //	return pdudecoder.DecodeE2SmKpmRanfunctionDescription(e2SmKpmPdu)
 //}
 
-func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
-}
-
-func (sm servicemodel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
-}
-
-func (sm servicemodel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
-}
-
-func (sm servicemodel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
-}
-
-func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
-}
-
-func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
-}
+//func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
+//	return nil, fmt.Errorf("not implemented on KPM")
+//}
+//
+//func (sm servicemodel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
+//	return nil, fmt.Errorf("not implemented on KPM")
+//}
+//
+//func (sm servicemodel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
+//	return nil, fmt.Errorf("not implemented on KPM")
+//}
+//
+//func (sm servicemodel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+//	return nil, fmt.Errorf("not implemented on KPM")
+//}
+//
+//func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
+//	return nil, fmt.Errorf("not implemented on KPM")
+//}
+//
+//func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+//	return nil, fmt.Errorf("not implemented on KPM")
+//}
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module
-var ServiceModel servicemodel
+//var ServiceModel servicemodel

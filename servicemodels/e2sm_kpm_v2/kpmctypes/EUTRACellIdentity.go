@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -87,10 +86,4 @@ func decodeEutracellIdentity(eutracellIdentityC *C.EUTRACellIdentity_t) (*e2sm_k
 	eutracellIdentity.Value = eutracellIdentityValue
 
 	return eutracellIdentity, nil
-}
-
-func decodeEutracellIdentityBytes(array [8]byte) (*e2sm_kpm_v2.EutracellIdentity, error) {
-	eutracellIdentityC := (*C.EUTRACellIdentity_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeEutracellIdentity(eutracellIdentityC)
 }

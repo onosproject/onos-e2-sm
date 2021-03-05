@@ -116,9 +116,3 @@ func decodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeaderC *C.E2SM_KPM_Indicati
 
 	return e2SmKpmIndicationHeader, nil
 }
-
-func decodeE2SmKpmIndicationHeaderBytes(array [8]byte) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
-	e2SmKpmIndicationHeaderC := (*C.E2SM_KPM_IndicationHeader_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeaderC)
-}

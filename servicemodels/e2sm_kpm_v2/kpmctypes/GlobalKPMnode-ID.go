@@ -161,9 +161,3 @@ func decodeGlobalKpmnodeID(globalKpmnodeIDC *C.GlobalKPMnode_ID_t) (*e2sm_kpm_v2
 
 	return globalKpmnodeID, nil
 }
-
-func decodeGlobalKpmnodeIDBytes(array [8]byte) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
-	globalKpmnodeIDC := (*C.GlobalKPMnode_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeGlobalKpmnodeID(globalKpmnodeIDC)
-}

@@ -117,9 +117,3 @@ func decodeEngnbID(engnbIDC *C.ENGNB_ID_t) (*e2sm_kpm_v2.EngnbId, error) {
 
 	return engnbID, nil
 }
-
-func decodeEngnbIDBytes(array [48]byte) (*e2sm_kpm_v2.EngnbId, error) { //ToDo - Check addressing correct structure in Protobuf
-	engnbIDC := (*C.ENGNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeEngnbID(engnbIDC)
-}

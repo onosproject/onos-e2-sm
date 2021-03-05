@@ -13,7 +13,6 @@ package kpmv2ctypes
 //#include "MeasurementRecord.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -86,8 +85,7 @@ func newMeasurementData(measurementData *e2sm_kpm_v2.MeasurementData) (*C.Measur
 func decodeMeasurementData(measurementDataC *C.MeasurementData_t) (*e2sm_kpm_v2.MeasurementData, error) {
 
 	measurementData := new(e2sm_kpm_v2.MeasurementData)
-	var ieCount int
-	ieCount = int(measurementDataC.list.count)
+	var ieCount = int(measurementDataC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementDataC.list.array)) * uintptr(i)
 		ieC := *(**C.MeasurementRecord_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementDataC.list.array)) + offset))
@@ -99,10 +97,4 @@ func decodeMeasurementData(measurementDataC *C.MeasurementData_t) (*e2sm_kpm_v2.
 	}
 
 	return measurementData, nil
-}
-
-func decodeMeasurementDataBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementData, error) {
-	measurementDataC := (*C.MeasurementData_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeMeasurementData(measurementDataC)
 }

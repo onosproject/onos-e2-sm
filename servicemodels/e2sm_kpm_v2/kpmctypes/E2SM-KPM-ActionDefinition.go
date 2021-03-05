@@ -57,16 +57,16 @@ func xerDecodeE2SmKpmActionDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmActionD
 	return decodeE2SmKpmActionDefinition((*C.E2SM_KPM_ActionDefinition_t)(unsafePtr))
 }
 
-func perDecodeE2SmKpmActionDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_ActionDefinition)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeE2SmKpmActionDefinition((*C.E2SM_KPM_ActionDefinition_t)(unsafePtr))
-}
+//func perDecodeE2SmKpmActionDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_ActionDefinition)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeE2SmKpmActionDefinition((*C.E2SM_KPM_ActionDefinition_t)(unsafePtr))
+//}
 
 func newE2SmKpmActionDefinition(e2SmKpmActionDefinition *e2sm_kpm_v2.E2SmKpmActionDefinition) (*C.E2SM_KPM_ActionDefinition_t, error) {
 
@@ -129,10 +129,4 @@ func decodeE2SmKpmActionDefinition(e2SmKpmActionDefinitionC *C.E2SM_KPM_ActionDe
 	}
 
 	return e2SmKpmActionDefinition, nil
-}
-
-func decodeE2SmKpmActionDefinitionBytes(array [8]byte) (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) { //ToDo - Check addressing correct structure in Protobuf
-	e2SmKpmActionDefinitionC := (*C.E2SM_KPM_ActionDefinition_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmKpmActionDefinition(e2SmKpmActionDefinitionC)
 }

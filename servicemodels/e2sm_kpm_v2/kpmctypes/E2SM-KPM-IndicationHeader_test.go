@@ -38,7 +38,7 @@ func Test_xerEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 922, len(xer))
+	assert.Equal(t, 944, len(xer))
 	t.Logf("E2SmKpmIndicationHeader XER\n%s", string(xer))
 }
 
@@ -48,7 +48,7 @@ func Test_xerDecodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 922, len(xer))
+	assert.Equal(t, 944, len(xer))
 	t.Logf("E2SmKpmIndicationHeader XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmKpmIndicationHeader(xer)
@@ -63,7 +63,7 @@ func Test_perEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 34, len(per))
 	t.Logf("E2SmKpmIndicationHeader PER\n%s", string(per))
 }
 
@@ -73,7 +73,7 @@ func Test_perDecodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 34, len(per))
 	t.Logf("E2SmKpmIndicationHeader PER\n%s", string(per))
 
 	result, err := perDecodeE2SmKpmIndicationHeader(per)

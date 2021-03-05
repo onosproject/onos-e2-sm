@@ -69,15 +69,15 @@ func perDecodeRanfunctionName(bytes []byte) (*e2sm_kpm_v2.RanfunctionName, error
 
 func newRanfunctionName(ranfunctionName *e2sm_kpm_v2.RanfunctionName) (*C.RANfunction_Name_t, error) {
 
-	ranFunctionShortNameC, err := newPrintableString(string(ranfunctionName.RanFunctionShortName))
+	ranFunctionShortNameC, err := newPrintableString(ranfunctionName.RanFunctionShortName)
 	if err != nil {
 		return nil, err
 	}
-	ranFunctionE2SmOidC, err := newPrintableString(string(ranfunctionName.RanFunctionE2SmOid))
+	ranFunctionE2SmOidC, err := newPrintableString(ranfunctionName.RanFunctionE2SmOid)
 	if err != nil {
 		return nil, err
 	}
-	ranFunctionDescriptionC, err := newPrintableString(string(ranfunctionName.RanFunctionDescription))
+	ranFunctionDescriptionC, err := newPrintableString(ranfunctionName.RanFunctionDescription)
 	if err != nil {
 		return nil, err
 	}

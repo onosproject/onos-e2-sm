@@ -129,7 +129,7 @@ func decodeE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1C *C.E2S
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
-	kpmNodeId, err := decodeGlobalKpmnodeID(e2SmKpmIndicationHeaderFormat1C.kpmNodeID)
+	kpmNodeID, err := decodeGlobalKpmnodeID(e2SmKpmIndicationHeaderFormat1C.kpmNodeID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGlobalKpmnodeId() %s", err.Error())
 	}
@@ -140,7 +140,7 @@ func decodeE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1C *C.E2S
 		SenderName:        senderName,
 		SenderType:        senderType,
 		VendorName:        vendorName,
-		KpmNodeId:         kpmNodeId,
+		KpmNodeId:         kpmNodeID,
 	}
 
 	return &e2SmKpmIndicationHeaderFormat1, nil

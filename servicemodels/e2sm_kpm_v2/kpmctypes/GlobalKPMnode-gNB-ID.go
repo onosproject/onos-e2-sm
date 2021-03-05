@@ -110,13 +110,13 @@ func decodeGlobalKpmnodeGnbID(globalKpmnodeGnbIDC *C.GlobalKPMnode_gNB_ID_t) (*e
 		return nil, fmt.Errorf("decodeGnbDuID() %s", err.Error())
 	}
 
-	globalKpmnodeNgEnbId := e2sm_kpm_v2.GlobalKpmnodeGnbId{
+	globalKpmnodeNgEnbID := e2sm_kpm_v2.GlobalKpmnodeGnbId{
 		GlobalGNbId: globalGnbID,
 		GNbCuUpId:   gNbCuUpID,
 		GNbDuId:     gNbDuID,
 	}
 
-	return &globalKpmnodeNgEnbId, nil
+	return &globalKpmnodeNgEnbID, nil
 }
 
 func decodeGlobalKpmnodeGnbIDBytes(array [8]byte) (*e2sm_kpm_v2.GlobalKpmnodeGnbId, error) {

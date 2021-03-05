@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -105,10 +104,4 @@ func decodeGlobalEnbID(globalEnbIDC *C.GlobalENB_ID_t) (*e2sm_kpm_v2.GlobalEnbId
 	}
 
 	return &globalEnbID, nil
-}
-
-func decodeGlobalEnbIDBytes(array [8]byte) (*e2sm_kpm_v2.GlobalEnbId, error) {
-	globalEnbIDC := (*C.GlobalENB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeGlobalEnbID(globalEnbIDC)
 }

@@ -10,9 +10,9 @@ import (
 	"testing"
 )
 
-func createRicKpmnodeItem() *e2sm_kpm_v2.RicKpmnodeItem {
+func createRicKpmnodeItem() (*e2sm_kpm_v2.RicKpmnodeItem, error) {
 
-	res := &e2sm_kpm_v2.RicKpmnodeItem{
+	res := e2sm_kpm_v2.RicKpmnodeItem{
 		RicKpmnodeType: &e2sm_kpm_v2.GlobalKpmnodeId{
 			GlobalKpmnodeId: &e2sm_kpm_v2.GlobalKpmnodeId_GNb{
 				GNb: &e2sm_kpm_v2.GlobalKpmnodeGnbId{
@@ -51,7 +51,7 @@ func createRicKpmnodeItem() *e2sm_kpm_v2.RicKpmnodeItem {
 					EUtracellIdentity: &e2sm_kpm_v2.EutracellIdentity{
 						Value: &e2sm_kpm_v2.BitString{
 							Value: 0x9bcd4,
-							Len:   22,
+							Len:   28,
 						},
 					},
 					PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{
@@ -64,26 +64,31 @@ func createRicKpmnodeItem() *e2sm_kpm_v2.RicKpmnodeItem {
 
 	res.CellMeasurementObjectList = append(res.CellMeasurementObjectList, item)
 
-	return res
+	if err := res.Validate(); err != nil {
+		return nil, err
+	}
+	return &res, nil
 }
 
 func Test_xerEncodeRicKpmnodeItem(t *testing.T) {
 
-	item := createRicKpmnodeItem()
+	item, err := createRicKpmnodeItem()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 936, len(xer))
+	assert.Equal(t, 964, len(xer))
 	t.Logf("RicKpmNodeItem XER\n%s", string(xer))
 }
 
 func Test_xerDecodeRicKpmnnodeItem(t *testing.T) {
 
-	item := createRicKpmnodeItem()
+	item, err := createRicKpmnodeItem()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 936, len(xer))
+	assert.Equal(t, 964, len(xer))
 	t.Logf("RicKpmNodeItem XER\n%s", string(xer))
 
 	result, err := xerDecodeRicKpmnodeItem(xer)
@@ -94,21 +99,23 @@ func Test_xerDecodeRicKpmnnodeItem(t *testing.T) {
 
 func Test_perEncodeRicKpmnnodeItem(t *testing.T) {
 
-	item := createRicKpmnodeItem()
+	item, err := createRicKpmnodeItem()
+	assert.NilError(t, err)
 
 	per, err := perEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 29, len(per))
 	t.Logf("RicKpmNodeItem PER\n%s", string(per))
 }
 
 func Test_perDecodeRicKpmnNodeItem(t *testing.T) {
 
-	item := createRicKpmnodeItem()
+	item, err := createRicKpmnodeItem()
+	assert.NilError(t, err)
 
 	per, err := perEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 29, len(per))
 	t.Logf("RicKpmNodeItem PER\n%s", string(per))
 
 	result, err := perDecodeRicKpmnodeItem(per)

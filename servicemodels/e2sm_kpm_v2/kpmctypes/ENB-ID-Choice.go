@@ -156,9 +156,3 @@ func decodeEnbIDChoice(enbIDChoiceC *C.ENB_ID_Choice_t) (*e2sm_kpm_v2.EnbIdChoic
 
 	return enbIDChoice, nil
 }
-
-func decodeEnbIDChoiceBytes(array [48]byte) (*e2sm_kpm_v2.EnbIdChoice, error) {
-	enbIDChoiceC := (*C.ENB_ID_Choice_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeEnbIDChoice(enbIDChoiceC)
-}

@@ -137,9 +137,3 @@ func decodeEnbID(enbIDC *C.ENB_ID_t) (*e2sm_kpm_v2.EnbId, error) {
 
 	return enbID, nil
 }
-
-func decodeEnbIDBytes(array [48]byte) (*e2sm_kpm_v2.EnbId, error) {
-	enbIDC := (*C.ENB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeEnbID(enbIDC)
-}

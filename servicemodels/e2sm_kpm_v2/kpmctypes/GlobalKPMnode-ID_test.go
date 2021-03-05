@@ -87,11 +87,11 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2.GlobalKpmnodeId {
 					},
 					ShortMacroENbId: &e2sm_kpm_v2.BitString{
 						Value: 0x9bcd4,
-						Len: 18,
+						Len:   18,
 					},
 					LongMacroENbId: &e2sm_kpm_v2.BitString{
 						Value: 0x9bcd4,
-						Len: 21,
+						Len:   21,
 					},
 				},
 				GNbDuId: &e2sm_kpm_v2.GnbDuId{

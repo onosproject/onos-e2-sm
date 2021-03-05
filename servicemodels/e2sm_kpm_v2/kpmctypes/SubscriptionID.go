@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -87,10 +86,4 @@ func decodeSubscriptionID(subscriptionIDC *C.SubscriptionID_t) (*e2sm_kpm_v2.Sub
 	subscriptionID.Value = subscriptionIDValue
 
 	return subscriptionID, nil
-}
-
-func decodeSubscriptionIDBytes(array [8]byte) (*e2sm_kpm_v2.SubscriptionId, error) {
-	subscriptionIdC := (*C.SubscriptionID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeSubscriptionID(subscriptionIdC)
 }

@@ -84,6 +84,6 @@ func decodeMeasurementTypeID(measurementTypeIDC *C.MeasurementTypeID_t) (*e2sm_k
 }
 
 func decodeMeasurementTypeIDBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementTypeId, error) {
-	measurementTypeIdC := C.long(binary.LittleEndian.Uint64(array[0:]))
-	return decodeMeasurementTypeID(&measurementTypeIdC)
+	measurementTypeIDC := C.long(binary.LittleEndian.Uint64(array[0:]))
+	return decodeMeasurementTypeID(&measurementTypeIDC)
 }

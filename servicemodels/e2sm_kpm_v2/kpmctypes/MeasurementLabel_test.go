@@ -32,18 +32,18 @@ func createMeasurementLabel() *e2sm_kpm_v2.MeasurementLabel {
 			Value: 1,
 		},
 		ARpmax: &e2sm_kpm_v2.Arp{
-			Value: 50,
+			Value: 15,
 		},
 		ARpmin: &e2sm_kpm_v2.Arp{
 			Value: 1,
 		},
 		BitrateRange:     25,
 		LayerMuMimo:      1,
-		SUm:              11,
+		SUm:              0,
 		DistBinX:         123,
 		DistBinY:         456,
 		DistBinZ:         789,
-		PreLabelOverride: 2,
+		PreLabelOverride: 0,
 		StartEndInd:      1,
 	}
 }
@@ -54,7 +54,7 @@ func Test_xerEncodeMeasurementLabel(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 550, len(xer))
 	t.Logf("MeasurementLabel XER\n%s", string(xer))
 }
 
@@ -64,12 +64,13 @@ func Test_xerDecodeMeasurementLabel(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(xer))
+	assert.Equal(t, 550, len(xer))
 	t.Logf("MeasurementLabel XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementLabel(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementLabel XER - decoded\n%s", result)
 }
 
 func Test_perEncodeMeasurementLabel(t *testing.T) {
@@ -78,7 +79,7 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 
 	per, err := perEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
+	assert.Equal(t, 36, len(per))
 	t.Logf("MeasurementLabel XER\n%s", string(per))
 }
 
@@ -88,10 +89,11 @@ func Test_perDecodeMeasurementLabel(t *testing.T) {
 
 	per, err := perEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 4, len(per))
-	t.Logf("MeasurementLabel XER\n%s", string(per))
+	assert.Equal(t, 36, len(per))
+	t.Logf("MeasurementLabel PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementLabel(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("MeasurementLabel PER - decoded\n%v", result)
 }

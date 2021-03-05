@@ -129,9 +129,3 @@ func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_kpm_v2.CellGloba
 
 	return cellGlobalID, nil
 }
-
-func decodeCellGlobalIDBytes(array [8]byte) (*e2sm_kpm_v2.CellGlobalId, error) {
-	cellGlobalIDC := (*C.CellGlobalID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeCellGlobalID(cellGlobalIDC)
-}
