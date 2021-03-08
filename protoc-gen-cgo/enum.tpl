@@ -87,7 +87,7 @@ func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnde
 }
 
 func decode{{.MessageName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) { //ToDo - Check addressing correct structure in Protobuf
-    {{lowCaseFirstLetter .MessageName}}C := (*C.{{dashToUnderscore .MessageName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+    {{lowCaseFirstLetter .MessageName}}C := (*C.{{dashToUnderscore .MessageName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
 
     return decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C)
 }
