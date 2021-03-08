@@ -19,9 +19,9 @@ func TestE2SmKpmIndicationHeader(t *testing.T) {
 	timeStamp := []byte{0x21, 0x22, 0x23, 0x24}
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	var fileFormatVersion int32 = 2
-	var senderName int32 = 123
-	var vendorName int32 = 54
+	var fileFormatVersion string = "txt"
+	var senderName string = "ONF"
+	var vendorName string = "onf"
 
 	globalKpmNodeID, err := CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)

@@ -16,6 +16,7 @@
 #include "CellObjectID.h"
 #include "GranularityPeriod.h"
 #include "MeasurementData.h"
+#include "MeasurementInfoList.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
@@ -30,7 +31,7 @@ typedef struct E2SM_KPM_IndicationMessage_Format1 {
 	SubscriptionID_t	 subscriptID;
 	CellObjectID_t	*cellObjID;	/* OPTIONAL */
 	GranularityPeriod_t	*granulPeriod;	/* OPTIONAL */
-	struct MeasurementInfoList	*measInfoList;	/* OPTIONAL */
+	MeasurementInfoList_t	*measInfoList;	/* OPTIONAL */
 	MeasurementData_t	 measData;
 	/*
 	 * This type is extensible,

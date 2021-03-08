@@ -14,6 +14,7 @@
 /* Including external dependencies */
 #include "TimeStamp.h"
 #include "PrintableString.h"
+#include "GlobalKPMnode-ID.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
@@ -30,7 +31,7 @@ typedef struct E2SM_KPM_IndicationHeader_Format1 {
 	PrintableString_t	*senderName;	/* OPTIONAL */
 	PrintableString_t	*senderType;	/* OPTIONAL */
 	PrintableString_t	*vendorName;	/* OPTIONAL */
-	struct GlobalKPMnode_ID	*kpmNodeID;	/* OPTIONAL */
+	GlobalKPMnode_ID_t	*kpmNodeID;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

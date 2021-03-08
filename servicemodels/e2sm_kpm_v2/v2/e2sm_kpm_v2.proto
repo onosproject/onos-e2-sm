@@ -8,6 +8,7 @@ SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 // Protobuf generated from /e2sm_kpm_ies_v2.asn by asn1c-0.9.29
 // E2SM-KPM-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version2(2) e2sm(2) e2sm-KPMMON-IEs(2) }
 
+// It is KPM 2.0.1 SM
 syntax = "proto3";
 
 package e2sm_kpm_v2.v2;
@@ -38,8 +39,8 @@ message CellGlobalId {
 
 // sequence from e2sm_kpm_ies_v2.asn:42
 message Snssai {
-  int32 s_st = 1 [json_name="SNSSAI:sST"];
-  int32 s_d = 2 [json_name="SNSSAI:sD"];
+  bytes s_st = 1 [(validate.v1.rules).bytes.len = 1, json_name="SNSSAI:sST"];
+  bytes s_d = 2 [(validate.v1.rules).bytes.len = 3, json_name="SNSSAI:sD"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:47
@@ -86,14 +87,14 @@ message MeasurementLabel {
   Qci q_cimin = 6 [json_name="MeasurementLabel:qCImin"];
   Arp a_rpmax = 7 [json_name="MeasurementLabel:aRPmax"];
   Arp a_rpmin = 8 [json_name="MeasurementLabel:aRPmin"];
-  int32 bitrate_range = 9 [json_name="MeasurementLabel:bitrateRange"];
-  int32 layer_mu_mimo = 10 [json_name="MeasurementLabel:layerMU_MIMO"];
-  int32 s_um = 11 [json_name="MeasurementLabel:sUM"];
-  int32 dist_bin_x = 12 [json_name="MeasurementLabel:distBinX"];
-  int32 dist_bin_y = 13 [json_name="MeasurementLabel:distBinY"];
-  int32 dist_bin_z = 14 [json_name="MeasurementLabel:distBinZ"];
-  int32 pre_label_override = 15 [json_name="MeasurementLabel:preLabelOverride"];
-  int32 start_end_ind = 16 [json_name="MeasurementLabel:startEndInd"];
+  int32 bitrate_range = 9 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:bitrateRange"];
+  int32 layer_mu_mimo = 10 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:layerMU_MIMO"];
+  int32 s_um = 11 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementLabel:sUM"];
+  int32 dist_bin_x = 12 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinX"];
+  int32 dist_bin_y = 13 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinY"];
+  int32 dist_bin_z = 14 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinZ"];
+  int32 pre_label_override = 15 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementLabel:preLabelOverride"];
+  int32 start_end_ind = 16 [(validate.v1.rules).int32 = {gte: 0, lte: 1}, json_name="MeasurementLabel:startEndInd"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:91
@@ -210,9 +211,9 @@ message EnbId {
 
 // sequence from e2sm_kpm_ies_v2.asn:184
 message RanfunctionName {
-  int32 ran_function_short_name = 1 [json_name="RANfunction-Name:ranFunction_ShortName"];
-  int32 ran_function_e2_sm_oid = 2 [json_name="RANfunction-Name:ranFunction_E2SM_OID"];
-  int32 ran_function_description = 3 [json_name="RANfunction-Name:ranFunction_Decsription"];
+  string ran_function_short_name = 1 [json_name="RANfunction-Name:ranFunction_ShortName"];
+  string ran_function_e2_sm_oid = 2 [json_name="RANfunction-Name:ranFunction_E2SM_OID"];
+  string ran_function_description = 3 [json_name="RANfunction-Name:ranFunction_Decsription"];
   int32 ran_function_instance = 4 [json_name="RANfunction-Name:ranFunction_Instance"];
 };
 
@@ -353,10 +354,10 @@ message E2SmKpmIndicationHeader {
 // sequence from e2sm_kpm_ies_v2.asn:298
 message E2SmKpmIndicationHeaderFormat1 {
   TimeStamp collet_start_time = 1 [json_name="E2SM-KPM-IndicationHeader-Format1:colletStartTime"];
-  int32 file_formatversion = 2 [json_name="E2SM-KPM-IndicationHeader-Format1:fileFormatversion"];
-  int32 sender_name = 3 [json_name="E2SM-KPM-IndicationHeader-Format1:senderName"];
-  int32 sender_type = 4 [json_name="E2SM-KPM-IndicationHeader-Format1:senderType"];
-  int32 vendor_name = 5 [json_name="E2SM-KPM-IndicationHeader-Format1:vendorName"];
+  string file_formatversion = 2 [json_name="E2SM-KPM-IndicationHeader-Format1:fileFormatversion"];
+  string sender_name = 3 [json_name="E2SM-KPM-IndicationHeader-Format1:senderName"];
+  string sender_type = 4 [json_name="E2SM-KPM-IndicationHeader-Format1:senderType"];
+  string vendor_name = 5 [json_name="E2SM-KPM-IndicationHeader-Format1:vendorName"];
   GlobalKpmnodeId kpm_node_id = 6 [json_name="E2SM-KPM-IndicationHeader-Format1:kpmNodeID"];
 };
 

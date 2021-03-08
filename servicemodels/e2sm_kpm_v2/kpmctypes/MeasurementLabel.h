@@ -16,6 +16,7 @@
 #include "FiveQI.h"
 #include "QCI.h"
 #include "ARP.h"
+#include "SNSSAI.h"
 #include "NativeInteger.h"
 #include "NativeEnumerated.h"
 #include "constr_SEQUENCE.h"

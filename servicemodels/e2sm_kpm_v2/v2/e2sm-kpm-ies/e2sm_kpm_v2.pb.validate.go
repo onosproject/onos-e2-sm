@@ -304,9 +304,19 @@ func (m *Snssai) Validate() error {
 		return nil
 	}
 
-	// no validation rules for SSt
+	if len(m.GetSSt()) != 1 {
+		return SnssaiValidationError{
+			field:  "SSt",
+			reason: "value length must be 1 bytes",
+		}
+	}
 
-	// no validation rules for SD
+	if len(m.GetSD()) != 3 {
+		return SnssaiValidationError{
+			field:  "SD",
+			reason: "value length must be 3 bytes",
+		}
+	}
 
 	return nil
 }
@@ -902,21 +912,61 @@ func (m *MeasurementLabel) Validate() error {
 		}
 	}
 
-	// no validation rules for BitrateRange
+	if val := m.GetBitrateRange(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "BitrateRange",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for LayerMuMimo
+	if val := m.GetLayerMuMimo(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "LayerMuMimo",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for SUm
+	if val := m.GetSUm(); val < 0 || val >= 1 {
+		return MeasurementLabelValidationError{
+			field:  "SUm",
+			reason: "value must be inside range [0, 1)",
+		}
+	}
 
-	// no validation rules for DistBinX
+	if val := m.GetDistBinX(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "DistBinX",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for DistBinY
+	if val := m.GetDistBinY(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "DistBinY",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for DistBinZ
+	if val := m.GetDistBinZ(); val < 1 || val > 65536 {
+		return MeasurementLabelValidationError{
+			field:  "DistBinZ",
+			reason: "value must be inside range [1, 65536]",
+		}
+	}
 
-	// no validation rules for PreLabelOverride
+	if val := m.GetPreLabelOverride(); val < 0 || val >= 1 {
+		return MeasurementLabelValidationError{
+			field:  "PreLabelOverride",
+			reason: "value must be inside range [0, 1)",
+		}
+	}
 
-	// no validation rules for StartEndInd
+	if val := m.GetStartEndInd(); val < 0 || val > 1 {
+		return MeasurementLabelValidationError{
+			field:  "StartEndInd",
+			reason: "value must be inside range [0, 1]",
+		}
+	}
 
 	return nil
 }

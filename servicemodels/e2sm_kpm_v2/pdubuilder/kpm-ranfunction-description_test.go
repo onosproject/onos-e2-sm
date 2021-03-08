@@ -11,9 +11,9 @@ import (
 )
 
 func TestE2SmKpmRanfunctionDescription(t *testing.T) {
-	var rfSn int32 = 123
-	var rfE2SMoid int32 = 456
-	var rfd int32 = 789
+	var rfSn string = "onf"
+	var rfE2SMoid string = "oid123"
+	var rfd string = "someDescription"
 	var rfi int32 = 21
 
 	plmnID := []byte{0x21, 0x22, 0x23}
