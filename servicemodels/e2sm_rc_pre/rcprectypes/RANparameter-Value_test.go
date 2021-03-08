@@ -66,7 +66,7 @@ func Test_xerEncodeRanparameterValue(t *testing.T) {
 
 	xer, err = xerEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 83, len(xer))
+	assert.Equal(t, 73, len(xer))
 	t.Logf("RANparameterValue (Enum) XER\n%s", string(xer))
 
 	//rpv = createRanparameterValueValueOctS()
@@ -109,7 +109,7 @@ func Test_xerDecodeMeasurementRecordItem(t *testing.T) {
 
 	xer, err = xerEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 83, len(xer))
+	assert.Equal(t, 73, len(xer))
 	t.Logf("RANparameterValue (Enum) XER\n%s", string(xer))
 
 	result, err = xerDecodeRanparameterValue(xer)
@@ -166,7 +166,7 @@ func Test_perEncodeMeasurementRecordItem(t *testing.T) {
 
 	per, err = perEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 7, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("RANparameterValue (Enum) PER\n%s", string(per))
 
 	//rpv = createRanparameterValueValueOctS()
@@ -209,7 +209,7 @@ func Test_perDecodeMeasurementRecordItem(t *testing.T) {
 
 	per, err = perEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 7, len(per))
+	assert.Equal(t, 3, len(per))
 	t.Logf("RANparameterValue (Enum) PER\n%s", string(per))
 
 	result, err = perDecodeRanparameterValue(per)
