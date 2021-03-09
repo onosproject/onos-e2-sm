@@ -34,3 +34,8 @@ func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 
 	return bytes, nil
 }
+
+func decodePrintableStringBytes(array [16]byte) (string, error) {
+	psC := (*C.PrintableString_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+	return decodePrintableString(psC)
+}

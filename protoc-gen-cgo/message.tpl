@@ -211,8 +211,8 @@ return decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C)
 {{ define "OPTIONAL_DECODE" }}
 {{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .FieldName}} := {{decodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}}){{else}}
-{{lowCaseFirstLetter .FieldName}}, err := {{decodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}})
+{{lowCaseFirstLetter .FieldName}} := {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}}){{else}}
+{{lowCaseFirstLetter .FieldName}}, err := {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}})
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
