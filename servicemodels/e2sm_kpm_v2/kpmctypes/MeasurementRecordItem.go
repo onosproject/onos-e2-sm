@@ -80,7 +80,7 @@ func newMeasurementRecordItem(measurementRecordItem *e2sm_kpm_v2.MeasurementReco
 		if err != nil {
 			return nil, fmt.Errorf("newInteger() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.MeasurementRecordItem_Real:
 		pr = C.MeasurementRecordItem_PR_real
 
@@ -88,7 +88,7 @@ func newMeasurementRecordItem(measurementRecordItem *e2sm_kpm_v2.MeasurementReco
 		if err != nil {
 			return nil, fmt.Errorf("newReal() %s", err.Error())
 		}
-		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_kpm_v2.MeasurementRecordItem_NoValue:
 		pr = C.MeasurementRecordItem_PR_noValue
 
@@ -124,7 +124,7 @@ func decodeMeasurementRecordItem(measurementRecordItemC *C.MeasurementRecordItem
 		}
 	case C.MeasurementRecordItem_PR_real:
 		var a [8]byte
-		copy(a[:], measurementRecordItemC.choice[8:16])
+		copy(a[:], measurementRecordItemC.choice[0:8])
 		measRecordItem, err := decodeRealBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeRealBytes() %s", err.Error())

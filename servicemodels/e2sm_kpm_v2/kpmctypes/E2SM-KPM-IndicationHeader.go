@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeader *e2sm_kpm_v2.E2SmKpmIndicationHeader) ([]byte, error) {
+func XerEncodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeader *e2sm_kpm_v2.E2SmKpmIndicationHeader) ([]byte, error) {
 	e2SmKpmIndicationHeaderCP, err := newE2SmKpmIndicationHeader(e2SmKpmIndicationHeader)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationHeader() %s", err.Error())
@@ -32,7 +32,7 @@ func xerEncodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeader *e2sm_kpm_v2.E2SmK
 	return bytes, nil
 }
 
-func perEncodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeader *e2sm_kpm_v2.E2SmKpmIndicationHeader) ([]byte, error) {
+func PerEncodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeader *e2sm_kpm_v2.E2SmKpmIndicationHeader) ([]byte, error) {
 	e2SmKpmIndicationHeaderCP, err := newE2SmKpmIndicationHeader(e2SmKpmIndicationHeader)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmKpmIndicationHeader() %s", err.Error())
@@ -45,7 +45,7 @@ func perEncodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeader *e2sm_kpm_v2.E2SmK
 	return bytes, nil
 }
 
-func xerDecodeE2SmKpmIndicationHeader(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
+func XerDecodeE2SmKpmIndicationHeader(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_IndicationHeader)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmKpmIndicationHeader(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicat
 	return decodeE2SmKpmIndicationHeader((*C.E2SM_KPM_IndicationHeader_t)(unsafePtr))
 }
 
-func perDecodeE2SmKpmIndicationHeader(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
+func PerDecodeE2SmKpmIndicationHeader(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_IndicationHeader)
 	if err != nil {
 		return nil, err

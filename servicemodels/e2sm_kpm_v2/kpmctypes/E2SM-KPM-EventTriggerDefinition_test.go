@@ -24,7 +24,7 @@ func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2.E2SmKpmEventTriggerDefin
 //
 //	etd := createE2SMKPMEventTriggerDefinition()
 //
-//	xer, err := xerEncodeE2SmKpmEventTriggerDefinition(etd)
+//	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
 //	assert.NilError(t, err)
 //	assert.Equal(t, 259, len(xer))
 //	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
@@ -34,12 +34,12 @@ func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2.E2SmKpmEventTriggerDefin
 //
 //	etd := createE2SMKPMEventTriggerDefinition()
 //
-//	xer, err := xerEncodeE2SmKpmEventTriggerDefinition(etd)
+//	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
 //	assert.NilError(t, err)
 //	assert.Equal(t, 259, len(xer))
 //	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
 //
-//	result, err := xerDecodeE2SmKpmEventTriggerDefinition(xer)
+//	result, err := XerDecodeE2SmKpmEventTriggerDefinition(xer)
 //	assert.NilError(t, err)
 //	assert.Assert(t, result != nil)
 //	t.Logf("E2SmKpmEventTriggerDefinition XER - decoded\n%s", result)
@@ -49,7 +49,7 @@ func Test_perEncodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	etd := createE2SMKPMEventTriggerDefinition()
 
-	per, err := perEncodeE2SmKpmEventTriggerDefinition(etd)
+	per, err := PerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinition PER\n%s", string(per))
@@ -59,12 +59,12 @@ func Test_perDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	etd := createE2SMKPMEventTriggerDefinition()
 
-	per, err := perEncodeE2SmKpmEventTriggerDefinition(etd)
+	per, err := PerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinition PER\n%s", string(per))
 
-	result, err := perDecodeE2SmKpmEventTriggerDefinition(per)
+	result, err := PerDecodeE2SmKpmEventTriggerDefinition(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmKpmEventTriggerDefinition PER - decoded\n%s", result)

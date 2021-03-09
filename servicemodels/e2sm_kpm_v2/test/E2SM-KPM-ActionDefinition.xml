@@ -1,0 +1,42 @@
+<E2SM-KPM-ActionDefinition>
+    <ric-Style-Type>12</ric-Style-Type>
+    <actionDefinition-formats>
+        <actionDefinition-Format1>
+            <cellObjID>onf</cellObjID>
+            <measInfoList>
+                <MeasurementInfoItem>
+                    <measType>
+                        <measName>trial</measName>
+                    </measType>
+                    <labelInfoList>
+                        <LabelInfoItem>
+                            <measLabel>
+                                <plmnID>21 22 23</plmnID>
+                                <sliceID>
+                                    <sST>01</sST>
+                                    <sD>01 02 03</sD>
+                                </sliceID>
+                                <fiveQI>10</fiveQI>
+                                <qCI>15</qCI>
+                                <qCImax>15</qCImax>
+                                <qCImin>1</qCImin>
+                                <aRPmax>15</aRPmax>
+                                <aRPmin>1</aRPmin>
+                                <bitrateRange>251</bitrateRange>
+                                <layerMU-MIMO>5</layerMU-MIMO>
+                                <sUM><true/></sUM>
+                                <distBinX>123</distBinX>
+                                <distBinY>456</distBinY>
+                                <distBinZ>789</distBinZ>
+                                <preLabelOverride><true/></preLabelOverride>
+                                <startEndInd><end/></startEndInd>
+                            </measLabel>
+                        </LabelInfoItem>
+                    </labelInfoList>
+                </MeasurementInfoItem>
+            </measInfoList>
+            <granulPeriod>21</granulPeriod>
+            <subscriptID>12345</subscriptID>
+        </actionDefinition-Format1>
+    </actionDefinition-formats>
+</E2SM-KPM-ActionDefinition>

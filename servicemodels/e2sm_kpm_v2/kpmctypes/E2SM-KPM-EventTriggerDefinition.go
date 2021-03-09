@@ -19,20 +19,20 @@ import (
 	"unsafe"
 )
 
-//func xerEncodeE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_kpm_v2.E2SmKpmEventTriggerDefinition) ([]byte, error) {
-//	e2SmKpmEventTriggerDefinitionCP, err := newE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition)
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeE2SmKpmEventTriggerDefinition() %s", err.Error())
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_EventTriggerDefinition, unsafe.Pointer(e2SmKpmEventTriggerDefinitionCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeE2SmKpmEventTriggerDefinition() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
+func XerEncodeE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_kpm_v2.E2SmKpmEventTriggerDefinition) ([]byte, error) {
+	e2SmKpmEventTriggerDefinitionCP, err := newE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition)
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeE2SmKpmEventTriggerDefinition() %s", err.Error())
+	}
 
-func perEncodeE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_kpm_v2.E2SmKpmEventTriggerDefinition) ([]byte, error) {
+	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_EventTriggerDefinition, unsafe.Pointer(e2SmKpmEventTriggerDefinitionCP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeE2SmKpmEventTriggerDefinition() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func PerEncodeE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_kpm_v2.E2SmKpmEventTriggerDefinition) ([]byte, error) {
 	e2SmKpmEventTriggerDefinitionCP, err := newE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmKpmEventTriggerDefinition() %s", err.Error())
@@ -45,18 +45,18 @@ func perEncodeE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_
 	return bytes, nil
 }
 
-//func xerDecodeE2SmKpmEventTriggerDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_EventTriggerDefinition)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeE2SmKpmEventTriggerDefinition((*C.E2SM_KPM_EventTriggerDefinition_t)(unsafePtr))
-//}
+func XerDecodeE2SmKpmEventTriggerDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_EventTriggerDefinition)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeE2SmKpmEventTriggerDefinition((*C.E2SM_KPM_EventTriggerDefinition_t)(unsafePtr))
+}
 
-func perDecodeE2SmKpmEventTriggerDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
+func PerDecodeE2SmKpmEventTriggerDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_EventTriggerDefinition)
 	if err != nil {
 		return nil, err
