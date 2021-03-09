@@ -16,6 +16,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	"math"
 	"unsafe"
 )
 
@@ -70,30 +71,22 @@ func perDecodeMeasurementRecordItem(bytes []byte) (*e2sm_kpm_v2.MeasurementRecor
 func newMeasurementRecordItem(measurementRecordItem *e2sm_kpm_v2.MeasurementRecordItem) (*C.MeasurementRecordItem_t, error) {
 
 	var pr C.MeasurementRecordItem_PR
-	choiceC := [16]byte{}
+	choiceC := [8]byte{}
 
 	switch choice := measurementRecordItem.MeasurementRecordItem.(type) {
 	case *e2sm_kpm_v2.MeasurementRecordItem_Integer:
 		pr = C.MeasurementRecordItem_PR_integer
 
-		im, err := newInteger(choice.Integer)
-		if err != nil {
-			return nil, fmt.Errorf("newInteger() %s", err.Error())
-		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[:], uint64(choice.Integer))
 	case *e2sm_kpm_v2.MeasurementRecordItem_Real:
 		pr = C.MeasurementRecordItem_PR_real
 
-		im, err := newReal(choice.Real)
-		if err != nil {
-			return nil, fmt.Errorf("newReal() %s", err.Error())
-		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[:8], math.Float64bits(choice.Real))
 	case *e2sm_kpm_v2.MeasurementRecordItem_NoValue:
 		pr = C.MeasurementRecordItem_PR_noValue
 
 		im := newNull()
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[:8], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newMeasurementRecordItem() %T not yet implemented", choice)
 	}
@@ -113,22 +106,12 @@ func decodeMeasurementRecordItem(measurementRecordItemC *C.MeasurementRecordItem
 
 	switch measurementRecordItemC.present {
 	case C.MeasurementRecordItem_PR_integer:
-		var a [8]byte
-		copy(a[:], measurementRecordItemC.choice[0:8])
-		measRecordItem, err := decodeIntegerBytes(a)
-		if err != nil {
-			return nil, fmt.Errorf("decodeIntegerBytes() %s", err.Error())
-		}
+		measRecordItem := int64(binary.LittleEndian.Uint64(measurementRecordItemC.choice[:]))
 		measurementRecordItem.MeasurementRecordItem = &e2sm_kpm_v2.MeasurementRecordItem_Integer{
 			Integer: measRecordItem,
 		}
 	case C.MeasurementRecordItem_PR_real:
-		var a [8]byte
-		copy(a[:], measurementRecordItemC.choice[0:8])
-		measRecordItem, err := decodeRealBytes(a)
-		if err != nil {
-			return nil, fmt.Errorf("decodeRealBytes() %s", err.Error())
-		}
+		measRecordItem := math.Float64frombits(binary.LittleEndian.Uint64(measurementRecordItemC.choice[:]))
 		measurementRecordItem.MeasurementRecordItem = &e2sm_kpm_v2.MeasurementRecordItem_Real{
 			Real: measRecordItem,
 		}

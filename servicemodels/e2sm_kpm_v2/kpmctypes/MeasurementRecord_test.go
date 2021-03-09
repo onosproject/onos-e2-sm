@@ -6,6 +6,8 @@ package kpmv2ctypes
 
 import (
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	"gotest.tools/assert"
+	"testing"
 )
 
 func createMeasurementRecord() (*e2sm_kpm_v2.MeasurementRecord, error) {
@@ -20,12 +22,12 @@ func createMeasurementRecord() (*e2sm_kpm_v2.MeasurementRecord, error) {
 	}
 	res.Value = append(res.Value, item1)
 
-	//item2 := &e2sm_kpm_v2.MeasurementRecordItem{
-	//	MeasurementRecordItem: &e2sm_kpm_v2.MeasurementRecordItem_Real{
-	//		Real: 22,
-	//	},
-	//}
-	//res.Value = append(res.Value, item2)
+	item2 := &e2sm_kpm_v2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2sm_kpm_v2.MeasurementRecordItem_Real{
+			Real: 22,
+		},
+	}
+	res.Value = append(res.Value, item2)
 
 	item3 := &e2sm_kpm_v2.MeasurementRecordItem{
 		MeasurementRecordItem: &e2sm_kpm_v2.MeasurementRecordItem_NoValue{
@@ -40,56 +42,58 @@ func createMeasurementRecord() (*e2sm_kpm_v2.MeasurementRecord, error) {
 	return res, nil
 }
 
-//func Test_xerEncodeMeasurementRecord(t *testing.T) {
-//
-//	mr, err := createMeasurementRecord()
-//	assert.NilError(t, err)
-//
-//	xer, err := xerEncodeMeasurementRecord(mr)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 119, len(xer))
-//	t.Logf("MeasurementRecord XER\n%s", string(xer))
-//}
-//
-//func Test_xerDecodeMeasurementRecord(t *testing.T) {
-//
-//	mr, err := createMeasurementRecord()
-//	assert.NilError(t, err)
-//
-//	xer, err := xerEncodeMeasurementRecord(mr)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 119, len(xer))
-//	t.Logf("MeasurementRecord XER\n%s", string(xer))
-//
-//	result, err := xerDecodeMeasurementRecord(xer)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("MeasurementRecord XER - decoded\n%s", result)
-//}
-//
-//func Test_perEncodeMeasurementRecord(t *testing.T) {
-//
-//	mr, err := createMeasurementRecord()
-//	assert.NilError(t, err)
-//
-//	per, err := perEncodeMeasurementRecord(mr)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 10, len(per))
-//	t.Logf("MeasurementRecord PER\n%s", string(per))
-//}
-//
-//func Test_perDecodeMeasurementRecord(t *testing.T) {
-//
-//	mr, err := createMeasurementRecord()
-//	assert.NilError(t, err)
-//
-//	per, err := perEncodeMeasurementRecord(mr)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 10, len(per))
-//	t.Logf("MeasurementRecord PER\n%s", string(per))
-//
-//	result, err := perDecodeMeasurementRecord(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("MeasurementRecord PER - decoded\n%v", result)
-//}
+func Test_xerEncodeMeasurementRecord(t *testing.T) {
+
+	mr, err := createMeasurementRecord()
+	assert.NilError(t, err)
+
+	xer, err := xerEncodeMeasurementRecord(mr)
+	assert.NilError(t, err)
+	assert.Equal(t, 140, len(xer))
+	t.Logf("MeasurementRecord XER\n%s", string(xer))
+}
+
+func Test_xerDecodeMeasurementRecord(t *testing.T) {
+
+	mr, err := createMeasurementRecord()
+	assert.NilError(t, err)
+
+	xer, err := xerEncodeMeasurementRecord(mr)
+	assert.NilError(t, err)
+	assert.Equal(t, 140, len(xer))
+	t.Logf("MeasurementRecord XER\n%s", string(xer))
+
+	result, err := xerDecodeMeasurementRecord(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	assert.Equal(t, 3, len(result.GetValue()))
+	t.Logf("MeasurementRecord XER - decoded\n%s", result)
+}
+
+func Test_perEncodeMeasurementRecord(t *testing.T) {
+
+	mr, err := createMeasurementRecord()
+	assert.NilError(t, err)
+
+	per, err := perEncodeMeasurementRecord(mr)
+	assert.NilError(t, err)
+	assert.Equal(t, 10, len(per))
+	t.Logf("MeasurementRecord PER\n%s", string(per))
+}
+
+func Test_perDecodeMeasurementRecord(t *testing.T) {
+
+	mr, err := createMeasurementRecord()
+	assert.NilError(t, err)
+
+	per, err := perEncodeMeasurementRecord(mr)
+	assert.NilError(t, err)
+	assert.Equal(t, 10, len(per))
+	t.Logf("MeasurementRecord PER\n%s", string(per))
+
+	result, err := perDecodeMeasurementRecord(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	assert.Equal(t, 3, len(result.GetValue()))
+	t.Logf("MeasurementRecord PER - decoded\n%v", result)
+}
