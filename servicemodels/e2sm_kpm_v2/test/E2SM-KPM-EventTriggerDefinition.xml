@@ -1,0 +1,7 @@
+<E2SM-KPM-EventTriggerDefinition>
+    <eventDefinition-formats>
+        <eventDefinition-Format1>
+            <reportingPeriod>12</reportingPeriod>
+        </eventDefinition-Format1>
+    </eventDefinition-formats>
+</E2SM-KPM-EventTriggerDefinition>

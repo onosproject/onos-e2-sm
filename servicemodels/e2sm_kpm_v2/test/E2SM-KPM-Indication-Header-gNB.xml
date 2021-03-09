@@ -1,0 +1,25 @@
+<E2SM-KPM-IndicationHeader>
+    <indicationHeader-formats>
+        <indicationHeader-Format1>
+            <colletStartTime>21 22 23 24</colletStartTime>
+            <fileFormatversion>txt</fileFormatversion>
+            <senderName>ONF</senderName>
+            <senderType></senderType>
+            <vendorName>onf</vendorName>
+            <kpmNodeID>
+                <gNB>
+                    <global-gNB-ID>
+                        <plmn-id>37 34 37</plmn-id>
+                        <gnb-id>
+                            <gnb-ID>
+                                1101010010111100000010
+                            </gnb-ID>
+                        </gnb-id>
+                    </global-gNB-ID>
+                    <gNB-CU-UP-ID>12345</gNB-CU-UP-ID>
+                    <gNB-DU-ID>6789</gNB-DU-ID>
+                </gNB>
+            </kpmNodeID>
+        </indicationHeader-Format1>
+    </indicationHeader-formats>
+</E2SM-KPM-IndicationHeader>
