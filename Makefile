@@ -11,6 +11,9 @@ BUF_VERSION := 0.36.0
 build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
 	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
 
+build/_output/e2sm_kpm.so.2.0.0: # @HELP build the e2sm_kpm.so.2.0.0
+	cd servicemodels/e2sm_kpm_v2 && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.2.0.0 -buildmode=plugin .
+
 build/_output/e2sm_ni.so.1.0.0: # @HELP build the e2sm_ni.so.1.0.1
 	cd servicemodels/e2sm_ni && CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
 
@@ -19,7 +22,7 @@ build/_output/e2sm_rc_pre.so.1.0.0: # @HELP build the e2sm_rc_pre.so.1.0.1
 
 PHONY:build
 build: # @HELP build all libraries
-build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0
+build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_kpm.so.2.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0
 
 build_protoc_gen_cgo:
 	cd protoc-gen-cgo/ && go build -v -o ./protoc-gen-cgo && cd ..
@@ -33,10 +36,13 @@ test: license_check build build_protoc_gen_cgo linters
 jenkins-test:  # @HELP run the unit tests and source code validation producing a junit style report for Jenkins
 jenkins-test: build-tools license_check linters
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
+	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 
 deps_kpm: # @HELP ensure that the required dependencies are in place
 	cd servicemodels/e2sm_kpm
+	go build -v -buildmode=plugin ./modelmain.go
+	cd servicemodels/e2sm_kpm_v2
 	go build -v -buildmode=plugin ./modelmain.go
 	bash -c "diff -u <(echo -n) <(git diff go.mod)"
 	bash -c "diff -u <(echo -n) <(git diff go.sum)"
@@ -89,6 +95,16 @@ service-model-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin Docker 
 		-t onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 	@rm -rf vendor
 
+PHONY: service-model-docker-e2sm_kpm-2.0.0
+service-model-docker-e2sm_kpm-2.0.0: # @HELP build e2sm_kpm 2.0.0 plugin Docker image
+	@cd servicemodels/e2sm_kpm_v2 && go mod vendor && cd ../..
+	docker build . -f build/plugins/Dockerfile \
+		--build-arg PLUGIN_MAKE_TARGET=e2sm_kpm_v2 \
+		--build-arg PLUGIN_MAKE_VERSION=2.0.0 \
+		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+		-t onosproject/service-model-docker-e2sm_kpm-2.0.0:${ONOS_E2_SM_VERSION}
+	@rm -rf vendor
+
 PHONY: service-model-ransim-docker-e2sm_kpm-1.0.0
 service-model-ransim-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin Docker image for RAN Simulator
 	@cd servicemodels/e2sm_kpm && go mod vendor && cd ../..
@@ -97,6 +113,16 @@ service-model-ransim-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin 
 		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
 		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
 		-t onosproject/service-model-ransim-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
+	@rm -rf vendor
+
+PHONY: service-model-ransim-docker-e2sm_kpm-2.0.0
+service-model-ransim-docker-e2sm_kpm-2.0.0: # @HELP build e2sm_kpm 2.0.0 plugin Docker image for RAN Simulator
+	@cd servicemodels/e2sm_kpm_v2&& go mod vendor && cd ../..
+	docker build . -f build/plugins/ransim.Dockerfile \
+		--build-arg PLUGIN_MAKE_TARGET=e2sm_kpm_v2\
+		--build-arg PLUGIN_MAKE_VERSION=2.0.0 \
+		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+		-t onosproject/service-model-ransim-e2sm_kpm-2.0.0:${ONOS_E2_SM_VERSION}
 	@rm -rf vendor
 
 PHONY: service-model-docker-e2sm_ni-1.0.0
@@ -130,14 +156,18 @@ service-model-ransim-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 p
 	@rm -rf vendor
 
 images: # @HELP build all Docker images
-images: build service-model-docker-e2sm_kpm-1.0.0 service-model-ransim-docker-e2sm_kpm-1.0.0 service-model-docker-e2sm_ni-1.0.0 \
-		service-model-docker-e2sm_rc_pre-1.0.0 service-model-ransim-docker-e2sm_rc_pre-1.0.0
+images: build service-model-docker-e2sm_kpm-1.0.0 service-model-ransim-docker-e2sm_kpm-1.0.0 \
+	service-model-docker-e2sm_kpm-2.0.0 service-model-ransim-docker-e2sm_kpm-2.0.0 \
+	service-model-docker-e2sm_ni-1.0.0 service-model-docker-e2sm_rc_pre-1.0.0 \
+	service-model-ransim-docker-e2sm_rc_pre-1.0.0
 
 kind: # @HELP build Docker images and add them to the currently configured kind cluster
 kind: images
 	@if [ "`kind get clusters`" = '' ]; then echo "no kind cluster found" && exit 1; fi
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_kpm-2.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-ransim-e2sm_kpm-2.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
@@ -147,6 +177,7 @@ all: build images
 
 publish: # @HELP publish version on github and dockerhub
 	./../build-tools/publish-version servicemodels/e2sm_kpm/${VERSION} onosproject/service-model-docker-e2sm_kpm-1.0.0 onosproject/service-model-ransim-e2sm_kpm-1.0.0
+	./../build-tools/publish-version servicemodels/e2sm_kpm_v2/${VERSION} onosproject/service-model-docker-e2sm_kpm-2.0.0 onosproject/service-model-ransim-e2sm_kpm-2.0.0
 	./../build-tools/publish-version servicemodels/e2sm_ni/${VERSION} onosproject/service-model-docker-e2sm_ni-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_rc_pre/${VERSION} onosproject/service-model-docker-e2sm_rc_pre-1.0.0 onosproject/service-model-ransim-e2sm_rc_pre-1.0.0
 
