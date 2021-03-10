@@ -32,4 +32,5 @@ coverage.txt
 *report*.xml
 *coverage*.xml
 *-output.out
+**/converter-example
 

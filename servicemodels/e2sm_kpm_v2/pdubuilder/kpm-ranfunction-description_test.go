@@ -21,7 +21,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 		Value: 0x9bcd4,
 		Len:   22,
 	}
-	cellGlobalID, err := CreateCellGlobalID_NRCGI(plmnID, bs)
+	cellGlobalID, err := CreateCellGlobalID_NRCGI(plmnID, 0xabcdef012 << 28) // 36 bit
 	assert.NilError(t, err)
 	var cellObjID string = "ONF"
 	cellMeasObjItem := CreateCellMeasurementObjectItem(cellObjID, *cellGlobalID)

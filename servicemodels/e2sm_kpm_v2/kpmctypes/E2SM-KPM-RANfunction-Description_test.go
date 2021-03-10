@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"gotest.tools/assert"
@@ -23,7 +24,7 @@ func createE2SMKPMRanfunctionDescription() *e2sm_kpm_v2.E2SmKpmRanfunctionDescri
 		Value: 0x9bcd4,
 		Len:   22,
 	}
-	cellGlobalID, _ := pdubuilder.CreateCellGlobalID_NRCGI(plmnID, bs)
+	cellGlobalID, _ := pdubuilder.CreateCellGlobalID_NRCGI(plmnID, 0xABCDEF012 << 28) // 36 bits
 
 	var cellObjID string = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, *cellGlobalID)
@@ -75,7 +76,7 @@ func Test_xerEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
-	assert.Equal(t, 2688, len(xer))
+	assert.Equal(t, 2702, len(xer))
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 }
 
@@ -85,7 +86,7 @@ func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
-	assert.Equal(t, 2688, len(xer))
+	assert.Equal(t, 2702, len(xer))
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmKpmRanfunctionDescription(xer)
@@ -94,24 +95,24 @@ func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 	t.Logf("E2SmKpmRanfunctionDescription XER - decoded\n%s", result)
 }
 
-//func Test_perEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
-//
-//	rfd := createE2SMKPMRanfunctionDescription()
-//
-//	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 4, len(per))
-//	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", string(per))
-//}
-//
+func Test_perEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
+
+	rfd := createE2SMKPMRanfunctionDescription()
+
+	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
+	assert.NilError(t, err)
+	assert.Equal(t, 111, len(per))
+	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", hex.Dump(per))
+}
+
 //func Test_perDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 //
 //	rfd := createE2SMKPMRanfunctionDescription()
 //
 //	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
 //	assert.NilError(t, err)
-//	assert.Equal(t, 4, len(per))
-//	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", string(per))
+//	assert.Equal(t, 111, len(per))
+//	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", hex.Dump(per))
 //
 //	result, err := PerDecodeE2SmKpmRanfunctionDescription(per)
 //	assert.NilError(t, err)
