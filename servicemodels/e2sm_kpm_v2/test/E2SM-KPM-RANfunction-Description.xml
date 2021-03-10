@@ -28,7 +28,7 @@
                         <nr-CGI>
                             <pLMN-Identity>21 22 23</pLMN-Identity>
                             <nRCellIdentity>
-                                1101010010111100000010
+                                000000000000000000000000001000000000
                             </nRCellIdentity>
                         </nr-CGI>
                     </cell-global-ID>
