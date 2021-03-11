@@ -25,12 +25,13 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	var gnbDuID int64 = 6789
 	var fileFormatVersion string = "txt"
 	var senderName string = "ONF"
+	var senderType string = "someType"
 	var vendorName string = "onf"
 
 	globalKpmNodeID, err := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, vendorName, *globalKpmNodeID)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, *globalKpmNodeID)
 
 	err = newE2SmKpmPdu.Validate()
 	assert.NilError(t, err, "error validating E2SmPDU")
@@ -38,12 +39,12 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
-	assert.Equal(t, 58, len(protoBytes))
+	assert.Equal(t, 68, len(protoBytes))
 
 	asn1Bytes, err := kpmv2TestSm.IndicationHeaderProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 34, len(asn1Bytes))
+	assert.Equal(t, 42, len(asn1Bytes))
 	t.Logf("E2SM-KPM-Indicationheader gNB asn1Bytes are \n%x", asn1Bytes)
 }
 

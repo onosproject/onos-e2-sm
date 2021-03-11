@@ -76,7 +76,7 @@ func Test_xerEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
-	assert.Equal(t, 2702, len(xer))
+	assert.Equal(t, 1975, len(xer))
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 }
 
@@ -86,7 +86,7 @@ func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
-	assert.Equal(t, 2702, len(xer))
+	assert.Equal(t, 1975, len(xer))
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmKpmRanfunctionDescription(xer)
@@ -101,21 +101,21 @@ func Test_perEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
-	assert.Equal(t, 111, len(per))
+	assert.Equal(t, 77, len(per))
 	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", hex.Dump(per))
 }
 
-//func Test_perDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
-//
-//	rfd := createE2SMKPMRanfunctionDescription()
-//
-//	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 111, len(per))
-//	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", hex.Dump(per))
-//
-//	result, err := PerDecodeE2SmKpmRanfunctionDescription(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("E2SmKpmRanfunctionDescription PER - decoded\n%s", result)
-//}
+func Test_perDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
+
+	rfd := createE2SMKPMRanfunctionDescription()
+
+	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
+	assert.NilError(t, err)
+	assert.Equal(t, 77, len(per))
+	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", hex.Dump(per))
+
+	result, err := PerDecodeE2SmKpmRanfunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmKpmRanfunctionDescription PER - decoded\n%s", result)
+}

@@ -8,8 +8,8 @@ import (
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 )
 
-func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, senderName string, vendorName string,
-	globalKpmNodeID e2sm_kpm_v2.GlobalKpmnodeId) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
+func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, senderName string, senderType string,
+	vendorName string, globalKpmNodeID e2sm_kpm_v2.GlobalKpmnodeId) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
 
 	if len(timeStamp) != 4 {
 		return nil, fmt.Errorf("TimeStamp should be 4 chars")
@@ -23,6 +23,7 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, s
 				},
 				FileFormatversion: fileFormatVersion,
 				SenderName:        senderName,
+				SenderType:        senderType,
 				VendorName:        vendorName,
 				KpmNodeId:         &globalKpmNodeID,
 			},

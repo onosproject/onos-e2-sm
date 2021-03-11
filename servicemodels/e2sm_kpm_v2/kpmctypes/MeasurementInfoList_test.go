@@ -115,18 +115,18 @@ func Test_perEncodeMeasurementInfoList(t *testing.T) {
 	t.Logf("MeasurementInfoList PER\n%s", string(per))
 }
 
-//func Test_perDecodeMeasurementInfoList(t *testing.T) {
-//
-//	mii, err := createMeasurementInfoList()
-//	assert.NilError(t, err)
-//
-//	per, err := perEncodeMeasurementInfoList(mii)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 41, len(per))
-//	t.Logf("MeasurementInfoList PER\n%s", string(per))
-//
-//	result, err := perDecodeMeasurementInfoList(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("MeasurementInfoList PER - decoded\n%s", result)
-//}
+func Test_perDecodeMeasurementInfoList(t *testing.T) {
+
+	mii, err := createMeasurementInfoList()
+	assert.NilError(t, err)
+
+	per, err := perEncodeMeasurementInfoList(mii)
+	assert.NilError(t, err)
+	assert.Equal(t, 41, len(per))
+	t.Logf("MeasurementInfoList PER\n%s", string(per))
+
+	//result, err := perDecodeMeasurementInfoList(per)
+	//assert.NilError(t, err)
+	//assert.Assert(t, result != nil)
+	//t.Logf("MeasurementInfoList PER - decoded\n%s", result)
+}

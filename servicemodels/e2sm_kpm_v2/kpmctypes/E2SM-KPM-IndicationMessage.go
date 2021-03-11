@@ -18,53 +18,53 @@ import (
 	"unsafe"
 )
 
-//func XerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMessage *e2sm_kpm_v2.E2SmKpmIndicationMessage) ([]byte, error) {
-//	e2SmKpmIndicationMessageCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMessage)
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessage() %s", err.Error())
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationMessage, unsafe.Pointer(e2SmKpmIndicationMessageCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessage() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
+func XerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMessage *e2sm_kpm_v2.E2SmKpmIndicationMessage) ([]byte, error) {
+	e2SmKpmIndicationMessageCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMessage)
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessage() %s", err.Error())
+	}
 
-//func PerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMessage *e2sm_kpm_v2.E2SmKpmIndicationMessage) ([]byte, error) {
-//	e2SmKpmIndicationMessageCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMessage)
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeE2SmKpmIndicationMessage() %s", err.Error())
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_IndicationMessage, unsafe.Pointer(e2SmKpmIndicationMessageCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeE2SmKpmIndicationMessage() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
+	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_IndicationMessage, unsafe.Pointer(e2SmKpmIndicationMessageCP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeE2SmKpmIndicationMessage() %s", err.Error())
+	}
+	return bytes, nil
+}
 
-//func XerDecodeE2SmKpmIndicationMessage(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_IndicationMessage)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeE2SmKpmIndicationMessage((*C.E2SM_KPM_IndicationMessage_t)(unsafePtr))
-//}
+func PerEncodeE2SmKpmIndicationMessage(e2SmKpmIndicationMessage *e2sm_kpm_v2.E2SmKpmIndicationMessage) ([]byte, error) {
+	e2SmKpmIndicationMessageCP, err := newE2SmKpmIndicationMessage(e2SmKpmIndicationMessage)
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeE2SmKpmIndicationMessage() %s", err.Error())
+	}
 
-//func PerDecodeE2SmKpmIndicationMessage(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_IndicationMessage)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeE2SmKpmIndicationMessage((*C.E2SM_KPM_IndicationMessage_t)(unsafePtr))
-//}
+	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_IndicationMessage, unsafe.Pointer(e2SmKpmIndicationMessageCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeE2SmKpmIndicationMessage() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func XerDecodeE2SmKpmIndicationMessage(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_IndicationMessage)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeE2SmKpmIndicationMessage((*C.E2SM_KPM_IndicationMessage_t)(unsafePtr))
+}
+
+func PerDecodeE2SmKpmIndicationMessage(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_IndicationMessage)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeE2SmKpmIndicationMessage((*C.E2SM_KPM_IndicationMessage_t)(unsafePtr))
+}
 
 func newE2SmKpmIndicationMessage(e2SmKpmIndicationMessage *e2sm_kpm_v2.E2SmKpmIndicationMessage) (*C.E2SM_KPM_IndicationMessage_t, error) {
 

@@ -66,7 +66,7 @@ func Test_xerEncodeE2SmKpmActionDefinition(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 1884, len(xer))
+	assert.Equal(t, 414, len(xer))
 	t.Logf("E2SmKpmActionDefinition XER\n%s", string(xer))
 }
 
@@ -76,7 +76,7 @@ func Test_xerDecodeE2SmKpmActionDefinition(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 1884, len(xer))
+	assert.Equal(t, 414, len(xer))
 	t.Logf("E2SmKpmActionDefinition XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmKpmActionDefinition(xer)
@@ -91,21 +91,21 @@ func Test_perEncodeE2SmKpmActionDefinition(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 59, len(per))
+	assert.Equal(t, 15, len(per))
 	t.Logf("E2SmKpmActionDefinition PER\n%s", string(per))
 }
 
-//func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
-//
-//	actionDef := createE2SMKPMActionDefinition()
-//
-//	per, err := PerEncodeE2SmKpmActionDefinition(actionDef)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 59, len(per))
-//	t.Logf("E2SmKpmActionDefinition PER\n%s", string(per))
-//
-//	result, err := PerDecodeE2SmKpmActionDefinition(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("E2SmKpmActionDefinition PER - decoded\n%s", result)
-//}
+func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
+
+	actionDef := createE2SMKPMActionDefinition()
+
+	per, err := PerEncodeE2SmKpmActionDefinition(actionDef)
+	assert.NilError(t, err)
+	assert.Equal(t, 15, len(per))
+	t.Logf("E2SmKpmActionDefinition PER\n%s", string(per))
+
+	//result, err := PerDecodeE2SmKpmActionDefinition(per)
+	//assert.NilError(t, err)
+	//assert.Assert(t, result != nil)
+	//t.Logf("E2SmKpmActionDefinition PER - decoded\n%s", result)
+}

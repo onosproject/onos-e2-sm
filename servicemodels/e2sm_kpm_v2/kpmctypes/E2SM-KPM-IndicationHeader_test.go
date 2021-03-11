@@ -23,11 +23,12 @@ func createE2SMKPMIndicationHeader() *e2sm_kpm_v2.E2SmKpmIndicationHeader {
 	var gnbDuID int64 = 6789
 	var fileFormatVersion string = "txt"
 	var senderName string = "ONF"
+	var senderType string = "someType"
 	var vendorName string = "onf"
 
 	globalKpmNodeID, _ := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, vendorName, *globalKpmNodeID)
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, *globalKpmNodeID)
 
 	return newE2SmKpmPdu
 }
@@ -38,7 +39,7 @@ func Test_xerEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 944, len(xer))
+	assert.Equal(t, 952, len(xer))
 	t.Logf("E2SmKpmIndicationHeader XER\n%s", string(xer))
 }
 
@@ -48,7 +49,7 @@ func Test_xerDecodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	xer, err := XerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 944, len(xer))
+	assert.Equal(t, 952, len(xer))
 	t.Logf("E2SmKpmIndicationHeader XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmKpmIndicationHeader(xer)
@@ -63,7 +64,7 @@ func Test_perEncodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 34, len(per))
+	assert.Equal(t, 42, len(per))
 	t.Logf("E2SmKpmIndicationHeader PER\n%s", string(per))
 }
 
@@ -73,7 +74,7 @@ func Test_perDecodeE2SmKpmIndicationHeader(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmIndicationHeader(ih)
 	assert.NilError(t, err)
-	assert.Equal(t, 34, len(per))
+	assert.Equal(t, 42, len(per))
 	t.Logf("E2SmKpmIndicationHeader PER\n%s", string(per))
 	//t.Logf("E2SmKpmIndicationHeader PER\n%x", per)
 

@@ -90,18 +90,18 @@ func Test_perEncodeRicReportStyleItem(t *testing.T) {
 	t.Logf("RicReportStyleItem PER\n%s", string(per))
 }
 
-//func Test_perDecodeRicReportStyleItem(t *testing.T) {
-//
-//	item, err := createRicReportStyleItem()
-//	assert.NilError(t, err)
-//
-//	per, err := perEncodeRicReportStyleItem(item)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 40, len(per))
-//	t.Logf("RicReportStyleItem PER\n%s", string(per))
-//
-//	result, err := perDecodeRicReportStyleItem(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("RicReportStyleItem PER - decoded\n%v", result)
-//}
+func Test_perDecodeRicReportStyleItem(t *testing.T) {
+
+	item, err := createRicReportStyleItem()
+	assert.NilError(t, err)
+
+	per, err := perEncodeRicReportStyleItem(item)
+	assert.NilError(t, err)
+	assert.Equal(t, 40, len(per))
+	t.Logf("RicReportStyleItem PER\n%s", string(per))
+
+	//result, err := perDecodeRicReportStyleItem(per)
+	//assert.NilError(t, err)
+	//assert.Assert(t, result != nil)
+	//t.Logf("RicReportStyleItem PER - decoded\n%v", result)
+}

@@ -21,12 +21,13 @@ func TestE2SmKpmIndicationHeader(t *testing.T) {
 	var gnbDuID int64 = 6789
 	var fileFormatVersion string = "txt"
 	var senderName string = "ONF"
+	var senderType string = "someType"
 	var vendorName string = "onf"
 
 	globalKpmNodeID, err := CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, vendorName, *globalKpmNodeID)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, *globalKpmNodeID)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 }

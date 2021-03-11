@@ -63,7 +63,7 @@ func Test_xerEncodeE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmActionDefinitionFormat1(actionDefFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 1446, len(xer))
+	assert.Equal(t, 216, len(xer))
 	t.Logf("E2SmKpmActionDefinitionFormat1 XER\n%s", string(xer))
 }
 
@@ -73,7 +73,7 @@ func Test_xerDecodeE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmActionDefinitionFormat1(actionDefFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 1446, len(xer))
+	assert.Equal(t, 216, len(xer))
 	t.Logf("E2SmKpmActionDefinitionFormat1 XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmKpmActionDefinitionFormat1(xer)
@@ -88,21 +88,21 @@ func Test_perEncodeE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmActionDefinitionFormat1(actionDefFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 56, len(per))
+	assert.Equal(t, 12, len(per))
 	t.Logf("E2SmKpmActionDefinitionFormat1 PER\n%s", string(per))
 }
 
-//func Test_perDecodeE2SmKpmActionDefinitionFormat1(t *testing.T) {
-//
-//	actionDefFormat1 := createE2SMKPMActionDefinitionFormat1()
-//
-//	per, err := perEncodeE2SmKpmActionDefinitionFormat1(actionDefFormat1)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 56, len(per))
-//	t.Logf("E2SmKpmActionDefinitionFormat1 PER\n%s", string(per))
-//
-//	result, err := perDecodeE2SmKpmActionDefinitionFormat1(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("E2SmKpmActionDefinitionFormat1 PER - decoded\n%s", result)
-//}
+func Test_perDecodeE2SmKpmActionDefinitionFormat1(t *testing.T) {
+
+	actionDefFormat1 := createE2SMKPMActionDefinitionFormat1()
+
+	per, err := perEncodeE2SmKpmActionDefinitionFormat1(actionDefFormat1)
+	assert.NilError(t, err)
+	assert.Equal(t, 12, len(per))
+	t.Logf("E2SmKpmActionDefinitionFormat1 PER\n%s", string(per))
+
+	//result, err := perDecodeE2SmKpmActionDefinitionFormat1(per)
+	//assert.NilError(t, err)
+	//assert.Assert(t, result != nil)
+	//t.Logf("E2SmKpmActionDefinitionFormat1 PER - decoded\n%s", result)
+}
