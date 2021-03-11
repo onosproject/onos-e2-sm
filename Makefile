@@ -42,8 +42,6 @@ jenkins-test: build-tools license_check linters
 deps_kpm: # @HELP ensure that the required dependencies are in place
 	cd servicemodels/e2sm_kpm
 	go build -v -buildmode=plugin ./modelmain.go
-	cd servicemodels/e2sm_kpm_v2
-	go build -v -buildmode=plugin ./modelmain.go
 	bash -c "diff -u <(echo -n) <(git diff go.mod)"
 	bash -c "diff -u <(echo -n) <(git diff go.sum)"
 

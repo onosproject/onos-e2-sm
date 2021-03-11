@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"google.golang.org/protobuf/proto"
@@ -50,6 +51,10 @@ func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, e
 	return perBytes, nil
 }
 
+func (sm servicemodel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
 //func (sm servicemodel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 //	perBytes, err := kpmv2ctypes.PerDecodeE2SmKpmIndicationMessage(asn1Bytes)
 //	if err != nil {
@@ -63,6 +68,10 @@ func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, e
 //
 //	return protoBytes, nil
 //}
+
+func (sm servicemodel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
+}
 
 //func (sm servicemodel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
 //	protoObj := new(e2sm_kpm_v2.E2SmKpmIndicationMessage)
@@ -78,6 +87,10 @@ func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, e
 //	return perBytes, nil
 //}
 
+func (sm servicemodel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
 //func (sm servicemodel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 //	perBytes, err := kpmv2ctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1Bytes)
 //	if err != nil {
@@ -91,6 +104,10 @@ func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, e
 //
 //	return protoBytes, nil
 //}
+
+func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
+}
 
 //func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
 //	protoObj := new(e2sm_kpm_v2.E2SmKpmRanfunctionDescription)
@@ -134,6 +151,10 @@ func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]b
 	return perBytes, nil
 }
 
+func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
 //func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 //	perBytes, err := kpmv2ctypes.PerDecodeE2SmKpmActionDefinition(asn1Bytes)
 //	if err != nil {
@@ -147,6 +168,10 @@ func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]b
 //
 //	return protoBytes, nil
 //}
+
+func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
+}
 
 //func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 //	protoObj := new(e2sm_kpm_v2.E2SmKpmActionDefinition)
@@ -162,6 +187,10 @@ func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]b
 //	return perBytes, nil
 //}
 
+func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
+    return nil, nil, nil, fmt.Errorf("not implemented")
+}
+
 // It is redundant so far - could be reused for future, if you need to extract something specific from RanFunctionDescription message
 //func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
 //	e2SmKpmPdu, err := kpmv2ctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1bytes)
@@ -171,30 +200,29 @@ func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]b
 //	return pdudecoder.DecodeE2SmKpmRanfunctionDescription(e2SmKpmPdu)
 //}
 
-// Set of control messages for compliance with PCI use-case
-//func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
-//	return nil, fmt.Errorf("not implemented on KPM")
-//}
-//
-//func (sm servicemodel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-//	return nil, fmt.Errorf("not implemented on KPM")
-//}
-//
-//func (sm servicemodel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
-//	return nil, fmt.Errorf("not implemented on KPM")
-//}
-//
-//func (sm servicemodel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-//	return nil, fmt.Errorf("not implemented on KPM")
-//}
-//
-//func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
-//	return nil, fmt.Errorf("not implemented on KPM")
-//}
-//
-//func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
-//	return nil, fmt.Errorf("not implemented on KPM")
-//}
+func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, fmt.Errorf("not implemented on KPM")
+}
 
 //ServiceModel is the exported symbol that gives an entry point to this shared module
 var ServiceModel servicemodel
