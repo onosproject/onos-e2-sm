@@ -20,30 +20,30 @@ func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2.E2SmKpmEventTriggerDefin
 	return newE2SmKpmPdu
 }
 
-func Test_xerEncodeE2SmKpmEventTriggerDefinition(t *testing.T) {
+//func Test_xerEncodeE2SmKpmEventTriggerDefinition(t *testing.T) {
+//
+//	etd := createE2SMKPMEventTriggerDefinition()
+//
+//	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
+//	assert.NilError(t, err)
+//	assert.Equal(t, 259, len(xer))
+//	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
+//}
 
-	etd := createE2SMKPMEventTriggerDefinition()
-
-	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
-	assert.NilError(t, err)
-	assert.Equal(t, 259, len(xer))
-	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
-}
-
-func Test_xerDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
-
-	etd := createE2SMKPMEventTriggerDefinition()
-
-	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
-	assert.NilError(t, err)
-	assert.Equal(t, 259, len(xer))
-	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
-
-	result, err := XerDecodeE2SmKpmEventTriggerDefinition(xer)
-	assert.NilError(t, err)
-	assert.Assert(t, result != nil)
-	t.Logf("E2SmKpmEventTriggerDefinition XER - decoded\n%s", result)
-}
+//func Test_xerDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
+//
+//	etd := createE2SMKPMEventTriggerDefinition()
+//
+//	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
+//	assert.NilError(t, err)
+//	assert.Equal(t, 259, len(xer))
+//	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
+//
+//	result, err := XerDecodeE2SmKpmEventTriggerDefinition(xer)
+//	assert.NilError(t, err)
+//	assert.Assert(t, result != nil)
+//	t.Logf("E2SmKpmEventTriggerDefinition XER - decoded\n%s", result)
+//}
 
 func Test_perEncodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
