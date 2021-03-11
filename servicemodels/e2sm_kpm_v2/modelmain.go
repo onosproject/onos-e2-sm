@@ -88,40 +88,32 @@ func (sm servicemodel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, 
 //}
 
 func (sm servicemodel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented")
-}
+	perBytes, err := kpmv2ctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("error decoding E2SmKpmRanfunctionDescription to PER %s", err)
+	}
 
-//func (sm servicemodel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
-//	perBytes, err := kpmv2ctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1Bytes)
-//	if err != nil {
-//		return nil, fmt.Errorf("error decoding E2SmKpmRanfunctionDescription to PER %s", err)
-//	}
-//
-//	protoBytes, err := proto.Marshal(perBytes)
-//	if err != nil {
-//		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmRanfunctionDescription %s", err)
-//	}
-//
-//	return protoBytes, nil
-//}
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmRanfunctionDescription %s", err)
+	}
+
+	return protoBytes, nil
+}
 
 func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented")
-}
+	protoObj := new(e2sm_kpm_v2.E2SmKpmRanfunctionDescription)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmRanfunctionDescription %s", err)
+	}
 
-//func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
-//	protoObj := new(e2sm_kpm_v2.E2SmKpmRanfunctionDescription)
-//	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-//		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmRanfunctionDescription %s", err)
-//	}
-//
-//	perBytes, err := kpmv2ctypes.PerEncodeE2SmKpmRanfunctionDescription(protoObj)
-//	if err != nil {
-//		return nil, fmt.Errorf("error encoding E2SmKpmRanfunctionDescription to PER %s", err)
-//	}
-//
-//	return perBytes, nil
-//}
+	perBytes, err := kpmv2ctypes.PerEncodeE2SmKpmRanfunctionDescription(protoObj)
+	if err != nil {
+		return nil, fmt.Errorf("error encoding E2SmKpmRanfunctionDescription to PER %s", err)
+	}
+
+	return perBytes, nil
+}
 
 func (sm servicemodel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := kpmv2ctypes.PerDecodeE2SmKpmEventTriggerDefinition(asn1Bytes)
