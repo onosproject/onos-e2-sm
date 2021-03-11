@@ -7,12 +7,14 @@ package kpmv2ctypes
 import (
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	"gotest.tools/assert"
+	"testing"
 )
 
 func createE2SMKPMIndicationMessage() *e2sm_kpm_v2.E2SmKpmIndicationMessage {
 
 	var integer int64 = 12345
-	//var rl float64 = 6789
+	var rl float64 = 6789
 	var cellObjID string = "onf"
 	var granularity int32 = 21
 	var subscriptionID int64 = 12345
@@ -57,7 +59,7 @@ func createE2SMKPMIndicationMessage() *e2sm_kpm_v2.E2SmKpmIndicationMessage {
 	}
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItem_Integer(integer))
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItem_NoValue())
-	//measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItem_Real(rl))
+	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItem_Real(rl))
 
 	measData := e2sm_kpm_v2.MeasurementData{
 		Value: make([]*e2sm_kpm_v2.MeasurementRecord, 0),
@@ -69,52 +71,52 @@ func createE2SMKPMIndicationMessage() *e2sm_kpm_v2.E2SmKpmIndicationMessage {
 	return newE2SmKpmPdu
 }
 
-//func Test_xerEncodeE2SmKpmIndicationMessage(t *testing.T) {
-//
-//	im := createE2SMKPMIndicationMessage()
-//
-//	xer, err := XerEncodeE2SmKpmIndicationMessage(im)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 1646, len(xer))
-//	t.Logf("E2SmKpmIndicationMessage XER\n%s", string(xer))
-//}
+func Test_xerEncodeE2SmKpmIndicationMessage(t *testing.T) {
 
-//func Test_xerDecodeE2SmKpmIndicationMessage(t *testing.T) {
-//
-//	im := createE2SMKPMIndicationMessage()
-//
-//	xer, err := XerEncodeE2SmKpmIndicationMessage(im)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 1646, len(xer))
-//	t.Logf("E2SmKpmIndicationMessage XER\n%s", string(xer))
-//
-//	result, err := XerDecodeE2SmKpmIndicationMessage(xer)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("E2SmKpmIndicationMessage XER - decoded\n%s", result)
-//}
+	im := createE2SMKPMIndicationMessage()
 
-//func Test_perEncodeE2SmKpmIndicationMessage(t *testing.T) {
-//
-//	im := createE2SMKPMIndicationMessage()
-//
-//	per, err := PerEncodeE2SmKpmIndicationMessage(im)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 4, len(per))
-//	t.Logf("E2SmKpmIndicationMessage PER\n%s", string(per))
-//}
+	xer, err := XerEncodeE2SmKpmIndicationMessage(im)
+	assert.NilError(t, err)
+	assert.Equal(t, 372, len(xer))
+	t.Logf("E2SmKpmIndicationMessage XER\n%s", string(xer))
+}
 
-//func Test_perDecodeE2SmKpmIndicationMessage(t *testing.T) {
-//
-//	im := createE2SMKPMIndicationMessage()
-//
-//	per, err := PerEncodeE2SmKpmIndicationMessage(im)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 4, len(per))
-//	t.Logf("E2SmKpmIndicationMessage PER\n%s", string(per))
-//
-//	result, err := PerDecodeE2SmKpmIndicationMessage(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("E2SmKpmIndicationMessage PER - decoded\n%s", result)
-//}
+func Test_xerDecodeE2SmKpmIndicationMessage(t *testing.T) {
+
+	im := createE2SMKPMIndicationMessage()
+
+	xer, err := XerEncodeE2SmKpmIndicationMessage(im)
+	assert.NilError(t, err)
+	assert.Equal(t, 372, len(xer))
+	t.Logf("E2SmKpmIndicationMessage XER\n%s", string(xer))
+
+	result, err := XerDecodeE2SmKpmIndicationMessage(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmKpmIndicationMessage XER - decoded\n%s", result)
+}
+
+func Test_perEncodeE2SmKpmIndicationMessage(t *testing.T) {
+
+	im := createE2SMKPMIndicationMessage()
+
+	per, err := PerEncodeE2SmKpmIndicationMessage(im)
+	assert.NilError(t, err)
+	assert.Equal(t, 13, len(per))
+	t.Logf("E2SmKpmIndicationMessage PER\n%s", string(per))
+}
+
+func Test_perDecodeE2SmKpmIndicationMessage(t *testing.T) {
+
+	im := createE2SMKPMIndicationMessage()
+
+	per, err := PerEncodeE2SmKpmIndicationMessage(im)
+	assert.NilError(t, err)
+	assert.Equal(t, 13, len(per))
+	t.Logf("E2SmKpmIndicationMessage PER\n%s", string(per))
+
+	//result, err := PerDecodeE2SmKpmIndicationMessage(per)
+	//assert.NilError(t, err)
+	//assert.Assert(t, result != nil)
+	//t.Logf("E2SmKpmIndicationMessage PER - decoded\n%s", result)
+}
