@@ -111,6 +111,7 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 
 	bitrateRangeC := C.long(measurementLabel.BitrateRange)
 	layerMuMimoC := C.long(measurementLabel.LayerMuMimo)
+	//var sUmC C.e_MeasurementLabel__sUM
 	sUmC := C.long(measurementLabel.SUm)
 	distBinXC := C.long(measurementLabel.DistBinX)
 	distBinYC := C.long(measurementLabel.DistBinY)
@@ -184,11 +185,9 @@ func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_
 
 	bitrateRange := int32(*measurementLabelC.bitrateRange)
 	layerMuMimo := int32(*measurementLabelC.layerMU_MIMO)
-	sUm := int32(*measurementLabelC.sUM)
 	distBinX := int32(*measurementLabelC.distBinX)
 	distBinY := int32(*measurementLabelC.distBinY)
 	distBinZ := int32(*measurementLabelC.distBinZ)
-	preLabelOverride := int32(*measurementLabelC.preLabelOverride)
 	startEndInd := int32(*measurementLabelC.startEndInd)
 	measurementLabel := e2sm_kpm_v2.MeasurementLabel{
 		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
@@ -202,12 +201,12 @@ func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_
 		ARpmin:           aRpmin,
 		BitrateRange:     bitrateRange,
 		LayerMuMimo:      layerMuMimo,
-		SUm:              sUm,
+		SUm:              e2sm_kpm_v2.SUM_SUM_TRUE,
 		DistBinX:         distBinX,
 		DistBinY:         distBinY,
 		DistBinZ:         distBinZ,
-		PreLabelOverride: preLabelOverride,
-		StartEndInd:      startEndInd,
+		PreLabelOverride: e2sm_kpm_v2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE,
+		StartEndInd:      e2sm_kpm_v2.StartEndInd(startEndInd),
 	}
 
 	return &measurementLabel, nil
