@@ -32,12 +32,20 @@ typedef enum MeasurementLabel__sUM {
 	 * Enumeration is extensible
 	 */
 } e_MeasurementLabel__sUM;
+
+/* MeasurementLabel__sUM */
+typedef long	 MeasurementLabel__sUM_t;
+
 typedef enum MeasurementLabel__preLabelOverride {
 	MeasurementLabel__preLabelOverride_true	= 0
 	/*
 	 * Enumeration is extensible
 	 */
 } e_MeasurementLabel__preLabelOverride;
+
+/* MeasurementLabel__preLabelOverride */
+typedef long	 MeasurementLabel__preLabelOverride_t;
+
 typedef enum MeasurementLabel__startEndInd {
 	MeasurementLabel__startEndInd_start	= 0,
 	MeasurementLabel__startEndInd_end	= 1
@@ -45,6 +53,9 @@ typedef enum MeasurementLabel__startEndInd {
 	 * Enumeration is extensible
 	 */
 } e_MeasurementLabel__startEndInd;
+
+/* MeasurementLabel__startEndInd */
+typedef long	 MeasurementLabel__startEndInd_t;
 
 /* Forward declarations */
 struct SNSSAI;
@@ -61,12 +72,12 @@ typedef struct MeasurementLabel {
 	ARP_t	*aRPmin;	/* OPTIONAL */
 	long	*bitrateRange;	/* OPTIONAL */
 	long	*layerMU_MIMO;	/* OPTIONAL */
-	long	*sUM;	/* OPTIONAL */
+	MeasurementLabel__sUM_t	*sUM;	/* OPTIONAL */
 	long	*distBinX;	/* OPTIONAL */
 	long	*distBinY;	/* OPTIONAL */
 	long	*distBinZ;	/* OPTIONAL */
-	long	*preLabelOverride;	/* OPTIONAL */
-	long	*startEndInd;	/* OPTIONAL */
+	MeasurementLabel__preLabelOverride_t	*preLabelOverride;	/* OPTIONAL */
+	MeasurementLabel__startEndInd_t	*startEndInd;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
