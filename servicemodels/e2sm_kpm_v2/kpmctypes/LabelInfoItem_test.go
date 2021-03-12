@@ -34,19 +34,19 @@ func createLabelInfoItem() *e2sm_kpm_v2.LabelInfoItem {
 				Value: 1,
 			},
 			ARpmax: &e2sm_kpm_v2.Arp{
-				Value: 50,
+				Value: 15,
 			},
 			ARpmin: &e2sm_kpm_v2.Arp{
 				Value: 1,
 			},
 			BitrateRange:     25,
 			LayerMuMimo:      1,
-			SUm:              0,
+			SUm:              e2sm_kpm_v2.SUM_SUM_TRUE,
 			DistBinX:         123,
 			DistBinY:         456,
 			DistBinZ:         789,
-			PreLabelOverride: 0,
-			StartEndInd:      1,
+			PreLabelOverride: e2sm_kpm_v2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE,
+			StartEndInd:      e2sm_kpm_v2.StartEndInd_START_END_IND_END,
 		},
 	}
 }
@@ -82,7 +82,7 @@ func Test_perEncodeLabelInfoItem(t *testing.T) {
 
 	per, err := perEncodeLabelInfoItem(lii)
 	assert.NilError(t, err)
-	assert.Equal(t, 38, len(per))
+	assert.Equal(t, 36, len(per))
 	t.Logf("LabelInfoItem PER\n%s", string(per))
 }
 
@@ -92,7 +92,7 @@ func Test_perDecodeLabelInfoItem(t *testing.T) {
 
 	per, err := perEncodeLabelInfoItem(lii)
 	assert.NilError(t, err)
-	assert.Equal(t, 38, len(per))
+	assert.Equal(t, 36, len(per))
 	t.Logf("LabelInfoItem PER\n%s", string(per))
 
 	result, err := perDecodeLabelInfoItem(per)

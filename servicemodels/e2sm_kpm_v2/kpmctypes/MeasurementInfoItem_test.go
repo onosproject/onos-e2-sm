@@ -45,12 +45,12 @@ func createMeasurementInfoItem() (*e2sm_kpm_v2.MeasurementInfoItem, error) {
 			},
 			BitrateRange:     25,
 			LayerMuMimo:      1,
-			SUm:              0,
+			SUm:              e2sm_kpm_v2.SUM_SUM_TRUE,
 			DistBinX:         123,
 			DistBinY:         456,
 			DistBinZ:         789,
-			PreLabelOverride: 0,
-			StartEndInd:      1,
+			PreLabelOverride: e2sm_kpm_v2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE,
+			StartEndInd:      e2sm_kpm_v2.StartEndInd_START_END_IND_START,
 		},
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
@@ -79,7 +79,7 @@ func Test_xerEncodeMeasurementInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 982, len(xer))
+	assert.Equal(t, 984, len(xer))
 	t.Logf("MeasurementInfoItem XER\n%s", string(xer))
 }
 
@@ -90,7 +90,7 @@ func Test_xerDecodeMeasurementInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 982, len(xer))
+	assert.Equal(t, 984, len(xer))
 	t.Logf("MeasurementInfoItem XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementInfoItem(xer)

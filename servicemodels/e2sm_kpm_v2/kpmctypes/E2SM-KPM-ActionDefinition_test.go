@@ -28,17 +28,15 @@ func createE2SMKPMActionDefinition() *e2sm_kpm_v2.E2SmKpmActionDefinition {
 	var arpMin int32 = 1
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
-	var sum int32 = 0
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
-	var preLabel int32 = 0
-	var startEndIndication int32 = 1
+	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
 	var measurementName string = "trial"
 
 	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd, fiveQI,
-		qci, qciMax, qciMin, arpMax, arpMin, bitrateRange, layerMuMimo, sum,
-		distX, distY, distZ, preLabel, startEndIndication)
+		qci, qciMax, qciMin, arpMax, arpMin, bitrateRange, layerMuMimo,
+		distX, distY, distZ, startEndIndication)
 
 	labelInfoList := e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),

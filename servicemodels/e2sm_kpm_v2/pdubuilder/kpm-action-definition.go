@@ -96,8 +96,8 @@ func CreateMeasurementType_MeasName(measName string) (*e2sm_kpm_v2.MeasurementTy
 }
 
 func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI int32, qci int32, qciMax int32, qciMin int32,
-	arpMax int32, arpMin int32, bitrateRange int32, layerMuMimo int32, sum int32, distX int32, distY int32, distZ int32,
-	preLabel int32, startEndIndication int32) (*e2sm_kpm_v2.LabelInfoItem, error) {
+	arpMax int32, arpMin int32, bitrateRange int32, layerMuMimo int32, distX int32, distY int32, distZ int32,
+	startEndIndication e2sm_kpm_v2.StartEndInd) (*e2sm_kpm_v2.LabelInfoItem, error) {
 
 	if len(sst) != 1 {
 		return nil, fmt.Errorf("error: SST should be 1 chars")
@@ -144,11 +144,11 @@ func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI int32, qci
 			},
 			BitrateRange:     bitrateRange,
 			LayerMuMimo:      layerMuMimo,
-			SUm:              sum,
+			SUm:              e2sm_kpm_v2.SUM_SUM_TRUE,
 			DistBinX:         distX,
 			DistBinY:         distY,
 			DistBinZ:         distZ,
-			PreLabelOverride: preLabel,
+			PreLabelOverride: e2sm_kpm_v2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE,
 			StartEndInd:      startEndIndication,
 		},
 	}

@@ -16,439 +16,455 @@ option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2
 
 import "validate/v1/validate.proto";
 
+// enumerated from e2sm_kpm_v2.asn1:82
+enum SUM {
+  SUM_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.asn1:86
+enum PreLabelOverride {
+  PRE_LABEL_OVERRIDE_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.asn1:87
+enum StartEndInd {
+  START_END_IND_START = 0;
+  START_END_IND_END = 1;
+};
+
 // sequence from e2sm_kpm_ies_v2.asn:24
 message Eutracgi {
-  PlmnIdentity p_lmn_identity = 1 [json_name="EUTRACGI:pLMN_Identity"];
-  EutracellIdentity e_utracell_identity = 2 [json_name="EUTRACGI:eUTRACellIdentity"];
+  PlmnIdentity p_lmn_identity = 1 [json_name = "EUTRACGI:pLMN_Identity"];
+  EutracellIdentity e_utracell_identity = 2 [json_name = "EUTRACGI:eUTRACellIdentity"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:30
 message Nrcgi {
-  PlmnIdentity p_lmn_identity = 1 [json_name="NRCGI:pLMN_Identity"];
-  NrcellIdentity n_rcell_identity = 2 [json_name="NRCGI:nRCellIdentity"];
+  PlmnIdentity p_lmn_identity = 1 [json_name = "NRCGI:pLMN_Identity"];
+  NrcellIdentity n_rcell_identity = 2 [json_name = "NRCGI:nRCellIdentity"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:36
 message CellGlobalId {
   // choice from e2sm_kpm_ies_v2.asn:36
   oneof cell_global_id {
-    Nrcgi nr_cgi = 1 [json_name="CellGlobalID:nr_CGI"];
-    Eutracgi e_utra_cgi = 2 [json_name="CellGlobalID:eUTRA_CGI"];
+    Nrcgi nr_cgi = 1 [json_name = "CellGlobalID:nr_CGI"];
+    Eutracgi e_utra_cgi = 2 [json_name = "CellGlobalID:eUTRA_CGI"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:42
 message Snssai {
-  bytes s_st = 1 [(validate.v1.rules).bytes.len = 1, json_name="SNSSAI:sST"];
-  bytes s_d = 2 [(validate.v1.rules).bytes.len = 3, json_name="SNSSAI:sD"];
+  bytes s_st = 1 [(validate.v1.rules).bytes.len = 1, json_name = "SNSSAI:sST"];
+  bytes s_d = 2 [(validate.v1.rules).bytes.len = 3, json_name = "SNSSAI:sD"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:47
 message FiveQi {
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name="FiveQI:value"];
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name = "FiveQI:value"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:49
 message Qci {
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name="QCI:value"];
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name = "QCI:value"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:51
 message Arp {
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 15}, json_name="ARP:value"];
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 15}, json_name = "ARP:value"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:61
 message GranularityPeriod {
-  int32 value = 1 [json_name="GranularityPeriod:value"];
+  int32 value = 1 [json_name = "GranularityPeriod:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:62
 message MeasurementType {
   // choice from e2sm_kpm_ies_v2.asn:62
   oneof measurement_type {
-    MeasurementTypeName meas_name = 1 [json_name="MeasurementType:measName"];
-    MeasurementTypeId meas_id = 2 [json_name="MeasurementType:measID"];
+    MeasurementTypeName meas_name = 1 [json_name = "MeasurementType:measName"];
+    MeasurementTypeId meas_id = 2 [json_name = "MeasurementType:measID"];
   }
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:69
 message MeasurementTypeId {
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementTypeID:value"];
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name = "MeasurementTypeID:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:72
 message MeasurementLabel {
-  PlmnIdentity plmn_id = 1 [json_name="MeasurementLabel:plmnID"];
-  Snssai slice_id = 2 [json_name="MeasurementLabel:sliceID"];
-  FiveQi five_qi = 3 [json_name="MeasurementLabel:fiveQI"];
-  Qci q_ci = 4 [json_name="MeasurementLabel:qCI"];
-  Qci q_cimax = 5 [json_name="MeasurementLabel:qCImax"];
-  Qci q_cimin = 6 [json_name="MeasurementLabel:qCImin"];
-  Arp a_rpmax = 7 [json_name="MeasurementLabel:aRPmax"];
-  Arp a_rpmin = 8 [json_name="MeasurementLabel:aRPmin"];
-  int32 bitrate_range = 9 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:bitrateRange"];
-  int32 layer_mu_mimo = 10 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:layerMU_MIMO"];
-  int32 s_um = 11 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementLabel:sUM"];
-  int32 dist_bin_x = 12 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinX"];
-  int32 dist_bin_y = 13 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinY"];
-  int32 dist_bin_z = 14 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="MeasurementLabel:distBinZ"];
-  int32 pre_label_override = 15 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementLabel:preLabelOverride"];
-  int32 start_end_ind = 16 [(validate.v1.rules).int32 = {gte: 0, lte: 1}, json_name="MeasurementLabel:startEndInd"];
+  PlmnIdentity plmn_id = 1 [json_name = "MeasurementLabel:plmnID"];
+  Snssai slice_id = 2 [json_name = "MeasurementLabel:sliceID"];
+  FiveQi five_qi = 3 [json_name = "MeasurementLabel:fiveQI"];
+  Qci q_ci = 4 [json_name = "MeasurementLabel:qCI"];
+  Qci q_cimax = 5 [json_name = "MeasurementLabel:qCImax"];
+  Qci q_cimin = 6 [json_name = "MeasurementLabel:qCImin"];
+  Arp a_rpmax = 7 [json_name = "MeasurementLabel:aRPmax"];
+  Arp a_rpmin = 8 [json_name = "MeasurementLabel:aRPmin"];
+  int32 bitrate_range = 9 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name = "MeasurementLabel:bitrateRange"];
+  int32 layer_mu_mimo = 10 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name = "MeasurementLabel:layerMU_MIMO"];
+  SUM s_um = 11 [json_name = "MeasurementLabel:sUM"];
+  int32 dist_bin_x = 12 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name = "MeasurementLabel:distBinX"];
+  int32 dist_bin_y = 13 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name = "MeasurementLabel:distBinY"];
+  int32 dist_bin_z = 14 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name = "MeasurementLabel:distBinZ"];
+  PreLabelOverride pre_label_override = 15 [json_name = "MeasurementLabel:preLabelOverride"];
+  StartEndInd start_end_ind = 16 [json_name = "MeasurementLabel:startEndInd"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:91
 message SubscriptionId {
-  int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967296}, json_name="SubscriptionID:value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967296}, json_name = "SubscriptionID:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:96
 message GlobalKpmnodeId {
   // choice from e2sm_kpm_ies_v2.asn:96
   oneof global_kpmnode_id {
-    GlobalKpmnodeGnbId g_nb = 1 [json_name="GlobalKPMnode-ID:gNB"];
-    GlobalKpmnodeEnGnbId en_g_nb = 2 [json_name="GlobalKPMnode-ID:en_gNB"];
-    GlobalKpmnodeNgEnbId ng_e_nb = 3 [json_name="GlobalKPMnode-ID:ng_eNB"];
-    GlobalKpmnodeEnbId e_nb = 4 [json_name="GlobalKPMnode-ID:eNB"];
+    GlobalKpmnodeGnbId g_nb = 1 [json_name = "GlobalKPMnode-ID:gNB"];
+    GlobalKpmnodeEnGnbId en_g_nb = 2 [json_name = "GlobalKPMnode-ID:en_gNB"];
+    GlobalKpmnodeNgEnbId ng_e_nb = 3 [json_name = "GlobalKPMnode-ID:ng_eNB"];
+    GlobalKpmnodeEnbId e_nb = 4 [json_name = "GlobalKPMnode-ID:eNB"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:104
 message GlobalKpmnodeGnbId {
-  GlobalgNbId global_g_nb_id = 1 [json_name="GlobalKPMnode-gNB-ID:global_gNB_ID"];
-  GnbCuUpId g_nb_cu_up_id = 2 [json_name="GlobalKPMnode-gNB-ID:gNB_CU_UP_ID"];
-  GnbDuId g_nb_du_id = 3 [json_name="GlobalKPMnode-gNB-ID:gNB_DU_ID"];
+  GlobalgNbId global_g_nb_id = 1 [json_name = "GlobalKPMnode-gNB-ID:global_gNB_ID"];
+  GnbCuUpId g_nb_cu_up_id = 2 [json_name = "GlobalKPMnode-gNB-ID:gNB_CU_UP_ID"];
+  GnbDuId g_nb_du_id = 3 [json_name = "GlobalKPMnode-gNB-ID:gNB_DU_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:111
 message GlobalgNbId {
-  PlmnIdentity plmn_id = 1 [json_name="GlobalgNB-ID:plmn_id"];
-  GnbIdChoice gnb_id = 2 [json_name="GlobalgNB-ID:gnb_id"];
+  PlmnIdentity plmn_id = 1 [json_name = "GlobalgNB-ID:plmn_id"];
+  GnbIdChoice gnb_id = 2 [json_name = "GlobalgNB-ID:gnb_id"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:116
 message GnbCuUpId {
-  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="GNB-CU-UP-ID:value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name = "GNB-CU-UP-ID:value"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:118
 message GnbDuId {
-  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="GNB-DU-ID:value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name = "GNB-DU-ID:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:121
 message GnbIdChoice {
   // choice from e2sm_kpm_ies_v2.asn:121
   oneof gnb_id_choice {
-    BitString gnb_id = 1 [json_name="GNB-ID-Choice:gnb_ID"];
+    BitString gnb_id = 1 [json_name = "GNB-ID-Choice:gnb_ID"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:126
 message GlobalKpmnodeEnGnbId {
-  GlobalenGnbId global_g_nb_id = 1 [json_name="GlobalKPMnode-en-gNB-ID:global_gNB_ID"];
-  GnbCuUpId g_nb_cu_up_id = 2 [json_name="GlobalKPMnode-en-gNB-ID:gNB_CU_UP_ID"];
-  GnbDuId g_nb_du_id = 3 [json_name="GlobalKPMnode-en-gNB-ID:gNB_DU_ID"];
+  GlobalenGnbId global_g_nb_id = 1 [json_name = "GlobalKPMnode-en-gNB-ID:global_gNB_ID"];
+  GnbCuUpId g_nb_cu_up_id = 2 [json_name = "GlobalKPMnode-en-gNB-ID:gNB_CU_UP_ID"];
+  GnbDuId g_nb_du_id = 3 [json_name = "GlobalKPMnode-en-gNB-ID:gNB_DU_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:133
 message GlobalenGnbId {
-  PlmnIdentity p_lmn_identity = 1 [json_name="GlobalenGNB-ID:pLMN_Identity"];
-  EngnbId g_nb_id = 2 [json_name="GlobalenGNB-ID:gNB_ID"];
+  PlmnIdentity p_lmn_identity = 1 [json_name = "GlobalenGNB-ID:pLMN_Identity"];
+  EngnbId g_nb_id = 2 [json_name = "GlobalenGNB-ID:gNB_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:139
 message EngnbId {
   // choice from e2sm_kpm_ies_v2.asn:139
   oneof engnb_id {
-    BitString g_nb_id = 1 [json_name="ENGNB-ID:gNB_ID"];
+    BitString g_nb_id = 1 [json_name = "ENGNB-ID:gNB_ID"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:144
 message GlobalKpmnodeNgEnbId {
-  GlobalngeNbId global_ng_e_nb_id = 1 [json_name="GlobalKPMnode-ng-eNB-ID:global_ng_eNB_ID"];
-  GnbDuId g_nb_du_id = 2 [json_name="GlobalKPMnode-ng-eNB-ID:gNB_DU_ID"];
+  GlobalngeNbId global_ng_e_nb_id = 1 [json_name = "GlobalKPMnode-ng-eNB-ID:global_ng_eNB_ID"];
+  GnbDuId g_nb_du_id = 2 [json_name = "GlobalKPMnode-ng-eNB-ID:gNB_DU_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:150
 message GlobalngeNbId {
-  PlmnIdentity plmn_id = 1 [json_name="GlobalngeNB-ID:plmn_id"];
-  EnbIdChoice enb_id = 2 [json_name="GlobalngeNB-ID:enb_id"];
-  BitString short_macro_e_nb_id = 3 [json_name="GlobalngeNB-ID:short_Macro_eNB_ID"];
-  BitString long_macro_e_nb_id = 4 [json_name="GlobalngeNB-ID:long_Macro_eNB_ID"];
+  PlmnIdentity plmn_id = 1 [json_name = "GlobalngeNB-ID:plmn_id"];
+  EnbIdChoice enb_id = 2 [json_name = "GlobalngeNB-ID:enb_id"];
+  BitString short_macro_e_nb_id = 3 [json_name = "GlobalngeNB-ID:short_Macro_eNB_ID"];
+  BitString long_macro_e_nb_id = 4 [json_name = "GlobalngeNB-ID:long_Macro_eNB_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:158
 message EnbIdChoice {
   // choice from e2sm_kpm_ies_v2.asn:158
   oneof enb_id_choice {
-    BitString enb_id_macro = 1 [json_name="ENB-ID-Choice:enb_ID_macro"];
-    BitString enb_id_shortmacro = 2 [json_name="ENB-ID-Choice:enb_ID_shortmacro"];
-    BitString enb_id_longmacro = 3 [json_name="ENB-ID-Choice:enb_ID_longmacro"];
+    BitString enb_id_macro = 1 [json_name = "ENB-ID-Choice:enb_ID_macro"];
+    BitString enb_id_shortmacro = 2 [json_name = "ENB-ID-Choice:enb_ID_shortmacro"];
+    BitString enb_id_longmacro = 3 [json_name = "ENB-ID-Choice:enb_ID_longmacro"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:165
 message GlobalKpmnodeEnbId {
-  GlobalEnbId global_e_nb_id = 1 [json_name="GlobalKPMnode-eNB-ID:global_eNB_ID"];
+  GlobalEnbId global_e_nb_id = 1 [json_name = "GlobalKPMnode-eNB-ID:global_eNB_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:170
 message GlobalEnbId {
-  PlmnIdentity p_lmn_identity = 1 [json_name="GlobalENB-ID:pLMN_Identity"];
-  EnbId e_nb_id = 2 [json_name="GlobalENB-ID:eNB_ID"];
+  PlmnIdentity p_lmn_identity = 1 [json_name = "GlobalENB-ID:pLMN_Identity"];
+  EnbId e_nb_id = 2 [json_name = "GlobalENB-ID:eNB_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:176
 message EnbId {
   // choice from e2sm_kpm_ies_v2.asn:176
   oneof enb_id {
-    BitString macro_e_nb_id = 1 [json_name="ENB-ID:macro_eNB_ID"];
-    BitString home_e_nb_id = 2 [json_name="ENB-ID:home_eNB_ID"];
+    BitString macro_e_nb_id = 1 [json_name = "ENB-ID:macro_eNB_ID"];
+    BitString home_e_nb_id = 2 [json_name = "ENB-ID:home_eNB_ID"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:184
 message RanfunctionName {
-  string ran_function_short_name = 1 [json_name="RANfunction-Name:ranFunction_ShortName"];
-  string ran_function_e2_sm_oid = 2 [json_name="RANfunction-Name:ranFunction_E2SM_OID"];
-  string ran_function_description = 3 [json_name="RANfunction-Name:ranFunction_Decsription"];
-  int32 ran_function_instance = 4 [json_name="RANfunction-Name:ranFunction_Instance"];
+  string ran_function_short_name = 1 [json_name = "RANfunction-Name:ranFunction_ShortName"];
+  string ran_function_e2_sm_oid = 2 [json_name = "RANfunction-Name:ranFunction_E2SM_OID"];
+  string ran_function_description = 3 [json_name = "RANfunction-Name:ranFunction_Decsription"];
+  int32 ran_function_instance = 4 [json_name = "RANfunction-Name:ranFunction_Instance"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:193
 message RicStyleType {
-  int32 value = 1 [json_name="RIC-Style-Type:value"];
+  int32 value = 1 [json_name = "RIC-Style-Type:value"];
 };
 
 // range of Integer from e2sm_kpm_ies_v2.asn:201
 message RicFormatType {
-  int32 value = 1 [json_name="RIC-Format-Type:value"];
+  int32 value = 1 [json_name = "RIC-Format-Type:value"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:201
 message MaxnoofKpmnodes {
-  int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="MaxnoofKPMnodes:value"];
+  int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name = "MaxnoofKPMnodes:value"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:202
 message MaxnoofCells {
-  int32 value = 1 [(validate.v1.rules).int32.const = 16384, json_name="MaxnoofCells:value"];
+  int32 value = 1 [(validate.v1.rules).int32.const = 16384, json_name = "MaxnoofCells:value"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:203
 message MaxnoofRicstyles {
-  int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="MaxnoofRicstyles:value"];
+  int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name = "MaxnoofRicstyles:value"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:204
 message MaxnoofMeasurementInfo {
-  int32 value = 1 [(validate.v1.rules).int32.const = 65536, json_name="MaxnoofMeasurementInfo:value"];
+  int32 value = 1 [(validate.v1.rules).int32.const = 65536, json_name = "MaxnoofMeasurementInfo:value"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:205
 message MaxnoofLabelInfo {
-  int64 value = 1 [(validate.v1.rules).int64.const = 2147483647, json_name="MaxnoofLabelInfo"];
+  int64 value = 1 [(validate.v1.rules).int64.const = 2147483647, json_name = "MaxnoofLabelInfo"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:206
 message MaxnoofMeasurementRecord {
-  int32 value = 1 [(validate.v1.rules).int32.const = 65536, json_name="MaxnoofMeasurementRecord:value"];
+  int32 value = 1 [(validate.v1.rules).int32.const = 65536, json_name = "MaxnoofMeasurementRecord:value"];
 };
 
 // constant Integer from e2sm_kpm_ies_v2.asn:207
 message MaxnoofMeasurementValue {
-  int64 value = 1 [(validate.v1.rules).int64.const = 2147483647, json_name="MaxnoofMeasurementValue"];
+  int64 value = 1 [(validate.v1.rules).int64.const = 2147483647, json_name = "MaxnoofMeasurementValue"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:211
 message MeasurementInfoList {
-  repeated MeasurementInfoItem value = 1 [json_name="MeasurementInfoList:value"];
+  repeated MeasurementInfoItem value = 1 [json_name = "MeasurementInfoList:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:212
 message MeasurementInfoItem {
-  MeasurementType meas_type = 1 [json_name="MeasurementInfoItem:measType"];
-  LabelInfoList label_info_list = 2 [json_name="MeasurementInfoItem:labelInfoList"];
+  MeasurementType meas_type = 1 [json_name = "MeasurementInfoItem:measType"];
+  LabelInfoList label_info_list = 2 [json_name = "MeasurementInfoItem:labelInfoList"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:219
 message LabelInfoList {
-  repeated LabelInfoItem value = 1 [json_name="LabelInfoList:value"];
+  repeated LabelInfoItem value = 1 [json_name = "LabelInfoList:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:220
 message LabelInfoItem {
-  MeasurementLabel meas_label = 1 [json_name="LabelInfoItem:measLabel"];
+  MeasurementLabel meas_label = 1 [json_name = "LabelInfoItem:measLabel"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:226
 message MeasurementData {
-  repeated MeasurementRecord value = 1 [json_name="MeasurementData:value"];
+  repeated MeasurementRecord value = 1 [json_name = "MeasurementData:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:228
 message MeasurementRecord {
-  repeated MeasurementRecordItem value = 1 [json_name="MeasurementRecord:value"];
+  repeated MeasurementRecordItem value = 1 [json_name = "MeasurementRecord:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:229
 message MeasurementRecordItem {
   // choice from e2sm_kpm_ies_v2.asn:229
   oneof measurement_record_item {
-    int64 integer = 1 [json_name="MeasurementRecordItem:integer"];
-    double real = 2 [json_name="MeasurementRecordItem:real"];
-    int32 no_value = 3 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name="MeasurementRecordItem:noValue"];
+    int64 integer = 1 [json_name = "MeasurementRecordItem:integer"];
+    double real = 2 [json_name = "MeasurementRecordItem:real"];
+    int32 no_value = 3 [(validate.v1.rules).int32 = {gte: 0, lt: 1}, json_name = "MeasurementRecordItem:noValue"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:237
 message MeasurementInfoActionList {
-  repeated MeasurementInfoActionItem value = 1 [json_name="MeasurementInfo-Action-List:value"];
+  repeated MeasurementInfoActionItem value = 1 [json_name = "MeasurementInfo-Action-List:value"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:238
 message MeasurementInfoActionItem {
-  MeasurementTypeName meas_name = 1 [json_name="MeasurementInfo-Action-Item:measName"];
-  MeasurementTypeId meas_id = 2 [json_name="MeasurementInfo-Action-Item:measID"];
+  MeasurementTypeName meas_name = 1 [json_name = "MeasurementInfo-Action-Item:measName"];
+  MeasurementTypeId meas_id = 2 [json_name = "MeasurementInfo-Action-Item:measID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:255
 message E2SmKpmEventTriggerDefinition {
   // choice from e2sm-kpm-ies_v2.asn1:255
   oneof e2_sm_kpm_event_trigger_definition {
-    E2SmKpmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name="E2SM-KPM-EventTriggerDefinition:eventDefinition_Format1"];
+    E2SmKpmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "E2SM-KPM-EventTriggerDefinition:eventDefinition_Format1"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:260
 message E2SmKpmEventTriggerDefinitionFormat1 {
-  int32 reporting_period = 1 [json_name="E2SM-KPM-EventTriggerDefinition-Format1:reportingPeriod"];
+  int32 reporting_period = 1 [json_name = "E2SM-KPM-EventTriggerDefinition-Format1:reportingPeriod"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:269
 message E2SmKpmActionDefinition {
-  RicStyleType ric_style_type = 1 [json_name="E2SM-KPM-ActionDefinition:ric_Style_Type"];
+  RicStyleType ric_style_type = 1 [json_name = "E2SM-KPM-ActionDefinition:ric_Style_Type"];
   oneof e2_sm_kpm_action_definition {
-    E2SmKpmActionDefinitionFormat1 action_definition_format1 = 2 [json_name="E2SM-KPM-ActionDefinition:actionDefinition_Format1"];
+    E2SmKpmActionDefinitionFormat1 action_definition_format1 = 2 [json_name = "E2SM-KPM-ActionDefinition:actionDefinition_Format1"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:278
 message E2SmKpmActionDefinitionFormat1 {
-  CellObjectId cell_obj_id = 1 [json_name="E2SM-KPM-ActionDefinition-Format1:cellObjID"];
-  MeasurementInfoList meas_info_list = 2 [json_name="E2SM-KPM-ActionDefinition-Format1:measInfoList"];
-  GranularityPeriod granul_period = 3 [json_name="E2SM-KPM-ActionDefinition-Format1:granulPeriod"];
-  SubscriptionId subscript_id = 4 [json_name="E2SM-KPM-ActionDefinition-Format1:subscriptID"];
+  CellObjectId cell_obj_id = 1 [json_name = "E2SM-KPM-ActionDefinition-Format1:cellObjID"];
+  MeasurementInfoList meas_info_list = 2 [json_name = "E2SM-KPM-ActionDefinition-Format1:measInfoList"];
+  GranularityPeriod granul_period = 3 [json_name = "E2SM-KPM-ActionDefinition-Format1:granulPeriod"];
+  SubscriptionId subscript_id = 4 [json_name = "E2SM-KPM-ActionDefinition-Format1:subscriptID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:293
 message E2SmKpmIndicationHeader {
   // choice from e2sm-kpm-v01.00.asn1:293
   oneof e2_sm_kpm_indication_header {
-    E2SmKpmIndicationHeaderFormat1 indication_header_format1 = 1 [json_name="E2SM-KPM-IndicationHeader:indicationHeader_Format1"];
+    E2SmKpmIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "E2SM-KPM-IndicationHeader:indicationHeader_Format1"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:298
 message E2SmKpmIndicationHeaderFormat1 {
-  TimeStamp collet_start_time = 1 [json_name="E2SM-KPM-IndicationHeader-Format1:colletStartTime"];
-  string file_formatversion = 2 [json_name="E2SM-KPM-IndicationHeader-Format1:fileFormatversion"];
-  string sender_name = 3 [json_name="E2SM-KPM-IndicationHeader-Format1:senderName"];
-  string sender_type = 4 [json_name="E2SM-KPM-IndicationHeader-Format1:senderType"];
-  string vendor_name = 5 [json_name="E2SM-KPM-IndicationHeader-Format1:vendorName"];
-  GlobalKpmnodeId kpm_node_id = 6 [json_name="E2SM-KPM-IndicationHeader-Format1:kpmNodeID"];
+  TimeStamp collet_start_time = 1 [json_name = "E2SM-KPM-IndicationHeader-Format1:colletStartTime"];
+  string file_formatversion = 2 [json_name = "E2SM-KPM-IndicationHeader-Format1:fileFormatversion"];
+  string sender_name = 3 [json_name = "E2SM-KPM-IndicationHeader-Format1:senderName"];
+  string sender_type = 4 [json_name = "E2SM-KPM-IndicationHeader-Format1:senderType"];
+  string vendor_name = 5 [json_name = "E2SM-KPM-IndicationHeader-Format1:vendorName"];
+  GlobalKpmnodeId kpm_node_id = 6 [json_name = "E2SM-KPM-IndicationHeader-Format1:kpmNodeID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:315
 message E2SmKpmIndicationMessage {
   // choice from e2sm_kpm_ies_v2.asn:315
   oneof e2_sm_kpm_indication_message {
-    E2SmKpmIndicationMessageFormat1 indication_message_format1 = 1 [json_name="E2SM-KPM-IndicationMessage:indicationMessage_Format1"];
+    E2SmKpmIndicationMessageFormat1 indication_message_format1 = 1 [json_name = "E2SM-KPM-IndicationMessage:indicationMessage_Format1"];
   }
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:320
 message E2SmKpmIndicationMessageFormat1 {
-  SubscriptionId subscript_id = 1 [json_name="E2SM-KPM-IndicationMessage-Format1:subscriptID"];
-  CellObjectId cell_obj_id = 2 [json_name="E2SM-KPM-IndicationMessage-Format1:cellObjID"];
-  GranularityPeriod granul_period = 3 [json_name="E2SM-KPM-IndicationMessage-Format1:granulPeriod"];
-  MeasurementInfoList meas_info_list = 4 [json_name="E2SM-KPM-IndicationMessage-Format1:measInfoList"];
-  MeasurementData meas_data = 5 [json_name="E2SM-KPM-IndicationMessage-Format1:measData"];
+  SubscriptionId subscript_id = 1 [json_name = "E2SM-KPM-IndicationMessage-Format1:subscriptID"];
+  CellObjectId cell_obj_id = 2 [json_name = "E2SM-KPM-IndicationMessage-Format1:cellObjID"];
+  GranularityPeriod granul_period = 3 [json_name = "E2SM-KPM-IndicationMessage-Format1:granulPeriod"];
+  MeasurementInfoList meas_info_list = 4 [json_name = "E2SM-KPM-IndicationMessage-Format1:measInfoList"];
+  MeasurementData meas_data = 5 [json_name = "E2SM-KPM-IndicationMessage-Format1:measData"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:333
 message E2SmKpmRanfunctionDescription {
-  RanfunctionName ran_function_name = 1 [json_name="E2SM-KPM-RANfunction-Description:ranFunction_Name"];
-  repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="E2SM-KPM-RANfunction-Description:ric_KPM_Node_List"];
-  repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM-KPM-RANfunction-Description:ric_EventTriggerStyle_List"];
-  repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM-KPM-RANfunction-Description:ric_ReportStyle_List"];
+  RanfunctionName ran_function_name = 1 [json_name = "E2SM-KPM-RANfunction-Description:ranFunction_Name"];
+  repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name = "E2SM-KPM-RANfunction-Description:ric_KPM_Node_List"];
+  repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "E2SM-KPM-RANfunction-Description:ric_EventTriggerStyle_List"];
+  repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "E2SM-KPM-RANfunction-Description:ric_ReportStyle_List"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:341
 message RicKpmnodeItem {
-  GlobalKpmnodeId ric_kpmnode_type = 1 [json_name="RIC-KPMNode-Item:ric_KPMNode_Type"];
-  repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name="RIC-KPMNode-Item:cell_Measurement_Object_List"];
+  GlobalKpmnodeId ric_kpmnode_type = 1 [json_name = "RIC-KPMNode-Item:ric_KPMNode_Type"];
+  repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name = "RIC-KPMNode-Item:cell_Measurement_Object_List"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:347
 message CellMeasurementObjectItem {
-  CellObjectId cell_object_id = 1 [json_name="Cell-Measurement-Object-Item:cell_object_ID"];
-  CellGlobalId cell_global_id = 2 [json_name="Cell-Measurement-Object-Item:cell_global_ID"];
+  CellObjectId cell_object_id = 1 [json_name = "Cell-Measurement-Object-Item:cell_object_ID"];
+  CellGlobalId cell_global_id = 2 [json_name = "Cell-Measurement-Object-Item:cell_global_ID"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:353
 message RicEventTriggerStyleItem {
-  RicStyleType ric_event_trigger_style_type = 1 [json_name="RIC-EventTriggerStyle-Item:ric_EventTriggerStyle_Type"];
-  RicStyleName ric_event_trigger_style_name = 2 [json_name="RIC-EventTriggerStyle-Item:ric_EventTriggerStyle_Name"];
-  RicFormatType ric_event_trigger_format_type = 3 [json_name="RIC-EventTriggerStyle-Item:ric_EventTriggerFormat_Type"];
+  RicStyleType ric_event_trigger_style_type = 1 [json_name = "RIC-EventTriggerStyle-Item:ric_EventTriggerStyle_Type"];
+  RicStyleName ric_event_trigger_style_name = 2 [json_name = "RIC-EventTriggerStyle-Item:ric_EventTriggerStyle_Name"];
+  RicFormatType ric_event_trigger_format_type = 3 [json_name = "RIC-EventTriggerStyle-Item:ric_EventTriggerFormat_Type"];
 };
 
 // sequence from e2sm_kpm_ies_v2.asn:360
 message RicReportStyleItem {
-  RicStyleType ric_report_style_type = 1 [json_name="RIC-ReportStyle-Item:ric_ReportStyle_Type"];
-  RicStyleName ric_report_style_name = 2 [json_name="RIC-ReportStyle-Item:ric_ReportStyle_Name"];
-  RicFormatType ric_action_format_type = 3 [json_name="RIC-ReportStyle-Item:ric_ActionFormat_Type"];
-  MeasurementInfoActionList meas_info_action_list = 4 [json_name="RIC-ReportStyle-Item:measInfo_Action_List"];
-  RicFormatType ric_indication_header_format_type = 5 [json_name="RIC-ReportStyle-Item:ric_IndicationHeaderFormat_Type"];
-  RicFormatType ric_indication_message_format_type = 6 [json_name="RIC-ReportStyle-Item:ric_IndicationMessageFormat_Type"];
+  RicStyleType ric_report_style_type = 1 [json_name = "RIC-ReportStyle-Item:ric_ReportStyle_Type"];
+  RicStyleName ric_report_style_name = 2 [json_name = "RIC-ReportStyle-Item:ric_ReportStyle_Name"];
+  RicFormatType ric_action_format_type = 3 [json_name = "RIC-ReportStyle-Item:ric_ActionFormat_Type"];
+  MeasurementInfoActionList meas_info_action_list = 4 [json_name = "RIC-ReportStyle-Item:measInfo_Action_List"];
+  RicFormatType ric_indication_header_format_type = 5 [json_name = "RIC-ReportStyle-Item:ric_IndicationHeaderFormat_Type"];
+  RicFormatType ric_indication_message_format_type = 6 [json_name = "RIC-ReportStyle-Item:ric_IndicationMessageFormat_Type"];
 };
 
 //Additionally copied and pasted..
 
 message RicStyleName {
-  string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RIC-Style-Name:value"];
+  string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "RIC-Style-Name:value"];
 }
 
 // Maybe validation part should be added..
 message CellObjectId {
-  string value = 1 [(validate.v1.rules).string = {min_len: 0, max_len: 400}, json_name="CellObjectID:value"];
+  string value = 1 [(validate.v1.rules).string = {min_len: 0, max_len: 400}, json_name = "CellObjectID:value"];
 }
 
 // Maybe validation part should be added..
 message MeasurementTypeName {
-  string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="MeasurementTypeName:value"];
+  string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "MeasurementTypeName:value"];
 }
 
 message PlmnIdentity {
-  bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name="PLMN-Identity:value"];
+  bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name = "PLMN-Identity:value"];
 }
 
 // Maybe validation part should be added..
 message TimeStamp {
-  bytes value = 1 [(validate.v1.rules).bytes.len = 4, json_name="TimeStamp:value"];
+  bytes value = 1 [(validate.v1.rules).bytes.len = 4, json_name = "TimeStamp:value"];
 }
 
 message EutracellIdentity {
-  BitString value = 1 [json_name="EUTRACellIdentity:value"]; //28
+  BitString value = 1 [json_name = "EUTRACellIdentity:value"]; //28
 }
 
 message NrcellIdentity {
-  BitString value = 1 [json_name="NRCellIdentity:value"]; //36
+  BitString value = 1 [json_name = "NRCellIdentity:value"]; //36
 }
 
 message BitString {
-  uint64 value = 1 [json_name="BIT_STRING:value"];
-  uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name="BIT_STRING:len"];
+  uint64 value = 1 [json_name = "BIT_STRING:value"];
+  uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name = "BIT_STRING:len"];
 }
