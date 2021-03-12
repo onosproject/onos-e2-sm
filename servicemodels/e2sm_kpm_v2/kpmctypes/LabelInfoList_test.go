@@ -38,7 +38,7 @@ func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList{
 				Value: 1,
 			},
 			ARpmax: &e2sm_kpm_v2.Arp{
-				Value: 50,
+				Value: 15,
 			},
 			ARpmin: &e2sm_kpm_v2.Arp{
 				Value: 1,
@@ -89,7 +89,7 @@ func Test_perEncodeLabelInfoList(t *testing.T) {
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 39, len(per))
+	assert.Equal(t, 37, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 }
 
@@ -99,7 +99,7 @@ func Test_perDecodeLabelInfoList(t *testing.T) {
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 39, len(per))
+	assert.Equal(t, 37, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 
 	result, err := perDecodeLabelInfoList(per)

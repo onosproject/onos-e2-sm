@@ -112,12 +112,12 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 	bitrateRangeC := C.long(measurementLabel.BitrateRange)
 	layerMuMimoC := C.long(measurementLabel.LayerMuMimo)
 	//var sUmC C.e_MeasurementLabel__sUM
-	sUmC := C.long(measurementLabel.SUm)
+	sUmC := C.long(int32(measurementLabel.GetSUm()))
 	distBinXC := C.long(measurementLabel.DistBinX)
 	distBinYC := C.long(measurementLabel.DistBinY)
 	distBinZC := C.long(measurementLabel.DistBinZ)
-	preLabelOverrideC := C.long(measurementLabel.PreLabelOverride)
-	startEndIndC := C.long(measurementLabel.StartEndInd)
+	preLabelOverrideC := C.long(int32(measurementLabel.GetPreLabelOverride()))
+	startEndIndC := C.long(int32(measurementLabel.GetStartEndInd()))
 	measurementLabelC := C.MeasurementLabel_t{
 		//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 		plmnID:           plmnIDC,

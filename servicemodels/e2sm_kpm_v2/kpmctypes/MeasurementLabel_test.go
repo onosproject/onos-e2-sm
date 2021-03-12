@@ -39,12 +39,12 @@ func createMeasurementLabel() *e2sm_kpm_v2.MeasurementLabel {
 		},
 		BitrateRange:     25,
 		LayerMuMimo:      1,
-		SUm:              0,
+		SUm:              e2sm_kpm_v2.SUM_SUM_TRUE,
 		DistBinX:         123,
 		DistBinY:         456,
 		DistBinZ:         789,
-		PreLabelOverride: 0,
-		StartEndInd:      1,
+		PreLabelOverride: e2sm_kpm_v2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE,
+		StartEndInd:      e2sm_kpm_v2.StartEndInd_START_END_IND_END,
 	}
 }
 
