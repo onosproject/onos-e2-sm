@@ -21,20 +21,20 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 		Value: 0x9bcd4,
 		Len:   22,
 	}
-	cellGlobalID, err := CreateCellGlobalID_NRCGI(plmnID, 0xabcdef012 << 28) // 36 bit
+	cellGlobalID, err := CreateCellGlobalIDNRCGI(plmnID, 0xabcdef012<<28) // 36 bit
 	assert.NilError(t, err)
 	var cellObjID string = "ONF"
-	cellMeasObjItem := CreateCellMeasurementObjectItem(cellObjID, *cellGlobalID)
+	cellMeasObjItem := CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	globalKpmnodeID, err := CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmnodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
 	cmol := make([]*e2sm_kpm_v2.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := CreateRicKpmnodeItem(*globalKpmnodeID, cmol)
+	kpmNodeItem := CreateRicKpmnodeItem(globalKpmnodeID, cmol)
 
 	rknl := make([]*e2sm_kpm_v2.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -58,7 +58,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	var indMsgFormat int32 = 24
 	var indHdrFormat int32 = 47
-	rrsi := CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, measInfoActionList, indHdrFormat, indMsgFormat)
+	rrsi := CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, &measInfoActionList, indHdrFormat, indMsgFormat)
 
 	rrsl := make([]*e2sm_kpm_v2.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)

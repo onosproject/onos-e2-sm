@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -81,10 +80,4 @@ func decodeRicFormatType(ricFormatTypeC *C.RIC_Format_Type_t) (*e2sm_kpm_v2.RicF
 	}
 
 	return &ricFormatType, nil
-}
-
-func decodeRicFormatTypeBytes(array [8]byte) (*e2sm_kpm_v2.RicFormatType, error) {
-	ricFormatTypeC := (*C.RIC_Format_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeRicFormatType(ricFormatTypeC)
 }

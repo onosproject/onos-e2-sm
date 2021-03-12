@@ -53,7 +53,7 @@ deps_rc: # @HELP ensure that the required dependencies are in place
 
 linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
-	#cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-cgo/ && golangci-lint run --timeout 5m && cd ..

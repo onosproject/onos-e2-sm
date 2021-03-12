@@ -15,13 +15,13 @@ func Test_xerEncodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gNbCuUp int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gNbCuUp, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())
@@ -34,13 +34,13 @@ func Test_xerDecodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gNbCuUp int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gNbCuUp, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())
@@ -58,13 +58,13 @@ func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gNbCuUp int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gNbCuUp, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())
@@ -77,13 +77,13 @@ func Test_perDecodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 22,
+		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gNbCuUp int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gNbCuUp, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())

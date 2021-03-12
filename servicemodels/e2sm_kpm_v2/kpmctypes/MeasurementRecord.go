@@ -13,7 +13,6 @@ package kpmv2ctypes
 //#include "MeasurementRecordItem.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -87,8 +86,7 @@ func decodeMeasurementRecord(measurementRecordC *C.MeasurementRecord_t) (*e2sm_k
 
 	measurementRecord := new(e2sm_kpm_v2.MeasurementRecord)
 
-	var ieCount int
-	ieCount = int(measurementRecordC.list.count)
+	ieCount := int(measurementRecordC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementRecordC.list.array)) * uintptr(i)
 		ieC := *(**C.MeasurementRecordItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementRecordC.list.array)) + offset))
@@ -100,10 +98,4 @@ func decodeMeasurementRecord(measurementRecordC *C.MeasurementRecord_t) (*e2sm_k
 	}
 
 	return measurementRecord, nil
-}
-
-func decodeMeasurementRecordBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementRecord, error) {
-	measurementRecordC := (*C.MeasurementRecord_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeMeasurementRecord(measurementRecordC)
 }

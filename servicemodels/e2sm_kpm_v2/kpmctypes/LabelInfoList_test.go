@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList{
+func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList {
 
 	labelInfoList := &e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),

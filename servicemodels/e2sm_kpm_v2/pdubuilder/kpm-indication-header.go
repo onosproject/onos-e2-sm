@@ -9,7 +9,7 @@ import (
 )
 
 func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, senderName string, senderType string,
-	vendorName string, globalKpmNodeID e2sm_kpm_v2.GlobalKpmnodeId) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
+	vendorName string, globalKpmNodeID *e2sm_kpm_v2.GlobalKpmnodeId) (*e2sm_kpm_v2.E2SmKpmIndicationHeader, error) {
 
 	if len(timeStamp) != 4 {
 		return nil, fmt.Errorf("TimeStamp should be 4 chars")
@@ -25,7 +25,7 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, s
 				SenderName:        senderName,
 				SenderType:        senderType,
 				VendorName:        vendorName,
-				KpmNodeId:         &globalKpmNodeID,
+				KpmNodeId:         globalKpmNodeID,
 			},
 		},
 	}
@@ -36,7 +36,7 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, s
 	return &e2SmKpmPdu, nil
 }
 
-func CreateGlobalKpmnodeID_gNBID(bs e2sm_kpm_v2.BitString, plmnID []byte, gnbCuUpID int64,
+func CreateGlobalKpmnodeIDgNBID(bs *e2sm_kpm_v2.BitString, plmnID []byte, gnbCuUpID int64,
 	gnbDuID int64) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
@@ -49,7 +49,7 @@ func CreateGlobalKpmnodeID_gNBID(bs e2sm_kpm_v2.BitString, plmnID []byte, gnbCuU
 				GlobalGNbId: &e2sm_kpm_v2.GlobalgNbId{
 					GnbId: &e2sm_kpm_v2.GnbIdChoice{
 						GnbIdChoice: &e2sm_kpm_v2.GnbIdChoice_GnbId{
-							GnbId: &bs,
+							GnbId: bs,
 						},
 					},
 					PlmnId: &e2sm_kpm_v2.PlmnIdentity{
@@ -67,7 +67,7 @@ func CreateGlobalKpmnodeID_gNBID(bs e2sm_kpm_v2.BitString, plmnID []byte, gnbCuU
 	}, nil
 }
 
-func CreateGlobalKpmnodeID_enGNbID(bsValue uint64, bsLen uint32, plmnID []byte, gnbCuUpID int64,
+func CreateGlobalKpmnodeIDenGNbID(bsValue uint64, bsLen uint32, plmnID []byte, gnbCuUpID int64,
 	gnbDuID int64) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
@@ -101,8 +101,8 @@ func CreateGlobalKpmnodeID_enGNbID(bsValue uint64, bsLen uint32, plmnID []byte, 
 	}, nil
 }
 
-func CreateGlobalKpmnodeID_ngENbID(bs e2sm_kpm_v2.BitString, plmnID []byte, shortMacroEnbID e2sm_kpm_v2.BitString,
-	longMacroEnbID e2sm_kpm_v2.BitString, gnbDuID int64) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
+func CreateGlobalKpmnodeIDngENbID(bs *e2sm_kpm_v2.BitString, plmnID []byte, shortMacroEnbID *e2sm_kpm_v2.BitString,
+	longMacroEnbID *e2sm_kpm_v2.BitString, gnbDuID int64) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
@@ -114,14 +114,14 @@ func CreateGlobalKpmnodeID_ngENbID(bs e2sm_kpm_v2.BitString, plmnID []byte, shor
 				GlobalNgENbId: &e2sm_kpm_v2.GlobalngeNbId{
 					EnbId: &e2sm_kpm_v2.EnbIdChoice{
 						EnbIdChoice: &e2sm_kpm_v2.EnbIdChoice_EnbIdMacro{
-							EnbIdMacro: &bs,
+							EnbIdMacro: bs,
 						},
 					},
 					PlmnId: &e2sm_kpm_v2.PlmnIdentity{
 						Value: plmnID,
 					},
-					ShortMacroENbId: &shortMacroEnbID,
-					LongMacroENbId:  &longMacroEnbID,
+					ShortMacroENbId: shortMacroEnbID,
+					LongMacroENbId:  longMacroEnbID,
 				},
 				GNbDuId: &e2sm_kpm_v2.GnbDuId{
 					Value: gnbDuID,
@@ -131,7 +131,7 @@ func CreateGlobalKpmnodeID_ngENbID(bs e2sm_kpm_v2.BitString, plmnID []byte, shor
 	}, nil
 }
 
-func CreateGlobalKpmnodeID_eNBID(bs e2sm_kpm_v2.BitString, plmnID []byte) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
+func CreateGlobalKpmnodeIDeNBID(bs *e2sm_kpm_v2.BitString, plmnID []byte) (*e2sm_kpm_v2.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
@@ -143,7 +143,7 @@ func CreateGlobalKpmnodeID_eNBID(bs e2sm_kpm_v2.BitString, plmnID []byte) (*e2sm
 				GlobalENbId: &e2sm_kpm_v2.GlobalEnbId{
 					ENbId: &e2sm_kpm_v2.EnbId{
 						EnbId: &e2sm_kpm_v2.EnbId_HomeENbId{
-							HomeENbId: &bs,
+							HomeENbId: bs,
 						},
 					},
 					PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{

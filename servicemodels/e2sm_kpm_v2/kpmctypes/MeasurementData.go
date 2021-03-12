@@ -55,16 +55,16 @@ func xerDecodeMeasurementData(bytes []byte) (*e2sm_kpm_v2.MeasurementData, error
 	return decodeMeasurementData((*C.MeasurementData_t)(unsafePtr))
 }
 
-func perDecodeMeasurementData(bytes []byte) (*e2sm_kpm_v2.MeasurementData, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementData)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeMeasurementData((*C.MeasurementData_t)(unsafePtr))
-}
+//func perDecodeMeasurementData(bytes []byte) (*e2sm_kpm_v2.MeasurementData, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementData)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeMeasurementData((*C.MeasurementData_t)(unsafePtr))
+//}
 
 func newMeasurementData(measurementData *e2sm_kpm_v2.MeasurementData) (*C.MeasurementData_t, error) {
 

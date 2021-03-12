@@ -42,9 +42,9 @@ func TestE2SmKpmActionDefinition(t *testing.T) {
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
-	measName, err := CreateMeasurementType_MeasName(measurementName)
+	measName, err := CreateMeasurementTypeMeasName(measurementName)
 	assert.NilError(t, err)
-	measInfoItem, err := CreateMeasurementInfoItem(*measName, labelInfoList)
+	measInfoItem, err := CreateMeasurementInfoItem(measName, &labelInfoList)
 	assert.NilError(t, err)
 
 	measInfoList := e2sm_kpm_v2.MeasurementInfoList{
@@ -52,10 +52,10 @@ func TestE2SmKpmActionDefinition(t *testing.T) {
 	}
 	measInfoList.Value = append(measInfoList.Value, measInfoItem)
 
-	actionDefinition, err := CreateActionDefinitionFormat1(cellObjID, measInfoList, granularity, subscriptionID)
+	actionDefinition, err := CreateActionDefinitionFormat1(cellObjID, &measInfoList, granularity, subscriptionID)
 	assert.NilError(t, err)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmActionDefinition(ricStyleType, *actionDefinition)
+	newE2SmKpmPdu, err := CreateE2SmKpmActionDefinition(ricStyleType, actionDefinition)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 }

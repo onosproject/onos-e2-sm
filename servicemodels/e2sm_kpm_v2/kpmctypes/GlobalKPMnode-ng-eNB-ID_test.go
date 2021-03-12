@@ -15,20 +15,20 @@ func Test_xerEncodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 20,
+		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 18,
+		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 21,
+		Len:   21,
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_ngENbID(bs, plmnID, shortMacroEnbID, longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalKpmnodeNgEnbID(ngeNbID.GetNgENb())
@@ -41,20 +41,20 @@ func Test_xerDecodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 20,
+		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 18,
+		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 21,
+		Len:   21,
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_ngENbID(bs, plmnID, shortMacroEnbID, longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalKpmnodeNgEnbID(ngeNbID.GetNgENb())
@@ -72,20 +72,20 @@ func Test_perEncodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 20,
+		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 18,
+		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 21,
+		Len:   21,
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_ngENbID(bs, plmnID, shortMacroEnbID, longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalKpmnodeNgEnbID(ngeNbID.GetNgENb())
@@ -98,20 +98,20 @@ func Test_perDecodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 20,
+		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 18,
+		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
 		Value: 0x9bcde4,
-		Len: 21,
+		Len:   21,
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeID_ngENbID(bs, plmnID, shortMacroEnbID, longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalKpmnodeNgEnbID(ngeNbID.GetNgENb())

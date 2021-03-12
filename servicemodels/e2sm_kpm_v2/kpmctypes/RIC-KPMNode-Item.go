@@ -13,7 +13,6 @@ package kpmv2ctypes
 //#include "Cell-Measurement-Object-Item.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -106,8 +105,7 @@ func decodeRicKpmnodeItem(ricKpmnodeItemC *C.RIC_KPMNode_Item_t) (*e2sm_kpm_v2.R
 
 	}
 
-	var ieCount int
-	ieCount = int(ricKpmnodeItemC.cell_Measurement_Object_List.list.count)
+	ieCount := int(ricKpmnodeItemC.cell_Measurement_Object_List.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(ricKpmnodeItemC.cell_Measurement_Object_List.list.array)) * uintptr(i)
 		ieC := *(**C.Cell_Measurement_Object_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(ricKpmnodeItemC.cell_Measurement_Object_List.list.array)) + offset))
@@ -119,10 +117,4 @@ func decodeRicKpmnodeItem(ricKpmnodeItemC *C.RIC_KPMNode_Item_t) (*e2sm_kpm_v2.R
 	}
 
 	return &ricKpmnodeItem, nil
-}
-
-func decodeRicKpmnodeItemBytes(array [8]byte) (*e2sm_kpm_v2.RicKpmnodeItem, error) { //ToDo - Check addressing correct structure in Protobuf
-	ricKpmnodeItemC := (*C.RIC_KPMNode_Item_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeRicKpmnodeItem(ricKpmnodeItemC)
 }

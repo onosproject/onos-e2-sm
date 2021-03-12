@@ -9,14 +9,14 @@ import (
 )
 
 func CreateE2SmKpmActionDefinition(ricStyleType int32,
-	actionDefinition e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1) (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) {
+	actionDefinition *e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1) (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) {
 
 	e2SmKpmPdu := e2sm_kpm_v2.E2SmKpmActionDefinition{
 		RicStyleType: &e2sm_kpm_v2.RicStyleType{
 			Value: ricStyleType,
 		},
 		E2SmKpmActionDefinition: &e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat1{
-			ActionDefinitionFormat1: &actionDefinition,
+			ActionDefinitionFormat1: actionDefinition,
 		},
 	}
 
@@ -26,14 +26,14 @@ func CreateE2SmKpmActionDefinition(ricStyleType int32,
 	return &e2SmKpmPdu, nil
 }
 
-func CreateActionDefinitionFormat1(cellObjID string, measInfoList e2sm_kpm_v2.MeasurementInfoList,
+func CreateActionDefinitionFormat1(cellObjID string, measInfoList *e2sm_kpm_v2.MeasurementInfoList,
 	granularity int32, subID int64) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1, error) {
 
 	actionDefinitionFormat1 := e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1{
 		CellObjId: &e2sm_kpm_v2.CellObjectId{
 			Value: cellObjID,
 		},
-		MeasInfoList: &measInfoList,
+		MeasInfoList: measInfoList,
 		GranulPeriod: &e2sm_kpm_v2.GranularityPeriod{
 			Value: granularity,
 		},
@@ -49,11 +49,11 @@ func CreateActionDefinitionFormat1(cellObjID string, measInfoList e2sm_kpm_v2.Me
 	return &actionDefinitionFormat1, nil
 }
 
-func CreateMeasurementInfoItem(measType e2sm_kpm_v2.MeasurementType, labelInfoList e2sm_kpm_v2.LabelInfoList) (*e2sm_kpm_v2.MeasurementInfoItem, error) {
+func CreateMeasurementInfoItem(measType *e2sm_kpm_v2.MeasurementType, labelInfoList *e2sm_kpm_v2.LabelInfoList) (*e2sm_kpm_v2.MeasurementInfoItem, error) {
 
 	item := e2sm_kpm_v2.MeasurementInfoItem{
-		MeasType:      &measType,
-		LabelInfoList: &labelInfoList,
+		MeasType:      measType,
+		LabelInfoList: labelInfoList,
 	}
 
 	if err := item.Validate(); err != nil {
@@ -63,7 +63,7 @@ func CreateMeasurementInfoItem(measType e2sm_kpm_v2.MeasurementType, labelInfoLi
 	return &item, nil
 }
 
-func CreateMeasurementType_MeasID(measTypeID int32) (*e2sm_kpm_v2.MeasurementType, error) {
+func CreateMeasurementTypeMeasID(measTypeID int32) (*e2sm_kpm_v2.MeasurementType, error) {
 	measType := e2sm_kpm_v2.MeasurementType{
 		MeasurementType: &e2sm_kpm_v2.MeasurementType_MeasId{
 			MeasId: &e2sm_kpm_v2.MeasurementTypeId{
@@ -79,7 +79,7 @@ func CreateMeasurementType_MeasID(measTypeID int32) (*e2sm_kpm_v2.MeasurementTyp
 	return &measType, nil
 }
 
-func CreateMeasurementType_MeasName(measName string) (*e2sm_kpm_v2.MeasurementType, error) {
+func CreateMeasurementTypeMeasName(measName string) (*e2sm_kpm_v2.MeasurementType, error) {
 	measType := e2sm_kpm_v2.MeasurementType{
 		MeasurementType: &e2sm_kpm_v2.MeasurementType_MeasName{
 			MeasName: &e2sm_kpm_v2.MeasurementTypeName{

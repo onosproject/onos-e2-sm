@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -102,10 +101,4 @@ func decodeSnssai(snssaiC *C.SNSSAI_t) (*e2sm_kpm_v2.Snssai, error) {
 	}
 
 	return &snssai, nil
-}
-
-func decodeSnssaiBytes(array [8]byte) (*e2sm_kpm_v2.Snssai, error) { //ToDo - Check addressing correct structure in Protobuf
-	snssaiC := (*C.SNSSAI_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeSnssai(snssaiC)
 }

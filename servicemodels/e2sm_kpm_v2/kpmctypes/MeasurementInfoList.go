@@ -15,7 +15,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -58,16 +57,16 @@ func xerDecodeMeasurementInfoList(bytes []byte) (*e2sm_kpm_v2.MeasurementInfoLis
 	return decodeMeasurementInfoList((*C.MeasurementInfoList_t)(unsafePtr))
 }
 
-func perDecodeMeasurementInfoList(bytes []byte) (*e2sm_kpm_v2.MeasurementInfoList, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementInfoList)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeMeasurementInfoList((*C.MeasurementInfoList_t)(unsafePtr))
-}
+//func perDecodeMeasurementInfoList(bytes []byte) (*e2sm_kpm_v2.MeasurementInfoList, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementInfoList)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeMeasurementInfoList((*C.MeasurementInfoList_t)(unsafePtr))
+//}
 
 func newMeasurementInfoList(measurementInfoList *e2sm_kpm_v2.MeasurementInfoList) (*C.MeasurementInfoList_t, error) {
 
@@ -91,8 +90,7 @@ func decodeMeasurementInfoList(measurementInfoListC *C.MeasurementInfoList_t) (*
 		Value: make([]*e2sm_kpm_v2.MeasurementInfoItem, 0),
 	}
 
-	var ieCount int
-	ieCount = int(measurementInfoListC.list.count)
+	ieCount := int(measurementInfoListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementInfoListC.list.array)) * uintptr(i)
 		ieC := *(**C.MeasurementInfoItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementInfoListC.list.array)) + offset))
@@ -106,8 +104,3 @@ func decodeMeasurementInfoList(measurementInfoListC *C.MeasurementInfoList_t) (*
 	return &measurementInfoList, nil
 }
 
-func decodeMeasurementInfoListBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementInfoList, error) {
-	measurementInfoListC := (*C.MeasurementInfoList_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeMeasurementInfoList(measurementInfoListC)
-}

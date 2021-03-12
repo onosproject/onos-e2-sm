@@ -44,8 +44,8 @@ func createE2SMKPMIndicationMessage() *e2sm_kpm_v2.E2SmKpmIndicationMessage {
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
-	measName, _ := pdubuilder.CreateMeasurementType_MeasName(measurementName)
-	measInfoItem, _ := pdubuilder.CreateMeasurementInfoItem(*measName, labelInfoList)
+	measName, _ := pdubuilder.CreateMeasurementTypeMeasName(measurementName)
+	measInfoItem, _ := pdubuilder.CreateMeasurementInfoItem(measName, &labelInfoList)
 
 	measInfoList := e2sm_kpm_v2.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2.MeasurementInfoItem, 0),
@@ -55,16 +55,16 @@ func createE2SMKPMIndicationMessage() *e2sm_kpm_v2.E2SmKpmIndicationMessage {
 	measRecord := e2sm_kpm_v2.MeasurementRecord{
 		Value: make([]*e2sm_kpm_v2.MeasurementRecordItem, 0),
 	}
-	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItem_Integer(integer))
-	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItem_NoValue())
-	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItem_Real(rl))
+	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemInteger(integer))
+	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemNoValue())
+	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemReal(rl))
 
 	measData := e2sm_kpm_v2.MeasurementData{
 		Value: make([]*e2sm_kpm_v2.MeasurementRecord, 0),
 	}
 	measData.Value = append(measData.Value, &measRecord)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessage(subscriptionID, cellObjID, granularity, measInfoList, measData)
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessage(subscriptionID, cellObjID, granularity, &measInfoList, &measData)
 
 	return newE2SmKpmPdu
 }

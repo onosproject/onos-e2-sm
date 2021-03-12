@@ -26,9 +26,9 @@ func createE2SMKPMIndicationHeaderFormat1() *e2sm_kpm_v2.E2SmKpmIndicationHeader
 	var senderType string = "someType"
 	var vendorName string = "onf"
 
-	globalKpmNodeID, _ := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmNodeID, _ := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, *globalKpmNodeID)
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, globalKpmNodeID)
 
 	return newE2SmKpmPdu.GetIndicationHeaderFormat1()
 }

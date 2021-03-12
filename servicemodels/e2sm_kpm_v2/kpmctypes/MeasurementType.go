@@ -133,9 +133,3 @@ func decodeMeasurementType(measurementTypeC *C.MeasurementType_t) (*e2sm_kpm_v2.
 
 	return measurementType, nil
 }
-
-func decodeMeasurementTypeBytes(array [40]byte) (*e2sm_kpm_v2.MeasurementType, error) {
-	measurementTypeC := (*C.MeasurementType_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
-
-	return decodeMeasurementType(measurementTypeC)
-}

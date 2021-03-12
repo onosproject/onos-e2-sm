@@ -126,9 +126,3 @@ func decodeMeasurementRecordItem(measurementRecordItemC *C.MeasurementRecordItem
 
 	return measurementRecordItem, nil
 }
-
-func decodeMeasurementRecordItemBytes(array [16]byte) (*e2sm_kpm_v2.MeasurementRecordItem, error) {
-	measurementRecordItemC := (*C.MeasurementRecordItem_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
-
-	return decodeMeasurementRecordItem(measurementRecordItemC)
-}
