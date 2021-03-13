@@ -43,17 +43,17 @@ func createE2SMKPMActionDefinition() *e2sm_kpm_v2.E2SmKpmActionDefinition {
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
-	measName, _ := pdubuilder.CreateMeasurementType_MeasName(measurementName)
-	measInfoItem, _ := pdubuilder.CreateMeasurementInfoItem(*measName, labelInfoList)
+	measName, _ := pdubuilder.CreateMeasurementTypeMeasName(measurementName)
+	measInfoItem, _ := pdubuilder.CreateMeasurementInfoItem(measName, &labelInfoList)
 
 	measInfoList := e2sm_kpm_v2.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2.MeasurementInfoItem, 0),
 	}
 	measInfoList.Value = append(measInfoList.Value, measInfoItem)
 
-	actionDefinition, _ := pdubuilder.CreateActionDefinitionFormat1(cellObjID, measInfoList, granularity, subscriptionID)
+	actionDefinition, _ := pdubuilder.CreateActionDefinitionFormat1(cellObjID, &measInfoList, granularity, subscriptionID)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmActionDefinition(ricStyleType, *actionDefinition)
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmActionDefinition(ricStyleType, actionDefinition)
 
 	return newE2SmKpmPdu
 }

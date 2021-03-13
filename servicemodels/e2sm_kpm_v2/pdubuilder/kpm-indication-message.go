@@ -9,7 +9,7 @@ import (
 )
 
 func CreateE2SmKpmIndicationMessage(subscriptionID int64, cellObjID string, granularity int32,
-	measInfoList e2sm_kpm_v2.MeasurementInfoList, measData e2sm_kpm_v2.MeasurementData) (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
+	measInfoList *e2sm_kpm_v2.MeasurementInfoList, measData *e2sm_kpm_v2.MeasurementData) (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
 
 	e2SmKpmPdu := e2sm_kpm_v2.E2SmKpmIndicationMessage{
 		E2SmKpmIndicationMessage: &e2sm_kpm_v2.E2SmKpmIndicationMessage_IndicationMessageFormat1{
@@ -23,8 +23,8 @@ func CreateE2SmKpmIndicationMessage(subscriptionID int64, cellObjID string, gran
 				GranulPeriod: &e2sm_kpm_v2.GranularityPeriod{
 					Value: granularity,
 				},
-				MeasInfoList: &measInfoList,
-				MeasData:     &measData,
+				MeasInfoList: measInfoList,
+				MeasData:     measData,
 			},
 		},
 	}
@@ -35,7 +35,7 @@ func CreateE2SmKpmIndicationMessage(subscriptionID int64, cellObjID string, gran
 	return &e2SmKpmPdu, nil
 }
 
-func CreateMeasurementRecordItem_Integer(integer int64) *e2sm_kpm_v2.MeasurementRecordItem {
+func CreateMeasurementRecordItemInteger(integer int64) *e2sm_kpm_v2.MeasurementRecordItem {
 
 	return &e2sm_kpm_v2.MeasurementRecordItem{
 		MeasurementRecordItem: &e2sm_kpm_v2.MeasurementRecordItem_Integer{
@@ -44,7 +44,7 @@ func CreateMeasurementRecordItem_Integer(integer int64) *e2sm_kpm_v2.Measurement
 	}
 }
 
-func CreateMeasurementRecordItem_Real(real float64) *e2sm_kpm_v2.MeasurementRecordItem {
+func CreateMeasurementRecordItemReal(real float64) *e2sm_kpm_v2.MeasurementRecordItem {
 
 	return &e2sm_kpm_v2.MeasurementRecordItem{
 		MeasurementRecordItem: &e2sm_kpm_v2.MeasurementRecordItem_Real{
@@ -53,7 +53,7 @@ func CreateMeasurementRecordItem_Real(real float64) *e2sm_kpm_v2.MeasurementReco
 	}
 }
 
-func CreateMeasurementRecordItem_NoValue() *e2sm_kpm_v2.MeasurementRecordItem {
+func CreateMeasurementRecordItemNoValue() *e2sm_kpm_v2.MeasurementRecordItem {
 
 	return &e2sm_kpm_v2.MeasurementRecordItem{
 		MeasurementRecordItem: &e2sm_kpm_v2.MeasurementRecordItem_NoValue{

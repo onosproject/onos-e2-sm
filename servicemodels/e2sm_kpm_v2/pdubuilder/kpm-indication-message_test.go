@@ -23,7 +23,7 @@ func TestE2SmKpmIndicationMessage(t *testing.T) {
 	var qci int32 = 15
 	var qciMin int32 = 1
 	var qciMax int32 = 15
-	var arpMax int32 = 100
+	var arpMax int32 = 15
 	var arpMin int32 = 10
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
@@ -36,15 +36,16 @@ func TestE2SmKpmIndicationMessage(t *testing.T) {
 	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd, fiveQI,
 		qci, qciMax, qciMin, arpMax, arpMin, bitrateRange, layerMuMimo,
 		distX, distY, distZ, startEndIndication)
+	assert.NilError(t, err)
 
 	labelInfoList := e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
-	measName, err := CreateMeasurementType_MeasName(measurementName)
+	measName, err := CreateMeasurementTypeMeasName(measurementName)
 	assert.NilError(t, err)
-	measInfoItem, err := CreateMeasurementInfoItem(*measName, labelInfoList)
+	measInfoItem, err := CreateMeasurementInfoItem(measName, &labelInfoList)
 	assert.NilError(t, err)
 
 	measInfoList := e2sm_kpm_v2.MeasurementInfoList{
@@ -55,16 +56,16 @@ func TestE2SmKpmIndicationMessage(t *testing.T) {
 	measRecord := e2sm_kpm_v2.MeasurementRecord{
 		Value: make([]*e2sm_kpm_v2.MeasurementRecordItem, 0),
 	}
-	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItem_Integer(integer))
-	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItem_NoValue())
-	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItem_Real(rl))
+	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemInteger(integer))
+	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemNoValue())
+	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemReal(rl))
 
 	measData := e2sm_kpm_v2.MeasurementData{
 		Value: make([]*e2sm_kpm_v2.MeasurementRecord, 0),
 	}
 	measData.Value = append(measData.Value, &measRecord)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessage(subscriptionID, cellObjID, granularity, measInfoList, measData)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessage(subscriptionID, cellObjID, granularity, &measInfoList, &measData)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 }

@@ -28,10 +28,11 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	var senderType string = "someType"
 	var vendorName string = "onf"
 
-	globalKpmNodeID, err := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmNodeID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, *globalKpmNodeID)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, globalKpmNodeID)
+	assert.NilError(t, err)
 
 	err = newE2SmKpmPdu.Validate()
 	assert.NilError(t, err, "error validating E2SmPDU")
@@ -131,20 +132,20 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 		Value: 0x9bcd4,
 		Len:   22,
 	}
-	cellGlobalID, err := pdubuilder.CreateCellGlobalID_NRCGI(plmnID, 0xabcdef012 << 28) // 36 bit
+	cellGlobalID, err := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, 0xabcdef012<<28) // 36 bit
 	assert.NilError(t, err)
 	var cellObjID string = "ONF"
-	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, *cellGlobalID)
+	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	globalKpmnodeID, err := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmnodeID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
 	assert.NilError(t, err)
 
 	cmol := make([]*e2sm_kpm_v2.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(*globalKpmnodeID, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID, cmol)
 
 	rknl := make([]*e2sm_kpm_v2.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -168,7 +169,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 
 	var indMsgFormat int32 = 24
 	var indHdrFormat int32 = 47
-	rrsi := pdubuilder.CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, measInfoActionList, indHdrFormat, indMsgFormat)
+	rrsi := pdubuilder.CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, &measInfoActionList, indHdrFormat, indMsgFormat)
 
 	rrsl := make([]*e2sm_kpm_v2.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)

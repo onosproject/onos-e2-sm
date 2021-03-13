@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -87,10 +86,4 @@ func decodeNrcellIdentity(nrcellIdentityC *C.NRCellIdentity_t) (*e2sm_kpm_v2.Nrc
 	nrcellIdentity.Value = nrcellIdentityValue
 
 	return nrcellIdentity, nil
-}
-
-func decodeNrcellIdentityBytes(array [8]byte) (*e2sm_kpm_v2.NrcellIdentity, error) {
-	nrcellIdentityC := (*C.NRCellIdentity_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeNrcellIdentity(nrcellIdentityC)
 }

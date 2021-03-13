@@ -56,16 +56,16 @@ func xerDecodeE2SmKpmIndicationMessageFormat1(bytes []byte) (*e2sm_kpm_v2.E2SmKp
 	return decodeE2SmKpmIndicationMessageFormat1((*C.E2SM_KPM_IndicationMessage_Format1_t)(unsafePtr))
 }
 
-func perDecodeE2SmKpmIndicationMessageFormat1(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationMessageFormat1, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_IndicationMessage_Format1)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeE2SmKpmIndicationMessageFormat1((*C.E2SM_KPM_IndicationMessage_Format1_t)(unsafePtr))
-}
+//func perDecodeE2SmKpmIndicationMessageFormat1(bytes []byte) (*e2sm_kpm_v2.E2SmKpmIndicationMessageFormat1, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_IndicationMessage_Format1)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeE2SmKpmIndicationMessageFormat1((*C.E2SM_KPM_IndicationMessage_Format1_t)(unsafePtr))
+//}
 
 func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1 *e2sm_kpm_v2.E2SmKpmIndicationMessageFormat1) (*C.E2SM_KPM_IndicationMessage_Format1_t, error) {
 

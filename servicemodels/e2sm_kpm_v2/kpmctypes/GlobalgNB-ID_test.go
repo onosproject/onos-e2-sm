@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func createGlobalgNbID () *e2sm_kpm_v2.GlobalgNbId {
+func createGlobalgNbID() *e2sm_kpm_v2.GlobalgNbId {
 
 	return &e2sm_kpm_v2.GlobalgNbId{
 		PlmnId: &e2sm_kpm_v2.PlmnIdentity{

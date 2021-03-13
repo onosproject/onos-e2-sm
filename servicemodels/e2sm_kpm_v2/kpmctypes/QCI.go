@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
 	"unsafe"
@@ -81,10 +80,4 @@ func decodeQci(qciC *C.QCI_t) (*e2sm_kpm_v2.Qci, error) {
 	}
 
 	return &qci, nil
-}
-
-func decodeQciBytes(array [8]byte) (*e2sm_kpm_v2.Qci, error) {
-	qciC := (*C.QCI_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeQci(qciC)
 }

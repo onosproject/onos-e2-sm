@@ -29,35 +29,35 @@ func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd stri
 	return &e2SmKpmPdu, nil
 }
 
-func CreateRicKpmnodeItem(globalKpmnodeID e2sm_kpm_v2.GlobalKpmnodeId, cmol []*e2sm_kpm_v2.CellMeasurementObjectItem) *e2sm_kpm_v2.RicKpmnodeItem {
+func CreateRicKpmnodeItem(globalKpmnodeID *e2sm_kpm_v2.GlobalKpmnodeId, cmol []*e2sm_kpm_v2.CellMeasurementObjectItem) *e2sm_kpm_v2.RicKpmnodeItem {
 
 	return &e2sm_kpm_v2.RicKpmnodeItem{
-		RicKpmnodeType:            &globalKpmnodeID,
+		RicKpmnodeType:            globalKpmnodeID,
 		CellMeasurementObjectList: cmol,
 	}
 }
 
-func CreateCellMeasurementObjectItem(cellObjID string, cellGlobalID e2sm_kpm_v2.CellGlobalId) *e2sm_kpm_v2.CellMeasurementObjectItem {
+func CreateCellMeasurementObjectItem(cellObjID string, cellGlobalID *e2sm_kpm_v2.CellGlobalId) *e2sm_kpm_v2.CellMeasurementObjectItem {
 
 	return &e2sm_kpm_v2.CellMeasurementObjectItem{
 		CellObjectId: &e2sm_kpm_v2.CellObjectId{
 			Value: cellObjID,
 		},
-		CellGlobalId: &cellGlobalID,
+		CellGlobalId: cellGlobalID,
 	}
 }
 
-func CreateCellGlobalID_NRCGI(plmnID []byte, cellIdBits36 uint64) (*e2sm_kpm_v2.CellGlobalId, error) {
+func CreateCellGlobalIDNRCGI(plmnID []byte, cellIDBits36 uint64) (*e2sm_kpm_v2.CellGlobalId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
 	}
 
-	if cellIdBits36 & 0x000000000fffffff > 0 {
+	if cellIDBits36&0x000000000fffffff > 0 {
 		return nil, fmt.Errorf("bits should be at the left - not expecting anything in last 28 bits")
 	}
 	bs := e2sm_kpm_v2.BitString{
-		Value: cellIdBits36,
+		Value: cellIDBits36,
 		Len:   36,
 	}
 
@@ -75,7 +75,7 @@ func CreateCellGlobalID_NRCGI(plmnID []byte, cellIdBits36 uint64) (*e2sm_kpm_v2.
 	}, nil
 }
 
-func CreateCellGlobalID_EUTRACGI(plmnID []byte, bs e2sm_kpm_v2.BitString) (*e2sm_kpm_v2.CellGlobalId, error) {
+func CreateCellGlobalIDEUTRACGI(plmnID []byte, bs *e2sm_kpm_v2.BitString) (*e2sm_kpm_v2.CellGlobalId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
@@ -88,7 +88,7 @@ func CreateCellGlobalID_EUTRACGI(plmnID []byte, bs e2sm_kpm_v2.BitString) (*e2sm
 					Value: plmnID,
 				},
 				EUtracellIdentity: &e2sm_kpm_v2.EutracellIdentity{
-					Value: &bs,
+					Value: bs,
 				},
 			},
 		},
@@ -111,7 +111,7 @@ func CreateRicEventTriggerStyleItem(ricStyleType int32, ricStyleName string, ric
 }
 
 func CreateRicReportStyleItem(ricStyleType int32, ricStyleName string, ricFormatType int32,
-	measInfoActionList e2sm_kpm_v2.MeasurementInfoActionList, indHdrFormatType int32,
+	measInfoActionList *e2sm_kpm_v2.MeasurementInfoActionList, indHdrFormatType int32,
 	indMsgFormatType int32) *e2sm_kpm_v2.RicReportStyleItem {
 
 	return &e2sm_kpm_v2.RicReportStyleItem{
@@ -124,7 +124,7 @@ func CreateRicReportStyleItem(ricStyleType int32, ricStyleName string, ricFormat
 		RicActionFormatType: &e2sm_kpm_v2.RicFormatType{
 			Value: ricFormatType,
 		},
-		MeasInfoActionList: &measInfoActionList,
+		MeasInfoActionList: measInfoActionList,
 		RicIndicationHeaderFormatType: &e2sm_kpm_v2.RicFormatType{
 			Value: indHdrFormatType,
 		},

@@ -24,19 +24,19 @@ func createE2SMKPMRanfunctionDescription() *e2sm_kpm_v2.E2SmKpmRanfunctionDescri
 		Value: 0x9bcd4,
 		Len:   22,
 	}
-	cellGlobalID, _ := pdubuilder.CreateCellGlobalID_NRCGI(plmnID, 0xABCDEF012 << 28) // 36 bits
+	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, 0xABCDEF012<<28) // 36 bits
 
 	var cellObjID string = "ONF"
-	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, *cellGlobalID)
+	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	globalKpmnodeID, _ := pdubuilder.CreateGlobalKpmnodeID_gNBID(bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmnodeID, _ := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
 
 	cmol := make([]*e2sm_kpm_v2.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(*globalKpmnodeID, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID, cmol)
 
 	rknl := make([]*e2sm_kpm_v2.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -60,7 +60,7 @@ func createE2SMKPMRanfunctionDescription() *e2sm_kpm_v2.E2SmKpmRanfunctionDescri
 
 	var indMsgFormat int32 = 24
 	var indHdrFormat int32 = 47
-	rrsi := pdubuilder.CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, measInfoActionList, indHdrFormat, indMsgFormat)
+	rrsi := pdubuilder.CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, &measInfoActionList, indHdrFormat, indMsgFormat)
 
 	rrsl := make([]*e2sm_kpm_v2.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
