@@ -12,10 +12,12 @@ extern "C" {
 #define maxnoofKPMNodes (1024)
 #define maxnoofCells (16384)
 #define maxnoofRICStyles (63)
-#define maxnoofMeasurementInfo (65536)
+#define maxnoofMeasurementInfo (65535)
 #define maxnoofLabelInfo (2147483647)
-#define maxnoofMeasurementRecord (65536)
+#define maxnoofMeasurementRecord (65535)
 #define maxnoofMeasurementValue (2147483647)
+#define maxnoofConditionInfo (32768)
+#define maxnoofUEID (65535)
 
 
 #ifdef __cplusplus

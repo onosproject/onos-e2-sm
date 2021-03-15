@@ -1,7 +1,7 @@
 include ./Makefile.am.libasncodec
 
 LIBS += -lm
-CFLAGS += $(ASN_MODULE_CFLAGS) -DASN_PDU_COLLECTION -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT -g -DASN_EMIT_DEBUG=1
+CFLAGS += $(ASN_MODULE_CFLAGS) -DASN_PDU_COLLECTION -I.
 ASN_LIBRARY ?= libasncodec.a
 ASN_PROGRAM ?= converter-example
 ASN_PROGRAM_SRCS ?= \
@@ -29,5 +29,5 @@ clean:
 regen: regenerate-from-asn1-source
 
 regenerate-from-asn1-source:
-	asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D. ../v2/e2sm_kpm_v2.asn
+	asn1c -pdu=all -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D. ../v2/e2sm_kpm_v2.0.2-rm.asn
 

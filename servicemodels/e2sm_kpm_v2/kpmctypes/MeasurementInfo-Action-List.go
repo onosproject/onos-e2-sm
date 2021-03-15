@@ -55,16 +55,16 @@ func xerDecodeMeasurementInfoActionList(bytes []byte) (*e2sm_kpm_v2.MeasurementI
 	return decodeMeasurementInfoActionList((*C.MeasurementInfo_Action_List_t)(unsafePtr))
 }
 
-//func perDecodeMeasurementInfoActionList(bytes []byte) (*e2sm_kpm_v2.MeasurementInfoActionList, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementInfo_Action_List)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeMeasurementInfoActionList((*C.MeasurementInfo_Action_List_t)(unsafePtr))
-//}
+func perDecodeMeasurementInfoActionList(bytes []byte) (*e2sm_kpm_v2.MeasurementInfoActionList, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementInfo_Action_List)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeMeasurementInfoActionList((*C.MeasurementInfo_Action_List_t)(unsafePtr))
+}
 
 func newMeasurementInfoActionList(measurementInfoActionList *e2sm_kpm_v2.MeasurementInfoActionList) (*C.MeasurementInfo_Action_List_t, error) {
 

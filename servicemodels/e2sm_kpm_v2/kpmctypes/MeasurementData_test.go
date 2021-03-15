@@ -86,7 +86,7 @@ func Test_perEncodeMeasurementData(t *testing.T) {
 
 	per, err := perEncodeMeasurementData(md)
 	assert.NilError(t, err)
-	assert.Equal(t, 17, len(per))
+	assert.Equal(t, 18, len(per))
 	t.Logf("MeasurementData PER\n%s", string(per))
 }
 
@@ -97,12 +97,12 @@ func Test_perDecodeMeasurementData(t *testing.T) {
 
 	per, err := perEncodeMeasurementData(md)
 	assert.NilError(t, err)
-	assert.Equal(t, 17, len(per))
+	assert.Equal(t, 18, len(per))
 	t.Logf("MeasurementData PER\n%s", string(per))
 
-	//result, err := perDecodeMeasurementData(per)
-	//assert.NilError(t, err)
-	//assert.Assert(t, result != nil)
-	//assert.Equal(t, 3, len(result.GetValue()))
-	//t.Logf("MeasurementData PER - decoded\n%v", result)
+	result, err := perDecodeMeasurementData(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	assert.Equal(t, 1, len(result.GetValue()))
+	t.Logf("MeasurementData PER - decoded\n%v", result)
 }

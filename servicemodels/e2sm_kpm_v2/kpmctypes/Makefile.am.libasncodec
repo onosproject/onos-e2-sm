@@ -8,8 +8,10 @@ ASN_MODULE_SRCS=	\
 	./SNSSAI.c	\
 	./FiveQI.c	\
 	./QCI.c	\
+	./QFI.c	\
 	./ARP.c	\
 	./TimeStamp.c	\
+	./UE-Identity.c	\
 	./CellObjectID.c	\
 	./GranularityPeriod.c	\
 	./MeasurementType.c	\
@@ -17,6 +19,10 @@ ASN_MODULE_SRCS=	\
 	./MeasurementTypeID.c	\
 	./MeasurementLabel.c	\
 	./SubscriptionID.c	\
+	./TestCondInfo.c	\
+	./TestCond-Type.c	\
+	./TestCond-Expression.c	\
+	./TestCond-Value.c	\
 	./GlobalKPMnode-ID.c	\
 	./GlobalKPMnode-gNB-ID.c	\
 	./GlobalgNB-ID.c	\
@@ -41,18 +47,30 @@ ASN_MODULE_SRCS=	\
 	./LabelInfoList.c	\
 	./LabelInfoItem.c	\
 	./MeasurementData.c	\
+	./MeasurementDataItem.c	\
 	./MeasurementRecord.c	\
 	./MeasurementRecordItem.c	\
 	./MeasurementInfo-Action-List.c	\
 	./MeasurementInfo-Action-Item.c	\
+	./MeasurementCondList.c	\
+	./MeasurementCondItem.c	\
+	./MeasurementCondUEidList.c	\
+	./MeasurementCondUEidItem.c	\
+	./MatchingCondList.c	\
+	./MatchingCondItem.c	\
+	./MatchingUEidList.c	\
+	./MatchingUEidItem.c	\
 	./E2SM-KPM-EventTriggerDefinition.c	\
 	./E2SM-KPM-EventTriggerDefinition-Format1.c	\
 	./E2SM-KPM-ActionDefinition.c	\
 	./E2SM-KPM-ActionDefinition-Format1.c	\
+	./E2SM-KPM-ActionDefinition-Format2.c	\
+	./E2SM-KPM-ActionDefinition-Format3.c	\
 	./E2SM-KPM-IndicationHeader.c	\
 	./E2SM-KPM-IndicationHeader-Format1.c	\
 	./E2SM-KPM-IndicationMessage.c	\
 	./E2SM-KPM-IndicationMessage-Format1.c	\
+	./E2SM-KPM-IndicationMessage-Format2.c	\
 	./E2SM-KPM-RANfunction-Description.c	\
 	./RIC-KPMNode-Item.c	\
 	./Cell-Measurement-Object-Item.c	\
@@ -69,8 +87,10 @@ ASN_MODULE_HDRS=	\
 	./SNSSAI.h	\
 	./FiveQI.h	\
 	./QCI.h	\
+	./QFI.h	\
 	./ARP.h	\
 	./TimeStamp.h	\
+	./UE-Identity.h	\
 	./CellObjectID.h	\
 	./GranularityPeriod.h	\
 	./MeasurementType.h	\
@@ -78,6 +98,10 @@ ASN_MODULE_HDRS=	\
 	./MeasurementTypeID.h	\
 	./MeasurementLabel.h	\
 	./SubscriptionID.h	\
+	./TestCondInfo.h	\
+	./TestCond-Type.h	\
+	./TestCond-Expression.h	\
+	./TestCond-Value.h	\
 	./GlobalKPMnode-ID.h	\
 	./GlobalKPMnode-gNB-ID.h	\
 	./GlobalgNB-ID.h	\
@@ -102,18 +126,30 @@ ASN_MODULE_HDRS=	\
 	./LabelInfoList.h	\
 	./LabelInfoItem.h	\
 	./MeasurementData.h	\
+	./MeasurementDataItem.h	\
 	./MeasurementRecord.h	\
 	./MeasurementRecordItem.h	\
 	./MeasurementInfo-Action-List.h	\
 	./MeasurementInfo-Action-Item.h	\
+	./MeasurementCondList.h	\
+	./MeasurementCondItem.h	\
+	./MeasurementCondUEidList.h	\
+	./MeasurementCondUEidItem.h	\
+	./MatchingCondList.h	\
+	./MatchingCondItem.h	\
+	./MatchingUEidList.h	\
+	./MatchingUEidItem.h	\
 	./E2SM-KPM-EventTriggerDefinition.h	\
 	./E2SM-KPM-EventTriggerDefinition-Format1.h	\
 	./E2SM-KPM-ActionDefinition.h	\
 	./E2SM-KPM-ActionDefinition-Format1.h	\
+	./E2SM-KPM-ActionDefinition-Format2.h	\
+	./E2SM-KPM-ActionDefinition-Format3.h	\
 	./E2SM-KPM-IndicationHeader.h	\
 	./E2SM-KPM-IndicationHeader-Format1.h	\
 	./E2SM-KPM-IndicationMessage.h	\
 	./E2SM-KPM-IndicationMessage-Format1.h	\
+	./E2SM-KPM-IndicationMessage-Format2.h	\
 	./E2SM-KPM-RANfunction-Description.h	\
 	./RIC-KPMNode-Item.h	\
 	./Cell-Measurement-Object-Item.h	\
