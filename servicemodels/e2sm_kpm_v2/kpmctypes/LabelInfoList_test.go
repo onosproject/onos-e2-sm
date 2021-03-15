@@ -5,7 +5,7 @@
 package kpmv2ctypes
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -54,6 +54,7 @@ func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList {
 		},
 	}
 	labelInfoList.Value = append(labelInfoList.Value, item)
+	labelInfoList.Value = append(labelInfoList.Value, item)
 
 	return labelInfoList
 }
@@ -64,7 +65,7 @@ func Test_xerEncodeLabelInfoLabel(t *testing.T) {
 
 	xer, err := xerEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 778, len(xer))
+	assert.Equal(t, 1523, len(xer))
 	t.Logf("LabelInfoList XER\n%s", string(xer))
 }
 
@@ -74,7 +75,7 @@ func Test_xerDecodeLabelInfoList(t *testing.T) {
 
 	xer, err := xerEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 778, len(xer))
+	assert.Equal(t, 1523, len(xer))
 	t.Logf("LabelInfoList XER\n%s", string(xer))
 
 	result, err := xerDecodeLabelInfoList(xer)
@@ -89,7 +90,7 @@ func Test_perEncodeLabelInfoList(t *testing.T) {
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 37, len(per))
+	assert.Equal(t, 72, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 }
 
@@ -99,7 +100,7 @@ func Test_perDecodeLabelInfoList(t *testing.T) {
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 37, len(per))
+	assert.Equal(t, 72, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 
 	result, err := perDecodeLabelInfoList(per)

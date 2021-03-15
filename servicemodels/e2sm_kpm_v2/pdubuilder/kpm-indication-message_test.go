@@ -5,7 +5,7 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -61,9 +61,9 @@ func TestE2SmKpmIndicationMessage(t *testing.T) {
 	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemReal(rl))
 
 	measData := e2sm_kpm_v2.MeasurementData{
-		Value: make([]*e2sm_kpm_v2.MeasurementRecord, 0),
+		Value: make([]*e2sm_kpm_v2.MeasurementDataItem, 0),
 	}
-	measData.Value = append(measData.Value, &measRecord)
+	//measData.Value = append(measData.Value, &measRecord)
 
 	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessage(subscriptionID, cellObjID, granularity, &measInfoList, &measData)
 	assert.NilError(t, err)

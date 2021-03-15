@@ -6,7 +6,7 @@ package kpmv2ctypes
 
 import (
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -60,9 +60,9 @@ func createE2SMKPMIndicationMessageFormat1() *e2sm_kpm_v2.E2SmKpmIndicationMessa
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemReal(rl))
 
 	measData := e2sm_kpm_v2.MeasurementData{
-		Value: make([]*e2sm_kpm_v2.MeasurementRecord, 0),
+		Value: make([]*e2sm_kpm_v2.MeasurementDataItem, 0),
 	}
-	measData.Value = append(measData.Value, &measRecord)
+	//measData.Value = append(measData.Value, &measRecord)
 
 	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessage(subscriptionID, cellObjID, granularity, &measInfoList, &measData)
 

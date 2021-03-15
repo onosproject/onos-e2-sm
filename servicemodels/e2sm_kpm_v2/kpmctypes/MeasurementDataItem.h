@@ -28,10 +28,13 @@ typedef enum MeasurementDataItem__incompleteFlag {
 	 */
 } e_MeasurementDataItem__incompleteFlag;
 
+/* MeasurementDataItem__incompleteFlag */
+typedef long	 MeasurementDataItem__incompleteFlag_t;
+
 /* MeasurementDataItem */
 typedef struct MeasurementDataItem {
 	MeasurementRecord_t	 measRecord;
-	long	*incompleteFlag;	/* OPTIONAL */
+	MeasurementDataItem__incompleteFlag_t	*incompleteFlag;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

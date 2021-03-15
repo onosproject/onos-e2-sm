@@ -11,20 +11,19 @@ package kpmv2ctypes
 //#include <assert.h>
 //#include "QFI.h"
 import "C"
-
 import (
 	"fmt"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
 func xerEncodeQfi(qfi *e2sm_kpm_v2.Qfi) ([]byte, error) {
-	qfiCP, err := newQfi(qci)
+	qfiCP, err := newQfi(qfi)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeQfi() %s", err.Error())
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_QFI, unsafe.Pointer(qciCP))
+	bytes, err := encodeXer(&C.asn_DEF_QFI, unsafe.Pointer(qfiCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeQfi() %s", err.Error())
 	}

@@ -37,30 +37,50 @@ typedef enum TestCond_Type__gBR {
 	 * Enumeration is extensible
 	 */
 } e_TestCond_Type__gBR;
+
+/* TestCond_Type__gBR */
+typedef long	 TestCond_Type__gBR_t;
+
 typedef enum TestCond_Type__aMBR {
 	TestCond_Type__aMBR_true	= 0
 	/*
 	 * Enumeration is extensible
 	 */
 } e_TestCond_Type__aMBR;
+
+/* TestCond_Type__aMBR */
+typedef long	 TestCond_Type__aMBR_t;
+
 typedef enum TestCond_Type__isStat {
 	TestCond_Type__isStat_true	= 0
 	/*
 	 * Enumeration is extensible
 	 */
 } e_TestCond_Type__isStat;
+
+/* TestCond_Type__isStat */
+typedef long	 TestCond_Type__isStat_t;
+
 typedef enum TestCond_Type__isCatM {
 	TestCond_Type__isCatM_true	= 0
 	/*
 	 * Enumeration is extensible
 	 */
 } e_TestCond_Type__isCatM;
+
+/* e_TestCond_Type__isCatM */
+typedef long	 e_TestCond_Type__isCatM_t;
+
 typedef enum TestCond_Type__rSRP {
 	TestCond_Type__rSRP_true	= 0
 	/*
 	 * Enumeration is extensible
 	 */
 } e_TestCond_Type__rSRP;
+
+/* TestCond_Type__rSRP */
+typedef long	 TestCond_Type__rSRP_t;
+
 typedef enum TestCond_Type__rSRQ {
 	TestCond_Type__rSRQ_true	= 0
 	/*
@@ -68,16 +88,19 @@ typedef enum TestCond_Type__rSRQ {
 	 */
 } e_TestCond_Type__rSRQ;
 
+/* TestCond_Type__rSRQ */
+typedef long	 TestCond_Type__rSRQ_t;
+
 /* TestCond-Type */
 typedef struct TestCond_Type {
 	TestCond_Type_PR present;
 	union TestCond_Type_u {
-		long	 gBR;
-		long	 aMBR;
-		long	 isStat;
-		long	 isCatM;
-		long	 rSRP;
-		long	 rSRQ;
+		TestCond_Type__gBR_t	 gBR;
+		TestCond_Type__aMBR_t	 aMBR;
+		TestCond_Type__isStat_t	 isStat;
+		e_TestCond_Type__isCatM_t	 isCatM;
+		TestCond_Type__rSRP_t	 rSRP;
+		TestCond_Type__rSRQ_t	 rSRQ;
 		/*
 		 * This type is extensible,
 		 * possible extensions are below.
