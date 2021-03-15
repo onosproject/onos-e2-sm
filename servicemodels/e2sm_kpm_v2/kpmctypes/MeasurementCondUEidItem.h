@@ -15,6 +15,7 @@
 #include "MeasurementType.h"
 #include "MatchingCondList.h"
 #include "constr_SEQUENCE.h"
+#include "MatchingUEidList.h"
 
 #ifdef __cplusplus
 extern "C" {

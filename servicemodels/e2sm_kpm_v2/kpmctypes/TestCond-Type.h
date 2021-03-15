@@ -69,7 +69,7 @@ typedef enum TestCond_Type__isCatM {
 } e_TestCond_Type__isCatM;
 
 /* e_TestCond_Type__isCatM */
-typedef long	 e_TestCond_Type__isCatM_t;
+typedef long	 TestCond_Type__isCatM_t;
 
 typedef enum TestCond_Type__rSRP {
 	TestCond_Type__rSRP_true	= 0
@@ -98,7 +98,7 @@ typedef struct TestCond_Type {
 		TestCond_Type__gBR_t	 gBR;
 		TestCond_Type__aMBR_t	 aMBR;
 		TestCond_Type__isStat_t	 isStat;
-		e_TestCond_Type__isCatM_t	 isCatM;
+		TestCond_Type__isCatM_t	 isCatM;
 		TestCond_Type__rSRP_t	 rSRP;
 		TestCond_Type__rSRQ_t	 rSRQ;
 		/*

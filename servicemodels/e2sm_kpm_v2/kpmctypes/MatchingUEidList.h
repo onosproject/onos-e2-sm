@@ -14,6 +14,7 @@
 /* Including external dependencies */
 #include "asn_SEQUENCE_OF.h"
 #include "constr_SEQUENCE_OF.h"
+#include "MatchingUEidItem.h"
 
 #ifdef __cplusplus
 extern "C" {

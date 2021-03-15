@@ -152,8 +152,8 @@ return nil, err
 
 {{ define "OPTIONAL_ENCODE" }}{{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
-{{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
+{{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
+{{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 }
@@ -222,7 +222,7 @@ return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 {{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
 {{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}{
-{{upperCaseFirstLetter .FieldName}}: {{decodeDataType .DataType}}(*{{lowCaseFirstLetter .MessageName}}C),
+{{upperCaseFirstLetter .FieldName}}: {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C),
 }{{else}}
 {{lowCaseFirstLetter .MessageName}} := new({{.ProtoFileName}}.{{.MessageName}})
 {{lowCaseFirstLetter .MessageName}}Value, err := {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C)
