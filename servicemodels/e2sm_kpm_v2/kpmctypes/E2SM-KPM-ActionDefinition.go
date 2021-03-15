@@ -87,6 +87,22 @@ func newE2SmKpmActionDefinition(e2SmKpmActionDefinition *e2sm_kpm_v2.E2SmKpmActi
 			return nil, fmt.Errorf("newE2SmKpmActionDefinitionFormat1() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+	case *e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat2:
+		pr = C.E2SM_KPM_ActionDefinition__actionDefinition_formats_PR_actionDefinition_Format2
+
+		im, err := newE2SmKpmActionDefinitionFormat2(choice.ActionDefinitionFormat2)
+		if err != nil {
+			return nil, fmt.Errorf("newE2SmKpmActionDefinitionFormat2() %s", err.Error())
+		}
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+	case *e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat3:
+		pr = C.E2SM_KPM_ActionDefinition__actionDefinition_formats_PR_actionDefinition_Format3
+
+		im, err := newE2SmKpmActionDefinitionFormat3(choice.ActionDefinitionFormat3)
+		if err != nil {
+			return nil, fmt.Errorf("newE2SmKpmActionDefinitionFormat3() %s", err.Error())
+		}
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newE2SmKpmActionDefinition() %T not yet implemented", choice)
 	}
@@ -119,10 +135,26 @@ func decodeE2SmKpmActionDefinition(e2SmKpmActionDefinitionC *C.E2SM_KPM_ActionDe
 	case C.E2SM_KPM_ActionDefinition__actionDefinition_formats_PR_actionDefinition_Format1:
 		actionDefinitionFormat1, err := decodeE2SmKpmActionDefinitionFormat1Bytes(e2SmKpmActionDefinitionC.actionDefinition_formats.choice)
 		if err != nil {
-			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
+			return nil, fmt.Errorf("decodeE2SmKpmActionDefinitionFormat1Bytes() %s", err.Error())
 		}
 		e2SmKpmActionDefinition.E2SmKpmActionDefinition = &e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat1{
 			ActionDefinitionFormat1: actionDefinitionFormat1,
+		}
+	case C.E2SM_KPM_ActionDefinition__actionDefinition_formats_PR_actionDefinition_Format2:
+		actionDefinitionFormat2, err := decodeE2SmKpmActionDefinitionFormat2Bytes(e2SmKpmActionDefinitionC.actionDefinition_formats.choice)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmKpmActionDefinitionFormat2Bytes() %s", err.Error())
+		}
+		e2SmKpmActionDefinition.E2SmKpmActionDefinition = &e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat2{
+			ActionDefinitionFormat2: actionDefinitionFormat2,
+		}
+	case C.E2SM_KPM_ActionDefinition__actionDefinition_formats_PR_actionDefinition_Format1:
+		actionDefinitionFormat3, err := decodeE2SmKpmActionDefinitionFormat3Bytes(e2SmKpmActionDefinitionC.actionDefinition_formats.choice)
+		if err != nil {
+			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())
+		}
+		e2SmKpmActionDefinition.E2SmKpmActionDefinition = &e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat3{
+			ActionDefinitionFormat3: actionDefinitionFormat3,
 		}
 	default:
 		return nil, fmt.Errorf("decodeE2SmKpmActionDefinition() %v not yet implemented", e2SmKpmActionDefinitionC.actionDefinition_formats.present)
