@@ -15,55 +15,56 @@ import "C"
 import (
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	"unsafe"
 )
 
-//func xerEncodeMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem) ([]byte, error) {
-//	measurementDataItemCP, err := newMeasurementDataItem(measurementDataItem)
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMeasurementDataItem() %s", err.Error())
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_MeasurementDataItem, unsafe.Pointer(measurementDataItemCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMeasurementDataItem() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func perEncodeMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem) ([]byte, error) {
-//	measurementDataItemCP, err := newMeasurementDataItem(measurementDataItem)
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMeasurementDataItem() %s", err.Error())
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementDataItem, unsafe.Pointer(measurementDataItemCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMeasurementDataItem() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func xerDecodeMeasurementDataItem(bytes []byte) (*e2sm_kpm_v2.MeasurementDataItem, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementDataItem)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeMeasurementDataItem((*C.MeasurementDataItem_t)(unsafePtr))
-//}
-//
-//func perDecodeMeasurementDataItem(bytes []byte) (*e2sm_kpm_v2.MeasurementDataItem, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementDataItem)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeMeasurementDataItem((*C.MeasurementDataItem_t)(unsafePtr))
-//}
+func xerEncodeMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem) ([]byte, error) {
+	measurementDataItemCP, err := newMeasurementDataItem(measurementDataItem)
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMeasurementDataItem() %s", err.Error())
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_MeasurementDataItem, unsafe.Pointer(measurementDataItemCP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMeasurementDataItem() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perEncodeMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem) ([]byte, error) {
+	measurementDataItemCP, err := newMeasurementDataItem(measurementDataItem)
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMeasurementDataItem() %s", err.Error())
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementDataItem, unsafe.Pointer(measurementDataItemCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMeasurementDataItem() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeMeasurementDataItem(bytes []byte) (*e2sm_kpm_v2.MeasurementDataItem, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementDataItem)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeMeasurementDataItem((*C.MeasurementDataItem_t)(unsafePtr))
+}
+
+func perDecodeMeasurementDataItem(bytes []byte) (*e2sm_kpm_v2.MeasurementDataItem, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementDataItem)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeMeasurementDataItem((*C.MeasurementDataItem_t)(unsafePtr))
+}
 
 func newMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem) (*C.MeasurementDataItem_t, error) {
 

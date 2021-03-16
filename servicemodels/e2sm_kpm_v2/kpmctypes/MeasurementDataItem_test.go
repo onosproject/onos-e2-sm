@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func createMeasurementData() (*e2sm_kpm_v2.MeasurementData, error) {
+func createMeasurementDataItem() (*e2sm_kpm_v2.MeasurementDataItem, error) {
 
 	measRecord := &e2sm_kpm_v2.MeasurementRecord{
 		Value: make([]*e2sm_kpm_v2.MeasurementRecordItem, 0),
@@ -42,72 +42,65 @@ func createMeasurementData() (*e2sm_kpm_v2.MeasurementData, error) {
 		IncompleteFlag: e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE,
 	}
 
-	measData := &e2sm_kpm_v2.MeasurementData{
-		Value: make([]*e2sm_kpm_v2.MeasurementDataItem, 0),
-	}
-	measData.Value = append(measData.Value, measDataItem)
-
-	if err := measData.Validate(); err != nil {
+	if err := measDataItem.Validate(); err != nil {
 		return nil, err
 	}
-	return measData, nil
+	return measDataItem, nil
 }
 
-func Test_xerEncodeMeasurementData(t *testing.T) {
+func Test_xerEncodeMeasurementDataItem(t *testing.T) {
 
-	md, err := createMeasurementData()
+	mdi, err := createMeasurementDataItem()
 	assert.NilError(t, err)
 
-	xer, err := xerEncodeMeasurementData(md)
+	xer, err := xerEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 343, len(xer))
-	t.Logf("MeasurementData XER\n%s", string(xer))
+	assert.Equal(t, 262, len(xer))
+	t.Logf("MeasurementDataItem XER\n%s", string(xer))
 }
 
-func Test_xerDecodeMeasurementData(t *testing.T) {
+func Test_xerDecodeMeasurementDataItem(t *testing.T) {
 
-	md, err := createMeasurementData()
+	mdi, err := createMeasurementDataItem()
 	assert.NilError(t, err)
 
-	xer, err := xerEncodeMeasurementData(md)
+	xer, err := xerEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 343, len(xer))
-	t.Logf("MeasurementData XER\n%s", string(xer))
+	assert.Equal(t, 262, len(xer))
+	t.Logf("MeasurementDataItem XER\n%s", string(xer))
 
-	result, err := xerDecodeMeasurementData(xer)
+	result, err := xerDecodeMeasurementDataItem(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	assert.Equal(t, 1, len(result.GetValue()))
 	//measRecord := result.GetValue()[0]
 	//assert.Equal(t, 3, len(measRecord.GetValue()))
-
-	t.Logf("MeasurementData XER - decoded\n%s", result)
+	t.Logf("MeasurementDataItem XER - decoded\n%s", result)
 }
 
-func Test_perEncodeMeasurementData(t *testing.T) {
+func Test_perEncodeMeasurementDataItem(t *testing.T) {
 
-	md, err := createMeasurementData()
+	mdi, err := createMeasurementDataItem()
 	assert.NilError(t, err)
 
-	per, err := perEncodeMeasurementData(md)
+	per, err := perEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 19, len(per))
-	t.Logf("MeasurementData PER\n%s", string(per))
+	assert.Equal(t, 17, len(per))
+	t.Logf("MeasurementDataItem PER\n%s", string(per))
 }
 
-func Test_perDecodeMeasurementData(t *testing.T) {
+func Test_perDecodeMeasurementDataItem(t *testing.T) {
 
-	md, err := createMeasurementData()
+	mdi, err := createMeasurementDataItem()
 	assert.NilError(t, err)
 
-	per, err := perEncodeMeasurementData(md)
+	per, err := perEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 19, len(per))
-	t.Logf("MeasurementData PER\n%s", string(per))
+	assert.Equal(t, 17, len(per))
+	t.Logf("MeasurementDataItem PER\n%s", string(per))
 
-	result, err := perDecodeMeasurementData(per)
+	result, err := perDecodeMeasurementDataItem(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	assert.Equal(t, 1, len(result.GetValue()))
-	t.Logf("MeasurementData PER - decoded\n%v", result)
+	//assert.Equal(t, 1, len(result.GetValue()))
+	t.Logf("MeasurementDataItem PER - decoded\n%v", result)
 }

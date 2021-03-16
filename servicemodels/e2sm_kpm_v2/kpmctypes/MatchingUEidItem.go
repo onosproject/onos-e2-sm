@@ -15,55 +15,56 @@ import "C"
 import (
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	"unsafe"
 )
 
-//func xerEncodeMatchingUeIDItem(matchingUeIDItem *e2sm_kpm_v2.MatchingUeidItem) ([]byte, error) {
-//	matchingUeIDItemCP, err := newMatchingUeIDItem(matchingUeIDItem)
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMatchingUeIDItem() %s", err.Error())
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_MatchingUEidItem, unsafe.Pointer(matchingUeIDItemCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMatchingUeidItem() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func perEncodeMatchingUeIDItem(matchingUeIDItem *e2sm_kpm_v2.MatchingUeidItem) ([]byte, error) {
-//	matchingUeIDItemCP, err := newMatchingUeIDItem(matchingUeIDItem)
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMatchingUeidItem() %s", err.Error())
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_MatchingUEidItem, unsafe.Pointer(matchingUeIDItemCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMatchingUeidItem() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func xerDecodeMatchingUeIDItem(bytes []byte) (*e2sm_kpm_v2.MatchingUeidItem, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MatchingUEidItem)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeMatchingUeIDItem((*C.MatchingUEidItem_t)(unsafePtr))
-//}
-//
-//func perDecodeMatchingUeIDItem(bytes []byte) (*e2sm_kpm_v2.MatchingUeidItem, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MatchingUEidItem)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeMatchingUeIDItem((*C.MatchingUEidItem_t)(unsafePtr))
-//}
+func xerEncodeMatchingUeIDItem(matchingUeIDItem *e2sm_kpm_v2.MatchingUeidItem) ([]byte, error) {
+	matchingUeIDItemCP, err := newMatchingUeIDItem(matchingUeIDItem)
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMatchingUeIDItem() %s", err.Error())
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_MatchingUEidItem, unsafe.Pointer(matchingUeIDItemCP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMatchingUeidItem() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perEncodeMatchingUeIDItem(matchingUeIDItem *e2sm_kpm_v2.MatchingUeidItem) ([]byte, error) {
+	matchingUeIDItemCP, err := newMatchingUeIDItem(matchingUeIDItem)
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMatchingUeidItem() %s", err.Error())
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_MatchingUEidItem, unsafe.Pointer(matchingUeIDItemCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMatchingUeidItem() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeMatchingUeIDItem(bytes []byte) (*e2sm_kpm_v2.MatchingUeidItem, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MatchingUEidItem)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeMatchingUeIDItem((*C.MatchingUEidItem_t)(unsafePtr))
+}
+
+func perDecodeMatchingUeIDItem(bytes []byte) (*e2sm_kpm_v2.MatchingUeidItem, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MatchingUEidItem)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeMatchingUeIDItem((*C.MatchingUEidItem_t)(unsafePtr))
+}
 
 func newMatchingUeIDItem(matchingUeIDItem *e2sm_kpm_v2.MatchingUeidItem) (*C.MatchingUEidItem_t, error) {
 

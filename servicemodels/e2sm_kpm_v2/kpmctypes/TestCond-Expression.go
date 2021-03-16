@@ -14,55 +14,56 @@ import "C"
 import (
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	"unsafe"
 )
 
-//func xerEncodeTestCondExpression(testCondExpression e2sm_kpm_v2.TestCondExpression) ([]byte, error) {
-//	testCondExpressionCP, err := newTestCondExpression(testCondExpression)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_TestCond_Expression, unsafe.Pointer(testCondExpressionCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeTestCondExpression() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func perEncodeTestCondExpression(testCondExpression e2sm_kpm_v2.TestCondExpression) ([]byte, error) {
-//	testCondExpressionCP, err := newTestCondExpression(testCondExpression)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_TestCond_Expression, unsafe.Pointer(testCondExpressionCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeTestCondExpression() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func xerDecodeTestCondExpression(bytes []byte) (*e2sm_kpm_v2.TestCondExpression, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_TestCond_Expression)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeTestCondExpression((*C.TestCond_Expression_t)(unsafePtr))
-//}
-//
-//func perDecodeTestCondExpression(bytes []byte) (*e2sm_kpm_v2.TestCondExpression, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TestCond_Expression)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeTestCondExpression((*C.TestCond_Expression_t)(unsafePtr))
-//}
+func xerEncodeTestCondExpression(testCondExpression e2sm_kpm_v2.TestCondExpression) ([]byte, error) {
+	testCondExpressionCP, err := newTestCondExpression(testCondExpression)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_TestCond_Expression, unsafe.Pointer(testCondExpressionCP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeTestCondExpression() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perEncodeTestCondExpression(testCondExpression e2sm_kpm_v2.TestCondExpression) ([]byte, error) {
+	testCondExpressionCP, err := newTestCondExpression(testCondExpression)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_TestCond_Expression, unsafe.Pointer(testCondExpressionCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeTestCondExpression() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeTestCondExpression(bytes []byte) (*e2sm_kpm_v2.TestCondExpression, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_TestCond_Expression)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeTestCondExpression((*C.TestCond_Expression_t)(unsafePtr))
+}
+
+func perDecodeTestCondExpression(bytes []byte) (*e2sm_kpm_v2.TestCondExpression, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TestCond_Expression)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeTestCondExpression((*C.TestCond_Expression_t)(unsafePtr))
+}
 
 func newTestCondExpression(testCondExpression e2sm_kpm_v2.TestCondExpression) (*C.TestCond_Expression_t, error) {
 	var ret C.TestCond_Expression_t
