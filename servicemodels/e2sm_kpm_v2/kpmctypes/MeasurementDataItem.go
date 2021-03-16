@@ -83,8 +83,8 @@ func newMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem
 	}
 
 	measurementDataItemC := C.MeasurementDataItem_t{
-		measRecord:     measRecordC,
-		incompleteFlag: incompleteFlagC,
+		measRecord:     *measRecordC,
+		incompleteFlag: &incompleteFlagC,
 	}
 
 	return &measurementDataItemC, nil
@@ -92,7 +92,7 @@ func newMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem
 
 func decodeMeasurementDataItem(measurementDataItemC *C.MeasurementDataItem_t) (*e2sm_kpm_v2.MeasurementDataItem, error) {
 
-	measRecord, err := decodeMeasurementRecord(measurementDataItemC.measRecord)
+	measRecord, err := decodeMeasurementRecord(&measurementDataItemC.measRecord)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementRecord() %s", err.Error())
 	}

@@ -84,7 +84,7 @@ func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t
 			return nil, fmt.Errorf("unexpected TestCondType GBR %v", choice.GBr)
 		}
 
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(gbrC))))
+		binary.LittleEndian.PutUint32(choiceC[0:], uint32(gbrC))
 	case *e2sm_kpm_v2.TestCondType_AMbr:
 		pr = C.TestCond_Type_PR_aMBR
 
@@ -96,7 +96,7 @@ func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t
 			return nil, fmt.Errorf("unexpected TestCondType AMBR %v", choice.AMbr)
 		}
 
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(ambrC))))
+		binary.LittleEndian.PutUint32(choiceC[0:], uint32(ambrC))
 	case *e2sm_kpm_v2.TestCondType_IsStat:
 		pr = C.TestCond_Type_PR_isStat
 
@@ -108,7 +108,7 @@ func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t
 			return nil, fmt.Errorf("unexpected TestCondType IsStat %v", choice.IsStat)
 		}
 
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(isStatC))))
+		binary.LittleEndian.PutUint32(choiceC[0:], uint32(isStatC))
 	case *e2sm_kpm_v2.TestCondType_IsCatM:
 		pr = C.TestCond_Type_PR_isCatM
 
@@ -120,7 +120,7 @@ func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t
 			return nil, fmt.Errorf("unexpected TestCondType IsCatM %v", choice.IsCatM)
 		}
 
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(isCatMC))))
+		binary.LittleEndian.PutUint32(choiceC[0:], uint32(isCatMC))
 	case *e2sm_kpm_v2.TestCondType_RSrp:
 		pr = C.TestCond_Type_PR_rSRP
 
@@ -132,7 +132,7 @@ func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t
 			return nil, fmt.Errorf("unexpected TestCondType RSRP %v", choice.RSrp)
 		}
 
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(rsrpC))))
+		binary.LittleEndian.PutUint32(choiceC[0:], uint32(rsrpC))
 	case *e2sm_kpm_v2.TestCondType_RSrq:
 		pr = C.TestCond_Type_PR_rSRQ //ToDo - Check if it's correct PR's name
 
@@ -144,7 +144,7 @@ func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t
 			return nil, fmt.Errorf("unexpected TestCondType RSRP %v", choice.RSrq)
 		}
 
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(rsrqC))))
+		binary.LittleEndian.PutUint32(choiceC[0:], uint32(rsrqC))
 	default:
 		return nil, fmt.Errorf("newTestCondType() %T not yet implemented", choice)
 	}
@@ -166,6 +166,7 @@ func decodeTestCondType(testCondTypeC *C.TestCond_Type_t) (*e2sm_kpm_v2.TestCond
 		testCondType.TestCondType = &e2sm_kpm_v2.TestCondType_GBr{
 			GBr: e2sm_kpm_v2.GBR_GBR_TRUE,
 		}
+		//int32(binary.LittleEndian.Uint32(testCondTypeC.choice[:8]))
 	case C.TestCond_Type_PR_aMBR:
 		testCondType.TestCondType = &e2sm_kpm_v2.TestCondType_AMbr{
 			AMbr: e2sm_kpm_v2.AMBR_AMBR_TRUE,

@@ -91,7 +91,7 @@ func decodeMatchingCondList(matchingCondListC *C.MatchingCondList_t) (*e2sm_kpm_
 	ieCount = int(matchingCondListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(matchingCondListC.list.array)) * uintptr(i)
-		ieC := *(**C.MatchingCondItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(matchingCondListC.value.list.array)) + offset))
+		ieC := *(**C.MatchingCondItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(matchingCondListC.list.array)) + offset))
 		ie, err := decodeMatchingCondItem(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMatchingCondItem() %s", err.Error())

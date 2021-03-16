@@ -91,10 +91,10 @@ func newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_
 
 	e2SmKpmActionDefinitionFormat3C := C.E2SM_KPM_ActionDefinition_Format3_t{
 		//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-		cellObjID:    cellObjIDC,
-		measCondList: measCondListC,
-		granulPeriod: granulPeriodC,
-		subscriptID:  subscriptIDC,
+		cellObjID:    *cellObjIDC,
+		measCondList: *measCondListC,
+		granulPeriod: *granulPeriodC,
+		subscriptID:  *subscriptIDC,
 	}
 
 	return &e2SmKpmActionDefinitionFormat3C, nil
@@ -102,22 +102,22 @@ func newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_
 
 func decodeE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3C *C.E2SM_KPM_ActionDefinition_Format3_t) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
 
-	cellObjID, err := decodeCellObjectID(e2SmKpmActionDefinitionFormat3C.cellObjID)
+	cellObjID, err := decodeCellObjectID(&e2SmKpmActionDefinitionFormat3C.cellObjID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellObjectId() %s", err.Error())
 	}
 
-	measCondList, err := decodeMeasurementCondList(e2SmKpmActionDefinitionFormat3C.measCondList)
+	measCondList, err := decodeMeasurementCondList(&e2SmKpmActionDefinitionFormat3C.measCondList)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementCondList() %s", err.Error())
 	}
 
-	granulPeriod, err := decodeGranularityPeriod(e2SmKpmActionDefinitionFormat3C.granulPeriod)
+	granulPeriod, err := decodeGranularityPeriod(&e2SmKpmActionDefinitionFormat3C.granulPeriod)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGranularityPeriod() %s", err.Error())
 	}
 
-	subscriptID, err := decodeSubscriptionID(e2SmKpmActionDefinitionFormat3C.subscriptID)
+	subscriptID, err := decodeSubscriptionID(&e2SmKpmActionDefinitionFormat3C.subscriptID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeSubscriptionId() %s", err.Error())
 	}

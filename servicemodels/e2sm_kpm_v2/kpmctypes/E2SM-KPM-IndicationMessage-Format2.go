@@ -95,12 +95,11 @@ func newE2SmKpmIndicationMessageFormat2(e2SmKpmIndicationMessageFormat2 *e2sm_kp
 	}
 
 	e2SmKpmIndicationMessageFormat2C := C.E2SM_KPM_IndicationMessage_Format2_t{
-		//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-		subscriptID:      subscriptIDC,
+		subscriptID:      *subscriptIDC,
 		cellObjID:        cellObjIDC,
 		granulPeriod:     granulPeriodC,
-		measCondUEidList: measCondUeIDListC,
-		measData:         measDataC,
+		measCondUEidList: *measCondUeIDListC,
+		measData:         *measDataC,
 	}
 
 	return &e2SmKpmIndicationMessageFormat2C, nil
@@ -108,7 +107,7 @@ func newE2SmKpmIndicationMessageFormat2(e2SmKpmIndicationMessageFormat2 *e2sm_kp
 
 func decodeE2SmKpmIndicationMessageFormat2(e2SmKpmIndicationMessageFormat2C *C.E2SM_KPM_IndicationMessage_Format2_t) (*e2sm_kpm_v2.E2SmKpmIndicationMessageFormat2, error) {
 
-	subscriptID, err := decodeSubscriptionID(e2SmKpmIndicationMessageFormat2C.subscriptID)
+	subscriptID, err := decodeSubscriptionID(&e2SmKpmIndicationMessageFormat2C.subscriptID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeSubscriptionId() %s", err.Error())
 	}
@@ -123,18 +122,17 @@ func decodeE2SmKpmIndicationMessageFormat2(e2SmKpmIndicationMessageFormat2C *C.E
 		return nil, fmt.Errorf("decodeGranularityPeriod() %s", err.Error())
 	}
 
-	measCondUeIDList, err := decodeMeasurementCondUeIDList(e2SmKpmIndicationMessageFormat2C.measCondUEidList)
+	measCondUeIDList, err := decodeMeasurementCondUeIDList(&e2SmKpmIndicationMessageFormat2C.measCondUEidList)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementCondUeidList() %s", err.Error())
 	}
 
-	measData, err := decodeMeasurementData(e2SmKpmIndicationMessageFormat2C.measData)
+	measData, err := decodeMeasurementData(&e2SmKpmIndicationMessageFormat2C.measData)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementData() %s", err.Error())
 	}
 
 	e2SmKpmIndicationMessageFormat2 := e2sm_kpm_v2.E2SmKpmIndicationMessageFormat2{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		SubscriptId:      subscriptID,
 		CellObjId:        cellObjID,
 		GranulPeriod:     granulPeriod,

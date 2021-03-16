@@ -90,7 +90,7 @@ func decodeMatchingUeIDList(matchingUeIDListC *C.MatchingUEidList_t) (*e2sm_kpm_
 	ieCount = int(matchingUeIDListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(matchingUeIDListC.list.array)) * uintptr(i)
-		ieC := *(**C.MatchingUeidItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(matchingUeIDListC.value.list.array)) + offset))
+		ieC := *(**C.MatchingUEidItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(matchingUeIDListC.list.array)) + offset))
 		ie, err := decodeMatchingUeIDItem(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMatchingUeIDItem() %s", err.Error())

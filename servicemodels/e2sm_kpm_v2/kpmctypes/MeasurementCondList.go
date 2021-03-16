@@ -91,7 +91,7 @@ func decodeMeasurementCondList(measurementCondListC *C.MeasurementCondList_t) (*
 	ieCount = int(measurementCondListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementCondListC.list.array)) * uintptr(i)
-		ieC := *(**C.MeasurementCondItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementCondListC.value.list.array)) + offset))
+		ieC := *(**C.MeasurementCondItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementCondListC.list.array)) + offset))
 		ie, err := decodeMeasurementCondItem(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeMeasurementCondItem() %s", err.Error())

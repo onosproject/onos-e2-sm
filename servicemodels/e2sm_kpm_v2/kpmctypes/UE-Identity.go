@@ -69,12 +69,12 @@ func perDecodeUeIdentity(bytes []byte) (*e2sm_kpm_v2.UeIdentity, error) {
 
 func newUeIdentity(ueIdentity *e2sm_kpm_v2.UeIdentity) (*C.UE_Identity_t, error) {
 
-	ueIdentityC, err := decodeOctetString(ueIdentity.Value)
+	ueIdentityC, err := newOctetString(ueIdentity.Value)
 	if err != nil {
 		return nil, fmt.Errorf("decodeOctetString() %s", err.Error())
 	}
 
-	return &ueIdentityC, nil
+	return ueIdentityC, nil
 }
 
 func decodeUeIdentity(ueIdentityC *C.UE_Identity_t) (*e2sm_kpm_v2.UeIdentity, error) {

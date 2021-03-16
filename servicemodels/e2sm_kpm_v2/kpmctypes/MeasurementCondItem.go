@@ -80,8 +80,8 @@ func newMeasurementCondItem(measurementCondItem *e2sm_kpm_v2.MeasurementCondItem
 	}
 
 	measurementCondItemC := C.MeasurementCondItem_t{
-		measType:     measTypeC,
-		matchingCond: matchingCondC,
+		measType:     *measTypeC,
+		matchingCond: *matchingCondC,
 	}
 
 	return &measurementCondItemC, nil
@@ -89,12 +89,12 @@ func newMeasurementCondItem(measurementCondItem *e2sm_kpm_v2.MeasurementCondItem
 
 func decodeMeasurementCondItem(measurementCondItemC *C.MeasurementCondItem_t) (*e2sm_kpm_v2.MeasurementCondItem, error) {
 
-	measType, err := decodeMeasurementType(measurementCondItemC.measType)
+	measType, err := decodeMeasurementType(&measurementCondItemC.measType)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementType() %s", err.Error())
 	}
 
-	matchingCond, err := decodeMatchingCondList(measurementCondItemC.matchingCond)
+	matchingCond, err := decodeMatchingCondList(&measurementCondItemC.matchingCond)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMatchingCondList() %s", err.Error())
 	}

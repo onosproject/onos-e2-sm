@@ -12,6 +12,7 @@ package kpmv2ctypes
 //#include "OCTET_STRING.h"
 import "C"
 import (
+	"encoding/binary"
 	"unsafe"
 )
 
@@ -37,3 +38,9 @@ func decodeOctetString(octC *C.OCTET_STRING_t) (string, error) {
 //func freeOctetString(octC *C.OCTET_STRING_t) {
 //	C.free(unsafe.Pointer(octC))
 //}
+
+func decodeOctetStringBytes(array [16]byte) (string, error) {
+	octSC := (*C.OCTET_STRING_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+
+	return decodeOctetString(octSC)
+}

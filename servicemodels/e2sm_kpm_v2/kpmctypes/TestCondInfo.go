@@ -85,9 +85,9 @@ func newTestCondInfo(testCondInfo *e2sm_kpm_v2.TestCondInfo) (*C.TestCondInfo_t,
 	}
 
 	testCondInfoC := C.TestCondInfo_t{
-		testType:  testTypeC,
-		testExpr:  testExprC,
-		testValue: testValueC,
+		testType:  *testTypeC,
+		testExpr:  *testExprC,
+		testValue: *testValueC,
 	}
 
 	return &testCondInfoC, nil
@@ -95,17 +95,17 @@ func newTestCondInfo(testCondInfo *e2sm_kpm_v2.TestCondInfo) (*C.TestCondInfo_t,
 
 func decodeTestCondInfo(testCondInfoC *C.TestCondInfo_t) (*e2sm_kpm_v2.TestCondInfo, error) {
 
-	testType, err := decodeTestCondType(testCondInfoC.testType)
+	testType, err := decodeTestCondType(&testCondInfoC.testType)
 	if err != nil {
 		return nil, fmt.Errorf("decodeTestCondType() %s", err.Error())
 	}
 
-	testExpr, err := decodeTestCondExpression(testCondInfoC.testExpr)
+	testExpr, err := decodeTestCondExpression(&testCondInfoC.testExpr)
 	if err != nil {
 		return nil, fmt.Errorf("decodeTestCondExpression() %s", err.Error())
 	}
 
-	testValue, err := decodeTestCondValue(testCondInfoC.testValue)
+	testValue, err := decodeTestCondValue(&testCondInfoC.testValue)
 	if err != nil {
 		return nil, fmt.Errorf("decodeTestCondValue() %s", err.Error())
 	}

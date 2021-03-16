@@ -75,7 +75,7 @@ func newMatchingUeIDItem(matchingUeIDItem *e2sm_kpm_v2.MatchingUeidItem) (*C.Mat
 	}
 
 	matchingUeIDItemC := C.MatchingUEidItem_t{
-		ueID: ueIDC,
+		ueID: *ueIDC,
 	}
 
 	return &matchingUeIDItemC, nil
@@ -83,7 +83,7 @@ func newMatchingUeIDItem(matchingUeIDItem *e2sm_kpm_v2.MatchingUeidItem) (*C.Mat
 
 func decodeMatchingUeIDItem(matchingUeIDItemC *C.MatchingUEidItem_t) (*e2sm_kpm_v2.MatchingUeidItem, error) {
 
-	ueID, err := decodeUeIdentity(matchingUeIDItemC.ueID)
+	ueID, err := decodeUeIdentity(&matchingUeIDItemC.ueID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeUeIdentity() %s", err.Error())
 	}

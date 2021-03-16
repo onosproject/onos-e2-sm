@@ -148,7 +148,7 @@ func decodeE2SmKpmActionDefinition(e2SmKpmActionDefinitionC *C.E2SM_KPM_ActionDe
 		e2SmKpmActionDefinition.E2SmKpmActionDefinition = &e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat2{
 			ActionDefinitionFormat2: actionDefinitionFormat2,
 		}
-	case C.E2SM_KPM_ActionDefinition__actionDefinition_formats_PR_actionDefinition_Format1:
+	case C.E2SM_KPM_ActionDefinition__actionDefinition_formats_PR_actionDefinition_Format3:
 		actionDefinitionFormat3, err := decodeE2SmKpmActionDefinitionFormat3Bytes(e2SmKpmActionDefinitionC.actionDefinition_formats.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeBitStringBytes() %s", err.Error())

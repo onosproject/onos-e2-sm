@@ -80,8 +80,8 @@ func newE2SmKpmActionDefinitionFormat2(e2SmKpmActionDefinitionFormat2 *e2sm_kpm_
 	}
 
 	e2SmKpmActionDefinitionFormat2C := C.E2SM_KPM_ActionDefinition_Format2_t{
-		ueID:          ueIDC,
-		subscriptInfo: subscriptInfoC,
+		ueID:          *ueIDC,
+		subscriptInfo: *subscriptInfoC,
 	}
 
 	return &e2SmKpmActionDefinitionFormat2C, nil
@@ -89,12 +89,12 @@ func newE2SmKpmActionDefinitionFormat2(e2SmKpmActionDefinitionFormat2 *e2sm_kpm_
 
 func decodeE2SmKpmActionDefinitionFormat2(e2SmKpmActionDefinitionFormat2C *C.E2SM_KPM_ActionDefinition_Format2_t) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat2, error) {
 
-	ueID, err := decodeUeIdentity(e2SmKpmActionDefinitionFormat2C.ueID)
+	ueID, err := decodeUeIdentity(&e2SmKpmActionDefinitionFormat2C.ueID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeUeIdentity() %s", err.Error())
 	}
 
-	subscriptInfo, err := decodeE2SmKpmActionDefinitionFormat1(e2SmKpmActionDefinitionFormat2C.subscriptInfo)
+	subscriptInfo, err := decodeE2SmKpmActionDefinitionFormat1(&e2SmKpmActionDefinitionFormat2C.subscriptInfo)
 	if err != nil {
 		return nil, fmt.Errorf("decodeE2SmKpmActionDefinitionFormat1() %s", err.Error())
 	}
