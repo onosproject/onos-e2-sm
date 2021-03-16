@@ -81,6 +81,7 @@ func newTestCondValue(testCondValue *e2sm_kpm_v2.TestCondValue) (*C.TestCond_Val
 		pr = C.TestCond_Value_PR_valueEnum
 
 		binary.LittleEndian.PutUint64(choiceC[:], uint64(choice.ValueEnum))
+		//ToDo - Implement Boolean.go
 	//case *e2sm_kpm_v2.TestCondValue_ValueBool:
 	//	pr = C.TestCond_Value_PR_valueBool
 	//
@@ -140,6 +141,7 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 		testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValueEnum{
 			ValueEnum: enm,
 		}
+		//ToDo - Implement Boolean.go
 	//case C.TestCond_Value_PR_valueBool:
 	//	testCondValuestructC, err := decodeBoolBytes(testCondValueC.choice) //ToDo - Verify if decodeSmthBytes function exists
 	//	if err != nil {
@@ -160,6 +162,7 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 			ValueBitS: bs,
 		}
 	case C.TestCond_Value_PR_valueOctS:
+		//ToDo: Fix decoding
 		var a [16]byte
 		copy(a[:], testCondValueC.choice[:16])
 		testCondValuestructC, err := decodeOctetStringBytes(a)
@@ -171,6 +174,7 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 			ValueOctS: testCondValuestructC,
 		}
 	case C.TestCond_Value_PR_valuePrtS:
+		//ToDo - Fix decoding
 		var a [16]byte
 		copy(a[:], testCondValueC.choice[:16])
 		testCondValuestructC, err := decodePrintableStringBytes(a)
