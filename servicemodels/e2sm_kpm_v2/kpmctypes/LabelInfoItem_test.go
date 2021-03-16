@@ -24,6 +24,9 @@ func createLabelInfoItem() *e2sm_kpm_v2.LabelInfoItem {
 			FiveQi: &e2sm_kpm_v2.FiveQi{
 				Value: 23,
 			},
+			QFi: &e2sm_kpm_v2.Qfi{
+				Value: 62,
+			},
 			QCi: &e2sm_kpm_v2.Qci{
 				Value: 24,
 			},
@@ -57,7 +60,7 @@ func Test_xerEncodeLabelInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeLabelInfoItem(lii)
 	assert.NilError(t, err)
-	assert.Equal(t, 653, len(xer))
+	assert.Equal(t, 675, len(xer))
 	t.Logf("LabelInfoItem XER\n%s", string(xer))
 }
 
@@ -67,7 +70,7 @@ func Test_xerDecodeLabelInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeLabelInfoItem(lii)
 	assert.NilError(t, err)
-	assert.Equal(t, 653, len(xer))
+	assert.Equal(t, 675, len(xer))
 	t.Logf("LabelInfoItem XER\n%s", string(xer))
 
 	result, err := xerDecodeLabelInfoItem(xer)

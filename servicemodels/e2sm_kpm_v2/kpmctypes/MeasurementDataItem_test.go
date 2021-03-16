@@ -38,7 +38,7 @@ func createMeasurementDataItem() (*e2sm_kpm_v2.MeasurementDataItem, error) {
 	measRecord.Value = append(measRecord.Value, item3)
 
 	measDataItem := &e2sm_kpm_v2.MeasurementDataItem{
-		MeasRecord: measRecord,
+		MeasRecord:     measRecord,
 		IncompleteFlag: e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE,
 	}
 

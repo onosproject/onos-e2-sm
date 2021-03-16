@@ -15,55 +15,56 @@ import "C"
 import (
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	"unsafe"
 )
 
-//func xerEncodeMeasurementCondUeIDItem(measurementCondUeIDItem *e2sm_kpm_v2.MeasurementCondUeidItem) ([]byte, error) {
-//	measurementCondUeIDItemCP, err := newMeasurementCondUeIDItem(measurementCondUeIDItem)
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDItem() %s", err.Error())
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_MeasurementCondUEidItem, unsafe.Pointer(measurementCondUeIDItemCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDItem() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func perEncodeMeasurementCondUeIDItem(measurementCondUeIDItem *e2sm_kpm_v2.MeasurementCondUeidItem) ([]byte, error) {
-//	measurementCondUeIDItemCP, err := newMeasurementCondUeIDItem(measurementCondUeIDItem)
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDItem() %s", err.Error())
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementCondUEidItem, unsafe.Pointer(measurementCondUeIDItemCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDItem() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func xerDecodeMeasurementCondUeIDItem(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidItem, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementCondUEidItem)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeMeasurementCondUeIDItem((*C.MeasurementCondUEidItem_t)(unsafePtr))
-//}
-//
-//func perDecodeMeasurementCondUeIDItem(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidItem, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementCondUEidItem)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeMeasurementCondUeIDItem((*C.MeasurementCondUEidItem_t)(unsafePtr))
-//}
+func xerEncodeMeasurementCondUeIDItem(measurementCondUeIDItem *e2sm_kpm_v2.MeasurementCondUeidItem) ([]byte, error) {
+	measurementCondUeIDItemCP, err := newMeasurementCondUeIDItem(measurementCondUeIDItem)
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDItem() %s", err.Error())
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_MeasurementCondUEidItem, unsafe.Pointer(measurementCondUeIDItemCP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDItem() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perEncodeMeasurementCondUeIDItem(measurementCondUeIDItem *e2sm_kpm_v2.MeasurementCondUeidItem) ([]byte, error) {
+	measurementCondUeIDItemCP, err := newMeasurementCondUeIDItem(measurementCondUeIDItem)
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDItem() %s", err.Error())
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementCondUEidItem, unsafe.Pointer(measurementCondUeIDItemCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDItem() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeMeasurementCondUeIDItem(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidItem, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementCondUEidItem)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeMeasurementCondUeIDItem((*C.MeasurementCondUEidItem_t)(unsafePtr))
+}
+
+func perDecodeMeasurementCondUeIDItem(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidItem, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementCondUEidItem)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeMeasurementCondUeIDItem((*C.MeasurementCondUEidItem_t)(unsafePtr))
+}
 
 func newMeasurementCondUeIDItem(measurementCondUeIDItem *e2sm_kpm_v2.MeasurementCondUeidItem) (*C.MeasurementCondUEidItem_t, error) {
 

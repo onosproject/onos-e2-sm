@@ -18,53 +18,53 @@ import (
 	"unsafe"
 )
 
-//func xerEncodeMeasurementCondUeIDList(measurementCondUeIDList *e2sm_kpm_v2.MeasurementCondUeidList) ([]byte, error) {
-//	measurementCondUeIDListCP, err := newMeasurementCondUeIDList(measurementCondUeIDList)
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDList() %s", err.Error())
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_MeasurementCondUEidList, unsafe.Pointer(measurementCondUeIDListCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDList() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func perEncodeMeasurementCondUeIDList(measurementCondUeIDList *e2sm_kpm_v2.MeasurementCondUeidList) ([]byte, error) {
-//	measurementCondUeIDListCP, err := newMeasurementCondUeIDList(measurementCondUeIDList)
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDList() %s", err.Error())
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementCondUEidList, unsafe.Pointer(measurementCondUeIDListCP))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDList() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func xerDecodeMeasurementCondUeIDList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidList, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementCondUEidList)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeMeasurementCondUeIDList((*C.MeasurementCondUEidList_t)(unsafePtr))
-//}
-//
-//func perDecodeMeasurementCondUeIDList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidList, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementCondUEidList)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeMeasurementCondUeIDList((*C.MeasurementCondUEidList_t)(unsafePtr))
-//}
+func xerEncodeMeasurementCondUeIDList(measurementCondUeIDList *e2sm_kpm_v2.MeasurementCondUeidList) ([]byte, error) {
+	measurementCondUeIDListCP, err := newMeasurementCondUeIDList(measurementCondUeIDList)
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDList() %s", err.Error())
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_MeasurementCondUEidList, unsafe.Pointer(measurementCondUeIDListCP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeMeasurementCondUeIDList() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perEncodeMeasurementCondUeIDList(measurementCondUeIDList *e2sm_kpm_v2.MeasurementCondUeidList) ([]byte, error) {
+	measurementCondUeIDListCP, err := newMeasurementCondUeIDList(measurementCondUeIDList)
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDList() %s", err.Error())
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementCondUEidList, unsafe.Pointer(measurementCondUeIDListCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMeasurementCondUeIDList() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeMeasurementCondUeIDList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidList, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementCondUEidList)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeMeasurementCondUeIDList((*C.MeasurementCondUEidList_t)(unsafePtr))
+}
+
+func perDecodeMeasurementCondUeIDList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondUeidList, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementCondUEidList)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeMeasurementCondUeIDList((*C.MeasurementCondUEidList_t)(unsafePtr))
+}
 
 func newMeasurementCondUeIDList(measurementCondUeIDList *e2sm_kpm_v2.MeasurementCondUeidList) (*C.MeasurementCondUEidList_t, error) {
 

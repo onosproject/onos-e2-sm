@@ -19,53 +19,53 @@ import (
 	"unsafe"
 )
 
-//func xerEncodeE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3) ([]byte, error) {
-//	e2SmKpmActionDefinitionFormat3CP, err := newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3)
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
-//	}
-//
-//	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_ActionDefinition_Format3, unsafe.Pointer(e2SmKpmActionDefinitionFormat3CP))
-//	if err != nil {
-//		return nil, fmt.Errorf("xerEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func perEncodeE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3) ([]byte, error) {
-//	e2SmKpmActionDefinitionFormat3CP, err := newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3)
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
-//	}
-//
-//	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_ActionDefinition_Format3, unsafe.Pointer(e2SmKpmActionDefinitionFormat3CP))
-//	if err != nil {
-//		return nil, fmt.Errorf("perEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
-//	}
-//	return bytes, nil
-//}
-//
-//func xerDecodeE2SmKpmActionDefinitionFormat3(bytes []byte) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_ActionDefinition_Format3)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from XER is nil")
-//	}
-//	return decodeE2SmKpmActionDefinitionFormat3((*C.E2SM_KPM_ActionDefinition_Format3_t)(unsafePtr))
-//}
-//
-//func perDecodeE2SmKpmActionDefinitionFormat3(bytes []byte) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_ActionDefinition_Format3)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeE2SmKpmActionDefinitionFormat3((*C.E2SM_KPM_ActionDefinition_Format3_t)(unsafePtr))
-//}
+func xerEncodeE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3) ([]byte, error) {
+	e2SmKpmActionDefinitionFormat3CP, err := newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3)
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
+	}
+
+	bytes, err := encodeXer(&C.asn_DEF_E2SM_KPM_ActionDefinition_Format3, unsafe.Pointer(e2SmKpmActionDefinitionFormat3CP))
+	if err != nil {
+		return nil, fmt.Errorf("xerEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func perEncodeE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3) ([]byte, error) {
+	e2SmKpmActionDefinitionFormat3CP, err := newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3)
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_KPM_ActionDefinition_Format3, unsafe.Pointer(e2SmKpmActionDefinitionFormat3CP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeE2SmKpmActionDefinitionFormat3() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeE2SmKpmActionDefinitionFormat3(bytes []byte) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_ActionDefinition_Format3)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeE2SmKpmActionDefinitionFormat3((*C.E2SM_KPM_ActionDefinition_Format3_t)(unsafePtr))
+}
+
+func perDecodeE2SmKpmActionDefinitionFormat3(bytes []byte) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_KPM_ActionDefinition_Format3)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeE2SmKpmActionDefinitionFormat3((*C.E2SM_KPM_ActionDefinition_Format3_t)(unsafePtr))
+}
 
 func newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3) (*C.E2SM_KPM_ActionDefinition_Format3_t, error) {
 
