@@ -16,56 +16,55 @@ import (
 	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
-	"unsafe"
 )
 
-func xerEncodeTestCondType(testCondType *e2sm_kpm_v2.TestCondType) ([]byte, error) {
-	testCondTypeCP, err := newTestCondType(testCondType)
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeTestCondType() %s", err.Error())
-	}
-
-	bytes, err := encodeXer(&C.asn_DEF_TestCond_Type, unsafe.Pointer(testCondTypeCP))
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeTestCondType() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func perEncodeTestCondType(testCondType *e2sm_kpm_v2.TestCondType) ([]byte, error) {
-	testCondTypeCP, err := newTestCondType(testCondType)
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeTestCondType() %s", err.Error())
-	}
-
-	bytes, err := encodePerBuffer(&C.asn_DEF_TestCond_Type, unsafe.Pointer(testCondTypeCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeTestCondType() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func xerDecodeTestCondType(bytes []byte) (*e2sm_kpm_v2.TestCondType, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_TestCond_Type)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	return decodeTestCondType((*C.TestCond_Type_t)(unsafePtr))
-}
-
-func perDecodeTestCondType(bytes []byte) (*e2sm_kpm_v2.TestCondType, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TestCond_Type)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeTestCondType((*C.TestCond_Type_t)(unsafePtr))
-}
+//func xerEncodeTestCondType(testCondType *e2sm_kpm_v2.TestCondType) ([]byte, error) {
+//	testCondTypeCP, err := newTestCondType(testCondType)
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeTestCondType() %s", err.Error())
+//	}
+//
+//	bytes, err := encodeXer(&C.asn_DEF_TestCond_Type, unsafe.Pointer(testCondTypeCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeTestCondType() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func perEncodeTestCondType(testCondType *e2sm_kpm_v2.TestCondType) ([]byte, error) {
+//	testCondTypeCP, err := newTestCondType(testCondType)
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeTestCondType() %s", err.Error())
+//	}
+//
+//	bytes, err := encodePerBuffer(&C.asn_DEF_TestCond_Type, unsafe.Pointer(testCondTypeCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeTestCondType() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func xerDecodeTestCondType(bytes []byte) (*e2sm_kpm_v2.TestCondType, error) {
+//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_TestCond_Type)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from XER is nil")
+//	}
+//	return decodeTestCondType((*C.TestCond_Type_t)(unsafePtr))
+//}
+//
+//func perDecodeTestCondType(bytes []byte) (*e2sm_kpm_v2.TestCondType, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TestCond_Type)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeTestCondType((*C.TestCond_Type_t)(unsafePtr))
+//}
 
 func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t, error) {
 
@@ -192,10 +191,4 @@ func decodeTestCondType(testCondTypeC *C.TestCond_Type_t) (*e2sm_kpm_v2.TestCond
 	}
 
 	return testCondType, nil
-}
-
-func decodeTestCondTypeBytes(array [8]byte) (*e2sm_kpm_v2.TestCondType, error) {
-	testCondTypeC := (*C.TestCond_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestCondType(testCondTypeC)
 }

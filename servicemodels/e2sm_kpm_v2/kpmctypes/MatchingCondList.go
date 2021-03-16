@@ -13,59 +13,58 @@ package kpmv2ctypes
 //#include "MatchingCondItem.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
-func xerEncodeMatchingCondList(matchingCondList *e2sm_kpm_v2.MatchingCondList) ([]byte, error) {
-	matchingCondListCP, err := newMatchingCondList(matchingCondList)
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeMatchingCondList() %s", err.Error())
-	}
-
-	bytes, err := encodeXer(&C.asn_DEF_MatchingCondList, unsafe.Pointer(matchingCondListCP))
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeMatchingCondList() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func perEncodeMatchingCondList(matchingCondList *e2sm_kpm_v2.MatchingCondList) ([]byte, error) {
-	matchingCondListCP, err := newMatchingCondList(matchingCondList)
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeMatchingCondList() %s", err.Error())
-	}
-
-	bytes, err := encodePerBuffer(&C.asn_DEF_MatchingCondList, unsafe.Pointer(matchingCondListCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeMatchingCondList() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func xerDecodeMatchingCondList(bytes []byte) (*e2sm_kpm_v2.MatchingCondList, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MatchingCondList)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	return decodeMatchingCondList((*C.MatchingCondList_t)(unsafePtr))
-}
-
-func perDecodeMatchingCondList(bytes []byte) (*e2sm_kpm_v2.MatchingCondList, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MatchingCondList)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeMatchingCondList((*C.MatchingCondList_t)(unsafePtr))
-}
+//func xerEncodeMatchingCondList(matchingCondList *e2sm_kpm_v2.MatchingCondList) ([]byte, error) {
+//	matchingCondListCP, err := newMatchingCondList(matchingCondList)
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeMatchingCondList() %s", err.Error())
+//	}
+//
+//	bytes, err := encodeXer(&C.asn_DEF_MatchingCondList, unsafe.Pointer(matchingCondListCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeMatchingCondList() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func perEncodeMatchingCondList(matchingCondList *e2sm_kpm_v2.MatchingCondList) ([]byte, error) {
+//	matchingCondListCP, err := newMatchingCondList(matchingCondList)
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeMatchingCondList() %s", err.Error())
+//	}
+//
+//	bytes, err := encodePerBuffer(&C.asn_DEF_MatchingCondList, unsafe.Pointer(matchingCondListCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeMatchingCondList() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func xerDecodeMatchingCondList(bytes []byte) (*e2sm_kpm_v2.MatchingCondList, error) {
+//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MatchingCondList)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from XER is nil")
+//	}
+//	return decodeMatchingCondList((*C.MatchingCondList_t)(unsafePtr))
+//}
+//
+//func perDecodeMatchingCondList(bytes []byte) (*e2sm_kpm_v2.MatchingCondList, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MatchingCondList)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeMatchingCondList((*C.MatchingCondList_t)(unsafePtr))
+//}
 
 func newMatchingCondList(matchingCondList *e2sm_kpm_v2.MatchingCondList) (*C.MatchingCondList_t, error) {
 
@@ -87,8 +86,7 @@ func decodeMatchingCondList(matchingCondListC *C.MatchingCondList_t) (*e2sm_kpm_
 
 	matchingCondList := new(e2sm_kpm_v2.MatchingCondList)
 
-	var ieCount int
-	ieCount = int(matchingCondListC.list.count)
+	ieCount := int(matchingCondListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(matchingCondListC.list.array)) * uintptr(i)
 		ieC := *(**C.MatchingCondItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(matchingCondListC.list.array)) + offset))
@@ -100,10 +98,4 @@ func decodeMatchingCondList(matchingCondListC *C.MatchingCondList_t) (*e2sm_kpm_
 	}
 
 	return matchingCondList, nil
-}
-
-func decodeMatchingCondListBytes(array [8]byte) (*e2sm_kpm_v2.MatchingCondList, error) {
-	matchingCondListC := (*C.MatchingCondList_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeMatchingCondList(matchingCondListC)
 }

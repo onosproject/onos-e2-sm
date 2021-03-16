@@ -13,59 +13,58 @@ package kpmv2ctypes
 //#include "MeasurementCondItem.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
-func xerEncodeMeasurementCondList(measurementCondList *e2sm_kpm_v2.MeasurementCondList) ([]byte, error) {
-	measurementCondListCP, err := newMeasurementCondList(measurementCondList)
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeMeasurementCondList() %s", err.Error())
-	}
-
-	bytes, err := encodeXer(&C.asn_DEF_MeasurementCondList, unsafe.Pointer(measurementCondListCP))
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeMeasurementCondList() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func perEncodeMeasurementCondList(measurementCondList *e2sm_kpm_v2.MeasurementCondList) ([]byte, error) {
-	measurementCondListCP, err := newMeasurementCondList(measurementCondList)
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeMeasurementCondList() %s", err.Error())
-	}
-
-	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementCondList, unsafe.Pointer(measurementCondListCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeMeasurementCondList() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func xerDecodeMeasurementCondList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondList, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementCondList)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	return decodeMeasurementCondList((*C.MeasurementCondList_t)(unsafePtr))
-}
-
-func perDecodeMeasurementCondList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondList, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementCondList)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeMeasurementCondList((*C.MeasurementCondList_t)(unsafePtr))
-}
+//func xerEncodeMeasurementCondList(measurementCondList *e2sm_kpm_v2.MeasurementCondList) ([]byte, error) {
+//	measurementCondListCP, err := newMeasurementCondList(measurementCondList)
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeMeasurementCondList() %s", err.Error())
+//	}
+//
+//	bytes, err := encodeXer(&C.asn_DEF_MeasurementCondList, unsafe.Pointer(measurementCondListCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeMeasurementCondList() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func perEncodeMeasurementCondList(measurementCondList *e2sm_kpm_v2.MeasurementCondList) ([]byte, error) {
+//	measurementCondListCP, err := newMeasurementCondList(measurementCondList)
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeMeasurementCondList() %s", err.Error())
+//	}
+//
+//	bytes, err := encodePerBuffer(&C.asn_DEF_MeasurementCondList, unsafe.Pointer(measurementCondListCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeMeasurementCondList() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func xerDecodeMeasurementCondList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondList, error) {
+//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MeasurementCondList)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from XER is nil")
+//	}
+//	return decodeMeasurementCondList((*C.MeasurementCondList_t)(unsafePtr))
+//}
+//
+//func perDecodeMeasurementCondList(bytes []byte) (*e2sm_kpm_v2.MeasurementCondList, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MeasurementCondList)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeMeasurementCondList((*C.MeasurementCondList_t)(unsafePtr))
+//}
 
 func newMeasurementCondList(measurementCondList *e2sm_kpm_v2.MeasurementCondList) (*C.MeasurementCondList_t, error) {
 
@@ -87,8 +86,7 @@ func decodeMeasurementCondList(measurementCondListC *C.MeasurementCondList_t) (*
 
 	measurementCondList := new(e2sm_kpm_v2.MeasurementCondList)
 
-	var ieCount int
-	ieCount = int(measurementCondListC.list.count)
+	ieCount := int(measurementCondListC.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(measurementCondListC.list.array)) * uintptr(i)
 		ieC := *(**C.MeasurementCondItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(measurementCondListC.list.array)) + offset))
@@ -100,10 +98,4 @@ func decodeMeasurementCondList(measurementCondListC *C.MeasurementCondList_t) (*
 	}
 
 	return measurementCondList, nil
-}
-
-func decodeMeasurementCondListBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementCondList, error) {
-	measurementCondListC := (*C.MeasurementCondList_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeMeasurementCondList(measurementCondListC)
 }

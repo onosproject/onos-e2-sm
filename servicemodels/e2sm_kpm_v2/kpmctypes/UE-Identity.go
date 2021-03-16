@@ -13,7 +13,6 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
@@ -87,10 +86,4 @@ func decodeUeIdentity(ueIdentityC *C.UE_Identity_t) (*e2sm_kpm_v2.UeIdentity, er
 	ueIdentity.Value = ueIdentityValue
 
 	return ueIdentity, nil
-}
-
-func decodeUeIdentityBytes(array [8]byte) (*e2sm_kpm_v2.UeIdentity, error) {
-	ueIdentityC := (*C.UE_Identity_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeUeIdentity(ueIdentityC)
 }
