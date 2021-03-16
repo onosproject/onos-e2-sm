@@ -1,0 +1,32 @@
+<E2SM-KPM-ActionDefinition>
+    <ric-Style-Type>12</ric-Style-Type>
+    <actionDefinition-formats>
+        <actionDefinition-Format3>
+            <cellObjID>onf</cellObjID>
+            <measCondList>
+                <MeasurementCondItem>
+                    <measType>
+                        <measName>trial</measName>
+                    </measType>
+                    <matchingCond>
+                        <testCondInfo>
+                            <testType>
+                                <rSRP>
+                                    <true/>
+                                </rSRP>
+                            </testType>
+                            <testExpr>
+                                <lessthan/>
+                            </testExpr>
+                            <testValue>
+                                <valueEnum>201</valueEnum>
+                            </testValue>
+                        </testCondInfo>
+                    </matchingCond>
+                </MeasurementCondItem>
+            </measCondList>
+            <granulPeriod>21</granulPeriod>
+            <subscriptID>12345</subscriptID>
+        </actionDefinition-Format3>
+    </actionDefinition-formats>
+</E2SM-KPM-ActionDefinition>
