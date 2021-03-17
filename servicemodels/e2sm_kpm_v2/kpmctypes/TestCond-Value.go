@@ -85,7 +85,8 @@ func newTestCondValue(testCondValue *e2sm_kpm_v2.TestCondValue) (*C.TestCond_Val
 	//case *e2sm_kpm_v2.TestCondValue_ValueBool:
 	//	pr = C.TestCond_Value_PR_valueBool
 	//
-	//	binary.LittleEndian.PutUint64(choiceC[:], uint64(choice.ValueBool))
+	//	bC := newBoolean(choice.ValueBool)
+	//	binary.LittleEndian.PutUint32(choiceC[:], uint32(uintptr(unsafe.Pointer(bC))))
 	case *e2sm_kpm_v2.TestCondValue_ValueBitS:
 		pr = C.TestCond_Value_PR_valueBitS
 
@@ -143,12 +144,12 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 		}
 		//ToDo - Implement Boolean.go
 	//case C.TestCond_Value_PR_valueBool:
-	//	testCondValuestructC, err := decodeBoolBytes(testCondValueC.choice) //ToDo - Verify if decodeSmthBytes function exists
-	//	if err != nil {
-	//		return nil, fmt.Errorf("decodeBoolBytes() %s", err.Error())
-	//	}
+	//	var a [8]byte
+	//	copy(a[:], testCondValueC.choice[:8])
+	//	b := decodeBooleanBytes(a)
+	//
 	//	testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValueBool{
-	//		ValueBool: testCondValuestructC,
+	//		ValueBool: b,
 	//	}
 	case C.TestCond_Value_PR_valueBitS:
 		bsC := newBitStringFromArray(testCondValueC.choice)

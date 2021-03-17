@@ -157,10 +157,10 @@ func Test_perEncodeTestCondValue(t *testing.T) {
 
 	//testCondValue = pdubuilder.CreateTestCondValueBool(true)
 	//
-	//xer, err = xerEncodeTestCondValue(testCondValue)
+	//per, err = xerEncodeTestCondValue(testCondValue)
 	//assert.NilError(t, err)
-	//assert.Equal(t, 63, len(xer))
-	//t.Logf("TestCondValue (Boolean) XER\n%s", string(xer))
+	//assert.Equal(t, 63, len(per))
+	//t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
 
 	bs := &e2sm_kpm_v2.BitString{
 		Value: 0x9bcd4,
@@ -216,10 +216,10 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 
 	//testCondValue = pdubuilder.CreateTestCondValueBool(true)
 	//
-	//xer, err = xerEncodeTestCondValue(testCondValue)
+	//per, err = xerEncodeTestCondValue(testCondValue)
 	//assert.NilError(t, err)
-	//assert.Equal(t, 63, len(xer))
-	//t.Logf("TestCondValue (Boolean) XER\n%s", string(xer))
+	//assert.Equal(t, 63, len(per))
+	//t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
 	//
 	//result, err = perDecodeTestCondValue(per)
 	//assert.NilError(t, err)
