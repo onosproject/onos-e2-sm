@@ -13,8 +13,9 @@ package kpmv2ctypes
 import "C"
 
 import (
+	"encoding/binary"
 	"fmt"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
@@ -83,6 +84,11 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 		return nil, fmt.Errorf("newFiveQi() %s", err.Error())
 	}
 
+	qFiC, err := newQfi(measurementLabel.QFi)
+	if err != nil {
+		return nil, fmt.Errorf("newQfi() %s", err.Error())
+	}
+
 	qCiC, err := newQci(measurementLabel.QCi)
 	if err != nil {
 		return nil, fmt.Errorf("newQci() %s", err.Error())
@@ -143,6 +149,7 @@ func newMeasurementLabel(measurementLabel *e2sm_kpm_v2.MeasurementLabel) (*C.Mea
 		plmnID:           plmnIDC,
 		sliceID:          sliceIDC,
 		fiveQI:           fiveQiC,
+		qFI:              qFiC,
 		qCI:              qCiC,
 		qCImax:           qCimaxC,
 		qCImin:           qCiminC,
@@ -176,6 +183,11 @@ func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_
 	fiveQi, err := decodeFiveQi(measurementLabelC.fiveQI)
 	if err != nil {
 		return nil, fmt.Errorf("decodeFiveQi() %s", err.Error())
+	}
+
+	qFi, err := decodeQfi(measurementLabelC.qFI)
+	if err != nil {
+		return nil, fmt.Errorf("decodeQfi() %s", err.Error())
 	}
 
 	qCi, err := decodeQci(measurementLabelC.qCI)
@@ -214,6 +226,7 @@ func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_
 		PlmnId:           plmnID,
 		SliceId:          sliceID,
 		FiveQi:           fiveQi,
+		QFi:              qFi,
 		QCi:              qCi,
 		QCimax:           qCimax,
 		QCimin:           qCimin,
@@ -230,4 +243,10 @@ func decodeMeasurementLabel(measurementLabelC *C.MeasurementLabel_t) (*e2sm_kpm_
 	}
 
 	return &measurementLabel, nil
+}
+
+func decodeMeasurementLabelBytes(array [8]byte) (*e2sm_kpm_v2.MeasurementLabel, error) {
+	mlC := (*C.MeasurementLabel_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+
+	return decodeMeasurementLabel(mlC)
 }

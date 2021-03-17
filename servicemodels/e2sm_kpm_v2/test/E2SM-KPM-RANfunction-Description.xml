@@ -54,8 +54,8 @@
                     <measID>24</measID>
                 </MeasurementInfo-Action-Item>
             </measInfo-Action-List>
-            <ric-IndicationHeaderFormat-Type>47</ric-IndicationHeaderFormat-Type>
-            <ric-IndicationMessageFormat-Type>24</ric-IndicationMessageFormat-Type>
+            <ric-IndicationHeaderFormat-Type>2</ric-IndicationHeaderFormat-Type>
+            <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
         </RIC-ReportStyle-Item>
     </ric-ReportStyle-List>
 </E2SM-KPM-RANfunction-Description>

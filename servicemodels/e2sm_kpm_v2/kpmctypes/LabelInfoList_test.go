@@ -5,12 +5,13 @@
 package kpmv2ctypes
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	"fmt"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList {
+func createLabelInfoList() (*e2sm_kpm_v2.LabelInfoList, error) {
 
 	labelInfoList := &e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),
@@ -27,6 +28,9 @@ func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList {
 			},
 			FiveQi: &e2sm_kpm_v2.FiveQi{
 				Value: 23,
+			},
+			QFi: &e2sm_kpm_v2.Qfi{
+				Value: 62,
 			},
 			QCi: &e2sm_kpm_v2.Qci{
 				Value: 24,
@@ -54,27 +58,33 @@ func createLabelInfoList() *e2sm_kpm_v2.LabelInfoList {
 		},
 	}
 	labelInfoList.Value = append(labelInfoList.Value, item)
+	labelInfoList.Value = append(labelInfoList.Value, item)
 
-	return labelInfoList
+	if err := labelInfoList.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating labelInfoList %s", err.Error())
+	}
+	return labelInfoList, nil
 }
 
-func Test_xerEncodeLabelInfoLabel(t *testing.T) {
+func Test_xerEncodeLabelInfoList(t *testing.T) {
 
-	lil := createLabelInfoList()
+	lil, err := createLabelInfoList()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 778, len(xer))
+	assert.Equal(t, 1575, len(xer))
 	t.Logf("LabelInfoList XER\n%s", string(xer))
 }
 
 func Test_xerDecodeLabelInfoList(t *testing.T) {
 
-	lil := createLabelInfoList()
+	lil, err := createLabelInfoList()
+	assert.NilError(t, err)
 
 	xer, err := xerEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 778, len(xer))
+	assert.Equal(t, 1575, len(xer))
 	t.Logf("LabelInfoList XER\n%s", string(xer))
 
 	result, err := xerDecodeLabelInfoList(xer)
@@ -85,21 +95,23 @@ func Test_xerDecodeLabelInfoList(t *testing.T) {
 
 func Test_perEncodeLabelInfoList(t *testing.T) {
 
-	lil := createLabelInfoList()
+	lil, err := createLabelInfoList()
+	assert.NilError(t, err)
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 37, len(per))
+	assert.Equal(t, 72, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 }
 
 func Test_perDecodeLabelInfoList(t *testing.T) {
 
-	lil := createLabelInfoList()
+	lil, err := createLabelInfoList()
+	assert.NilError(t, err)
 
 	per, err := perEncodeLabelInfoList(lil)
 	assert.NilError(t, err)
-	assert.Equal(t, 37, len(per))
+	assert.Equal(t, 72, len(per))
 	t.Logf("LabelInfoList PER\n%s", string(per))
 
 	result, err := perDecodeLabelInfoList(per)

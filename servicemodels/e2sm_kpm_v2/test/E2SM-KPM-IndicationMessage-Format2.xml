@@ -1,0 +1,49 @@
+<E2SM-KPM-IndicationMessage>
+    <indicationMessage-formats>
+        <indicationMessage-Format2>
+            <subscriptID>12345</subscriptID>
+            <cellObjID>onf</cellObjID>
+            <granulPeriod>21</granulPeriod>
+            <measCondUEidList>
+                <MeasurementCondUEidItem>
+                    <measType>
+                        <measName>trial</measName>
+                    </measType>
+                    <matchingCond>
+                        <testCondInfo>
+                            <testType>
+                                <rSRP>
+                                    <true/>
+                                </rSRP>
+                            </testType>
+                            <testExpr>
+                                <lessthan/>
+                            </testExpr>
+                            <testValue>
+                                <valueEnum>201</valueEnum>
+                            </testValue>
+                        </testCondInfo>
+
+                    </matchingCond>
+                    <matchingUEidList>
+                        <MatchingUEidItem>
+                            <ueID>53 6F 6D 65 55 45</ueID>
+                        </MatchingUEidItem>
+                    </matchingUEidList>
+                </MeasurementCondUEidItem>
+            </measCondUEidList>
+            <measData>
+                <MeasurementDataItem>
+                    <measRecord>
+                        <integer>12345</integer>
+                        <noValue></noValue>
+                        <real>22.199999999999999</real>
+                    </measRecord>
+                    <incompleteFlag>
+                        <true/>
+                    </incompleteFlag>
+                </MeasurementDataItem>
+            </measData>
+        </indicationMessage-Format2>
+    </indicationMessage-formats>
+</E2SM-KPM-IndicationMessage>

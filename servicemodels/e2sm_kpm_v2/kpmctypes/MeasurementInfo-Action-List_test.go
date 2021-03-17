@@ -5,7 +5,7 @@
 package kpmv2ctypes
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -66,22 +66,22 @@ func Test_perEncodeMeasurementInfoActionList(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoActionList(mial)
 	assert.NilError(t, err)
-	assert.Equal(t, 9, len(per))
+	assert.Equal(t, 10, len(per))
 	t.Logf("MeasurementInfoActionList PER\n%s", string(per))
 }
 
-//func Test_perDecodeMeasurementInfoActionList(t *testing.T) {
-//
-//	mial, err := createMeasurementInfoActionList()
-//	assert.NilError(t, err)
-//
-//	per, err := perEncodeMeasurementInfoActionList(mial)
-//	assert.NilError(t, err)
-//	assert.Equal(t, 9, len(per))
-//	t.Logf("MeasurementInfoActionList PER\n%s", string(per))
-//
-//	result, err := perDecodeMeasurementInfoActionList(per)
-//	assert.NilError(t, err)
-//	assert.Assert(t, result != nil)
-//	t.Logf("MeasurementInfoActionList PER - decoded\n%v", result)
-//}
+func Test_perDecodeMeasurementInfoActionList(t *testing.T) {
+
+	mial, err := createMeasurementInfoActionList()
+	assert.NilError(t, err)
+
+	per, err := perEncodeMeasurementInfoActionList(mial)
+	assert.NilError(t, err)
+	assert.Equal(t, 10, len(per))
+	t.Logf("MeasurementInfoActionList PER\n%s", string(per))
+
+	result, err := perDecodeMeasurementInfoActionList(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("MeasurementInfoActionList PER - decoded\n%v", result)
+}

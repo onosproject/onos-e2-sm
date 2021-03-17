@@ -5,7 +5,7 @@
 package kpmv2ctypes
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -39,10 +39,10 @@ func createRicReportStyleItem() (*e2sm_kpm_v2.RicReportStyleItem, error) {
 		},
 		MeasInfoActionList: measInfo,
 		RicIndicationHeaderFormatType: &e2sm_kpm_v2.RicFormatType{
-			Value: 1234,
+			Value: 1,
 		},
 		RicIndicationMessageFormatType: &e2sm_kpm_v2.RicFormatType{
-			Value: 5678,
+			Value: 1,
 		},
 	}
 
@@ -59,7 +59,7 @@ func Test_xerEncodeRicReportStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 578, len(xer))
+	assert.Equal(t, 572, len(xer))
 	t.Logf("RicReportStyleItem XER\n%s", string(xer))
 }
 
@@ -70,7 +70,7 @@ func Test_xerDecodeRicReportStyleItem(t *testing.T) {
 
 	xer, err := xerEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 578, len(xer))
+	assert.Equal(t, 572, len(xer))
 	t.Logf("RicReportStyleItem XER\n%s", string(xer))
 
 	result, err := xerDecodeRicReportStyleItem(xer)
@@ -86,7 +86,7 @@ func Test_perEncodeRicReportStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 40, len(per))
+	assert.Equal(t, 39, len(per))
 	t.Logf("RicReportStyleItem PER\n%s", string(per))
 }
 
@@ -97,11 +97,11 @@ func Test_perDecodeRicReportStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicReportStyleItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 40, len(per))
+	assert.Equal(t, 39, len(per))
 	t.Logf("RicReportStyleItem PER\n%s", string(per))
 
-	//result, err := perDecodeRicReportStyleItem(per)
-	//assert.NilError(t, err)
-	//assert.Assert(t, result != nil)
-	//t.Logf("RicReportStyleItem PER - decoded\n%v", result)
+	result, err := perDecodeRicReportStyleItem(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RicReportStyleItem PER - decoded\n%v", result)
 }

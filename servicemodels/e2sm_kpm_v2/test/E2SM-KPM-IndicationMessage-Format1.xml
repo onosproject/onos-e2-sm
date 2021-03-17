@@ -1,8 +1,9 @@
-<E2SM-KPM-ActionDefinition>
-    <ric-Style-Type>12</ric-Style-Type>
-    <actionDefinition-formats>
-        <actionDefinition-Format1>
+<E2SM-KPM-IndicationMessage>
+    <indicationMessage-formats>
+        <indicationMessage-Format1>
+            <subscriptID>12345</subscriptID>
             <cellObjID>onf</cellObjID>
+            <granulPeriod>21</granulPeriod>
             <measInfoList>
                 <MeasurementInfoItem>
                     <measType>
@@ -17,26 +18,43 @@
                                     <sD>01 02 03</sD>
                                 </sliceID>
                                 <fiveQI>10</fiveQI>
+                                <qFI>62</qFI>
                                 <qCI>15</qCI>
                                 <qCImax>15</qCImax>
                                 <qCImin>1</qCImin>
                                 <aRPmax>15</aRPmax>
-                                <aRPmin>1</aRPmin>
+                                <aRPmin>10</aRPmin>
                                 <bitrateRange>251</bitrateRange>
                                 <layerMU-MIMO>5</layerMU-MIMO>
-                                <sUM><true/></sUM>
+                                <sUM>
+                                    <true/>
+                                </sUM>
                                 <distBinX>123</distBinX>
                                 <distBinY>456</distBinY>
                                 <distBinZ>789</distBinZ>
-                                <preLabelOverride><true/></preLabelOverride>
-                                <startEndInd><end/></startEndInd>
+                                <preLabelOverride>
+                                    <true/>
+                                </preLabelOverride>
+                                <startEndInd>
+                                    <start/>
+                                </startEndInd>
                             </measLabel>
                         </LabelInfoItem>
                     </labelInfoList>
                 </MeasurementInfoItem>
             </measInfoList>
-            <granulPeriod>21</granulPeriod>
-            <subscriptID>12345</subscriptID>
-        </actionDefinition-Format1>
-    </actionDefinition-formats>
-</E2SM-KPM-ActionDefinition>
+            <measData>
+                <MeasurementDataItem>
+                    <measRecord>
+                        <integer>12345</integer>
+                        <noValue></noValue>
+                        <real>22.199999999999999</real>
+                    </measRecord>
+                    <incompleteFlag>
+                        <true/>
+                    </incompleteFlag>
+                </MeasurementDataItem>
+            </measData>
+        </indicationMessage-Format1>
+    </indicationMessage-formats>
+</E2SM-KPM-IndicationMessage>

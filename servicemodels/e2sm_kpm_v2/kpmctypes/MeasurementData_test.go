@@ -5,7 +5,7 @@
 package kpmv2ctypes
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -37,10 +37,15 @@ func createMeasurementData() (*e2sm_kpm_v2.MeasurementData, error) {
 	}
 	measRecord.Value = append(measRecord.Value, item3)
 
-	measData := &e2sm_kpm_v2.MeasurementData{
-		Value: make([]*e2sm_kpm_v2.MeasurementRecord, 0),
+	measDataItem := &e2sm_kpm_v2.MeasurementDataItem{
+		MeasRecord:     measRecord,
+		IncompleteFlag: e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE,
 	}
-	measData.Value = append(measData.Value, measRecord)
+
+	measData := &e2sm_kpm_v2.MeasurementData{
+		Value: make([]*e2sm_kpm_v2.MeasurementDataItem, 0),
+	}
+	measData.Value = append(measData.Value, measDataItem)
 
 	if err := measData.Validate(); err != nil {
 		return nil, err
@@ -55,7 +60,7 @@ func Test_xerEncodeMeasurementData(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementData(md)
 	assert.NilError(t, err)
-	assert.Equal(t, 223, len(xer))
+	assert.Equal(t, 343, len(xer))
 	t.Logf("MeasurementData XER\n%s", string(xer))
 }
 
@@ -66,15 +71,15 @@ func Test_xerDecodeMeasurementData(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementData(md)
 	assert.NilError(t, err)
-	assert.Equal(t, 223, len(xer))
+	assert.Equal(t, 343, len(xer))
 	t.Logf("MeasurementData XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementData(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	assert.Equal(t, 1, len(result.GetValue()))
-	measRecord := result.GetValue()[0]
-	assert.Equal(t, 3, len(measRecord.GetValue()))
+	//measRecord := result.GetValue()[0]
+	//assert.Equal(t, 3, len(measRecord.GetValue()))
 
 	t.Logf("MeasurementData XER - decoded\n%s", result)
 }
@@ -86,7 +91,7 @@ func Test_perEncodeMeasurementData(t *testing.T) {
 
 	per, err := perEncodeMeasurementData(md)
 	assert.NilError(t, err)
-	assert.Equal(t, 17, len(per))
+	assert.Equal(t, 19, len(per))
 	t.Logf("MeasurementData PER\n%s", string(per))
 }
 
@@ -97,12 +102,12 @@ func Test_perDecodeMeasurementData(t *testing.T) {
 
 	per, err := perEncodeMeasurementData(md)
 	assert.NilError(t, err)
-	assert.Equal(t, 17, len(per))
+	assert.Equal(t, 19, len(per))
 	t.Logf("MeasurementData PER\n%s", string(per))
 
-	//result, err := perDecodeMeasurementData(per)
-	//assert.NilError(t, err)
-	//assert.Assert(t, result != nil)
-	//assert.Equal(t, 3, len(result.GetValue()))
-	//t.Logf("MeasurementData PER - decoded\n%v", result)
+	result, err := perDecodeMeasurementData(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	assert.Equal(t, 1, len(result.GetValue()))
+	t.Logf("MeasurementData PER - decoded\n%v", result)
 }

@@ -5,7 +5,7 @@
 package kpmv2ctypes
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -27,6 +27,9 @@ func createMeasurementInfoList() (*e2sm_kpm_v2.MeasurementInfoList, error) {
 			},
 			FiveQi: &e2sm_kpm_v2.FiveQi{
 				Value: 23,
+			},
+			QFi: &e2sm_kpm_v2.Qfi{
+				Value: 62,
 			},
 			QCi: &e2sm_kpm_v2.Qci{
 				Value: 24,
@@ -84,7 +87,7 @@ func Test_xerEncodeMeasurementInfoList(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 1147, len(xer))
+	assert.Equal(t, 1181, len(xer))
 	t.Logf("MeasurementInfoList XER\n%s", string(xer))
 }
 
@@ -95,7 +98,7 @@ func Test_xerDecodeMeasurementInfoList(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 1147, len(xer))
+	assert.Equal(t, 1181, len(xer))
 	t.Logf("MeasurementInfoList XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementInfoList(xer)
@@ -111,7 +114,7 @@ func Test_perEncodeMeasurementInfoList(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 41, len(per))
+	assert.Equal(t, 42, len(per))
 	t.Logf("MeasurementInfoList PER\n%s", string(per))
 }
 
@@ -122,11 +125,11 @@ func Test_perDecodeMeasurementInfoList(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoList(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 41, len(per))
+	assert.Equal(t, 42, len(per))
 	t.Logf("MeasurementInfoList PER\n%s", string(per))
 
-	//result, err := perDecodeMeasurementInfoList(per)
-	//assert.NilError(t, err)
-	//assert.Assert(t, result != nil)
-	//t.Logf("MeasurementInfoList PER - decoded\n%s", result)
+	result, err := perDecodeMeasurementInfoList(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("MeasurementInfoList PER - decoded\n%s", result)
 }

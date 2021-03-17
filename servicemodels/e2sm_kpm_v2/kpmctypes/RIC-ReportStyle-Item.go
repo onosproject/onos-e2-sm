@@ -14,7 +14,7 @@ import "C"
 
 import (
 	"fmt"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
@@ -55,16 +55,16 @@ func xerDecodeRicReportStyleItem(bytes []byte) (*e2sm_kpm_v2.RicReportStyleItem,
 	return decodeRicReportStyleItem((*C.RIC_ReportStyle_Item_t)(unsafePtr))
 }
 
-//func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_kpm_v2.RicReportStyleItem, error) {
-//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RIC_ReportStyle_Item)
-//	if err != nil {
-//		return nil, err
-//	}
-//	if unsafePtr == nil {
-//		return nil, fmt.Errorf("pointer decoded from PER is nil")
-//	}
-//	return decodeRicReportStyleItem((*C.RIC_ReportStyle_Item_t)(unsafePtr))
-//}
+func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_kpm_v2.RicReportStyleItem, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RIC_ReportStyle_Item)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeRicReportStyleItem((*C.RIC_ReportStyle_Item_t)(unsafePtr))
+}
 
 func newRicReportStyleItem(ricReportStyleItem *e2sm_kpm_v2.RicReportStyleItem) (*C.RIC_ReportStyle_Item_t, error) {
 

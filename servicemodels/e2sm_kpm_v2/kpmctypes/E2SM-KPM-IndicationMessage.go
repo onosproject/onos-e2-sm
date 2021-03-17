@@ -14,7 +14,7 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
@@ -80,6 +80,14 @@ func newE2SmKpmIndicationMessage(e2SmKpmIndicationMessage *e2sm_kpm_v2.E2SmKpmIn
 			return nil, fmt.Errorf("newE2SmKpmIndicationMessageFormat1() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+	case *e2sm_kpm_v2.E2SmKpmIndicationMessage_IndicationMessageFormat2:
+		pr = C.E2SM_KPM_IndicationMessage__indicationMessage_formats_PR_indicationMessage_Format2
+
+		im, err := newE2SmKpmIndicationMessageFormat2(choice.IndicationMessageFormat2)
+		if err != nil {
+			return nil, fmt.Errorf("newE2SmKpmIndicationMessageFormat2() %s", err.Error())
+		}
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newE2SmKpmIndicationMessage() %T not yet implemented", choice)
 	}
@@ -108,6 +116,14 @@ func decodeE2SmKpmIndicationMessage(e2SmKpmIndicationMessageC *C.E2SM_KPM_Indica
 		}
 		e2SmKpmIndicationMessage.E2SmKpmIndicationMessage = &e2sm_kpm_v2.E2SmKpmIndicationMessage_IndicationMessageFormat1{
 			IndicationMessageFormat1: indicationMessageFormat1,
+		}
+	case C.E2SM_KPM_IndicationMessage__indicationMessage_formats_PR_indicationMessage_Format2:
+		indicationMessageFormat2, err := decodeE2SmKpmIndicationMessageFormat2Bytes(e2SmKpmIndicationMessageC.indicationMessage_formats.choice)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmKpmIndicationMessageFormat1Bytes() %s", err.Error())
+		}
+		e2SmKpmIndicationMessage.E2SmKpmIndicationMessage = &e2sm_kpm_v2.E2SmKpmIndicationMessage_IndicationMessageFormat2{
+			IndicationMessageFormat2: indicationMessageFormat2,
 		}
 	default:
 		return nil, fmt.Errorf("decodeE2SmKpmIndicationMessage() %v not yet implemented", e2SmKpmIndicationMessageC.indicationMessage_formats.present)

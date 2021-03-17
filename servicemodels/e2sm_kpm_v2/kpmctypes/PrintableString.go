@@ -12,7 +12,11 @@ package kpmv2ctypes
 //#include "PrintableString.h"
 import "C"
 
-import "fmt"
+import (
+	"encoding/binary"
+	"fmt"
+	"unsafe"
+)
 
 // TODO: Change the argument to a []byte
 func newPrintableString(msg string) (*C.PrintableString_t, error) {
@@ -33,4 +37,10 @@ func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 	}
 
 	return bytes, nil
+}
+
+func decodePrintableStringBytes(array [16]byte) (string, error) {
+	prtSC := (*C.PrintableString_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+
+	return decodePrintableString(prtSC)
 }

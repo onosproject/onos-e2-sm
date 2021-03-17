@@ -6,7 +6,7 @@ package kpmv2ctypes
 
 import (
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -29,7 +29,7 @@ func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2.E2SmKpmEventTriggerDefin
 //	assert.Equal(t, 259, len(xer))
 //	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
 //}
-
+//
 //func Test_xerDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 //
 //	etd := createE2SMKPMEventTriggerDefinition()

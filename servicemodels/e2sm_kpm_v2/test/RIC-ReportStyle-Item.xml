@@ -1,0 +1,13 @@
+<RIC-ReportStyle-Item>
+    <ric-ReportStyle-Type>11</ric-ReportStyle-Type>
+    <ric-ReportStyle-Name>onf</ric-ReportStyle-Name>
+    <ric-ActionFormat-Type>15</ric-ActionFormat-Type>
+    <measInfo-Action-List>
+        <MeasurementInfo-Action-Item>
+            <measName>OpenNetworking</measName>
+            <measID>24</measID>
+        </MeasurementInfo-Action-Item>
+    </measInfo-Action-List>
+    <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
+    <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
+</RIC-ReportStyle-Item>

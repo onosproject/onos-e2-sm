@@ -5,7 +5,7 @@
 package kpmv2ctypes
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-ies"
+	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -27,6 +27,9 @@ func createMeasurementInfoItem() (*e2sm_kpm_v2.MeasurementInfoItem, error) {
 			},
 			FiveQi: &e2sm_kpm_v2.FiveQi{
 				Value: 23,
+			},
+			QFi: &e2sm_kpm_v2.Qfi{
+				Value: 62,
 			},
 			QCi: &e2sm_kpm_v2.Qci{
 				Value: 24,
@@ -79,7 +82,7 @@ func Test_xerEncodeMeasurementInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 984, len(xer))
+	assert.Equal(t, 1014, len(xer))
 	t.Logf("MeasurementInfoItem XER\n%s", string(xer))
 }
 
@@ -90,7 +93,7 @@ func Test_xerDecodeMeasurementInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 984, len(xer))
+	assert.Equal(t, 1014, len(xer))
 	t.Logf("MeasurementInfoItem XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementInfoItem(xer)
