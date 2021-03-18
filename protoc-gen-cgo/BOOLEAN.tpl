@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package kpmv2ctypes
+package {{.PackageName}}ctypes
 
 //#cgo CFLAGS: -I. -D_DEFAULT_SOURCE -DASN_DISABLE_OER_SUPPORT
 //#cgo LDFLAGS: -lm

@@ -82,11 +82,12 @@ func newTestCondValue(testCondValue *e2sm_kpm_v2.TestCondValue) (*C.TestCond_Val
 
 		binary.LittleEndian.PutUint64(choiceC[:], uint64(choice.ValueEnum))
 		//ToDo - Implement Boolean.go
-	//case *e2sm_kpm_v2.TestCondValue_ValueBool:
-	//	pr = C.TestCond_Value_PR_valueBool
-	//
-	//	bC := newBoolean(choice.ValueBool)
-	//	binary.LittleEndian.PutUint32(choiceC[:], uint32(uintptr(unsafe.Pointer(bC))))
+	case *e2sm_kpm_v2.TestCondValue_ValueBool:
+		pr = C.TestCond_Value_PR_valueBool
+
+		fmt.Printf("Boolean is %v\n", choice.ValueBool)
+		bC := newBoolean(choice.ValueBool)
+		binary.LittleEndian.PutUint32(choiceC[:], uint32(*bC))
 	case *e2sm_kpm_v2.TestCondValue_ValueBitS:
 		pr = C.TestCond_Value_PR_valueBitS
 
@@ -143,14 +144,15 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 			ValueEnum: enm,
 		}
 		//ToDo - Implement Boolean.go
-	//case C.TestCond_Value_PR_valueBool:
-	//	var a [8]byte
-	//	copy(a[:], testCondValueC.choice[:8])
-	//	b := decodeBooleanBytes(a)
-	//
-	//	testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValueBool{
-	//		ValueBool: b,
-	//	}
+	case C.TestCond_Value_PR_valueBool:
+		var a [8]byte
+		copy(a[:], testCondValueC.choice[:8])
+		b := decodeBooleanBytes(a)
+
+		fmt.Printf("Decoded Boolean is %v\n", b)
+		testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValueBool{
+			ValueBool: b,
+		}
 	case C.TestCond_Value_PR_valueBitS:
 		bsC := newBitStringFromArray(testCondValueC.choice)
 
@@ -166,24 +168,24 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 		//ToDo: Fix decoding
 		var a [16]byte
 		copy(a[:], testCondValueC.choice[:16])
-		testCondValuestructC, err := decodeOctetStringBytes(a)
+		octS, err := decodeOctetStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodeOctetStringBytes() %s", err.Error())
 		}
 
 		testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValueOctS{
-			ValueOctS: testCondValuestructC,
+			ValueOctS: octS,
 		}
 	case C.TestCond_Value_PR_valuePrtS:
 		//ToDo - Fix decoding
 		var a [16]byte
 		copy(a[:], testCondValueC.choice[:16])
-		testCondValuestructC, err := decodePrintableStringBytes(a)
+		prtS, err := decodePrintableStringBytes(a)
 		if err != nil {
 			return nil, fmt.Errorf("decodePrintableStringBytes() %s", err.Error())
 		}
 		testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValuePrtS{
-			ValuePrtS: testCondValuestructC,
+			ValuePrtS: prtS,
 		}
 	default:
 		return nil, fmt.Errorf("decodeTestCondValue() %v not yet implemented", testCondValueC.present)

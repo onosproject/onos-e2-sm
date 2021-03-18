@@ -27,12 +27,12 @@ func Test_xerEncodeTestCondValue(t *testing.T) {
 	assert.Equal(t, 65, len(xer))
 	t.Logf("TestCondValue (Enum) XER\n%s", string(xer))
 
-	//testCondValue = pdubuilder.CreateTestCondValueBool(true)
-	//
-	//xer, err = xerEncodeTestCondValue(testCondValue)
-	//assert.NilError(t, err)
-	//assert.Equal(t, 63, len(xer))
-	//t.Logf("TestCondValue (Boolean) XER\n%s", string(xer))
+	testCondValue = pdubuilder.CreateTestCondValueBool(true)
+
+	xer, err = xerEncodeTestCondValue(testCondValue)
+	assert.NilError(t, err)
+	assert.Equal(t, 70, len(xer))
+	t.Logf("TestCondValue (Boolean) XER\n%s", string(xer))
 
 	bs := &e2sm_kpm_v2.BitString{
 		Value: 0x9bcd4,
@@ -86,17 +86,17 @@ func Test_xerDecodeTestCondValue(t *testing.T) {
 	assert.Assert(t, result != nil)
 	t.Logf("TestCondValue (Enum) XER - decoded\n%s", result)
 
-	//testCondValue = pdubuilder.CreateTestCondValueBool(true)
-	//
-	//xer, err = xerEncodeTestCondValue(testCondValue)
-	//assert.NilError(t, err)
-	//assert.Equal(t, 63, len(xer))
-	//t.Logf("TestCondValue (Boolean) XER\n%s", string(xer))
-	//
-	//result, err = xerDecodeTestCondValue(xer)
-	//assert.NilError(t, err)
-	//assert.Assert(t, result != nil)
-	//t.Logf("TestCondValue (Boolean) XER - decoded\n%s", result)
+	testCondValue = pdubuilder.CreateTestCondValueBool(true)
+
+	xer, err = xerEncodeTestCondValue(testCondValue)
+	assert.NilError(t, err)
+	assert.Equal(t, 70, len(xer))
+	t.Logf("TestCondValue (Boolean) XER\n%s", string(xer))
+
+	result, err = xerDecodeTestCondValue(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("TestCondValue (Boolean) XER - decoded\n%s", result)
 
 	bs := &e2sm_kpm_v2.BitString{
 		Value: 0x9bcd4,
@@ -155,12 +155,12 @@ func Test_perEncodeTestCondValue(t *testing.T) {
 	assert.Equal(t, 3, len(per))
 	t.Logf("TestCondValue (Enum) PER\n%s", string(per))
 
-	//testCondValue = pdubuilder.CreateTestCondValueBool(true)
-	//
-	//per, err = xerEncodeTestCondValue(testCondValue)
-	//assert.NilError(t, err)
-	//assert.Equal(t, 63, len(per))
-	//t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
+	testCondValue = pdubuilder.CreateTestCondValueBool(true)
+
+	per, err = perEncodeTestCondValue(testCondValue)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per))
+	t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
 
 	bs := &e2sm_kpm_v2.BitString{
 		Value: 0x9bcd4,
@@ -214,17 +214,17 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	assert.Assert(t, result != nil)
 	t.Logf("TestCondValue (Enum) PER - decoded\n%v", result)
 
-	//testCondValue = pdubuilder.CreateTestCondValueBool(true)
-	//
-	//per, err = xerEncodeTestCondValue(testCondValue)
-	//assert.NilError(t, err)
-	//assert.Equal(t, 63, len(per))
-	//t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
-	//
-	//result, err = perDecodeTestCondValue(per)
-	//assert.NilError(t, err)
-	//assert.Assert(t, result != nil)
-	//t.Logf("TestCondValue (Boolean) PER - decoded\n%v", result)
+	testCondValue = pdubuilder.CreateTestCondValueBool(false)
+
+	per, err = perEncodeTestCondValue(testCondValue)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per))
+	t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
+
+	result, err = perDecodeTestCondValue(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("TestCondValue (Boolean) PER - decoded\n%v", result)
 
 	bs := &e2sm_kpm_v2.BitString{
 		Value: 0x9bcd4,
