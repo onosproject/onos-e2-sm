@@ -85,7 +85,7 @@ func newTestCondValue(testCondValue *e2sm_kpm_v2.TestCondValue) (*C.TestCond_Val
 	case *e2sm_kpm_v2.TestCondValue_ValueBool:
 		pr = C.TestCond_Value_PR_valueBool
 
-		fmt.Printf("Boolean is %v\n", choice.ValueBool)
+		//fmt.Printf("Boolean is %v\n", choice.ValueBool)
 		bC := newBoolean(choice.ValueBool)
 		binary.LittleEndian.PutUint32(choiceC[:], uint32(*bC))
 	case *e2sm_kpm_v2.TestCondValue_ValueBitS:
@@ -112,7 +112,7 @@ func newTestCondValue(testCondValue *e2sm_kpm_v2.TestCondValue) (*C.TestCond_Val
 
 		im, err := newPrintableString(choice.ValuePrtS)
 		if err != nil {
-			return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
+			return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im.buf))))
 		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(im.size))
@@ -149,7 +149,7 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 		copy(a[:], testCondValueC.choice[:8])
 		b := decodeBooleanBytes(a)
 
-		fmt.Printf("Decoded Boolean is %v\n", b)
+		//fmt.Printf("Decoded Boolean is %v\n", b)
 		testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValueBool{
 			ValueBool: b,
 		}
@@ -165,7 +165,6 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 			ValueBitS: bs,
 		}
 	case C.TestCond_Value_PR_valueOctS:
-		//ToDo: Fix decoding
 		var a [16]byte
 		copy(a[:], testCondValueC.choice[:16])
 		octS, err := decodeOctetStringBytes(a)
@@ -177,7 +176,6 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 			ValueOctS: octS,
 		}
 	case C.TestCond_Value_PR_valuePrtS:
-		//ToDo - Fix decoding
 		var a [16]byte
 		copy(a[:], testCondValueC.choice[:16])
 		prtS, err := decodePrintableStringBytes(a)

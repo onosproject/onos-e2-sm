@@ -66,6 +66,20 @@ func newBitStringFromBytes(valAsBytes []byte, size uint64, bitsUnused int) *C.BI
 	return &bsC
 }
 
+func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
+	size := binary.LittleEndian.Uint64(array[8:16])
+	bitsUnused := int(binary.LittleEndian.Uint32(array[16:20]))
+	bytes := C.GoBytes(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[:8]))), C.int(size))
+
+	bsC := C.BIT_STRING_t{
+		buf:         (*C.uchar)(C.CBytes(bytes)),
+		size:        C.ulong(size),
+		bits_unused: C.int(bitsUnused),
+	}
+
+	return &bsC
+}
+
 // decodeBitString - byteString in C has 20 bytes
 // 8 for a 64bit address of a buffer, 8 for the size in bytes of the buffer uint64, 4 for the unused bits
 // The unused bits are at the end of the buffer
