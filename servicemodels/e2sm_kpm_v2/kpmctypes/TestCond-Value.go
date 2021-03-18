@@ -87,7 +87,7 @@ func newTestCondValue(testCondValue *e2sm_kpm_v2.TestCondValue) (*C.TestCond_Val
 
 		fmt.Printf("Boolean is %v\n", choice.ValueBool)
 		bC := newBoolean(choice.ValueBool)
-		binary.LittleEndian.PutUint32(choiceC[:], uint32(uintptr(unsafe.Pointer(bC))))
+		binary.LittleEndian.PutUint32(choiceC[:], uint32(*bC))
 	case *e2sm_kpm_v2.TestCondValue_ValueBitS:
 		pr = C.TestCond_Value_PR_valueBitS
 

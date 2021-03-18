@@ -6,9 +6,9 @@ package kpmv2ctypes
 
 import (
 	"encoding/binary"
+	"encoding/hex"
 	"gotest.tools/assert"
 	"testing"
-	"unsafe"
 )
 
 func Test_xerEncodingBolean(t *testing.T) {
@@ -34,8 +34,8 @@ func Test_xerEncodingBolean(t *testing.T) {
 	t.Logf("BOOLEAN (False) XER - decoded\n%v", result)
 
 	choiceC := [8]byte{}
-	bC := newBoolean(false)
-	binary.LittleEndian.PutUint32(choiceC[:], uint32(uintptr(unsafe.Pointer(bC))))
+	bC := newBoolean(true)
+	binary.LittleEndian.PutUint32(choiceC[:], uint32(*bC))
 
 	var a [8]byte
 	copy(a[:], choiceC[:])
@@ -49,7 +49,7 @@ func Test_perEncodingBoolean(t *testing.T) {
 	per, err := perEncodeBoolean(false)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("BOOLEAN (False) PER\n%s", string(per))
+	t.Logf("BOOLEAN (False) PER\n%s", hex.Dump(per))
 
 	result, err := perDecodeBoolean(per)
 	assert.NilError(t, err)
@@ -59,7 +59,7 @@ func Test_perEncodingBoolean(t *testing.T) {
 	per, err = perEncodeBoolean(true)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("BOOLEAN (True) PER\n%s", string(per))
+	t.Logf("BOOLEAN (True) PER\n%s", hex.Dump(per))
 
 	result, err = perDecodeBoolean(per)
 	assert.NilError(t, err)

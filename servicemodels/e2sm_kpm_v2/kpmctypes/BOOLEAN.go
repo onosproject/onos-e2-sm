@@ -65,7 +65,7 @@ func newBoolean(b bool) *C.BOOLEAN_t {
 	if b {
 		bC = C.int(0xff)
 	}
-	fmt.Printf("Encoded boolean is %v\n", bC)
+	//fmt.Printf("Encoded boolean is %v\n", bC)
 	return &bC
 }
 
@@ -80,7 +80,7 @@ func decodeBoolean(bC *C.BOOLEAN_t) bool {
 func decodeBooleanBytes(array [8]byte) bool {
 
 	b := int32(binary.LittleEndian.Uint32(array[:8]))
-	fmt.Printf("Decoded from bytes boolean is %v\n", b)
+	//fmt.Printf("Decoded from bytes boolean is %v\n", b)
 
 	return b != 0
 }

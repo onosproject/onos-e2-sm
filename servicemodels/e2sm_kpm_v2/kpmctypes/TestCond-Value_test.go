@@ -86,7 +86,7 @@ func Test_xerDecodeTestCondValue(t *testing.T) {
 	assert.Assert(t, result != nil)
 	t.Logf("TestCondValue (Enum) XER - decoded\n%s", result)
 
-	testCondValue = pdubuilder.CreateTestCondValueBool(false)
+	testCondValue = pdubuilder.CreateTestCondValueBool(true)
 
 	xer, err = xerEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
