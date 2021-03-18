@@ -74,10 +74,7 @@ func decodeBoolean(bC *C.BOOLEAN_t) bool {
 	b := int32(*bC)
 	//fmt.Printf("Decoded boolean is %v\n", b)
 
-	if b == 0 {
-		return false
-	}
-	return true
+	return b != 0
 }
 
 func decodeBooleanBytes(array [8]byte) bool {
@@ -85,8 +82,5 @@ func decodeBooleanBytes(array [8]byte) bool {
 	b := int32(binary.LittleEndian.Uint32(array[:8]))
 	fmt.Printf("Decoded from bytes boolean is %v\n", b)
 
-	if b == 0 {
-		return false
-	}
-	return true
+	return b != 0
 }
