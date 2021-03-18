@@ -13,9 +13,7 @@ package kpmv2ctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
-	"unsafe"
 )
 
 // TODO: Change the argument to a []byte
@@ -39,8 +37,14 @@ func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 	return bytes, nil
 }
 
-func decodePrintableStringBytes(array [16]byte) (string, error) {
-	prtSC := (*C.PrintableString_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+func newPrintableStringFromArray(array [16]byte) *C.PrintableString_t {
 
-	return decodePrintableString(prtSC)
+	prtStrC := newOctetStringFromArray(array)
+	return prtStrC
+}
+
+func decodePrintableStringBytes(array [16]byte) (string, error) {
+	prtStrC := newPrintableStringFromArray(array)
+
+	return decodePrintableString(prtStrC)
 }
