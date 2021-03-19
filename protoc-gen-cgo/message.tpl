@@ -16,7 +16,7 @@ import "C"{{else}}import "C"
 import (
     "fmt"
     "encoding/binary"
-    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.FullPackageName}}" //ToDo - Make imports more dynamic
+    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.ProtoFileName}}{{.FullPackageName}}" //ToDo - Make imports more dynamic
     "unsafe"
 )
 

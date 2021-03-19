@@ -161,7 +161,29 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 
 			// Generating new .go file
-			m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+".go", tplEnum, enumData)
+			if !findWithinBasicTypes(enumData.CstructName) {
+				m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+".go", tplEnum, enumData)
+			}
+
+			//// Handling a unit test here
+			//utTpl, err := template.New("unit_test.tpl").Funcs(template.FuncMap{
+			//	"lowCaseFirstLetter":   lowCaseFirstLetter,
+			//	"upperCaseFirstLetter": upperCaseFirstLetter,
+			//	"dashToUnderscore":     dashToUnderscore,
+			//	"underscoreToDash":     underscoreToDash,
+			//	"tolow":                strings.ToLower,
+			//	"cleanDashes":          cleanDashes,
+			//	"cutIES":               cutIES,
+			//}).ParseFiles("unit_test.tpl")
+			//if err != nil {
+			//	//fmt.Errorf("couldn't parse Unit Test template :/ %v", err)
+			//	panic(err)
+			//}
+			//
+			//// Generating new .go file
+			//if !findWithinBasicTypes(enumData.CstructName) {
+			//	m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+"_test.go", utTpl, enumData)
+			//}
 		}
 
 		fmt.Fprintf(buf, "---------------------------------------- Messages are -----------------------------------------\n")
@@ -275,13 +297,35 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				"cutIES":               cutIES,
 			}).ParseFiles("message.tpl")
 			if err != nil {
-				//fmt.Errorf("couldn't parse template :/ %v", err)
+				//fmt.Errorf("couldn't parse Message template :/ %v", err)
 				panic(err)
 			}
 
 			// Generating new .go file
 			if !findWithinBasicTypes(msgData.CstructName) {
 				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+".go", tplMsg, msgData)
+			}
+
+			// Handling a unit test
+			utTpl, err := template.New("unit_test.tpl").Funcs(template.FuncMap{
+				"lowCaseFirstLetter":   lowCaseFirstLetter,
+				"upperCaseFirstLetter": upperCaseFirstLetter,
+				"dashToUnderscore":     dashToUnderscore,
+				"underscoreToDash":     underscoreToDash,
+				"decodeDataType":       decodeDataType,
+				"encodeDataType":       encodeDataType,
+				"checkElementaryType":  checkElementaryType,
+				"cleanDashes":          cleanDashes,
+				"cutIES":               cutIES,
+			}).ParseFiles("unit_test.tpl")
+			if err != nil {
+				//fmt.Errorf("couldn't parse Unit Test template :/ %v", err)
+				panic(err)
+			}
+
+			// Generating new .go file
+			if !findWithinBasicTypes(msgData.CstructName) {
+				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+"_test.go", utTpl, msgData)
 			}
 		}
 
@@ -531,7 +575,7 @@ func extractProtoFileName(proto string) string {
 //}
 
 func getBasicTypes() []string {
-	return []string{"asn_codecs_prim", "BIT_STRING", "INTEGER", "OCTET_STRING", "PrintableString"}
+	return []string{"asn_codecs_prim", "BIT_STRING", "INTEGER", "OCTET_STRING", "PrintableString", "BOOLEAN"}
 }
 
 func findWithinBasicTypes(fileName string) bool {
@@ -544,3 +588,12 @@ func findWithinBasicTypes(fileName string) bool {
 
 	return false
 }
+
+//ToDo - implement proper linting..
+//func lintingInstance(str string) string {
+//
+//	strings.ReplaceAll(str, "Id", "ID")
+//	strings.ReplaceAll(str, "id", "ID")
+//
+//	return str
+//}
