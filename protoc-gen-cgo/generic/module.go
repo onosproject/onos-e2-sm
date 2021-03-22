@@ -327,6 +327,28 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			if !findWithinBasicTypes(msgData.CstructName) {
 				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+"_test.go", utTpl, msgData)
 			}
+
+			// Handling a type creation
+			typesTpl, err := template.New("types_gen.tpl").Funcs(template.FuncMap{
+				"lowCaseFirstLetter":   lowCaseFirstLetter,
+				"upperCaseFirstLetter": upperCaseFirstLetter,
+				"dashToUnderscore":     dashToUnderscore,
+				"underscoreToDash":     underscoreToDash,
+				"decodeDataType":       decodeDataType,
+				"encodeDataType":       encodeDataType,
+				"checkElementaryType":  checkElementaryType,
+				"cleanDashes":          cleanDashes,
+				"cutIES":               cutIES,
+			}).ParseFiles("types_gen.tpl")
+			if err != nil {
+				//fmt.Errorf("couldn't parse template for types generation :/ %v", err)
+				panic(err)
+			}
+
+			// Generating new .go file
+			if !findWithinBasicTypes(msgData.CstructName) {
+				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.MessageName)+".go", typesTpl, msgData)
+			}
 		}
 
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
