@@ -17,7 +17,7 @@ import (
     "unsafe"
 )
 
-func xerEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} {{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
+func xerEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
     {{lowCaseFirstLetter .MessageName}}CP, err := new{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
     if err != nil {
         return nil, err
@@ -30,7 +30,7 @@ func xerEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} {{.ProtoFileN
     return bytes, nil
 }
 
-func perEncode{{.MessageName}}(*{{lowCaseFirstLetter .MessageName}} {{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
+func perEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
     {{lowCaseFirstLetter .MessageName}}CP, err := new{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
     if err != nil {
         return nil, err
@@ -65,7 +65,7 @@ func perDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName
     return decode{{.MessageName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
 }
 
-func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} {{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
+func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
     var ret C.{{dashToUnderscore .CstructName}}_t
     switch {{lowCaseFirstLetter .MessageName}} { {{with .FieldList}}{{ range . }}
             case {{.ProtoFileName}}.{{.MessageName}}_{{.FieldName}}:
