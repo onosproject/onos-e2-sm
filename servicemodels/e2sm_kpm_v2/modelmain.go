@@ -20,10 +20,15 @@ type servicemodel string
 const smname = "e2sm_kpm"
 const smversion = "v2"
 const modulename = "e2sm_kpm_v2.so.2.0"
-const smoid = "1.3.6.1.4.1.53148.1.2.2.2"
+const smoidKpmV2 = "1.3.6.1.4.1.53148.1.2.2.2"
 
-func (sm servicemodel) ServiceModelData() (string, string, string, string) {
-	return smname, smversion, modulename, smoid
+func (sm servicemodel) ServiceModelData2() (string, string, string, string) {
+	return smname, smversion, modulename, smoidKpmV2
+}
+
+// Deprecated
+func (sm servicemodel) ServiceModelData() (string, string, string) {
+	return smname, smversion, modulename
 }
 
 func (sm servicemodel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
