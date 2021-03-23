@@ -6,6 +6,7 @@ package pdudecoder
 
 import (
 	"fmt"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 )
@@ -22,7 +23,7 @@ func DecodeE2SmKpmRanfunctionDescription(e2smKpmPdu *e2sm_kpm_v2.E2SmKpmRanfunct
 	}
 	ranFunctionName := types.RanfunctionNameDef{
 		RanFunctionShortName:   types.ShortName(ranfunctionName.GetRanFunctionShortName()),
-		RanFunctionE2SmOid:     types.Oid(ranfunctionName.GetRanFunctionE2SmOid()),
+		RanFunctionE2SmOid:     types.OID(ranfunctionName.GetRanFunctionE2SmOid()),
 		RanFunctionDescription: types.Description(ranfunctionName.RanFunctionDescription),
 		RanFunctionInstance:    types.Instance(ranfunctionName.RanFunctionInstance),
 	}
