@@ -173,6 +173,10 @@ func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.Ra
 	return pdudecoder.DecodeE2SmKpmRanfunctionDescription(e2SmKpmPdu)
 }
 
+func (sm servicemodel) GetRANfunctionOID() string {
+	return "1.3.6.1.4.1.53148.1.2.2.2"
+}
+
 func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
 }

@@ -172,6 +172,10 @@ func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.Ra
 	return pdudecoder.DecodeE2SmRcPreRanfunctionDescription(e2SmRcPrePdu)
 }
 
+func (sm servicemodel) GetRANfunctionOID() string {
+	return "1.3.6.1.4.1.1.1.2.2"
+}
+
 func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := rcprectypes.PerDecodeE2SmRcPreControlHeader(asn1Bytes)
 	if err != nil {
