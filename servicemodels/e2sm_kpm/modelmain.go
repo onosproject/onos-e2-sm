@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdudecoder"
@@ -19,7 +20,13 @@ type servicemodel string
 const smname = "e2sm_kpm"
 const smversion = "v1beta1"
 const modulename = "e2sm_kpm.so.1.0.1"
+const smoidKpmV1 = "1.3.6.1.4.1.53148.1.1.2.2"
 
+func (sm servicemodel) ServiceModelData2() (string, string, string, string) {
+	return smname, smversion, modulename, smoidKpmV1
+}
+
+// Deprecated
 func (sm servicemodel) ServiceModelData() (string, string, string) {
 	return smname, smversion, modulename
 }
@@ -164,7 +171,7 @@ func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, e
 	return perBytes, nil
 }
 
-func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
+func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
 	e2SmKpmPdu, err := kpmctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1bytes)
 	if err != nil {
 		return nil, nil, nil, err

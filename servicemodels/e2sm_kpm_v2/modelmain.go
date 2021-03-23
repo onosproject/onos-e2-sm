@@ -7,19 +7,26 @@ package main
 
 import (
 	"fmt"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
+	kpmv2ctypes "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdudecoder"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"google.golang.org/protobuf/proto"
 )
 
 type servicemodel string
 
-const smname = "e2sm_kpm_v2"
+const smname = "e2sm_kpm"
 const smversion = "v2"
 const modulename = "e2sm_kpm_v2.so.2.0"
+const smoidKpmV2 = "1.3.6.1.4.1.53148.1.2.2.2"
 
+func (sm servicemodel) ServiceModelData2() (string, string, string, string) {
+	return smname, smversion, modulename, smoidKpmV2
+}
+
+// Deprecated
 func (sm servicemodel) ServiceModelData() (string, string, string) {
 	return smname, smversion, modulename
 }
@@ -165,7 +172,7 @@ func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, e
 }
 
 //It is redundant so far - could be reused for future, if you need to extract something specific from RanFunctionDescription message
-func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
+func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
 	e2SmKpmPdu, err := kpmv2ctypes.PerDecodeE2SmKpmRanfunctionDescription(asn1bytes)
 	if err != nil {
 		return nil, nil, nil, err

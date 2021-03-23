@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdudecoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
@@ -19,7 +20,13 @@ type servicemodel string
 const smname = "e2sm_rc_pre"
 const smversion = "v1"
 const modulename = "e2sm_rc_pre.so.1.0.1"
+const smoidRcPreV1 = "1.3.6.1.4.1.53148.1.1.2.100"
 
+func (sm servicemodel) ServiceModelData2() (string, string, string, string) {
+	return smname, smversion, modulename, smoidRcPreV1
+}
+
+// Deprecated
 func (sm servicemodel) ServiceModelData() (string, string, string) {
 	return smname, smversion, modulename
 }

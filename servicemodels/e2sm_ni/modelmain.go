@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 )
 
@@ -15,7 +16,13 @@ type servicemodel string
 const smname = "e2sm_ni"
 const smversion = "v1beta1"
 const modulename = "e2sm_ni.so.1.0.1"
+const smoidNiV1 = "1.3.6.1.4.1.53148.1.1.2.1"
 
+func (sm servicemodel) ServiceModelData2() (string, string, string, string) {
+	return smname, smversion, modulename, smoidNiV1
+}
+
+// Deprecated
 func (sm servicemodel) ServiceModelData() (string, string, string) {
 	return smname, smversion, modulename
 }
@@ -56,7 +63,7 @@ func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, e
 	return nil, fmt.Errorf("not yet implemented")
 }
 
-func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error){
+func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
 	return nil, nil, nil, fmt.Errorf("not yet implemented")
 }
 
