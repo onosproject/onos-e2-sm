@@ -17,18 +17,19 @@ import (
 
 type servicemodel string
 
-const smname = "e2sm_kpm"
-const smversion = "v1beta1"
-const modulename = "e2sm_kpm.so.1.0.1"
-const smoidKpmV1 = "1.3.6.1.4.1.53148.1.1.2.2"
+const smName = "e2sm_kpm"
+const smVersion = "v1beta1"
+const moduleName = "e2sm_kpm.so.1.0.1"
+const smOidKpmV1 = "1.3.6.1.4.1.53148.1.1.2.2"
 
-func (sm servicemodel) ServiceModelData2() (string, string, string, string) {
-	return smname, smversion, modulename, smoidKpmV1
-}
-
-// Deprecated
-func (sm servicemodel) ServiceModelData() (string, string, string) {
-	return smname, smversion, modulename
+func (sm servicemodel) ServiceModelData() types.ServiceModelData {
+	smData := types.ServiceModelData{
+		Name:       smName,
+		Version:    smVersion,
+		ModuleName: moduleName,
+		OID:        smOidKpmV1,
+	}
+	return smData
 }
 
 func (sm servicemodel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {

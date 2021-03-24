@@ -6,6 +6,7 @@ package pdudecoder
 
 import (
 	"fmt"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
 )
@@ -22,7 +23,7 @@ func DecodeE2SmRcPreRanfunctionDescription(e2smRcPrePdu *e2sm_rc_pre_ies.E2SmRcP
 	}
 	ranFunctionName := types.RanfunctionNameDef{
 		RanFunctionShortName:   types.ShortName(ranfunctionName.GetRanFunctionShortName()),
-		RanFunctionE2SmOid:     types.Oid(ranfunctionName.GetRanFunctionE2SmOid()),
+		RanFunctionE2SmOid:     types.OID(ranfunctionName.GetRanFunctionE2SmOid()),
 		RanFunctionDescription: types.Description(ranfunctionName.RanFunctionDescription),
 		RanFunctionInstance:    types.Instance(ranfunctionName.RanFunctionInstance),
 	}
