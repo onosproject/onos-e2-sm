@@ -68,13 +68,9 @@ func perDecodeRicKpmnodeItem(bytes []byte) (*e2sm_kpm_v2.RicKpmnodeItem, error) 
 
 func newRicKpmnodeItem(ricKpmnodeItem *e2sm_kpm_v2.RicKpmnodeItem) (*C.RIC_KPMNode_Item_t, error) {
 
-	//fmt.Printf("We're inside newRicKpmnodeItem(), starting encoding...")
-	//fmt.Printf("Encoding CellMeasurementObjectList: \n %v \n", ricKpmnodeItem.GetCellMeasurementObjectList())
 	cellMeasurementObjectListC := new(C.struct_RIC_KPMNode_Item__cell_Measurement_Object_List) //ToDo - verify correctness of the variable's name
 	for _, cellMeasurementObjectListItem := range ricKpmnodeItem.GetCellMeasurementObjectList() {
-		//fmt.Printf("Encoding CellMeasurementObjectItem: \n %v \n", cellMeasurementObjectListItem)
 		cellMeasurementObjectListItemC, err := newCellMeasurementObjectItem(cellMeasurementObjectListItem)
-		//fmt.Printf("That's the C version of encoded CellMeasurementObjectItem: \n %v \n", cellMeasurementObjectListItemC)
 		if err != nil {
 			return nil, fmt.Errorf("newCellMeasurementObjectItem() %s", err.Error())
 		}
@@ -82,29 +78,22 @@ func newRicKpmnodeItem(ricKpmnodeItem *e2sm_kpm_v2.RicKpmnodeItem) (*C.RIC_KPMNo
 			return nil, err
 		}
 	}
-	//fmt.Printf("That's the C version of encoded CellMeasurementObjectList: \n %v \n", cellMeasurementObjectListC)
 
-	//fmt.Printf("Encoding GlobalKpmnodeI: \n %v \n", ricKpmnodeItem.RicKpmnodeType)
 	ricKpmnodeTypeC, err := newGlobalKpmnodeID(ricKpmnodeItem.RicKpmnodeType)
 	if err != nil {
 		return nil, fmt.Errorf("newGlobalKpmnodeID() %s", err.Error())
 	}
-	//fmt.Printf("That's the C version of encoded RicKpmnodeType: \n %v \n", ricKpmnodeTypeC)
 
-	//fmt.Printf("Composing final C-structure...")
 	ricKpmnodeItemC := C.RIC_KPMNode_Item_t{
 		ric_KPMNode_Type:             *ricKpmnodeTypeC,
 		cell_Measurement_Object_List: cellMeasurementObjectListC,
 	}
-	//fmt.Printf("This is final C-structure: \n %v \n", ricKpmnodeItemC)
 
 	return &ricKpmnodeItemC, nil
 }
 
 func decodeRicKpmnodeItem(ricKpmnodeItemC *C.RIC_KPMNode_Item_t) (*e2sm_kpm_v2.RicKpmnodeItem, error) {
 
-	//fmt.Printf("We're inside decodeRicKpmnodeItem(), starting decoding...")
-	//fmt.Printf("Decoding RicKpmnodeType: \n %v \n", ricKpmnodeItemC.ric_KPMNode_Type)
 	ricKpmnodeType, err := decodeGlobalKpmnodeID(&ricKpmnodeItemC.ric_KPMNode_Type)
 	if err != nil {
 		return nil, fmt.Errorf("decodeGlobalKpmnodeID() %s", err.Error())
@@ -118,23 +107,16 @@ func decodeRicKpmnodeItem(ricKpmnodeItemC *C.RIC_KPMNode_Item_t) (*e2sm_kpm_v2.R
 
 	}
 
-	//fmt.Printf("Decoding CellMeasurementObjectList: \n %v \n", ricKpmnodeItemC.cell_Measurement_Object_List)
-	//fmt.Printf("We've got %v items to decode \n", int(ricKpmnodeItemC.cell_Measurement_Object_List.list.count))
 	ieCount := int(ricKpmnodeItemC.cell_Measurement_Object_List.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(ricKpmnodeItemC.cell_Measurement_Object_List.list.array)) * uintptr(i)
 		ieC := *(**C.Cell_Measurement_Object_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(ricKpmnodeItemC.cell_Measurement_Object_List.list.array)) + offset))
-		//fmt.Printf("Decoding CellMeasurementObjectItem: \n %v \n", ieC)
 		ie, err := decodeCellMeasurementObjectItem(ieC)
-		//fmt.Printf("Decoded CellMeasurementObjectItem is: \n %v \n", ie)
 		if err != nil {
 			return nil, fmt.Errorf("decodeCellMeasurementObjectItem() %s", err.Error())
 		}
 		ricKpmnodeItem.CellMeasurementObjectList = append(ricKpmnodeItem.CellMeasurementObjectList, ie)
 	}
-	//fmt.Printf("Decoded CellMeasurementObjectList is: \n %v \n", ricKpmnodeItem.CellMeasurementObjectList)
-
-	//fmt.Printf("This is final decoded structure: \n %v \n", ricKpmnodeItem)
 
 	return &ricKpmnodeItem, nil
 }
