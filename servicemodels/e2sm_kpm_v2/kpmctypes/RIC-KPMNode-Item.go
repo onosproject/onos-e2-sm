@@ -98,6 +98,8 @@ func decodeRicKpmnodeItem(ricKpmnodeItemC *C.RIC_KPMNode_Item_t) (*e2sm_kpm_v2.R
 	if err != nil {
 		return nil, fmt.Errorf("decodeGlobalKpmnodeID() %s", err.Error())
 	}
+	//fmt.Printf("That's what was decoded from C: \n %v \n", ricKpmnodeType)
+
 
 	ricKpmnodeItem := e2sm_kpm_v2.RicKpmnodeItem{
 		RicKpmnodeType:            ricKpmnodeType,

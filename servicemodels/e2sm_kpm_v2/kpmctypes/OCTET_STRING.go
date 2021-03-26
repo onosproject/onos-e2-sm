@@ -23,6 +23,8 @@ func newOctetString(msg string) (*C.OCTET_STRING_t, error) {
 		buf:  (*C.uchar)(msgBytes),
 		size: C.ulong(len(msg)),
 	}
+	//C.free(unsafe.Pointer(msgBytes))
+
 	return &octStrC, nil
 }
 
@@ -32,6 +34,8 @@ func decodeOctetString(octC *C.OCTET_STRING_t) (string, error) {
 		return "", nil //ToDo - should it return error that OctetString is empty one?
 	}
 	bytes := C.GoBytes(unsafe.Pointer(octC.buf), C.int(octC.size))
+	//freeOctetString(octC)
+
 	return string(bytes), nil
 }
 
@@ -47,6 +51,7 @@ func newOctetStringFromArray(array [16]byte) *C.OCTET_STRING_t {
 		buf:  (*C.uchar)(C.CBytes(bytes)),
 		size: C.ulong(size),
 	}
+	//C.free(unsafe.Pointer(bytes))
 
 	return &octStrC
 }

@@ -40,6 +40,7 @@ func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 func newPrintableStringFromArray(array [16]byte) *C.PrintableString_t {
 
 	prtStrC := newOctetStringFromArray(array)
+
 	return prtStrC
 }
 

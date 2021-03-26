@@ -9,7 +9,7 @@ package kpmv2ctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-KPM-IndicationMessage.h"
+//#include "E2SM-KPMv2-IndicationMessage.h"
 //extern int consumeBytesCb(void* p0, uint32_t p1, void* p2);
 import "C"
 import (

@@ -1,4 +1,4 @@
-<E2SM-KPM-RANfunction-Description>
+<E2SM-KPMv2-RANfunction-Description>
     <ranFunction-Name>
         <ranFunction-ShortName>onf</ranFunction-ShortName>
         <ranFunction-E2SM-OID>oid123</ranFunction-E2SM-OID>
@@ -58,4 +58,4 @@
             <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
         </RIC-ReportStyle-Item>
     </ric-ReportStyle-List>
-</E2SM-KPM-RANfunction-Description>
+</E2SM-KPMv2-RANfunction-Description>
