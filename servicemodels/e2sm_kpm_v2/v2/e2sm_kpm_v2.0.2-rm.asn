@@ -323,22 +323,22 @@ MatchingUEidItem ::= SEQUENCE{
 }
 
 -- **************************************************************
--- E2SM-KPM Service Model IEs
+-- E2SM-KPMv2 Service Model IEs
 -- **************************************************************
 
 -- **************************************************************
 --   Event Trigger Definition OCTET STRING contents
 -- **************************************************************
 
-E2SM-KPM-EventTriggerDefinition ::= SEQUENCE{
+E2SM-KPMv2-EventTriggerDefinition ::= SEQUENCE{
 	eventDefinition-formats			CHOICE{
-		eventDefinition-Format1			E2SM-KPM-EventTriggerDefinition-Format1,
+		eventDefinition-Format1			E2SM-KPMv2-EventTriggerDefinition-Format1,
 		...
 	},
 	...
 }
 
-E2SM-KPM-EventTriggerDefinition-Format1 ::= SEQUENCE{
+E2SM-KPMv2-EventTriggerDefinition-Format1 ::= SEQUENCE{
 	reportingPeriod					INTEGER,
 	...
 }
@@ -347,18 +347,18 @@ E2SM-KPM-EventTriggerDefinition-Format1 ::= SEQUENCE{
 --   Action Definition OCTET STRING contents
 -- **************************************************************
 
-E2SM-KPM-ActionDefinition ::= SEQUENCE{
+E2SM-KPMv2-ActionDefinition ::= SEQUENCE{
 	ric-Style-Type					RIC-Style-Type,
 	actionDefinition-formats 	CHOICE{
-		actionDefinition-Format1		E2SM-KPM-ActionDefinition-Format1,
-		actionDefinition-Format2		E2SM-KPM-ActionDefinition-Format2,
-		actionDefinition-Format3		E2SM-KPM-ActionDefinition-Format3,
+		actionDefinition-Format1		E2SM-KPMv2-ActionDefinition-Format1,
+		actionDefinition-Format2		E2SM-KPMv2-ActionDefinition-Format2,
+		actionDefinition-Format3		E2SM-KPMv2-ActionDefinition-Format3,
 		...
 	},
 	...
 }
 
-E2SM-KPM-ActionDefinition-Format1 ::= SEQUENCE {
+E2SM-KPMv2-ActionDefinition-Format1 ::= SEQUENCE {
 	cellObjID						CellObjectID,
 	measInfoList					MeasurementInfoList,
 	granulPeriod					GranularityPeriod,
@@ -366,13 +366,13 @@ E2SM-KPM-ActionDefinition-Format1 ::= SEQUENCE {
 	...
 }
 
-E2SM-KPM-ActionDefinition-Format2 ::= SEQUENCE {
+E2SM-KPMv2-ActionDefinition-Format2 ::= SEQUENCE {
 	ueID							UE-Identity,
-	subscriptInfo					E2SM-KPM-ActionDefinition-Format1,
+	subscriptInfo					E2SM-KPMv2-ActionDefinition-Format1,
 	...
 }
 
-E2SM-KPM-ActionDefinition-Format3 ::= SEQUENCE {
+E2SM-KPMv2-ActionDefinition-Format3 ::= SEQUENCE {
 	cellObjID						CellObjectID,
 	measCondList					MeasurementCondList,
 	granulPeriod					GranularityPeriod,
@@ -384,15 +384,15 @@ E2SM-KPM-ActionDefinition-Format3 ::= SEQUENCE {
 --   Indication Header OCTET STRING contents
 -- **************************************************************
 
-E2SM-KPM-IndicationHeader ::= SEQUENCE{
+E2SM-KPMv2-IndicationHeader ::= SEQUENCE{
 	indicationHeader-formats		CHOICE{
-		indicationHeader-Format1		E2SM-KPM-IndicationHeader-Format1,
+		indicationHeader-Format1		E2SM-KPMv2-IndicationHeader-Format1,
 		...
 	},
 	...
 }
 
-E2SM-KPM-IndicationHeader-Format1 ::= SEQUENCE{
+E2SM-KPMv2-IndicationHeader-Format1 ::= SEQUENCE{
 	colletStartTime				TimeStamp,
 	fileFormatversion				PrintableString (SIZE (0..15), ...)		OPTIONAL,
 	senderName						PrintableString (SIZE (0..400), ...)	OPTIONAL,
@@ -406,16 +406,16 @@ E2SM-KPM-IndicationHeader-Format1 ::= SEQUENCE{
 --   Indication Message OCTET STRING contents
 -- **************************************************************
 
-E2SM-KPM-IndicationMessage ::= SEQUENCE{
+E2SM-KPMv2-IndicationMessage ::= SEQUENCE{
 	indicationMessage-formats		CHOICE{
-		indicationMessage-Format1		E2SM-KPM-IndicationMessage-Format1,
-		indicationMessage-Format2		E2SM-KPM-IndicationMessage-Format2,
+		indicationMessage-Format1		E2SM-KPMv2-IndicationMessage-Format1,
+		indicationMessage-Format2		E2SM-KPMv2-IndicationMessage-Format2,
 		...
 	},
 	...
 }
 
-E2SM-KPM-IndicationMessage-Format1 ::= SEQUENCE {
+E2SM-KPMv2-IndicationMessage-Format1 ::= SEQUENCE {
 	subscriptID						SubscriptionID,
 	cellObjID						CellObjectID							OPTIONAL,
 	granulPeriod					GranularityPeriod 						OPTIONAL,
@@ -424,7 +424,7 @@ E2SM-KPM-IndicationMessage-Format1 ::= SEQUENCE {
 	...
 }
 
-E2SM-KPM-IndicationMessage-Format2 ::= SEQUENCE {
+E2SM-KPMv2-IndicationMessage-Format2 ::= SEQUENCE {
 	subscriptID						SubscriptionID,
 	cellObjID						CellObjectID							OPTIONAL,
 	granulPeriod					GranularityPeriod 						OPTIONAL,
@@ -437,7 +437,7 @@ E2SM-KPM-IndicationMessage-Format2 ::= SEQUENCE {
 --   RAN Function Definition OCTET STRING contents
 -- ***************************************************************
 
-E2SM-KPM-RANfunction-Description ::= SEQUENCE{
+E2SM-KPMv2-RANfunction-Description ::= SEQUENCE{
 	ranFunction-Name					RANfunction-Name,
 	ric-KPM-Node-List					SEQUENCE (SIZE(1..maxnoofKPMNodes)) OF RIC-KPMNode-Item 				OPTIONAL,
 	ric-EventTriggerStyle-List			SEQUENCE (SIZE(1..maxnoofRICStyles)) OF RIC-EventTriggerStyle-Item 		OPTIONAL,

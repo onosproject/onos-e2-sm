@@ -68,7 +68,10 @@ func perDecodeCellObjectID(bytes []byte) (*e2sm_kpm_v2.CellObjectId, error) {
 
 func newCellObjectID(cellObjectID *e2sm_kpm_v2.CellObjectId) (*C.CellObjectID_t, error) {
 
+	//fmt.Printf("We're inside newCellObjectID(), starting encoding...")
+	//fmt.Printf("Encoding PrintableString: \n %v \n", cellObjectID.Value)
 	cellObjectIDC, err := newPrintableString(cellObjectID.Value)
+	//fmt.Printf("That's the C version of encoded PrintableString: \n %v \n", cellObjectIDC)
 	if err != nil {
 		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 	}
@@ -78,12 +81,16 @@ func newCellObjectID(cellObjectID *e2sm_kpm_v2.CellObjectId) (*C.CellObjectID_t,
 
 func decodeCellObjectID(cellObjectIDC *C.CellObjectID_t) (*e2sm_kpm_v2.CellObjectId, error) {
 
+	//fmt.Printf("We're inside decodeCellMeasurementObjectItem(), starting decoding...")
 	cellObjectID := new(e2sm_kpm_v2.CellObjectId)
+	//fmt.Printf("Decoding PrintableString: \n %v \n", cellObjectIDC)
 	cellObjectIDValue, err := decodePrintableString(cellObjectIDC)
+	//fmt.Printf("That's what was decoded from C: \n %v \n", cellObjectIDValue)
 	if err != nil {
 		return nil, fmt.Errorf("decodeString() %s", err.Error())
 	}
 	cellObjectID.Value = cellObjectIDValue
 
+	//fmt.Printf("This is final decoded structure: \n %v \n", cellObjectID)
 	return cellObjectID, nil
 }

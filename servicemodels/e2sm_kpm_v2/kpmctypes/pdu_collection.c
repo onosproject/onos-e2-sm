@@ -4,164 +4,20 @@
 
 struct asn_TYPE_descriptor_s;	/* Forward declaration */
 
-extern struct asn_TYPE_descriptor_s asn_DEF_PLMN_Identity;
-extern struct asn_TYPE_descriptor_s asn_DEF_EUTRACellIdentity;
-extern struct asn_TYPE_descriptor_s asn_DEF_NRCellIdentity;
-extern struct asn_TYPE_descriptor_s asn_DEF_EUTRACGI;
-extern struct asn_TYPE_descriptor_s asn_DEF_NRCGI;
-extern struct asn_TYPE_descriptor_s asn_DEF_CellGlobalID;
-extern struct asn_TYPE_descriptor_s asn_DEF_SNSSAI;
-extern struct asn_TYPE_descriptor_s asn_DEF_FiveQI;
-extern struct asn_TYPE_descriptor_s asn_DEF_QCI;
-extern struct asn_TYPE_descriptor_s asn_DEF_QFI;
-extern struct asn_TYPE_descriptor_s asn_DEF_ARP;
-extern struct asn_TYPE_descriptor_s asn_DEF_TimeStamp;
-extern struct asn_TYPE_descriptor_s asn_DEF_UE_Identity;
-extern struct asn_TYPE_descriptor_s asn_DEF_CellObjectID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GranularityPeriod;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementType;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementTypeName;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementTypeID;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementLabel;
-extern struct asn_TYPE_descriptor_s asn_DEF_SubscriptionID;
-extern struct asn_TYPE_descriptor_s asn_DEF_TestCondInfo;
-extern struct asn_TYPE_descriptor_s asn_DEF_TestCond_Type;
-extern struct asn_TYPE_descriptor_s asn_DEF_TestCond_Expression;
-extern struct asn_TYPE_descriptor_s asn_DEF_TestCond_Value;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalKPMnode_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalKPMnode_gNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalgNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GNB_CU_UP_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GNB_DU_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GNB_ID_Choice;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalKPMnode_en_gNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalenGNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_ENGNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalKPMnode_ng_eNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalngeNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_ENB_ID_Choice;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalKPMnode_eNB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_GlobalENB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_ENB_ID;
-extern struct asn_TYPE_descriptor_s asn_DEF_RANfunction_Name;
-extern struct asn_TYPE_descriptor_s asn_DEF_RIC_Style_Type;
-extern struct asn_TYPE_descriptor_s asn_DEF_RIC_Style_Name;
-extern struct asn_TYPE_descriptor_s asn_DEF_RIC_Format_Type;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementInfoList;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementInfoItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_LabelInfoList;
-extern struct asn_TYPE_descriptor_s asn_DEF_LabelInfoItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementData;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementDataItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementRecord;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementRecordItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementInfo_Action_List;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementInfo_Action_Item;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementCondList;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementCondItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementCondUEidList;
-extern struct asn_TYPE_descriptor_s asn_DEF_MeasurementCondUEidItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_MatchingCondList;
-extern struct asn_TYPE_descriptor_s asn_DEF_MatchingCondItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_MatchingUEidList;
-extern struct asn_TYPE_descriptor_s asn_DEF_MatchingUEidItem;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_EventTriggerDefinition;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_EventTriggerDefinition_Format1;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_ActionDefinition;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_ActionDefinition_Format1;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_ActionDefinition_Format2;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_ActionDefinition_Format3;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_IndicationHeader;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_IndicationHeader_Format1;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_IndicationMessage;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_IndicationMessage_Format1;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_IndicationMessage_Format2;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPM_RANfunction_Description;
-extern struct asn_TYPE_descriptor_s asn_DEF_RIC_KPMNode_Item;
-extern struct asn_TYPE_descriptor_s asn_DEF_Cell_Measurement_Object_Item;
-extern struct asn_TYPE_descriptor_s asn_DEF_RIC_EventTriggerStyle_Item;
-extern struct asn_TYPE_descriptor_s asn_DEF_RIC_ReportStyle_Item;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPMv2_EventTriggerDefinition;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPMv2_ActionDefinition;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPMv2_IndicationHeader;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPMv2_IndicationMessage;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPMv2_RANfunction_Description;
 
 
 struct asn_TYPE_descriptor_s *asn_pdu_collection[] = {
 	/* From module E2SM-KPM-IEs in ../v2/e2sm_kpm_v2.0.2-rm.asn */
-	&asn_DEF_PLMN_Identity,	
-	&asn_DEF_EUTRACellIdentity,	
-	&asn_DEF_NRCellIdentity,	
-	&asn_DEF_EUTRACGI,	
-	&asn_DEF_NRCGI,	
-	&asn_DEF_CellGlobalID,	
-	&asn_DEF_SNSSAI,	
-	&asn_DEF_FiveQI,	
-	&asn_DEF_QCI,	
-	&asn_DEF_QFI,	
-	&asn_DEF_ARP,	
-	&asn_DEF_TimeStamp,	
-	&asn_DEF_UE_Identity,	
-	&asn_DEF_CellObjectID,	
-	&asn_DEF_GranularityPeriod,	
-	&asn_DEF_MeasurementType,	
-	&asn_DEF_MeasurementTypeName,	
-	&asn_DEF_MeasurementTypeID,	
-	&asn_DEF_MeasurementLabel,	
-	&asn_DEF_SubscriptionID,	
-	&asn_DEF_TestCondInfo,	
-	&asn_DEF_TestCond_Type,	
-	&asn_DEF_TestCond_Expression,	
-	&asn_DEF_TestCond_Value,	
-	&asn_DEF_GlobalKPMnode_ID,	
-	&asn_DEF_GlobalKPMnode_gNB_ID,	
-	&asn_DEF_GlobalgNB_ID,	
-	&asn_DEF_GNB_CU_UP_ID,	
-	&asn_DEF_GNB_DU_ID,	
-	&asn_DEF_GNB_ID_Choice,	
-	&asn_DEF_GlobalKPMnode_en_gNB_ID,	
-	&asn_DEF_GlobalenGNB_ID,	
-	&asn_DEF_ENGNB_ID,	
-	&asn_DEF_GlobalKPMnode_ng_eNB_ID,	
-	&asn_DEF_GlobalngeNB_ID,	
-	&asn_DEF_ENB_ID_Choice,	
-	&asn_DEF_GlobalKPMnode_eNB_ID,	
-	&asn_DEF_GlobalENB_ID,	
-	&asn_DEF_ENB_ID,	
-	&asn_DEF_RANfunction_Name,	
-	&asn_DEF_RIC_Style_Type,	
-	&asn_DEF_RIC_Style_Name,	
-	&asn_DEF_RIC_Format_Type,	
-	&asn_DEF_MeasurementInfoList,	
-	&asn_DEF_MeasurementInfoItem,	
-	&asn_DEF_LabelInfoList,	
-	&asn_DEF_LabelInfoItem,	
-	&asn_DEF_MeasurementData,	
-	&asn_DEF_MeasurementDataItem,	
-	&asn_DEF_MeasurementRecord,	
-	&asn_DEF_MeasurementRecordItem,	
-	&asn_DEF_MeasurementInfo_Action_List,	
-	&asn_DEF_MeasurementInfo_Action_Item,	
-	&asn_DEF_MeasurementCondList,	
-	&asn_DEF_MeasurementCondItem,	
-	&asn_DEF_MeasurementCondUEidList,	
-	&asn_DEF_MeasurementCondUEidItem,	
-	&asn_DEF_MatchingCondList,	
-	&asn_DEF_MatchingCondItem,	
-	&asn_DEF_MatchingUEidList,	
-	&asn_DEF_MatchingUEidItem,	
-	&asn_DEF_E2SM_KPM_EventTriggerDefinition,	
-	&asn_DEF_E2SM_KPM_EventTriggerDefinition_Format1,	
-	&asn_DEF_E2SM_KPM_ActionDefinition,	
-	&asn_DEF_E2SM_KPM_ActionDefinition_Format1,	
-	&asn_DEF_E2SM_KPM_ActionDefinition_Format2,	
-	&asn_DEF_E2SM_KPM_ActionDefinition_Format3,	
-	&asn_DEF_E2SM_KPM_IndicationHeader,	
-	&asn_DEF_E2SM_KPM_IndicationHeader_Format1,	
-	&asn_DEF_E2SM_KPM_IndicationMessage,	
-	&asn_DEF_E2SM_KPM_IndicationMessage_Format1,	
-	&asn_DEF_E2SM_KPM_IndicationMessage_Format2,	
-	&asn_DEF_E2SM_KPM_RANfunction_Description,	
-	&asn_DEF_RIC_KPMNode_Item,	
-	&asn_DEF_Cell_Measurement_Object_Item,	
-	&asn_DEF_RIC_EventTriggerStyle_Item,	
-	&asn_DEF_RIC_ReportStyle_Item,	
+	&asn_DEF_E2SM_KPMv2_EventTriggerDefinition,	
+	&asn_DEF_E2SM_KPMv2_ActionDefinition,	
+	&asn_DEF_E2SM_KPMv2_IndicationHeader,	
+	&asn_DEF_E2SM_KPMv2_IndicationMessage,	
+	&asn_DEF_E2SM_KPMv2_RANfunction_Description,	
 	0
 };
 

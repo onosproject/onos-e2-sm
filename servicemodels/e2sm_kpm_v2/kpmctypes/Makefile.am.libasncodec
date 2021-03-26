@@ -60,18 +60,18 @@ ASN_MODULE_SRCS=	\
 	./MatchingCondItem.c	\
 	./MatchingUEidList.c	\
 	./MatchingUEidItem.c	\
-	./E2SM-KPM-EventTriggerDefinition.c	\
-	./E2SM-KPM-EventTriggerDefinition-Format1.c	\
-	./E2SM-KPM-ActionDefinition.c	\
-	./E2SM-KPM-ActionDefinition-Format1.c	\
-	./E2SM-KPM-ActionDefinition-Format2.c	\
-	./E2SM-KPM-ActionDefinition-Format3.c	\
-	./E2SM-KPM-IndicationHeader.c	\
-	./E2SM-KPM-IndicationHeader-Format1.c	\
-	./E2SM-KPM-IndicationMessage.c	\
-	./E2SM-KPM-IndicationMessage-Format1.c	\
-	./E2SM-KPM-IndicationMessage-Format2.c	\
-	./E2SM-KPM-RANfunction-Description.c	\
+	./E2SM-KPMv2-EventTriggerDefinition.c	\
+	./E2SM-KPMv2-EventTriggerDefinition-Format1.c	\
+	./E2SM-KPMv2-ActionDefinition.c	\
+	./E2SM-KPMv2-ActionDefinition-Format1.c	\
+	./E2SM-KPMv2-ActionDefinition-Format2.c	\
+	./E2SM-KPMv2-ActionDefinition-Format3.c	\
+	./E2SM-KPMv2-IndicationHeader.c	\
+	./E2SM-KPMv2-IndicationHeader-Format1.c	\
+	./E2SM-KPMv2-IndicationMessage.c	\
+	./E2SM-KPMv2-IndicationMessage-Format1.c	\
+	./E2SM-KPMv2-IndicationMessage-Format2.c	\
+	./E2SM-KPMv2-RANfunction-Description.c	\
 	./RIC-KPMNode-Item.c	\
 	./Cell-Measurement-Object-Item.c	\
 	./RIC-EventTriggerStyle-Item.c	\
@@ -139,18 +139,18 @@ ASN_MODULE_HDRS=	\
 	./MatchingCondItem.h	\
 	./MatchingUEidList.h	\
 	./MatchingUEidItem.h	\
-	./E2SM-KPM-EventTriggerDefinition.h	\
-	./E2SM-KPM-EventTriggerDefinition-Format1.h	\
-	./E2SM-KPM-ActionDefinition.h	\
-	./E2SM-KPM-ActionDefinition-Format1.h	\
-	./E2SM-KPM-ActionDefinition-Format2.h	\
-	./E2SM-KPM-ActionDefinition-Format3.h	\
-	./E2SM-KPM-IndicationHeader.h	\
-	./E2SM-KPM-IndicationHeader-Format1.h	\
-	./E2SM-KPM-IndicationMessage.h	\
-	./E2SM-KPM-IndicationMessage-Format1.h	\
-	./E2SM-KPM-IndicationMessage-Format2.h	\
-	./E2SM-KPM-RANfunction-Description.h	\
+	./E2SM-KPMv2-EventTriggerDefinition.h	\
+	./E2SM-KPMv2-EventTriggerDefinition-Format1.h	\
+	./E2SM-KPMv2-ActionDefinition.h	\
+	./E2SM-KPMv2-ActionDefinition-Format1.h	\
+	./E2SM-KPMv2-ActionDefinition-Format2.h	\
+	./E2SM-KPMv2-ActionDefinition-Format3.h	\
+	./E2SM-KPMv2-IndicationHeader.h	\
+	./E2SM-KPMv2-IndicationHeader-Format1.h	\
+	./E2SM-KPMv2-IndicationMessage.h	\
+	./E2SM-KPMv2-IndicationMessage-Format1.h	\
+	./E2SM-KPMv2-IndicationMessage-Format2.h	\
+	./E2SM-KPMv2-RANfunction-Description.h	\
 	./RIC-KPMNode-Item.h	\
 	./Cell-Measurement-Object-Item.h	\
 	./RIC-EventTriggerStyle-Item.h	\

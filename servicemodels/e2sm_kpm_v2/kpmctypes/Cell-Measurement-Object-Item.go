@@ -68,32 +68,44 @@ func perDecodeCellMeasurementObjectItem(bytes []byte) (*e2sm_kpm_v2.CellMeasurem
 
 func newCellMeasurementObjectItem(cellMeasurementObjectItem *e2sm_kpm_v2.CellMeasurementObjectItem) (*C.Cell_Measurement_Object_Item_t, error) {
 
+	//fmt.Printf("We're inside newCellMeasurementObjectItem(), starting encoding...")
+	//fmt.Printf("Encoding CellObjectID: \n %v \n", cellMeasurementObjectItem.CellObjectId)
 	cellObjectIDC, err := newCellObjectID(cellMeasurementObjectItem.CellObjectId)
+	//fmt.Printf("That's the C version of encoded CellObjectID: \n %v \n", cellObjectIDC)
 	if err != nil {
 		return nil, fmt.Errorf("newCellObjectId() %s", err.Error())
 	}
 
+	//fmt.Printf("Encoding CellGlobalID: \n %v \n", cellMeasurementObjectItem.CellGlobalId)
 	cellGlobalIDC, err := newCellGlobalID(cellMeasurementObjectItem.CellGlobalId)
+	//fmt.Printf("That's the C version of encoded CellGlobalID: \n %v \n", cellGlobalIDC)
 	if err != nil {
 		return nil, fmt.Errorf("newCellGlobalId() %s", err.Error())
 	}
 
+	//fmt.Printf("Composing final C-structure...")
 	cellMeasurementObjectItemC := C.Cell_Measurement_Object_Item_t{
 		cell_object_ID: *cellObjectIDC,
 		cell_global_ID: *cellGlobalIDC,
 	}
+	//fmt.Printf("This is final C-structure: \n %v \n", cellMeasurementObjectItemC)
 
 	return &cellMeasurementObjectItemC, nil
 }
 
 func decodeCellMeasurementObjectItem(cellMeasurementObjectItemC *C.Cell_Measurement_Object_Item_t) (*e2sm_kpm_v2.CellMeasurementObjectItem, error) {
 
+	//fmt.Printf("We're inside decodeCellMeasurementObjectItem(), starting decoding...")
+	//fmt.Printf("Decoding CellObjectID: \n %v \n", cellMeasurementObjectItemC.cell_object_ID)
 	cellObjectID, err := decodeCellObjectID(&cellMeasurementObjectItemC.cell_object_ID)
+	//fmt.Printf("That's what was decoded from C: \n %v \n", cellObjectID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellObjectId() %s", err.Error())
 	}
 
+	//fmt.Printf("Decoding CellGlobalID: \n %v \n", cellMeasurementObjectItemC.cell_global_ID)
 	cellGlobalID, err := decodeCellGlobalID(&cellMeasurementObjectItemC.cell_global_ID)
+	//fmt.Printf("That's what was decoded from C: \n %v \n", cellGlobalID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellGlobalId() %s", err.Error())
 	}
@@ -102,6 +114,7 @@ func decodeCellMeasurementObjectItem(cellMeasurementObjectItemC *C.Cell_Measurem
 		CellObjectId: cellObjectID,
 		CellGlobalId: cellGlobalID,
 	}
+	//fmt.Printf("This is final decoded structure: \n %v \n", cellMeasurementObjectItem)
 
 	return &cellMeasurementObjectItem, nil
 }

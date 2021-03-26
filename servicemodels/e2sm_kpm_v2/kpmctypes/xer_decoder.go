@@ -9,7 +9,7 @@ package kpmv2ctypes
 // #include <stdio.h>
 // #include <stdlib.h>
 // #include <assert.h>
-// #include "E2SM-KPM-IndicationMessage.h"
+// #include "E2SM-KPMv2-IndicationMessage.h"
 import "C"
 import (
 	"fmt"
