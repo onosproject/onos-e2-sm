@@ -73,14 +73,16 @@ func newMeasurementInfoItem(measurementInfoItem *e2sm_kpm_v2.MeasurementInfoItem
 		return nil, fmt.Errorf("newMeasurementType() %s", err.Error())
 	}
 
-	labelInfoListC, err := newLabelInfoList(measurementInfoItem.LabelInfoList)
-	if err != nil {
-		return nil, fmt.Errorf("newLabelInfoList() %s", err.Error())
+	measurementInfoItemC := C.MeasurementInfoItem_t{
+		measType: *measTypeC,
+		//labelInfoList: labelInfoListC,
 	}
 
-	measurementInfoItemC := C.MeasurementInfoItem_t{
-		measType:      *measTypeC,
-		labelInfoList: labelInfoListC,
+	if measurementInfoItem.LabelInfoList != nil {
+		measurementInfoItemC.labelInfoList, err = newLabelInfoList(measurementInfoItem.LabelInfoList)
+		if err != nil {
+			return nil, fmt.Errorf("newLabelInfoList() %s", err.Error())
+		}
 	}
 
 	return &measurementInfoItemC, nil
@@ -93,15 +95,16 @@ func decodeMeasurementInfoItem(measurementInfoItemC *C.MeasurementInfoItem_t) (*
 		return nil, fmt.Errorf("decodeMeasurementType() %s", err.Error())
 	}
 
-	labelInfoList, err := decodeLabelInfoList(measurementInfoItemC.labelInfoList)
-	if err != nil {
-		return nil, fmt.Errorf("decodeLabelInfoList() %s", err.Error())
+	measurementInfoItem := e2sm_kpm_v2.MeasurementInfoItem{
+		MeasType: measType,
+		//LabelInfoList: labelInfoList,
 	}
 
-	measurementInfoItem := e2sm_kpm_v2.MeasurementInfoItem{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
-		MeasType:      measType,
-		LabelInfoList: labelInfoList,
+	if measurementInfoItemC.labelInfoList != nil {
+		measurementInfoItem.LabelInfoList, err = decodeLabelInfoList(measurementInfoItemC.labelInfoList)
+		if err != nil {
+			return nil, fmt.Errorf("decodeLabelInfoList() %s", err.Error())
+		}
 	}
 
 	return &measurementInfoItem, nil

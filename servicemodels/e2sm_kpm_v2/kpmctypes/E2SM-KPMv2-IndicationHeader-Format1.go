@@ -74,34 +74,44 @@ func newE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1 *e2sm_kpm_
 		return nil, fmt.Errorf("newTimeStamp() %s", err.Error())
 	}
 
-	fileFormatversionC, err := newPrintableString(e2SmKpmIndicationHeaderFormat1.FileFormatversion)
-	if err != nil {
-		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
-	}
-	senderNameC, err := newPrintableString(e2SmKpmIndicationHeaderFormat1.SenderName)
-	if err != nil {
-		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
-	}
-	senderTypeC, err := newPrintableString(e2SmKpmIndicationHeaderFormat1.SenderType)
-	if err != nil {
-		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
-	}
-	vendorNameC, err := newPrintableString(e2SmKpmIndicationHeaderFormat1.VendorName)
-	if err != nil {
-		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
-	}
-	kpmNodeIDC, err := newGlobalKpmnodeID(e2SmKpmIndicationHeaderFormat1.KpmNodeId)
-	if err != nil {
-		return nil, fmt.Errorf("newGlobalKpmnodeID() %s", err.Error())
-	}
-
 	e2SmKpmIndicationHeaderFormat1C := C.E2SM_KPMv2_IndicationHeader_Format1_t{
 		colletStartTime:   *colletStartTimeC,
-		fileFormatversion: fileFormatversionC,
-		senderName:        senderNameC,
-		senderType:        senderTypeC,
-		vendorName:        vendorNameC,
-		kpmNodeID:         kpmNodeIDC,
+		//fileFormatversion: fileFormatversionC,
+		//senderName:        senderNameC,
+		//senderType:        senderTypeC,
+		//vendorName:        vendorNameC,
+		//kpmNodeID:         kpmNodeIDC,
+	}
+
+	if e2SmKpmIndicationHeaderFormat1.FileFormatversion != "" {
+		e2SmKpmIndicationHeaderFormat1C.fileFormatversion, err = newPrintableString(e2SmKpmIndicationHeaderFormat1.FileFormatversion)
+		if err != nil {
+			return nil, fmt.Errorf("newPrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1.SenderName != "" {
+		e2SmKpmIndicationHeaderFormat1C.senderName, err = newPrintableString(e2SmKpmIndicationHeaderFormat1.SenderName)
+		if err != nil {
+			return nil, fmt.Errorf("newPrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1.SenderType != "" {
+		e2SmKpmIndicationHeaderFormat1C.senderType, err = newPrintableString(e2SmKpmIndicationHeaderFormat1.SenderType)
+		if err != nil {
+			return nil, fmt.Errorf("newPrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1.VendorName != "" {
+		e2SmKpmIndicationHeaderFormat1C.vendorName, err = newPrintableString(e2SmKpmIndicationHeaderFormat1.VendorName)
+		if err != nil {
+			return nil, fmt.Errorf("newPrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1.KpmNodeId != nil {
+		e2SmKpmIndicationHeaderFormat1C.kpmNodeID, err = newGlobalKpmnodeID(e2SmKpmIndicationHeaderFormat1.KpmNodeId)
+		if err != nil {
+			return nil, fmt.Errorf("newGlobalKpmnodeID() %s", err.Error())
+		}
 	}
 
 	return &e2SmKpmIndicationHeaderFormat1C, nil
@@ -113,34 +123,45 @@ func decodeE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1C *C.E2S
 	if err != nil {
 		return nil, fmt.Errorf("decodeTimeStamp() %s", err.Error())
 	}
-	fileFormatversion, err := decodePrintableString(e2SmKpmIndicationHeaderFormat1C.fileFormatversion)
-	if err != nil {
-		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
-	}
-	senderName, err := decodePrintableString(e2SmKpmIndicationHeaderFormat1C.senderName)
-	if err != nil {
-		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
-	}
-	senderType, err := decodePrintableString(e2SmKpmIndicationHeaderFormat1C.senderType)
-	if err != nil {
-		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
-	}
-	vendorName, err := decodePrintableString(e2SmKpmIndicationHeaderFormat1C.vendorName)
-	if err != nil {
-		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
-	}
-	kpmNodeID, err := decodeGlobalKpmnodeID(e2SmKpmIndicationHeaderFormat1C.kpmNodeID)
-	if err != nil {
-		return nil, fmt.Errorf("decodeGlobalKpmnodeId() %s", err.Error())
-	}
 
 	e2SmKpmIndicationHeaderFormat1 := e2sm_kpm_v2.E2SmKpmIndicationHeaderFormat1{
 		ColletStartTime:   colletStartTime,
-		FileFormatversion: fileFormatversion,
-		SenderName:        senderName,
-		SenderType:        senderType,
-		VendorName:        vendorName,
-		KpmNodeId:         kpmNodeID,
+		//FileFormatversion: fileFormatversion,
+		//SenderName:        senderName,
+		//SenderType:        senderType,
+		//VendorName:        vendorName,
+		//KpmNodeId:         kpmNodeID,
+	}
+
+	if e2SmKpmIndicationHeaderFormat1C.fileFormatversion != nil {
+		e2SmKpmIndicationHeaderFormat1.FileFormatversion, err = decodePrintableString(e2SmKpmIndicationHeaderFormat1C.fileFormatversion)
+		if err != nil {
+			return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1C.senderName != nil {
+		e2SmKpmIndicationHeaderFormat1.SenderName, err = decodePrintableString(e2SmKpmIndicationHeaderFormat1C.senderName)
+		if err != nil {
+			return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1C.senderType != nil {
+		e2SmKpmIndicationHeaderFormat1.SenderType, err = decodePrintableString(e2SmKpmIndicationHeaderFormat1C.senderType)
+		if err != nil {
+			return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1C.vendorName != nil {
+		e2SmKpmIndicationHeaderFormat1.VendorName, err = decodePrintableString(e2SmKpmIndicationHeaderFormat1C.vendorName)
+		if err != nil {
+			return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationHeaderFormat1C.kpmNodeID != nil {
+		e2SmKpmIndicationHeaderFormat1.KpmNodeId, err = decodeGlobalKpmnodeID(e2SmKpmIndicationHeaderFormat1C.kpmNodeID)
+		if err != nil {
+			return nil, fmt.Errorf("decodeGlobalKpmnodeId() %s", err.Error())
+		}
 	}
 
 	return &e2SmKpmIndicationHeaderFormat1, nil

@@ -38,31 +38,31 @@ func createRicKpmnodeItem() (*e2sm_kpm_v2.RicKpmnodeItem, error) {
 				},
 			},
 		},
-		CellMeasurementObjectList: make([]*e2sm_kpm_v2.CellMeasurementObjectItem, 0),
+		CellMeasurementObjectList: nil,
 	}
 
-	item := &e2sm_kpm_v2.CellMeasurementObjectItem{
-		CellObjectId: &e2sm_kpm_v2.CellObjectId{
-			Value: "123",
-		},
-		CellGlobalId: &e2sm_kpm_v2.CellGlobalId{
-			CellGlobalId: &e2sm_kpm_v2.CellGlobalId_EUtraCgi{
-				EUtraCgi: &e2sm_kpm_v2.Eutracgi{
-					EUtracellIdentity: &e2sm_kpm_v2.EutracellIdentity{
-						Value: &e2sm_kpm_v2.BitString{
-							Value: 0x9bcd4,
-							Len:   28,
-						},
-					},
-					PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{
-						Value: []byte("ONF"),
-					},
-				},
-			},
-		},
-	}
-
-	res.CellMeasurementObjectList = append(res.CellMeasurementObjectList, item)
+	//item := &e2sm_kpm_v2.CellMeasurementObjectItem{
+	//	CellObjectId: &e2sm_kpm_v2.CellObjectId{
+	//		Value: "123",
+	//	},
+	//	CellGlobalId: &e2sm_kpm_v2.CellGlobalId{
+	//		CellGlobalId: &e2sm_kpm_v2.CellGlobalId_EUtraCgi{
+	//			EUtraCgi: &e2sm_kpm_v2.Eutracgi{
+	//				EUtracellIdentity: &e2sm_kpm_v2.EutracellIdentity{
+	//					Value: &e2sm_kpm_v2.BitString{
+	//						Value: 0x9bcd4,
+	//						Len:   28,
+	//					},
+	//				},
+	//				PLmnIdentity: &e2sm_kpm_v2.PlmnIdentity{
+	//					Value: []byte("ONF"),
+	//				},
+	//			},
+	//		},
+	//	},
+	//}
+	//
+	//res.CellMeasurementObjectList = append(res.CellMeasurementObjectList, item)
 
 	if err := res.Validate(); err != nil {
 		return nil, err
@@ -77,7 +77,8 @@ func Test_xerEncodeRicKpmnodeItem(t *testing.T) {
 
 	xer, err := xerEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 964, len(xer))
+	//assert.Equal(t, 964, len(xer))
+	assert.Equal(t, 455, len(xer)) // without CellMeasurementObjectList
 	t.Logf("RicKpmNodeItem XER\n%s", string(xer))
 }
 
@@ -88,7 +89,8 @@ func Test_xerDecodeRicKpmnnodeItem(t *testing.T) {
 
 	xer, err := xerEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 964, len(xer))
+	//assert.Equal(t, 964, len(xer))
+	assert.Equal(t, 455, len(xer)) //without CellMeasurementObjectList
 	t.Logf("RicKpmNodeItem XER\n%s", string(xer))
 
 	result, err := xerDecodeRicKpmnodeItem(xer)
@@ -104,7 +106,8 @@ func Test_perEncodeRicKpmnnodeItem(t *testing.T) {
 
 	per, err := perEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 29, len(per))
+	//assert.Equal(t, 29, len(per))
+	assert.Equal(t, 13, len(per)) //without CellMeasurementObjectList
 	t.Logf("RicKpmNodeItem PER\n%s", string(per))
 }
 
@@ -115,7 +118,8 @@ func Test_perDecodeRicKpmnNodeItem(t *testing.T) {
 
 	per, err := perEncodeRicKpmnodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 29, len(per))
+	//assert.Equal(t, 29, len(per))
+	assert.Equal(t, 13, len(per)) //without CellMeasurementObjectList
 	t.Logf("RicKpmNodeItem PER\n%s", string(per))
 
 	result, err := perDecodeRicKpmnodeItem(per)

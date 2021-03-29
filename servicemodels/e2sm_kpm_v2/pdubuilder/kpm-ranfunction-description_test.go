@@ -28,8 +28,14 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	globalKpmnodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmnodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
 	assert.NilError(t, err)
+	globalKpmnodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+		Value: gnbCuUpID,
+	}
+	globalKpmnodeID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 
 	cmol := make([]*e2sm_kpm_v2.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
@@ -53,7 +59,10 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	var measTypeName string = "OpenNetworking"
 	var measTypeID int32 = 24
-	measInfoActionItem := CreateMeasurementInfoActionItem(measTypeName, measTypeID)
+	measInfoActionItem := CreateMeasurementInfoActionItem(measTypeName)
+	measInfoActionItem.MeasId = &e2sm_kpm_v2.MeasurementTypeId{
+		Value: measTypeID,
+	}
 	measInfoActionList.Value = append(measInfoActionList.Value, measInfoActionItem)
 
 	var indMsgFormat int32 = 24
@@ -63,8 +72,11 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	rrsl := make([]*e2sm_kpm_v2.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rfi, rknl, retsl, rrsl)
+	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
 	assert.NilError(t, err)
+	if newE2SmKpmPdu != nil {
+		newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = rfi
+	}
 
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)

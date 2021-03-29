@@ -13,9 +13,9 @@ import (
 func createMeasurementInfoActionItem() *e2sm_kpm_v2.MeasurementInfoActionItem {
 
 	return &e2sm_kpm_v2.MeasurementInfoActionItem{
-		MeasId: &e2sm_kpm_v2.MeasurementTypeId{
-			Value: 21,
-		},
+		//MeasId: &e2sm_kpm_v2.MeasurementTypeId{
+		//	Value: 21,
+		//},
 		MeasName: &e2sm_kpm_v2.MeasurementTypeName{
 			Value: "onf",
 		},
@@ -28,7 +28,8 @@ func Test_xerEncodeMeasurementInfoActionItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoActionItem(miai)
 	assert.NilError(t, err)
-	assert.Equal(t, 114, len(xer))
+	//assert.Equal(t, 114, len(xer))
+	assert.Equal(t, 90, len(xer)) // without MeasID
 	t.Logf("MeasurementInfoActionItem XER\n%s", string(xer))
 }
 
@@ -38,7 +39,8 @@ func Test_xerDecodeMeasurementInfoActionItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoActionItem(miai)
 	assert.NilError(t, err)
-	assert.Equal(t, 114, len(xer))
+	//assert.Equal(t, 114, len(xer))
+	assert.Equal(t, 90, len(xer)) // without MeasID
 	t.Logf("MeasurementInfoActionItem XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementInfoActionItem(xer)
@@ -53,7 +55,8 @@ func Test_perEncodeMeasurementInfoActionItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoActionItem(miai)
 	assert.NilError(t, err)
-	assert.Equal(t, 8, len(per))
+	//assert.Equal(t, 8, len(per))
+	assert.Equal(t, 5, len(per)) // without MeasID
 	t.Logf("MeasurementInfoActionItem PER\n%s", string(per))
 }
 
@@ -63,7 +66,8 @@ func Test_perDecodeMeasurementInfoActionItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoActionItem(miai)
 	assert.NilError(t, err)
-	assert.Equal(t, 8, len(per))
+	//assert.Equal(t, 8, len(per))
+	assert.Equal(t, 5, len(per)) // without MeasID
 	t.Logf("MeasurementInfoActionItem PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementInfoActionItem(per)

@@ -28,7 +28,10 @@ func Test_xerEncodeGlobalngeNbID(t *testing.T) {
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID)
+	ngeNbID.GetNgENb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
@@ -54,7 +57,10 @@ func Test_xerDecodeGlobalngeNbID(t *testing.T) {
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID)
+	ngeNbID.GetNgENb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
 	xer, err := xerEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
@@ -85,7 +91,10 @@ func Test_perEncodeGlobalngeNbID(t *testing.T) {
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID)
+	ngeNbID.GetNgENb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())
@@ -111,7 +120,10 @@ func Test_perDecodeGlobalngeNbID(t *testing.T) {
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID, gnbDuID)
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID)
+	ngeNbID.GetNgENb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
 	per, err := perEncodeGlobalngeNbID(ngeNbID.GetNgENb().GetGlobalNgENbId())

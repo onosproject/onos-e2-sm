@@ -38,8 +38,9 @@ func createMeasurementDataItem() (*e2sm_kpm_v2.MeasurementDataItem, error) {
 	measRecord.Value = append(measRecord.Value, item3)
 
 	measDataItem := &e2sm_kpm_v2.MeasurementDataItem{
-		MeasRecord:     measRecord,
-		IncompleteFlag: e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE,
+		MeasRecord: measRecord,
+		//IncompleteFlag: e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE,
+		IncompleteFlag: -1,
 	}
 
 	if err := measDataItem.Validate(); err != nil {
@@ -55,7 +56,8 @@ func Test_xerEncodeMeasurementDataItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 262, len(xer))
+	//assert.Equal(t, 262, len(xer))
+	assert.Equal(t, 217, len(xer)) // without IncompleteFlag
 	t.Logf("MeasurementDataItem XER\n%s", string(xer))
 }
 
@@ -66,7 +68,8 @@ func Test_xerDecodeMeasurementDataItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 262, len(xer))
+	//assert.Equal(t, 262, len(xer))
+	assert.Equal(t, 217, len(xer)) // without IncompleteFlag
 	t.Logf("MeasurementDataItem XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementDataItem(xer)
@@ -84,7 +87,8 @@ func Test_perEncodeMeasurementDataItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 17, len(per))
+	//assert.Equal(t, 17, len(per))
+	assert.Equal(t, 17, len(per)) // without IncompleteFlag
 	t.Logf("MeasurementDataItem PER\n%s", string(per))
 }
 
@@ -95,7 +99,8 @@ func Test_perDecodeMeasurementDataItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
-	assert.Equal(t, 17, len(per))
+	//assert.Equal(t, 17, len(per))
+	assert.Equal(t, 17, len(per)) // without IncompleteFlag
 	t.Logf("MeasurementDataItem PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementDataItem(per)

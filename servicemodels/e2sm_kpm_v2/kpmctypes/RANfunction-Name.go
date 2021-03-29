@@ -83,14 +83,18 @@ func newRanfunctionName(ranfunctionName *e2sm_kpm_v2.RanfunctionName) (*C.RANfun
 		return nil, err
 	}
 
-	ranFunctionInstanceC := C.long(ranfunctionName.RanFunctionInstance)
-
 	ranfunctionNameC := C.RANfunction_Name_t{
 		ranFunction_ShortName:   *ranFunctionShortNameC,
 		ranFunction_E2SM_OID:    *ranFunctionE2SmOidC,
 		ranFunction_Description: *ranFunctionDescriptionC,
-		ranFunction_Instance:    &ranFunctionInstanceC,
+		//ranFunction_Instance:    &ranFunctionInstanceC,
 	}
+
+	if ranfunctionName.RanFunctionInstance != -1 {
+		rfi := C.long(ranfunctionName.RanFunctionInstance)
+		ranfunctionNameC.ranFunction_Instance = &rfi
+	}
+
 
 	return &ranfunctionNameC, nil
 }
@@ -112,12 +116,15 @@ func decodeRanfunctionName(ranfunctionNameC *C.RANfunction_Name_t) (*e2sm_kpm_v2
 		return nil, err
 	}
 
-	ranFunctionInstance := int32(*ranfunctionNameC.ranFunction_Instance)
 	ranfunctionName := e2sm_kpm_v2.RanfunctionName{
 		RanFunctionShortName:   ranFunctionShortName,
 		RanFunctionE2SmOid:     ranFunctionE2SmOid,
 		RanFunctionDescription: ranFunctionDescription,
-		RanFunctionInstance:    ranFunctionInstance,
+	}
+
+	// instance is optional
+	if ranfunctionNameC.ranFunction_Instance != nil {
+		ranfunctionName.RanFunctionInstance = int32(*ranfunctionNameC.ranFunction_Instance)
 	}
 
 	return &ranfunctionName, nil

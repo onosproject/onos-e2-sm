@@ -14,11 +14,12 @@ func Test_xerEncodeSnssai(t *testing.T) {
 
 	snssai := &e2sm_kpm_v2.Snssai{
 		SSt: []byte{0x01},
-		SD:  []byte{0x01, 0x02, 0x03},
+		//SD:  []byte{0x01, 0x02, 0x03},
 	}
 	xer, err := xerEncodeSnssai(snssai)
 	assert.NilError(t, err)
-	assert.Equal(t, 59, len(xer))
+	//assert.Equal(t, 59, len(xer))
+	assert.Equal(t, 37, len(xer)) // without SD
 	t.Logf("Snssai XER\n%s", string(xer))
 }
 
@@ -26,11 +27,12 @@ func Test_xerDecodeSnssai(t *testing.T) {
 
 	snssai := &e2sm_kpm_v2.Snssai{
 		SSt: []byte{0x01},
-		SD:  []byte{0x01, 0x02, 0x03},
+		//SD:  []byte{0x01, 0x02, 0x03},
 	}
 	xer, err := xerEncodeSnssai(snssai)
 	assert.NilError(t, err)
-	assert.Equal(t, 59, len(xer))
+	//assert.Equal(t, 59, len(xer))
+	assert.Equal(t, 37, len(xer)) // without SD
 	t.Logf("Snssai XER\n%s", string(xer))
 
 	result, err := xerDecodeSnssai(xer)
@@ -43,11 +45,12 @@ func Test_perEncodeSnssai(t *testing.T) {
 
 	snssai := &e2sm_kpm_v2.Snssai{
 		SSt: []byte{0x01},
-		SD:  []byte{0x01, 0x02, 0x03},
+		//SD:  []byte{0x01, 0x02, 0x03},
 	}
 	per, err := perEncodeSnssai(snssai)
 	assert.NilError(t, err)
-	assert.Equal(t, 5, len(per))
+	//assert.Equal(t, 5, len(per))
+	assert.Equal(t, 2, len(per)) // without SD
 	t.Logf("Snssai PER\n%s", string(per))
 }
 
@@ -55,11 +58,12 @@ func Test_perDecodeSnssai(t *testing.T) {
 
 	snssai := &e2sm_kpm_v2.Snssai{
 		SSt: []byte{0x01},
-		SD:  []byte{0x01, 0x02, 0x03},
+		//SD:  []byte{0x01, 0x02, 0x03},
 	}
 	per, err := perEncodeSnssai(snssai)
 	assert.NilError(t, err)
-	assert.Equal(t, 5, len(per))
+	//assert.Equal(t, 5, len(per))
+	assert.Equal(t, 2, len(per)) // without SD
 	t.Logf("Snssai PER\n%s", string(per))
 
 	result, err := perDecodeSnssai(per)

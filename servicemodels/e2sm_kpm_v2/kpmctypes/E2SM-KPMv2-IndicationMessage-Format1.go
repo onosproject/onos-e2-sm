@@ -74,21 +74,6 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1 *e2sm_kp
 		return nil, fmt.Errorf("newSubscriptionID() %s", err.Error())
 	}
 
-	cellObjIDC, err := newCellObjectID(e2SmKpmIndicationMessageFormat1.CellObjId)
-	if err != nil {
-		return nil, fmt.Errorf("newCellObjectId() %s", err.Error())
-	}
-
-	granulPeriodC, err := newGranularityPeriod(e2SmKpmIndicationMessageFormat1.GranulPeriod)
-	if err != nil {
-		return nil, fmt.Errorf("newGranularityPeriod() %s", err.Error())
-	}
-
-	measInfoListC, err := newMeasurementInfoList(e2SmKpmIndicationMessageFormat1.MeasInfoList)
-	if err != nil {
-		return nil, fmt.Errorf("newMeasurementInfoList() %s", err.Error())
-	}
-
 	measDataC, err := newMeasurementData(e2SmKpmIndicationMessageFormat1.MeasData)
 	if err != nil {
 		return nil, fmt.Errorf("newMeasurementData() %s", err.Error())
@@ -96,10 +81,31 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1 *e2sm_kp
 
 	e2SmKpmIndicationMessageFormat1C := C.E2SM_KPMv2_IndicationMessage_Format1_t{
 		subscriptID:  *subscriptIDC,
-		cellObjID:    cellObjIDC,
-		granulPeriod: granulPeriodC,
-		measInfoList: measInfoListC,
+		//cellObjID:    cellObjIDC,
+		//granulPeriod: granulPeriodC,
+		//measInfoList: measInfoListC,
 		measData:     *measDataC,
+	}
+
+	if e2SmKpmIndicationMessageFormat1.CellObjId != nil {
+		e2SmKpmIndicationMessageFormat1C.cellObjID, err = newCellObjectID(e2SmKpmIndicationMessageFormat1.CellObjId)
+		if err != nil {
+			return nil, fmt.Errorf("newCellObjectId() %s", err.Error())
+		}
+	}
+
+	if e2SmKpmIndicationMessageFormat1.GranulPeriod != nil {
+		e2SmKpmIndicationMessageFormat1C.granulPeriod, err = newGranularityPeriod(e2SmKpmIndicationMessageFormat1.GranulPeriod)
+		if err != nil{
+		return nil, fmt.Errorf("newGranularityPeriod() %s", err.Error())
+	}
+	}
+
+	if e2SmKpmIndicationMessageFormat1.MeasInfoList != nil {
+		e2SmKpmIndicationMessageFormat1C.measInfoList, err = newMeasurementInfoList(e2SmKpmIndicationMessageFormat1.MeasInfoList)
+		if err != nil {
+			return nil, fmt.Errorf("newMeasurementInfoList() %s", err.Error())
+		}
 	}
 
 	return &e2SmKpmIndicationMessageFormat1C, nil
@@ -112,21 +118,6 @@ func decodeE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1C *C.E
 		return nil, fmt.Errorf("decodeSubscriptionId() %s", err.Error())
 	}
 
-	cellObjID, err := decodeCellObjectID(e2SmKpmIndicationMessageFormat1C.cellObjID)
-	if err != nil {
-		return nil, fmt.Errorf("decodeCellObjectId() %s", err.Error())
-	}
-
-	granulPeriod, err := decodeGranularityPeriod(e2SmKpmIndicationMessageFormat1C.granulPeriod)
-	if err != nil {
-		return nil, fmt.Errorf("decodeGranularityPeriod() %s", err.Error())
-	}
-
-	measInfoList, err := decodeMeasurementInfoList(e2SmKpmIndicationMessageFormat1C.measInfoList)
-	if err != nil {
-		return nil, fmt.Errorf("decodeMeasurementInfoList() %s", err.Error())
-	}
-
 	measData, err := decodeMeasurementData(&e2SmKpmIndicationMessageFormat1C.measData)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMeasurementData() %s", err.Error())
@@ -134,12 +125,30 @@ func decodeE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1C *C.E
 
 	e2SmKpmIndicationMessageFormat1 := e2sm_kpm_v2.E2SmKpmIndicationMessageFormat1{
 		SubscriptId:  subscriptID,
-		CellObjId:    cellObjID,
-		GranulPeriod: granulPeriod,
-		MeasInfoList: measInfoList,
+		//CellObjId:    cellObjID,
+		//GranulPeriod: granulPeriod,
+		//MeasInfoList: measInfoList,
 		MeasData:     measData,
 	}
 
+	if e2SmKpmIndicationMessageFormat1C.cellObjID != nil {
+		e2SmKpmIndicationMessageFormat1.CellObjId, err = decodeCellObjectID(e2SmKpmIndicationMessageFormat1C.cellObjID)
+		if err != nil {
+			return nil, fmt.Errorf("decodeCellObjectId() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationMessageFormat1C.granulPeriod != nil {
+		e2SmKpmIndicationMessageFormat1.GranulPeriod, err = decodeGranularityPeriod(e2SmKpmIndicationMessageFormat1C.granulPeriod)
+		if err != nil {
+			return nil, fmt.Errorf("decodeGranularityPeriod() %s", err.Error())
+		}
+	}
+	if e2SmKpmIndicationMessageFormat1C.measInfoList != nil {
+		e2SmKpmIndicationMessageFormat1.MeasInfoList, err = decodeMeasurementInfoList(e2SmKpmIndicationMessageFormat1C.measInfoList)
+		if err != nil {
+			return nil, fmt.Errorf("decodeMeasurementInfoList() %s", err.Error())
+		}
+	}
 	return &e2SmKpmIndicationMessageFormat1, nil
 }
 

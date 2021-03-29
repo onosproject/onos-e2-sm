@@ -12,7 +12,7 @@ SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 syntax = "proto3";
 
 package e2sm_kpm_v2.v2;
-option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2;e2sm-kpm-v2";
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2;e2sm_kpm_v2";
 
 import "validate/v1/validate.proto";
 
@@ -580,15 +580,15 @@ message E2SmKpmIndicationMessageFormat2 {
 // sequence from e2sm_kpm_v2.0.2-rm.asn:441
 message E2SmKpmRanfunctionDescription {
     RanfunctionName ran_function_name = 1 [json_name = "E2SM-KPM-RANfunction-Description:ranFunction_Name"];
-    repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name = "E2SM-KPM-RANfunction-Description:ric_KPM_Node_List"];
-    repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "E2SM-KPM-RANfunction-Description:ric_EventTriggerStyle_List"];
-    repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "E2SM-KPM-RANfunction-Description:ric_ReportStyle_List"];
+    repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {max_items: 1024}, json_name = "E2SM-KPM-RANfunction-Description:ric_KPM_Node_List"];
+    repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {max_items: 63}, json_name = "E2SM-KPM-RANfunction-Description:ric_EventTriggerStyle_List"];
+    repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {max_items: 63}, json_name = "E2SM-KPM-RANfunction-Description:ric_ReportStyle_List"];
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:449
 message RicKpmnodeItem {
     GlobalKpmnodeId ric_kpmnode_type = 1 [json_name = "RIC-KPMNode-Item:ric_KPMNode_Type"];
-    repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name = "RIC-KPMNode-Item:cell_Measurement_Object_List"];
+    repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {max_items: 16384}, json_name = "RIC-KPMNode-Item:cell_Measurement_Object_List"];
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:455
