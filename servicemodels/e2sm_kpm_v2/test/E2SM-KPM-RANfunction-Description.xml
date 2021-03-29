@@ -1,36 +1,33 @@
 <E2SM-KPMv2-RANfunction-Description>
     <ranFunction-Name>
-        <ranFunction-ShortName>onf</ranFunction-ShortName>
-        <ranFunction-E2SM-OID>oid123</ranFunction-E2SM-OID>
-        <ranFunction-Description>someDescription</ranFunction-Description>
-        <ranFunction-Instance>21</ranFunction-Instance>
+        <ranFunction-ShortName>ORAN-E2SM-KPM</ranFunction-ShortName>
+        <ranFunction-E2SM-OID>1.3.6.1.4.1.53148.1.2.2.2</ranFunction-E2SM-OID>
+        <ranFunction-Description>KPM monitor</ranFunction-Description>
     </ranFunction-Name>
     <ric-KPM-Node-List>
         <RIC-KPMNode-Item>
             <ric-KPMNode-Type>
-                <gNB>
-                    <global-gNB-ID>
-                        <plmn-id>21 22 23</plmn-id>
-                        <gnb-id>
-                            <gnb-ID>
-                                1101010010111100000010
-                            </gnb-ID>
-                        </gnb-id>
-                    </global-gNB-ID>
-                    <gNB-CU-UP-ID>12345</gNB-CU-UP-ID>
-                    <gNB-DU-ID>6789</gNB-DU-ID>
-                </gNB>
+                <eNB>
+                    <global-eNB-ID>
+                        <pLMN-Identity>02 F8 29</pLMN-Identity>
+                        <eNB-ID>
+                            <macro-eNB-ID>
+                                00000000111000000000
+                            </macro-eNB-ID>
+                        </eNB-ID>
+                    </global-eNB-ID>
+                </eNB>
             </ric-KPMNode-Type>
             <cell-Measurement-Object-List>
                 <Cell-Measurement-Object-Item>
-                    <cell-object-ID>ONF</cell-object-ID>
+                    <cell-object-ID>EUtranCellFDD</cell-object-ID>
                     <cell-global-ID>
-                        <nr-CGI>
-                            <pLMN-Identity>21 22 23</pLMN-Identity>
-                            <nRCellIdentity>
-                                000000000000000000000000001000000000
-                            </nRCellIdentity>
-                        </nr-CGI>
+                        <eUTRA-CGI>
+                            <pLMN-Identity>02 F8 29</pLMN-Identity>
+                            <eUTRACellIdentity>
+                                00000000111000000000
+                            </eUTRACellIdentity>
+                        </eUTRA-CGI>
                     </cell-global-ID>
                 </Cell-Measurement-Object-Item>
             </cell-Measurement-Object-List>
@@ -38,23 +35,39 @@
     </ric-KPM-Node-List>
     <ric-EventTriggerStyle-List>
         <RIC-EventTriggerStyle-Item>
-            <ric-EventTriggerStyle-Type>11</ric-EventTriggerStyle-Type>
-            <ric-EventTriggerStyle-Name>onf</ric-EventTriggerStyle-Name>
-            <ric-EventTriggerFormat-Type>15</ric-EventTriggerFormat-Type>
+            <ric-EventTriggerStyle-Type>1</ric-EventTriggerStyle-Type>
+            <ric-EventTriggerStyle-Name>Trigger1</ric-EventTriggerStyle-Name>
+            <ric-EventTriggerFormat-Type>1</ric-EventTriggerFormat-Type>
         </RIC-EventTriggerStyle-Item>
     </ric-EventTriggerStyle-List>
     <ric-ReportStyle-List>
         <RIC-ReportStyle-Item>
-            <ric-ReportStyle-Type>11</ric-ReportStyle-Type>
-            <ric-ReportStyle-Name>onf</ric-ReportStyle-Name>
-            <ric-ActionFormat-Type>15</ric-ActionFormat-Type>
+            <ric-ReportStyle-Type>6</ric-ReportStyle-Type>
+            <ric-ReportStyle-Name>O-CU-UP Measurement Container for the EPC connected deployment</ric-ReportStyle-Name>
+            <ric-ActionFormat-Type>6</ric-ActionFormat-Type>
             <measInfo-Action-List>
                 <MeasurementInfo-Action-Item>
-                    <measName>OpenNetworking</measName>
-                    <measID>24</measID>
+                    <measName>RRC.ConnEstabAtt.sum</measName>
+                    <measID>1</measID>
+                </MeasurementInfo-Action-Item>
+                <MeasurementInfo-Action-Item>
+                    <measName>RRC.ConnEstabSucc.sum</measName>
+                    <measID>2</measID>
+                </MeasurementInfo-Action-Item>
+                <MeasurementInfo-Action-Item>
+                    <measName>RRC.ConnReEstabAtt.sum</measName>
+                    <measID>3</measID>
+                </MeasurementInfo-Action-Item>
+                <MeasurementInfo-Action-Item>
+                    <measName>RRC.ConnMean</measName>
+                    <measID>4</measID>
+                </MeasurementInfo-Action-Item>
+                <MeasurementInfo-Action-Item>
+                    <measName>RRC.ConnMax</measName>
+                    <measID>5</measID>
                 </MeasurementInfo-Action-Item>
             </measInfo-Action-List>
-            <ric-IndicationHeaderFormat-Type>2</ric-IndicationHeaderFormat-Type>
+            <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
             <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
         </RIC-ReportStyle-Item>
     </ric-ReportStyle-List>

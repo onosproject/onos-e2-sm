@@ -33,10 +33,35 @@ func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
 	var measurementName string = "trial"
 
-	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd, fiveQI, qfi,
-		qci, qciMax, qciMin, arpMax, arpMin, bitrateRange, layerMuMimo,
-		distX, distY, distZ, startEndIndication)
+	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd)
 	assert.NilError(t, err)
+	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
+		Value: fiveQI,
+	}
+	labelInfoItem.MeasLabel.QFi = &e2sm_kpm_v2.Qfi{
+		Value: qfi,
+	}
+	labelInfoItem.MeasLabel.QCi = &e2sm_kpm_v2.Qci{
+		Value: qci,
+	}
+	labelInfoItem.MeasLabel.QCimin = &e2sm_kpm_v2.Qci{
+		Value: qciMin,
+	}
+	labelInfoItem.MeasLabel.QCimax = &e2sm_kpm_v2.Qci{
+		Value: qciMax,
+	}
+	labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2.Arp{
+		Value: arpMin,
+	}
+	labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2.Arp{
+		Value: arpMax,
+	}
+	labelInfoItem.MeasLabel.BitrateRange = bitrateRange
+	labelInfoItem.MeasLabel.LayerMuMimo = layerMuMimo
+	labelInfoItem.MeasLabel.DistBinX = distX
+	labelInfoItem.MeasLabel.DistBinY = distY
+	labelInfoItem.MeasLabel.DistBinZ = distZ
+	labelInfoItem.MeasLabel.StartEndInd = startEndIndication
 
 	labelInfoList := e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),
@@ -84,10 +109,35 @@ func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
 	var measurementName string = "trial"
 
-	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd, fiveQI, qfi,
-		qci, qciMax, qciMin, arpMax, arpMin, bitrateRange, layerMuMimo,
-		distX, distY, distZ, startEndIndication)
+	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd)
 	assert.NilError(t, err)
+	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
+		Value: fiveQI,
+	}
+	labelInfoItem.MeasLabel.QFi = &e2sm_kpm_v2.Qfi{
+		Value: qfi,
+	}
+	labelInfoItem.MeasLabel.QCi = &e2sm_kpm_v2.Qci{
+		Value: qci,
+	}
+	labelInfoItem.MeasLabel.QCimin = &e2sm_kpm_v2.Qci{
+		Value: qciMin,
+	}
+	labelInfoItem.MeasLabel.QCimax = &e2sm_kpm_v2.Qci{
+		Value: qciMax,
+	}
+	labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2.Arp{
+		Value: arpMin,
+	}
+	labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2.Arp{
+		Value: arpMax,
+	}
+	labelInfoItem.MeasLabel.BitrateRange = bitrateRange
+	labelInfoItem.MeasLabel.LayerMuMimo = layerMuMimo
+	labelInfoItem.MeasLabel.DistBinX = distX
+	labelInfoItem.MeasLabel.DistBinY = distY
+	labelInfoItem.MeasLabel.DistBinZ = distZ
+	labelInfoItem.MeasLabel.StartEndInd = startEndIndication
 
 	labelInfoList := e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),

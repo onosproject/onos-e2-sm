@@ -24,7 +24,13 @@ func TestE2SmKpmIndicationHeader(t *testing.T) {
 	var senderType string = "someType"
 	var vendorName string = "onf"
 
-	globalKpmNodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmNodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
+	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+		Value: gnbCuUpID,
+	}
+	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
 	newE2SmKpmPdu, err := CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, globalKpmNodeID)

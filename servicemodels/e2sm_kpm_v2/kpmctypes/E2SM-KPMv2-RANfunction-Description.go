@@ -75,44 +75,53 @@ func newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_v2
 		return nil, fmt.Errorf("newRanfunctionName() %s", err.Error())
 	}
 
-	ricKpmNodeListC := new(C.struct_E2SM_KPMv2_RANfunction_Description__ric_KPM_Node_List)
-	for _, ricKpmNodeListItem := range e2SmKpmRanfunctionDescription.GetRicKpmNodeList() {
-		ricKpmNodeListItemC, err := newRicKpmnodeItem(ricKpmNodeListItem)
-		if err != nil {
-			return nil, fmt.Errorf("newRicKpmnodeItem() %s", err.Error())
-		}
-		if _, err = C.asn_sequence_add(unsafe.Pointer(ricKpmNodeListC), unsafe.Pointer(ricKpmNodeListItemC)); err != nil {
-			return nil, err
-		}
-	}
-
-	ricEventTriggerStyleListC := new(C.struct_E2SM_KPMv2_RANfunction_Description__ric_EventTriggerStyle_List)
-	for _, ricEventTriggerStyleListItem := range e2SmKpmRanfunctionDescription.GetRicEventTriggerStyleList() {
-		ricEventTriggerStyleListItemC, err := newRicEventTriggerStyleItem(ricEventTriggerStyleListItem)
-		if err != nil {
-			return nil, fmt.Errorf("newRicEventTriggerStyleItem() %s", err.Error())
-		}
-		if _, err = C.asn_sequence_add(unsafe.Pointer(ricEventTriggerStyleListC), unsafe.Pointer(ricEventTriggerStyleListItemC)); err != nil {
-			return nil, err
-		}
-	}
-
-	ricReportStyleListC := new(C.struct_E2SM_KPMv2_RANfunction_Description__ric_ReportStyle_List)
-	for _, ricReportStyleListItem := range e2SmKpmRanfunctionDescription.GetRicReportStyleList() {
-		ricReportStyleListItemC, err := newRicReportStyleItem(ricReportStyleListItem)
-		if err != nil {
-			return nil, fmt.Errorf("newRicReportStyleItem() %s", err.Error())
-		}
-		if _, err = C.asn_sequence_add(unsafe.Pointer(ricReportStyleListC), unsafe.Pointer(ricReportStyleListItemC)); err != nil {
-			return nil, err
-		}
-	}
-
 	e2SmKpmRanfunctionDescriptionC := C.E2SM_KPMv2_RANfunction_Description_t{
 		ranFunction_Name:           *ranFunctionNameC,
-		ric_KPM_Node_List:          ricKpmNodeListC,
-		ric_EventTriggerStyle_List: ricEventTriggerStyleListC,
-		ric_ReportStyle_List:       ricReportStyleListC,
+		//ric_KPM_Node_List:          ricKpmNodeListC,
+		//ric_EventTriggerStyle_List: ricEventTriggerStyleListC,
+		//ric_ReportStyle_List:       ricReportStyleListC,
+	}
+
+	if e2SmKpmRanfunctionDescription.RicKpmNodeList != nil {
+		ricKpmNodeListC := new(C.struct_E2SM_KPMv2_RANfunction_Description__ric_KPM_Node_List)
+		for _, ricKpmNodeListItem := range e2SmKpmRanfunctionDescription.GetRicKpmNodeList() {
+			ricKpmNodeListItemC, err := newRicKpmnodeItem(ricKpmNodeListItem)
+			if err != nil {
+				return nil, fmt.Errorf("newRicKpmnodeItem() %s", err.Error())
+			}
+			if _, err = C.asn_sequence_add(unsafe.Pointer(ricKpmNodeListC), unsafe.Pointer(ricKpmNodeListItemC)); err != nil {
+				return nil, err
+			}
+		}
+		e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List = ricKpmNodeListC
+	}
+
+	if e2SmKpmRanfunctionDescription.RicEventTriggerStyleList != nil {
+		ricEventTriggerStyleListC := new(C.struct_E2SM_KPMv2_RANfunction_Description__ric_EventTriggerStyle_List)
+		for _, ricEventTriggerStyleListItem := range e2SmKpmRanfunctionDescription.GetRicEventTriggerStyleList() {
+			ricEventTriggerStyleListItemC, err := newRicEventTriggerStyleItem(ricEventTriggerStyleListItem)
+			if err != nil {
+				return nil, fmt.Errorf("newRicEventTriggerStyleItem() %s", err.Error())
+			}
+			if _, err = C.asn_sequence_add(unsafe.Pointer(ricEventTriggerStyleListC), unsafe.Pointer(ricEventTriggerStyleListItemC)); err != nil {
+				return nil, err
+			}
+		}
+		e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List = ricEventTriggerStyleListC
+	}
+
+	if e2SmKpmRanfunctionDescription.RicReportStyleList != nil {
+		ricReportStyleListC := new(C.struct_E2SM_KPMv2_RANfunction_Description__ric_ReportStyle_List)
+		for _, ricReportStyleListItem := range e2SmKpmRanfunctionDescription.GetRicReportStyleList() {
+			ricReportStyleListItemC, err := newRicReportStyleItem(ricReportStyleListItem)
+			if err != nil {
+				return nil, fmt.Errorf("newRicReportStyleItem() %s", err.Error())
+			}
+			if _, err = C.asn_sequence_add(unsafe.Pointer(ricReportStyleListC), unsafe.Pointer(ricReportStyleListItemC)); err != nil {
+				return nil, err
+			}
+		}
+		e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List = ricReportStyleListC
 	}
 
 	return &e2SmKpmRanfunctionDescriptionC, nil
@@ -130,41 +139,48 @@ func decodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescriptionC *C.E2SM_
 		RicKpmNodeList:           make([]*e2sm_kpm_v2.RicKpmnodeItem, 0),
 		RicEventTriggerStyleList: make([]*e2sm_kpm_v2.RicEventTriggerStyleItem, 0),
 		RicReportStyleList:       make([]*e2sm_kpm_v2.RicReportStyleItem, 0),
-
 	}
 
-	var ieCount int
-	ieCount = int(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.count)
-	for i := 0; i < ieCount; i++ {
-		offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.array)) * uintptr(i)
-		ieC := *(**C.RIC_KPMNode_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.array)) + offset))
-		ie, err := decodeRicKpmnodeItem(ieC)
-		if err != nil {
-			return nil, fmt.Errorf("decodeRicKpmnodeItem() %s", err.Error())
+	// instance is optional
+	if e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List != nil {
+		ieCount := int(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.count)
+		for i := 0; i < ieCount; i++ {
+			offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.array)) * uintptr(i)
+			ieC := *(**C.RIC_KPMNode_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.array)) + offset))
+			ie, err := decodeRicKpmnodeItem(ieC)
+			if err != nil {
+				return nil, fmt.Errorf("decodeRicKpmnodeItem() %s", err.Error())
+			}
+			e2SmKpmRanfunctionDescription.RicKpmNodeList = append(e2SmKpmRanfunctionDescription.RicKpmNodeList, ie)
 		}
-		e2SmKpmRanfunctionDescription.RicKpmNodeList = append(e2SmKpmRanfunctionDescription.RicKpmNodeList, ie)
 	}
 
-	ieCount = int(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.count)
-	for i := 0; i < ieCount; i++ {
-		offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) * uintptr(i)
-		ieC := *(**C.RIC_EventTriggerStyle_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) + offset))
-		ie, err := decodeRicEventTriggerStyleItem(ieC)
-		if err != nil {
-			return nil, fmt.Errorf("decodeRicEventTriggerStyleItem() %s", err.Error())
+	//instance is optional
+	if e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List != nil {
+		ieCount := int(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.count)
+		for i := 0; i < ieCount; i++ {
+			offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) * uintptr(i)
+			ieC := *(**C.RIC_EventTriggerStyle_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) + offset))
+			ie, err := decodeRicEventTriggerStyleItem(ieC)
+			if err != nil {
+				return nil, fmt.Errorf("decodeRicEventTriggerStyleItem() %s", err.Error())
+			}
+			e2SmKpmRanfunctionDescription.RicEventTriggerStyleList = append(e2SmKpmRanfunctionDescription.RicEventTriggerStyleList, ie)
 		}
-		e2SmKpmRanfunctionDescription.RicEventTriggerStyleList = append(e2SmKpmRanfunctionDescription.RicEventTriggerStyleList, ie)
 	}
 
-	ieCount = int(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.count)
-	for i := 0; i < ieCount; i++ {
-		offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) * uintptr(i)
-		ieC := *(**C.RIC_ReportStyle_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) + offset))
-		ie, err := decodeRicReportStyleItem(ieC)
-		if err != nil {
-			return nil, fmt.Errorf("decodeRicReportStyleItem() %s", err.Error())
+	//instance is optional
+	if e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List != nil {
+		ieCount := int(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.count)
+		for i := 0; i < ieCount; i++ {
+			offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) * uintptr(i)
+			ieC := *(**C.RIC_ReportStyle_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) + offset))
+			ie, err := decodeRicReportStyleItem(ieC)
+			if err != nil {
+				return nil, fmt.Errorf("decodeRicReportStyleItem() %s", err.Error())
+			}
+			e2SmKpmRanfunctionDescription.RicReportStyleList = append(e2SmKpmRanfunctionDescription.RicReportStyleList, ie)
 		}
-		e2SmKpmRanfunctionDescription.RicReportStyleList = append(e2SmKpmRanfunctionDescription.RicReportStyleList, ie)
 	}
 
 	return &e2SmKpmRanfunctionDescription, nil

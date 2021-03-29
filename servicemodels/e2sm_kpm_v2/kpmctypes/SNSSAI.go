@@ -72,13 +72,17 @@ func newSnssai(snssai *e2sm_kpm_v2.Snssai) (*C.SNSSAI_t, error) {
 	if err != nil {
 		return nil, err
 	}
-	sDC, err := newOctetString(string(snssai.SD))
-	if err != nil {
-		return nil, err
-	}
+
 	snssaiC := C.SNSSAI_t{
 		sST: *sStC,
-		sD:  sDC,
+		//sD:  sDC,
+	}
+
+	if snssai.SD != nil {
+		snssaiC.sD, err = newOctetString(string(snssai.SD))
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &snssaiC, nil
@@ -90,14 +94,18 @@ func decodeSnssai(snssaiC *C.SNSSAI_t) (*e2sm_kpm_v2.Snssai, error) {
 	if err != nil {
 		return nil, err
 	}
-	sD, err := decodeOctetString(snssaiC.sD)
-	if err != nil {
-		return nil, err
-	}
 
 	snssai := e2sm_kpm_v2.Snssai{
 		SSt: []byte(sSt),
-		SD:  []byte(sD),
+		//SD:  []byte(sD),
+	}
+
+	if snssaiC.sD != nil {
+		sd, err := decodeOctetString(snssaiC.sD)
+		if err != nil {
+			return nil, err
+		}
+		snssai.SD = []byte(sd)
 	}
 
 	return &snssai, nil

@@ -66,7 +66,7 @@ func createMeasurementInfoItem() (*e2sm_kpm_v2.MeasurementInfoItem, error) {
 				},
 			},
 		},
-		LabelInfoList: labelInfoList,
+		//LabelInfoList: labelInfoList,
 	}
 	if err := res.Validate(); err != nil {
 		return nil, err
@@ -82,7 +82,8 @@ func Test_xerEncodeMeasurementInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 1014, len(xer))
+	//assert.Equal(t, 1014, len(xer))
+	assert.Equal(t, 104, len(xer)) // without LabelInfoList
 	t.Logf("MeasurementInfoItem XER\n%s", string(xer))
 }
 
@@ -93,7 +94,8 @@ func Test_xerDecodeMeasurementInfoItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 1014, len(xer))
+	//assert.Equal(t, 1014, len(xer))
+	assert.Equal(t, 104, len(xer)) // without LabelInfoList
 	t.Logf("MeasurementInfoItem XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementInfoItem(xer)
@@ -109,7 +111,8 @@ func Test_perEncodeMeasurementInfoItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 40, len(per))
+	//assert.Equal(t, 40, len(per))
+	assert.Equal(t, 3, len(per)) // without LabelInfoList
 	t.Logf("MeasurementInfoItem PER\n%s", string(per))
 }
 
@@ -120,7 +123,8 @@ func Test_perDecodeMeasurementInfoItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementInfoItem(mii)
 	assert.NilError(t, err)
-	assert.Equal(t, 40, len(per))
+	//assert.Equal(t, 40, len(per))
+	assert.Equal(t, 3, len(per)) // without LabelInfoList
 	t.Logf("MeasurementInfoItem PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementInfoItem(per)

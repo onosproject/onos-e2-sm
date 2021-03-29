@@ -73,14 +73,16 @@ func newMeasurementInfoActionItem(measurementInfoActionItem *e2sm_kpm_v2.Measure
 		return nil, fmt.Errorf("newMeasurementTypeName() %s", err.Error())
 	}
 
-	measIDC, err := newMeasurementTypeID(measurementInfoActionItem.MeasId)
-	if err != nil {
-		return nil, fmt.Errorf("newMeasurementTypeId() %s", err.Error())
-	}
-
 	measurementInfoActionItemC := C.MeasurementInfo_Action_Item_t{
 		measName: *measNameC,
-		measID:   measIDC,
+		//measID:   measIDC,
+	}
+
+	if measurementInfoActionItem.MeasId != nil {
+		measurementInfoActionItemC.measID, err = newMeasurementTypeID(measurementInfoActionItem.MeasId)
+		if err != nil {
+			return nil, fmt.Errorf("newMeasurementTypeId() %s", err.Error())
+		}
 	}
 
 	return &measurementInfoActionItemC, nil
@@ -93,14 +95,16 @@ func decodeMeasurementInfoActionItem(measurementInfoActionItemC *C.MeasurementIn
 		return nil, fmt.Errorf("decodeMeasurementTypeName() %s", err.Error())
 	}
 
-	measID, err := decodeMeasurementTypeID(measurementInfoActionItemC.measID)
-	if err != nil {
-		return nil, fmt.Errorf("decodeMeasurementTypeId() %s", err.Error())
-	}
-
 	measurementInfoActionItem := e2sm_kpm_v2.MeasurementInfoActionItem{
 		MeasName: measName,
-		MeasId:   measID,
+		//MeasId:   measID,
+	}
+
+	if measurementInfoActionItemC.measID != nil {
+		measurementInfoActionItem.MeasId, err = decodeMeasurementTypeID(measurementInfoActionItemC.measID)
+		if err != nil {
+			return nil, fmt.Errorf("decodeMeasurementTypeId() %s", err.Error())
+		}
 	}
 
 	return &measurementInfoActionItem, nil

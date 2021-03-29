@@ -73,17 +73,20 @@ func newMeasurementDataItem(measurementDataItem *e2sm_kpm_v2.MeasurementDataItem
 		return nil, fmt.Errorf("newMeasurementRecord() %s", err.Error())
 	}
 
-	var incompleteFlagC C.MeasurementDataItem__incompleteFlag_t
-	switch measurementDataItem.IncompleteFlag {
-	case e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE:
-		incompleteFlagC = C.MeasurementDataItem__incompleteFlag_true
-	default:
-		return nil, fmt.Errorf("unexpected MeasurementDataItem IncompleteFlag %v", measurementDataItem.IncompleteFlag)
+	measurementDataItemC := C.MeasurementDataItem_t{
+		measRecord: *measRecordC,
+		//incompleteFlag: &incompleteFlagC,
 	}
 
-	measurementDataItemC := C.MeasurementDataItem_t{
-		measRecord:     *measRecordC,
-		incompleteFlag: &incompleteFlagC,
+	if measurementDataItem.IncompleteFlag != -1 {
+		var incompleteFlagC C.MeasurementDataItem__incompleteFlag_t
+		switch measurementDataItem.IncompleteFlag {
+		case e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE:
+			incompleteFlagC = C.MeasurementDataItem__incompleteFlag_true
+		default:
+			return nil, fmt.Errorf("unexpected MeasurementDataItem IncompleteFlag %v", measurementDataItem.IncompleteFlag)
+		}
+		measurementDataItemC.incompleteFlag = &incompleteFlagC
 	}
 
 	return &measurementDataItemC, nil

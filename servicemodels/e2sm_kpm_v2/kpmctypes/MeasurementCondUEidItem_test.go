@@ -106,9 +106,9 @@ func createMeasurementCondUEIDItem() (*e2sm_kpm_v2.MeasurementCondUeidItem, erro
 	}
 
 	res := &e2sm_kpm_v2.MeasurementCondUeidItem{
-		MatchingCond:     mcl,
-		MeasType:         measType,
-		MatchingUeidList: muel,
+		MatchingCond: mcl,
+		MeasType:     measType,
+		//MatchingUeidList: muel,
 	}
 	if err := res.Validate(); err != nil {
 		return nil, err
@@ -123,7 +123,8 @@ func Test_xerEncodeMeasurementCondUEIDItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementCondUeIDItem(mcueIDi)
 	assert.NilError(t, err)
-	assert.Equal(t, 1441, len(xer))
+	//assert.Equal(t, 1441, len(xer))
+	assert.Equal(t, 1296, len(xer)) // without MatchingUeidList
 	t.Logf("MeasurementCondUEidItem XER\n%s", string(xer))
 }
 
@@ -134,7 +135,8 @@ func Test_xerDecodeMeasurementCondUEIDItem(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementCondUeIDItem(mcueIDi)
 	assert.NilError(t, err)
-	assert.Equal(t, 1441, len(xer))
+	//assert.Equal(t, 1441, len(xer))
+	assert.Equal(t, 1296, len(xer)) // without MatchingUeidList
 	t.Logf("MeasurementCondUEidItem XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementCondUeIDItem(xer)
@@ -150,7 +152,8 @@ func Test_perEncodeMeasurementCondUEIDItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementCondUeIDItem(mcueIDi)
 	assert.NilError(t, err)
-	assert.Equal(t, 57, len(per))
+	//assert.Equal(t, 57, len(per))
+	assert.Equal(t, 47, len(per)) // without MatchingUeidList
 	t.Logf("MeasurementCondUEidItem PER\n%s", string(per))
 }
 
@@ -161,7 +164,8 @@ func Test_perDecodeMeasurementCondUEIDItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementCondUeIDItem(mcueIDi)
 	assert.NilError(t, err)
-	assert.Equal(t, 57, len(per))
+	//assert.Equal(t, 57, len(per))
+	assert.Equal(t, 47, len(per)) // without MatchingUeidList
 	t.Logf("MeasurementCondUEidItem PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementCondUeIDItem(per)

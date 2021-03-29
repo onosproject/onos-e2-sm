@@ -36,9 +36,36 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2.E2SmKpmIndicationMessageForm
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
 	var measurementName string = "trial"
 
-	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd, fiveQI, qfi,
-		qci, qciMax, qciMin, arpMax, arpMin, bitrateRange, layerMuMimo,
-		distX, distY, distZ, startEndIndication)
+	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd)
+	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
+		Value: fiveQI,
+	}
+	labelInfoItem.MeasLabel.QFi = &e2sm_kpm_v2.Qfi{
+		Value: qfi,
+	}
+	labelInfoItem.MeasLabel.QCi = &e2sm_kpm_v2.Qci{
+		Value: qci,
+	}
+	labelInfoItem.MeasLabel.QCimin = &e2sm_kpm_v2.Qci{
+		Value: qciMin,
+	}
+	labelInfoItem.MeasLabel.QCimax = &e2sm_kpm_v2.Qci{
+		Value: qciMax,
+	}
+	labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2.Arp{
+		Value: arpMin,
+	}
+	labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2.Arp{
+		Value: arpMax,
+	}
+	labelInfoItem.MeasLabel.BitrateRange = bitrateRange
+	labelInfoItem.MeasLabel.LayerMuMimo = layerMuMimo
+	labelInfoItem.MeasLabel.DistBinX = distX
+	labelInfoItem.MeasLabel.DistBinY = distY
+	labelInfoItem.MeasLabel.DistBinZ = distZ
+	labelInfoItem.MeasLabel.StartEndInd = startEndIndication
+	labelInfoItem.MeasLabel.PreLabelOverride = e2sm_kpm_v2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	labelInfoItem.MeasLabel.SUm = e2sm_kpm_v2.SUM_SUM_TRUE
 
 	labelInfoList := e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),
@@ -70,7 +97,8 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2.E2SmKpmIndicationMessageForm
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, cellObjID, granularity, &measInfoList, measData)
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, cellObjID, nil, measData)
+	newE2SmKpmPdu.GetIndicationMessageFormat1().GranulPeriod.Value = granularity
 	if err := newE2SmKpmPdu.Validate(); err != nil {
 		return nil, err
 	}
@@ -84,7 +112,8 @@ func Test_xerEncodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationMessageFormat1(imf1)
 	assert.NilError(t, err)
-	assert.Equal(t, 1878, len(xer))
+	//assert.Equal(t, 1878, len(xer))
+	assert.Equal(t, 569, len(xer)) //without MeasurementInfoList
 	t.Logf("E2SmKpmIndicationMessageFormat1 XER\n%s", string(xer))
 }
 
@@ -95,7 +124,8 @@ func Test_xerDecodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationMessageFormat1(imf1)
 	assert.NilError(t, err)
-	assert.Equal(t, 1878, len(xer))
+	//assert.Equal(t, 1878, len(xer))
+	assert.Equal(t, 569, len(xer)) //without MeasurementInfoList
 	t.Logf("E2SmKpmIndicationMessageFormat1 XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmKpmIndicationMessageFormat1(xer)
@@ -111,7 +141,8 @@ func Test_perEncodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmIndicationMessageFormat1(imf1)
 	assert.NilError(t, err)
-	assert.Equal(t, 77, len(per))
+	//assert.Equal(t, 77, len(per))
+	assert.Equal(t, 31, len(per)) //without MeasurementInfoList
 	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%s", string(per))
 }
 
@@ -122,7 +153,8 @@ func Test_perDecodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmIndicationMessageFormat1(imf1)
 	assert.NilError(t, err)
-	assert.Equal(t, 77, len(per))
+	//assert.Equal(t, 77, len(per))
+	assert.Equal(t, 31, len(per)) //without MeasurementInfoList
 	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%s", string(per))
 
 	result, err := perDecodeE2SmKpmIndicationMessageFormat1(per)

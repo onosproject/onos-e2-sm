@@ -155,12 +155,12 @@ func createIndicationMessageFormat2() (*e2sm_kpm_v2.E2SmKpmIndicationMessageForm
 		SubscriptId: &e2sm_kpm_v2.SubscriptionId{
 			Value: 12345,
 		},
-		CellObjId: &e2sm_kpm_v2.CellObjectId{
-			Value: "123",
-		},
-		GranulPeriod: &e2sm_kpm_v2.GranularityPeriod{
-			Value: 21,
-		},
+		//CellObjId: &e2sm_kpm_v2.CellObjectId{
+		//	Value: "123",
+		//},
+		//GranulPeriod: &e2sm_kpm_v2.GranularityPeriod{
+		//	Value: 21,
+		//},
 		MeasCondUeidList: mcUEIDl,
 		MeasData:         measData,
 	}
@@ -178,7 +178,8 @@ func Test_xerEncodeE2SmKpmIndicationMessageFormat2(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationMessageFormat2(imf2)
 	assert.NilError(t, err)
-	assert.Equal(t, 2412, len(xer))
+	//assert.Equal(t, 2412, len(xer))
+	assert.Equal(t, 2345, len(xer)) // without GranulPeriod and CellObjID
 	t.Logf("E2SmKpmIndicationMessageFormat2 XER\n%s", string(xer))
 }
 
@@ -189,7 +190,8 @@ func Test_xerDecodeE2SmKpmIndicationMessageFormat2(t *testing.T) {
 
 	xer, err := xerEncodeE2SmKpmIndicationMessageFormat2(imf2)
 	assert.NilError(t, err)
-	assert.Equal(t, 2412, len(xer))
+	//assert.Equal(t, 2412, len(xer))
+	assert.Equal(t, 2345, len(xer)) // without GranulPeriod and CellObjID
 	t.Logf("E2SmKpmIndicationMessageFormat2 XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmKpmIndicationMessageFormat2(xer)
@@ -205,7 +207,8 @@ func Test_perEncodeE2SmKpmIndicationMessageFormat2(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmIndicationMessageFormat2(imf2)
 	assert.NilError(t, err)
-	assert.Equal(t, 89, len(per))
+	//assert.Equal(t, 89, len(per))
+	assert.Equal(t, 81, len(per)) // without GranulPeriod and CellObjID
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%s", string(per))
 }
 
@@ -216,7 +219,8 @@ func Test_perDecodeE2SmKpmIndicationMessageFormat2(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmIndicationMessageFormat2(imf2)
 	assert.NilError(t, err)
-	assert.Equal(t, 89, len(per))
+	//assert.Equal(t, 89, len(per))
+	assert.Equal(t, 81, len(per)) // without GranulPeriod and CellObjID
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%s", string(per))
 
 	result, err := perDecodeE2SmKpmIndicationMessageFormat2(per)

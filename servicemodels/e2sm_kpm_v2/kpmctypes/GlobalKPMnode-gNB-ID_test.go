@@ -18,15 +18,22 @@ func Test_xerEncodeGlobalKpmnodeGnbID(t *testing.T) {
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
-	var gNbCuUp int64 = 31
+	var gNbCuUpID int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
+	gNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
+	gNbID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+		Value: gNbCuUpID,
+	}
+	gNbID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
-	xer, err := xerEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())
+	xer, err := xerEncodeGlobalKpmnodeGnbID(gNbID.GetGNb())
 	assert.NilError(t, err)
 	assert.Equal(t, 307, len(xer))
+	//assert.Equal(t, 241, len(xer)) // without GNbCuUpID and GNbDuID
 	t.Logf("GlobalKpmnodeGnbID XER\n%s", string(xer))
 }
 
@@ -37,15 +44,22 @@ func Test_xerDecodeGlobalKpmnodeGnbID(t *testing.T) {
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
-	var gNbCuUp int64 = 31
+	var gNbCuUpID int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
+	gNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
+	gNbID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+		Value: gNbCuUpID,
+	}
+	gNbID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
-	xer, err := xerEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())
+	xer, err := xerEncodeGlobalKpmnodeGnbID(gNbID.GetGNb())
 	assert.NilError(t, err)
 	assert.Equal(t, 307, len(xer))
+	//assert.Equal(t, 241, len(xer)) // without GNbCuUpID and GNbDuID
 	t.Logf("GlobalKpmnodeGnbID XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalKpmnodeGnbID(xer)
@@ -61,15 +75,22 @@ func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
-	var gNbCuUp int64 = 31
+	var gNbCuUpID int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
+	gNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
+	gNbID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+		Value: gNbCuUpID,
+	}
+	gNbID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
-	per, err := perEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())
+	per, err := perEncodeGlobalKpmnodeGnbID(gNbID.GetGNb())
 	assert.NilError(t, err)
 	assert.Equal(t, 12, len(per))
+	//assert.Equal(t, 8, len(per)) // without GNbCuUpID and GNbDuID
 	t.Logf("GlobalKpmnodeGnbID PER\n%s", string(per))
 }
 
@@ -80,15 +101,22 @@ func Test_perDecodeGlobalKpmnodeGnbID(t *testing.T) {
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
-	var gNbCuUp int64 = 31
+	var gNbCuUpID int64 = 31
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gNbCuUp, gnbDuID)
+	gNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
+	gNbID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+		Value: gNbCuUpID,
+	}
+	gNbID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 	assert.NilError(t, err)
 
-	per, err := perEncodeGlobalKpmnodeGnbID(ngeNbID.GetGNb())
+	per, err := perEncodeGlobalKpmnodeGnbID(gNbID.GetGNb())
 	assert.NilError(t, err)
 	assert.Equal(t, 12, len(per))
+	//assert.Equal(t, 8, len(per)) // without GNbCuUpID and GNbDuID
 	t.Logf("GlobalKpmnodeGnbID PER\n%s", string(per))
 
 	result, err := perDecodeGlobalKpmnodeGnbID(per)

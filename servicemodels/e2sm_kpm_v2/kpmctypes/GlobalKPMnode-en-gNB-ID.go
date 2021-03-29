@@ -74,20 +74,24 @@ func newGlobalKpmnodeEnGnbID(globalKpmnodeEnGnbID *e2sm_kpm_v2.GlobalKpmnodeEnGn
 		return nil, fmt.Errorf("newGlobalenGnbID() %s", err.Error())
 	}
 
-	gNbCuUpIDC, err := newGnbCuUpID(globalKpmnodeEnGnbID.GNbCuUpId)
-	if err != nil {
-		return nil, fmt.Errorf("newGnbCuUpID() %s", err.Error())
-	}
-
-	gNbDuIDC, err := newGnbDuID(globalKpmnodeEnGnbID.GNbDuId)
-	if err != nil {
-		return nil, fmt.Errorf("newGnbDuID() %s", err.Error())
-	}
-
 	globalKpmnodeEnGnbIDC := C.GlobalKPMnode_en_gNB_ID_t{
 		global_gNB_ID: *globalGNbIDC,
-		gNB_CU_UP_ID:  gNbCuUpIDC,
-		gNB_DU_ID:     gNbDuIDC,
+		//gNB_CU_UP_ID:  gNbCuUpIDC,
+		//gNB_DU_ID:     gNbDuIDC,
+	}
+
+	if globalKpmnodeEnGnbID.GNbCuUpId != nil {
+		globalKpmnodeEnGnbIDC.gNB_CU_UP_ID, err = newGnbCuUpID(globalKpmnodeEnGnbID.GNbCuUpId)
+		if err != nil {
+			return nil, fmt.Errorf("newGnbCuUpID() %s", err.Error())
+		}
+	}
+
+	if globalKpmnodeEnGnbID.GNbDuId != nil {
+		globalKpmnodeEnGnbIDC.gNB_DU_ID, err = newGnbDuID(globalKpmnodeEnGnbID.GNbDuId)
+		if err != nil {
+			return nil, fmt.Errorf("newGnbDuID() %s", err.Error())
+		}
 	}
 
 	return &globalKpmnodeEnGnbIDC, nil
@@ -100,20 +104,24 @@ func decodeGlobalKpmnodeEnGnbID(globalKpmnodeEnGnbIDC *C.GlobalKPMnode_en_gNB_ID
 		return nil, fmt.Errorf("decodeGlobalenGnbID() %s", err.Error())
 	}
 
-	gNbCuUpID, err := decodeGnbCuUpID(globalKpmnodeEnGnbIDC.gNB_CU_UP_ID)
-	if err != nil {
-		return nil, fmt.Errorf("decodeGnbCuUpID() %s", err.Error())
-	}
-
-	gNbDuID, err := decodeGnbDuID(globalKpmnodeEnGnbIDC.gNB_DU_ID)
-	if err != nil {
-		return nil, fmt.Errorf("decodeGnbDuID() %s", err.Error())
-	}
-
 	globalKpmnodeEnGnbID := e2sm_kpm_v2.GlobalKpmnodeEnGnbId{
 		GlobalGNbId: globalGNbID,
-		GNbCuUpId:   gNbCuUpID,
-		GNbDuId:     gNbDuID,
+		//GNbCuUpId:   gNbCuUpID,
+		//GNbDuId:     gNbDuID,
+	}
+
+	if globalKpmnodeEnGnbIDC.gNB_CU_UP_ID != nil {
+		globalKpmnodeEnGnbID.GNbCuUpId, err = decodeGnbCuUpID(globalKpmnodeEnGnbIDC.gNB_CU_UP_ID)
+		if err != nil {
+			return nil, fmt.Errorf("decodeGnbCuUpID() %s", err.Error())
+		}
+	}
+
+	if globalKpmnodeEnGnbIDC.gNB_DU_ID != nil {
+		globalKpmnodeEnGnbID.GNbDuId, err = decodeGnbDuID(globalKpmnodeEnGnbIDC.gNB_DU_ID)
+		if err != nil {
+			return nil, fmt.Errorf("decodeGnbDuID() %s", err.Error())
+		}
 	}
 
 	return &globalKpmnodeEnGnbID, nil

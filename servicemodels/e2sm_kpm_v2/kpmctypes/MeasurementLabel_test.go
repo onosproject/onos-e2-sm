@@ -19,24 +19,24 @@ func createMeasurementLabel() *e2sm_kpm_v2.MeasurementLabel {
 			SD:  []byte{0x01, 0x02, 0x03},
 			SSt: []byte{0x01},
 		},
-		FiveQi: &e2sm_kpm_v2.FiveQi{
-			Value: 23,
-		},
-		QFi: &e2sm_kpm_v2.Qfi{
-			Value: 52,
-		},
+		//FiveQi: &e2sm_kpm_v2.FiveQi{
+		//	Value: 23,
+		//},
+		//QFi: &e2sm_kpm_v2.Qfi{
+		//	Value: 52,
+		//},
 		QCi: &e2sm_kpm_v2.Qci{
 			Value: 24,
 		},
 		QCimax: &e2sm_kpm_v2.Qci{
 			Value: 30,
 		},
-		QCimin: &e2sm_kpm_v2.Qci{
-			Value: 1,
-		},
-		ARpmax: &e2sm_kpm_v2.Arp{
-			Value: 15,
-		},
+		//QCimin: &e2sm_kpm_v2.Qci{
+		//	Value: 1,
+		//},
+		//ARpmax: &e2sm_kpm_v2.Arp{
+		//	Value: 15,
+		//},
 		ARpmin: &e2sm_kpm_v2.Arp{
 			Value: 1,
 		},
@@ -44,9 +44,9 @@ func createMeasurementLabel() *e2sm_kpm_v2.MeasurementLabel {
 		LayerMuMimo:      1,
 		SUm:              e2sm_kpm_v2.SUM_SUM_TRUE,
 		DistBinX:         123,
-		DistBinY:         456,
+		DistBinY:         -1,
 		DistBinZ:         789,
-		PreLabelOverride: e2sm_kpm_v2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE,
+		PreLabelOverride: -1,
 		StartEndInd:      e2sm_kpm_v2.StartEndInd_START_END_IND_END,
 	}
 }
@@ -57,7 +57,8 @@ func Test_xerEncodeMeasurementLabel(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 568, len(xer))
+	//assert.Equal(t, 568, len(xer))
+	assert.Equal(t, 401, len(xer)) // without FiveQI, QFi, QCimin, ARPmax, DistBinY and PreLabelOverride
 	t.Logf("MeasurementLabel XER\n%s", string(xer))
 }
 
@@ -67,7 +68,8 @@ func Test_xerDecodeMeasurementLabel(t *testing.T) {
 
 	xer, err := xerEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 568, len(xer))
+	//assert.Equal(t, 568, len(xer))
+	assert.Equal(t, 401, len(xer)) // without FiveQI, QFi, QCimin, ARPmax, DistBinY and PreLabelOverride
 	t.Logf("MeasurementLabel XER\n%s", string(xer))
 
 	result, err := xerDecodeMeasurementLabel(xer)
@@ -82,7 +84,8 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 
 	per, err := perEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 36, len(per))
+	//assert.Equal(t, 36, len(per))
+	assert.Equal(t, 28, len(per)) // without FiveQI, QFi, QCimin, ARPmax, DistBinY and PreLabelOverride
 	t.Logf("MeasurementLabel XER\n%s", string(per))
 }
 
@@ -92,7 +95,8 @@ func Test_perDecodeMeasurementLabel(t *testing.T) {
 
 	per, err := perEncodeMeasurementLabel(ml)
 	assert.NilError(t, err)
-	assert.Equal(t, 36, len(per))
+	//assert.Equal(t, 36, len(per))
+	assert.Equal(t, 28, len(per)) // without FiveQI, QFi, QCimin, ARPmax, DistBinY and PreLabelOverride
 	t.Logf("MeasurementLabel PER\n%s", string(per))
 
 	result, err := perDecodeMeasurementLabel(per)

@@ -34,10 +34,35 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
 	var measurementName string = "trial"
 
-	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd, fiveQI, qfi,
-		qci, qciMax, qciMin, arpMax, arpMin, bitrateRange, layerMuMimo,
-		distX, distY, distZ, startEndIndication)
+	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd)
 	assert.NilError(t, err)
+	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
+		Value: fiveQI,
+	}
+	labelInfoItem.MeasLabel.QFi = &e2sm_kpm_v2.Qfi{
+		Value: qfi,
+	}
+	labelInfoItem.MeasLabel.QCi = &e2sm_kpm_v2.Qci{
+		Value: qci,
+	}
+	labelInfoItem.MeasLabel.QCimin = &e2sm_kpm_v2.Qci{
+		Value: qciMin,
+	}
+	labelInfoItem.MeasLabel.QCimax = &e2sm_kpm_v2.Qci{
+		Value: qciMax,
+	}
+	labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2.Arp{
+		Value: arpMin,
+	}
+	labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2.Arp{
+		Value: arpMax,
+	}
+	labelInfoItem.MeasLabel.BitrateRange = bitrateRange
+	labelInfoItem.MeasLabel.LayerMuMimo = layerMuMimo
+	labelInfoItem.MeasLabel.DistBinX = distX
+	labelInfoItem.MeasLabel.DistBinY = distY
+	labelInfoItem.MeasLabel.DistBinZ = distZ
+	labelInfoItem.MeasLabel.StartEndInd = startEndIndication
 
 	labelInfoList := e2sm_kpm_v2.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2.LabelInfoItem, 0),
@@ -62,6 +87,7 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemReal(rl))
 
 	measDataItem, err := CreateMeasurementDataItem(&measRecord)
+	measDataItem.IncompleteFlag = e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE
 	assert.NilError(t, err)
 
 	measData := e2sm_kpm_v2.MeasurementData{
@@ -69,9 +95,11 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat1(subscriptionID, cellObjID, granularity, &measInfoList, &measData)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat1(subscriptionID, cellObjID, &measInfoList, &measData)
+	newE2SmKpmPdu.GetIndicationMessageFormat1().GranulPeriod.Value = granularity
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	t.Logf("Composed IndicationMessage-Format1 is \n %v \n", newE2SmKpmPdu)
 }
 
 func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
@@ -123,6 +151,7 @@ func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemReal(rl))
 
 	measDataItem, err := CreateMeasurementDataItem(&measRecord)
+	measDataItem.IncompleteFlag = e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE
 	assert.NilError(t, err)
 
 	measData := e2sm_kpm_v2.MeasurementData{
@@ -130,7 +159,9 @@ func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat2(subscriptionID, cellObjID, granularity, &measCondUEIDList, &measData)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat2(subscriptionID, cellObjID, &measCondUEIDList, &measData)
+	newE2SmKpmPdu.GetIndicationMessageFormat2().GranulPeriod.Value = granularity
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	t.Logf("Composed IndicationMessage-Format2 is \n %v \n", newE2SmKpmPdu)
 }

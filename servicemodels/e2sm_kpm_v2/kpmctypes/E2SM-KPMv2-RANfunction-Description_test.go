@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func createE2SMKPMRanfunctionDescription() *e2sm_kpm_v2.E2SmKpmRanfunctionDescription {
+func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
 
 	var rfSn string = "onf"
 	var rfE2SMoid string = "oid123"
@@ -31,7 +31,13 @@ func createE2SMKPMRanfunctionDescription() *e2sm_kpm_v2.E2SmKpmRanfunctionDescri
 
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	globalKpmnodeID, _ := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID, gnbCuUpID, gnbDuID)
+	globalKpmnodeID, _ := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
+	globalKpmnodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+		Value: gnbCuUpID,
+	}
+	globalKpmnodeID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+		Value: gnbDuID,
+	}
 
 	cmol := make([]*e2sm_kpm_v2.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
@@ -55,7 +61,10 @@ func createE2SMKPMRanfunctionDescription() *e2sm_kpm_v2.E2SmKpmRanfunctionDescri
 
 	var measTypeName string = "OpenNetworking"
 	var measTypeID int32 = 24
-	measInfoActionItem := pdubuilder.CreateMeasurementInfoActionItem(measTypeName, measTypeID)
+	measInfoActionItem := pdubuilder.CreateMeasurementInfoActionItem(measTypeName)
+	measInfoActionItem.MeasId = &e2sm_kpm_v2.MeasurementTypeId{
+		Value: measTypeID,
+	}
 	measInfoActionList.Value = append(measInfoActionList.Value, measInfoActionItem)
 
 	var indMsgFormat int32 = 1
@@ -65,28 +74,37 @@ func createE2SMKPMRanfunctionDescription() *e2sm_kpm_v2.E2SmKpmRanfunctionDescri
 	rrsl := make([]*e2sm_kpm_v2.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rfi, rknl, retsl, rrsl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
+	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = rfi
+	if err != nil {
+		return nil, err
+	}
+	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
-	return newE2SmKpmPdu
+	return newE2SmKpmPdu, nil
 }
 
 func Test_xerEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
-	rfd := createE2SMKPMRanfunctionDescription()
+	rfd, err := createE2SMKPMRanfunctionDescription()
+	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
 	assert.Equal(t, 2704, len(xer))
+	//assert.Equal(t, 372, len(xer)) // without lists
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 }
 
 func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
-	rfd := createE2SMKPMRanfunctionDescription()
+	rfd, err := createE2SMKPMRanfunctionDescription()
+	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
 	assert.Equal(t, 2704, len(xer))
+	//assert.Equal(t, 372, len(xer)) // without lists
 	t.Logf("E2SmKpmRanfunctionDescription XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmKpmRanfunctionDescription(xer)
@@ -97,21 +115,25 @@ func Test_xerDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
 func Test_perEncodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
-	rfd := createE2SMKPMRanfunctionDescription()
+	rfd, err := createE2SMKPMRanfunctionDescription()
+	assert.NilError(t, err)
 
 	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
 	assert.Equal(t, 112, len(per))
+	//assert.Equal(t, 33, len(per)) // without lists
 	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", hex.Dump(per))
 }
 
 func Test_perDecodeE2SmKpmRanfunctionDescription(t *testing.T) {
 
-	rfd := createE2SMKPMRanfunctionDescription()
+	rfd, err := createE2SMKPMRanfunctionDescription()
+	assert.NilError(t, err)
 
 	per, err := PerEncodeE2SmKpmRanfunctionDescription(rfd)
 	assert.NilError(t, err)
 	assert.Equal(t, 112, len(per))
+	//assert.Equal(t, 33, len(per)) // without lists
 	t.Logf("E2SmKpmRanfunctionDescription PER\n%s", hex.Dump(per))
 
 	result, err := PerDecodeE2SmKpmRanfunctionDescription(per)
