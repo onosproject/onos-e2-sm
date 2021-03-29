@@ -268,8 +268,10 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 
 	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
 	assert.NilError(t, err, "error creating E2SmPDU")
-	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = rfi
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	if newE2SmKpmPdu != nil {
+		newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = rfi
+	}
 
 	err = newE2SmKpmPdu.Validate()
 	assert.NilError(t, err, "error validating E2SmPDU")

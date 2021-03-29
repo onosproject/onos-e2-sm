@@ -74,7 +74,9 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
 	assert.NilError(t, err)
-	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = rfi
+	if newE2SmKpmPdu != nil {
+		newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = rfi
+	}
 
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
