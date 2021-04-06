@@ -68,22 +68,24 @@ func perDecodeSubscriptionID(bytes []byte) (*e2sm_kpm_v2.SubscriptionId, error) 
 
 func newSubscriptionID(subscriptionID *e2sm_kpm_v2.SubscriptionId) (*C.SubscriptionID_t, error) {
 
-	subscriptionIDC, err := newInteger(subscriptionID.Value)
-	if err != nil {
-		return nil, fmt.Errorf("newInt64() %s", err.Error())
-	}
+	//subscriptionIDC, err := newInteger(subscriptionID.Value)
+	//if err != nil {
+	//	return nil, fmt.Errorf("newInt64() %s", err.Error())
+	//}
 
-	return subscriptionIDC, nil
+	res := C.ulong(subscriptionID.Value)
+
+	return &res, nil
 }
 
 func decodeSubscriptionID(subscriptionIDC *C.SubscriptionID_t) (*e2sm_kpm_v2.SubscriptionId, error) {
 
 	subscriptionID := new(e2sm_kpm_v2.SubscriptionId)
-	subscriptionIDValue, err := decodeInteger(subscriptionIDC)
-	if err != nil {
-		return nil, fmt.Errorf("decodeInteger() %s", err.Error())
-	}
-	subscriptionID.Value = subscriptionIDValue
+	//subscriptionIDValue, err := decodeInteger(subscriptionIDC)
+	//if err != nil {
+	//	return nil, fmt.Errorf("decodeInteger() %s", err.Error())
+	//}
+	subscriptionID.Value = int64(*subscriptionIDC)
 
 	return subscriptionID, nil
 }

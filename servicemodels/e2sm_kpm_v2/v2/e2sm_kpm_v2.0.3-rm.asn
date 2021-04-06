@@ -70,7 +70,7 @@ MeasurementType ::= CHOICE {
 
 MeasurementTypeName ::= PrintableString(SIZE(1.. 150, ...))
 
-MeasurementTypeID ::= INTEGER (1.. 65536, ...)
+MeasurementTypeID ::= INTEGER (1.. 65535, ...)
 
 MeasurementLabel ::= SEQUENCE {
 	plmnID					PLMN-Identity						OPTIONAL,
@@ -82,18 +82,18 @@ MeasurementLabel ::= SEQUENCE {
 	qCImin					QCI									OPTIONAL,
 	aRPmax					ARP									OPTIONAL,
 	aRPmin					ARP									OPTIONAL,
-	bitrateRange			INTEGER (1.. 65536, ...)			OPTIONAL,
-	layerMU-MIMO			INTEGER (1.. 65536, ...)			OPTIONAL,
+	bitrateRange			INTEGER (1.. 65535, ...)			OPTIONAL,
+	layerMU-MIMO			INTEGER (1.. 65535, ...)			OPTIONAL,
 	sUM						ENUMERATED {true, ...}				OPTIONAL,
-	distBinX				INTEGER (1.. 65536, ...)			OPTIONAL,
-	distBinY				INTEGER (1.. 65536, ...)			OPTIONAL,
-	distBinZ				INTEGER (1.. 65536, ...)			OPTIONAL,
+	distBinX				INTEGER (1.. 65535, ...)			OPTIONAL,
+	distBinY				INTEGER (1.. 65535, ...)			OPTIONAL,
+	distBinZ				INTEGER (1.. 65535, ...)			OPTIONAL,
 	preLabelOverride		ENUMERATED {true, ...}				OPTIONAL,
 	startEndInd				ENUMERATED {start, end, ...}		OPTIONAL,
 	...
 }
 
-SubscriptionID ::= INTEGER (1.. 4294967296, ...)
+SubscriptionID ::= INTEGER (1.. 4294967295, ...)
 
 TestCondInfo ::= SEQUENCE{
 	testType				TestCond-Type,
