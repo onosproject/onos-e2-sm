@@ -5,6 +5,8 @@
 package main
 
 import (
+	"encoding/hex"
+	"fmt"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdubuilder"
 	e2smkpmies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"google.golang.org/protobuf/proto"
@@ -39,6 +41,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
 	assert.Equal(t, 31, len(asn1Bytes))
+	t.Logf("E2SM-KPM-IndicationHeader asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
@@ -74,6 +77,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	asn1Bytes, err := kpmTestSm.IndicationMessageProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
+	t.Logf("E2SM-KPM-IndicationMessage asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
@@ -138,6 +142,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
 	assert.Equal(t, 63, len(asn1Bytes))
+	t.Logf("E2SM-KPM-RanFunctionDescription asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 //func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
@@ -181,6 +186,7 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
 	assert.Equal(t, 2, len(asn1Bytes))
+	t.Logf("E2SM-KPM-EventTriggerDefinition asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
@@ -217,6 +223,7 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
 	assert.Equal(t, 3, len(asn1Bytes))
+	t.Logf("E2SM-KPM-ActionDefinition asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 //func TestServicemodel_ActionDefinitionASN1toProto(t *testing.T) {
@@ -235,3 +242,144 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 //	assert.NilError(t, err)
 //	assert.Equal(t, 1, testIM.GetRicStyleType().GetValue())
 //}
+
+func TestServicemodel_Asn1BytesToByte(t *testing.T) {
+	indHdrHex, err := kpmTestSm.Asn1BytesToByte("3f0c4f4e4600d4bc08000000006f6e66efabd4bc004f4e4698805344310000")
+	assert.NilError(t, err)
+	fmt.Printf("Output of Asn1BytesToByte is \n%x\n", indHdrHex)
+
+	inHdrBytes, err := kpmTestSm.IndicationHeaderASN1toProto(indHdrHex)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, inHdrBytes != nil)
+	assert.Equal(t, 67, len(inHdrBytes))
+	testIH := &e2smkpmies.E2SmKpmIndicationHeader{}
+	err = proto.Unmarshal(inHdrBytes, testIH)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (IndicationHeader) is \n%v\n", testIH)
+
+	indMsgHex, err := kpmTestSm.Asn1BytesToByte("4000006c1a4f70656e4e6574776f726b696e67c001000c72616e436f6e7461696e6572")
+	assert.NilError(t, err)
+	fmt.Printf("Output of Asn1BytesToByte is \n%x\n", indMsgHex)
+
+	indMsgBytes, err := kpmTestSm.IndicationMessageASN1toProto(indMsgHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, indMsgBytes != nil)
+	assert.Equal(t, 44, len(indMsgBytes))
+	testIM := &e2smkpmies.E2SmKpmIndicationMessage{}
+	err = proto.Unmarshal(indMsgBytes, testIM)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (IndicationMessage) is \n%v", testIM)
+
+	actDefHex, err := kpmTestSm.Asn1BytesToByte("00010c")
+	assert.NilError(t, err)
+	fmt.Printf("Output of Asn1BytesToByte is \n%x\n", actDefHex)
+
+	actDefBytes, err := kpmTestSm.ActionDefinitionASN1toProto(actDefHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, actDefBytes != nil)
+	assert.Equal(t, 4, len(actDefBytes))
+	testAD := &e2smkpmies.E2SmKpmActionDefinition{}
+	err = proto.Unmarshal(actDefBytes, testAD)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (ActionDefinition) is \n%v\n", testAD)
+
+	evntTrigDefHex, err := kpmTestSm.Asn1BytesToByte("2030")
+	assert.NilError(t, err)
+	fmt.Printf("Output of Asn1BytesToByte is \n%x\n", evntTrigDefHex)
+
+	evntTrigDefBytes, err := kpmTestSm.EventTriggerDefinitionASN1toProto(evntTrigDefHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, evntTrigDefBytes != nil)
+	assert.Equal(t, 6, len(evntTrigDefBytes))
+	testETD := &e2smkpmies.E2SmKpmEventTriggerDefinition{}
+	err = proto.Unmarshal(evntTrigDefBytes, testETD)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (EventTriggerDefinition) is \n%v\n", testETD)
+
+	ranFuncDescHex, err := kpmTestSm.Asn1BytesToByte("20204f4e460000024f696406804f70656e4e6574776f726b696e6701016000" +
+		"010d03804f4e466576656e74012a00010c04004f4e467265706f727401150138")
+	assert.NilError(t, err)
+	fmt.Printf("Output of Asn1BytesToByte is \n%x\n", ranFuncDescHex)
+
+	ranFuncDescBytes, err := kpmTestSm.RanFuncDescriptionASN1toProto(ranFuncDescHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, ranFuncDescBytes != nil)
+	assert.Equal(t, 81, len(ranFuncDescBytes))
+	testRFD := &e2smkpmies.E2SmKpmRanfunctionDescription{}
+	err = proto.Unmarshal(ranFuncDescBytes, testRFD)
+	t.Logf("Decoded message (RanFunctionDescription) is \n%v\n", testRFD)
+	assert.NilError(t, err)
+}
+
+func TestServicemodel_HexDumpToByte(t *testing.T) {
+	indHdrHex, err := kpmTestSm.HexDumpToByte("00000000  3f 0c 4f 4e 46 00 d4 bc  08 00 00 00 00 6f 6e 66  |?.ONF........onf|" +
+		"	00000010  ef ab d4 bc 00 4f 4e 46  98 80 53 44 31 00 00     |.....ONF..SD1..|")
+	assert.NilError(t, err)
+	fmt.Printf("Output of HexDumpToByte is \n%x\n", indHdrHex)
+
+	indHdrBytes, err := kpmTestSm.IndicationHeaderASN1toProto(indHdrHex)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, indHdrBytes != nil)
+	assert.Equal(t, 67, len(indHdrBytes))
+	testIH := &e2smkpmies.E2SmKpmIndicationHeader{}
+	err = proto.Unmarshal(indHdrBytes, testIH)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (IndicationHeader) is \n%v", testIH)
+
+	indMsgHex, err := kpmTestSm.HexDumpToByte("00000000  40 00 00 6c 1a 4f 70 65  6e 4e 65 74 77 6f 72 6b  |@..l.OpenNetwork|" +
+		"	00000010  69 6e 67 c0 01 00 0c 72  61 6e 43 6f 6e 74 61 69  |ing....ranContai|" +
+		"		00000020  6e 65 72                                          |ner|")
+	assert.NilError(t, err)
+	fmt.Printf("Output of HexDumpToByte is \n%x\n", indMsgHex)
+
+	indMsgBytes, err := kpmTestSm.IndicationMessageASN1toProto(indMsgHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, indMsgBytes != nil)
+	assert.Equal(t, 44, len(indMsgBytes))
+	testIM := &e2smkpmies.E2SmKpmIndicationMessage{}
+	err = proto.Unmarshal(indMsgBytes, testIM)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (IndicationMessage) is \n%v", testIM)
+
+	actDefHex, err := kpmTestSm.HexDumpToByte("00000000  00 01 0c                                          |...|")
+	assert.NilError(t, err)
+	fmt.Printf("Output of HexDumpToByte is \n%x\n", actDefHex)
+
+	actDefBytes, err := kpmTestSm.ActionDefinitionASN1toProto(actDefHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, actDefBytes != nil)
+	assert.Equal(t, 4, len(actDefBytes))
+	testAD := &e2smkpmies.E2SmKpmActionDefinition{}
+	err = proto.Unmarshal(actDefBytes, testAD)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (ActionDefinition) is \n%v\n", testAD)
+
+	evntTrigDefHex, err := kpmTestSm.HexDumpToByte("00000000  20 30                                             | 0|")
+	assert.NilError(t, err)
+	fmt.Printf("Output of HexDumpToByte is \n%x\n", evntTrigDefHex)
+
+	evntTrigDefBytes, err := kpmTestSm.EventTriggerDefinitionASN1toProto(evntTrigDefHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, evntTrigDefBytes != nil)
+	assert.Equal(t, 6, len(evntTrigDefBytes))
+	testETD := &e2smkpmies.E2SmKpmEventTriggerDefinition{}
+	err = proto.Unmarshal(evntTrigDefBytes, testETD)
+	assert.NilError(t, err)
+	t.Logf("Decoded message (EventTriggerDefinition) is \n%v\n", testETD)
+
+	ranFuncDescHex, err := kpmTestSm.HexDumpToByte("00000000  20 20 4f 4e 46 00 00 02  4f 69 64 06 80 4f 70 65  |  ONF...Oid..Ope|" +
+		"	00000010  6e 4e 65 74 77 6f 72 6b  69 6e 67 01 01 60 00 01  |nNetworking..`..|" +
+		"        00000020  0d 03 80 4f 4e 46 65 76  65 6e 74 01 2a 00 01 0c  |...ONFevent.*...|" +
+		"        00000030  04 00 4f 4e 46 72 65 70  6f 72 74 01 15 01 38     |..ONFreport...8|")
+	assert.NilError(t, err)
+	fmt.Printf("Output of HexDumpToByte is \n%x\n", ranFuncDescHex)
+
+	ranFuncDescBytes, err := kpmTestSm.RanFuncDescriptionASN1toProto(ranFuncDescHex)
+	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+	assert.Assert(t, ranFuncDescBytes != nil)
+	assert.Equal(t, 81, len(ranFuncDescBytes))
+	testRFD := &e2smkpmies.E2SmKpmRanfunctionDescription{}
+	err = proto.Unmarshal(ranFuncDescBytes, testRFD)
+	t.Logf("Decoded message (RanFunctionDescription) is \n%v\n", testRFD)
+	assert.NilError(t, err)
+}

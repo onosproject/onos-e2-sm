@@ -6,7 +6,10 @@
 package main
 
 import (
+	"encoding/hex"
 	"fmt"
+	"regexp"
+	"strings"
 
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
@@ -202,6 +205,51 @@ func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, erro
 
 func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+// This function was created for debugging purposes
+// It takes as an input string of asn1 bytes (in HEXadecimal format)
+// and converts them to the array of bytes ([]byte) which could be passed
+// to the input of *ASN1toProto function
+// Input data could be obtained in a following way:
+// t.Logf("E2SM-KPM-ActionDefinition (Format3) asn1Bytes are \n%x", asn1Bytes)
+func (sm servicemodel) Asn1BytesToByte(str string) ([]byte, error) {
+
+	return hex.DecodeString(str)
+}
+
+// This function was created for debugging purposes.
+// It takes as an input output of hex.Dump() for asn1 bytes
+// and converts them to the array of bytes ([]byte)
+// which could be passed to the input of *ASN1toProto function
+// Input data could be obtained in a following way:
+// t.Logf("E2SM-KPM-ActionDefinition (Format3) asn1Bytes are \n%v", hex.Dump(asn1Bytes))
+func (sm servicemodel) HexDumpToByte(str string) ([]byte, error) {
+
+	r, err := regexp.Compile("([\t\n\f\r ][0-9a-f]{2})")
+	if err != nil {
+		return nil, err
+	}
+	out := r.FindAllString(str, -1)
+
+	res := ""
+	escapeElement := 16
+	for i, slice := range out {
+		postprcs := strings.ReplaceAll(slice, " ", "")
+		postprcss := strings.ReplaceAll(postprcs, "  ", "")
+		if i != escapeElement {
+			res = res + fmt.Sprintf("%v", strings.ReplaceAll(postprcss, "\n", ""))
+		} else {
+			escapeElement = escapeElement + 17
+		}
+	}
+
+	b, err := hex.DecodeString(res)
+	if err != nil {
+		return nil, err
+	}
+
+	return b, nil
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module
