@@ -30,7 +30,7 @@ func Test_xerEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeEnGnbID(enbID.GetEnGNb())
 	assert.NilError(t, err)
-	assert.Equal(t, 335, len(xer))
+	assert.Equal(t, 339, len(xer))
 	//assert.Equal(t, 269, len(xer)) // without GNbCUUpID and GNbDuID
 	t.Logf("GlobalKpmnodeEnGnbID XER\n%s", string(xer))
 }
@@ -54,7 +54,7 @@ func Test_xerDecodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeEnGnbID(enbID.GetEnGNb())
 	assert.NilError(t, err)
-	assert.Equal(t, 335, len(xer))
+	assert.Equal(t, 339, len(xer))
 	//assert.Equal(t, 269, len(xer)) // without GNbCUUpID and GNbDuID
 	t.Logf("GlobalKpmnodeEnGnbID XER\n%s", string(xer))
 

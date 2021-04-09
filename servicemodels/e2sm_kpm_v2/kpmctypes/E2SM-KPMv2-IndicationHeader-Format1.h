@@ -21,7 +21,7 @@ extern "C" {
 #endif
 
 /* Forward declarations */
-struct GlobalKPMnode_ID;
+struct GlobalKPMv2node_ID;
 
 /* E2SM-KPMv2-IndicationHeader-Format1 */
 typedef struct E2SM_KPMv2_IndicationHeader_Format1 {
@@ -30,7 +30,7 @@ typedef struct E2SM_KPMv2_IndicationHeader_Format1 {
 	PrintableString_t	*senderName;	/* OPTIONAL */
 	PrintableString_t	*senderType;	/* OPTIONAL */
 	PrintableString_t	*vendorName;	/* OPTIONAL */
-	struct GlobalKPMnode_ID	*kpmNodeID;	/* OPTIONAL */
+	struct GlobalKPMv2node_ID	*kpmNodeID;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

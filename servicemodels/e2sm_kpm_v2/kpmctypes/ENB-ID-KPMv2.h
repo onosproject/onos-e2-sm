@@ -5,8 +5,8 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#ifndef	_ENB_ID_H_
-#define	_ENB_ID_H_
+#ifndef	_ENB_ID_KPMv2_H_
+#define	_ENB_ID_KPMv2_H_
 
 
 #include "asn_application.h"
@@ -20,18 +20,18 @@ extern "C" {
 #endif
 
 /* Dependencies */
-typedef enum ENB_ID_PR {
-	ENB_ID_PR_NOTHING,	/* No components present */
-	ENB_ID_PR_macro_eNB_ID,
-	ENB_ID_PR_home_eNB_ID
+typedef enum ENB_ID_KPMv2_PR {
+	ENB_ID_KPMv2_PR_NOTHING,	/* No components present */
+	ENB_ID_KPMv2_PR_macro_eNB_ID,
+	ENB_ID_KPMv2_PR_home_eNB_ID
 	/* Extensions may appear below */
 	
-} ENB_ID_PR;
+} ENB_ID_KPMv2_PR;
 
-/* ENB-ID */
-typedef struct ENB_ID {
-	ENB_ID_PR present;
-	union ENB_ID_u {
+/* ENB-ID-KPMv2 */
+typedef struct ENB_ID_KPMv2 {
+	ENB_ID_KPMv2_PR present;
+	union ENB_ID_KPMv2_u {
 		BIT_STRING_t	 macro_eNB_ID;
 		BIT_STRING_t	 home_eNB_ID;
 		/*
@@ -42,17 +42,17 @@ typedef struct ENB_ID {
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
-} ENB_ID_t;
+} ENB_ID_KPMv2_t;
 
 /* Implementation */
-extern asn_TYPE_descriptor_t asn_DEF_ENB_ID;
-extern asn_CHOICE_specifics_t asn_SPC_ENB_ID_specs_1;
-extern asn_TYPE_member_t asn_MBR_ENB_ID_1[2];
-extern asn_per_constraints_t asn_PER_type_ENB_ID_constr_1;
+extern asn_TYPE_descriptor_t asn_DEF_ENB_ID_KPMv2;
+extern asn_CHOICE_specifics_t asn_SPC_ENB_ID_KPMv2_specs_1;
+extern asn_TYPE_member_t asn_MBR_ENB_ID_KPMv2_1[2];
+extern asn_per_constraints_t asn_PER_type_ENB_ID_KPMv2_constr_1;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* _ENB_ID_H_ */
+#endif	/* _ENB_ID_KPMv2_H_ */
 #include "asn_internal.h"

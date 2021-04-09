@@ -5,23 +5,25 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#ifndef	_GlobalKPMnode_eNB_ID_H_
-#define	_GlobalKPMnode_eNB_ID_H_
+#ifndef	_GlobalKPMv2node_ng_eNB_ID_H_
+#define	_GlobalKPMv2node_ng_eNB_ID_H_
 
 
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "GlobalENB-ID.h"
+#include "GlobalngeNB-ID-KPMv2.h"
+#include "GNB-DU-ID.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* GlobalKPMnode-eNB-ID */
-typedef struct GlobalKPMnode_eNB_ID {
-	GlobalENB_ID_t	 global_eNB_ID;
+/* GlobalKPMv2node-ng-eNB-ID */
+typedef struct GlobalKPMv2node_ng_eNB_ID {
+	GlobalngeNB_ID_KPMv2_t	 global_ng_eNB_ID;
+	GNB_DU_ID_t	*gNB_DU_ID;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
@@ -29,16 +31,16 @@ typedef struct GlobalKPMnode_eNB_ID {
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
-} GlobalKPMnode_eNB_ID_t;
+} GlobalKPMv2node_ng_eNB_ID_t;
 
 /* Implementation */
-extern asn_TYPE_descriptor_t asn_DEF_GlobalKPMnode_eNB_ID;
-extern asn_SEQUENCE_specifics_t asn_SPC_GlobalKPMnode_eNB_ID_specs_1;
-extern asn_TYPE_member_t asn_MBR_GlobalKPMnode_eNB_ID_1[1];
+extern asn_TYPE_descriptor_t asn_DEF_GlobalKPMv2node_ng_eNB_ID;
+extern asn_SEQUENCE_specifics_t asn_SPC_GlobalKPMv2node_ng_eNB_ID_specs_1;
+extern asn_TYPE_member_t asn_MBR_GlobalKPMv2node_ng_eNB_ID_1[2];
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* _GlobalKPMnode_eNB_ID_H_ */
+#endif	/* _GlobalKPMv2node_ng_eNB_ID_H_ */
 #include "asn_internal.h"

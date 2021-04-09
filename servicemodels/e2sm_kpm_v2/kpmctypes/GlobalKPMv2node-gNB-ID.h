@@ -5,8 +5,8 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#ifndef	_GlobalKPMnode_gNB_ID_H_
-#define	_GlobalKPMnode_gNB_ID_H_
+#ifndef	_GlobalKPMv2node_gNB_ID_H_
+#define	_GlobalKPMv2node_gNB_ID_H_
 
 
 #include "asn_application.h"
@@ -21,8 +21,8 @@
 extern "C" {
 #endif
 
-/* GlobalKPMnode-gNB-ID */
-typedef struct GlobalKPMnode_gNB_ID {
+/* GlobalKPMv2node-gNB-ID */
+typedef struct GlobalKPMv2node_gNB_ID {
 	GlobalgNB_ID_t	 global_gNB_ID;
 	GNB_CU_UP_ID_t	*gNB_CU_UP_ID;	/* OPTIONAL */
 	GNB_DU_ID_t	*gNB_DU_ID;	/* OPTIONAL */
@@ -33,16 +33,16 @@ typedef struct GlobalKPMnode_gNB_ID {
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
-} GlobalKPMnode_gNB_ID_t;
+} GlobalKPMv2node_gNB_ID_t;
 
 /* Implementation */
-extern asn_TYPE_descriptor_t asn_DEF_GlobalKPMnode_gNB_ID;
-extern asn_SEQUENCE_specifics_t asn_SPC_GlobalKPMnode_gNB_ID_specs_1;
-extern asn_TYPE_member_t asn_MBR_GlobalKPMnode_gNB_ID_1[3];
+extern asn_TYPE_descriptor_t asn_DEF_GlobalKPMv2node_gNB_ID;
+extern asn_SEQUENCE_specifics_t asn_SPC_GlobalKPMv2node_gNB_ID_specs_1;
+extern asn_TYPE_member_t asn_MBR_GlobalKPMv2node_gNB_ID_1[3];
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* _GlobalKPMnode_gNB_ID_H_ */
+#endif	/* _GlobalKPMv2node_gNB_ID_H_ */
 #include "asn_internal.h"

@@ -23,21 +23,21 @@ ASN_MODULE_SRCS=	\
 	./TestCond-Type.c	\
 	./TestCond-Expression.c	\
 	./TestCond-Value.c	\
-	./GlobalKPMnode-ID.c	\
-	./GlobalKPMnode-gNB-ID.c	\
+	./GlobalKPMv2node-ID.c	\
+	./GlobalKPMv2node-gNB-ID.c	\
 	./GlobalgNB-ID.c	\
 	./GNB-CU-UP-ID.c	\
 	./GNB-DU-ID.c	\
 	./GNB-ID-Choice.c	\
-	./GlobalKPMnode-en-gNB-ID.c	\
+	./GlobalKPMv2node-en-gNB-ID.c	\
 	./GlobalenGNB-ID.c	\
 	./ENGNB-ID.c	\
-	./GlobalKPMnode-ng-eNB-ID.c	\
-	./GlobalngeNB-ID.c	\
+	./GlobalKPMv2node-ng-eNB-ID.c	\
+	./GlobalngeNB-ID-KPMv2.c	\
 	./ENB-ID-Choice.c	\
-	./GlobalKPMnode-eNB-ID.c	\
+	./GlobalKPMv2node-eNB-ID.c	\
 	./GlobalENB-ID.c	\
-	./ENB-ID.c	\
+	./ENB-ID-KPMv2.c	\
 	./RANfunction-Name.c	\
 	./RIC-Style-Type.c	\
 	./RIC-Style-Name.c	\
@@ -102,21 +102,21 @@ ASN_MODULE_HDRS=	\
 	./TestCond-Type.h	\
 	./TestCond-Expression.h	\
 	./TestCond-Value.h	\
-	./GlobalKPMnode-ID.h	\
-	./GlobalKPMnode-gNB-ID.h	\
+	./GlobalKPMv2node-ID.h	\
+	./GlobalKPMv2node-gNB-ID.h	\
 	./GlobalgNB-ID.h	\
 	./GNB-CU-UP-ID.h	\
 	./GNB-DU-ID.h	\
 	./GNB-ID-Choice.h	\
-	./GlobalKPMnode-en-gNB-ID.h	\
+	./GlobalKPMv2node-en-gNB-ID.h	\
 	./GlobalenGNB-ID.h	\
 	./ENGNB-ID.h	\
-	./GlobalKPMnode-ng-eNB-ID.h	\
-	./GlobalngeNB-ID.h	\
+	./GlobalKPMv2node-ng-eNB-ID.h	\
+	./GlobalngeNB-ID-KPMv2.h	\
 	./ENB-ID-Choice.h	\
-	./GlobalKPMnode-eNB-ID.h	\
+	./GlobalKPMv2node-eNB-ID.h	\
 	./GlobalENB-ID.h	\
-	./ENB-ID.h	\
+	./ENB-ID-KPMv2.h	\
 	./RANfunction-Name.h	\
 	./RIC-Style-Type.h	\
 	./RIC-Style-Name.h	\

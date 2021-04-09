@@ -40,14 +40,14 @@ func Test_xerEncodeEnbID(t *testing.T) {
 
 	xer, err := xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 87, len(xer))
+	assert.Equal(t, 99, len(xer))
 	t.Logf("EnbID (Macro) XER\n%s", string(xer))
 
 	enbID = createEnbIDHome()
 
 	xer, err = xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 93, len(xer))
+	assert.Equal(t, 105, len(xer))
 	t.Logf("EnbID (Home) XER\n%s", string(xer))
 }
 
@@ -57,7 +57,7 @@ func Test_xerDecodeEnbID(t *testing.T) {
 
 	xer, err := xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 87, len(xer))
+	assert.Equal(t, 99, len(xer))
 	t.Logf("EnbID (Macro) XER\n%s", string(xer))
 
 	result, err := xerDecodeEnbID(xer)
@@ -69,7 +69,7 @@ func Test_xerDecodeEnbID(t *testing.T) {
 
 	xer, err = xerEncodeEnbID(enbID)
 	assert.NilError(t, err)
-	assert.Equal(t, 93, len(xer))
+	assert.Equal(t, 105, len(xer))
 	t.Logf("EnbID (Home) XER\n%s", string(xer))
 
 	result, err = xerDecodeEnbID(xer)

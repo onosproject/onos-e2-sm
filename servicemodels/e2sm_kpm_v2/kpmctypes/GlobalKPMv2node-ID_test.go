@@ -131,28 +131,28 @@ func Test_xerEncodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 366, len(xer))
+	assert.Equal(t, 370, len(xer))
 	t.Logf("GlobalKpmnodeID (GNb) XER\n%s", string(xer))
 
 	globalKpmnodeID = createGlobalKpmnodeID2()
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 384, len(xer))
+	assert.Equal(t, 388, len(xer))
 	t.Logf("GlobalKpmnodeID (enGNb) XER\n%s", string(xer))
 
 	globalKpmnodeID = createGlobalKpmnodeID3()
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 547, len(xer))
+	assert.Equal(t, 551, len(xer))
 	t.Logf("GlobalKpmnodeID (ngENb) XER\n%s", string(xer))
 
 	globalKpmnodeID = createGlobalKpmnodeID4()
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 314, len(xer))
+	assert.Equal(t, 318, len(xer))
 	t.Logf("GlobalKpmnodeID (ENb) XER\n%s", string(xer))
 }
 
@@ -162,7 +162,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err := xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 366, len(xer))
+	assert.Equal(t, 370, len(xer))
 	t.Logf("GlobalKpmnodeID (GNb) XER\n%s", string(xer))
 
 	result, err := xerDecodeGlobalKpmnodeID(xer)
@@ -174,7 +174,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 384, len(xer))
+	assert.Equal(t, 388, len(xer))
 	t.Logf("GlobalKpmnodeID (enGNb) XER\n%s", string(xer))
 
 	result, err = xerDecodeGlobalKpmnodeID(xer)
@@ -186,7 +186,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 547, len(xer))
+	assert.Equal(t, 551, len(xer))
 	t.Logf("GlobalKpmnodeID (ngENb) XER\n%s", string(xer))
 
 	result, err = xerDecodeGlobalKpmnodeID(xer)
@@ -198,7 +198,7 @@ func Test_xerDecodeGlobalKpmnodeID(t *testing.T) {
 
 	xer, err = xerEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
-	assert.Equal(t, 314, len(xer))
+	assert.Equal(t, 318, len(xer))
 	t.Logf("GlobalKpmnodeID (ENb) XER\n%s", string(xer))
 
 	result, err = xerDecodeGlobalKpmnodeID(xer)

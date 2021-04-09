@@ -133,15 +133,15 @@ TestCond-Value ::= CHOICE{
 
 -- **************************************************************
 
-GlobalKPMnode-ID ::= CHOICE{
-	gNB						GlobalKPMnode-gNB-ID,
-	en-gNB					GlobalKPMnode-en-gNB-ID,
-	ng-eNB					GlobalKPMnode-ng-eNB-ID,
-	eNB						GlobalKPMnode-eNB-ID,
+GlobalKPMv2node-ID ::= CHOICE{
+	gNB						GlobalKPMv2node-gNB-ID,
+	en-gNB					GlobalKPMv2node-en-gNB-ID,
+	ng-eNB					GlobalKPMv2node-ng-eNB-ID,
+	eNB						GlobalKPMv2node-eNB-ID,
 	...
 }
 
-GlobalKPMnode-gNB-ID ::= SEQUENCE{
+GlobalKPMv2node-gNB-ID ::= SEQUENCE{
 	global-gNB-ID			GlobalgNB-ID,
 	gNB-CU-UP-ID			GNB-CU-UP-ID					OPTIONAL,
 	gNB-DU-ID				GNB-DU-ID						OPTIONAL,
@@ -163,7 +163,7 @@ GNB-ID-Choice ::= CHOICE {
 	...
 }
 
-GlobalKPMnode-en-gNB-ID ::= SEQUENCE{
+GlobalKPMv2node-en-gNB-ID ::= SEQUENCE{
 	global-gNB-ID			GlobalenGNB-ID,
 	gNB-CU-UP-ID			GNB-CU-UP-ID					OPTIONAL,
 	gNB-DU-ID				GNB-DU-ID						OPTIONAL,
@@ -181,13 +181,13 @@ ENGNB-ID ::= CHOICE {
 	...
 }
 
-GlobalKPMnode-ng-eNB-ID ::= SEQUENCE{
-	global-ng-eNB-ID		GlobalngeNB-ID,
+GlobalKPMv2node-ng-eNB-ID ::= SEQUENCE{
+	global-ng-eNB-ID		GlobalngeNB-ID-KPMv2,
 	gNB-DU-ID				GNB-DU-ID						OPTIONAL,
 	...
 }
 
-GlobalngeNB-ID ::= SEQUENCE {
+GlobalngeNB-ID-KPMv2 ::= SEQUENCE {
 	plmn-id					PLMN-Identity,
 	enb-id					ENB-ID-Choice,
 	short-Macro-eNB-ID		BIT STRING (SIZE(18)),
@@ -202,18 +202,18 @@ ENB-ID-Choice ::= CHOICE {
 	...
 }
 
-GlobalKPMnode-eNB-ID ::= SEQUENCE{
+GlobalKPMv2node-eNB-ID ::= SEQUENCE{
 	global-eNB-ID			GlobalENB-ID,
 	...
 }
 
 GlobalENB-ID ::= SEQUENCE {
 	pLMN-Identity			PLMN-Identity,
-	eNB-ID					ENB-ID,
+	eNB-ID					ENB-ID-KPMv2,
 	...
 }
 
-ENB-ID ::= CHOICE {
+ENB-ID-KPMv2 ::= CHOICE {
 	macro-eNB-ID			BIT STRING (SIZE (20)),
 	home-eNB-ID				BIT STRING (SIZE (28)),
 	...
@@ -398,7 +398,7 @@ E2SM-KPMv2-IndicationHeader-Format1 ::= SEQUENCE{
 	senderName						PrintableString (SIZE (0..400), ...)	OPTIONAL,
 	senderType						PrintableString (SIZE (0..8), ...)		OPTIONAL,
 	vendorName						PrintableString (SIZE (0..32), ...)		OPTIONAL,
-	kpmNodeID						GlobalKPMnode-ID						OPTIONAL,
+	kpmNodeID						GlobalKPMv2node-ID						OPTIONAL,
 	...
 }
 
@@ -446,7 +446,7 @@ E2SM-KPMv2-RANfunction-Description ::= SEQUENCE{
 }
 
 RIC-KPMNode-Item ::= SEQUENCE {
-	ric-KPMNode-Type					GlobalKPMnode-ID,
+	ric-KPMNode-Type					GlobalKPMv2node-ID,
 	cell-Measurement-Object-List		SEQUENCE (SIZE(1..maxnoofCells)) OF Cell-Measurement-Object-Item 		OPTIONAL,
 	...
 }

@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#include "GlobalngeNB-ID.h"
+#include "GlobalngeNB-ID-KPMv2.h"
 
 static int
 memb_short_Macro_eNB_ID_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
@@ -79,8 +79,8 @@ static asn_per_constraints_t asn_PER_memb_long_Macro_eNB_ID_constr_5 CC_NOTUSED 
 	{ APC_CONSTRAINED,	 0,  0,  21,  21 }	/* (SIZE(21..21)) */,
 	0, 0	/* No PER value map */
 };
-asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_1[] = {
-	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID, plmn_id),
+asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_KPMv2_1[] = {
+	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID_KPMv2, plmn_id),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
 		&asn_DEF_PLMN_Identity,
@@ -89,7 +89,7 @@ asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_1[] = {
 		0, 0, /* No default value */
 		"plmn-id"
 		},
-	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID, enb_id),
+	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID_KPMv2, enb_id),
 		(ASN_TAG_CLASS_CONTEXT | (1 << 2)),
 		+1,	/* EXPLICIT tag at current level */
 		&asn_DEF_ENB_ID_Choice,
@@ -98,7 +98,7 @@ asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_1[] = {
 		0, 0, /* No default value */
 		"enb-id"
 		},
-	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID, short_Macro_eNB_ID),
+	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID_KPMv2, short_Macro_eNB_ID),
 		(ASN_TAG_CLASS_CONTEXT | (2 << 2)),
 		-1,	/* IMPLICIT tag at current level */
 		&asn_DEF_BIT_STRING,
@@ -107,7 +107,7 @@ asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_1[] = {
 		0, 0, /* No default value */
 		"short-Macro-eNB-ID"
 		},
-	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID, long_Macro_eNB_ID),
+	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID_KPMv2, long_Macro_eNB_ID),
 		(ASN_TAG_CLASS_CONTEXT | (3 << 2)),
 		-1,	/* IMPLICIT tag at current level */
 		&asn_DEF_BIT_STRING,
@@ -117,36 +117,36 @@ asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_1[] = {
 		"long-Macro-eNB-ID"
 		},
 };
-static const ber_tlv_tag_t asn_DEF_GlobalngeNB_ID_tags_1[] = {
+static const ber_tlv_tag_t asn_DEF_GlobalngeNB_ID_KPMv2_tags_1[] = {
 	(ASN_TAG_CLASS_UNIVERSAL | (16 << 2))
 };
-static const asn_TYPE_tag2member_t asn_MAP_GlobalngeNB_ID_tag2el_1[] = {
+static const asn_TYPE_tag2member_t asn_MAP_GlobalngeNB_ID_KPMv2_tag2el_1[] = {
     { (ASN_TAG_CLASS_CONTEXT | (0 << 2)), 0, 0, 0 }, /* plmn-id */
     { (ASN_TAG_CLASS_CONTEXT | (1 << 2)), 1, 0, 0 }, /* enb-id */
     { (ASN_TAG_CLASS_CONTEXT | (2 << 2)), 2, 0, 0 }, /* short-Macro-eNB-ID */
     { (ASN_TAG_CLASS_CONTEXT | (3 << 2)), 3, 0, 0 } /* long-Macro-eNB-ID */
 };
-asn_SEQUENCE_specifics_t asn_SPC_GlobalngeNB_ID_specs_1 = {
-	sizeof(struct GlobalngeNB_ID),
-	offsetof(struct GlobalngeNB_ID, _asn_ctx),
-	asn_MAP_GlobalngeNB_ID_tag2el_1,
+asn_SEQUENCE_specifics_t asn_SPC_GlobalngeNB_ID_KPMv2_specs_1 = {
+	sizeof(struct GlobalngeNB_ID_KPMv2),
+	offsetof(struct GlobalngeNB_ID_KPMv2, _asn_ctx),
+	asn_MAP_GlobalngeNB_ID_KPMv2_tag2el_1,
 	4,	/* Count of tags in the map */
 	0, 0, 0,	/* Optional elements (not needed) */
 	4,	/* First extension addition */
 };
-asn_TYPE_descriptor_t asn_DEF_GlobalngeNB_ID = {
-	"GlobalngeNB-ID",
-	"GlobalngeNB-ID",
+asn_TYPE_descriptor_t asn_DEF_GlobalngeNB_ID_KPMv2 = {
+	"GlobalngeNB-ID-KPMv2",
+	"GlobalngeNB-ID-KPMv2",
 	&asn_OP_SEQUENCE,
-	asn_DEF_GlobalngeNB_ID_tags_1,
-	sizeof(asn_DEF_GlobalngeNB_ID_tags_1)
-		/sizeof(asn_DEF_GlobalngeNB_ID_tags_1[0]), /* 1 */
-	asn_DEF_GlobalngeNB_ID_tags_1,	/* Same as above */
-	sizeof(asn_DEF_GlobalngeNB_ID_tags_1)
-		/sizeof(asn_DEF_GlobalngeNB_ID_tags_1[0]), /* 1 */
+	asn_DEF_GlobalngeNB_ID_KPMv2_tags_1,
+	sizeof(asn_DEF_GlobalngeNB_ID_KPMv2_tags_1)
+		/sizeof(asn_DEF_GlobalngeNB_ID_KPMv2_tags_1[0]), /* 1 */
+	asn_DEF_GlobalngeNB_ID_KPMv2_tags_1,	/* Same as above */
+	sizeof(asn_DEF_GlobalngeNB_ID_KPMv2_tags_1)
+		/sizeof(asn_DEF_GlobalngeNB_ID_KPMv2_tags_1[0]), /* 1 */
 	{ 0, 0, SEQUENCE_constraint },
-	asn_MBR_GlobalngeNB_ID_1,
+	asn_MBR_GlobalngeNB_ID_KPMv2_1,
 	4,	/* Elements count */
-	&asn_SPC_GlobalngeNB_ID_specs_1	/* Additional specs */
+	&asn_SPC_GlobalngeNB_ID_KPMv2_specs_1	/* Additional specs */
 };
 
