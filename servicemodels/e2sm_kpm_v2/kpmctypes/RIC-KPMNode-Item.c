@@ -85,7 +85,7 @@ asn_TYPE_member_t asn_MBR_RIC_KPMNode_Item_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct RIC_KPMNode_Item, ric_KPMNode_Type),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		+1,	/* EXPLICIT tag at current level */
-		&asn_DEF_GlobalKPMnode_ID,
+		&asn_DEF_GlobalKPMv2node_ID,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */

@@ -5,8 +5,8 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#ifndef	_GlobalngeNB_ID_H_
-#define	_GlobalngeNB_ID_H_
+#ifndef	_GlobalngeNB_ID_KPMv2_H_
+#define	_GlobalngeNB_ID_KPMv2_H_
 
 
 #include "asn_application.h"
@@ -21,8 +21,8 @@
 extern "C" {
 #endif
 
-/* GlobalngeNB-ID */
-typedef struct GlobalngeNB_ID {
+/* GlobalngeNB-ID-KPMv2 */
+typedef struct GlobalngeNB_ID_KPMv2 {
 	PLMN_Identity_t	 plmn_id;
 	ENB_ID_Choice_t	 enb_id;
 	BIT_STRING_t	 short_Macro_eNB_ID;
@@ -34,16 +34,16 @@ typedef struct GlobalngeNB_ID {
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
-} GlobalngeNB_ID_t;
+} GlobalngeNB_ID_KPMv2_t;
 
 /* Implementation */
-extern asn_TYPE_descriptor_t asn_DEF_GlobalngeNB_ID;
-extern asn_SEQUENCE_specifics_t asn_SPC_GlobalngeNB_ID_specs_1;
-extern asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_1[4];
+extern asn_TYPE_descriptor_t asn_DEF_GlobalngeNB_ID_KPMv2;
+extern asn_SEQUENCE_specifics_t asn_SPC_GlobalngeNB_ID_KPMv2_specs_1;
+extern asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_KPMv2_1[4];
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* _GlobalngeNB_ID_H_ */
+#endif	/* _GlobalngeNB_ID_KPMv2_H_ */
 #include "asn_internal.h"

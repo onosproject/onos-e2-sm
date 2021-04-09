@@ -9,7 +9,7 @@ package kpmv2ctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "GlobalngeNB-ID.h"
+//#include "GlobalngeNB-ID-KPMv2.h"
 import "C"
 
 import (
@@ -24,7 +24,7 @@ func xerEncodeGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) ([]byte, e
 		return nil, fmt.Errorf("xerEncodeGlobalngeNbID() %s", err.Error())
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_GlobalngeNB_ID, unsafe.Pointer(globalngeNbIDCP))
+	bytes, err := encodeXer(&C.asn_DEF_GlobalngeNB_ID_KPMv2, unsafe.Pointer(globalngeNbIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGlobalngeNbID() %s", err.Error())
 	}
@@ -37,7 +37,7 @@ func perEncodeGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) ([]byte, e
 		return nil, fmt.Errorf("perEncodeGlobalngeNbID() %s", err.Error())
 	}
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_GlobalngeNB_ID, unsafe.Pointer(globalngeNbIDCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_GlobalngeNB_ID_KPMv2, unsafe.Pointer(globalngeNbIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeGlobalngeNbID() %s", err.Error())
 	}
@@ -45,28 +45,28 @@ func perEncodeGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) ([]byte, e
 }
 
 func xerDecodeGlobalngeNbID(bytes []byte) (*e2sm_kpm_v2.GlobalngeNbId, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_GlobalngeNB_ID)
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_GlobalngeNB_ID_KPMv2)
 	if err != nil {
 		return nil, err
 	}
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from XER is nil")
 	}
-	return decodeGlobalngeNbID((*C.GlobalngeNB_ID_t)(unsafePtr))
+	return decodeGlobalngeNbID((*C.GlobalngeNB_ID_KPMv2_t)(unsafePtr))
 }
 
 func perDecodeGlobalngeNbID(bytes []byte) (*e2sm_kpm_v2.GlobalngeNbId, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GlobalngeNB_ID)
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GlobalngeNB_ID_KPMv2)
 	if err != nil {
 		return nil, err
 	}
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
-	return decodeGlobalngeNbID((*C.GlobalngeNB_ID_t)(unsafePtr))
+	return decodeGlobalngeNbID((*C.GlobalngeNB_ID_KPMv2_t)(unsafePtr))
 }
 
-func newGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) (*C.GlobalngeNB_ID_t, error) {
+func newGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) (*C.GlobalngeNB_ID_KPMv2_t, error) {
 
 	plmnIDC, err := newPlmnIdentity(globalngeNbID.PlmnId)
 	if err != nil {
@@ -88,7 +88,7 @@ func newGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) (*C.GlobalngeNB_
 		return nil, fmt.Errorf("newBitString() %s", err.Error())
 	}
 
-	globalngeNbIDC := C.GlobalngeNB_ID_t{
+	globalngeNbIDC := C.GlobalngeNB_ID_KPMv2_t{
 		plmn_id:            *plmnIDC,
 		enb_id:             *enbIDC,
 		short_Macro_eNB_ID: *shortMacroENbIDC,
@@ -98,7 +98,7 @@ func newGlobalngeNbID(globalngeNbID *e2sm_kpm_v2.GlobalngeNbId) (*C.GlobalngeNB_
 	return &globalngeNbIDC, nil
 }
 
-func decodeGlobalngeNbID(globalngeNbIDC *C.GlobalngeNB_ID_t) (*e2sm_kpm_v2.GlobalngeNbId, error) {
+func decodeGlobalngeNbID(globalngeNbIDC *C.GlobalngeNB_ID_KPMv2_t) (*e2sm_kpm_v2.GlobalngeNbId, error) {
 
 	plmnID, err := decodePlmnIdentity(&globalngeNbIDC.plmn_id)
 	if err != nil {

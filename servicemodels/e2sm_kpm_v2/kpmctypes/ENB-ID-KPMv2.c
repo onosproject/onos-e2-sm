@@ -5,7 +5,7 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#include "ENB-ID.h"
+#include "ENB-ID-KPMv2.h"
 
 static int
 memb_macro_eNB_ID_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
@@ -79,13 +79,13 @@ static asn_per_constraints_t asn_PER_memb_home_eNB_ID_constr_3 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 0,  0,  28,  28 }	/* (SIZE(28..28)) */,
 	0, 0	/* No PER value map */
 };
-asn_per_constraints_t asn_PER_type_ENB_ID_constr_1 CC_NOTUSED = {
+asn_per_constraints_t asn_PER_type_ENB_ID_KPMv2_constr_1 CC_NOTUSED = {
 	{ APC_CONSTRAINED | APC_EXTENSIBLE,  1,  1,  0,  1 }	/* (0..1,...) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };
-asn_TYPE_member_t asn_MBR_ENB_ID_1[] = {
-	{ ATF_NOFLAGS, 0, offsetof(struct ENB_ID, choice.macro_eNB_ID),
+asn_TYPE_member_t asn_MBR_ENB_ID_KPMv2_1[] = {
+	{ ATF_NOFLAGS, 0, offsetof(struct ENB_ID_KPMv2, choice.macro_eNB_ID),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
 		&asn_DEF_BIT_STRING,
@@ -94,7 +94,7 @@ asn_TYPE_member_t asn_MBR_ENB_ID_1[] = {
 		0, 0, /* No default value */
 		"macro-eNB-ID"
 		},
-	{ ATF_NOFLAGS, 0, offsetof(struct ENB_ID, choice.home_eNB_ID),
+	{ ATF_NOFLAGS, 0, offsetof(struct ENB_ID_KPMv2, choice.home_eNB_ID),
 		(ASN_TAG_CLASS_CONTEXT | (1 << 2)),
 		-1,	/* IMPLICIT tag at current level */
 		&asn_DEF_BIT_STRING,
@@ -104,31 +104,31 @@ asn_TYPE_member_t asn_MBR_ENB_ID_1[] = {
 		"home-eNB-ID"
 		},
 };
-static const asn_TYPE_tag2member_t asn_MAP_ENB_ID_tag2el_1[] = {
+static const asn_TYPE_tag2member_t asn_MAP_ENB_ID_KPMv2_tag2el_1[] = {
     { (ASN_TAG_CLASS_CONTEXT | (0 << 2)), 0, 0, 0 }, /* macro-eNB-ID */
     { (ASN_TAG_CLASS_CONTEXT | (1 << 2)), 1, 0, 0 } /* home-eNB-ID */
 };
-asn_CHOICE_specifics_t asn_SPC_ENB_ID_specs_1 = {
-	sizeof(struct ENB_ID),
-	offsetof(struct ENB_ID, _asn_ctx),
-	offsetof(struct ENB_ID, present),
-	sizeof(((struct ENB_ID *)0)->present),
-	asn_MAP_ENB_ID_tag2el_1,
+asn_CHOICE_specifics_t asn_SPC_ENB_ID_KPMv2_specs_1 = {
+	sizeof(struct ENB_ID_KPMv2),
+	offsetof(struct ENB_ID_KPMv2, _asn_ctx),
+	offsetof(struct ENB_ID_KPMv2, present),
+	sizeof(((struct ENB_ID_KPMv2 *)0)->present),
+	asn_MAP_ENB_ID_KPMv2_tag2el_1,
 	2,	/* Count of tags in the map */
 	0, 0,
 	2	/* Extensions start */
 };
-asn_TYPE_descriptor_t asn_DEF_ENB_ID = {
-	"ENB-ID",
-	"ENB-ID",
+asn_TYPE_descriptor_t asn_DEF_ENB_ID_KPMv2 = {
+	"ENB-ID-KPMv2",
+	"ENB-ID-KPMv2",
 	&asn_OP_CHOICE,
 	0,	/* No effective tags (pointer) */
 	0,	/* No effective tags (count) */
 	0,	/* No tags (pointer) */
 	0,	/* No tags (count) */
-	{ 0, &asn_PER_type_ENB_ID_constr_1, CHOICE_constraint },
-	asn_MBR_ENB_ID_1,
+	{ 0, &asn_PER_type_ENB_ID_KPMv2_constr_1, CHOICE_constraint },
+	asn_MBR_ENB_ID_KPMv2_1,
 	2,	/* Elements count */
-	&asn_SPC_ENB_ID_specs_1	/* Additional specs */
+	&asn_SPC_ENB_ID_KPMv2_specs_1	/* Additional specs */
 };
 

@@ -12,7 +12,7 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "GlobalKPMnode-ID.h"
+#include "GlobalKPMv2node-ID.h"
 #include "asn_SEQUENCE_OF.h"
 #include "constr_SEQUENCE_OF.h"
 #include "constr_SEQUENCE.h"
@@ -26,7 +26,7 @@ struct Cell_Measurement_Object_Item;
 
 /* RIC-KPMNode-Item */
 typedef struct RIC_KPMNode_Item {
-	GlobalKPMnode_ID_t	 ric_KPMNode_Type;
+	GlobalKPMv2node_ID_t	 ric_KPMNode_Type;
 	struct RIC_KPMNode_Item__cell_Measurement_Object_List {
 		A_SEQUENCE_OF(struct Cell_Measurement_Object_Item) list;
 		

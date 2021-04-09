@@ -9,7 +9,7 @@ package kpmv2ctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "GlobalKPMnode-ng-eNB-ID.h"
+//#include "GlobalKPMv2node-ng-eNB-ID.h"
 import "C"
 
 import (
@@ -25,7 +25,7 @@ func xerEncodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmno
 		return nil, fmt.Errorf("xerEncodeGlobalKpmnodeNgEnbID() %s", err.Error())
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_GlobalKPMnode_ng_eNB_ID, unsafe.Pointer(globalKpmnodeNgEnbIDCP))
+	bytes, err := encodeXer(&C.asn_DEF_GlobalKPMv2node_ng_eNB_ID, unsafe.Pointer(globalKpmnodeNgEnbIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeGlobalKpmnodeNgEnbID() %s", err.Error())
 	}
@@ -38,7 +38,7 @@ func perEncodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmno
 		return nil, fmt.Errorf("perEncodeGlobalKpmnodeNgEnbID() %s", err.Error())
 	}
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_GlobalKPMnode_ng_eNB_ID, unsafe.Pointer(globalKpmnodeNgEnbIDCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_GlobalKPMv2node_ng_eNB_ID, unsafe.Pointer(globalKpmnodeNgEnbIDCP))
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeGlobalKpmnodeNgEnbID() %s", err.Error())
 	}
@@ -46,35 +46,35 @@ func perEncodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmno
 }
 
 func xerDecodeGlobalKpmnodeNgEnbID(bytes []byte) (*e2sm_kpm_v2.GlobalKpmnodeNgEnbId, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_GlobalKPMnode_ng_eNB_ID)
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_GlobalKPMv2node_ng_eNB_ID)
 	if err != nil {
 		return nil, err
 	}
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from XER is nil")
 	}
-	return decodeGlobalKpmnodeNgEnbID((*C.GlobalKPMnode_ng_eNB_ID_t)(unsafePtr))
+	return decodeGlobalKpmnodeNgEnbID((*C.GlobalKPMv2node_ng_eNB_ID_t)(unsafePtr))
 }
 
 func perDecodeGlobalKpmnodeNgEnbID(bytes []byte) (*e2sm_kpm_v2.GlobalKpmnodeNgEnbId, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GlobalKPMnode_ng_eNB_ID)
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_GlobalKPMv2node_ng_eNB_ID)
 	if err != nil {
 		return nil, err
 	}
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
-	return decodeGlobalKpmnodeNgEnbID((*C.GlobalKPMnode_ng_eNB_ID_t)(unsafePtr))
+	return decodeGlobalKpmnodeNgEnbID((*C.GlobalKPMv2node_ng_eNB_ID_t)(unsafePtr))
 }
 
-func newGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmnodeNgEnbId) (*C.GlobalKPMnode_ng_eNB_ID_t, error) {
+func newGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmnodeNgEnbId) (*C.GlobalKPMv2node_ng_eNB_ID_t, error) {
 
 	globalNgENbIDC, err := newGlobalngeNbID(globalKpmnodeNgEnbID.GlobalNgENbId)
 	if err != nil {
 		return nil, fmt.Errorf("newGlobalngeNbID() %s", err.Error())
 	}
 
-	globalKpmnodeNgEnbIDC := C.GlobalKPMnode_ng_eNB_ID_t{
+	globalKpmnodeNgEnbIDC := C.GlobalKPMv2node_ng_eNB_ID_t{
 		global_ng_eNB_ID: *globalNgENbIDC,
 		//gNB_DU_ID:        gNbDuIDC,
 	}
@@ -89,7 +89,7 @@ func newGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbID *e2sm_kpm_v2.GlobalKpmnodeNgEn
 	return &globalKpmnodeNgEnbIDC, nil
 }
 
-func decodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbIDC *C.GlobalKPMnode_ng_eNB_ID_t) (*e2sm_kpm_v2.GlobalKpmnodeNgEnbId, error) {
+func decodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbIDC *C.GlobalKPMv2node_ng_eNB_ID_t) (*e2sm_kpm_v2.GlobalKpmnodeNgEnbId, error) {
 
 	globalNgENbID, err := decodeGlobalngeNbID(&globalKpmnodeNgEnbIDC.global_ng_eNB_ID)
 	if err != nil {
@@ -112,7 +112,7 @@ func decodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbIDC *C.GlobalKPMnode_ng_eNB_ID
 }
 
 func decodeGlobalKpmnodeNgEnbIDBytes(array [8]byte) (*e2sm_kpm_v2.GlobalKpmnodeNgEnbId, error) {
-	globalKpmnodeNgEnbIDC := (*C.GlobalKPMnode_ng_eNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+	globalKpmnodeNgEnbIDC := (*C.GlobalKPMv2node_ng_eNB_ID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeGlobalKpmnodeNgEnbID(globalKpmnodeNgEnbIDC)
 }

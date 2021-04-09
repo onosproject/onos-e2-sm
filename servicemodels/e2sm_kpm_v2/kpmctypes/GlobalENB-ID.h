@@ -13,7 +13,7 @@
 
 /* Including external dependencies */
 #include "PLMN-Identity.h"
-#include "ENB-ID.h"
+#include "ENB-ID-KPMv2.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
@@ -23,7 +23,7 @@ extern "C" {
 /* GlobalENB-ID */
 typedef struct GlobalENB_ID {
 	PLMN_Identity_t	 pLMN_Identity;
-	ENB_ID_t	 eNB_ID;
+	ENB_ID_KPMv2_t	 eNB_ID;
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
