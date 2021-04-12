@@ -449,10 +449,7 @@ func extractTypeName(fullStr string, delStr string) string {
 
 func checkOptionalField(str string) bool {
 
-	if !strings.Contains(str, ":OPTIONAL") {
-		return false
-	}
-	return true
+	return strings.Contains(str, ":OPTIONAL")
 }
 
 func extractCstructFieldName(str string) string {
