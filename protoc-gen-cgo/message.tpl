@@ -75,15 +75,16 @@ func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}
 {{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{else}}
+var err error
+{{lowCaseFirstLetter .MessageName}}C := C.{{dashToUnderscore .CstructName}}_t{}
 {{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
 {{if .Optional}}{{ template "OPTIONAL_ENCODE" . }}{{end}}
-{{lowCaseFirstLetter .MessageName}}C := C.{{dashToUnderscore .CstructName}}_t{
 //ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file{{ $optionalFields := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields }}
-{{.CstructLeafName}}: {{lowCaseFirstLetter .FieldName}}C,{{end}}
-{{ $repeatedFields := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields }}{{.CstructLeafName}}: *{{lowCaseFirstLetter .FieldName}}C,
+{{if not .Optionality}}{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C{{end}}{{end}}
+{{ $repeatedFields := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields }}{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C
 {{end}}
-{{ $oneOfFields := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields }} //{{.CstructLeafName}}: {{lowCaseFirstLetter .FieldName}}C,{{end}}
-}{{end}}
+{{ $oneOfFields := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields }} //{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C{{end}}
+{{end}}
 {{end}}
     return &{{lowCaseFirstLetter .MessageName}}C, nil
 }
@@ -95,13 +96,14 @@ func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnde
 {{if .Repeated}}{{ template "REPEATED_DECODE" . }}{{end}}
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{else}}
-{{if .Optional}}{{ template "OPTIONAL_DECODE" . }}{{end}}
+var err error
 {{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}{
 //ToDo - check whether pointers passed correctly with regard to Protobuf's definition{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
-{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .FieldName}},{{end}}
+//{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .FieldName}},{{end}}
 {{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}{{upperCaseFirstLetter .FieldName}}: make([]*{{.ProtoFileName}}.{{.DataType}}, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
 {{end}}
-{{ $oneOfFields1 := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields1 }} //{{upperCaseFirstLetter.FieldName}}: {{lowCaseFirstLetter .FieldName}}, {{end}}}
+{{ $oneOfFields1 := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields1 }} //{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .FieldName}}, {{end}}}
+{{if .Optional}}{{ template "OPTIONAL_DECODE" . }}{{end}}
 {{if .Repeated}}{{ template "REPEATED_DECODE" . }}{{end}}{{end}}
 {{end}}
     return &{{lowCaseFirstLetter .MessageName}}, nil
@@ -135,11 +137,11 @@ present: pr,
 choice:  choiceC,
 }{{end}}
 
-{{ define "REPEATED_ENCODE" }}
-{{ $fields := .FieldList.RepeatedField }}
+{{ define "REPEATED_ENCODE" }}{{ $fields := .FieldList.RepeatedField }}
 {{ range $fieldIndex, $field := $fields }}
+{{if .Optionality}}{{template "OPTIONALITY_ENCODE_BEGIN" . }}{{end}}
 {{lowCaseFirstLetter .FieldName}}C := new(C.struct_{{dashToUnderscore .CstructName}}__{{.CstructLeafName}}) //ToDo - verify correctness of the variable's name
-for _, {{lowCaseFirstLetter .FieldName}}Item := range {{lowCaseFirstLetter .MessageName}}.Get{{.FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
+for _, {{lowCaseFirstLetter .FieldName}}Item := range {{.VariableName}}.Get{{.FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
 {{lowCaseFirstLetter .FieldName}}ItemC, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .FieldName}}Item)
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
@@ -147,22 +149,22 @@ return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 if _, err = C.asn_sequence_add(unsafe.Pointer({{lowCaseFirstLetter .FieldName}}C), unsafe.Pointer({{lowCaseFirstLetter .FieldName}}ItemC)); err != nil {
 return nil, err
 }
-}{{end}}
-{{end}}
+}
+{{if .Optionality}}{{template "OPTIONALITY_ENCODE_END" . }}{{end}}{{end}}{{end}}
 
 {{ define "OPTIONAL_ENCODE" }}{{ $fields := .FieldList.OptionalField }}
-{{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
-{{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
+{{ range $fieldIndex, $field := $fields }}{{if .Optionality}}{{template "OPTIONALITY_ENCODE_BEGIN" . }}{{end}}{{if checkElementaryType .DataType}}
+{{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
+{{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 }
-{{end}}{{end}}{{end}}
+{{end}}{{if .Optionality}}{{template "OPTIONALITY_ENCODE_END" . }}{{end}}{{end}}{{end}}
 
 {{ define "OPTIONAL_ENCODE_SINGLE" }}{{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .MessageName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
-{{lowCaseFirstLetter .MessageName}}C, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}})
+{{.VariableName}}C := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
+{{.VariableName}}C, err := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 }
@@ -174,11 +176,11 @@ return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 
 switch {{lowCaseFirstLetter .MessageName}}C.present { {{ range $fieldIndex, $field := $fields }}
 case C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}}:
-{{lowCaseFirstLetter .MessageName}}structC, err := {{decodeDataType .DataType}}Bytes({{lowCaseFirstLetter .MessageName}}C.choice) //ToDo - Verify if decodeSmthBytes function exists
+{{lowCaseFirstLetter .MessageName}}structC, err := {{decodeDataType .DataType}}Bytes({{.VariableName}}C.choice) //ToDo - Verify if decodeSmthBytes function exists
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}Bytes() %s", err.Error())
 }
-{{lowCaseFirstLetter .MessageName}}.{{.MessageName}} = &{{.ProtoFileName}}.{{.MessageName}}_{{upperCaseFirstLetter .FieldName}}{
+{{lowCaseFirstLetter .MessageName}}.{{.FieldName}} = &{{.ProtoFileName}}.{{.MessageName}}_{{upperCaseFirstLetter .FieldName}}{
 {{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .MessageName}}structC,
 }{{end}}
 default:
@@ -188,16 +190,19 @@ return nil, fmt.Errorf("decode{{.MessageName}}() %v not yet implemented", {{lowC
 {{ define "REPEATED_DECODE" }}
 {{ $fields := .FieldList.RepeatedField }}
 var ieCount int
-{{ range $fieldIndex, $field := $fields }}ieCount = int({{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}}.list.count)
+{{ range $fieldIndex, $field := $fields }}
+{{if .Optionality}}{{template "OPTIONALITY_DECODE_BEGIN" . }}{{end}}
+ieCount = int({{.VariableName}}C.{{.CstructLeafName}}.list.count)
 for i := 0; i < ieCount; i++ {
-offset := unsafe.Sizeof(unsafe.Pointer({{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}}.list.array)) * uintptr(i)
-ieC := *(**C.{{.DataType}}_t)(unsafe.Pointer(uintptr(unsafe.Pointer({{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}}.list.array)) + offset))
+offset := unsafe.Sizeof(unsafe.Pointer({{.VariableName}}C.{{.CstructLeafName}}.list.array)) * uintptr(i)
+ieC := *(**C.{{.DataType}}_t)(unsafe.Pointer(uintptr(unsafe.Pointer({{.VariableName}}C.{{.CstructLeafName}}.list.array)) + offset))
 ie, err := {{decodeDataType .DataType}}(ieC)
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
-{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}} = append({{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}}, ie)
+{{.VariableName}}.{{upperCaseFirstLetter .FieldName}} = append({{.VariableName}}.{{upperCaseFirstLetter .FieldName}}, ie)
 }
+{{if .Optionality}}{{template "OPTIONALITY_DECODE_END" . }}{{end}}
 {{end}}{{end}}
 
 {{ define "DECODE_BYTES" }}
@@ -210,24 +215,39 @@ return decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C)
 
 {{ define "OPTIONAL_DECODE" }}
 {{ $fields := .FieldList.OptionalField }}
-{{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .FieldName}} := {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}}){{else}}
-{{lowCaseFirstLetter .FieldName}}, err := {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}})
+{{ range $fieldIndex, $field := $fields }}{{if .Optionality}}{{template "OPTIONALITY_DECODE_BEGIN" . }}{{end}}{{if checkElementaryType .DataType}}
+{{lowCaseFirstLetter .MessageName}}.{{.FieldName}} = {{decodeDataType .DataType}}({{.VariableName}}C.{{.CstructLeafName}}){{else}}
+{{lowCaseFirstLetter .MessageName}}.{{.FieldName}}, err = {{decodeDataType .DataType}}({{.VariableName}}C.{{.CstructLeafName}})
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
-{{end}}{{end}}{{end}}
+{{end}}{{if .Optionality}}{{template "OPTIONALITY_DECODE_END" . }}{{end}}{{end}}{{end}}
 
 {{ define "OPTIONAL_DECODE_SINGLE" }}
 {{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}{
-{{upperCaseFirstLetter .FieldName}}: {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C),
+{{.VariableName}} := {{.ProtoFileName}}.{{.MessageName}}{
+{{upperCaseFirstLetter .FieldName}}: {{decodeDataType .DataType}}({{.VariableName}}C),
 }{{else}}
-{{lowCaseFirstLetter .MessageName}} := new({{.ProtoFileName}}.{{.MessageName}})
-{{lowCaseFirstLetter .MessageName}}Value, err := {{decodeDataType .DataType}}({{lowCaseFirstLetter .MessageName}}C)
+{{.VariableName}} := new({{.ProtoFileName}}.{{.MessageName}})
+{{.VariableName}}Value, err := {{decodeDataType .DataType}}({{.VariableName}}C)
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
-{{lowCaseFirstLetter .MessageName}}.{{upperCaseFirstLetter .FieldName}} = {{lowCaseFirstLetter .MessageName}}Value
+{{.VariableName}}.{{upperCaseFirstLetter .FieldName}} = {{.VariableName}}Value
 {{end}}{{end}}{{end}}
+
+{{ define "OPTIONALITY_ENCODE_BEGIN" }}
+if {{.VariableName}}.{{.FieldName}} != nil {
+{{end}}
+
+{{ define "OPTIONALITY_ENCODE_END" }}
+{{.VariableName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C
+}{{end}}
+
+{{ define "OPTIONALITY_DECODE_BEGIN" }}
+if {{.VariableName}}C.{{.CstructLeafName}} != nil {
+{{end}}
+
+{{ define "OPTIONALITY_DECODE_END" }}
+}{{end}}

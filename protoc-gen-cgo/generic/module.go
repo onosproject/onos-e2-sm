@@ -56,6 +56,8 @@ type elementaryField struct {
 	FieldTypeName   string
 	CstructName     string
 	CstructLeafName string
+	Optionality     bool // This item identifies whether structure is OPTIONAL in ASN1 definition
+	VariableName    string
 }
 
 // Defines data structure to pass to enum template
@@ -74,7 +76,7 @@ type reportModule struct {
 	*pgs.ModuleBase
 }
 
-// New configures the module with an instance of ModuleBase
+// NewModule configures the module with an instance of ModuleBase
 func NewModule() pgs.Module {
 	return &reportModule{
 		ModuleBase: &pgs.ModuleBase{},
@@ -122,232 +124,244 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		fmt.Fprintf(buf, "------------------------------------------ Enums are -------------------------------------------\n")
 		// ToDo: find a way how to pass comments to Enums -- [json_name] tag doesn't work
 		for i, enum := range f.AllEnums() { // Constants
-			fmt.Fprintf(buf, "%03d. Enum Name %v\n", i, enum.Name())
-			fmt.Fprintf(buf, "%03d. Enum Descriptor %v\n", i, enum.Descriptor())
-			enumData := enumDataStruct{
-				MessageName:     enum.Name().String(),
-				ProtoFileName:   basicTypesInfo.ProtoFileName,
-				PackageName:     basicTypesInfo.PackageName,
-				FullPackageName: basicTypesInfo.FullPackageName,
-				CstructName:     "",
-				FieldList:       make([]elementaryField, 0),
+
+			// If it's not a constant (or any other message which doesn't have specific C-structs - process and create a file, otherwise ignore
+			if !strings.Contains(enum.SourceCodeInfo().LeadingComments(), "{-}") ||
+				!strings.Contains(enum.SourceCodeInfo().LeadingComments(), "constant") {
+				fmt.Fprintf(buf, "%03d. Enum Name %v\n", i, enum.Name())
+				fmt.Fprintf(buf, "%03d. Enum Descriptor %v\n", i, enum.Descriptor())
+				enumData := enumDataStruct{
+					MessageName:     doLinting(enum.Name().String()),
+					ProtoFileName:   basicTypesInfo.ProtoFileName,
+					PackageName:     basicTypesInfo.PackageName,
+					FullPackageName: basicTypesInfo.FullPackageName,
+					CstructName:     "",
+					FieldList:       make([]elementaryField, 0),
+				}
+				enumData.CstructName = extractCstructName(enum.SourceCodeInfo().LeadingComments()) //.Name().String() // Don't know how to get it (yet)
+
+				var listItem elementaryField
+
+				for j, value := range enum.Descriptor().GetValue() {
+					fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetName() %v\n", j, value.GetName())
+					fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetNumber() %v\n", j, value.GetNumber())
+					listItem.FieldName = value.GetName()
+					listItem.ProtoFileName = basicTypesInfo.ProtoFileName
+					listItem.MessageName = doLinting(enum.Name().String())
+					listItem.CstructLeafName = adjustEnumLeafName(squeezeDoubleDash(value.GetName()), enumData.CstructName) // Don't know how to obtain (yet)
+					enumData.FieldList = append(enumData.FieldList, listItem)
+				}
+
+				tplEnum, err := template.New("enum.tpl").Funcs(template.FuncMap{
+					"lowCaseFirstLetter":   lowCaseFirstLetter,
+					"upperCaseFirstLetter": upperCaseFirstLetter,
+					"dashToUnderscore":     dashToUnderscore,
+					"underscoreToDash":     underscoreToDash,
+					"tolow":                strings.ToLower,
+					"cleanDashes":          cleanDashes,
+					"cutIES":               cutIES,
+				}).ParseFiles("enum.tpl")
+				if err != nil {
+					//fmt.Errorf("couldn't parse template :/ %v", err)
+					panic(err)
+				}
+
+				// Generating new .go file
+				if !findWithinBasicTypes(enumData.CstructName) {
+					m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+".go", tplEnum, enumData)
+				}
+
+				//// Handling a unit test here
+				//utTpl, err := template.New("unit_test.tpl").Funcs(template.FuncMap{
+				//	"lowCaseFirstLetter":   lowCaseFirstLetter,
+				//	"upperCaseFirstLetter": upperCaseFirstLetter,
+				//	"dashToUnderscore":     dashToUnderscore,
+				//	"underscoreToDash":     underscoreToDash,
+				//	"tolow":                strings.ToLower,
+				//	"cleanDashes":          cleanDashes,
+				//	"cutIES":               cutIES,
+				//}).ParseFiles("unit_test.tpl")
+				//if err != nil {
+				//	//fmt.Errorf("couldn't parse Unit Test template :/ %v", err)
+				//	panic(err)
+				//}
+				//
+				//// Generating new .go file
+				//if !findWithinBasicTypes(enumData.CstructName) {
+				//	m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+"_test.go", utTpl, enumData)
+				//}
 			}
-			enumData.CstructName = extractEnumCstructName(enum.SourceCodeInfo().LeadingComments()) //.Name().String() // Don't know how to get it (yet)
-
-			var listItem elementaryField
-
-			for j, value := range enum.Descriptor().GetValue() {
-				fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetName() %v\n", j, value.GetName())
-				fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetNumber() %v\n", j, value.GetNumber())
-				listItem.FieldName = value.GetName()
-				listItem.ProtoFileName = basicTypesInfo.ProtoFileName
-				listItem.MessageName = enum.Name().String()
-				listItem.CstructLeafName = adjustEnumLeafName(squeezeDoubleDash(value.GetName()), enumData.CstructName) // Don't know how to obtain (yet)
-				enumData.FieldList = append(enumData.FieldList, listItem)
-			}
-
-			tplEnum, err := template.New("enum.tpl").Funcs(template.FuncMap{
-				"lowCaseFirstLetter":   lowCaseFirstLetter,
-				"upperCaseFirstLetter": upperCaseFirstLetter,
-				"dashToUnderscore":     dashToUnderscore,
-				"underscoreToDash":     underscoreToDash,
-				"tolow":                strings.ToLower,
-				"cleanDashes":          cleanDashes,
-				"cutIES":               cutIES,
-			}).ParseFiles("enum.tpl")
-			if err != nil {
-				//fmt.Errorf("couldn't parse template :/ %v", err)
-				panic(err)
-			}
-
-			// Generating new .go file
-			if !findWithinBasicTypes(enumData.CstructName) {
-				m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+".go", tplEnum, enumData)
-			}
-
-			//// Handling a unit test here
-			//utTpl, err := template.New("unit_test.tpl").Funcs(template.FuncMap{
-			//	"lowCaseFirstLetter":   lowCaseFirstLetter,
-			//	"upperCaseFirstLetter": upperCaseFirstLetter,
-			//	"dashToUnderscore":     dashToUnderscore,
-			//	"underscoreToDash":     underscoreToDash,
-			//	"tolow":                strings.ToLower,
-			//	"cleanDashes":          cleanDashes,
-			//	"cutIES":               cutIES,
-			//}).ParseFiles("unit_test.tpl")
-			//if err != nil {
-			//	//fmt.Errorf("couldn't parse Unit Test template :/ %v", err)
-			//	panic(err)
-			//}
-			//
-			//// Generating new .go file
-			//if !findWithinBasicTypes(enumData.CstructName) {
-			//	m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+"_test.go", utTpl, enumData)
-			//}
 		}
 
 		fmt.Fprintf(buf, "---------------------------------------- Messages are -----------------------------------------\n")
 		for i, msg := range f.AllMessages() { // Messages in each of .proto files
 
-			optional := false
-			repeated := false
-			oneof := false
-			var cstructName string
-			var items int = 0
-			valueFound := false
+			// If it's not a constant (or any other message which doesn't have specific C-structs - process and create a file, otherwise ignore
+			if !strings.Contains(msg.SourceCodeInfo().LeadingComments(), "{-}") ||
+				!strings.Contains(msg.SourceCodeInfo().LeadingComments(), "constant") {
+				optional := false
+				repeated := false
+				oneof := false
+				var cstructName string
+				var items int = 0
+				valueFound := false
 
-			fieldItems := fieldList{
-				RepeatedField: make([]elementaryField, 0),
-				OneOfField:    make([]elementaryField, 0),
-				OptionalField: make([]elementaryField, 0),
-				SingleItem:    false,
-			}
-			//deps := dependencies{
-			//	Multiple:         false,
-			//	DependenciesList: make([]string, 0),
-			//}
-
-			flds := msg.Descriptor().GetField()
-			fmt.Fprintf(buf, "%03d. Message Descriptor() %v\n", i, msg.Descriptor())
-			fmt.Fprintf(buf, "%03d. Message Name() %v\n", i, extractProtoFileName(f.Name().Split()[0]))
-
-			for _, fld := range flds {
-				items++
-				fmt.Fprintf(buf, "%03d. Field() -- %v\n ", i, fld.String())
-
-				var elemField elementaryField
-
-				elemField.FieldName = adjustFieldName(fld.GetName())
-				elemField.CstructLeafName = dashToUnderscore(extractCstructFieldName(fld.GetJsonName()))
-				if strings.Contains(strings.ToLower(elemField.FieldName), "value") {
-					valueFound = true
+				fieldItems := fieldList{
+					RepeatedField: make([]elementaryField, 0),
+					OneOfField:    make([]elementaryField, 0),
+					OptionalField: make([]elementaryField, 0),
+					SingleItem:    false,
 				}
+				//deps := dependencies{
+				//	Multiple:         false,
+				//	DependenciesList: make([]string, 0),
+				//}
 
-				cstructName = extractCstructName(fld.GetJsonName())
-				elemField.CstructName = extractCstructName(fld.GetJsonName())
+				flds := msg.Descriptor().GetField()
+				fmt.Fprintf(buf, "%03d. Message Descriptor() %v\n", i, msg.Descriptor())
+				fmt.Fprintf(buf, "%03d. Message Name() %v\n", i, extractProtoFileName(f.Name().Split()[0]))
 
-				elemField.DataType = convertDataType(extractDataType(fld.GetType().String()),
-					extractDependentType(msg.Package().ProtoName().String(), fld.GetTypeName()))
+				for _, fld := range flds {
+					items++
+					fmt.Fprintf(buf, "%03d. Field() -- %v\n ", i, fld.String())
 
-				//deps.DependenciesList = putDependency(deps.DependenciesList, elemField.CstructName)
+					var elemField elementaryField
 
-				elemField.MessageName = msg.Name().String()
-				elemField.ProtoFileName = basicTypesInfo.ProtoFileName
-				elemField.FieldTypeName = extractTypeName(msg.FullyQualifiedName(), msg.Package().ProtoName().String())
-				//fmt.Fprintf(buf, "%03d. Message Descriptor().OneOfDecl() %v\n", i, msg.Descriptor().GetOneofDecl())
+					elemField.FieldName = adjustFieldName(fld.GetName())
+					elemField.CstructLeafName = dashToUnderscore(extractCstructFieldName(fld.GetJsonName()))
+					if strings.Contains(strings.ToLower(elemField.FieldName), "value") {
+						valueFound = true
+					}
 
-				if msg.Descriptor().GetOneofDecl() != nil {
-					oneof = true
-					fieldItems.OneOfField = append(fieldItems.OneOfField, elemField)
-				} else {
-					switch extractLabel(fld.GetLabel().String()) {
-					case "OPTIONAL":
-						optional = true
-						fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
+					cstructName = extractCstructName(msg.SourceCodeInfo().LeadingComments())
+					elemField.CstructName = cstructName
+					elemField.Optionality = checkOptionalField(fld.GetJsonName())
+					elemField.VariableName = lowCaseFirstLetter(doLinting(msg.Name().String()))
 
-					case "REPEATED":
-						repeated = true
-						fieldItems.RepeatedField = append(fieldItems.RepeatedField, elemField)
+					elemField.DataType = convertDataType(extractDataType(fld.GetType().String()),
+						extractDependentType(msg.Package().ProtoName().String(), fld.GetTypeName()))
 
-					default: // If message has only one leaf it is still "OPTIONAL"
-						optional = true
-						fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
+					//deps.DependenciesList = putDependency(deps.DependenciesList, elemField.CstructName)
 
+					elemField.MessageName = doLinting(msg.Name().String())
+					elemField.ProtoFileName = basicTypesInfo.ProtoFileName
+					elemField.FieldTypeName = extractTypeName(msg.FullyQualifiedName(), msg.Package().ProtoName().String())
+					//fmt.Fprintf(buf, "%03d. Message Descriptor().OneOfDecl() %v\n", i, msg.Descriptor().GetOneofDecl())
+
+					if msg.Descriptor().GetOneofDecl() != nil {
+						oneof = true
+						fieldItems.OneOfField = append(fieldItems.OneOfField, elemField)
+					} else {
+						switch extractLabel(fld.GetLabel().String()) {
+						case "OPTIONAL":
+							optional = true
+							fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
+
+						case "REPEATED":
+							repeated = true
+							fieldItems.RepeatedField = append(fieldItems.RepeatedField, elemField)
+
+						default: // If message has only one leaf it is still "OPTIONAL"
+							optional = true
+							fieldItems.OptionalField = append(fieldItems.OptionalField, elemField)
+
+						}
 					}
 				}
-			}
 
-			// ToDo - Go through the nested types
-			//nstdTypes := msg.Descriptor().GetNestedType()
-			// ...
+				// ToDo - Go through the nested types
+				//nstdTypes := msg.Descriptor().GetNestedType()
+				// ...
 
-			if items == 1 && valueFound {
-				fieldItems.SingleItem = true
-			}
-			//if len(deps.DependenciesList) > 1 {
-			//	deps.Multiple = true
-			//}
+				if items == 1 && valueFound {
+					fieldItems.SingleItem = true
+				}
+				//if len(deps.DependenciesList) > 1 {
+				//	deps.Multiple = true
+				//}
 
-			// Filling in data structure to pass to template with correct input
-			msgData := msgDataStruct{
-				MessageName:     msg.Name().String(),
-				ProtoFileName:   basicTypesInfo.ProtoFileName,
-				PackageName:     basicTypesInfo.PackageName,
-				FullPackageName: basicTypesInfo.FullPackageName,
-				CstructName:     cstructName,
-				FieldList:       fieldItems,
-				OneOf:           oneof,
-				Repeated:        repeated,
-				Optional:        optional,
-				//Dependencies:  deps,
-			}
-			fmt.Fprintf(buf, "%03d. Gathered Message Data -- %v\n ", i, msgData)
+				// Filling in data structure to pass to template with correct input
+				msgData := msgDataStruct{
+					MessageName:     msg.Name().String(),
+					ProtoFileName:   basicTypesInfo.ProtoFileName,
+					PackageName:     basicTypesInfo.PackageName,
+					FullPackageName: basicTypesInfo.FullPackageName,
+					CstructName:     cstructName,
+					FieldList:       fieldItems,
+					OneOf:           oneof,
+					Repeated:        repeated,
+					Optional:        optional,
+					//VariableName: doLinting(msg.Name().String()), //ToDo - complete integration of linters
+					//Dependencies:  deps,
+				}
+				fmt.Fprintf(buf, "%03d. Gathered Message Data -- %v\n ", i, msgData)
 
-			fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
+				fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
 
-			tplMsg, err := template.New("message.tpl").Funcs(template.FuncMap{
-				"lowCaseFirstLetter":   lowCaseFirstLetter,
-				"upperCaseFirstLetter": upperCaseFirstLetter,
-				"dashToUnderscore":     dashToUnderscore,
-				"underscoreToDash":     underscoreToDash,
-				"decodeDataType":       decodeDataType,
-				"encodeDataType":       encodeDataType,
-				"checkElementaryType":  checkElementaryType,
-				"cleanDashes":          cleanDashes,
-				"cutIES":               cutIES,
-			}).ParseFiles("message.tpl")
-			if err != nil {
-				//fmt.Errorf("couldn't parse Message template :/ %v", err)
-				panic(err)
-			}
+				tplMsg, err := template.New("message.tpl").Funcs(template.FuncMap{
+					"lowCaseFirstLetter":   lowCaseFirstLetter,
+					"upperCaseFirstLetter": upperCaseFirstLetter,
+					"dashToUnderscore":     dashToUnderscore,
+					"underscoreToDash":     underscoreToDash,
+					"decodeDataType":       decodeDataType,
+					"encodeDataType":       encodeDataType,
+					"checkElementaryType":  checkElementaryType,
+					"cleanDashes":          cleanDashes,
+					"cutIES":               cutIES,
+				}).ParseFiles("message.tpl")
+				if err != nil {
+					//fmt.Errorf("couldn't parse Message template :/ %v", err)
+					panic(err)
+				}
 
-			// Generating new .go file
-			if !findWithinBasicTypes(msgData.CstructName) {
-				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+".go", tplMsg, msgData)
-			}
+				// Generating new .go file
+				if !findWithinBasicTypes(msgData.CstructName) {
+					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+".go", tplMsg, msgData)
+				}
 
-			// Handling a unit test
-			utTpl, err := template.New("unit_test.tpl").Funcs(template.FuncMap{
-				"lowCaseFirstLetter":   lowCaseFirstLetter,
-				"upperCaseFirstLetter": upperCaseFirstLetter,
-				"dashToUnderscore":     dashToUnderscore,
-				"underscoreToDash":     underscoreToDash,
-				"decodeDataType":       decodeDataType,
-				"encodeDataType":       encodeDataType,
-				"checkElementaryType":  checkElementaryType,
-				"cleanDashes":          cleanDashes,
-				"cutIES":               cutIES,
-			}).ParseFiles("unit_test.tpl")
-			if err != nil {
-				//fmt.Errorf("couldn't parse Unit Test template :/ %v", err)
-				panic(err)
-			}
+				// Handling a unit test
+				utTpl, err := template.New("unit_test.tpl").Funcs(template.FuncMap{
+					"lowCaseFirstLetter":   lowCaseFirstLetter,
+					"upperCaseFirstLetter": upperCaseFirstLetter,
+					"dashToUnderscore":     dashToUnderscore,
+					"underscoreToDash":     underscoreToDash,
+					"decodeDataType":       decodeDataType,
+					"encodeDataType":       encodeDataType,
+					"checkElementaryType":  checkElementaryType,
+					"cleanDashes":          cleanDashes,
+					"cutIES":               cutIES,
+				}).ParseFiles("unit_test.tpl")
+				if err != nil {
+					//fmt.Errorf("couldn't parse Unit Test template :/ %v", err)
+					panic(err)
+				}
 
-			// Generating new .go file
-			if !findWithinBasicTypes(msgData.CstructName) {
-				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+"_test.go", utTpl, msgData)
-			}
+				// Generating new .go file
+				if !findWithinBasicTypes(msgData.CstructName) {
+					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+"_test.go", utTpl, msgData)
+				}
 
-			// Handling a type creation
-			typesTpl, err := template.New("types_gen.tpl").Funcs(template.FuncMap{
-				"lowCaseFirstLetter":   lowCaseFirstLetter,
-				"upperCaseFirstLetter": upperCaseFirstLetter,
-				"dashToUnderscore":     dashToUnderscore,
-				"underscoreToDash":     underscoreToDash,
-				"decodeDataType":       decodeDataType,
-				"encodeDataType":       encodeDataType,
-				"checkElementaryType":  checkElementaryType,
-				"cleanDashes":          cleanDashes,
-				"cutIES":               cutIES,
-			}).ParseFiles("types_gen.tpl")
-			if err != nil {
-				//fmt.Errorf("couldn't parse template for types generation :/ %v", err)
-				panic(err)
-			}
+				// Handling a type creation
+				typesTpl, err := template.New("types_gen.tpl").Funcs(template.FuncMap{
+					"lowCaseFirstLetter":   lowCaseFirstLetter,
+					"upperCaseFirstLetter": upperCaseFirstLetter,
+					"dashToUnderscore":     dashToUnderscore,
+					"underscoreToDash":     underscoreToDash,
+					"decodeDataType":       decodeDataType,
+					"encodeDataType":       encodeDataType,
+					"checkElementaryType":  checkElementaryType,
+					"cleanDashes":          cleanDashes,
+					"cutIES":               cutIES,
+				}).ParseFiles("types_gen.tpl")
+				if err != nil {
+					//fmt.Errorf("couldn't parse template for types generation :/ %v", err)
+					panic(err)
+				}
 
-			// Generating new .go file
-			if !findWithinBasicTypes(msgData.CstructName) {
-				m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.MessageName)+".go", typesTpl, msgData)
+				// Generating new .go file
+				if !findWithinBasicTypes(msgData.CstructName) {
+					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.MessageName)+".go", typesTpl, msgData)
+				}
 			}
 		}
 
@@ -433,20 +447,20 @@ func extractTypeName(fullStr string, delStr string) string {
 	return strings.ReplaceAll(fullStr, "."+delStr+".", "")
 }
 
-func extractCstructName(str string) string {
+func checkOptionalField(str string) bool {
 
-	if !strings.Contains(str, ":") {
-		return str
+	if !strings.Contains(str, ":OPTIONAL") {
+		return false
 	}
-	return str[:strings.Index(str, ":")]
+	return true
 }
 
 func extractCstructFieldName(str string) string {
 
 	if !strings.Contains(str, ":") {
-		return ""
+		return str
 	}
-	return str[strings.Index(str, ":")+1:]
+	return str[:strings.Index(str, ":")]
 }
 
 func squeezeDoubleDash(str string) string {
@@ -568,7 +582,7 @@ func adjustFullPackageName(fullPackageName string) string {
 	return path + adjustedPackageName
 }
 
-func extractEnumCstructName(name string) string {
+func extractCstructName(name string) string {
 
 	return name[strings.Index(name, "{")+1 : strings.Index(name, "}")]
 }
@@ -611,11 +625,11 @@ func findWithinBasicTypes(fileName string) bool {
 	return false
 }
 
-//ToDo - implement proper linting..
-//func lintingInstance(str string) string {
-//
-//	strings.ReplaceAll(str, "Id", "ID")
-//	strings.ReplaceAll(str, "id", "ID")
-//
-//	return str
-//}
+//ToDo - fix linting properly - overlapping with custom types for some reason..
+func doLinting(str string) string {
+
+	//res := strings.ReplaceAll(str, "Id", "ID")
+	//res = strings.ReplaceAll(res, "id", "ID")
+
+	return str //res
+}
