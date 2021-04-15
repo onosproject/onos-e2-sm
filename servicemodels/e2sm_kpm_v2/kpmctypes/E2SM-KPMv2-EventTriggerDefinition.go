@@ -46,14 +46,14 @@ func PerEncodeE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinition *e2sm_
 }
 
 //func XerDecodeE2SmKpmEventTriggerDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
-//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPM_EventTriggerDefinition)
+//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_KPMv2_EventTriggerDefinition)
 //	if err != nil {
 //		return nil, err
 //	}
 //	if unsafePtr == nil {
 //		return nil, fmt.Errorf("pointer decoded from XER is nil")
 //	}
-//	return decodeE2SmKpmEventTriggerDefinition((*C.E2SM_KPM_EventTriggerDefinition_t)(unsafePtr))
+//	return decodeE2SmKpmEventTriggerDefinition((*C.E2SM_KPMv2_EventTriggerDefinition_t)(unsafePtr))
 //}
 
 func PerDecodeE2SmKpmEventTriggerDefinition(bytes []byte) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
