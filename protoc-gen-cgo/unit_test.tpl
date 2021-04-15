@@ -13,11 +13,11 @@ pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/{{.ProtoFileName}}/p
 "testing"
 )
 
-func create{{.MessageName}}Msg() (*{{.ProtoFileName}}.{{.MessageName}}, error) {
-//ToDo - fill in with correct structs
-// {{lowCaseFirstLetter .MessageName}} := pdubuilder.Create{{.MessageName}}() //ToDo - put an argument here
+func create{{.GlobalName}}Msg() (*{{.ProtoFileName}}.{{.MessageName}}, error) {
 
-{{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}{ {{if .Optional}}//ToDo - check whether pointers passed correctly with regard to Protobuf's definition{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
+// {{lowCaseFirstLetter .GlobalName}} := pdubuilder.Create{{.GlobalName}}() //ToDo - fill in arguments here(if this function exists
+
+{{lowCaseFirstLetter .GlobalName}} := {{.ProtoFileName}}.{{.MessageName}}{ {{if .Optional}}{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
 {{upperCaseFirstLetter .FieldName}}: nil,{{end}}
 {{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}{{upperCaseFirstLetter .FieldName}}: make([]*{{.ProtoFileName}}.{{.DataType}}, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
 {{end}}
@@ -32,58 +32,58 @@ func create{{.MessageName}}Msg() (*{{.ProtoFileName}}.{{.MessageName}}, error) {
 {{end}}
 }
 
-if err := {{lowCaseFirstLetter .MessageName}}.Validate(); err != nil {
+if err := {{lowCaseFirstLetter .GlobalName}}.Validate(); err != nil {
 return nil, fmt.Errorf("error validating {{.MessageName}} %s", err.Error())
 }
-return {{lowCaseFirstLetter .MessageName}}, nil
+return &{{lowCaseFirstLetter .GlobalName}}, nil
 }
 
-func Test_xerEncoding{{.MessageName}}(t *testing.T) {
+func Test_xerEncoding{{.GlobalName}}(t *testing.T) {
 
-{{lowCaseFirstLetter .MessageName}}, err := create{{.MessageName}}Msg()
-assert.NilError(t, err, "Error creating PDU")
+{{lowCaseFirstLetter .GlobalName}}, err := create{{.GlobalName}}Msg()
+assert.NilError(t, err, "Error creating {{.MessageName}} PDU")
 
-xer, err := xerEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
+xer, err := xerEncode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}})
 assert.NilError(t, err)
 assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
-t.Logf("{{.MessageName}} XER\n%s", string(xer))
+t.Logf("{{.GlobalName}} XER\n%s", string(xer))
 
-result, err := xerDecode{{.MessageName}}(xer)
+result, err := xerDecode{{.GlobalName}}(xer)
 assert.NilError(t, err)
 assert.Assert(t, result != nil)
-t.Logf("{{.MessageName}} XER - decoded\n%v", result)
+t.Logf("{{.GlobalName}} XER - decoded\n%v", result)
 //ToDo - adjust field's verification {{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
-assert.Equal(t, {{lowCaseFirstLetter .MessageName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
+assert.Equal(t, {{lowCaseFirstLetter .GlobalName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
 {{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}
 assert.Equal(t, 1, len(result.Get{{upperCaseFirstLetter .FieldName}}())) //ToDo - adjust length of a list
-assert.DeepEqual(t, {{lowCaseFirstLetter .MessageName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
+assert.DeepEqual(t, {{lowCaseFirstLetter .GlobalName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
 {{if .OneOf}}//This one if for OneOf fields
 {{ $oneofFields1 := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneofFields1 }}
-assert.DeepEqual(t, {{lowCaseFirstLetter .MessageName}}.Get{{upperCaseFirstLetter .FieldName}}().GetValue(), result.Get{{upperCaseFirstLetter .FieldName}}().GetValue()){{end}}
+assert.DeepEqual(t, {{lowCaseFirstLetter .GlobalName}}.Get{{upperCaseFirstLetter .FieldName}}().GetValue(), result.Get{{upperCaseFirstLetter .FieldName}}().GetValue()){{end}}
 {{end}}
 }
 
-func Test_perEncoding{{.MessageName}}(t *testing.T) {
+func Test_perEncoding{{.GlobalName}}(t *testing.T) {
 
-{{lowCaseFirstLetter .MessageName}}, err := create{{.MessageName}}Msg()
-assert.NilError(t, err, "Error creating PDU")
+{{lowCaseFirstLetter .GlobalName}}, err := create{{.GlobalName}}Msg()
+assert.NilError(t, err, "Error creating {{.MessageName}} PDU")
 
-per, err := perEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
+per, err := perEncode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}})
 assert.NilError(t, err)
 assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
-t.Logf("{{.MessageName}} PER\n%v", hex.Dump(per))
+t.Logf("{{.GlobalName}} PER\n%v", hex.Dump(per))
 
-result, err := perDecode{{.MessageName}}(per)
+result, err := perDecode{{.GlobalName}}(per)
 assert.NilError(t, err)
 assert.Assert(t, result != nil)
-t.Logf("{{.MessageName}} PER - decoded\n%v", result)
+t.Logf("{{.GlobalName}} PER - decoded\n%v", result)
 //ToDo - adjust field's verification {{ $optionalFields2 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields2 }}
-assert.Equal(t, {{lowCaseFirstLetter .MessageName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
+assert.Equal(t, {{lowCaseFirstLetter .GlobalName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
 {{ $repeatedFields2 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields2 }}
 assert.Equal(t, 1, len(result.Get{{upperCaseFirstLetter .FieldName}}())) //ToDo - adjust length of a list
-assert.DeepEqual(t, {{lowCaseFirstLetter .MessageName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
+assert.DeepEqual(t, {{lowCaseFirstLetter .GlobalName}}.Get{{upperCaseFirstLetter .FieldName}}(), result.Get{{upperCaseFirstLetter .FieldName}}()){{end}}
 {{if .OneOf}}//This one if for OneOf fields
 {{ $oneofFields1 := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneofFields1 }}
-assert.DeepEqual(t, {{lowCaseFirstLetter .MessageName}}.Get{{upperCaseFirstLetter .FieldName}}().GetValue(), result.Get{{upperCaseFirstLetter .FieldName}}().GetValue()){{end}}
+assert.DeepEqual(t, {{lowCaseFirstLetter .GlobalName}}.Get{{upperCaseFirstLetter .FieldName}}().GetValue(), result.Get{{upperCaseFirstLetter .FieldName}}().GetValue()){{end}}
 {{end}}
 }

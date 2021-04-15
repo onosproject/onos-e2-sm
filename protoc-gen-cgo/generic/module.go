@@ -18,6 +18,7 @@ const moduleName = "cgo"
 // Defines data structure to pass to template
 type msgDataStruct struct {
 	MessageName     string
+	GlobalName      string
 	ProtoFileName   string
 	PackageName     string
 	FullPackageName string
@@ -50,6 +51,7 @@ type fieldList struct {
 
 type elementaryField struct {
 	MessageName     string
+	GlobalName      string
 	ProtoFileName   string
 	FieldName       string
 	DataType        string
@@ -63,6 +65,7 @@ type elementaryField struct {
 // Defines data structure to pass to enum template
 type enumDataStruct struct {
 	MessageName     string
+	GlobalName      string
 	ProtoFileName   string
 	PackageName     string
 	FullPackageName string
@@ -131,7 +134,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				fmt.Fprintf(buf, "%03d. Enum Name %v\n", i, enum.Name())
 				fmt.Fprintf(buf, "%03d. Enum Descriptor %v\n", i, enum.Descriptor())
 				enumData := enumDataStruct{
-					MessageName:     doLinting(enum.Name().String()),
+					MessageName:     enum.Name().String(),
+					GlobalName:      doLinting(enum.Name().String()),
 					ProtoFileName:   basicTypesInfo.ProtoFileName,
 					PackageName:     basicTypesInfo.PackageName,
 					FullPackageName: basicTypesInfo.FullPackageName,
@@ -145,9 +149,10 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				for j, value := range enum.Descriptor().GetValue() {
 					fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetName() %v\n", j, value.GetName())
 					fmt.Fprintf(buf, "%03d. Enum Descriptor().GetValue().GetNumber() %v\n", j, value.GetNumber())
-					listItem.FieldName = value.GetName()
+					listItem.FieldName = lowCaseFirstLetter(value.GetName())
 					listItem.ProtoFileName = basicTypesInfo.ProtoFileName
-					listItem.MessageName = doLinting(enum.Name().String())
+					listItem.MessageName = enum.Name().String()
+					listItem.VariableName = doLinting(enum.Name().String())
 					listItem.CstructLeafName = adjustEnumLeafName(squeezeDoubleDash(value.GetName()), enumData.CstructName) // Don't know how to obtain (yet)
 					enumData.FieldList = append(enumData.FieldList, listItem)
 				}
@@ -227,7 +232,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 					var elemField elementaryField
 
-					elemField.FieldName = adjustFieldName(fld.GetName())
+					elemField.FieldName = lowCaseFirstLetter(adjustFieldName(fld.GetName()))
 					elemField.CstructLeafName = dashToUnderscore(extractCstructFieldName(fld.GetJsonName()))
 					if strings.Contains(strings.ToLower(elemField.FieldName), "value") {
 						valueFound = true
@@ -236,14 +241,16 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					cstructName = extractCstructName(msg.SourceCodeInfo().LeadingComments())
 					elemField.CstructName = cstructName
 					elemField.Optionality = checkOptionalField(fld.GetJsonName())
-					elemField.VariableName = lowCaseFirstLetter(doLinting(msg.Name().String()))
+					//elemField.VariableName = lowCaseFirstLetter(doLinting(msg.Name().String()))
 
 					elemField.DataType = convertDataType(extractDataType(fld.GetType().String()),
 						extractDependentType(msg.Package().ProtoName().String(), fld.GetTypeName()))
 
 					//deps.DependenciesList = putDependency(deps.DependenciesList, elemField.CstructName)
 
-					elemField.MessageName = doLinting(msg.Name().String())
+					elemField.MessageName = msg.Name().String()
+					elemField.VariableName = doLinting(msg.Name().String())
+					elemField.GlobalName = elemField.VariableName
 					elemField.ProtoFileName = basicTypesInfo.ProtoFileName
 					elemField.FieldTypeName = extractTypeName(msg.FullyQualifiedName(), msg.Package().ProtoName().String())
 					//fmt.Fprintf(buf, "%03d. Message Descriptor().OneOfDecl() %v\n", i, msg.Descriptor().GetOneofDecl())
@@ -283,6 +290,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				// Filling in data structure to pass to template with correct input
 				msgData := msgDataStruct{
 					MessageName:     msg.Name().String(),
+					GlobalName:      doLinting(msg.Name().String()),
 					ProtoFileName:   basicTypesInfo.ProtoFileName,
 					PackageName:     basicTypesInfo.PackageName,
 					FullPackageName: basicTypesInfo.FullPackageName,
@@ -308,6 +316,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					"checkElementaryType":  checkElementaryType,
 					"cleanDashes":          cleanDashes,
 					"cutIES":               cutIES,
+					"doLinting":            doLinting,
 				}).ParseFiles("message.tpl")
 				if err != nil {
 					//fmt.Errorf("couldn't parse Message template :/ %v", err)
@@ -330,6 +339,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					"checkElementaryType":  checkElementaryType,
 					"cleanDashes":          cleanDashes,
 					"cutIES":               cutIES,
+					"doLinting":            doLinting,
 				}).ParseFiles("unit_test.tpl")
 				if err != nil {
 					//fmt.Errorf("couldn't parse Unit Test template :/ %v", err)
@@ -352,6 +362,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					"checkElementaryType":  checkElementaryType,
 					"cleanDashes":          cleanDashes,
 					"cutIES":               cutIES,
+					"doLinting":            doLinting,
 				}).ParseFiles("types_gen.tpl")
 				if err != nil {
 					//fmt.Errorf("couldn't parse template for types generation :/ %v", err)
@@ -360,7 +371,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 				// Generating new .go file
 				if !findWithinBasicTypes(msgData.CstructName) {
-					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.MessageName)+".go", typesTpl, msgData)
+					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.MessageName)+"_types.go", typesTpl, msgData)
 				}
 			}
 		}
@@ -515,15 +526,17 @@ func decodeDataType(dataType string) string {
 	case "int32", "uint32", "uint64":
 		return dataType
 	case "[]byte": // ToDo - sometimes could be OctetString
-		return dataType
+		return "newOctetString"
 	case "string":
 		return "decodePrintableString"
+	case "bool":
+		return "decodeBoolean"
 	case "int64":
 		return "decodeInteger"
 	case "message": //ToDo: isn't it pointless?? -- missing enum then
-		return "decode" + upperCaseFirstLetter(dataType)
+		return "decode" + upperCaseFirstLetter(doLinting(dataType))
 	default:
-		return "decode" + upperCaseFirstLetter(dataType)
+		return "decode" + upperCaseFirstLetter(doLinting(dataType))
 	}
 }
 
@@ -533,15 +546,17 @@ func encodeDataType(dataType string) string {
 	case "int32", "uint32", "uint64":
 		return "C.long"
 	case "[]byte": // ToDo - sometimes could be OctetString
-		return dataType
+		return "decodeOctetString"
 	case "string":
-		return "decodePrintableString"
+		return "newPrintableString"
+	case "bool":
+		return "newBoolean"
 	case "int64":
 		return "newInteger"
 	case "message": //ToDo: isn't it pointless?? -- missing enum then
-		return "new" + upperCaseFirstLetter(dataType)
+		return "new" + upperCaseFirstLetter(doLinting(dataType))
 	default:
-		return "new" + upperCaseFirstLetter(dataType)
+		return "new" + upperCaseFirstLetter(doLinting(dataType))
 	}
 }
 
@@ -625,8 +640,19 @@ func findWithinBasicTypes(fileName string) bool {
 //ToDo - fix linting properly - overlapping with custom types for some reason..
 func doLinting(str string) string {
 
-	//res := strings.ReplaceAll(str, "Id", "ID")
-	//res = strings.ReplaceAll(res, "id", "ID")
+	//Firstly verify if this instance should be linted - go through exceptions
+	if strings.Contains(str, "PlmnIdentity") {
+		return str
+	}
+	if strings.Contains(str, "Oid") {
+		return str
+	}
+	if strings.Contains(str, "UeIdentity") {
+		return str
+	}
 
-	return str //res
+	res := strings.ReplaceAll(str, "Id", "ID")
+	res = strings.ReplaceAll(res, "id", "ID")
+
+	return res
 }

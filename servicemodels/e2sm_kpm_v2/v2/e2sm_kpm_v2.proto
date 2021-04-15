@@ -229,7 +229,7 @@ message TestCondValue {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:137
-//{GlobalKPMnode-ID}
+//{GlobalKPMv2node-ID}
 message GlobalKpmnodeId {
     // choice from e2sm_kpm_v2.0.2-rm.asn:137
     oneof global_kpmnode_id {
@@ -241,7 +241,7 @@ message GlobalKpmnodeId {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:145
-//{GlobalKPMnode-gNB-ID}
+//{GlobalKPMv2node-gNB-ID}
 message GlobalKpmnodeGnbId {
     GlobalgNbId global_g_nb_id = 1 [json_name = "global_gNB_ID"];
     GnbCuUpId g_nb_cu_up_id = 2 [json_name = "gNB_CU_UP_ID:OPTIONAL"];
@@ -277,7 +277,7 @@ message GnbIdChoice {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:167
-//{GlobalKPMnode-en-gNB-ID}
+//{GlobalKPMv2node-en-gNB-ID}
 message GlobalKpmnodeEnGnbId {
     GlobalenGnbId global_g_nb_id = 1 [json_name = "global_gNB_ID"];
     GnbCuUpId g_nb_cu_up_id = 2 [json_name = "gNB_CU_UP_ID:OPTIONAL"];
@@ -301,14 +301,14 @@ message EngnbId {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:185
-//{GlobalKPMnode-ng-eNB-ID}
+//{GlobalKPMv2node-ng-eNB-ID}
 message GlobalKpmnodeNgEnbId {
     GlobalngeNbId global_ng_e_nb_id = 1 [json_name = "global_ng_eNB_ID"];
     GnbDuId g_nb_du_id = 2 [json_name = "gNB_DU_ID:OPTIONAL"];
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:191
-//{GlobalngeNB-ID}
+//{GlobalngeNB-ID-KPMv2}
 message GlobalngeNbId {
     PlmnIdentity plmn_id = 1 [json_name = "plmn_id"];
     EnbIdChoice enb_id = 2 [json_name = "enb_id"];
@@ -328,7 +328,7 @@ message EnbIdChoice {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:206
-//{GlobalKPMnode-eNB-ID}
+//{GlobalKPMv2node-eNB-ID}
 message GlobalKpmnodeEnbId {
     GlobalEnbId global_e_nb_id = 1 [json_name = "global_eNB_ID"];
 };
@@ -341,7 +341,7 @@ message GlobalEnbId {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:217
-//{ENB-ID}
+//{ENB-ID-KPMv2}
 message EnbId {
     // choice from e2sm_kpm_v2.0.2-rm.asn:217
     oneof enb_id {
@@ -549,7 +549,7 @@ message MatchingUeidItem {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:337
-//{E2SM-KPM-EventTriggerDefinition}
+//{E2SM-KPMv2-EventTriggerDefinition}
 message E2SmKpmEventTriggerDefinition {
     // choice from e2sm-kpm-ies_v2.asn1:337
     oneof e2_sm_kpm_event_trigger_definition {
@@ -558,13 +558,13 @@ message E2SmKpmEventTriggerDefinition {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:342
-//{E2SM-KPM-EventTriggerDefinition-Format1}
+//{E2SM-KPMv2-EventTriggerDefinition-Format1}
 message E2SmKpmEventTriggerDefinitionFormat1 {
     int32 reporting_period = 1 [json_name = "reportingPeriod"];
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:351
-//{E2SM-KPM-ActionDefinition}
+//{E2SM-KPMv2-ActionDefinition}
 message E2SmKpmActionDefinition {
     RicStyleType ric_style_type = 1 [json_name = "ric_Style_Type"];
     oneof e2_sm_kpm_action_definition {
@@ -575,7 +575,7 @@ message E2SmKpmActionDefinition {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:362
-//{E2SM-KPM-ActionDefinition-Format1}
+//{E2SM-KPMv2-ActionDefinition-Format1}
 message E2SmKpmActionDefinitionFormat1 {
     CellObjectId cell_obj_id = 1 [json_name = "cellObjID"];
     MeasurementInfoList meas_info_list = 2 [json_name = "measInfoList"];
@@ -584,14 +584,14 @@ message E2SmKpmActionDefinitionFormat1 {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:370
-//{E2SM-KPM-ActionDefinition-Format2}
+//{E2SM-KPMv2-ActionDefinition-Format2}
 message E2SmKpmActionDefinitionFormat2 {
     UeIdentity ue_id = 1 [json_name = "ueID"];
     E2SmKpmActionDefinitionFormat1 subscript_info = 2 [json_name = "subscriptInfo"];
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:376
-//{E2SM-KPM-ActionDefinition-Format3}
+//{E2SM-KPMv2-ActionDefinition-Format3}
 message E2SmKpmActionDefinitionFormat3 {
     CellObjectId cell_obj_id = 1 [json_name = "cellObjID"];
     MeasurementCondList meas_cond_list = 2 [json_name = "measCondList"];
@@ -600,7 +600,7 @@ message E2SmKpmActionDefinitionFormat3 {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:391
-//{E2SM-KPM-IndicationHeader}
+//{E2SM-KPMv2-IndicationHeader}
 message E2SmKpmIndicationHeader {
     // choice from e2sm-kpm-v01.00.asn1:391
     oneof e2_sm_kpm_indication_header {
@@ -609,7 +609,7 @@ message E2SmKpmIndicationHeader {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:396
-//{E2SM-KPM-IndicationHeader-Format1}
+//{E2SM-KPMv2-IndicationHeader-Format1}
 message E2SmKpmIndicationHeaderFormat1 {
     TimeStamp collet_start_time = 1 [json_name = "colletStartTime"];
     string file_formatversion = 2 [json_name = "fileFormatversion:OPTIONAL"];
@@ -620,7 +620,7 @@ message E2SmKpmIndicationHeaderFormat1 {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:414
-//{E2SM-KPM-IndicationMessage}
+//{E2SM-KPMv2-IndicationMessage}
 message E2SmKpmIndicationMessage {
     // choice from e2sm_kpm_ies_v2.asn:414
     oneof e2_sm_kpm_indication_message {
@@ -630,7 +630,7 @@ message E2SmKpmIndicationMessage {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:419
-//{E2SM-KPM-IndicationMessage-Format1}
+//{E2SM-KPMv2-IndicationMessage-Format1}
 message E2SmKpmIndicationMessageFormat1 {
     SubscriptionId subscript_id = 1 [json_name = "subscriptID"];
     CellObjectId cell_obj_id = 2 [json_name = "cellObjID:OPTIONAL"];
@@ -640,7 +640,7 @@ message E2SmKpmIndicationMessageFormat1 {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:428
-//{E2SM-KPM-IndicationMessage-Format2}
+//{E2SM-KPMv2-IndicationMessage-Format2}
 message E2SmKpmIndicationMessageFormat2 {
     SubscriptionId subscript_id = 1 [json_name = "subscriptID"];
     CellObjectId cell_obj_id = 2 [json_name = "cellObjID:OPTIONAL"];
@@ -650,7 +650,7 @@ message E2SmKpmIndicationMessageFormat2 {
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:441
-//{E2SM-KPM-RANfunction-Description}
+//{E2SM-KPMv2-RANfunction-Description}
 message E2SmKpmRanfunctionDescription {
     RanfunctionName ran_function_name = 1 [json_name = "ranFunction_Name"];
     repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {max_items: 1024}, json_name = "ric_KPM_Node_List:OPTIONAL"];

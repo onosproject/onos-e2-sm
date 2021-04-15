@@ -17,33 +17,33 @@ import (
     "unsafe"
 )
 
-func xerEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
-    {{lowCaseFirstLetter .MessageName}}CP, err := new{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
+func xerEncode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
+    {{lowCaseFirstLetter .GlobalName}}CP, err := new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}})
     if err != nil {
         return nil, err
     }
 
-    bytes, err := encodeXer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .MessageName}}CP)) //ToDo - change name of C-encoder tag
+    bytes, err := encodeXer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .GlobalName}}CP)) //ToDo - change name of C-encoder tag
     if err != nil {
-        return nil, fmt.Errorf("xerEncode{{.MessageName}}() %s", err.Error())
+        return nil, fmt.Errorf("xerEncode{{.GlobalName}}() %s", err.Error())
     }
     return bytes, nil
 }
 
-func perEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
-    {{lowCaseFirstLetter .MessageName}}CP, err := new{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
+func perEncode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
+    {{lowCaseFirstLetter .GlobalName}}CP, err := new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}})
     if err != nil {
         return nil, err
     }
 
-    bytes, err := encodePerBuffer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .MessageName}}CP))
+    bytes, err := encodePerBuffer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .GlobalName}}CP))
     if err != nil {
-        return nil, fmt.Errorf("perEncode{{.MessageName}}() %s", err.Error())
+        return nil, fmt.Errorf("perEncode{{.GlobalName}}() %s", err.Error())
     }
     return bytes, nil
 }
 
-func xerDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+func xerDecode{{.GlobalName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
     unsafePtr, err := decodeXer(bytes, &C.asn_DEF_{{dashToUnderscore .CstructName}})
     if err != nil {
         return nil, err
@@ -51,10 +51,10 @@ func xerDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName
     if unsafePtr == nil {
         return nil, fmt.Errorf("pointer decoded from XER is nil")
     }
-    return decode{{.MessageName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr)) //ToDo - change name of C-struct
+    return decode{{.GlobalName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr)) //ToDo - change name of C-struct
 }
 
-func perDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+func perDecode{{.GlobalName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
     unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_{{dashToUnderscore .CstructName}})
     if err != nil {
         return nil, err
@@ -62,32 +62,32 @@ func perDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName
     if unsafePtr == nil {
        return nil, fmt.Errorf("pointer decoded from PER is nil")
     }
-    return decode{{.MessageName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
+    return decode{{.GlobalName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
 }
 
-func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
+func new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
     var ret C.{{dashToUnderscore .CstructName}}_t
-    switch {{lowCaseFirstLetter .MessageName}} { {{with .FieldList}}{{ range . }}
+    switch {{lowCaseFirstLetter .GlobalName}} { {{with .FieldList}}{{ range . }}
             case {{.ProtoFileName}}.{{.MessageName}}_{{.FieldName}}:
                 ret = C.{{.CstructLeafName}} //ToDo - double-check correctness of the name {{ end }}{{end}}
     default:
-        return nil, fmt.Errorf("unexpected {{underscoreToDash .MessageName}} %v", {{lowCaseFirstLetter .MessageName}})
+        return nil, fmt.Errorf("unexpected {{underscoreToDash .MessageName}} %v", {{lowCaseFirstLetter .GlobalName}})
     }
 
 
     return &ret, nil
 }
 
-func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnderscore .CstructName}}_t) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+func decode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}}C *C.{{dashToUnderscore .CstructName}}_t) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
 
     //ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
-    {{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}(int32(*{{lowCaseFirstLetter .MessageName}}C))
+    {{lowCaseFirstLetter .GlobalName}} := {{.ProtoFileName}}.{{.MessageName}}(int32(*{{lowCaseFirstLetter .GlobalName}}C))
 
-    return {{lowCaseFirstLetter .MessageName}}, nil
+    return {{lowCaseFirstLetter .GlobalName}}, nil
 }
 
-func decode{{.MessageName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) { //ToDo - Check addressing correct structure in Protobuf
-    {{lowCaseFirstLetter .MessageName}}C := (*C.{{dashToUnderscore .MessageName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+func decode{{.GlobalName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) { //ToDo - Check addressing correct structure in Protobuf
+    {{lowCaseFirstLetter .GlobalName}}C := (*C.{{dashToUnderscore .MessageName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
 
-    return decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C)
+    return decode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}}C)
 }

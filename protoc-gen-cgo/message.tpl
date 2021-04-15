@@ -20,33 +20,33 @@ import (
     "unsafe"
 )
 
-func xerEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
-    {{lowCaseFirstLetter .MessageName}}CP, err := new{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
+func xerEncode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
+    {{lowCaseFirstLetter .GlobalName}}CP, err := new{{.GlobalName}}({{lowCaseFirstLetter .MessageName}})
     if err != nil {
-        return nil, fmt.Errorf("xerEncode{{.MessageName}}() %s", err.Error())
+        return nil, fmt.Errorf("xerEncode{{.GlobalName}}() %s", err.Error())
     }
 
-    bytes, err := encodeXer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .MessageName}}CP))
+    bytes, err := encodeXer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .GlobalName}}CP))
     if err != nil {
-        return nil, fmt.Errorf("xerEncode{{.MessageName}}() %s", err.Error())
-    }
-    return bytes, nil
-}
-
-func perEncode{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
-    {{lowCaseFirstLetter .MessageName}}CP, err := new{{.MessageName}}({{lowCaseFirstLetter .MessageName}})
-    if err != nil {
-        return nil, fmt.Errorf("perEncode{{.MessageName}}() %s", err.Error())
-    }
-
-    bytes, err := encodePerBuffer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .MessageName}}CP))
-    if err != nil {
-        return nil, fmt.Errorf("perEncode{{.MessageName}}() %s", err.Error())
+        return nil, fmt.Errorf("xerEncode{{.GlobalName}}() %s", err.Error())
     }
     return bytes, nil
 }
 
-func xerDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+func perEncode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
+    {{lowCaseFirstLetter .GlobalName}}CP, err := new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}})
+    if err != nil {
+        return nil, fmt.Errorf("perEncode{{.GlobalName}}() %s", err.Error())
+    }
+
+    bytes, err := encodePerBuffer(&C.asn_DEF_{{dashToUnderscore .CstructName}}, unsafe.Pointer({{lowCaseFirstLetter .GlobalName}}CP))
+    if err != nil {
+        return nil, fmt.Errorf("perEncode{{.GlobalName}}() %s", err.Error())
+    }
+    return bytes, nil
+}
+
+func xerDecode{{.GlobalName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
     unsafePtr, err := decodeXer(bytes, &C.asn_DEF_{{dashToUnderscore .CstructName}})
     if err != nil {
         return nil, err
@@ -54,10 +54,10 @@ func xerDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName
     if unsafePtr == nil {
         return nil, fmt.Errorf("pointer decoded from XER is nil")
     }
-    return decode{{.MessageName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
+    return decode{{.GlobalName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
 }
 
-func perDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+func perDecode{{.GlobalName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
     unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_{{dashToUnderscore .CstructName}})
     if err != nil {
         return nil, err
@@ -65,10 +65,10 @@ func perDecode{{.MessageName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName
     if unsafePtr == nil {
        return nil, fmt.Errorf("pointer decoded from PER is nil")
     }
-    return decode{{.MessageName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
+    return decode{{.GlobalName}}((*C.{{dashToUnderscore .CstructName}}_t)(unsafePtr))
 }
 
-func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
+func new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
 {{if .FieldList.SingleItem}}
 {{if .Optional}}{{ template "OPTIONAL_ENCODE_SINGLE" . }}{{end}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{end}}
@@ -76,20 +76,20 @@ func new{{.MessageName}}({{lowCaseFirstLetter .MessageName}} *{{.ProtoFileName}}
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{else}}
 var err error
-{{lowCaseFirstLetter .MessageName}}C := C.{{dashToUnderscore .CstructName}}_t{}
+{{lowCaseFirstLetter .GlobalName}}C := C.{{dashToUnderscore .CstructName}}_t{}
 {{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
 {{if .Optional}}{{ template "OPTIONAL_ENCODE" . }}{{end}}
 //ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file{{ $optionalFields := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields }}
-{{if not .Optionality}}{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C{{end}}{{end}}
-{{ $repeatedFields := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields }}{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C
+{{if not .Optionality}}{{lowCaseFirstLetter .GlobalName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C{{end}}{{end}}
+{{ $repeatedFields := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields }}{{lowCaseFirstLetter .GlobalName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C
 {{end}}
-{{ $oneOfFields := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields }} //{{lowCaseFirstLetter .MessageName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C{{end}}
+{{ $oneOfFields := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields }} //{{lowCaseFirstLetter .GlobalName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C{{end}}
 {{end}}
 {{end}}
-    return &{{lowCaseFirstLetter .MessageName}}C, nil
+    return &{{lowCaseFirstLetter .GlobalName}}C, nil
 }
 
-func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnderscore .CstructName}}_t) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+func decode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}}C *C.{{dashToUnderscore .CstructName}}_t) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
 {{if .FieldList.SingleItem}}
 {{if .Optional}}{{ template "OPTIONAL_DECODE_SINGLE" . }}{{end}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{end}}
@@ -97,7 +97,7 @@ func decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C *C.{{dashToUnde
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{else}}
 var err error
-{{lowCaseFirstLetter .MessageName}} := {{.ProtoFileName}}.{{.MessageName}}{
+{{lowCaseFirstLetter .GlobalName}} := {{.ProtoFileName}}.{{.MessageName}}{
 //ToDo - check whether pointers passed correctly with regard to Protobuf's definition{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
 //{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .FieldName}},{{end}}
 {{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}{{upperCaseFirstLetter .FieldName}}: make([]*{{.ProtoFileName}}.{{.DataType}}, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
@@ -106,7 +106,7 @@ var err error
 {{if .Optional}}{{ template "OPTIONAL_DECODE" . }}{{end}}
 {{if .Repeated}}{{ template "REPEATED_DECODE" . }}{{end}}{{end}}
 {{end}}
-    return &{{lowCaseFirstLetter .MessageName}}, nil
+    return &{{lowCaseFirstLetter .GlobalName}}, nil
 }
 
 {{ template "DECODE_BYTES" . }}
@@ -119,20 +119,20 @@ var err error
 var pr C.{{dashToUnderscore .CstructName}}_PR //ToDo - verify correctness of the name
 choiceC := [8]byte{} //ToDo - Check if number of bytes is sufficient
 
-switch choice := {{lowCaseFirstLetter .MessageName}}.{{.MessageName}}.(type) { {{ range $fieldIndex, $field := $fields }}
-case *{{.ProtoFileName}}.{{.MessageName}}_{{.FieldName}}:
+switch choice := {{lowCaseFirstLetter .GlobalName}}.{{.MessageName}}.(type) { {{ range $fieldIndex, $field := $fields }}
+case *{{.ProtoFileName}}.{{.MessageName}}_{{upperCaseFirstLetter .FieldName}}:
 pr = C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}} //ToDo - Check if it's correct PR's name
 
-im, err := {{encodeDataType .DataType}}(choice.{{.FieldName}})
+im, err := {{encodeDataType .DataType}}(choice.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 }
 binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im)))){{end}}
 default:
-return nil, fmt.Errorf("new{{.MessageName}}() %T not yet implemented", choice)
+return nil, fmt.Errorf("new{{.GlobalName}}() %T not yet implemented", choice)
 }
 
-{{lowCaseFirstLetter .MessageName}}C := C.{{dashToUnderscore .CstructName}}_t{
+{{lowCaseFirstLetter .GlobalName}}C := C.{{dashToUnderscore .CstructName}}_t{
 present: pr,
 choice:  choiceC,
 }{{end}}
@@ -141,7 +141,7 @@ choice:  choiceC,
 {{ range $fieldIndex, $field := $fields }}
 {{if .Optionality}}{{template "OPTIONALITY_ENCODE_BEGIN" . }}{{end}}
 {{lowCaseFirstLetter .FieldName}}C := new(C.struct_{{dashToUnderscore .CstructName}}__{{.CstructLeafName}}) //ToDo - verify correctness of the variable's name
-for _, {{lowCaseFirstLetter .FieldName}}Item := range {{.VariableName}}.Get{{.FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
+for _, {{lowCaseFirstLetter .FieldName}}Item := range {{lowCaseFirstLetter .VariableName}}.Get{{upperCaseFirstLetter .FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
 {{lowCaseFirstLetter .FieldName}}ItemC, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .FieldName}}Item)
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
@@ -154,8 +154,8 @@ return nil, err
 
 {{ define "OPTIONAL_ENCODE" }}{{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if .Optionality}}{{template "OPTIONALITY_ENCODE_BEGIN" . }}{{end}}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .FieldName}}C := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
-{{lowCaseFirstLetter .FieldName}}C, err := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}})
+{{doLinting .FieldName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
+{{doLinting .FieldName}}C, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 }
@@ -163,8 +163,8 @@ return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 
 {{ define "OPTIONAL_ENCODE_SINGLE" }}{{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{.VariableName}}C := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
-{{.VariableName}}C, err := {{encodeDataType .DataType}}({{.VariableName}}.{{upperCaseFirstLetter .FieldName}})
+{{lowCaseFirstLetter .VariableName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
+{{lowCaseFirstLetter .VariableName}}C, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 }
@@ -172,19 +172,19 @@ return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 
 {{ define "ONEOF_DECODE" }}
 {{ $fields := .FieldList.OneOfField }}
-{{lowCaseFirstLetter .MessageName}} := new({{.ProtoFileName}}.{{.MessageName}})
+{{lowCaseFirstLetter .GlobalName}} := new({{.ProtoFileName}}.{{.MessageName}})
 
-switch {{lowCaseFirstLetter .MessageName}}C.present { {{ range $fieldIndex, $field := $fields }}
+switch {{lowCaseFirstLetter .GlobalName}}C.present { {{ range $fieldIndex, $field := $fields }}
 case C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}}:
-{{lowCaseFirstLetter .MessageName}}structC, err := {{decodeDataType .DataType}}Bytes({{.VariableName}}C.choice) //ToDo - Verify if decodeSmthBytes function exists
+{{lowCaseFirstLetter .GlobalName}}structC, err := {{decodeDataType .DataType}}Bytes({{.VariableName}}C.choice) //ToDo - Verify if decodeSmthBytes function exists
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}Bytes() %s", err.Error())
 }
-{{lowCaseFirstLetter .MessageName}}.{{.FieldName}} = &{{.ProtoFileName}}.{{.MessageName}}_{{upperCaseFirstLetter .FieldName}}{
-{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .MessageName}}structC,
+{{lowCaseFirstLetter .GlobalName}}.{{upperCaseFirstLetter .FieldName}} = &{{.ProtoFileName}}.{{.MessageName}}_{{upperCaseFirstLetter .FieldName}}{
+{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .GlobalName}}structC,
 }{{end}}
 default:
-return nil, fmt.Errorf("decode{{.MessageName}}() %v not yet implemented", {{lowCaseFirstLetter .MessageName}}C.present)
+return nil, fmt.Errorf("decode{{.GlobalName}}() %v not yet implemented", {{lowCaseFirstLetter .GlobalName}}C.present)
 }{{ end }}
 
 {{ define "REPEATED_DECODE" }}
@@ -192,32 +192,32 @@ return nil, fmt.Errorf("decode{{.MessageName}}() %v not yet implemented", {{lowC
 var ieCount int
 {{ range $fieldIndex, $field := $fields }}
 {{if .Optionality}}{{template "OPTIONALITY_DECODE_BEGIN" . }}{{end}}
-ieCount = int({{.VariableName}}C.{{.CstructLeafName}}.list.count)
+ieCount = int({{lowCaseFirstLetter .VariableName}}C.{{.CstructLeafName}}.list.count)
 for i := 0; i < ieCount; i++ {
-offset := unsafe.Sizeof(unsafe.Pointer({{.VariableName}}C.{{.CstructLeafName}}.list.array)) * uintptr(i)
-ieC := *(**C.{{.DataType}}_t)(unsafe.Pointer(uintptr(unsafe.Pointer({{.VariableName}}C.{{.CstructLeafName}}.list.array)) + offset))
+offset := unsafe.Sizeof(unsafe.Pointer({{lowCaseFirstLetter .VariableName}}C.{{.CstructLeafName}}.list.array)) * uintptr(i)
+ieC := *(**C.{{.DataType}}_t)(unsafe.Pointer(uintptr(unsafe.Pointer({{lowCaseFirstLetter .VariableName}}C.{{.CstructLeafName}}.list.array)) + offset))
 ie, err := {{decodeDataType .DataType}}(ieC)
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
-{{.VariableName}}.{{upperCaseFirstLetter .FieldName}} = append({{.VariableName}}.{{upperCaseFirstLetter .FieldName}}, ie)
+{{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}} = append({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}}, ie)
 }
 {{if .Optionality}}{{template "OPTIONALITY_DECODE_END" . }}{{end}}
 {{end}}{{end}}
 
 {{ define "DECODE_BYTES" }}
-func decode{{.MessageName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) { //ToDo - Check addressing correct structure in Protobuf
-{{lowCaseFirstLetter .MessageName}}C := (*C.{{dashToUnderscore .CstructName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+func decode{{.GlobalName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
+{{lowCaseFirstLetter .GlobalName}}C := (*C.{{dashToUnderscore .CstructName}}_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
-return decode{{.MessageName}}({{lowCaseFirstLetter .MessageName}}C)
+return decode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}}C)
 }
 {{end}}
 
 {{ define "OPTIONAL_DECODE" }}
 {{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if .Optionality}}{{template "OPTIONALITY_DECODE_BEGIN" . }}{{end}}{{if checkElementaryType .DataType}}
-{{lowCaseFirstLetter .MessageName}}.{{.FieldName}} = {{decodeDataType .DataType}}({{.VariableName}}C.{{.CstructLeafName}}){{else}}
-{{lowCaseFirstLetter .MessageName}}.{{.FieldName}}, err = {{decodeDataType .DataType}}({{.VariableName}}C.{{.CstructLeafName}})
+{{lowCaseFirstLetter .GlobalName}}.{{upperCaseFirstLetter .FieldName}} = {{decodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}C.{{.CstructLeafName}}){{else}}
+{{lowCaseFirstLetter .GlobalName}}.{{upperCaseFirstLetter .FieldName}}, err = {{decodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}C.{{.CstructLeafName}})
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
@@ -226,27 +226,29 @@ return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 {{ define "OPTIONAL_DECODE_SINGLE" }}
 {{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if checkElementaryType .DataType}}
-{{.VariableName}} := {{.ProtoFileName}}.{{.MessageName}}{
-{{upperCaseFirstLetter .FieldName}}: {{decodeDataType .DataType}}({{.VariableName}}C),
+{{lowCaseFirstLetter .VariableName}} := {{.ProtoFileName}}.{{.MessageName}}{
+{{upperCaseFirstLetter .FieldName}}: {{decodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}C),
 }{{else}}
-{{.VariableName}} := new({{.ProtoFileName}}.{{.MessageName}})
-{{.VariableName}}Value, err := {{decodeDataType .DataType}}({{.VariableName}}C)
+{{lowCaseFirstLetter .VariableName}} := new({{.ProtoFileName}}.{{.MessageName}})
+{{lowCaseFirstLetter .VariableName}}Value, err := {{decodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}C)
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
-{{.VariableName}}.{{upperCaseFirstLetter .FieldName}} = {{.VariableName}}Value
+{{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}} = {{lowCaseFirstLetter .VariableName}}Value
 {{end}}{{end}}{{end}}
 
 {{ define "OPTIONALITY_ENCODE_BEGIN" }}
-if {{.VariableName}}.{{.FieldName}} != nil {
+//instance is optional
+if {{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}} != nil {
 {{end}}
 
 {{ define "OPTIONALITY_ENCODE_END" }}
-{{.VariableName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C
+{{lowCaseFirstLetter .VariableName}}C.{{.CstructLeafName}} = {{doLinting .FieldName}}C
 }{{end}}
 
 {{ define "OPTIONALITY_DECODE_BEGIN" }}
-if {{.VariableName}}C.{{.CstructLeafName}} != nil {
+//instance is optional
+if {{lowCaseFirstLetter .VariableName}}C.{{.CstructLeafName}} != nil {
 {{end}}
 
 {{ define "OPTIONALITY_DECODE_END" }}
