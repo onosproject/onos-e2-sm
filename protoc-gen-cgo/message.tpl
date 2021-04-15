@@ -72,7 +72,7 @@ func new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{
 {{if .FieldList.SingleItem}}
 {{if .Optional}}{{ template "OPTIONAL_ENCODE_SINGLE" . }}{{end}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{end}}
-{{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
+{{if .Repeated}}{{ template "REPEATED_ENCODE_SINGLE" . }}{{end}}
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_ENCODE" . }}{{else}}
 var err error
@@ -93,7 +93,7 @@ func decode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}}C *C.{{dashToUnders
 {{if .FieldList.SingleItem}}
 {{if .Optional}}{{ template "OPTIONAL_DECODE_SINGLE" . }}{{end}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{end}}
-{{if .Repeated}}{{ template "REPEATED_DECODE" . }}{{end}}
+{{if .Repeated}}{{ template "REPEATED_DECODE_SINGLE" . }}{{end}}
 {{else}}
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{else}}
 var err error
@@ -152,6 +152,19 @@ return nil, err
 }
 {{if .Optionality}}{{template "OPTIONALITY_ENCODE_END" . }}{{end}}{{end}}{{end}}
 
+{{ define "REPEATED_ENCODE_SINGLE" }}{{ $fields := .FieldList.RepeatedField }}
+{{ range $fieldIndex, $field := $fields }}
+{{lowCaseFirstLetter .VariableName}}C := new(C.{{dashToUnderscore .CstructName}}_t) //ToDo - verify correctness of the variable's name
+for _, ie := range {{lowCaseFirstLetter .VariableName}}.Get{{upperCaseFirstLetter .FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
+ieC, err := {{encodeDataType .DataType}}(ie)
+if err != nil {
+return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
+}
+if _, err = C.asn_sequence_add(unsafe.Pointer({{lowCaseFirstLetter .VariableName}}C), unsafe.Pointer(ieC)); err != nil {
+return nil, err
+}
+}{{end}}{{end}}
+
 {{ define "OPTIONAL_ENCODE" }}{{ $fields := .FieldList.OptionalField }}
 {{ range $fieldIndex, $field := $fields }}{{if .Optionality}}{{template "OPTIONALITY_ENCODE_BEGIN" . }}{{end}}{{if checkElementaryType .DataType}}
 {{doLinting .FieldName}}C := {{encodeDataType .DataType}}({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}}){{else}}
@@ -202,8 +215,25 @@ return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
 }
 {{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}} = append({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}}, ie)
 }
-{{if .Optionality}}{{template "OPTIONALITY_DECODE_END" . }}{{end}}
-{{end}}{{end}}
+{{if .Optionality}}{{template "OPTIONALITY_DECODE_END" . }}{{end}}{{end}}{{end}}
+
+{{ define "REPEATED_DECODE_SINGLE" }}
+{{ $fields := .FieldList.RepeatedField }}
+var ieCount int
+{{ range $fieldIndex, $field := $fields }}
+{{lowCaseFirstLetter .VariableName}} := {{.ProtoFileName}}.{{.MessageName}}{}
+{{if .Optionality}}{{template "OPTIONALITY_DECODE_BEGIN" . }}{{end}}
+ieCount = int({{lowCaseFirstLetter .VariableName}}C.list.count)
+for i := 0; i < ieCount; i++ {
+offset := unsafe.Sizeof(unsafe.Pointer({{lowCaseFirstLetter .VariableName}}C.list.array)) * uintptr(i)
+ieC := *(**C.{{.DataType}}_t)(unsafe.Pointer(uintptr(unsafe.Pointer({{lowCaseFirstLetter .VariableName}}C.list.array)) + offset))
+ie, err := {{decodeDataType .DataType}}(ieC)
+if err != nil {
+return nil, fmt.Errorf("{{decodeDataType .DataType}}() %s", err.Error())
+}
+{{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}} = append({{lowCaseFirstLetter .VariableName}}.{{upperCaseFirstLetter .FieldName}}, ie)
+}
+{{if .Optionality}}{{template "OPTIONALITY_DECODE_END" . }}{{end}}{{end}}{{end}}
 
 {{ define "DECODE_BYTES" }}
 func decode{{.GlobalName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) {
