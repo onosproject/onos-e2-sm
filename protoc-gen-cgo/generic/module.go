@@ -129,7 +129,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		for i, enum := range f.AllEnums() { // Constants
 
 			// If it's not a constant (or any other message which doesn't have specific C-structs - process and create a file, otherwise ignore
-			if !strings.Contains(enum.SourceCodeInfo().LeadingComments(), "{-}") ||
+			if !strings.Contains(enum.SourceCodeInfo().LeadingComments(), "{-}") &&
 				!strings.Contains(enum.SourceCodeInfo().LeadingComments(), "constant") {
 				fmt.Fprintf(buf, "%03d. Enum Name %v\n", i, enum.Name())
 				fmt.Fprintf(buf, "%03d. Enum Descriptor %v\n", i, enum.Descriptor())
@@ -202,7 +202,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		for i, msg := range f.AllMessages() { // Messages in each of .proto files
 
 			// If it's not a constant (or any other message which doesn't have specific C-structs - process and create a file, otherwise ignore
-			if !strings.Contains(msg.SourceCodeInfo().LeadingComments(), "{-}") ||
+			if !strings.Contains(msg.SourceCodeInfo().LeadingComments(), "{-}") &&
 				!strings.Contains(msg.SourceCodeInfo().LeadingComments(), "constant") {
 				optional := false
 				repeated := false
