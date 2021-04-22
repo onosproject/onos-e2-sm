@@ -28,7 +28,7 @@ func newAsnCodecsPrim(msg []byte) *C.ASN__PRIMITIVE_TYPE_t {
 func decodeAsnCodecsPrim(asnPrimTypeC *C.ASN__PRIMITIVE_TYPE_t) []byte {
 
 	res := C.GoBytes(unsafe.Pointer(asnPrimTypeC.buf), C.int(asnPrimTypeC.size))
-	freeAsnCodecsPrim(asnPrimTypeC)
+	//freeAsnCodecsPrim(asnPrimTypeC)
 
 	return res
 }
