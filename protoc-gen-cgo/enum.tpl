@@ -67,7 +67,7 @@ func perDecode{{.GlobalName}}(bytes []byte) (*{{.ProtoFileName}}.{{.MessageName}
 
 func new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) (*C.{{dashToUnderscore .CstructName}}_t, error) {
     var ret C.{{dashToUnderscore .CstructName}}_t
-    switch {{lowCaseFirstLetter .GlobalName}} { {{with .FieldList}}{{ range . }}
+    switch *{{lowCaseFirstLetter .GlobalName}} { {{with .FieldList}}{{ range . }}
             case {{.ProtoFileName}}.{{.MessageName}}_{{.FieldName}}:
                 ret = C.{{.CstructLeafName}} //ToDo - double-check correctness of the name {{ end }}{{end}}
     default:
@@ -83,7 +83,7 @@ func decode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}}C *C.{{dashToUnders
     //ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
     {{lowCaseFirstLetter .GlobalName}} := {{.ProtoFileName}}.{{.MessageName}}(int32(*{{lowCaseFirstLetter .GlobalName}}C))
 
-    return {{lowCaseFirstLetter .GlobalName}}, nil
+    return &{{lowCaseFirstLetter .GlobalName}}, nil
 }
 
 func decode{{.GlobalName}}Bytes(array [8]byte) (*{{.ProtoFileName}}.{{.MessageName}}, error) { //ToDo - Check addressing correct structure in Protobuf

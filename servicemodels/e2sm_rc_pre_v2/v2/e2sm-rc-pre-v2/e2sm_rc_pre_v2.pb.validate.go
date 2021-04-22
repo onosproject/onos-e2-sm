@@ -2121,19 +2121,17 @@ func (m *E2SmRcPreIndicationMessage) Validate() error {
 		return nil
 	}
 
-	switch m.E2SmRcPreIndicationMessage.(type) {
-
-	case *E2SmRcPreIndicationMessage_RicStyleType:
-
-		if v, ok := interface{}(m.GetRicStyleType()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return E2SmRcPreIndicationMessageValidationError{
-					field:  "RicStyleType",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
+	if v, ok := interface{}(m.GetRicStyleType()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmRcPreIndicationMessageValidationError{
+				field:  "RicStyleType",
+				reason: "embedded message failed validation",
+				cause:  err,
 			}
 		}
+	}
+
+	switch m.E2SmRcPreIndicationMessage.(type) {
 
 	case *E2SmRcPreIndicationMessage_IndicationMessageFormat1:
 

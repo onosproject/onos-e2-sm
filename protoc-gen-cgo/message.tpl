@@ -21,7 +21,7 @@ import (
 )
 
 func xerEncode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}} *{{.ProtoFileName}}.{{.MessageName}}) ([]byte, error) {
-    {{lowCaseFirstLetter .GlobalName}}CP, err := new{{.GlobalName}}({{lowCaseFirstLetter .MessageName}})
+    {{lowCaseFirstLetter .GlobalName}}CP, err := new{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}})
     if err != nil {
         return nil, fmt.Errorf("xerEncode{{.GlobalName}}() %s", err.Error())
     }
@@ -189,7 +189,7 @@ return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 
 switch {{lowCaseFirstLetter .GlobalName}}C.present { {{ range $fieldIndex, $field := $fields }}
 case C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}}:
-{{lowCaseFirstLetter .GlobalName}}structC, err := {{decodeDataType .DataType}}Bytes({{.VariableName}}C.choice) //ToDo - Verify if decodeSmthBytes function exists
+{{lowCaseFirstLetter .GlobalName}}structC, err := {{decodeDataType .DataType}}Bytes({{lowCaseFirstLetter .VariableName}}C.choice) //ToDo - Verify if decodeSmthBytes function exists
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}Bytes() %s", err.Error())
 }
