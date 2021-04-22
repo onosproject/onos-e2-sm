@@ -16,7 +16,7 @@ option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre
 import "validate/v1/validate.proto";
 
 // enumerated from e2sm-rc-pre-v2.asn1:50
-// {Cell-Size}
+//{Cell-Size}
 enum CellSize {
     CELL_SIZE_FEMTO = 0;
     CELL_SIZE_ENTERPRISE = 1;
@@ -25,7 +25,7 @@ enum CellSize {
 };
 
 // enumerated from e2sm-rc-pre-v2.asn1:107
-// {RANparameter-Type}
+//{RANparameter-Type}
 enum RanparameterType {
     RANPARAMETER_TYPE_INTEGER = 0;
     RANPARAMETER_TYPE_ENUMERATED = 1;
@@ -36,14 +36,14 @@ enum RanparameterType {
 };
 
 // enumerated from e2sm-rc-pre-v2.asn1:117
-// {RC-PRE-Trigger-Type}
+//{RC-PRE-Trigger-Type}
 enum RcPreTriggerType {
     RC_PRE_TRIGGER_TYPE_UPON_CHANGE = 0;
     RC_PRE_TRIGGER_TYPE_PERIODIC = 1;
 };
 
 // enumerated from e2sm-rc-pre-v2.asn1:203
-// {RC-PRE-Command}
+//{RC-PRE-Command}
 enum RcPreCommand {
     RC_PRE_COMMAND_SET_PARAMETERS = 0;
 };
@@ -232,7 +232,7 @@ message E2SmRcPreIndicationHeader {
 };
 
 // sequence from e2sm-rc-pre-v2.asn1:153
-//{E2SM-RC-PRE-IndicationHeader-Format1} - It's also an OPTIONAL instance - reason?
+//{E2SM-RC-PRE-IndicationHeader-Format1}
 message E2SmRcPreIndicationHeaderFormat1 {
     CellGlobalId cgi = 1 [json_name="cgi"];
 };
@@ -240,9 +240,9 @@ message E2SmRcPreIndicationHeaderFormat1 {
 // sequence from e2sm-rc-pre-v2.asn1:163
 //{E2SM-RC-PRE-IndicationMessage}
 message E2SmRcPreIndicationMessage {
+    RicStyleType ric_style_type = 1 [json_name="ric_Style_Type"];
     // choice from e2sm-rc-pre-v2.asn1:163
     oneof e2_sm_rc_pre_indication_message {
-        RicStyleType ric_style_type = 1 [json_name="ric_Style_Type"];
         E2SmRcPreIndicationMessageFormat1 indication_message_format1 = 2 [json_name="indicationMessage_Format1"];
     }
 };
@@ -308,7 +308,7 @@ message E2SmRcPreControlOutcome {
 };
 
 // sequence from e2sm-rc-pre-v2.asn1:235
-//{E2SM-RC-PRE-ControlOutcome-Format1} - It's also an OPTIONAL instance - reason?
+//{E2SM-RC-PRE-ControlOutcome-Format1}
 message E2SmRcPreControlOutcomeFormat1 {
     repeated RanparameterItem outcome_element_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="outcomeElement_List"];
 };
@@ -319,6 +319,7 @@ message E2SmRcPreRanfunctionDescription {
     RanfunctionName ran_function_name = 1  [json_name="ranFunction_Name"];
     E2SmRcPreRanfunctionItem001 e2_sm_rc_pre_ranfunction_item = 2 [json_name="e2SM_RC_PRE_RANfunction_Item"];
 
+    //{E2SM-RC-PRE-RANfunction-Description-Item001}
     message E2SmRcPreRanfunctionItem001 {
         repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric_EventTriggerStyle_List:OPTIONAL"];
         repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric_ReportStyle_List:OPTIONAL"];
