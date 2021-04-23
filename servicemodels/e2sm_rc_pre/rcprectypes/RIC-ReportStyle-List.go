@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeRicReportStyleItem(ricReportStyleItem *e2sm_rc_pre_ies.RicReportStyleList) ([]byte, error) {
+func xerEncodeRicReportStyleItem(ricReportStyleItem *e2sm_rc_pre_v2.RicReportStyleList) ([]byte, error) {
 	ricReportStyleItemCP := newRicReportStyleListItem(ricReportStyleItem)
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_ReportStyle_List, unsafe.Pointer(ricReportStyleItemCP))
@@ -27,7 +27,7 @@ func xerEncodeRicReportStyleItem(ricReportStyleItem *e2sm_rc_pre_ies.RicReportSt
 	return bytes, nil
 }
 
-func perEncodeRicReportStyleItem(ricReportStyleItem *e2sm_rc_pre_ies.RicReportStyleList) ([]byte, error) {
+func perEncodeRicReportStyleItem(ricReportStyleItem *e2sm_rc_pre_v2.RicReportStyleList) ([]byte, error) {
 	ricReportStyleItemCP := newRicReportStyleListItem(ricReportStyleItem)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_ReportStyle_List, unsafe.Pointer(ricReportStyleItemCP))
@@ -37,7 +37,7 @@ func perEncodeRicReportStyleItem(ricReportStyleItem *e2sm_rc_pre_ies.RicReportSt
 	return bytes, nil
 }
 
-func xerDecodeRicReportStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicReportStyleList, error) {
+func xerDecodeRicReportStyleItem(bytes []byte) (*e2sm_rc_pre_v2.RicReportStyleList, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RIC_ReportStyle_List)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func xerDecodeRicReportStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicReportStyleL
 	return decodeRicReportStyleListItem((*C.RIC_ReportStyle_List_t)(unsafePtr)), nil
 }
 
-func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicReportStyleList, error) {
+func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_rc_pre_v2.RicReportStyleList, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RIC_ReportStyle_List)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func perDecodeRicReportStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicReportStyleL
 	return decodeRicReportStyleListItem((*C.RIC_ReportStyle_List_t)(unsafePtr)), nil
 }
 
-func newRicReportStyleListItem(ricReportStyleListItem *e2sm_rc_pre_ies.RicReportStyleList) *C.RIC_ReportStyle_List_t {
+func newRicReportStyleListItem(ricReportStyleListItem *e2sm_rc_pre_v2.RicReportStyleList) *C.RIC_ReportStyle_List_t {
 
 	ricReportStyleTypeC := newRicStyleType(ricReportStyleListItem.RicReportStyleType)
 	ricReportStyleNameC := newRicStyleName(ricReportStyleListItem.RicReportStyleName)
@@ -76,14 +76,14 @@ func newRicReportStyleListItem(ricReportStyleListItem *e2sm_rc_pre_ies.RicReport
 	return &ricReportStyleListItemC
 }
 
-func decodeRicReportStyleListItem(ricReportStyleListItemC *C.RIC_ReportStyle_List_t) *e2sm_rc_pre_ies.RicReportStyleList {
+func decodeRicReportStyleListItem(ricReportStyleListItemC *C.RIC_ReportStyle_List_t) *e2sm_rc_pre_v2.RicReportStyleList {
 
 	ricReportStyleType := decodeRicStyleType(&ricReportStyleListItemC.ric_ReportStyle_Type)
 	ricReportStyleName := decodeRicStyleName(&ricReportStyleListItemC.ric_ReportStyle_Name)
 	ricReportStyleIndicationHeaderFormatType := decodeRicFormatType(&ricReportStyleListItemC.ric_IndicationHeaderFormat_Type)
 	ricReportStyleIndicationMessageFormatType := decodeRicFormatType(&ricReportStyleListItemC.ric_IndicationMessageFormat_Type)
 
-	ricReportStyleListItem := e2sm_rc_pre_ies.RicReportStyleList{
+	ricReportStyleListItem := e2sm_rc_pre_v2.RicReportStyleList{
 		RicReportStyleType:             ricReportStyleType,
 		RicReportStyleName:             ricReportStyleName,
 		RicIndicationHeaderFormatType:  ricReportStyleIndicationHeaderFormatType,

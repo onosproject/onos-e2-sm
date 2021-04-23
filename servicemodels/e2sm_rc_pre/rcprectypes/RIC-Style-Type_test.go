@@ -5,7 +5,7 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -13,7 +13,7 @@ import (
 func Test_xerEncodeRicStyleType(t *testing.T) {
 
 	var ricType int32 = 11
-	ricStyleType := &e2sm_rc_pre_ies.RicStyleType{
+	ricStyleType := &e2sm_rc_pre_v2.RicStyleType{
 		Value: ricType,
 	}
 
@@ -26,7 +26,7 @@ func Test_xerEncodeRicStyleType(t *testing.T) {
 func Test_xerDecodeRicStyleType(t *testing.T) {
 
 	var ricType int32 = 11
-	ricStyleType := &e2sm_rc_pre_ies.RicStyleType{
+	ricStyleType := &e2sm_rc_pre_v2.RicStyleType{
 		Value: ricType,
 	}
 
@@ -43,7 +43,7 @@ func Test_xerDecodeRicStyleType(t *testing.T) {
 func Test_perEncodeRicStyleType(t *testing.T) {
 
 	var ricType int32 = 11
-	ricStyleType := &e2sm_rc_pre_ies.RicStyleType{
+	ricStyleType := &e2sm_rc_pre_v2.RicStyleType{
 		Value: ricType,
 	}
 
@@ -56,7 +56,7 @@ func Test_perEncodeRicStyleType(t *testing.T) {
 func Test_perDecodeRicStyleType(t *testing.T) {
 
 	var ricType int32 = 11
-	ricStyleType := &e2sm_rc_pre_ies.RicStyleType{
+	ricStyleType := &e2sm_rc_pre_v2.RicStyleType{
 		Value: ricType,
 	}
 

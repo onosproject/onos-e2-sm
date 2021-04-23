@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeRanfunctionName(ranfunctionName *e2sm_rc_pre_ies.RanfunctionName) ([]byte, error) {
+func xerEncodeRanfunctionName(ranfunctionName *e2sm_rc_pre_v2.RanfunctionName) ([]byte, error) {
 	ranfunctionNameCP := newRanfunctionName(ranfunctionName)
 
 	bytes, err := encodeXer(&C.asn_DEF_RANfunction_Name, unsafe.Pointer(ranfunctionNameCP))
@@ -27,7 +27,7 @@ func xerEncodeRanfunctionName(ranfunctionName *e2sm_rc_pre_ies.RanfunctionName) 
 	return bytes, nil
 }
 
-func perEncodeRanfunctionName(ranfunctionName *e2sm_rc_pre_ies.RanfunctionName) ([]byte, error) {
+func perEncodeRanfunctionName(ranfunctionName *e2sm_rc_pre_v2.RanfunctionName) ([]byte, error) {
 	ranfunctionNameCP := newRanfunctionName(ranfunctionName)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RANfunction_Name, unsafe.Pointer(ranfunctionNameCP))
@@ -37,7 +37,7 @@ func perEncodeRanfunctionName(ranfunctionName *e2sm_rc_pre_ies.RanfunctionName) 
 	return bytes, nil
 }
 
-func xerDecodeRanfunctionName(bytes []byte) (*e2sm_rc_pre_ies.RanfunctionName, error) {
+func xerDecodeRanfunctionName(bytes []byte) (*e2sm_rc_pre_v2.RanfunctionName, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RANfunction_Name)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func xerDecodeRanfunctionName(bytes []byte) (*e2sm_rc_pre_ies.RanfunctionName, e
 	return decodeRanfunctionName((*C.RANfunction_Name_t)(unsafePtr)), nil
 }
 
-func perDecodeRanfunctionName(bytes []byte) (*e2sm_rc_pre_ies.RanfunctionName, error) {
+func perDecodeRanfunctionName(bytes []byte) (*e2sm_rc_pre_v2.RanfunctionName, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RANfunction_Name)
 	if err != nil {
 		return nil, err
@@ -59,30 +59,36 @@ func perDecodeRanfunctionName(bytes []byte) (*e2sm_rc_pre_ies.RanfunctionName, e
 	return decodeRanfunctionName((*C.RANfunction_Name_t)(unsafePtr)), nil
 }
 
-func newRanfunctionName(ranfunctionName *e2sm_rc_pre_ies.RanfunctionName) *C.RANfunction_Name_t {
+func newRanfunctionName(ranfunctionName *e2sm_rc_pre_v2.RanfunctionName) *C.RANfunction_Name_t {
 
-	ranFunctionShortNameC := newPrintableString(ranfunctionName.RanFunctionShortName)
-	ranFunctionE2SmOidC := newPrintableString(ranfunctionName.RanFunctionE2SmOid)
-	ranFunctionDescriptionC := newPrintableString(ranfunctionName.RanFunctionDescription)
-	ranFunctionInstanceC := (C.long)(ranfunctionName.RanFunctionInstance)
+	ranFunctionShortNameC := newPrintableString(ranfunctionName.GetRanFunctionShortName())
+	ranFunctionE2SmOidC := newPrintableString(ranfunctionName.GetRanFunctionE2SmOid())
+	ranFunctionDescriptionC := newPrintableString(ranfunctionName.GetRanFunctionDescription())
+	//ranFunctionInstanceC := (C.long)(ranfunctionName.RanFunctionInstance)
 
 	ranfunctionNameC := C.RANfunction_Name_t{
 		ranFunction_ShortName:   *ranFunctionShortNameC,
 		ranFunction_E2SM_OID:    *ranFunctionE2SmOidC,
 		ranFunction_Description: *ranFunctionDescriptionC,
-		ranFunction_Instance:    &ranFunctionInstanceC,
+		//ranFunction_Instance:    &ranFunctionInstanceC,
+	}
+
+	//instance is optional
+	if ranfunctionName.GetRanFunctionInstance() != -1 {
+		rfi := C.long(ranfunctionName.GetRanFunctionInstance())
+		ranfunctionNameC.ranFunction_Instance = &rfi
 	}
 
 	return &ranfunctionNameC
 }
 
-func decodeRanfunctionName(ranfunctionNameC *C.RANfunction_Name_t) *e2sm_rc_pre_ies.RanfunctionName {
+func decodeRanfunctionName(ranfunctionNameC *C.RANfunction_Name_t) *e2sm_rc_pre_v2.RanfunctionName {
 
 	ranFunctionShortName := decodePrintableString(&ranfunctionNameC.ranFunction_ShortName)
 	ranFunctionE2SmOid := decodePrintableString(&ranfunctionNameC.ranFunction_E2SM_OID)
 	ranFunctionDescription := decodePrintableString(&ranfunctionNameC.ranFunction_Description)
 
-	ranfunctionName := e2sm_rc_pre_ies.RanfunctionName{
+	ranfunctionName := e2sm_rc_pre_v2.RanfunctionName{
 		RanFunctionShortName:   ranFunctionShortName,
 		RanFunctionE2SmOid:     ranFunctionE2SmOid,
 		RanFunctionDescription: ranFunctionDescription,

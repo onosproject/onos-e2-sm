@@ -14,11 +14,11 @@ import "C"
 
 import (
 	//"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	//"unsafe"
 )
 
-//func xerEncodeRanparameterId(ranparameterId *e2sm_rc_pre_ies.RanparameterId) ([]byte, error) {
+//func xerEncodeRanparameterId(ranparameterId *e2sm_rc_pre_v2.RanparameterId) ([]byte, error) {
 //	ranparameterIDCP, err := newRanparameterID(ranparameterId)
 //	if err != nil {
 //		return nil, fmt.Errorf("xerEncodeRanparameterId() %s", err.Error())
@@ -31,7 +31,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func perEncodeRanparameterId(ranparameterId *e2sm_rc_pre_ies.RanparameterId) ([]byte, error) {
+//func perEncodeRanparameterId(ranparameterId *e2sm_rc_pre_v2.RanparameterId) ([]byte, error) {
 //	ranparameterIDCP, err := newRanparameterID(ranparameterId)
 //	if err != nil {
 //		return nil, fmt.Errorf("xerEncodeRanparameterId() %s", err.Error())
@@ -44,7 +44,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func xerdecodeRanparameterID(bytes []byte) (*e2sm_rc_pre_ies.RanparameterId, error) {
+//func xerdecodeRanparameterID(bytes []byte) (*e2sm_rc_pre_v2.RanparameterId, error) {
 //	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RANparameter_ID)
 //	if err != nil {
 //		return nil, err
@@ -55,7 +55,7 @@ import (
 //	return decodeRanparameterID((*C.RANparameter_ID_t)(unsafePtr))
 //}
 //
-//func perdecodeRanparameterID(bytes []byte) (*e2sm_rc_pre_ies.RanparameterId, error) {
+//func perdecodeRanparameterID(bytes []byte) (*e2sm_rc_pre_v2.RanparameterId, error) {
 //	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RANparameter_ID)
 //	if err != nil {
 //		return nil, err
@@ -66,16 +66,16 @@ import (
 //	return decodeRanparameterID((*C.RANparameter_ID_t)(unsafePtr))
 //}
 
-func newRanparameterID(ranparameterID *e2sm_rc_pre_ies.RanparameterId) (*C.RANparameter_ID_t, error) {
+func newRanparameterID(ranparameterID *e2sm_rc_pre_v2.RanparameterId) (*C.RANparameter_ID_t, error) {
 
 	ranparameterIDC := C.long(ranparameterID.Value)
 
 	return &ranparameterIDC, nil
 }
 
-func decodeRanparameterID(ranparameterIDC *C.RANparameter_ID_t) (*e2sm_rc_pre_ies.RanparameterId, error) {
+func decodeRanparameterID(ranparameterIDC *C.RANparameter_ID_t) (*e2sm_rc_pre_v2.RanparameterId, error) {
 
-	ranparameterID := e2sm_rc_pre_ies.RanparameterId{
+	ranparameterID := e2sm_rc_pre_v2.RanparameterId{
 		Value: int32(*ranparameterIDC),
 	}
 

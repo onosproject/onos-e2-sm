@@ -5,14 +5,14 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createCellSize() e2sm_rc_pre_ies.CellSize {
+func createCellSize() e2sm_rc_pre_v2.CellSize {
 
-	return e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO
+	return e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO
 }
 
 func Test_xerEncodeCellSize(t *testing.T) {

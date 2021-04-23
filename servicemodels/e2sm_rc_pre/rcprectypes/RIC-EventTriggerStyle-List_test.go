@@ -5,25 +5,25 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createRicEventTriggerStyleItem() *e2sm_rc_pre_ies.RicEventTriggerStyleList {
+func createRicEventTriggerStyleItem() *e2sm_rc_pre_v2.RicEventTriggerStyleList {
 
 	var ricEventStyleType int32 = 13
 	var ricEventStyleName = "ONFevent"
 	var ricEventFormatType int32 = 42
 
-	ricEventTriggerStyleItem := &e2sm_rc_pre_ies.RicEventTriggerStyleList{
-		RicEventTriggerStyleType: &e2sm_rc_pre_ies.RicStyleType{
+	ricEventTriggerStyleItem := &e2sm_rc_pre_v2.RicEventTriggerStyleList{
+		RicEventTriggerStyleType: &e2sm_rc_pre_v2.RicStyleType{
 			Value: ricEventStyleType, //int32
 		},
-		RicEventTriggerStyleName: &e2sm_rc_pre_ies.RicStyleName{
+		RicEventTriggerStyleName: &e2sm_rc_pre_v2.RicStyleName{
 			Value: ricEventStyleName, //string
 		},
-		RicEventTriggerFormatType: &e2sm_rc_pre_ies.RicFormatType{
+		RicEventTriggerFormatType: &e2sm_rc_pre_v2.RicFormatType{
 			Value: ricEventFormatType, //int32
 		},
 	}

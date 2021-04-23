@@ -6,7 +6,7 @@ package rcprectypes
 
 import (
 	"encoding/hex"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -15,7 +15,7 @@ func Test_xerEncodePlmnIdentity(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
-	plmnIdentity := &e2sm_rc_pre_ies.PlmnIdentity{
+	plmnIdentity := &e2sm_rc_pre_v2.PlmnIdentity{
 		Value: plmnIDBytes,
 	}
 

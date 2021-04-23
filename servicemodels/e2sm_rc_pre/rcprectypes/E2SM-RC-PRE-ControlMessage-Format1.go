@@ -15,11 +15,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1) ([]byte, error) {
 	e2SmRcPreControlMessageFormat1CP, err := newE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlMessageFormat1() %s", err.Error())
@@ -32,7 +32,7 @@ func XerEncodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2s
 	return bytes, nil
 }
 
-func PerEncodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1) ([]byte, error) {
+func PerEncodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1) ([]byte, error) {
 	e2SmRcPreControlMessageFormat1CP, err := newE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlMessageFormat1() %s", err.Error())
@@ -45,7 +45,7 @@ func PerEncodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2s
 	return bytes, nil
 }
 
-func XerDecodeE2SmRcPreControlMessageFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1, error) {
+func XerDecodeE2SmRcPreControlMessageFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_ControlMessage_Format1)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func XerDecodeE2SmRcPreControlMessageFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2S
 	return decodeE2SmRcPreControlMessageFormat1((*C.E2SM_RC_PRE_ControlMessage_Format1_t)(unsafePtr))
 }
 
-func PerDecodeE2SmRcPreControlMessageFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1, error) {
+func PerDecodeE2SmRcPreControlMessageFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_ControlMessage_Format1)
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func PerDecodeE2SmRcPreControlMessageFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2S
 	return decodeE2SmRcPreControlMessageFormat1((*C.E2SM_RC_PRE_ControlMessage_Format1_t)(unsafePtr))
 }
 
-func newE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1) (*C.E2SM_RC_PRE_ControlMessage_Format1_t, error) {
+func newE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1) (*C.E2SM_RC_PRE_ControlMessage_Format1_t, error) {
 
 	parameterTypeC, err := newRanparameterDefItem(e2SmRcPreControlMessageFormat1.ParameterType)
 	if err != nil {
@@ -87,7 +87,7 @@ func newE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1 *e2sm_rc_p
 	return &e2SmRcPreControlMessageFormat1C, nil
 }
 
-func decodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1C *C.E2SM_RC_PRE_ControlMessage_Format1_t) (*e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1, error) {
+func decodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1C *C.E2SM_RC_PRE_ControlMessage_Format1_t) (*e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1, error) {
 
 	parameterType, err := decodeRanparameterDefItem(&e2SmRcPreControlMessageFormat1C.parameterType)
 	if err != nil {
@@ -99,7 +99,7 @@ func decodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1C *C.E2S
 		return nil, fmt.Errorf("decodeE2SmRcPreControlMessageFormat1() %s", err.Error())
 	}
 
-	e2SmRcPreControlMessageFormat1 := e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1{
+	e2SmRcPreControlMessageFormat1 := e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1{
 		ParameterType: parameterType,
 		ParameterVal:  parameterVal,
 	}
@@ -107,7 +107,7 @@ func decodeE2SmRcPreControlMessageFormat1(e2SmRcPreControlMessageFormat1C *C.E2S
 	return &e2SmRcPreControlMessageFormat1, nil
 }
 
-func decodeE2SmRcPreControlMessageFormat1Bytes(array [8]byte) (*e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1, error) {
+func decodeE2SmRcPreControlMessageFormat1Bytes(array [8]byte) (*e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1, error) {
 	controlMessageFormat1C := (*C.E2SM_RC_PRE_ControlMessage_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeE2SmRcPreControlMessageFormat1(controlMessageFormat1C)

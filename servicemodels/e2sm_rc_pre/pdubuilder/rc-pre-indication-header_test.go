@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -15,7 +15,7 @@ import (
 func TestE2SmRcPreIndicationHeader(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
-	cellID := e2sm_rc_pre_ies.BitString{
+	cellID := e2sm_rc_pre_v2.BitString{
 		Value: 0x9bcd4ab, //uint64
 		Len:   28,        //uint32
 	}

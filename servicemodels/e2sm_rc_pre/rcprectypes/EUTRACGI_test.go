@@ -5,7 +5,7 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -14,12 +14,12 @@ func Test_xerEncodeEUTRACGI(t *testing.T) {
 
 	var plmnIDeutracgi = "ONF"
 
-	eUTRACGI := &e2sm_rc_pre_ies.Eutracgi{
-		PLmnIdentity: &e2sm_rc_pre_ies.PlmnIdentity{
+	eUTRACGI := &e2sm_rc_pre_v2.Eutracgi{
+		PLmnIdentity: &e2sm_rc_pre_v2.PlmnIdentity{
 			Value: []byte(plmnIDeutracgi),
 		},
-		EUtracellIdentity: &e2sm_rc_pre_ies.EutracellIdentity{
-			Value: &e2sm_rc_pre_ies.BitString{
+		EUtracellIdentity: &e2sm_rc_pre_v2.EutracellIdentity{
+			Value: &e2sm_rc_pre_v2.BitString{
 				Value: 0x9bcd4ab, //uint64
 				Len:   28,        //uint32
 			},

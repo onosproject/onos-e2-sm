@@ -5,13 +5,14 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdubuilder"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createCommonE2SmRcPreRanfunctionDescription() (*e2sm_rc_pre_ies.E2SmRcPreRanfunctionDescription, error) {
+func createCommonE2SmRcPreRanfunctionDescription() (*e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription, error) {
 
 	var ranFunctionShortName = "ORAN-E2SM-RC-PRE"
 	var ranFunctionE2SmOid = "Oid"
@@ -68,7 +69,7 @@ func Test_PerEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 	per, err := PerEncodeE2SmRcPreRanfunctionDescription(ranfunctionDescriptionMsg)
 	assert.NilError(t, err)
 	assert.Equal(t, 76, len(per))
-	t.Logf("E2SM-RC-PRE-RANfunction-Description PER\n%x", string(per))
+	t.Logf("E2SM-RC-PRE-RANfunction-Description PER\n%x", hex.Dump(per))
 }
 
 func Test_PerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
@@ -79,7 +80,7 @@ func Test_PerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 	per, err := PerEncodeE2SmRcPreRanfunctionDescription(ranfunctionDescriptionMsg)
 	assert.NilError(t, err)
 	assert.Equal(t, 76, len(per))
-	t.Logf("E2SM-RC-PRE-RANfunction-Description PER\n%s", string(per))
+	t.Logf("E2SM-RC-PRE-RANfunction-Description PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmRcPreRanfunctionDescription(per)
 	assert.NilError(t, err)

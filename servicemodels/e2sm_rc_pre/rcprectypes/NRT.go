@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeNRT(nrt *e2sm_rc_pre_ies.Nrt) ([]byte, error) {
+func xerEncodeNRT(nrt *e2sm_rc_pre_v2.Nrt) ([]byte, error) {
 
 	nrtCP, err := newNRT(nrt)
 	if err != nil {
@@ -31,18 +31,25 @@ func xerEncodeNRT(nrt *e2sm_rc_pre_ies.Nrt) ([]byte, error) {
 	return bytes, nil
 }
 
-func newNRT(nrt *e2sm_rc_pre_ies.Nrt) (*C.NRT_t, error) {
+func newNRT(nrt *e2sm_rc_pre_v2.Nrt) (*C.NRT_t, error) {
 
-	cgi, _ := newCellGlobalID(nrt.Cgi)
-	earfcn := newEARFCN(nrt.DlEarfcn)
-	cellSize, _ := newCellSize(nrt.CellSize)
-	pci := newPCI(nrt.Pci)
-	nrIndex := C.long(nrt.NrIndex)
+	cgi, err := newCellGlobalID(nrt.GetCgi())
+	if err != nil {
+		return nil, err
+	}
+	earfcn, err := newARFCN(nrt.GetDlArfcn())
+	if err != nil {
+		return nil, err
+	}
+	cellSize, err := newCellSize(nrt.GetCellSize())
+	if err != nil {
+		return nil, err
+	}
+	pci := newPCI(nrt.GetPci())
 
 	nrtC := C.NRT_t{
-		nrIndex:   nrIndex,
 		cgi:       *cgi,
-		dl_EARFCN: *earfcn,
+		dl_ARFCN:  *earfcn,
 		cell_Size: cellSize,
 		pci:       *pci,
 	}
@@ -50,15 +57,20 @@ func newNRT(nrt *e2sm_rc_pre_ies.Nrt) (*C.NRT_t, error) {
 	return &nrtC, nil
 }
 
-func decodeNRT(nrtC *C.NRT_t) (*e2sm_rc_pre_ies.Nrt, error) {
-	nrt := new(e2sm_rc_pre_ies.Nrt)
-	nrt.NrIndex = int32(nrtC.nrIndex)
+func decodeNRT(nrtC *C.NRT_t) (*e2sm_rc_pre_v2.Nrt, error) {
+	nrt := new(e2sm_rc_pre_v2.Nrt)
 
-	cgi, _ := decodeCellGlobalID(&nrtC.cgi)
+	cgi, err := decodeCellGlobalID(&nrtC.cgi)
+	if err != nil {
+		return nil, err
+	}
 	nrt.Cgi = cgi
 
-	earfcn := decodeEARFCN(&nrtC.dl_EARFCN)
-	nrt.DlEarfcn = earfcn
+	arfcn, err := decodeARFCN(&nrtC.dl_ARFCN)
+	if err != nil {
+		return nil, err
+	}
+	nrt.DlArfcn = arfcn
 
 	cellSize := decodeCellSize(&nrtC.cell_Size)
 	nrt.CellSize = cellSize

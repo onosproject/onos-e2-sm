@@ -5,7 +5,8 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	"encoding/hex"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -14,7 +15,7 @@ func Test_xerEncodeEARFCN(t *testing.T) {
 
 	var earfcn int32 = 253
 
-	c := &e2sm_rc_pre_ies.Earfcn{
+	c := &e2sm_rc_pre_v2.Earfcn{
 		Value: earfcn,
 	}
 
@@ -23,45 +24,49 @@ func Test_xerEncodeEARFCN(t *testing.T) {
 	t.Logf("EARFCN XER\n%s", string(xer))
 }
 
-func Test_decodeEARFCN(t *testing.T) {
+func Test_xerDecodeEARFCN(t *testing.T) {
 
 	var earfcn int32 = 253
 
-	c := &e2sm_rc_pre_ies.Earfcn{
+	c := &e2sm_rc_pre_v2.Earfcn{
 		Value: earfcn,
 	}
 
-	earfcnC := newEARFCN(c)
-	result := decodeEARFCN(earfcnC)
-	assert.Equal(t, earfcn, result.Value, "Something went wrong, comparison is incorrect")
+	xer, err := xerEncodeEARFCN(c)
+	assert.NilError(t, err)
+	t.Logf("EARFCN XER\n%s", string(xer))
+
+	result, err := xerDecodeEARFCN(xer)
+	assert.NilError(t, err)
+	assert.Equal(t, earfcn, result.GetValue(), "Something went wrong, comparison is incorrect")
 }
 
 func Test_perEncodeEARFCN(t *testing.T) {
 
 	var earfcn int32 = 253
 
-	c := &e2sm_rc_pre_ies.Earfcn{
+	c := &e2sm_rc_pre_v2.Earfcn{
 		Value: earfcn,
 	}
 
 	earfcnPer, err := perEncodeEARFCN(c)
 	assert.NilError(t, err)
 	assert.Assert(t, earfcnPer != nil)
-	t.Logf("EARFCN PER\n%v", earfcnPer)
+	t.Logf("EARFCN PER\n%v", hex.Dump(earfcnPer))
 }
 
 func Test_perDecodeEARFCN(t *testing.T) {
 
 	var earfcn int32 = 253
 
-	c := &e2sm_rc_pre_ies.Earfcn{
+	c := &e2sm_rc_pre_v2.Earfcn{
 		Value: earfcn,
 	}
 
 	earfcnPer, err := perEncodeEARFCN(c)
 	assert.NilError(t, err)
 	assert.Assert(t, earfcnPer != nil)
-	t.Logf("EARFCN PER\n%v", earfcnPer)
+	t.Logf("EARFCN PER\n%v", hex.Dump(earfcnPer))
 
 	result, err := perDecodeEARFCN(earfcnPer)
 	assert.NilError(t, err)

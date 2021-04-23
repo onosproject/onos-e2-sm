@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeRicStyleName(ricStyleName *e2sm_rc_pre_ies.RicStyleName) ([]byte, error) {
+func xerEncodeRicStyleName(ricStyleName *e2sm_rc_pre_v2.RicStyleName) ([]byte, error) {
 	ricStyleNameCP := newRicStyleName(ricStyleName)
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_Style_Name, unsafe.Pointer(ricStyleNameCP))
@@ -27,7 +27,7 @@ func xerEncodeRicStyleName(ricStyleName *e2sm_rc_pre_ies.RicStyleName) ([]byte, 
 	return bytes, nil
 }
 
-func perEncodeRicStyleName(ricStyleName *e2sm_rc_pre_ies.RicStyleName) ([]byte, error) {
+func perEncodeRicStyleName(ricStyleName *e2sm_rc_pre_v2.RicStyleName) ([]byte, error) {
 	ricStyleNameCP := newRicStyleName(ricStyleName)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_Style_Name, unsafe.Pointer(ricStyleNameCP))
@@ -37,7 +37,7 @@ func perEncodeRicStyleName(ricStyleName *e2sm_rc_pre_ies.RicStyleName) ([]byte, 
 	return bytes, nil
 }
 
-func xerDecodeRicStyleName(bytes []byte) (*e2sm_rc_pre_ies.RicStyleName, error) {
+func xerDecodeRicStyleName(bytes []byte) (*e2sm_rc_pre_v2.RicStyleName, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RIC_Style_Name)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func xerDecodeRicStyleName(bytes []byte) (*e2sm_rc_pre_ies.RicStyleName, error) 
 	return decodeRicStyleName((*C.RIC_Style_Name_t)(unsafePtr)), nil
 }
 
-func perDecodeRicStyleName(bytes []byte) (*e2sm_rc_pre_ies.RicStyleName, error) {
+func perDecodeRicStyleName(bytes []byte) (*e2sm_rc_pre_v2.RicStyleName, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RIC_Style_Name)
 	if err != nil {
 		return nil, err
@@ -59,15 +59,15 @@ func perDecodeRicStyleName(bytes []byte) (*e2sm_rc_pre_ies.RicStyleName, error) 
 	return decodeRicStyleName((*C.RIC_Style_Name_t)(unsafePtr)), nil
 }
 
-func newRicStyleName(ricStyleName *e2sm_rc_pre_ies.RicStyleName) *C.RIC_Style_Name_t {
+func newRicStyleName(ricStyleName *e2sm_rc_pre_v2.RicStyleName) *C.RIC_Style_Name_t {
 	ricStyleNameCP := newPrintableString(ricStyleName.Value)
 
 	return ricStyleNameCP
 }
 
-func decodeRicStyleName(ricStyleNameC *C.RIC_Style_Name_t) *e2sm_rc_pre_ies.RicStyleName {
+func decodeRicStyleName(ricStyleNameC *C.RIC_Style_Name_t) *e2sm_rc_pre_v2.RicStyleName {
 
-	ricStyleName := e2sm_rc_pre_ies.RicStyleName{
+	ricStyleName := e2sm_rc_pre_v2.RicStyleName{
 		Value: decodePrintableString(ricStyleNameC),
 	}
 	return &ricStyleName

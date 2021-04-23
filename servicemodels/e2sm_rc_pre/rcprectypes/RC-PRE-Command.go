@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	//"unsafe"
 )
 
-//func xerEncodeRcPreCommand(rcPreCommand *e2sm_rc_pre_ies.RcPreCommand) ([]byte, error) {
+//func xerEncodeRcPreCommand(rcPreCommand *e2sm_rc_pre_v2.RcPreCommand) ([]byte, error) {
 //	rcPreCommandCP, err := newRcPreCommand(rcPreCommand)
 //	if err != nil {
 //		return nil, err
@@ -30,7 +30,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func perEncodeRcPreCommand(rcPreCommand *e2sm_rc_pre_ies.RcPreCommand) ([]byte, error) {
+//func perEncodeRcPreCommand(rcPreCommand *e2sm_rc_pre_v2.RcPreCommand) ([]byte, error) {
 //	rcPreCommandCP, err := newRcPreCommand(rcPreCommand)
 //	if err != nil {
 //		return nil, err
@@ -43,7 +43,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func xerDecodeRcPreCommand(bytes []byte) (*e2sm_rc_pre_ies.RcPreCommand, error) {
+//func xerDecodeRcPreCommand(bytes []byte) (*e2sm_rc_pre_v2.RcPreCommand, error) {
 //	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RC_PRE_Command)
 //	if err != nil {
 //		return nil, err
@@ -54,7 +54,7 @@ import (
 //	return decodeRcPreCommand((*C.RC_PRE_Command_t)(unsafePtr)) //ToDo - change name of C-struct
 //}
 //
-//func perDecodeRcPreCommand(bytes []byte) (*e2sm_rc_pre_ies.RcPreCommand, error) {
+//func perDecodeRcPreCommand(bytes []byte) (*e2sm_rc_pre_v2.RcPreCommand, error) {
 //	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RC_PRE_Command)
 //	if err != nil {
 //		return nil, err
@@ -65,10 +65,10 @@ import (
 //	return decodeRcPreCommand((*C.RC_PRE_Command_t)(unsafePtr))
 //}
 
-func newRcPreCommand(rcPreCommand *e2sm_rc_pre_ies.RcPreCommand) (*C.RC_PRE_Command_t, error) { //ToDo - change name of C-struct
+func newRcPreCommand(rcPreCommand *e2sm_rc_pre_v2.RcPreCommand) (*C.RC_PRE_Command_t, error) { //ToDo - change name of C-struct
 	var ret C.RC_PRE_Command_t
 	switch *rcPreCommand {
-	case e2sm_rc_pre_ies.RcPreCommand_RC_PRE_COMMAND_SET_PARAMETERS:
+	case e2sm_rc_pre_v2.RcPreCommand_RC_PRE_COMMAND_SET_PARAMETERS:
 		ret = C.RC_PRE_Command_setParameters
 	default:
 		return nil, fmt.Errorf("unexpected RC-PRE-Command %v", rcPreCommand)
@@ -77,10 +77,10 @@ func newRcPreCommand(rcPreCommand *e2sm_rc_pre_ies.RcPreCommand) (*C.RC_PRE_Comm
 	return &ret, nil
 }
 
-func decodeRcPreCommand(rcPreCommandC *C.RC_PRE_Command_t) (*e2sm_rc_pre_ies.RcPreCommand, error) { //ToDo - change name of C-struct
+func decodeRcPreCommand(rcPreCommandC *C.RC_PRE_Command_t) (*e2sm_rc_pre_v2.RcPreCommand, error) { //ToDo - change name of C-struct
 
 	//ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
-	rcPreCommand := e2sm_rc_pre_ies.RcPreCommand(int32(*rcPreCommandC))
+	rcPreCommand := e2sm_rc_pre_v2.RcPreCommand(int32(*rcPreCommandC))
 
 	return &rcPreCommand, nil
 }

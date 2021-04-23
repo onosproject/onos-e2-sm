@@ -15,11 +15,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_ies.E2SmRcPreControlOutcome) ([]byte, error) {
+func XerEncodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_v2.E2SmRcPreControlOutcome) ([]byte, error) {
 	e2SmRcPreControlOutcomeCP, err := newE2SmRcPreControlOutcome(e2SmRcPreControlOutcome)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlOutcome() %s", err.Error())
@@ -32,7 +32,7 @@ func XerEncodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_ies.E
 	return bytes, nil
 }
 
-func PerEncodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_ies.E2SmRcPreControlOutcome) ([]byte, error) {
+func PerEncodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_v2.E2SmRcPreControlOutcome) ([]byte, error) {
 	e2SmRcPreControlOutcomeCP, err := newE2SmRcPreControlOutcome(e2SmRcPreControlOutcome)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlOutcome() %s", err.Error())
@@ -45,7 +45,7 @@ func PerEncodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_ies.E
 	return bytes, nil
 }
 
-func XerDecodeE2SmRcPreControlOutcome(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlOutcome, error) {
+func XerDecodeE2SmRcPreControlOutcome(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlOutcome, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_ControlOutcome)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func XerDecodeE2SmRcPreControlOutcome(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreC
 	return decodeE2SmRcPreControlOutcome((*C.E2SM_RC_PRE_ControlOutcome_t)(unsafePtr))
 }
 
-func PerDecodeE2SmRcPreControlOutcome(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlOutcome, error) {
+func PerDecodeE2SmRcPreControlOutcome(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlOutcome, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_ControlOutcome)
 	if err != nil {
 		return nil, err
@@ -67,13 +67,13 @@ func PerDecodeE2SmRcPreControlOutcome(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreC
 	return decodeE2SmRcPreControlOutcome((*C.E2SM_RC_PRE_ControlOutcome_t)(unsafePtr))
 }
 
-func newE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_ies.E2SmRcPreControlOutcome) (*C.E2SM_RC_PRE_ControlOutcome_t, error) {
+func newE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_v2.E2SmRcPreControlOutcome) (*C.E2SM_RC_PRE_ControlOutcome_t, error) {
 
 	var pr C.E2SM_RC_PRE_ControlOutcome_PR
 	choiceC := [8]byte{}
 
 	switch choice := e2SmRcPreControlOutcome.E2SmRcPreControlOutcome.(type) {
-	case *e2sm_rc_pre_ies.E2SmRcPreControlOutcome_ControlOutcomeFormat1:
+	case *e2sm_rc_pre_v2.E2SmRcPreControlOutcome_ControlOutcomeFormat1:
 		pr = C.E2SM_RC_PRE_ControlOutcome_PR_controlOutcome_Format1
 
 		im, err := newE2SmRcPreControlOutcomeFormat1(choice.ControlOutcomeFormat1)
@@ -93,10 +93,10 @@ func newE2SmRcPreControlOutcome(e2SmRcPreControlOutcome *e2sm_rc_pre_ies.E2SmRcP
 	return &e2SmRcPreControlOutcomeC, nil
 }
 
-func decodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcomeC *C.E2SM_RC_PRE_ControlOutcome_t) (*e2sm_rc_pre_ies.E2SmRcPreControlOutcome, error) {
+func decodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcomeC *C.E2SM_RC_PRE_ControlOutcome_t) (*e2sm_rc_pre_v2.E2SmRcPreControlOutcome, error) {
 
 	//This is Decoder part (OneOf)
-	e2SmRcPreControlOutcome := new(e2sm_rc_pre_ies.E2SmRcPreControlOutcome)
+	e2SmRcPreControlOutcome := new(e2sm_rc_pre_v2.E2SmRcPreControlOutcome)
 
 	switch e2SmRcPreControlOutcomeC.present {
 	case C.E2SM_RC_PRE_ControlOutcome_PR_controlOutcome_Format1:
@@ -104,7 +104,7 @@ func decodeE2SmRcPreControlOutcome(e2SmRcPreControlOutcomeC *C.E2SM_RC_PRE_Contr
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmRcPreControlOutcome() %s", err.Error())
 		}
-		e2SmRcPreControlOutcome.E2SmRcPreControlOutcome = &e2sm_rc_pre_ies.E2SmRcPreControlOutcome_ControlOutcomeFormat1{
+		e2SmRcPreControlOutcome.E2SmRcPreControlOutcome = &e2sm_rc_pre_v2.E2SmRcPreControlOutcome_ControlOutcomeFormat1{
 			ControlOutcomeFormat1: e2SmRcPreControlOutcomestructC,
 		}
 	default:

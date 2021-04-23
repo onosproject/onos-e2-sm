@@ -20,7 +20,7 @@ protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
 
 protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
   --go_out=. \
-  e2sm_rc_pre_v2/v2/e2sm_rc_pre_v2.proto
+  e2sm_rc_pre/v2/e2sm_rc_pre_v2.proto
 
 cp -r github.com/onosproject/onos-e2-sm/* .
 rm -rf github.com

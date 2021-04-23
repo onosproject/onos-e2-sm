@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -16,33 +16,17 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
-	cellID := e2sm_rc_pre_ies.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
-	}
-
-	var dlEarfcn int32 = 253
 	var pci int32 = 11
 
-	pciPool := &e2sm_rc_pre_ies.PciRange{
-		LowerPci: &e2sm_rc_pre_ies.Pci{
-			Value: 10,
-		},
-		UpperPci: &e2sm_rc_pre_ies.Pci{
-			Value: 20,
-		},
-	}
-
-	neighbors := &e2sm_rc_pre_ies.Nrt{
-		NrIndex: 1,
-		Cgi: &e2sm_rc_pre_ies.CellGlobalId{
-			CellGlobalId: &e2sm_rc_pre_ies.CellGlobalId_EUtraCgi{
-				EUtraCgi: &e2sm_rc_pre_ies.Eutracgi{
-					PLmnIdentity: &e2sm_rc_pre_ies.PlmnIdentity{
+	neighbors := &e2sm_rc_pre_v2.Nrt{
+		Cgi: &e2sm_rc_pre_v2.CellGlobalId{
+			CellGlobalId: &e2sm_rc_pre_v2.CellGlobalId_EUtraCgi{
+				EUtraCgi: &e2sm_rc_pre_v2.Eutracgi{
+					PLmnIdentity: &e2sm_rc_pre_v2.PlmnIdentity{
 						Value: plmnIDBytes,
 					},
-					EUtracellIdentity: &e2sm_rc_pre_ies.EutracellIdentity{
-						Value: &e2sm_rc_pre_ies.BitString{
+					EUtracellIdentity: &e2sm_rc_pre_v2.EutracellIdentity{
+						Value: &e2sm_rc_pre_v2.BitString{
 							Value: 0x9bcd4ac, //uint64
 							Len:   28,        //uint32
 						},
@@ -50,16 +34,16 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 				},
 			},
 		},
-		Pci: &e2sm_rc_pre_ies.Pci{
+		Pci: &e2sm_rc_pre_v2.Pci{
 			Value: 11,
 		},
-		CellSize: e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO,
-		DlEarfcn: &e2sm_rc_pre_ies.Earfcn{
-			Value: 253,
-		},
+		CellSize: e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO,
+		DlArfcn:  CreateEArfcn(253),
 	}
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationMsg(plmnIDBytes, &cellID, dlEarfcn, e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO, pci, pciPool, neighbors)
+	cellSize := e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO
+
+	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, CreateEArfcn(253), cellSize, pci, neighbors)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 

@@ -8,10 +8,10 @@ import (
 	"fmt"
 
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 )
 
-func DecodeE2SmRcPreRanfunctionDescription(e2smRcPrePdu *e2sm_rc_pre_ies.E2SmRcPreRanfunctionDescription) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
+func DecodeE2SmRcPreRanfunctionDescription(e2smRcPrePdu *e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
 
 	if err := e2smRcPrePdu.Validate(); err != nil {
 		return nil, nil, nil, fmt.Errorf("invalid E2SmRcPrePdu %s", err.Error())

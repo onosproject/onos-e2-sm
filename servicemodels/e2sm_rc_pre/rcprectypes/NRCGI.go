@@ -14,11 +14,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeNRCGI(nrcgi *e2sm_rc_pre_ies.Nrcgi) ([]byte, error) {
+func xerEncodeNRCGI(nrcgi *e2sm_rc_pre_v2.Nrcgi) ([]byte, error) {
 
 	nrcgiCP, err := newNRCGI(nrcgi)
 	if err != nil {
@@ -32,10 +32,10 @@ func xerEncodeNRCGI(nrcgi *e2sm_rc_pre_ies.Nrcgi) ([]byte, error) {
 	return bytes, nil
 }
 
-func newNRCGI(nrcgi *e2sm_rc_pre_ies.Nrcgi) (*C.NRCGI_t, error) {
+func newNRCGI(nrcgi *e2sm_rc_pre_v2.Nrcgi) (*C.NRCGI_t, error) {
 
 	plmnID := newPlmnIdentity(nrcgi.PLmnIdentity)
-	nrCellIdentity := newNRCellIdentity(nrcgi.NRcellIdentity)
+	nrCellIdentity := newNRCellIdentity(nrcgi.GetNRcellIdentity())
 
 	nrcgiC := C.NRCGI_t{
 		pLMN_Identity:  *plmnID,
@@ -45,8 +45,8 @@ func newNRCGI(nrcgi *e2sm_rc_pre_ies.Nrcgi) (*C.NRCGI_t, error) {
 	return &nrcgiC, nil
 }
 
-func decodeNRCGI(nrcgiC *C.NRCGI_t) (*e2sm_rc_pre_ies.Nrcgi, error) {
-	nrcgi := new(e2sm_rc_pre_ies.Nrcgi)
+func decodeNRCGI(nrcgiC *C.NRCGI_t) (*e2sm_rc_pre_v2.Nrcgi, error) {
+	nrcgi := new(e2sm_rc_pre_v2.Nrcgi)
 
 	plmnID := decodePlmnIdentity(&nrcgiC.pLMN_Identity)
 	nrcgi.PLmnIdentity = plmnID
@@ -60,7 +60,7 @@ func decodeNRCGI(nrcgiC *C.NRCGI_t) (*e2sm_rc_pre_ies.Nrcgi, error) {
 	return nrcgi, nil
 }
 
-func decodeNRCGIBytes(array [8]byte) *e2sm_rc_pre_ies.Nrcgi {
+func decodeNRCGIBytes(array [8]byte) *e2sm_rc_pre_v2.Nrcgi {
 	nrcgiC := (*C.NRCGI_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 	nrcgi, _ := decodeNRCGI(nrcgiC)
 	return nrcgi

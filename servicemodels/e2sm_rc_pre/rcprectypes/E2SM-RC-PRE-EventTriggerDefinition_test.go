@@ -5,6 +5,7 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdubuilder"
 	"gotest.tools/assert"
 	"testing"
@@ -43,7 +44,7 @@ func Test_PerEncodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
 	per, err := PerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition)
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
-	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%s", string(per))
+	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%s", hex.Dump(per))
 }
 
 func Test_PerDecodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
@@ -54,7 +55,7 @@ func Test_PerDecodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
 	//10010c
-	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%x", per)
+	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmRcPreEventTriggerDefinition(per)
 	assert.NilError(t, err)

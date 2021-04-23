@@ -14,11 +14,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
 	E2SmRcPreEventTriggerDefinitionFormat1CP, err := newE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
@@ -31,7 +31,7 @@ func XerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefini
 	return bytes, nil
 }
 
-func PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
+func PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1) ([]byte, error) {
 	E2SmRcPreEventTriggerDefinitionFormat1CP, err := newE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
@@ -44,7 +44,7 @@ func PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefini
 	return bytes, nil
 }
 
-func XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
+func XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_Format1)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func XerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre
 	return decodeE2SmRcPreEventTriggerDefinitionFormat1((*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t)(unsafePtr))
 }
 
-func PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
+func PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_Format1)
 	if err != nil {
 		return nil, err
@@ -66,39 +66,47 @@ func PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_rc_pre
 	return decodeE2SmRcPreEventTriggerDefinitionFormat1((*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t)(unsafePtr))
 }
 
-func newE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1) (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t, error) {
+func newE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1 *e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1) (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t, error) {
 
 	triggerTypeC, err := newRcPreTriggerType(&e2SmRcPreEventTriggerDefinitionFormat1.TriggerType)
 	if err != nil {
 		return nil, fmt.Errorf("newE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
-	reportingPeriodMsC := C.long(e2SmRcPreEventTriggerDefinitionFormat1.ReportingPeriodMs)
 	e2SmRcPreEventTriggerDefinitionFormat1C := C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t{
-		triggerType:        *triggerTypeC,
-		reportingPeriod_ms: &reportingPeriodMsC,
+		triggerType: *triggerTypeC,
+		//reportingPeriod_ms: &reportingPeriodMsC,
+	}
+
+	if e2SmRcPreEventTriggerDefinitionFormat1.GetReportingPeriodMs() != -1 {
+		reportingPeriodMsC := C.long(e2SmRcPreEventTriggerDefinitionFormat1.ReportingPeriodMs)
+		e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms = &reportingPeriodMsC
 	}
 
 	return &e2SmRcPreEventTriggerDefinitionFormat1C, nil
 }
 
-func decodeE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1C *C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
+func decodeE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1C *C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 
 	triggerType, err := decodeRcPreTriggerType(&e2SmRcPreEventTriggerDefinitionFormat1C.triggerType)
 	if err != nil {
 		return nil, fmt.Errorf("decodeE2SmRcPreEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
-	reportingPeriodMs := int32(*e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms)
-	e2SmRcPreEventTriggerDefinitionFormat1 := e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1{
-		TriggerType:       *triggerType,
-		ReportingPeriodMs: reportingPeriodMs,
+	e2SmRcPreEventTriggerDefinitionFormat1 := e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1{
+		TriggerType: *triggerType,
+		//ReportingPeriodMs: reportingPeriodMs,
+	}
+
+	if e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms != nil {
+		reportingPeriodMs := int32(*e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms)
+		e2SmRcPreEventTriggerDefinitionFormat1.ReportingPeriodMs = reportingPeriodMs
 	}
 
 	return &e2SmRcPreEventTriggerDefinitionFormat1, nil
 }
 
-func decodeE2SmRcPreEventTriggerDefinitionFormat1Bytes(array [8]byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1, error) {
+func decodeE2SmRcPreEventTriggerDefinitionFormat1Bytes(array [8]byte) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 	e2SmRcPreEventTriggerDefinitionFormat1C := (*C.E2SM_RC_PRE_EventTriggerDefinition_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 	result, err := decodeE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFormat1C)
 	if err != nil {

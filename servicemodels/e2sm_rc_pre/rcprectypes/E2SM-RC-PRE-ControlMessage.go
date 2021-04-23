@@ -15,11 +15,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_ies.E2SmRcPreControlMessage) ([]byte, error) {
+func XerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_v2.E2SmRcPreControlMessage) ([]byte, error) {
 	e2SmRcPreControlMessageCP, err := newE2SmRcPreControlMessage(e2SmRcPreControlMessage)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlMessage() %s", err.Error())
@@ -32,7 +32,7 @@ func XerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_ies.E
 	return bytes, nil
 }
 
-func PerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_ies.E2SmRcPreControlMessage) ([]byte, error) {
+func PerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_v2.E2SmRcPreControlMessage) ([]byte, error) {
 	e2SmRcPreControlMessageCP, err := newE2SmRcPreControlMessage(e2SmRcPreControlMessage)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlMessage() %s", err.Error())
@@ -45,7 +45,7 @@ func PerEncodeE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_ies.E
 	return bytes, nil
 }
 
-func XerDecodeE2SmRcPreControlMessage(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlMessage, error) {
+func XerDecodeE2SmRcPreControlMessage(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlMessage, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_ControlMessage)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func XerDecodeE2SmRcPreControlMessage(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreC
 	return decodeE2SmRcPreControlMessage((*C.E2SM_RC_PRE_ControlMessage_t)(unsafePtr))
 }
 
-func PerDecodeE2SmRcPreControlMessage(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlMessage, error) {
+func PerDecodeE2SmRcPreControlMessage(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlMessage, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_ControlMessage)
 	if err != nil {
 		return nil, err
@@ -67,13 +67,13 @@ func PerDecodeE2SmRcPreControlMessage(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreC
 	return decodeE2SmRcPreControlMessage((*C.E2SM_RC_PRE_ControlMessage_t)(unsafePtr))
 }
 
-func newE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_ies.E2SmRcPreControlMessage) (*C.E2SM_RC_PRE_ControlMessage_t, error) {
+func newE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_v2.E2SmRcPreControlMessage) (*C.E2SM_RC_PRE_ControlMessage_t, error) {
 
 	var pr C.E2SM_RC_PRE_ControlMessage_PR
 	choiceC := [8]byte{}
 
 	switch choice := e2SmRcPreControlMessage.E2SmRcPreControlMessage.(type) {
-	case *e2sm_rc_pre_ies.E2SmRcPreControlMessage_ControlMessage:
+	case *e2sm_rc_pre_v2.E2SmRcPreControlMessage_ControlMessage:
 		pr = C.E2SM_RC_PRE_ControlMessage_PR_controlMessage
 
 		im, err := newE2SmRcPreControlMessageFormat1(choice.ControlMessage)
@@ -93,10 +93,10 @@ func newE2SmRcPreControlMessage(e2SmRcPreControlMessage *e2sm_rc_pre_ies.E2SmRcP
 	return &e2SmRcPreControlMessageC, nil
 }
 
-func decodeE2SmRcPreControlMessage(e2SmRcPreControlMessageC *C.E2SM_RC_PRE_ControlMessage_t) (*e2sm_rc_pre_ies.E2SmRcPreControlMessage, error) {
+func decodeE2SmRcPreControlMessage(e2SmRcPreControlMessageC *C.E2SM_RC_PRE_ControlMessage_t) (*e2sm_rc_pre_v2.E2SmRcPreControlMessage, error) {
 
 	//This is Decoder part (OneOf)
-	e2SmRcPreControlMessage := new(e2sm_rc_pre_ies.E2SmRcPreControlMessage)
+	e2SmRcPreControlMessage := new(e2sm_rc_pre_v2.E2SmRcPreControlMessage)
 
 	switch e2SmRcPreControlMessageC.present {
 	case C.E2SM_RC_PRE_ControlMessage_PR_controlMessage:
@@ -104,7 +104,7 @@ func decodeE2SmRcPreControlMessage(e2SmRcPreControlMessageC *C.E2SM_RC_PRE_Contr
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmRcPreControlMessage() %s", err.Error())
 		}
-		e2SmRcPreControlMessage.E2SmRcPreControlMessage = &e2sm_rc_pre_ies.E2SmRcPreControlMessage_ControlMessage{
+		e2SmRcPreControlMessage.E2SmRcPreControlMessage = &e2sm_rc_pre_v2.E2SmRcPreControlMessage_ControlMessage{
 			ControlMessage: e2SmRcPreControlMessagestructC,
 		}
 	default:

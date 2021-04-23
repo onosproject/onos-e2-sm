@@ -14,11 +14,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeCellGlobalID(cellGlobalID *e2sm_rc_pre_ies.CellGlobalId) ([]byte, error) {
+func xerEncodeCellGlobalID(cellGlobalID *e2sm_rc_pre_v2.CellGlobalId) ([]byte, error) {
 
 	cellGlobalIDCP, err := newCellGlobalID(cellGlobalID)
 	if err != nil {
@@ -32,17 +32,25 @@ func xerEncodeCellGlobalID(cellGlobalID *e2sm_rc_pre_ies.CellGlobalId) ([]byte, 
 	return bytes, nil
 }
 
-func newCellGlobalID(cellGlobalID *e2sm_rc_pre_ies.CellGlobalId) (*C.CellGlobalID_t, error) {
+func newCellGlobalID(cellGlobalID *e2sm_rc_pre_v2.CellGlobalId) (*C.CellGlobalID_t, error) {
 	var pr C.CellGlobalID_PR
 	choiceC := [8]byte{}
 
 	switch choice := cellGlobalID.CellGlobalId.(type) {
-	case *e2sm_rc_pre_ies.CellGlobalId_EUtraCgi:
+	case *e2sm_rc_pre_v2.CellGlobalId_EUtraCgi:
 		pr = C.CellGlobalID_PR_eUTRA_CGI
 
 		im, err := newEUTRACGI(choice.EUtraCgi)
 		if err != nil {
 			return nil, fmt.Errorf("newCellGlobalID() %s", err.Error())
+		}
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+	case *e2sm_rc_pre_v2.CellGlobalId_NrCgi:
+		pr = C.CellGlobalID_PR_nr_CGI
+
+		im, err := newNRCGI(choice.NrCgi)
+		if err != nil {
+			return nil, fmt.Errorf("newNRCGI() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
@@ -57,18 +65,18 @@ func newCellGlobalID(cellGlobalID *e2sm_rc_pre_ies.CellGlobalId) (*C.CellGlobalI
 	return &cellGlobalIDC, nil
 }
 
-func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_rc_pre_ies.CellGlobalId, error) {
-	cellGlobalID := new(e2sm_rc_pre_ies.CellGlobalId)
+func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_rc_pre_v2.CellGlobalId, error) {
+	cellGlobalID := new(e2sm_rc_pre_v2.CellGlobalId)
 
 	switch cellGlobalIDC.present {
 	case C.CellGlobalID_PR_eUTRA_CGI:
 		eutraCgiCellGlobalID := decodeEUTRACGIBytes(cellGlobalIDC.choice)
-		cellGlobalID.CellGlobalId = &e2sm_rc_pre_ies.CellGlobalId_EUtraCgi{
+		cellGlobalID.CellGlobalId = &e2sm_rc_pre_v2.CellGlobalId_EUtraCgi{
 			EUtraCgi: eutraCgiCellGlobalID,
 		}
 	case C.CellGlobalID_PR_nr_CGI:
 		nrCgiCellGlobalID := decodeNRCGIBytes(cellGlobalIDC.choice)
-		cellGlobalID.CellGlobalId = &e2sm_rc_pre_ies.CellGlobalId_NrCgi{
+		cellGlobalID.CellGlobalId = &e2sm_rc_pre_v2.CellGlobalId_NrCgi{
 			NrCgi: nrCgiCellGlobalID,
 		}
 	default:

@@ -5,7 +5,7 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -13,7 +13,7 @@ import (
 func Test_xerEncodeRicStyleName(t *testing.T) {
 
 	name := "RicStyleName"
-	ricStyleName := &e2sm_rc_pre_ies.RicStyleName{
+	ricStyleName := &e2sm_rc_pre_v2.RicStyleName{
 		Value: name,
 	}
 
@@ -26,7 +26,7 @@ func Test_xerEncodeRicStyleName(t *testing.T) {
 func Test_xerDecodeRicStyleName(t *testing.T) {
 
 	name := "RicStyleName"
-	ricStyleName := &e2sm_rc_pre_ies.RicStyleName{
+	ricStyleName := &e2sm_rc_pre_v2.RicStyleName{
 		Value: name,
 	}
 
@@ -43,7 +43,7 @@ func Test_xerDecodeRicStyleName(t *testing.T) {
 func Test_perEncodeRicStyleName(t *testing.T) {
 
 	name := "RicStyleName"
-	ricStyleName := &e2sm_rc_pre_ies.RicStyleName{
+	ricStyleName := &e2sm_rc_pre_v2.RicStyleName{
 		Value: name,
 	}
 
@@ -56,7 +56,7 @@ func Test_perEncodeRicStyleName(t *testing.T) {
 func Test_perDecodeRicStyleName(t *testing.T) {
 
 	name := "RicStyleName"
-	ricStyleName := &e2sm_rc_pre_ies.RicStyleName{
+	ricStyleName := &e2sm_rc_pre_v2.RicStyleName{
 		Value: name,
 	}
 
