@@ -7,7 +7,7 @@ package rcprectypes
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdubuilder"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -16,7 +16,7 @@ func Test_XerEncodeE2SmRcPreControlHeader(t *testing.T) {
 	var controlMessagePriority int32 = 1
 	var plmnID = "12f410"
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
-	cellID := e2sm_rc_pre_ies.BitString{
+	cellID := e2sm_rc_pre_v2.BitString{
 		Value: 0x9bcd4ab, //uint64
 		Len:   28,        //uint32
 	}
@@ -35,7 +35,7 @@ func Test_XerDecodeE2SmRcPreControlHeader(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
-	cellID := e2sm_rc_pre_ies.BitString{
+	cellID := e2sm_rc_pre_v2.BitString{
 		Value: 0x9bcd4ab, //uint64
 		Len:   28,        //uint32
 	}
@@ -50,7 +50,32 @@ func Test_XerDecodeE2SmRcPreControlHeader(t *testing.T) {
 
 	result, err := XerDecodeE2SmRcPreControlHeader(xer)
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-ControlHeader XER\n%s", result)
+	t.Logf("E2SM-RC-PRE-ControlHeader decoded XER is\n%v", result)
+
+	//assert.Equal(t, e2SmRcPreControlHeader.GetRicStyleType().GetValue(), result.GetRicStyleType().GetValue(), "Encoded and decoded values are not the same")
+}
+
+func Test_PerDecodeE2SmRcPreControlHeader(t *testing.T) {
+	var controlMessagePriority int32 = 1
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
+
+	cellID := e2sm_rc_pre_v2.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   28,        //uint32
+	}
+
+	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+
+	per, err := PerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader)
+	assert.NilError(t, err)
+	assert.Equal(t, 10, len(per))
+	t.Logf("E2SM-RC-PRE-ControlHeader PER\n%v", hex.Dump(per))
+
+	result, err := PerDecodeE2SmRcPreControlHeader(per)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RC-PRE-ControlHeader decoded PER is\n%v", result)
 
 	//assert.Equal(t, e2SmRcPreControlHeader.GetRicStyleType().GetValue(), result.GetRicStyleType().GetValue(), "Encoded and decoded values are not the same")
 }

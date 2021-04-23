@@ -12,12 +12,13 @@ package rcprectypes
 //#include "RIC-Style-Type.h"
 import "C"
 import (
+	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeRicStyleType(ricStyleType *e2sm_rc_pre_ies.RicStyleType) ([]byte, error) {
+func xerEncodeRicStyleType(ricStyleType *e2sm_rc_pre_v2.RicStyleType) ([]byte, error) {
 	ricStyleTypeCP := newRicStyleType(ricStyleType)
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_Style_Type, unsafe.Pointer(ricStyleTypeCP))
@@ -27,7 +28,7 @@ func xerEncodeRicStyleType(ricStyleType *e2sm_rc_pre_ies.RicStyleType) ([]byte, 
 	return bytes, nil
 }
 
-func perEncodeRicStyleType(ricStyleType *e2sm_rc_pre_ies.RicStyleType) ([]byte, error) {
+func perEncodeRicStyleType(ricStyleType *e2sm_rc_pre_v2.RicStyleType) ([]byte, error) {
 	ricStyleTypeCP := newRicStyleType(ricStyleType)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_Style_Type, unsafe.Pointer(ricStyleTypeCP))
@@ -37,7 +38,7 @@ func perEncodeRicStyleType(ricStyleType *e2sm_rc_pre_ies.RicStyleType) ([]byte, 
 	return bytes, nil
 }
 
-func xerDecodeRicStyleType(bytes []byte) (*e2sm_rc_pre_ies.RicStyleType, error) {
+func xerDecodeRicStyleType(bytes []byte) (*e2sm_rc_pre_v2.RicStyleType, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RIC_Style_Type)
 	if err != nil {
 		return nil, err
@@ -48,7 +49,7 @@ func xerDecodeRicStyleType(bytes []byte) (*e2sm_rc_pre_ies.RicStyleType, error) 
 	return decodeRicStyleType((*C.RIC_Style_Type_t)(unsafePtr)), nil
 }
 
-func perDecodeRicStyleType(bytes []byte) (*e2sm_rc_pre_ies.RicStyleType, error) {
+func perDecodeRicStyleType(bytes []byte) (*e2sm_rc_pre_v2.RicStyleType, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RIC_Style_Type)
 	if err != nil {
 		return nil, err
@@ -59,17 +60,24 @@ func perDecodeRicStyleType(bytes []byte) (*e2sm_rc_pre_ies.RicStyleType, error) 
 	return decodeRicStyleType((*C.RIC_Style_Type_t)(unsafePtr)), nil
 }
 
-func newRicStyleType(ricStyleType *e2sm_rc_pre_ies.RicStyleType) *C.RIC_Style_Type_t {
+func newRicStyleType(ricStyleType *e2sm_rc_pre_v2.RicStyleType) *C.RIC_Style_Type_t {
 
 	ricStyleTypeC := C.long(ricStyleType.Value)
 
 	return &ricStyleTypeC
 }
 
-func decodeRicStyleType(ricStyleTypeC *C.RIC_Style_Type_t) *e2sm_rc_pre_ies.RicStyleType {
+func decodeRicStyleType(ricStyleTypeC *C.RIC_Style_Type_t) *e2sm_rc_pre_v2.RicStyleType {
 
-	ricStyleType := e2sm_rc_pre_ies.RicStyleType{
+	ricStyleType := e2sm_rc_pre_v2.RicStyleType{
 		Value: int32(*ricStyleTypeC),
 	}
 	return &ricStyleType
+}
+
+func decodeRicStyleTypeBytes(array [8]byte) *e2sm_rc_pre_v2.RicStyleType {
+	ricStyleTypeC := (*C.RIC_Style_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+	ricStyleType := decodeRicStyleType(ricStyleTypeC)
+
+	return ricStyleType
 }

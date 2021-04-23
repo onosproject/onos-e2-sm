@@ -5,29 +5,29 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createRicReportStyleItem() *e2sm_rc_pre_ies.RicReportStyleList {
+func createRicReportStyleItem() *e2sm_rc_pre_v2.RicReportStyleList {
 
 	var ricReportStyleType int32 = 12
 	var ricReportStyleName = "ONFreport"
 	var ricIndicationHeaderFormatType int32 = 21
 	var ricIndicationMessageFormatType int32 = 56
 
-	ricReportStyleItem := &e2sm_rc_pre_ies.RicReportStyleList{
-		RicReportStyleType: &e2sm_rc_pre_ies.RicStyleType{
+	ricReportStyleItem := &e2sm_rc_pre_v2.RicReportStyleList{
+		RicReportStyleType: &e2sm_rc_pre_v2.RicStyleType{
 			Value: ricReportStyleType, //int32
 		},
-		RicReportStyleName: &e2sm_rc_pre_ies.RicStyleName{
+		RicReportStyleName: &e2sm_rc_pre_v2.RicStyleName{
 			Value: ricReportStyleName, //string
 		},
-		RicIndicationHeaderFormatType: &e2sm_rc_pre_ies.RicFormatType{
+		RicIndicationHeaderFormatType: &e2sm_rc_pre_v2.RicFormatType{
 			Value: ricIndicationHeaderFormatType, //int32
 		},
-		RicIndicationMessageFormatType: &e2sm_rc_pre_ies.RicFormatType{
+		RicIndicationMessageFormatType: &e2sm_rc_pre_v2.RicFormatType{
 			Value: ricIndicationMessageFormatType, //int32
 		},
 	}

@@ -5,18 +5,18 @@ package pdubuilder
 
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 )
 
-func CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod int32) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition, error) {
+func CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod int32) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition, error) {
 
-	eventDefinitionFormat1 := &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1{
-		TriggerType:       e2sm_rc_pre_ies.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_PERIODIC,
+	eventDefinitionFormat1 := &e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1{
+		TriggerType:       e2sm_rc_pre_v2.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_PERIODIC,
 		ReportingPeriodMs: rtPeriod,
 	}
 
-	E2SmRcPrePdu := e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition{
-		E2SmRcPreEventTriggerDefinitionEventDefinitionFormats: &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
+	E2SmRcPrePdu := e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition{
+		E2SmRcPreEventTriggerDefinitionEventDefinitionFormats: &e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
 			EventDefinitionFormat1: eventDefinitionFormat1,
 		},
 	}
@@ -27,15 +27,15 @@ func CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod int32) (*e2sm_rc_pre
 	return &E2SmRcPrePdu, nil
 }
 
-func CreateE2SmRcPreEventTriggerDefinitionUponChange() (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition, error) {
+func CreateE2SmRcPreEventTriggerDefinitionUponChange() (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition, error) {
 
-	eventDefinitionFormat1 := &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinitionFormat1{
-		TriggerType:       e2sm_rc_pre_ies.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_UPON_CHANGE,
+	eventDefinitionFormat1 := &e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1{
+		TriggerType:       e2sm_rc_pre_v2.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_UPON_CHANGE,
 		ReportingPeriodMs: 0,
 	}
 
-	E2SmRcPrePdu := e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition{
-		E2SmRcPreEventTriggerDefinitionEventDefinitionFormats: &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
+	E2SmRcPrePdu := e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition{
+		E2SmRcPreEventTriggerDefinitionEventDefinitionFormats: &e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
 			EventDefinitionFormat1: eventDefinitionFormat1,
 		},
 	}

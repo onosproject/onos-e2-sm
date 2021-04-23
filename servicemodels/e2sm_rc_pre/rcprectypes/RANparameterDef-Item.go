@@ -14,11 +14,11 @@ import "C"
 
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	//"unsafe"
 )
 
-//func xerEncodeRanparameterDefItem(ranparameterDefItem *e2sm_rc_pre_ies.RanparameterDefItem) ([]byte, error) {
+//func xerEncodeRanparameterDefItem(ranparameterDefItem *e2sm_rc_pre_v2.RanparameterDefItem) ([]byte, error) {
 //	ranparameterDefItemCP, err := newRanparameterDefItem(ranparameterDefItem)
 //	if err != nil {
 //		return nil, fmt.Errorf("xerEncodeRanparameterDefItem() %s", err.Error())
@@ -31,7 +31,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func perEncodeRanparameterDefItem(ranparameterDefItem *e2sm_rc_pre_ies.RanparameterDefItem) ([]byte, error) {
+//func perEncodeRanparameterDefItem(ranparameterDefItem *e2sm_rc_pre_v2.RanparameterDefItem) ([]byte, error) {
 //	ranparameterDefItemCP, err := newRanparameterDefItem(ranparameterDefItem)
 //	if err != nil {
 //		return nil, fmt.Errorf("xerEncodeRanparameterDefItem() %s", err.Error())
@@ -44,7 +44,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func xerDecodeRanparameterDefItem(bytes []byte) (*e2sm_rc_pre_ies.RanparameterDefItem, error) {
+//func xerDecodeRanparameterDefItem(bytes []byte) (*e2sm_rc_pre_v2.RanparameterDefItem, error) {
 //	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RANparameterDef_Item)
 //	if err != nil {
 //		return nil, err
@@ -55,7 +55,7 @@ import (
 //	return decodeRanparameterDefItem((*C.RANparameterDef_Item_t)(unsafePtr))
 //}
 //
-//func perDecodeRanparameterDefItem(bytes []byte) (*e2sm_rc_pre_ies.RanparameterDefItem, error) {
+//func perDecodeRanparameterDefItem(bytes []byte) (*e2sm_rc_pre_v2.RanparameterDefItem, error) {
 //	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RANparameterDef_Item)
 //	if err != nil {
 //		return nil, err
@@ -66,7 +66,7 @@ import (
 //	return decodeRanparameterDefItem((*C.RANparameterDef_Item_t)(unsafePtr))
 //}
 
-func newRanparameterDefItem(ranparameterDefItem *e2sm_rc_pre_ies.RanparameterDefItem) (*C.RANparameterDef_Item_t, error) {
+func newRanparameterDefItem(ranparameterDefItem *e2sm_rc_pre_v2.RanparameterDefItem) (*C.RANparameterDef_Item_t, error) {
 
 	ranparameterIDC, err := newRanparameterID(ranparameterDefItem.RanParameterId)
 	if err != nil {
@@ -92,7 +92,7 @@ func newRanparameterDefItem(ranparameterDefItem *e2sm_rc_pre_ies.RanparameterDef
 	return &ranparameterDefItemC, nil
 }
 
-func decodeRanparameterDefItem(ranparameterDefItemC *C.RANparameterDef_Item_t) (*e2sm_rc_pre_ies.RanparameterDefItem, error) {
+func decodeRanparameterDefItem(ranparameterDefItemC *C.RANparameterDef_Item_t) (*e2sm_rc_pre_v2.RanparameterDefItem, error) {
 
 	ranparameterID, err := decodeRanparameterID(&ranparameterDefItemC.ranParameter_ID)
 	if err != nil {
@@ -109,7 +109,7 @@ func decodeRanparameterDefItem(ranparameterDefItemC *C.RANparameterDef_Item_t) (
 		return nil, fmt.Errorf("decodeRanparameterDefItem() %s", err.Error())
 	}
 
-	ranparameterDefItem := e2sm_rc_pre_ies.RanparameterDefItem{
+	ranparameterDefItem := e2sm_rc_pre_v2.RanparameterDefItem{
 		RanParameterId:   ranparameterID,
 		RanParameterName: ranParameterName,
 		RanParameterType: *ranParameterType,

@@ -5,19 +5,19 @@
 package rcprectypes
 
 import (
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createRanfunctionName() *e2sm_rc_pre_ies.RanfunctionName {
+func createRanfunctionName() *e2sm_rc_pre_v2.RanfunctionName {
 
 	var ranFunctionShortName = "ONF"
 	var ranFunctionE2SmOid = "Oid"
 	var ranFunctionDescription = "OpenNetworking"
 	var ranFunctionInstance int32 = 3
 
-	ranfunctionName := &e2sm_rc_pre_ies.RanfunctionName{
+	ranfunctionName := &e2sm_rc_pre_v2.RanfunctionName{
 		RanFunctionShortName:   ranFunctionShortName,
 		RanFunctionE2SmOid:     ranFunctionE2SmOid,
 		RanFunctionDescription: ranFunctionDescription,

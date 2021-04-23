@@ -14,11 +14,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func PerEncodeE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_ies.E2SmRcPreIndicationHeader) ([]byte, error) {
+func PerEncodeE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_v2.E2SmRcPreIndicationHeader) ([]byte, error) {
 	indicationHeaderCP, err := newE2SmRcPreIndicationHeader(indicationHeader)
 	if err != nil {
 		return nil, fmt.Errorf("PerEncodeE2SmRcPreIndicationHeader() %s", err.Error())
@@ -31,7 +31,7 @@ func PerEncodeE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_ies.E2SmRc
 	return bytes, nil
 }
 
-func XerEncodeE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_ies.E2SmRcPreIndicationHeader) ([]byte, error) {
+func XerEncodeE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_v2.E2SmRcPreIndicationHeader) ([]byte, error) {
 	indicationHeaderCP, err := newE2SmRcPreIndicationHeader(indicationHeader)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationHeader() %s", err.Error())
@@ -44,7 +44,7 @@ func XerEncodeE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_ies.E2SmRc
 	return bytes, nil
 }
 
-func PerDecodeE2SmRcPreIndicationHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreIndicationHeader, error) {
+func PerDecodeE2SmRcPreIndicationHeader(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreIndicationHeader, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_IndicationHeader)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func PerDecodeE2SmRcPreIndicationHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPr
 	return decodeE2SmRcPreIndicationHeader((*C.E2SM_RC_PRE_IndicationHeader_t)(unsafePtr))
 }
 
-func XerDecodeE2SmRcPreIndicationHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreIndicationHeader, error) {
+func XerDecodeE2SmRcPreIndicationHeader(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreIndicationHeader, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_IndicationHeader)
 	if err != nil {
 		return nil, err
@@ -66,12 +66,12 @@ func XerDecodeE2SmRcPreIndicationHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPr
 	return decodeE2SmRcPreIndicationHeader((*C.E2SM_RC_PRE_IndicationHeader_t)(unsafePtr))
 }
 
-func newE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_ies.E2SmRcPreIndicationHeader) (*C.E2SM_RC_PRE_IndicationHeader_t, error) {
+func newE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_v2.E2SmRcPreIndicationHeader) (*C.E2SM_RC_PRE_IndicationHeader_t, error) {
 	var pr C.E2SM_RC_PRE_IndicationHeader_PR
 	choiceC := [8]byte{}
 
 	switch choice := indicationHeader.E2SmRcPreIndicationHeader.(type) {
-	case *e2sm_rc_pre_ies.E2SmRcPreIndicationHeader_IndicationHeaderFormat1:
+	case *e2sm_rc_pre_v2.E2SmRcPreIndicationHeader_IndicationHeaderFormat1:
 		pr = C.E2SM_RC_PRE_IndicationHeader_PR_indicationHeader_Format1
 
 		im, err := newE2SmRcPreIndicationHeaderFormat1(choice.IndicationHeaderFormat1)
@@ -91,8 +91,8 @@ func newE2SmRcPreIndicationHeader(indicationHeader *e2sm_rc_pre_ies.E2SmRcPreInd
 	return &indicationHeaderC, nil
 }
 
-func decodeE2SmRcPreIndicationHeader(indicationHeaderC *C.E2SM_RC_PRE_IndicationHeader_t) (*e2sm_rc_pre_ies.E2SmRcPreIndicationHeader, error) {
-	indicationHeader := new(e2sm_rc_pre_ies.E2SmRcPreIndicationHeader)
+func decodeE2SmRcPreIndicationHeader(indicationHeaderC *C.E2SM_RC_PRE_IndicationHeader_t) (*e2sm_rc_pre_v2.E2SmRcPreIndicationHeader, error) {
+	indicationHeader := new(e2sm_rc_pre_v2.E2SmRcPreIndicationHeader)
 
 	switch indicationHeaderC.present {
 	case C.E2SM_RC_PRE_IndicationHeader_PR_indicationHeader_Format1:
@@ -101,7 +101,7 @@ func decodeE2SmRcPreIndicationHeader(indicationHeaderC *C.E2SM_RC_PRE_Indication
 			return nil, fmt.Errorf("decodeE2SmRcPreIndicationHeader() %s", err.Error())
 		}
 
-		indicationHeader.E2SmRcPreIndicationHeader = &e2sm_rc_pre_ies.E2SmRcPreIndicationHeader_IndicationHeaderFormat1{
+		indicationHeader.E2SmRcPreIndicationHeader = &e2sm_rc_pre_v2.E2SmRcPreIndicationHeader_IndicationHeaderFormat1{
 			IndicationHeaderFormat1: indicationHeaderFormat1,
 		}
 	default:

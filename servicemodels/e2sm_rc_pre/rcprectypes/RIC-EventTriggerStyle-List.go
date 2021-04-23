@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_rc_pre_ies.RicEventTriggerStyleList) ([]byte, error) {
+func xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_rc_pre_v2.RicEventTriggerStyleList) ([]byte, error) {
 	ricEventTriggerStyleItemCP := newRicEventTriggerStyleList(ricEventTriggerStyleItem)
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_EventTriggerStyle_List, unsafe.Pointer(ricEventTriggerStyleItemCP))
@@ -27,7 +27,7 @@ func xerEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_rc_pre_ies
 	return bytes, nil
 }
 
-func perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_rc_pre_ies.RicEventTriggerStyleList) ([]byte, error) {
+func perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_rc_pre_v2.RicEventTriggerStyleList) ([]byte, error) {
 	ricEventTriggerStyleItemCP := newRicEventTriggerStyleList(ricEventTriggerStyleItem)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_EventTriggerStyle_List, unsafe.Pointer(ricEventTriggerStyleItemCP))
@@ -37,7 +37,7 @@ func perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem *e2sm_rc_pre_ies
 	return bytes, nil
 }
 
-func xerDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicEventTriggerStyleList, error) {
+func xerDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_rc_pre_v2.RicEventTriggerStyleList, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RIC_EventTriggerStyle_List)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func xerDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicEventT
 	return decodeRicEventTriggerStyleListItem((*C.RIC_EventTriggerStyle_List_t)(unsafePtr)), nil
 }
 
-func perDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicEventTriggerStyleList, error) {
+func perDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_rc_pre_v2.RicEventTriggerStyleList, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RIC_EventTriggerStyle_List)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func perDecodeRicEventTriggerStyleItem(bytes []byte) (*e2sm_rc_pre_ies.RicEventT
 	return decodeRicEventTriggerStyleListItem((*C.RIC_EventTriggerStyle_List_t)(unsafePtr)), nil
 }
 
-func newRicEventTriggerStyleList(ricEventTriggerStyleList *e2sm_rc_pre_ies.RicEventTriggerStyleList) *C.RIC_EventTriggerStyle_List_t {
+func newRicEventTriggerStyleList(ricEventTriggerStyleList *e2sm_rc_pre_v2.RicEventTriggerStyleList) *C.RIC_EventTriggerStyle_List_t {
 
 	ricEventTriggerStyleTypeC := newRicStyleType(ricEventTriggerStyleList.RicEventTriggerStyleType)
 	ricEventTriggerStyleNameC := newRicStyleName(ricEventTriggerStyleList.RicEventTriggerStyleName)
@@ -74,13 +74,13 @@ func newRicEventTriggerStyleList(ricEventTriggerStyleList *e2sm_rc_pre_ies.RicEv
 	return &ricEventTriggerStyleListC
 }
 
-func decodeRicEventTriggerStyleListItem(ricEventTriggerStyleListC *C.RIC_EventTriggerStyle_List_t) *e2sm_rc_pre_ies.RicEventTriggerStyleList {
+func decodeRicEventTriggerStyleListItem(ricEventTriggerStyleListC *C.RIC_EventTriggerStyle_List_t) *e2sm_rc_pre_v2.RicEventTriggerStyleList {
 
 	ricStyleType := decodeRicStyleType(&ricEventTriggerStyleListC.ric_EventTriggerStyle_Type)
 	ricStyleName := decodeRicStyleName(&ricEventTriggerStyleListC.ric_EventTriggerStyle_Name)
 	ricFormatType := decodeRicFormatType(&ricEventTriggerStyleListC.ric_EventTriggerFormat_Type)
 
-	ricEventTriggerStyleList := e2sm_rc_pre_ies.RicEventTriggerStyleList{
+	ricEventTriggerStyleList := e2sm_rc_pre_v2.RicEventTriggerStyleList{
 		RicEventTriggerStyleType:  ricStyleType,
 		RicEventTriggerStyleName:  ricStyleName,
 		RicEventTriggerFormatType: ricFormatType,

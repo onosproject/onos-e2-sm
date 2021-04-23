@@ -15,11 +15,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1) ([]byte, error) {
 	e2SmRcPreControlHeaderFormat1CP, err := newE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlHeaderFormat1() %s", err.Error())
@@ -32,7 +32,7 @@ func XerEncodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_
 	return bytes, nil
 }
 
-func PerEncodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1) ([]byte, error) {
+func PerEncodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1) ([]byte, error) {
 	e2SmRcPreControlHeaderFormat1CP, err := newE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlHeaderFormat1() %s", err.Error())
@@ -45,7 +45,7 @@ func PerEncodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_
 	return bytes, nil
 }
 
-func XerDecodeE2SmRcPreControlHeaderFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1, error) {
+func XerDecodeE2SmRcPreControlHeaderFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_ControlHeader_Format1)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func XerDecodeE2SmRcPreControlHeaderFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2Sm
 	return decodeE2SmRcPreControlHeaderFormat1((*C.E2SM_RC_PRE_ControlHeader_Format1_t)(unsafePtr))
 }
 
-func PerDecodeE2SmRcPreControlHeaderFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1, error) {
+func PerDecodeE2SmRcPreControlHeaderFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_ControlHeader_Format1)
 	if err != nil {
 		return nil, err
@@ -67,43 +67,46 @@ func PerDecodeE2SmRcPreControlHeaderFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2Sm
 	return decodeE2SmRcPreControlHeaderFormat1((*C.E2SM_RC_PRE_ControlHeader_Format1_t)(unsafePtr))
 }
 
-func newE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1) (*C.E2SM_RC_PRE_ControlHeader_Format1_t, error) {
-	cgi, _ := newCellGlobalID(e2SmRcPreControlHeaderFormat1.Cgi)
-
+func newE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1) (*C.E2SM_RC_PRE_ControlHeader_Format1_t, error) {
 	rcCommandC, err := newRcPreCommand(&e2SmRcPreControlHeaderFormat1.RcCommand)
 	if err != nil {
 		return nil, fmt.Errorf("newE2SmRcPreControlHeaderFormat1() %s", err.Error())
 	}
 
-	ricControlMessagePriorityC, err := newRicControlMessagePriority(e2SmRcPreControlHeaderFormat1.RicControlMessagePriority)
-	if err != nil {
-		return nil, fmt.Errorf("newE2SmRcPreControlHeaderFormat1() %s", err.Error())
+	e2SmRcPreControlHeaderFormat1C := C.E2SM_RC_PRE_ControlHeader_Format1_t{
+		//cgi:                          cgi,
+		rc_command: *rcCommandC,
+		//ric_Control_Message_Priority: ricControlMessagePriorityC,
 	}
 
-	e2SmRcPreControlHeaderFormat1C := C.E2SM_RC_PRE_ControlHeader_Format1_t{
-		cgi:                          cgi,
-		rc_command:                   *rcCommandC,
-		ric_Control_Message_Priority: ricControlMessagePriorityC,
+	if e2SmRcPreControlHeaderFormat1.GetCgi() != nil {
+		cgi, err := newCellGlobalID(e2SmRcPreControlHeaderFormat1.Cgi)
+		if err != nil {
+			return nil, err
+		}
+		e2SmRcPreControlHeaderFormat1C.cgi = cgi
+	}
+
+	if e2SmRcPreControlHeaderFormat1.GetRicControlMessagePriority() != nil {
+		ricControlMessagePriorityC, err := newRicControlMessagePriority(e2SmRcPreControlHeaderFormat1.RicControlMessagePriority)
+		if err != nil {
+			return nil, fmt.Errorf("newE2SmRcPreControlHeaderFormat1() %s", err.Error())
+		}
+		e2SmRcPreControlHeaderFormat1C.ric_Control_Message_Priority = ricControlMessagePriorityC
 	}
 
 	return &e2SmRcPreControlHeaderFormat1C, nil
 }
 
-func decodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1C *C.E2SM_RC_PRE_ControlHeader_Format1_t) (*e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1, error) {
+func decodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1C *C.E2SM_RC_PRE_ControlHeader_Format1_t) (*e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1, error) {
 
 	rcCommand, err := decodeRcPreCommand(&e2SmRcPreControlHeaderFormat1C.rc_command)
 	if err != nil {
 		return nil, fmt.Errorf("decodeE2SmRcPreControlHeaderFormat1() %s", err.Error())
 	}
 
-	ricControlMessagePriority, err := decodeRicControlMessagePriority(e2SmRcPreControlHeaderFormat1C.ric_Control_Message_Priority)
-	if err != nil {
-		return nil, fmt.Errorf("decodeE2SmRcPreControlHeaderFormat1() %s", err.Error())
-	}
-
-	e2SmRcPreControlHeaderFormat1 := e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1{
-		RcCommand:                 *rcCommand,
-		RicControlMessagePriority: ricControlMessagePriority,
+	e2SmRcPreControlHeaderFormat1 := e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1{
+		RcCommand: *rcCommand,
 	}
 
 	if e2SmRcPreControlHeaderFormat1C.cgi != nil { // Is optional
@@ -114,10 +117,18 @@ func decodeE2SmRcPreControlHeaderFormat1(e2SmRcPreControlHeaderFormat1C *C.E2SM_
 		e2SmRcPreControlHeaderFormat1.Cgi = cgi
 	}
 
+	if e2SmRcPreControlHeaderFormat1C.ric_Control_Message_Priority != nil {
+		ricControlMessagePriority, err := decodeRicControlMessagePriority(e2SmRcPreControlHeaderFormat1C.ric_Control_Message_Priority)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmRcPreControlHeaderFormat1() %s", err.Error())
+		}
+		e2SmRcPreControlHeaderFormat1.RicControlMessagePriority = ricControlMessagePriority
+	}
+
 	return &e2SmRcPreControlHeaderFormat1, nil
 }
 
-func decodeE2SmRcPreControlHeaderFormat1Bytes(array [8]byte) (*e2sm_rc_pre_ies.E2SmRcPreControlHeaderFormat1, error) {
+func decodeE2SmRcPreControlHeaderFormat1Bytes(array [8]byte) (*e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1, error) {
 	controlHeaderFormat1C := (*C.E2SM_RC_PRE_ControlHeader_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeE2SmRcPreControlHeaderFormat1(controlHeaderFormat1C)

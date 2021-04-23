@@ -14,12 +14,12 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"math"
 	"unsafe"
 )
 
-func xerEncodeBitString(bs *e2sm_rc_pre_ies.BitString) ([]byte, error) {
+func xerEncodeBitString(bs *e2sm_rc_pre_v2.BitString) ([]byte, error) {
 	bsC := newBitString(bs)
 	defer freeBitString(bsC)
 	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
@@ -30,7 +30,7 @@ func xerEncodeBitString(bs *e2sm_rc_pre_ies.BitString) ([]byte, error) {
 }
 
 // PerEncodeGnbID - used only in tests
-func perEncodeBitString(bs *e2sm_rc_pre_ies.BitString) ([]byte, error) {
+func perEncodeBitString(bs *e2sm_rc_pre_v2.BitString) ([]byte, error) {
 	bsC := newBitString(bs)
 	defer freeBitString(bsC)
 	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
@@ -41,7 +41,7 @@ func perEncodeBitString(bs *e2sm_rc_pre_ies.BitString) ([]byte, error) {
 	return bytes, nil
 }
 
-func newBitString(bs *e2sm_rc_pre_ies.BitString) *C.BIT_STRING_t {
+func newBitString(bs *e2sm_rc_pre_v2.BitString) *C.BIT_STRING_t {
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
 	valAsBytes := make([]byte, 8)
 	binary.LittleEndian.PutUint64(valAsBytes, bs.Value)
@@ -83,7 +83,7 @@ func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 // decodeBitString - byteString in C has 20 bytes
 // 8 for a 64bit address of a buffer, 8 for the size in bytes of the buffer uint64, 4 for the unused bits
 // The unused bits are at the end of the buffer
-func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_rc_pre_ies.BitString, error) {
+func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_rc_pre_v2.BitString, error) {
 	size := uint64(bsC.size)
 	bitsUnused := uint32(bsC.bits_unused)
 	if size > 8 {
@@ -107,7 +107,7 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_rc_pre_ies.BitString, error) {
 	for i := 0; i < int(size); i++ {
 		goBytes[i] = bytes[i]
 	}
-	bs := &e2sm_rc_pre_ies.BitString{
+	bs := &e2sm_rc_pre_v2.BitString{
 		Value: binary.LittleEndian.Uint64(goBytes),
 		Len:   uint32(size*8 - uint64(bitsUnused)),
 	}
@@ -119,7 +119,7 @@ func freeBitString(bsC *C.BIT_STRING_t) {
 	C.free(unsafe.Pointer(bsC.buf))
 }
 
-//func decodeBitStringBytes(array [8]byte) (*e2sm_rc_pre_ies.BitString, error) {
+//func decodeBitStringBytes(array [8]byte) (*e2sm_rc_pre_v2.BitString, error) {
 //	intC := (*C.BIT_STRING_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
 //	return decodeBitString(intC)
 //}

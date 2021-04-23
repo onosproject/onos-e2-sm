@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodePCI(pci *e2sm_rc_pre_ies.Pci) ([]byte, error) {
+func xerEncodePCI(pci *e2sm_rc_pre_v2.Pci) ([]byte, error) {
 	pciCP := newPCI(pci)
 
 	bytes, err := encodeXer(&C.asn_DEF_PCI, unsafe.Pointer(pciCP))
@@ -27,7 +27,7 @@ func xerEncodePCI(pci *e2sm_rc_pre_ies.Pci) ([]byte, error) {
 	return bytes, nil
 }
 
-func perEncodePCI(pci *e2sm_rc_pre_ies.Pci) ([]byte, error) {
+func perEncodePCI(pci *e2sm_rc_pre_v2.Pci) ([]byte, error) {
 	pciCP := newPCI(pci)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_PCI, unsafe.Pointer(pciCP))
@@ -37,7 +37,7 @@ func perEncodePCI(pci *e2sm_rc_pre_ies.Pci) ([]byte, error) {
 	return bytes, nil
 }
 
-func perDecodePCI(bytes []byte) (*e2sm_rc_pre_ies.Pci, error) {
+func perDecodePCI(bytes []byte) (*e2sm_rc_pre_v2.Pci, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_PCI)
 	if err != nil {
 		return nil, err
@@ -48,13 +48,13 @@ func perDecodePCI(bytes []byte) (*e2sm_rc_pre_ies.Pci, error) {
 	return decodePCI((*C.PCI_t)(unsafePtr)), nil
 }
 
-func newPCI(pci *e2sm_rc_pre_ies.Pci) *C.PCI_t {
-	pciC := C.long(pci.Value)
+func newPCI(pci *e2sm_rc_pre_v2.Pci) *C.PCI_t {
+	pciC := C.long(pci.GetValue())
 	return &pciC
 }
 
-func decodePCI(pciC *C.PCI_t) *e2sm_rc_pre_ies.Pci {
-	return &e2sm_rc_pre_ies.Pci{
+func decodePCI(pciC *C.PCI_t) *e2sm_rc_pre_v2.Pci {
+	return &e2sm_rc_pre_v2.Pci{
 		Value: int32(*pciC),
 	}
 }

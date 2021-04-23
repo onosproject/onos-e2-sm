@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	//"unsafe"
 )
 
-//func xerEncodeRanparameterType(ranparameterType *e2sm_rc_pre_ies.RanparameterType) ([]byte, error) {
+//func xerEncodeRanparameterType(ranparameterType *e2sm_rc_pre_v2.RanparameterType) ([]byte, error) {
 //	ranparameterTypeCP, err := newRanparameterType(ranparameterType)
 //	if err != nil {
 //		return nil, err
@@ -30,7 +30,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func perEncodeRanparameterType(ranparameterType *e2sm_rc_pre_ies.RanparameterType) ([]byte, error) {
+//func perEncodeRanparameterType(ranparameterType *e2sm_rc_pre_v2.RanparameterType) ([]byte, error) {
 //	ranparameterTypeCP, err := newRanparameterType(ranparameterType)
 //	if err != nil {
 //		return nil, err
@@ -43,7 +43,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func xerDecodeRanparameterType(bytes []byte) (*e2sm_rc_pre_ies.RanparameterType, error) {
+//func xerDecodeRanparameterType(bytes []byte) (*e2sm_rc_pre_v2.RanparameterType, error) {
 //	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RANparameter_Type)
 //	if err != nil {
 //		return nil, err
@@ -54,7 +54,7 @@ import (
 //	return decodeRanparameterType((*C.RANparameter_Type_t)(unsafePtr)) //ToDo - change name of C-struct
 //}
 //
-//func perDecodeRanparameterType(bytes []byte) (*e2sm_rc_pre_ies.RanparameterType, error) {
+//func perDecodeRanparameterType(bytes []byte) (*e2sm_rc_pre_v2.RanparameterType, error) {
 //	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RANparameter_Type)
 //	if err != nil {
 //		return nil, err
@@ -65,20 +65,20 @@ import (
 //	return decodeRanparameterType((*C.RANparameter_Type_t)(unsafePtr)) //ToDo - change name of C-struct
 //}
 
-func newRanparameterType(ranparameterType *e2sm_rc_pre_ies.RanparameterType) (*C.RANparameter_Type_t, error) { //ToDo - change name of C-struct
+func newRanparameterType(ranparameterType *e2sm_rc_pre_v2.RanparameterType) (*C.RANparameter_Type_t, error) { //ToDo - change name of C-struct
 	var ret C.RANparameter_Type_t
 	switch *ranparameterType {
-	case e2sm_rc_pre_ies.RanparameterType_RANPARAMETER_TYPE_INTEGER:
+	case e2sm_rc_pre_v2.RanparameterType_RANPARAMETER_TYPE_INTEGER:
 		ret = C.RANparameter_Type_integer
-	case e2sm_rc_pre_ies.RanparameterType_RANPARAMETER_TYPE_ENUMERATED:
+	case e2sm_rc_pre_v2.RanparameterType_RANPARAMETER_TYPE_ENUMERATED:
 		ret = C.RANparameter_Type_enumerated
-	case e2sm_rc_pre_ies.RanparameterType_RANPARAMETER_TYPE_BOOLEAN:
+	case e2sm_rc_pre_v2.RanparameterType_RANPARAMETER_TYPE_BOOLEAN:
 		ret = C.RANparameter_Type_boolean
-	case e2sm_rc_pre_ies.RanparameterType_RANPARAMETER_TYPE_BIT_STRING:
+	case e2sm_rc_pre_v2.RanparameterType_RANPARAMETER_TYPE_BIT_STRING:
 		ret = C.RANparameter_Type_bit_string
-	case e2sm_rc_pre_ies.RanparameterType_RANPARAMETER_TYPE_OCTET_STRING:
+	case e2sm_rc_pre_v2.RanparameterType_RANPARAMETER_TYPE_OCTET_STRING:
 		ret = C.RANparameter_Type_octet_string
-	case e2sm_rc_pre_ies.RanparameterType_RANPARAMETER_TYPE_PRINTABLE_STRING:
+	case e2sm_rc_pre_v2.RanparameterType_RANPARAMETER_TYPE_PRINTABLE_STRING:
 		ret = C.RANparameter_Type_printable_string //ToDo: change name of C-variable
 	default:
 		return nil, fmt.Errorf("unexpected RANparameter-Type %v", ranparameterType)
@@ -87,10 +87,10 @@ func newRanparameterType(ranparameterType *e2sm_rc_pre_ies.RanparameterType) (*C
 	return &ret, nil
 }
 
-func decodeRanparameterType(ranparameterTypeC *C.RANparameter_Type_t) (*e2sm_rc_pre_ies.RanparameterType, error) { //ToDo - change name of C-struct
+func decodeRanparameterType(ranparameterTypeC *C.RANparameter_Type_t) (*e2sm_rc_pre_v2.RanparameterType, error) { //ToDo - change name of C-struct
 
 	//ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
-	ranparameterType := e2sm_rc_pre_ies.RanparameterType(int32(*ranparameterTypeC))
+	ranparameterType := e2sm_rc_pre_v2.RanparameterType(int32(*ranparameterTypeC))
 
 	return &ranparameterType, nil
 }

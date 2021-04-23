@@ -12,9 +12,8 @@ import (
 
 func TestE2SmRcPreControlOutcome(t *testing.T) {
 	var ranParameterID int32 = 20
-	var ranParameterValue int32 = 10
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreControlOutcome(ranParameterID, ranParameterValue)
+	newE2SmRcPrePdu, err := CreateE2SmRcPreControlOutcome(ranParameterID)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 

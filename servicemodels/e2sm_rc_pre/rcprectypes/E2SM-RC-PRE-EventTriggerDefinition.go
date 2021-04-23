@@ -14,11 +14,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func PerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition) ([]byte, error) {
+func PerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition) ([]byte, error) {
 
 	E2SmRcPreEventTriggerDefinitionCP, err := newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition)
 	if err != nil {
@@ -32,7 +32,7 @@ func PerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e
 	return bytes, nil
 }
 
-func XerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition) ([]byte, error) {
+func XerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition) ([]byte, error) {
 
 	E2SmRcPreEventTriggerDefinitionCP, err := newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition)
 	if err != nil {
@@ -46,7 +46,7 @@ func XerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e
 	return bytes, nil
 }
 
-func PerDecodeE2SmRcPreEventTriggerDefinition(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition, error) {
+func PerDecodeE2SmRcPreEventTriggerDefinition(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition)
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func PerDecodeE2SmRcPreEventTriggerDefinition(bytes []byte) (*e2sm_rc_pre_ies.E2
 	return decodeE2SmRcPreEventTriggerDefinition((*C.E2SM_RC_PRE_EventTriggerDefinition_t)(unsafePtr))
 }
 
-func XerDecodeE2SmRcPreEventTriggerDefinition(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition, error) {
+func XerDecodeE2SmRcPreEventTriggerDefinition(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_EventTriggerDefinition)
 	if err != nil {
 		return nil, err
@@ -68,12 +68,12 @@ func XerDecodeE2SmRcPreEventTriggerDefinition(bytes []byte) (*e2sm_rc_pre_ies.E2
 	return decodeE2SmRcPreEventTriggerDefinition((*C.E2SM_RC_PRE_EventTriggerDefinition_t)(unsafePtr))
 }
 
-func newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition) (*C.E2SM_RC_PRE_EventTriggerDefinition_t, error) {
+func newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition) (*C.E2SM_RC_PRE_EventTriggerDefinition_t, error) {
 	var presentC C.E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR
 	choiceC := [8]byte{}
 
 	switch choice := E2SmRcPreEventTriggerDefinition.E2SmRcPreEventTriggerDefinitionEventDefinitionFormats.(type) {
-	case *e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1:
+	case *e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1:
 		presentC = C.E2SM_RC_PRE_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1
 
 		im, err := newE2SmRcPreEventTriggerDefinitionFormat1(choice.EventDefinitionFormat1)
@@ -97,8 +97,8 @@ func newE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition *e2sm_rc
 	return &E2SmRcPreEventTriggerDefinitionC, nil
 }
 
-func decodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinitionC *C.E2SM_RC_PRE_EventTriggerDefinition_t) (*e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition, error) {
-	E2SmRcPreEventTriggerDefinition := new(e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition)
+func decodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinitionC *C.E2SM_RC_PRE_EventTriggerDefinition_t) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition, error) {
+	E2SmRcPreEventTriggerDefinition := new(e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition)
 
 	eventDefinitionFormatsC := E2SmRcPreEventTriggerDefinitionC.eventDefinition_formats
 	switch eventDefinitionFormatsC.present {
@@ -108,7 +108,7 @@ func decodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinitionC *C.E
 			return nil, fmt.Errorf("decodeE2SmRcPreIndicationMessage() %s", err.Error())
 		}
 
-		E2SmRcPreEventTriggerDefinition.E2SmRcPreEventTriggerDefinitionEventDefinitionFormats = &e2sm_rc_pre_ies.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
+		E2SmRcPreEventTriggerDefinition.E2SmRcPreEventTriggerDefinitionEventDefinitionFormats = &e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition_EventDefinitionFormat1{
 			EventDefinitionFormat1: E2SmRcPreEventTriggerDefinitionFormat1,
 		}
 

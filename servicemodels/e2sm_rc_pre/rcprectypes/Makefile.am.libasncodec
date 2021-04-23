@@ -6,8 +6,9 @@ ASN_MODULE_SRCS=	\
 	./NRCGI.c	\
 	./CellGlobalID.c	\
 	./EARFCN.c	\
+	./NRARFCN.c	\
 	./PCI.c	\
-	./PCI-Range.c	\
+	./ARFCN.c	\
 	./Cell-Size.c	\
 	./RIC-Style-Type.c	\
 	./RIC-Style-Name.c	\
@@ -22,7 +23,6 @@ ASN_MODULE_SRCS=	\
 	./RC-PRE-Trigger-Type.c	\
 	./E2SM-RC-PRE-EventTriggerDefinition.c	\
 	./E2SM-RC-PRE-EventTriggerDefinition-Format1.c	\
-	./E2SM-RC-PRE-ActionDefinition.c	\
 	./E2SM-RC-PRE-IndicationHeader.c	\
 	./E2SM-RC-PRE-IndicationHeader-Format1.c	\
 	./E2SM-RC-PRE-IndicationMessage.c	\
@@ -48,8 +48,9 @@ ASN_MODULE_HDRS=	\
 	./NRCGI.h	\
 	./CellGlobalID.h	\
 	./EARFCN.h	\
+	./NRARFCN.h	\
 	./PCI.h	\
-	./PCI-Range.h	\
+	./ARFCN.h	\
 	./Cell-Size.h	\
 	./RIC-Style-Type.h	\
 	./RIC-Style-Name.h	\
@@ -64,7 +65,6 @@ ASN_MODULE_HDRS=	\
 	./RC-PRE-Trigger-Type.h	\
 	./E2SM-RC-PRE-EventTriggerDefinition.h	\
 	./E2SM-RC-PRE-EventTriggerDefinition-Format1.h	\
-	./E2SM-RC-PRE-ActionDefinition.h	\
 	./E2SM-RC-PRE-IndicationHeader.h	\
 	./E2SM-RC-PRE-IndicationHeader-Format1.h	\
 	./E2SM-RC-PRE-IndicationMessage.h	\

@@ -15,11 +15,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1) ([]byte, error) {
 	e2SmRcPreControlOutcomeFormat1CP, err := newE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlOutcomeFormat1() %s", err.Error())
@@ -32,7 +32,7 @@ func XerEncodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2s
 	return bytes, nil
 }
 
-func PerEncodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1) ([]byte, error) {
+func PerEncodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1) ([]byte, error) {
 	e2SmRcPreControlOutcomeFormat1CP, err := newE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlOutcomeFormat1() %s", err.Error())
@@ -45,7 +45,7 @@ func PerEncodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2s
 	return bytes, nil
 }
 
-func XerDecodeE2SmRcPreControlOutcomeFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1, error) {
+func XerDecodeE2SmRcPreControlOutcomeFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_ControlOutcome_Format1)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func XerDecodeE2SmRcPreControlOutcomeFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2S
 	return decodeE2SmRcPreControlOutcomeFormat1((*C.E2SM_RC_PRE_ControlOutcome_Format1_t)(unsafePtr))
 }
 
-func PerDecodeE2SmRcPreControlOutcomeFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1, error) {
+func PerDecodeE2SmRcPreControlOutcomeFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_ControlOutcome_Format1)
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ func PerDecodeE2SmRcPreControlOutcomeFormat1(bytes []byte) (*e2sm_rc_pre_ies.E2S
 	return decodeE2SmRcPreControlOutcomeFormat1((*C.E2SM_RC_PRE_ControlOutcome_Format1_t)(unsafePtr))
 }
 
-func newE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1) (*C.E2SM_RC_PRE_ControlOutcome_Format1_t, error) {
+func newE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1) (*C.E2SM_RC_PRE_ControlOutcome_Format1_t, error) {
 
 	outcomeElementListC := new(C.struct_E2SM_RC_PRE_ControlOutcome_Format1__outcomeElement_List)
 	e2SmRcPreControlOutcomeFormat1C := C.E2SM_RC_PRE_ControlOutcome_Format1_t{
@@ -87,10 +87,10 @@ func newE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1 *e2sm_rc_p
 	return &e2SmRcPreControlOutcomeFormat1C, nil
 }
 
-func decodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1C *C.E2SM_RC_PRE_ControlOutcome_Format1_t) (*e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1, error) {
+func decodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1C *C.E2SM_RC_PRE_ControlOutcome_Format1_t) (*e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1, error) {
 
 	var ieCount = int(e2SmRcPreControlOutcomeFormat1C.outcomeElement_List.list.count)
-	e2SmRcPreControlOutcomeFormat1 := new(e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1)
+	e2SmRcPreControlOutcomeFormat1 := new(e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1)
 
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(e2SmRcPreControlOutcomeFormat1C.outcomeElement_List.list.array)) * uintptr(i)
@@ -105,7 +105,7 @@ func decodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1C *C.E2S
 	return e2SmRcPreControlOutcomeFormat1, nil
 }
 
-func decodeE2SmRcPreControlOutcomeFormat1Bytes(array [8]byte) (*e2sm_rc_pre_ies.E2SmRcPreControlOutcomeFormat1, error) {
+func decodeE2SmRcPreControlOutcomeFormat1Bytes(array [8]byte) (*e2sm_rc_pre_v2.E2SmRcPreControlOutcomeFormat1, error) {
 	e2SmRcPreControlOutcomeFormat1C := (*C.E2SM_RC_PRE_ControlOutcome_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 	result, err := decodeE2SmRcPreControlOutcomeFormat1(e2SmRcPreControlOutcomeFormat1C)
 	if err != nil {

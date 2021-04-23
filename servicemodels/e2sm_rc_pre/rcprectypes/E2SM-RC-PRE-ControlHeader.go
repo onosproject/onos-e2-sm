@@ -15,11 +15,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_ies.E2SmRcPreControlHeader) ([]byte, error) {
+func XerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_v2.E2SmRcPreControlHeader) ([]byte, error) {
 	e2SmRcPreControlHeaderCP, err := newE2SmRcPreControlHeader(e2SmRcPreControlHeader)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlHeader() %s", err.Error())
@@ -32,7 +32,7 @@ func XerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_ies.E2S
 	return bytes, nil
 }
 
-func PerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_ies.E2SmRcPreControlHeader) ([]byte, error) {
+func PerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_v2.E2SmRcPreControlHeader) ([]byte, error) {
 	e2SmRcPreControlHeaderCP, err := newE2SmRcPreControlHeader(e2SmRcPreControlHeader)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreControlHeader() %s", err.Error())
@@ -45,7 +45,7 @@ func PerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_ies.E2S
 	return bytes, nil
 }
 
-func XerDecodeE2SmRcPreControlHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlHeader, error) {
+func XerDecodeE2SmRcPreControlHeader(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlHeader, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_ControlHeader)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func XerDecodeE2SmRcPreControlHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreCo
 	return decodeE2SmRcPreControlHeader((*C.E2SM_RC_PRE_ControlHeader_t)(unsafePtr))
 }
 
-func PerDecodeE2SmRcPreControlHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreControlHeader, error) {
+func PerDecodeE2SmRcPreControlHeader(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreControlHeader, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_ControlHeader)
 	if err != nil {
 		return nil, err
@@ -67,13 +67,13 @@ func PerDecodeE2SmRcPreControlHeader(bytes []byte) (*e2sm_rc_pre_ies.E2SmRcPreCo
 	return decodeE2SmRcPreControlHeader((*C.E2SM_RC_PRE_ControlHeader_t)(unsafePtr))
 }
 
-func newE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_ies.E2SmRcPreControlHeader) (*C.E2SM_RC_PRE_ControlHeader_t, error) {
+func newE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_v2.E2SmRcPreControlHeader) (*C.E2SM_RC_PRE_ControlHeader_t, error) {
 
 	var pr C.E2SM_RC_PRE_ControlHeader_PR
 	choiceC := [8]byte{}
 
 	switch choice := e2SmRcPreControlHeader.E2SmRcPreControlHeader.(type) {
-	case *e2sm_rc_pre_ies.E2SmRcPreControlHeader_ControlHeaderFormat1:
+	case *e2sm_rc_pre_v2.E2SmRcPreControlHeader_ControlHeaderFormat1:
 		pr = C.E2SM_RC_PRE_ControlHeader_PR_controlHeader_Format1
 
 		im, err := newE2SmRcPreControlHeaderFormat1(choice.ControlHeaderFormat1)
@@ -93,10 +93,10 @@ func newE2SmRcPreControlHeader(e2SmRcPreControlHeader *e2sm_rc_pre_ies.E2SmRcPre
 	return &e2SmRcPreControlHeaderC, nil
 }
 
-func decodeE2SmRcPreControlHeader(e2SmRcPreControlHeaderC *C.E2SM_RC_PRE_ControlHeader_t) (*e2sm_rc_pre_ies.E2SmRcPreControlHeader, error) {
+func decodeE2SmRcPreControlHeader(e2SmRcPreControlHeaderC *C.E2SM_RC_PRE_ControlHeader_t) (*e2sm_rc_pre_v2.E2SmRcPreControlHeader, error) {
 
 	//This is Decoder part (OneOf)
-	e2SmRcPreControlHeader := new(e2sm_rc_pre_ies.E2SmRcPreControlHeader)
+	e2SmRcPreControlHeader := new(e2sm_rc_pre_v2.E2SmRcPreControlHeader)
 
 	switch e2SmRcPreControlHeaderC.present {
 	case C.E2SM_RC_PRE_ControlHeader_PR_controlHeader_Format1:
@@ -104,7 +104,7 @@ func decodeE2SmRcPreControlHeader(e2SmRcPreControlHeaderC *C.E2SM_RC_PRE_Control
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmRcPreControlHeader() %s", err.Error())
 		}
-		e2SmRcPreControlHeader.E2SmRcPreControlHeader = &e2sm_rc_pre_ies.E2SmRcPreControlHeader_ControlHeaderFormat1{
+		e2SmRcPreControlHeader.E2SmRcPreControlHeader = &e2sm_rc_pre_v2.E2SmRcPreControlHeader_ControlHeaderFormat1{
 			ControlHeaderFormat1: e2SmRcPreControlHeaderstructC,
 		}
 	default:

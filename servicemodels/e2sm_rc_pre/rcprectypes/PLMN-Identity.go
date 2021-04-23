@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodePlmnIdentity(plmnID *e2sm_rc_pre_ies.PlmnIdentity) ([]byte, error) {
+func xerEncodePlmnIdentity(plmnID *e2sm_rc_pre_v2.PlmnIdentity) ([]byte, error) {
 
 	plmnIDCP := newPlmnIdentity(plmnID)
 
@@ -28,15 +28,15 @@ func xerEncodePlmnIdentity(plmnID *e2sm_rc_pre_ies.PlmnIdentity) ([]byte, error)
 	return bytes, nil
 }
 
-func newPlmnIdentity(plmnID *e2sm_rc_pre_ies.PlmnIdentity) *C.PLMN_Identity_t {
+func newPlmnIdentity(plmnID *e2sm_rc_pre_v2.PlmnIdentity) *C.PLMN_Identity_t {
 
-	plmnIDC := newOctetString(string(plmnID.Value))
+	plmnIDC := newOctetString(string(plmnID.GetValue()))
 
 	return plmnIDC
 }
 
-func decodePlmnIdentity(plmnIDC *C.PLMN_Identity_t) *e2sm_rc_pre_ies.PlmnIdentity {
-	plmnID := new(e2sm_rc_pre_ies.PlmnIdentity)
+func decodePlmnIdentity(plmnIDC *C.PLMN_Identity_t) *e2sm_rc_pre_v2.PlmnIdentity {
+	plmnID := new(e2sm_rc_pre_v2.PlmnIdentity)
 
 	plmnIDO := decodeOctetString(plmnIDC)
 	plmnID.Value = []byte(plmnIDO)

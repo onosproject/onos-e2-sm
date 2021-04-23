@@ -13,12 +13,12 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
 //ToDo: Solve "Cannot convert cellSizeC (type _Ctype_long) to type unsafe.Pointer"
-func xerEncodeCellSize(cellSize e2sm_rc_pre_ies.CellSize) ([]byte, error) {
+func xerEncodeCellSize(cellSize e2sm_rc_pre_v2.CellSize) ([]byte, error) {
 	cellSizeC, err := newCellSize(cellSize)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func xerEncodeCellSize(cellSize e2sm_rc_pre_ies.CellSize) ([]byte, error) {
 	return bytes, nil
 }
 
-func perEncodeCellSize(cellSize e2sm_rc_pre_ies.CellSize) ([]byte, error) {
+func perEncodeCellSize(cellSize e2sm_rc_pre_v2.CellSize) ([]byte, error) {
 	cellSizeC, err := newCellSize(cellSize)
 	if err != nil {
 		return nil, err
@@ -45,7 +45,7 @@ func perEncodeCellSize(cellSize e2sm_rc_pre_ies.CellSize) ([]byte, error) {
 }
 
 //ToDo: Decide what to return instead of nil, which cannot be returned since return value is not a pointer anymore
-func xerDecodeCellSize(bytes []byte) (e2sm_rc_pre_ies.CellSize, error) {
+func xerDecodeCellSize(bytes []byte) (e2sm_rc_pre_v2.CellSize, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_Cell_Size)
 	if err != nil {
 		return 0, err
@@ -56,7 +56,7 @@ func xerDecodeCellSize(bytes []byte) (e2sm_rc_pre_ies.CellSize, error) {
 	return decodeCellSize((*C.Cell_Size_t)(unsafePtr)), nil
 }
 
-func perDecodeCellSize(bytes []byte) (e2sm_rc_pre_ies.CellSize, error) {
+func perDecodeCellSize(bytes []byte) (e2sm_rc_pre_v2.CellSize, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_Cell_Size)
 	if err != nil {
 		return 0, err
@@ -67,16 +67,16 @@ func perDecodeCellSize(bytes []byte) (e2sm_rc_pre_ies.CellSize, error) {
 	return decodeCellSize((*C.Cell_Size_t)(unsafePtr)), nil
 }
 
-func newCellSize(cellSize e2sm_rc_pre_ies.CellSize) (C.Cell_Size_t, error) {
+func newCellSize(cellSize e2sm_rc_pre_v2.CellSize) (C.Cell_Size_t, error) {
 	var ret C.Cell_Size_t
 	switch cellSize {
-	case e2sm_rc_pre_ies.CellSize_CELL_SIZE_FEMTO:
+	case e2sm_rc_pre_v2.CellSize_CELL_SIZE_FEMTO:
 		ret = C.Cell_Size_femto
-	case e2sm_rc_pre_ies.CellSize_CELL_SIZE_ENTERPRISE:
+	case e2sm_rc_pre_v2.CellSize_CELL_SIZE_ENTERPRISE:
 		ret = C.Cell_Size_enterprise
-	case e2sm_rc_pre_ies.CellSize_CELL_SIZE_OUTDOOR_SMALL:
+	case e2sm_rc_pre_v2.CellSize_CELL_SIZE_OUTDOOR_SMALL:
 		ret = C.Cell_Size_outdoorSmall
-	case e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO:
+	case e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO:
 		ret = C.Cell_Size_macro
 	default:
 		return 0, fmt.Errorf("unexpected CellSize %v", cellSize)
@@ -84,7 +84,7 @@ func newCellSize(cellSize e2sm_rc_pre_ies.CellSize) (C.Cell_Size_t, error) {
 	return ret, nil
 }
 
-func decodeCellSize(cellSizeC *C.Cell_Size_t) e2sm_rc_pre_ies.CellSize {
+func decodeCellSize(cellSizeC *C.Cell_Size_t) e2sm_rc_pre_v2.CellSize {
 
-	return e2sm_rc_pre_ies.CellSize(int32(*cellSizeC))
+	return e2sm_rc_pre_v2.CellSize(int32(*cellSizeC))
 }

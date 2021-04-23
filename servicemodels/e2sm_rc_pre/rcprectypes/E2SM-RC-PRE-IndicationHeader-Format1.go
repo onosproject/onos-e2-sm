@@ -14,11 +14,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func XerEncodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreIndicationHeaderFormat1) ([]byte, error) {
+func XerEncodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1) ([]byte, error) {
 	indicationHeaderFormat1CP, err := newE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("XerEncodeE2SmRcPreIndicationHeaderFormat1() %s", err.Error())
@@ -31,7 +31,7 @@ func XerEncodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_
 	return bytes, nil
 }
 
-func newE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_ies.E2SmRcPreIndicationHeaderFormat1) (*C.E2SM_RC_PRE_IndicationHeader_Format1_t, error) {
+func newE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1) (*C.E2SM_RC_PRE_IndicationHeader_Format1_t, error) {
 
 	cgi, _ := newCellGlobalID(indicationHeaderFormat1.Cgi)
 
@@ -42,8 +42,8 @@ func newE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_ie
 	return &indicationHeaderFormat1C, nil
 }
 
-func decodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1C *C.E2SM_RC_PRE_IndicationHeader_Format1_t) (*e2sm_rc_pre_ies.E2SmRcPreIndicationHeaderFormat1, error) {
-	indicationHeaderFormat1 := new(e2sm_rc_pre_ies.E2SmRcPreIndicationHeaderFormat1)
+func decodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1C *C.E2SM_RC_PRE_IndicationHeader_Format1_t) (*e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1, error) {
+	indicationHeaderFormat1 := new(e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1)
 
 	if indicationHeaderFormat1C.cgi != nil { // Is optional
 		cgi, err := decodeCellGlobalID(indicationHeaderFormat1C.cgi)
@@ -55,7 +55,7 @@ func decodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1C *C.E2SM_RC_
 	return indicationHeaderFormat1, nil
 }
 
-func decodeE2SmRcPreIndicationHeaderFormat1Bytes(array [8]byte) (*e2sm_rc_pre_ies.E2SmRcPreIndicationHeaderFormat1, error) {
+func decodeE2SmRcPreIndicationHeaderFormat1Bytes(array [8]byte) (*e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1, error) {
 	indicationHeaderFormat1C := (*C.E2SM_RC_PRE_IndicationHeader_Format1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 
 	return decodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1C)

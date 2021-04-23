@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeRicFormatType(ricFormatType *e2sm_rc_pre_ies.RicFormatType) ([]byte, error) {
+func xerEncodeRicFormatType(ricFormatType *e2sm_rc_pre_v2.RicFormatType) ([]byte, error) {
 	ricFormatTypeCP := newRicFormatType(ricFormatType)
 
 	bytes, err := encodeXer(&C.asn_DEF_RIC_Format_Type, unsafe.Pointer(ricFormatTypeCP))
@@ -27,7 +27,7 @@ func xerEncodeRicFormatType(ricFormatType *e2sm_rc_pre_ies.RicFormatType) ([]byt
 	return bytes, nil
 }
 
-func perEncodeRicFormatType(ricFormatType *e2sm_rc_pre_ies.RicFormatType) ([]byte, error) {
+func perEncodeRicFormatType(ricFormatType *e2sm_rc_pre_v2.RicFormatType) ([]byte, error) {
 	ricFormatTypeCP := newRicFormatType(ricFormatType)
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_RIC_Format_Type, unsafe.Pointer(ricFormatTypeCP))
@@ -37,7 +37,7 @@ func perEncodeRicFormatType(ricFormatType *e2sm_rc_pre_ies.RicFormatType) ([]byt
 	return bytes, nil
 }
 
-func xerDecodeRicFormatType(bytes []byte) (*e2sm_rc_pre_ies.RicFormatType, error) {
+func xerDecodeRicFormatType(bytes []byte) (*e2sm_rc_pre_v2.RicFormatType, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RIC_Format_Type)
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func xerDecodeRicFormatType(bytes []byte) (*e2sm_rc_pre_ies.RicFormatType, error
 	return decodeRicFormatType((*C.RIC_Format_Type_t)(unsafePtr)), nil
 }
 
-func perDecodeRicFormatType(bytes []byte) (*e2sm_rc_pre_ies.RicFormatType, error) {
+func perDecodeRicFormatType(bytes []byte) (*e2sm_rc_pre_v2.RicFormatType, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RIC_Format_Type)
 	if err != nil {
 		return nil, err
@@ -59,16 +59,16 @@ func perDecodeRicFormatType(bytes []byte) (*e2sm_rc_pre_ies.RicFormatType, error
 	return decodeRicFormatType((*C.RIC_Format_Type_t)(unsafePtr)), nil
 }
 
-func newRicFormatType(ricFormatType *e2sm_rc_pre_ies.RicFormatType) *C.RIC_Format_Type_t {
+func newRicFormatType(ricFormatType *e2sm_rc_pre_v2.RicFormatType) *C.RIC_Format_Type_t {
 
 	ricStyleTypeC := C.long(ricFormatType.Value)
 
 	return &ricStyleTypeC
 }
 
-func decodeRicFormatType(ricFormatTypeC *C.RIC_Format_Type_t) *e2sm_rc_pre_ies.RicFormatType {
+func decodeRicFormatType(ricFormatTypeC *C.RIC_Format_Type_t) *e2sm_rc_pre_v2.RicFormatType {
 
-	ricFormatType := e2sm_rc_pre_ies.RicFormatType{
+	ricFormatType := e2sm_rc_pre_v2.RicFormatType{
 		Value: int32(*ricFormatTypeC),
 	}
 	return &ricFormatType

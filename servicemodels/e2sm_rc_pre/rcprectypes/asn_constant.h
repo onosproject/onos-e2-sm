@@ -14,7 +14,8 @@ extern "C" {
 #define maxPLMN (12)
 #define maxNR (4096)
 #define maxEARFCN (262143)
-#define maxPCI (503)
+#define maxNRARFCN (3279167)
+#define maxPCI (1007)
 #define maxPciRange (100)
 #define maxofRANparameters (65535)
 

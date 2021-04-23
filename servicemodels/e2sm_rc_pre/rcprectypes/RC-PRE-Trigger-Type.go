@@ -13,11 +13,11 @@ package rcprectypes
 import "C"
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	//"unsafe"
 )
 
-//func xerEncodeRcPreTriggerType(rcPreTriggerType *e2sm_rc_pre_ies.RcPreTriggerType) ([]byte, error) {
+//func xerEncodeRcPreTriggerType(rcPreTriggerType *e2sm_rc_pre_v2.RcPreTriggerType) ([]byte, error) {
 //	rcPreTriggerTypeCP, err := newRcPreTriggerType(rcPreTriggerType)
 //	if err != nil {
 //		return nil, err
@@ -30,7 +30,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func perEncodeRcPreTriggerType(rcPreTriggerType *e2sm_rc_pre_ies.RcPreTriggerType) ([]byte, error) {
+//func perEncodeRcPreTriggerType(rcPreTriggerType *e2sm_rc_pre_v2.RcPreTriggerType) ([]byte, error) {
 //	rcPreTriggerTypeCP, err := newRcPreTriggerType(rcPreTriggerType)
 //	if err != nil {
 //		return nil, err
@@ -43,7 +43,7 @@ import (
 //	return bytes, nil
 //}
 //
-//func xerDecodeRcPreTriggerType(bytes []byte) (*e2sm_rc_pre_ies.RcPreTriggerType, error) {
+//func xerDecodeRcPreTriggerType(bytes []byte) (*e2sm_rc_pre_v2.RcPreTriggerType, error) {
 //	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RC_PRE_Trigger_Type)
 //	if err != nil {
 //		return nil, err
@@ -54,7 +54,7 @@ import (
 //	return decodeRcPreTriggerType((*C.RC_PRE_Trigger_Type_t)(unsafePtr)) //ToDo - change name of C-struct
 //}
 //
-//func perDecodeRcPreTriggerType(bytes []byte) (*e2sm_rc_pre_ies.RcPreTriggerType, error) {
+//func perDecodeRcPreTriggerType(bytes []byte) (*e2sm_rc_pre_v2.RcPreTriggerType, error) {
 //	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RC_PRE_Trigger_Type)
 //	if err != nil {
 //		return nil, err
@@ -65,12 +65,12 @@ import (
 //	return decodeRcPreTriggerType((*C.RC_PRE_Trigger_Type_t)(unsafePtr)) //ToDo - change name of C-struct
 //}
 
-func newRcPreTriggerType(rcPreTriggerType *e2sm_rc_pre_ies.RcPreTriggerType) (*C.RC_PRE_Trigger_Type_t, error) { //ToDo - change name of C-struct
+func newRcPreTriggerType(rcPreTriggerType *e2sm_rc_pre_v2.RcPreTriggerType) (*C.RC_PRE_Trigger_Type_t, error) { //ToDo - change name of C-struct
 	var ret C.RC_PRE_Trigger_Type_t
 	switch *rcPreTriggerType {
-	case e2sm_rc_pre_ies.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_UPON_CHANGE:
+	case e2sm_rc_pre_v2.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_UPON_CHANGE:
 		ret = C.RC_PRE_Trigger_Type_upon_change
-	case e2sm_rc_pre_ies.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_PERIODIC:
+	case e2sm_rc_pre_v2.RcPreTriggerType_RC_PRE_TRIGGER_TYPE_PERIODIC:
 		ret = C.RC_PRE_Trigger_Type_periodic
 	default:
 		return nil, fmt.Errorf("unexpected RC-PRE-Trigger-Type %v", rcPreTriggerType)
@@ -79,10 +79,10 @@ func newRcPreTriggerType(rcPreTriggerType *e2sm_rc_pre_ies.RcPreTriggerType) (*C
 	return &ret, nil
 }
 
-func decodeRcPreTriggerType(rcPreTriggerTypeC *C.RC_PRE_Trigger_Type_t) (*e2sm_rc_pre_ies.RcPreTriggerType, error) { //ToDo - change name of C-struct
+func decodeRcPreTriggerType(rcPreTriggerTypeC *C.RC_PRE_Trigger_Type_t) (*e2sm_rc_pre_v2.RcPreTriggerType, error) { //ToDo - change name of C-struct
 
 	//ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
-	rcPreTriggerType := e2sm_rc_pre_ies.RcPreTriggerType(int32(*rcPreTriggerTypeC))
+	rcPreTriggerType := e2sm_rc_pre_v2.RcPreTriggerType(int32(*rcPreTriggerTypeC))
 
 	return &rcPreTriggerType, nil
 }

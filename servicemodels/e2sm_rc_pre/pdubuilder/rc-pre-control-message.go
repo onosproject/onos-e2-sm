@@ -5,29 +5,29 @@ package pdubuilder
 
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 )
 
-func CreateE2SmRcPreControlMessage(RANparameterID int32, RANparameterName string, RANparameterValue int32) (*e2sm_rc_pre_ies.E2SmRcPreControlMessage, error) {
+func CreateE2SmRcPreControlMessage(RANparameterID int32, RANparameterName string, RANparameterValue int32) (*e2sm_rc_pre_v2.E2SmRcPreControlMessage, error) {
 
-	e2smRcPreMsgFormat1 := e2sm_rc_pre_ies.E2SmRcPreControlMessageFormat1{
-		ParameterType: &e2sm_rc_pre_ies.RanparameterDefItem{
-			RanParameterId: &e2sm_rc_pre_ies.RanparameterId{
+	e2smRcPreMsgFormat1 := e2sm_rc_pre_v2.E2SmRcPreControlMessageFormat1{
+		ParameterType: &e2sm_rc_pre_v2.RanparameterDefItem{
+			RanParameterId: &e2sm_rc_pre_v2.RanparameterId{
 				Value: RANparameterID,
 			},
-			RanParameterName: &e2sm_rc_pre_ies.RanparameterName{
+			RanParameterName: &e2sm_rc_pre_v2.RanparameterName{
 				Value: RANparameterName,
 			},
-			RanParameterType: e2sm_rc_pre_ies.RanparameterType_RANPARAMETER_TYPE_INTEGER,
+			RanParameterType: e2sm_rc_pre_v2.RanparameterType_RANPARAMETER_TYPE_INTEGER,
 		},
-		ParameterVal: &e2sm_rc_pre_ies.RanparameterValue{
-			RanparameterValue: &e2sm_rc_pre_ies.RanparameterValue_ValueInt{
+		ParameterVal: &e2sm_rc_pre_v2.RanparameterValue{
+			RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValueInt{
 				ValueInt: RANparameterValue,
 			},
 		},
 	}
-	e2smRcPrePdu := e2sm_rc_pre_ies.E2SmRcPreControlMessage{
-		E2SmRcPreControlMessage: &e2sm_rc_pre_ies.E2SmRcPreControlMessage_ControlMessage{
+	e2smRcPrePdu := e2sm_rc_pre_v2.E2SmRcPreControlMessage{
+		E2SmRcPreControlMessage: &e2sm_rc_pre_v2.E2SmRcPreControlMessage_ControlMessage{
 			ControlMessage: &e2smRcPreMsgFormat1,
 		},
 	}

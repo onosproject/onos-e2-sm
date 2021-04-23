@@ -14,11 +14,11 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"unsafe"
 )
 
-func xerEncodeEUTRACGI(eutracgi *e2sm_rc_pre_ies.Eutracgi) ([]byte, error) {
+func xerEncodeEUTRACGI(eutracgi *e2sm_rc_pre_v2.Eutracgi) ([]byte, error) {
 
 	eutracgiCP, err := newEUTRACGI(eutracgi)
 	if err != nil {
@@ -32,7 +32,7 @@ func xerEncodeEUTRACGI(eutracgi *e2sm_rc_pre_ies.Eutracgi) ([]byte, error) {
 	return bytes, nil
 }
 
-func newEUTRACGI(eutracgi *e2sm_rc_pre_ies.Eutracgi) (*C.EUTRACGI_t, error) {
+func newEUTRACGI(eutracgi *e2sm_rc_pre_v2.Eutracgi) (*C.EUTRACGI_t, error) {
 
 	plmnID := newPlmnIdentity(eutracgi.PLmnIdentity)
 	eutracellIdentity := newEUTRACellIdentity(eutracgi.EUtracellIdentity)
@@ -45,8 +45,8 @@ func newEUTRACGI(eutracgi *e2sm_rc_pre_ies.Eutracgi) (*C.EUTRACGI_t, error) {
 	return &eutracgiC, nil
 }
 
-func decodeEUTRACGI(eutracgiC *C.EUTRACGI_t) (*e2sm_rc_pre_ies.Eutracgi, error) {
-	eutracgi := new(e2sm_rc_pre_ies.Eutracgi)
+func decodeEUTRACGI(eutracgiC *C.EUTRACGI_t) (*e2sm_rc_pre_v2.Eutracgi, error) {
+	eutracgi := new(e2sm_rc_pre_v2.Eutracgi)
 
 	plmnID := decodePlmnIdentity(&eutracgiC.pLMN_Identity)
 	eutracgi.PLmnIdentity = plmnID
@@ -60,7 +60,7 @@ func decodeEUTRACGI(eutracgiC *C.EUTRACGI_t) (*e2sm_rc_pre_ies.Eutracgi, error) 
 	return eutracgi, nil
 }
 
-func decodeEUTRACGIBytes(array [8]byte) *e2sm_rc_pre_ies.Eutracgi {
+func decodeEUTRACGIBytes(array [8]byte) *e2sm_rc_pre_v2.Eutracgi {
 	eutracgiC := (*C.EUTRACGI_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
 	eutracgi, _ := decodeEUTRACGI(eutracgiC)
 

@@ -5,50 +5,50 @@ package pdubuilder
 
 import (
 	"fmt"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 )
 
 func CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunctionE2SmOid string, ranFunctionDescription string,
 	ranFunctionInstance int32, ricEventStyleType int32, ricEventStyleName string, ricEventFormatType int32,
 	ricReportStyleType int32, ricReportStyleName string, ricIndicationHeaderFormatType int32,
-	ricIndicationMessageFormatType int32) (*e2sm_rc_pre_ies.E2SmRcPreRanfunctionDescription, error) {
+	ricIndicationMessageFormatType int32) (*e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription, error) {
 
-	ranfunctionItem := e2sm_rc_pre_ies.E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001{
-		RicEventTriggerStyleList: make([]*e2sm_rc_pre_ies.RicEventTriggerStyleList, 0),
-		RicReportStyleList:       make([]*e2sm_rc_pre_ies.RicReportStyleList, 0),
+	ranfunctionItem := e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001{
+		RicEventTriggerStyleList: make([]*e2sm_rc_pre_v2.RicEventTriggerStyleList, 0),
+		RicReportStyleList:       make([]*e2sm_rc_pre_v2.RicReportStyleList, 0),
 	}
 
-	ricEventTriggerStyleList := e2sm_rc_pre_ies.RicEventTriggerStyleList{
-		RicEventTriggerStyleType: &e2sm_rc_pre_ies.RicStyleType{
+	ricEventTriggerStyleList := e2sm_rc_pre_v2.RicEventTriggerStyleList{
+		RicEventTriggerStyleType: &e2sm_rc_pre_v2.RicStyleType{
 			Value: ricEventStyleType, //int32
 		},
-		RicEventTriggerStyleName: &e2sm_rc_pre_ies.RicStyleName{
+		RicEventTriggerStyleName: &e2sm_rc_pre_v2.RicStyleName{
 			Value: ricEventStyleName, //string
 		},
-		RicEventTriggerFormatType: &e2sm_rc_pre_ies.RicFormatType{
+		RicEventTriggerFormatType: &e2sm_rc_pre_v2.RicFormatType{
 			Value: ricEventFormatType, //int32
 		},
 	}
 	ranfunctionItem.RicEventTriggerStyleList = append(ranfunctionItem.RicEventTriggerStyleList, &ricEventTriggerStyleList)
 
-	ricReportStyleList := e2sm_rc_pre_ies.RicReportStyleList{
-		RicReportStyleType: &e2sm_rc_pre_ies.RicStyleType{
+	ricReportStyleList := e2sm_rc_pre_v2.RicReportStyleList{
+		RicReportStyleType: &e2sm_rc_pre_v2.RicStyleType{
 			Value: ricReportStyleType, //int32
 		},
-		RicReportStyleName: &e2sm_rc_pre_ies.RicStyleName{
+		RicReportStyleName: &e2sm_rc_pre_v2.RicStyleName{
 			Value: ricReportStyleName, //string
 		},
-		RicIndicationHeaderFormatType: &e2sm_rc_pre_ies.RicFormatType{
+		RicIndicationHeaderFormatType: &e2sm_rc_pre_v2.RicFormatType{
 			Value: ricIndicationHeaderFormatType, //int32
 		},
-		RicIndicationMessageFormatType: &e2sm_rc_pre_ies.RicFormatType{
+		RicIndicationMessageFormatType: &e2sm_rc_pre_v2.RicFormatType{
 			Value: ricIndicationMessageFormatType, //int32
 		},
 	}
 	ranfunctionItem.RicReportStyleList = append(ranfunctionItem.RicReportStyleList, &ricReportStyleList)
 
-	e2smRcPrePdu := e2sm_rc_pre_ies.E2SmRcPreRanfunctionDescription{
-		RanFunctionName: &e2sm_rc_pre_ies.RanfunctionName{
+	e2smRcPrePdu := e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription{
+		RanFunctionName: &e2sm_rc_pre_v2.RanfunctionName{
 			RanFunctionShortName:   ranFunctionShortName,   //string
 			RanFunctionE2SmOid:     ranFunctionE2SmOid,     //sting
 			RanFunctionDescription: ranFunctionDescription, //string

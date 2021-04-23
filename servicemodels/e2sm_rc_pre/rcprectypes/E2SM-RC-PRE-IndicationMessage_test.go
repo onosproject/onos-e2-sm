@@ -6,70 +6,47 @@ package rcprectypes
 
 import (
 	"encoding/hex"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
 func Test_XerEncodeE2SmRcPreIndicationMessage(t *testing.T) {
 	var plmnID = "12f410"
-	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
 
-	cgi := &e2sm_rc_pre_ies.CellGlobalId{
-		CellGlobalId: &e2sm_rc_pre_ies.CellGlobalId_EUtraCgi{
-			EUtraCgi: &e2sm_rc_pre_ies.Eutracgi{
-				PLmnIdentity: &e2sm_rc_pre_ies.PlmnIdentity{
-					Value: plmnIDBytes,
-				},
-				EUtracellIdentity: &e2sm_rc_pre_ies.EutracellIdentity{
-					Value: &e2sm_rc_pre_ies.BitString{
-						Value: 0x9bcd4ab, //uint64
-						Len:   28,        //uint32
-					},
-				},
+	arfcn := &e2sm_rc_pre_v2.Arfcn{
+		Arfcn: &e2sm_rc_pre_v2.Arfcn_EArfcn{
+			EArfcn: &e2sm_rc_pre_v2.Earfcn{
+				Value: 253,
 			},
 		},
 	}
-	earfcn := &e2sm_rc_pre_ies.Earfcn{
-		Value: 253,
-	}
 
-	cellSize := e2sm_rc_pre_ies.CellSize_CELL_SIZE_MACRO
-	pci := &e2sm_rc_pre_ies.Pci{
+	cellSize := e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO
+	pci := &e2sm_rc_pre_v2.Pci{
 		Value: 11,
 	}
 
-	e2SmIindicationMsg := &e2sm_rc_pre_ies.E2SmRcPreIndicationMessage_IndicationMessageFormat1{
-		IndicationMessageFormat1: &e2sm_rc_pre_ies.E2SmRcPreIndicationMessageFormat1{
-			Cgi:       cgi,
-			DlEarfcn:  earfcn,
+	e2SmIindicationMsg := &e2sm_rc_pre_v2.E2SmRcPreIndicationMessage_IndicationMessageFormat1{
+		IndicationMessageFormat1: &e2sm_rc_pre_v2.E2SmRcPreIndicationMessageFormat1{
+			DlArfcn:   arfcn,
 			CellSize:  cellSize,
-			PciPool:   make([]*e2sm_rc_pre_ies.PciRange, 0),
 			Pci:       pci,
-			Neighbors: make([]*e2sm_rc_pre_ies.Nrt, 0),
+			Neighbors: make([]*e2sm_rc_pre_v2.Nrt, 0),
 		},
 	}
 
-	pciPool := &e2sm_rc_pre_ies.PciRange{
-		LowerPci: &e2sm_rc_pre_ies.Pci{
-			Value: 10,
-		},
-		UpperPci: &e2sm_rc_pre_ies.Pci{
-			Value: 20,
-		},
-	}
-	e2SmIindicationMsg.IndicationMessageFormat1.PciPool = append(e2SmIindicationMsg.IndicationMessageFormat1.PciPool, pciPool)
-
-	neighbors := &e2sm_rc_pre_ies.Nrt{
-		NrIndex: 1,
-		Cgi: &e2sm_rc_pre_ies.CellGlobalId{
-			CellGlobalId: &e2sm_rc_pre_ies.CellGlobalId_EUtraCgi{
-				EUtraCgi: &e2sm_rc_pre_ies.Eutracgi{
-					PLmnIdentity: &e2sm_rc_pre_ies.PlmnIdentity{
+	neighbors := &e2sm_rc_pre_v2.Nrt{
+		Cgi: &e2sm_rc_pre_v2.CellGlobalId{
+			CellGlobalId: &e2sm_rc_pre_v2.CellGlobalId_EUtraCgi{
+				EUtraCgi: &e2sm_rc_pre_v2.Eutracgi{
+					PLmnIdentity: &e2sm_rc_pre_v2.PlmnIdentity{
 						Value: plmnIDBytes,
 					},
-					EUtracellIdentity: &e2sm_rc_pre_ies.EutracellIdentity{
-						Value: &e2sm_rc_pre_ies.BitString{
+					EUtracellIdentity: &e2sm_rc_pre_v2.EutracellIdentity{
+						Value: &e2sm_rc_pre_v2.BitString{
 							Value: 0x9bcd4ab, //uint64
 							Len:   28,        //uint32
 						},
@@ -77,21 +54,37 @@ func Test_XerEncodeE2SmRcPreIndicationMessage(t *testing.T) {
 				},
 			},
 		},
-		Pci: &e2sm_rc_pre_ies.Pci{
+		Pci: &e2sm_rc_pre_v2.Pci{
 			Value: 11,
 		},
 		CellSize: cellSize,
-		DlEarfcn: &e2sm_rc_pre_ies.Earfcn{
-			Value: 253,
+		DlArfcn: &e2sm_rc_pre_v2.Arfcn{
+			Arfcn: &e2sm_rc_pre_v2.Arfcn_NrArfcn{
+				NrArfcn: &e2sm_rc_pre_v2.Nrarfcn{
+					Value: 253,
+				},
+			},
 		},
 	}
 	e2SmIindicationMsg.IndicationMessageFormat1.Neighbors = append(e2SmIindicationMsg.IndicationMessageFormat1.Neighbors, neighbors)
 
-	E2SmRcPrePdu := &e2sm_rc_pre_ies.E2SmRcPreIndicationMessage{
+	E2SmRcPrePdu := &e2sm_rc_pre_v2.E2SmRcPreIndicationMessage{
 		E2SmRcPreIndicationMessage: e2SmIindicationMsg,
 	}
 
 	xer, err := XerEncodeE2SmRcPreIndicationMessage(E2SmRcPrePdu)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-IndicationMessage XER\n%s", string(xer))
+
+	result, err := XerDecodeE2SmRcPreIndicationMessage(xer)
+	assert.NilError(t, err)
+	t.Logf("Decoded RC-PRE-IndicationMessage is \n%v", result)
+
+	per, err := PerEncodeE2SmRcPreIndicationMessage(E2SmRcPrePdu)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RC-PRE-IndicationMessage PER\n%v", hex.Dump(per))
+
+	result, err = PerDecodeE2SmRcPreIndicationMessage(per)
+	assert.NilError(t, err)
+	t.Logf("Decoded RC-PRE-IndicationMessage is \n%v", result)
 }

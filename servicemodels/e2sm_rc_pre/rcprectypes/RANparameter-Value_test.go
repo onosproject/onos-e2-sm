@@ -6,55 +6,55 @@ package rcprectypes
 
 import (
 	"encoding/hex"
-	e2sm_rc_pre_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v1/e2sm-rc-pre-ies"
+	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createRanparameterValueValueInteger() *e2sm_rc_pre_ies.RanparameterValue {
-	return &e2sm_rc_pre_ies.RanparameterValue{
-		RanparameterValue: &e2sm_rc_pre_ies.RanparameterValue_ValueInt{
+func createRanparameterValueValueInteger() *e2sm_rc_pre_v2.RanparameterValue {
+	return &e2sm_rc_pre_v2.RanparameterValue{
+		RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValueInt{
 			ValueInt: 44,
 		},
 	}
 }
 
-func createRanparameterValueValueEnum() *e2sm_rc_pre_ies.RanparameterValue {
-	return &e2sm_rc_pre_ies.RanparameterValue{
-		RanparameterValue: &e2sm_rc_pre_ies.RanparameterValue_ValueEnum{
+func createRanparameterValueValueEnum() *e2sm_rc_pre_v2.RanparameterValue {
+	return &e2sm_rc_pre_v2.RanparameterValue{
+		RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValueEnum{
 			ValueEnum: 98,
 		},
 	}
 }
 
-func createRanparameterValueValueBool() *e2sm_rc_pre_ies.RanparameterValue {
-	return &e2sm_rc_pre_ies.RanparameterValue{
-		RanparameterValue: &e2sm_rc_pre_ies.RanparameterValue_ValueBool{
+func createRanparameterValueValueBool() *e2sm_rc_pre_v2.RanparameterValue {
+	return &e2sm_rc_pre_v2.RanparameterValue{
+		RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValueBool{
 			ValueBool: true,
 		},
 	}
 }
 
-func createRanparameterValueValueOctS() *e2sm_rc_pre_ies.RanparameterValue {
-	return &e2sm_rc_pre_ies.RanparameterValue{
-		RanparameterValue: &e2sm_rc_pre_ies.RanparameterValue_ValueOctS{
+func createRanparameterValueValueOctS() *e2sm_rc_pre_v2.RanparameterValue {
+	return &e2sm_rc_pre_v2.RanparameterValue{
+		RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValueOctS{
 			ValueOctS: "onf",
 		},
 	}
 }
 
-func createRanparameterValueValuePrtS() *e2sm_rc_pre_ies.RanparameterValue {
-	return &e2sm_rc_pre_ies.RanparameterValue{
-		RanparameterValue: &e2sm_rc_pre_ies.RanparameterValue_ValuePrtS{
+func createRanparameterValueValuePrtS() *e2sm_rc_pre_v2.RanparameterValue {
+	return &e2sm_rc_pre_v2.RanparameterValue{
+		RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValuePrtS{
 			ValuePrtS: "onf",
 		},
 	}
 }
 
-func createRanparameterValueValueBitS() *e2sm_rc_pre_ies.RanparameterValue {
-	return &e2sm_rc_pre_ies.RanparameterValue{
-		RanparameterValue: &e2sm_rc_pre_ies.RanparameterValue_ValueBitS{
-			ValueBitS: &e2sm_rc_pre_ies.BitString{
+func createRanparameterValueValueBitS() *e2sm_rc_pre_v2.RanparameterValue {
+	return &e2sm_rc_pre_v2.RanparameterValue{
+		RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValueBitS{
+			ValueBitS: &e2sm_rc_pre_v2.BitString{
 				Value: 0x9bcd4,
 				Len:   22,
 			},
