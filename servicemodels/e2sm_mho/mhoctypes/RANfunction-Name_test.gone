@@ -1,0 +1,75 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createRanfunctionNameMsg() (*e2sm_mho.RanfunctionName, error) {
+
+	// ranfunctionName := pdubuilder.CreateRanfunctionName() //ToDo - fill in arguments here(if this function exists
+
+	ranfunctionName := e2sm_mho.RanfunctionName{
+		RanFunctionShortName:   nil,
+		RanFunctionE2SmOid:     nil,
+		RanFunctionDescription: nil,
+		RanFunctionInstance:    nil,
+	}
+
+	if err := ranfunctionName.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating RanfunctionName %s", err.Error())
+	}
+	return &ranfunctionName, nil
+}
+
+func Test_xerEncodingRanfunctionName(t *testing.T) {
+
+	ranfunctionName, err := createRanfunctionNameMsg()
+	assert.NilError(t, err, "Error creating RanfunctionName PDU")
+
+	xer, err := xerEncodeRanfunctionName(ranfunctionName)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("RanfunctionName XER\n%s", string(xer))
+
+	result, err := xerDecodeRanfunctionName(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RanfunctionName XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ranfunctionName.GetRanFunctionShortName(), result.GetRanFunctionShortName())
+	assert.Equal(t, ranfunctionName.GetRanFunctionE2SmOid(), result.GetRanFunctionE2SmOid())
+	assert.Equal(t, ranfunctionName.GetRanFunctionDescription(), result.GetRanFunctionDescription())
+	assert.Equal(t, ranfunctionName.GetRanFunctionInstance(), result.GetRanFunctionInstance())
+
+}
+
+func Test_perEncodingRanfunctionName(t *testing.T) {
+
+	ranfunctionName, err := createRanfunctionNameMsg()
+	assert.NilError(t, err, "Error creating RanfunctionName PDU")
+
+	per, err := perEncodeRanfunctionName(ranfunctionName)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("RanfunctionName PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeRanfunctionName(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RanfunctionName PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ranfunctionName.GetRanFunctionShortName(), result.GetRanFunctionShortName())
+	assert.Equal(t, ranfunctionName.GetRanFunctionE2SmOid(), result.GetRanFunctionE2SmOid())
+	assert.Equal(t, ranfunctionName.GetRanFunctionDescription(), result.GetRanFunctionDescription())
+	assert.Equal(t, ranfunctionName.GetRanFunctionInstance(), result.GetRanFunctionInstance())
+
+}

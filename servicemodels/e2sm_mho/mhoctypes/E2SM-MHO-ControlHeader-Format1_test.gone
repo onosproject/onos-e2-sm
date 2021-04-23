@@ -1,0 +1,69 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createE2SmMhoControlHeaderFormat1Msg() (*e2sm_mho.E2SmMhoControlHeaderFormat1, error) {
+
+	// e2SmMhoControlHeaderFormat1 := pdubuilder.CreateE2SmMhoControlHeaderFormat1() //ToDo - fill in arguments here(if this function exists
+
+	e2SmMhoControlHeaderFormat1 := e2sm_mho.E2SmMhoControlHeaderFormat1{
+		RcCommand:                 nil,
+		RicControlMessagePriority: nil,
+	}
+
+	if err := e2SmMhoControlHeaderFormat1.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmMhoControlHeaderFormat1 %s", err.Error())
+	}
+	return &e2SmMhoControlHeaderFormat1, nil
+}
+
+func Test_xerEncodingE2SmMhoControlHeaderFormat1(t *testing.T) {
+
+	e2SmMhoControlHeaderFormat1, err := createE2SmMhoControlHeaderFormat1Msg()
+	assert.NilError(t, err, "Error creating E2SmMhoControlHeaderFormat1 PDU")
+
+	xer, err := xerEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("E2SmMhoControlHeaderFormat1 XER\n%s", string(xer))
+
+	result, err := xerDecodeE2SmMhoControlHeaderFormat1(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmMhoControlHeaderFormat1 XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, e2SmMhoControlHeaderFormat1.GetRcCommand(), result.GetRcCommand())
+	assert.Equal(t, e2SmMhoControlHeaderFormat1.GetRicControlMessagePriority(), result.GetRicControlMessagePriority())
+
+}
+
+func Test_perEncodingE2SmMhoControlHeaderFormat1(t *testing.T) {
+
+	e2SmMhoControlHeaderFormat1, err := createE2SmMhoControlHeaderFormat1Msg()
+	assert.NilError(t, err, "Error creating E2SmMhoControlHeaderFormat1 PDU")
+
+	per, err := perEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("E2SmMhoControlHeaderFormat1 PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeE2SmMhoControlHeaderFormat1(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmMhoControlHeaderFormat1 PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, e2SmMhoControlHeaderFormat1.GetRcCommand(), result.GetRcCommand())
+	assert.Equal(t, e2SmMhoControlHeaderFormat1.GetRicControlMessagePriority(), result.GetRicControlMessagePriority())
+
+}

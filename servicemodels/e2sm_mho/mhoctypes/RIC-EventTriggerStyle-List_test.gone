@@ -1,0 +1,72 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createRicEventTriggerStyleListMsg() (*e2sm_mho.RicEventTriggerStyleList, error) {
+
+	// ricEventTriggerStyleList := pdubuilder.CreateRicEventTriggerStyleList() //ToDo - fill in arguments here(if this function exists
+
+	ricEventTriggerStyleList := e2sm_mho.RicEventTriggerStyleList{
+		RicEventTriggerStyleType:  nil,
+		RicEventTriggerStyleName:  nil,
+		RicEventTriggerFormatType: nil,
+	}
+
+	if err := ricEventTriggerStyleList.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating RicEventTriggerStyleList %s", err.Error())
+	}
+	return &ricEventTriggerStyleList, nil
+}
+
+func Test_xerEncodingRicEventTriggerStyleList(t *testing.T) {
+
+	ricEventTriggerStyleList, err := createRicEventTriggerStyleListMsg()
+	assert.NilError(t, err, "Error creating RicEventTriggerStyleList PDU")
+
+	xer, err := xerEncodeRicEventTriggerStyleList(ricEventTriggerStyleList)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("RicEventTriggerStyleList XER\n%s", string(xer))
+
+	result, err := xerDecodeRicEventTriggerStyleList(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RicEventTriggerStyleList XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ricEventTriggerStyleList.GetRicEventTriggerStyleType(), result.GetRicEventTriggerStyleType())
+	assert.Equal(t, ricEventTriggerStyleList.GetRicEventTriggerStyleName(), result.GetRicEventTriggerStyleName())
+	assert.Equal(t, ricEventTriggerStyleList.GetRicEventTriggerFormatType(), result.GetRicEventTriggerFormatType())
+
+}
+
+func Test_perEncodingRicEventTriggerStyleList(t *testing.T) {
+
+	ricEventTriggerStyleList, err := createRicEventTriggerStyleListMsg()
+	assert.NilError(t, err, "Error creating RicEventTriggerStyleList PDU")
+
+	per, err := perEncodeRicEventTriggerStyleList(ricEventTriggerStyleList)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("RicEventTriggerStyleList PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeRicEventTriggerStyleList(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RicEventTriggerStyleList PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ricEventTriggerStyleList.GetRicEventTriggerStyleType(), result.GetRicEventTriggerStyleType())
+	assert.Equal(t, ricEventTriggerStyleList.GetRicEventTriggerStyleName(), result.GetRicEventTriggerStyleName())
+	assert.Equal(t, ricEventTriggerStyleList.GetRicEventTriggerFormatType(), result.GetRicEventTriggerFormatType())
+
+}

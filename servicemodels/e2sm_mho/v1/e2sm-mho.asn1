@@ -1,0 +1,213 @@
+-- **************************************************************
+-- E2SM-MHO
+-- Information Element Definitions
+--
+-- **************************************************************
+
+E2SM-MHO-IEs {
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1 (1) e2sm(2) e2sm-MHO-IEs (101)}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+PLMN-Identity ::= OCTET STRING (SIZE(3))
+
+EUTRACellIdentity ::= BIT STRING (SIZE(28))
+
+NRCellIdentity ::= BIT STRING (SIZE(36))
+
+EUTRACGI ::= SEQUENCE {
+    pLMN-Identity            PLMN-Identity,
+    eUTRACellIdentity            EUTRACellIdentity,
+    ...
+}
+
+NRCGI ::= SEQUENCE {
+    pLMN-Identity            PLMN-Identity,
+    nRCellIdentity            NRCellIdentity,
+    ...
+}
+
+CellGlobalID ::= CHOICE {
+    nr-CGI                    NRCGI,
+    eUTRA-CGI                EUTRACGI,
+    ...
+}
+
+RSRP ::= INTEGER
+
+UE-Identity ::= OCTET STRING
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+
+maxofMessageProtocolTests          INTEGER ::= 15
+maxofRICstyles                     INTEGER ::= 63
+maxPLMN                            INTEGER ::= 12 -- Maximum number of PLMNs broadcast and reported by UE at establishment
+maxNR                              INTEGER ::= 4096
+
+
+RIC-Style-Type  ::= INTEGER
+RIC-Style-Name  ::= PrintableString(SIZE(1..150,...))
+RIC-Format-Type ::= INTEGER
+
+-- **************************************************************
+-- E2SM-MHO Common IEs
+-- **************************************************************
+RIC-Control-Message-Priority ::= INTEGER
+
+MHO-Trigger-Type ::= ENUMERATED{
+    periodic,
+    upon-rcv-meas-report,
+    upon-change-rrc-status,
+    ...
+}
+
+-- **************************************************************
+-- Event Trigger Definition OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-MHO-EventTriggerDefinition IE
+E2SM-MHO-EventTriggerDefinition ::= SEQUENCE{
+    eventDefinition-formats    CHOICE{
+     eventDefinition-Format1 E2SM-MHO-EventTriggerDefinition-Format1,
+        ...
+    },
+    ...
+}
+
+E2SM-MHO-EventTriggerDefinition-Format1 ::= SEQUENCE{
+   triggerType                  MHO-Trigger-Type,
+   reportingPeriod-ms          INTEGER  OPTIONAL,
+   ...
+}
+
+-- **************************************************************
+-- Indication Header OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-MHO-IndicationHeader IE
+E2SM-MHO-IndicationHeader ::= CHOICE {
+   indicationHeader-Format1             E2SM-MHO-IndicationHeader-Format1,
+   ...
+}
+
+-- E2SM-MHO-IndicationHeader Format 1
+E2SM-MHO-IndicationHeader-Format1 ::= SEQUENCE {
+    cgi         CellGlobalID,
+    ...
+}
+
+-- **************************************************************
+-- Indication Message OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-MHO-IndicationMessage IE
+E2SM-MHO-IndicationMessage ::= CHOICE {
+   indicationMessage-Format1            E2SM-MHO-IndicationMessage-Format1,
+   indicationMessage-Format2            E2SM-MHO-IndicationMessage-Format2,
+   ...
+}
+
+
+
+-- E2SM-MHO-IndicationMessage-Format 1 IE
+-- for UE measurement reports
+E2SM-MHO-IndicationMessage-Format1 ::= SEQUENCE {
+   ueID       UE-Identity,
+   rsrp       RSRP,
+   ...
+}
+
+-- E2SM-MHO-IndicationMessage-Format 2 IE
+-- for UE RRC status
+E2SM-MHO-IndicationMessage-Format2 ::= SEQUENCE {
+   ueID       UE-Identity,
+   rrcStatus   RRCStatus,
+   ...
+}
+
+RRCStatus ::= ENUMERATED {connected, inactive, idle, ...} 
+
+
+-- **************************************************************
+-- Control Header OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-MHO-ControlHeader IE
+E2SM-MHO-ControlHeader ::= CHOICE{
+    controlHeader-Format1        E2SM-MHO-ControlHeader-Format1,
+    ...
+}
+
+-- E2SM-MHO-ControlHeader Format 1
+E2SM-MHO-ControlHeader-Format1 ::= SEQUENCE{
+    rc-command                   MHO-Command,
+    ric-Control-Message-Priority    RIC-Control-Message-Priority    OPTIONAL,
+    ...
+}
+
+MHO-Command::= ENUMERATED {initiateHandover, ... }
+
+
+-- **************************************************************
+-- Control Message OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-MHO-ControlMessage IE
+E2SM-MHO-ControlMessage ::= CHOICE{
+    controlMessage-Format1    E2SM-MHO-ControlMessage-Format1,
+...
+}
+
+-- E2SM-MHO-ControlMessage Format 1
+E2SM-MHO-ControlMessage-Format1 ::= SEQUENCE{
+    serving-cgi                 CellGlobalID,
+    uedID                    UE-Identity,
+    target-cgi                CellGlobalID,
+    ...
+}
+
+-- ***************************************************************
+-- RAN Function Description OCTET STRING contents
+-- ***************************************************************
+
+-- E2SM-MHO-RANfunction-Description
+E2SM-MHO-RANfunction-Description ::= SEQUENCE{
+    ranFunction-Name    RANfunction-Name,
+    e2SM-MHO-RANfunction-Item SEQUENCE{
+        ric-EventTriggerStyle-List    SEQUENCE (SIZE(1..maxofRICstyles)) OF RIC-EventTriggerStyle-List OPTIONAL,
+        ric-ReportStyle-List    SEQUENCE (SIZE(1..maxofRICstyles)) OF RIC-ReportStyle-List OPTIONAL,
+        ...
+    },
+    ...
+}
+
+RANfunction-Name ::= SEQUENCE{
+    ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
+    ranFunction-E2SM-OID    PrintableString(SIZE(1..1000,...)),
+    ranFunction-Description     PrintableString(SIZE(1..150,...)),
+    ranFunction-Instance        INTEGER OPTIONAL,
+    ...
+}
+
+RIC-EventTriggerStyle-List ::= SEQUENCE{
+    ric-EventTriggerStyle-Type            RIC-Style-Type,
+    ric-EventTriggerStyle-Name            RIC-Style-Name,
+    ric-EventTriggerFormat-Type            RIC-Format-Type,
+    ...
+}
+
+RIC-ReportStyle-List ::= SEQUENCE{
+    ric-ReportStyle-Type                RIC-Style-Type,
+    ric-ReportStyle-Name                RIC-Style-Name,
+    ric-IndicationHeaderFormat-Type        RIC-Format-Type,
+    ric-IndicationMessageFormat-Type    RIC-Format-Type,
+    ...
+}
+
+END

@@ -1,0 +1,66 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createRicStyleNameMsg() (*e2sm_mho.RicStyleName, error) {
+
+	// ricStyleName := pdubuilder.CreateRicStyleName() //ToDo - fill in arguments here(if this function exists
+
+	ricStyleName := e2sm_mho.RicStyleName{
+		Value: nil,
+	}
+
+	if err := ricStyleName.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating RicStyleName %s", err.Error())
+	}
+	return &ricStyleName, nil
+}
+
+func Test_xerEncodingRicStyleName(t *testing.T) {
+
+	ricStyleName, err := createRicStyleNameMsg()
+	assert.NilError(t, err, "Error creating RicStyleName PDU")
+
+	xer, err := xerEncodeRicStyleName(ricStyleName)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("RicStyleName XER\n%s", string(xer))
+
+	result, err := xerDecodeRicStyleName(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RicStyleName XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ricStyleName.GetValue(), result.GetValue())
+
+}
+
+func Test_perEncodingRicStyleName(t *testing.T) {
+
+	ricStyleName, err := createRicStyleNameMsg()
+	assert.NilError(t, err, "Error creating RicStyleName PDU")
+
+	per, err := perEncodeRicStyleName(ricStyleName)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("RicStyleName PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeRicStyleName(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RicStyleName PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ricStyleName.GetValue(), result.GetValue())
+
+}

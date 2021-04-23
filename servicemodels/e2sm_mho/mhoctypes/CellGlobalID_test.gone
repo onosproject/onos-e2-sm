@@ -1,0 +1,85 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createCellGlobalIDMsg() (*e2sm_mho.CellGlobalId, error) {
+
+	// cellGlobalID := pdubuilder.CreateCellGlobalID() //ToDo - fill in arguments here(if this function exists
+
+	cellGlobalID := e2sm_mho.CellGlobalId{
+		NrCgi: nil,
+		CellGlobalId: &e2sm_mho.CellGlobalId_nrCgi{
+			NrCgi: &e2sm_mho.nrCgi{
+				Value: nil,
+			},
+		},
+		EUtraCgi: nil,
+		CellGlobalId: &e2sm_mho.CellGlobalId_eUtraCgi{
+			EUtraCgi: &e2sm_mho.eUtraCgi{
+				Value: nil,
+			},
+		},
+	}
+
+	if err := cellGlobalID.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating CellGlobalId %s", err.Error())
+	}
+	return &cellGlobalID, nil
+}
+
+func Test_xerEncodingCellGlobalID(t *testing.T) {
+
+	cellGlobalID, err := createCellGlobalIDMsg()
+	assert.NilError(t, err, "Error creating CellGlobalId PDU")
+
+	xer, err := xerEncodeCellGlobalID(cellGlobalID)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("CellGlobalID XER\n%s", string(xer))
+
+	result, err := xerDecodeCellGlobalID(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("CellGlobalID XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+
+	//This one if for OneOf fields
+
+	assert.DeepEqual(t, cellGlobalID.GetNrCgi().GetValue(), result.GetNrCgi().GetValue())
+	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetValue(), result.GetEUtraCgi().GetValue())
+
+}
+
+func Test_perEncodingCellGlobalID(t *testing.T) {
+
+	cellGlobalID, err := createCellGlobalIDMsg()
+	assert.NilError(t, err, "Error creating CellGlobalId PDU")
+
+	per, err := perEncodeCellGlobalID(cellGlobalID)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeCellGlobalID(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("CellGlobalID PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+
+	//This one if for OneOf fields
+
+	assert.DeepEqual(t, cellGlobalID.GetNrCgi().GetValue(), result.GetNrCgi().GetValue())
+	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetValue(), result.GetEUtraCgi().GetValue())
+
+}

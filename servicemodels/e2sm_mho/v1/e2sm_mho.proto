@@ -1,0 +1,262 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+*/
+
+////////////////////// e2sm-mho-ies.proto //////////////////////
+// Protobuf generated from /e2sm-mho.asn1 by asn1c-0.9.29
+// E2SM-MHO-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1(1) e2sm(2) e2sm-MHO-IEs(101) }
+
+syntax = "proto3";
+
+package e2sm_mho.v1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho;e2sm_mho";
+
+import "validate/v1/validate.proto";
+
+// enumerated from e2sm-mho.asn1:64
+//{-}
+enum MhoTriggerType {
+    MHO_TRIGGER_TYPE_PERIODIC = 0;
+    MHO_TRIGGER_TYPE_UPON_RCV_MEAS_REPORT = 1;
+    MHO_TRIGGER_TYPE_UPON_CHANGE_RRC_STATUS = 2;
+};
+
+// enumerated from e2sm-mho.asn1:134
+//{-}
+enum Rrcstatus {
+    RRCSTATUS_CONNECTED = 0;
+    RRCSTATUS_INACTIVE = 1;
+    RRCSTATUS_IDLE = 2;
+};
+
+// enumerated from e2sm-mho.asn1:154
+//{-}
+enum MhoCommand {
+    MHO_COMMAND_INITIATE_HANDOVER = 0;
+};
+
+// sequence from e2sm-mho.asn1:21
+// {EUTRACGI}
+message Eutracgi {
+    PlmnIdentity p_lmn_identity = 1 [json_name = "pLMN_Identity"];
+    EutracellIdentity e_utracell_identity = 2 [json_name = "eUTRACellIdentity"];
+};
+
+// sequence from e2sm-mho.asn1:27
+// {NRCGI}
+message Nrcgi {
+    PlmnIdentity p_lmn_identity = 1 [json_name = "pLMN_Identity"];
+    NrcellIdentity n_rcell_identity = 2 [json_name = "nRCellIdentity"];
+};
+
+// sequence from e2sm-mho.asn1:33
+//{CellGlobalID}
+message CellGlobalId {
+    // choice from e2sm-mho.asn1:33
+    oneof cell_global_id {
+        Nrcgi nr_cgi = 1 [json_name = "nr_CGI"];
+        Eutracgi e_utra_cgi = 2 [json_name = "eUTRA_CGI"];
+    }
+};
+
+// range of Integer from e2sm-mho.asn1:40
+// {RSRP}
+message Rsrp {
+    int32 value = 1 [json_name = "value"];
+};
+
+// constant Integer from e2sm-mho.asn1:48
+//{-}
+message MaxofMessageProtocolTests {
+    int32 value = 1 [(validate.v1.rules).int32.const = 15, json_name = "value"];
+};
+
+// constant Integer from e2sm-mho.asn1:49
+//{-}
+message MaxofRicstyles {
+    int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name = "value"];
+};
+
+// constant Integer from e2sm-mho.asn1:50
+//{-}
+message MaxPlmn {
+    int32 value = 1 [(validate.v1.rules).int32.const = 12, json_name = "value"];
+};
+
+// constant Integer from e2sm-mho.asn1:51
+//{-}
+message MaxNr {
+    int32 value = 1 [(validate.v1.rules).int32.const = 4096, json_name = "value"];
+};
+
+// range of Integer from e2sm-mho.asn1:55
+// {RIC-Style-Type}
+message RicStyleType {
+    int32 value = 1 [json_name = "value"];
+};
+
+// range of Integer from e2sm-mho.asn1:61
+//{RIC-Format-Type}
+message RicFormatType {
+    int32 value = 1 [json_name = "value"];
+};
+
+// range of Integer from e2sm-mho.asn1:63
+// {RIC-Control-Message-Priority}
+message RicControlMessagePriority {
+    int32 value = 1 [json_name = "value"];
+};
+
+// sequence from e2sm-mho.asn1:79
+// {E2SM-MHO-EventTriggerDefinition}
+message E2SmMhoEventTriggerDefinition {
+    oneof e2_sm_mho_indication_header {
+        E2SmMhoIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "eventDefinition_Format1"];
+    }
+};
+
+// sequence from e2sm-mho.asn1:84
+// {E2SM-MHO-EventTriggerDefinition-Format1}
+message E2SmMhoEventTriggerDefinitionFormat1 {
+    MhoTriggerType trigger_type = 1 [json_name = "triggerType"];
+    int32 reporting_period_ms = 2 [json_name = "reportingPeriod_ms:OPTIONAL"];
+};
+
+// sequence from e2sm-mho.asn1:95
+// {E2SM-MHO-IndicationHeader}
+message E2SmMhoIndicationHeader {
+    // choice from e2sm-mho.asn1:95
+    oneof e2_sm_mho_indication_header {
+        E2SmMhoIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "indicationHeader_Format1"];
+    }
+};
+
+// sequence from e2sm-mho.asn1:101
+// {E2SM-MHO-IndicationHeader-Format1}
+message E2SmMhoIndicationHeaderFormat1 {
+    CellGlobalId cgi = 1 [json_name = "cgi"];
+};
+
+// sequence from e2sm-mho.asn1:111
+// {E2SM-MHO-IndicationMessage}
+message E2SmMhoIndicationMessage {
+    // choice from e2sm-mho.asn1:111
+    oneof e2_sm_mho_indication_message {
+        E2SmMhoIndicationMessageFormat1 indication_message_format1 = 1 [json_name = "indicationMessage_Format1"];
+        E2SmMhoIndicationMessageFormat2 indication_message_format2 = 2 [json_name = "indicationMessage_Format2"];
+    }
+};
+
+// sequence from e2sm-mho.asn1:121
+// {E2SM-MHO-IndicationMessage-Format1}
+message E2SmMhoIndicationMessageFormat1 {
+    UeIdentity ue_id = 1 [json_name = "ueID"];
+    Rsrp rsrp = 2 [json_name = "rsrp"];
+};
+
+// sequence from e2sm-mho.asn1:129
+// {E2SM-MHO-IndicationMessage-Format2}
+message E2SmMhoIndicationMessageFormat2 {
+    UeIdentity ue_id = 1 [json_name = "ueID"];
+    Rrcstatus rrc_status = 2 [json_name = "rrcStatus"];
+};
+
+// sequence from e2sm-mho.asn1:143
+// {E2SM-MHO-ControlHeader}
+message E2SmMhoControlHeader {
+    // choice from e2sm-mho.asn1:143
+    oneof e2_sm_mho_control_header {
+        E2SmMhoControlHeaderFormat1 control_header_format1 = 1 [json_name = "controlHeader_Format1"];
+    }
+};
+
+// sequence from e2sm-mho.asn1:149
+// {E2SM-MHO-ControlHeader-Format1}
+message E2SmMhoControlHeaderFormat1 {
+    MhoCommand rc_command = 1 [json_name = "rc_command"];
+    RicControlMessagePriority ric_control_message_priority = 2 [json_name = "ric_Control_Message_Priority"];
+};
+
+// sequence from e2sm-mho.asn1:163
+// {E2SM-MHO-ControlMessage}
+message E2SmMhoControlMessage {
+    // choice from e2sm-mho.asn1:163
+    oneof e2_sm_mho_control_message {
+        E2SmMhoControlMessageFormat1 control_message_format1 = 1 [json_name = "controlMessage_Format1"];
+    }
+};
+
+// sequence from e2sm-mho.asn1:169
+// {E2SM-MHO-ControlMessage-Format1}
+message E2SmMhoControlMessageFormat1 {
+    CellGlobalId serving_cgi = 1 [json_name = "serving_cgi"];
+    UeIdentity ued_id = 2 [json_name = "uedID"];
+    CellGlobalId target_cgi = 3 [json_name = "target_cgi"];
+};
+
+// sequence from e2sm-mho.asn1:181
+// {E2SM-MHO-RANfunction-Description}
+message E2SmMhoRanfunctionDescription {
+    RanfunctionName ran_function_name = 1 [json_name = "ranFunction_Name"];
+    repeated RicEventTriggerStyleList ric_event_trigger_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item:ric_EventTriggerStyle_List"];
+    repeated RicReportStyleList ric_report_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item:ric_ReportStyle_List"];
+};
+
+// sequence from e2sm-mho.asn1:191
+// {RANfunction-Name}
+message RanfunctionName {
+    string ran_function_short_name = 1 [json_name = "ranFunction_ShortName"];
+    string ran_function_e2_sm_oid = 2 [json_name = "ranFunction_E2SM_OID"];
+    string ran_function_description = 3 [json_name = "ranFunction_Decsription"];
+    int32 ran_function_instance = 4 [json_name = "ranFunction_Instance:OPTIONAL"];
+};
+
+// sequence from e2sm-mho.asn1:199
+// {RIC-EventTriggerStyle-List}
+message RicEventTriggerStyleList {
+    RicStyleType ric_event_trigger_style_type = 1 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Type"];
+    RicStyleName ric_event_trigger_style_name = 2 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Name"];
+    RicFormatType ric_event_trigger_format_type = 3 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerFormat_Type"];
+};
+
+// sequence from e2sm-mho.asn1:206
+// {RIC-ReportStyle-List}
+message RicReportStyleList {
+    RicStyleType ric_report_style_type = 1 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Type"];
+    RicStyleName ric_report_style_name = 2 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Name"];
+    RicFormatType ric_indication_header_format_type = 3 [json_name="RIC_ReportStyle_List:ric_IndicationHeaderFormat_Type"];
+    RicFormatType ric_indication_message_format_type = 4 [json_name="RIC_ReportStyle_List:ric_IndicationMessageFormat_Type"];
+};
+
+// {RIC-Style-Name}
+message RicStyleName {
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RIC-Style-Name:value"];
+}
+
+// {UE-Identity}
+message UeIdentity {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 4, json_name="UE-Identity:value"];
+}
+
+// {PLMN-Identity}
+message PlmnIdentity {
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name="PLMN-Identity:value"];
+}
+
+// {EUTRACellIdentity}
+message EutracellIdentity {
+    BitString value = 1 [json_name="EUTRACellIdentity:value"]; //28
+}
+
+// {NRCellIdentity}
+message NrcellIdentity {
+    BitString value = 1 [json_name="NRCellIdentity:value"]; //36
+}
+
+// {BIT_STRING}
+message BitString {
+    uint64 value = 1 [json_name="BIT_STRING:value"];
+    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name="BIT_STRING:len"];
+}
