@@ -112,8 +112,8 @@ message RicControlMessagePriority {
 // sequence from e2sm-mho.asn1:79
 // {E2SM-MHO-EventTriggerDefinition}
 message E2SmMhoEventTriggerDefinition {
-    oneof e2_sm_mho_indication_header {
-        E2SmMhoIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "eventDefinition_Format1"];
+    oneof e2_sm_mho_event_trigger_definition {
+        E2SmMhoEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "eventDefinition_Format1"];
     }
 };
 
@@ -200,8 +200,8 @@ message E2SmMhoControlMessageFormat1 {
 // {E2SM-MHO-RANfunction-Description}
 message E2SmMhoRanfunctionDescription {
     RanfunctionName ran_function_name = 1 [json_name = "ranFunction_Name"];
-    repeated RicEventTriggerStyleList ric_event_trigger_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item:ric_EventTriggerStyle_List"];
-    repeated RicReportStyleList ric_report_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item:ric_ReportStyle_List"];
+    repeated RicEventTriggerStyleList ric_event_trigger_style_list = 2 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_EventTriggerStyle_List:OPTIONAL"];
+    repeated RicReportStyleList ric_report_style_list = 3 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_ReportStyle_List:OPTIONAL"];
 };
 
 // sequence from e2sm-mho.asn1:191

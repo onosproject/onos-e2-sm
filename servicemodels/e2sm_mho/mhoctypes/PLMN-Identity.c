@@ -22,7 +22,7 @@ PLMN_Identity_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	size = st->size;
 	
-	if((size == 3)) {
+	if (size == 3) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {

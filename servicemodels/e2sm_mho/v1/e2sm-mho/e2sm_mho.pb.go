@@ -750,7 +750,8 @@ type E2SmMhoEventTriggerDefinition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	EventDefinitionFormats int32 `protobuf:"varint,1,opt,name=event_definition_formats,json=eventDefinitionFormats,proto3" json:"event_definition_formats,omitempty"`
+	//EventDefinitionFormats int32 `protobuf:"varint,1,opt,name=event_definition_formats,json=eventDefinitionFormats,proto3" json:"event_definition_formats,omitempty"`
+	E2SmMhoEventTriggerDefinition isE2SmMhoEventTriggerDefinition_E2SmMhoEventTriggerDefinition `protobuf_oneof:"e2_sm_mho_event_trigger_definition"`
 }
 
 func (x *E2SmMhoEventTriggerDefinition) Reset() {
@@ -783,6 +784,13 @@ func (x *E2SmMhoEventTriggerDefinition) ProtoReflect() protoreflect.Message {
 // Deprecated: Use E2SmMhoEventTriggerDefinition.ProtoReflect.Descriptor instead.
 func (*E2SmMhoEventTriggerDefinition) Descriptor() ([]byte, []int) {
 	return file_e2sm_mho_v1_e2sm_mho_proto_rawDescGZIP(), []int{11}
+}
+
+func (m *E2SmMhoEventTriggerDefinition) GetE2SmMhoEventTriggerDefinition() isE2SmMhoEventTriggerDefinition_E2SmMhoEventTriggerDefinition {
+	if m != nil {
+		return m.E2SmMhoEventTriggerDefinition
+	}
+	return nil
 }
 
 func (x *E2SmMhoEventTriggerDefinition) GetEventDefinitionFormats() int32 {

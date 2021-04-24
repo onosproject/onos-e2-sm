@@ -9,8 +9,9 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-RANfunction-Description.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
-//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
+//#include "E2SM-MHO-RANfunction-Description.h"
+//#include "RIC-EventTriggerStyle-List.h"
+//#include "RIC-ReportStyle-List.h"
 import "C"
 import (
 	"encoding/binary"
@@ -72,26 +73,38 @@ func newE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescription *e2sm_mho.E2
 	var err error
 	e2SmMhoRanfunctionDescriptionC := C.E2SM_MHO_RANfunction_Description_t{}
 
-	ricEventTriggerStyleListC := new(C.struct_E2SM_MHO_RANfunction_Description__E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item) //ToDo - verify correctness of the variable's name
-	for _, ricEventTriggerStyleListItem := range e2SmMhoRanfunctionDescription.GetRicEventTriggerStyleList() {                               //ToDo - Verify if GetSmth() function is called correctly
-		ricEventTriggerStyleListItemC, err := newRicEventTriggerStyleList(ricEventTriggerStyleListItem)
-		if err != nil {
-			return nil, fmt.Errorf("newRicEventTriggerStyleList() %s", err.Error())
+	//instance is optional
+	if e2SmMhoRanfunctionDescription.RicEventTriggerStyleList != nil {
+
+		ricEventTriggerStyleListC := new(C.struct_E2SM_MHO_RANfunction_Description__ric_EventTriggerStyle_List)    //ToDo - verify correctness of the variable's name
+		for _, ricEventTriggerStyleListItem := range e2SmMhoRanfunctionDescription.GetRicEventTriggerStyleList() { //ToDo - Verify if GetSmth() function is called correctly
+			ricEventTriggerStyleListItemC, err := newRicEventTriggerStyleList(ricEventTriggerStyleListItem)
+			if err != nil {
+				return nil, fmt.Errorf("newRicEventTriggerStyleList() %s", err.Error())
+			}
+			if _, err = C.asn_sequence_add(unsafe.Pointer(ricEventTriggerStyleListC), unsafe.Pointer(ricEventTriggerStyleListItemC)); err != nil {
+				return nil, err
+			}
 		}
-		if _, err = C.asn_sequence_add(unsafe.Pointer(ricEventTriggerStyleListC), unsafe.Pointer(ricEventTriggerStyleListItemC)); err != nil {
-			return nil, err
-		}
+
+		e2SmMhoRanfunctionDescriptionC.ric_EventTriggerStyle_List = ricEventTriggerStyleListC
 	}
 
-	ricReportStyleListC := new(C.struct_E2SM_MHO_RANfunction_Description__E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item) //ToDo - verify correctness of the variable's name
-	for _, ricReportStyleListItem := range e2SmMhoRanfunctionDescription.GetRicReportStyleList() {                                     //ToDo - Verify if GetSmth() function is called correctly
-		ricReportStyleListItemC, err := newRicReportStyleList(ricReportStyleListItem)
-		if err != nil {
-			return nil, fmt.Errorf("newRicReportStyleList() %s", err.Error())
+	//instance is optional
+	if e2SmMhoRanfunctionDescription.RicReportStyleList != nil {
+
+		ricReportStyleListC := new(C.struct_E2SM_MHO_RANfunction_Description__ric_ReportStyle_List)    //ToDo - verify correctness of the variable's name
+		for _, ricReportStyleListItem := range e2SmMhoRanfunctionDescription.GetRicReportStyleList() { //ToDo - Verify if GetSmth() function is called correctly
+			ricReportStyleListItemC, err := newRicReportStyleList(ricReportStyleListItem)
+			if err != nil {
+				return nil, fmt.Errorf("newRicReportStyleList() %s", err.Error())
+			}
+			if _, err = C.asn_sequence_add(unsafe.Pointer(ricReportStyleListC), unsafe.Pointer(ricReportStyleListItemC)); err != nil {
+				return nil, err
+			}
 		}
-		if _, err = C.asn_sequence_add(unsafe.Pointer(ricReportStyleListC), unsafe.Pointer(ricReportStyleListItemC)); err != nil {
-			return nil, err
-		}
+
+		e2SmMhoRanfunctionDescriptionC.ric_ReportStyle_List = ricReportStyleListC
 	}
 
 	ranFunctionNameC, err := newRanfunctionName(e2SmMhoRanfunctionDescription.RanFunctionName)
@@ -101,8 +114,8 @@ func newE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescription *e2sm_mho.E2
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	e2SmMhoRanfunctionDescriptionC.ranFunction_Name = ranFunctionNameC
-	e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item = ricEventTriggerStyleListC
-	e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item = ricReportStyleListC
+	e2SmMhoRanfunctionDescriptionC.ric_EventTriggerStyle_List = ricEventTriggerStyleListC
+	e2SmMhoRanfunctionDescriptionC.ric_ReportStyle_List = ricReportStyleListC
 
 	return &e2SmMhoRanfunctionDescriptionC, nil
 }
@@ -125,26 +138,36 @@ func decodeE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescriptionC *C.E2SM_
 
 	var ieCount int
 
-	ieCount = int(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.count)
-	for i := 0; i < ieCount; i++ {
-		offset := unsafe.Sizeof(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) * uintptr(i)
-		ieC := *(**C.RicEventTriggerStyleList_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) + offset))
-		ie, err := decodeRicEventTriggerStyleList(ieC)
-		if err != nil {
-			return nil, fmt.Errorf("decodeRicEventTriggerStyleList() %s", err.Error())
+	//instance is optional
+	if e2SmMhoRanfunctionDescriptionC.ric_EventTriggerStyle_List != nil {
+
+		ieCount = int(e2SmMhoRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.count)
+		for i := 0; i < ieCount; i++ {
+			offset := unsafe.Sizeof(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) * uintptr(i)
+			ieC := *(**C.RIC_EventTriggerStyle_List_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) + offset))
+			ie, err := decodeRicEventTriggerStyleList(ieC)
+			if err != nil {
+				return nil, fmt.Errorf("decodeRicEventTriggerStyleList() %s", err.Error())
+			}
+			e2SmMhoRanfunctionDescription.RicEventTriggerStyleList = append(e2SmMhoRanfunctionDescription.RicEventTriggerStyleList, ie)
 		}
-		e2SmMhoRanfunctionDescription.RicEventTriggerStyleList = append(e2SmMhoRanfunctionDescription.RicEventTriggerStyleList, ie)
+
 	}
 
-	ieCount = int(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.count)
-	for i := 0; i < ieCount; i++ {
-		offset := unsafe.Sizeof(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) * uintptr(i)
-		ieC := *(**C.RicReportStyleList_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) + offset))
-		ie, err := decodeRicReportStyleList(ieC)
-		if err != nil {
-			return nil, fmt.Errorf("decodeRicReportStyleList() %s", err.Error())
+	//instance is optional
+	if e2SmMhoRanfunctionDescriptionC.ric_ReportStyle_List != nil {
+
+		ieCount = int(e2SmMhoRanfunctionDescriptionC.ric_ReportStyle_List.list.count)
+		for i := 0; i < ieCount; i++ {
+			offset := unsafe.Sizeof(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) * uintptr(i)
+            ieC := *(**C.RIC_ReportStyle_List_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) + offset))
+			ie, err := decodeRicReportStyleList(ieC)
+			if err != nil {
+				return nil, fmt.Errorf("decodeRicReportStyleList() %s", err.Error())
+			}
+			e2SmMhoRanfunctionDescription.RicReportStyleList = append(e2SmMhoRanfunctionDescription.RicReportStyleList, ie)
 		}
-		e2SmMhoRanfunctionDescription.RicReportStyleList = append(e2SmMhoRanfunctionDescription.RicReportStyleList, ie)
+
 	}
 
 	return &e2SmMhoRanfunctionDescription, nil
