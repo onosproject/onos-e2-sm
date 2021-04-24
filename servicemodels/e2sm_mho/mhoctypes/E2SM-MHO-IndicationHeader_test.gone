@@ -1,0 +1,77 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createE2SmMhoIndicationHeaderMsg() (*e2sm_mho.E2SmMhoIndicationHeader, error) {
+
+	// e2SmMhoIndicationHeader := pdubuilder.CreateE2SmMhoIndicationHeader() //ToDo - fill in arguments here(if this function exists
+
+	e2SmMhoIndicationHeader := e2sm_mho.E2SmMhoIndicationHeader{
+		IndicationHeaderFormat1: nil,
+		E2SmMhoIndicationHeader: &e2sm_mho.E2SmMhoIndicationHeader_indicationHeaderFormat1{
+			IndicationHeaderFormat1: &e2sm_mho.indicationHeaderFormat1{
+				Value: nil,
+			},
+		},
+	}
+
+	if err := e2SmMhoIndicationHeader.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmMhoIndicationHeader %s", err.Error())
+	}
+	return &e2SmMhoIndicationHeader, nil
+}
+
+func Test_xerEncodingE2SmMhoIndicationHeader(t *testing.T) {
+
+	e2SmMhoIndicationHeader, err := createE2SmMhoIndicationHeaderMsg()
+	assert.NilError(t, err, "Error creating E2SmMhoIndicationHeader PDU")
+
+	xer, err := xerEncodeE2SmMhoIndicationHeader(e2SmMhoIndicationHeader)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("E2SmMhoIndicationHeader XER\n%s", string(xer))
+
+	result, err := xerDecodeE2SmMhoIndicationHeader(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmMhoIndicationHeader XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+
+	//This one if for OneOf fields
+
+	assert.DeepEqual(t, e2SmMhoIndicationHeader.GetIndicationHeaderFormat1().GetValue(), result.GetIndicationHeaderFormat1().GetValue())
+
+}
+
+func Test_perEncodingE2SmMhoIndicationHeader(t *testing.T) {
+
+	e2SmMhoIndicationHeader, err := createE2SmMhoIndicationHeaderMsg()
+	assert.NilError(t, err, "Error creating E2SmMhoIndicationHeader PDU")
+
+	per, err := perEncodeE2SmMhoIndicationHeader(e2SmMhoIndicationHeader)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("E2SmMhoIndicationHeader PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeE2SmMhoIndicationHeader(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmMhoIndicationHeader PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+
+	//This one if for OneOf fields
+
+	assert.DeepEqual(t, e2SmMhoIndicationHeader.GetIndicationHeaderFormat1().GetValue(), result.GetIndicationHeaderFormat1().GetValue())
+
+}

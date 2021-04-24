@@ -1,0 +1,77 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createE2SmMhoControlMessageMsg() (*e2sm_mho.E2SmMhoControlMessage, error) {
+
+	// e2SmMhoControlMessage := pdubuilder.CreateE2SmMhoControlMessage() //ToDo - fill in arguments here(if this function exists
+
+	e2SmMhoControlMessage := e2sm_mho.E2SmMhoControlMessage{
+		ControlMessageFormat1: nil,
+		E2SmMhoControlMessage: &e2sm_mho.E2SmMhoControlMessage_controlMessageFormat1{
+			ControlMessageFormat1: &e2sm_mho.controlMessageFormat1{
+				Value: nil,
+			},
+		},
+	}
+
+	if err := e2SmMhoControlMessage.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmMhoControlMessage %s", err.Error())
+	}
+	return &e2SmMhoControlMessage, nil
+}
+
+func Test_xerEncodingE2SmMhoControlMessage(t *testing.T) {
+
+	e2SmMhoControlMessage, err := createE2SmMhoControlMessageMsg()
+	assert.NilError(t, err, "Error creating E2SmMhoControlMessage PDU")
+
+	xer, err := xerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("E2SmMhoControlMessage XER\n%s", string(xer))
+
+	result, err := xerDecodeE2SmMhoControlMessage(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmMhoControlMessage XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+
+	//This one if for OneOf fields
+
+	assert.DeepEqual(t, e2SmMhoControlMessage.GetControlMessageFormat1().GetValue(), result.GetControlMessageFormat1().GetValue())
+
+}
+
+func Test_perEncodingE2SmMhoControlMessage(t *testing.T) {
+
+	e2SmMhoControlMessage, err := createE2SmMhoControlMessageMsg()
+	assert.NilError(t, err, "Error creating E2SmMhoControlMessage PDU")
+
+	per, err := perEncodeE2SmMhoControlMessage(e2SmMhoControlMessage)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("E2SmMhoControlMessage PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeE2SmMhoControlMessage(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SmMhoControlMessage PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+
+	//This one if for OneOf fields
+
+	assert.DeepEqual(t, e2SmMhoControlMessage.GetControlMessageFormat1().GetValue(), result.GetControlMessageFormat1().GetValue())
+
+}

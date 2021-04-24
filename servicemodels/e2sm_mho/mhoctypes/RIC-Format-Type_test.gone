@@ -1,0 +1,66 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createRicFormatTypeMsg() (*e2sm_mho.RicFormatType, error) {
+
+	// ricFormatType := pdubuilder.CreateRicFormatType() //ToDo - fill in arguments here(if this function exists
+
+	ricFormatType := e2sm_mho.RicFormatType{
+		Value: nil,
+	}
+
+	if err := ricFormatType.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating RicFormatType %s", err.Error())
+	}
+	return &ricFormatType, nil
+}
+
+func Test_xerEncodingRicFormatType(t *testing.T) {
+
+	ricFormatType, err := createRicFormatTypeMsg()
+	assert.NilError(t, err, "Error creating RicFormatType PDU")
+
+	xer, err := xerEncodeRicFormatType(ricFormatType)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("RicFormatType XER\n%s", string(xer))
+
+	result, err := xerDecodeRicFormatType(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RicFormatType XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ricFormatType.GetValue(), result.GetValue())
+
+}
+
+func Test_perEncodingRicFormatType(t *testing.T) {
+
+	ricFormatType, err := createRicFormatTypeMsg()
+	assert.NilError(t, err, "Error creating RicFormatType PDU")
+
+	per, err := perEncodeRicFormatType(ricFormatType)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("RicFormatType PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeRicFormatType(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("RicFormatType PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, ricFormatType.GetValue(), result.GetValue())
+
+}

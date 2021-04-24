@@ -1,0 +1,66 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createEutracellIDentityMsg() (*e2sm_mho.EutracellIdentity, error) {
+
+	// eutracellIDentity := pdubuilder.CreateEutracellIDentity() //ToDo - fill in arguments here(if this function exists
+
+	eutracellIDentity := e2sm_mho.EutracellIdentity{
+		Value: nil,
+	}
+
+	if err := eutracellIDentity.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating EutracellIdentity %s", err.Error())
+	}
+	return &eutracellIDentity, nil
+}
+
+func Test_xerEncodingEutracellIDentity(t *testing.T) {
+
+	eutracellIDentity, err := createEutracellIDentityMsg()
+	assert.NilError(t, err, "Error creating EutracellIdentity PDU")
+
+	xer, err := xerEncodeEutracellIDentity(eutracellIDentity)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("EutracellIDentity XER\n%s", string(xer))
+
+	result, err := xerDecodeEutracellIDentity(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("EutracellIDentity XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, eutracellIDentity.GetValue(), result.GetValue())
+
+}
+
+func Test_perEncodingEutracellIDentity(t *testing.T) {
+
+	eutracellIDentity, err := createEutracellIDentityMsg()
+	assert.NilError(t, err, "Error creating EutracellIdentity PDU")
+
+	per, err := perEncodeEutracellIDentity(eutracellIDentity)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("EutracellIDentity PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeEutracellIDentity(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("EutracellIDentity PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, eutracellIDentity.GetValue(), result.GetValue())
+
+}

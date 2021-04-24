@@ -1,0 +1,69 @@
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+//
+// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+
+package mhoctypes
+
+import (
+	"encoding/hex"
+	"fmt"
+	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	"gotest.tools/assert"
+	"testing"
+)
+
+func createNrcgiMsg() (*e2sm_mho.Nrcgi, error) {
+
+	// nrcgi := pdubuilder.CreateNrcgi() //ToDo - fill in arguments here(if this function exists
+
+	nrcgi := e2sm_mho.Nrcgi{
+		PLmnIdentity:   nil,
+		NRcellIdentity: nil,
+	}
+
+	if err := nrcgi.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating Nrcgi %s", err.Error())
+	}
+	return &nrcgi, nil
+}
+
+func Test_xerEncodingNrcgi(t *testing.T) {
+
+	nrcgi, err := createNrcgiMsg()
+	assert.NilError(t, err, "Error creating Nrcgi PDU")
+
+	xer, err := xerEncodeNrcgi(nrcgi)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	t.Logf("Nrcgi XER\n%s", string(xer))
+
+	result, err := xerDecodeNrcgi(xer)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("Nrcgi XER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, nrcgi.GetPLmnIdentity(), result.GetPLmnIdentity())
+	assert.Equal(t, nrcgi.GetNRcellIdentity(), result.GetNRcellIdentity())
+
+}
+
+func Test_perEncodingNrcgi(t *testing.T) {
+
+	nrcgi, err := createNrcgiMsg()
+	assert.NilError(t, err, "Error creating Nrcgi PDU")
+
+	per, err := perEncodeNrcgi(nrcgi)
+	assert.NilError(t, err)
+	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	t.Logf("Nrcgi PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeNrcgi(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("Nrcgi PER - decoded\n%v", result)
+	//ToDo - adjust field's verification
+	assert.Equal(t, nrcgi.GetPLmnIdentity(), result.GetPLmnIdentity())
+	assert.Equal(t, nrcgi.GetNRcellIdentity(), result.GetNRcellIdentity())
+
+}
