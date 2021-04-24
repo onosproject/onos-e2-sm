@@ -21,7 +21,9 @@ func Test_XerEncodeE2SmRcPreIndicationHeader(t *testing.T) {
 		Value: 0x9bcd4ab, //uint64
 		Len:   28,        //uint32
 	}
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(cgi)
 	assert.NilError(t, err, "Test_XerEncodeE2SmRcPreIndicationHeader)_ error is not nil")
 	assert.Assert(t, newE2SmRcPrePdu != nil, "Test_XerEncodeE2SmRcPreIndicationHeader() newE2SmRcPrePdu is nil")
 
@@ -49,7 +51,9 @@ func Test_PerDecodeE2SmRcPreIndicationHeader(t *testing.T) {
 		Value: 0x9bcd4ab, //uint64
 		Len:   28,        //uint32
 	}
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(cgi)
 	assert.NilError(t, err, "Test_XerEncodeE2SmRcPreIndicationHeader)_ error is not nil")
 	assert.Assert(t, newE2SmRcPrePdu != nil, "Test_XerEncodeE2SmRcPreIndicationHeader() newE2SmRcPrePdu is nil")
 

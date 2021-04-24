@@ -25,11 +25,23 @@ func createCommonE2SmRcPreRanfunctionDescription() (*e2sm_rc_pre_v2.E2SmRcPreRan
 	var ricReportStyleName = "ONFreport"
 	var ricIndicationHeaderFormatType int32 = 21
 	var ricIndicationMessageFormatType int32 = 56
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid, ranFunctionDescription,
-		ranFunctionInstance, ricEventStyleType, ricEventStyleName, ricEventFormatType, ricReportStyleType, ricReportStyleName,
-		ricIndicationHeaderFormatType, ricIndicationMessageFormatType)
+
+	retsl := make([]*e2sm_rc_pre_v2.RicEventTriggerStyleList, 0)
+	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
+	retsl = append(retsl, retsi)
+
+	rrsl := make([]*e2sm_rc_pre_v2.RicReportStyleList, 0)
+	rrsi := pdubuilder.CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
+		ricIndicationMessageFormatType)
+	rrsl = append(rrsl, rrsi)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid,
+		ranFunctionDescription, retsl, rrsl)
 	if err != nil {
 		return nil, err
+	}
+
+	if newE2SmRcPrePdu != nil {
+		newE2SmRcPrePdu.RanFunctionName.RanFunctionInstance = ranFunctionInstance
 	}
 
 	return newE2SmRcPrePdu, nil

@@ -21,7 +21,9 @@ func Test_XerEncodeE2SmRcPreControlHeader(t *testing.T) {
 		Len:   28,        //uint32
 	}
 
-	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
 	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader)
@@ -40,7 +42,9 @@ func Test_XerDecodeE2SmRcPreControlHeader(t *testing.T) {
 		Len:   28,        //uint32
 	}
 
-	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
 	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader)
@@ -65,7 +69,9 @@ func Test_PerDecodeE2SmRcPreControlHeader(t *testing.T) {
 		Len:   28,        //uint32
 	}
 
-	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	e2SmRcPreControlHeader, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
 	assert.NilError(t, err)
 
 	per, err := PerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader)

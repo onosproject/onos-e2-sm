@@ -9,14 +9,14 @@ import (
 )
 
 func CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes []byte, arfcn *e2sm_rc_pre_v2.Arfcn, cellSize e2sm_rc_pre_v2.CellSize,
-	pci int32, neighbors *e2sm_rc_pre_v2.Nrt) (*e2sm_rc_pre_v2.E2SmRcPreIndicationMessage, error) {
+	pci int32, neighbor []*e2sm_rc_pre_v2.Nrt) (*e2sm_rc_pre_v2.E2SmRcPreIndicationMessage, error) {
 	if len(plmnIDBytes) != 3 {
 		return nil, fmt.Errorf("error: Plmn ID should be 3 bytes, actual length is %d", len(plmnIDBytes))
 	}
 
 	e2SmIindicationMsg := e2sm_rc_pre_v2.E2SmRcPreIndicationMessage_IndicationMessageFormat1{
 		IndicationMessageFormat1: &e2sm_rc_pre_v2.E2SmRcPreIndicationMessageFormat1{
-			Neighbors: make([]*e2sm_rc_pre_v2.Nrt, 0),
+			Neighbors: neighbor,
 			DlArfcn:   arfcn,
 			CellSize:  cellSize,
 			Pci: &e2sm_rc_pre_v2.Pci{
@@ -25,7 +25,7 @@ func CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes []byte, arfcn *e2sm_rc_pre_
 		},
 	}
 
-	e2SmIindicationMsg.IndicationMessageFormat1.Neighbors = append(e2SmIindicationMsg.IndicationMessageFormat1.Neighbors, neighbors)
+	//e2SmIindicationMsg.IndicationMessageFormat1.Neighbors = append(e2SmIindicationMsg.IndicationMessageFormat1.Neighbors, neighbors)
 
 	E2SmRcPrePdu := e2sm_rc_pre_v2.E2SmRcPreIndicationMessage{
 		E2SmRcPreIndicationMessage: &e2SmIindicationMsg,
@@ -76,4 +76,19 @@ func CreateNrArfcn(value int32) *e2sm_rc_pre_v2.Arfcn {
 			},
 		},
 	}
+}
+
+func CreateNrt(cgi *e2sm_rc_pre_v2.CellGlobalId, arfcn *e2sm_rc_pre_v2.Arfcn, cellSize e2sm_rc_pre_v2.CellSize, pci *e2sm_rc_pre_v2.Pci) (*e2sm_rc_pre_v2.Nrt, error) {
+
+	nrt := e2sm_rc_pre_v2.Nrt{
+		Cgi:      cgi,
+		DlArfcn:  arfcn,
+		CellSize: cellSize,
+		Pci:      pci,
+	}
+
+	if err := nrt.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
+	return &nrt, nil
 }
