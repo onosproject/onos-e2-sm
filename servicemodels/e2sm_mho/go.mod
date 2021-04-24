@@ -1,4 +1,4 @@
-module github/onosproject/onos-e2-sm/servicemodels/e2sm_mho
+module github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho
 
 go 1.16
 

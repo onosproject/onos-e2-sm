@@ -9,8 +9,9 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-RANfunction-Description.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
-//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
+//#include "E2SM-MHO-RANfunction-Description.h"
+//#include "RIC-EventTriggerStyle-List.h"
+//#include "RIC-ReportStyle-List.h"
 import "C"
 import (
 	"encoding/binary"
@@ -128,7 +129,7 @@ func decodeE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescriptionC *C.E2SM_
 	ieCount = int(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) * uintptr(i)
-		ieC := *(**C.RicEventTriggerStyleList_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) + offset))
+		ieC := *(**C.RIC_EventTriggerStyle_List_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) + offset))
 		ie, err := decodeRicEventTriggerStyleList(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeRicEventTriggerStyleList() %s", err.Error())
@@ -139,7 +140,7 @@ func decodeE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescriptionC *C.E2SM_
 	ieCount = int(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) * uintptr(i)
-		ieC := *(**C.RicReportStyleList_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) + offset))
+		ieC := *(**C.RIC_ReportStyle_List_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoRanfunctionDescriptionC.E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item.list.array)) + offset))
 		ie, err := decodeRicReportStyleList(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeRicReportStyleList() %s", err.Error())

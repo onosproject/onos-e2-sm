@@ -69,12 +69,12 @@ func perDecodeE2SmMhoEventTriggerDefinition(bytes []byte) (*e2sm_mho.E2SmMhoEven
 
 func newE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_mho.E2SmMhoEventTriggerDefinition) (*C.E2SM_MHO_EventTriggerDefinition_t, error) {
 
-	var pr C.E2SM_MHO_EventTriggerDefinition_PR //ToDo - verify correctness of the name
+	var pr C.E2SM_MHO_EventTriggerDefinition__eventDefinition_formats_PR //ToDo - verify correctness of the name
 	choiceC := [8]byte{}                        //ToDo - Check if number of bytes is sufficient
 
 	switch choice := e2SmMhoEventTriggerDefinition.E2SmMhoEventTriggerDefinition.(type) {
 	case *e2sm_mho.E2SmMhoEventTriggerDefinition_IndicationHeaderFormat1:
-		pr = C.E2SM_MHO_EventTriggerDefinition_PR_eventDefinition_Format1 //ToDo - Check if it's correct PR's name
+		pr = C.E2SM_MHO_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1 //ToDo - Check if it's correct PR's name
 
 		im, err := newE2SmMhoIndicationHeaderFormat1(choice.IndicationHeaderFormat1)
 		if err != nil {
@@ -98,7 +98,7 @@ func decodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinitionC *C.E2SM_
 	e2SmMhoEventTriggerDefinition := new(e2sm_mho.E2SmMhoEventTriggerDefinition)
 
 	switch e2SmMhoEventTriggerDefinitionC.present {
-	case C.E2SM_MHO_EventTriggerDefinition_PR_eventDefinition_Format1:
+	case C.E2SM_MHO_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1:
 		e2SmMhoEventTriggerDefinitionstructC, err := decodeE2SmMhoIndicationHeaderFormat1Bytes(e2SmMhoEventTriggerDefinitionC.choice) //ToDo - Verify if decodeSmthBytes function exists
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoIndicationHeaderFormat1Bytes() %s", err.Error())
