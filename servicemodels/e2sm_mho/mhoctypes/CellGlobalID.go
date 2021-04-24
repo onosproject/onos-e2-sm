@@ -111,7 +111,7 @@ func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_mho.CellGlobalId
 		if err != nil {
 			return nil, fmt.Errorf("decodeNrcgiBytes() %s", err.Error())
 		}
-		cellGlobalID.NrCgi = &e2sm_mho.CellGlobalId_NrCgi{
+		cellGlobalID.CellGlobalId = &e2sm_mho.CellGlobalId_NrCgi{
 			NrCgi: cellGlobalIDstructC,
 		}
 	case C.CellGlobalID_PR_eUTRA_CGI:
@@ -119,14 +119,14 @@ func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_mho.CellGlobalId
 		if err != nil {
 			return nil, fmt.Errorf("decodeEutracgiBytes() %s", err.Error())
 		}
-		cellGlobalID.EUtraCgi = &e2sm_mho.CellGlobalId_EUtraCgi{
+		cellGlobalID.CellGlobalId = &e2sm_mho.CellGlobalId_EUtraCgi{
 			EUtraCgi: cellGlobalIDstructC,
 		}
 	default:
 		return nil, fmt.Errorf("decodeCellGlobalID() %v not yet implemented", cellGlobalIDC.present)
 	}
 
-	return &cellGlobalID, nil
+	return cellGlobalID, nil
 }
 
 func decodeCellGlobalIDBytes(array [8]byte) (*e2sm_mho.CellGlobalId, error) {

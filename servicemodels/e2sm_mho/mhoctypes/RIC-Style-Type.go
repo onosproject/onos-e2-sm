@@ -77,7 +77,7 @@ func newRicStyleType(ricStyleType *e2sm_mho.RicStyleType) (*C.RIC_Style_Type_t, 
 func decodeRicStyleType(ricStyleTypeC *C.RIC_Style_Type_t) (*e2sm_mho.RicStyleType, error) {
 
 	ricStyleType := e2sm_mho.RicStyleType{
-		Value: int32(ricStyleTypeC),
+		Value: int32(*ricStyleTypeC),
 	}
 
 	return &ricStyleType, nil

@@ -12,6 +12,7 @@ package mhoctypes
 //#include "OCTET_STRING.h"
 import "C"
 import (
+	"encoding/binary"
 	"unsafe"
 )
 

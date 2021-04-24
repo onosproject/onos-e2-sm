@@ -77,7 +77,7 @@ func newRicControlMessagePriority(ricControlMessagePriority *e2sm_mho.RicControl
 func decodeRicControlMessagePriority(ricControlMessagePriorityC *C.RIC_Control_Message_Priority_t) (*e2sm_mho.RicControlMessagePriority, error) {
 
 	ricControlMessagePriority := e2sm_mho.RicControlMessagePriority{
-		Value: int32(ricControlMessagePriorityC),
+		Value: int32(*ricControlMessagePriorityC),
 	}
 
 	return &ricControlMessagePriority, nil

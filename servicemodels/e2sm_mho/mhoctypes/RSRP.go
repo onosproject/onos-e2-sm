@@ -77,7 +77,7 @@ func newRsrp(rsrp *e2sm_mho.Rsrp) (*C.RSRP_t, error) {
 func decodeRsrp(rsrpC *C.RSRP_t) (*e2sm_mho.Rsrp, error) {
 
 	rsrp := e2sm_mho.Rsrp{
-		Value: int32(rsrpC),
+		Value: int32(*rsrpC),
 	}
 
 	return &rsrp, nil

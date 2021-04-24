@@ -862,7 +862,21 @@ func (m *E2SmMhoEventTriggerDefinition) Validate() error {
 		return nil
 	}
 
-	// no validation rules for EventDefinitionFormats
+	switch m.E2SmMhoEventTriggerDefinition.(type) {
+
+	case *E2SmMhoEventTriggerDefinition_EventDefinitionFormat1:
+
+		if v, ok := interface{}(m.GetEventDefinitionFormat1()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmMhoEventTriggerDefinitionValidationError{
+					field:  "EventDefinitionFormat1",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	return nil
 }
@@ -1782,7 +1796,49 @@ func (m *E2SmMhoRanfunctionDescription) Validate() error {
 		}
 	}
 
-	// no validation rules for E2SmMhoRanfunctionItem
+	if len(m.GetRicEventTriggerStyleList()) > 63 {
+		return E2SmMhoRanfunctionDescriptionValidationError{
+			field:  "RicEventTriggerStyleList",
+			reason: "value must contain no more than 63 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetRicEventTriggerStyleList() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmMhoRanfunctionDescriptionValidationError{
+					field:  fmt.Sprintf("RicEventTriggerStyleList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(m.GetRicReportStyleList()) > 63 {
+		return E2SmMhoRanfunctionDescriptionValidationError{
+			field:  "RicReportStyleList",
+			reason: "value must contain no more than 63 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetRicReportStyleList() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmMhoRanfunctionDescriptionValidationError{
+					field:  fmt.Sprintf("RicReportStyleList[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	return nil
 }
@@ -2200,12 +2256,7 @@ func (m *UeIdentity) Validate() error {
 		return nil
 	}
 
-	if len(m.GetValue()) != 4 {
-		return UeIdentityValidationError{
-			field:  "Value",
-			reason: "value length must be 4 bytes",
-		}
-	}
+	// no validation rules for Value
 
 	return nil
 }

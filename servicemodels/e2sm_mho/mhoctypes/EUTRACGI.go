@@ -72,19 +72,19 @@ func newEutracgi(eutracgi *e2sm_mho.Eutracgi) (*C.EUTRACGI_t, error) {
 	var err error
 	eutracgiC := C.EUTRACGI_t{}
 
-	pLmnIDentityC, err := newPlmnIdentity(eutracgi.PLmnIdentity)
+	pLmnIdentityC, err := newPlmnIdentity(eutracgi.PLmnIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("newPlmnIdentity() %s", err.Error())
 	}
 
-	eUtracellIDentityC, err := newEutracellIDentity(eutracgi.EUtracellIdentity)
+	eUtracellIdentityC, err := newEutracellIDentity(eutracgi.EUtracellIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("newEutracellIDentity() %s", err.Error())
 	}
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	eutracgiC.pLMN_Identity = pLmnIdentityC
-	eutracgiC.eUTRACellIdentity = eUtracellIdentityC
+	eutracgiC.pLMN_Identity = *pLmnIdentityC
+	eutracgiC.eUTRACellIdentity = *eUtracellIdentityC
 
 	return &eutracgiC, nil
 }
@@ -99,12 +99,12 @@ func decodeEutracgi(eutracgiC *C.EUTRACGI_t) (*e2sm_mho.Eutracgi, error) {
 
 	}
 
-	eutracgi.PLmnIdentity, err = decodePlmnIdentity(eutracgiC.pLMN_Identity)
+	eutracgi.PLmnIdentity, err = decodePlmnIdentity(&eutracgiC.pLMN_Identity)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	eutracgi.EUtracellIdentity, err = decodeEutracellIDentity(eutracgiC.eUTRACellIdentity)
+	eutracgi.EUtracellIdentity, err = decodeEutracellIDentity(&eutracgiC.eUTRACellIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("decodeEutracellIDentity() %s", err.Error())
 	}

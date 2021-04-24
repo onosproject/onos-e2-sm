@@ -18,9 +18,9 @@ func createE2SmMhoEventTriggerDefinitionMsg() (*e2sm_mho.E2SmMhoEventTriggerDefi
 	// e2SmMhoEventTriggerDefinition := pdubuilder.CreateE2SmMhoEventTriggerDefinition() //ToDo - fill in arguments here(if this function exists
 
 	e2SmMhoEventTriggerDefinition := e2sm_mho.E2SmMhoEventTriggerDefinition{
-		IndicationHeaderFormat1: nil,
-		E2SmMhoEventTriggerDefinition: &e2sm_mho.E2SmMhoEventTriggerDefinition_indicationHeaderFormat1{
-			IndicationHeaderFormat1: &e2sm_mho.indicationHeaderFormat1{
+		EventDefinitionFormat1: nil,
+		E2SmMhoEventTriggerDefinition: &e2sm_mho.E2SmMhoEventTriggerDefinition_eventDefinitionFormat1{
+			EventDefinitionFormat1: &e2sm_mho.eventDefinitionFormat1{
 				Value: nil,
 			},
 		},
@@ -50,7 +50,7 @@ func Test_xerEncodingE2SmMhoEventTriggerDefinition(t *testing.T) {
 
 	//This one if for OneOf fields
 
-	assert.DeepEqual(t, e2SmMhoEventTriggerDefinition.GetIndicationHeaderFormat1().GetValue(), result.GetIndicationHeaderFormat1().GetValue())
+	assert.DeepEqual(t, e2SmMhoEventTriggerDefinition.GetEventDefinitionFormat1().GetValue(), result.GetEventDefinitionFormat1().GetValue())
 
 }
 
@@ -72,6 +72,6 @@ func Test_perEncodingE2SmMhoEventTriggerDefinition(t *testing.T) {
 
 	//This one if for OneOf fields
 
-	assert.DeepEqual(t, e2SmMhoEventTriggerDefinition.GetIndicationHeaderFormat1().GetValue(), result.GetIndicationHeaderFormat1().GetValue())
+	assert.DeepEqual(t, e2SmMhoEventTriggerDefinition.GetEventDefinitionFormat1().GetValue(), result.GetEventDefinitionFormat1().GetValue())
 
 }

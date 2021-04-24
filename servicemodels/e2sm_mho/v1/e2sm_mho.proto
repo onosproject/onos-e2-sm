@@ -16,7 +16,7 @@ option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1
 import "validate/v1/validate.proto";
 
 // enumerated from e2sm-mho.asn1:64
-//{-}
+//{MHO-Trigger-Type}
 enum MhoTriggerType {
     MHO_TRIGGER_TYPE_PERIODIC = 0;
     MHO_TRIGGER_TYPE_UPON_RCV_MEAS_REPORT = 1;
@@ -24,7 +24,7 @@ enum MhoTriggerType {
 };
 
 // enumerated from e2sm-mho.asn1:134
-//{-}
+//{RRCStatus}
 enum Rrcstatus {
     RRCSTATUS_CONNECTED = 0;
     RRCSTATUS_INACTIVE = 1;
@@ -32,7 +32,7 @@ enum Rrcstatus {
 };
 
 // enumerated from e2sm-mho.asn1:154
-//{-}
+//{MHO-Command}
 enum MhoCommand {
     MHO_COMMAND_INITIATE_HANDOVER = 0;
 };
@@ -112,8 +112,8 @@ message RicControlMessagePriority {
 // sequence from e2sm-mho.asn1:79
 // {E2SM-MHO-EventTriggerDefinition}
 message E2SmMhoEventTriggerDefinition {
-    oneof e2_sm_mho_indication_header {
-        E2SmMhoIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "eventDefinition_Format1"];
+    oneof e2_sm_mho_event_trigger_definition {
+        E2SmMhoEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "eventDefinition_Format1"];
     }
 };
 
@@ -200,8 +200,8 @@ message E2SmMhoControlMessageFormat1 {
 // {E2SM-MHO-RANfunction-Description}
 message E2SmMhoRanfunctionDescription {
     RanfunctionName ran_function_name = 1 [json_name = "ranFunction_Name"];
-    repeated RicEventTriggerStyleList ric_event_trigger_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item:ric_EventTriggerStyle_List"];
-    repeated RicReportStyleList ric_report_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="E2SM_MHO_RANfunction_Description__e2SM_MHO_RANfunction_Item:ric_ReportStyle_List"];
+    repeated RicEventTriggerStyleList ric_event_trigger_style_list = 2 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_EventTriggerStyle_List:OPTIONAL"];
+    repeated RicReportStyleList ric_report_style_list = 3 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_ReportStyle_List:OPTIONAL"];
 };
 
 // sequence from e2sm-mho.asn1:191
@@ -216,47 +216,47 @@ message RanfunctionName {
 // sequence from e2sm-mho.asn1:199
 // {RIC-EventTriggerStyle-List}
 message RicEventTriggerStyleList {
-    RicStyleType ric_event_trigger_style_type = 1 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Type"];
-    RicStyleName ric_event_trigger_style_name = 2 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerStyle_Name"];
-    RicFormatType ric_event_trigger_format_type = 3 [json_name="RIC_EventTriggerStyle_List:ric_EventTriggerFormat_Type"];
+    RicStyleType ric_event_trigger_style_type = 1 [json_name="ric_EventTriggerStyle_Type"];
+    RicStyleName ric_event_trigger_style_name = 2 [json_name="ric_EventTriggerStyle_Name"];
+    RicFormatType ric_event_trigger_format_type = 3 [json_name="ric_EventTriggerFormat_Type"];
 };
 
 // sequence from e2sm-mho.asn1:206
 // {RIC-ReportStyle-List}
 message RicReportStyleList {
-    RicStyleType ric_report_style_type = 1 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Type"];
-    RicStyleName ric_report_style_name = 2 [json_name="RIC_ReportStyle_List:ric_ReportStyle_Name"];
-    RicFormatType ric_indication_header_format_type = 3 [json_name="RIC_ReportStyle_List:ric_IndicationHeaderFormat_Type"];
-    RicFormatType ric_indication_message_format_type = 4 [json_name="RIC_ReportStyle_List:ric_IndicationMessageFormat_Type"];
+    RicStyleType ric_report_style_type = 1 [json_name="ric_ReportStyle_Type"];
+    RicStyleName ric_report_style_name = 2 [json_name="ric_ReportStyle_Name"];
+    RicFormatType ric_indication_header_format_type = 3 [json_name="ric_IndicationHeaderFormat_Type"];
+    RicFormatType ric_indication_message_format_type = 4 [json_name="ric_IndicationMessageFormat_Type"];
 };
 
 // {RIC-Style-Name}
 message RicStyleName {
-    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="RIC-Style-Name:value"];
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="value"];
 }
 
 // {UE-Identity}
 message UeIdentity {
-    bytes value = 1 [(validate.v1.rules).bytes.len = 4, json_name="UE-Identity:value"];
+    string value = 1 [json_name="value"];
 }
 
 // {PLMN-Identity}
 message PlmnIdentity {
-    bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name="PLMN-Identity:value"];
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name="value"];
 }
 
 // {EUTRACellIdentity}
 message EutracellIdentity {
-    BitString value = 1 [json_name="EUTRACellIdentity:value"]; //28
+    BitString value = 1 [json_name="value"]; //28
 }
 
 // {NRCellIdentity}
 message NrcellIdentity {
-    BitString value = 1 [json_name="NRCellIdentity:value"]; //36
+    BitString value = 1 [json_name="value"]; //36
 }
 
 // {BIT_STRING}
 message BitString {
-    uint64 value = 1 [json_name="BIT_STRING:value"];
-    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name="BIT_STRING:len"];
+    uint64 value = 1 [json_name="value"];
+    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name="len"];
 }

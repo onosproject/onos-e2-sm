@@ -74,7 +74,7 @@ func newRicStyleName(ricStyleName *e2sm_mho.RicStyleName) (*C.RIC_Style_Name_t, 
 		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 	}
 
-	return &ricStyleNameC, nil
+	return ricStyleNameC, nil
 }
 
 func decodeRicStyleName(ricStyleNameC *C.RIC_Style_Name_t) (*e2sm_mho.RicStyleName, error) {
@@ -86,7 +86,7 @@ func decodeRicStyleName(ricStyleNameC *C.RIC_Style_Name_t) (*e2sm_mho.RicStyleNa
 	}
 	ricStyleName.Value = ricStyleNameValue
 
-	return &ricStyleName, nil
+	return ricStyleName, nil
 }
 
 func decodeRicStyleNameBytes(array [8]byte) (*e2sm_mho.RicStyleName, error) {

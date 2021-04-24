@@ -83,8 +83,8 @@ func newE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1 *e2sm_mh
 	}
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	e2SmMhoIndicationMessageFormat1C.ueID = ueIdC
-	e2SmMhoIndicationMessageFormat1C.rsrp = rsrpC
+	e2SmMhoIndicationMessageFormat1C.ueID = *ueIDC
+	e2SmMhoIndicationMessageFormat1C.rsrp = *rsrpC
 
 	return &e2SmMhoIndicationMessageFormat1C, nil
 }
@@ -99,12 +99,12 @@ func decodeE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1C *C.E
 
 	}
 
-	e2SmMhoIndicationMessageFormat1.UeId, err = decodeUeIdentity(e2SmMhoIndicationMessageFormat1C.ueID)
+	e2SmMhoIndicationMessageFormat1.UeId, err = decodeUeIdentity(&e2SmMhoIndicationMessageFormat1C.ueID)
 	if err != nil {
 		return nil, fmt.Errorf("decodeUeIdentity() %s", err.Error())
 	}
 
-	e2SmMhoIndicationMessageFormat1.Rsrp, err = decodeRsrp(e2SmMhoIndicationMessageFormat1C.rsrp)
+	e2SmMhoIndicationMessageFormat1.Rsrp, err = decodeRsrp(&e2SmMhoIndicationMessageFormat1C.rsrp)
 	if err != nil {
 		return nil, fmt.Errorf("decodeRsrp() %s", err.Error())
 	}

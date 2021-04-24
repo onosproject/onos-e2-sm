@@ -9,13 +9,12 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "RIC-Format-Type.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "RIC-Format-Type.h"
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 
@@ -77,14 +76,8 @@ func newRicFormatType(ricFormatType *e2sm_mho.RicFormatType) (*C.RIC_Format_Type
 func decodeRicFormatType(ricFormatTypeC *C.RIC_Format_Type_t) (*e2sm_mho.RicFormatType, error) {
 
 	ricFormatType := e2sm_mho.RicFormatType{
-		Value: int32(ricFormatTypeC),
+		Value: int32(*ricFormatTypeC),
 	}
 
 	return &ricFormatType, nil
-}
-
-func decodeRicFormatTypeBytes(array [8]byte) (*e2sm_mho.RicFormatType, error) {
-	ricFormatTypeC := (*C.RIC_Format_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeRicFormatType(ricFormatTypeC)
 }

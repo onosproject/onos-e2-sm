@@ -78,7 +78,7 @@ func newE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1 *e2sm_mho.
 	}
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	e2SmMhoIndicationHeaderFormat1C.cgi = cgiC
+	e2SmMhoIndicationHeaderFormat1C.cgi = *cgiC
 
 	return &e2SmMhoIndicationHeaderFormat1C, nil
 }
@@ -92,7 +92,7 @@ func decodeE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1C *C.E2S
 
 	}
 
-	e2SmMhoIndicationHeaderFormat1.Cgi, err = decodeCellGlobalID(e2SmMhoIndicationHeaderFormat1C.cgi)
+	e2SmMhoIndicationHeaderFormat1.Cgi, err = decodeCellGlobalID(&e2SmMhoIndicationHeaderFormat1C.cgi)
 	if err != nil {
 		return nil, fmt.Errorf("decodeCellGlobalID() %s", err.Error())
 	}

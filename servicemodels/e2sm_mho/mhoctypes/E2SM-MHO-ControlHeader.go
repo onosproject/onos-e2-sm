@@ -103,14 +103,14 @@ func decodeE2SmMhoControlHeader(e2SmMhoControlHeaderC *C.E2SM_MHO_ControlHeader_
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoControlHeaderFormat1Bytes() %s", err.Error())
 		}
-		e2SmMhoControlHeader.ControlHeaderFormat1 = &e2sm_mho.E2SmMhoControlHeader_ControlHeaderFormat1{
+		e2SmMhoControlHeader.E2SmMhoControlHeader = &e2sm_mho.E2SmMhoControlHeader_ControlHeaderFormat1{
 			ControlHeaderFormat1: e2SmMhoControlHeaderstructC,
 		}
 	default:
 		return nil, fmt.Errorf("decodeE2SmMhoControlHeader() %v not yet implemented", e2SmMhoControlHeaderC.present)
 	}
 
-	return &e2SmMhoControlHeader, nil
+	return e2SmMhoControlHeader, nil
 }
 
 func decodeE2SmMhoControlHeaderBytes(array [8]byte) (*e2sm_mho.E2SmMhoControlHeader, error) {
