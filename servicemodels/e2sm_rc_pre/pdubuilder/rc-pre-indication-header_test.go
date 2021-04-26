@@ -20,7 +20,9 @@ func TestE2SmRcPreIndicationHeader(t *testing.T) {
 		Len:   28,        //uint32
 	}
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationHeader(plmnIDBytes, &cellID)
+	cgi, err := CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationHeader(cgi)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 

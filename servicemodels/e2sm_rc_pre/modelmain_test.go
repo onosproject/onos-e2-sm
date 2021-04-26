@@ -23,7 +23,9 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 		Value: 0x9bcd4ab, //uint64
 		Len:   28,        //uint32
 	}
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(cgi)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()
@@ -45,42 +47,30 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var plmnID = "12f410"
-	plmnIDBytes, _ := hex.DecodeString(plmnID)
-
-	dlArfcn := &e2sm_rc_pre_v2.Arfcn{
-		Arfcn: &e2sm_rc_pre_v2.Arfcn_EArfcn{
-			EArfcn: &e2sm_rc_pre_v2.Earfcn{
-				Value: 253,
-			},
-		},
-	}
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
+	dlArfcn := pdubuilder.CreateEArfcn(253)
 	var pci int32 = 11
+	cellSize := e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO
 
-	neighbors := &e2sm_rc_pre_v2.Nrt{
-		Cgi: &e2sm_rc_pre_v2.CellGlobalId{
-			CellGlobalId: &e2sm_rc_pre_v2.CellGlobalId_EUtraCgi{
-				EUtraCgi: &e2sm_rc_pre_v2.Eutracgi{
-					PLmnIdentity: &e2sm_rc_pre_v2.PlmnIdentity{
-						Value: plmnIDBytes,
-					},
-					EUtracellIdentity: &e2sm_rc_pre_v2.EutracellIdentity{
-						Value: &e2sm_rc_pre_v2.BitString{
-							Value: 0x9bcd4ac, //uint64
-							Len:   28,        //uint32
-						},
-					},
-				},
-			},
-		},
-		Pci: &e2sm_rc_pre_v2.Pci{
-			Value: 11,
-		},
-		CellSize: e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO,
-		DlArfcn:  dlArfcn,
+	cellID := e2sm_rc_pre_v2.BitString{
+		Value: 0x9bcd4ac, //uint64
+		Len:   28,        //uint32
 	}
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, dlArfcn, e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO, pci, neighbors)
+	neighbor, err := pdubuilder.CreateNrt(cgi, dlArfcn, cellSize, &e2sm_rc_pre_v2.Pci{
+		Value: pci,
+	})
+	assert.NilError(t, err)
+
+	neighbors := make([]*e2sm_rc_pre_v2.Nrt, 0)
+	neighbors = append(neighbors, neighbor)
+
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, dlArfcn, cellSize, pci, neighbors)
 	assert.NilError(t, err, "error creating E2SmPDU")
+	assert.Assert(t, newE2SmRcPrePdu != nil)
 
 	err = newE2SmRcPrePdu.Validate()
 	assert.NilError(t, err, "error validating E2SmPDU")
@@ -146,11 +136,22 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	var ricReportStyleName = "ONFreport"
 	var ricIndicationHeaderFormatType int32 = 21
 	var ricIndicationMessageFormatType int32 = 56
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid, ranFunctionDescription,
-		ranFunctionInstance, ricEventStyleType, ricEventStyleName, ricEventFormatType, ricReportStyleType, ricReportStyleName,
-		ricIndicationHeaderFormatType, ricIndicationMessageFormatType)
+
+	retsl := make([]*e2sm_rc_pre_v2.RicEventTriggerStyleList, 0)
+	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
+	retsl = append(retsl, retsi)
+
+	rrsl := make([]*e2sm_rc_pre_v2.RicReportStyleList, 0)
+	rrsi := pdubuilder.CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
+		ricIndicationMessageFormatType)
+	rrsl = append(rrsl, rrsi)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid,
+		ranFunctionDescription, retsl, rrsl)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, newE2SmRcPrePdu != nil)
+	if newE2SmRcPrePdu != nil {
+		newE2SmRcPrePdu.RanFunctionName.RanFunctionInstance = ranFunctionInstance
+	}
 
 	err = newE2SmRcPrePdu.Validate()
 	assert.NilError(t, err, "error validating E2SmPDU")
@@ -230,7 +231,9 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 		Len:   28,        //uint32
 	}
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()
@@ -270,7 +273,8 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 	var ranParameterValue int32 = 20
 	var ranParameterID int32 = 1
 
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameterValue)
+	ranParameter := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()

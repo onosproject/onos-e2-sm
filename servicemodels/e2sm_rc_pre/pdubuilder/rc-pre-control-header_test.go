@@ -19,10 +19,12 @@ func TestE2SmRcPreControlHeader(t *testing.T) {
 
 	cellID := e2sm_rc_pre_v2.BitString{
 		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Len:   36,        //uint32
 	}
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreControlHeader(controlMessagePriority, plmnIDBytes, &cellID)
+	cgi, err := CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 
@@ -32,6 +34,5 @@ func TestE2SmRcPreControlHeader(t *testing.T) {
 
 	per, err := rcprectypes.PerEncodeE2SmRcPreControlHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Ind Header: % x", per)
-
+	t.Logf("PER Encoded Ind Header: %v", hex.Dump(per))
 }
