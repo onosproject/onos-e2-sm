@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.E2SmMhoControlHeaderFormat1) ([]byte, error) {
+func XerEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.E2SmMhoControlHeaderFormat1) ([]byte, error) {
 	e2SmMhoControlHeaderFormat1CP, err := newE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeE2SmMhoControlHeaderFormat1() %s", err.Error())
@@ -32,7 +32,7 @@ func xerEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.E2SmMhoControlHeaderFormat1) ([]byte, error) {
+func PerEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.E2SmMhoControlHeaderFormat1) ([]byte, error) {
 	e2SmMhoControlHeaderFormat1CP, err := newE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmMhoControlHeaderFormat1() %s", err.Error())
@@ -45,7 +45,7 @@ func perEncodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoControlHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoControlHeaderFormat1, error) {
+func XerDecodeE2SmMhoControlHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoControlHeaderFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_ControlHeader_Format1)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmMhoControlHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoContro
 	return decodeE2SmMhoControlHeaderFormat1((*C.E2SM_MHO_ControlHeader_Format1_t)(unsafePtr))
 }
 
-func perDecodeE2SmMhoControlHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoControlHeaderFormat1, error) {
+func PerDecodeE2SmMhoControlHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoControlHeaderFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_ControlHeader_Format1)
 	if err != nil {
 		return nil, err

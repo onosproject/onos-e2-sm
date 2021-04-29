@@ -9,43 +9,42 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "EUTRACellIdentity.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "EUTRACellIdentity.h"
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 
-func xerEncodeEutracellIDentity(eutracellIDentity *e2sm_mho.EutracellIdentity) ([]byte, error) {
-	eutracellIDentityCP, err := newEutracellIDentity(eutracellIDentity)
+func xerEncodeEutracellIdentity(eutracellIdentity *e2sm_mho.EutracellIdentity) ([]byte, error) {
+	eutracellIdentityCP, err := newEutracellIdentity(eutracellIdentity)
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeEutracellIDentity() %s", err.Error())
+		return nil, fmt.Errorf("xerEncodeEutracellIdentity() %s", err.Error())
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_EUTRACellIdentity, unsafe.Pointer(eutracellIDentityCP))
+	bytes, err := encodeXer(&C.asn_DEF_EUTRACellIdentity, unsafe.Pointer(eutracellIdentityCP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeEutracellIDentity() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func perEncodeEutracellIDentity(eutracellIDentity *e2sm_mho.EutracellIdentity) ([]byte, error) {
-	eutracellIDentityCP, err := newEutracellIDentity(eutracellIDentity)
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeEutracellIDentity() %s", err.Error())
-	}
-
-	bytes, err := encodePerBuffer(&C.asn_DEF_EUTRACellIdentity, unsafe.Pointer(eutracellIDentityCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeEutracellIDentity() %s", err.Error())
+		return nil, fmt.Errorf("xerEncodeEutracellIdentity() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func xerDecodeEutracellIDentity(bytes []byte) (*e2sm_mho.EutracellIdentity, error) {
+func perEncodeEutracellIdentity(eutracellIdentity *e2sm_mho.EutracellIdentity) ([]byte, error) {
+	eutracellIdentityCP, err := newEutracellIdentity(eutracellIdentity)
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeEutracellIdentity() %s", err.Error())
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_EUTRACellIdentity, unsafe.Pointer(eutracellIdentityCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeEutracellIdentity() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeEutracellIdentity(bytes []byte) (*e2sm_mho.EutracellIdentity, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_EUTRACellIdentity)
 	if err != nil {
 		return nil, err
@@ -53,10 +52,10 @@ func xerDecodeEutracellIDentity(bytes []byte) (*e2sm_mho.EutracellIdentity, erro
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from XER is nil")
 	}
-	return decodeEutracellIDentity((*C.EUTRACellIdentity_t)(unsafePtr))
+	return decodeEutracellIdentity((*C.EUTRACellIdentity_t)(unsafePtr))
 }
 
-func perDecodeEutracellIDentity(bytes []byte) (*e2sm_mho.EutracellIdentity, error) {
+func perDecodeEutracellIdentity(bytes []byte) (*e2sm_mho.EutracellIdentity, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_EUTRACellIdentity)
 	if err != nil {
 		return nil, err
@@ -64,33 +63,27 @@ func perDecodeEutracellIDentity(bytes []byte) (*e2sm_mho.EutracellIdentity, erro
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from PER is nil")
 	}
-	return decodeEutracellIDentity((*C.EUTRACellIdentity_t)(unsafePtr))
+	return decodeEutracellIdentity((*C.EUTRACellIdentity_t)(unsafePtr))
 }
 
-func newEutracellIDentity(eutracellIDentity *e2sm_mho.EutracellIdentity) (*C.EUTRACellIdentity_t, error) {
+func newEutracellIdentity(eutracellIdentity *e2sm_mho.EutracellIdentity) (*C.EUTRACellIdentity_t, error) {
 
-	eutracellIDentityC, err := newBitString(eutracellIDentity.Value)
+	eutracellIdentityC, err := newBitString(eutracellIdentity.Value)
 	if err != nil {
 		return nil, fmt.Errorf("newBitString() %s", err.Error())
 	}
 
-	return eutracellIDentityC, nil
+	return eutracellIdentityC, nil
 }
 
-func decodeEutracellIDentity(eutracellIDentityC *C.EUTRACellIdentity_t) (*e2sm_mho.EutracellIdentity, error) {
+func decodeEutracellIdentity(eutracellIdentityC *C.EUTRACellIdentity_t) (*e2sm_mho.EutracellIdentity, error) {
 
-	eutracellIDentity := new(e2sm_mho.EutracellIdentity)
-	eutracellIDentityValue, err := decodeBitString(eutracellIDentityC)
+	eutracellIdentity := new(e2sm_mho.EutracellIdentity)
+	eutracellIdentityValue, err := decodeBitString(eutracellIdentityC)
 	if err != nil {
 		return nil, fmt.Errorf("decodeBitString() %s", err.Error())
 	}
-	eutracellIDentity.Value = eutracellIDentityValue
+	eutracellIdentity.Value = eutracellIdentityValue
 
-	return eutracellIDentity, nil
-}
-
-func decodeEutracellIDentityBytes(array [8]byte) (*e2sm_mho.EutracellIdentity, error) {
-	eutracellIDentityC := (*C.EUTRACellIdentity_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeEutracellIDentity(eutracellIDentityC)
+	return eutracellIdentity, nil
 }

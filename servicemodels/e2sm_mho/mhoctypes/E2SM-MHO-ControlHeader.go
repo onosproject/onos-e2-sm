@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoControlHeader(e2SmMhoControlHeader *e2sm_mho.E2SmMhoControlHeader) ([]byte, error) {
+func XerEncodeE2SmMhoControlHeader(e2SmMhoControlHeader *e2sm_mho.E2SmMhoControlHeader) ([]byte, error) {
 	e2SmMhoControlHeaderCP, err := newE2SmMhoControlHeader(e2SmMhoControlHeader)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeE2SmMhoControlHeader() %s", err.Error())
@@ -32,7 +32,7 @@ func xerEncodeE2SmMhoControlHeader(e2SmMhoControlHeader *e2sm_mho.E2SmMhoControl
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoControlHeader(e2SmMhoControlHeader *e2sm_mho.E2SmMhoControlHeader) ([]byte, error) {
+func PerEncodeE2SmMhoControlHeader(e2SmMhoControlHeader *e2sm_mho.E2SmMhoControlHeader) ([]byte, error) {
 	e2SmMhoControlHeaderCP, err := newE2SmMhoControlHeader(e2SmMhoControlHeader)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmMhoControlHeader() %s", err.Error())
@@ -45,7 +45,7 @@ func perEncodeE2SmMhoControlHeader(e2SmMhoControlHeader *e2sm_mho.E2SmMhoControl
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoControlHeader(bytes []byte) (*e2sm_mho.E2SmMhoControlHeader, error) {
+func XerDecodeE2SmMhoControlHeader(bytes []byte) (*e2sm_mho.E2SmMhoControlHeader, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_ControlHeader)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmMhoControlHeader(bytes []byte) (*e2sm_mho.E2SmMhoControlHeader
 	return decodeE2SmMhoControlHeader((*C.E2SM_MHO_ControlHeader_t)(unsafePtr))
 }
 
-func perDecodeE2SmMhoControlHeader(bytes []byte) (*e2sm_mho.E2SmMhoControlHeader, error) {
+func PerDecodeE2SmMhoControlHeader(bytes []byte) (*e2sm_mho.E2SmMhoControlHeader, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_ControlHeader)
 	if err != nil {
 		return nil, err

@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1 *e2sm_mho.E2SmMhoIndicationHeaderFormat1) ([]byte, error) {
+func XerEncodeE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1 *e2sm_mho.E2SmMhoIndicationHeaderFormat1) ([]byte, error) {
 	e2SmMhoIndicationHeaderFormat1CP, err := newE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeE2SmMhoIndicationHeaderFormat1() %s", err.Error())
@@ -32,7 +32,7 @@ func xerEncodeE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1 *e2s
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1 *e2sm_mho.E2SmMhoIndicationHeaderFormat1) ([]byte, error) {
+func PerEncodeE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1 *e2sm_mho.E2SmMhoIndicationHeaderFormat1) ([]byte, error) {
 	e2SmMhoIndicationHeaderFormat1CP, err := newE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmMhoIndicationHeaderFormat1() %s", err.Error())
@@ -45,7 +45,7 @@ func perEncodeE2SmMhoIndicationHeaderFormat1(e2SmMhoIndicationHeaderFormat1 *e2s
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoIndicationHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeaderFormat1, error) {
+func XerDecodeE2SmMhoIndicationHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeaderFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_IndicationHeader_Format1)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmMhoIndicationHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoInd
 	return decodeE2SmMhoIndicationHeaderFormat1((*C.E2SM_MHO_IndicationHeader_Format1_t)(unsafePtr))
 }
 
-func perDecodeE2SmMhoIndicationHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeaderFormat1, error) {
+func PerDecodeE2SmMhoIndicationHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeaderFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_IndicationHeader_Format1)
 	if err != nil {
 		return nil, err
