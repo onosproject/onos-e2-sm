@@ -68,14 +68,13 @@ func perDecodeE2SmMhoControlHeaderFormat1(bytes []byte) (*e2sm_mho.E2SmMhoContro
 }
 
 func newE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.E2SmMhoControlHeaderFormat1) (*C.E2SM_MHO_ControlHeader_Format1_t, error) {
-
-	var err error
-	e2SmMhoControlHeaderFormat1C := C.E2SM_MHO_ControlHeader_Format1_t{}
-
-	rcCommandC, err := newMhoCommand(e2SmMhoControlHeaderFormat1.RcCommand)
+	// TODO TODO
+	rcCommandC, err := newMhoCommand(&e2SmMhoControlHeaderFormat1.RcCommand)
 	if err != nil {
 		return nil, fmt.Errorf("newMhoCommand() %s", err.Error())
 	}
+
+	e2SmMhoControlHeaderFormat1C := C.E2SM_MHO_ControlHeader_Format1_t{}
 
 	ricControlMessagePriorityC, err := newRicControlMessagePriority(e2SmMhoControlHeaderFormat1.RicControlMessagePriority)
 	if err != nil {
@@ -83,14 +82,14 @@ func newE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.E2SmMh
 	}
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	e2SmMhoControlHeaderFormat1C.rc_command = rcCommandC
+	e2SmMhoControlHeaderFormat1C.rc_command = *rcCommandC
 	e2SmMhoControlHeaderFormat1C.ric_Control_Message_Priority = ricControlMessagePriorityC
 
 	return &e2SmMhoControlHeaderFormat1C, nil
 }
 
 func decodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1C *C.E2SM_MHO_ControlHeader_Format1_t) (*e2sm_mho.E2SmMhoControlHeaderFormat1, error) {
-
+	// TODO TODO
 	var err error
 	e2SmMhoControlHeaderFormat1 := e2sm_mho.E2SmMhoControlHeaderFormat1{
 		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
@@ -99,10 +98,12 @@ func decodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1C *C.E2SM_MHO_
 
 	}
 
-	e2SmMhoControlHeaderFormat1.RcCommand, err = decodeMhoCommand(e2SmMhoControlHeaderFormat1C.rc_command)
+	var t *e2sm_mho.MhoCommand
+	t, err = decodeMhoCommand(&e2SmMhoControlHeaderFormat1C.rc_command)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMhoCommand() %s", err.Error())
 	}
+	e2SmMhoControlHeaderFormat1.RcCommand = *t
 
 	e2SmMhoControlHeaderFormat1.RicControlMessagePriority, err = decodeRicControlMessagePriority(e2SmMhoControlHeaderFormat1C.ric_Control_Message_Priority)
 	if err != nil {

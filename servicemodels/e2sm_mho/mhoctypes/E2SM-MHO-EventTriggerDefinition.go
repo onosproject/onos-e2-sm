@@ -69,26 +69,25 @@ func perDecodeE2SmMhoEventTriggerDefinition(bytes []byte) (*e2sm_mho.E2SmMhoEven
 
 func newE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_mho.E2SmMhoEventTriggerDefinition) (*C.E2SM_MHO_EventTriggerDefinition_t, error) {
 
-	var pr C.E2SM_MHO_EventTriggerDefinition_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}                        //ToDo - Check if number of bytes is sufficient
+    var pr C.E2SM_MHO_EventTriggerDefinition__eventDefinition_formats_PR //ToDo - verify correctness of the name
+    choiceC := [8]byte{}                                                 //ToDo - Check if number of bytes is sufficient
 
 	switch choice := e2SmMhoEventTriggerDefinition.E2SmMhoEventTriggerDefinition.(type) {
-	case *e2sm_mho.E2SmMhoEventTriggerDefinition_IndicationHeaderFormat1:
-		pr = C.E2SM_MHO_EventTriggerDefinition_PR_eventDefinition_Format1 //ToDo - Check if it's correct PR's name
+	case *e2sm_mho.E2SmMhoEventTriggerDefinition_EventDefinitionFormat1:
+        pr = C.E2SM_MHO_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1 //ToDo - Check if it's correct PR's name
 
-		im, err := newE2SmMhoIndicationHeaderFormat1(choice.IndicationHeaderFormat1)
+		im, err := newE2SmMhoEventTriggerDefinitionFormat1(choice.EventDefinitionFormat1)
 		if err != nil {
-			return nil, fmt.Errorf("newE2SmMhoIndicationHeaderFormat1() %s", err.Error())
+			return nil, fmt.Errorf("newE2SmMhoEventTriggerDefinitionFormat1() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newE2SmMhoEventTriggerDefinition() %T not yet implemented", choice)
 	}
 
-	e2SmMhoEventTriggerDefinitionC := C.E2SM_MHO_EventTriggerDefinition_t{
-		present: pr,
-		choice:  choiceC,
-	}
+    e2SmMhoEventTriggerDefinitionC := C.E2SM_MHO_EventTriggerDefinition_t{}
+    e2SmMhoEventTriggerDefinitionC.eventDefinition_formats.present = pr
+    e2SmMhoEventTriggerDefinitionC.eventDefinition_formats.choice = choiceC
 
 	return &e2SmMhoEventTriggerDefinitionC, nil
 }
@@ -97,20 +96,20 @@ func decodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinitionC *C.E2SM_
 
 	e2SmMhoEventTriggerDefinition := new(e2sm_mho.E2SmMhoEventTriggerDefinition)
 
-	switch e2SmMhoEventTriggerDefinitionC.present {
-	case C.E2SM_MHO_EventTriggerDefinition_PR_eventDefinition_Format1:
-		e2SmMhoEventTriggerDefinitionstructC, err := decodeE2SmMhoIndicationHeaderFormat1Bytes(e2SmMhoEventTriggerDefinitionC.choice) //ToDo - Verify if decodeSmthBytes function exists
+    switch e2SmMhoEventTriggerDefinitionC.eventDefinition_formats.present {
+    case C.E2SM_MHO_EventTriggerDefinition__eventDefinition_formats_PR_eventDefinition_Format1:
+        e2SmMhoEventTriggerDefinitionstructC, err := decodeE2SmMhoEventTriggerDefinitionFormat1Bytes(e2SmMhoEventTriggerDefinitionC.eventDefinition_formats.choice)
 		if err != nil {
-			return nil, fmt.Errorf("decodeE2SmMhoIndicationHeaderFormat1Bytes() %s", err.Error())
+			return nil, fmt.Errorf("decodeE2SmMhoEventTriggerDefinitionFormat1Bytes() %s", err.Error())
 		}
-		e2SmMhoEventTriggerDefinition.IndicationHeaderFormat1 = &e2sm_mho.E2SmMhoEventTriggerDefinition_IndicationHeaderFormat1{
-			IndicationHeaderFormat1: e2SmMhoEventTriggerDefinitionstructC,
+        e2SmMhoEventTriggerDefinition.E2SmMhoEventTriggerDefinition = &e2sm_mho.E2SmMhoEventTriggerDefinition_EventDefinitionFormat1{
+            EventDefinitionFormat1: e2SmMhoEventTriggerDefinitionstructC,
 		}
 	default:
-		return nil, fmt.Errorf("decodeE2SmMhoEventTriggerDefinition() %v not yet implemented", e2SmMhoEventTriggerDefinitionC.present)
+		return nil, fmt.Errorf("decodeE2SmMhoEventTriggerDefinition() %v not yet implemented", e2SmMhoEventTriggerDefinitionC.eventDefinition_formats.present)
 	}
 
-	return &e2SmMhoEventTriggerDefinition, nil
+    return e2SmMhoEventTriggerDefinition, nil
 }
 
 func decodeE2SmMhoEventTriggerDefinitionBytes(array [8]byte) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {

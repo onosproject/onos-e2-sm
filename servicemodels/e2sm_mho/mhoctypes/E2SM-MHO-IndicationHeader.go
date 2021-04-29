@@ -103,14 +103,14 @@ func decodeE2SmMhoIndicationHeader(e2SmMhoIndicationHeaderC *C.E2SM_MHO_Indicati
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoIndicationHeaderFormat1Bytes() %s", err.Error())
 		}
-		e2SmMhoIndicationHeader.IndicationHeaderFormat1 = &e2sm_mho.E2SmMhoIndicationHeader_IndicationHeaderFormat1{
+		e2SmMhoIndicationHeader.E2SmMhoIndicationHeader = &e2sm_mho.E2SmMhoIndicationHeader_IndicationHeaderFormat1{
 			IndicationHeaderFormat1: e2SmMhoIndicationHeaderstructC,
 		}
 	default:
 		return nil, fmt.Errorf("decodeE2SmMhoIndicationHeader() %v not yet implemented", e2SmMhoIndicationHeaderC.present)
 	}
 
-	return &e2SmMhoIndicationHeader, nil
+	return e2SmMhoIndicationHeader, nil
 }
 
 func decodeE2SmMhoIndicationHeaderBytes(array [8]byte) (*e2sm_mho.E2SmMhoIndicationHeader, error) {

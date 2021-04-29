@@ -103,14 +103,14 @@ func decodeE2SmMhoControlMessage(e2SmMhoControlMessageC *C.E2SM_MHO_ControlMessa
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoControlMessageFormat1Bytes() %s", err.Error())
 		}
-		e2SmMhoControlMessage.ControlMessageFormat1 = &e2sm_mho.E2SmMhoControlMessage_ControlMessageFormat1{
+		e2SmMhoControlMessage.E2SmMhoControlMessage = &e2sm_mho.E2SmMhoControlMessage_ControlMessageFormat1{
 			ControlMessageFormat1: e2SmMhoControlMessagestructC,
 		}
 	default:
 		return nil, fmt.Errorf("decodeE2SmMhoControlMessage() %v not yet implemented", e2SmMhoControlMessageC.present)
 	}
 
-	return &e2SmMhoControlMessage, nil
+	return e2SmMhoControlMessage, nil
 }
 
 func decodeE2SmMhoControlMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoControlMessage, error) {

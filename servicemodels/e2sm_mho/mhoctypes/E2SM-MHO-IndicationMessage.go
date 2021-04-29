@@ -111,7 +111,7 @@ func decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC *C.E2SM_MHO_Indica
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoIndicationMessageFormat1Bytes() %s", err.Error())
 		}
-		e2SmMhoIndicationMessage.IndicationMessageFormat1 = &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat1{
+		e2SmMhoIndicationMessage.E2SmMhoIndicationMessage = &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat1{
 			IndicationMessageFormat1: e2SmMhoIndicationMessagestructC,
 		}
 	case C.E2SM_MHO_IndicationMessage_PR_indicationMessage_Format2:
@@ -119,14 +119,14 @@ func decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC *C.E2SM_MHO_Indica
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoIndicationMessageFormat2Bytes() %s", err.Error())
 		}
-		e2SmMhoIndicationMessage.IndicationMessageFormat2 = &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat2{
+		e2SmMhoIndicationMessage.E2SmMhoIndicationMessage = &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat2{
 			IndicationMessageFormat2: e2SmMhoIndicationMessagestructC,
 		}
 	default:
 		return nil, fmt.Errorf("decodeE2SmMhoIndicationMessage() %v not yet implemented", e2SmMhoIndicationMessageC.present)
 	}
 
-	return &e2SmMhoIndicationMessage, nil
+	return e2SmMhoIndicationMessage, nil
 }
 
 func decodeE2SmMhoIndicationMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {

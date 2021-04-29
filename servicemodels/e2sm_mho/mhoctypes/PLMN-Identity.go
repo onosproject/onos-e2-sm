@@ -9,13 +9,12 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "PLMN-Identity.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "PLMN-Identity.h"
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 
@@ -69,22 +68,23 @@ func perDecodePlmnIdentity(bytes []byte) (*e2sm_mho.PlmnIdentity, error) {
 
 func newPlmnIdentity(plmnIdentity *e2sm_mho.PlmnIdentity) (*C.PLMN_Identity_t, error) {
 
-	plmnIdentityC := decodeOctetString(plmnIdentity.Value)
+	plmnIdentityC, err := newOctetString(string(plmnIdentity.Value))
+	if err != nil {
+		return nil, err
+	}
 
-	return &plmnIdentityC, nil
+	return plmnIdentityC, nil
 }
 
 func decodePlmnIdentity(plmnIdentityC *C.PLMN_Identity_t) (*e2sm_mho.PlmnIdentity, error) {
 
+	plmnID, err := decodeOctetString(plmnIdentityC)
+	if err != nil {
+		return nil, err
+	}
 	plmnIdentity := e2sm_mho.PlmnIdentity{
-		Value: newOctetString(plmnIdentityC),
+		Value: []byte(plmnID),
 	}
 
 	return &plmnIdentity, nil
-}
-
-func decodePlmnIdentityBytes(array [8]byte) (*e2sm_mho.PlmnIdentity, error) {
-	plmnIdentityC := (*C.PLMN_Identity_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodePlmnIdentity(plmnIdentityC)
 }

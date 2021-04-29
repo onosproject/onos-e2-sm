@@ -74,7 +74,7 @@ func newEutracellIDentity(eutracellIDentity *e2sm_mho.EutracellIdentity) (*C.EUT
 		return nil, fmt.Errorf("newBitString() %s", err.Error())
 	}
 
-	return &eutracellIDentityC, nil
+	return eutracellIDentityC, nil
 }
 
 func decodeEutracellIDentity(eutracellIDentityC *C.EUTRACellIdentity_t) (*e2sm_mho.EutracellIdentity, error) {
@@ -86,7 +86,7 @@ func decodeEutracellIDentity(eutracellIDentityC *C.EUTRACellIdentity_t) (*e2sm_m
 	}
 	eutracellIDentity.Value = eutracellIDentityValue
 
-	return &eutracellIDentity, nil
+	return eutracellIDentity, nil
 }
 
 func decodeEutracellIDentityBytes(array [8]byte) (*e2sm_mho.EutracellIdentity, error) {

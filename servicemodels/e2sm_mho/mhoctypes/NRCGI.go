@@ -72,19 +72,19 @@ func newNrcgi(nrcgi *e2sm_mho.Nrcgi) (*C.NRCGI_t, error) {
 	var err error
 	nrcgiC := C.NRCGI_t{}
 
-	pLmnIDentityC, err := newPlmnIdentity(nrcgi.PLmnIdentity)
+	pLmnIdentityC, err := newPlmnIdentity(nrcgi.PLmnIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("newPlmnIdentity() %s", err.Error())
 	}
 
-	nRcellIDentityC, err := newNrcellIDentity(nrcgi.NRcellIdentity)
+	nRcellIdentityC, err := newNrcellIDentity(nrcgi.NRcellIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("newNrcellIDentity() %s", err.Error())
 	}
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	nrcgiC.pLMN_Identity = pLmnIdentityC
-	nrcgiC.nRCellIdentity = nRcellIdentityC
+	nrcgiC.pLMN_Identity = *pLmnIdentityC
+	nrcgiC.nRCellIdentity = *nRcellIdentityC
 
 	return &nrcgiC, nil
 }
@@ -99,12 +99,12 @@ func decodeNrcgi(nrcgiC *C.NRCGI_t) (*e2sm_mho.Nrcgi, error) {
 
 	}
 
-	nrcgi.PLmnIdentity, err = decodePlmnIdentity(nrcgiC.pLMN_Identity)
+	nrcgi.PLmnIdentity, err = decodePlmnIdentity(&nrcgiC.pLMN_Identity)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	nrcgi.NRcellIdentity, err = decodeNrcellIDentity(nrcgiC.nRCellIdentity)
+	nrcgi.NRcellIdentity, err = decodeNrcellIDentity(&nrcgiC.nRCellIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("decodeNrcellIDentity() %s", err.Error())
 	}

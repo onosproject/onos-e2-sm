@@ -72,19 +72,19 @@ func newE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat
 	var err error
 	e2SmMhoEventTriggerDefinitionFormat1C := C.E2SM_MHO_EventTriggerDefinition_Format1_t{}
 
-	triggerTypeC, err := newMhoTriggerType(e2SmMhoEventTriggerDefinitionFormat1.TriggerType)
-	if err != nil {
-		return nil, fmt.Errorf("newMhoTriggerType() %s", err.Error())
-	}
+    triggerTypeC, err := newMhoTriggerType(&e2SmMhoEventTriggerDefinitionFormat1.TriggerType)
+    if err != nil {
+        return nil, fmt.Errorf("newMhoTriggerType() %s", err.Error())
+    }
 
-	//instance is optional
-	if e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs != nil {
+    //instance is optional
+    if e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs != -1 {
 
-		reportingPeriodMsC := C.long(e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs)
-		e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms = reportingPeriodMsC
-	}
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	e2SmMhoEventTriggerDefinitionFormat1C.triggerType = triggerTypeC
+        reportingPeriodMsC := C.long(e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs)
+        *e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms = reportingPeriodMsC
+    }
+    //ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+    e2SmMhoEventTriggerDefinitionFormat1C.triggerType = *triggerTypeC
 
 	return &e2SmMhoEventTriggerDefinitionFormat1C, nil
 }
@@ -99,15 +99,17 @@ func decodeE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFor
 
 	}
 
-	e2SmMhoEventTriggerDefinitionFormat1.TriggerType, err = decodeMhoTriggerType(e2SmMhoEventTriggerDefinitionFormat1C.triggerType)
+	var t *e2sm_mho.MhoTriggerType
+	t, err = decodeMhoTriggerType(&e2SmMhoEventTriggerDefinitionFormat1C.triggerType)
 	if err != nil {
 		return nil, fmt.Errorf("decodeMhoTriggerType() %s", err.Error())
 	}
+	e2SmMhoEventTriggerDefinitionFormat1.TriggerType = *t
 
 	//instance is optional
 	if e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms != nil {
 
-		e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs = int32(e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms)
+		e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs = int32(*e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms)
 	}
 
 	return &e2SmMhoEventTriggerDefinitionFormat1, nil

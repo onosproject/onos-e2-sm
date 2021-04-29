@@ -27,7 +27,7 @@ EUTRACellIdentity_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
 		size = 0;
 	}
 	
-	if((size == 28)) {
+	if (size == 28) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {
