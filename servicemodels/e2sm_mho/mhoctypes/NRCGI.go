@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "NRCGI.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "NRCGI.h"
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 
@@ -69,44 +69,39 @@ func perDecodeNrcgi(bytes []byte) (*e2sm_mho.Nrcgi, error) {
 
 func newNrcgi(nrcgi *e2sm_mho.Nrcgi) (*C.NRCGI_t, error) {
 
-	var err error
-	nrcgiC := C.NRCGI_t{}
-
 	pLmnIdentityC, err := newPlmnIdentity(nrcgi.PLmnIdentity)
 	if err != nil {
 		return nil, fmt.Errorf("newPlmnIdentity() %s", err.Error())
 	}
 
-	nRcellIdentityC, err := newNrcellIDentity(nrcgi.NRcellIdentity)
+	nRcellIdentityC, err := newNrcellIdentity(nrcgi.NRcellIdentity)
 	if err != nil {
-		return nil, fmt.Errorf("newNrcellIDentity() %s", err.Error())
+		return nil, fmt.Errorf("newNrcellIdentity() %s", err.Error())
 	}
 
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	nrcgiC.pLMN_Identity = *pLmnIdentityC
-	nrcgiC.nRCellIdentity = *nRcellIdentityC
+	nrcgiC := C.NRCGI_t{
+		pLMN_Identity:  *pLmnIdentityC,
+		nRCellIdentity: *nRcellIdentityC,
+	}
 
 	return &nrcgiC, nil
 }
 
 func decodeNrcgi(nrcgiC *C.NRCGI_t) (*e2sm_mho.Nrcgi, error) {
 
-	var err error
-	nrcgi := e2sm_mho.Nrcgi{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
-		//PLmnIdentity: pLmnIdentity,
-		//NRcellIdentity: nRcellIdentity,
-
-	}
-
-	nrcgi.PLmnIdentity, err = decodePlmnIdentity(&nrcgiC.pLMN_Identity)
+	pLmnIdentity, err := decodePlmnIdentity(&nrcgiC.pLMN_Identity)
 	if err != nil {
 		return nil, fmt.Errorf("decodePlmnIdentity() %s", err.Error())
 	}
 
-	nrcgi.NRcellIdentity, err = decodeNrcellIDentity(&nrcgiC.nRCellIdentity)
+	nRcellIdentity, err := decodeNrcellIdentity(&nrcgiC.nRCellIdentity)
 	if err != nil {
-		return nil, fmt.Errorf("decodeNrcellIDentity() %s", err.Error())
+		return nil, fmt.Errorf("decodeNrcellIdentity() %s", err.Error())
+	}
+
+	nrcgi := e2sm_mho.Nrcgi{
+		PLmnIdentity:   pLmnIdentity,
+		NRcellIdentity: nRcellIdentity,
 	}
 
 	return &nrcgi, nil

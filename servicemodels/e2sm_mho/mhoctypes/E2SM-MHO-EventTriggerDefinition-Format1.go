@@ -19,23 +19,23 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat1 *e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1) ([]byte, error) {
+func XerEncodeE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat1 *e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1) ([]byte, error) {
 	e2SmMhoEventTriggerDefinitionFormat1CP, err := newE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat1)
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmMhoEventTriggerDefinitionFormat1() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmMhoEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodeXer(&C.asn_DEF_E2SM_MHO_EventTriggerDefinition_Format1, unsafe.Pointer(e2SmMhoEventTriggerDefinitionFormat1CP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmMhoEventTriggerDefinitionFormat1() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmMhoEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat1 *e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1) ([]byte, error) {
+func PerEncodeE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat1 *e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1) ([]byte, error) {
 	e2SmMhoEventTriggerDefinitionFormat1CP, err := newE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat1)
 	if err != nil {
-		return nil, fmt.Errorf("perEncodeE2SmMhoEventTriggerDefinitionFormat1() %s", err.Error())
+		return nil, fmt.Errorf("PerEncodeE2SmMhoEventTriggerDefinitionFormat1() %s", err.Error())
 	}
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_MHO_EventTriggerDefinition_Format1, unsafe.Pointer(e2SmMhoEventTriggerDefinitionFormat1CP))
@@ -45,7 +45,7 @@ func perEncodeE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinition
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1, error) {
+func XerDecodeE2SmMhoEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_EventTriggerDefinition_Format1)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmMhoEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_mho.E2Sm
 	return decodeE2SmMhoEventTriggerDefinitionFormat1((*C.E2SM_MHO_EventTriggerDefinition_Format1_t)(unsafePtr))
 }
 
-func perDecodeE2SmMhoEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1, error) {
+func PerDecodeE2SmMhoEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_EventTriggerDefinition_Format1)
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func newE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat
     if e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs != -1 {
 
         reportingPeriodMsC := C.long(e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs)
-        *e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms = reportingPeriodMsC
+        e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms = &reportingPeriodMsC
     }
     //ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
     e2SmMhoEventTriggerDefinitionFormat1C.triggerType = *triggerTypeC

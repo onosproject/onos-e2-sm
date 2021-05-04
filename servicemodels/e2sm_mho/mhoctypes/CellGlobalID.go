@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "CellGlobalID.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "CellGlobalID.h"
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 
@@ -69,12 +69,12 @@ func perDecodeCellGlobalID(bytes []byte) (*e2sm_mho.CellGlobalId, error) {
 
 func newCellGlobalID(cellGlobalID *e2sm_mho.CellGlobalId) (*C.CellGlobalID_t, error) {
 
-	var pr C.CellGlobalID_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}     //ToDo - Check if number of bytes is sufficient
+	var pr C.CellGlobalID_PR
+	choiceC := [8]byte{}
 
 	switch choice := cellGlobalID.CellGlobalId.(type) {
 	case *e2sm_mho.CellGlobalId_NrCgi:
-		pr = C.CellGlobalID_PR_nr_CGI //ToDo - Check if it's correct PR's name
+		pr = C.CellGlobalID_PR_nr_CGI
 
 		im, err := newNrcgi(choice.NrCgi)
 		if err != nil {
@@ -82,7 +82,7 @@ func newCellGlobalID(cellGlobalID *e2sm_mho.CellGlobalId) (*C.CellGlobalID_t, er
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_mho.CellGlobalId_EUtraCgi:
-		pr = C.CellGlobalID_PR_eUTRA_CGI //ToDo - Check if it's correct PR's name
+		pr = C.CellGlobalID_PR_eUTRA_CGI
 
 		im, err := newEutracgi(choice.EUtraCgi)
 		if err != nil {
@@ -90,7 +90,7 @@ func newCellGlobalID(cellGlobalID *e2sm_mho.CellGlobalId) (*C.CellGlobalID_t, er
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
-		return nil, fmt.Errorf("newCellGlobalID() %T not yet implemented", choice)
+		return nil, fmt.Errorf("newCellGlobalId() %T not yet implemented", choice)
 	}
 
 	cellGlobalIDC := C.CellGlobalID_t{
@@ -103,11 +103,12 @@ func newCellGlobalID(cellGlobalID *e2sm_mho.CellGlobalId) (*C.CellGlobalID_t, er
 
 func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_mho.CellGlobalId, error) {
 
+	//This is Decoder part (OneOf)
 	cellGlobalID := new(e2sm_mho.CellGlobalId)
 
 	switch cellGlobalIDC.present {
 	case C.CellGlobalID_PR_nr_CGI:
-		cellGlobalIDstructC, err := decodeNrcgiBytes(cellGlobalIDC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		cellGlobalIDstructC, err := decodeNrcgiBytes(cellGlobalIDC.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeNrcgiBytes() %s", err.Error())
 		}
@@ -115,7 +116,7 @@ func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_mho.CellGlobalId
 			NrCgi: cellGlobalIDstructC,
 		}
 	case C.CellGlobalID_PR_eUTRA_CGI:
-		cellGlobalIDstructC, err := decodeEutracgiBytes(cellGlobalIDC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		cellGlobalIDstructC, err := decodeEutracgiBytes(cellGlobalIDC.choice)
 		if err != nil {
 			return nil, fmt.Errorf("decodeEutracgiBytes() %s", err.Error())
 		}
@@ -127,10 +128,4 @@ func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_mho.CellGlobalId
 	}
 
 	return cellGlobalID, nil
-}
-
-func decodeCellGlobalIDBytes(array [8]byte) (*e2sm_mho.CellGlobalId, error) {
-	cellGlobalIDC := (*C.CellGlobalID_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeCellGlobalID(cellGlobalIDC)
 }

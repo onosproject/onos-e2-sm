@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_mho.E2SmMhoEventTriggerDefinition) ([]byte, error) {
+func XerEncodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_mho.E2SmMhoEventTriggerDefinition) ([]byte, error) {
 	e2SmMhoEventTriggerDefinitionCP, err := newE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeE2SmMhoEventTriggerDefinition() %s", err.Error())
@@ -32,7 +32,7 @@ func xerEncodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_mho.E2SmMhoEventTriggerDefinition) ([]byte, error) {
+func PerEncodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_mho.E2SmMhoEventTriggerDefinition) ([]byte, error) {
 	e2SmMhoEventTriggerDefinitionCP, err := newE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmMhoEventTriggerDefinition() %s", err.Error())
@@ -45,7 +45,7 @@ func perEncodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinition *e2sm_
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoEventTriggerDefinition(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
+func XerDecodeE2SmMhoEventTriggerDefinition(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_EventTriggerDefinition)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmMhoEventTriggerDefinition(bytes []byte) (*e2sm_mho.E2SmMhoEven
 	return decodeE2SmMhoEventTriggerDefinition((*C.E2SM_MHO_EventTriggerDefinition_t)(unsafePtr))
 }
 
-func perDecodeE2SmMhoEventTriggerDefinition(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
+func PerDecodeE2SmMhoEventTriggerDefinition(bytes []byte) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_EventTriggerDefinition)
 	if err != nil {
 		return nil, err

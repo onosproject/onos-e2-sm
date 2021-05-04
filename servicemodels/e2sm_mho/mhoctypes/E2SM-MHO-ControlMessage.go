@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage *e2sm_mho.E2SmMhoControlMessage) ([]byte, error) {
+func XerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage *e2sm_mho.E2SmMhoControlMessage) ([]byte, error) {
 	e2SmMhoControlMessageCP, err := newE2SmMhoControlMessage(e2SmMhoControlMessage)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeE2SmMhoControlMessage() %s", err.Error())
@@ -32,7 +32,7 @@ func xerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage *e2sm_mho.E2SmMhoContr
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoControlMessage(e2SmMhoControlMessage *e2sm_mho.E2SmMhoControlMessage) ([]byte, error) {
+func PerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage *e2sm_mho.E2SmMhoControlMessage) ([]byte, error) {
 	e2SmMhoControlMessageCP, err := newE2SmMhoControlMessage(e2SmMhoControlMessage)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmMhoControlMessage() %s", err.Error())
@@ -45,7 +45,7 @@ func perEncodeE2SmMhoControlMessage(e2SmMhoControlMessage *e2sm_mho.E2SmMhoContr
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoControlMessage(bytes []byte) (*e2sm_mho.E2SmMhoControlMessage, error) {
+func XerDecodeE2SmMhoControlMessage(bytes []byte) (*e2sm_mho.E2SmMhoControlMessage, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_ControlMessage)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmMhoControlMessage(bytes []byte) (*e2sm_mho.E2SmMhoControlMessa
 	return decodeE2SmMhoControlMessage((*C.E2SM_MHO_ControlMessage_t)(unsafePtr))
 }
 
-func perDecodeE2SmMhoControlMessage(bytes []byte) (*e2sm_mho.E2SmMhoControlMessage, error) {
+func PerDecodeE2SmMhoControlMessage(bytes []byte) (*e2sm_mho.E2SmMhoControlMessage, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_ControlMessage)
 	if err != nil {
 		return nil, err

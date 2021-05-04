@@ -9,54 +9,42 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-IndicationHeader.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-IndicationHeader.h"
 import "C"
-
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoIndicationHeader(e2SmMhoIndicationHeader *e2sm_mho.E2SmMhoIndicationHeader) ([]byte, error) {
-	e2SmMhoIndicationHeaderCP, err := newE2SmMhoIndicationHeader(e2SmMhoIndicationHeader)
+func PerEncodeE2SmMhoIndicationHeader(indicationHeader *e2sm_mho.E2SmMhoIndicationHeader) ([]byte, error) {
+	indicationHeaderCP, err := newE2SmMhoIndicationHeader(indicationHeader)
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmMhoIndicationHeader() %s", err.Error())
+		return nil, fmt.Errorf("PerEncodeE2SmMhoIndicationHeader() %s", err.Error())
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_E2SM_MHO_IndicationHeader, unsafe.Pointer(e2SmMhoIndicationHeaderCP))
+	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_MHO_IndicationHeader, unsafe.Pointer(indicationHeaderCP))
 	if err != nil {
-		return nil, fmt.Errorf("xerEncodeE2SmMhoIndicationHeader() %s", err.Error())
+		return nil, fmt.Errorf("PerEncodeE2SmMhoIndicationHeader() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoIndicationHeader(e2SmMhoIndicationHeader *e2sm_mho.E2SmMhoIndicationHeader) ([]byte, error) {
-	e2SmMhoIndicationHeaderCP, err := newE2SmMhoIndicationHeader(e2SmMhoIndicationHeader)
+func XerEncodeE2SmMhoIndicationHeader(indicationHeader *e2sm_mho.E2SmMhoIndicationHeader) ([]byte, error) {
+	indicationHeaderCP, err := newE2SmMhoIndicationHeader(indicationHeader)
 	if err != nil {
-		return nil, fmt.Errorf("perEncodeE2SmMhoIndicationHeader() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmMhoIndicationHeader() %s", err.Error())
 	}
 
-	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_MHO_IndicationHeader, unsafe.Pointer(e2SmMhoIndicationHeaderCP))
+	bytes, err := encodeXer(&C.asn_DEF_E2SM_MHO_IndicationHeader, unsafe.Pointer(indicationHeaderCP))
 	if err != nil {
-		return nil, fmt.Errorf("perEncodeE2SmMhoIndicationHeader() %s", err.Error())
+		return nil, fmt.Errorf("XerEncodeE2SmMhoIndicationHeader() %s", err.Error())
 	}
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoIndicationHeader(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeader, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_IndicationHeader)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	return decodeE2SmMhoIndicationHeader((*C.E2SM_MHO_IndicationHeader_t)(unsafePtr))
-}
-
-func perDecodeE2SmMhoIndicationHeader(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeader, error) {
+func PerDecodeE2SmMhoIndicationHeader(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeader, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_IndicationHeader)
 	if err != nil {
 		return nil, err
@@ -67,54 +55,58 @@ func perDecodeE2SmMhoIndicationHeader(bytes []byte) (*e2sm_mho.E2SmMhoIndication
 	return decodeE2SmMhoIndicationHeader((*C.E2SM_MHO_IndicationHeader_t)(unsafePtr))
 }
 
-func newE2SmMhoIndicationHeader(e2SmMhoIndicationHeader *e2sm_mho.E2SmMhoIndicationHeader) (*C.E2SM_MHO_IndicationHeader_t, error) {
+func XerDecodeE2SmMhoIndicationHeader(bytes []byte) (*e2sm_mho.E2SmMhoIndicationHeader, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_IndicationHeader)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeE2SmMhoIndicationHeader((*C.E2SM_MHO_IndicationHeader_t)(unsafePtr))
+}
 
-	var pr C.E2SM_MHO_IndicationHeader_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}                  //ToDo - Check if number of bytes is sufficient
+func newE2SmMhoIndicationHeader(indicationHeader *e2sm_mho.E2SmMhoIndicationHeader) (*C.E2SM_MHO_IndicationHeader_t, error) {
+	var pr C.E2SM_MHO_IndicationHeader_PR
+	choiceC := [8]byte{}
 
-	switch choice := e2SmMhoIndicationHeader.E2SmMhoIndicationHeader.(type) {
+	switch choice := indicationHeader.E2SmMhoIndicationHeader.(type) {
 	case *e2sm_mho.E2SmMhoIndicationHeader_IndicationHeaderFormat1:
-		pr = C.E2SM_MHO_IndicationHeader_PR_indicationHeader_Format1 //ToDo - Check if it's correct PR's name
+		pr = C.E2SM_MHO_IndicationHeader_PR_indicationHeader_Format1
 
 		im, err := newE2SmMhoIndicationHeaderFormat1(choice.IndicationHeaderFormat1)
 		if err != nil {
-			return nil, fmt.Errorf("newE2SmMhoIndicationHeaderFormat1() %s", err.Error())
+			return nil, fmt.Errorf("newE2SmMhoIndicationHeader() %s", err.Error())
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newE2SmMhoIndicationHeader() %T not yet implemented", choice)
 	}
 
-	e2SmMhoIndicationHeaderC := C.E2SM_MHO_IndicationHeader_t{
+	indicationHeaderC := C.E2SM_MHO_IndicationHeader_t{
 		present: pr,
 		choice:  choiceC,
 	}
 
-	return &e2SmMhoIndicationHeaderC, nil
+	return &indicationHeaderC, nil
 }
 
-func decodeE2SmMhoIndicationHeader(e2SmMhoIndicationHeaderC *C.E2SM_MHO_IndicationHeader_t) (*e2sm_mho.E2SmMhoIndicationHeader, error) {
+func decodeE2SmMhoIndicationHeader(indicationHeaderC *C.E2SM_MHO_IndicationHeader_t) (*e2sm_mho.E2SmMhoIndicationHeader, error) {
+	indicationHeader := new(e2sm_mho.E2SmMhoIndicationHeader)
 
-	e2SmMhoIndicationHeader := new(e2sm_mho.E2SmMhoIndicationHeader)
-
-	switch e2SmMhoIndicationHeaderC.present {
+	switch indicationHeaderC.present {
 	case C.E2SM_MHO_IndicationHeader_PR_indicationHeader_Format1:
-		e2SmMhoIndicationHeaderstructC, err := decodeE2SmMhoIndicationHeaderFormat1Bytes(e2SmMhoIndicationHeaderC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		indicationHeaderFormat1, err := decodeE2SmMhoIndicationHeaderFormat1Bytes(indicationHeaderC.choice)
 		if err != nil {
-			return nil, fmt.Errorf("decodeE2SmMhoIndicationHeaderFormat1Bytes() %s", err.Error())
+			return nil, fmt.Errorf("decodeE2SmMhoIndicationHeader() %s", err.Error())
 		}
-		e2SmMhoIndicationHeader.E2SmMhoIndicationHeader = &e2sm_mho.E2SmMhoIndicationHeader_IndicationHeaderFormat1{
-			IndicationHeaderFormat1: e2SmMhoIndicationHeaderstructC,
+
+		indicationHeader.E2SmMhoIndicationHeader = &e2sm_mho.E2SmMhoIndicationHeader_IndicationHeaderFormat1{
+			IndicationHeaderFormat1: indicationHeaderFormat1,
 		}
 	default:
-		return nil, fmt.Errorf("decodeE2SmMhoIndicationHeader() %v not yet implemented", e2SmMhoIndicationHeaderC.present)
+		return nil, fmt.Errorf("decodeE2SmMhoIndicationHeader() %v not yet implemented", indicationHeaderC.present)
 	}
 
-	return e2SmMhoIndicationHeader, nil
-}
-
-func decodeE2SmMhoIndicationHeaderBytes(array [8]byte) (*e2sm_mho.E2SmMhoIndicationHeader, error) {
-	e2SmMhoIndicationHeaderC := (*C.E2SM_MHO_IndicationHeader_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmMhoIndicationHeader(e2SmMhoIndicationHeaderC)
+	return indicationHeader, nil
 }

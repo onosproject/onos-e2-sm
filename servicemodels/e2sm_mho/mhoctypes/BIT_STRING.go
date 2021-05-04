@@ -14,38 +14,38 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"math"
 	"unsafe"
 )
 
-func xerEncodeBitString(bs *e2sm_mho.BitString) ([]byte, error) {
-	bsC, err := newBitString(bs)
-	if err != nil {
-		return nil, fmt.Errorf("newBitString() %s", err.Error())
-	}
-	defer freeBitString(bsC)
-	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
-	if err != nil {
-		return nil, err
-	}
-	return bytes, nil
-}
+//func xerEncodeBitString(bs *e2sm_mho.BitString) ([]byte, error) {
+//	bsC, err := newBitString(bs)
+//	if err != nil {
+//		return nil, fmt.Errorf("newBitString() %s", err.Error())
+//	}
+//	defer freeBitString(bsC)
+//	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
+//	if err != nil {
+//		return nil, err
+//	}
+//	return bytes, nil
+//}
 
-// PerEncodeGnbID - used only in tests
-func perEncodeBitString(bs *e2sm_mho.BitString) ([]byte, error) {
-	bsC, err := newBitString(bs)
-	if err != nil {
-		return nil, fmt.Errorf("newBitString() %s", err.Error())
-	}
-	defer freeBitString(bsC)
-	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
-	if err != nil {
-		return nil, err
-	}
-
-	return bytes, nil
-}
+//// PerEncodeGnbID - used only in tests
+//func perEncodeBitString(bs *e2sm_mho.BitString) ([]byte, error) {
+//	bsC, err := newBitString(bs)
+//	if err != nil {
+//		return nil, fmt.Errorf("newBitString() %s", err.Error())
+//	}
+//	defer freeBitString(bsC)
+//	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	return bytes, nil
+//}
 
 func newBitString(bs *e2sm_mho.BitString) (*C.BIT_STRING_t, error) {
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
@@ -62,15 +62,29 @@ func newBitString(bs *e2sm_mho.BitString) (*C.BIT_STRING_t, error) {
 	return &bsC, nil
 }
 
-func newBitStringFromBytes(valAsBytes []byte, size uint64, bitsUnused int) (*C.BIT_STRING_t, error) {
-	bsC := C.BIT_STRING_t{
-		buf:         (*C.uchar)(C.CBytes(valAsBytes)),
-		size:        C.ulong(size),
-		bits_unused: C.int(bitsUnused),
-	}
+//func newBitStringFromBytes(valAsBytes []byte, size uint64, bitsUnused int) (*C.BIT_STRING_t, error) {
+//	bsC := C.BIT_STRING_t{
+//		buf:         (*C.uchar)(C.CBytes(valAsBytes)),
+//		size:        C.ulong(size),
+//		bits_unused: C.int(bitsUnused),
+//	}
+//
+//	return &bsC, nil
+//}
 
-	return &bsC, nil
-}
+//func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
+//	size := binary.LittleEndian.Uint64(array[8:16])
+//	bitsUnused := int(binary.LittleEndian.Uint32(array[16:20]))
+//	bytes := C.GoBytes(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[:8]))), C.int(size))
+//
+//	bsC := C.BIT_STRING_t{
+//		buf:         (*C.uchar)(C.CBytes(bytes)),
+//		size:        C.ulong(size),
+//		bits_unused: C.int(bitsUnused),
+//	}
+//
+//	return &bsC
+//}
 
 // decodeBitString - byteString in C has 20 bytes
 // 8 for a 64bit address of a buffer, 8 for the size in bytes of the buffer uint64, 4 for the unused bits
@@ -107,6 +121,12 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_mho.BitString, error) {
 	return bs, nil
 }
 
-func freeBitString(bsC *C.BIT_STRING_t) {
-	C.free(unsafe.Pointer(bsC.buf))
-}
+//func decodeBitStringBytes(array [8]byte) (*e2sm_mho.BitString, error) {
+//	bsC := (*C.BIT_STRING_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeBitString(bsC)
+//}
+
+//func freeBitString(bsC *C.BIT_STRING_t) {
+//	C.free(unsafe.Pointer(bsC.buf))
+//}
