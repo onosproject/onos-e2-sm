@@ -7,18 +7,17 @@ package mhoctypes
 import (
 	"encoding/hex"
 	"fmt"
-	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createRsrpMsg() (*e2sm_mho.Rsrp, error) {
+func createRsrpMsg(rsrpVal int32) (*e2sm_mho.Rsrp, error) {
 
 	// rsrp := pdubuilder.CreateRsrp() //ToDo - fill in arguments here(if this function exists
 
 	rsrp := e2sm_mho.Rsrp{
-		Value: nil,
+		Value: rsrpVal,
 	}
 
 	if err := rsrp.Validate(); err != nil {
@@ -29,12 +28,12 @@ func createRsrpMsg() (*e2sm_mho.Rsrp, error) {
 
 func Test_xerEncodingRsrp(t *testing.T) {
 
-	rsrp, err := createRsrpMsg()
+	rsrp, err := createRsrpMsg(1234)
 	assert.NilError(t, err, "Error creating Rsrp PDU")
 
 	xer, err := xerEncodeRsrp(rsrp)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	assert.Equal(t, 18, len(xer))
 	t.Logf("Rsrp XER\n%s", string(xer))
 
 	result, err := xerDecodeRsrp(xer)
@@ -48,12 +47,12 @@ func Test_xerEncodingRsrp(t *testing.T) {
 
 func Test_perEncodingRsrp(t *testing.T) {
 
-	rsrp, err := createRsrpMsg()
+	rsrp, err := createRsrpMsg(1234)
 	assert.NilError(t, err, "Error creating Rsrp PDU")
 
 	per, err := perEncodeRsrp(rsrp)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	assert.Equal(t, 3, len(per))
 	t.Logf("Rsrp PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRsrp(per)

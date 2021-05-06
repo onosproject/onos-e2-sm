@@ -34,12 +34,12 @@ func Test_xerEncodingE2SmMhoIndicationMessage(t *testing.T) {
 	e2SmMhoIndicationMessage, err := createE2SmMhoIndicationMessageMsg()
 	assert.NilError(t, err, "Error creating E2SmMhoIndicationMessage PDU")
 
-	xer, err := xerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
+	xer, err := XerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
 	assert.NilError(t, err)
 	assert.Equal(t, 183, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("E2SmMhoIndicationMessage XER\n%s", string(xer))
 
-	result, err := xerDecodeE2SmMhoIndicationMessage(xer)
+	result, err := XerDecodeE2SmMhoIndicationMessage(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoIndicationMessage XER - decoded\n%v", result)
@@ -54,12 +54,12 @@ func Test_perEncodingE2SmMhoIndicationMessage(t *testing.T) {
 	e2SmMhoIndicationMessage, err := createE2SmMhoIndicationMessageMsg()
 	assert.NilError(t, err, "Error creating E2SmMhoIndicationMessage PDU")
 
-	per, err := perEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
+	per, err := PerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
 	assert.NilError(t, err)
 	assert.Equal(t, 9, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("E2SmMhoIndicationMessage PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeE2SmMhoIndicationMessage(per)
+	result, err := PerDecodeE2SmMhoIndicationMessage(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoIndicationMessage PER - decoded\n%v", result)

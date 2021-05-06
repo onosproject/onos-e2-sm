@@ -13,57 +13,56 @@ package mhoctypes
 import "C"
 import (
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
-	"unsafe"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 )
 
-func xerEncodeRrcstatus(rrcstatus *e2sm_mho.Rrcstatus) ([]byte, error) {
-	rrcstatusCP, err := newRrcstatus(rrcstatus)
-	if err != nil {
-		return nil, err
-	}
-
-	bytes, err := encodeXer(&C.asn_DEF_RRCStatus, unsafe.Pointer(rrcstatusCP)) //ToDo - change name of C-encoder tag
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeRrcstatus() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func perEncodeRrcstatus(rrcstatus *e2sm_mho.Rrcstatus) ([]byte, error) {
-	rrcstatusCP, err := newRrcstatus(rrcstatus)
-	if err != nil {
-		return nil, err
-	}
-
-	bytes, err := encodePerBuffer(&C.asn_DEF_RRCStatus, unsafe.Pointer(rrcstatusCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeRrcstatus() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func xerDecodeRrcstatus(bytes []byte) (*e2sm_mho.Rrcstatus, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RRCStatus)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	return decodeRrcstatus((*C.RRCStatus_t)(unsafePtr)) //ToDo - change name of C-struct
-}
-
-func perDecodeRrcstatus(bytes []byte) (*e2sm_mho.Rrcstatus, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RRCStatus)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeRrcstatus((*C.RRCStatus_t)(unsafePtr))
-}
+//func xerEncodeRrcstatus(rrcstatus *e2sm_mho.Rrcstatus) ([]byte, error) {
+//	rrcstatusCP, err := newRrcstatus(rrcstatus)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	bytes, err := encodeXer(&C.asn_DEF_RRCStatus, unsafe.Pointer(rrcstatusCP)) //ToDo - change name of C-encoder tag
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeRrcstatus() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func perEncodeRrcstatus(rrcstatus *e2sm_mho.Rrcstatus) ([]byte, error) {
+//	rrcstatusCP, err := newRrcstatus(rrcstatus)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	bytes, err := encodePerBuffer(&C.asn_DEF_RRCStatus, unsafe.Pointer(rrcstatusCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeRrcstatus() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func xerDecodeRrcstatus(bytes []byte) (*e2sm_mho.Rrcstatus, error) {
+//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RRCStatus)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from XER is nil")
+//	}
+//	return decodeRrcstatus((*C.RRCStatus_t)(unsafePtr)) //ToDo - change name of C-struct
+//}
+//
+//func perDecodeRrcstatus(bytes []byte) (*e2sm_mho.Rrcstatus, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_RRCStatus)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeRrcstatus((*C.RRCStatus_t)(unsafePtr))
+//}
 
 func newRrcstatus(rrcstatus *e2sm_mho.Rrcstatus) (*C.RRCStatus_t, error) {
 	var ret C.RRCStatus_t

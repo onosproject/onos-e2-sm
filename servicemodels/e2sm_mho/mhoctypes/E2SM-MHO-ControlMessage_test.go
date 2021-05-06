@@ -32,7 +32,7 @@ func Test_XerEncodeE2SmMhoControlMessage(t *testing.T) {
 		},
 	}
 
-	ueId := &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
 
@@ -52,7 +52,7 @@ func Test_XerEncodeE2SmMhoControlMessage(t *testing.T) {
 		},
 	}
 
-	e2SmMhoControlMessage, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueId, targetCgi)
+	e2SmMhoControlMessage, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueID, targetCgi)
 	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage)
@@ -81,7 +81,7 @@ func Test_XerDecodeE2SmMhoControlMessage(t *testing.T) {
 		},
 	}
 
-	ueId := &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
 
@@ -101,7 +101,7 @@ func Test_XerDecodeE2SmMhoControlMessage(t *testing.T) {
 		},
 	}
 
-	e2SmMhoControlMessage, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueId, targetCgi)
+	e2SmMhoControlMessage, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueID, targetCgi)
 	assert.NilError(t, err)
 
 	xer, err := XerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage)
@@ -136,7 +136,7 @@ func Test_PerDecodeE2SmMhoControlMessage(t *testing.T) {
 		},
 	}
 
-	ueId := &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
 
@@ -156,7 +156,7 @@ func Test_PerDecodeE2SmMhoControlMessage(t *testing.T) {
 		},
 	}
 
-	e2SmMhoControlMessage, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueId, targetCgi)
+	e2SmMhoControlMessage, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueID, targetCgi)
 	assert.NilError(t, err)
 
 	per, err := PerEncodeE2SmMhoControlMessage(e2SmMhoControlMessage)

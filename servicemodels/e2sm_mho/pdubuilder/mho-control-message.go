@@ -8,12 +8,12 @@ import (
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 )
 
-func CreateE2SmMhoControlMessage(servingCgi *e2sm_mho.CellGlobalId, uedId *e2sm_mho.UeIdentity, targetCgi  *e2sm_mho.CellGlobalId) (*e2sm_mho.E2SmMhoControlMessage, error) {
+func CreateE2SmMhoControlMessage(servingCgi *e2sm_mho.CellGlobalId, uedID *e2sm_mho.UeIdentity, targetCgi *e2sm_mho.CellGlobalId) (*e2sm_mho.E2SmMhoControlMessage, error) {
 
 	e2smMhoMsgFormat1 := e2sm_mho.E2SmMhoControlMessageFormat1{
 		ServingCgi: servingCgi,
-		UedId: uedId,
-		TargetCgi: targetCgi,
+		UedId:      uedID,
+		TargetCgi:  targetCgi,
 	}
 
 	e2smMhoPdu := e2sm_mho.E2SmMhoControlMessage{

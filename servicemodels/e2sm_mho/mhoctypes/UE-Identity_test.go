@@ -7,18 +7,17 @@ package mhoctypes
 import (
 	"encoding/hex"
 	"fmt"
-	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createUeIdentityMsg() (*e2sm_mho.UeIdentity, error) {
+func createUeIdentityMsg(ueIdentityValue string) (*e2sm_mho.UeIdentity, error) {
 
 	// ueIdentity := pdubuilder.CreateUeIdentity() //ToDo - fill in arguments here(if this function exists
 
 	ueIdentity := e2sm_mho.UeIdentity{
-		Value: nil,
+		Value: ueIdentityValue,
 	}
 
 	if err := ueIdentity.Validate(); err != nil {
@@ -29,12 +28,12 @@ func createUeIdentityMsg() (*e2sm_mho.UeIdentity, error) {
 
 func Test_xerEncodingUeIdentity(t *testing.T) {
 
-	ueIdentity, err := createUeIdentityMsg()
+	ueIdentity, err := createUeIdentityMsg("1234")
 	assert.NilError(t, err, "Error creating UeIdentity PDU")
 
 	xer, err := xerEncodeUeIdentity(ueIdentity)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	assert.Equal(t, 39, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("UeIdentity XER\n%s", string(xer))
 
 	result, err := xerDecodeUeIdentity(xer)
@@ -48,12 +47,12 @@ func Test_xerEncodingUeIdentity(t *testing.T) {
 
 func Test_perEncodingUeIdentity(t *testing.T) {
 
-	ueIdentity, err := createUeIdentityMsg()
+	ueIdentity, err := createUeIdentityMsg("1234")
 	assert.NilError(t, err, "Error creating UeIdentity PDU")
 
 	per, err := perEncodeUeIdentity(ueIdentity)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
+	assert.Equal(t, 5, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("UeIdentity PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeUeIdentity(per)

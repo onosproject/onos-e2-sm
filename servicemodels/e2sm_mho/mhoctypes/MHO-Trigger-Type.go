@@ -12,59 +12,57 @@ package mhoctypes
 //#include "MHO-Trigger-Type.h"
 import "C"
 import (
-    "encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
-	"unsafe"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 )
 
-func xerEncodeMhoTriggerType(mhoTriggerType *e2sm_mho.MhoTriggerType) ([]byte, error) {
-	mhoTriggerTypeCP, err := newMhoTriggerType(mhoTriggerType)
-	if err != nil {
-		return nil, err
-	}
-
-	bytes, err := encodeXer(&C.asn_DEF_MHO_Trigger_Type, unsafe.Pointer(mhoTriggerTypeCP)) //ToDo - change name of C-encoder tag
-	if err != nil {
-		return nil, fmt.Errorf("xerEncodeMhoTriggerType() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func perEncodeMhoTriggerType(mhoTriggerType *e2sm_mho.MhoTriggerType) ([]byte, error) {
-	mhoTriggerTypeCP, err := newMhoTriggerType(mhoTriggerType)
-	if err != nil {
-		return nil, err
-	}
-
-	bytes, err := encodePerBuffer(&C.asn_DEF_MHO_Trigger_Type, unsafe.Pointer(mhoTriggerTypeCP))
-	if err != nil {
-		return nil, fmt.Errorf("perEncodeMhoTriggerType() %s", err.Error())
-	}
-	return bytes, nil
-}
-
-func xerDecodeMhoTriggerType(bytes []byte) (*e2sm_mho.MhoTriggerType, error) {
-	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MHO_Trigger_Type)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from XER is nil")
-	}
-	return decodeMhoTriggerType((*C.MHO_Trigger_Type_t)(unsafePtr)) //ToDo - change name of C-struct
-}
-
-func perDecodeMhoTriggerType(bytes []byte) (*e2sm_mho.MhoTriggerType, error) {
-	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MHO_Trigger_Type)
-	if err != nil {
-		return nil, err
-	}
-	if unsafePtr == nil {
-		return nil, fmt.Errorf("pointer decoded from PER is nil")
-	}
-	return decodeMhoTriggerType((*C.MHO_Trigger_Type_t)(unsafePtr))
-}
+//func xerEncodeMhoTriggerType(mhoTriggerType *e2sm_mho.MhoTriggerType) ([]byte, error) {
+//	mhoTriggerTypeCP, err := newMhoTriggerType(mhoTriggerType)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	bytes, err := encodeXer(&C.asn_DEF_MHO_Trigger_Type, unsafe.Pointer(mhoTriggerTypeCP)) //ToDo - change name of C-encoder tag
+//	if err != nil {
+//		return nil, fmt.Errorf("xerEncodeMhoTriggerType() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func perEncodeMhoTriggerType(mhoTriggerType *e2sm_mho.MhoTriggerType) ([]byte, error) {
+//	mhoTriggerTypeCP, err := newMhoTriggerType(mhoTriggerType)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	bytes, err := encodePerBuffer(&C.asn_DEF_MHO_Trigger_Type, unsafe.Pointer(mhoTriggerTypeCP))
+//	if err != nil {
+//		return nil, fmt.Errorf("perEncodeMhoTriggerType() %s", err.Error())
+//	}
+//	return bytes, nil
+//}
+//
+//func xerDecodeMhoTriggerType(bytes []byte) (*e2sm_mho.MhoTriggerType, error) {
+//	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_MHO_Trigger_Type)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from XER is nil")
+//	}
+//	return decodeMhoTriggerType((*C.MHO_Trigger_Type_t)(unsafePtr)) //ToDo - change name of C-struct
+//}
+//
+//func perDecodeMhoTriggerType(bytes []byte) (*e2sm_mho.MhoTriggerType, error) {
+//	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_MHO_Trigger_Type)
+//	if err != nil {
+//		return nil, err
+//	}
+//	if unsafePtr == nil {
+//		return nil, fmt.Errorf("pointer decoded from PER is nil")
+//	}
+//	return decodeMhoTriggerType((*C.MHO_Trigger_Type_t)(unsafePtr))
+//}
 
 func newMhoTriggerType(mhoTriggerType *e2sm_mho.MhoTriggerType) (*C.MHO_Trigger_Type_t, error) {
 	var ret C.MHO_Trigger_Type_t
@@ -90,8 +88,8 @@ func decodeMhoTriggerType(mhoTriggerTypeC *C.MHO_Trigger_Type_t) (*e2sm_mho.MhoT
 	return &mhoTriggerType, nil
 }
 
-func decodeMhoTriggerTypeBytes(array [8]byte) (*e2sm_mho.MhoTriggerType, error) { //ToDo - Check addressing correct structure in Protobuf
-	mhoTriggerTypeC := (*C.MHO_Trigger_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
-
-	return decodeMhoTriggerType(mhoTriggerTypeC)
-}
+//func decodeMhoTriggerTypeBytes(array [8]byte) (*e2sm_mho.MhoTriggerType, error) { //ToDo - Check addressing correct structure in Protobuf
+//	mhoTriggerTypeC := (*C.MHO_Trigger_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
+//
+//	return decodeMhoTriggerType(mhoTriggerTypeC)
+//}

@@ -113,8 +113,8 @@ func decodeE2SmMhoControlMessage(e2SmMhoControlMessageC *C.E2SM_MHO_ControlMessa
 	return e2SmMhoControlMessage, nil
 }
 
-func decodeE2SmMhoControlMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoControlMessage, error) {
-	e2SmMhoControlMessageC := (*C.E2SM_MHO_ControlMessage_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmMhoControlMessage(e2SmMhoControlMessageC)
-}
+//func decodeE2SmMhoControlMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoControlMessage, error) {
+//	e2SmMhoControlMessageC := (*C.E2SM_MHO_ControlMessage_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeE2SmMhoControlMessage(e2SmMhoControlMessageC)
+//}

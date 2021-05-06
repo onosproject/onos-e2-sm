@@ -1,0 +1,25 @@
+<E2SM-MHO-RANfunction-Description>
+    <ranFunction-Name>
+        <ranFunction-ShortName>ONF</ranFunction-ShortName>
+        <ranFunction-E2SM-OID>Oid</ranFunction-E2SM-OID>
+        <ranFunction-Description>OpenNetworking</ranFunction-Description>
+        <ranFunction-Instance>3</ranFunction-Instance>
+    </ranFunction-Name>
+    <e2SM-MHO-RANfunction-Item>
+        <ric-EventTriggerStyle-List>
+            <RIC-EventTriggerStyle-List>
+                <ric-EventTriggerStyle-Type>13</ric-EventTriggerStyle-Type>
+                <ric-EventTriggerStyle-Name>ONFevent</ric-EventTriggerStyle-Name>
+                <ric-EventTriggerFormat-Type>42</ric-EventTriggerFormat-Type>
+            </RIC-EventTriggerStyle-List>
+        </ric-EventTriggerStyle-List>
+        <ric-ReportStyle-List>
+            <RIC-ReportStyle-List>
+                <ric-ReportStyle-Type>12</ric-ReportStyle-Type>
+                <ric-ReportStyle-Name>ONFreport</ric-ReportStyle-Name>
+                <ric-IndicationHeaderFormat-Type>21</ric-IndicationHeaderFormat-Type>
+                <ric-IndicationMessageFormat-Type>56</ric-IndicationMessageFormat-Type>
+            </RIC-ReportStyle-List>
+        </ric-ReportStyle-List>
+    </e2SM-MHO-RANfunction-Item>
+</E2SM-MHO-RANfunction-Description>

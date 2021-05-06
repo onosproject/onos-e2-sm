@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-func xerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMhoIndicationMessage) ([]byte, error) {
+func XerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMhoIndicationMessage) ([]byte, error) {
 	e2SmMhoIndicationMessageCP, err := newE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeE2SmMhoIndicationMessage() %s", err.Error())
@@ -32,7 +32,7 @@ func xerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMh
 	return bytes, nil
 }
 
-func perEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMhoIndicationMessage) ([]byte, error) {
+func PerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMhoIndicationMessage) ([]byte, error) {
 	e2SmMhoIndicationMessageCP, err := newE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeE2SmMhoIndicationMessage() %s", err.Error())
@@ -45,7 +45,7 @@ func perEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMh
 	return bytes, nil
 }
 
-func xerDecodeE2SmMhoIndicationMessage(bytes []byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
+func XerDecodeE2SmMhoIndicationMessage(bytes []byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_MHO_IndicationMessage)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func xerDecodeE2SmMhoIndicationMessage(bytes []byte) (*e2sm_mho.E2SmMhoIndicatio
 	return decodeE2SmMhoIndicationMessage((*C.E2SM_MHO_IndicationMessage_t)(unsafePtr))
 }
 
-func perDecodeE2SmMhoIndicationMessage(bytes []byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
+func PerDecodeE2SmMhoIndicationMessage(bytes []byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_MHO_IndicationMessage)
 	if err != nil {
 		return nil, err
@@ -129,8 +129,8 @@ func decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC *C.E2SM_MHO_Indica
 	return e2SmMhoIndicationMessage, nil
 }
 
-func decodeE2SmMhoIndicationMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
-	e2SmMhoIndicationMessageC := (*C.E2SM_MHO_IndicationMessage_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC)
-}
+//func decodeE2SmMhoIndicationMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
+//	e2SmMhoIndicationMessageC := (*C.E2SM_MHO_IndicationMessage_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC)
+//}

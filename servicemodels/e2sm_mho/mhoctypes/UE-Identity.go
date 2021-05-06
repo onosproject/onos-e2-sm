@@ -13,7 +13,6 @@ package mhoctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
 	"unsafe"
@@ -89,8 +88,8 @@ func decodeUeIdentity(ueIdentityC *C.UE_Identity_t) (*e2sm_mho.UeIdentity, error
 	return ueIdentity, nil
 }
 
-func decodeUeIdentityBytes(array [8]byte) (*e2sm_mho.UeIdentity, error) {
-	ueIdentityC := (*C.UE_Identity_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeUeIdentity(ueIdentityC)
-}
+//func decodeUeIdentityBytes(array [8]byte) (*e2sm_mho.UeIdentity, error) {
+//	ueIdentityC := (*C.UE_Identity_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeUeIdentity(ueIdentityC)
+//}

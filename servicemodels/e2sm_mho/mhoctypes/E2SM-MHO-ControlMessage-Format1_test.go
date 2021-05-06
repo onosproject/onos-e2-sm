@@ -32,7 +32,7 @@ func createE2SmMhoControlMessageFormat1Msg() (*e2sm_mho.E2SmMhoControlMessageFor
 		},
 	}
 
-	ueId := &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
 
@@ -54,7 +54,7 @@ func createE2SmMhoControlMessageFormat1Msg() (*e2sm_mho.E2SmMhoControlMessageFor
 
 	e2SmMhoControlMessageFormat1 := e2sm_mho.E2SmMhoControlMessageFormat1{
 		ServingCgi: servingCgi,
-		UedId:      ueId,
+		UedId:      ueID,
 		TargetCgi:  targetCgi,
 	}
 
