@@ -187,7 +187,7 @@ images: build service-model-docker-e2sm_kpm-1.0.0 service-model-ransim-docker-e2
 	service-model-docker-e2sm_kpm_v2-1.0.0 service-model-ransim-docker-e2sm_kpm_v2-1.0.0 \
 	service-model-docker-e2sm_ni-1.0.0 service-model-docker-e2sm_rc_pre-1.0.0 \
 	service-model-ransim-docker-e2sm_rc_pre-1.0.0 service-model-docker-e2sm_mho-1.0.0 \
-	service-model-ransim-e2sm_mho-1.0.0
+	service-model-ransim-docker-e2sm_mho-1.0.0
 
 kind: # @HELP build Docker images and add them to the currently configured kind cluster
 kind: images

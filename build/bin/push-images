@@ -10,3 +10,5 @@ docker push onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0:latest
 docker push onosproject/service-model-docker-e2sm_ni-1.0.0:latest
 docker push onosproject/service-model-docker-e2sm_rc_pre-1.0.0:latest
 docker push onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:latest
+docker push onosproject/service-model-docker-e2sm_mho-1.0.0:latest
+docker push onosproject/service-model-ransim-e2sm_mho-1.0.0:latest
