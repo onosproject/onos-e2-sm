@@ -112,8 +112,8 @@ func decodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinitionC *C.E2SM_
     return e2SmMhoEventTriggerDefinition, nil
 }
 
-func decodeE2SmMhoEventTriggerDefinitionBytes(array [8]byte) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
-	e2SmMhoEventTriggerDefinitionC := (*C.E2SM_MHO_EventTriggerDefinition_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinitionC)
-}
+//func decodeE2SmMhoEventTriggerDefinitionBytes(array [8]byte) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
+//	e2SmMhoEventTriggerDefinitionC := (*C.E2SM_MHO_EventTriggerDefinition_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeE2SmMhoEventTriggerDefinition(e2SmMhoEventTriggerDefinitionC)
+//}

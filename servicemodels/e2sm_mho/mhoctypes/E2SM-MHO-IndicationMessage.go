@@ -129,8 +129,8 @@ func decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC *C.E2SM_MHO_Indica
 	return e2SmMhoIndicationMessage, nil
 }
 
-func decodeE2SmMhoIndicationMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
-	e2SmMhoIndicationMessageC := (*C.E2SM_MHO_IndicationMessage_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC)
-}
+//func decodeE2SmMhoIndicationMessageBytes(array [8]byte) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
+//	e2SmMhoIndicationMessageC := (*C.E2SM_MHO_IndicationMessage_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC)
+//}

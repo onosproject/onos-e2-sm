@@ -47,13 +47,13 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 }
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
-	ueId := &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
 	rsrp := &e2sm_mho.Rsrp{
 		Value: 1234,
 	}
-	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoIndicationMsgFormat1(ueId, rsrp)
+	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoIndicationMsgFormat1(ueID, rsrp)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, newE2SmMhoPdu != nil)
 
@@ -275,10 +275,10 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 			},
 		},
 	}
-	ueId :=  &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
-	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueId, targetCgi)
+	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoControlMessage(servingCgi, ueID, targetCgi)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmMhoPdu.Validate()

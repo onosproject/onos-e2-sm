@@ -33,7 +33,7 @@ func TestE2SmMhoControlMsg(t *testing.T) {
 		},
 	}
 
-	ueId := &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
 
@@ -52,7 +52,7 @@ func TestE2SmMhoControlMsg(t *testing.T) {
 			},
 		},
 	}
-	newE2SmMhoPdu, err := CreateE2SmMhoControlMessage(servingCgi, ueId, targetCgi)
+	newE2SmMhoPdu, err := CreateE2SmMhoControlMessage(servingCgi, ueID, targetCgi)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmMhoPdu != nil)
 

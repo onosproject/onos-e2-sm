@@ -12,8 +12,8 @@ package mhoctypes
 //#include "RIC-EventTriggerStyle-List.h"
 import "C"
 import (
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"fmt"
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 

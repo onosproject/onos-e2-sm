@@ -113,8 +113,8 @@ func decodeE2SmMhoControlHeader(e2SmMhoControlHeaderC *C.E2SM_MHO_ControlHeader_
 	return e2SmMhoControlHeader, nil
 }
 
-func decodeE2SmMhoControlHeaderBytes(array [8]byte) (*e2sm_mho.E2SmMhoControlHeader, error) {
-	e2SmMhoControlHeaderC := (*C.E2SM_MHO_ControlHeader_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeE2SmMhoControlHeader(e2SmMhoControlHeaderC)
-}
+//func decodeE2SmMhoControlHeaderBytes(array [8]byte) (*e2sm_mho.E2SmMhoControlHeader, error) {
+//	e2SmMhoControlHeaderC := (*C.E2SM_MHO_ControlHeader_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeE2SmMhoControlHeader(e2SmMhoControlHeaderC)
+//}

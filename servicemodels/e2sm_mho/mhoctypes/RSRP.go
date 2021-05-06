@@ -13,7 +13,6 @@ package mhoctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
 	"unsafe"
@@ -83,8 +82,8 @@ func decodeRsrp(rsrpC *C.RSRP_t) (*e2sm_mho.Rsrp, error) {
 	return &rsrp, nil
 }
 
-func decodeRsrpBytes(array [8]byte) (*e2sm_mho.Rsrp, error) {
-	rsrpC := (*C.RSRP_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeRsrp(rsrpC)
-}
+//func decodeRsrpBytes(array [8]byte) (*e2sm_mho.Rsrp, error) {
+//	rsrpC := (*C.RSRP_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeRsrp(rsrpC)
+//}

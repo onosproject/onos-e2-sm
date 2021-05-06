@@ -8,11 +8,11 @@ import (
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 )
 
-func CreateE2SmMhoIndicationMsgFormat1(ueId *e2sm_mho.UeIdentity, rsrp *e2sm_mho.Rsrp) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
+func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_mho.UeIdentity, rsrp *e2sm_mho.Rsrp) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
 	E2SmMhoPdu := e2sm_mho.E2SmMhoIndicationMessage{
 		E2SmMhoIndicationMessage: &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat1{
 			IndicationMessageFormat1: &e2sm_mho.E2SmMhoIndicationMessageFormat1{
-				UeId: ueId,
+				UeId: ueID,
 				Rsrp: rsrp,
 			},
 		},
@@ -24,11 +24,11 @@ func CreateE2SmMhoIndicationMsgFormat1(ueId *e2sm_mho.UeIdentity, rsrp *e2sm_mho
 	return &E2SmMhoPdu, nil
 }
 
-func CreateE2SmMhoIndicationMsgFormat2(ueId *e2sm_mho.UeIdentity, rrcStatus e2sm_mho.Rrcstatus) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
+func CreateE2SmMhoIndicationMsgFormat2(ueID *e2sm_mho.UeIdentity, rrcStatus e2sm_mho.Rrcstatus) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
 	E2SmMhoPdu := e2sm_mho.E2SmMhoIndicationMessage{
 		E2SmMhoIndicationMessage: &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat2{
 			IndicationMessageFormat2: &e2sm_mho.E2SmMhoIndicationMessageFormat2{
-				UeId: ueId,
+				UeId:      ueID,
 				RrcStatus: rrcStatus,
 			},
 		},

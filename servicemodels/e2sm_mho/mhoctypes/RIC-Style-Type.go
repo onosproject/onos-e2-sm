@@ -13,7 +13,6 @@ package mhoctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
 	"unsafe"
@@ -83,8 +82,8 @@ func decodeRicStyleType(ricStyleTypeC *C.RIC_Style_Type_t) (*e2sm_mho.RicStyleTy
 	return &ricStyleType, nil
 }
 
-func decodeRicStyleTypeBytes(array [8]byte) (*e2sm_mho.RicStyleType, error) {
-	ricStyleTypeC := (*C.RIC_Style_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeRicStyleType(ricStyleTypeC)
-}
+//func decodeRicStyleTypeBytes(array [8]byte) (*e2sm_mho.RicStyleType, error) {
+//	ricStyleTypeC := (*C.RIC_Style_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeRicStyleType(ricStyleTypeC)
+//}

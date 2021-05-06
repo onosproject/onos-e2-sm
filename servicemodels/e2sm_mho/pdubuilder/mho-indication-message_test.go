@@ -14,13 +14,13 @@ import (
 
 func TestE2SmMhoIndicationMsg(t *testing.T) {
 
-	ueId := &e2sm_mho.UeIdentity{
+	ueID := &e2sm_mho.UeIdentity{
 		Value: "1234",
 	}
 	rsrp := &e2sm_mho.Rsrp{
 		Value: 1234,
 	}
-	newE2SmMhoPdu, err := CreateE2SmMhoIndicationMsgFormat1(ueId, rsrp)
+	newE2SmMhoPdu, err := CreateE2SmMhoIndicationMsgFormat1(ueID, rsrp)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmMhoPdu != nil)
 

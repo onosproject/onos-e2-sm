@@ -12,7 +12,6 @@ package mhoctypes
 //#include "OCTET_STRING.h"
 import "C"
 import (
-	"encoding/binary"
 	"unsafe"
 )
 
@@ -39,20 +38,20 @@ func decodeOctetString(octC *C.OCTET_STRING_t) (string, error) {
 //	C.free(unsafe.Pointer(octC))
 //}
 
-func newOctetStringFromArray(array [16]byte) *C.OCTET_STRING_t {
-	size := binary.LittleEndian.Uint64(array[8:16])
-	bytes := C.GoBytes(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[:8]))), C.int(size))
+//func newOctetStringFromArray(array [16]byte) *C.OCTET_STRING_t {
+//	size := binary.LittleEndian.Uint64(array[8:16])
+//	bytes := C.GoBytes(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[:8]))), C.int(size))
+//
+//	octStrC := C.OCTET_STRING_t{
+//		buf:  (*C.uchar)(C.CBytes(bytes)),
+//		size: C.ulong(size),
+//	}
+//
+//	return &octStrC
+//}
 
-	octStrC := C.OCTET_STRING_t{
-		buf:  (*C.uchar)(C.CBytes(bytes)),
-		size: C.ulong(size),
-	}
-
-	return &octStrC
-}
-
-func decodeOctetStringBytes(array [16]byte) (string, error) {
-	octSC := newOctetStringFromArray(array)
-
-	return decodeOctetString(octSC)
-}
+//func decodeOctetStringBytes(array [16]byte) (string, error) {
+//	octSC := newOctetStringFromArray(array)
+//
+//	return decodeOctetString(octSC)
+//}

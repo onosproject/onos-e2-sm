@@ -9,8 +9,8 @@ import (
 	"fmt"
 
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdudecoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/mhoctypes"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdudecoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"google.golang.org/protobuf/proto"
 )

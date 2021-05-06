@@ -19,7 +19,7 @@ func CreateE2SmMhoRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunc
 			RanFunctionInstance:    -1,                     // Not valid value, indicates this item not present in message - handled later in CGo encoding
 		},
 		RicEventTriggerStyleList: retsl,
-		RicReportStyleList: rrsl,
+		RicReportStyleList:       rrsl,
 	}
 
 	if err := e2smMhoPdu.Validate(); err != nil {
