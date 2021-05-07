@@ -7,10 +7,40 @@
 
 #include "RSRP.h"
 
+int
+RSRP_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	long value;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	value = *(const long *)sptr;
+	
+	if((value >= -65536 && value <= 65536)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
 /*
  * This type is implemented using NativeInteger,
  * so here we adjust the DEF accordingly.
  */
+asn_per_constraints_t asn_PER_type_RSRP_constr_1 CC_NOTUSED = {
+	{ APC_CONSTRAINED | APC_EXTENSIBLE,  18, -1, -65536,  65536 }	/* (-65536..65536,...) */,
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	0, 0	/* No PER value map */
+};
 static const ber_tlv_tag_t asn_DEF_RSRP_tags_1[] = {
 	(ASN_TAG_CLASS_UNIVERSAL | (2 << 2))
 };
@@ -24,7 +54,7 @@ asn_TYPE_descriptor_t asn_DEF_RSRP = {
 	asn_DEF_RSRP_tags_1,	/* Same as above */
 	sizeof(asn_DEF_RSRP_tags_1)
 		/sizeof(asn_DEF_RSRP_tags_1[0]), /* 1 */
-	{ 0, 0, NativeInteger_constraint },
+	{ 0, &asn_PER_type_RSRP_constr_1, RSRP_constraint },
 	0, 0,	/* No members */
 	0	/* No specifics */
 };

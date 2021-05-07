@@ -64,7 +64,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	protoBytes, err := proto.Marshal(newE2SmMhoPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmMhoIndicationMessage to bytes")
 
-	assert.Equal(t, 15, len(protoBytes))
+	assert.Equal(t, 39, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.IndicationMessageProtoToASN1(protoBytes)
 
@@ -87,18 +87,21 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
-	indicationMessageAsn1 := []byte{0x00, 0x04, 0x31, 0x32, 0x33, 0x34, 0x02, 0x04, 0xd2}
+	indicationMessageAsn1 := []byte{
+		0x00, 0x04, 0x31, 0x32, 0x33, 0x34, 0x00, 0x40, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x04, 0x01,
+		0x04, 0xd2,
+	}
 	protoBytes, err := rcPreTestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 15, len(protoBytes))
+	assert.Equal(t, 39, len(protoBytes))
 	testIM := &e2sm_mho.E2SmMhoIndicationMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded MHO-IndicationMessage is \n%v", testIM)
 
 	assert.Equal(t, "1234", testIM.GetIndicationMessageFormat1().GetUeId().Value)
-	assert.Equal(t, 1234, int(testIM.GetIndicationMessageFormat1().GetRsrp().Value))
+	//assert.Equal(t, 1234, int(testIM.GetIndicationMessageFormat1().GetRsrp().Value))
 }
 
 func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
@@ -145,7 +148,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	asn1Bytes, err := rcPreTestSm.RanFuncDescriptionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 63, len(asn1Bytes))
+	assert.Equal(t, 59, len(asn1Bytes))
 	t.Logf("ASN1 bytes for MHO-RanFunctionDescription are \n%v", hex.Dump(asn1Bytes))
 }
 
@@ -153,9 +156,9 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	// This message is taken as an output from the function above
 	ranFuncDescriptionAsn1 := []byte{
 		0x20, 0x20, 0x4f, 0x4e, 0x46, 0x00, 0x00, 0x02, 0x4f, 0x69, 0x64, 0x06, 0x80, 0x4f, 0x70, 0x65,
-		0x6e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x69, 0x6e, 0x67, 0x01, 0x03, 0x60, 0x00, 0x01,
-		0x0d, 0x03, 0x80, 0x4f, 0x4e, 0x46, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x01, 0x2a, 0x00, 0x01, 0x0c,
-		0x04, 0x00, 0x4f, 0x4e, 0x46, 0x72, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x01, 0x15, 0x01, 0x38,
+		0x6e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x69, 0x6e, 0x67, 0x01, 0x03, 0x60, 0x06, 0x81,
+		0xc0, 0x4f, 0x4e, 0x46, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x00, 0x2a, 0x00, 0x30, 0x10, 0x4f, 0x4e,
+		0x46, 0x72, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x00, 0x15, 0x00, 0x38,
 	}
 
 	protoBytes, err := rcPreTestSm.RanFuncDescriptionASN1toProto(ranFuncDescriptionAsn1)
@@ -222,7 +225,7 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 3, len(asn1Bytes))
+	assert.Equal(t, 2, len(asn1Bytes))
 	t.Logf("ASN1 bytes for MHO-ControlHeader are \n%v", hex.Dump(asn1Bytes))
 }
 

@@ -22,6 +22,7 @@ extern "C" {
 typedef long	 RIC_Control_Message_Priority_t;
 
 /* Implementation */
+extern asn_per_constraints_t asn_PER_type_RIC_Control_Message_Priority_constr_1;
 extern asn_TYPE_descriptor_t asn_DEF_RIC_Control_Message_Priority;
 asn_struct_free_f RIC_Control_Message_Priority_free;
 asn_struct_print_f RIC_Control_Message_Priority_print;

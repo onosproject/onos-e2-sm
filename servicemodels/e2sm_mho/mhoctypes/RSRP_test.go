@@ -52,7 +52,7 @@ func Test_perEncodingRsrp(t *testing.T) {
 
 	per, err := perEncodeRsrp(rsrp)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 4, len(per))
 	t.Logf("Rsrp PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRsrp(per)

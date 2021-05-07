@@ -13,17 +13,26 @@
 
 /* Including external dependencies */
 #include "UE-Identity.h"
-#include "RSRP.h"
+#include "asn_SEQUENCE_OF.h"
+#include "constr_SEQUENCE_OF.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/* Forward declarations */
+struct E2SM_MHO_MeasurementReportItem;
+
 /* E2SM-MHO-IndicationMessage-Format1 */
 typedef struct E2SM_MHO_IndicationMessage_Format1 {
 	UE_Identity_t	 ueID;
-	RSRP_t	 rsrp;
+	struct E2SM_MHO_IndicationMessage_Format1__measReport {
+		A_SEQUENCE_OF(struct E2SM_MHO_MeasurementReportItem) list;
+		
+		/* Context for parsing across buffer boundaries */
+		asn_struct_ctx_t _asn_ctx;
+	} measReport;
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

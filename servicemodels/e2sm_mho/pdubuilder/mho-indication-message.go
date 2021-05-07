@@ -4,16 +4,41 @@
 package pdubuilder
 
 import (
+	"encoding/hex"
 	"fmt"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 )
 
 func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_mho.UeIdentity, rsrp *e2sm_mho.Rsrp) (*e2sm_mho.E2SmMhoIndicationMessage, error) {
+
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	measReport := []*e2sm_mho.E2SmMhoMeasurementReportItem{
+		{
+			Cgi: &e2sm_mho.CellGlobalId{
+				CellGlobalId: &e2sm_mho.CellGlobalId_EUtraCgi{
+					EUtraCgi: &e2sm_mho.Eutracgi{
+						PLmnIdentity: &e2sm_mho.PlmnIdentity{
+							Value: plmnIDBytes,
+						},
+						EUtracellIdentity: &e2sm_mho.EutracellIdentity{
+							Value: &e2sm_mho.BitString{
+								Value: 0x9bcd4ab, //uint64
+								Len:   28,        //uint32
+							},
+						},
+					},
+				},
+			},
+			Rsrp: rsrp,
+		},
+	}
+
 	E2SmMhoPdu := e2sm_mho.E2SmMhoIndicationMessage{
 		E2SmMhoIndicationMessage: &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat1{
 			IndicationMessageFormat1: &e2sm_mho.E2SmMhoIndicationMessageFormat1{
-				UeId: ueID,
-				Rsrp: rsrp,
+				UeId:       ueID,
+				MeasReport: measReport,
 			},
 		},
 	}

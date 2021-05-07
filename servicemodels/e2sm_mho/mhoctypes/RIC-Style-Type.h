@@ -22,6 +22,7 @@ extern "C" {
 typedef long	 RIC_Style_Type_t;
 
 /* Implementation */
+extern asn_per_constraints_t asn_PER_type_RIC_Style_Type_constr_1;
 extern asn_TYPE_descriptor_t asn_DEF_RIC_Style_Type;
 asn_struct_free_f RIC_Style_Type_free;
 asn_struct_print_f RIC_Style_Type_print;

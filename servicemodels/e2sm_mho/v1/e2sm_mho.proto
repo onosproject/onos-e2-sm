@@ -64,7 +64,7 @@ message CellGlobalId {
 // range of Integer from e2sm-mho.asn1:40
 // {RSRP}
 message Rsrp {
-    int32 value = 1 [json_name = "value"];
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: -65536, lte: 65536}, json_name = "value"];
 };
 
 // constant Integer from e2sm-mho.asn1:48
@@ -94,19 +94,19 @@ message MaxNr {
 // range of Integer from e2sm-mho.asn1:55
 // {RIC-Style-Type}
 message RicStyleType {
-    int32 value = 1 [json_name = "value"];
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 63}, json_name = "value"];
 };
 
 // range of Integer from e2sm-mho.asn1:61
 //{RIC-Format-Type}
 message RicFormatType {
-    int32 value = 1 [json_name = "value"];
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name = "value"];
 };
 
 // range of Integer from e2sm-mho.asn1:63
 // {RIC-Control-Message-Priority}
 message RicControlMessagePriority {
-    int32 value = 1 [json_name = "value"];
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name = "value"];
 };
 
 // sequence from e2sm-mho.asn1:79
@@ -153,6 +153,13 @@ message E2SmMhoIndicationMessage {
 // {E2SM-MHO-IndicationMessage-Format1}
 message E2SmMhoIndicationMessageFormat1 {
     UeIdentity ue_id = 1 [json_name = "ueID"];
+    repeated E2SmMhoMeasurementReportItem meas_report = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 100}, json_name = "measReport"];
+};
+
+// sequence from e2sm-mho.asn1:128
+// {E2SM-MHO-MeasurementReportItem}
+message E2SmMhoMeasurementReportItem {
+    CellGlobalId cgi = 1 [json_name = "cgi"];
     Rsrp rsrp = 2 [json_name = "rsrp"];
 };
 

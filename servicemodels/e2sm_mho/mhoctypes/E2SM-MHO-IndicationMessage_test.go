@@ -14,11 +14,35 @@ import (
 
 func createE2SmMhoIndicationMessageMsg() (*e2sm_mho.E2SmMhoIndicationMessage, error) {
 
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	measReport := []*e2sm_mho.E2SmMhoMeasurementReportItem{
+		{
+			Cgi: &e2sm_mho.CellGlobalId{
+				CellGlobalId: &e2sm_mho.CellGlobalId_EUtraCgi{
+					EUtraCgi: &e2sm_mho.Eutracgi{
+						PLmnIdentity: &e2sm_mho.PlmnIdentity{
+							Value: plmnIDBytes,
+						},
+						EUtracellIdentity: &e2sm_mho.EutracellIdentity{
+							Value: &e2sm_mho.BitString{
+								Value: 0x9bcd4ab, //uint64
+								Len:   28,        //uint32
+							},
+						},
+					},
+				},
+			},
+			Rsrp: &e2sm_mho.Rsrp{
+				Value: 1234,
+			},
+		},
+	}
 	e2SmMhoIndicationMessage := e2sm_mho.E2SmMhoIndicationMessage{
 		E2SmMhoIndicationMessage: &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat1{
 			IndicationMessageFormat1: &e2sm_mho.E2SmMhoIndicationMessageFormat1{
-				UeId: &e2sm_mho.UeIdentity{Value: "1234"},
-				Rsrp: &e2sm_mho.Rsrp{Value: 1234},
+				UeId:       &e2sm_mho.UeIdentity{Value: "1234"},
+				MeasReport: measReport,
 			},
 		},
 	}
@@ -36,7 +60,7 @@ func Test_xerEncodingE2SmMhoIndicationMessage(t *testing.T) {
 
 	xer, err := XerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
 	assert.NilError(t, err)
-	assert.Equal(t, 183, len(xer)) //ToDo - adjust length of the XER encoded message
+	assert.Equal(t, 645, len(xer))
 	t.Logf("E2SmMhoIndicationMessage XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmMhoIndicationMessage(xer)
@@ -56,7 +80,7 @@ func Test_perEncodingE2SmMhoIndicationMessage(t *testing.T) {
 
 	per, err := PerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
 	assert.NilError(t, err)
-	assert.Equal(t, 9, len(per)) // ToDo - adjust length of the PER encoded message
+	assert.Equal(t, 18, len(per))
 	t.Logf("E2SmMhoIndicationMessage PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmMhoIndicationMessage(per)

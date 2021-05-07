@@ -9,9 +9,9 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-IndicationMessage-Format1.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-IndicationMessage-Format1.h"
+//#include "E2SM-MHO-MeasurementReportItem.h"
 import "C"
-
 import (
 	"encoding/binary"
 	"fmt"
@@ -76,15 +76,20 @@ func newE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1 *e2sm_mh
 	if err != nil {
 		return nil, fmt.Errorf("newUeIdentity() %s", err.Error())
 	}
-
-	rsrpC, err := newRsrp(e2SmMhoIndicationMessageFormat1.Rsrp)
-	if err != nil {
-		return nil, fmt.Errorf("newRsrp() %s", err.Error())
+	measReportC := new(C.struct_E2SM_MHO_IndicationMessage_Format1__measReport)      //ToDo - verify correctness of the variable's name
+	for _, measReportItem := range e2SmMhoIndicationMessageFormat1.GetMeasReport() { //ToDo - Verify if GetSmth() function is called correctly
+		measReportItemC, err := newE2SmMhoMeasurementReportItem(measReportItem)
+		if err != nil {
+			return nil, fmt.Errorf("newE2SmMhoMeasurementReportItem() %s", err.Error())
+		}
+		if _, err = C.asn_sequence_add(unsafe.Pointer(measReportC), unsafe.Pointer(measReportItemC)); err != nil {
+			return nil, err
+		}
 	}
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	e2SmMhoIndicationMessageFormat1C.ueID = *ueIDC
-	e2SmMhoIndicationMessageFormat1C.rsrp = *rsrpC
+	e2SmMhoIndicationMessageFormat1C.measReport = *measReportC
 
 	return &e2SmMhoIndicationMessageFormat1C, nil
 }
@@ -95,7 +100,7 @@ func decodeE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1C *C.E
 	e2SmMhoIndicationMessageFormat1 := e2sm_mho.E2SmMhoIndicationMessageFormat1{
 		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		//UeId: ueId,
-		//Rsrp: rsrp,
+		MeasReport: make([]*e2sm_mho.E2SmMhoMeasurementReportItem, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
 
 	}
 
@@ -104,9 +109,15 @@ func decodeE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1C *C.E
 		return nil, fmt.Errorf("decodeUeIdentity() %s", err.Error())
 	}
 
-	e2SmMhoIndicationMessageFormat1.Rsrp, err = decodeRsrp(&e2SmMhoIndicationMessageFormat1C.rsrp)
-	if err != nil {
-		return nil, fmt.Errorf("decodeRsrp() %s", err.Error())
+	ieCount := int(e2SmMhoIndicationMessageFormat1C.measReport.list.count)
+	for i := 0; i < ieCount; i++ {
+		offset := unsafe.Sizeof(unsafe.Pointer(e2SmMhoIndicationMessageFormat1C.measReport.list.array)) * uintptr(i)
+		ieC := *(**C.E2SM_MHO_MeasurementReportItem_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmMhoIndicationMessageFormat1C.measReport.list.array)) + offset))
+		ie, err := decodeE2SmMhoMeasurementReportItem(ieC)
+		if err != nil {
+			return nil, fmt.Errorf("decodeE2SmMhoMeasurementReportItem() %s", err.Error())
+		}
+		e2SmMhoIndicationMessageFormat1.MeasReport = append(e2SmMhoIndicationMessageFormat1.MeasReport, ie)
 	}
 
 	return &e2SmMhoIndicationMessageFormat1, nil
