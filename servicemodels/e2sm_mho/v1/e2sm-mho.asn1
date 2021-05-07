@@ -119,7 +119,7 @@ E2SM-MHO-IndicationMessage ::= CHOICE {
 -- for UE measurement reports
 E2SM-MHO-IndicationMessage-Format1 ::= SEQUENCE {
    ueID       UE-Identity,
-   measReport  SEQUENCE OF E2SM-MHO-MeasurementReportItem,
+   measReport  SEQUENCE (SIZE (1..100)) OF E2SM-MHO-MeasurementReportItem,
    ...
 }
 
