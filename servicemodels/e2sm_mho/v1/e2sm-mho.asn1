@@ -35,7 +35,7 @@ CellGlobalID ::= CHOICE {
     ...
 }
 
-RSRP ::= INTEGER
+RSRP ::= INTEGER (-65536..65536, ...)
 
 UE-Identity ::= OCTET STRING
 
@@ -51,14 +51,14 @@ maxPLMN                            INTEGER ::= 12 -- Maximum number of PLMNs bro
 maxNR                              INTEGER ::= 4096
 
 
-RIC-Style-Type  ::= INTEGER
+RIC-Style-Type  ::= INTEGER (0..maxofRICstyles, ...)
 RIC-Style-Name  ::= PrintableString(SIZE(1..150,...))
-RIC-Format-Type ::= INTEGER
+RIC-Format-Type ::= INTEGER (0..255, ...)
 
 -- **************************************************************
 -- E2SM-MHO Common IEs
 -- **************************************************************
-RIC-Control-Message-Priority ::= INTEGER
+RIC-Control-Message-Priority ::= INTEGER (0..255, ...)
 
 MHO-Trigger-Type ::= ENUMERATED{
     periodic,
@@ -119,7 +119,14 @@ E2SM-MHO-IndicationMessage ::= CHOICE {
 -- for UE measurement reports
 E2SM-MHO-IndicationMessage-Format1 ::= SEQUENCE {
    ueID       UE-Identity,
-   rsrp       RSRP,
+   measReport  SEQUENCE (SIZE (1..100)) OF E2SM-MHO-MeasurementReportItem,
+   ...
+}
+
+-- Measured RSRP for a cell
+E2SM-MHO-MeasurementReportItem ::= SEQUENCE {
+   cgi         CellGlobalID,
+   rsrp        RSRP,
    ...
 }
 
