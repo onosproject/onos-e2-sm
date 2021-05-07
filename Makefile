@@ -199,8 +199,8 @@ kind: images
 	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-mho-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-mho-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-ransim-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 
 
 all: build images
