@@ -207,13 +207,8 @@ message E2SmMhoControlMessageFormat1 {
 // {E2SM-MHO-RANfunction-Description}
 message E2SmMhoRanfunctionDescription {
     RanfunctionName ran_function_name = 1 [json_name = "ranFunction_Name"];
-    E2SmMhoRanfunctionItem001 e2_sm_mho_ranfunction_item = 2 [json_name="e2SM_MHO_RANfunction_Item"];
-
-    //{E2SM-MHO-RANfunction-Item001}
-    message E2SmMhoRanfunctionItem001 {
-        repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_EventTriggerStyle_List:OPTIONAL"];
-        repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_ReportStyle_List:OPTIONAL"];
-    }
+    repeated RicEventTriggerStyleList ric_event_trigger_style_list = 2 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_EventTriggerStyle_List:OPTIONAL"];
+    repeated RicReportStyleList ric_report_style_list = 3 [(validate.v1.rules).repeated = {max_items: 63}, json_name="ric_ReportStyle_List:OPTIONAL"];
 };
 
 // sequence from e2sm-mho.asn1:191
