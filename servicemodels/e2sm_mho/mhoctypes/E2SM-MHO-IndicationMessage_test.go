@@ -18,7 +18,7 @@ func createE2SmMhoIndicationMessageMsg() (*e2sm_mho.E2SmMhoIndicationMessage, er
 		E2SmMhoIndicationMessage: &e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat1{
 			IndicationMessageFormat1: &e2sm_mho.E2SmMhoIndicationMessageFormat1{
 				UeId: &e2sm_mho.UeIdentity{Value: "1234"},
-				Rsrp: &e2sm_mho.Rsrp{Value: 1234},
+				MeasReport: make([]*e2sm_mho.E2SmMhoMeasurementReportItem, 0),
 			},
 		},
 	}
@@ -54,12 +54,12 @@ func Test_perEncodingE2SmMhoIndicationMessage(t *testing.T) {
 	e2SmMhoIndicationMessage, err := createE2SmMhoIndicationMessageMsg()
 	assert.NilError(t, err, "Error creating E2SmMhoIndicationMessage PDU")
 
-	per, err := PerEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
+	per, err := perEncodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessage)
 	assert.NilError(t, err)
 	assert.Equal(t, 9, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("E2SmMhoIndicationMessage PER\n%v", hex.Dump(per))
 
-	result, err := PerDecodeE2SmMhoIndicationMessage(per)
+	result, err := perDecodeE2SmMhoIndicationMessage(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoIndicationMessage PER - decoded\n%v", result)

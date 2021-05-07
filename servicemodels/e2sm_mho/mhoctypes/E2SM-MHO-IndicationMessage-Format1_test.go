@@ -19,7 +19,8 @@ func createE2SmMhoIndicationMessageFormat1Msg() (*e2sm_mho.E2SmMhoIndicationMess
 
 	e2SmMhoIndicationMessageFormat1 := e2sm_mho.E2SmMhoIndicationMessageFormat1{
 		UeId: &e2sm_mho.UeIdentity{Value: "1234"},
-		Rsrp: &e2sm_mho.Rsrp{Value: 1234},
+		MeasReport: make([]*e2sm_mho.E2SmMhoMeasurementReportItem, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
+
 	}
 
 	if err := e2SmMhoIndicationMessageFormat1.Validate(); err != nil {
@@ -44,7 +45,8 @@ func Test_XerEncodingE2SmMhoIndicationMessageFormat1(t *testing.T) {
 	t.Logf("E2SmMhoIndicationMessageFormat1 XER - decoded\n%v", result)
 	//ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoIndicationMessageFormat1.GetUeId(), result.GetUeId())
-	//assert.Equal(t, e2SmMhoIndicationMessageFormat1.GetRsrp(), result.GetRsrp())
+	//assert.Equal(t, 1, len(result.GetMeasReport())) //ToDo - adjust length of a list
+	//assert.DeepEqual(t, e2SmMhoIndicationMessageFormat1.GetMeasReport(), result.GetMeasReport())
 
 }
 
@@ -64,6 +66,7 @@ func Test_PerEncodingE2SmMhoIndicationMessageFormat1(t *testing.T) {
 	t.Logf("E2SmMhoIndicationMessageFormat1 PER - decoded\n%v", result)
 	//ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoIndicationMessageFormat1.GetUeId(), result.GetUeId())
-	//assert.Equal(t, e2SmMhoIndicationMessageFormat1.GetRsrp(), result.GetRsrp())
+	//assert.Equal(t, 1, len(result.GetMeasReport())) //ToDo - adjust length of a list
+	//assert.DeepEqual(t, e2SmMhoIndicationMessageFormat1.GetMeasReport(), result.GetMeasReport())
 
 }
