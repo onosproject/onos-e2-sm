@@ -207,7 +207,7 @@ message E2SmMhoControlMessageFormat1 {
 // {E2SM-MHO-RANfunction-Description}
 message E2SmMhoRanfunctionDescription {
     RanfunctionName ran_function_name = 1 [json_name = "ranFunction_Name"];
-    E2SmMhoRanfunctionItem001 e2_sm_rc_pre_ranfunction_item = 2 [json_name="e2SM_RC_PRE_RANfunction_Item"];
+    E2SmMhoRanfunctionItem001 e2_sm_mho_ranfunction_item = 2 [json_name="e2SM_MHO_RANfunction_Item"];
 
     //{E2SM-MHO-RANfunction-Item001}
     message E2SmMhoRanfunctionItem001 {
