@@ -304,7 +304,12 @@ func (m *Rsrp) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Value
+	if val := m.GetValue(); val < -65536 || val > 65536 {
+		return RsrpValidationError{
+			field:  "Value",
+			reason: "value must be inside range [-65536, 65536]",
+		}
+	}
 
 	return nil
 }
@@ -659,7 +664,12 @@ func (m *RicStyleType) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Value
+	if val := m.GetValue(); val < 0 || val > 63 {
+		return RicStyleTypeValidationError{
+			field:  "Value",
+			reason: "value must be inside range [0, 63]",
+		}
+	}
 
 	return nil
 }
@@ -726,7 +736,12 @@ func (m *RicFormatType) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Value
+	if val := m.GetValue(); val < 0 || val > 255 {
+		return RicFormatTypeValidationError{
+			field:  "Value",
+			reason: "value must be inside range [0, 255]",
+		}
+	}
 
 	return nil
 }
@@ -793,7 +808,12 @@ func (m *RicControlMessagePriority) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Value
+	if val := m.GetValue(); val < 0 || val > 255 {
+		return RicControlMessagePriorityValidationError{
+			field:  "Value",
+			reason: "value must be inside range [0, 255]",
+		}
+	}
 
 	return nil
 }
@@ -1284,14 +1304,26 @@ func (m *E2SmMhoIndicationMessageFormat1) Validate() error {
 		}
 	}
 
-	if v, ok := interface{}(m.GetRsrp()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return E2SmMhoIndicationMessageFormat1ValidationError{
-				field:  "Rsrp",
-				reason: "embedded message failed validation",
-				cause:  err,
+	if l := len(m.GetMeasReport()); l < 1 || l > 100 {
+		return E2SmMhoIndicationMessageFormat1ValidationError{
+			field:  "MeasReport",
+			reason: "value must contain between 1 and 100 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetMeasReport() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return E2SmMhoIndicationMessageFormat1ValidationError{
+					field:  fmt.Sprintf("MeasReport[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
 			}
 		}
+
 	}
 
 	return nil
@@ -1353,6 +1385,94 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = E2SmMhoIndicationMessageFormat1ValidationError{}
+
+// Validate checks the field values on E2SmMhoMeasurementReportItem with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *E2SmMhoMeasurementReportItem) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if v, ok := interface{}(m.GetCgi()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmMhoMeasurementReportItemValidationError{
+				field:  "Cgi",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetRsrp()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmMhoMeasurementReportItemValidationError{
+				field:  "Rsrp",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// E2SmMhoMeasurementReportItemValidationError is the validation error returned
+// by E2SmMhoMeasurementReportItem.Validate if the designated constraints
+// aren't met.
+type E2SmMhoMeasurementReportItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e E2SmMhoMeasurementReportItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e E2SmMhoMeasurementReportItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e E2SmMhoMeasurementReportItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e E2SmMhoMeasurementReportItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e E2SmMhoMeasurementReportItemValidationError) ErrorName() string {
+	return "E2SmMhoMeasurementReportItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e E2SmMhoMeasurementReportItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sE2SmMhoMeasurementReportItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = E2SmMhoMeasurementReportItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = E2SmMhoMeasurementReportItemValidationError{}
 
 // Validate checks the field values on E2SmMhoIndicationMessageFormat2 with the
 // rules defined in the proto definition for this message. If any rules are

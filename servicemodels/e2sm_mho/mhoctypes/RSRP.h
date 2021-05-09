@@ -22,6 +22,7 @@ extern "C" {
 typedef long	 RSRP_t;
 
 /* Implementation */
+extern asn_per_constraints_t asn_PER_type_RSRP_constr_1;
 extern asn_TYPE_descriptor_t asn_DEF_RSRP;
 asn_struct_free_f RSRP_free;
 asn_struct_print_f RSRP_print;

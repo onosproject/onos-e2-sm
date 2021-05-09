@@ -90,7 +90,7 @@ func Test_PerEncodingE2SmMhoRanfunctionDescription(t *testing.T) {
 
 	per, err := PerEncodeE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescription)
 	assert.NilError(t, err)
-	assert.Equal(t, 73, len(per)) // ToDo - adjust length of the PER encoded message
+	assert.Equal(t, 69, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("E2SmMhoRanfunctionDescription PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmMhoRanfunctionDescription(per)

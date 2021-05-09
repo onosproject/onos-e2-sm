@@ -68,7 +68,7 @@ func Test_perEncodeRicReportStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicReportStyleItem(ricReportStyleItem)
 	assert.NilError(t, err)
-	assert.Equal(t, 18, len(per))
+	assert.Equal(t, 16, len(per))
 	t.Logf("RIC-ReportStyle-List PER\n%s", string(per))
 }
 
@@ -78,7 +78,7 @@ func Test_perDecodeRicReportStyleItem(t *testing.T) {
 
 	per, err := perEncodeRicReportStyleItem(ricReportStyleItem)
 	assert.NilError(t, err)
-	assert.Equal(t, 18, len(per))
+	assert.Equal(t, 16, len(per))
 	t.Logf("RIC-ReportStyle-List PER\n%s", string(per))
 
 	result, err := perDecodeRicReportStyleItem(per)
