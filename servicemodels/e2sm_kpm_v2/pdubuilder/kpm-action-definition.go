@@ -63,7 +63,7 @@ func CreateE2SmKpmActionDefinitionFormat3(ricStyleType int32,
 }
 
 func CreateActionDefinitionFormat1(cellObjID string, measInfoList *e2sm_kpm_v2.MeasurementInfoList,
-	granularity int32, subID int64) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1, error) {
+	granularity uint32, subID int64) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1, error) {
 
 	actionDefinitionFormat1 := e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1{
 		CellObjId: &e2sm_kpm_v2.CellObjectId{
@@ -102,7 +102,7 @@ func CreateActionDefinitionFormat2(ueID string, actionDefinitionFormat1 *e2sm_kp
 }
 
 func CreateActionDefinitionFormat3(cellObjID string, measCondList *e2sm_kpm_v2.MeasurementCondList,
-	granularity int32, subID int64) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
+	granularity uint32, subID int64) (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
 
 	actionDefinitionFormat3 := e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3{
 		CellObjId: &e2sm_kpm_v2.CellObjectId{

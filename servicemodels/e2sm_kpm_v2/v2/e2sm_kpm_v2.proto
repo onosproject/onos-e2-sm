@@ -8,7 +8,7 @@ SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 // Protobuf generated from /e2sm_kpm_v2.0.2-rm.asn by asn1c-0.9.29
 // E2SM-KPM-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version2(2) e2sm(2) e2sm-KPMMON-IEs(2) }
 
-// It is KPM v2.0.2-rm
+// It is KPM v2.0.3-rm
 syntax = "proto3";
 
 package e2sm_kpm_v2.v2;
@@ -145,7 +145,7 @@ message Arp {
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:65
 //{GranularityPeriod}
 message GranularityPeriod {
-    int32 value = 1 [json_name = "value"];
+    uint32 value = 1 [json_name = "value"];
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:66
@@ -560,7 +560,7 @@ message E2SmKpmEventTriggerDefinition {
 // sequence from e2sm_kpm_v2.0.2-rm.asn:342
 //{E2SM-KPMv2-EventTriggerDefinition-Format1}
 message E2SmKpmEventTriggerDefinitionFormat1 {
-    int32 reporting_period = 1 [json_name = "reportingPeriod"];
+    uint32 reporting_period = 1 [json_name = "reportingPeriod"];
 };
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:351

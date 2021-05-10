@@ -13,7 +13,7 @@ import (
 
 func createE2SMKPMEventTriggerDefinitionFormat1() *e2sm_kpm_v2.E2SmKpmEventTriggerDefinitionFormat1 {
 
-	var rtPeriod int32 = 15
+	var rtPeriod uint32 = 15
 
 	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
 
@@ -51,7 +51,7 @@ func Test_perEncodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmEventTriggerDefinitionFormat1(etdf1)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinitionFormat1 PER\n%s", string(per))
 }
 
@@ -61,7 +61,7 @@ func Test_perDecodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmEventTriggerDefinitionFormat1(etdf1)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinitionFormat1 PER\n%s", string(per))
 
 	result, err := perDecodeE2SmKpmEventTriggerDefinitionFormat1(per)

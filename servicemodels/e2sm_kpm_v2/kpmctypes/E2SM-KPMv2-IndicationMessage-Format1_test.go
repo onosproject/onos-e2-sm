@@ -16,7 +16,7 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2.E2SmKpmIndicationMessageForm
 	var integer int64 = 12345
 	var rl float64 = 6789.51
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -142,7 +142,7 @@ func Test_perEncodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	per, err := perEncodeE2SmKpmIndicationMessageFormat1(imf1)
 	assert.NilError(t, err)
 	//assert.Equal(t, 77, len(per))
-	assert.Equal(t, 31, len(per)) //without MeasurementInfoList
+	assert.Equal(t, 30, len(per)) //without MeasurementInfoList
 	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%s", string(per))
 }
 
@@ -154,7 +154,7 @@ func Test_perDecodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	per, err := perEncodeE2SmKpmIndicationMessageFormat1(imf1)
 	assert.NilError(t, err)
 	//assert.Equal(t, 77, len(per))
-	assert.Equal(t, 31, len(per)) //without MeasurementInfoList
+	assert.Equal(t, 30, len(per)) //without MeasurementInfoList
 	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%s", string(per))
 
 	result, err := perDecodeE2SmKpmIndicationMessageFormat1(per)

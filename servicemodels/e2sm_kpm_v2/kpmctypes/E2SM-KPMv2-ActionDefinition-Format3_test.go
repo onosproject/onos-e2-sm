@@ -15,7 +15,7 @@ import (
 func createActionDefinitionFormat3() (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
 
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	var measurementName string = "trial"
 

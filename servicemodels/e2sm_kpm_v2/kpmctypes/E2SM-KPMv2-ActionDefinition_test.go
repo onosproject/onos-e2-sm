@@ -16,7 +16,7 @@ func createE2SMKPMActionDefinitionFormat1() (*e2sm_kpm_v2.E2SmKpmActionDefinitio
 
 	var ricStyleType int32 = 12
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -93,7 +93,7 @@ func createE2SMKPMActionDefinitionFormat2() (*e2sm_kpm_v2.E2SmKpmActionDefinitio
 
 	var ricStyleType int32 = 12
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -173,7 +173,7 @@ func createE2SMKPMActionDefinitionFormat3() (*e2sm_kpm_v2.E2SmKpmActionDefinitio
 
 	var ricStyleType int32 = 12
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	var measurementName string = "trial"
 
@@ -281,7 +281,7 @@ func Test_perEncodeE2SmKpmActionDefinition(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 60, len(per))
+	assert.Equal(t, 58, len(per))
 	t.Logf("E2SmKpmActionDefinition (Format1) PER\n%s", string(per))
 
 	actionDef, err = createE2SMKPMActionDefinitionFormat2()
@@ -289,7 +289,7 @@ func Test_perEncodeE2SmKpmActionDefinition(t *testing.T) {
 
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 68, len(per))
+	assert.Equal(t, 66, len(per))
 	t.Logf("E2SmKpmActionDefinition (Format2) PER\n%s", string(per))
 
 	actionDef, err = createE2SMKPMActionDefinitionFormat3()
@@ -297,7 +297,7 @@ func Test_perEncodeE2SmKpmActionDefinition(t *testing.T) {
 
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 30, len(per))
+	assert.Equal(t, 29, len(per))
 	t.Logf("E2SmKpmActionDefinition (Format3) PER\n%s", string(per))
 }
 
@@ -308,7 +308,7 @@ func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 60, len(per))
+	assert.Equal(t, 58, len(per))
 	t.Logf("E2SmKpmActionDefinition (Format1) PER\n%s", string(per))
 
 	result, err := PerDecodeE2SmKpmActionDefinition(per)
@@ -321,7 +321,7 @@ func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
 
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 68, len(per))
+	assert.Equal(t, 66, len(per))
 	t.Logf("E2SmKpmActionDefinition (Format2) PER\n%s", string(per))
 
 	result, err = PerDecodeE2SmKpmActionDefinition(per)
@@ -334,7 +334,7 @@ func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
 
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
-	assert.Equal(t, 30, len(per))
+	assert.Equal(t, 29, len(per))
 	t.Logf("E2SmKpmActionDefinition (Format3) PER\n%s", string(per))
 
 	result, err = PerDecodeE2SmKpmActionDefinition(per)

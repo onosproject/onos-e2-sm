@@ -208,7 +208,7 @@ func Test_perEncodeE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	per, err := perEncodeE2SmKpmIndicationMessageFormat2(imf2)
 	assert.NilError(t, err)
 	//assert.Equal(t, 89, len(per))
-	assert.Equal(t, 81, len(per)) // without GranulPeriod and CellObjID
+	assert.Equal(t, 80, len(per)) // without GranulPeriod and CellObjID
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%s", string(per))
 }
 
@@ -220,7 +220,7 @@ func Test_perDecodeE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	per, err := perEncodeE2SmKpmIndicationMessageFormat2(imf2)
 	assert.NilError(t, err)
 	//assert.Equal(t, 89, len(per))
-	assert.Equal(t, 81, len(per)) // without GranulPeriod and CellObjID
+	assert.Equal(t, 80, len(per)) // without GranulPeriod and CellObjID
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%s", string(per))
 
 	result, err := perDecodeE2SmKpmIndicationMessageFormat2(per)

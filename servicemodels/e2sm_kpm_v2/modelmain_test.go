@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"google.golang.org/protobuf/proto"
@@ -52,7 +53,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
 	assert.Equal(t, 42, len(asn1Bytes))
-	t.Logf("E2SM-KPM-IndicationHeader (gNB) asn1Bytes are \n%x", asn1Bytes)
+	t.Logf("E2SM-KPM-IndicationHeader (gNB) asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
@@ -79,7 +80,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -175,15 +176,15 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	asn1Bytes, err := kpmv2TestSm.IndicationMessageProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	t.Logf("E2SM-KPM-IndicationMessage (Format1)) asn1Bytes are \n%x", asn1Bytes)
+	t.Logf("E2SM-KPM-IndicationMessage (Format1)) asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
-	indicationMessageAsn1 := []byte{0x0e, 0x40, 0x30, 0x38, 0x00, 0x00, 0x03, 0x6f, 0x6e, 0x66, 0x01, 0x15, 0x00, 0x00,
-		0x40, 0x20, 0x74, 0x72, 0x69, 0x61, 0x6c, 0x01, 0x3f, 0xff, 0xe0, 0x21, 0x22, 0x23, 0x40, 0x40, 0x01, 0x02, 0x03,
-		0x00, 0x0a, 0x7c, 0x0f, 0x00, 0x0f, 0x00, 0x01, 0x72, 0x40, 0x00, 0xfa, 0x00, 0x00, 0x04, 0x00, 0x00, 0x7a, 0x00,
-		0x01, 0xc7, 0x00, 0x03, 0x14, 0x00, 0x00, 0x00, 0x40, 0x03, 0x00, 0x02, 0x30, 0x39, 0x44, 0x04, 0x80, 0x00, 0x1a,
-		0x85, 0x00}
+	indicationMessageAsn1 := []byte{0x0e, 0x80, 0x30, 0x38, 0x00, 0x00, 0x03, 0x6f, 0x6e, 0x66, 0x00, 0x14, 0x00, 0x00, 0x40, 0x20,
+		0x74, 0x72, 0x69, 0x61, 0x6c, 0x01, 0x3f, 0xfb, 0xa0, 0x21, 0x22, 0x23, 0x40, 0x40, 0x01, 0x02,
+		0x03, 0x00, 0x0a, 0x7c, 0x0f, 0x00, 0x0f, 0x00, 0x01, 0x72, 0x40, 0x00, 0xfa, 0x00, 0x00, 0x04,
+		0x00, 0x00, 0x7a, 0x00, 0x01, 0xc7, 0x00, 0x03, 0x14, 0x00, 0x00, 0x00, 0x40, 0x03, 0x08, 0x30,
+		0x39, 0x44, 0x04, 0x80, 0x00, 0x1a, 0x85, 0x00}
 
 	protoBytes, err := kpmv2TestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
@@ -284,19 +285,19 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	asn1Bytes, err := kpmv2TestSm.RanFuncDescriptionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 112, len(asn1Bytes))
-	t.Logf("E2SM-KPM-RANfunctionDescription asn1Bytes are \n%x", asn1Bytes)
+	assert.Equal(t, 110, len(asn1Bytes))
+	t.Logf("E2SM-KPM-RANfunctionDescription asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	// This message is taken as an output from the function above
-	ranFuncDescriptionAsn1 := []byte{0x74, 0x04, 0x6f, 0x6e, 0x66, 0x00, 0x00, 0x05, 0x6f, 0x69, 0x64, 0x31, 0x32, 0x33,
-		0x07, 0x00, 0x73, 0x6f, 0x6d, 0x65, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x01, 0x15,
-		0x00, 0x00, 0x43, 0x00, 0x21, 0x22, 0x23, 0x00, 0xd4, 0xbc, 0x08, 0x80, 0x30, 0x39, 0x20, 0x1a, 0x85, 0x00, 0x00,
-		0x00, 0x00, 0x03, 0x4f, 0x4e, 0x46, 0x00, 0x21, 0x22, 0x23, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x01, 0x0b, 0x01,
-		0x00, 0x6f, 0x6e, 0x66, 0x01, 0x0f, 0x00, 0x01, 0x0b, 0x01, 0x00, 0x6f, 0x6e, 0x66, 0x01, 0x0f, 0x00, 0x00, 0x41,
-		0xa0, 0x4f, 0x70, 0x65, 0x6e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x69, 0x6e, 0x67, 0x00, 0x00, 0x17, 0x01,
-		0x2f, 0x01, 0x18}
+	ranFuncDescriptionAsn1 := []byte{0x74, 0x04, 0x6f, 0x6e, 0x66, 0x00, 0x00, 0x05, 0x6f, 0x69, 0x64, 0x31, 0x32, 0x33, 0x07, 0x00,
+		0x73, 0x6f, 0x6d, 0x65, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x00,
+		0x15, 0x00, 0x00, 0x43, 0x00, 0x21, 0x22, 0x23, 0x00, 0xd4, 0xbc, 0x08, 0x80, 0x30, 0x39, 0x20,
+		0x1a, 0x85, 0x00, 0x00, 0x00, 0x00, 0x03, 0x4f, 0x4e, 0x46, 0x00, 0x21, 0x22, 0x23, 0x00, 0x00,
+		0x00, 0x20, 0x00, 0x00, 0x0b, 0x01, 0x00, 0x6f, 0x6e, 0x66, 0x00, 0x0f, 0x00, 0x0b, 0x01, 0x00,
+		0x6f, 0x6e, 0x66, 0x00, 0x0f, 0x00, 0x00, 0x41, 0xa0, 0x4f, 0x70, 0x65, 0x6e, 0x4e, 0x65, 0x74,
+		0x77, 0x6f, 0x72, 0x6b, 0x69, 0x6e, 0x67, 0x00, 0x00, 0x17, 0x00, 0x2f, 0x00, 0x18}
 
 	protoBytes, err := kpmv2TestSm.RanFuncDescriptionASN1toProto(ranFuncDescriptionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
@@ -311,7 +312,7 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
-	var rtPeriod int32 = 12
+	var rtPeriod uint32 = 12
 	e2SmKpmEventTriggerDefinition, err := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, e2SmKpmEventTriggerDefinition != nil, "Created E2SmPDU is nil")
@@ -327,14 +328,14 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	asn1Bytes, err := kpmv2TestSm.EventTriggerDefinitionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 3, len(asn1Bytes))
-	t.Logf("E2SM-KPM-EventTriggerDefinition asn1Bytes are \n%x", asn1Bytes)
+	assert.Equal(t, 2, len(asn1Bytes))
+	t.Logf("E2SM-KPM-EventTriggerDefinition asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	// This value is taken from Shad and passed as a byte array directly to the function
 	// It's the encoding of what's in the file ../test/E2SM-KPM-EventTriggerDefinition.xml
-	eventTriggerDefinitionAsn1 := []byte{0x00, 0x01, 0x0c}
+	eventTriggerDefinitionAsn1 := []byte{0x00, 0x0b}
 
 	protoBytes, err := kpmv2TestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
@@ -345,13 +346,13 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	t.Logf("Decoded message is \n%v", testETD)
 	assert.NilError(t, err)
 	t.Logf("Reporting period is \n%v", testETD.GetEventDefinitionFormat1().GetReportingPeriod())
-	assert.Equal(t, int32(12), testETD.GetEventDefinitionFormat1().GetReportingPeriod())
+	assert.Equal(t, uint32(12), testETD.GetEventDefinitionFormat1().GetReportingPeriod())
 }
 
 func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	var ricStyleType int32 = 12
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	var measurementName string = "trial"
 
@@ -396,13 +397,13 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	asn1Bytes, err := kpmv2TestSm.ActionDefinitionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 30, len(asn1Bytes))
-	t.Logf("E2SM-KPM-ActionDefinition (Format3) asn1Bytes are \n%x", asn1Bytes)
+	assert.Equal(t, 29, len(asn1Bytes))
+	t.Logf("E2SM-KPM-ActionDefinition (Format3) asn1Bytes are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_ActionDefinitionASN1toProto(t *testing.T) {
-	actionDefinitionAsn1 := []byte{0x00, 0x01, 0x0c, 0x40, 0x00, 0x03, 0x6f, 0x6e, 0x66, 0x00, 0x00, 0x00, 0x40, 0x74,
-		0x72, 0x69, 0x61, 0x6c, 0x00, 0x00, 0x48, 0x21, 0x02, 0x00, 0xc9, 0x01, 0x15, 0x20, 0x30, 0x38}
+	actionDefinitionAsn1 := []byte{0x00, 0x0c, 0x40, 0x00, 0x03, 0x6f, 0x6e, 0x66, 0x00, 0x00, 0x00, 0x40, 0x74, 0x72, 0x69, 0x61,
+		0x6c, 0x00, 0x00, 0x48, 0x21, 0x02, 0x00, 0xc9, 0x00, 0x14, 0x40, 0x30, 0x38}
 
 	protoBytes, err := kpmv2TestSm.ActionDefinitionASN1toProto(actionDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
@@ -416,7 +417,7 @@ func TestServicemodel_ActionDefinitionASN1toProto(t *testing.T) {
 	adf3 := testAD.GetActionDefinitionFormat3()
 	assert.Equal(t, "onf", adf3.GetCellObjId().GetValue())
 	assert.Equal(t, int64(12345), adf3.GetSubscriptId().GetValue())
-	assert.Equal(t, int32(21), adf3.GetGranulPeriod().GetValue())
+	assert.Equal(t, uint32(21), adf3.GetGranulPeriod().GetValue())
 	mcl := adf3.GetMeasCondList().GetValue()[0]
 	assert.Equal(t, "trial", mcl.GetMeasType().GetMeasName().GetValue())
 	mc := mcl.GetMatchingCond().GetValue()[0]

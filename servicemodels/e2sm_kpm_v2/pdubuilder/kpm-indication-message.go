@@ -18,7 +18,7 @@ func CreateE2SmKpmIndicationMessageFormat1(subscriptionID int64, cellObjID strin
 					Value: subscriptionID,
 				},
 				GranulPeriod: &e2sm_kpm_v2.GranularityPeriod{
-					Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
+					Value: uint32(0), // Not valid value, indicates this item not present in message - handled later in CGo encoding
 				},
 				MeasData: measData,
 			},
@@ -52,7 +52,7 @@ func CreateE2SmKpmIndicationMessageFormat2(subscriptionID int64, cellObjID strin
 					Value: subscriptionID,
 				},
 				GranulPeriod: &e2sm_kpm_v2.GranularityPeriod{
-					Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
+					Value: uint32(0), // Not valid value, indicates this item not present in message - handled later in CGo encoding
 				},
 				MeasCondUeidList: measCondUEList,
 				MeasData:         measData,

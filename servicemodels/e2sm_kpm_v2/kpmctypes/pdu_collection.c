@@ -12,7 +12,7 @@ extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_KPMv2_RANfunction_Description;
 
 
 struct asn_TYPE_descriptor_s *asn_pdu_collection[] = {
-	/* From module E2SM-KPM-IEs in ../v2/e2sm_kpm_v2.0.3-rm.asn */
+	/* From module E2SM-KPM-IEs in ../v2/e2sm_kpm_v2.0.3-changed.asn */
 	&asn_DEF_E2SM_KPMv2_EventTriggerDefinition,	
 	&asn_DEF_E2SM_KPMv2_ActionDefinition,	
 	&asn_DEF_E2SM_KPMv2_IndicationHeader,	

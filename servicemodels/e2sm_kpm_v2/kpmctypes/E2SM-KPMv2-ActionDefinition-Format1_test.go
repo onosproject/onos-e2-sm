@@ -15,7 +15,7 @@ import (
 func createActionDefinitionFormat1() (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat1, error) {
 
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -120,7 +120,7 @@ func Test_perEncodeE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmActionDefinitionFormat1(actionDefFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 57, len(per))
+	assert.Equal(t, 56, len(per))
 	t.Logf("E2SmKpmActionDefinitionFormat1 PER\n%s", string(per))
 }
 
@@ -131,7 +131,7 @@ func Test_perDecodeE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 	per, err := perEncodeE2SmKpmActionDefinitionFormat1(actionDefFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 57, len(per))
+	assert.Equal(t, 56, len(per))
 	t.Logf("E2SmKpmActionDefinitionFormat1 PER\n%s", string(per))
 
 	result, err := perDecodeE2SmKpmActionDefinitionFormat1(per)
