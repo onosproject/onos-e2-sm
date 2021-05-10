@@ -209,9 +209,8 @@ publish: # @HELP publish version on github and dockerhub
 	./../build-tools/publish-version servicemodels/e2sm_kpm/${VERSION} onosproject/service-model-docker-e2sm_kpm-1.0.0 onosproject/service-model-ransim-e2sm_kpm-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_kpm_v2/${VERSION} onosproject/service-model-docker-e2sm_kpm_v2-1.0.0 onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_ni/${VERSION} onosproject/service-model-docker-e2sm_ni-1.0.0
-	./../build-tools/publish-version servicemodels/e2sm_rc_pre/${VERSION} onosproject/service-model-docker-e2sm_rc_pre-1.0.0 onosproject/service-model-ransim-e2sm_rc_pre-1.0.0 servicemodels/mho/${VERSION} onosproject/service-model-docker-mho-1.0.0 onosproject/service-model-ransim-mho-1.0.0
-	./../build-tools/publish-version
-
+	./../build-tools/publish-version servicemodels/e2sm_rc_pre/${VERSION} onosproject/service-model-docker-e2sm_rc_pre-1.0.0 onosproject/service-model-ransim-e2sm_rc_pre-1.0.0
+	./../build-tools/publish-version servicemodels/e2sm_mho/${VERSION} onosproject/service-model-docker-e2sm_mho-1.0.0 onosproject/service-model-ransim-e2sm_mho-1.0.0
 
 jenkins-publish: build-tools jenkins-tools # @HELP Jenkins calls this to publish artifacts
 	./build/bin/push-images
