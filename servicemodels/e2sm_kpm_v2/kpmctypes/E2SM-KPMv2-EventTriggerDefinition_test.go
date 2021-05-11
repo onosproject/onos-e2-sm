@@ -13,7 +13,7 @@ import (
 
 func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2.E2SmKpmEventTriggerDefinition {
 
-	var rtPeriod int32 = 15
+	var rtPeriod uint32 = 15
 
 	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
 
@@ -26,7 +26,7 @@ func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2.E2SmKpmEventTriggerDefin
 //
 //	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
 //	assert.NilError(t, err)
-//	assert.Equal(t, 259, len(xer))
+//	assert.Equal(t, 263, len(xer))
 //	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
 //}
 //
@@ -36,7 +36,7 @@ func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2.E2SmKpmEventTriggerDefin
 //
 //	xer, err := XerEncodeE2SmKpmEventTriggerDefinition(etd)
 //	assert.NilError(t, err)
-//	assert.Equal(t, 259, len(xer))
+//	assert.Equal(t, 263, len(xer))
 //	t.Logf("E2SmKpmEventTriggerDefinition XER\n%s", string(xer))
 //
 //	result, err := XerDecodeE2SmKpmEventTriggerDefinition(xer)
@@ -51,7 +51,7 @@ func Test_perEncodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinition PER\n%s", string(per))
 }
 
@@ -61,7 +61,7 @@ func Test_perDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("E2SmKpmEventTriggerDefinition PER\n%s", string(per))
 
 	result, err := PerDecodeE2SmKpmEventTriggerDefinition(per)

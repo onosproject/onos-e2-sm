@@ -8,8 +8,8 @@ import (
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 )
 
-func CreateE2SmKpmEventTriggerDefinition(rtPeriod int32) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
-	if rtPeriod < 0 && rtPeriod > 19 {
+func CreateE2SmKpmEventTriggerDefinition(rtPeriod uint32) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinition, error) {
+	if rtPeriod > 19 {
 		return nil, fmt.Errorf("reportPeriodIe is out of range. Should be from 0 to 19")
 	}
 

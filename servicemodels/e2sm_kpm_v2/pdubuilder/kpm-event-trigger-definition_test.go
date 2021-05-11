@@ -10,7 +10,7 @@ import (
 )
 
 func TestE2SmKpmEventTriggerDefinition(t *testing.T) {
-	var rtPeriod int32 = 15
+	var rtPeriod uint32 = 15
 
 	newE2SmKpmPdu, err := CreateE2SmKpmEventTriggerDefinition(rtPeriod)
 	assert.NilError(t, err)

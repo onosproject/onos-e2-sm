@@ -68,7 +68,7 @@ func perDecodeGranularityPeriod(bytes []byte) (*e2sm_kpm_v2.GranularityPeriod, e
 
 func newGranularityPeriod(granularityPeriod *e2sm_kpm_v2.GranularityPeriod) (*C.GranularityPeriod_t, error) {
 
-	granularityPeriodC := C.long(granularityPeriod.Value)
+	granularityPeriodC := C.ulong(granularityPeriod.Value)
 
 	return &granularityPeriodC, nil
 }
@@ -76,7 +76,7 @@ func newGranularityPeriod(granularityPeriod *e2sm_kpm_v2.GranularityPeriod) (*C.
 func decodeGranularityPeriod(granularityPeriodC *C.GranularityPeriod_t) (*e2sm_kpm_v2.GranularityPeriod, error) {
 
 	granularityPeriod := e2sm_kpm_v2.GranularityPeriod{
-		Value: int32(*granularityPeriodC),
+		Value: uint32(*granularityPeriodC),
 	}
 
 	return &granularityPeriod, nil

@@ -69,7 +69,7 @@ func perDecodeE2SmKpmEventTriggerDefinitionFormat1(bytes []byte) (*e2sm_kpm_v2.E
 
 func newE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1 *e2sm_kpm_v2.E2SmKpmEventTriggerDefinitionFormat1) (*C.E2SM_KPMv2_EventTriggerDefinition_Format1_t, error) {
 
-	reportingPeriodC := C.long(e2SmKpmEventTriggerDefinitionFormat1.ReportingPeriod)
+	reportingPeriodC := C.ulong(e2SmKpmEventTriggerDefinitionFormat1.ReportingPeriod)
 	e2SmKpmEventTriggerDefinitionFormat1C := C.E2SM_KPMv2_EventTriggerDefinition_Format1_t{
 		reportingPeriod: reportingPeriodC,
 	}
@@ -79,7 +79,7 @@ func newE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat
 
 func decodeE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFormat1C *C.E2SM_KPMv2_EventTriggerDefinition_Format1_t) (*e2sm_kpm_v2.E2SmKpmEventTriggerDefinitionFormat1, error) {
 
-	reportingPeriod := int32(e2SmKpmEventTriggerDefinitionFormat1C.reportingPeriod)
+	reportingPeriod := uint32(e2SmKpmEventTriggerDefinitionFormat1C.reportingPeriod)
 	e2SmKpmEventTriggerDefinitionFormat1 := e2sm_kpm_v2.E2SmKpmEventTriggerDefinitionFormat1{
 		ReportingPeriod: reportingPeriod,
 	}

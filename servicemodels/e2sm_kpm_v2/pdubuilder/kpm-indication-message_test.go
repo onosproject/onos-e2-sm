@@ -14,7 +14,7 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -106,7 +106,7 @@ func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	var measurementName string = "trial"
 	var ueID string = "SomeUE"

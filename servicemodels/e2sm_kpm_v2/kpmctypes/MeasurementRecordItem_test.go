@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -103,7 +104,7 @@ func Test_perEncodeMeasurementRecordItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("MeasurementRecordItem (Integer) PER\n%s", string(per))
 
 	mri = createMeasurementRecordItemReal()
@@ -127,8 +128,8 @@ func Test_perDecodeMeasurementRecordItem(t *testing.T) {
 
 	per, err := perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
-	t.Logf("MeasurementRecordItem (Integer) PER\n%s", string(per))
+	assert.Equal(t, 2, len(per))
+	t.Logf("MeasurementRecordItem (Integer) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeMeasurementRecordItem(per)
 	assert.NilError(t, err)
@@ -140,7 +141,7 @@ func Test_perDecodeMeasurementRecordItem(t *testing.T) {
 	per, err = perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("MeasurementRecordItem (Real) PER\n%s", string(per))
+	t.Logf("MeasurementRecordItem (Real) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeMeasurementRecordItem(per)
 	assert.NilError(t, err)
@@ -151,7 +152,7 @@ func Test_perDecodeMeasurementRecordItem(t *testing.T) {
 	per, err = perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("MeasurementRecordItem (NoValue) PER\n%s", string(per))
+	t.Logf("MeasurementRecordItem (NoValue) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeMeasurementRecordItem(per)
 	assert.NilError(t, err)

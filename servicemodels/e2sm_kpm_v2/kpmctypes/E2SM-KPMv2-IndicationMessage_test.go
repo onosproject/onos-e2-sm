@@ -16,7 +16,7 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2.E2SmKpmIndicationMess
 	var integer int64 = 12345
 	var rl float64 = 22.2
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -108,7 +108,7 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2.E2SmKpmIndicationMess
 	var integer int64 = 12345
 	var rl float64 = 22.2
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	var measurementName string = "trial"
 	var ueID string = "SomeUE"
@@ -218,7 +218,7 @@ func Test_perEncodeE2SmKpmIndicationMessage(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
-	assert.Equal(t, 78, len(per))
+	assert.Equal(t, 77, len(per))
 	t.Logf("E2SmKpmIndicationMessage (Format1) PER\n%s", string(per))
 
 	im, err = createE2SMKPMIndicationMessageFormat2()
@@ -226,7 +226,7 @@ func Test_perEncodeE2SmKpmIndicationMessage(t *testing.T) {
 
 	per, err = PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
-	assert.Equal(t, 58, len(per))
+	assert.Equal(t, 56, len(per))
 	t.Logf("E2SmKpmIndicationMessage (Format2) PER\n%s", string(per))
 }
 
@@ -237,7 +237,7 @@ func Test_perDecodeE2SmKpmIndicationMessage(t *testing.T) {
 
 	per, err := PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
-	assert.Equal(t, 78, len(per))
+	assert.Equal(t, 77, len(per))
 	t.Logf("E2SmKpmIndicationMessage (Format1) PER\n%s", string(per))
 
 	result, err := PerDecodeE2SmKpmIndicationMessage(per)
@@ -250,7 +250,7 @@ func Test_perDecodeE2SmKpmIndicationMessage(t *testing.T) {
 
 	per, err = PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
-	assert.Equal(t, 58, len(per))
+	assert.Equal(t, 56, len(per))
 	t.Logf("E2SmKpmIndicationMessage (Format2) PER\n%s", string(per))
 
 	result, err = PerDecodeE2SmKpmIndicationMessage(per)

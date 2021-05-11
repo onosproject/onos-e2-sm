@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -88,8 +89,8 @@ func Test_perEncodeMeasurementDataItem(t *testing.T) {
 	per, err := perEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
 	//assert.Equal(t, 17, len(per))
-	assert.Equal(t, 17, len(per)) // without IncompleteFlag
-	t.Logf("MeasurementDataItem PER\n%s", string(per))
+	assert.Equal(t, 16, len(per)) // without IncompleteFlag
+	t.Logf("MeasurementDataItem PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeMeasurementDataItem(t *testing.T) {
@@ -100,8 +101,8 @@ func Test_perDecodeMeasurementDataItem(t *testing.T) {
 	per, err := perEncodeMeasurementDataItem(mdi)
 	assert.NilError(t, err)
 	//assert.Equal(t, 17, len(per))
-	assert.Equal(t, 17, len(per)) // without IncompleteFlag
-	t.Logf("MeasurementDataItem PER\n%s", string(per))
+	assert.Equal(t, 16, len(per)) // without IncompleteFlag
+	t.Logf("MeasurementDataItem PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeMeasurementDataItem(per)
 	assert.NilError(t, err)
