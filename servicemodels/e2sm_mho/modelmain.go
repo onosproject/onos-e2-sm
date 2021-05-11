@@ -20,7 +20,7 @@ type servicemodel string
 const smName = "e2sm_mho"
 const smVersion = "v1"
 const moduleName = "e2sm_mho.so.1.0.1"
-const smOIDMho = "1.3.6.1.4.1.53148.1.2.2.100"
+const smOIDMho = "1.3.6.1.4.1.53148.1.2.2.101"
 
 func (sm servicemodel) ServiceModelData() types.ServiceModelData {
 	smData := types.ServiceModelData{
