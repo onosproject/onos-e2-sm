@@ -8,8 +8,11 @@ package main
 import (
 	"fmt"
 
-	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
+	gogotypes "github.com/gogo/protobuf/types"
+
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
+
+	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	kpmv2ctypes "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdudecoder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
@@ -206,9 +209,8 @@ func (sm serviceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, err
 	return nil, fmt.Errorf("not implemented on KPM")
 }
 
-func (sm serviceModel) OnSetup(object *topoapi.Object, asn1Bytes []byte) error {
-	fmt.Println("Inside service model", object.ID)
-	protoBytes, err := sm.RanFuncDescriptionASN1toProto(asn1Bytes)
+func (sm serviceModel) OnSetup(request *types.OnSetupRequest) error {
+	protoBytes, err := sm.RanFuncDescriptionASN1toProto(request.RANFunctionDescription)
 	if err != nil {
 		return err
 	}
@@ -217,8 +219,32 @@ func (sm serviceModel) OnSetup(object *topoapi.Object, asn1Bytes []byte) error {
 	if err != nil {
 		return err
 	}
+	serviceModels := request.ServiceModels
+	e2Cells := request.E2Cells
+	kpmV2ServiceModel := serviceModels[smOIDKpmV2]
+	kpmV2ServiceModel.Name = ranFunctionDescription.RanFunctionName.RanFunctionShortName
+	kpmRANFunction := &topoapi.KPMRanFunction{}
 
-	fmt.Printf("Node list: %v", ranFunctionDescription)
+	for _, kpmNode := range ranFunctionDescription.RicKpmNodeList {
+		for _, cell := range kpmNode.CellMeasurementObjectList {
+			cellObject := &topoapi.E2Cell{
+				CID: cell.GetCellObjectId().GetValue(),
+			}
+			*e2Cells = append(*e2Cells, cellObject)
+		}
+	}
+
+	for _, reportStyle := range ranFunctionDescription.GetRicReportStyleList() {
+		for _, meanInfoItem := range reportStyle.GetMeasInfoActionList().GetValue() {
+			kpmRANFunction.Measurements = append(kpmRANFunction.Measurements, &topoapi.KPMMeasurement{
+				ID:   meanInfoItem.GetMeasId().String(),
+				Name: meanInfoItem.GetMeasName().GetValue(),
+			})
+
+		}
+	}
+	kpmRANFunctionAny, err := gogotypes.MarshalAny(kpmRANFunction)
+	kpmV2ServiceModel.RanFunctions = []*gogotypes.Any{kpmRANFunctionAny}
 
 	return nil
 }
