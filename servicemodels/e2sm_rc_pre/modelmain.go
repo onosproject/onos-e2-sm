@@ -8,6 +8,9 @@ package main
 import (
 	"fmt"
 
+	prototypes "github.com/gogo/protobuf/types"
+	topoapi "github.com/onosproject/onos-api/go/onos/topo"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdudecoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
@@ -242,6 +245,26 @@ func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, err
 	}
 
 	return perBytes, nil
+}
+
+func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
+	protoBytes, err := sm.RanFuncDescriptionASN1toProto(request.RANFunctionDescription)
+	if err != nil {
+		return err
+	}
+	ranFunctionDescription := &e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription{}
+	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
+	if err != nil {
+		return err
+	}
+	serviceModels := request.ServiceModels
+	serviceModel := serviceModels[smOIDRcPreV1]
+	serviceModel.Name = ranFunctionDescription.RanFunctionName.RanFunctionShortName
+	ranFunction := &topoapi.RCRanFunction{}
+
+	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
+	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
+	return nil
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module
