@@ -65,3 +65,35 @@ func Test_PerDecodeE2SmRcPreIndicationHeader(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-IndicationHeader is \n%v", result)
 }
+
+func Test_PerDecodeE2SmRcPreIndicationHeadeNrCGI(t *testing.T) {
+
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
+
+	cellID := e2sm_rc_pre_v2.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   36,        //uint32
+	}
+	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(cgi)
+	assert.NilError(t, err, "Test_XerEncodeE2SmRcPreIndicationHeaderFormat1() error is not nil")
+	assert.Assert(t, newE2SmRcPrePdu != nil, "Test_XerEncodeE2SmRcPreIndicationHeaderFormat1() newE2SmRcPrePdu is nil")
+
+	xer, err := XerEncodeE2SmRcPreIndicationHeader(newE2SmRcPrePdu)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) XER\n%s", string(xer))
+
+	result, err := XerDecodeE2SmRcPreIndicationHeader(xer)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) XER - decoded\n%s", result)
+
+	per, err := PerEncodeE2SmRcPreIndicationHeader(newE2SmRcPrePdu)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) PER\n%v", hex.Dump(per))
+
+	resultPer, err := PerDecodeE2SmRcPreIndicationHeader(per)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) PER - decoded\n%s", resultPer)
+}

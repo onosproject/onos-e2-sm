@@ -31,6 +31,41 @@ func XerEncodeE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_
 	return bytes, nil
 }
 
+func XerDecodeE2SmRcPreIndicationHeaderFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_E2SM_RC_PRE_IndicationHeader_Format1)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeE2SmRcPreIndicationHeaderFormat1((*C.E2SM_RC_PRE_IndicationHeader_Format1_t)(unsafePtr))
+}
+
+func PerEncodeE2SmRcPreIndicationHeaderFormat1(indicationHeader *e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1) ([]byte, error) {
+	indicationHeaderCP, err := newE2SmRcPreIndicationHeaderFormat1(indicationHeader)
+	if err != nil {
+		return nil, fmt.Errorf("PerEncodeE2SmRcPreIndicationHeader() %s", err.Error())
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_E2SM_RC_PRE_IndicationHeader_Format1, unsafe.Pointer(indicationHeaderCP))
+	if err != nil {
+		return nil, fmt.Errorf("PerEncodeE2SmRcPreIndicationHeader() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func PerDecodeE2SmRcPreIndicationHeaderFormat1(bytes []byte) (*e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_E2SM_RC_PRE_IndicationHeader_Format1)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeE2SmRcPreIndicationHeaderFormat1((*C.E2SM_RC_PRE_IndicationHeader_Format1_t)(unsafePtr))
+}
+
 func newE2SmRcPreIndicationHeaderFormat1(indicationHeaderFormat1 *e2sm_rc_pre_v2.E2SmRcPreIndicationHeaderFormat1) (*C.E2SM_RC_PRE_IndicationHeader_Format1_t, error) {
 
 	cgi, _ := newCellGlobalID(indicationHeaderFormat1.Cgi)
