@@ -62,12 +62,15 @@ func CreateE2SmRcPreControlMessage(RANparameterID int32, RANparameterName string
 	return &e2smRcPrePdu, nil
 }
 
-func CreateRanParameterValueInt(value int32) *e2sm_rc_pre_v2.RanparameterValue {
+func CreateRanParameterValueInt(value uint32) (*e2sm_rc_pre_v2.RanparameterValue, error) {
+	if value > 4294967295 {
+		return nil, fmt.Errorf("Value should be within range 0 to 4294967295")
+	}
 	return &e2sm_rc_pre_v2.RanparameterValue{
 		RanparameterValue: &e2sm_rc_pre_v2.RanparameterValue_ValueInt{
 			ValueInt: value,
 		},
-	}
+	}, nil
 }
 
 func CreateRanParameterValueEnum(value int32) *e2sm_rc_pre_v2.RanparameterValue {

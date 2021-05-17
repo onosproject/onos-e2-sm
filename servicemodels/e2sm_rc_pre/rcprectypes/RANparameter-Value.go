@@ -75,7 +75,7 @@ func newRanparameterValue(ranparameterValue *e2sm_rc_pre_v2.RanparameterValue) (
 	switch choice := ranparameterValue.RanparameterValue.(type) {
 	case *e2sm_rc_pre_v2.RanparameterValue_ValueInt:
 		pr = C.RANparameter_Value_PR_valueInt
-		binary.LittleEndian.PutUint32(choiceC[:8], uint32(choice.ValueInt))
+		binary.LittleEndian.PutUint32(choiceC[:8], choice.ValueInt)
 	case *e2sm_rc_pre_v2.RanparameterValue_ValueEnum:
 		pr = C.RANparameter_Value_PR_valueEnum
 		binary.LittleEndian.PutUint32(choiceC[:8], uint32(choice.ValueEnum))
@@ -121,7 +121,7 @@ func decodeRanparameterValue(ranparameterValueC *C.RANparameter_Value_t) (*e2sm_
 	switch ranparameterValueC.present {
 	case C.RANparameter_Value_PR_valueInt:
 		ranparameterValue.RanparameterValue = &e2sm_rc_pre_v2.RanparameterValue_ValueInt{
-			ValueInt: int32(binary.LittleEndian.Uint32(ranparameterValueC.choice[:8])),
+			ValueInt: binary.LittleEndian.Uint32(ranparameterValueC.choice[:8]),
 		}
 	case C.RANparameter_Value_PR_valueEnum:
 		ranparameterValue.RanparameterValue = &e2sm_rc_pre_v2.RanparameterValue_ValueEnum{

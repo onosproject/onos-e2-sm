@@ -78,8 +78,8 @@ func newE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitionFo
 		//reportingPeriod_ms: &reportingPeriodMsC,
 	}
 
-	if e2SmRcPreEventTriggerDefinitionFormat1.GetReportingPeriodMs() != -1 {
-		reportingPeriodMsC := C.long(e2SmRcPreEventTriggerDefinitionFormat1.ReportingPeriodMs)
+	if e2SmRcPreEventTriggerDefinitionFormat1.GetReportingPeriodMs() != 0 {
+		reportingPeriodMsC := C.ulong(e2SmRcPreEventTriggerDefinitionFormat1.ReportingPeriodMs)
 		e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms = &reportingPeriodMsC
 	}
 
@@ -99,7 +99,7 @@ func decodeE2SmRcPreEventTriggerDefinitionFormat1(e2SmRcPreEventTriggerDefinitio
 	}
 
 	if e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms != nil {
-		reportingPeriodMs := int32(*e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms)
+		reportingPeriodMs := uint32(*e2SmRcPreEventTriggerDefinitionFormat1C.reportingPeriod_ms)
 		e2SmRcPreEventTriggerDefinitionFormat1.ReportingPeriodMs = reportingPeriodMs
 	}
 

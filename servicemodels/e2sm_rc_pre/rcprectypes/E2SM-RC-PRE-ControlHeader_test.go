@@ -76,7 +76,7 @@ func Test_PerDecodeE2SmRcPreControlHeader(t *testing.T) {
 
 	per, err := PerEncodeE2SmRcPreControlHeader(e2SmRcPreControlHeader)
 	assert.NilError(t, err)
-	assert.Equal(t, 10, len(per))
+	assert.Equal(t, 9, len(per))
 	t.Logf("E2SM-RC-PRE-ControlHeader PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmRcPreControlHeader(per)

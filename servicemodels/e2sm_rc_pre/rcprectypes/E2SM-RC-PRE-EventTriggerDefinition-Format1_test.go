@@ -13,7 +13,7 @@ import (
 
 func createE2SmRcPreEventTriggerDefinitionFormat1() (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinitionFormat1, error) {
 
-	var rtPeriod int32 = 12
+	var rtPeriod uint32 = 12
 
 	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod)
 	if err != nil {
@@ -56,7 +56,7 @@ func Test_PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	per, err := PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 PER\n%s", string(per))
 }
 
@@ -66,7 +66,7 @@ func Test_PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	per, err := PerEncodeE2SmRcPreEventTriggerDefinitionFormat1(E2SmRcPreEventTriggerDefinitionFormat1)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition-Format1 PER\n%s", string(per))
 
 	result, err := PerDecodeE2SmRcPreEventTriggerDefinitionFormat1(per)
