@@ -32,6 +32,41 @@ func xerEncodeCellGlobalID(cellGlobalID *e2sm_rc_pre_v2.CellGlobalId) ([]byte, e
 	return bytes, nil
 }
 
+func perEncodeCellGlobalID(cellSize *e2sm_rc_pre_v2.CellGlobalId) ([]byte, error) {
+	cellSizeC, err := newCellGlobalID(cellSize)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := encodePerBuffer(&C.asn_DEF_CellGlobalID, unsafe.Pointer(cellSizeC))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeCellSize() %s", err.Error())
+	}
+	return bytes, nil
+}
+
+func xerDecodeCellGlobalID(bytes []byte) (*e2sm_rc_pre_v2.CellGlobalId, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_CellGlobalID)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeCellGlobalID((*C.CellGlobalID_t)(unsafePtr))
+}
+
+func perDecodeCellGlobalID(bytes []byte) (*e2sm_rc_pre_v2.CellGlobalId, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_CellGlobalID)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeCellGlobalID((*C.CellGlobalID_t)(unsafePtr))
+}
+
 func newCellGlobalID(cellGlobalID *e2sm_rc_pre_v2.CellGlobalId) (*C.CellGlobalID_t, error) {
 	var pr C.CellGlobalID_PR
 	choiceC := [8]byte{}

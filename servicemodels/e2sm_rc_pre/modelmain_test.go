@@ -45,6 +45,70 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.Equal(t, 8, len(asn1Bytes))
 }
 
+func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
+	// This value is taken from Shad and passed as a byte array directly to the function
+	// It's the encoding of what's in the file ../test/E2SM-RC-PRE-Indication-Header.xml
+
+	indicationHeaderAsn1Bytes := []byte{0x28, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x00}
+
+	protoBytes, err := rcPreTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 24, len(protoBytes))
+	testIH := &e2sm_rc_pre_v2.E2SmRcPreIndicationHeader{}
+	err = proto.Unmarshal(protoBytes, testIH)
+	assert.NilError(t, err)
+	t.Logf("Decoded RC-PRE-IndicationHeader is \n%v", testIH)
+	assert.DeepEqual(t, []byte{0x12, 0xf4, 0x10}, testIH.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetPLmnIdentity().GetValue())
+}
+
+func TestServicemodel_IndicationHeaderNrCGIProtoToASN1(t *testing.T) {
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
+
+	cellID := e2sm_rc_pre_v2.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   36,        //uint32
+	}
+	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationHeader(cgi)
+	assert.NilError(t, err, "error creating E2SmPDU")
+
+	err = newE2SmRcPrePdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+
+	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreIndicationHeader (NrCGI) to bytes")
+	assert.Equal(t, 24, len(protoBytes))
+
+	asn1Bytes, err := rcPreTestSm.IndicationHeaderProtoToASN1(protoBytes)
+
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	t.Logf("ASN1 bytes for RC-PRE-IndicationHeader (NrCGI) are \n%v", hex.Dump(asn1Bytes))
+	assert.Equal(t, 9, len(asn1Bytes))
+}
+
+func TestServicemodel_IndicationHeaderNrCGIASN1toProto(t *testing.T) {
+	// This value is taken from Shad and passed as a byte array directly to the function
+	// It's the encoding of what's in the file ../test/E2SM-RC-PRE-Indication-Header.xml
+
+	indicationHeaderAsn1Bytes := []byte{0x20, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x09, 0x00}
+
+	protoBytes, err := rcPreTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 24, len(protoBytes))
+	testIH := &e2sm_rc_pre_v2.E2SmRcPreIndicationHeader{}
+	err = proto.Unmarshal(protoBytes, testIH)
+	assert.NilError(t, err)
+	t.Logf("Decoded RC-PRE-IndicationHeader (NrCGI) is \n%v", testIH)
+	assert.DeepEqual(t, []byte{0x12, 0xf4, 0x10}, testIH.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetPLmnIdentity().GetValue())
+}
+
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, err := hex.DecodeString(plmnID)
@@ -86,23 +150,6 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
 	t.Logf("ASN1 bytes for RC-PRE-IndicationMessage (Format1) are \n%v", hex.Dump(asn1Bytes))
-}
-
-func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
-	// This value is taken from Shad and passed as a byte array directly to the function
-	// It's the encoding of what's in the file ../test/E2SM-RC-PRE-Indication-Header.xml
-
-	indicationHeaderAsn1Bytes := []byte{0x28, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x00}
-
-	protoBytes, err := rcPreTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
-	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
-	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 24, len(protoBytes))
-	testIH := &e2sm_rc_pre_v2.E2SmRcPreIndicationHeader{}
-	err = proto.Unmarshal(protoBytes, testIH)
-	assert.NilError(t, err)
-	t.Logf("Decoded RC-PRE-IndicationHeader is \n%v", testIH)
-	assert.DeepEqual(t, []byte{0x12, 0xf4, 0x10}, testIH.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetPLmnIdentity().GetValue())
 }
 
 func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
@@ -265,7 +312,55 @@ func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
 	t.Logf("Decoded RC-PRE-ControlHeader is \n%v", testCH)
 	assert.Equal(t, 1, int(testCH.GetControlHeaderFormat1().GetRicControlMessagePriority().GetValue()))
 	assert.DeepEqual(t, []byte{0x12, 0xf4, 0x10}, testCH.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetPLmnIdentity().GetValue())
+	assert.Equal(t, uint32(28), testCH.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
+}
 
+func TestServicemodel_ControlHeaderNrCGIProtoToASN1(t *testing.T) {
+
+	var controlMessagePriority int32 = 1
+	var plmnID = "12f410"
+	plmnIDBytes, _ := hex.DecodeString(plmnID)
+
+	cellID := e2sm_rc_pre_v2.BitString{
+		Value: 0x9bcd4ab, //uint64
+		Len:   36,        //uint32
+	}
+
+	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
+	assert.NilError(t, err, "error creating E2SmPDU")
+
+	err = newE2SmRcPrePdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
+	assert.NilError(t, err)
+	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
+	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreControlHeader to bytes")
+	assert.Equal(t, 28, len(protoBytes))
+
+	asn1Bytes, err := rcPreTestSm.ControlHeaderProtoToASN1(protoBytes)
+
+	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+	assert.Assert(t, asn1Bytes != nil)
+	assert.Equal(t, 11, len(asn1Bytes))
+	t.Logf("ASN1 bytes for RC-PRE-ControlHeader (with NrCGI) are \n%v", hex.Dump(asn1Bytes))
+}
+
+func TestServicemodel_ControlHeaderNrCGIASN1toProto(t *testing.T) {
+	ControlHeaderAsn1Bytes := []byte{0x30, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x09, 0x00, 0x01, 0x01}
+
+	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
+	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
+	assert.Assert(t, protoBytes != nil)
+	assert.Equal(t, 28, len(protoBytes))
+	testCH := &e2sm_rc_pre_v2.E2SmRcPreControlHeader{}
+	err = proto.Unmarshal(protoBytes, testCH)
+	assert.NilError(t, err)
+	t.Logf("Decoded RC-PRE-ControlHeader is \n%v", testCH)
+	assert.Equal(t, 1, int(testCH.GetControlHeaderFormat1().GetRicControlMessagePriority().GetValue()))
+	assert.DeepEqual(t, []byte{0x12, 0xf4, 0x10}, testCH.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetPLmnIdentity().GetValue())
+	assert.Equal(t, uint32(36), testCH.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }
 
 func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
