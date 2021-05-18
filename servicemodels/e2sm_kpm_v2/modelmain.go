@@ -8,6 +8,10 @@ package main
 import (
 	"fmt"
 
+	prototypes "github.com/gogo/protobuf/types"
+
+	topoapi "github.com/onosproject/onos-api/go/onos/topo"
+
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	kpmv2ctypes "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdudecoder"
@@ -203,6 +207,46 @@ func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, erro
 
 func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
+}
+
+func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
+	protoBytes, err := sm.RanFuncDescriptionASN1toProto(request.RANFunctionDescription)
+	if err != nil {
+		return err
+	}
+	ranFunctionDescription := &e2sm_kpm_v2.E2SmKpmRanfunctionDescription{}
+	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
+	if err != nil {
+		return err
+	}
+	serviceModels := request.ServiceModels
+	e2Cells := request.E2Cells
+	serviceModel := serviceModels[smOIDKpmV2]
+	serviceModel.Name = ranFunctionDescription.RanFunctionName.RanFunctionShortName
+	ranFunction := &topoapi.KPMRanFunction{}
+
+	for _, kpmNode := range ranFunctionDescription.RicKpmNodeList {
+		for _, cell := range kpmNode.CellMeasurementObjectList {
+			cellObject := &topoapi.E2Cell{
+				CID: cell.GetCellObjectId().GetValue(),
+			}
+			*e2Cells = append(*e2Cells, cellObject)
+		}
+	}
+
+	for _, reportStyle := range ranFunctionDescription.GetRicReportStyleList() {
+		for _, meanInfoItem := range reportStyle.GetMeasInfoActionList().GetValue() {
+			ranFunction.Measurements = append(ranFunction.Measurements, &topoapi.KPMMeasurement{
+				ID:   meanInfoItem.GetMeasId().String(),
+				Name: meanInfoItem.GetMeasName().GetValue(),
+			})
+
+		}
+	}
+	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
+	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
+
+	return nil
 }
 
 //ServiceModel is the exported symbol that gives an entry point to this shared module
