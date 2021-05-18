@@ -68,9 +68,9 @@ func Test_DecodeE2SmKpmRanfunctionDescriptionBytesRadisys(t *testing.T) {
 	err = rfd.Validate()
 	assert.NilError(t, err)
 	t.Logf("Protobuf message is \n%v", rfd)
-	//assert.Equal(t, "ORAN-E2SM-KPM", rfd.GetRanFunctionName().GetRanFunctionShortName())
-	//assert.Equal(t, "KPM monitor", rfd.GetRanFunctionName().GetRanFunctionDescription())
-	//assert.Equal(t, "1.3.6.1.4.1.53148.1.2.2.2", rfd.GetRanFunctionName().GetRanFunctionE2SmOid())
+	assert.Equal(t, "ORAN-E2SM-KPM", rfd.GetRanFunctionName().GetRanFunctionShortName())
+	assert.Equal(t, "KPM monitor", rfd.GetRanFunctionName().GetRanFunctionDescription())
+	assert.Equal(t, "1.3.6.1.4.1.53148.1.2.2.2", rfd.GetRanFunctionName().GetRanFunctionE2SmOid())
 }
 
 var rSysBytes = []byte{
