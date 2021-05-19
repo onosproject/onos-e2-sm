@@ -189,7 +189,7 @@ message RanparameterId {
 message RanparameterValue {
     // choice from e2sm_rc_pre_v2.asn:87
     oneof ranparameter_value {
-        int32 value_int = 1 [json_name="valueInt"];
+        uint32 value_int = 1 [json_name="valueInt"];
         int32 value_enum = 2 [json_name="valueEnum"];
         bool value_bool = 3 [json_name="valueBool"];
         BitString value_bit_s = 4 [json_name="valueBitS"];
@@ -218,7 +218,7 @@ message E2SmRcPreEventTriggerDefinition {
 //{E2SM-RC-PRE-EventTriggerDefinition-Format1}
 message E2SmRcPreEventTriggerDefinitionFormat1 {
     RcPreTriggerType trigger_type = 1 [json_name="triggerType"];
-    int32 reporting_period_ms = 2 [json_name="reportingPeriod_ms:OPTIONAL"];
+    uint32 reporting_period_ms = 2 [json_name="reportingPeriod_ms:OPTIONAL"];
 };
 
 // sequence from e2sm_rc_pre_v2.asn:146

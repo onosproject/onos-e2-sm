@@ -5,6 +5,7 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -31,7 +32,7 @@ func createRicEventTriggerStyleItem() *e2sm_rc_pre_v2.RicEventTriggerStyleList {
 	return ricEventTriggerStyleItem
 }
 
-func Test_xerEncodeRicEventTriggerStyleItem(t *testing.T) {
+func Test_xerEncodeRicEventTriggerStyleList(t *testing.T) {
 
 	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
@@ -41,7 +42,7 @@ func Test_xerEncodeRicEventTriggerStyleItem(t *testing.T) {
 	t.Logf("RIC-EventTriggerStyle-List XER\n%s", string(xer))
 }
 
-func Test_xerDecodeRicEventTriggerStyleItem(t *testing.T) {
+func Test_xerDecodeRicEventTriggerStyleList(t *testing.T) {
 
 	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
@@ -57,24 +58,24 @@ func Test_xerDecodeRicEventTriggerStyleItem(t *testing.T) {
 	assert.Equal(t, ricEventTriggerStyleItem.RicEventTriggerFormatType.Value, result.RicEventTriggerFormatType.Value, "Encoded and decoded RicFormatType values are not the same")
 }
 
-func Test_perEncodeRicEventTriggerStyleItem(t *testing.T) {
+func Test_perEncodeRicEventTriggerStyleList(t *testing.T) {
 
 	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
 	per, err := perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem)
 	assert.NilError(t, err)
-	assert.Equal(t, 15, len(per))
-	t.Logf("RIC-EventTriggerStyle-List PER\n%s", string(per))
+	assert.Equal(t, 14, len(per))
+	t.Logf("RIC-EventTriggerStyle-List PER\n%v", hex.Dump(per))
 }
 
-func Test_perDecodeRicEventTriggerStyleItem(t *testing.T) {
+func Test_perDecodeRicEventTriggerStyleList(t *testing.T) {
 
 	ricEventTriggerStyleItem := createRicEventTriggerStyleItem()
 
 	per, err := perEncodeRicEventTriggerStyleItem(ricEventTriggerStyleItem)
 	assert.NilError(t, err)
-	assert.Equal(t, 15, len(per))
-	t.Logf("RIC-EventTriggerStyle-List PER\n%s", string(per))
+	assert.Equal(t, 14, len(per))
+	t.Logf("RIC-EventTriggerStyle-List PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRicEventTriggerStyleItem(per)
 	assert.NilError(t, err)

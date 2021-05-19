@@ -5,6 +5,7 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -35,7 +36,7 @@ func createRicReportStyleItem() *e2sm_rc_pre_v2.RicReportStyleList {
 	return ricReportStyleItem
 }
 
-func Test_xerEncodeRicReportStyleItem(t *testing.T) {
+func Test_xerEncodeRicReportStyleList(t *testing.T) {
 
 	ricReportStyleItem := createRicReportStyleItem()
 
@@ -45,7 +46,7 @@ func Test_xerEncodeRicReportStyleItem(t *testing.T) {
 	t.Logf("RIC-ReportStyle-List XER\n%s", string(xer))
 }
 
-func Test_xerDecodeRicReportStyleItem(t *testing.T) {
+func Test_xerDecodeRicReportStyleList(t *testing.T) {
 
 	ricReportStyleItem := createRicReportStyleItem()
 
@@ -62,24 +63,24 @@ func Test_xerDecodeRicReportStyleItem(t *testing.T) {
 	assert.Equal(t, ricReportStyleItem.RicIndicationMessageFormatType.Value, result.RicIndicationMessageFormatType.Value, "Encoded and decoded RicIndicationMessageFormatType values are not the same")
 }
 
-func Test_perEncodeRicReportStyleItem(t *testing.T) {
+func Test_perEncodeRicReportStyleList(t *testing.T) {
 
 	ricReportStyleItem := createRicReportStyleItem()
 
 	per, err := perEncodeRicReportStyleItem(ricReportStyleItem)
 	assert.NilError(t, err)
-	assert.Equal(t, 18, len(per))
-	t.Logf("RIC-ReportStyle-List PER\n%s", string(per))
+	assert.Equal(t, 17, len(per))
+	t.Logf("RIC-ReportStyle-List PER\n%v", hex.Dump(per))
 }
 
-func Test_perDecodeRicReportStyleItem(t *testing.T) {
+func Test_perDecodeRicReportStyleList(t *testing.T) {
 
 	ricReportStyleItem := createRicReportStyleItem()
 
 	per, err := perEncodeRicReportStyleItem(ricReportStyleItem)
 	assert.NilError(t, err)
-	assert.Equal(t, 18, len(per))
-	t.Logf("RIC-ReportStyle-List PER\n%s", string(per))
+	assert.Equal(t, 17, len(per))
+	t.Logf("RIC-ReportStyle-List PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRicReportStyleItem(per)
 	assert.NilError(t, err)

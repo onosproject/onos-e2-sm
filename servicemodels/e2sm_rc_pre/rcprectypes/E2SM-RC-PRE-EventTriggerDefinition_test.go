@@ -43,7 +43,7 @@ func Test_PerEncodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
 	assert.NilError(t, err)
 	per, err := PerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%s", hex.Dump(per))
 }
 
@@ -53,7 +53,7 @@ func Test_PerDecodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
 	assert.NilError(t, err)
 	per, err := PerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	//10010c
 	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%v", hex.Dump(per))
 

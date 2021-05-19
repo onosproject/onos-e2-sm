@@ -14,10 +14,11 @@ import (
 
 func TestE2SmRcPreControlMsg(t *testing.T) {
 	var ranParameterName = "PCI"
-	var ranParameterValue int32 = 10
+	var ranParameterValue uint32 = 10
 	var ranParameterID int32 = 1
 
-	ranParameter := CreateRanParameterValueInt(ranParameterValue)
+	ranParameter, err := CreateRanParameterValueInt(ranParameterValue)
+	assert.NilError(t, err)
 	newE2SmRcPrePdu, err := CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
@@ -30,7 +31,7 @@ func TestE2SmRcPreControlMsg(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("PER Encoded Ind Message: % x", per)
 
-	ranParameter = CreateRanParameterValueEnum(ranParameterValue)
+	ranParameter = CreateRanParameterValueEnum(int32(ranParameterValue))
 	newE2SmRcPrePdu, err = CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)

@@ -14,7 +14,7 @@ extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_RANfunction_Description;
 
 
 struct asn_TYPE_descriptor_s *asn_pdu_collection[] = {
-	/* From module E2SM-RC-PRE-IEs in ../v2/e2sm_rc_pre_v2.asn */
+	/* From module E2SM-RC-PRE-IEs in ../v2/e2sm-rc-pre_v2_rsys.asn */
 	&asn_DEF_E2SM_RC_PRE_EventTriggerDefinition,	
 	&asn_DEF_E2SM_RC_PRE_IndicationHeader,	
 	&asn_DEF_E2SM_RC_PRE_IndicationMessage,	

@@ -13,10 +13,11 @@ import (
 
 func Test_XerEncodeE2SmRcPreControlMessage(t *testing.T) {
 	var ranParameterName = "PCI"
-	var ranParameterValue int32 = 10
+	var ranParameterValue uint32 = 10
 	var ranParameterID int32 = 1
 
-	ranParameter := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	ranParameter, err := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	assert.NilError(t, err)
 	e2SmRcPreControlMessage, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
 	assert.NilError(t, err)
 
@@ -28,10 +29,11 @@ func Test_XerEncodeE2SmRcPreControlMessage(t *testing.T) {
 
 func Test_XerDecodeE2SmRcPreControlMessage(t *testing.T) {
 	var ranParameterName = "PCI"
-	var ranParameterValue int32 = 10
+	var ranParameterValue uint32 = 10
 	var ranParameterID int32 = 1
 
-	ranParameter := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	ranParameter, err := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	assert.NilError(t, err)
 	e2SmRcPreControlMessage, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
 	assert.NilError(t, err)
 
@@ -49,10 +51,11 @@ func Test_XerDecodeE2SmRcPreControlMessage(t *testing.T) {
 
 func Test_PerDecodeE2SmRcPreControlMessage(t *testing.T) {
 	var ranParameterName = "PCI"
-	var ranParameterValue int32 = 10
+	var ranParameterValue uint32 = 10
 	var ranParameterID int32 = 1
 
-	ranParameter := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	ranParameter, err := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	assert.NilError(t, err)
 	e2SmRcPreControlMessage, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
 	assert.NilError(t, err)
 

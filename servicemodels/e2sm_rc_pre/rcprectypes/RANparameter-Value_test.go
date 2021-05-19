@@ -62,7 +62,7 @@ func createRanparameterValueValueBitS() *e2sm_rc_pre_v2.RanparameterValue {
 	}
 }
 
-func Test_xerEncodeRanparameterValue(t *testing.T) {
+func Test_xerEncodeRanParameterValue(t *testing.T) {
 
 	rpv := createRanparameterValueValueInteger()
 
@@ -107,7 +107,7 @@ func Test_xerEncodeRanparameterValue(t *testing.T) {
 	t.Logf("RANparameterValue (BitString) XER\n%s", string(xer))
 }
 
-func Test_xerDecodeMeasurementRecordItem(t *testing.T) {
+func Test_xerDecodeRanParameterValue(t *testing.T) {
 
 	rpv := createRanparameterValueValueInteger()
 
@@ -182,13 +182,13 @@ func Test_xerDecodeMeasurementRecordItem(t *testing.T) {
 	t.Logf("RANparameterValue (BitString) XER - decoded\n%s", result)
 }
 
-func Test_perEncodeMeasurementRecordItem(t *testing.T) {
+func Test_perEncodeRanParameterValue(t *testing.T) {
 
 	rpv := createRanparameterValueValueInteger()
 
 	per, err := perEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("RANparameterValue (Integer) PER\n%s", hex.Dump(per))
 
 	rpv = createRanparameterValueValueEnum()
@@ -227,13 +227,13 @@ func Test_perEncodeMeasurementRecordItem(t *testing.T) {
 	t.Logf("RANparameterValue (BitString) PER\n%s", hex.Dump(per))
 }
 
-func Test_perDecodeMeasurementRecordItem(t *testing.T) {
+func Test_perDecodeRanParameterValue(t *testing.T) {
 
 	rpv := createRanparameterValueValueInteger()
 
 	per, err := perEncodeRanparameterValue(rpv)
 	assert.NilError(t, err)
-	assert.Equal(t, 3, len(per))
+	assert.Equal(t, 2, len(per))
 	t.Logf("RANparameterValue (Integer) PER\n%s", hex.Dump(per))
 
 	result, err := perDecodeRanparameterValue(per)

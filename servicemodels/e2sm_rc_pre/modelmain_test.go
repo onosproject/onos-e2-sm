@@ -211,16 +211,16 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	asn1Bytes, err := rcPreTestSm.RanFuncDescriptionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 63, len(asn1Bytes))
+	assert.Equal(t, 61, len(asn1Bytes))
 	t.Logf("ASN1 bytes for RC-PRE-RanFunctionDescription are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	// This message is taken as an output from the function above
 	ranFuncDescriptionAsn1 := []byte{0x20, 0x20, 0x4f, 0x4e, 0x46, 0x00, 0x00, 0x02, 0x4f, 0x69, 0x64, 0x06, 0x80, 0x4f,
-		0x70, 0x65, 0x6e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x69, 0x6e, 0x67, 0x01, 0x03, 0x60, 0x00, 0x01, 0x0d,
-		0x03, 0x80, 0x4f, 0x4e, 0x46, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x01, 0x2a, 0x00, 0x01, 0x0c, 0x04, 0x00, 0x4f, 0x4e,
-		0x46, 0x72, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x01, 0x15, 0x01, 0x38}
+		0x70, 0x65, 0x6e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x69, 0x6e, 0x67, 0x00, 0x03, 0x60, 0x00, 0x0d, 0x03,
+		0x80, 0x4f, 0x4e, 0x46, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x00, 0x2a, 0x00, 0x0c, 0x04, 0x00, 0x4f, 0x4e, 0x46, 0x72,
+		0x65, 0x70, 0x6f, 0x72, 0x74, 0x00, 0x15, 0x00, 0x38}
 
 	protoBytes, err := rcPreTestSm.RanFuncDescriptionASN1toProto(ranFuncDescriptionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
@@ -235,7 +235,7 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
-	var rtPeriod int32 = 12
+	var rtPeriod uint32 = 12
 	e2SmRcPreEventTriggerDefinition, err := pdubuilder.CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, e2SmRcPreEventTriggerDefinition != nil, "Created E2SmPDU is nil")
@@ -250,12 +250,12 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 
 	asn1Bytes, err := rcPreTestSm.EventTriggerDefinitionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
-	assert.Equal(t, 3, len(asn1Bytes))
+	assert.Equal(t, 2, len(asn1Bytes))
 	t.Logf("ASN1 bytes for RC-PRE-EventTriggerDefinition are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
-	eventTriggerDefinitionAsn1 := []byte{0x14, 0x01, 0x0c}
+	eventTriggerDefinitionAsn1 := []byte{0x14, 0x0b}
 	protoBytes, err := rcPreTestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
@@ -264,7 +264,7 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-EventTriggerDefinition is \n%v", testIM)
-	assert.Equal(t, int32(12), testIM.GetEventDefinitionFormat1().GetReportingPeriodMs())
+	assert.Equal(t, uint32(12), testIM.GetEventDefinitionFormat1().GetReportingPeriodMs())
 }
 
 func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
@@ -295,12 +295,12 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 10, len(asn1Bytes))
+	assert.Equal(t, 9, len(asn1Bytes))
 	t.Logf("ASN1 bytes for RC-PRE-ControlHeader are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
-	ControlHeaderAsn1Bytes := []byte{0x34, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x00, 0x01, 0x01}
+	ControlHeaderAsn1Bytes := []byte{0x34, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x00, 0x01}
 
 	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
@@ -343,12 +343,12 @@ func TestServicemodel_ControlHeaderNrCGIProtoToASN1(t *testing.T) {
 
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
 	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 11, len(asn1Bytes))
+	assert.Equal(t, 10, len(asn1Bytes))
 	t.Logf("ASN1 bytes for RC-PRE-ControlHeader (with NrCGI) are \n%v", hex.Dump(asn1Bytes))
 }
 
 func TestServicemodel_ControlHeaderNrCGIASN1toProto(t *testing.T) {
-	ControlHeaderAsn1Bytes := []byte{0x30, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x09, 0x00, 0x01, 0x01}
+	ControlHeaderAsn1Bytes := []byte{0x30, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x09, 0x00, 0x01}
 
 	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
@@ -365,10 +365,11 @@ func TestServicemodel_ControlHeaderNrCGIASN1toProto(t *testing.T) {
 
 func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 	var ranParameterName = "PCI"
-	var ranParameterValue int32 = 20
+	var ranParameterValue uint32 = 20
 	var ranParameterID int32 = 1
 
-	ranParameter := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	ranParameter, err := pdubuilder.CreateRanParameterValueInt(ranParameterValue)
+	assert.NilError(t, err)
 	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
@@ -385,7 +386,7 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 }
 
 func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
-	ControlMessageAsn1 := []byte{0x00, 0x00, 0x01, 0x01, 0x00, 0x50, 0x43, 0x49, 0x00, 0x01, 0x14}
+	ControlMessageAsn1 := []byte{0x00, 0x00, 0x01, 0x01, 0x00, 0x50, 0x43, 0x49, 0x00, 0x00, 0x14}
 
 	protoBytes, err := rcPreTestSm.ControlMessageASN1toProto(ControlMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
@@ -395,7 +396,7 @@ func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-ControlMessage is \n%v", testIM)
-	assert.Equal(t, int32(20), testIM.GetControlMessage().GetParameterVal().GetValueInt())
+	assert.Equal(t, uint32(20), testIM.GetControlMessage().GetParameterVal().GetValueInt())
 }
 
 func TestServicemodel_ControlOutcomeProtoToASN1(t *testing.T) {
