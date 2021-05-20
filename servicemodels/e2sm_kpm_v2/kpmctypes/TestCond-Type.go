@@ -69,8 +69,8 @@ func perDecodeTestCondType(bytes []byte) (*e2sm_kpm_v2.TestCondType, error) {
 
 func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t, error) {
 
-	var pr C.TestCond_Type_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}      //ToDo - Check if number of bytes is sufficient
+	var pr C.TestCond_Type_PR
+	choiceC := [8]byte{}
 
 	switch choice := testCondType.TestCondType.(type) {
 	case *e2sm_kpm_v2.TestCondType_GBr:
@@ -134,7 +134,7 @@ func newTestCondType(testCondType *e2sm_kpm_v2.TestCondType) (*C.TestCond_Type_t
 
 		binary.LittleEndian.PutUint32(choiceC[0:], uint32(rsrpC))
 	case *e2sm_kpm_v2.TestCondType_RSrq:
-		pr = C.TestCond_Type_PR_rSRQ //ToDo - Check if it's correct PR's name
+		pr = C.TestCond_Type_PR_rSRQ
 
 		var rsrqC C.TestCond_Type__rSRQ_t
 		switch choice.RSrq {
@@ -187,6 +187,8 @@ func decodeTestCondType(testCondTypeC *C.TestCond_Type_t) (*e2sm_kpm_v2.TestCond
 		testCondType.TestCondType = &e2sm_kpm_v2.TestCondType_RSrq{
 			RSrq: e2sm_kpm_v2.RSRQ_RSRQ_TRUE,
 		}
+	case C.TestCond_Type_PR_NOTHING:
+		return nil, fmt.Errorf("decodeTestCondType() An empty TestCondType has been sent %v", testCondTypeC.present)
 	default:
 		return nil, fmt.Errorf("decodeTestCondType() %v not yet implemented", testCondTypeC.present)
 	}

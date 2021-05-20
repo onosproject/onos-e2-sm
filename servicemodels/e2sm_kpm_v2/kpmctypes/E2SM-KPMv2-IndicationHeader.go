@@ -110,6 +110,8 @@ func decodeE2SmKpmIndicationHeader(e2SmKpmIndicationHeaderC *C.E2SM_KPMv2_Indica
 		e2SmKpmIndicationHeader.E2SmKpmIndicationHeader = &e2sm_kpm_v2.E2SmKpmIndicationHeader_IndicationHeaderFormat1{
 			IndicationHeaderFormat1: indicationHeaderFormat1,
 		}
+	case C.E2SM_KPMv2_IndicationHeader__indicationHeader_formats_PR_NOTHING:
+		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeader() An empty IndicationHeader-Format has been sent %v", e2SmKpmIndicationHeaderC.indicationHeader_formats.present)
 	default:
 		return nil, fmt.Errorf("decodeE2SmKpmIndicationHeader() %v not yet implemented", e2SmKpmIndicationHeaderC.indicationHeader_formats.present)
 	}

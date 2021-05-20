@@ -150,6 +150,8 @@ func decodeEnbIDChoice(enbIDChoiceC *C.ENB_ID_Choice_t) (*e2sm_kpm_v2.EnbIdChoic
 		enbIDChoice.EnbIdChoice = &e2sm_kpm_v2.EnbIdChoice_EnbIdLongmacro{
 			EnbIdLongmacro: enbID,
 		}
+	case C.ENB_ID_Choice_PR_NOTHING:
+		return nil, fmt.Errorf("decodeEnbIDChoice() An empty EnbID-Choice has been sent %v", enbIDChoiceC.present)
 	default:
 		return nil, fmt.Errorf("decodeEnbIDChoice() %v not yet implemented", enbIDChoiceC.present)
 	}

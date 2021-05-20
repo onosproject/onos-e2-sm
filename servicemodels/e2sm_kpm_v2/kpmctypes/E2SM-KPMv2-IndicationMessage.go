@@ -125,6 +125,8 @@ func decodeE2SmKpmIndicationMessage(e2SmKpmIndicationMessageC *C.E2SM_KPMv2_Indi
 		e2SmKpmIndicationMessage.E2SmKpmIndicationMessage = &e2sm_kpm_v2.E2SmKpmIndicationMessage_IndicationMessageFormat2{
 			IndicationMessageFormat2: indicationMessageFormat2,
 		}
+	case C.E2SM_KPMv2_IndicationMessage__indicationMessage_formats_PR_NOTHING:
+		return nil, fmt.Errorf("decodeE2SmKpmIndicationMessage() An empty IndicationMessage-Format has been sent %v", e2SmKpmIndicationMessageC.indicationMessage_formats.present)
 	default:
 		return nil, fmt.Errorf("decodeE2SmKpmIndicationMessage() %v not yet implemented", e2SmKpmIndicationMessageC.indicationMessage_formats.present)
 	}

@@ -122,6 +122,8 @@ func decodeMatchingCondItem(matchingCondItemC *C.MatchingCondItem_t) (*e2sm_kpm_
 		matchingCondItem.MatchingCondItem = &e2sm_kpm_v2.MatchingCondItem_TestCondInfo{
 			TestCondInfo: matchingCondItemstructC,
 		}
+	case C.MatchingCondItem_PR_NOTHING:
+		return nil, fmt.Errorf("decodeMatchingCondItem() An empty MatchingCondItem has been sent %v", matchingCondItemC.present)
 	default:
 		return nil, fmt.Errorf("decodeMatchingCondItem() %v not yet implemented", matchingCondItemC.present)
 	}

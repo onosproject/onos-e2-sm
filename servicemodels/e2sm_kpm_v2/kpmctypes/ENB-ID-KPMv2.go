@@ -131,6 +131,8 @@ func decodeEnbID(enbIDC *C.ENB_ID_KPMv2_t) (*e2sm_kpm_v2.EnbId, error) {
 		enbID.EnbId = &e2sm_kpm_v2.EnbId_HomeENbId{
 			HomeENbId: enbIDdec,
 		}
+	case C.ENB_ID_KPMv2_PR_NOTHING:
+		return nil, fmt.Errorf("decodeEnbID() An empty EnbID has been sent %v", enbIDC.present)
 	default:
 		return nil, fmt.Errorf("decodeEnbID() %v not yet implemented", enbIDC.present)
 	}

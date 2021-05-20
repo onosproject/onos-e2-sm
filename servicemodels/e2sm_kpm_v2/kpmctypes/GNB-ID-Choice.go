@@ -110,6 +110,8 @@ func decodeGnbIDChoice(gnbIDchoiceC *C.GNB_ID_Choice_t) (*e2sm_kpm_v2.GnbIdChoic
 		gnbIDchoice.GnbIdChoice = &e2sm_kpm_v2.GnbIdChoice_GnbId{
 			GnbId: gnbID,
 		}
+	case C.GNB_ID_Choice_PR_NOTHING:
+		return nil, fmt.Errorf("decodeGnbIDChoice() An empty GnbID has been sent %v", gnbIDchoiceC.present)
 	default:
 		return nil, fmt.Errorf("decodeGnbIDChoice() %v not yet implemented", gnbIDchoiceC.present)
 	}
