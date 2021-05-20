@@ -110,6 +110,8 @@ func decodeE2SmKpmEventTriggerDefinition(e2SmKpmEventTriggerDefinitionC *C.E2SM_
 		e2SmKpmEventTriggerDefinition.E2SmKpmEventTriggerDefinition = &e2sm_kpm_v2.E2SmKpmEventTriggerDefinition_EventDefinitionFormat1{
 			EventDefinitionFormat1: eventTriggerDefinitionFormat1,
 		}
+	case C.E2SM_KPMv2_EventTriggerDefinition__eventDefinition_formats_PR_NOTHING:
+		return nil, fmt.Errorf("decodeE2SmKpmEventTriggerDefinition() An empty EventTriggerDefinition-Format has been sent %v", e2SmKpmEventTriggerDefinitionC.eventDefinition_formats.present)
 	default:
 		return nil, fmt.Errorf("decodeE2SmKpmEventTriggerDefinition() %v not yet implemented", e2SmKpmEventTriggerDefinitionC.eventDefinition_formats.present)
 	}

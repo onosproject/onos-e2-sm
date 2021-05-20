@@ -127,6 +127,8 @@ func decodeMeasurementType(measurementTypeC *C.MeasurementType_t) (*e2sm_kpm_v2.
 		measurementType.MeasurementType = &e2sm_kpm_v2.MeasurementType_MeasId{
 			MeasId: measurementTypestructC,
 		}
+	case C.MeasurementType_PR_NOTHING:
+		return nil, fmt.Errorf("decodeMeasurementType() An empty MeasurementType has been sent %v", measurementTypeC.present)
 	default:
 		return nil, fmt.Errorf("decodeMeasurementType() %v not yet implemented", measurementTypeC.present)
 	}

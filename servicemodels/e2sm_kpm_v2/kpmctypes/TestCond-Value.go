@@ -143,7 +143,6 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 		testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValueEnum{
 			ValueEnum: enm,
 		}
-		//ToDo - Implement Boolean.go
 	case C.TestCond_Value_PR_valueBool:
 		var a [8]byte
 		copy(a[:], testCondValueC.choice[:8])
@@ -185,6 +184,8 @@ func decodeTestCondValue(testCondValueC *C.TestCond_Value_t) (*e2sm_kpm_v2.TestC
 		testCondValue.TestCondValue = &e2sm_kpm_v2.TestCondValue_ValuePrtS{
 			ValuePrtS: prtS,
 		}
+	case C.TestCond_Value_PR_NOTHING:
+		return nil, fmt.Errorf("decodeTestCondValue() An empty TestCondValue has been sent %v", testCondValueC.present)
 	default:
 		return nil, fmt.Errorf("decodeTestCondValue() %v not yet implemented", testCondValueC.present)
 	}

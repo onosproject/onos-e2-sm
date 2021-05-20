@@ -123,6 +123,8 @@ func decodeCellGlobalID(cellGlobalIDC *C.CellGlobalID_t) (*e2sm_kpm_v2.CellGloba
 		cellGlobalID.CellGlobalId = &e2sm_kpm_v2.CellGlobalId_EUtraCgi{
 			EUtraCgi: cellGlobalIDstructC,
 		}
+	case C.CellGlobalID_PR_NOTHING:
+		return nil, fmt.Errorf("decodeCellGlobalID() An empty CellGlobalID has been sent %v", cellGlobalIDC.present)
 	default:
 		return nil, fmt.Errorf("decodeCellGlobalID() %v not yet implemented", cellGlobalIDC.present)
 	}

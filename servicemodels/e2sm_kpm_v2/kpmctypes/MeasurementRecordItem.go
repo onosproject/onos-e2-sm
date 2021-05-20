@@ -120,6 +120,8 @@ func decodeMeasurementRecordItem(measurementRecordItemC *C.MeasurementRecordItem
 		measurementRecordItem.MeasurementRecordItem = &e2sm_kpm_v2.MeasurementRecordItem_NoValue{
 			NoValue: null,
 		}
+	case C.MeasurementRecordItem_PR_NOTHING:
+		return nil, fmt.Errorf("decodeMeasurementRecordItem() An empty MeasurementRecordItem has been sent %v", measurementRecordItemC.present)
 	default:
 		return nil, fmt.Errorf("decodeMeasurementRecordItem() %v not yet implemented", measurementRecordItemC.present)
 	}

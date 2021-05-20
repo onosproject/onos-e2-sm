@@ -155,6 +155,8 @@ func decodeGlobalKpmnodeID(globalKpmnodeIDC *C.GlobalKPMv2node_ID_t) (*e2sm_kpm_
 		globalKpmnodeID.GlobalKpmnodeId = &e2sm_kpm_v2.GlobalKpmnodeId_ENb{
 			ENb: globalKpmnodeIDstructC,
 		}
+	case C.GlobalKPMv2node_ID_PR_NOTHING:
+		return nil, fmt.Errorf("decodeGlobalKpmnodeID() An empty GlobalKPMnodeID has been sent %v", globalKpmnodeIDC.present)
 	default:
 		return nil, fmt.Errorf("decodeGlobalKpmnodeID() %v not yet implemented", globalKpmnodeIDC.present)
 	}

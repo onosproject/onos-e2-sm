@@ -111,6 +111,8 @@ func decodeEngnbID(engnbIDC *C.ENGNB_ID_t) (*e2sm_kpm_v2.EngnbId, error) {
 		engnbID.EngnbId = &e2sm_kpm_v2.EngnbId_GNbId{
 			GNbId: engnbIDCdec,
 		}
+	case C.ENGNB_ID_PR_NOTHING:
+		return nil, fmt.Errorf("decodeEngnbID() An empty en-Gnb-ID has been sent %v", engnbIDC.present)
 	default:
 		return nil, fmt.Errorf("decodeEngnbID() %v not yet implemented", engnbIDC.present)
 	}

@@ -156,6 +156,8 @@ func decodeE2SmKpmActionDefinition(e2SmKpmActionDefinitionC *C.E2SM_KPMv2_Action
 		e2SmKpmActionDefinition.E2SmKpmActionDefinition = &e2sm_kpm_v2.E2SmKpmActionDefinition_ActionDefinitionFormat3{
 			ActionDefinitionFormat3: actionDefinitionFormat3,
 		}
+	case C.E2SM_KPMv2_ActionDefinition__actionDefinition_formats_PR_NOTHING:
+		return nil, fmt.Errorf("decodeE2SmKpmActionDefinition() An empty ActionDefinition-Format has been sent %v", e2SmKpmActionDefinitionC.actionDefinition_formats.present)
 	default:
 		return nil, fmt.Errorf("decodeE2SmKpmActionDefinition() %v not yet implemented", e2SmKpmActionDefinitionC.actionDefinition_formats.present)
 	}
