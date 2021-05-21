@@ -9,5 +9,5 @@ require (
 	github.com/onosproject/onos-api/go v0.7.42
 	google.golang.org/protobuf v1.25.0
 	gotest.tools v2.2.0+incompatible
-        github.com/pkg/errors v0.9.1 // indirect
+    github.com/pkg/errors v0.9.1 // indirect
 )
