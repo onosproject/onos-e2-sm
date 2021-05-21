@@ -7,7 +7,7 @@
 
 #include "E2SM-KPMv2-IndicationHeader-Format1.h"
 
-#include "GlobalKPMv2node-ID.h"
+#include "GlobalKPMnode-ID-KPMv2.h"
 static const int permitted_alphabet_table_3[256] = {
  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	/*                  */
  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,	/*                  */
@@ -312,7 +312,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_IndicationHeader_Format1_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct E2SM_KPMv2_IndicationHeader_Format1, colletStartTime),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_TimeStamp,
+		&asn_DEF_TimeStamp_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -357,7 +357,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_IndicationHeader_Format1_1[] = {
 	{ ATF_POINTER, 1, offsetof(struct E2SM_KPMv2_IndicationHeader_Format1, kpmNodeID),
 		(ASN_TAG_CLASS_CONTEXT | (5 << 2)),
 		+1,	/* EXPLICIT tag at current level */
-		&asn_DEF_GlobalKPMv2node_ID,
+		&asn_DEF_GlobalKPMnode_ID_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */

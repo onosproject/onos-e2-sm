@@ -78,7 +78,7 @@ static asn_TYPE_member_t asn_MBR_E2SM_KPMv2_ActionDefinition_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct E2SM_KPMv2_ActionDefinition, ric_Style_Type),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_RIC_Style_Type,
+		&asn_DEF_RIC_Style_Type_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */

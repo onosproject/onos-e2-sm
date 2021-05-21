@@ -1,65 +1,65 @@
 ASN_MODULE_SRCS=	\
-	./PLMN-Identity.c	\
-	./EUTRACellIdentity.c	\
-	./NRCellIdentity.c	\
-	./EUTRACGI.c	\
-	./NRCGI.c	\
-	./CellGlobalID.c	\
-	./SNSSAI.c	\
-	./FiveQI.c	\
-	./QCI.c	\
-	./QFI.c	\
-	./ARP.c	\
-	./TimeStamp.c	\
-	./UE-Identity.c	\
-	./CellObjectID.c	\
-	./GranularityPeriod.c	\
-	./MeasurementType.c	\
-	./MeasurementTypeName.c	\
-	./MeasurementTypeID.c	\
-	./MeasurementLabel.c	\
-	./SubscriptionID.c	\
-	./TestCondInfo.c	\
-	./TestCond-Type.c	\
-	./TestCond-Expression.c	\
-	./TestCond-Value.c	\
-	./GlobalKPMv2node-ID.c	\
-	./GlobalKPMv2node-gNB-ID.c	\
-	./GlobalgNB-ID.c	\
-	./GNB-CU-UP-ID.c	\
-	./GNB-DU-ID.c	\
-	./GNB-ID-Choice.c	\
-	./GlobalKPMv2node-en-gNB-ID.c	\
-	./GlobalenGNB-ID.c	\
-	./ENGNB-ID.c	\
-	./GlobalKPMv2node-ng-eNB-ID.c	\
+	./PLMN-Identity-KPMv2.c	\
+	./EUTRACellIdentity-KPMv2.c	\
+	./NRCellIdentity-KPMv2.c	\
+	./EUTRACGI-KPMv2.c	\
+	./NRCGI-KPMv2.c	\
+	./CellGlobalID-KPMv2.c	\
+	./SNSSAI-KPMv2.c	\
+	./FiveQI-KPMv2.c	\
+	./QCI-KPMv2.c	\
+	./QFI-KPMv2.c	\
+	./ARP-KPMv2.c	\
+	./TimeStamp-KPMv2.c	\
+	./UE-Identity-KPMv2.c	\
+	./CellObjectID-KPMv2.c	\
+	./GranularityPeriod-KPMv2.c	\
+	./MeasurementType-KPMv2.c	\
+	./MeasurementTypeName-KPMv2.c	\
+	./MeasurementTypeID-KPMv2.c	\
+	./MeasurementLabel-KPMv2.c	\
+	./SubscriptionID-KPMv2.c	\
+	./TestCondInfo-KPMv2.c	\
+	./TestCond-Type-KPMv2.c	\
+	./TestCond-Expression-KPMv2.c	\
+	./TestCond-Value-KPMv2.c	\
+	./GlobalKPMnode-ID-KPMv2.c	\
+	./GlobalKPMnode-gNB-ID-KPMv2.c	\
+	./GlobalgNB-ID-KPMv2.c	\
+	./GNB-CU-UP-ID-KPMv2.c	\
+	./GNB-DU-ID-KPMv2.c	\
+	./GNB-ID-Choice-KPMv2.c	\
+	./GlobalKPMnode-en-gNB-ID-KPMv2.c	\
+	./GlobalenGNB-ID-KPMv2.c	\
+	./ENGNB-ID-KPMv2.c	\
+	./GlobalKPMnode-ng-eNB-ID-KPMv2.c	\
 	./GlobalngeNB-ID-KPMv2.c	\
-	./ENB-ID-Choice.c	\
-	./GlobalKPMv2node-eNB-ID.c	\
-	./GlobalENB-ID.c	\
+	./ENB-ID-Choice-KPMv2.c	\
+	./GlobalKPMnode-eNB-ID-KPMv2.c	\
+	./GlobalENB-ID-KPMv2.c	\
 	./ENB-ID-KPMv2.c	\
-	./RANfunction-Name.c	\
-	./RIC-Style-Type.c	\
-	./RIC-Style-Name.c	\
-	./RIC-Format-Type.c	\
-	./MeasurementInfoList.c	\
-	./MeasurementInfoItem.c	\
-	./LabelInfoList.c	\
-	./LabelInfoItem.c	\
-	./MeasurementData.c	\
-	./MeasurementDataItem.c	\
-	./MeasurementRecord.c	\
-	./MeasurementRecordItem.c	\
-	./MeasurementInfo-Action-List.c	\
-	./MeasurementInfo-Action-Item.c	\
-	./MeasurementCondList.c	\
-	./MeasurementCondItem.c	\
-	./MeasurementCondUEidList.c	\
-	./MeasurementCondUEidItem.c	\
-	./MatchingCondList.c	\
-	./MatchingCondItem.c	\
-	./MatchingUEidList.c	\
-	./MatchingUEidItem.c	\
+	./RANfunction-Name-KPMv2.c	\
+	./RIC-Style-Type-KPMv2.c	\
+	./RIC-Style-Name-KPMv2.c	\
+	./RIC-Format-Type-KPMv2.c	\
+	./MeasurementInfoList-KPMv2.c	\
+	./MeasurementInfoItem-KPMv2.c	\
+	./LabelInfoList-KPMv2.c	\
+	./LabelInfoItem-KPMv2.c	\
+	./MeasurementData-KPMv2.c	\
+	./MeasurementDataItem-KPMv2.c	\
+	./MeasurementRecord-KPMv2.c	\
+	./MeasurementRecordItem-KPMv2.c	\
+	./MeasurementInfo-Action-List-KPMv2.c	\
+	./MeasurementInfo-Action-Item-KPMv2.c	\
+	./MeasurementCondList-KPMv2.c	\
+	./MeasurementCondItem-KPMv2.c	\
+	./MeasurementCondUEidList-KPMv2.c	\
+	./MeasurementCondUEidItem-KPMv2.c	\
+	./MatchingCondList-KPMv2.c	\
+	./MatchingCondItem-KPMv2.c	\
+	./MatchingUEidList-KPMv2.c	\
+	./MatchingUEidItem-KPMv2.c	\
 	./E2SM-KPMv2-EventTriggerDefinition.c	\
 	./E2SM-KPMv2-EventTriggerDefinition-Format1.c	\
 	./E2SM-KPMv2-ActionDefinition.c	\
@@ -72,73 +72,73 @@ ASN_MODULE_SRCS=	\
 	./E2SM-KPMv2-IndicationMessage-Format1.c	\
 	./E2SM-KPMv2-IndicationMessage-Format2.c	\
 	./E2SM-KPMv2-RANfunction-Description.c	\
-	./RIC-KPMNode-Item.c	\
-	./Cell-Measurement-Object-Item.c	\
-	./RIC-EventTriggerStyle-Item.c	\
-	./RIC-ReportStyle-Item.c
+	./RIC-KPMNode-Item-KPMv2.c	\
+	./Cell-Measurement-Object-Item-KPMv2.c	\
+	./RIC-EventTriggerStyle-Item-KPMv2.c	\
+	./RIC-ReportStyle-Item-KPMv2.c
 
 ASN_MODULE_HDRS=	\
-	./PLMN-Identity.h	\
-	./EUTRACellIdentity.h	\
-	./NRCellIdentity.h	\
-	./EUTRACGI.h	\
-	./NRCGI.h	\
-	./CellGlobalID.h	\
-	./SNSSAI.h	\
-	./FiveQI.h	\
-	./QCI.h	\
-	./QFI.h	\
-	./ARP.h	\
-	./TimeStamp.h	\
-	./UE-Identity.h	\
-	./CellObjectID.h	\
-	./GranularityPeriod.h	\
-	./MeasurementType.h	\
-	./MeasurementTypeName.h	\
-	./MeasurementTypeID.h	\
-	./MeasurementLabel.h	\
-	./SubscriptionID.h	\
-	./TestCondInfo.h	\
-	./TestCond-Type.h	\
-	./TestCond-Expression.h	\
-	./TestCond-Value.h	\
-	./GlobalKPMv2node-ID.h	\
-	./GlobalKPMv2node-gNB-ID.h	\
-	./GlobalgNB-ID.h	\
-	./GNB-CU-UP-ID.h	\
-	./GNB-DU-ID.h	\
-	./GNB-ID-Choice.h	\
-	./GlobalKPMv2node-en-gNB-ID.h	\
-	./GlobalenGNB-ID.h	\
-	./ENGNB-ID.h	\
-	./GlobalKPMv2node-ng-eNB-ID.h	\
+	./PLMN-Identity-KPMv2.h	\
+	./EUTRACellIdentity-KPMv2.h	\
+	./NRCellIdentity-KPMv2.h	\
+	./EUTRACGI-KPMv2.h	\
+	./NRCGI-KPMv2.h	\
+	./CellGlobalID-KPMv2.h	\
+	./SNSSAI-KPMv2.h	\
+	./FiveQI-KPMv2.h	\
+	./QCI-KPMv2.h	\
+	./QFI-KPMv2.h	\
+	./ARP-KPMv2.h	\
+	./TimeStamp-KPMv2.h	\
+	./UE-Identity-KPMv2.h	\
+	./CellObjectID-KPMv2.h	\
+	./GranularityPeriod-KPMv2.h	\
+	./MeasurementType-KPMv2.h	\
+	./MeasurementTypeName-KPMv2.h	\
+	./MeasurementTypeID-KPMv2.h	\
+	./MeasurementLabel-KPMv2.h	\
+	./SubscriptionID-KPMv2.h	\
+	./TestCondInfo-KPMv2.h	\
+	./TestCond-Type-KPMv2.h	\
+	./TestCond-Expression-KPMv2.h	\
+	./TestCond-Value-KPMv2.h	\
+	./GlobalKPMnode-ID-KPMv2.h	\
+	./GlobalKPMnode-gNB-ID-KPMv2.h	\
+	./GlobalgNB-ID-KPMv2.h	\
+	./GNB-CU-UP-ID-KPMv2.h	\
+	./GNB-DU-ID-KPMv2.h	\
+	./GNB-ID-Choice-KPMv2.h	\
+	./GlobalKPMnode-en-gNB-ID-KPMv2.h	\
+	./GlobalenGNB-ID-KPMv2.h	\
+	./ENGNB-ID-KPMv2.h	\
+	./GlobalKPMnode-ng-eNB-ID-KPMv2.h	\
 	./GlobalngeNB-ID-KPMv2.h	\
-	./ENB-ID-Choice.h	\
-	./GlobalKPMv2node-eNB-ID.h	\
-	./GlobalENB-ID.h	\
+	./ENB-ID-Choice-KPMv2.h	\
+	./GlobalKPMnode-eNB-ID-KPMv2.h	\
+	./GlobalENB-ID-KPMv2.h	\
 	./ENB-ID-KPMv2.h	\
-	./RANfunction-Name.h	\
-	./RIC-Style-Type.h	\
-	./RIC-Style-Name.h	\
-	./RIC-Format-Type.h	\
-	./MeasurementInfoList.h	\
-	./MeasurementInfoItem.h	\
-	./LabelInfoList.h	\
-	./LabelInfoItem.h	\
-	./MeasurementData.h	\
-	./MeasurementDataItem.h	\
-	./MeasurementRecord.h	\
-	./MeasurementRecordItem.h	\
-	./MeasurementInfo-Action-List.h	\
-	./MeasurementInfo-Action-Item.h	\
-	./MeasurementCondList.h	\
-	./MeasurementCondItem.h	\
-	./MeasurementCondUEidList.h	\
-	./MeasurementCondUEidItem.h	\
-	./MatchingCondList.h	\
-	./MatchingCondItem.h	\
-	./MatchingUEidList.h	\
-	./MatchingUEidItem.h	\
+	./RANfunction-Name-KPMv2.h	\
+	./RIC-Style-Type-KPMv2.h	\
+	./RIC-Style-Name-KPMv2.h	\
+	./RIC-Format-Type-KPMv2.h	\
+	./MeasurementInfoList-KPMv2.h	\
+	./MeasurementInfoItem-KPMv2.h	\
+	./LabelInfoList-KPMv2.h	\
+	./LabelInfoItem-KPMv2.h	\
+	./MeasurementData-KPMv2.h	\
+	./MeasurementDataItem-KPMv2.h	\
+	./MeasurementRecord-KPMv2.h	\
+	./MeasurementRecordItem-KPMv2.h	\
+	./MeasurementInfo-Action-List-KPMv2.h	\
+	./MeasurementInfo-Action-Item-KPMv2.h	\
+	./MeasurementCondList-KPMv2.h	\
+	./MeasurementCondItem-KPMv2.h	\
+	./MeasurementCondUEidList-KPMv2.h	\
+	./MeasurementCondUEidItem-KPMv2.h	\
+	./MatchingCondList-KPMv2.h	\
+	./MatchingCondItem-KPMv2.h	\
+	./MatchingUEidList-KPMv2.h	\
+	./MatchingUEidItem-KPMv2.h	\
 	./E2SM-KPMv2-EventTriggerDefinition.h	\
 	./E2SM-KPMv2-EventTriggerDefinition-Format1.h	\
 	./E2SM-KPMv2-ActionDefinition.h	\
@@ -151,10 +151,10 @@ ASN_MODULE_HDRS=	\
 	./E2SM-KPMv2-IndicationMessage-Format1.h	\
 	./E2SM-KPMv2-IndicationMessage-Format2.h	\
 	./E2SM-KPMv2-RANfunction-Description.h	\
-	./RIC-KPMNode-Item.h	\
-	./Cell-Measurement-Object-Item.h	\
-	./RIC-EventTriggerStyle-Item.h	\
-	./RIC-ReportStyle-Item.h
+	./RIC-KPMNode-Item-KPMv2.h	\
+	./Cell-Measurement-Object-Item-KPMv2.h	\
+	./RIC-EventTriggerStyle-Item-KPMv2.h	\
+	./RIC-ReportStyle-Item-KPMv2.h
 
 ASN_MODULE_HDRS+=./OPEN_TYPE.h
 ASN_MODULE_SRCS+=./OPEN_TYPE.c

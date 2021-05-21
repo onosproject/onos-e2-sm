@@ -7,9 +7,9 @@
 
 #include "E2SM-KPMv2-RANfunction-Description.h"
 
-#include "RIC-KPMNode-Item.h"
-#include "RIC-EventTriggerStyle-Item.h"
-#include "RIC-ReportStyle-Item.h"
+#include "RIC-KPMNode-Item-KPMv2.h"
+#include "RIC-EventTriggerStyle-Item-KPMv2.h"
+#include "RIC-ReportStyle-Item-KPMv2.h"
 static int
 memb_ric_KPM_Node_List_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
@@ -122,7 +122,7 @@ static asn_TYPE_member_t asn_MBR_ric_KPM_Node_List_3[] = {
 	{ ATF_POINTER, 0, 0,
 		(ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
 		0,
-		&asn_DEF_RIC_KPMNode_Item,
+		&asn_DEF_RIC_KPMNode_Item_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -159,7 +159,7 @@ static asn_TYPE_member_t asn_MBR_ric_EventTriggerStyle_List_5[] = {
 	{ ATF_POINTER, 0, 0,
 		(ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
 		0,
-		&asn_DEF_RIC_EventTriggerStyle_Item,
+		&asn_DEF_RIC_EventTriggerStyle_Item_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -196,7 +196,7 @@ static asn_TYPE_member_t asn_MBR_ric_ReportStyle_List_7[] = {
 	{ ATF_POINTER, 0, 0,
 		(ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
 		0,
-		&asn_DEF_RIC_ReportStyle_Item,
+		&asn_DEF_RIC_ReportStyle_Item_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -233,7 +233,7 @@ static asn_TYPE_member_t asn_MBR_E2SM_KPMv2_RANfunction_Description_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct E2SM_KPMv2_RANfunction_Description, ranFunction_Name),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_RANfunction_Name,
+		&asn_DEF_RANfunction_Name_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */

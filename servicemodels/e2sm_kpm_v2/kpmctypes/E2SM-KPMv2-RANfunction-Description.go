@@ -10,9 +10,9 @@ package kpmv2ctypes
 //#include <stdlib.h>
 //#include <assert.h>
 //#include "E2SM-KPMv2-RANfunction-Description.h"
-//#include "RIC-KPMNode-Item.h"
-//#include "RIC-EventTriggerStyle-Item.h"
-//#include "RIC-ReportStyle-Item.h"
+//#include "RIC-KPMNode-Item-KPMv2.h"
+//#include "RIC-EventTriggerStyle-Item-KPMv2.h"
+//#include "RIC-ReportStyle-Item-KPMv2.h"
 import "C"
 import (
 	"fmt"
@@ -146,7 +146,7 @@ func decodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescriptionC *C.E2SM_
 		ieCount := int(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.count)
 		for i := 0; i < ieCount; i++ {
 			offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.array)) * uintptr(i)
-			ieC := *(**C.RIC_KPMNode_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.array)) + offset))
+			ieC := *(**C.RIC_KPMNode_Item_KPMv2_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_KPM_Node_List.list.array)) + offset))
 			ie, err := decodeRicKpmnodeItem(ieC)
 			if err != nil {
 				return nil, fmt.Errorf("decodeRicKpmnodeItem() %s", err.Error())
@@ -160,7 +160,7 @@ func decodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescriptionC *C.E2SM_
 		ieCount := int(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.count)
 		for i := 0; i < ieCount; i++ {
 			offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) * uintptr(i)
-			ieC := *(**C.RIC_EventTriggerStyle_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) + offset))
+			ieC := *(**C.RIC_EventTriggerStyle_Item_KPMv2_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_EventTriggerStyle_List.list.array)) + offset))
 			ie, err := decodeRicEventTriggerStyleItem(ieC)
 			if err != nil {
 				return nil, fmt.Errorf("decodeRicEventTriggerStyleItem() %s", err.Error())
@@ -174,7 +174,7 @@ func decodeE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescriptionC *C.E2SM_
 		ieCount := int(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.count)
 		for i := 0; i < ieCount; i++ {
 			offset := unsafe.Sizeof(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) * uintptr(i)
-			ieC := *(**C.RIC_ReportStyle_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) + offset))
+			ieC := *(**C.RIC_ReportStyle_Item_KPMv2_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmRanfunctionDescriptionC.ric_ReportStyle_List.list.array)) + offset))
 			ie, err := decodeRicReportStyleItem(ieC)
 			if err != nil {
 				return nil, fmt.Errorf("decodeRicReportStyleItem() %s", err.Error())
