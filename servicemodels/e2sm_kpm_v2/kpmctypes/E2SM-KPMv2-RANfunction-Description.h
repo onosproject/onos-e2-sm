@@ -12,7 +12,7 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "RANfunction-Name.h"
+#include "RANfunction-Name-KPMv2.h"
 #include "asn_SEQUENCE_OF.h"
 #include "constr_SEQUENCE_OF.h"
 #include "constr_SEQUENCE.h"
@@ -22,27 +22,27 @@ extern "C" {
 #endif
 
 /* Forward declarations */
-struct RIC_KPMNode_Item;
-struct RIC_EventTriggerStyle_Item;
-struct RIC_ReportStyle_Item;
+struct RIC_KPMNode_Item_KPMv2;
+struct RIC_EventTriggerStyle_Item_KPMv2;
+struct RIC_ReportStyle_Item_KPMv2;
 
 /* E2SM-KPMv2-RANfunction-Description */
 typedef struct E2SM_KPMv2_RANfunction_Description {
-	RANfunction_Name_t	 ranFunction_Name;
+	RANfunction_Name_KPMv2_t	 ranFunction_Name;
 	struct E2SM_KPMv2_RANfunction_Description__ric_KPM_Node_List {
-		A_SEQUENCE_OF(struct RIC_KPMNode_Item) list;
+		A_SEQUENCE_OF(struct RIC_KPMNode_Item_KPMv2) list;
 		
 		/* Context for parsing across buffer boundaries */
 		asn_struct_ctx_t _asn_ctx;
 	} *ric_KPM_Node_List;
 	struct E2SM_KPMv2_RANfunction_Description__ric_EventTriggerStyle_List {
-		A_SEQUENCE_OF(struct RIC_EventTriggerStyle_Item) list;
+		A_SEQUENCE_OF(struct RIC_EventTriggerStyle_Item_KPMv2) list;
 		
 		/* Context for parsing across buffer boundaries */
 		asn_struct_ctx_t _asn_ctx;
 	} *ric_EventTriggerStyle_List;
 	struct E2SM_KPMv2_RANfunction_Description__ric_ReportStyle_List {
-		A_SEQUENCE_OF(struct RIC_ReportStyle_Item) list;
+		A_SEQUENCE_OF(struct RIC_ReportStyle_Item_KPMv2) list;
 		
 		/* Context for parsing across buffer boundaries */
 		asn_struct_ctx_t _asn_ctx;

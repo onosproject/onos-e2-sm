@@ -14,74 +14,74 @@ BEGIN
 --   IEs
 -- **************************************************************
 
-PLMN-Identity ::= OCTET STRING (SIZE(3))
+PLMN-Identity-KPMv2 ::= OCTET STRING (SIZE(3))
 
-EUTRACellIdentity ::= BIT STRING (SIZE(28))
+EUTRACellIdentity-KPMv2 ::= BIT STRING (SIZE(28))
 
-NRCellIdentity ::= BIT STRING (SIZE(36))
+NRCellIdentity-KPMv2 ::= BIT STRING (SIZE(36))
 
-EUTRACGI ::= SEQUENCE {
-	pLMN-Identity			PLMN-Identity,
-	eUTRACellIdentity		EUTRACellIdentity,
+EUTRACGI-KPMv2 ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity-KPMv2,
+	eUTRACellIdentity		EUTRACellIdentity-KPMv2,
 	...
 }
 
-NRCGI ::= SEQUENCE {
-	pLMN-Identity			PLMN-Identity,
-	nRCellIdentity			NRCellIdentity,
+NRCGI-KPMv2 ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity-KPMv2,
+	nRCellIdentity			NRCellIdentity-KPMv2,
 	...
 }
 
-CellGlobalID ::= CHOICE {
-	nr-CGI					NRCGI,
-	eUTRA-CGI				EUTRACGI,
+CellGlobalID-KPMv2 ::= CHOICE {
+	nr-CGI					NRCGI-KPMv2,
+	eUTRA-CGI				EUTRACGI-KPMv2,
 	...
 }
 
-SNSSAI ::= SEQUENCE {
+SNSSAI-KPMv2 ::= SEQUENCE {
 	sST						OCTET STRING (SIZE(1)),
 	sD						OCTET STRING (SIZE(3)) 				OPTIONAL,
 	...
 }
 
-FiveQI ::= INTEGER (0.. 255, ...)
+FiveQI-KPMv2 ::= INTEGER (0.. 255, ...)
 
-QCI ::= INTEGER (0.. 255, ...)
+QCI-KPMv2 ::= INTEGER (0.. 255, ...)
 
-QFI ::= INTEGER (0.. 63, ...)
+QFI-KPMv2 ::= INTEGER (0.. 63, ...)
 
-ARP ::= INTEGER (1.. 15, ...)
+ARP-KPMv2 ::= INTEGER (1.. 15, ...)
 
-TimeStamp ::= OCTET STRING (SIZE(4))
+TimeStamp-KPMv2 ::= OCTET STRING (SIZE(4))
 
-UE-Identity ::= OCTET STRING
+UE-Identity-KPMv2 ::= OCTET STRING
 
 -- **************************************************************
 
-CellObjectID ::= PrintableString(SIZE (0.. 400), ...)
+CellObjectID-KPMv2 ::= PrintableString(SIZE (0.. 400), ...)
 
-GranularityPeriod ::= INTEGER (1.. 4294967295)
+GranularityPeriod-KPMv2 ::= INTEGER (1.. 4294967295)
 
-MeasurementType ::= CHOICE {
-	measName				MeasurementTypeName,
-	measID					MeasurementTypeID,
+MeasurementType-KPMv2 ::= CHOICE {
+	measName				MeasurementTypeName-KPMv2,
+	measID					MeasurementTypeID-KPMv2,
 	...
 }
 
-MeasurementTypeName ::= PrintableString(SIZE(1.. 150, ...))
+MeasurementTypeName-KPMv2 ::= PrintableString(SIZE(1.. 150, ...))
 
-MeasurementTypeID ::= INTEGER (1.. 65536, ...)
+MeasurementTypeID-KPMv2 ::= INTEGER (1.. 65536, ...)
 
-MeasurementLabel ::= SEQUENCE {
-	plmnID					PLMN-Identity						OPTIONAL,
-	sliceID					SNSSAI								OPTIONAL,
-	fiveQI					FiveQI								OPTIONAL,
-	qFI						QFI									OPTIONAL,
-	qCI						QCI									OPTIONAL,
-	qCImax					QCI									OPTIONAL,
-	qCImin					QCI									OPTIONAL,
-	aRPmax					ARP									OPTIONAL,
-	aRPmin					ARP									OPTIONAL,
+MeasurementLabel-KPMv2 ::= SEQUENCE {
+	plmnID					PLMN-Identity-KPMv2						OPTIONAL,
+	sliceID					SNSSAI-KPMv2								OPTIONAL,
+	fiveQI					FiveQI-KPMv2								OPTIONAL,
+	qFI						QFI-KPMv2									OPTIONAL,
+	qCI						QCI-KPMv2									OPTIONAL,
+	qCImax					QCI-KPMv2									OPTIONAL,
+	qCImin					QCI-KPMv2									OPTIONAL,
+	aRPmax					ARP-KPMv2									OPTIONAL,
+	aRPmin					ARP-KPMv2									OPTIONAL,
 	bitrateRange			INTEGER (1.. 65536, ...)			OPTIONAL,
 	layerMU-MIMO			INTEGER (1.. 65536, ...)			OPTIONAL,
 	sUM						ENUMERATED {true, ...}				OPTIONAL,
@@ -93,16 +93,16 @@ MeasurementLabel ::= SEQUENCE {
 	...
 }
 
-SubscriptionID ::= INTEGER (1.. 4294967295)
+SubscriptionID-KPMv2 ::= INTEGER (1.. 4294967295)
 
-TestCondInfo ::= SEQUENCE{
-	testType				TestCond-Type,
-	testExpr				TestCond-Expression,
-	testValue				TestCond-Value,
+TestCondInfo-KPMv2 ::= SEQUENCE{
+	testType				TestCond-Type-KPMv2,
+	testExpr				TestCond-Expression-KPMv2,
+	testValue				TestCond-Value-KPMv2,
 	...
 }
 
-TestCond-Type ::= CHOICE{
+TestCond-Type-KPMv2 ::= CHOICE{
 	gBR						ENUMERATED {true, ...},
 	aMBR					ENUMERATED {true, ...},
 	isStat					ENUMERATED {true, ...},
@@ -112,7 +112,7 @@ TestCond-Type ::= CHOICE{
 	...
 }
 
-TestCond-Expression ::= ENUMERATED {
+TestCond-Expression-KPMv2 ::= ENUMERATED {
 equal, 
 greaterthan, 
 lessthan, 
@@ -121,7 +121,7 @@ present,
 ...
 }
 
-TestCond-Value ::= CHOICE{
+TestCond-Value-KPMv2 ::= CHOICE{
 	valueInt				INTEGER,
 	valueEnum				INTEGER,
 	valueBool				BOOLEAN,
@@ -133,82 +133,82 @@ TestCond-Value ::= CHOICE{
 
 -- **************************************************************
 
-GlobalKPMv2node-ID ::= CHOICE{
-	gNB						GlobalKPMv2node-gNB-ID,
-	en-gNB					GlobalKPMv2node-en-gNB-ID,
-	ng-eNB					GlobalKPMv2node-ng-eNB-ID,
-	eNB						GlobalKPMv2node-eNB-ID,
+GlobalKPMnode-ID-KPMv2 ::= CHOICE{
+	gNB						GlobalKPMnode-gNB-ID-KPMv2,
+	en-gNB					GlobalKPMnode-en-gNB-ID-KPMv2,
+	ng-eNB					GlobalKPMnode-ng-eNB-ID-KPMv2,
+	eNB						GlobalKPMnode-eNB-ID-KPMv2,
 	...
 }
 
-GlobalKPMv2node-gNB-ID ::= SEQUENCE{
-	global-gNB-ID			GlobalgNB-ID,
-	gNB-CU-UP-ID			GNB-CU-UP-ID					OPTIONAL,
-	gNB-DU-ID				GNB-DU-ID						OPTIONAL,
+GlobalKPMnode-gNB-ID-KPMv2 ::= SEQUENCE{
+	global-gNB-ID			GlobalgNB-ID-KPMv2,
+	gNB-CU-UP-ID			GNB-CU-UP-ID-KPMv2					OPTIONAL,
+	gNB-DU-ID				GNB-DU-ID-KPMv2						OPTIONAL,
 	...
 }
 
-GlobalgNB-ID	::= SEQUENCE {
-	plmn-id					PLMN-Identity,
-	gnb-id					GNB-ID-Choice,
+GlobalgNB-ID-KPMv2	::= SEQUENCE {
+	plmn-id					PLMN-Identity-KPMv2,
+	gnb-id					GNB-ID-Choice-KPMv2,
 	...
 }
 
-GNB-CU-UP-ID ::= INTEGER (0..68719476735)
+GNB-CU-UP-ID-KPMv2 ::= INTEGER (0..68719476735)
 
-GNB-DU-ID ::=  INTEGER (0..68719476735)
+GNB-DU-ID-KPMv2 ::=  INTEGER (0..68719476735)
 
-GNB-ID-Choice ::= CHOICE {
+GNB-ID-Choice-KPMv2 ::= CHOICE {
 	gnb-ID					BIT STRING (SIZE(22..32)),
 	...
 }
 
-GlobalKPMv2node-en-gNB-ID ::= SEQUENCE{
-	global-gNB-ID			GlobalenGNB-ID,
-	gNB-CU-UP-ID			GNB-CU-UP-ID					OPTIONAL,
-	gNB-DU-ID				GNB-DU-ID						OPTIONAL,
+GlobalKPMnode-en-gNB-ID-KPMv2 ::= SEQUENCE{
+	global-gNB-ID			GlobalenGNB-ID-KPMv2,
+	gNB-CU-UP-ID			GNB-CU-UP-ID-KPMv2					OPTIONAL,
+	gNB-DU-ID				GNB-DU-ID-KPMv2						OPTIONAL,
 	...
 }
 
-GlobalenGNB-ID ::= SEQUENCE {
-	pLMN-Identity			PLMN-Identity,
-	gNB-ID					ENGNB-ID,
+GlobalenGNB-ID-KPMv2 ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity-KPMv2,
+	gNB-ID					ENGNB-ID-KPMv2,
 	...
 }
 
-ENGNB-ID ::= CHOICE {
+ENGNB-ID-KPMv2 ::= CHOICE {
 	gNB-ID					BIT STRING (SIZE (22..32)),
 	...
 }
 
-GlobalKPMv2node-ng-eNB-ID ::= SEQUENCE{
+GlobalKPMnode-ng-eNB-ID-KPMv2 ::= SEQUENCE{
 	global-ng-eNB-ID		GlobalngeNB-ID-KPMv2,
-	gNB-DU-ID				GNB-DU-ID						OPTIONAL,
+	gNB-DU-ID				GNB-DU-ID-KPMv2						OPTIONAL,
 	...
 }
 
 GlobalngeNB-ID-KPMv2 ::= SEQUENCE {
-	plmn-id					PLMN-Identity,
-	enb-id					ENB-ID-Choice,
+	plmn-id					PLMN-Identity-KPMv2,
+	enb-id					ENB-ID-Choice-KPMv2,
 	short-Macro-eNB-ID		BIT STRING (SIZE(18)),
 	long-Macro-eNB-ID		BIT STRING (SIZE(21)),
 	...
 }
 
-ENB-ID-Choice ::= CHOICE {
+ENB-ID-Choice-KPMv2 ::= CHOICE {
 	enb-ID-macro			BIT STRING (SIZE(20)),
 	enb-ID-shortmacro		BIT STRING (SIZE(18)),
 	enb-ID-longmacro		BIT STRING (SIZE(21)),
 	...
 }
 
-GlobalKPMv2node-eNB-ID ::= SEQUENCE{
-	global-eNB-ID			GlobalENB-ID,
+GlobalKPMnode-eNB-ID-KPMv2 ::= SEQUENCE{
+	global-eNB-ID			GlobalENB-ID-KPMv2,
 	...
 }
 
-GlobalENB-ID ::= SEQUENCE {
-	pLMN-Identity			PLMN-Identity,
+GlobalENB-ID-KPMv2 ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity-KPMv2,
 	eNB-ID					ENB-ID-KPMv2,
 	...
 }
@@ -221,7 +221,7 @@ ENB-ID-KPMv2 ::= CHOICE {
 
 -- **************************************************************
 
-RANfunction-Name ::= SEQUENCE{
+RANfunction-Name-KPMv2 ::= SEQUENCE{
 	ranFunction-ShortName		PrintableString(SIZE(1..150,...)),
 	ranFunction-E2SM-OID		PrintableString(SIZE(1..1000,...)),
 	ranFunction-Description		PrintableString(SIZE(1..150,...)),
@@ -229,96 +229,96 @@ RANfunction-Name ::= SEQUENCE{
 	...
 }
 
-RIC-Style-Type ::= INTEGER (0.. 255, ...)
+RIC-Style-Type-KPMv2 ::= INTEGER (0.. 255, ...)
 
-RIC-Style-Name ::= PrintableString(SIZE(1.. 150, ...))
+RIC-Style-Name-KPMv2 ::= PrintableString(SIZE(1.. 150, ...))
 
-RIC-Format-Type ::= INTEGER (0.. 255, ...)
+RIC-Format-Type-KPMv2 ::= INTEGER (0.. 255, ...)
 
 -- **************************************************************
 --   Lists
 -- **************************************************************
 
-maxnoofKPMNodes				INTEGER ::= 1024
-maxnoofCells				INTEGER ::= 16384
-maxnoofRICStyles			INTEGER ::= 63
-maxnoofMeasurementInfo		INTEGER ::= 65535
-maxnoofLabelInfo			INTEGER ::= 2147483647
-maxnoofMeasurementRecord	INTEGER ::= 65535
-maxnoofMeasurementValue		INTEGER ::= 2147483647
-maxnoofConditionInfo		INTEGER ::= 32768
-maxnoofUEID					INTEGER ::= 65535
+maxnoofKPMNodes-KPMv2				INTEGER ::= 1024
+maxnoofCells-KPMv2				INTEGER ::= 16384
+maxnoofRICStyles-KPMv2			INTEGER ::= 63
+maxnoofMeasurementInfo-KPMv2		INTEGER ::= 65535
+maxnoofLabelInfo-KPMv2			INTEGER ::= 2147483647
+maxnoofMeasurementRecord-KPMv2	INTEGER ::= 65535
+maxnoofMeasurementValue-KPMv2		INTEGER ::= 2147483647
+maxnoofConditionInfo-KPMv2		INTEGER ::= 32768
+maxnoofUEID-KPMv2					INTEGER ::= 65535
 
 
-MeasurementInfoList ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo)) OF MeasurementInfoItem
+MeasurementInfoList-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo-KPMv2)) OF MeasurementInfoItem-KPMv2
 
-MeasurementInfoItem ::= SEQUENCE {
-	measType				MeasurementType,
-	labelInfoList			LabelInfoList				OPTIONAL,
+MeasurementInfoItem-KPMv2 ::= SEQUENCE {
+	measType				MeasurementType-KPMv2,
+	labelInfoList			LabelInfoList-KPMv2				OPTIONAL,
 	...
 }
 
-LabelInfoList ::= SEQUENCE (SIZE(1..maxnoofLabelInfo)) OF LabelInfoItem
+LabelInfoList-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofLabelInfo-KPMv2)) OF LabelInfoItem-KPMv2
 
-LabelInfoItem ::= SEQUENCE {
-	measLabel				MeasurementLabel,
+LabelInfoItem-KPMv2 ::= SEQUENCE {
+	measLabel				MeasurementLabel-KPMv2,
 	...
 }
 
-MeasurementData ::= SEQUENCE (SIZE(1..maxnoofMeasurementRecord)) OF MeasurementDataItem
+MeasurementData-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofMeasurementRecord-KPMv2)) OF MeasurementDataItem-KPMv2
 
-MeasurementDataItem ::= SEQUENCE {
-	measRecord				MeasurementRecord,
+MeasurementDataItem-KPMv2 ::= SEQUENCE {
+	measRecord				MeasurementRecord-KPMv2,
 	incompleteFlag			ENUMERATED {true, ...}		OPTIONAL,
 	...
 }
 
-MeasurementRecord ::= SEQUENCE (SIZE(1..maxnoofMeasurementValue)) OF MeasurementRecordItem
+MeasurementRecord-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofMeasurementValue-KPMv2)) OF MeasurementRecordItem-KPMv2
 
-MeasurementRecordItem ::= CHOICE {
+MeasurementRecordItem-KPMv2 ::= CHOICE {
 	integer					INTEGER (0..4294967295),
 	real					REAL,
 	noValue					NULL,
 	...
 }		
 
-MeasurementInfo-Action-List ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo)) OF MeasurementInfo-Action-Item
+MeasurementInfo-Action-List-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo-KPMv2)) OF MeasurementInfo-Action-Item-KPMv2
 
-MeasurementInfo-Action-Item ::= SEQUENCE {
-	measName				MeasurementTypeName,
-	measID					MeasurementTypeID			OPTIONAL,
+MeasurementInfo-Action-Item-KPMv2 ::= SEQUENCE {
+	measName				MeasurementTypeName-KPMv2,
+	measID					MeasurementTypeID-KPMv2			OPTIONAL,
 	...
 }
 
-MeasurementCondList ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo)) OF MeasurementCondItem
+MeasurementCondList-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo-KPMv2)) OF MeasurementCondItem-KPMv2
 
-MeasurementCondItem ::= SEQUENCE {
-	measType				MeasurementType,
-	matchingCond			MatchingCondList,
+MeasurementCondItem-KPMv2 ::= SEQUENCE {
+	measType				MeasurementType-KPMv2,
+	matchingCond			MatchingCondList-KPMv2,
 	...
 }
 
-MeasurementCondUEidList ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo)) OF MeasurementCondUEidItem
+MeasurementCondUEidList-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofMeasurementInfo-KPMv2)) OF MeasurementCondUEidItem-KPMv2
 
-MeasurementCondUEidItem ::= SEQUENCE {
-	measType				MeasurementType,
-	matchingCond			MatchingCondList,
-	matchingUEidList		MatchingUEidList			OPTIONAL,
+MeasurementCondUEidItem-KPMv2 ::= SEQUENCE {
+	measType				MeasurementType-KPMv2,
+	matchingCond			MatchingCondList-KPMv2,
+	matchingUEidList		MatchingUEidList-KPMv2			OPTIONAL,
 	...
 }
 
-MatchingCondList ::= SEQUENCE (SIZE(1..maxnoofConditionInfo)) OF MatchingCondItem
+MatchingCondList-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofConditionInfo-KPMv2)) OF MatchingCondItem-KPMv2
 
-MatchingCondItem ::= CHOICE{
-	measLabel				MeasurementLabel,
-	testCondInfo			TestCondInfo,
+MatchingCondItem-KPMv2 ::= CHOICE{
+	measLabel				MeasurementLabel-KPMv2,
+	testCondInfo			TestCondInfo-KPMv2,
 	...
 }
 
-MatchingUEidList ::= SEQUENCE (SIZE(1..maxnoofUEID)) OF MatchingUEidItem
+MatchingUEidList-KPMv2 ::= SEQUENCE (SIZE(1..maxnoofUEID-KPMv2)) OF MatchingUEidItem-KPMv2
 
-MatchingUEidItem ::= SEQUENCE{
-	ueID					UE-Identity,
+MatchingUEidItem-KPMv2 ::= SEQUENCE{
+	ueID					UE-Identity-KPMv2,
 	...
 }
 
@@ -348,7 +348,7 @@ E2SM-KPMv2-EventTriggerDefinition-Format1 ::= SEQUENCE{
 -- **************************************************************
 
 E2SM-KPMv2-ActionDefinition ::= SEQUENCE{
-	ric-Style-Type					RIC-Style-Type,
+	ric-Style-Type					RIC-Style-Type-KPMv2,
 	actionDefinition-formats 	CHOICE{
 		actionDefinition-Format1		E2SM-KPMv2-ActionDefinition-Format1,
 		actionDefinition-Format2		E2SM-KPMv2-ActionDefinition-Format2,
@@ -359,24 +359,24 @@ E2SM-KPMv2-ActionDefinition ::= SEQUENCE{
 }
 
 E2SM-KPMv2-ActionDefinition-Format1 ::= SEQUENCE {
-	cellObjID						CellObjectID,
-	measInfoList					MeasurementInfoList,
-	granulPeriod					GranularityPeriod,
-	subscriptID						SubscriptionID,
+	cellObjID						CellObjectID-KPMv2,
+	measInfoList					MeasurementInfoList-KPMv2,
+	granulPeriod					GranularityPeriod-KPMv2,
+	subscriptID						SubscriptionID-KPMv2,
 	...
 }
 
 E2SM-KPMv2-ActionDefinition-Format2 ::= SEQUENCE {
-	ueID							UE-Identity,
+	ueID							UE-Identity-KPMv2,
 	subscriptInfo					E2SM-KPMv2-ActionDefinition-Format1,
 	...
 }
 
 E2SM-KPMv2-ActionDefinition-Format3 ::= SEQUENCE {
-	cellObjID						CellObjectID,
-	measCondList					MeasurementCondList,
-	granulPeriod					GranularityPeriod,
-	subscriptID						SubscriptionID,
+	cellObjID						CellObjectID-KPMv2,
+	measCondList					MeasurementCondList-KPMv2,
+	granulPeriod					GranularityPeriod-KPMv2,
+	subscriptID						SubscriptionID-KPMv2,
 	...
 }
 
@@ -393,12 +393,12 @@ E2SM-KPMv2-IndicationHeader ::= SEQUENCE{
 }
 
 E2SM-KPMv2-IndicationHeader-Format1 ::= SEQUENCE{
-	colletStartTime				TimeStamp,
+	colletStartTime				TimeStamp-KPMv2,
 	fileFormatversion				PrintableString (SIZE (0..15), ...)		OPTIONAL,
 	senderName						PrintableString (SIZE (0..400), ...)	OPTIONAL,
 	senderType						PrintableString (SIZE (0..8), ...)		OPTIONAL,
 	vendorName						PrintableString (SIZE (0..32), ...)		OPTIONAL,
-	kpmNodeID						GlobalKPMv2node-ID						OPTIONAL,
+	kpmNodeID						GlobalKPMnode-ID-KPMv2						OPTIONAL,
 	...
 }
 
@@ -416,20 +416,20 @@ E2SM-KPMv2-IndicationMessage ::= SEQUENCE{
 }
 
 E2SM-KPMv2-IndicationMessage-Format1 ::= SEQUENCE {
-	subscriptID						SubscriptionID,
-	cellObjID						CellObjectID							OPTIONAL,
-	granulPeriod					GranularityPeriod 						OPTIONAL,
-	measInfoList					MeasurementInfoList						OPTIONAL,
-	measData							MeasurementData,
+	subscriptID						SubscriptionID-KPMv2,
+	cellObjID						CellObjectID-KPMv2							OPTIONAL,
+	granulPeriod					GranularityPeriod-KPMv2 						OPTIONAL,
+	measInfoList					MeasurementInfoList-KPMv2						OPTIONAL,
+	measData							MeasurementData-KPMv2,
 	...
 }
 
 E2SM-KPMv2-IndicationMessage-Format2 ::= SEQUENCE {
-	subscriptID						SubscriptionID,
-	cellObjID						CellObjectID							OPTIONAL,
-	granulPeriod					GranularityPeriod 						OPTIONAL,
-	measCondUEidList				MeasurementCondUEidList,
-	measData						MeasurementData,
+	subscriptID						SubscriptionID-KPMv2,
+	cellObjID						CellObjectID-KPMv2							OPTIONAL,
+	granulPeriod					GranularityPeriod-KPMv2 						OPTIONAL,
+	measCondUEidList				MeasurementCondUEidList-KPMv2,
+	measData						MeasurementData-KPMv2,
 	...
 }
 
@@ -438,39 +438,39 @@ E2SM-KPMv2-IndicationMessage-Format2 ::= SEQUENCE {
 -- ***************************************************************
 
 E2SM-KPMv2-RANfunction-Description ::= SEQUENCE{
-	ranFunction-Name					RANfunction-Name,
-	ric-KPM-Node-List					SEQUENCE (SIZE(1..maxnoofKPMNodes)) OF RIC-KPMNode-Item 				OPTIONAL,
-	ric-EventTriggerStyle-List			SEQUENCE (SIZE(1..maxnoofRICStyles)) OF RIC-EventTriggerStyle-Item 		OPTIONAL,
-	ric-ReportStyle-List				SEQUENCE (SIZE(1..maxnoofRICStyles)) OF RIC-ReportStyle-Item 			OPTIONAL,
+	ranFunction-Name					RANfunction-Name-KPMv2,
+	ric-KPM-Node-List					SEQUENCE (SIZE(1..maxnoofKPMNodes-KPMv2)) OF RIC-KPMNode-Item-KPMv2 				OPTIONAL,
+	ric-EventTriggerStyle-List			SEQUENCE (SIZE(1..maxnoofRICStyles-KPMv2)) OF RIC-EventTriggerStyle-Item-KPMv2 		OPTIONAL,
+	ric-ReportStyle-List				SEQUENCE (SIZE(1..maxnoofRICStyles-KPMv2)) OF RIC-ReportStyle-Item-KPMv2 			OPTIONAL,
 	...
 }
 
-RIC-KPMNode-Item ::= SEQUENCE {
-	ric-KPMNode-Type					GlobalKPMv2node-ID,
-	cell-Measurement-Object-List		SEQUENCE (SIZE(1..maxnoofCells)) OF Cell-Measurement-Object-Item 		OPTIONAL,
+RIC-KPMNode-Item-KPMv2 ::= SEQUENCE {
+	ric-KPMNode-Type					GlobalKPMnode-ID-KPMv2,
+	cell-Measurement-Object-List		SEQUENCE (SIZE(1..maxnoofCells-KPMv2)) OF Cell-Measurement-Object-Item-KPMv2 		OPTIONAL,
 	...
 }
 
-Cell-Measurement-Object-Item ::= SEQUENCE {
-	cell-object-ID						CellObjectID,
-	cell-global-ID						CellGlobalID,
+Cell-Measurement-Object-Item-KPMv2 ::= SEQUENCE {
+	cell-object-ID						CellObjectID-KPMv2,
+	cell-global-ID						CellGlobalID-KPMv2,
 	...
 }
 
-RIC-EventTriggerStyle-Item ::= SEQUENCE{
-	ric-EventTriggerStyle-Type			RIC-Style-Type,
-	ric-EventTriggerStyle-Name			RIC-Style-Name,
-	ric-EventTriggerFormat-Type			RIC-Format-Type,
+RIC-EventTriggerStyle-Item-KPMv2 ::= SEQUENCE{
+	ric-EventTriggerStyle-Type			RIC-Style-Type-KPMv2,
+	ric-EventTriggerStyle-Name			RIC-Style-Name-KPMv2,
+	ric-EventTriggerFormat-Type			RIC-Format-Type-KPMv2,
 	...
 }
 
-RIC-ReportStyle-Item ::= SEQUENCE{
-	ric-ReportStyle-Type				RIC-Style-Type,
-	ric-ReportStyle-Name				RIC-Style-Name,
-	ric-ActionFormat-Type				RIC-Format-Type,
-	measInfo-Action-List				MeasurementInfo-Action-List, 
-	ric-IndicationHeaderFormat-Type		RIC-Format-Type,
-	ric-IndicationMessageFormat-Type	RIC-Format-Type,
+RIC-ReportStyle-Item-KPMv2 ::= SEQUENCE{
+	ric-ReportStyle-Type				RIC-Style-Type-KPMv2,
+	ric-ReportStyle-Name				RIC-Style-Name-KPMv2,
+	ric-ActionFormat-Type				RIC-Format-Type-KPMv2,
+	measInfo-Action-List				MeasurementInfo-Action-List-KPMv2,
+	ric-IndicationHeaderFormat-Type		RIC-Format-Type-KPMv2,
+	ric-IndicationMessageFormat-Type	RIC-Format-Type-KPMv2,
 	...
 }
 

@@ -12,10 +12,10 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "SubscriptionID.h"
-#include "CellObjectID.h"
-#include "GranularityPeriod.h"
-#include "MeasurementData.h"
+#include "SubscriptionID-KPMv2.h"
+#include "CellObjectID-KPMv2.h"
+#include "GranularityPeriod-KPMv2.h"
+#include "MeasurementData-KPMv2.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
@@ -23,15 +23,15 @@ extern "C" {
 #endif
 
 /* Forward declarations */
-struct MeasurementInfoList;
+struct MeasurementInfoList_KPMv2;
 
 /* E2SM-KPMv2-IndicationMessage-Format1 */
 typedef struct E2SM_KPMv2_IndicationMessage_Format1 {
-	SubscriptionID_t	 subscriptID;
-	CellObjectID_t	*cellObjID;	/* OPTIONAL */
-	GranularityPeriod_t	*granulPeriod;	/* OPTIONAL */
-	struct MeasurementInfoList	*measInfoList;	/* OPTIONAL */
-	MeasurementData_t	 measData;
+	SubscriptionID_KPMv2_t	 subscriptID;
+	CellObjectID_KPMv2_t	*cellObjID;	/* OPTIONAL */
+	GranularityPeriod_KPMv2_t	*granulPeriod;	/* OPTIONAL */
+	struct MeasurementInfoList_KPMv2	*measInfoList;	/* OPTIONAL */
+	MeasurementData_KPMv2_t	 measData;
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

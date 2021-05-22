@@ -12,7 +12,7 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "TimeStamp.h"
+#include "TimeStamp-KPMv2.h"
 #include "PrintableString.h"
 #include "constr_SEQUENCE.h"
 
@@ -21,16 +21,16 @@ extern "C" {
 #endif
 
 /* Forward declarations */
-struct GlobalKPMv2node_ID;
+struct GlobalKPMnode_ID_KPMv2;
 
 /* E2SM-KPMv2-IndicationHeader-Format1 */
 typedef struct E2SM_KPMv2_IndicationHeader_Format1 {
-	TimeStamp_t	 colletStartTime;
+	TimeStamp_KPMv2_t	 colletStartTime;
 	PrintableString_t	*fileFormatversion;	/* OPTIONAL */
 	PrintableString_t	*senderName;	/* OPTIONAL */
 	PrintableString_t	*senderType;	/* OPTIONAL */
 	PrintableString_t	*vendorName;	/* OPTIONAL */
-	struct GlobalKPMv2node_ID	*kpmNodeID;	/* OPTIONAL */
+	struct GlobalKPMnode_ID_KPMv2	*kpmNodeID;	/* OPTIONAL */
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.
