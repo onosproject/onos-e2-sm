@@ -12,7 +12,7 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "UE-Identity.h"
+#include "UE-Identity-KPMv2.h"
 #include "E2SM-KPMv2-ActionDefinition-Format1.h"
 #include "constr_SEQUENCE.h"
 
@@ -22,7 +22,7 @@ extern "C" {
 
 /* E2SM-KPMv2-ActionDefinition-Format2 */
 typedef struct E2SM_KPMv2_ActionDefinition_Format2 {
-	UE_Identity_t	 ueID;
+	UE_Identity_KPMv2_t	 ueID;
 	E2SM_KPMv2_ActionDefinition_Format1_t	 subscriptInfo;
 	/*
 	 * This type is extensible,

@@ -11,7 +11,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_ActionDefinition_Format2_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct E2SM_KPMv2_ActionDefinition_Format2, ueID),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_UE_Identity,
+		&asn_DEF_UE_Identity_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */

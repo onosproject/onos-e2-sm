@@ -12,7 +12,7 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "RIC-Style-Type.h"
+#include "RIC-Style-Type-KPMv2.h"
 #include "constr_CHOICE.h"
 #include "constr_SEQUENCE.h"
 
@@ -37,7 +37,7 @@ struct E2SM_KPMv2_ActionDefinition_Format3;
 
 /* E2SM-KPMv2-ActionDefinition */
 typedef struct E2SM_KPMv2_ActionDefinition {
-	RIC_Style_Type_t	 ric_Style_Type;
+	RIC_Style_Type_KPMv2_t	 ric_Style_Type;
 	struct E2SM_KPMv2_ActionDefinition__actionDefinition_formats {
 		E2SM_KPMv2_ActionDefinition__actionDefinition_formats_PR present;
 		union E2SM_KPMv2_ActionDefinition__actionDefinition_formats_u {

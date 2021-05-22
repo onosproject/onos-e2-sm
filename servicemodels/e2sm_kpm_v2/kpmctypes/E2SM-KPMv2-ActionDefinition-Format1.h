@@ -12,10 +12,10 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "CellObjectID.h"
-#include "MeasurementInfoList.h"
-#include "GranularityPeriod.h"
-#include "SubscriptionID.h"
+#include "CellObjectID-KPMv2.h"
+#include "MeasurementInfoList-KPMv2.h"
+#include "GranularityPeriod-KPMv2.h"
+#include "SubscriptionID-KPMv2.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
@@ -24,10 +24,10 @@ extern "C" {
 
 /* E2SM-KPMv2-ActionDefinition-Format1 */
 typedef struct E2SM_KPMv2_ActionDefinition_Format1 {
-	CellObjectID_t	 cellObjID;
-	MeasurementInfoList_t	 measInfoList;
-	GranularityPeriod_t	 granulPeriod;
-	SubscriptionID_t	 subscriptID;
+	CellObjectID_KPMv2_t	 cellObjID;
+	MeasurementInfoList_KPMv2_t	 measInfoList;
+	GranularityPeriod_KPMv2_t	 granulPeriod;
+	SubscriptionID_KPMv2_t	 subscriptID;
 	/*
 	 * This type is extensible,
 	 * possible extensions are below.

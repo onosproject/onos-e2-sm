@@ -11,7 +11,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_IndicationMessage_Format2_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct E2SM_KPMv2_IndicationMessage_Format2, subscriptID),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_SubscriptionID,
+		&asn_DEF_SubscriptionID_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -20,7 +20,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_IndicationMessage_Format2_1[] = {
 	{ ATF_POINTER, 2, offsetof(struct E2SM_KPMv2_IndicationMessage_Format2, cellObjID),
 		(ASN_TAG_CLASS_CONTEXT | (1 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_CellObjectID,
+		&asn_DEF_CellObjectID_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -29,7 +29,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_IndicationMessage_Format2_1[] = {
 	{ ATF_POINTER, 1, offsetof(struct E2SM_KPMv2_IndicationMessage_Format2, granulPeriod),
 		(ASN_TAG_CLASS_CONTEXT | (2 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_GranularityPeriod,
+		&asn_DEF_GranularityPeriod_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -38,7 +38,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_IndicationMessage_Format2_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct E2SM_KPMv2_IndicationMessage_Format2, measCondUEidList),
 		(ASN_TAG_CLASS_CONTEXT | (3 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_MeasurementCondUEidList,
+		&asn_DEF_MeasurementCondUEidList_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -47,7 +47,7 @@ asn_TYPE_member_t asn_MBR_E2SM_KPMv2_IndicationMessage_Format2_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct E2SM_KPMv2_IndicationMessage_Format2, measData),
 		(ASN_TAG_CLASS_CONTEXT | (4 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_MeasurementData,
+		&asn_DEF_MeasurementData_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */

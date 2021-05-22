@@ -83,7 +83,7 @@ asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_KPMv2_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID_KPMv2, plmn_id),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_PLMN_Identity,
+		&asn_DEF_PLMN_Identity_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */
@@ -92,7 +92,7 @@ asn_TYPE_member_t asn_MBR_GlobalngeNB_ID_KPMv2_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct GlobalngeNB_ID_KPMv2, enb_id),
 		(ASN_TAG_CLASS_CONTEXT | (1 << 2)),
 		+1,	/* EXPLICIT tag at current level */
-		&asn_DEF_ENB_ID_Choice,
+		&asn_DEF_ENB_ID_Choice_KPMv2,
 		0,
 		{ 0, 0, 0 },
 		0, 0, /* No default value */

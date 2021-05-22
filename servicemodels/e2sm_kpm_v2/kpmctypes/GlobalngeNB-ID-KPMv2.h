@@ -12,8 +12,8 @@
 #include "asn_application.h"
 
 /* Including external dependencies */
-#include "PLMN-Identity.h"
-#include "ENB-ID-Choice.h"
+#include "PLMN-Identity-KPMv2.h"
+#include "ENB-ID-Choice-KPMv2.h"
 #include "BIT_STRING.h"
 #include "constr_SEQUENCE.h"
 
@@ -23,8 +23,8 @@ extern "C" {
 
 /* GlobalngeNB-ID-KPMv2 */
 typedef struct GlobalngeNB_ID_KPMv2 {
-	PLMN_Identity_t	 plmn_id;
-	ENB_ID_Choice_t	 enb_id;
+	PLMN_Identity_KPMv2_t	 plmn_id;
+	ENB_ID_Choice_KPMv2_t	 enb_id;
 	BIT_STRING_t	 short_Macro_eNB_ID;
 	BIT_STRING_t	 long_Macro_eNB_ID;
 	/*
