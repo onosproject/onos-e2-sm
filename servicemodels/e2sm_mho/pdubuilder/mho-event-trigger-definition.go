@@ -8,6 +8,25 @@ import (
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 )
 
+func CreateE2SmMhoEventTriggerDefinition(triggerType e2sm_mho.MhoTriggerType, rtPeriod int32) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
+
+	eventDefinitionFormat1 := &e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1{
+		TriggerType:       triggerType,
+		ReportingPeriodMs: rtPeriod,
+	}
+
+	E2SmMhoPdu := e2sm_mho.E2SmMhoEventTriggerDefinition{
+		E2SmMhoEventTriggerDefinition: &e2sm_mho.E2SmMhoEventTriggerDefinition_EventDefinitionFormat1{
+			EventDefinitionFormat1: eventDefinitionFormat1,
+		},
+	}
+
+	if err := E2SmMhoPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmMhoPDU %s", err.Error())
+	}
+	return &E2SmMhoPdu, nil
+}
+
 func CreateE2SmMhoEventTriggerDefinitionPeriodic(rtPeriod int32) (*e2sm_mho.E2SmMhoEventTriggerDefinition, error) {
 
 	eventDefinitionFormat1 := &e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1{
