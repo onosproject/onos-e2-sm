@@ -9,15 +9,15 @@
 extern "C" {
 #endif
 
-#define maxofMessageProtocolTests (15)
-#define maxofRICstyles (63)
-#define maxPLMN (12)
-#define maxNR (4096)
-#define maxEARFCN (262143)
-#define maxNRARFCN (3279167)
-#define maxPCI (1007)
-#define maxPciRange (100)
-#define maxofRANparameters (65535)
+#define maxofMessageProtocolTests_RCPRE (15)
+#define maxofRICstyles_RCPRE (63)
+#define maxPLMN_RCPRE (12)
+#define maxNR_RCPRE (4096)
+#define maxEARFCN_RCPRE (262143)
+#define maxNRARFCN_RCPRE (3279167)
+#define maxPCI_RCPRE (1007)
+#define maxPciRange_RCPRE (100)
+#define maxofRANparameters_RCPRE (65535)
 
 
 #ifdef __cplusplus

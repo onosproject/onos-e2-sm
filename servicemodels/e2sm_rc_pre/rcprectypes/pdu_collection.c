@@ -4,24 +4,24 @@
 
 struct asn_TYPE_descriptor_s;	/* Forward declaration */
 
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_EventTriggerDefinition;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_IndicationHeader;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_IndicationMessage;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_ControlHeader;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_ControlMessage;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_ControlOutcome;
-extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_RANfunction_Description;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_RCPRE;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_IndicationHeader_RCPRE;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_IndicationMessage_RCPRE;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_ControlHeader_RCPRE;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_ControlMessage_RCPRE;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_ControlOutcome_RCPRE;
+extern struct asn_TYPE_descriptor_s asn_DEF_E2SM_RC_PRE_RANfunction_Description_RCPRE;
 
 
 struct asn_TYPE_descriptor_s *asn_pdu_collection[] = {
 	/* From module E2SM-RC-PRE-IEs in ../v2/e2sm-rc-pre_v2_rsys.asn */
-	&asn_DEF_E2SM_RC_PRE_EventTriggerDefinition,	
-	&asn_DEF_E2SM_RC_PRE_IndicationHeader,	
-	&asn_DEF_E2SM_RC_PRE_IndicationMessage,	
-	&asn_DEF_E2SM_RC_PRE_ControlHeader,	
-	&asn_DEF_E2SM_RC_PRE_ControlMessage,	
-	&asn_DEF_E2SM_RC_PRE_ControlOutcome,	
-	&asn_DEF_E2SM_RC_PRE_RANfunction_Description,	
+	&asn_DEF_E2SM_RC_PRE_EventTriggerDefinition_RCPRE,	
+	&asn_DEF_E2SM_RC_PRE_IndicationHeader_RCPRE,	
+	&asn_DEF_E2SM_RC_PRE_IndicationMessage_RCPRE,	
+	&asn_DEF_E2SM_RC_PRE_ControlHeader_RCPRE,	
+	&asn_DEF_E2SM_RC_PRE_ControlMessage_RCPRE,	
+	&asn_DEF_E2SM_RC_PRE_ControlOutcome_RCPRE,	
+	&asn_DEF_E2SM_RC_PRE_RANfunction_Description_RCPRE,	
 	0
 };
 
