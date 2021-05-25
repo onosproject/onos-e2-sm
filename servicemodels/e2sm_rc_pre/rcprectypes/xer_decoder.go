@@ -9,7 +9,7 @@ package rcprectypes
 // #include <stdio.h>
 // #include <stdlib.h>
 // #include <assert.h>
-// #include "E2SM-RC-PRE-IndicationMessage.h"
+// #include "E2SM-RC-PRE-IndicationMessage-RCPRE.h"
 import "C"
 import (
 	"fmt"

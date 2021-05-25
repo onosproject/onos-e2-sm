@@ -1,4 +1,4 @@
-<E2SM-RC-PRE-IndicationHeader>
+<E2SM-RC-PRE-IndicationHeader-RCPRE>
     <indicationHeader-Format1>
         <cgi>
             <eUTRA-CGI>
@@ -9,4 +9,4 @@
             </eUTRA-CGI>
         </cgi>
     </indicationHeader-Format1>
-</E2SM-RC-PRE-IndicationHeader>
+</E2SM-RC-PRE-IndicationHeader-RCPRE>

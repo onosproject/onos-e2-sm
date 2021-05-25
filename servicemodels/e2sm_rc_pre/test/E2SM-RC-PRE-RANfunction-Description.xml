@@ -1,4 +1,4 @@
-<E2SM-RC-PRE-RANfunction-Description>
+<E2SM-RC-PRE-RANfunction-Description-RCPRE>
     <ranFunction-Name>
         <ranFunction-ShortName>ORAN-E2SM-RC-PRE</ranFunction-ShortName>
         <ranFunction-E2SM-OID>OID123</ranFunction-E2SM-OID>
@@ -7,19 +7,19 @@
     </ranFunction-Name>
     <e2SM-RC-PRE-RANfunction-Item>
         <ric-EventTriggerStyle-List>
-            <RIC-EventTriggerStyle-List>
+            <RIC-EventTriggerStyle-List-RCPRE>
                 <ric-EventTriggerStyle-Type>1</ric-EventTriggerStyle-Type>
                 <ric-EventTriggerStyle-Name>Periodic report</ric-EventTriggerStyle-Name>
                 <ric-EventTriggerFormat-Type>5</ric-EventTriggerFormat-Type>
-            </RIC-EventTriggerStyle-List>
+            </RIC-EventTriggerStyle-List-RCPRE>
         </ric-EventTriggerStyle-List>
         <ric-ReportStyle-List>
-            <RIC-ReportStyle-List>
+            <RIC-ReportStyle-List-RCPRE>
                 <ric-ReportStyle-Type>1</ric-ReportStyle-Type>
                 <ric-ReportStyle-Name>PCI and NRT update for eNB</ric-ReportStyle-Name>
                 <ric-IndicationHeaderFormat-Type>1</ric-IndicationHeaderFormat-Type>
                 <ric-IndicationMessageFormat-Type>1</ric-IndicationMessageFormat-Type>
-            </RIC-ReportStyle-List>
+            </RIC-ReportStyle-List-RCPRE>
         </ric-ReportStyle-List>
     </e2SM-RC-PRE-RANfunction-Item>
-</E2SM-RC-PRE-RANfunction-Description>
+</E2SM-RC-PRE-RANfunction-Description-RCPRE>
