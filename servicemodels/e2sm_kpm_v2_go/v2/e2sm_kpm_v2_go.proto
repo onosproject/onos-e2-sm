@@ -762,12 +762,12 @@ message TimeStamp {
 
 //{EUTRACellIdentity}
 message EutracellIdentity {
-    // @inject_tag: aper:"valueExt,valueLB:28,valueUB:28"
+    // @inject_tag: aper:"sizeLB:28,sizeUB:28"
     asn1.v1.BitString value = 1 [json_name = "value"]; //28
 }
 
 //{NRCellIdentity}
 message NrcellIdentity {
-    // @inject_tag: aper:"valueExt,valueLB:36,valueUB:36"
+    // @inject_tag: aper:"sizeLB:36,sizeUB:36"
     asn1.v1.BitString value = 1 [json_name = "value"]; //36
 }

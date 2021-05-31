@@ -39,11 +39,12 @@ func Test_perDecodeEutracellIdentity(t *testing.T) {
 	per, err := aper.Marshal(*eCellID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 8, len(per))
-	t.Logf("EutracellIdentity PER\n%s", hex.Dump(per))
+	t.Logf("EutracellIdentity PER\n%v", hex.Dump(per))
 
-	result := aper.Unmarshal(per, e2sm_kpm_v2_go.EutracellIdentity{})
+	result := e2sm_kpm_v2_go.EutracellIdentity{}
+	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, result != nil)
+	assert.Assert(t, &result != nil)
 	t.Logf("EutracellIdentity PER - decoded\n%v", result)
 
 	//Comparing with reference bytes

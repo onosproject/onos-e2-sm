@@ -5886,8 +5886,8 @@ type EutracellIdentity struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt,valueLB:28,valueUB:28"
-	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:28,valueUB:28"` //28
+	// @inject_tag: aper:"sizeLB:28,sizeUB:28"
+	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:28,sizeUB:28"` //28
 }
 
 func (x *EutracellIdentity) Reset() {
@@ -5935,8 +5935,8 @@ type NrcellIdentity struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt,valueLB:36,valueUB:36"
-	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:36,valueUB:36"` //36
+	// @inject_tag: aper:"sizeLB:36,sizeUB:36"
+	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:36,sizeUB:36"` //36
 }
 
 func (x *NrcellIdentity) Reset() {
