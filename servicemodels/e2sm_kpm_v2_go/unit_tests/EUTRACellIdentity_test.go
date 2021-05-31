@@ -36,12 +36,12 @@ func Test_perDecodeEutracellIdentity(t *testing.T) {
 
 	eCellID := createEutracellIdentity()
 
-	per, err := aper.MarshalWithParams(*eCellID, "valueExt")
+	per, err := aper.Marshal(*eCellID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 8, len(per))
 	t.Logf("EutracellIdentity PER\n%s", hex.Dump(per))
 
-	result := aper.UnmarshalWithParams(per, e2sm_kpm_v2_go.EutracellIdentity{}, "valueExt")
+	result := aper.Unmarshal(per, e2sm_kpm_v2_go.EutracellIdentity{})
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("EutracellIdentity PER - decoded\n%v", result)
