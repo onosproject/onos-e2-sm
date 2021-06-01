@@ -14,34 +14,33 @@ import (
 	"testing"
 )
 
-var refPerEutraCellIdentity = "00000000  d4 bc 09 00                                       |....|"
+var refPerNrCellID = "00000000  d4 bc 09 00 00                                    |.....|"
 
-func createEutracellIdentity() *e2sm_kpm_v2_go.EutracellIdentity {
-
-	return &e2sm_kpm_v2_go.EutracellIdentity{
+func createNrcellIdentity() *e2sm_kpm_v2_go.NrcellIdentity {
+	return &e2sm_kpm_v2_go.NrcellIdentity{
 		Value: &asn1.BitString{
 			Value: 0x9bcd4,
-			Len:   28,
+			Len:   36,
 		},
 	}
 }
 
-func Test_perDecodeEutracellIdentity(t *testing.T) {
+func Test_perEncodingNrCellIdentity(t *testing.T) {
 
-	eCellID := createEutracellIdentity()
+	nrCgi := createNrcellIdentity()
 
-	per, err := aper.Marshal(*eCellID)
+	per, err := aper.Marshal(*nrCgi)
 	assert.NilError(t, err)
-	t.Logf("EutraCellIdentity PER\n%v", hex.Dump(per))
+	t.Logf("NrCellIdentity PER\n%s", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.EutracellIdentity{}
+	result := e2sm_kpm_v2_go.NrcellIdentity{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("EutraCellIdentity PER - decoded\n%v", result)
+	t.Logf("NrCellIdentity PER - decoded\n%v", result)
 
 	//Comparing with reference bytes
-	perRefBytes, err := hexlib.DumpToByte(refPerEutraCellIdentity)
+	perRefBytes, err := hexlib.DumpToByte(refPerNrCellID)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }

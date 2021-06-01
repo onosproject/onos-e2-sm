@@ -16,7 +16,7 @@ import (
 	"testing"
 )
 
-var refPer = "00000000  40 4f 4e 46 d4 bc 09 00                           |@ONF....|"
+var refPerCellGlobalID = "00000000  40 4f 4e 46 d4 bc 09 00                           |@ONF....|"
 
 func TestMain(m *testing.M) {
 	log := logging.GetLogger("asn1")
@@ -49,16 +49,17 @@ func Test_perDecodeCellGlobalID(t *testing.T) {
 
 	per, err := aper.MarshalWithParams(*cellGlobalID, "valueExt")
 	assert.NilError(t, err)
-	//assert.Equal(t, 8, len(per))
 	t.Logf("CellGlobalID PER\n%s", hex.Dump(per))
 
-	result := aper.UnmarshalWithParams(per, e2sm_kpm_v2_go.CellGlobalId{}, "valueExt")
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	result := e2sm_kpm_v2_go.CellGlobalId{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, result != nil)
+	assert.Assert(t, &result != nil)
 	t.Logf("CellGlobalID PER - decoded\n%v", result)
 
 	//Comparing with reference bytes
-	perRefBytes, err := hexlib.DumpToByte(refPer)
+	perRefBytes, err := hexlib.DumpToByte(refPerCellGlobalID)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }

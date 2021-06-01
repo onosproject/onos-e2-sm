@@ -653,12 +653,12 @@ type CellGlobalId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:36
-	// @inject_tag: aper:"valueExt,valueUB:2"
+	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to CellGlobalId:
 	//	*CellGlobalId_NrCgi
 	//	*CellGlobalId_EUtraCgi
-	CellGlobalId isCellGlobalId_CellGlobalId `protobuf_oneof:"cell_global_id" aper:"valueExt,valueUB:2"`
+	CellGlobalId isCellGlobalId_CellGlobalId `protobuf_oneof:"cell_global_id" aper:"valueUB:2"`
 }
 
 func (x *CellGlobalId) Reset() {
@@ -1049,12 +1049,12 @@ type MeasurementType struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:66
-	// @inject_tag: aper:"valueExt,valueUB:2"
+	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to MeasurementType:
 	//	*MeasurementType_MeasName
 	//	*MeasurementType_MeasId
-	MeasurementType isMeasurementType_MeasurementType `protobuf_oneof:"measurement_type" aper:"valueExt,valueUB:2"`
+	MeasurementType isMeasurementType_MeasurementType `protobuf_oneof:"measurement_type" aper:"valueUB:2"`
 }
 
 func (x *MeasurementType) Reset() {
@@ -1495,7 +1495,7 @@ type TestCondType struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:106
-	// @inject_tag: aper:"valueExt,valueUB:6,"
+	// @inject_tag: aper:"valueUB:6,"
 	//
 	// Types that are assignable to TestCondType:
 	//	*TestCondType_GBr
@@ -1504,7 +1504,7 @@ type TestCondType struct {
 	//	*TestCondType_IsCatM
 	//	*TestCondType_RSrp
 	//	*TestCondType_RSrq
-	TestCondType isTestCondType_TestCondType `protobuf_oneof:"test_cond_type" aper:"valueExt,valueUB:6,"`
+	TestCondType isTestCondType_TestCondType `protobuf_oneof:"test_cond_type" aper:"valueUB:6,"`
 }
 
 func (x *TestCondType) Reset() {
@@ -1642,7 +1642,7 @@ type TestCondValue struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:125
-	// @inject_tag: aper:"valueExt,valueUB:6"
+	// @inject_tag: aper:"valueUB:6"
 	//
 	// Types that are assignable to TestCondValue:
 	//	*TestCondValue_ValueInt
@@ -1651,7 +1651,7 @@ type TestCondValue struct {
 	//	*TestCondValue_ValueBitS
 	//	*TestCondValue_ValueOctS
 	//	*TestCondValue_ValuePrtS
-	TestCondValue isTestCondValue_TestCondValue `protobuf_oneof:"test_cond_value" aper:"valueExt,valueUB:6"`
+	TestCondValue isTestCondValue_TestCondValue `protobuf_oneof:"test_cond_value" aper:"valueUB:6"`
 }
 
 func (x *TestCondValue) Reset() {
@@ -1789,14 +1789,14 @@ type GlobalKpmnodeId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:137
-	// @inject_tag: aper:"valueExt,valueUB:4"
+	// @inject_tag: aper:"valueUB:4"
 	//
 	// Types that are assignable to GlobalKpmnodeId:
 	//	*GlobalKpmnodeId_GNb
 	//	*GlobalKpmnodeId_EnGNb
 	//	*GlobalKpmnodeId_NgENb
 	//	*GlobalKpmnodeId_ENb
-	GlobalKpmnodeId isGlobalKpmnodeId_GlobalKpmnodeId `protobuf_oneof:"global_kpmnode_id" aper:"valueExt,valueUB:4"`
+	GlobalKpmnodeId isGlobalKpmnodeId_GlobalKpmnodeId `protobuf_oneof:"global_kpmnode_id" aper:"valueUB:4"`
 }
 
 func (x *GlobalKpmnodeId) Reset() {
@@ -2326,11 +2326,11 @@ type EngnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:180
-	// @inject_tag: aper:"valueExt,valueUB:1"
+	// @inject_tag: aper:"valueUB:1"
 	//
 	// Types that are assignable to EngnbId:
 	//	*EngnbId_GNbId
-	EngnbId isEngnbId_EngnbId `protobuf_oneof:"engnb_id" aper:"valueExt,valueUB:1"`
+	EngnbId isEngnbId_EngnbId `protobuf_oneof:"engnb_id" aper:"valueUB:1"`
 }
 
 func (x *EngnbId) Reset() {
@@ -2531,13 +2531,13 @@ type EnbIdChoice struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:199
-	// @inject_tag: aper:"valueExt,valueUB:3"
+	// @inject_tag: aper:"valueUB:3"
 	//
 	// Types that are assignable to EnbIdChoice:
 	//	*EnbIdChoice_EnbIdMacro
 	//	*EnbIdChoice_EnbIdShortmacro
 	//	*EnbIdChoice_EnbIdLongmacro
-	EnbIdChoice isEnbIdChoice_EnbIdChoice `protobuf_oneof:"enb_id_choice" aper:"valueExt,valueUB:3"`
+	EnbIdChoice isEnbIdChoice_EnbIdChoice `protobuf_oneof:"enb_id_choice" aper:"valueUB:3"`
 }
 
 func (x *EnbIdChoice) Reset() {
@@ -2739,12 +2739,12 @@ type EnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:217
-	// @inject_tag: aper:"valueExt,valueUB:2"
+	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to EnbId:
 	//	*EnbId_MacroENbId
 	//	*EnbId_HomeENbId
-	EnbId isEnbId_EnbId `protobuf_oneof:"enb_id" aper:"valueExt,valueUB:2"`
+	EnbId isEnbId_EnbId `protobuf_oneof:"enb_id" aper:"valueUB:2"`
 }
 
 func (x *EnbId) Reset() {
@@ -4300,12 +4300,12 @@ type MatchingCondItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:313
-	// @inject_tag: aper:"valueExt,sizeUB:2"
+	// @inject_tag: aper:"sizeUB:2"
 	//
 	// Types that are assignable to MatchingCondItem:
 	//	*MatchingCondItem_MeasLabel
 	//	*MatchingCondItem_TestCondInfo
-	MatchingCondItem isMatchingCondItem_MatchingCondItem `protobuf_oneof:"matching_cond_item" aper:"valueExt,sizeUB:2"`
+	MatchingCondItem isMatchingCondItem_MatchingCondItem `protobuf_oneof:"matching_cond_item" aper:"sizeUB:2"`
 }
 
 func (x *MatchingCondItem) Reset() {
@@ -4486,11 +4486,11 @@ type E2SmKpmEventTriggerDefinition struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm-kpm-ies_v2.asn1:337
-	// @inject_tag: aper:"valueExt,valueLB:1,valueUB:1"
+	// @inject_tag: aper:"valueLB:1,valueUB:1"
 	//
 	// Types that are assignable to E2SmKpmEventTriggerDefinition:
 	//	*E2SmKpmEventTriggerDefinition_EventDefinitionFormat1
-	E2SmKpmEventTriggerDefinition isE2SmKpmEventTriggerDefinition_E2SmKpmEventTriggerDefinition `protobuf_oneof:"e2_sm_kpm_event_trigger_definition" aper:"valueExt,valueLB:1,valueUB:1"`
+	E2SmKpmEventTriggerDefinition isE2SmKpmEventTriggerDefinition_E2SmKpmEventTriggerDefinition `protobuf_oneof:"e2_sm_kpm_event_trigger_definition" aper:"valueLB:1,valueUB:1"`
 }
 
 func (x *E2SmKpmEventTriggerDefinition) Reset() {
@@ -4609,13 +4609,13 @@ type E2SmKpmActionDefinition struct {
 	unknownFields protoimpl.UnknownFields
 
 	RicStyleType *RicStyleType `protobuf:"bytes,1,opt,name=ric_style_type,json=ric-Style-Type,proto3" json:"ric_style_type,omitempty"`
-	// @inject_tag: aper:"valueExt,valueUB:3"
+	// @inject_tag: aper:"valueUB:3"
 	//
 	// Types that are assignable to E2SmKpmActionDefinition:
 	//	*E2SmKpmActionDefinition_ActionDefinitionFormat1
 	//	*E2SmKpmActionDefinition_ActionDefinitionFormat2
 	//	*E2SmKpmActionDefinition_ActionDefinitionFormat3
-	E2SmKpmActionDefinition isE2SmKpmActionDefinition_E2SmKpmActionDefinition `protobuf_oneof:"e2_sm_kpm_action_definition" aper:"valueExt,valueUB:3"`
+	E2SmKpmActionDefinition isE2SmKpmActionDefinition_E2SmKpmActionDefinition `protobuf_oneof:"e2_sm_kpm_action_definition" aper:"valueUB:3"`
 }
 
 func (x *E2SmKpmActionDefinition) Reset() {
@@ -4924,11 +4924,11 @@ type E2SmKpmIndicationHeader struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm-kpm-v01.00.asn1:391
-	// @inject_tag: aper:"valueExt,valueUB:1"
+	// @inject_tag: aper:"valueUB:1"
 	//
 	// Types that are assignable to E2SmKpmIndicationHeader:
 	//	*E2SmKpmIndicationHeader_IndicationHeaderFormat1
-	E2SmKpmIndicationHeader isE2SmKpmIndicationHeader_E2SmKpmIndicationHeader `protobuf_oneof:"e2_sm_kpm_indication_header" aper:"valueExt,valueUB:1"`
+	E2SmKpmIndicationHeader isE2SmKpmIndicationHeader_E2SmKpmIndicationHeader `protobuf_oneof:"e2_sm_kpm_indication_header" aper:"valueUB:1"`
 }
 
 func (x *E2SmKpmIndicationHeader) Reset() {
@@ -5090,12 +5090,12 @@ type E2SmKpmIndicationMessage struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_ies_v2.asn:414
-	// @inject_tag: aper:"valueExt,valueUB:2"
+	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to E2SmKpmIndicationMessage:
 	//	*E2SmKpmIndicationMessage_IndicationMessageFormat1
 	//	*E2SmKpmIndicationMessage_IndicationMessageFormat2
-	E2SmKpmIndicationMessage isE2SmKpmIndicationMessage_E2SmKpmIndicationMessage `protobuf_oneof:"e2_sm_kpm_indication_message" aper:"valueExt,valueUB:2"`
+	E2SmKpmIndicationMessage isE2SmKpmIndicationMessage_E2SmKpmIndicationMessage `protobuf_oneof:"e2_sm_kpm_indication_message" aper:"valueUB:2"`
 }
 
 func (x *E2SmKpmIndicationMessage) Reset() {
