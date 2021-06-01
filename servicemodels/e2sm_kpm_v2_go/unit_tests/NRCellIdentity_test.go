@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package kpmv2ctypes
+package kpmv2
 
 import (
 	"encoding/hex"
@@ -31,7 +31,7 @@ func Test_perEncodingNrCellIdentity(t *testing.T) {
 
 	per, err := aper.Marshal(*nrCgi)
 	assert.NilError(t, err)
-	t.Logf("NrCellIdentity PER\n%s", hex.Dump(per))
+	t.Logf("NrCellIdentity PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.NrcellIdentity{}
 	err = aper.Unmarshal(per, &result)

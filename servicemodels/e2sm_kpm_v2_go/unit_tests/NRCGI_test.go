@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package kpmv2ctypes
+package kpmv2
 
 import (
 	"encoding/hex"
@@ -36,7 +36,7 @@ func Test_perEncodingNrCGI(t *testing.T) {
 
 	per, err := aper.MarshalWithParams(*nrCgi, "valueExt")
 	assert.NilError(t, err)
-	t.Logf("NrCGI PER\n%s", hex.Dump(per))
+	t.Logf("NrCGI PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Nrcgi{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")

@@ -13,26 +13,31 @@ import (
 	"testing"
 )
 
-var refPerPlmnID = "00000000  21 22 23                                          |!\"#|"
+var refPerCellObjectID = "00000000  00 00 03 31 32 33                                 |...123|"
 
-func Test_perEncodingPlmnID(t *testing.T) {
+func createCellObjectID() *e2sm_kpm_v2_go.CellObjectId {
 
-	plmnID := e2sm_kpm_v2_go.PlmnIdentity{
-		Value: []byte{0x21, 0x22, 0x23},
+	return &e2sm_kpm_v2_go.CellObjectId{
+		Value: "123",
 	}
+}
 
-	per, err := aper.Marshal(plmnID)
+func Test_perEncodingCellObjectID(t *testing.T) {
+
+	coID := createCellObjectID()
+
+	per, err := aper.MarshalWithParams(*coID, "valueExt")
 	assert.NilError(t, err)
-	t.Logf("PLMN-Identity PER\n%v", hex.Dump(per))
+	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.PlmnIdentity{}
-	err = aper.Unmarshal(per, &result)
+	result := e2sm_kpm_v2_go.CellObjectId{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("PLMN-Identity PER - decoded\n%v", result)
+	t.Logf("CellObjectID PER - decoded\n%v", result)
 
 	//Comparing with reference bytes
-	perRefBytes, err := hexlib.DumpToByte(refPerPlmnID)
+	perRefBytes, err := hexlib.DumpToByte(refPerCellObjectID)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }

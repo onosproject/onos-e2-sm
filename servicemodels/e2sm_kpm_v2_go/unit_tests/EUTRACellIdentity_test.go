@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package kpmv2ctypes
+package kpmv2
 
 import (
 	"encoding/hex"
@@ -26,7 +26,7 @@ func createEutracellIdentity() *e2sm_kpm_v2_go.EutracellIdentity {
 	}
 }
 
-func Test_perDecodeEutracellIdentity(t *testing.T) {
+func Test_perEncodingEutracellIdentity(t *testing.T) {
 
 	eCellID := createEutracellIdentity()
 

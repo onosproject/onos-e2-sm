@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package kpmv2ctypes
+package kpmv2
 
 import (
 	"encoding/hex"
@@ -43,13 +43,13 @@ func createCellGlobalID() *e2sm_kpm_v2_go.CellGlobalId {
 	}
 }
 
-func Test_perDecodeCellGlobalID(t *testing.T) {
+func Test_perEncodingCellGlobalID(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID()
 
 	per, err := aper.MarshalWithParams(*cellGlobalID, "valueExt")
 	assert.NilError(t, err)
-	t.Logf("CellGlobalID PER\n%s", hex.Dump(per))
+	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.CellGlobalId{}
@@ -63,4 +63,3 @@ func Test_perDecodeCellGlobalID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }
-
