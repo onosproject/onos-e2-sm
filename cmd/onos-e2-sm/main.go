@@ -164,7 +164,7 @@ func (r *moduleResolver) fetchMod(target string) (*modfile.File, error) {
 
 	targetPath, _ := splitModPathVersion(target)
 
-	fakeModDir, err := ioutil.TempDir("", "config-plugin-target")
+	fakeModDir, err := ioutil.TempDir("", "onos-e2-sm-plugin")
 	if err != nil {
 		return nil, err
 	}
