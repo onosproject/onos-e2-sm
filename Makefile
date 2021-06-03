@@ -119,7 +119,7 @@ service-model-docker-e2sm_kpm_v2-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin D
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_kpm_v2" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
+			-t onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 	./build/bin/build-deps e2sm_kpm_v2 ${RAN_SIM_MOD} onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_kpm_v2" \
@@ -132,7 +132,7 @@ service-model-docker-e2sm_ni-1.0.0: # @HELP build e2sm_ni 1.0.0 plugin Docker im
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_ni" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-ransim-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
+			-t onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 	./build/bin/build-deps e2sm_ni ${RAN_SIM_MOD}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_ni" \
@@ -145,7 +145,7 @@ service-model-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin D
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+			-t onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	./build/bin/build-deps e2sm_rc_pre ${RAN_SIM_MOD}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre" \
@@ -158,7 +158,7 @@ service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker 
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_mho" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-ransim-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
+			-t onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 	./build/bin/build-deps e2sm_mho ${RAN_SIM_MOD}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_mho" \
