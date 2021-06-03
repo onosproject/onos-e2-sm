@@ -5480,7 +5480,8 @@ type CellMeasurementObjectItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	CellObjectId *CellObjectId `protobuf:"bytes,1,opt,name=cell_object_id,json=cell-object-ID,proto3" json:"cell_object_id,omitempty"`
-	CellGlobalId *CellGlobalId `protobuf:"bytes,2,opt,name=cell_global_id,json=cell-global-ID,proto3" json:"cell_global_id,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	CellGlobalId *CellGlobalId `protobuf:"bytes,2,opt,name=cell_global_id,json=cell-global-ID,proto3" json:"cell_global_id,omitempty" aper:"valueExt"`
 }
 
 func (x *CellMeasurementObjectItem) Reset() {

@@ -798,6 +798,7 @@ message RicKpmnodeItem {
 // {Cell-Measurement-Object-Item}
 message CellMeasurementObjectItem {
     CellObjectId cell_object_id = 1 [ json_name="cell-object-ID"];
+    // @inject_tag: aper:"valueExt"
     CellGlobalId cell_global_id = 2 [ json_name="cell-global-ID"];
 };
 
