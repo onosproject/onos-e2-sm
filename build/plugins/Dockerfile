@@ -3,15 +3,15 @@ ENV GO111MODULE=on
 ARG PLUGIN_MAKE_TARGET
 ARG PLUGIN_MAKE_VERSION
 
-COPY build/_input/${PLUGIN_MAKE_TARGET} /servicemodel
+COPY build/_input/${PLUGIN_MAKE_TARGET} /build
 
-WORKDIR /servicemodel
+WORKDIR /build
 
-RUN CGO_ENABLED=1 go build -o ${PLUGIN_MAKE_TARGET}.so.${PLUGIN_MAKE_VERSION} \
+RUN GOFLAGS=-mod=vendor CGO_ENABLED=1 go build -o ${PLUGIN_MAKE_TARGET}.so.${PLUGIN_MAKE_VERSION} \
     -buildmode=plugin github.com/onosproject/onos-e2-sm/servicemodels/${PLUGIN_MAKE_TARGET}
 
 FROM alpine:3.12
 ARG PLUGIN_MAKE_TARGET
 ARG PLUGIN_MAKE_VERSION
-COPY --from=pluginbuild /servicemodel/${PLUGIN_MAKE_TARGET}.so.${PLUGIN_MAKE_VERSION} /
+COPY --from=pluginbuild /build/${PLUGIN_MAKE_TARGET}.so.${PLUGIN_MAKE_VERSION} /
 
