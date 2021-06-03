@@ -40,7 +40,7 @@ func createCellMeasurementObjectItem() *e2sm_kpm_v2_go.CellMeasurementObjectItem
 	}
 }
 
-func Test_perDecodeCellMeasurementObjectItem(t *testing.T) {
+func Test_perEncodingCellMeasurementObjectItem(t *testing.T) {
 
 	cmoi := createCellMeasurementObjectItem()
 
