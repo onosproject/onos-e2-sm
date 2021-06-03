@@ -798,8 +798,8 @@ type FiveQi struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeExt,sizeLB:0,sizeUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:0,sizeUB:255"`
+	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
 }
 
 func (x *FiveQi) Reset() {
@@ -848,8 +848,8 @@ type Qci struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeExt,sizeLB:0,sizeUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:0,sizeUB:255"`
+	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
 }
 
 func (x *Qci) Reset() {
@@ -898,8 +898,8 @@ type Qfi struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeExt,sizeLB:0,sizeUB:63"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:0,sizeUB:63"`
+	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:63"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:63"`
 }
 
 func (x *Qfi) Reset() {
@@ -948,8 +948,8 @@ type Arp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:15"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:15"`
+	// @inject_tag: aper:"valueExt,valueLB:1,valueUB:15"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:1,valueUB:15"`
 }
 
 func (x *Arp) Reset() {
@@ -998,8 +998,8 @@ type GranularityPeriod struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1,sizeUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:1,sizeUB:4294967295"`
+	// @inject_tag: aper:"valueLB:1,valueUB:4294967295"
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:4294967295"`
 }
 
 func (x *GranularityPeriod) Reset() {
@@ -1135,8 +1135,8 @@ type MeasurementTypeId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:65536"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:65536"`
+	// @inject_tag: aper:"valueExt,valueLB:1,valueUB:65536"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:1,valueUB:65536"`
 }
 
 func (x *MeasurementTypeId) Reset() {
@@ -1203,18 +1203,18 @@ type MeasurementLabel struct {
 	ARpmax *Arp `protobuf:"bytes,8,opt,name=a_rpmax,json=aRPmax,proto3,oneof" json:"a_rpmax,omitempty" aper:"optional"`
 	// @inject_tag: aper:"optional"
 	ARpmin *Arp `protobuf:"bytes,9,opt,name=a_rpmin,json=aRPmin,proto3,oneof" json:"a_rpmin,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"
-	BitrateRange *int32 `protobuf:"varint,10,opt,name=bitrate_range,json=bitrateRange,proto3,oneof" json:"bitrate_range,omitempty" aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"
-	LayerMuMimo *int32 `protobuf:"varint,11,opt,name=layer_mu_mimo,json=layerMU-MIMO,proto3,oneof" json:"layer_mu_mimo,omitempty" aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+	BitrateRange *int32 `protobuf:"varint,10,opt,name=bitrate_range,json=bitrateRange,proto3,oneof" json:"bitrate_range,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+	LayerMuMimo *int32 `protobuf:"varint,11,opt,name=layer_mu_mimo,json=layerMU-MIMO,proto3,oneof" json:"layer_mu_mimo,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
 	SUm *SUM `protobuf:"varint,12,opt,name=s_um,json=sUM,proto3,enum=e2sm_kpm_v2_go.v2.SUM,oneof" json:"s_um,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:0"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"
-	DistBinX *int32 `protobuf:"varint,13,opt,name=dist_bin_x,json=distBinX,proto3,oneof" json:"dist_bin_x,omitempty" aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"
-	DistBinY *int32 `protobuf:"varint,14,opt,name=dist_bin_y,json=distBinY,proto3,oneof" json:"dist_bin_y,omitempty" aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"
-	DistBinZ *int32 `protobuf:"varint,15,opt,name=dist_bin_z,json=distBinZ,proto3,oneof" json:"dist_bin_z,omitempty" aper:"optional,sizeExt,sizeLB:1,sizeUB:65536"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+	DistBinX *int32 `protobuf:"varint,13,opt,name=dist_bin_x,json=distBinX,proto3,oneof" json:"dist_bin_x,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+	DistBinY *int32 `protobuf:"varint,14,opt,name=dist_bin_y,json=distBinY,proto3,oneof" json:"dist_bin_y,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+	DistBinZ *int32 `protobuf:"varint,15,opt,name=dist_bin_z,json=distBinZ,proto3,oneof" json:"dist_bin_z,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
 	PreLabelOverride *PreLabelOverride `protobuf:"varint,16,opt,name=pre_label_override,json=preLabelOverride,proto3,enum=e2sm_kpm_v2_go.v2.PreLabelOverride,oneof" json:"pre_label_override,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:0"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:1"
@@ -1379,8 +1379,8 @@ type SubscriptionId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1,sizeUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:1,sizeUB:4294967295"`
+	// @inject_tag: aper:"valueLB:1,valueUB:4294967295"
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:4294967295"`
 }
 
 func (x *SubscriptionId) Reset() {
@@ -1693,14 +1693,14 @@ func (m *TestCondValue) GetTestCondValue() isTestCondValue_TestCondValue {
 	return nil
 }
 
-func (x *TestCondValue) GetValueInt() int32 {
+func (x *TestCondValue) GetValueInt() int64 {
 	if x, ok := x.GetTestCondValue().(*TestCondValue_ValueInt); ok {
 		return x.ValueInt
 	}
 	return 0
 }
 
-func (x *TestCondValue) GetValueEnum() int32 {
+func (x *TestCondValue) GetValueEnum() int64 {
 	if x, ok := x.GetTestCondValue().(*TestCondValue_ValueEnum); ok {
 		return x.ValueEnum
 	}
@@ -1741,12 +1741,12 @@ type isTestCondValue_TestCondValue interface {
 
 type TestCondValue_ValueInt struct {
 	// @inject_tag: aper:"choiceIdx:1"
-	ValueInt int32 `protobuf:"varint,1,opt,name=value_int,json=valueInt,proto3,oneof" aper:"choiceIdx:1"`
+	ValueInt int64 `protobuf:"varint,1,opt,name=value_int,json=valueInt,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type TestCondValue_ValueEnum struct {
 	// @inject_tag: aper:"choiceIdx:2"
-	ValueEnum int32 `protobuf:"varint,2,opt,name=value_enum,json=valueEnum,proto3,oneof" aper:"choiceIdx:2"`
+	ValueEnum int64 `protobuf:"varint,2,opt,name=value_enum,json=valueEnum,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type TestCondValue_ValueBool struct {
@@ -1871,23 +1871,23 @@ type isGlobalKpmnodeId_GlobalKpmnodeId interface {
 }
 
 type GlobalKpmnodeId_GNb struct {
-	// @inject_tag: aper:"choiceIdx:1"
-	GNb *GlobalKpmnodeGnbId `protobuf:"bytes,1,opt,name=g_nb,json=gNB,proto3,oneof" aper:"choiceIdx:1"`
+	// @inject_tag: aper:"choiceIdx:1,valueExt,valueUB:4"
+	GNb *GlobalKpmnodeGnbId `protobuf:"bytes,1,opt,name=g_nb,json=gNB,proto3,oneof" aper:"choiceIdx:1,valueExt,valueUB:4"`
 }
 
 type GlobalKpmnodeId_EnGNb struct {
-	// @inject_tag: aper:"choiceIdx:2"
-	EnGNb *GlobalKpmnodeEnGnbId `protobuf:"bytes,2,opt,name=en_g_nb,json=en-gNB,proto3,oneof" aper:"choiceIdx:2"`
+	// @inject_tag: aper:"choiceIdx:2,valueExt,valueUB:4"
+	EnGNb *GlobalKpmnodeEnGnbId `protobuf:"bytes,2,opt,name=en_g_nb,json=en-gNB,proto3,oneof" aper:"choiceIdx:2,valueExt,valueUB:4"`
 }
 
 type GlobalKpmnodeId_NgENb struct {
-	// @inject_tag: aper:"choiceIdx:3"
-	NgENb *GlobalKpmnodeNgEnbId `protobuf:"bytes,3,opt,name=ng_e_nb,json=ng-eNB,proto3,oneof" aper:"choiceIdx:3"`
+	// @inject_tag: aper:"choiceIdx:3,valueExt,valueUB:4"
+	NgENb *GlobalKpmnodeNgEnbId `protobuf:"bytes,3,opt,name=ng_e_nb,json=ng-eNB,proto3,oneof" aper:"choiceIdx:3,valueExt,valueUB:4"`
 }
 
 type GlobalKpmnodeId_ENb struct {
-	// @inject_tag: aper:"choiceIdx:4"
-	ENb *GlobalKpmnodeEnbId `protobuf:"bytes,4,opt,name=e_nb,json=eNB,proto3,oneof" aper:"choiceIdx:4"`
+	// @inject_tag: aper:"choiceIdx:4,valueExt,valueUB:4"
+	ENb *GlobalKpmnodeEnbId `protobuf:"bytes,4,opt,name=e_nb,json=eNB,proto3,oneof" aper:"choiceIdx:4,valueExt,valueUB:4"`
 }
 
 func (*GlobalKpmnodeId_GNb) isGlobalKpmnodeId_GlobalKpmnodeId() {}
@@ -1905,7 +1905,8 @@ type GlobalKpmnodeGnbId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GlobalGNbId *GlobalgNbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	GlobalGNbId *GlobalgNbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty" aper:"valueExt"`
 	// @inject_tag: aper:"optional"
 	GNbCuUpId *GnbCuUpId `protobuf:"bytes,2,opt,name=g_nb_cu_up_id,json=gNB-CU-UP-ID,proto3,oneof" json:"g_nb_cu_up_id,omitempty" aper:"optional"`
 	// @inject_tag: aper:"optional"
@@ -2029,8 +2030,8 @@ type GnbCuUpId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:0,sizeUB:68719476735"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:0,sizeUB:68719476735"`
+	// @inject_tag: aper:"valueLB:0,valueUB:68719476735"
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:68719476735"`
 }
 
 func (x *GnbCuUpId) Reset() {
@@ -2079,8 +2080,8 @@ type GnbDuId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:0,sizeUB:68719476735"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:0,sizeUB:68719476735"`
+	// @inject_tag: aper:"valueLB:0,valueUB:68719476735"
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:68719476735"`
 }
 
 func (x *GnbDuId) Reset() {
@@ -2188,8 +2189,8 @@ type isGnbIdChoice_GnbIdChoice interface {
 }
 
 type GnbIdChoice_GnbId struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
-	GnbId *asn1.BitString `protobuf:"bytes,1,opt,name=gnb_id,json=gnb-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32"`
+	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"
+	GnbId *asn1.BitString `protobuf:"bytes,1,opt,name=gnb_id,json=gnb-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"`
 }
 
 func (*GnbIdChoice_GnbId) isGnbIdChoice_GnbIdChoice() {}
@@ -2201,7 +2202,8 @@ type GlobalKpmnodeEnGnbId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GlobalGNbId *GlobalenGnbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	GlobalGNbId *GlobalenGnbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty" aper:"valueExt"`
 	// @inject_tag: aper:"optional"
 	GNbCuUpId *GnbCuUpId `protobuf:"bytes,2,opt,name=g_nb_cu_up_id,json=gNB-CU-UP-ID,proto3,oneof" json:"g_nb_cu_up_id,omitempty" aper:"optional"`
 	// @inject_tag: aper:"optional"
@@ -2384,8 +2386,8 @@ type isEngnbId_EngnbId interface {
 }
 
 type EngnbId_GNbId struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
-	GNbId *asn1.BitString `protobuf:"bytes,1,opt,name=g_nb_id,json=gNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32"`
+	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"
+	GNbId *asn1.BitString `protobuf:"bytes,1,opt,name=g_nb_id,json=gNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"`
 }
 
 func (*EngnbId_GNbId) isEngnbId_EngnbId() {}
@@ -2397,7 +2399,8 @@ type GlobalKpmnodeNgEnbId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GlobalNgENbId *GlobalngeNbId `protobuf:"bytes,1,opt,name=global_ng_e_nb_id,json=global-ng-eNB-ID,proto3" json:"global_ng_e_nb_id,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	GlobalNgENbId *GlobalngeNbId `protobuf:"bytes,1,opt,name=global_ng_e_nb_id,json=global-ng-eNB-ID,proto3" json:"global_ng_e_nb_id,omitempty" aper:"valueExt"`
 	// @inject_tag: aper:"optional"
 	GNbDuId *GnbDuId `protobuf:"bytes,2,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3,oneof" json:"g_nb_du_id,omitempty" aper:"optional"`
 }
@@ -2632,7 +2635,8 @@ type GlobalKpmnodeEnbId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GlobalENbId *GlobalEnbId `protobuf:"bytes,1,opt,name=global_e_nb_id,json=global-eNB-ID,proto3" json:"global_e_nb_id,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	GlobalENbId *GlobalEnbId `protobuf:"bytes,1,opt,name=global_e_nb_id,json=global-eNB-ID,proto3" json:"global_e_nb_id,omitempty" aper:"valueExt"`
 }
 
 func (x *GlobalKpmnodeEnbId) Reset() {
@@ -2902,8 +2906,8 @@ type RicStyleType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeExt,sizeLB:0,sizeUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:0,sizeUB:255"`
+	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
 }
 
 func (x *RicStyleType) Reset() {
@@ -2952,8 +2956,8 @@ type RicFormatType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeExt,sizeLB:0,sizeUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:0,sizeUB:255"`
+	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
 }
 
 func (x *RicFormatType) Reset() {
@@ -3002,8 +3006,8 @@ type MaxnoofKpmnodes struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1024,sizeUB:1024"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:1024,sizeUB:1024"`
+	// @inject_tag: aper:"valueLB:1024,valueUB:1024"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1024,valueUB:1024"`
 }
 
 func (x *MaxnoofKpmnodes) Reset() {
@@ -3052,8 +3056,8 @@ type MaxnoofCells struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:16384,sizeUB:16384"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:16384,sizeUB:16384"`
+	// @inject_tag: aper:"valueLB:16384,valueUB:16384"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:16384,valueUB:16384"`
 }
 
 func (x *MaxnoofCells) Reset() {
@@ -3102,8 +3106,8 @@ type MaxnoofRicstyles struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:63,sizeUB:63"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:63,sizeUB:63"`
+	// @inject_tag: aper:"valueLB:63,valueUB:63"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:63,valueUB:63"`
 }
 
 func (x *MaxnoofRicstyles) Reset() {
@@ -3152,8 +3156,8 @@ type MaxnoofMeasurementInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:65535,sizeUB:65535"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:65535,sizeUB:65535"`
+	// @inject_tag: aper:"valueLB:65535,valueUB:65535"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:65535,valueUB:65535"`
 }
 
 func (x *MaxnoofMeasurementInfo) Reset() {
@@ -3202,8 +3206,8 @@ type MaxnoofLabelInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:2147483647,sizeUB:2147483647"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:2147483647,sizeUB:2147483647"`
+	// @inject_tag: aper:"valueLB:2147483647,valueUB:2147483647"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:2147483647,valueUB:2147483647"`
 }
 
 func (x *MaxnoofLabelInfo) Reset() {
@@ -3252,8 +3256,8 @@ type MaxnoofMeasurementRecord struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:65535,sizeUB:65535"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:65535,sizeUB:65535"`
+	// @inject_tag: aper:"valueLB:65535,valueUB:65535"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:65535,valueUB:65535"`
 }
 
 func (x *MaxnoofMeasurementRecord) Reset() {
@@ -3302,8 +3306,8 @@ type MaxnoofMeasurementValue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:2147483647,sizeUB:2147483647"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:2147483647,sizeUB:2147483647"`
+	// @inject_tag: aper:"valueLB:2147483647,valueUB:2147483647"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:2147483647,valueUB:2147483647"`
 }
 
 func (x *MaxnoofMeasurementValue) Reset() {
@@ -3352,8 +3356,8 @@ type MaxnoofConditionInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:32768,sizeUB:32768"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:32768,sizeUB:32768"`
+	// @inject_tag: aper:"valueLB:32768,valueUB:32768"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:32768,valueUB:32768"`
 }
 
 func (x *MaxnoofConditionInfo) Reset() {
@@ -3402,8 +3406,8 @@ type MaxnoofUeid struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:65535,sizeUB:65535"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:65535,sizeUB:65535"`
+	// @inject_tag: aper:"valueLB:65535,valueUB:65535"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:65535,valueUB:65535"`
 }
 
 func (x *MaxnoofUeid) Reset() {
@@ -3709,8 +3713,8 @@ type MeasurementDataItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	MeasRecord *MeasurementRecord `protobuf:"bytes,1,opt,name=meas_record,json=measRecord,proto3" json:"meas_record,omitempty"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:1,sizeUB:1"
-	IncompleteFlag *int32 `protobuf:"varint,2,opt,name=incomplete_flag,json=incompleteFlag,proto3,oneof" json:"incomplete_flag,omitempty" aper:"optional,sizeExt,sizeLB:1,sizeUB:1"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:1"
+	IncompleteFlag *int32 `protobuf:"varint,2,opt,name=incomplete_flag,json=incompleteFlag,proto3,oneof" json:"incomplete_flag,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:1"`
 }
 
 func (x *MeasurementDataItem) Reset() {
@@ -3865,14 +3869,14 @@ func (m *MeasurementRecordItem) GetMeasurementRecordItem() isMeasurementRecordIt
 	return nil
 }
 
-func (x *MeasurementRecordItem) GetInteger() int32 {
+func (x *MeasurementRecordItem) GetInteger() int64 {
 	if x, ok := x.GetMeasurementRecordItem().(*MeasurementRecordItem_Integer); ok {
 		return x.Integer
 	}
 	return 0
 }
 
-func (x *MeasurementRecordItem) GetReal() int32 {
+func (x *MeasurementRecordItem) GetReal() float64 {
 	if x, ok := x.GetMeasurementRecordItem().(*MeasurementRecordItem_Real); ok {
 		return x.Real
 	}
@@ -3891,13 +3895,13 @@ type isMeasurementRecordItem_MeasurementRecordItem interface {
 }
 
 type MeasurementRecordItem_Integer struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeLB:0,sizeUB:4294967295"
-	Integer int32 `protobuf:"varint,1,opt,name=integer,proto3,oneof" aper:"choiceIdx:1,sizeLB:0,sizeUB:4294967295"`
+	// @inject_tag: aper:"choiceIdx:1,valueLB:0,valueUB:4294967295"
+	Integer int64 `protobuf:"varint,1,opt,name=integer,proto3,oneof" aper:"choiceIdx:1,valueLB:0,valueUB:4294967295"`
 }
 
 type MeasurementRecordItem_Real struct {
 	// @inject_tag: aper:"choiceIdx:2"
-	Real int32 `protobuf:"varint,2,opt,name=real,proto3,oneof" aper:"choiceIdx:2"`
+	Real float64 `protobuf:"fixed64,2,opt,name=real,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type MeasurementRecordItem_NoValue struct {
@@ -4558,8 +4562,8 @@ type E2SmKpmEventTriggerDefinitionFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1,sizeUB:4294967295"
-	ReportingPeriod int32 `protobuf:"varint,1,opt,name=reporting_period,json=reportingPeriod,proto3" json:"reporting_period,omitempty" aper:"sizeLB:1,sizeUB:4294967295"`
+	// @inject_tag: aper:"valueLB:1,valueUB:4294967295"
+	ReportingPeriod int32 `protobuf:"varint,1,opt,name=reporting_period,json=reportingPeriod,proto3" json:"reporting_period,omitempty" aper:"valueLB:1,valueUB:4294967295"`
 }
 
 func (x *E2SmKpmEventTriggerDefinitionFormat1) Reset() {
@@ -6259,9 +6263,9 @@ var file_e2sm_kpm_v2_go_v2_e2sm_kpm_v2_go_proto_rawDesc = []byte{
 	0x74, 0x65, 0x73, 0x74, 0x5f, 0x63, 0x6f, 0x6e, 0x64, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x22, 0xfd,
 	0x01, 0x0a, 0x0d, 0x54, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x6e, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65,
 	0x12, 0x1d, 0x0a, 0x09, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x5f, 0x69, 0x6e, 0x74, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x08, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x49, 0x6e, 0x74, 0x12,
+	0x01, 0x28, 0x03, 0x48, 0x00, 0x52, 0x08, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x49, 0x6e, 0x74, 0x12,
 	0x1f, 0x0a, 0x0a, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x5f, 0x65, 0x6e, 0x75, 0x6d, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x09, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x45, 0x6e, 0x75, 0x6d,
+	0x01, 0x28, 0x03, 0x48, 0x00, 0x52, 0x09, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x45, 0x6e, 0x75, 0x6d,
 	0x12, 0x1f, 0x0a, 0x0a, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x5f, 0x62, 0x6f, 0x6f, 0x6c, 0x18, 0x03,
 	0x20, 0x01, 0x28, 0x08, 0x48, 0x00, 0x52, 0x09, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x6f, 0x6f,
 	0x6c, 0x12, 0x34, 0x0a, 0x0b, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x5f, 0x62, 0x69, 0x74, 0x5f, 0x73,
@@ -6528,9 +6532,9 @@ var file_e2sm_kpm_v2_go_v2_e2sm_kpm_v2_go_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x05,
 	0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x81, 0x01, 0x0a, 0x15, 0x4d, 0x65, 0x61, 0x73, 0x75, 0x72,
 	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x49, 0x74, 0x65, 0x6d, 0x12,
-	0x1a, 0x0a, 0x07, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
+	0x1a, 0x0a, 0x07, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
 	0x48, 0x00, 0x52, 0x07, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x65, 0x72, 0x12, 0x14, 0x0a, 0x04, 0x72,
-	0x65, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x04, 0x72, 0x65, 0x61,
+	0x65, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x48, 0x00, 0x52, 0x04, 0x72, 0x65, 0x61,
 	0x6c, 0x12, 0x1b, 0x0a, 0x08, 0x6e, 0x6f, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20,
 	0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x07, 0x6e, 0x6f, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x19,
 	0x0a, 0x17, 0x6d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x72, 0x65,

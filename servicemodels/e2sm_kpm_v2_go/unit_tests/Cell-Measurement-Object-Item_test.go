@@ -58,6 +58,6 @@ func Test_perEncodingCellMeasurementObjectItem(t *testing.T) {
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerCellMeasObjItem)
 	assert.NilError(t, err)
-	assert.DeepEqual(t, per, perRefBytes) //ToDo - these bytes differ in 7th byte
+	assert.DeepEqual(t, per, perRefBytes)
 }
 
