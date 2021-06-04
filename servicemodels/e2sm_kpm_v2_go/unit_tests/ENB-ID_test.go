@@ -17,7 +17,6 @@ import (
 var refPerEnbIDmacro = "00000000  00 d4 bc 00                                       |....|"
 var refPerEnbIDhome = "00000000  40 d4 bc 09 00                                    |@....|"
 
-
 func createEnbIDMacro() *e2sm_kpm_v2_go.EnbId {
 
 	return &e2sm_kpm_v2_go.EnbId{
@@ -42,15 +41,15 @@ func createEnbIDHome() *e2sm_kpm_v2_go.EnbId {
 	}
 }
 
-func Test_perDecodeEnbID(t *testing.T) {
+func Test_perEncodingEnbID(t *testing.T) {
 
 	enbID := createEnbIDMacro()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(enbID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("EnbID (Macro) PER\n%v", hex.Dump(per))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.EnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
@@ -63,15 +62,15 @@ func Test_perDecodeEnbID(t *testing.T) {
 	assert.DeepEqual(t, per, perRefBytes)
 }
 
-func Test_perDecodeEnbIDhome(t *testing.T) {
+func Test_perEncodingEnbIDhome(t *testing.T) {
 
 	enbID := createEnbIDHome()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(enbID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("EnbID (Home) PER\n%v", hex.Dump(per))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.EnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)

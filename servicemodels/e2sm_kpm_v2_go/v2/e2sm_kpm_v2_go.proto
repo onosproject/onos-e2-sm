@@ -104,11 +104,10 @@ message Nrcgi {
 // {CellGlobalID}
 message CellGlobalId {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:36
-    // @inject_tag: aper:"valueUB:2"
     oneof cell_global_id {
-        // @inject_tag: aper:"choiceIdx:1,valueExt,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
         Nrcgi nr_cgi = 1 [ json_name="nr-CGI"];
-        // @inject_tag: aper:"choiceIdx:2,valueExt,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
         Eutracgi e_utra_cgi = 2 [ json_name="eUTRA-CGI"];
     }
 };
@@ -161,11 +160,10 @@ message GranularityPeriod {
 // {MeasurementType}
 message MeasurementType {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:66
-    // @inject_tag: aper:"valueUB:2"
     oneof measurement_type {
-        // @inject_tag: aper:"choiceIdx:1,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:1"
         MeasurementTypeName meas_name = 1 [ json_name="measName"];
-        // @inject_tag: aper:"choiceIdx:2,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:2"
         MeasurementTypeId meas_id = 2 [ json_name="measID"];
     }
 };
@@ -235,19 +233,18 @@ message TestCondInfo {
 // {TestCond-Type}
 message TestCondType {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:106
-    // @inject_tag: aper:"valueUB:6,"
     oneof test_cond_type {
-        // @inject_tag: aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1"
         GBR g_br = 1 [ json_name="gBR"];
-        // @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1"
         AMBR a_mbr = 2 [ json_name="aMBR"];
-        // @inject_tag: aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1"
         ISSTAT is_stat = 3 [ json_name="isStat"];
-        // @inject_tag: aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1"
         ISCATM is_cat_m = 4 [ json_name="isCatM"];
-        // @inject_tag: aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1"
         RSRP r_srp = 5 [ json_name="rSRP"];
-        // @inject_tag: aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1"
         RSRQ r_srq = 6 [ json_name="rSRQ"];
     }
 };
@@ -256,19 +253,18 @@ message TestCondType {
 // {TestCond-Value}
 message TestCondValue {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:125
-    // @inject_tag: aper:"valueUB:6"
     oneof test_cond_value {
-        // @inject_tag: aper:"choiceIdx:1,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:1"
         int64 value_int = 1 [ json_name="valueInt"];
-        // @inject_tag: aper:"choiceIdx:2,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:2"
         int64 value_enum = 2 [ json_name="valueEnum"];
-        // @inject_tag: aper:"choiceIdx:3,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:3"
         bool value_bool = 3 [ json_name="valueBool"];
-        // @inject_tag: aper:"choiceIdx:4,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:4"
         asn1.v1.BitString value_bit_s = 4 [ json_name="valueBitS"];
-        // @inject_tag: aper:"choiceIdx:5,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:5"
         bytes value_oct_s = 5 [ json_name="valueOctS"];
-        // @inject_tag: aper:"choiceIdx:6,valueUB:6"
+        // @inject_tag: aper:"choiceIdx:6"
         string value_prt_s = 6 [ json_name="valuePrtS"];
     }
 };
@@ -277,15 +273,14 @@ message TestCondValue {
 // {GlobalKPMnode-ID}
 message GlobalKpmnodeId {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:137
-    // @inject_tag: aper:"valueUB:4"
     oneof global_kpmnode_id {
-        // @inject_tag: aper:"choiceIdx:1,valueExt,valueUB:4"
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
         GlobalKpmnodeGnbId g_nb = 1 [ json_name="gNB"];
-        // @inject_tag: aper:"choiceIdx:2,valueExt,valueUB:4"
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
         GlobalKpmnodeEnGnbId en_g_nb = 2 [ json_name="en-gNB"];
-        // @inject_tag: aper:"choiceIdx:3,valueExt,valueUB:4"
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
         GlobalKpmnodeNgEnbId ng_e_nb = 3 [ json_name="ng-eNB"];
-        // @inject_tag: aper:"choiceIdx:4,valueExt,valueUB:4"
+        // @inject_tag: aper:"choiceIdx:4,valueExt"
         GlobalKpmnodeEnbId e_nb = 4 [ json_name="eNB"];
     }
 };
@@ -326,9 +321,8 @@ message GnbDuId {
 // {GNB-ID-Choice}
 message GnbIdChoice {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:162
-    // @inject_tag: aper:"valueUB:1"
     oneof gnb_id_choice {
-        // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
         asn1.v1.BitString gnb_id = 1 [ json_name="gnb-ID"];
     }
 };
@@ -355,9 +349,8 @@ message GlobalenGnbId {
 // {ENGNB-ID}
 message EngnbId {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:180
-    // @inject_tag: aper:"valueUB:1"
     oneof engnb_id {
-        // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
         asn1.v1.BitString g_nb_id = 1 [ json_name="gNB-ID"];
     }
 };
@@ -375,6 +368,7 @@ message GlobalKpmnodeNgEnbId {
 // {GlobalngeNB-ID}
 message GlobalngeNbId {
     PlmnIdentity plmn_id = 1 [ json_name="plmn-id"];
+    // @inject_tag: aper:"valueExt"
     EnbIdChoice enb_id = 2 [ json_name="enb-id"];
     // @inject_tag: aper:"sizeLB:18,sizeUB:18"
     asn1.v1.BitString short_macro_e_nb_id = 3 [ json_name="short-Macro-eNB-ID"];
@@ -386,13 +380,12 @@ message GlobalngeNbId {
 // {ENB-ID-Choice}
 message EnbIdChoice {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:199
-    // @inject_tag: aper:"valueUB:3"
     oneof enb_id_choice {
-        // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20,valueUB:3"
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
         asn1.v1.BitString enb_id_macro = 1 [ json_name="enb-ID-macro"];
-        // @inject_tag: aper:"choiceIdx:2,sizeLB:18,sizeUB:18,valueUB:3"
+        // @inject_tag: aper:"choiceIdx:2,sizeLB:18,sizeUB:18"
         asn1.v1.BitString enb_id_shortmacro = 2 [ json_name="enb-ID-shortmacro"];
-        // @inject_tag: aper:"choiceIdx:3,sizeLB:21,sizeUB:21,valueUB:3"
+        // @inject_tag: aper:"choiceIdx:3,sizeLB:21,sizeUB:21"
         asn1.v1.BitString enb_id_longmacro = 3 [ json_name="enb-ID-longmacro"];
     }
 };
@@ -408,6 +401,7 @@ message GlobalKpmnodeEnbId {
 // {GlobalENB-ID}
 message GlobalEnbId {
     PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
+    // @inject_tag: aper:"valueExt"
     EnbId e_nb_id = 2 [ json_name="eNB-ID"];
 };
 
@@ -415,11 +409,10 @@ message GlobalEnbId {
 // {ENB-ID}
 message EnbId {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:217
-    // @inject_tag: aper:"valueUB:2"
     oneof enb_id {
-        // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
         asn1.v1.BitString macro_e_nb_id = 1 [ json_name="macro-eNB-ID"];
-        // @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28"
         asn1.v1.BitString home_e_nb_id = 2 [ json_name="home-eNB-ID"];
     }
 };
@@ -567,13 +560,12 @@ message MeasurementRecord {
 // {MeasurementRecordItem}
 message MeasurementRecordItem {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:279
-    // @inject_tag: aper:"valueUB:3"
     oneof measurement_record_item {
         // @inject_tag: aper:"choiceIdx:1,valueLB:0,valueUB:4294967295"
         int64 integer = 1 [ json_name="integer"];
-        // @inject_tag: aper:"choiceIdx:2,valueUB:3"
+        // @inject_tag: aper:"choiceIdx:2"
         double real = 2 [ json_name="real"];
-        // @inject_tag: aper:"choiceIdx:3,valueUB:3"
+        // @inject_tag: aper:"choiceIdx:3"
         int32 no_value = 3 [ json_name="noValue"];
     }
 };
@@ -634,11 +626,10 @@ message MatchingCondList {
 // {MatchingCondItem}
 message MatchingCondItem {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:313
-    // @inject_tag: aper:"valueUB:2"
     oneof matching_cond_item {
-        // @inject_tag: aper:"choiceIdx:1,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:1"
         MeasurementLabel meas_label = 1 [ json_name="measLabel"];
-        // @inject_tag: aper:"choiceIdx:2,valueUB:2"
+        // @inject_tag: aper:"choiceIdx:2"
         TestCondInfo test_cond_info = 2 [ json_name="testCondInfo"];
     }
 };
@@ -660,9 +651,8 @@ message MatchingUeidItem {
 // {E2SM-KPM-EventTriggerDefinition}
 message E2SmKpmEventTriggerDefinition {
     // choice from e2sm-kpm-ies_v2.asn1:337
-    // @inject_tag: aper:"valueLB:1,valueUB:1"
     oneof e2_sm_kpm_event_trigger_definition {
-        // @inject_tag: aper:"choiceIdx:1,valueExt,valueUB:1"
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
         E2SmKpmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "eventDefinition_Format1"];
     }
 };
@@ -678,13 +668,12 @@ message E2SmKpmEventTriggerDefinitionFormat1 {
 // {E2SM-KPM-ActionDefinition}
 message E2SmKpmActionDefinition {
     RicStyleType ric_style_type = 1 [ json_name="ric-Style-Type"];
-    // @inject_tag: aper:"valueUB:3"
     oneof e2_sm_kpm_action_definition {
-        // @inject_tag: aper:"valueExt,choiceIdx:1,valueUB:3"
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmKpmActionDefinitionFormat1 action_definition_format1 = 2 [json_name = "actionDefinition_Format1"];
-        // @inject_tag: aper:"valueExt,choiceIdx:2,valueUB:3"
+        // @inject_tag: aper:"valueExt,choiceIdx:2"
         E2SmKpmActionDefinitionFormat2 action_definition_format2 = 3 [json_name = "actionDefinition_Format2"];
-        // @inject_tag: aper:"valueExt,choiceIdx:3,valueUB:3"
+        // @inject_tag: aper:"valueExt,choiceIdx:3"
         E2SmKpmActionDefinitionFormat3 action_definition_format3 = 4 [json_name = "actionDefinition_Format3"];
     }
 };
@@ -718,9 +707,8 @@ message E2SmKpmActionDefinitionFormat3 {
 // {E2SM-KPM-IndicationHeader}
 message E2SmKpmIndicationHeader {
     // choice from e2sm-kpm-v01.00.asn1:391
-    // @inject_tag: aper:"valueUB:1"
     oneof e2_sm_kpm_indication_header {
-        // @inject_tag: aper:"valueExt,choiceIdx:1,valueUB:1"
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmKpmIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "indicationHeader_Format1"];
     }
 };
@@ -737,6 +725,7 @@ message E2SmKpmIndicationHeaderFormat1 {
     optional string sender_type = 4 [(validate.v1.rules).string = {min_len: 0, max_len: 8}, json_name="senderType"];
     // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
     optional string vendor_name = 5 [(validate.v1.rules).string = {min_len: 0, max_len: 32}, json_name="vendorName"];
+    // @inject_tag: aper:"valueExt"
     optional GlobalKpmnodeId kpm_node_id = 6 [ json_name="kpmNodeID"];
 };
 
@@ -744,11 +733,10 @@ message E2SmKpmIndicationHeaderFormat1 {
 // {E2SM-KPM-IndicationMessage}
 message E2SmKpmIndicationMessage {
     // choice from e2sm_kpm_ies_v2.asn:414
-    // @inject_tag: aper:"valueUB:2"
     oneof e2_sm_kpm_indication_message {
-        // @inject_tag: aper:"valueExt,choiceIdx:1,valueUB:2"
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmKpmIndicationMessageFormat1 indication_message_format1 = 1 [json_name = "indicationMessage_Format1"];
-        // @inject_tag: aper:"valueExt,choiceIdx:2,valueUB:2"
+        // @inject_tag: aper:"valueExt,choiceIdx:2"
         E2SmKpmIndicationMessageFormat2 indication_message_format2 = 2 [json_name = "indicationMessage_Format2"];
     }
 };
@@ -781,6 +769,7 @@ message E2SmKpmIndicationMessageFormat2 {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:441
 // {E2SM-KPM-RANfunction-Description}
 message E2SmKpmRanfunctionDescription {
+    // @inject_tag: aper:"valueExt"
     RanfunctionName ran_function_name = 1 [ json_name="ranFunction-Name"];
     // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:1024"
     repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="ric-KPM-Node-List"];
@@ -793,6 +782,7 @@ message E2SmKpmRanfunctionDescription {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:449
 // {RIC-KPMNode-Item}
 message RicKpmnodeItem {
+    // @inject_tag: aper:"valueExt"
     GlobalKpmnodeId ric_kpmnode_type = 1 [ json_name="ric-KPMNode-Type"];
     // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:16384"
     repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name="cell-Measurement-Object-List"];

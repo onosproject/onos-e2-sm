@@ -44,11 +44,11 @@ func Test_perEncodingCellMeasurementObjectItem(t *testing.T) {
 
 	cmoi := createCellMeasurementObjectItem()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(*cmoi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.CellMeasurementObjectItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
@@ -60,4 +60,3 @@ func Test_perEncodingCellMeasurementObjectItem(t *testing.T) {
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }
-

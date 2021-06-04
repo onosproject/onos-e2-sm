@@ -33,11 +33,11 @@ func Test_perEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 	}
 	assert.NilError(t, err)
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(enbID.GetEnGNb(), "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnodeEnGnbID PER\n%v", hex.Dump(per))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.GlobalKpmnodeGnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)

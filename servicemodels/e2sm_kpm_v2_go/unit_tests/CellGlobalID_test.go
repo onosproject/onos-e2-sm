@@ -47,11 +47,11 @@ func Test_perEncodingCellGlobalID(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(*cellGlobalID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.CellGlobalId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)

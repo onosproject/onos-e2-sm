@@ -37,11 +37,11 @@ func Test_perEncodingGlobalGnbID(t *testing.T) {
 
 	gnbIDc := createGlobalgNbID()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.GlobalgNbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)

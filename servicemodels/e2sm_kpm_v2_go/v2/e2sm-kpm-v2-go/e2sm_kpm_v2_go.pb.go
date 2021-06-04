@@ -653,12 +653,11 @@ type CellGlobalId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:36
-	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to CellGlobalId:
 	//	*CellGlobalId_NrCgi
 	//	*CellGlobalId_EUtraCgi
-	CellGlobalId isCellGlobalId_CellGlobalId `protobuf_oneof:"cell_global_id" aper:"valueUB:2"`
+	CellGlobalId isCellGlobalId_CellGlobalId `protobuf_oneof:"cell_global_id"`
 }
 
 func (x *CellGlobalId) Reset() {
@@ -719,13 +718,13 @@ type isCellGlobalId_CellGlobalId interface {
 }
 
 type CellGlobalId_NrCgi struct {
-	// @inject_tag: aper:"choiceIdx:1,valueExt,valueUB:2"
-	NrCgi *Nrcgi `protobuf:"bytes,1,opt,name=nr_cgi,json=nr-CGI,proto3,oneof" aper:"choiceIdx:1,valueExt,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:1,valueExt"
+	NrCgi *Nrcgi `protobuf:"bytes,1,opt,name=nr_cgi,json=nr-CGI,proto3,oneof" aper:"choiceIdx:1,valueExt"`
 }
 
 type CellGlobalId_EUtraCgi struct {
-	// @inject_tag: aper:"choiceIdx:2,valueExt,valueUB:2"
-	EUtraCgi *Eutracgi `protobuf:"bytes,2,opt,name=e_utra_cgi,json=eUTRA-CGI,proto3,oneof" aper:"choiceIdx:2,valueExt,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:2,valueExt"
+	EUtraCgi *Eutracgi `protobuf:"bytes,2,opt,name=e_utra_cgi,json=eUTRA-CGI,proto3,oneof" aper:"choiceIdx:2,valueExt"`
 }
 
 func (*CellGlobalId_NrCgi) isCellGlobalId_CellGlobalId() {}
@@ -1049,12 +1048,11 @@ type MeasurementType struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:66
-	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to MeasurementType:
 	//	*MeasurementType_MeasName
 	//	*MeasurementType_MeasId
-	MeasurementType isMeasurementType_MeasurementType `protobuf_oneof:"measurement_type" aper:"valueUB:2"`
+	MeasurementType isMeasurementType_MeasurementType `protobuf_oneof:"measurement_type"`
 }
 
 func (x *MeasurementType) Reset() {
@@ -1115,13 +1113,13 @@ type isMeasurementType_MeasurementType interface {
 }
 
 type MeasurementType_MeasName struct {
-	// @inject_tag: aper:"choiceIdx:1,valueUB:2"
-	MeasName *MeasurementTypeName `protobuf:"bytes,1,opt,name=meas_name,json=measName,proto3,oneof" aper:"choiceIdx:1,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:1"
+	MeasName *MeasurementTypeName `protobuf:"bytes,1,opt,name=meas_name,json=measName,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type MeasurementType_MeasId struct {
-	// @inject_tag: aper:"choiceIdx:2,valueUB:2"
-	MeasId *MeasurementTypeId `protobuf:"bytes,2,opt,name=meas_id,json=measID,proto3,oneof" aper:"choiceIdx:2,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:2"
+	MeasId *MeasurementTypeId `protobuf:"bytes,2,opt,name=meas_id,json=measID,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 func (*MeasurementType_MeasName) isMeasurementType_MeasurementType() {}
@@ -1495,7 +1493,6 @@ type TestCondType struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:106
-	// @inject_tag: aper:"valueUB:6,"
 	//
 	// Types that are assignable to TestCondType:
 	//	*TestCondType_GBr
@@ -1504,7 +1501,7 @@ type TestCondType struct {
 	//	*TestCondType_IsCatM
 	//	*TestCondType_RSrp
 	//	*TestCondType_RSrq
-	TestCondType isTestCondType_TestCondType `protobuf_oneof:"test_cond_type" aper:"valueUB:6,"`
+	TestCondType isTestCondType_TestCondType `protobuf_oneof:"test_cond_type"`
 }
 
 func (x *TestCondType) Reset() {
@@ -1593,33 +1590,33 @@ type isTestCondType_TestCondType interface {
 }
 
 type TestCondType_GBr struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
-	GBr GBR `protobuf:"varint,1,opt,name=g_br,json=gBR,proto3,enum=e2sm_kpm_v2_go.v2.GBR,oneof" aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1"
+	GBr GBR `protobuf:"varint,1,opt,name=g_br,json=gBR,proto3,enum=e2sm_kpm_v2_go.v2.GBR,oneof" aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1"`
 }
 
 type TestCondType_AMbr struct {
-	// @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
-	AMbr AMBR `protobuf:"varint,2,opt,name=a_mbr,json=aMBR,proto3,enum=e2sm_kpm_v2_go.v2.AMBR,oneof" aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1"
+	AMbr AMBR `protobuf:"varint,2,opt,name=a_mbr,json=aMBR,proto3,enum=e2sm_kpm_v2_go.v2.AMBR,oneof" aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1"`
 }
 
 type TestCondType_IsStat struct {
-	// @inject_tag: aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
-	IsStat ISSTAT `protobuf:"varint,3,opt,name=is_stat,json=isStat,proto3,enum=e2sm_kpm_v2_go.v2.ISSTAT,oneof" aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1"
+	IsStat ISSTAT `protobuf:"varint,3,opt,name=is_stat,json=isStat,proto3,enum=e2sm_kpm_v2_go.v2.ISSTAT,oneof" aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1"`
 }
 
 type TestCondType_IsCatM struct {
-	// @inject_tag: aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
-	IsCatM ISCATM `protobuf:"varint,4,opt,name=is_cat_m,json=isCatM,proto3,enum=e2sm_kpm_v2_go.v2.ISCATM,oneof" aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1"
+	IsCatM ISCATM `protobuf:"varint,4,opt,name=is_cat_m,json=isCatM,proto3,enum=e2sm_kpm_v2_go.v2.ISCATM,oneof" aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1"`
 }
 
 type TestCondType_RSrp struct {
-	// @inject_tag: aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
-	RSrp RSRP `protobuf:"varint,5,opt,name=r_srp,json=rSRP,proto3,enum=e2sm_kpm_v2_go.v2.RSRP,oneof" aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1"
+	RSrp RSRP `protobuf:"varint,5,opt,name=r_srp,json=rSRP,proto3,enum=e2sm_kpm_v2_go.v2.RSRP,oneof" aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1"`
 }
 
 type TestCondType_RSrq struct {
-	// @inject_tag: aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"
-	RSrq RSRQ `protobuf:"varint,6,opt,name=r_srq,json=rSRQ,proto3,enum=e2sm_kpm_v2_go.v2.RSRQ,oneof" aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1"
+	RSrq RSRQ `protobuf:"varint,6,opt,name=r_srq,json=rSRQ,proto3,enum=e2sm_kpm_v2_go.v2.RSRQ,oneof" aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1"`
 }
 
 func (*TestCondType_GBr) isTestCondType_TestCondType() {}
@@ -1642,7 +1639,6 @@ type TestCondValue struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:125
-	// @inject_tag: aper:"valueUB:6"
 	//
 	// Types that are assignable to TestCondValue:
 	//	*TestCondValue_ValueInt
@@ -1651,7 +1647,7 @@ type TestCondValue struct {
 	//	*TestCondValue_ValueBitS
 	//	*TestCondValue_ValueOctS
 	//	*TestCondValue_ValuePrtS
-	TestCondValue isTestCondValue_TestCondValue `protobuf_oneof:"test_cond_value" aper:"valueUB:6"`
+	TestCondValue isTestCondValue_TestCondValue `protobuf_oneof:"test_cond_value"`
 }
 
 func (x *TestCondValue) Reset() {
@@ -1740,33 +1736,33 @@ type isTestCondValue_TestCondValue interface {
 }
 
 type TestCondValue_ValueInt struct {
-	// @inject_tag: aper:"choiceIdx:1,valueUB:6"
-	ValueInt int64 `protobuf:"varint,1,opt,name=value_int,json=valueInt,proto3,oneof" aper:"choiceIdx:1,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:1"
+	ValueInt int64 `protobuf:"varint,1,opt,name=value_int,json=valueInt,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type TestCondValue_ValueEnum struct {
-	// @inject_tag: aper:"choiceIdx:2,valueUB:6"
-	ValueEnum int64 `protobuf:"varint,2,opt,name=value_enum,json=valueEnum,proto3,oneof" aper:"choiceIdx:2,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:2"
+	ValueEnum int64 `protobuf:"varint,2,opt,name=value_enum,json=valueEnum,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type TestCondValue_ValueBool struct {
-	// @inject_tag: aper:"choiceIdx:3,valueUB:6"
-	ValueBool bool `protobuf:"varint,3,opt,name=value_bool,json=valueBool,proto3,oneof" aper:"choiceIdx:3,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:3"
+	ValueBool bool `protobuf:"varint,3,opt,name=value_bool,json=valueBool,proto3,oneof" aper:"choiceIdx:3"`
 }
 
 type TestCondValue_ValueBitS struct {
-	// @inject_tag: aper:"choiceIdx:4,valueUB:6"
-	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof" aper:"choiceIdx:4,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:4"
+	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof" aper:"choiceIdx:4"`
 }
 
 type TestCondValue_ValueOctS struct {
-	// @inject_tag: aper:"choiceIdx:5,valueUB:6"
-	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof" aper:"choiceIdx:5,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:5"
+	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof" aper:"choiceIdx:5"`
 }
 
 type TestCondValue_ValuePrtS struct {
-	// @inject_tag: aper:"choiceIdx:6,valueUB:6"
-	ValuePrtS string `protobuf:"bytes,6,opt,name=value_prt_s,json=valuePrtS,proto3,oneof" aper:"choiceIdx:6,valueUB:6"`
+	// @inject_tag: aper:"choiceIdx:6"
+	ValuePrtS string `protobuf:"bytes,6,opt,name=value_prt_s,json=valuePrtS,proto3,oneof" aper:"choiceIdx:6"`
 }
 
 func (*TestCondValue_ValueInt) isTestCondValue_TestCondValue() {}
@@ -1789,14 +1785,13 @@ type GlobalKpmnodeId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:137
-	// @inject_tag: aper:"valueUB:4"
 	//
 	// Types that are assignable to GlobalKpmnodeId:
 	//	*GlobalKpmnodeId_GNb
 	//	*GlobalKpmnodeId_EnGNb
 	//	*GlobalKpmnodeId_NgENb
 	//	*GlobalKpmnodeId_ENb
-	GlobalKpmnodeId isGlobalKpmnodeId_GlobalKpmnodeId `protobuf_oneof:"global_kpmnode_id" aper:"valueUB:4"`
+	GlobalKpmnodeId isGlobalKpmnodeId_GlobalKpmnodeId `protobuf_oneof:"global_kpmnode_id"`
 }
 
 func (x *GlobalKpmnodeId) Reset() {
@@ -1871,23 +1866,23 @@ type isGlobalKpmnodeId_GlobalKpmnodeId interface {
 }
 
 type GlobalKpmnodeId_GNb struct {
-	// @inject_tag: aper:"choiceIdx:1,valueExt,valueUB:4"
-	GNb *GlobalKpmnodeGnbId `protobuf:"bytes,1,opt,name=g_nb,json=gNB,proto3,oneof" aper:"choiceIdx:1,valueExt,valueUB:4"`
+	// @inject_tag: aper:"choiceIdx:1,valueExt"
+	GNb *GlobalKpmnodeGnbId `protobuf:"bytes,1,opt,name=g_nb,json=gNB,proto3,oneof" aper:"choiceIdx:1,valueExt"`
 }
 
 type GlobalKpmnodeId_EnGNb struct {
-	// @inject_tag: aper:"choiceIdx:2,valueExt,valueUB:4"
-	EnGNb *GlobalKpmnodeEnGnbId `protobuf:"bytes,2,opt,name=en_g_nb,json=en-gNB,proto3,oneof" aper:"choiceIdx:2,valueExt,valueUB:4"`
+	// @inject_tag: aper:"choiceIdx:2,valueExt"
+	EnGNb *GlobalKpmnodeEnGnbId `protobuf:"bytes,2,opt,name=en_g_nb,json=en-gNB,proto3,oneof" aper:"choiceIdx:2,valueExt"`
 }
 
 type GlobalKpmnodeId_NgENb struct {
-	// @inject_tag: aper:"choiceIdx:3,valueExt,valueUB:4"
-	NgENb *GlobalKpmnodeNgEnbId `protobuf:"bytes,3,opt,name=ng_e_nb,json=ng-eNB,proto3,oneof" aper:"choiceIdx:3,valueExt,valueUB:4"`
+	// @inject_tag: aper:"choiceIdx:3,valueExt"
+	NgENb *GlobalKpmnodeNgEnbId `protobuf:"bytes,3,opt,name=ng_e_nb,json=ng-eNB,proto3,oneof" aper:"choiceIdx:3,valueExt"`
 }
 
 type GlobalKpmnodeId_ENb struct {
-	// @inject_tag: aper:"choiceIdx:4,valueExt,valueUB:4"
-	ENb *GlobalKpmnodeEnbId `protobuf:"bytes,4,opt,name=e_nb,json=eNB,proto3,oneof" aper:"choiceIdx:4,valueExt,valueUB:4"`
+	// @inject_tag: aper:"choiceIdx:4,valueExt"
+	ENb *GlobalKpmnodeEnbId `protobuf:"bytes,4,opt,name=e_nb,json=eNB,proto3,oneof" aper:"choiceIdx:4,valueExt"`
 }
 
 func (*GlobalKpmnodeId_GNb) isGlobalKpmnodeId_GlobalKpmnodeId() {}
@@ -2131,11 +2126,10 @@ type GnbIdChoice struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:162
-	// @inject_tag: aper:"valueUB:1"
 	//
 	// Types that are assignable to GnbIdChoice:
 	//	*GnbIdChoice_GnbId
-	GnbIdChoice isGnbIdChoice_GnbIdChoice `protobuf_oneof:"gnb_id_choice" aper:"valueUB:1"`
+	GnbIdChoice isGnbIdChoice_GnbIdChoice `protobuf_oneof:"gnb_id_choice"`
 }
 
 func (x *GnbIdChoice) Reset() {
@@ -2189,8 +2183,8 @@ type isGnbIdChoice_GnbIdChoice interface {
 }
 
 type GnbIdChoice_GnbId struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"
-	GnbId *asn1.BitString `protobuf:"bytes,1,opt,name=gnb_id,json=gnb-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"`
+	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
+	GnbId *asn1.BitString `protobuf:"bytes,1,opt,name=gnb_id,json=gnb-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32"`
 }
 
 func (*GnbIdChoice_GnbId) isGnbIdChoice_GnbIdChoice() {}
@@ -2328,11 +2322,10 @@ type EngnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:180
-	// @inject_tag: aper:"valueUB:1"
 	//
 	// Types that are assignable to EngnbId:
 	//	*EngnbId_GNbId
-	EngnbId isEngnbId_EngnbId `protobuf_oneof:"engnb_id" aper:"valueUB:1"`
+	EngnbId isEngnbId_EngnbId `protobuf_oneof:"engnb_id"`
 }
 
 func (x *EngnbId) Reset() {
@@ -2386,8 +2379,8 @@ type isEngnbId_EngnbId interface {
 }
 
 type EngnbId_GNbId struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"
-	GNbId *asn1.BitString `protobuf:"bytes,1,opt,name=g_nb_id,json=gNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32,valueUB:1"`
+	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
+	GNbId *asn1.BitString `protobuf:"bytes,1,opt,name=g_nb_id,json=gNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32"`
 }
 
 func (*EngnbId_GNbId) isEngnbId_EngnbId() {}
@@ -2459,7 +2452,8 @@ type GlobalngeNbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmn-id,proto3" json:"plmn_id,omitempty"`
-	EnbId  *EnbIdChoice  `protobuf:"bytes,2,opt,name=enb_id,json=enb-id,proto3" json:"enb_id,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	EnbId *EnbIdChoice `protobuf:"bytes,2,opt,name=enb_id,json=enb-id,proto3" json:"enb_id,omitempty" aper:"valueExt"`
 	// @inject_tag: aper:"sizeLB:18,sizeUB:18"
 	ShortMacroENbId *asn1.BitString `protobuf:"bytes,3,opt,name=short_macro_e_nb_id,json=short-Macro-eNB-ID,proto3" json:"short_macro_e_nb_id,omitempty" aper:"sizeLB:18,sizeUB:18"`
 	// @inject_tag: aper:"sizeLB:21,sizeUB:21"
@@ -2534,13 +2528,12 @@ type EnbIdChoice struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:199
-	// @inject_tag: aper:"valueUB:3"
 	//
 	// Types that are assignable to EnbIdChoice:
 	//	*EnbIdChoice_EnbIdMacro
 	//	*EnbIdChoice_EnbIdShortmacro
 	//	*EnbIdChoice_EnbIdLongmacro
-	EnbIdChoice isEnbIdChoice_EnbIdChoice `protobuf_oneof:"enb_id_choice" aper:"valueUB:3"`
+	EnbIdChoice isEnbIdChoice_EnbIdChoice `protobuf_oneof:"enb_id_choice"`
 }
 
 func (x *EnbIdChoice) Reset() {
@@ -2608,18 +2601,18 @@ type isEnbIdChoice_EnbIdChoice interface {
 }
 
 type EnbIdChoice_EnbIdMacro struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20,valueUB:3"
-	EnbIdMacro *asn1.BitString `protobuf:"bytes,1,opt,name=enb_id_macro,json=enb-ID-macro,proto3,oneof" aper:"choiceIdx:1,sizeLB:20,sizeUB:20,valueUB:3"`
+	// @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
+	EnbIdMacro *asn1.BitString `protobuf:"bytes,1,opt,name=enb_id_macro,json=enb-ID-macro,proto3,oneof" aper:"choiceIdx:1,sizeLB:20,sizeUB:20"`
 }
 
 type EnbIdChoice_EnbIdShortmacro struct {
-	// @inject_tag: aper:"choiceIdx:2,sizeLB:18,sizeUB:18,valueUB:3"
-	EnbIdShortmacro *asn1.BitString `protobuf:"bytes,2,opt,name=enb_id_shortmacro,json=enb-ID-shortmacro,proto3,oneof" aper:"choiceIdx:2,sizeLB:18,sizeUB:18,valueUB:3"`
+	// @inject_tag: aper:"choiceIdx:2,sizeLB:18,sizeUB:18"
+	EnbIdShortmacro *asn1.BitString `protobuf:"bytes,2,opt,name=enb_id_shortmacro,json=enb-ID-shortmacro,proto3,oneof" aper:"choiceIdx:2,sizeLB:18,sizeUB:18"`
 }
 
 type EnbIdChoice_EnbIdLongmacro struct {
-	// @inject_tag: aper:"choiceIdx:3,sizeLB:21,sizeUB:21,valueUB:3"
-	EnbIdLongmacro *asn1.BitString `protobuf:"bytes,3,opt,name=enb_id_longmacro,json=enb-ID-longmacro,proto3,oneof" aper:"choiceIdx:3,sizeLB:21,sizeUB:21,valueUB:3"`
+	// @inject_tag: aper:"choiceIdx:3,sizeLB:21,sizeUB:21"
+	EnbIdLongmacro *asn1.BitString `protobuf:"bytes,3,opt,name=enb_id_longmacro,json=enb-ID-longmacro,proto3,oneof" aper:"choiceIdx:3,sizeLB:21,sizeUB:21"`
 }
 
 func (*EnbIdChoice_EnbIdMacro) isEnbIdChoice_EnbIdChoice() {}
@@ -2686,7 +2679,8 @@ type GlobalEnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PLmnIdentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmn_identity,json=pLMN-Identity,proto3" json:"p_lmn_identity,omitempty"`
-	ENbId        *EnbId        `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	ENbId *EnbId `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty" aper:"valueExt"`
 }
 
 func (x *GlobalEnbId) Reset() {
@@ -2743,12 +2737,11 @@ type EnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:217
-	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to EnbId:
 	//	*EnbId_MacroENbId
 	//	*EnbId_HomeENbId
-	EnbId isEnbId_EnbId `protobuf_oneof:"enb_id" aper:"valueUB:2"`
+	EnbId isEnbId_EnbId `protobuf_oneof:"enb_id"`
 }
 
 func (x *EnbId) Reset() {
@@ -2809,13 +2802,13 @@ type isEnbId_EnbId interface {
 }
 
 type EnbId_MacroENbId struct {
-	// @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20,valueUB:2"
-	MacroENbId *asn1.BitString `protobuf:"bytes,1,opt,name=macro_e_nb_id,json=macro-eNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:20,sizeUB:20,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
+	MacroENbId *asn1.BitString `protobuf:"bytes,1,opt,name=macro_e_nb_id,json=macro-eNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:20,sizeUB:20"`
 }
 
 type EnbId_HomeENbId struct {
-	// @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28,valueUB:2"
-	HomeENbId *asn1.BitString `protobuf:"bytes,2,opt,name=home_e_nb_id,json=home-eNB-ID,proto3,oneof" aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28"
+	HomeENbId *asn1.BitString `protobuf:"bytes,2,opt,name=home_e_nb_id,json=home-eNB-ID,proto3,oneof" aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28"`
 }
 
 func (*EnbId_MacroENbId) isEnbId_EnbId() {}
@@ -3821,13 +3814,12 @@ type MeasurementRecordItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:279
-	// @inject_tag: aper:"valueUB:3"
 	//
 	// Types that are assignable to MeasurementRecordItem:
 	//	*MeasurementRecordItem_Integer
 	//	*MeasurementRecordItem_Real
 	//	*MeasurementRecordItem_NoValue
-	MeasurementRecordItem isMeasurementRecordItem_MeasurementRecordItem `protobuf_oneof:"measurement_record_item" aper:"valueUB:3"`
+	MeasurementRecordItem isMeasurementRecordItem_MeasurementRecordItem `protobuf_oneof:"measurement_record_item"`
 }
 
 func (x *MeasurementRecordItem) Reset() {
@@ -3900,13 +3892,13 @@ type MeasurementRecordItem_Integer struct {
 }
 
 type MeasurementRecordItem_Real struct {
-	// @inject_tag: aper:"choiceIdx:2,valueUB:3"
-	Real float64 `protobuf:"fixed64,2,opt,name=real,proto3,oneof" aper:"choiceIdx:2,valueUB:3"`
+	// @inject_tag: aper:"choiceIdx:2"
+	Real float64 `protobuf:"fixed64,2,opt,name=real,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type MeasurementRecordItem_NoValue struct {
-	// @inject_tag: aper:"choiceIdx:3,valueUB:3"
-	NoValue int32 `protobuf:"varint,3,opt,name=no_value,json=noValue,proto3,oneof" aper:"choiceIdx:3,valueUB:3"`
+	// @inject_tag: aper:"choiceIdx:3"
+	NoValue int32 `protobuf:"varint,3,opt,name=no_value,json=noValue,proto3,oneof" aper:"choiceIdx:3"`
 }
 
 func (*MeasurementRecordItem_Integer) isMeasurementRecordItem_MeasurementRecordItem() {}
@@ -4304,12 +4296,11 @@ type MatchingCondItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_v2.0.3-radisys.asn:313
-	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to MatchingCondItem:
 	//	*MatchingCondItem_MeasLabel
 	//	*MatchingCondItem_TestCondInfo
-	MatchingCondItem isMatchingCondItem_MatchingCondItem `protobuf_oneof:"matching_cond_item" aper:"valueUB:2"`
+	MatchingCondItem isMatchingCondItem_MatchingCondItem `protobuf_oneof:"matching_cond_item"`
 }
 
 func (x *MatchingCondItem) Reset() {
@@ -4370,13 +4361,13 @@ type isMatchingCondItem_MatchingCondItem interface {
 }
 
 type MatchingCondItem_MeasLabel struct {
-	// @inject_tag: aper:"choiceIdx:1,valueUB:2"
-	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3,oneof" aper:"choiceIdx:1,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:1"
+	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type MatchingCondItem_TestCondInfo struct {
-	// @inject_tag: aper:"choiceIdx:2,valueUB:2"
-	TestCondInfo *TestCondInfo `protobuf:"bytes,2,opt,name=test_cond_info,json=testCondInfo,proto3,oneof" aper:"choiceIdx:2,valueUB:2"`
+	// @inject_tag: aper:"choiceIdx:2"
+	TestCondInfo *TestCondInfo `protobuf:"bytes,2,opt,name=test_cond_info,json=testCondInfo,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 func (*MatchingCondItem_MeasLabel) isMatchingCondItem_MatchingCondItem() {}
@@ -4490,11 +4481,10 @@ type E2SmKpmEventTriggerDefinition struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm-kpm-ies_v2.asn1:337
-	// @inject_tag: aper:"valueLB:1,valueUB:1"
 	//
 	// Types that are assignable to E2SmKpmEventTriggerDefinition:
 	//	*E2SmKpmEventTriggerDefinition_EventDefinitionFormat1
-	E2SmKpmEventTriggerDefinition isE2SmKpmEventTriggerDefinition_E2SmKpmEventTriggerDefinition `protobuf_oneof:"e2_sm_kpm_event_trigger_definition" aper:"valueLB:1,valueUB:1"`
+	E2SmKpmEventTriggerDefinition isE2SmKpmEventTriggerDefinition_E2SmKpmEventTriggerDefinition `protobuf_oneof:"e2_sm_kpm_event_trigger_definition"`
 }
 
 func (x *E2SmKpmEventTriggerDefinition) Reset() {
@@ -4548,8 +4538,8 @@ type isE2SmKpmEventTriggerDefinition_E2SmKpmEventTriggerDefinition interface {
 }
 
 type E2SmKpmEventTriggerDefinition_EventDefinitionFormat1 struct {
-	// @inject_tag: aper:"choiceIdx:1,valueExt,valueUB:1"
-	EventDefinitionFormat1 *E2SmKpmEventTriggerDefinitionFormat1 `protobuf:"bytes,1,opt,name=event_definition_format1,json=eventDefinition_Format1,proto3,oneof" aper:"choiceIdx:1,valueExt,valueUB:1"`
+	// @inject_tag: aper:"choiceIdx:1,valueExt"
+	EventDefinitionFormat1 *E2SmKpmEventTriggerDefinitionFormat1 `protobuf:"bytes,1,opt,name=event_definition_format1,json=eventDefinition_Format1,proto3,oneof" aper:"choiceIdx:1,valueExt"`
 }
 
 func (*E2SmKpmEventTriggerDefinition_EventDefinitionFormat1) isE2SmKpmEventTriggerDefinition_E2SmKpmEventTriggerDefinition() {
@@ -4613,13 +4603,11 @@ type E2SmKpmActionDefinition struct {
 	unknownFields protoimpl.UnknownFields
 
 	RicStyleType *RicStyleType `protobuf:"bytes,1,opt,name=ric_style_type,json=ric-Style-Type,proto3" json:"ric_style_type,omitempty"`
-	// @inject_tag: aper:"valueUB:3"
-	//
 	// Types that are assignable to E2SmKpmActionDefinition:
 	//	*E2SmKpmActionDefinition_ActionDefinitionFormat1
 	//	*E2SmKpmActionDefinition_ActionDefinitionFormat2
 	//	*E2SmKpmActionDefinition_ActionDefinitionFormat3
-	E2SmKpmActionDefinition isE2SmKpmActionDefinition_E2SmKpmActionDefinition `protobuf_oneof:"e2_sm_kpm_action_definition" aper:"valueUB:3"`
+	E2SmKpmActionDefinition isE2SmKpmActionDefinition_E2SmKpmActionDefinition `protobuf_oneof:"e2_sm_kpm_action_definition"`
 }
 
 func (x *E2SmKpmActionDefinition) Reset() {
@@ -4694,18 +4682,18 @@ type isE2SmKpmActionDefinition_E2SmKpmActionDefinition interface {
 }
 
 type E2SmKpmActionDefinition_ActionDefinitionFormat1 struct {
-	// @inject_tag: aper:"valueExt,choiceIdx:1,valueUB:3"
-	ActionDefinitionFormat1 *E2SmKpmActionDefinitionFormat1 `protobuf:"bytes,2,opt,name=action_definition_format1,json=actionDefinition_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1,valueUB:3"`
+	// @inject_tag: aper:"valueExt,choiceIdx:1"
+	ActionDefinitionFormat1 *E2SmKpmActionDefinitionFormat1 `protobuf:"bytes,2,opt,name=action_definition_format1,json=actionDefinition_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1"`
 }
 
 type E2SmKpmActionDefinition_ActionDefinitionFormat2 struct {
-	// @inject_tag: aper:"valueExt,choiceIdx:2,valueUB:3"
-	ActionDefinitionFormat2 *E2SmKpmActionDefinitionFormat2 `protobuf:"bytes,3,opt,name=action_definition_format2,json=actionDefinition_Format2,proto3,oneof" aper:"valueExt,choiceIdx:2,valueUB:3"`
+	// @inject_tag: aper:"valueExt,choiceIdx:2"
+	ActionDefinitionFormat2 *E2SmKpmActionDefinitionFormat2 `protobuf:"bytes,3,opt,name=action_definition_format2,json=actionDefinition_Format2,proto3,oneof" aper:"valueExt,choiceIdx:2"`
 }
 
 type E2SmKpmActionDefinition_ActionDefinitionFormat3 struct {
-	// @inject_tag: aper:"valueExt,choiceIdx:3,valueUB:3"
-	ActionDefinitionFormat3 *E2SmKpmActionDefinitionFormat3 `protobuf:"bytes,4,opt,name=action_definition_format3,json=actionDefinition_Format3,proto3,oneof" aper:"valueExt,choiceIdx:3,valueUB:3"`
+	// @inject_tag: aper:"valueExt,choiceIdx:3"
+	ActionDefinitionFormat3 *E2SmKpmActionDefinitionFormat3 `protobuf:"bytes,4,opt,name=action_definition_format3,json=actionDefinition_Format3,proto3,oneof" aper:"valueExt,choiceIdx:3"`
 }
 
 func (*E2SmKpmActionDefinition_ActionDefinitionFormat1) isE2SmKpmActionDefinition_E2SmKpmActionDefinition() {
@@ -4928,11 +4916,10 @@ type E2SmKpmIndicationHeader struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm-kpm-v01.00.asn1:391
-	// @inject_tag: aper:"valueUB:1"
 	//
 	// Types that are assignable to E2SmKpmIndicationHeader:
 	//	*E2SmKpmIndicationHeader_IndicationHeaderFormat1
-	E2SmKpmIndicationHeader isE2SmKpmIndicationHeader_E2SmKpmIndicationHeader `protobuf_oneof:"e2_sm_kpm_indication_header" aper:"valueUB:1"`
+	E2SmKpmIndicationHeader isE2SmKpmIndicationHeader_E2SmKpmIndicationHeader `protobuf_oneof:"e2_sm_kpm_indication_header"`
 }
 
 func (x *E2SmKpmIndicationHeader) Reset() {
@@ -4986,8 +4973,8 @@ type isE2SmKpmIndicationHeader_E2SmKpmIndicationHeader interface {
 }
 
 type E2SmKpmIndicationHeader_IndicationHeaderFormat1 struct {
-	// @inject_tag: aper:"valueExt,choiceIdx:1,valueUB:1"
-	IndicationHeaderFormat1 *E2SmKpmIndicationHeaderFormat1 `protobuf:"bytes,1,opt,name=indication_header_format1,json=indicationHeader_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1,valueUB:1"`
+	// @inject_tag: aper:"valueExt,choiceIdx:1"
+	IndicationHeaderFormat1 *E2SmKpmIndicationHeaderFormat1 `protobuf:"bytes,1,opt,name=indication_header_format1,json=indicationHeader_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1"`
 }
 
 func (*E2SmKpmIndicationHeader_IndicationHeaderFormat1) isE2SmKpmIndicationHeader_E2SmKpmIndicationHeader() {
@@ -5008,8 +4995,9 @@ type E2SmKpmIndicationHeaderFormat1 struct {
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:8"
 	SenderType *string `protobuf:"bytes,4,opt,name=sender_type,json=senderType,proto3,oneof" json:"sender_type,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:8"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
-	VendorName *string          `protobuf:"bytes,5,opt,name=vendor_name,json=vendorName,proto3,oneof" json:"vendor_name,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:32"`
-	KpmNodeId  *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty"`
+	VendorName *string `protobuf:"bytes,5,opt,name=vendor_name,json=vendorName,proto3,oneof" json:"vendor_name,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:32"`
+	// @inject_tag: aper:"valueExt"
+	KpmNodeId *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty" aper:"valueExt"`
 }
 
 func (x *E2SmKpmIndicationHeaderFormat1) Reset() {
@@ -5094,12 +5082,11 @@ type E2SmKpmIndicationMessage struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_ies_v2.asn:414
-	// @inject_tag: aper:"valueUB:2"
 	//
 	// Types that are assignable to E2SmKpmIndicationMessage:
 	//	*E2SmKpmIndicationMessage_IndicationMessageFormat1
 	//	*E2SmKpmIndicationMessage_IndicationMessageFormat2
-	E2SmKpmIndicationMessage isE2SmKpmIndicationMessage_E2SmKpmIndicationMessage `protobuf_oneof:"e2_sm_kpm_indication_message" aper:"valueUB:2"`
+	E2SmKpmIndicationMessage isE2SmKpmIndicationMessage_E2SmKpmIndicationMessage `protobuf_oneof:"e2_sm_kpm_indication_message"`
 }
 
 func (x *E2SmKpmIndicationMessage) Reset() {
@@ -5160,13 +5147,13 @@ type isE2SmKpmIndicationMessage_E2SmKpmIndicationMessage interface {
 }
 
 type E2SmKpmIndicationMessage_IndicationMessageFormat1 struct {
-	// @inject_tag: aper:"valueExt,choiceIdx:1,valueUB:2"
-	IndicationMessageFormat1 *E2SmKpmIndicationMessageFormat1 `protobuf:"bytes,1,opt,name=indication_message_format1,json=indicationMessage_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1,valueUB:2"`
+	// @inject_tag: aper:"valueExt,choiceIdx:1"
+	IndicationMessageFormat1 *E2SmKpmIndicationMessageFormat1 `protobuf:"bytes,1,opt,name=indication_message_format1,json=indicationMessage_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1"`
 }
 
 type E2SmKpmIndicationMessage_IndicationMessageFormat2 struct {
-	// @inject_tag: aper:"valueExt,choiceIdx:2,valueUB:2"
-	IndicationMessageFormat2 *E2SmKpmIndicationMessageFormat2 `protobuf:"bytes,2,opt,name=indication_message_format2,json=indicationMessage_Format2,proto3,oneof" aper:"valueExt,choiceIdx:2,valueUB:2"`
+	// @inject_tag: aper:"valueExt,choiceIdx:2"
+	IndicationMessageFormat2 *E2SmKpmIndicationMessageFormat2 `protobuf:"bytes,2,opt,name=indication_message_format2,json=indicationMessage_Format2,proto3,oneof" aper:"valueExt,choiceIdx:2"`
 }
 
 func (*E2SmKpmIndicationMessage_IndicationMessageFormat1) isE2SmKpmIndicationMessage_E2SmKpmIndicationMessage() {
@@ -5349,7 +5336,8 @@ type E2SmKpmRanfunctionDescription struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RanFunctionName *RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	RanFunctionName *RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty" aper:"valueExt"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:1024"
 	RicKpmNodeList []*RicKpmnodeItem `protobuf:"bytes,2,rep,name=ric_kpm_node_list,json=ric-KPM-Node-List,proto3" json:"ric_kpm_node_list,omitempty" aper:"valueExt,sizeLB:1,sizeUB:1024"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:63"
@@ -5425,7 +5413,8 @@ type RicKpmnodeItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RicKpmnodeType *GlobalKpmnodeId `protobuf:"bytes,1,opt,name=ric_kpmnode_type,json=ric-KPMNode-Type,proto3" json:"ric_kpmnode_type,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	RicKpmnodeType *GlobalKpmnodeId `protobuf:"bytes,1,opt,name=ric_kpmnode_type,json=ric-KPMNode-Type,proto3" json:"ric_kpmnode_type,omitempty" aper:"valueExt"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:16384"
 	CellMeasurementObjectList []*CellMeasurementObjectItem `protobuf:"bytes,2,rep,name=cell_measurement_object_list,json=cell-Measurement-Object-List,proto3" json:"cell_measurement_object_list,omitempty" aper:"valueExt,sizeLB:1,sizeUB:16384"`
 }

@@ -82,11 +82,11 @@ func Test_perEncodingRicKPMnodeItem(t *testing.T) {
 	rkni, err := createRicKpmnodeItem()
 	assert.NilError(t, err)
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(*rkni, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("RIC-KPMnodeItem PER\n%v", hex.Dump(per))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.RicKpmnodeItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
