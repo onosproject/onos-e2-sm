@@ -14,8 +14,8 @@ import (
 	"testing"
 )
 
-var refPerRicKPMnodeItem = "00000000  43 00 6f 6e 66 00 d4 bc  08 00 15 00 16 00 00 00  |C.onf...........|" +
-	"        00000010  00 03 31 32 33 40 4f 4e  46 d4 bc 09 00           |..123@ONF....|"
+var refPerRicKPMnodeItem = "00000000  43 00 6f 6e 66 00 d4 bc  08 00 15 00 16 00 00 00  |C.onf...........|\n" +
+	"00000010  00 03 31 32 33 40 4f 4e  46 d4 bc 09 00           |..123@ONF....|"
 
 func createRicKpmnodeItem() (*e2sm_kpm_v2_go.RicKpmnodeItem, error) {
 

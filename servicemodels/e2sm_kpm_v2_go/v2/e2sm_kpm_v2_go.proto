@@ -300,6 +300,7 @@ message GlobalKpmnodeGnbId {
 // {GlobalgNB-ID}
 message GlobalgNbId {
     PlmnIdentity plmn_id = 1 [ json_name="plmn-id"];
+    // @inject_tag: aper:"valueExt"
     GnbIdChoice gnb_id = 2 [ json_name="gnb-id"];
 };
 
@@ -342,6 +343,7 @@ message GlobalKpmnodeEnGnbId {
 // {GlobalenGNB-ID}
 message GlobalenGnbId {
     PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
+    // @inject_tag: aper:"valueExt"
     EngnbId g_nb_id = 2 [ json_name="gNB-ID"];
 };
 
