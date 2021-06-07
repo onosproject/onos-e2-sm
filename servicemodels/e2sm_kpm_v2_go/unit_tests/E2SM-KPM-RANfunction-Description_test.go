@@ -23,7 +23,7 @@ var refPerE2SmKpmRanFunctionDescription = "00000000  74 04 6f 6e 66 00 00 05  6f
 	"00000050  6f 6e 66 00 0f 00 00 41  a0 4f 70 65 6e 4e 65 74  |onf....A.OpenNet|" +
 	"00000060  77 6f 72 6b 69 6e 67 00  00 17 00 02 00 01        |working.......|\""
 
-func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
+func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
 	var rfSn string = "onf"
 	var rfE2SMoid string = "oid123"
@@ -97,7 +97,7 @@ func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 
 func Test_perEncodingE2SmKpmRanFunctionDescription(t *testing.T) {
 
-	rfd, err := createE2SMKPMRanfunctionDescription()
+	rfd, err := createE2SmKpmRanFunctionDescription()
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm

@@ -25,7 +25,7 @@ func createE2SMKPMEventTriggerDefinitionFormat1() *e2sm_kpm_v2_go.E2SmKpmEventTr
 	return newE2SmKpmPdu.GetEventDefinitionFormat1()
 }
 
-func Test_perDecodeE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
+func Test_perEncodingE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
 	etdf1 := createE2SMKPMEventTriggerDefinitionFormat1()
 

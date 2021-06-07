@@ -21,7 +21,7 @@ func createMeasurementTypeID() *e2sm_kpm_v2_go.MeasurementTypeId {
 	}
 }
 
-func Test_perDecodeMeasurementTypeID(t *testing.T) {
+func Test_perEncodingMeasurementTypeID(t *testing.T) {
 
 	mtID := createMeasurementTypeID()
 

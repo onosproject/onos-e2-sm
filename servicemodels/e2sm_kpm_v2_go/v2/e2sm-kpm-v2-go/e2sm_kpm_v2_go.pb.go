@@ -4998,8 +4998,8 @@ type E2SmKpmIndicationHeaderFormat1 struct {
 	SenderType *string `protobuf:"bytes,4,opt,name=sender_type,json=senderType,proto3,oneof" json:"sender_type,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:8"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
 	VendorName *string `protobuf:"bytes,5,opt,name=vendor_name,json=vendorName,proto3,oneof" json:"vendor_name,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:32"`
-	// @inject_tag: aper:"valueExt"
-	KpmNodeId *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"optional,valueExt"
+	KpmNodeId *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty" aper:"optional,valueExt"`
 }
 
 func (x *E2SmKpmIndicationHeaderFormat1) Reset() {

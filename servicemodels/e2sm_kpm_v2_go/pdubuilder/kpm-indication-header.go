@@ -26,26 +26,26 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, s
 		},
 	}
 
-	//// optional instance
-	//if fileFormatVersion != "" {
-	//	e2SmKpmPdu.GetIndicationHeaderFormat1().FileFormatversion = fileFormatVersion
-	//}
-	//// optional instance
-	//if senderName != "" {
-	//	e2SmKpmPdu.GetIndicationHeaderFormat1().SenderName = senderName
-	//}
-	//// optional instance
-	//if senderType != "" {
-	//	e2SmKpmPdu.GetIndicationHeaderFormat1().SenderType = senderType
-	//}
-	//// optional instance
-	//if vendorName != "" {
-	//	e2SmKpmPdu.GetIndicationHeaderFormat1().VendorName = vendorName
-	//}
-	//// optional instance
-	//if globalKpmNodeID != nil {
-	//	e2SmKpmPdu.GetIndicationHeaderFormat1().KpmNodeId = globalKpmNodeID
-	//}
+	// optional instance
+	if fileFormatVersion != "" {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().FileFormatversion = &fileFormatVersion
+	}
+	// optional instance
+	if senderName != "" {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderName = &senderName
+	}
+	// optional instance
+	if senderType != "" {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderType = &senderType
+	}
+	// optional instance
+	if vendorName != "" {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().VendorName = &vendorName
+	}
+	// optional instance
+	if globalKpmNodeID != nil {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().KpmNodeId = globalKpmNodeID
+	}
 
 	//if err := e2SmKpmPdu.Validate(); err != nil {
 	//	return nil, fmt.Errorf("error validating E2SmKpmPDU %s", err.Error())

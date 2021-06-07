@@ -25,7 +25,7 @@ func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2_go.E2SmKpmEventTriggerDe
 	return newE2SmKpmPdu
 }
 
-func Test_perDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
+func Test_perEncodingE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	etd := createE2SMKPMEventTriggerDefinition()
 

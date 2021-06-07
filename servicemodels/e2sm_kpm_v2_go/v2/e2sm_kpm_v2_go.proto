@@ -727,7 +727,7 @@ message E2SmKpmIndicationHeaderFormat1 {
     optional string sender_type = 4 [(validate.v1.rules).string = {min_len: 0, max_len: 8}, json_name="senderType"];
     // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
     optional string vendor_name = 5 [(validate.v1.rules).string = {min_len: 0, max_len: 32}, json_name="vendorName"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"optional,valueExt"
     optional GlobalKpmnodeId kpm_node_id = 6 [ json_name="kpmNodeID"];
 };
 
