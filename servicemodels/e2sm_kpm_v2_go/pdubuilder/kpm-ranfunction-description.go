@@ -21,19 +21,19 @@ func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd stri
 		},
 	}
 
-	//// optional instance
-	//if rknl != nil {
-	//	e2SmKpmPdu.RicKpmNodeList = rknl
-	//}
-	//// optional instance
-	//if retsl != nil {
-	//	e2SmKpmPdu.RicEventTriggerStyleList = retsl
-	//}
-	//// optional instance
-	//if rrsl != nil {
-	//	e2SmKpmPdu.RicReportStyleList = rrsl
-	//}
-	//
+	// optional instance
+	if rknl != nil {
+		e2SmKpmPdu.RicKpmNodeList = rknl
+	}
+	// optional instance
+	if retsl != nil {
+		e2SmKpmPdu.RicEventTriggerStyleList = retsl
+	}
+	// optional instance
+	if rrsl != nil {
+		e2SmKpmPdu.RicReportStyleList = rrsl
+	}
+
 	//if err := e2SmKpmPdu.Validate(); err != nil {
 	//	return nil, fmt.Errorf("error validating E2SmKpmRanfunctionDescription %s", err.Error())
 	//}

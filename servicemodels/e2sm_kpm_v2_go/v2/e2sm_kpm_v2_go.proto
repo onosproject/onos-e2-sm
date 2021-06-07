@@ -773,11 +773,11 @@ message E2SmKpmIndicationMessageFormat2 {
 message E2SmKpmRanfunctionDescription {
     // @inject_tag: aper:"valueExt"
     RanfunctionName ran_function_name = 1 [ json_name="ranFunction-Name"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:1024"
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:1024"
     repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="ric-KPM-Node-List"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:63"
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
     repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-EventTriggerStyle-List"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:63"
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
     repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-ReportStyle-List"];
 };
 

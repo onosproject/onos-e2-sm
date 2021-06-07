@@ -5340,12 +5340,12 @@ type E2SmKpmRanfunctionDescription struct {
 
 	// @inject_tag: aper:"valueExt"
 	RanFunctionName *RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty" aper:"valueExt"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:1024"
-	RicKpmNodeList []*RicKpmnodeItem `protobuf:"bytes,2,rep,name=ric_kpm_node_list,json=ric-KPM-Node-List,proto3" json:"ric_kpm_node_list,omitempty" aper:"valueExt,sizeLB:1,sizeUB:1024"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:63"
-	RicEventTriggerStyleList []*RicEventTriggerStyleItem `protobuf:"bytes,3,rep,name=ric_event_trigger_style_list,json=ric-EventTriggerStyle-List,proto3" json:"ric_event_trigger_style_list,omitempty" aper:"valueExt,sizeLB:1,sizeUB:63"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:63"
-	RicReportStyleList []*RicReportStyleItem `protobuf:"bytes,4,rep,name=ric_report_style_list,json=ric-ReportStyle-List,proto3" json:"ric_report_style_list,omitempty" aper:"valueExt,sizeLB:1,sizeUB:63"`
+	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:1024"
+	RicKpmNodeList []*RicKpmnodeItem `protobuf:"bytes,2,rep,name=ric_kpm_node_list,json=ric-KPM-Node-List,proto3" json:"ric_kpm_node_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:1024"`
+	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
+	RicEventTriggerStyleList []*RicEventTriggerStyleItem `protobuf:"bytes,3,rep,name=ric_event_trigger_style_list,json=ric-EventTriggerStyle-List,proto3" json:"ric_event_trigger_style_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:63"`
+	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
+	RicReportStyleList []*RicReportStyleItem `protobuf:"bytes,4,rep,name=ric_report_style_list,json=ric-ReportStyle-List,proto3" json:"ric_report_style_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:63"`
 }
 
 func (x *E2SmKpmRanfunctionDescription) Reset() {
