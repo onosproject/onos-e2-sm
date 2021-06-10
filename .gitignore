@@ -18,6 +18,7 @@ build/_output/onos-e2-sm
 protoc-gen-cgo/protoc-gen-cgo
 vendor
 **/_output
+**/_input
 *.DS_Store
 coverage.txt
 *.coverprofile
