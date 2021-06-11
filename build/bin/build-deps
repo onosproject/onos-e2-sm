@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-
+export GOPRIVATE=github.com/onosproject/*
 mkdir -p build/_input
 rm -rf build/_input/$1
 cp -r servicemodels/$1 build/_input/$1
