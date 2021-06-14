@@ -13,18 +13,26 @@ It would build a `protoc-gen-cgo` plugin.
 
 ## Usage
 To use this plugin please run Protobuf compiler on `*.proto` files you want to process in the following way:
-
-`protoc -I="." --plugin="./protoc-gen-cgo" --cgo_out="./generated" *.proto`
+```bash
+protoc -I="." --plugin="./protoc-gen-cgo" --cgo_out="./generated" *.proto
+```
 
 Here are the parameters you should pass:
 
-- `-I="..."` specifies path to the imports included in `.proto` file(s)
+- `-I="..."` specifies path to the imports included in `.proto` file(s),
+- `--plugin="..."` specifies path to your custom plugin if it is not located in one of the folders in `$PATH`,
+- `--cgo_out="..."` specifies path where to store newly generated CGo code. Also specifies input parameters to the plugin (see example above),
+- `*.proto` is a path to the source `.proto` file(s) to process.
 
-- `--plugin="..."` specifies path to your custom plugin if it is not located in one of the folders in `$PATH`
+Here is a set of parameters you could pass to the plugin:
+- `cgo` - generates CGo glue code (additional changes by hand are needed),
+- `ut` - generates unit test to corresponding CGo code (additional changes by hand are needed),
+- `t` - generates types (custom structures, wrapper to ease Protobuf usage),
 
-- `--cgo_out="..."` specifies path where to store generated files
-
-- `*.proto` is a path to the source `.proto` file(s) to process
+A valid example of plugin usage:
+```bash
+protoc -I="../servicemodels/" --plugin="./protoc-gen-cgo" --cgo_out="cgo=true,ut=false,t=false:./generated" ../servicemodels/e2sm_kpm_v2/v2/e2sm_kpm_v2.proto
+```
 
 ## Additonal changes
 To ensure that this plugin works correctly you should make some changes to source `.proto` file(s). 
