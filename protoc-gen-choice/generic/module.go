@@ -66,15 +66,13 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		}
 		fmt.Fprintf(buf, "ProtoFileName is \n%v\n", choices.ProtoFileName)
 
-		for _, msg := range f.AllMessages() { // Messages in each of .proto files
-			///////////////////////////////////////////////////////////
+		for _, msg := range f.AllMessages() {
 			if msg.Descriptor().GetOneofDecl() != nil {
 				choiceItem := choiceList{
 					MsgName: adjustOneOfStructName(msg.Name().String()),
 				}
 
 				for j, oneof := range msg.OneOfFields() {
-					//choiceItem.msgName = oneof.Name().String()
 					oneofItem := choiceLeaf{
 						Index:    j + 1,
 						LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(oneof.Name().String()),
@@ -89,7 +87,6 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		}
 
 		tplChoice, err := template.New("choice.tpl").ParseFiles("choice.tpl")
-
 		if err != nil {
 			//fmt.Errorf("couldn't parse template :/ %v", err)
 			panic(err)

@@ -6,8 +6,7 @@ package {{.ProtoFileName}}
 
 import "reflect"
 
-var Choicemap = map[string]map[int]reflect.Type{
-{{ $ch := .Choices }}{{ range $fieldIndex, $field := $ch }}
+var Choicemap = map[string]map[int]reflect.Type{ {{ $ch := .Choices }}{{ range $fieldIndex, $field := $ch }}
     "{{.MsgName}}":{ {{ $lf := .Leafs }}{{ range $innerFieldIndex, $innerField := $lf }}
         {{.Index}}:reflect.TypeOf({{.LeafName}}{}),{{end}}
     },{{end}}
