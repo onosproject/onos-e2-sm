@@ -1,0 +1,865 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+*/
+
+////////////////////// e2sm-kpm-ies.proto //////////////////////
+// Protobuf generated from /e2sm_kpm_v2.0.3-radisys.asn by asn1c-0.9.29
+// E2SM-KPM-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version2(2) e2sm(2) e2sm-KPMMON-IEs(2) }
+
+syntax = "proto3";
+
+package e2sm_kpm_v2_go.v2;
+option go_package = "e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go";
+
+import "validate/v1/validate.proto";
+import "asn1/v1/asn1.proto";
+
+// enumerated from e2sm_kpm_v2.0.3-radisys.asn:116
+enum TestCondExpression {
+    TEST_COND_EXPRESSION_EQUAL = 0;
+    TEST_COND_EXPRESSION_GREATERTHAN = 1;
+    TEST_COND_EXPRESSION_LESSTHAN = 2;
+    TEST_COND_EXPRESSION_CONTAINS = 3;
+    TEST_COND_EXPRESSION_PRESENT = 4;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:106
+//{-}
+enum GBR {
+    GBR_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:107
+//{-}
+enum AMBR {
+    AMBR_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:108
+//{-}
+enum ISSTAT {
+    ISSTAT_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:109
+//{-}
+enum ISCATM {
+    ISCATM_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:110
+//{-}
+enum RSRP {
+    RSRP_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:111
+//{-}
+enum RSRQ {
+    RSRQ_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:272
+//{-}
+enum IncompleteFlag {
+    INCOMPLETE_FLAG_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:82
+//{-}
+enum SUM {
+    SUM_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:86
+//{-}
+enum PreLabelOverride {
+    PRE_LABEL_OVERRIDE_TRUE = 0;
+};
+
+// enumerated from e2sm_kpm_v2.0.2-rm.asn1:87
+//{-}
+enum StartEndInd {
+    START_END_IND_START = 0;
+    START_END_IND_END = 1;
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:24
+// {EUTRACGI}
+message Eutracgi {
+    PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
+    EutracellIdentity e_utracell_identity = 2 [ json_name="eUTRACellIdentity"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:30
+// {NRCGI}
+message Nrcgi {
+    PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
+    NrcellIdentity n_rcell_identity = 2 [ json_name="nRCellIdentity"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:36
+// {CellGlobalID}
+message CellGlobalId {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:36
+    oneof cell_global_id {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        Nrcgi nr_cgi = 1 [ json_name="nr-CGI"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        Eutracgi e_utra_cgi = 2 [ json_name="eUTRA-CGI"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:42
+// {SNSSAI}
+message Snssai {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:1"
+    bytes s_st = 1 [(validate.v1.rules).bytes.len = 1, json_name="sST"];
+    // @inject_tag: aper:"optional,sizeLB:3,sizeUB:3"
+    optional bytes s_d = 2 [(validate.v1.rules).bytes.len = 3, json_name="sD"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:47
+// {FiveQI}
+message FiveQi {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name="value"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:49
+// {QCI}
+message Qci {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name="value"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:51
+// {QFI}
+message Qfi {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:63"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 63}, json_name="value"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:53
+// {ARP}
+message Arp {
+    // @inject_tag: aper:"valueExt,valueLB:1,valueUB:15"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 15}, json_name="value"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:63
+// {GranularityPeriod}
+message GranularityPeriod {
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:66
+// {MeasurementType}
+message MeasurementType {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:66
+    oneof measurement_type {
+        // @inject_tag: aper:"choiceIdx:1"
+        MeasurementTypeName meas_name = 1 [ json_name="measName"];
+        // @inject_tag: aper:"choiceIdx:2"
+        MeasurementTypeId meas_id = 2 [ json_name="measID"];
+    }
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:73
+// {MeasurementTypeID}
+message MeasurementTypeId {
+    // @inject_tag: aper:"valueExt,valueLB:1,valueUB:65536"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65536}, json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:76
+// {MeasurementLabel}
+message MeasurementLabel {
+    // @inject_tag: aper:"optional"
+    optional PlmnIdentity plmn_id = 1 [ json_name="plmnID"];
+    // @inject_tag: aper:"optional"
+    optional Snssai slice_id = 2 [ json_name="sliceID"];
+    // @inject_tag: aper:"optional"
+    optional FiveQi five_qi = 3 [ json_name="fiveQI"];
+    // @inject_tag: aper:"optional"
+    optional Qfi q_fi = 4 [ json_name="qFI"];
+    // @inject_tag: aper:"optional"
+    optional Qci q_ci = 5 [ json_name="qCI"];
+    // @inject_tag: aper:"optional"
+    optional Qci q_cimax = 6 [ json_name="qCImax"];
+    // @inject_tag: aper:"optional"
+    optional Qci q_cimin = 7 [ json_name="qCImin"];
+    // @inject_tag: aper:"optional"
+    optional Arp a_rpmax = 8 [ json_name="aRPmax"];
+    // @inject_tag: aper:"optional"
+    optional Arp a_rpmin = 9 [ json_name="aRPmin"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+    optional int32 bitrate_range = 10 [ json_name="bitrateRange"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+    optional int32 layer_mu_mimo = 11 [ json_name="layerMU-MIMO"];
+    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
+    optional SUM s_um = 12 [ json_name="sUM"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+    optional int32 dist_bin_x = 13 [ json_name="distBinX"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+    optional int32 dist_bin_y = 14 [ json_name="distBinY"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
+    optional int32 dist_bin_z = 15 [ json_name="distBinZ"];
+    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
+    optional PreLabelOverride pre_label_override = 16 [ json_name="preLabelOverride"];
+    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:1"
+    optional StartEndInd start_end_ind = 17 [ json_name="startEndInd"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:96
+// {SubscriptionID}
+message SubscriptionId {
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:99
+// {TestCondInfo}
+message TestCondInfo {
+    TestCondType test_type = 1 [ json_name="testType"];
+    TestCondExpression test_expr = 2 [ json_name="testExpr"];
+    TestCondValue test_value = 3 [ json_name="testValue"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:106
+// {TestCond-Type}
+message TestCondType {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:106
+    oneof test_cond_type {
+        // @inject_tag: aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1"
+        GBR g_br = 1 [ json_name="gBR"];
+        // @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1"
+        AMBR a_mbr = 2 [ json_name="aMBR"];
+        // @inject_tag: aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1"
+        ISSTAT is_stat = 3 [ json_name="isStat"];
+        // @inject_tag: aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1"
+        ISCATM is_cat_m = 4 [ json_name="isCatM"];
+        // @inject_tag: aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1"
+        RSRP r_srp = 5 [ json_name="rSRP"];
+        // @inject_tag: aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1"
+        RSRQ r_srq = 6 [ json_name="rSRQ"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:125
+// {TestCond-Value}
+message TestCondValue {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:125
+    oneof test_cond_value {
+        // @inject_tag: aper:"choiceIdx:1"
+        int64 value_int = 1 [ json_name="valueInt"];
+        // @inject_tag: aper:"choiceIdx:2"
+        int64 value_enum = 2 [ json_name="valueEnum"];
+        // @inject_tag: aper:"choiceIdx:3"
+        bool value_bool = 3 [ json_name="valueBool"];
+        // @inject_tag: aper:"choiceIdx:4"
+        asn1.v1.BitString value_bit_s = 4 [ json_name="valueBitS"];
+        // @inject_tag: aper:"choiceIdx:5"
+        bytes value_oct_s = 5 [ json_name="valueOctS"];
+        // @inject_tag: aper:"choiceIdx:6"
+        string value_prt_s = 6 [ json_name="valuePrtS"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:137
+// {GlobalKPMnode-ID}
+message GlobalKpmnodeId {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:137
+    oneof global_kpmnode_id {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        GlobalKpmnodeGnbId g_nb = 1 [ json_name="gNB"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        GlobalKpmnodeEnGnbId en_g_nb = 2 [ json_name="en-gNB"];
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        GlobalKpmnodeNgEnbId ng_e_nb = 3 [ json_name="ng-eNB"];
+        // @inject_tag: aper:"choiceIdx:4,valueExt"
+        GlobalKpmnodeEnbId e_nb = 4 [ json_name="eNB"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:145
+// {GlobalKPMnode-gNB-ID}
+message GlobalKpmnodeGnbId {
+    // @inject_tag: aper:"valueExt"
+    GlobalgNbId global_g_nb_id = 1 [ json_name="global-gNB-ID"];
+    // @inject_tag: aper:"optional"
+    optional GnbCuUpId g_nb_cu_up_id = 2 [ json_name="gNB-CU-UP-ID"];
+    // @inject_tag: aper:"optional"
+    optional GnbDuId g_nb_du_id = 3 [ json_name="gNB-DU-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:152
+// {GlobalgNB-ID}
+message GlobalgNbId {
+    PlmnIdentity plmn_id = 1 [ json_name="plmn-id"];
+    // @inject_tag: aper:"valueExt"
+    GnbIdChoice gnb_id = 2 [ json_name="gnb-id"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:157
+// {GNB-CU-UP-ID}
+message GnbCuUpId {
+    // @inject_tag: aper:"valueLB:0,valueUB:68719476735"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="value"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:159
+// {GNB-DU-ID}
+message GnbDuId {
+    // @inject_tag: aper:"valueLB:0,valueUB:68719476735"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:162
+// {GNB-ID-Choice}
+message GnbIdChoice {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:162
+    oneof gnb_id_choice {
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
+        asn1.v1.BitString gnb_id = 1 [ json_name="gnb-ID"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:167
+// {GlobalKPMnode-en-gNB-ID}
+message GlobalKpmnodeEnGnbId {
+    // @inject_tag: aper:"valueExt"
+    GlobalenGnbId global_g_nb_id = 1 [ json_name="global-gNB-ID"];
+    // @inject_tag: aper:"optional"
+    optional GnbCuUpId g_nb_cu_up_id = 2 [ json_name="gNB-CU-UP-ID"];
+    // @inject_tag: aper:"optional"
+    optional GnbDuId g_nb_du_id = 3 [ json_name="gNB-DU-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:174
+// {GlobalenGNB-ID}
+message GlobalenGnbId {
+    PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
+    // @inject_tag: aper:"valueExt"
+    EngnbId g_nb_id = 2 [ json_name="gNB-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:180
+// {ENGNB-ID}
+message EngnbId {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:180
+    oneof engnb_id {
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
+        asn1.v1.BitString g_nb_id = 1 [ json_name="gNB-ID"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:185
+// {GlobalKPMnode-ng-eNB-ID}
+message GlobalKpmnodeNgEnbId {
+    // @inject_tag: aper:"valueExt"
+    GlobalngeNbId global_ng_e_nb_id = 1 [ json_name="global-ng-eNB-ID"];
+    // @inject_tag: aper:"optional"
+    optional GnbDuId g_nb_du_id = 2 [ json_name="gNB-DU-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:191
+// {GlobalngeNB-ID}
+message GlobalngeNbId {
+    PlmnIdentity plmn_id = 1 [ json_name="plmn-id"];
+    // @inject_tag: aper:"valueExt"
+    EnbIdChoice enb_id = 2 [ json_name="enb-id"];
+    // @inject_tag: aper:"sizeLB:18,sizeUB:18"
+    asn1.v1.BitString short_macro_e_nb_id = 3 [ json_name="short-Macro-eNB-ID"];
+    // @inject_tag: aper:"sizeLB:21,sizeUB:21"
+    asn1.v1.BitString long_macro_e_nb_id = 4 [ json_name="long-Macro-eNB-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:199
+// {ENB-ID-Choice}
+message EnbIdChoice {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:199
+    oneof enb_id_choice {
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
+        asn1.v1.BitString enb_id_macro = 1 [ json_name="enb-ID-macro"];
+        // @inject_tag: aper:"choiceIdx:2,sizeLB:18,sizeUB:18"
+        asn1.v1.BitString enb_id_shortmacro = 2 [ json_name="enb-ID-shortmacro"];
+        // @inject_tag: aper:"choiceIdx:3,sizeLB:21,sizeUB:21"
+        asn1.v1.BitString enb_id_longmacro = 3 [ json_name="enb-ID-longmacro"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:206
+// {GlobalKPMnode-eNB-ID}
+message GlobalKpmnodeEnbId {
+    // @inject_tag: aper:"valueExt"
+    GlobalEnbId global_e_nb_id = 1 [ json_name="global-eNB-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:211
+// {GlobalENB-ID}
+message GlobalEnbId {
+    PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
+    // @inject_tag: aper:"valueExt"
+    EnbId e_nb_id = 2 [ json_name="eNB-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:217
+// {ENB-ID}
+message EnbId {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:217
+    oneof enb_id {
+        // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
+        asn1.v1.BitString macro_e_nb_id = 1 [ json_name="macro-eNB-ID"];
+        // @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28"
+        asn1.v1.BitString home_e_nb_id = 2 [ json_name="home-eNB-ID"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:225
+// {RANfunction-Name}
+message RanfunctionName {
+    // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
+    string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="ranFunction-ShortName"];
+    // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:1000"
+    string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}, json_name="ranFunction-E2SM-OID"];
+    // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
+    string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="ranFunction-Description"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:255"
+    optional int32 ran_function_instance = 4 [ json_name="ranFunction-Instance"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:232
+// {RIC-Style-Type}
+message RicStyleType {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name="value"];
+};
+
+// range of Integer from e2sm_kpm_v2.0.3-radisys.asn:236
+// {RIC-Format-Type}
+message RicFormatType {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:242
+// {-}
+message MaxnoofKpmnodes {
+    // @inject_tag: aper:"valueLB:1024,valueUB:1024"
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:243
+// {-}
+message MaxnoofCells {
+    // @inject_tag: aper:"valueLB:16384,valueUB:16384"
+    int32 value = 1 [(validate.v1.rules).int32.const = 16384, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:244
+// {-}
+message MaxnoofRicstyles {
+    // @inject_tag: aper:"valueLB:63,valueUB:63"
+    int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:245
+// {-}
+message MaxnoofMeasurementInfo {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:246
+// {-}
+message MaxnoofLabelInfo {
+    // @inject_tag: aper:"valueLB:2147483647,valueUB:2147483647"
+    int32 value = 1 [(validate.v1.rules).int32.const = 2147483647, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:247
+// {-}
+message MaxnoofMeasurementRecord {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:248
+// {-}
+message MaxnoofMeasurementValue {
+    // @inject_tag: aper:"valueLB:2147483647,valueUB:2147483647"
+    int32 value = 1 [(validate.v1.rules).int32.const = 2147483647, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:249
+// {-}
+message MaxnoofConditionInfo {
+    // @inject_tag: aper:"valueLB:32768,valueUB:32768"
+    int32 value = 1 [(validate.v1.rules).int32.const = 32768, json_name="value"];
+};
+
+// constant Integer from e2sm_kpm_v2.0.3-radisys.asn:250
+// {-}
+message MaxnoofUeid {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:255
+// {MeasurementInfoList}
+message MeasurementInfoList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+    repeated MeasurementInfoItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:256
+// {MeasurementInfoItem}
+message MeasurementInfoItem {
+    MeasurementType meas_type = 1 [ json_name="measType"];
+    optional LabelInfoList label_info_list = 2 [ json_name="labelInfoList"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:263
+// {LabelInfoList}
+message LabelInfoList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:2147483647"
+    repeated LabelInfoItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:264
+// {LabelInfoItem}
+message LabelInfoItem {
+    MeasurementLabel meas_label = 1 [ json_name="measLabel"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:270
+// {MeasurementData}
+message MeasurementData {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+    repeated MeasurementDataItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:271
+// {MeasurementDataItem}
+message MeasurementDataItem {
+    MeasurementRecord meas_record = 1 [ json_name="measRecord"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:1"
+    optional int32 incomplete_flag = 2 [ json_name="incompleteFlag"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:278
+// {MeasurementRecord}
+message MeasurementRecord {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:2147483647"
+    repeated MeasurementRecordItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:279
+// {MeasurementRecordItem}
+message MeasurementRecordItem {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:279
+    oneof measurement_record_item {
+        // @inject_tag: aper:"choiceIdx:1,valueLB:0,valueUB:4294967295"
+        int64 integer = 1 [ json_name="integer"];
+        // @inject_tag: aper:"choiceIdx:2"
+        double real = 2 [ json_name="real"];
+        // @inject_tag: aper:"choiceIdx:3"
+        int32 no_value = 3 [ json_name="noValue"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:287
+// {MeasurementInfo-Action-List}
+message MeasurementInfoActionList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+    repeated MeasurementInfoActionItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:288
+// {MeasurementInfo-Action-Item}
+message MeasurementInfoActionItem {
+    MeasurementTypeName meas_name = 1 [ json_name="measName"];
+    // @inject_tag: aper:"optional"
+    optional MeasurementTypeId meas_id = 2 [ json_name="measID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:295
+// {MeasurementCondList}
+message MeasurementCondList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+    repeated MeasurementCondItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:296
+// {MeasurementCondItem}
+message MeasurementCondItem {
+    MeasurementType meas_type = 1 [ json_name="measType"];
+    MatchingCondList matching_cond = 2 [ json_name="matchingCond"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:303
+// {MeasurementCondUEidList}
+message MeasurementCondUeidList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+    repeated MeasurementCondUeidItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:304
+// {MeasurementCondUEidItem}
+message MeasurementCondUeidItem {
+    MeasurementType meas_type = 1 [ json_name="measType"];
+    MatchingCondList matching_cond = 2 [ json_name="matchingCond"];
+    // @inject_tag: aper:"optional"
+    optional MatchingUeidList matching_ueid_list = 3 [ json_name="matchingUEidList"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:312
+// {MatchingCondList}
+message MatchingCondList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32768"
+    repeated MatchingCondItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:313
+// {MatchingCondItem}
+message MatchingCondItem {
+    // choice from e2sm_kpm_v2.0.3-radisys.asn:313
+    oneof matching_cond_item {
+        // @inject_tag: aper:"choiceIdx:1"
+        MeasurementLabel meas_label = 1 [ json_name="measLabel"];
+        // @inject_tag: aper:"choiceIdx:2"
+        TestCondInfo test_cond_info = 2 [ json_name="testCondInfo"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:320
+// {MatchingUEidList}
+message MatchingUeidList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+    repeated MatchingUeidItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:321
+// {MatchingUEidItem}
+message MatchingUeidItem {
+    UeIdentity ue_id = 1 [ json_name="ueID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:337
+// {E2SM-KPM-EventTriggerDefinition}
+message E2SmKpmEventTriggerDefinition {
+    // choice from e2sm-kpm-ies_v2.asn1:337
+    oneof e2_sm_kpm_event_trigger_definition {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmKpmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "eventDefinition_Format1"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:342
+// {E2SM-KPM-EventTriggerDefinition-Format1}
+message E2SmKpmEventTriggerDefinitionFormat1 {
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295"
+    int32 reporting_period = 1 [ json_name="reportingPeriod"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:351
+// {E2SM-KPM-ActionDefinition}
+message E2SmKpmActionDefinition {
+    RicStyleType ric_style_type = 1 [ json_name="ric-Style-Type"];
+    oneof e2_sm_kpm_action_definition {
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
+        E2SmKpmActionDefinitionFormat1 action_definition_format1 = 2 [json_name = "actionDefinition_Format1"];
+        // @inject_tag: aper:"valueExt,choiceIdx:2"
+        E2SmKpmActionDefinitionFormat2 action_definition_format2 = 3 [json_name = "actionDefinition_Format2"];
+        // @inject_tag: aper:"valueExt,choiceIdx:3"
+        E2SmKpmActionDefinitionFormat3 action_definition_format3 = 4 [json_name = "actionDefinition_Format3"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:362
+// {E2SM-KPM-ActionDefinition-Format1}
+message E2SmKpmActionDefinitionFormat1 {
+    CellObjectId cell_obj_id = 1 [ json_name="cellObjID"];
+    MeasurementInfoList meas_info_list = 2 [ json_name="measInfoList"];
+    GranularityPeriod granul_period = 3 [ json_name="granulPeriod"];
+    SubscriptionId subscript_id = 4 [ json_name="subscriptID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:370
+// {E2SM-KPM-ActionDefinition-Format2}
+message E2SmKpmActionDefinitionFormat2 {
+    UeIdentity ue_id = 1 [ json_name="ueID"];
+    E2SmKpmActionDefinitionFormat1 subscript_info = 2 [ json_name="subscriptInfo"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:376
+// {E2SM-KPM-ActionDefinition-Format3}
+message E2SmKpmActionDefinitionFormat3 {
+    CellObjectId cell_obj_id = 1 [ json_name="cellObjID"];
+    MeasurementCondList meas_cond_list = 2 [ json_name="measCondList"];
+    GranularityPeriod granul_period = 3 [ json_name="granulPeriod"];
+    SubscriptionId subscript_id = 4 [ json_name="subscriptID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:391
+// {E2SM-KPM-IndicationHeader}
+message E2SmKpmIndicationHeader {
+    // choice from e2sm-kpm-v01.00.asn1:391
+    oneof e2_sm_kpm_indication_header {
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
+        E2SmKpmIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "indicationHeader_Format1"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:396
+// {E2SM-KPM-IndicationHeader-Format1}
+message E2SmKpmIndicationHeaderFormat1 {
+    TimeStamp collet_start_time = 1 [ json_name="colletStartTime"];
+    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:15"
+    optional string file_formatversion = 2 [(validate.v1.rules).string = {min_len: 0, max_len: 15}, json_name="fileFormatversion"];
+    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:400"
+    optional string sender_name = 3 [(validate.v1.rules).string = {min_len: 0, max_len: 400}, json_name="senderName"];
+    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:8"
+    optional string sender_type = 4 [(validate.v1.rules).string = {min_len: 0, max_len: 8}, json_name="senderType"];
+    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
+    optional string vendor_name = 5 [(validate.v1.rules).string = {min_len: 0, max_len: 32}, json_name="vendorName"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional GlobalKpmnodeId kpm_node_id = 6 [ json_name="kpmNodeID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:414
+// {E2SM-KPM-IndicationMessage}
+message E2SmKpmIndicationMessage {
+    // choice from e2sm_kpm_ies_v2.asn:414
+    oneof e2_sm_kpm_indication_message {
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
+        E2SmKpmIndicationMessageFormat1 indication_message_format1 = 1 [json_name = "indicationMessage_Format1"];
+        // @inject_tag: aper:"valueExt,choiceIdx:2"
+        E2SmKpmIndicationMessageFormat2 indication_message_format2 = 2 [json_name = "indicationMessage_Format2"];
+    }
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:419
+// {E2SM-KPM-IndicationMessage-Format1}
+message E2SmKpmIndicationMessageFormat1 {
+    SubscriptionId subscript_id = 1 [ json_name="subscriptID"];
+    // @inject_tag: aper:"optional"
+    optional CellObjectId cell_obj_id = 2 [ json_name="cellObjID"];
+    // @inject_tag: aper:"optional"
+    optional GranularityPeriod granul_period = 3 [ json_name="granulPeriod"];
+    // @inject_tag: aper:"optional"
+    optional MeasurementInfoList meas_info_list = 4 [ json_name="measInfoList"];
+    MeasurementData meas_data = 5 [ json_name="measData"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:428
+// {E2SM-KPM-IndicationMessage-Format2}
+message E2SmKpmIndicationMessageFormat2 {
+    SubscriptionId subscript_id = 1 [ json_name="subscriptID"];
+    // @inject_tag: aper:"optional"
+    optional CellObjectId cell_obj_id = 2 [ json_name="cellObjID"];
+    // @inject_tag: aper:"optional"
+    optional GranularityPeriod granul_period = 3 [ json_name="granulPeriod"];
+    MeasurementCondUeidList meas_cond_ueid_list = 4 [ json_name="measCondUEidList"];
+    MeasurementData meas_data = 5 [ json_name="measData"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:441
+// {E2SM-KPM-RANfunction-Description}
+message E2SmKpmRanfunctionDescription {
+    // @inject_tag: aper:"valueExt"
+    RanfunctionName ran_function_name = 1 [ json_name="ranFunction-Name"];
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:1024"
+    repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="ric-KPM-Node-List"];
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
+    repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-EventTriggerStyle-List"];
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
+    repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-ReportStyle-List"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:449
+// {RIC-KPMNode-Item}
+message RicKpmnodeItem {
+    // @inject_tag: aper:"valueExt"
+    GlobalKpmnodeId ric_kpmnode_type = 1 [ json_name="ric-KPMNode-Type"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:16384"
+    repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name="cell-Measurement-Object-List"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:455
+// {Cell-Measurement-Object-Item}
+message CellMeasurementObjectItem {
+    CellObjectId cell_object_id = 1 [ json_name="cell-object-ID"];
+    // @inject_tag: aper:"valueExt"
+    CellGlobalId cell_global_id = 2 [ json_name="cell-global-ID"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:461
+// {RIC-EventTriggerStyle-Item}
+message RicEventTriggerStyleItem {
+    RicStyleType ric_event_trigger_style_type = 1 [ json_name="ric-EventTriggerStyle-Type"];
+    RicStyleName ric_event_trigger_style_name = 2 [ json_name="ric-EventTriggerStyle-Name"];
+    RicFormatType ric_event_trigger_format_type = 3 [ json_name="ric-EventTriggerFormat-Type"];
+};
+
+// sequence from e2sm_kpm_v2.0.3-radisys.asn:468
+// {RIC-ReportStyle-Item}
+message RicReportStyleItem {
+    RicStyleType ric_report_style_type = 1 [ json_name="ric-ReportStyle-Type"];
+    RicStyleName ric_report_style_name = 2 [ json_name="ric-ReportStyle-Name"];
+    RicFormatType ric_action_format_type = 3 [ json_name="ric-ActionFormat-Type"];
+    MeasurementInfoActionList meas_info_action_list = 4 [ json_name="measInfo-Action-List"];
+    RicFormatType ric_indication_header_format_type = 5 [ json_name="ric-IndicationHeaderFormat-Type"];
+    RicFormatType ric_indication_message_format_type = 6 [ json_name="ric-IndicationMessageFormat-Type"];
+};
+
+//{RIC-Style-Name}
+message RicStyleName {
+    // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "value"];
+}
+
+//{CellObjectID}
+message CellObjectId {
+    // @inject_tag: aper:"sizeExt,sizeLB:0,sizeUB:400"
+    string value = 1 [(validate.v1.rules).string = {min_len: 0, max_len: 400}, json_name = "value"];
+}
+
+//{MeasurementTypeName}
+message MeasurementTypeName {
+    // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "value"];
+}
+
+//{UE-Identity}
+message UeIdentity {
+    bytes value = 1 [json_name = "value"];
+}
+
+//{PLMN-Identity}
+message PlmnIdentity {
+    // @inject_tag: aper:"sizeLB:3,sizeUB:3"
+    bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name = "value"];
+}
+
+//{TimeStamp}
+message TimeStamp {
+    // @inject_tag: aper:"sizeLB:4,sizeUB:4"
+    bytes value = 1 [(validate.v1.rules).bytes.len = 4, json_name = "value"];
+}
+
+//{EUTRACellIdentity}
+message EutracellIdentity {
+    // @inject_tag: aper:"sizeLB:28,sizeUB:28"
+    asn1.v1.BitString value = 1 [json_name = "value"]; //28
+}
+
+//{NRCellIdentity}
+message NrcellIdentity {
+    // @inject_tag: aper:"sizeLB:36,sizeUB:36"
+    asn1.v1.BitString value = 1 [json_name = "value"]; //36
+}
