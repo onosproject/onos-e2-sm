@@ -98,6 +98,7 @@ func (m *reportModule) Name() string {
 // outside of the normal protoc flow.
 func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.Package) []pgs.Artifact {
 	buf := &bytes.Buffer{}
+	//fmt.Printf("Parameters are \n%v", m.Parameters().String())
 
 	//TODO: Extract the SM version from the each function header. Some other values
 	// could be also taken from function's header - format of parsing could be unified.
@@ -171,8 +172,13 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					panic(err)
 				}
 
+				param, _ := m.Parameters().Bool("cgo")
+				//if err != nil {
+				//	fmt.Errorf("parameter cgo wasn't found in the set %v", err)
+				//}
+
 				// Generating new .go file
-				if !findWithinBasicTypes(enumData.CstructName) {
+				if !findWithinBasicTypes(enumData.CstructName) && param {
 					m.OverwriteGeneratorTemplateFile(underscoreToDash(enumData.CstructName)+".go", tplEnum, enumData)
 				}
 
@@ -323,8 +329,13 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					panic(err)
 				}
 
+				cgo, _ := m.Parameters().Bool("cgo")
+				//if err != nil {
+				//	fmt.Errorf("parameter cgo wasn't found in the input set %v", err)
+				//}
+
 				// Generating new .go file
-				if !findWithinBasicTypes(msgData.CstructName) {
+				if !findWithinBasicTypes(msgData.CstructName) && cgo {
 					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+".go", tplMsg, msgData)
 				}
 
@@ -346,8 +357,13 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					panic(err)
 				}
 
+				ut, _ := m.Parameters().Bool("ut")
+				//if err != nil {
+				//	fmt.Errorf("parameter ut wasn't found in the input set %v", err)
+				//}
+
 				// Generating new .go file
-				if !findWithinBasicTypes(msgData.CstructName) {
+				if !findWithinBasicTypes(msgData.CstructName) && ut {
 					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.CstructName)+"_test.go", utTpl, msgData)
 				}
 
@@ -369,8 +385,13 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					panic(err)
 				}
 
+				t, _ := m.Parameters().Bool("t")
+				//if err != nil {
+				//	fmt.Errorf("parameter t wasn't found in the input set %v", err)
+				//}
+
 				// Generating new .go file
-				if !findWithinBasicTypes(msgData.CstructName) {
+				if !findWithinBasicTypes(msgData.CstructName) && t {
 					m.OverwriteGeneratorTemplateFile(underscoreToDash(msgData.MessageName)+"_types.go", typesTpl, msgData)
 				}
 			}
@@ -396,21 +417,28 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		//wc.Close()
 		//io.Copy(os.Stdout, rc)
 
-		// Printing basic types
-		basicTypesList := getBasicTypes()
-		for _, item := range basicTypesList {
-			basicTpl, err := template.New(item + ".tpl").Funcs(template.FuncMap{
-				"dashToUnderscore": dashToUnderscore,
-				"underscoreToDash": underscoreToDash,
-				"cutIES":           cutIES,
-			}).ParseFiles(item + ".tpl")
-			if err != nil {
-				//fmt.Errorf("couldn't parse template :/ %v", err)
-				panic(err)
-			}
+		cgo, _ := m.Parameters().Bool("cgo")
+		//if err != nil {
+		//	fmt.Errorf("parameter cgo wasn't found in the input set %v", err)
+		//}
 
-			// Generating new .go file
-			m.OverwriteGeneratorTemplateFile(item+".go", basicTpl, basicTypesInfo)
+		// Printing basic types
+		if cgo {
+			basicTypesList := getBasicTypes()
+			for _, item := range basicTypesList {
+				basicTpl, err := template.New(item + ".tpl").Funcs(template.FuncMap{
+					"dashToUnderscore": dashToUnderscore,
+					"underscoreToDash": underscoreToDash,
+					"cutIES":           cutIES,
+				}).ParseFiles(item + ".tpl")
+				if err != nil {
+					//fmt.Errorf("couldn't parse template :/ %v", err)
+					panic(err)
+				}
+
+				// Generating new .go file
+				m.OverwriteGeneratorTemplateFile(item+".go", basicTpl, basicTypesInfo)
+			}
 		}
 
 	}

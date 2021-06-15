@@ -13,8 +13,15 @@ import (
 	"github.com/onosproject/onos-e2-sm/protoc-gen-cgo/generic"
 )
 
+var p = pgs.Parameters{"cgo": "true", //To print CGo glue code
+	"ut": "true", //To print unit tests for CGo glue code
+	"t":  "true"} //To print types for easier conversion between Protobuf and custom types
+
 func main() {
 	g := pgs.Init(pgs.DebugMode())
+	md := pgs.InitMockDebugger()
+	pgs.Context(md, p, "../servicemodels/")
+
 	g.RegisterModule(generic.NewModule())
 	//g.RegisterPostProcessor(generic.NewPostProcessor()) // Probably wouldn't need in the end
 	//ToDo: Could be an issue when using latest Protobuf compiler (3.9.0) - simply comment it
