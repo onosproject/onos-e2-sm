@@ -3,7 +3,7 @@ export GO111MODULE=on
 
 .PHONY: build
 
-E2T_MOD ?= github.com/onosproject/onos-e2t
+E2T_MOD ?= github.com/onosproject/onos-e2t@master
 RAN_SIM_MOD ?= github.com/onosproject/ran-simulator
 
 ONOS_E2_SM_VERSION := latest
