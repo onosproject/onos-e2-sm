@@ -11,3 +11,5 @@ require (
 	google.golang.org/protobuf v1.25.0
 	gotest.tools v2.2.0+incompatible // indirect
 )
+
+replace github.com/onosproject/onos-api/go => /Users/adibrastegarnia/go/src/github.com/onosproject/onos-api/go

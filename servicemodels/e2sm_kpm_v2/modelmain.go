@@ -228,20 +228,27 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 	for _, kpmNode := range ranFunctionDescription.RicKpmNodeList {
 		for _, cell := range kpmNode.CellMeasurementObjectList {
 			cellObject := &topoapi.E2Cell{
-				CID: cell.GetCellObjectId().GetValue(),
+				CellObjectID: cell.GetCellObjectId().GetValue(),
 			}
 			*e2Cells = append(*e2Cells, cellObject)
 		}
 	}
 
 	for _, reportStyle := range ranFunctionDescription.GetRicReportStyleList() {
+		kpmReportStyle := &topoapi.KPMReportStyle{
+			Name: reportStyle.RicReportStyleName.Value,
+			Type: reportStyle.RicReportStyleType.Value,
+		}
+		var measurements []*topoapi.KPMMeasurement
 		for _, meanInfoItem := range reportStyle.GetMeasInfoActionList().GetValue() {
-			ranFunction.Measurements = append(ranFunction.Measurements, &topoapi.KPMMeasurement{
+			measurements = append(measurements, &topoapi.KPMMeasurement{
 				ID:   meanInfoItem.GetMeasId().String(),
 				Name: meanInfoItem.GetMeasName().GetValue(),
 			})
-
 		}
+
+		kpmReportStyle.Measurements = measurements
+		ranFunction.ReportStyles = append(ranFunction.ReportStyles, kpmReportStyle)
 	}
 	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
 	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
