@@ -260,7 +260,16 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 	serviceModels := request.ServiceModels
 	serviceModel := serviceModels[smOIDRcPreV1]
 	serviceModel.Name = ranFunctionDescription.RanFunctionName.RanFunctionShortName
+	reportStyleList := ranFunctionDescription.GetE2SmRcPreRanfunctionItem().GetRicReportStyleList()
+
 	ranFunction := &topoapi.RCRanFunction{}
+	for _, reportStyle := range reportStyleList {
+		rcReportStyle := &topoapi.RCReportStyle{
+			Name: reportStyle.RicReportStyleName.Value,
+			Type: reportStyle.RicReportStyleType.Value,
+		}
+		ranFunction.ReportStyles = append(ranFunction.ReportStyles, rcReportStyle)
+	}
 
 	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
 	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
