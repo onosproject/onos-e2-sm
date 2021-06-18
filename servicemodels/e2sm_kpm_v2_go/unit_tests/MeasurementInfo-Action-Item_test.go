@@ -31,7 +31,6 @@ func Test_perEncodingMeasurementInfoActionItem(t *testing.T) {
 
 	miai := createMeasurementInfoActionItem()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(miai, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfoActionItem PER\n%v", hex.Dump(per))

@@ -42,7 +42,6 @@ func Test_perEncodingMeasurementInfoActionList(t *testing.T) {
 	mial, err := createMeasurementInfoActionList()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.Marshal(mial)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfoActionList PER\n%v", hex.Dump(per))

@@ -182,25 +182,25 @@ message MeasurementLabel {
     optional PlmnIdentity plmn_id = 1 [ json_name="plmnID"];
     // @inject_tag: aper:"optional"
     optional Snssai slice_id = 2 [ json_name="sliceID"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional FiveQi five_qi = 3 [ json_name="fiveQI"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qfi q_fi = 4 [ json_name="qFI"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qci q_ci = 5 [ json_name="qCI"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qci q_cimax = 6 [ json_name="qCImax"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qci q_cimin = 7 [ json_name="qCImin"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Arp a_rpmax = 8 [ json_name="aRPmax"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Arp a_rpmin = 9 [ json_name="aRPmin"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 bitrate_range = 10 [ json_name="bitrateRange"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 layer_mu_mimo = 11 [ json_name="layerMU-MIMO"];
-    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
     optional SUM s_um = 12 [ json_name="sUM"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 dist_bin_x = 13 [ json_name="distBinX"];
@@ -208,7 +208,7 @@ message MeasurementLabel {
     optional int32 dist_bin_y = 14 [ json_name="distBinY"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 dist_bin_z = 15 [ json_name="distBinZ"];
-    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
     optional PreLabelOverride pre_label_override = 16 [ json_name="preLabelOverride"];
     // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:1"
     optional StartEndInd start_end_ind = 17 [ json_name="startEndInd"];

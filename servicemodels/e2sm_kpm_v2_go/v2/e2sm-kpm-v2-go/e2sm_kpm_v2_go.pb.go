@@ -1187,34 +1187,34 @@ type MeasurementLabel struct {
 	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmnID,proto3,oneof" json:"plmn_id,omitempty" aper:"optional"`
 	// @inject_tag: aper:"optional"
 	SliceId *Snssai `protobuf:"bytes,2,opt,name=slice_id,json=sliceID,proto3,oneof" json:"slice_id,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional"
-	FiveQi *FiveQi `protobuf:"bytes,3,opt,name=five_qi,json=fiveQI,proto3,oneof" json:"five_qi,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional"
-	QFi *Qfi `protobuf:"bytes,4,opt,name=q_fi,json=qFI,proto3,oneof" json:"q_fi,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional"
-	QCi *Qci `protobuf:"bytes,5,opt,name=q_ci,json=qCI,proto3,oneof" json:"q_ci,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional"
-	QCimax *Qci `protobuf:"bytes,6,opt,name=q_cimax,json=qCImax,proto3,oneof" json:"q_cimax,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional"
-	QCimin *Qci `protobuf:"bytes,7,opt,name=q_cimin,json=qCImin,proto3,oneof" json:"q_cimin,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional"
-	ARpmax *Arp `protobuf:"bytes,8,opt,name=a_rpmax,json=aRPmax,proto3,oneof" json:"a_rpmax,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional"
-	ARpmin *Arp `protobuf:"bytes,9,opt,name=a_rpmin,json=aRPmin,proto3,oneof" json:"a_rpmin,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional,valueExt"
+	FiveQi *FiveQi `protobuf:"bytes,3,opt,name=five_qi,json=fiveQI,proto3,oneof" json:"five_qi,omitempty" aper:"optional,valueExt"`
+	// @inject_tag: aper:"optional,valueExt"
+	QFi *Qfi `protobuf:"bytes,4,opt,name=q_fi,json=qFI,proto3,oneof" json:"q_fi,omitempty" aper:"optional,valueExt"`
+	// @inject_tag: aper:"optional,valueExt"
+	QCi *Qci `protobuf:"bytes,5,opt,name=q_ci,json=qCI,proto3,oneof" json:"q_ci,omitempty" aper:"optional,valueExt"`
+	// @inject_tag: aper:"optional,valueExt"
+	QCimax *Qci `protobuf:"bytes,6,opt,name=q_cimax,json=qCImax,proto3,oneof" json:"q_cimax,omitempty" aper:"optional,valueExt"`
+	// @inject_tag: aper:"optional,valueExt"
+	QCimin *Qci `protobuf:"bytes,7,opt,name=q_cimin,json=qCImin,proto3,oneof" json:"q_cimin,omitempty" aper:"optional,valueExt"`
+	// @inject_tag: aper:"optional,valueExt"
+	ARpmax *Arp `protobuf:"bytes,8,opt,name=a_rpmax,json=aRPmax,proto3,oneof" json:"a_rpmax,omitempty" aper:"optional,valueExt"`
+	// @inject_tag: aper:"optional,valueExt"
+	ARpmin *Arp `protobuf:"bytes,9,opt,name=a_rpmin,json=aRPmin,proto3,oneof" json:"a_rpmin,omitempty" aper:"optional,valueExt"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
 	BitrateRange *int32 `protobuf:"varint,10,opt,name=bitrate_range,json=bitrateRange,proto3,oneof" json:"bitrate_range,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
 	LayerMuMimo *int32 `protobuf:"varint,11,opt,name=layer_mu_mimo,json=layerMU-MIMO,proto3,oneof" json:"layer_mu_mimo,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
-	SUm *SUM `protobuf:"varint,12,opt,name=s_um,json=sUM,proto3,enum=e2sm_kpm_v2_go.v2.SUM,oneof" json:"s_um,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:0"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
+	SUm *SUM `protobuf:"varint,12,opt,name=s_um,json=sUM,proto3,enum=e2sm_kpm_v2_go.v2.SUM,oneof" json:"s_um,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:0"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
 	DistBinX *int32 `protobuf:"varint,13,opt,name=dist_bin_x,json=distBinX,proto3,oneof" json:"dist_bin_x,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
 	DistBinY *int32 `protobuf:"varint,14,opt,name=dist_bin_y,json=distBinY,proto3,oneof" json:"dist_bin_y,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
 	DistBinZ *int32 `protobuf:"varint,15,opt,name=dist_bin_z,json=distBinZ,proto3,oneof" json:"dist_bin_z,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
-	PreLabelOverride *PreLabelOverride `protobuf:"varint,16,opt,name=pre_label_override,json=preLabelOverride,proto3,enum=e2sm_kpm_v2_go.v2.PreLabelOverride,oneof" json:"pre_label_override,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:0"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
+	PreLabelOverride *PreLabelOverride `protobuf:"varint,16,opt,name=pre_label_override,json=preLabelOverride,proto3,enum=e2sm_kpm_v2_go.v2.PreLabelOverride,oneof" json:"pre_label_override,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:0"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:1"
 	StartEndInd *StartEndInd `protobuf:"varint,17,opt,name=start_end_ind,json=startEndInd,proto3,enum=e2sm_kpm_v2_go.v2.StartEndInd,oneof" json:"start_end_ind,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:1"`
 }
