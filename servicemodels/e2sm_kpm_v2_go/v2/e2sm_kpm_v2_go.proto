@@ -153,7 +153,7 @@ message Arp {
 // {GranularityPeriod}
 message GranularityPeriod {
     // @inject_tag: aper:"valueLB:1,valueUB:4294967295"
-    uint32 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
+    int32 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
 };
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:66
@@ -567,7 +567,7 @@ message MeasurementRecordItem {
         int64 integer = 1 [ json_name="integer"];
         // @inject_tag: aper:"choiceIdx:2"
         double real = 2 [ json_name="real"];
-        // @inject_tag: aper:"choiceIdx:3"
+        // @inject_tag: aper:"choiceIdx:3,valueLB:0,valueUB:0"
         int32 no_value = 3 [ json_name="noValue"];
     }
 };

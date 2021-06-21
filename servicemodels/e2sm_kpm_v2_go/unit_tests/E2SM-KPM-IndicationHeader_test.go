@@ -51,6 +51,7 @@ func Test_perEncodingE2SmKpmIndicationHeader(t *testing.T) {
 
 	ih := createE2SmKpmIndicationHeader()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(ih, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader PER\n%v", hex.Dump(per))

@@ -25,7 +25,7 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	var integer int64 = 12345
 	var rl float64 = 6789.51
 	var cellObjID string = "onf"
-	var granularity uint32 = 21
+	var granularity int32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -110,7 +110,9 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	measData.Value = append(measData.Value, measDataItem)
 
 	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, cellObjID, &measInfoList, measData)
-	newE2SmKpmPdu.GetIndicationMessageFormat1().GranulPeriod.Value = granularity
+	newE2SmKpmPdu.GetIndicationMessageFormat1().GranulPeriod = &e2sm_kpm_v2_go.GranularityPeriod{
+		Value: granularity,
+	}
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}

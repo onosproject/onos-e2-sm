@@ -77,11 +77,11 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
-	//result := e2sm_kpm_v2_go.MeasurementLabel{}
-	//err = aper.UnmarshalWithParams(per, &result, "valueExt")
-	//assert.NilError(t, err)
-	//assert.Assert(t, &result != nil)
-	//t.Logf("MeasurementLabel PER - decoded\n%v", result)
+	result := e2sm_kpm_v2_go.MeasurementLabel{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	assert.NilError(t, err)
+	assert.Assert(t, &result != nil)
+	t.Logf("MeasurementLabel PER - decoded\n%v", result)
 
 	//Comparing with reference bytes
 	//perRefBytes, err := hexlib.DumpToByte(refPerMeasLabel)
