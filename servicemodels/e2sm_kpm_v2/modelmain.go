@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	prototypes "github.com/gogo/protobuf/types"
 
@@ -229,7 +230,17 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 		for _, cell := range kpmNode.CellMeasurementObjectList {
 			cellObject := &topoapi.E2Cell{
 				CellObjectID: cell.GetCellObjectId().GetValue(),
+				CellGlobalID: &topoapi.CellGlobalID{},
 			}
+			switch cellGlobalID := cell.CellGlobalId.GetCellGlobalId().(type) {
+			case *e2sm_kpm_v2.CellGlobalId_NrCgi:
+				cellObject.CellGlobalID.Value = strconv.FormatUint(cellGlobalID.NrCgi.NRcellIdentity.Value.Value, 16)
+				cellObject.CellGlobalID.Type = topoapi.CellGlobalIDType_NRCGI
+			case *e2sm_kpm_v2.CellGlobalId_EUtraCgi:
+				cellObject.CellGlobalID.Value = strconv.FormatUint(cellGlobalID.EUtraCgi.EUtracellIdentity.Value.Value, 16)
+				cellObject.CellGlobalID.Type = topoapi.CellGlobalIDType_ECGI
+			}
+
 			*e2Cells = append(*e2Cells, cellObject)
 		}
 	}
