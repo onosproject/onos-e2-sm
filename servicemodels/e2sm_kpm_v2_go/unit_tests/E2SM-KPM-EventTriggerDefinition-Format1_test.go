@@ -18,7 +18,7 @@ var refPerEventTriggerDefinitionFormat1 = "00000000  00 0e                      
 
 func createE2SMKPMEventTriggerDefinitionFormat1() *e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1 {
 
-	var rtPeriod int32 = 15
+	var rtPeriod int64 = 15
 
 	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
 

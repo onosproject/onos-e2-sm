@@ -5,7 +5,8 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	var rfi int32 = 21
 
 	plmnID := []byte{0x21, 0x22, 0x23}
-	bs := e2sm_kpm_v2.BitString{
+	bs := asn1.BitString{
 		Value: 0x9bcd4,
 		Len:   22,
 	}
@@ -30,19 +31,19 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	var gnbDuID int64 = 6789
 	globalKpmnodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
 	assert.NilError(t, err)
-	globalKpmnodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+	globalKpmnodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmnodeID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+	globalKpmnodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
 		Value: gnbDuID,
 	}
 
-	cmol := make([]*e2sm_kpm_v2.CellMeasurementObjectItem, 0)
+	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
 	kpmNodeItem := CreateRicKpmnodeItem(globalKpmnodeID, cmol)
 
-	rknl := make([]*e2sm_kpm_v2.RicKpmnodeItem, 0)
+	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
 
 	var ricStyleType int32 = 11
@@ -50,17 +51,17 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	var ricFormatType int32 = 15
 	retsi := CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
-	retsl := make([]*e2sm_kpm_v2.RicEventTriggerStyleItem, 0)
+	retsl := make([]*e2sm_kpm_v2_go.RicEventTriggerStyleItem, 0)
 	retsl = append(retsl, retsi)
 
-	measInfoActionList := e2sm_kpm_v2.MeasurementInfoActionList{
-		Value: make([]*e2sm_kpm_v2.MeasurementInfoActionItem, 0),
+	measInfoActionList := e2sm_kpm_v2_go.MeasurementInfoActionList{
+		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoActionItem, 0),
 	}
 
 	var measTypeName string = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := CreateMeasurementInfoActionItem(measTypeName)
-	measInfoActionItem.MeasId = &e2sm_kpm_v2.MeasurementTypeId{
+	measInfoActionItem.MeasId = &e2sm_kpm_v2_go.MeasurementTypeId{
 		Value: measTypeID,
 	}
 	measInfoActionList.Value = append(measInfoActionList.Value, measInfoActionItem)
@@ -69,15 +70,13 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	var indHdrFormat int32 = 47
 	rrsi := CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, &measInfoActionList, indHdrFormat, indMsgFormat)
 
-	rrsl := make([]*e2sm_kpm_v2.RicReportStyleItem, 0)
+	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
 	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
 	assert.NilError(t, err)
 	if newE2SmKpmPdu != nil {
-		newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = rfi
+		newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
 	}
-
-	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 }

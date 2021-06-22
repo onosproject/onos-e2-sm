@@ -88,4 +88,3 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 	//assert.NilError(t, err)
 	//assert.DeepEqual(t, per, perRefBytes)
 }
-

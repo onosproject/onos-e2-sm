@@ -42,7 +42,7 @@ func createE2SmKpmIndicationHeader() *e2sm_kpm_v2_go.E2SmKpmIndicationHeader {
 		Value: gnbDuID,
 	}
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
 
 	return newE2SmKpmPdu
 }

@@ -5,13 +5,14 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
 )
 
 func TestE2SmKpmIndicationHeader(t *testing.T) {
-	bs := e2sm_kpm_v2.BitString{
+	bs := asn1.BitString{
 		Value: 0x9bcd4,
 		Len:   22,
 	}
@@ -25,15 +26,15 @@ func TestE2SmKpmIndicationHeader(t *testing.T) {
 	var vendorName string = "onf"
 
 	globalKpmNodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
-	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
+	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2.GnbDuId{
+	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
 		Value: gnbDuID,
 	}
 	assert.NilError(t, err)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 }

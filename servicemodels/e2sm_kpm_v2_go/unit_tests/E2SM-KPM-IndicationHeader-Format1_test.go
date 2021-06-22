@@ -44,7 +44,7 @@ func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHe
 	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
 		Value: gnbDuID,
 	}
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +56,7 @@ func Test_perEncodingE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 	ihf1, err := createE2SmKpmIndicationHeaderFormat1()
 	assert.NilError(t, err)
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(ihf1, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER\n%v", hex.Dump(per))

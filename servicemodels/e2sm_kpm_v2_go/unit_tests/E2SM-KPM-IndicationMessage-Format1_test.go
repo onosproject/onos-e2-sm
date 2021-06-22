@@ -25,8 +25,10 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	var integer int64 = 12345
 	var rl float64 = 6789.51
 	var cellObjID string = "onf"
-	var granularity int32 = 21
+	var granularity int64 = 21
 	var subscriptionID int64 = 12345
+	var measurementName string = "trial"
+
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
 	sd := []byte{0x01, 0x02, 0x03}
@@ -36,48 +38,21 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	var qciMin int32 = 1
 	var qciMax int32 = 15
 	var arpMax int32 = 15
-	var arpMin int32 = 1
+	var arpMin int32 = 10
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
+	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
+	var plo = e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
 	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
 
-	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd)
-	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2_go.FiveQi{
-		Value: fiveQI,
+	labelInfoItem, err := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
+		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
+	if err != nil {
+		return nil, err
 	}
-	labelInfoItem.MeasLabel.QFi = &e2sm_kpm_v2_go.Qfi{
-		Value: qfi,
-	}
-	labelInfoItem.MeasLabel.QCi = &e2sm_kpm_v2_go.Qci{
-		Value: qci,
-	}
-	labelInfoItem.MeasLabel.QCimin = &e2sm_kpm_v2_go.Qci{
-		Value: qciMin,
-	}
-	labelInfoItem.MeasLabel.QCimax = &e2sm_kpm_v2_go.Qci{
-		Value: qciMax,
-	}
-	labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2_go.Arp{
-		Value: arpMin,
-	}
-	labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2_go.Arp{
-		Value: arpMax,
-	}
-	labelInfoItem.MeasLabel.BitrateRange = &bitrateRange
-	labelInfoItem.MeasLabel.LayerMuMimo = &layerMuMimo
-	labelInfoItem.MeasLabel.DistBinX = &distX
-	labelInfoItem.MeasLabel.DistBinY = &distY
-	labelInfoItem.MeasLabel.DistBinZ = &distZ
-	labelInfoItem.MeasLabel.StartEndInd = &startEndIndication
-	plo := e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	labelInfoItem.MeasLabel.PreLabelOverride = &plo
-	sum := e2sm_kpm_v2_go.SUM_SUM_TRUE
-	labelInfoItem.MeasLabel.SUm = &sum
-
 	labelInfoList := e2sm_kpm_v2_go.LabelInfoList{
 		Value: make([]*e2sm_kpm_v2_go.LabelInfoItem, 0),
 	}
@@ -109,10 +84,7 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, cellObjID, &measInfoList, measData)
-	newE2SmKpmPdu.GetIndicationMessageFormat1().GranulPeriod = &e2sm_kpm_v2_go.GranularityPeriod{
-		Value: granularity,
-	}
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &granularity, &cellObjID, &measInfoList, measData)
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}
