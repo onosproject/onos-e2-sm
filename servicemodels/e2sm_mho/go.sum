@@ -65,6 +65,8 @@ github.com/onosproject/onos-api/go v0.7.63 h1:gqTsAoQHxOacoULErBmS2BfVvQCIVc+Y8j
 github.com/onosproject/onos-api/go v0.7.63/go.mod h1:0qXWs8DbOSW/jSSX2mr0yGhuPzREpM0H679rXtCfvmQ=
 github.com/onosproject/onos-api/go v0.7.64 h1:8ZcTulv2lN5GM8YNBcmhcxxE6y4TKmMU00E5apx0hyg=
 github.com/onosproject/onos-api/go v0.7.64/go.mod h1:0qXWs8DbOSW/jSSX2mr0yGhuPzREpM0H679rXtCfvmQ=
+github.com/onosproject/onos-api/go v0.7.66 h1:d+jbLU3SI4ZQUBT/7M5umSK6+VWszZkI6y7rR2U8K0c=
+github.com/onosproject/onos-api/go v0.7.66/go.mod h1:0qXWs8DbOSW/jSSX2mr0yGhuPzREpM0H679rXtCfvmQ=
 github.com/openconfig/gnmi v0.0.0-20200617225440-d2b4e6a45802/go.mod h1:M/EcuapNQgvzxo1DDXHK4tx3QpYM/uG4l591v33jG2A=
 github.com/openconfig/goyang v0.0.0-20200115183954-d0a48929f0ea/go.mod h1:dhXaV0JgHJzdrHi2l+w0fZrwArtXL7jEFoiqLEdmkvU=
 github.com/openconfig/ygot v0.6.0/go.mod h1:o30svNf7O0xK+R35tlx95odkDmZWS9JyWWQSmIhqwAs=
