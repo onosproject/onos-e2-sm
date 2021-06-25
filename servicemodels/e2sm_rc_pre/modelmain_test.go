@@ -280,7 +280,7 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(&controlMessagePriority, cgi)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()
@@ -328,7 +328,7 @@ func TestServicemodel_ControlHeaderNrCGIProtoToASN1(t *testing.T) {
 
 	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
-	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(controlMessagePriority, cgi)
+	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlHeader(&controlMessagePriority, cgi)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
 	err = newE2SmRcPrePdu.Validate()

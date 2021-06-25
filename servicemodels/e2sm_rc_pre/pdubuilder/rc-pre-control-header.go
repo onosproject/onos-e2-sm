@@ -8,15 +8,26 @@ import (
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 )
 
-func CreateE2SmRcPreControlHeader(controlMessagePriority int32, cgi *e2sm_rc_pre_v2.CellGlobalId) (*e2sm_rc_pre_v2.E2SmRcPreControlHeader, error) {
+func CreateE2SmRcPreControlHeader(controlMessagePriority *int32, cgi *e2sm_rc_pre_v2.CellGlobalId) (*e2sm_rc_pre_v2.E2SmRcPreControlHeader, error) {
 
 	e2smRcPreFormat1 := e2sm_rc_pre_v2.E2SmRcPreControlHeaderFormat1{
-		Cgi:       cgi,
+		//Cgi:       cgi,
 		RcCommand: e2sm_rc_pre_v2.RcPreCommand_RC_PRE_COMMAND_SET_PARAMETERS,
-		RicControlMessagePriority: &e2sm_rc_pre_v2.RicControlMessagePriority{
-			Value: controlMessagePriority,
-		},
+		//RicControlMessagePriority: &e2sm_rc_pre_v2.RicControlMessagePriority{
+		//	Value: *controlMessagePriority,
+		//},
 	}
+
+	if cgi != nil {
+		e2smRcPreFormat1.Cgi = cgi
+	}
+
+	if controlMessagePriority != nil {
+		e2smRcPreFormat1.RicControlMessagePriority = &e2sm_rc_pre_v2.RicControlMessagePriority{
+			Value: *controlMessagePriority,
+		}
+	}
+
 	e2smRcPrePdu := e2sm_rc_pre_v2.E2SmRcPreControlHeader{
 		E2SmRcPreControlHeader: &e2sm_rc_pre_v2.E2SmRcPreControlHeader_ControlHeaderFormat1{
 			ControlHeaderFormat1: &e2smRcPreFormat1,
