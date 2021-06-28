@@ -11,11 +11,6 @@ import (
 func CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunctionE2SmOid string, ranFunctionDescription string,
 	retsl []*e2sm_rc_pre_v2.RicEventTriggerStyleList, rrsl []*e2sm_rc_pre_v2.RicReportStyleList) (*e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription, error) {
 
-	ranfunctionItem := e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001{
-		RicEventTriggerStyleList: retsl,
-		RicReportStyleList:       rrsl,
-	}
-
 	e2smRcPrePdu := e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription{
 		RanFunctionName: &e2sm_rc_pre_v2.RanfunctionName{
 			RanFunctionShortName:   ranFunctionShortName,   //string
@@ -23,7 +18,22 @@ func CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName string, ranFu
 			RanFunctionDescription: ranFunctionDescription, //string
 			RanFunctionInstance:    -1,                     // Not valid value, indicates this item not present in message - handled later in CGo encoding
 		},
-		E2SmRcPreRanfunctionItem: &ranfunctionItem,
+		//E2SmRcPreRanfunctionItem: &ranfunctionItem,
+	}
+
+	if retsl != nil || rrsl != nil {
+		ranfunctionItem := e2sm_rc_pre_v2.E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001{
+			//RicEventTriggerStyleList: retsl,
+			//RicReportStyleList:       rrsl,
+		}
+		if retsl != nil {
+			ranfunctionItem.RicEventTriggerStyleList = retsl
+		}
+
+		if rrsl != nil {
+			ranfunctionItem.RicReportStyleList = rrsl
+		}
+		e2smRcPrePdu.E2SmRcPreRanfunctionItem = &ranfunctionItem
 	}
 
 	if err := e2smRcPrePdu.Validate(); err != nil {
