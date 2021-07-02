@@ -61,7 +61,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		m.Push(f.Name().String()).Debug("reporting")
 
 		choices := choiceStruct{
-			ProtoFileName: extractProtoFileName(f.Name().Split()[0]),
+			ProtoFileName: adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])),
 			Choices:       make([]choiceList, 0),
 		}
 		fmt.Fprintf(buf, "ProtoFileName is \n%v\n", choices.ProtoFileName)
@@ -153,4 +153,16 @@ func extractProtoFileName(proto string) string {
 		return proto[strings.LastIndex(proto, "/")+1:]
 	}
 	return proto
+}
+
+func adjustProtoFileName(filename string) string {
+
+	res := dashToUnderscore(filename)
+	// space for future adjustments
+	return res
+}
+
+func dashToUnderscore(str string) string {
+
+	return strings.ReplaceAll(str, "-", "_")
 }
