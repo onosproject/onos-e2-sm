@@ -18,15 +18,20 @@ const moduleName = "choice"
 // Defines data structure to pass to enum template
 type choiceStruct struct {
 	ProtoFileName string
-	Choices       []choiceList
+	Choices       []choiceMsg
 }
 
-type choiceList struct {
+type choiceMsg struct {
 	MsgName string
-	Leafs   []choiceLeaf
+	Items   []choiceItem
 }
 
-type choiceLeaf struct {
+type choiceItem struct {
+	Leafs      []leaf
+	ChoiceName string
+}
+
+type leaf struct {
 	Index    int
 	LeafName string
 }
@@ -61,28 +66,47 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		m.Push(f.Name().String()).Debug("reporting")
 
 		choices := choiceStruct{
-			ProtoFileName: extractProtoFileName(f.Name().Split()[0]),
-			Choices:       make([]choiceList, 0),
+			ProtoFileName: adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])),
+			Choices:       make([]choiceMsg, 0),
 		}
-		fmt.Fprintf(buf, "ProtoFileName is \n%v\n", choices.ProtoFileName)
+		fmt.Fprintf(buf, "ProtoFileName is %v\n", choices.ProtoFileName)
 
 		for _, msg := range f.AllMessages() {
-			if msg.Descriptor().GetOneofDecl() != nil {
-				choiceItem := choiceList{
+			fmt.Fprintf(buf, "OneOf list is %v\n", msg.OneOfs())
+			if msg.OneOfs() != nil {
+				chMsg := choiceMsg{
 					MsgName: adjustOneOfStructName(msg.Name().String()),
+					Items:   make([]choiceItem, 0),
 				}
-
-				for j, oneof := range msg.OneOfFields() {
-					oneofItem := choiceLeaf{
-						Index:    j + 1,
-						LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(oneof.Name().String()),
+				for i, plg := range msg.OneOfs() {
+					fmt.Fprintf(buf, "%v OneOf name is %v\n", i+1, plg.Name())
+					chItem := choiceItem{
+						ChoiceName: plg.Name().String(),
+						Leafs:      make([]leaf, 0),
 					}
-					choiceItem.Leafs = append(choiceItem.Leafs, oneofItem)
-					fmt.Fprintf(buf, "Obtained OneOf leaf is \n%v\n", oneofItem)
+					for j, field := range plg.Fields() {
+						//plg.Fields()
+						fmt.Fprintf(buf, "%v, OneOf field is %v\n", j+1, field.Name())
+						lf := leaf{
+							Index:    j + 1,
+							LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(field.Name().String()),
+						}
+						chItem.Leafs = append(chItem.Leafs, lf)
+					}
+					chMsg.Items = append(chMsg.Items, chItem)
 				}
-				fmt.Fprintf(buf, "Obtained OneOf item is \n%v\n", choiceItem)
 
-				choices.Choices = append(choices.Choices, choiceItem)
+				//for j, oneof := range msg.OneOfFields() {
+				//	oneofItem := choiceItem{
+				//		Index:    j + 1,
+				//		LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(oneof.Name().String()),
+				//	}
+				//	chItem.Leafs = append(chItem.Leafs, oneofItem)
+				//	fmt.Fprintf(buf, "Obtained OneOf leaf is \n%v\n", oneofItem)
+				//}
+				fmt.Fprintf(buf, "Obtained OneOf item is \n%v\n", chMsg)
+
+				choices.Choices = append(choices.Choices, chMsg)
 			}
 		}
 
@@ -153,4 +177,16 @@ func extractProtoFileName(proto string) string {
 		return proto[strings.LastIndex(proto, "/")+1:]
 	}
 	return proto
+}
+
+func adjustProtoFileName(filename string) string {
+
+	res := dashToUnderscore(filename)
+	// space for future adjustments
+	return res
+}
+
+func dashToUnderscore(str string) string {
+
+	return strings.ReplaceAll(str, "-", "_")
 }
