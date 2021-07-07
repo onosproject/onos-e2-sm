@@ -8,7 +8,9 @@ package main
 import (
 	"fmt"
 
+	prototypes "github.com/gogo/protobuf/types"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
+	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/mhoctypes"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdudecoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
@@ -222,6 +224,35 @@ func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, erro
 
 func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented")
+}
+
+func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
+	protoBytes, err := sm.RanFuncDescriptionASN1toProto(request.RANFunctionDescription)
+	if err != nil {
+		return err
+	}
+	ranFunctionDescription := &e2sm_mho.E2SmMhoRanfunctionDescription{}
+	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
+	if err != nil {
+		return err
+	}
+	serviceModels := request.ServiceModels
+	serviceModel := serviceModels[smOIDMho]
+	serviceModel.Name = ranFunctionDescription.RanFunctionName.RanFunctionShortName
+	reportStyleList := ranFunctionDescription.GetRicReportStyleList()
+
+	ranFunction := &topoapi.MHORanFunction{}
+	for _, reportStyle := range reportStyleList {
+		mhoReportStyle := &topoapi.MHOReportStyle{
+			Name: reportStyle.RicReportStyleName.Value,
+			Type: reportStyle.RicReportStyleType.Value,
+		}
+		ranFunction.ReportStyles = append(ranFunction.ReportStyles, mhoReportStyle)
+	}
+
+	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
+	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
+	return nil
 }
 
 // ServiceModel is the exported symbol that gives an entry point to this shared module
