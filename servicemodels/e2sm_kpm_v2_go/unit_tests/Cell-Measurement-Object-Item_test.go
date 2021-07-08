@@ -27,7 +27,7 @@ func createCellMeasurementObjectItem() *e2sm_kpm_v2_go.CellMeasurementObjectItem
 				EUtraCgi: &e2sm_kpm_v2_go.Eutracgi{
 					EUtracellIdentity: &e2sm_kpm_v2_go.EutracellIdentity{
 						Value: &asn1.BitString{
-							Value: 0x9bcd4,
+							Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 							Len:   28,
 						},
 					},
@@ -54,6 +54,17 @@ func Test_perEncodingCellMeasurementObjectItem(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("CellMeasurementObjectItem PER - decoded\n%v", result)
+
+}
+
+func Test_perCellMeasurementObjectItemCompareBytes(t *testing.T) {
+
+	cmoi := createCellMeasurementObjectItem()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*cmoi, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerCellMeasObjItem)

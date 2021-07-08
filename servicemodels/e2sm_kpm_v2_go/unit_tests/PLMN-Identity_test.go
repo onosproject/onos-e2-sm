@@ -30,6 +30,17 @@ func Test_perEncodingPlmnID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("PLMN-Identity PER - decoded\n%v", result)
+}
+
+func Test_perPlmnIDCompareBytes(t *testing.T) {
+
+	plmnID := e2sm_kpm_v2_go.PlmnIdentity{
+		Value: []byte{0x21, 0x22, 0x23},
+	}
+
+	per, err := aper.Marshal(plmnID)
+	assert.NilError(t, err)
+	t.Logf("PLMN-Identity PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerPlmnID)

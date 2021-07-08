@@ -23,7 +23,7 @@ func createGlobalKpmnodeID1() *e2sm_kpm_v2_go.GlobalKpmnodeId {
 					GnbId: &e2sm_kpm_v2_go.GnbIdChoice{
 						GnbIdChoice: &e2sm_kpm_v2_go.GnbIdChoice_GnbId{
 							GnbId: &asn1.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 								Len:   28,
 							},
 						},
@@ -52,7 +52,7 @@ func createGlobalKpmnodeID2() *e2sm_kpm_v2_go.GlobalKpmnodeId {
 					GNbId: &e2sm_kpm_v2_go.EngnbId{
 						EngnbId: &e2sm_kpm_v2_go.EngnbId_GNbId{
 							GNbId: &asn1.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 								Len:   28,
 							},
 						},
@@ -81,7 +81,7 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2_go.GlobalKpmnodeId {
 					EnbId: &e2sm_kpm_v2_go.EnbIdChoice{
 						EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdMacro{
 							EnbIdMacro: &asn1.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 								Len:   20,
 							},
 						},
@@ -90,11 +90,11 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2_go.GlobalKpmnodeId {
 						Value: []byte{0x21, 0x22, 0x23},
 					},
 					ShortMacroENbId: &asn1.BitString{
-						Value: 0x9bcd4,
+						Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 						Len:   18,
 					},
 					LongMacroENbId: &asn1.BitString{
-						Value: 0x9bcd4,
+						Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 						Len:   21,
 					},
 				},
@@ -115,7 +115,7 @@ func createGlobalKpmnodeID4() *e2sm_kpm_v2_go.GlobalKpmnodeId {
 					ENbId: &e2sm_kpm_v2_go.EnbId{
 						EnbId: &e2sm_kpm_v2_go.EnbId_HomeENbId{
 							HomeENbId: &asn1.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 								Len:   28,
 							},
 						},
@@ -148,6 +148,16 @@ func Test_perEncodingGlobalKpmNodeIDgnb(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GlobalKpmnodeID (GNb) PER - decoded\n%v", result)
+}
+
+func Test_perGlobalKpmNodeIDgnbCompareBytes(t *testing.T) {
+
+	globalKpmnodeID := createGlobalKpmnodeID1()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalKpmnodeID (GNb) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGlobalKPMnodeIDgnb)
@@ -169,6 +179,16 @@ func Test_perEncodingGlobalKpmNodeIDenGnb(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GlobalKpmnodeID (enGNb) PER - decoded\n%v", result)
+}
+
+func Test_perGlobalKpmNodeIDenGnbCompareBytes(t *testing.T) {
+
+	globalKpmnodeID := createGlobalKpmnodeID2()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalKpmnodeID (enGNb) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGlobalKPMnodeIDenGnb)
@@ -190,6 +210,16 @@ func Test_perEncodingGlobalKpmNodeIDngEnb(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GlobalKpmnodeID (ngENb) PER - decoded\n%v", result)
+}
+
+func Test_perGlobalKpmNodeIDngEnbCompareBytes(t *testing.T) {
+
+	globalKpmnodeID := createGlobalKpmnodeID3()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalKpmnodeID (ngENb) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGlobalKPMnodeIDngEnb)
@@ -211,6 +241,16 @@ func Test_perEncodingGlobalKpmNodeIDenb(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GlobalKpmnodeID (ENb) PER - decoded\n%v", result)
+}
+
+func Test_perGlobalKpmNodeIDenbCompareBytes(t *testing.T) {
+
+	globalKpmnodeID := createGlobalKpmnodeID4()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalKpmnodeID (ENb) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGlobalKPMnodeIDenb)

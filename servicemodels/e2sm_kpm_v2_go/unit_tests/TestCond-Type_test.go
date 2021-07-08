@@ -35,6 +35,16 @@ func Test_perEncodingTestCondTypeGBR(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondType (GBR) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondTypeGBRCompareBytes(t *testing.T) {
+
+	testCondType := pdubuilder.CreateTestCondTypeGBR()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondType, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondType (GBR) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCTgbr)
@@ -56,6 +66,16 @@ func Test_perEncodingTestCondTypeAMBR(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondType (AMBR) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondTypeAMBRCompareBytes(t *testing.T) {
+
+	testCondType := pdubuilder.CreateTestCondTypeAMBR()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondType, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondType (AMBR) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCTambr)
@@ -77,6 +97,16 @@ func Test_perEncodingTestCondTypeIsStat(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondType (IsStat) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondTypeIsStatCompareBytes(t *testing.T) {
+
+	testCondType := pdubuilder.CreateTestCondTypeIsStat()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondType, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondType (IsStat) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCTisstat)
@@ -98,6 +128,16 @@ func Test_perEncodingTestCondTypeIsCatM(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondType (IsCatM) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondTypeIsCatMCompareBytes(t *testing.T) {
+
+	testCondType := pdubuilder.CreateTestCondTypeIsCatM()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondType, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondType (IsCatM) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCTiscatm)
@@ -119,6 +159,16 @@ func Test_perEncodingTestCondTypeRSRP(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondType (RSRP) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondTypeRSRPCompareBytes(t *testing.T) {
+
+	testCondType := pdubuilder.CreateTestCondTypeRSRP()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondType, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondType (RSRP) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCTrsrp)
@@ -140,6 +190,16 @@ func Test_perEncodingTestCondTypeRSRQ(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondType (RSRQ) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondTypeRSRQCompareBytes(t *testing.T) {
+
+	testCondType := pdubuilder.CreateTestCondTypeRSRQ()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondType, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondType (RSRQ) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCTrsrq)

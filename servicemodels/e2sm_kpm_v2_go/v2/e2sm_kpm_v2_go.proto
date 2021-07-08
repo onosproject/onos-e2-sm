@@ -550,7 +550,7 @@ message MeasurementData {
 // {MeasurementDataItem}
 message MeasurementDataItem {
     MeasurementRecord meas_record = 1 [ json_name="measRecord"];
-    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:1"
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
     optional IncompleteFlag incomplete_flag = 2 [ json_name="incompleteFlag"];
 };
 

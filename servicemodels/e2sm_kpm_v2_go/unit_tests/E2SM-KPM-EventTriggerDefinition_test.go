@@ -37,6 +37,15 @@ func Test_perEncodingE2SmKpmEventTriggerDefinition(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-EventTriggerDefinition PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmEventTriggerDefinitionCompareBytes(t *testing.T) {
+
+	etd := createE2SMKPMEventTriggerDefinition()
+
+	per, err := encoder.PerEncodeE2SmKpmEventTriggerDefinition(etd)
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-EventTriggerDefinition PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEventTriggerDefinition)

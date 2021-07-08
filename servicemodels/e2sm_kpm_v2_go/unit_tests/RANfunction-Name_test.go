@@ -43,6 +43,16 @@ func Test_perEncodingRanFunctionName(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RanFunctionName PER - decoded\n%v", result)
+}
+
+func Test_perRanFunctionNameCompareBytes(t *testing.T) {
+
+	rfn := createRanFunctionName()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*rfn, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("RanFunctionName PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerRanFunctionName)

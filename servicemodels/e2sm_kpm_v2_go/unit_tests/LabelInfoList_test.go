@@ -97,6 +97,16 @@ func Test_perEncodingLabelInfoList(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("LabelInfoList PER - decoded\n%v", result)
+}
+
+func Test_perLabelInfoListCompareBytes(t *testing.T) {
+
+	lil, err := createLabelInfoList()
+	assert.NilError(t, err)
+
+	per, err := aper.MarshalWithParams(*lil, "")
+	assert.NilError(t, err)
+	t.Logf("LabelInfoList PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerLabelInfoList)

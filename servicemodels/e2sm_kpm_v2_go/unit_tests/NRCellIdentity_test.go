@@ -19,7 +19,7 @@ var refPerNrCellID = "00000000  d4 bc 09 00 00                                  
 func createNrcellIdentity() *e2sm_kpm_v2_go.NrcellIdentity {
 	return &e2sm_kpm_v2_go.NrcellIdentity{
 		Value: &asn1.BitString{
-			Value: 0x9bcd4,
+			Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 			Len:   36,
 		},
 	}
@@ -38,6 +38,15 @@ func Test_perEncodingNrCellIdentity(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("NrCellIdentity PER - decoded\n%v", result)
+}
+
+func Test_perNrCellIdentityCompareBytes(t *testing.T) {
+
+	nrCgi := createNrcellIdentity()
+
+	per, err := aper.Marshal(*nrCgi)
+	assert.NilError(t, err)
+	t.Logf("NrCellIdentity PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerNrCellID)

@@ -35,10 +35,11 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	bs := asn1.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 		Len:   22,
 	}
-	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, 0xABCDEF012<<28) // 36 bits
+	cellIDbits := []byte{0x12, 0xF0, 0xDE, 0xBC, 0x0A, 0x00}
+	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, cellIDbits) // 36 bits
 
 	var cellObjID string = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
@@ -128,6 +129,17 @@ func Test_perEncodingE2SmKpmRanFunctionDescription(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmRanFunctionDescriptionCompareBytes(t *testing.T) {
+
+	rfd, err := createE2SmKpmRanFunctionDescription()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*rfd, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescription)
@@ -150,6 +162,17 @@ func Test_perEncodingE2SmKpmRanFunctionDescriptionMndtOnly(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription (mandatory part only) PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmRanFunctionDescriptionMndtOnlyCompareBytes(t *testing.T) {
+
+	rfd, err := createE2SmKpmRanFunctionDescriptionMndtOnly()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*rfd, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription (mandatory part only) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionMndtOnly)

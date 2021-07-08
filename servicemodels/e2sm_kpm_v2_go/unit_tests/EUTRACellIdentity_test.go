@@ -20,7 +20,7 @@ func createEutracellIdentity() *e2sm_kpm_v2_go.EutracellIdentity {
 
 	return &e2sm_kpm_v2_go.EutracellIdentity{
 		Value: &asn1.BitString{
-			Value: 0x9bcd4,
+			Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 			Len:   28,
 		},
 	}
@@ -39,6 +39,15 @@ func Test_perEncodingEutracellIdentity(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("EutraCellIdentity PER - decoded\n%v", result)
+}
+
+func Test_perEutracellIdentityCompareBytes(t *testing.T) {
+
+	eCellID := createEutracellIdentity()
+
+	per, err := aper.Marshal(*eCellID)
+	assert.NilError(t, err)
+	t.Logf("EutraCellIdentity PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEutraCellIdentity)

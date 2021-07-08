@@ -30,10 +30,20 @@ func Test_perEncodingQci(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("QCI PER - decoded\n%v", result)
+}
+
+func Test_perQciCompareBytes(t *testing.T) {
+
+	qci := &e2sm_kpm_v2_go.Qci{
+		Value: 32,
+	}
+
+	per, err := aper.Marshal(*qci)
+	assert.NilError(t, err)
+	t.Logf("QCI PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerQci)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }
-

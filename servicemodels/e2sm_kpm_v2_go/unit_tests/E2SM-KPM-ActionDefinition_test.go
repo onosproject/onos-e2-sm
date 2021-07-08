@@ -234,6 +234,17 @@ func Test_perEncodingE2SmKpmActionDefinitionF1(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-ActionDefinition (Format1) PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmActionDefinitionF1CompareBytes(t *testing.T) {
+
+	actionDefFormat1, err := createE2SmKpmActionDefinitionFormat1()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*actionDefFormat1, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-ActionDefinition (Format1) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerADF3)
@@ -256,6 +267,17 @@ func Test_perEncodingE2SmKpmActionDefinitionF2(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-ActionDefinition (Format2) PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmActionDefinitionF2CompareBytes(t *testing.T) {
+
+	actionDefFormat2, err := createE2SmKpmActionDefinitionFormat2()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*actionDefFormat2, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-ActionDefinition (Format2) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerADF2)
@@ -278,6 +300,17 @@ func Test_perEncodingE2SmKpmActionDefinitionF3(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-ActionDefinition (Format3) PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmActionDefinitionF3CompareBytes(t *testing.T) {
+
+	actionDefFormat3, err := createE2SmKpmActionDefinitionFormat3()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*actionDefFormat3, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-ActionDefinition (Format3) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerADF3)

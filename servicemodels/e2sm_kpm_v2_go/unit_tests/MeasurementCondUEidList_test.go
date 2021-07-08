@@ -129,6 +129,17 @@ func Test_perEncodeMeasurementCondUEIDList(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementCondUEIDList PER - decoded\n%v", result)
+}
+
+func Test_perMeasurementCondUEIDListCompareBytes(t *testing.T) {
+
+	mcueIDl, err := createMeasurementCondUEIDList()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*mcueIDl, "")
+	assert.NilError(t, err)
+	t.Logf("MeasurementCondUEIDList PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMeasCondUeIDL)

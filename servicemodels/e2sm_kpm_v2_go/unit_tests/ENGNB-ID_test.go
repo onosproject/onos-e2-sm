@@ -22,7 +22,7 @@ func createEngnbID() *e2sm_kpm_v2_go.EngnbId {
 	return &e2sm_kpm_v2_go.EngnbId{
 		EngnbId: &e2sm_kpm_v2_go.EngnbId_GNbId{
 			GNbId: &asn1.BitString{
-				Value: 0x9bcde4,
+				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 				Len:   22,
 			},
 		},
@@ -34,7 +34,7 @@ func createEngnbIDlen32() *e2sm_kpm_v2_go.EngnbId {
 	return &e2sm_kpm_v2_go.EngnbId{
 		EngnbId: &e2sm_kpm_v2_go.EngnbId_GNbId{
 			GNbId: &asn1.BitString{
-				Value: 0x9bcde4,
+				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 				Len:   32,
 			},
 		},
@@ -55,6 +55,16 @@ func Test_perEncodingEnGnbID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("enGnbID PER - decoded\n%v", result)
+}
+
+func Test_perEnGnbIDCompareBytes(t *testing.T) {
+
+	gnbIDc := createEngnbID()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*gnbIDc, "sizeExt")
+	assert.NilError(t, err)
+	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEnGnbID)
@@ -77,6 +87,16 @@ func Test_perEncodingEnGnbIDlen32(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("enGnbID PER - decoded\n%v", result)
+}
+
+func Test_perEnGnbIDlen32CompareBytes(t *testing.T) {
+
+	gnbIDc := createEngnbIDlen32()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*gnbIDc, "sizeExt")
+	assert.NilError(t, err)
+	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEnGnbIDlen32)

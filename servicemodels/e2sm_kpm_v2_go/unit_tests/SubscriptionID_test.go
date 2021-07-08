@@ -30,6 +30,17 @@ func Test_perEncodingSubscriptionID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("SubscriptionID PER - decoded\n%v", result)
+}
+
+func Test_perSubscriptionIDCompareBytes(t *testing.T) {
+
+	subID := &e2sm_kpm_v2_go.SubscriptionId{
+		Value: 12345,
+	}
+
+	per, err := aper.Marshal(subID)
+	assert.NilError(t, err)
+	t.Logf("SubscriptionID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerSubID)

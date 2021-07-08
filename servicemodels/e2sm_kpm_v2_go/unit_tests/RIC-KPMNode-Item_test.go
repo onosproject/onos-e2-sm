@@ -27,7 +27,7 @@ func createRicKpmNodeItem() (*e2sm_kpm_v2_go.RicKpmnodeItem, error) {
 						GnbId: &e2sm_kpm_v2_go.GnbIdChoice{
 							GnbIdChoice: &e2sm_kpm_v2_go.GnbIdChoice_GnbId{
 								GnbId: &asn1.BitString{
-									Value: 0x9bcd4,
+									Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 									Len:   22,
 								},
 							},
@@ -57,7 +57,7 @@ func createRicKpmNodeItem() (*e2sm_kpm_v2_go.RicKpmnodeItem, error) {
 				EUtraCgi: &e2sm_kpm_v2_go.Eutracgi{
 					EUtracellIdentity: &e2sm_kpm_v2_go.EutracellIdentity{
 						Value: &asn1.BitString{
-							Value: 0x9bcd4,
+							Value: []byte{0x09, 0xbc, 0xd4, 0x00},
 							Len:   28,
 						},
 					},
@@ -92,6 +92,17 @@ func Test_perEncodingRicKpmNodeItem(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RIC-KPMnodeItem PER - decoded\n%v", result)
+}
+
+func Test_perRicKpmNodeItemCompareBytes(t *testing.T) {
+
+	rkni, err := createRicKpmNodeItem()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*rkni, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("RIC-KPMnodeItem PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerRicKPMnodeItem)

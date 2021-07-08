@@ -38,6 +38,15 @@ func Test_perEncodingE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmEventTriggerDefinitionFormat1CompareBytes(t *testing.T) {
+
+	etdf1 := createE2SMKPMEventTriggerDefinitionFormat1()
+
+	per, err := aper.MarshalWithParams(etdf1, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEventTriggerDefinitionFormat1)

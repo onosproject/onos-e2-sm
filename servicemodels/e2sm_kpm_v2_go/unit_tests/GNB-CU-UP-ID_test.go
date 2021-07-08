@@ -35,6 +35,15 @@ func Test_perEncodingGnbCuUpID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GnbCuUpID PER - decoded\n%v", result.GetValue())
+}
+
+func Test_perGnbCuUpIDCompareBytes(t *testing.T) {
+
+	gnbCuUpID := createGnbCuUpID()
+
+	per, err := aper.Marshal(*gnbCuUpID)
+	assert.NilError(t, err)
+	t.Logf("GnbCuUpID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGnbCuUpID)

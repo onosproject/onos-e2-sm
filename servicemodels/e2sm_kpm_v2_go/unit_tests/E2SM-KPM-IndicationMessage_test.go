@@ -169,6 +169,17 @@ func Test_perEncodingE2SmKpmIndicationMessage1(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SmKpmIndicationMessage (Format1) PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmIndicationMessage1CompareBytes(t *testing.T) {
+
+	im, err := createE2SMKPMIndicationMessageFormat1()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*im, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SmKpmIndicationMessage (Format1) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerIndMsg1)
@@ -176,7 +187,7 @@ func Test_perEncodingE2SmKpmIndicationMessage1(t *testing.T) {
 	assert.DeepEqual(t, per, perRefBytes)
 }
 
-func Test_perEncodingDecodeE2SmKpmIndicationMessage(t *testing.T) {
+func Test_perEncodingE2SmKpmIndicationMessage2(t *testing.T) {
 
 	im, err := createE2SMKPMIndicationMessageFormat2()
 	assert.NilError(t, err)
@@ -191,6 +202,17 @@ func Test_perEncodingDecodeE2SmKpmIndicationMessage(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SmKpmIndicationMessage (Format2) PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmIndicationMessage2CompareBytes(t *testing.T) {
+
+	im, err := createE2SMKPMIndicationMessageFormat2()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*im, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SmKpmIndicationMessage (Format2) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerIndMsg2)

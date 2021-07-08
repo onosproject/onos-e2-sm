@@ -35,6 +35,15 @@ func Test_perEncodingFiveQi(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("FiveQI PER - decoded\n%v", result)
+}
+
+func Test_perFiveQiCompareBytes(t *testing.T) {
+
+	fqi := createFiveQi()
+
+	per, err := aper.Marshal(*fqi)
+	assert.NilError(t, err)
+	t.Logf("FiveQI PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerFiveQI)

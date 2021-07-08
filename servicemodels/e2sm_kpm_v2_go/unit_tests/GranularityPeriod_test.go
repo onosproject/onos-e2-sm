@@ -30,6 +30,17 @@ func Test_perEncodingGranularityPeriod(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GranularityPeriod PER - decoded\n%v", result)
+}
+
+func Test_perGranularityPeriodCompareBytes(t *testing.T) {
+
+	gp := &e2sm_kpm_v2_go.GranularityPeriod{
+		Value: 21,
+	}
+
+	per, err := aper.Marshal(gp)
+	assert.NilError(t, err)
+	t.Logf("GranularityPeriod PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGP)

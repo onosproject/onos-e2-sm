@@ -55,12 +55,21 @@ func Test_perEncodingMeasurementRecordItemInteger(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementRecordItem (Integer) PER - decoded\n%v", result)
+}
+
+func Test_perMeasurementRecordItemIntegerCompareBytes(t *testing.T) {
+
+	mri := createMeasurementRecordItemInteger()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mri, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("MeasurementRecordItem (Integer) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMRIinteger)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
-
 }
 
 func Test_perEncodingMeasurementRecordItemReal(t *testing.T) {
@@ -77,12 +86,21 @@ func Test_perEncodingMeasurementRecordItemReal(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementRecordItem (Real) PER - decoded\n%v", result)
+}
+
+func Test_perMeasurementRecordItemRealCompareBytes(t *testing.T) {
+
+	mri := createMeasurementRecordItemReal()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mri, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("MeasurementRecordItem (Real) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMRIreal)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
-
 }
 
 func Test_perEncodingMeasurementRecordItemNull(t *testing.T) {
@@ -99,6 +117,16 @@ func Test_perEncodingMeasurementRecordItemNull(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementRecordItem (No value) PER - decoded\n%v", result)
+}
+
+func Test_perMeasurementRecordItemNullCompareBytes(t *testing.T) {
+
+	mri := createMeasurementRecordItemNoValue()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mri, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("MeasurementRecordItem (No value) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMRInovalue)

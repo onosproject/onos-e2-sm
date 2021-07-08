@@ -30,6 +30,17 @@ func Test_perEncodingQfi(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("QFI PER - decoded\n%v", result)
+}
+
+func Test_perQfiCompareBytes(t *testing.T) {
+
+	qfi := &e2sm_kpm_v2_go.Qfi{
+		Value: 32,
+	}
+
+	per, err := aper.Marshal(*qfi)
+	assert.NilError(t, err)
+	t.Logf("QFI PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerQfi)

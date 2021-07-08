@@ -36,6 +36,16 @@ func Test_perEncodingTestCondValueInt(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (Integer) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondValueIntCompareBytes(t *testing.T) {
+
+	testCondValue := pdubuilder.CreateTestCondValueInt(21)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondValue, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondValue (Integer) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCVint)
@@ -57,6 +67,16 @@ func Test_perEncodingTestCondValueEnum(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (Enumerator) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondValueEnumCompareBytes(t *testing.T) {
+
+	testCondValue := pdubuilder.CreateTestCondValueEnum(54)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondValue, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondValue (Enumerator) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCVenum)
@@ -78,6 +98,16 @@ func Test_perEncodingTestCondValueBool(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (Boolean) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondValueBoolCompareBytes(t *testing.T) {
+
+	testCondValue := pdubuilder.CreateTestCondValueBool(true)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondValue, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondValue (Boolean) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCVbool)
@@ -88,7 +118,7 @@ func Test_perEncodingTestCondValueBool(t *testing.T) {
 func Test_perEncodingTestCondValueBS(t *testing.T) {
 
 	bs := &asn1.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 		Len:   22,
 	}
 	testCondValue := pdubuilder.CreateTestCondValueBitS(bs)
@@ -103,6 +133,20 @@ func Test_perEncodingTestCondValueBS(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (BitString) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondValueBSCompareBytes(t *testing.T) {
+
+	bs := &asn1.BitString{
+		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Len:   22,
+	}
+	testCondValue := pdubuilder.CreateTestCondValueBitS(bs)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondValue, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondValue (BitString) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCVbs)
@@ -124,6 +168,16 @@ func Test_perEncodingTestCondValueOS(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (OctetString) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondValueOSCompareBytes(t *testing.T) {
+
+	testCondValue := pdubuilder.CreateTestCondValueOctS([]byte("onf"))
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondValue, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondValue (OctetString) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCVos)
@@ -145,6 +199,16 @@ func Test_perEncodingTestCondValuePS(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (PrintableString) PER - decoded\n%v", result)
+}
+
+func Test_perTestCondValuePSCompareBytes(t *testing.T) {
+
+	testCondValue := pdubuilder.CreateTestCondValuePrtS("ONF")
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*testCondValue, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestCondValue (PrintableString) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTCVps)

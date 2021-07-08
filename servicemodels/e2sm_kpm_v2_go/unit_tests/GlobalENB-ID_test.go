@@ -26,7 +26,7 @@ func createGlobalEnbID1() *e2sm_kpm_v2_go.GlobalEnbId {
 		ENbId: &e2sm_kpm_v2_go.EnbId{
 			EnbId: &e2sm_kpm_v2_go.EnbId_MacroENbId{
 				MacroENbId: &asn1.BitString{
-					Value: 0x9bcd4,
+					Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 					Len:   20,
 				},
 			},
@@ -43,7 +43,7 @@ func createGlobalEnbID2() *e2sm_kpm_v2_go.GlobalEnbId {
 		ENbId: &e2sm_kpm_v2_go.EnbId{
 			EnbId: &e2sm_kpm_v2_go.EnbId_HomeENbId{
 				HomeENbId: &asn1.BitString{
-					Value: 0x9bcd4,
+					Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 					Len:   28,
 				},
 			},
@@ -51,7 +51,7 @@ func createGlobalEnbID2() *e2sm_kpm_v2_go.GlobalEnbId {
 	}
 }
 
-func Test_perEncodingGlobalEnbID(t *testing.T) {
+func Test_perEncodingGlobalEnbID1(t *testing.T) {
 
 	globalEnbID1 := createGlobalEnbID1()
 
@@ -65,12 +65,24 @@ func Test_perEncodingGlobalEnbID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result1 != nil)
 	t.Logf("GlobalEnbID (Macro) PER - decoded\n%v", result1)
+}
+
+func Test_perGlobalEnbID1CompareBytes(t *testing.T) {
+
+	globalEnbID1 := createGlobalEnbID1()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per1, err := aper.MarshalWithParams(*globalEnbID1, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalEnbID (Macro) PER\n%v", hex.Dump(per1))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGlobalEnbID1)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per1, perRefBytes)
+}
 
+func Test_perEncodingGlobalEnbID2(t *testing.T) {
 	globalEnbID2 := createGlobalEnbID2()
 
 	per2, err := aper.MarshalWithParams(*globalEnbID2, "valueExt")
@@ -82,6 +94,14 @@ func Test_perEncodingGlobalEnbID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result2 != nil)
 	t.Logf("GlobalEnbID (Home) PER - decoded\n%v", result2)
+}
+
+func Test_perGlobalEnbID2CompareBytes(t *testing.T) {
+	globalEnbID2 := createGlobalEnbID2()
+
+	per2, err := aper.MarshalWithParams(*globalEnbID2, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per2))
 
 	//Comparing with reference bytes
 	perRefBytes2, err := hexlib.DumpToByte(refPerGlobalEnbID2)

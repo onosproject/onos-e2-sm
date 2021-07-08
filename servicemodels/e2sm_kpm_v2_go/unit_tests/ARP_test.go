@@ -36,3 +36,19 @@ func Test_perEncodingArp(t *testing.T) {
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }
+
+func Test_perArpCompareBytes(t *testing.T) {
+
+	arp := &e2sm_kpm_v2_go.Arp{
+		Value: 15,
+	}
+
+	per, err := aper.Marshal(*arp)
+	assert.NilError(t, err)
+	t.Logf("ARP PER\n%v", hex.Dump(per))
+
+	//Comparing with reference bytes
+	perRefBytes, err := hexlib.DumpToByte(refPerArp)
+	assert.NilError(t, err)
+	assert.DeepEqual(t, per, perRefBytes)
+}

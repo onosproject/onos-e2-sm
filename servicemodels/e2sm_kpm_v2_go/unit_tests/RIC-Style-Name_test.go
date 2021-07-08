@@ -30,6 +30,17 @@ func Test_perEncodingRicStyleName(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", result)
+}
+
+func Test_perRicStyleNameCompareBytes(t *testing.T) {
+
+	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+		Value: "SomeName",
+	}
+
+	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	assert.NilError(t, err)
+	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerRicStyleName)

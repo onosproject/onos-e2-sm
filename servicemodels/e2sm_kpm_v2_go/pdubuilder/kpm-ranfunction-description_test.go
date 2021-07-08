@@ -19,10 +19,11 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	bs := asn1.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 		Len:   22,
 	}
-	cellGlobalID, err := CreateCellGlobalIDNRCGI(plmnID, 0xabcdef012<<28) // 36 bit
+	cellIDbits := []byte{0x12, 0xF0, 0xDE, 0xBC, 0x0A, 0x00}
+	cellGlobalID, err := CreateCellGlobalIDNRCGI(plmnID, cellIDbits) // 36 bit
 	assert.NilError(t, err)
 	var cellObjID string = "ONF"
 	cellMeasObjItem := CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)

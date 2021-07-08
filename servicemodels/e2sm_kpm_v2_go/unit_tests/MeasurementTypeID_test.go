@@ -34,6 +34,15 @@ func Test_perEncodingMeasurementTypeID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementTypeID - decoded\n%v", result)
+}
+
+func Test_perMeasurementTypeIDCompareBytes(t *testing.T) {
+
+	mtID := createMeasurementTypeID()
+
+	per, err := aper.MarshalWithParams(mtID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("MeasurementTypeID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMeasurementTypeID)

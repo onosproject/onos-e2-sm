@@ -38,6 +38,24 @@ func Test_perEncodeMatchingUeIDList(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MatchingUeIDList PER - decoded\n%v", result)
+}
+
+func Test_perMatchingUeIDListCompareBytes(t *testing.T) {
+
+	muei := &e2sm_kpm_v2_go.MatchingUeidItem{
+		UeId: &e2sm_kpm_v2_go.UeIdentity{
+			Value: []byte("SomeUE"),
+		},
+	}
+	muel := &e2sm_kpm_v2_go.MatchingUeidList{
+		Value: make([]*e2sm_kpm_v2_go.MatchingUeidItem, 0),
+	}
+	muel.Value = append(muel.Value, muei)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*muei, "")
+	assert.NilError(t, err)
+	t.Logf("MatchingUeIDList PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMUeIDL)

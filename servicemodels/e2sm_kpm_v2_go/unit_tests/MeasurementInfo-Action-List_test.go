@@ -51,6 +51,16 @@ func Test_perEncodingMeasurementInfoActionList(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfoActionList - decoded\n%v", result)
+}
+
+func Test_perMeasurementInfoActionListCompareBytes(t *testing.T) {
+
+	mial, err := createMeasurementInfoActionList()
+	assert.NilError(t, err)
+
+	per, err := aper.Marshal(mial)
+	assert.NilError(t, err)
+	t.Logf("MeasurementInfoActionList PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMeasurementInfoActionList)

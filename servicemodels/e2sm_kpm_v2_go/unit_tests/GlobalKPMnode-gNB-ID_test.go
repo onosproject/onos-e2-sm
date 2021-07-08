@@ -17,10 +17,9 @@ import (
 
 var refPerGlobalKPMnodeGnbID = "00000000  60 21 22 23 00 e4 cd 98  00 1f 00 2a              |`!\"#.......*|"
 
-func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
-
+func createGlobalKpmnodeGnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 	bs := asn1.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -28,12 +27,22 @@ func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 	var gnbDuID int64 = 42
 
 	gNbID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
+	if err != nil {
+		return nil, err
+	}
 	gNbID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
 		Value: gNbCuUpID,
 	}
 	gNbID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
 		Value: gnbDuID,
 	}
+
+	return gNbID, nil
+}
+
+func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
+
+	gNbID, err := createGlobalKpmnodeGnbID()
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
@@ -46,10 +55,20 @@ func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GlobalKPMnodeGnbID PER - decoded\n%v", result)
+}
+
+func Test_perGlobalKpmnodeGnbIDCompareBytes(t *testing.T) {
+
+	gNbID, err := createGlobalKpmnodeGnbID()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gNbID.GetGNb(), "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalKPMnodeGnbID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGlobalKPMnodeGnbID)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }
-

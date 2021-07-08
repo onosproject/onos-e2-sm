@@ -129,6 +129,17 @@ func Test_perEncodeMeasurementCondList(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementCondList PER - decoded\n%v", result)
+}
+
+func Test_perMeasurementCondListCompareBytes(t *testing.T) {
+
+	mcl, err := createMeasurementCondList()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*mcl, "")
+	assert.NilError(t, err)
+	t.Logf("MeasurementCondList PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMeasCL)

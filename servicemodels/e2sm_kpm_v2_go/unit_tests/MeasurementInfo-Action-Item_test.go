@@ -40,6 +40,15 @@ func Test_perEncodingMeasurementInfoActionItem(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfoActionItem - decoded\n%v", result)
+}
+
+func Test_perMeasurementInfoActionItemCompareBytes(t *testing.T) {
+
+	miai := createMeasurementInfoActionItem()
+
+	per, err := aper.MarshalWithParams(miai, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("MeasurementInfoActionItem PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMeasurementInfoActionItem)

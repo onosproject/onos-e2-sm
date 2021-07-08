@@ -23,7 +23,7 @@ func createNrcgi() *e2sm_kpm_v2_go.Nrcgi {
 		},
 		NRcellIdentity: &e2sm_kpm_v2_go.NrcellIdentity{
 			Value: &asn1.BitString{
-				Value: 0x9bcd4,
+				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 				Len:   36,
 			},
 		},
@@ -43,6 +43,15 @@ func Test_perEncodingNrCGI(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("NrCGI PER - decoded\n%v", result)
+}
+
+func Test_perNrCGICompareBytes(t *testing.T) {
+
+	nrCgi := createNrcgi()
+
+	per, err := aper.MarshalWithParams(*nrCgi, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("NrCGI PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerNrCGI)

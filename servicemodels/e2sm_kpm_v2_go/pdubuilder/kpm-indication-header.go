@@ -77,7 +77,7 @@ func CreateGlobalKpmnodeIDgNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2
 	}, nil
 }
 
-func CreateGlobalKpmnodeIDenGNbID(bsValue uint64, bsLen uint32, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
+func CreateGlobalKpmnodeIDenGNbID(bsValue []byte, bsLen uint32, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")

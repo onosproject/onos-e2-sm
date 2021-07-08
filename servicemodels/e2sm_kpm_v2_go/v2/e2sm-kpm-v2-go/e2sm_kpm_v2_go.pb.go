@@ -3711,8 +3711,8 @@ type MeasurementDataItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	MeasRecord *MeasurementRecord `protobuf:"bytes,1,opt,name=meas_record,json=measRecord,proto3" json:"meas_record,omitempty"`
-	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:1"
-	IncompleteFlag *IncompleteFlag `protobuf:"varint,2,opt,name=incomplete_flag,json=incompleteFlag,proto3,enum=e2sm_kpm_v2_go.v2.IncompleteFlag,oneof" json:"incomplete_flag,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:1"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
+	IncompleteFlag *IncompleteFlag `protobuf:"varint,2,opt,name=incomplete_flag,json=incompleteFlag,proto3,enum=e2sm_kpm_v2_go.v2.IncompleteFlag,oneof" json:"incomplete_flag,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:0"`
 }
 
 func (x *MeasurementDataItem) Reset() {
