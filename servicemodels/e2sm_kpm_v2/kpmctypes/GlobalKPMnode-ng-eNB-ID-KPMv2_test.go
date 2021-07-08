@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
@@ -103,7 +104,7 @@ func Test_perEncodeGlobalKpmnodeNgEnbID(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 15, len(per))
 	//assert.Equal(t, 14, len(per)) // without GNbDuID
-	t.Logf("GlobalKpmnodeNgEnbID PER\n%s", string(per))
+	t.Logf("GlobalKpmnodeNgEnbID PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeGlobalKpmnodeNgEnbID(t *testing.T) {
@@ -133,7 +134,7 @@ func Test_perDecodeGlobalKpmnodeNgEnbID(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 15, len(per))
 	//assert.Equal(t, 14, len(per)) // without GNbDuID
-	t.Logf("GlobalKpmnodeNgEnbID PER\n%s", string(per))
+	t.Logf("GlobalKpmnodeNgEnbID PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeGlobalKpmnodeNgEnbID(per)
 	assert.NilError(t, err)

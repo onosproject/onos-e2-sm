@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
@@ -75,7 +76,7 @@ func Test_perEncodeE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 42, len(per))
 	assert.Equal(t, 19, len(per)) // without SenderType and GlobalKPMnodeID
-	t.Logf("E2SmKpmIndicationHeaderFormat1 PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationHeaderFormat1 PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeE2SmKpmIndicationHeaderFormat1(t *testing.T) {
@@ -87,7 +88,7 @@ func Test_perDecodeE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 42, len(per))
 	assert.Equal(t, 19, len(per)) // without SenderType and GlobalKPMnodeID
-	t.Logf("E2SmKpmIndicationHeaderFormat1 PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationHeaderFormat1 PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeE2SmKpmIndicationHeaderFormat1(per)
 	assert.NilError(t, err)

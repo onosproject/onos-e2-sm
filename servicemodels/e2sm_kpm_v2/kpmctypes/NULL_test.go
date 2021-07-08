@@ -30,7 +30,7 @@ package kpmv2ctypes
 //	per, err := perEncodeNull(0)
 //	assert.NilError(t, err)
 //	assert.Equal(t, 1, len(per))
-//	t.Logf("NULL PER - decoded\n%s", string(per))
+//	t.Logf("NULL PER\n%v", hex.Dump(per))
 //}
 //
 //func Test_perDecodeNull(t *testing.T) {
@@ -38,7 +38,7 @@ package kpmv2ctypes
 //	per, err := perEncodeNull(0)
 //	assert.NilError(t, err)
 //	assert.Equal(t, 4, len(per))
-//	t.Logf("NULL PER\n%s", string(per))
+//	t.Logf("NULL PER\n%v", hex.Dump(per))
 //
 //	result, err := perDecodeNull(per)
 //	assert.NilError(t, err)

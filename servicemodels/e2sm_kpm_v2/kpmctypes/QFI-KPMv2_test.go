@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -45,7 +46,7 @@ func Test_perEncodeQfi(t *testing.T) {
 	per, err := perEncodeQfi(qfi)
 	assert.NilError(t, err)
 	//assert.Equal(t, 1, len(per))
-	t.Logf("QFI PER\n%s", string(per))
+	t.Logf("QFI PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeQfi(t *testing.T) {
@@ -56,7 +57,7 @@ func Test_perDecodeQfi(t *testing.T) {
 	per, err := perEncodeQfi(qfi)
 	assert.NilError(t, err)
 	//assert.Equal(t, 1, len(per))
-	t.Logf("QFI PER\n%s", string(per))
+	t.Logf("QFI PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeQfi(per)
 	assert.NilError(t, err)

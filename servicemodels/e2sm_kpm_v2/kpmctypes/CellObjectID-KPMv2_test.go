@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -49,7 +50,7 @@ func Test_perEncodeCellObjectID(t *testing.T) {
 	per, err := perEncodeCellObjectID(objID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 6, len(per))
-	t.Logf("CellObjectID PER\n%s", string(per))
+	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeCellObjectID(t *testing.T) {
@@ -59,7 +60,7 @@ func Test_perDecodeCellObjectID(t *testing.T) {
 	per, err := perEncodeCellObjectID(objID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 6, len(per))
-	t.Logf("CellObjectID PER\n%s", string(per))
+	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeCellObjectID(per)
 	assert.NilError(t, err)

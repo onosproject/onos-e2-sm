@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	"gotest.tools/assert"
 	"testing"
@@ -137,42 +138,42 @@ func Test_perEncodeTestCondType(t *testing.T) {
 	per, err := perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (GBR) PER\n%s", string(per))
+	t.Logf("TestCondType (GBR) PER\n%v", hex.Dump(per))
 
 	testCondType = pdubuilder.CreateTestCondTypeAMBR()
 
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (AMBR) PER\n%s", string(per))
+	t.Logf("TestCondType (AMBR) PER\n%v", hex.Dump(per))
 
 	testCondType = pdubuilder.CreateTestCondTypeIsStat()
 
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (IsStat) PER\n%s", string(per))
+	t.Logf("TestCondType (IsStat) PER\n%v", hex.Dump(per))
 
 	testCondType = pdubuilder.CreateTestCondTypeIsCatM()
 
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (IsCatM) PER\n%s", string(per))
+	t.Logf("TestCondType (IsCatM) PER\n%v", hex.Dump(per))
 
 	testCondType = pdubuilder.CreateTestCondTypeRSRP()
 
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (RSRP) PER\n%s", string(per))
+	t.Logf("TestCondType (RSRP) PER\n%v", hex.Dump(per))
 
 	testCondType = pdubuilder.CreateTestCondTypeRSRQ()
 
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (RSRQ) PER\n%s", string(per))
+	t.Logf("TestCondType (RSRQ) PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeTestCondType(t *testing.T) {
@@ -182,7 +183,7 @@ func Test_perDecodeTestCondType(t *testing.T) {
 	per, err := perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (GBR) PER\n%s", string(per))
+	t.Logf("TestCondType (GBR) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeTestCondType(per)
 	assert.NilError(t, err)
@@ -194,7 +195,7 @@ func Test_perDecodeTestCondType(t *testing.T) {
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (AMBR) PER\n%s", string(per))
+	t.Logf("TestCondType (AMBR) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondType(per)
 	assert.NilError(t, err)
@@ -206,7 +207,7 @@ func Test_perDecodeTestCondType(t *testing.T) {
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (IsStat) PER\n%s", string(per))
+	t.Logf("TestCondType (IsStat) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondType(per)
 	assert.NilError(t, err)
@@ -218,7 +219,7 @@ func Test_perDecodeTestCondType(t *testing.T) {
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (IsCatN) PER\n%s", string(per))
+	t.Logf("TestCondType (IsCatN) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondType(per)
 	assert.NilError(t, err)
@@ -230,7 +231,7 @@ func Test_perDecodeTestCondType(t *testing.T) {
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (RSRP) PER\n%s", string(per))
+	t.Logf("TestCondType (RSRP) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondType(per)
 	assert.NilError(t, err)
@@ -242,7 +243,7 @@ func Test_perDecodeTestCondType(t *testing.T) {
 	per, err = perEncodeTestCondType(testCondType)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondType (RSRQ) PER\n%s", string(per))
+	t.Logf("TestCondType (RSRQ) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondType(per)
 	assert.NilError(t, err)

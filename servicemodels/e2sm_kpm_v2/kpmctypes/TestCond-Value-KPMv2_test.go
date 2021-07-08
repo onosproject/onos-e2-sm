@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
@@ -146,21 +147,21 @@ func Test_perEncodeTestCondValue(t *testing.T) {
 	per, err := perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
-	t.Logf("TestCondValue (Integer) PER\n%s", string(per))
+	t.Logf("TestCondValue (Integer) PER\n%v", hex.Dump(per))
 
 	testCondValue = pdubuilder.CreateTestCondValueEnum(54)
 
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
-	t.Logf("TestCondValue (Enum) PER\n%s", string(per))
+	t.Logf("TestCondValue (Enum) PER\n%v", hex.Dump(per))
 
 	testCondValue = pdubuilder.CreateTestCondValueBool(true)
 
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
+	t.Logf("TestCondValue (Boolean) PER\n%v", hex.Dump(per))
 
 	bs := &e2sm_kpm_v2.BitString{
 		Value: 0x9bcd4,
@@ -171,21 +172,21 @@ func Test_perEncodeTestCondValue(t *testing.T) {
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("TestCondValue (BitString) PER\n%s", string(per))
+	t.Logf("TestCondValue (BitString) PER\n%v", hex.Dump(per))
 
 	testCondValue = pdubuilder.CreateTestCondValueOctS("onf")
 
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("TestCondValue (OctetString) PER\n%s", string(per))
+	t.Logf("TestCondValue (OctetString) PER\n%v", hex.Dump(per))
 
 	testCondValue = pdubuilder.CreateTestCondValuePrtS("ONF")
 
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("TestCondValue (PrintableString) PER\n%s", string(per))
+	t.Logf("TestCondValue (PrintableString) PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeTestCondValue(t *testing.T) {
@@ -195,7 +196,7 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	per, err := perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
-	t.Logf("TestCondValue (Integer) PER\n%s", string(per))
+	t.Logf("TestCondValue (Integer) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeTestCondValue(per)
 	assert.NilError(t, err)
@@ -207,7 +208,7 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 3, len(per))
-	t.Logf("TestCondValue (Enum) PER\n%s", string(per))
+	t.Logf("TestCondValue (Enum) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondValue(per)
 	assert.NilError(t, err)
@@ -219,7 +220,7 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("TestCondValue (Boolean) PER\n%s", string(per))
+	t.Logf("TestCondValue (Boolean) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondValue(per)
 	assert.NilError(t, err)
@@ -235,7 +236,7 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("TestCondValue (BitString) PER\n%s", string(per))
+	t.Logf("TestCondValue (BitString) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondValue(per)
 	assert.NilError(t, err)
@@ -247,7 +248,7 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("TestCondValue (OctetString) PER\n%s", string(per))
+	t.Logf("TestCondValue (OctetString) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondValue(per)
 	assert.NilError(t, err)
@@ -259,7 +260,7 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	per, err = perEncodeTestCondValue(testCondValue)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("TestCondValue (PrintableString) PER\n%s", string(per))
+	t.Logf("TestCondValue (PrintableString) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeTestCondValue(per)
 	assert.NilError(t, err)

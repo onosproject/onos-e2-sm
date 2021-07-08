@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
@@ -62,7 +63,7 @@ func Test_perDecodeE2SmKpmEventTriggerDefinition(t *testing.T) {
 	per, err := PerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
 	assert.Equal(t, 2, len(per))
-	t.Logf("E2SmKpmEventTriggerDefinition PER\n%s", string(per))
+	t.Logf("E2SmKpmEventTriggerDefinition PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmKpmEventTriggerDefinition(per)
 	assert.NilError(t, err)

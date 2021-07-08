@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -108,7 +109,7 @@ func Test_perEncodeRicKpmnnodeItem(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 29, len(per))
 	//assert.Equal(t, 13, len(per)) //without CellMeasurementObjectList
-	t.Logf("RicKpmNodeItem PER\n%s", string(per))
+	t.Logf("RicKpmNodeItem PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeRicKpmnNodeItem(t *testing.T) {
@@ -120,7 +121,7 @@ func Test_perDecodeRicKpmnNodeItem(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 29, len(per))
 	//assert.Equal(t, 13, len(per)) //without CellMeasurementObjectList
-	t.Logf("RicKpmNodeItem PER\n%s", string(per))
+	t.Logf("RicKpmNodeItem PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRicKpmnodeItem(per)
 	assert.NilError(t, err)

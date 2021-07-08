@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -54,7 +55,7 @@ func Test_perEncodeGnbIDChoice(t *testing.T) {
 	per, err := perEncodeGnbIDChoice(gnbIDchoice)
 	assert.NilError(t, err)
 	//assert.Equal(t, 4, len(per))
-	t.Logf("GnbIDChoice PER\n%s", string(per))
+	t.Logf("GnbIDChoice PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeGnbIDChoice(t *testing.T) {
@@ -64,10 +65,10 @@ func Test_perDecodeGnbIDChoice(t *testing.T) {
 	per, err := perEncodeGnbIDChoice(gnbIDchoice)
 	assert.NilError(t, err)
 	//assert.Equal(t, 4, len(per))
-	t.Logf("GnbIDChoice XER\n%s", string(per))
+	t.Logf("GnbIDChoice PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeGnbIDChoice(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("GnbIDChoice XER - decoded\n%s", result)
+	t.Logf("GnbIDChoice PER - decoded\n%s", result)
 }

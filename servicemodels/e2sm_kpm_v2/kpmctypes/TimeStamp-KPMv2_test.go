@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -48,7 +49,7 @@ func Test_perEncodeTimeStamp(t *testing.T) {
 	per, err := perEncodeTimeStamp(timeStamp)
 	assert.NilError(t, err)
 	assert.Equal(t, 4, len(per))
-	t.Logf("TimeStamp PER\n%v", per)
+	t.Logf("TimeStamp PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeTimeStamp(t *testing.T) {
@@ -60,7 +61,7 @@ func Test_perDecodeTimeStamp(t *testing.T) {
 	per, err := perEncodeTimeStamp(timeStamp)
 	assert.NilError(t, err)
 	assert.Equal(t, 4, len(per))
-	t.Logf("TimeStamp PER\n%v", per)
+	t.Logf("TimeStamp PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeTimeStamp(per)
 	assert.NilError(t, err)

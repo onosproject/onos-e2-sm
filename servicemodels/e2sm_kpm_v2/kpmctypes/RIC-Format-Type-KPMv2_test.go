@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -45,7 +46,7 @@ func Test_perEncodeRicFormatType(t *testing.T) {
 	per, err := perEncodeRicFormatType(ricFormatType)
 	assert.NilError(t, err)
 	//assert.Equal(t, 2, len(per))
-	t.Logf("RicFormatType PER\n%s", string(per))
+	t.Logf("RicFormatType PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeRicFormatType(t *testing.T) {
@@ -56,7 +57,7 @@ func Test_perDecodeRicFormatType(t *testing.T) {
 	per, err := perEncodeRicFormatType(ricFormatType)
 	assert.NilError(t, err)
 	//assert.Equal(t, 2, len(per))
-	t.Logf("RicFormatType PER\n%s", string(per))
+	t.Logf("RicFormatType PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRicFormatType(per)
 	assert.NilError(t, err)

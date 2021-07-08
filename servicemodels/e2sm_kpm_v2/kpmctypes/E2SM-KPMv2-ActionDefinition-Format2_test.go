@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"fmt"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
@@ -124,7 +125,7 @@ func Test_perEncodeE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	per, err := perEncodeE2SmKpmActionDefinitionFormat2(actionDefFormat2)
 	assert.NilError(t, err)
 	assert.Equal(t, 64, len(per))
-	t.Logf("E2SmKpmActionDefinitionFormat2 PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinitionFormat2 PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeE2SmKpmActionDefinitionFormat2(t *testing.T) {
@@ -135,7 +136,7 @@ func Test_perDecodeE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	per, err := perEncodeE2SmKpmActionDefinitionFormat2(actionDefFormat2)
 	assert.NilError(t, err)
 	assert.Equal(t, 64, len(per))
-	t.Logf("E2SmKpmActionDefinitionFormat2 PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinitionFormat2 PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeE2SmKpmActionDefinitionFormat2(per)
 	assert.NilError(t, err)

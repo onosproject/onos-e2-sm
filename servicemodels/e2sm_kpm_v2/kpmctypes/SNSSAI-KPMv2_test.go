@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -51,7 +52,7 @@ func Test_perEncodeSnssai(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 5, len(per))
 	//assert.Equal(t, 2, len(per)) // without SD
-	t.Logf("Snssai PER\n%s", string(per))
+	t.Logf("Snssai PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeSnssai(t *testing.T) {
@@ -64,7 +65,7 @@ func Test_perDecodeSnssai(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 5, len(per))
 	//assert.Equal(t, 2, len(per)) // without SD
-	t.Logf("Snssai PER\n%s", string(per))
+	t.Logf("Snssai PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeSnssai(per)
 	assert.NilError(t, err)

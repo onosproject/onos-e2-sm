@@ -105,21 +105,21 @@ func Test_perEncodeMeasurementRecordItem(t *testing.T) {
 	per, err := perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
 	//assert.Equal(t, 2, len(per))
-	t.Logf("MeasurementRecordItem (Integer) PER\n%s", string(per))
+	t.Logf("MeasurementRecordItem (Integer) PER\n%v", hex.Dump(per))
 
 	mri = createMeasurementRecordItemReal()
 
 	per, err = perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
 	//assert.Equal(t, 5, len(per))
-	t.Logf("MeasurementRecordItem (Real) PER\n%s", string(per))
+	t.Logf("MeasurementRecordItem (Real) PER\n%v", hex.Dump(per))
 
 	mri = createMeasurementRecordItemNoValue()
 
 	per, err = perEncodeMeasurementRecordItem(mri)
 	assert.NilError(t, err)
 	//assert.Equal(t, 1, len(per))
-	t.Logf("MeasurementRecordItem (NoValue) PER\n%s", string(per))
+	t.Logf("MeasurementRecordItem (NoValue) PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeMeasurementRecordItem(t *testing.T) {

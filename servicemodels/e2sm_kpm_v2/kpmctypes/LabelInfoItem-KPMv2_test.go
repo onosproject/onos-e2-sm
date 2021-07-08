@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -86,7 +87,7 @@ func Test_perEncodeLabelInfoItem(t *testing.T) {
 	per, err := perEncodeLabelInfoItem(lii)
 	assert.NilError(t, err)
 	//assert.Equal(t, 36, len(per))
-	t.Logf("LabelInfoItem PER\n%s", string(per))
+	t.Logf("LabelInfoItem PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeLabelInfoItem(t *testing.T) {
@@ -96,7 +97,7 @@ func Test_perDecodeLabelInfoItem(t *testing.T) {
 	per, err := perEncodeLabelInfoItem(lii)
 	assert.NilError(t, err)
 	//assert.Equal(t, 36, len(per))
-	t.Logf("LabelInfoItem PER\n%s", string(per))
+	t.Logf("LabelInfoItem PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeLabelInfoItem(per)
 	assert.NilError(t, err)

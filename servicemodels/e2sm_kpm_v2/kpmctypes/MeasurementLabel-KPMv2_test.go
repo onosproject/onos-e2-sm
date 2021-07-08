@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -86,7 +87,7 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 36, len(per))
 	//assert.Equal(t, 28, len(per)) // without FiveQI, QFi, QCimin, ARPmax, DistBinY and PreLabelOverride
-	t.Logf("MeasurementLabel XER\n%s", string(per))
+	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeMeasurementLabel(t *testing.T) {
@@ -97,7 +98,7 @@ func Test_perDecodeMeasurementLabel(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 36, len(per))
 	//assert.Equal(t, 28, len(per)) // without FiveQI, QFi, QCimin, ARPmax, DistBinY and PreLabelOverride
-	t.Logf("MeasurementLabel PER\n%s", string(per))
+	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeMeasurementLabel(per)
 	assert.NilError(t, err)

@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -131,7 +132,7 @@ func Test_perEncodeMeasurementCondItem(t *testing.T) {
 	per, err := perEncodeMeasurementCondItem(mci)
 	assert.NilError(t, err)
 	//assert.Equal(t, 45, len(per))
-	t.Logf("MeasurementCondItem PER\n%s", string(per))
+	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeMeasurementCondItem(t *testing.T) {
@@ -142,7 +143,7 @@ func Test_perDecodeMeasurementCondItem(t *testing.T) {
 	per, err := perEncodeMeasurementCondItem(mci)
 	assert.NilError(t, err)
 	//assert.Equal(t, 45, len(per))
-	t.Logf("MeasurementCondItem PER\n%s", string(per))
+	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeMeasurementCondItem(per)
 	assert.NilError(t, err)

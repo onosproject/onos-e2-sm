@@ -46,7 +46,7 @@ func Test_perEncodeSubscriptionID(t *testing.T) {
 	per, err := perEncodeSubscriptionID(subID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 3, len(per))
-	t.Logf("SubscriptionID PER\n%s", string(per))
+	t.Logf("SubscriptionID PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeSubscriptionID(t *testing.T) {

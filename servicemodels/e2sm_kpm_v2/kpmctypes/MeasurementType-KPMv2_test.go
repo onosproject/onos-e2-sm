@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
@@ -75,7 +76,7 @@ func Test_perEncodeMeasurementType(t *testing.T) {
 	per, err := perEncodeMeasurementType(mt1)
 	assert.NilError(t, err)
 	//assert.Equal(t, 5, len(per))
-	t.Logf("MeasurementType (Name)  PER\n%s", string(per))
+	t.Logf("MeasurementType (Name)  PER\n%v", hex.Dump(per))
 
 	mt2, err := createMeasurementType2()
 	assert.NilError(t, err)
@@ -83,7 +84,7 @@ func Test_perEncodeMeasurementType(t *testing.T) {
 	per, err = perEncodeMeasurementType(mt2)
 	assert.NilError(t, err)
 	//assert.Equal(t, 3, len(per))
-	t.Logf("MeasurementType (ID)  PER\n%s", string(per))
+	t.Logf("MeasurementType (ID)  PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeMeasurementType(t *testing.T) {
@@ -94,7 +95,7 @@ func Test_perDecodeMeasurementType(t *testing.T) {
 	per, err := perEncodeMeasurementType(mt1)
 	assert.NilError(t, err)
 	//assert.Equal(t, 5, len(per))
-	t.Logf("MeasurementType (Name) PER\n%s", string(per))
+	t.Logf("MeasurementType (Name) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeMeasurementType(per)
 	assert.NilError(t, err)
@@ -107,7 +108,7 @@ func Test_perDecodeMeasurementType(t *testing.T) {
 	per, err = perEncodeMeasurementType(mt2)
 	assert.NilError(t, err)
 	//assert.Equal(t, 3, len(per))
-	t.Logf("MeasurementType (ID) PER\n%s", string(per))
+	t.Logf("MeasurementType (ID) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeMeasurementType(per)
 	assert.NilError(t, err)
