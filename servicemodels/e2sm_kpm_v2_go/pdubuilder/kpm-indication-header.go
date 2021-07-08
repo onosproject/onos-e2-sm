@@ -9,8 +9,8 @@ import (
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 )
 
-func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, senderName string, senderType string,
-	vendorName string, globalKpmNodeID *e2sm_kpm_v2_go.GlobalKpmnodeId) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion *string, senderName *string, senderType *string,
+	vendorName *string, globalKpmNodeID *e2sm_kpm_v2_go.GlobalKpmnodeId) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
 
 	if len(timeStamp) != 4 {
 		return nil, fmt.Errorf("TimeStamp should be 4 chars")
@@ -27,20 +27,20 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion string, s
 	}
 
 	// optional instance
-	if fileFormatVersion != "" {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().FileFormatversion = &fileFormatVersion
+	if fileFormatVersion != nil {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().FileFormatversion = fileFormatVersion
 	}
 	// optional instance
-	if senderName != "" {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderName = &senderName
+	if senderName != nil {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderName = senderName
 	}
 	// optional instance
-	if senderType != "" {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderType = &senderType
+	if senderType != nil {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderType = senderType
 	}
 	// optional instance
-	if vendorName != "" {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().VendorName = &vendorName
+	if vendorName != nil {
+		e2SmKpmPdu.GetIndicationHeaderFormat1().VendorName = vendorName
 	}
 	// optional instance
 	if globalKpmNodeID != nil {
@@ -77,7 +77,7 @@ func CreateGlobalKpmnodeIDgNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2
 	}, nil
 }
 
-func CreateGlobalKpmnodeIDenGNbID(bsValue uint64, bsLen uint32, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
+func CreateGlobalKpmnodeIDenGNbID(bsValue []byte, bsLen uint32, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")

@@ -25,15 +25,24 @@ func Test_perEncodingMeasurementTypeName(t *testing.T) {
 
 	mtn := createMeasurementTypeName()
 
-	per, err := aper.MarshalWithParams(mtn, "sizeExt")
+	per, err := aper.MarshalWithParams(mtn, "")
 	assert.NilError(t, err)
 	t.Logf("MeasurementTypeName PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementTypeName{}
-	err = aper.UnmarshalWithParams(per, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementTypeName - decoded\n%v", result)
+}
+
+func Test_perMeasurementTypeNameCompareBytes(t *testing.T) {
+
+	mtn := createMeasurementTypeName()
+
+	per, err := aper.MarshalWithParams(mtn, "")
+	assert.NilError(t, err)
+	t.Logf("MeasurementTypeName PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerMeasurementTypeName)

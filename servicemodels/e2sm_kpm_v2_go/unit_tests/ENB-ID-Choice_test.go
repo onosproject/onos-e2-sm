@@ -23,7 +23,7 @@ func createEnbIDChoiceMacro() *e2sm_kpm_v2_go.EnbIdChoice {
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdMacro{
 			EnbIdMacro: &asn1.BitString{
-				Value: 0x9bcd4,
+				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 				Len:   20,
 			},
 		},
@@ -35,7 +35,7 @@ func createEnbIDChoiceShortMacro() *e2sm_kpm_v2_go.EnbIdChoice {
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdShortmacro{
 			EnbIdShortmacro: &asn1.BitString{
-				Value: 0x9bcd4,
+				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 				Len:   18,
 			},
 		},
@@ -47,7 +47,7 @@ func createEnbIDChoiceLongMacro() *e2sm_kpm_v2_go.EnbIdChoice {
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdLongmacro{
 			EnbIdLongmacro: &asn1.BitString{
-				Value: 0x9bcd4,
+				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 				Len:   21,
 			},
 		},
@@ -68,6 +68,16 @@ func Test_perEncodingEnbIDchoiceMacro(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("EnbIDchoice (Macro) PER - decoded\n%v", result)
+}
+
+func Test_perEnbIDchoiceMacroCompareBytes(t *testing.T) {
+
+	enbID := createEnbIDChoiceMacro()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("EnbIDchoice (Macro) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEnbIDchoiceMacro)
@@ -89,6 +99,16 @@ func Test_perEncodingEnbIDchoiceShortMacro(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("EnbIDchoice (Short Macro) PER - decoded\n%v", result)
+}
+
+func Test_perEnbIDchoiceShortMacroCompareBytes(t *testing.T) {
+
+	enbID := createEnbIDChoiceShortMacro()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("EnbIDchoice (Short Macro) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEnbIDchoiceShortMacro)
@@ -110,6 +130,16 @@ func Test_perEncodingEnbIDchoiceLongMacro(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("EnbIDchoice (Long Macro) PER - decoded\n%v", result)
+}
+
+func Test_perEnbIDchoiceLongMacroCompareBytes(t *testing.T) {
+
+	enbID := createEnbIDChoiceLongMacro()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("EnbIDchoice (Long Macro) PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerEnbIDchoiceLongMacro)

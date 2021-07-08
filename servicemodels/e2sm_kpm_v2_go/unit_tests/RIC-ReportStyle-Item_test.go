@@ -73,6 +73,16 @@ func Test_perEncodingRicReportStyleItem(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RIC-ReportStyle-Item - decoded\n%v", result)
+}
+
+func Test_perRicReportStyleItemCompareBytes(t *testing.T) {
+
+	item, err := createRicReportStyleItem()
+	assert.NilError(t, err)
+
+	per, err := aper.MarshalWithParams(*item, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("RIC-ReportStyle-Item PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerRicReportStyleItem)

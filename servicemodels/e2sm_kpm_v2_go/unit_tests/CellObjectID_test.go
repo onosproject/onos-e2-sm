@@ -35,6 +35,15 @@ func Test_perEncodingCellObjectID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("CellObjectID PER - decoded\n%v", result)
+}
+
+func Test_perCellObjectIDCompareBytes(t *testing.T) {
+
+	coID := createCellObjectID()
+
+	per, err := aper.MarshalWithParams(*coID, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerCellObjectID)

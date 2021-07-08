@@ -182,25 +182,25 @@ message MeasurementLabel {
     optional PlmnIdentity plmn_id = 1 [ json_name="plmnID"];
     // @inject_tag: aper:"optional"
     optional Snssai slice_id = 2 [ json_name="sliceID"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional FiveQi five_qi = 3 [ json_name="fiveQI"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qfi q_fi = 4 [ json_name="qFI"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qci q_ci = 5 [ json_name="qCI"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qci q_cimax = 6 [ json_name="qCImax"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Qci q_cimin = 7 [ json_name="qCImin"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Arp a_rpmax = 8 [ json_name="aRPmax"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueExt"
     optional Arp a_rpmin = 9 [ json_name="aRPmin"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 bitrate_range = 10 [ json_name="bitrateRange"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 layer_mu_mimo = 11 [ json_name="layerMU-MIMO"];
-    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
     optional SUM s_um = 12 [ json_name="sUM"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 dist_bin_x = 13 [ json_name="distBinX"];
@@ -208,7 +208,7 @@ message MeasurementLabel {
     optional int32 dist_bin_y = 14 [ json_name="distBinY"];
     // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
     optional int32 dist_bin_z = 15 [ json_name="distBinZ"];
-    // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:0"
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
     optional PreLabelOverride pre_label_override = 16 [ json_name="preLabelOverride"];
     // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:1"
     optional StartEndInd start_end_ind = 17 [ json_name="startEndInd"];
@@ -224,8 +224,11 @@ message SubscriptionId {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:99
 // {TestCondInfo}
 message TestCondInfo {
+    // @inject_tag: aper:"valueExt"
     TestCondType test_type = 1 [ json_name="testType"];
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
     TestCondExpression test_expr = 2 [ json_name="testExpr"];
+    // @inject_tag: aper:"valueExt"
     TestCondValue test_value = 3 [ json_name="testValue"];
 };
 
@@ -234,17 +237,17 @@ message TestCondInfo {
 message TestCondType {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:106
     oneof test_cond_type {
-        // @inject_tag: aper:"choiceIdx:1,sizeExt,sizeLB:1,sizeUB:1"
+        // @inject_tag: aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:0"
         GBR g_br = 1 [ json_name="gBR"];
-        // @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:1,sizeUB:1"
+        // @inject_tag: aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:0"
         AMBR a_mbr = 2 [ json_name="aMBR"];
-        // @inject_tag: aper:"choiceIdx:3,sizeExt,sizeLB:1,sizeUB:1"
+        // @inject_tag: aper:"choiceIdx:3,valueExt,valueLB:0,valueUB:0"
         ISSTAT is_stat = 3 [ json_name="isStat"];
-        // @inject_tag: aper:"choiceIdx:4,sizeExt,sizeLB:1,sizeUB:1"
+        // @inject_tag: aper:"choiceIdx:4,valueExt,valueLB:0,valueUB:0"
         ISCATM is_cat_m = 4 [ json_name="isCatM"];
-        // @inject_tag: aper:"choiceIdx:5,sizeExt,sizeLB:1,sizeUB:1"
+        // @inject_tag: aper:"choiceIdx:5,valueExt,valueLB:0,valueUB:0"
         RSRP r_srp = 5 [ json_name="rSRP"];
-        // @inject_tag: aper:"choiceIdx:6,sizeExt,sizeLB:1,sizeUB:1"
+        // @inject_tag: aper:"choiceIdx:6,valueExt,valueLB:0,valueUB:0"
         RSRQ r_srq = 6 [ json_name="rSRQ"];
     }
 };
@@ -547,8 +550,8 @@ message MeasurementData {
 // {MeasurementDataItem}
 message MeasurementDataItem {
     MeasurementRecord meas_record = 1 [ json_name="measRecord"];
-    // @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:1"
-    optional int32 incomplete_flag = 2 [ json_name="incompleteFlag"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
+    optional IncompleteFlag incomplete_flag = 2 [ json_name="incompleteFlag"];
 };
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:278
@@ -567,7 +570,7 @@ message MeasurementRecordItem {
         int64 integer = 1 [ json_name="integer"];
         // @inject_tag: aper:"choiceIdx:2"
         double real = 2 [ json_name="real"];
-        // @inject_tag: aper:"choiceIdx:3"
+        // @inject_tag: aper:"choiceIdx:3,valueLB:0,valueUB:0"
         int32 no_value = 3 [ json_name="noValue"];
     }
 };
@@ -620,7 +623,7 @@ message MeasurementCondUeidItem {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:312
 // {MatchingCondList}
 message MatchingCondList {
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32768"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:32768"
     repeated MatchingCondItem value = 1 [ json_name="value"];
 };
 
@@ -629,9 +632,9 @@ message MatchingCondList {
 message MatchingCondItem {
     // choice from e2sm_kpm_v2.0.3-radisys.asn:313
     oneof matching_cond_item {
-        // @inject_tag: aper:"choiceIdx:1"
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
         MeasurementLabel meas_label = 1 [ json_name="measLabel"];
-        // @inject_tag: aper:"choiceIdx:2"
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
         TestCondInfo test_cond_info = 2 [ json_name="testCondInfo"];
     }
 };
@@ -663,7 +666,7 @@ message E2SmKpmEventTriggerDefinition {
 // {E2SM-KPM-EventTriggerDefinition-Format1}
 message E2SmKpmEventTriggerDefinitionFormat1 {
     // @inject_tag: aper:"valueLB:1,valueUB:4294967295"
-    int32 reporting_period = 1 [ json_name="reportingPeriod"];
+    int64 reporting_period = 1 [ json_name="reportingPeriod"];
 };
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:351

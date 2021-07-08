@@ -7,7 +7,7 @@ import (
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 )
 
-func CreateE2SmKpmEventTriggerDefinition(rtPeriod int32) (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
+func CreateE2SmKpmEventTriggerDefinition(rtPeriod int64) (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition{
 		E2SmKpmEventTriggerDefinition: &e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition_EventDefinitionFormat1{
 			EventDefinitionFormat1: &e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1{

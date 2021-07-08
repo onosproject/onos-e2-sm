@@ -22,7 +22,7 @@ var refPerE2SmKpmIndicationHeader = "00000000  1f 21 22 23 24 18 74 78  74 00 00
 func createE2SmKpmIndicationHeader() *e2sm_kpm_v2_go.E2SmKpmIndicationHeader {
 
 	bs := asn1.BitString{
-		Value: 0x9bcd4,
+		Value:[]byte{0xd4, 0xbc, 0x09, 0x00},
 		Len:   22,
 	}
 	plmnID := []byte{0x37, 0x34, 0x37}
@@ -42,7 +42,7 @@ func createE2SmKpmIndicationHeader() *e2sm_kpm_v2_go.E2SmKpmIndicationHeader {
 		Value: gnbDuID,
 	}
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, fileFormatVersion, senderName, senderType, vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
 
 	return newE2SmKpmPdu
 }
@@ -51,6 +51,7 @@ func Test_perEncodingE2SmKpmIndicationHeader(t *testing.T) {
 
 	ih := createE2SmKpmIndicationHeader()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per, err := aper.MarshalWithParams(ih, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader PER\n%v", hex.Dump(per))
@@ -60,6 +61,16 @@ func Test_perEncodingE2SmKpmIndicationHeader(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-IndicationHeader PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmIndicationHeaderCompareBytes(t *testing.T) {
+
+	ih := createE2SmKpmIndicationHeader()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(ih, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-IndicationHeader PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmIndicationHeader)

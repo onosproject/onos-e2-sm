@@ -15,13 +15,16 @@ import (
 	"testing"
 )
 
-var refPerE2SmKpmRanFunctionDescription = "00000000  74 04 6f 6e 66 00 00 05  6f 69 64 31 32 33 07 00  |t.onf...oid123..|" +
-	"00000010  73 6f 6d 65 44 65 73 63  72 69 70 74 69 6f 6e 00  |someDescription.|" +
-	"00000020  15 00 00 43 00 21 22 23  00 d4 bc 08 80 30 39 20  |...C.!\"#.....09 |" +
-	"00000030  1a 85 00 00 00 00 03 4f  4e 46 00 21 22 23 00 00  |.......ONF.!\"#..|" +
-	"00000040  00 20 00 00 0b 01 00 6f  6e 66 00 0f 00 0b 01 00  |. .....onf......|" +
-	"00000050  6f 6e 66 00 0f 00 00 41  a0 4f 70 65 6e 4e 65 74  |onf....A.OpenNet|" +
-	"00000060  77 6f 72 6b 69 6e 67 00  00 17 00 02 00 01        |working.......|\""
+var refPerE2SmKpmRanFunctionDescription = "00000000  74 04 6f 6e 66 00 00 05  6f 69 64 31 32 33 07 00  |t.onf...oid123..|\n" +
+	"00000010  73 6f 6d 65 44 65 73 63  72 69 70 74 69 6f 6e 00  |someDescription.|\n" +
+	"00000020  15 00 00 43 00 21 22 23  00 d4 bc 08 80 30 39 20  |...C.!\"#.....09 |\n" +
+	"00000030  1a 85 00 00 00 00 03 4f  4e 46 00 21 22 23 00 00  |.......ONF.!\"#..|\n" +
+	"00000040  00 20 00 00 0b 01 00 6f  6e 66 00 0f 00 0b 01 00  |. .....onf......|\n" +
+	"00000050  6f 6e 66 00 0f 00 00 41  a0 4f 70 65 6e 4e 65 74  |onf....A.OpenNet|\n" +
+	"00000060  77 6f 72 6b 69 6e 67 00  00 17 00 02 00 01        |working.......|\"\n"
+
+var refPerE2SmKpmRanFunctionDescriptionMndtOnly = "00000000  00 04 6f 6e 66 00 00 05  6f 69 64 31 32 33 07 00  |..onf...oid123..|\n" +
+	"00000010  73 6f 6d 65 44 65 73 63  72 69 70 74 69 6f 6e     |someDescription|"
 
 func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
@@ -32,10 +35,11 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	bs := asn1.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 		Len:   22,
 	}
-	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, 0xABCDEF012<<28) // 36 bits
+	cellIDbits := []byte{0x12, 0xF0, 0xDE, 0xBC, 0x0A, 0x00}
+	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, cellIDbits) // 36 bits
 
 	var cellObjID string = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
@@ -95,6 +99,21 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	return newE2SmKpmPdu, nil
 }
 
+func createE2SmKpmRanFunctionDescriptionMndtOnly() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
+
+	var rfSn string = "onf"
+	var rfE2SMoid string = "oid123"
+	var rfd string = "someDescription"
+
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, nil, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
+
+	return newE2SmKpmPdu, nil
+}
+
 func Test_perEncodingE2SmKpmRanFunctionDescription(t *testing.T) {
 
 	rfd, err := createE2SmKpmRanFunctionDescription()
@@ -110,10 +129,55 @@ func Test_perEncodingE2SmKpmRanFunctionDescription(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmRanFunctionDescriptionCompareBytes(t *testing.T) {
+
+	rfd, err := createE2SmKpmRanFunctionDescription()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*rfd, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescription)
 	assert.NilError(t, err)
+	assert.DeepEqual(t, per, perRefBytes)
+}
+
+func Test_perEncodingE2SmKpmRanFunctionDescriptionMndtOnly(t *testing.T) {
+
+	rfd, err := createE2SmKpmRanFunctionDescriptionMndtOnly()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*rfd, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription (mandatory part only) PER\n%v", hex.Dump(per))
+
+	result := e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	assert.NilError(t, err)
+	assert.Assert(t, &result != nil)
+	t.Logf("E2SM-KPM-RANfunctionDescription (mandatory part only) PER - decoded\n%v", result)
+}
+
+func Test_perE2SmKpmRanFunctionDescriptionMndtOnlyCompareBytes(t *testing.T) {
+
+	rfd, err := createE2SmKpmRanFunctionDescriptionMndtOnly()
+	assert.NilError(t, err)
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*rfd, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription (mandatory part only) PER\n%v", hex.Dump(per))
+
+	//Comparing with reference bytes
+	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionMndtOnly)
+	assert.NilError(t, err)
+	t.Logf("Extracted bytes are \n%v", hex.Dump(perRefBytes))
 	assert.DeepEqual(t, per, perRefBytes)
 }
 

@@ -25,7 +25,7 @@ func createGlobalgNbID() *e2sm_kpm_v2_go.GlobalgNbId {
 		GnbId: &e2sm_kpm_v2_go.GnbIdChoice{
 			GnbIdChoice: &e2sm_kpm_v2_go.GnbIdChoice_GnbId{
 				GnbId: &asn1.BitString{
-					Value: 0x9bcd4,
+					Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 					Len:   22,
 				},
 			},
@@ -47,6 +47,16 @@ func Test_perEncodingGlobalGnbID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GlobalGnbID PER - decoded\n%v", result)
+}
+
+func Test_perGlobalGnbIDCompareBytes(t *testing.T) {
+
+	gnbIDc := createGlobalgNbID()
+
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerGlobalGnbID)

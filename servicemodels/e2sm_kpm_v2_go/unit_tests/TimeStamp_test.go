@@ -15,7 +15,7 @@ import (
 
 var refPerTimeStamp = "00000000  01 02 03 04                                       |....|"
 
-func Test_xerEncodingTimeStamp(t *testing.T) {
+func Test_perEncodingTimeStamp(t *testing.T) {
 
 	stamp := []byte{0x01, 0x02, 0x03, 0x04}
 	timeStamp := e2sm_kpm_v2_go.TimeStamp{
@@ -31,6 +31,18 @@ func Test_xerEncodingTimeStamp(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("TimeStamp PER - decoded\n%v", result)
+}
+
+func Test_perTimeStampCompareBytes(t *testing.T) {
+
+	stamp := []byte{0x01, 0x02, 0x03, 0x04}
+	timeStamp := e2sm_kpm_v2_go.TimeStamp{
+		Value: stamp,
+	}
+
+	per, err := aper.Marshal(timeStamp)
+	assert.NilError(t, err)
+	t.Logf("TimeStamp PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerTimeStamp)

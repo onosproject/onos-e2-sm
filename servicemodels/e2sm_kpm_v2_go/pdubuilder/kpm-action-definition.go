@@ -175,7 +175,9 @@ func CreateMeasurementTypeMeasName(measName string) (*e2sm_kpm_v2_go.Measurement
 	return &measType, nil
 }
 
-func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte) (*e2sm_kpm_v2_go.LabelInfoItem, error) {
+func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI *int32, qfi *int32, qci *int32, qciMax *int32,
+	qciMin *int32, arpMin *int32, arpMax *int32, br *int32, lmm *int32, sum *e2sm_kpm_v2_go.SUM, dbx *int32, dby *int32,
+	dbz *int32, plo *e2sm_kpm_v2_go.PreLabelOverride, seind *e2sm_kpm_v2_go.StartEndInd) (*e2sm_kpm_v2_go.LabelInfoItem, error) {
 
 	labelInfoItem := e2sm_kpm_v2_go.LabelInfoItem{
 		MeasLabel: &e2sm_kpm_v2_go.MeasurementLabel{},
@@ -191,7 +193,7 @@ func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte) (*e2sm_kpm_v2_go.
 	}
 	if sst != nil {
 		if len(sst) != 1 {
-			return nil, fmt.Errorf("error: SST should be 1 chars")
+			return nil, fmt.Errorf("error: SST should be 1 char")
 		}
 		labelInfoItem.MeasLabel.SliceId = &e2sm_kpm_v2_go.Snssai{
 			SSt: sst,
@@ -203,33 +205,65 @@ func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte) (*e2sm_kpm_v2_go.
 			labelInfoItem.MeasLabel.SliceId.SD = sd
 		}
 	}
-
-	//labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2_go.FiveQi{
-	//	Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//}
-	//labelInfoItem.MeasLabel.QCi = &e2sm_kpm_v2_go.Qci{
-	//	Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//}
-	//labelInfoItem.MeasLabel.QCimax = &e2sm_kpm_v2_go.Qci{
-	//	Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//}
-	//labelInfoItem.MeasLabel.QCimin = &e2sm_kpm_v2_go.Qci{
-	//	Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//}
-	//labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2_go.Arp{
-	//	Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//}
-	//labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2_go.Arp{
-	//	Value: -1, // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//}
-	//labelInfoItem.MeasLabel.BitrateRange = -1     // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//labelInfoItem.MeasLabel.LayerMuMimo = -1      // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//labelInfoItem.MeasLabel.SUm = -1              // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//labelInfoItem.MeasLabel.DistBinX = -1         // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//labelInfoItem.MeasLabel.DistBinY = -1         // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//labelInfoItem.MeasLabel.DistBinZ = -1         // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//labelInfoItem.MeasLabel.PreLabelOverride = -1 // Not valid value, indicates this item not present in message - handled later in CGo encoding
-	//labelInfoItem.MeasLabel.StartEndInd = -1      // Not valid value, indicates this item not present in message - handled later in CGo encoding
+	if fiveQI != nil {
+		labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2_go.FiveQi{
+			Value: *fiveQI,
+		}
+	}
+	if qfi != nil {
+		labelInfoItem.MeasLabel.QFi = &e2sm_kpm_v2_go.Qfi{
+			Value: *qfi,
+		}
+	}
+	if qci != nil {
+		labelInfoItem.MeasLabel.QCi = &e2sm_kpm_v2_go.Qci{
+			Value: *qci,
+		}
+	}
+	if qciMax != nil {
+		labelInfoItem.MeasLabel.QCimax = &e2sm_kpm_v2_go.Qci{
+			Value: *qciMax,
+		}
+	}
+	if qciMin != nil {
+		labelInfoItem.MeasLabel.QCimin = &e2sm_kpm_v2_go.Qci{
+			Value: *qciMin,
+		}
+	}
+	if arpMin != nil {
+		labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2_go.Arp{
+			Value: *arpMin,
+		}
+	}
+	if arpMax != nil {
+		labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2_go.Arp{
+			Value: *arpMax,
+		}
+	}
+	if br != nil {
+		labelInfoItem.MeasLabel.BitrateRange = br
+	}
+	if lmm != nil {
+		labelInfoItem.MeasLabel.LayerMuMimo = lmm
+	}
+	if sum != nil {
+		labelInfoItem.MeasLabel.SUm = sum
+	}
+	if dbx != nil {
+		labelInfoItem.MeasLabel.DistBinX = dbx
+	}
+	if dby != nil {
+		labelInfoItem.MeasLabel.DistBinY = dby
+	}
+	if dbz != nil {
+		labelInfoItem.MeasLabel.DistBinZ = dbz
+	}
+	if plo != nil {
+		labelInfoItem.MeasLabel.PreLabelOverride = plo
+	}
+	if seind != nil {
+		labelInfoItem.MeasLabel.StartEndInd = seind
+	}
 
 	//if err := labelInfoItem.Validate(); err != nil {
 	//	return nil, fmt.Errorf("error validating LabelInfoItem %s", err.Error())
