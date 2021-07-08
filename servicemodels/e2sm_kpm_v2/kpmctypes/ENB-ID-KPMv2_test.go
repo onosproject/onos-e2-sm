@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -85,14 +86,14 @@ func Test_perEncodeEnbID(t *testing.T) {
 	per, err := perEncodeEnbID(enbID)
 	assert.NilError(t, err)
 	assert.Equal(t, 4, len(per))
-	t.Logf("EnbID (Macro) PER\n%s", string(per))
+	t.Logf("EnbID (Macro) PER\n%v", hex.Dump(per))
 
 	enbID = createEnbIDHome()
 
 	per, err = perEncodeEnbID(enbID)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("EnbID (Home) PER\n%s", string(per))
+	t.Logf("EnbID (Home) PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeEnbID(t *testing.T) {
@@ -102,7 +103,7 @@ func Test_perDecodeEnbID(t *testing.T) {
 	per, err := perEncodeEnbID(enbID)
 	assert.NilError(t, err)
 	assert.Equal(t, 4, len(per))
-	t.Logf("EnbID (Macro) PER\n%s", string(per))
+	t.Logf("EnbID (Macro) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeEnbID(per)
 	assert.NilError(t, err)
@@ -114,7 +115,7 @@ func Test_perDecodeEnbID(t *testing.T) {
 	per, err = perEncodeEnbID(enbID)
 	assert.NilError(t, err)
 	assert.Equal(t, 5, len(per))
-	t.Logf("EnbID (Home) PER\n%s", string(per))
+	t.Logf("EnbID (Home) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeEnbID(per)
 	assert.NilError(t, err)

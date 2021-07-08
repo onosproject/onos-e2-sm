@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -56,7 +57,7 @@ func Test_perEncodeNrcgi(t *testing.T) {
 	per, err := perEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
 	//assert.Equal(t, 9, len(per))
-	t.Logf("NRCGI PER\n%s", string(per))
+	t.Logf("NRCGI PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeNrcgi(t *testing.T) {
@@ -66,7 +67,7 @@ func Test_perDecodeNrcgi(t *testing.T) {
 	per, err := perEncodeNrcgi(nrcgi)
 	assert.NilError(t, err)
 	//assert.Equal(t, 9, len(per))
-	t.Logf("NRCGI PER\n%s", string(per))
+	t.Logf("NRCGI PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeNrcgi(per)
 	assert.NilError(t, err)

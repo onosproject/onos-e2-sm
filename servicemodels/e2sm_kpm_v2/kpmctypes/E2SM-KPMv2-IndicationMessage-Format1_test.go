@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
@@ -143,7 +144,7 @@ func Test_perEncodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 77, len(per))
 	assert.Equal(t, 30, len(per)) //without MeasurementInfoList
-	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
@@ -155,7 +156,7 @@ func Test_perDecodeE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Equal(t, 77, len(per))
 	assert.Equal(t, 30, len(per)) //without MeasurementInfoList
-	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationMessageFormat1 PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeE2SmKpmIndicationMessageFormat1(per)
 	assert.NilError(t, err)

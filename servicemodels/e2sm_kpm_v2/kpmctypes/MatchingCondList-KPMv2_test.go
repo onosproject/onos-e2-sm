@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -128,7 +129,7 @@ func Test_perEncodeMatchingCondList(t *testing.T) {
 	per, err := perEncodeMatchingCondList(mcl)
 	assert.NilError(t, err)
 	//assert.Equal(t, 42, len(per))
-	t.Logf("MatchingCondList PER\n%s", string(per))
+	t.Logf("MatchingCondList PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeMatchingCondList(t *testing.T) {
@@ -139,7 +140,7 @@ func Test_perDecodeMatchingCondList(t *testing.T) {
 	per, err := perEncodeMatchingCondList(mcl)
 	assert.NilError(t, err)
 	//assert.Equal(t, 42, len(per))
-	t.Logf("MatchingCondList PER\n%s", string(per))
+	t.Logf("MatchingCondList PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeMatchingCondList(per)
 	assert.NilError(t, err)

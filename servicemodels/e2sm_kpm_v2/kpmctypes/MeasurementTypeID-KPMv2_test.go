@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -48,7 +49,7 @@ func Test_perEncodeMeasurementTypeID(t *testing.T) {
 	per, err := perEncodeMeasurementTypeID(mtID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 3, len(per))
-	t.Logf("MeasurementTypeID PER\n%s", string(per))
+	t.Logf("MeasurementTypeID PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeMeasurementTypeID(t *testing.T) {
@@ -58,7 +59,7 @@ func Test_perDecodeMeasurementTypeID(t *testing.T) {
 	per, err := perEncodeMeasurementTypeID(mtID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 3, len(per))
-	t.Logf("MeasurementTypeID PER\n%s", string(per))
+	t.Logf("MeasurementTypeID PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeMeasurementTypeID(per)
 	assert.NilError(t, err)

@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -45,7 +46,7 @@ func Test_perEncodeRicStyleName(t *testing.T) {
 	per, err := perEncodeRicStyleName(ricStyleName)
 	assert.NilError(t, err)
 	//assert.Equal(t, 10, len(per))
-	t.Logf("RicStyleName PER\n%s", string(per))
+	t.Logf("RicStyleName PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeRicStyleName(t *testing.T) {
@@ -56,7 +57,7 @@ func Test_perDecodeRicStyleName(t *testing.T) {
 	per, err := perEncodeRicStyleName(ricStyleName)
 	assert.NilError(t, err)
 	//assert.Equal(t, 10, len(per))
-	t.Logf("RicStyleName PER\n%s", string(per))
+	t.Logf("RicStyleName PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRicStyleName(per)
 	assert.NilError(t, err)

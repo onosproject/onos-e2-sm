@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -52,7 +53,7 @@ func Test_perEncodeRanfunctionName(t *testing.T) {
 	per, err := perEncodeRanfunctionName(rfn)
 	assert.NilError(t, err)
 	//assert.Equal(t, 33, len(per))
-	t.Logf("RanfunctionName PER\n%s", string(per))
+	t.Logf("RanfunctionName PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeRanfunctionName(t *testing.T) {
@@ -62,7 +63,7 @@ func Test_perDecodeRanfunctionName(t *testing.T) {
 	per, err := perEncodeRanfunctionName(rfn)
 	assert.NilError(t, err)
 	//assert.Equal(t, 33, len(per))
-	t.Logf("RanfunctionName PER\n%s", string(per))
+	t.Logf("RanfunctionName PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRanfunctionName(per)
 	assert.NilError(t, err)

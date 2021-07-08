@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
@@ -219,7 +220,7 @@ func Test_perEncodeE2SmKpmIndicationMessage(t *testing.T) {
 	per, err := PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
 	assert.Equal(t, 77, len(per))
-	t.Logf("E2SmKpmIndicationMessage (Format1) PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationMessage (Format1) PER\n%v", hex.Dump(per))
 
 	im, err = createE2SMKPMIndicationMessageFormat2()
 	assert.NilError(t, err)
@@ -227,7 +228,7 @@ func Test_perEncodeE2SmKpmIndicationMessage(t *testing.T) {
 	per, err = PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
 	assert.Equal(t, 56, len(per))
-	t.Logf("E2SmKpmIndicationMessage (Format2) PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationMessage (Format2) PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeE2SmKpmIndicationMessage(t *testing.T) {
@@ -238,7 +239,7 @@ func Test_perDecodeE2SmKpmIndicationMessage(t *testing.T) {
 	per, err := PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
 	assert.Equal(t, 77, len(per))
-	t.Logf("E2SmKpmIndicationMessage (Format1) PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationMessage (Format1) PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmKpmIndicationMessage(per)
 	assert.NilError(t, err)
@@ -251,7 +252,7 @@ func Test_perDecodeE2SmKpmIndicationMessage(t *testing.T) {
 	per, err = PerEncodeE2SmKpmIndicationMessage(im)
 	assert.NilError(t, err)
 	assert.Equal(t, 56, len(per))
-	t.Logf("E2SmKpmIndicationMessage (Format2) PER\n%s", string(per))
+	t.Logf("E2SmKpmIndicationMessage (Format2) PER\n%v", hex.Dump(per))
 
 	result, err = PerDecodeE2SmKpmIndicationMessage(per)
 	assert.NilError(t, err)

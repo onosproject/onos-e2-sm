@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	"fmt"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdubuilder"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
@@ -282,7 +283,7 @@ func Test_perEncodeE2SmKpmActionDefinition(t *testing.T) {
 	per, err := PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
 	assert.Equal(t, 58, len(per))
-	t.Logf("E2SmKpmActionDefinition (Format1) PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinition (Format1) PER\n%v", hex.Dump(per))
 
 	actionDef, err = createE2SMKPMActionDefinitionFormat2()
 	assert.NilError(t, err)
@@ -290,7 +291,7 @@ func Test_perEncodeE2SmKpmActionDefinition(t *testing.T) {
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
 	assert.Equal(t, 66, len(per))
-	t.Logf("E2SmKpmActionDefinition (Format2) PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinition (Format2) PER\n%v", hex.Dump(per))
 
 	actionDef, err = createE2SMKPMActionDefinitionFormat3()
 	assert.NilError(t, err)
@@ -298,7 +299,7 @@ func Test_perEncodeE2SmKpmActionDefinition(t *testing.T) {
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
 	assert.Equal(t, 29, len(per))
-	t.Logf("E2SmKpmActionDefinition (Format3) PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinition (Format3) PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
@@ -309,7 +310,7 @@ func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
 	per, err := PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
 	assert.Equal(t, 58, len(per))
-	t.Logf("E2SmKpmActionDefinition (Format1) PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinition (Format1) PER\n%v", hex.Dump(per))
 
 	result, err := PerDecodeE2SmKpmActionDefinition(per)
 	assert.NilError(t, err)
@@ -322,7 +323,7 @@ func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
 	assert.Equal(t, 66, len(per))
-	t.Logf("E2SmKpmActionDefinition (Format2) PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinition (Format2) PER\n%v", hex.Dump(per))
 
 	result, err = PerDecodeE2SmKpmActionDefinition(per)
 	assert.NilError(t, err)
@@ -335,7 +336,7 @@ func Test_perDecodeE2SmKpmActionDefinition(t *testing.T) {
 	per, err = PerEncodeE2SmKpmActionDefinition(actionDef)
 	assert.NilError(t, err)
 	assert.Equal(t, 29, len(per))
-	t.Logf("E2SmKpmActionDefinition (Format3) PER\n%s", string(per))
+	t.Logf("E2SmKpmActionDefinition (Format3) PER\n%v", hex.Dump(per))
 
 	result, err = PerDecodeE2SmKpmActionDefinition(per)
 	assert.NilError(t, err)

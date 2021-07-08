@@ -5,6 +5,7 @@
 package kpmv2ctypes
 
 import (
+	"encoding/hex"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -95,14 +96,14 @@ func Test_perEncodeGlobalEnbID(t *testing.T) {
 	per, err := perEncodeGlobalEnbID(globalEnbID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 8, len(per))
-	t.Logf("GlobalEnbID (Macro) PER\n%s", string(per))
+	t.Logf("GlobalEnbID (Macro) PER\n%v", hex.Dump(per))
 
 	globalEnbID = createGlobalEnbID2()
 
 	per, err = perEncodeGlobalEnbID(globalEnbID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 9, len(per))
-	t.Logf("GlobalEnbID (Home) PER\n%s", string(per))
+	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeGlobalEnbID(t *testing.T) {
@@ -112,7 +113,7 @@ func Test_perDecodeGlobalEnbID(t *testing.T) {
 	per, err := perEncodeGlobalEnbID(globalEnbID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 8, len(per))
-	t.Logf("GlobalEnbID (Macro) PER\n%s", string(per))
+	t.Logf("GlobalEnbID (Macro) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeGlobalEnbID(per)
 	assert.NilError(t, err)
@@ -124,7 +125,7 @@ func Test_perDecodeGlobalEnbID(t *testing.T) {
 	per, err = perEncodeGlobalEnbID(globalEnbID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 9, len(per))
-	t.Logf("GlobalEnbID (Home) PER\n%s", string(per))
+	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeGlobalEnbID(per)
 	assert.NilError(t, err)
