@@ -35,7 +35,7 @@ build_protoc_gen_cgo:
 	cd protoc-gen-cgo/ && go build -v -o ./protoc-gen-cgo && cd ..
 
 build_protoc_gen_choice:
-	cd protoc-gen-choice/ && go build -v -o ./protoc-gen-choice && cd ..
+	cd protoc-gen-choice/ && go build -v -o ./protoc-gen-choice && go install && cd ..
 
 test: # @HELP run the unit tests and source code validation
 test: license_check build build_protoc_gen_cgo build_protoc_gen_choice linters
