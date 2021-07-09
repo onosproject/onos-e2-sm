@@ -222,7 +222,7 @@ func Test_perEncodeGlobalKpmnodeID(t *testing.T) {
 	per, err = perEncodeGlobalKpmnodeID(globalKpmnodeID)
 	assert.NilError(t, err)
 	//assert.Equal(t, 12, len(per))
-	t.Logf("GlobalKpmnodeID (ngENb) PER\n%v", hex.Dump(per))
+	t.Logf("GlobalKpmnodeID (enGNb) PER\n%v", hex.Dump(per))
 
 	globalKpmnodeID = createGlobalKpmnodeID3()
 
