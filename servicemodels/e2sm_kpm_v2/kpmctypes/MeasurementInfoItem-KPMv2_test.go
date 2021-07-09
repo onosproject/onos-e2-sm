@@ -67,7 +67,7 @@ func createMeasurementInfoItem() (*e2sm_kpm_v2.MeasurementInfoItem, error) {
 				},
 			},
 		},
-		//LabelInfoList: labelInfoList,
+		LabelInfoList: labelInfoList,
 	}
 	if err := res.Validate(); err != nil {
 		return nil, err
