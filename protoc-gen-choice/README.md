@@ -5,15 +5,21 @@ This plugin takes as an input Protobuf file and generates a OneOf options map to
 **A mandatory prerequisite is to have set $ONOS_ROOT variable in your environment!** 
 
 ## Build
-To build this plugin, go inside folder `protoc-gen-choice` and run following commands:
+To build this plugin, stay in the top-level directory and run 
+
+```bash
+make build_protoc_gen_choice
+```
+
+It would build & install a `protoc-gen-choice` plugin.
+
+You can also go inside the folder `protoc-gen-choice` and run following commands to build plugin manually:
 
 `go build -v -o ./protoc-gen-choice`
 
 `go install`
 
-Installing this plugin in your environment would allow you to run it from anywhere in your OS. 
-
-You can also stay in the top-level directory of the repo and run `make build_protoc_gen_choice`, which would build & install a `protoc-gen-choice` plugin.
+Installing this plugin in your environment would allow you to run it from anywhere in your OS.
 
 ## Usage
 To use this plugin please run Protobuf compiler on `*.proto` files you want to process in the following way:
