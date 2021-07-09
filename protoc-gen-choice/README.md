@@ -2,6 +2,7 @@
 This plugin takes as an input Protobuf file and generates a OneOf options map to treat CHOICE encoding.
 > Plugin was written with `Protoc-Gen-Star (PG*)` tool. It generates CHOICE map for all CHOICEs defined in O-RAN **Service Models**.
 
+**A mandatory prerequisite is to have set $ONOS_ROOT variable in your environment!** 
 
 ## Build
 To build this plugin, go inside folder `protoc-gen-choice` and run following commands:
