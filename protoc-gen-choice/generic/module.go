@@ -8,12 +8,17 @@ import (
 	"bytes"
 	"fmt"
 	pgs "github.com/lyft/protoc-gen-star"
+	"os"
+	"path/filepath"
 	"strings"
 	"text/template"
 	"unicode"
 )
 
 const moduleName = "choice"
+
+var templateDir string = os.Getenv("GOPATH")
+var templates = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-choice/templates/choice.tpl")))
 
 // Defines data structure to pass to enum template
 type choiceStruct struct {
@@ -110,14 +115,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 		}
 
-		tplChoice, err := template.New("choice.tpl").ParseFiles("choice.tpl")
-		if err != nil {
-			//fmt.Errorf("couldn't parse template :/ %v", err)
-			panic(err)
-		}
-
 		//Generating new .go file
-		m.OverwriteGeneratorTemplateFile("choiceOptions.go", tplChoice, choices)
+		m.OverwriteGeneratorTemplateFile("choiceOptions.go", templates.Lookup("choice.tpl"), choices)
 
 		m.Pop()
 		fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
