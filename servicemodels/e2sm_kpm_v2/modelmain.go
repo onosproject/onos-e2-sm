@@ -7,8 +7,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
-
 	prototypes "github.com/gogo/protobuf/types"
 
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
@@ -234,10 +232,10 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 			}
 			switch cellGlobalID := cell.CellGlobalId.GetCellGlobalId().(type) {
 			case *e2sm_kpm_v2.CellGlobalId_NrCgi:
-				cellObject.CellGlobalID.Value = strconv.FormatUint(cellGlobalID.NrCgi.NRcellIdentity.Value.Value, 16)
+				cellObject.CellGlobalID.Value = fmt.Sprintf("%x",cellGlobalID.NrCgi.NRcellIdentity.Value.Value)
 				cellObject.CellGlobalID.Type = topoapi.CellGlobalIDType_NRCGI
 			case *e2sm_kpm_v2.CellGlobalId_EUtraCgi:
-				cellObject.CellGlobalID.Value = strconv.FormatUint(cellGlobalID.EUtraCgi.EUtracellIdentity.Value.Value, 16)
+				cellObject.CellGlobalID.Value = fmt.Sprintf("%x", cellGlobalID.EUtraCgi.EUtracellIdentity.Value.Value)
 				cellObject.CellGlobalID.Type = topoapi.CellGlobalIDType_ECGI
 			}
 

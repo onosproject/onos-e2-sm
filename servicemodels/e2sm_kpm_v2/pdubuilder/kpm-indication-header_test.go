@@ -12,7 +12,7 @@ import (
 
 func TestE2SmKpmIndicationHeader(t *testing.T) {
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x09},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}

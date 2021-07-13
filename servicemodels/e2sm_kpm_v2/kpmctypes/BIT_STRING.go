@@ -32,7 +32,17 @@ func xerEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
 	return bytes, nil
 }
 
-// PerEncodeGnbID - used only in tests
+func xerDecodeBitString(bytes []byte) (*e2sm_kpm_v2.BitString, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_BIT_STRING)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeBitString((*C.BIT_STRING_t)(unsafePtr))
+}
+
 func perEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
 	bsC, err := newBitString(bs)
 	if err != nil {
@@ -45,6 +55,17 @@ func perEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
 	}
 
 	return bytes, nil
+}
+
+func perDecodeBitString(bytes []byte) (*e2sm_kpm_v2.BitString, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_BIT_STRING)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeBitString((*C.BIT_STRING_t)(unsafePtr))
 }
 
 //func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
@@ -64,23 +85,24 @@ func perEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
 
 // Previously newBitStringFromBytes
 func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
-	fmt.Printf("Bit String value is %x\nBitString length (size) is %v\n", bs.Value, bs.Len)
+	//fmt.Printf("Bit String value is %x\nBitString length (size) is %v\n", bs.Value, bs.Len)
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
-	fmt.Printf("Number of bytes is %v\n", numBytes)
+	//fmt.Printf("Number of bytes is %v\n", numBytes)
 	bitsUnused := numBytes*8 - int(bs.Len)
-	fmt.Printf("Number of unused bits is %v\n", bitsUnused)
+	//fmt.Printf("Number of unused bits is %v\n", bitsUnused)
 
 	if bitsUnused > 7 {
 		return nil, fmt.Errorf("bits unused (%d) is greater than 7", bitsUnused)
 	}
 
-	//verification
-	mask := byte((1<<bitsUnused)-1)
-	if bs.Value[numBytes-1]&mask > 0 {
-		return nil, fmt.Errorf("bit string is NOT octet-aligned")
-	}
 	if len(bs.Value) < numBytes {
 		return nil, fmt.Errorf("%d bytes are required for length %d, found %d", numBytes, bs.Len, len(bs.Value))
+	}
+
+	//verification
+	mask := byte((1 << bitsUnused) - 1)
+	if bs.Value[numBytes-1]&mask > 0 {
+		return nil, fmt.Errorf("bit string is NOT octet-aligned - expecting the %d (%d-%d) unused bits to be on the right and equal 0", bitsUnused, numBytes*8, bs.Len)
 	}
 
 	bsC := C.BIT_STRING_t{
@@ -88,7 +110,7 @@ func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
 		size:        C.ulong(numBytes),
 		bits_unused: C.int(bitsUnused),
 	}
-	fmt.Printf("Encoded BitString is %v\n", bsC)
+	//fmt.Printf("Encoded BitString is %v\n", bsC)
 
 	return &bsC, nil
 }

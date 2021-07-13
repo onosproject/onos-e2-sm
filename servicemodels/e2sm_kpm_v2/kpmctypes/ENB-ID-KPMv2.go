@@ -80,9 +80,6 @@ func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_KPMv2_t, error) {
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		//copy(choiceC[0:], bsC.buf)
-		//copy(choiceC[8:], bsC.size)
-		//copy(choiceC[16:], bsC.bits_unused)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
 		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
 		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
@@ -93,9 +90,6 @@ func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_KPMv2_t, error) {
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		//copy(choiceC[0:], bsC.buf)
-		//copy(choiceC[8:], bsC.size)
-		//copy(choiceC[16:], bsC.bits_unused)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
 		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
 		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
