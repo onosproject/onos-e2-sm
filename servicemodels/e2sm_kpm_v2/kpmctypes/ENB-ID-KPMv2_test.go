@@ -16,7 +16,7 @@ func createEnbIDMacro() *e2sm_kpm_v2.EnbId {
 	return &e2sm_kpm_v2.EnbId{
 		EnbId: &e2sm_kpm_v2.EnbId_MacroENbId{
 			MacroENbId: &e2sm_kpm_v2.BitString{
-				Value: []byte{0x12, 0x34},
+				Value: []byte{0x00, 0x00, 0x30},
 				Len:   20,
 			},
 		},
@@ -28,7 +28,7 @@ func createEnbIDHome() *e2sm_kpm_v2.EnbId {
 	return &e2sm_kpm_v2.EnbId{
 		EnbId: &e2sm_kpm_v2.EnbId_HomeENbId{
 			HomeENbId: &e2sm_kpm_v2.BitString{
-				Value: []byte{0x12, 0x34},
+				Value: []byte{0x12, 0x34, 0x00, 0x00},
 				Len:   28,
 			},
 		},
@@ -64,6 +64,8 @@ func Test_xerDecodeEnbID(t *testing.T) {
 	result, err := xerDecodeEnbID(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("EnbID (Macro) Value decoded\n%x", result.GetMacroENbId().Value)
+	assert.DeepEqual(t, enbID.GetMacroENbId().Value, result.GetMacroENbId().Value)
 	t.Logf("EnbID (Macro) XER - decoded\n%s", result)
 
 	enbID = createEnbIDHome()

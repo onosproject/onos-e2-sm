@@ -69,6 +69,20 @@ func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
 	fmt.Printf("Number of bytes is %v\n", numBytes)
 	bitsUnused := numBytes*8 - int(bs.Len)
 	fmt.Printf("Number of unused bits is %v\n", bitsUnused)
+
+	if bitsUnused > 7 {
+		return nil, fmt.Errorf("bits unused (%d) is greater than 7", bitsUnused)
+	}
+
+	//verification
+	mask := byte((1<<bitsUnused)-1)
+	if bs.Value[numBytes-1]&mask > 0 {
+		return nil, fmt.Errorf("bit string is NOT octet-aligned")
+	}
+	if len(bs.Value) < numBytes {
+		return nil, fmt.Errorf("%d bytes are required for length %d, found %d", numBytes, bs.Len, len(bs.Value))
+	}
+
 	bsC := C.BIT_STRING_t{
 		buf:         (*C.uchar)(C.CBytes(bs.Value)),
 		size:        C.ulong(numBytes),
@@ -111,11 +125,12 @@ func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 // 8 for a 64bit address of a buffer, 8 for the size in bytes of the buffer uint64, 4 for the unused bits
 // The unused bits are at the end of the buffer
 func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_v2.BitString, error) {
-	size := uint64(bsC.size)
+	size := uint32(bsC.size)
 	bitsUnused := uint32(bsC.bits_unused)
-	if size > 8 {
-		return nil, fmt.Errorf("max size is 8 bytes (64 bits) got %d", size)
-	} else if bitsUnused > 7 {
+	//if size > 8 {
+	//	return nil, fmt.Errorf("max size is 8 bytes (64 bits) got %d", size)
+	//} else
+	if bitsUnused > 7 {
 		return nil, fmt.Errorf("bits unused (%d) is greater than 7", bitsUnused)
 	}
 
@@ -130,13 +145,14 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_v2.BitString, error) {
 	//goBytes[i] = bytes[i] | prevCarry
 	//}
 	//fmt.Printf("bit string %x %d %d %+x %+x\n", bufAddr, size, bitsUnused, bytes, goBytes)
-	goBytes := make([]byte, 8)
-	for i := 0; i < int(size); i++ {
-		goBytes[i] = bytes[i]
-	}
+	//goBytes := make([]byte, 0)
+	//for i := 0; i < int(size); i++ {
+	//	//goBytes[i] = bytes[i]
+	//	goBytes = append(goBytes, bytes[i])
+	//}
 	bs := &e2sm_kpm_v2.BitString{
-		Value: goBytes,
-		Len:   uint32(size*8 - uint64(bitsUnused)),
+		Value: bytes,
+		Len:   size*8 - bitsUnused,
 	}
 
 	return bs, nil

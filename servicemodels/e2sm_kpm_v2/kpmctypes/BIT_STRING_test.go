@@ -13,7 +13,7 @@ import (
 
 func Test_newBitString(t *testing.T) {
 	bs1 := e2sm_kpm_v2.BitString{
-		Value: []byte{0xD4, 0xBC, 0x9A},
+		Value: []byte{0xD4, 0xBC, 0x90},
 		Len:   22,
 	}
 
@@ -33,11 +33,10 @@ func Test_newBitString(t *testing.T) {
 	// Can't do any further analysis as we can't have C in tests
 
 	// Now reverse it to get proto back out
-	//ToDo - incorrect decoding since value is d4bc9a0000000000 now - investigate why
 	bs2, err := decodeBitString(cBitString)
 	assert.NilError(t, err)
 	assert.Equal(t, uint32(22), bs2.Len)
-	assert.DeepEqual(t, []byte{0xD4, 0xBC, 0x9A, 0x00, 0x00, 0x00, 0x00, 0x00}, bs2.Value)
+	assert.DeepEqual(t, []byte{0xD4, 0xBC, 0x90}, bs2.Value)
 
 	xer2, err := xerEncodeBitString(bs2)
 	assert.NilError(t, err)
@@ -64,7 +63,7 @@ func Test_decodeBitString(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Assert(t, protoBitString != nil)
 	assert.Equal(t, int(protoBitString.Len), 28, "unexpected bit string length")
-	assert.DeepEqual(t, protoBitString.Value, []byte{0x9a, 0xbc, 0xde, 0xf0, 0x00, 0x00, 0x00, 0x00})
+	assert.DeepEqual(t, protoBitString.Value, []byte{0x9a, 0xbc, 0xde, 0xf0})
 
 	xer, err := xerEncodeBitString(protoBitString)
 	assert.NilError(t, err)
@@ -88,7 +87,7 @@ func Test_decodeBitString2(t *testing.T) {
 	assert.NilError(t, err)
 	//assert.Assert(t, protoBitString != nil)
 	assert.Equal(t, int(protoBitString.Len), 22, "unexpected bit string length")
-	assert.DeepEqual(t, protoBitString.Value, []byte{0x9a, 0xbc, 0xde, 0x00, 0x00, 0x00, 0x00, 0x00})
+	assert.DeepEqual(t, protoBitString.Value, []byte{0x9a, 0xbc, 0xde})
 
 	xer, err := xerEncodeBitString(protoBitString)
 	assert.NilError(t, err)
