@@ -13,6 +13,7 @@ package kpmv2ctypes
 import "C"
 
 import (
+	"encoding/binary"
 	"fmt"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
@@ -79,12 +80,12 @@ func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_KPMv2_t, error) {
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		copy(choiceC[0:], bsC.buf)
-		copy(choiceC[8:], bsC.size)
-		copy(choiceC[16:], bsC.bits_unused)
-		//binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
-		//binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
-		//binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
+		//copy(choiceC[0:], bsC.buf)
+		//copy(choiceC[8:], bsC.size)
+		//copy(choiceC[16:], bsC.bits_unused)
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
+		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
+		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
 	case *e2sm_kpm_v2.EnbId_HomeENbId:
 		pr = C.ENB_ID_KPMv2_PR_home_eNB_ID
 
@@ -92,12 +93,12 @@ func newEnbID(enbID *e2sm_kpm_v2.EnbId) (*C.ENB_ID_KPMv2_t, error) {
 		if err != nil {
 			return nil, fmt.Errorf("newBitString() %s", err.Error())
 		}
-		copy(choiceC[0:], bsC.buf)
-		copy(choiceC[8:], bsC.size)
-		copy(choiceC[16:], bsC.bits_unused)
-		//binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
-		//binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
-		//binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
+		//copy(choiceC[0:], bsC.buf)
+		//copy(choiceC[8:], bsC.size)
+		//copy(choiceC[16:], bsC.bits_unused)
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(bsC.buf))))
+		binary.LittleEndian.PutUint64(choiceC[8:], uint64(bsC.size))
+		binary.LittleEndian.PutUint32(choiceC[16:], uint32(bsC.bits_unused))
 	default:
 		return nil, fmt.Errorf("newEnbId() %T not yet implemented", choice)
 	}

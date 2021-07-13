@@ -19,33 +19,33 @@ import (
 	"unsafe"
 )
 
-//func xerEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
-//	bsC, err := newBitString(bs)
-//	if err != nil {
-//		return nil, fmt.Errorf("newBitString() %s", err.Error())
-//	}
-//	defer freeBitString(bsC)
-//	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
-//	if err != nil {
-//		return nil, err
-//	}
-//	return bytes, nil
-//}
-//
-//// PerEncodeGnbID - used only in tests
-//func perEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
-//	bsC, err := newBitString(bs)
-//	if err != nil {
-//		return nil, fmt.Errorf("newBitString() %s", err.Error())
-//	}
-//	defer freeBitString(bsC)
-//	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	return bytes, nil
-//}
+func xerEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
+	bsC, err := newBitString(bs)
+	if err != nil {
+		return nil, fmt.Errorf("newBitString() %s", err.Error())
+	}
+	//defer freeBitString(bsC)
+	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
+	if err != nil {
+		return nil, err
+	}
+	return bytes, nil
+}
+
+// PerEncodeGnbID - used only in tests
+func perEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
+	bsC, err := newBitString(bs)
+	if err != nil {
+		return nil, fmt.Errorf("newBitString() %s", err.Error())
+	}
+	//defer freeBitString(bsC)
+	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
+	if err != nil {
+		return nil, err
+	}
+
+	return bytes, nil
+}
 
 //func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
 //	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
@@ -71,7 +71,7 @@ func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
 	fmt.Printf("Number of unused bits is %v\n", bitsUnused)
 	bsC := C.BIT_STRING_t{
 		buf:         (*C.uchar)(C.CBytes(bs.Value)),
-		size:        C.ulong(bs.Len),
+		size:        C.ulong(numBytes),
 		bits_unused: C.int(bitsUnused),
 	}
 	fmt.Printf("Encoded BitString is %v\n", bsC)
