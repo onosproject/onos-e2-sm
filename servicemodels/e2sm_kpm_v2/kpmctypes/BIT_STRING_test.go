@@ -149,3 +149,41 @@ func Test_decodeBitString2(t *testing.T) {
 	assert.Equal(t, bs3.Len, resultPer.Len)
 	assert.DeepEqual(t, bs3.Value, resultPer.Value)
 }
+
+func Test_invalidBitStrings(t *testing.T) {
+
+	bs1 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0xab, 0xbc},
+		//Value: []byte{0xab, 0xbc, 0x00}, // - correct set of bytes to satisfy byte length constraint
+		Len: 22,
+	}
+	_, err := newBitString(bs1)
+	//assert.NilError(t, err)
+	assert.ErrorContains(t, err, "bytes are required for length")
+
+	bs2 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0xab, 0xbc, 0xcf},
+		//Value: []byte{0xab, 0xbc, 0xcc}, // - a correct set of bytes to satisfy octet-alignment constraint
+		Len: 22,
+	}
+	_, err = newBitString(bs2)
+	//assert.NilError(t, err)
+	assert.ErrorContains(t, err, "bit string is NOT octet-aligned")
+
+	// A valid bit string with proper length and proper octet alignment
+	// 25 bits need 4 bytes to be encoded successfully
+	// 4 bytes is 32 bits, 32-25 = 7 (unused bits)
+	// BitString.Value byte array should be shifted on 7 (unused) bits to the left to satisfy APER encoding rules
+	bs3 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0x09, 0xAB, 0xCD, 0x80},
+		Len:   25,
+	}
+	bsC, err := newBitString(bs3)
+	assert.NilError(t, err)
+
+	protoBitString, err := decodeBitString(bsC)
+	assert.NilError(t, err)
+	//assert.Assert(t, protoBitString != nil)
+	assert.Equal(t, int(protoBitString.Len), 25, "unexpected bit string length")
+	assert.DeepEqual(t, protoBitString.Value, []byte{0x09, 0xab, 0xcd, 0x80})
+}
