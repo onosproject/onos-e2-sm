@@ -90,7 +90,8 @@ func perDecodeBitString(bytes []byte) (*e2sm_kpm_v2.BitString, error) {
 // Then BitString.Value should be []byte{0x12, 0x34, 0x50} - 3 bytes long
 // 2. To encode this in bytes for APER requires an additional 4 zeros at the end (same as bit shifting to the left by 4).
 // This additional 4 zeroes shift is Octet alignment - bits should be aligned to the left of available bytes.
-// Why 4 bits? 24-20 = 4
+// Why 4 bits? 24-20 = 4.
+// For more example, see examples in Test_validBitStringsOne in BIT_STRING_test.go
 func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
 	//fmt.Printf("Bit String value is %x\nBitString length (size) is %v\n", bs.Value, bs.Len)
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
