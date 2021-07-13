@@ -150,6 +150,7 @@ func Test_decodeBitString2(t *testing.T) {
 	assert.DeepEqual(t, bs3.Value, resultPer.Value)
 }
 
+// A unit test to illustrate importance of Octet alignment and bit shifting
 func Test_invalidBitStrings(t *testing.T) {
 
 	bs1 := &e2sm_kpm_v2.BitString{
@@ -186,4 +187,53 @@ func Test_invalidBitStrings(t *testing.T) {
 	//assert.Assert(t, protoBitString != nil)
 	assert.Equal(t, int(protoBitString.Len), 25, "unexpected bit string length")
 	assert.DeepEqual(t, protoBitString.Value, []byte{0x09, 0xab, 0xcd, 0x80})
+}
+
+// A unit test to illustrate Octet alignment and bit shifting on the example of encoding 1
+func Test_validBitStringsOne(t *testing.T) {
+	// Here is a set of valid representations of 1 with different BitString length (see logs)
+	bs4 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0x00, 0x00, 0x40},
+		Len:   18, // 6 bits unused
+	}
+
+	xer1, err := xerEncodeBitString(bs4)
+	assert.NilError(t, err)
+	t.Logf("XER Bit String is \n%s", xer1)
+
+	bs5 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0x00, 0x00, 0x04},
+		Len:   22, // 2 bits unused
+	}
+
+	xer2, err := xerEncodeBitString(bs5)
+	assert.NilError(t, err)
+	t.Logf("XER Bit String is \n%s", xer2)
+
+	bs6 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0x00, 0x00, 0x00, 0x10},
+		Len:   28,
+	}
+
+	xer3, err := xerEncodeBitString(bs6)
+	assert.NilError(t, err)
+	t.Logf("XER Bit String is \n%s", xer3)
+
+	bs7 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0x00, 0x00, 0x00, 0x01},
+		Len:   32,
+	}
+
+	xer4, err := xerEncodeBitString(bs7)
+	assert.NilError(t, err)
+	t.Logf("XER Bit String is \n%s", xer4)
+
+	bs8 := &e2sm_kpm_v2.BitString{
+		Value: []byte{0x00, 0x00, 0x00, 0x00, 0x10},
+		Len:   36,
+	}
+
+	xer5, err := xerEncodeBitString(bs8)
+	assert.NilError(t, err)
+	t.Logf("XER Bit String is \n%s", xer5)
 }

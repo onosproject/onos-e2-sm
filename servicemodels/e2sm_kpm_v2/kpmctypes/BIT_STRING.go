@@ -84,6 +84,13 @@ func perDecodeBitString(bytes []byte) (*e2sm_kpm_v2.BitString, error) {
 //}
 
 // Previously newBitStringFromBytes
+// Each BitString should be Octet-aligned, which puts some constraints on it.
+// 1. Number of bytes in BitString.Value (of []byte) should fit all bits (defined in BitString.Len)
+// For instance, we have 20 bits long BitString. It would require 3 bytes (24 bits) to fit the value.
+// Then BitString.Value should be []byte{0x12, 0x34, 0x50} - 3 bytes long
+// 2. To encode this in bytes for APER requires an additional 4 zeros at the end (same as bit shifting to the left by 4).
+// This additional 4 zeroes shift is Octet alignment - bits should be aligned to the left of available bytes.
+// Why 4 bits? 24-20 = 4
 func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
 	//fmt.Printf("Bit String value is %x\nBitString length (size) is %v\n", bs.Value, bs.Len)
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
@@ -126,20 +133,6 @@ func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 		bits_unused: C.int(bitsUnused),
 	}
 
-	//var b [8]byte
-	//var s [8]byte
-	//var bu [4]byte
-	//copy(b[:8], array[:8])
-	//copy(s[:8], array[8:16])
-	//copy(bu[:4], array[16:20])
-	//
-	//bsC := C.BIT_STRING_t{
-	//	//buf:         (*C.uchar)(C.CBytes(C.GoBytes(b), C.int(C.ulong(s)))),
-	//	buf:         (*C.uchar)(array[:8]),
-	//	size:        C.ulong(s),
-	//	bits_unused: C.int(bu),
-	//}
-
 	return &bsC
 }
 
@@ -149,9 +142,6 @@ func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_v2.BitString, error) {
 	size := uint32(bsC.size)
 	bitsUnused := uint32(bsC.bits_unused)
-	//if size > 8 {
-	//	return nil, fmt.Errorf("max size is 8 bytes (64 bits) got %d", size)
-	//} else
 	if bitsUnused > 7 {
 		return nil, fmt.Errorf("bits unused (%d) is greater than 7", bitsUnused)
 	}
