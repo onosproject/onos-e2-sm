@@ -17,7 +17,7 @@ var kpmv2TestSm servicemodel
 
 func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x09},
 		Len:   22,
 	}
 	plmnID := []byte{0x37, 0x34, 0x37}
@@ -213,10 +213,10 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x09},
 		Len:   22,
 	}
-	cellGlobalID, err := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, 0xabcdef012<<28) // 36 bit
+	cellGlobalID, err := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, []byte{0xd5, 0xbc, 0x09}) // 36 bit
 	assert.NilError(t, err)
 	var cellObjID string = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)

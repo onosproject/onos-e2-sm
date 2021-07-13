@@ -47,30 +47,33 @@ import (
 //	return bytes, nil
 //}
 
-func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
-	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
-	valAsBytes := make([]byte, 8)
-	binary.LittleEndian.PutUint64(valAsBytes, bs.Value)
-	bitsUnused := numBytes*8 - int(bs.Len)
-
-	bsC := C.BIT_STRING_t{
-		buf:         (*C.uchar)(C.CBytes(valAsBytes[:numBytes])),
-		size:        C.ulong(numBytes),
-		bits_unused: C.int(bitsUnused),
-	}
-	//fmt.Printf("Bit string %+v\n", bsC)
-	return &bsC, nil
-}
-
-//func newBitStringFromBytes(valAsBytes []byte, size uint64, bitsUnused int) (*C.BIT_STRING_t, error) {
+//func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
+//	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
+//	valAsBytes := make([]byte, 8)
+//	binary.LittleEndian.PutUint64(valAsBytes, bs.Value)
+//	bitsUnused := numBytes*8 - int(bs.Len)
+//
 //	bsC := C.BIT_STRING_t{
-//		buf:         (*C.uchar)(C.CBytes(valAsBytes)),
-//		size:        C.ulong(size),
+//		buf:         (*C.uchar)(C.CBytes(valAsBytes[:numBytes])),
+//		size:        C.ulong(numBytes),
 //		bits_unused: C.int(bitsUnused),
 //	}
-//
+//	//fmt.Printf("Bit string %+v\n", bsC)
 //	return &bsC, nil
 //}
+
+// Previously newBitStringFromBytes
+func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
+	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
+	bitsUnused := numBytes*8 - int(bs.Len)
+	bsC := C.BIT_STRING_t{
+		buf:         (*C.uchar)(C.CBytes(bs.Value)),
+		size:        C.ulong(bs.Len),
+		bits_unused: C.int(bitsUnused),
+	}
+
+	return &bsC, nil
+}
 
 func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 	size := binary.LittleEndian.Uint64(array[8:16])
@@ -114,7 +117,7 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_v2.BitString, error) {
 		goBytes[i] = bytes[i]
 	}
 	bs := &e2sm_kpm_v2.BitString{
-		Value: binary.LittleEndian.Uint64(goBytes),
+		Value: goBytes,
 		Len:   uint32(size*8 - uint64(bitsUnused)),
 	}
 

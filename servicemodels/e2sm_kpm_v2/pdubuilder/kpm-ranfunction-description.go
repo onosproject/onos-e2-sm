@@ -63,15 +63,15 @@ func CreateCellMeasurementObjectItem(cellObjID string, cellGlobalID *e2sm_kpm_v2
 	}
 }
 
-func CreateCellGlobalIDNRCGI(plmnID []byte, cellIDBits36 uint64) (*e2sm_kpm_v2.CellGlobalId, error) {
+func CreateCellGlobalIDNRCGI(plmnID []byte, cellIDBits36 []byte) (*e2sm_kpm_v2.CellGlobalId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
 	}
 
-	if cellIDBits36&0x000000000fffffff > 0 {
-		return nil, fmt.Errorf("bits should be at the left - not expecting anything in last 28 bits")
-	}
+	//if cellIDBits36&0x000000000fffffff > 0 {
+	//	return nil, fmt.Errorf("bits should be at the left - not expecting anything in last 28 bits")
+	//}
 	bs := e2sm_kpm_v2.BitString{
 		Value: cellIDBits36,
 		Len:   36,
