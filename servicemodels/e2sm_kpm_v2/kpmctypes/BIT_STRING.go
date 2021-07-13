@@ -64,13 +64,17 @@ import (
 
 // Previously newBitStringFromBytes
 func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
+	fmt.Printf("Bit String value is %x\nBitString length (size) is %v\n", bs.Value, bs.Len)
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
+	fmt.Printf("Number of bytes is %v\n", numBytes)
 	bitsUnused := numBytes*8 - int(bs.Len)
+	fmt.Printf("Number of unused bits is %v\n", bitsUnused)
 	bsC := C.BIT_STRING_t{
 		buf:         (*C.uchar)(C.CBytes(bs.Value)),
 		size:        C.ulong(bs.Len),
 		bits_unused: C.int(bitsUnused),
 	}
+	fmt.Printf("Encoded BitString is %v\n", bsC)
 
 	return &bsC, nil
 }
@@ -85,6 +89,20 @@ func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 		size:        C.ulong(size),
 		bits_unused: C.int(bitsUnused),
 	}
+
+	//var b [8]byte
+	//var s [8]byte
+	//var bu [4]byte
+	//copy(b[:8], array[:8])
+	//copy(s[:8], array[8:16])
+	//copy(bu[:4], array[16:20])
+	//
+	//bsC := C.BIT_STRING_t{
+	//	//buf:         (*C.uchar)(C.CBytes(C.GoBytes(b), C.int(C.ulong(s)))),
+	//	buf:         (*C.uchar)(array[:8]),
+	//	size:        C.ulong(s),
+	//	bits_unused: C.int(bu),
+	//}
 
 	return &bsC
 }
