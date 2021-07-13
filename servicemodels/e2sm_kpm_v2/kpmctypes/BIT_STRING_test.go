@@ -173,7 +173,7 @@ func Test_invalidBitStrings(t *testing.T) {
 	// A valid bit string with proper length and proper octet alignment
 	// 25 bits need 4 bytes to be encoded successfully
 	// 4 bytes is 32 bits, 32-25 = 7 (unused bits)
-	// BitString.Value byte array should be shifted on 7 (unused) bits to the left to satisfy APER encoding rules
+	// BitString.Value byte array should be shifted on 7 (unused) bits to the left to be Octet-aligned and satisfy APER encoding rules
 	bs3 := &e2sm_kpm_v2.BitString{
 		Value: []byte{0x09, 0xAB, 0xCD, 0x80},
 		Len:   25,
