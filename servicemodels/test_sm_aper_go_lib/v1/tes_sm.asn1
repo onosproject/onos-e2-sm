@@ -1,0 +1,57 @@
+-- **************************************************************
+-- Test SM for APER Go library validation
+-- Information Element Definitions
+--
+-- **************************************************************
+
+TEST-SM-IEs {
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(0) e2(1) version1 (1) e2sm(1) test-sm-IEs (0)}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+TEST-UnconstrainedInt ::= SEQUENCE {
+    attrUciA    INTEGER,
+    attrUciB    INTEGER
+}
+
+TEST-ConstrainedInt ::= SEQUENCE {
+    attrCiA    INTEGER(10.. 100),
+--    attrCiB    INTEGER(10.. ),
+    attrCiC    INTEGER(100),
+    attrCiD    INTEGER(10.. 20),
+    attrCiE    INTEGER(10.. 10)
+}
+
+TEST-BitString ::= SEQUENCE {
+    attrBs1     BIT STRING,
+    attrBs2     BIT STRING (SIZE(20)),
+    attrBs3     BIT STRING (SIZE(22..32)),
+    attrBs4     BIT STRING (SIZE(28..32, ...)),
+    attrBs5     BIT STRING (SIZE(22..36)) OPTIONAL
+}
+
+TEST-Choices ::= SEQUENCE {
+    otherAttr   OCTET STRING,
+    choice1     Choice1,
+    choice2     Choice2,
+    choice3     Choice3
+}
+
+Choice1 ::= CHOICE {
+    choice1A    INTEGER(...)
+}
+
+Choice2 ::= CHOICE {
+    choice2A    INTEGER(...),
+    choice2B    INTEGER(...)
+}
+
+Choice3 ::= CHOICE {
+    choice3A    INTEGER(...),
+    choice3B    INTEGER(...),
+    choice3C    INTEGER(...)
+}
+
+END
