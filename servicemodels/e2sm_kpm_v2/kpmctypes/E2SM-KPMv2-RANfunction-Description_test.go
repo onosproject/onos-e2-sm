@@ -21,10 +21,10 @@ func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2.E2SmKpmRanfunctionDescr
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
-	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, 0xABCDEF012<<28) // 36 bits
+	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, []byte{0xd5, 0xbc, 0x09, 0x00, 0x00}) // 36 bits
 
 	var cellObjID string = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)

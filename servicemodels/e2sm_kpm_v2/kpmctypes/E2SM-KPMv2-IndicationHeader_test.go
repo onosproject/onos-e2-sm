@@ -15,7 +15,7 @@ import (
 func createE2SMKPMIndicationHeader() *e2sm_kpm_v2.E2SmKpmIndicationHeader {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x37, 0x34, 0x37}

@@ -20,7 +20,7 @@ func createGlobalEnbID1() *e2sm_kpm_v2.GlobalEnbId {
 		ENbId: &e2sm_kpm_v2.EnbId{
 			EnbId: &e2sm_kpm_v2.EnbId_MacroENbId{
 				MacroENbId: &e2sm_kpm_v2.BitString{
-					Value: 0x9bcd4,
+					Value: []byte{0xd4, 0xbc, 0x30},
 					Len:   20,
 				},
 			},
@@ -37,7 +37,7 @@ func createGlobalEnbID2() *e2sm_kpm_v2.GlobalEnbId {
 		ENbId: &e2sm_kpm_v2.EnbId{
 			EnbId: &e2sm_kpm_v2.EnbId_HomeENbId{
 				HomeENbId: &e2sm_kpm_v2.BitString{
-					Value: 0x9bcd4,
+					Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 					Len:   28,
 				},
 			},

@@ -17,7 +17,7 @@ var kpmv2TestSm servicemodel
 
 func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x37, 0x34, 0x37}
@@ -47,7 +47,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
-	assert.Equal(t, 68, len(protoBytes))
+	assert.Equal(t, 69, len(protoBytes))
 
 	asn1Bytes, err := kpmv2TestSm.IndicationHeaderProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
@@ -66,7 +66,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	protoBytes, err := kpmv2TestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 68, len(protoBytes))
+	assert.Equal(t, 69, len(protoBytes))
 	testIH := &e2sm_kpm_v2.E2SmKpmIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
@@ -213,10 +213,10 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
-	cellGlobalID, err := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, 0xabcdef012<<28) // 36 bit
+	cellGlobalID, err := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, []byte{0xd5, 0xbc, 0x09, 0x00, 0x00}) // 36 bit
 	assert.NilError(t, err)
 	var cellObjID string = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
@@ -280,7 +280,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmKpmRanfunctionDescription to bytes")
-	assert.Equal(t, 174, len(protoBytes))
+	assert.Equal(t, 171, len(protoBytes))
 
 	asn1Bytes, err := kpmv2TestSm.RanFuncDescriptionProtoToASN1(protoBytes)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
@@ -302,7 +302,7 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	protoBytes, err := kpmv2TestSm.RanFuncDescriptionASN1toProto(ranFuncDescriptionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 169, len(protoBytes))
+	assert.Equal(t, 171, len(protoBytes))
 	testRFD := &e2sm_kpm_v2.E2SmKpmRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, testRFD)
 	t.Logf("Decoded message is \n%v", testRFD)

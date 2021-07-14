@@ -14,7 +14,7 @@ import (
 
 func Test_xerEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	var bsValue uint64 = 0x9bcde4
+	var bsValue = []byte{0xd4, 0xbc, 0x09, 0x00}
 	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32
@@ -38,7 +38,7 @@ func Test_xerEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
 func Test_xerDecodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	var bsValue uint64 = 0x9bcde4
+	var bsValue = []byte{0xd4, 0xbc, 0x09, 0x00}
 	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32
@@ -67,7 +67,7 @@ func Test_xerDecodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
 func Test_perEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	var bsValue uint64 = 0x9bcde4
+	var bsValue = []byte{0xd4, 0xbc, 0x09, 0x00}
 	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32
@@ -91,7 +91,7 @@ func Test_perEncodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
 func Test_perDecodeGlobalKpmnodeEnGnbID(t *testing.T) {
 
-	var bsValue uint64 = 0x9bcde4
+	var bsValue = []byte{0xd4, 0xbc, 0x09, 0x00}
 	var bsLen uint32 = 32
 	plmnID := []byte{0x21, 0x22, 0x23}
 	var gnbDuID int64 = 32

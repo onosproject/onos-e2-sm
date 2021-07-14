@@ -20,7 +20,7 @@ func createGlobalKpmnodeID1() *e2sm_kpm_v2.GlobalKpmnodeId {
 					GnbId: &e2sm_kpm_v2.GnbIdChoice{
 						GnbIdChoice: &e2sm_kpm_v2.GnbIdChoice_GnbId{
 							GnbId: &e2sm_kpm_v2.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 								Len:   28,
 							},
 						},
@@ -49,7 +49,7 @@ func createGlobalKpmnodeID2() *e2sm_kpm_v2.GlobalKpmnodeId {
 					GNbId: &e2sm_kpm_v2.EngnbId{
 						EngnbId: &e2sm_kpm_v2.EngnbId_GNbId{
 							GNbId: &e2sm_kpm_v2.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 								Len:   28,
 							},
 						},
@@ -78,7 +78,7 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2.GlobalKpmnodeId {
 					EnbId: &e2sm_kpm_v2.EnbIdChoice{
 						EnbIdChoice: &e2sm_kpm_v2.EnbIdChoice_EnbIdMacro{
 							EnbIdMacro: &e2sm_kpm_v2.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x30},
 								Len:   20,
 							},
 						},
@@ -87,11 +87,11 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2.GlobalKpmnodeId {
 						Value: []byte{0x21, 0x22, 0x23},
 					},
 					ShortMacroENbId: &e2sm_kpm_v2.BitString{
-						Value: 0x9bcd4,
+						Value: []byte{0xd4, 0xbc, 0xc0},
 						Len:   18,
 					},
 					LongMacroENbId: &e2sm_kpm_v2.BitString{
-						Value: 0x9bcd4,
+						Value: []byte{0xd4, 0xbc, 0x38},
 						Len:   21,
 					},
 				},
@@ -112,7 +112,7 @@ func createGlobalKpmnodeID4() *e2sm_kpm_v2.GlobalKpmnodeId {
 					ENbId: &e2sm_kpm_v2.EnbId{
 						EnbId: &e2sm_kpm_v2.EnbId_HomeENbId{
 							HomeENbId: &e2sm_kpm_v2.BitString{
-								Value: 0x9bcd4,
+								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 								Len:   28,
 							},
 						},

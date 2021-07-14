@@ -20,7 +20,7 @@ func createGlobalenGnbID() *e2sm_kpm_v2.GlobalenGnbId {
 		GNbId: &e2sm_kpm_v2.EngnbId{
 			EngnbId: &e2sm_kpm_v2.EngnbId_GNbId{
 				GNbId: &e2sm_kpm_v2.BitString{
-					Value: 0x9bcd4,
+					Value: []byte{0xd4, 0xbc, 0x0C},
 					Len:   22,
 				},
 			},

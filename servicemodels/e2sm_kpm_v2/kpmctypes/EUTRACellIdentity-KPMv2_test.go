@@ -15,7 +15,7 @@ func createEutracellIdentity() *e2sm_kpm_v2.EutracellIdentity {
 
 	return &e2sm_kpm_v2.EutracellIdentity{
 		Value: &e2sm_kpm_v2.BitString{
-			Value: 0x9bcd4,
+			Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 			Len:   28,
 		},
 	}

@@ -15,16 +15,16 @@ import (
 func Test_xerEncodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x38},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42
@@ -45,16 +45,16 @@ func Test_xerEncodeGlobalKpmnodeNgEnbID(t *testing.T) {
 func Test_xerDecodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x38},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42
@@ -80,16 +80,16 @@ func Test_xerDecodeGlobalKpmnodeNgEnbID(t *testing.T) {
 func Test_perEncodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x38},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42
@@ -110,16 +110,16 @@ func Test_perEncodeGlobalKpmnodeNgEnbID(t *testing.T) {
 func Test_perDecodeGlobalKpmnodeNgEnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x38},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42

@@ -15,7 +15,7 @@ import (
 func Test_xerEncodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -41,7 +41,7 @@ func Test_xerEncodeGlobalKpmnodeGnbID(t *testing.T) {
 func Test_xerDecodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -72,7 +72,7 @@ func Test_xerDecodeGlobalKpmnodeGnbID(t *testing.T) {
 func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -98,7 +98,7 @@ func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 func Test_perDecodeGlobalKpmnodeGnbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}

@@ -15,16 +15,16 @@ import (
 func Test_xerEncodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42
@@ -44,16 +44,16 @@ func Test_xerEncodeGlobalngeNbID(t *testing.T) {
 func Test_xerDecodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42
@@ -78,16 +78,16 @@ func Test_xerDecodeGlobalngeNbID(t *testing.T) {
 func Test_perEncodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42
@@ -107,16 +107,16 @@ func Test_perEncodeGlobalngeNbID(t *testing.T) {
 func Test_perDecodeGlobalngeNbID(t *testing.T) {
 
 	bs := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := e2sm_kpm_v2.BitString{
-		Value: 0x9bcde4,
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42

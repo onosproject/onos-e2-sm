@@ -16,7 +16,7 @@ func createEngnbID() *e2sm_kpm_v2.EngnbId {
 	return &e2sm_kpm_v2.EngnbId{
 		EngnbId: &e2sm_kpm_v2.EngnbId_GNbId{
 			GNbId: &e2sm_kpm_v2.BitString{
-				Value: 0x9bcde4,
+				Value: []byte{0xd4, 0xbc, 0x0c},
 				Len:   22,
 			},
 		},

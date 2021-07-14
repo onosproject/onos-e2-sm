@@ -36,7 +36,7 @@ func Test_xerEncodeTestCondValue(t *testing.T) {
 	t.Logf("TestCondValue (Boolean) XER\n%s", string(xer))
 
 	bs := &e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x0c},
 		Len:   22,
 	}
 	testCondValue = pdubuilder.CreateTestCondValueBitS(bs)
@@ -100,7 +100,7 @@ func Test_xerDecodeTestCondValue(t *testing.T) {
 	t.Logf("TestCondValue (Boolean) XER - decoded\n%s", result)
 
 	bs := &e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x0c},
 		Len:   22,
 	}
 	testCondValue = pdubuilder.CreateTestCondValueBitS(bs)
@@ -164,7 +164,7 @@ func Test_perEncodeTestCondValue(t *testing.T) {
 	t.Logf("TestCondValue (Boolean) PER\n%v", hex.Dump(per))
 
 	bs := &e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x0c},
 		Len:   22,
 	}
 	testCondValue = pdubuilder.CreateTestCondValueBitS(bs)
@@ -228,7 +228,7 @@ func Test_perDecodeTestCondValue(t *testing.T) {
 	t.Logf("TestCondValue (Boolean) PER - decoded\n%v", result)
 
 	bs := &e2sm_kpm_v2.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0xd4, 0xbc, 0x0c},
 		Len:   22,
 	}
 	testCondValue = pdubuilder.CreateTestCondValueBitS(bs)

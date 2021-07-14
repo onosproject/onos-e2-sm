@@ -19,58 +19,109 @@ import (
 	"unsafe"
 )
 
-//func xerEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
-//	bsC, err := newBitString(bs)
-//	if err != nil {
-//		return nil, fmt.Errorf("newBitString() %s", err.Error())
-//	}
-//	defer freeBitString(bsC)
-//	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
-//	if err != nil {
-//		return nil, err
-//	}
-//	return bytes, nil
-//}
+func xerEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
+	bsC, err := newBitString(bs)
+	if err != nil {
+		return nil, fmt.Errorf("newBitString() %s", err.Error())
+	}
+	//defer freeBitString(bsC)
+	bytes, err := encodeXer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
+	if err != nil {
+		return nil, err
+	}
+	return bytes, nil
+}
+
+func xerDecodeBitString(bytes []byte) (*e2sm_kpm_v2.BitString, error) {
+	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_BIT_STRING)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from XER is nil")
+	}
+	return decodeBitString((*C.BIT_STRING_t)(unsafePtr))
+}
+
+func perEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
+	bsC, err := newBitString(bs)
+	if err != nil {
+		return nil, fmt.Errorf("newBitString() %s", err.Error())
+	}
+	//defer freeBitString(bsC)
+	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
+	if err != nil {
+		return nil, err
+	}
+
+	return bytes, nil
+}
+
+func perDecodeBitString(bytes []byte) (*e2sm_kpm_v2.BitString, error) {
+	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_BIT_STRING)
+	if err != nil {
+		return nil, err
+	}
+	if unsafePtr == nil {
+		return nil, fmt.Errorf("pointer decoded from PER is nil")
+	}
+	return decodeBitString((*C.BIT_STRING_t)(unsafePtr))
+}
+
+//func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
+//	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
+//	valAsBytes := make([]byte, 8)
+//	binary.LittleEndian.PutUint64(valAsBytes, bs.Value)
+//	bitsUnused := numBytes*8 - int(bs.Len)
 //
-//// PerEncodeGnbID - used only in tests
-//func perEncodeBitString(bs *e2sm_kpm_v2.BitString) ([]byte, error) {
-//	bsC, err := newBitString(bs)
-//	if err != nil {
-//		return nil, fmt.Errorf("newBitString() %s", err.Error())
+//	bsC := C.BIT_STRING_t{
+//		buf:         (*C.uchar)(C.CBytes(valAsBytes[:numBytes])),
+//		size:        C.ulong(numBytes),
+//		bits_unused: C.int(bitsUnused),
 //	}
-//	defer freeBitString(bsC)
-//	bytes, err := encodePerBuffer(&C.asn_DEF_BIT_STRING, unsafe.Pointer(bsC))
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	return bytes, nil
+//	//fmt.Printf("Bit string %+v\n", bsC)
+//	return &bsC, nil
 //}
 
+// Previously newBitStringFromBytes
+// Each BitString should be Octet-aligned, which puts some constraints on it.
+// 1. Number of bytes in BitString.Value (of []byte) should fit all bits (defined in BitString.Len)
+// For instance, we have 20 bits long BitString. It would require 3 bytes (24 bits) to fit the value.
+// Then BitString.Value should be []byte{0x12, 0x34, 0x50} - 3 bytes long
+// 2. To encode this in bytes for APER requires an additional 4 zeros at the end (same as bit shifting to the left by 4).
+// This additional 4 zeroes shift is Octet alignment - bits should be aligned to the left of available bytes.
+// Why 4 bits? 24-20 = 4.
+// For more example, see examples in Test_validBitStringsOne in BIT_STRING_test.go
 func newBitString(bs *e2sm_kpm_v2.BitString) (*C.BIT_STRING_t, error) {
+	//fmt.Printf("Bit String value is %x\nBitString length (size) is %v\n", bs.Value, bs.Len)
 	numBytes := int(math.Ceil(float64(bs.Len) / 8.0))
-	valAsBytes := make([]byte, 8)
-	binary.LittleEndian.PutUint64(valAsBytes, bs.Value)
+	//fmt.Printf("Number of bytes is %v\n", numBytes)
 	bitsUnused := numBytes*8 - int(bs.Len)
+	//fmt.Printf("Number of unused bits is %v\n", bitsUnused)
+
+	if bitsUnused > 7 {
+		return nil, fmt.Errorf("bits unused (%d) is greater than 7", bitsUnused)
+	}
+
+	if len(bs.Value) < numBytes {
+		return nil, fmt.Errorf("%d bytes are required for length %d, found %d", numBytes, bs.Len, len(bs.Value))
+	}
+
+	//verification
+	mask := byte((1 << bitsUnused) - 1)
+	if bs.Value[numBytes-1]&mask > 0 {
+		return nil, fmt.Errorf("bit string is NOT octet-aligned - expecting the %d (%d-%d) unused bits to be on the right and equal 0", bitsUnused, numBytes*8, bs.Len)
+	}
 
 	bsC := C.BIT_STRING_t{
-		buf:         (*C.uchar)(C.CBytes(valAsBytes[:numBytes])),
+		buf:         (*C.uchar)(C.CBytes(bs.Value)),
 		size:        C.ulong(numBytes),
 		bits_unused: C.int(bitsUnused),
 	}
-	//fmt.Printf("Bit string %+v\n", bsC)
+	//fmt.Printf("Encoded BitString is %v\n", bsC)
+
 	return &bsC, nil
 }
-
-//func newBitStringFromBytes(valAsBytes []byte, size uint64, bitsUnused int) (*C.BIT_STRING_t, error) {
-//	bsC := C.BIT_STRING_t{
-//		buf:         (*C.uchar)(C.CBytes(valAsBytes)),
-//		size:        C.ulong(size),
-//		bits_unused: C.int(bitsUnused),
-//	}
-//
-//	return &bsC, nil
-//}
 
 func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 	size := binary.LittleEndian.Uint64(array[8:16])
@@ -90,11 +141,9 @@ func newBitStringFromArray(array [48]byte) *C.BIT_STRING_t {
 // 8 for a 64bit address of a buffer, 8 for the size in bytes of the buffer uint64, 4 for the unused bits
 // The unused bits are at the end of the buffer
 func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_v2.BitString, error) {
-	size := uint64(bsC.size)
+	size := uint32(bsC.size)
 	bitsUnused := uint32(bsC.bits_unused)
-	if size > 8 {
-		return nil, fmt.Errorf("max size is 8 bytes (64 bits) got %d", size)
-	} else if bitsUnused > 7 {
+	if bitsUnused > 7 {
 		return nil, fmt.Errorf("bits unused (%d) is greater than 7", bitsUnused)
 	}
 
@@ -109,13 +158,14 @@ func decodeBitString(bsC *C.BIT_STRING_t) (*e2sm_kpm_v2.BitString, error) {
 	//goBytes[i] = bytes[i] | prevCarry
 	//}
 	//fmt.Printf("bit string %x %d %d %+x %+x\n", bufAddr, size, bitsUnused, bytes, goBytes)
-	goBytes := make([]byte, 8)
-	for i := 0; i < int(size); i++ {
-		goBytes[i] = bytes[i]
-	}
+	//goBytes := make([]byte, 0)
+	//for i := 0; i < int(size); i++ {
+	//	//goBytes[i] = bytes[i]
+	//	goBytes = append(goBytes, bytes[i])
+	//}
 	bs := &e2sm_kpm_v2.BitString{
-		Value: binary.LittleEndian.Uint64(goBytes),
-		Len:   uint32(size*8 - uint64(bitsUnused)),
+		Value: bytes,
+		Len:   size*8 - bitsUnused,
 	}
 
 	return bs, nil
