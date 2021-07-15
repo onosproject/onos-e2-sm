@@ -47,8 +47,8 @@ func Test_XerEncodeE2SmRcPreIndicationMessage(t *testing.T) {
 					},
 					EUtracellIdentity: &e2sm_rc_pre_v2.EutracellIdentity{
 						Value: &e2sm_rc_pre_v2.BitString{
-							Value: 0x9bcd4ab, //uint64
-							Len:   28,        //uint32
+							Value: []byte{0xba, 0x4d, 0xcb, 0x90},
+							Len:   28, //uint32
 						},
 					},
 				},
@@ -79,12 +79,16 @@ func Test_XerEncodeE2SmRcPreIndicationMessage(t *testing.T) {
 	result, err := XerDecodeE2SmRcPreIndicationMessage(xer)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-IndicationMessage is \n%v", result)
+	assert.DeepEqual(t, E2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, E2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 
 	per, err := PerEncodeE2SmRcPreIndicationMessage(E2SmRcPrePdu)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-IndicationMessage PER\n%v", hex.Dump(per))
 
-	result, err = PerDecodeE2SmRcPreIndicationMessage(per)
+	resultPer, err := PerDecodeE2SmRcPreIndicationMessage(per)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-IndicationMessage is \n%v", result)
+	assert.DeepEqual(t, E2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), resultPer.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, E2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), resultPer.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }

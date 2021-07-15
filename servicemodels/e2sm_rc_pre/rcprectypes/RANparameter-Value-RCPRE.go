@@ -87,7 +87,10 @@ func newRanparameterValue(ranparameterValue *e2sm_rc_pre_v2.RanparameterValue) (
 	case *e2sm_rc_pre_v2.RanparameterValue_ValueBitS:
 		pr = C.RANparameter_Value_RCPRE_PR_valueBitS
 
-		im := newBitString(choice.ValueBitS)
+		im, err := newBitString(choice.ValueBitS)
+		if err != nil {
+			return nil, err
+		}
 		binary.LittleEndian.PutUint64(choiceC[0:8], uint64(uintptr(unsafe.Pointer(im.buf))))
 		binary.LittleEndian.PutUint64(choiceC[8:16], uint64(im.size))
 		binary.LittleEndian.PutUint32(choiceC[16:24], uint32(im.bits_unused))

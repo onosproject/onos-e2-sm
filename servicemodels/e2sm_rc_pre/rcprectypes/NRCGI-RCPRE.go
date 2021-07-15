@@ -35,7 +35,10 @@ func xerEncodeNRCGI(nrcgi *e2sm_rc_pre_v2.Nrcgi) ([]byte, error) {
 func newNRCGI(nrcgi *e2sm_rc_pre_v2.Nrcgi) (*C.NRCGI_RCPRE_t, error) {
 
 	plmnID := newPlmnIdentity(nrcgi.PLmnIdentity)
-	nrCellIdentity := newNRCellIdentity(nrcgi.GetNRcellIdentity())
+	nrCellIdentity, err := newNRCellIdentity(nrcgi.GetNRcellIdentity())
+	if err != nil {
+		return nil, err
+	}
 
 	nrcgiC := C.NRCGI_RCPRE_t{
 		pLMN_Identity:  *plmnID,

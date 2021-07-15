@@ -18,8 +18,8 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1EutraCGI(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x90},
+		Len:   28, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -34,14 +34,18 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1EutraCGI(t *testing.T) {
 	result, err := XerDecodeE2SmRcPreIndicationHeaderFormat1(xer)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) XER - decoded\n%s", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 
 	per, err := PerEncodeE2SmRcPreIndicationHeaderFormat1(newE2SmRcPrePdu.GetIndicationHeaderFormat1())
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) PER\n%s", string(xer))
+	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) PER\n%v", hex.Dump(per))
 
 	resultPer, err := PerDecodeE2SmRcPreIndicationHeaderFormat1(per)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) PER - decoded\n%s", resultPer)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }
 
 func Test_EncodingE2SmRcPreIndicationHeaderFormat1NrCGI(t *testing.T) {
@@ -50,8 +54,8 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1NrCGI(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x9f, 0xf0},
+		Len:   36, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -66,6 +70,8 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1NrCGI(t *testing.T) {
 	result, err := XerDecodeE2SmRcPreIndicationHeaderFormat1(xer)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (NRCGI) XER - decoded\n%s", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 
 	per, err := PerEncodeE2SmRcPreIndicationHeaderFormat1(newE2SmRcPrePdu.GetIndicationHeaderFormat1())
 	assert.NilError(t, err)
@@ -74,4 +80,6 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1NrCGI(t *testing.T) {
 	resultPer, err := PerDecodeE2SmRcPreIndicationHeaderFormat1(per)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (NRCGI) PER - decoded\n%s", resultPer)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }

@@ -18,8 +18,8 @@ func TestE2SmRcPreControlHeader(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90, 0x00},
+		Len:   36, //uint32
 	}
 
 	cgi, err := CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
@@ -42,8 +42,8 @@ func TestE2SmRcPreControlHeaderExcludeOptionalField(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90, 0x00},
+		Len:   36, //uint32
 	}
 
 	cgi, err := CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)

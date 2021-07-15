@@ -16,8 +16,8 @@ func TestE2SmRcPreIndicationHeader(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90},
+		Len:   28, //uint32
 	}
 
 	cgi, err := CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)

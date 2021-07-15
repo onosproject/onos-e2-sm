@@ -35,7 +35,10 @@ func xerEncodeEUTRACGI(eutracgi *e2sm_rc_pre_v2.Eutracgi) ([]byte, error) {
 func newEUTRACGI(eutracgi *e2sm_rc_pre_v2.Eutracgi) (*C.EUTRACGI_RCPRE_t, error) {
 
 	plmnID := newPlmnIdentity(eutracgi.PLmnIdentity)
-	eutracellIdentity := newEUTRACellIdentity(eutracgi.EUtracellIdentity)
+	eutracellIdentity, err := newEUTRACellIdentity(eutracgi.EUtracellIdentity)
+	if err != nil {
+		return nil, err
+	}
 
 	eutracgiC := C.EUTRACGI_RCPRE_t{
 		pLMN_Identity:     *plmnID,

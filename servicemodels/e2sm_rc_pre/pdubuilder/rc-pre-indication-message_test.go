@@ -21,8 +21,8 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 	cellSize := e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ac, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xac, 0xd4, 0xbc, 0x90},
+		Len:   28, //uint32
 	}
 	cgi, err := CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
