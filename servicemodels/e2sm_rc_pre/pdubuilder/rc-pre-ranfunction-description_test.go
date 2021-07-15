@@ -43,6 +43,11 @@ func TestE2SmRcPreRanfunctionDescriptionMsg(t *testing.T) {
 	per, err := rcprectypes.PerEncodeE2SmRcPreRanfunctionDescription(newE2SmRcPrePdu)
 	assert.NilError(t, err)
 	t.Logf("Encoded RanFunctionDescription in PER is \n%v", hex.Dump(per))
+
+	result1, err := rcprectypes.PerDecodeE2SmRcPreRanfunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result1 != nil)
+	t.Logf("Decoded RanFunctionDescription from PER is \n%v", result1)
 }
 
 func TestE2SmRcPreRanfunctionDescriptionMsgExcludeOptionalFields(t *testing.T) {

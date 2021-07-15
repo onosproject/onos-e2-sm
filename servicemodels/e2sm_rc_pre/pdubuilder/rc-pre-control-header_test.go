@@ -18,8 +18,8 @@ func TestE2SmRcPreControlHeader(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90, 0x00},
+		Len:   36, //uint32
 	}
 
 	cgi, err := CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
@@ -30,11 +30,23 @@ func TestE2SmRcPreControlHeader(t *testing.T) {
 
 	xer, err := rcprectypes.XerEncodeE2SmRcPreControlHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Ind Header: %s", string(xer))
+	t.Logf("XER Control Header: %s", string(xer))
+
+	result, err := rcprectypes.XerDecodeE2SmRcPreControlHeader(xer)
+	assert.NilError(t, err)
+	t.Logf("XER ControlHeader - decoded \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 
 	per, err := rcprectypes.PerEncodeE2SmRcPreControlHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
 	t.Logf("PER Encoded Ind Header: %v", hex.Dump(per))
+
+	resultPer, err := rcprectypes.PerDecodeE2SmRcPreControlHeader(per)
+	assert.NilError(t, err)
+	t.Logf("PER ControlHeader - decoded \n%v", resultPer)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }
 
 func TestE2SmRcPreControlHeaderExcludeOptionalField(t *testing.T) {
@@ -42,8 +54,8 @@ func TestE2SmRcPreControlHeaderExcludeOptionalField(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90, 0x00},
+		Len:   36, //uint32
 	}
 
 	cgi, err := CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
@@ -54,11 +66,23 @@ func TestE2SmRcPreControlHeaderExcludeOptionalField(t *testing.T) {
 
 	xer, err := rcprectypes.XerEncodeE2SmRcPreControlHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Ind Header: %s", string(xer))
+	t.Logf("XER Control Header: %s", string(xer))
+
+	result, err := rcprectypes.XerDecodeE2SmRcPreControlHeader(xer)
+	assert.NilError(t, err)
+	t.Logf("XER ControlHeader - decoded \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 
 	per, err := rcprectypes.PerEncodeE2SmRcPreControlHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
 	t.Logf("PER Encoded Ind Header: %v", hex.Dump(per))
+
+	resultPer, err := rcprectypes.PerDecodeE2SmRcPreControlHeader(per)
+	assert.NilError(t, err)
+	t.Logf("PER ControlHeader - decoded \n%v", resultPer)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }
 
 func TestE2SmRcPreControlHeaderExcludeAllOptionalFields(t *testing.T) {
@@ -68,9 +92,21 @@ func TestE2SmRcPreControlHeaderExcludeAllOptionalFields(t *testing.T) {
 
 	xer, err := rcprectypes.XerEncodeE2SmRcPreControlHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Ind Header: %s", string(xer))
+	t.Logf("XER Control Header: %s", string(xer))
+
+	result, err := rcprectypes.XerDecodeE2SmRcPreControlHeader(xer)
+	assert.NilError(t, err)
+	t.Logf("XER ControlHeader - decoded \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 
 	per, err := rcprectypes.PerEncodeE2SmRcPreControlHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
 	t.Logf("PER Encoded Ind Header: %v", hex.Dump(per))
+
+	resultPer, err := rcprectypes.PerDecodeE2SmRcPreControlHeader(per)
+	assert.NilError(t, err)
+	t.Logf("PER ControlHeader - decoded \n%v", resultPer)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }

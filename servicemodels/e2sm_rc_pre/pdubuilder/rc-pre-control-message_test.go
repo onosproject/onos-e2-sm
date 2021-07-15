@@ -25,11 +25,11 @@ func TestE2SmRcPreControlMsg(t *testing.T) {
 
 	xer, err := rcprectypes.XerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Ind Message: %s", string(xer))
+	t.Logf("XER Encoded Control Message: \n%s", string(xer))
 
 	per, err := rcprectypes.PerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Ind Message: % x", per)
+	t.Logf("PER Encoded Control Message: \n%v", hex.Dump(per))
 
 	ranParameter = CreateRanParameterValueEnum(int32(ranParameterValue))
 	newE2SmRcPrePdu, err = CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
@@ -38,11 +38,11 @@ func TestE2SmRcPreControlMsg(t *testing.T) {
 
 	xer, err = rcprectypes.XerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Indication Message: %s", string(xer))
+	t.Logf("XER Encoded Control Message: \n%s", string(xer))
 
 	per, err = rcprectypes.PerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Indication Message: %v", hex.Dump(per))
+	t.Logf("PER Encoded Control Message: \n%v", hex.Dump(per))
 
 	ranParameter = CreateRanParameterValueBool(true)
 	newE2SmRcPrePdu, err = CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
@@ -51,14 +51,14 @@ func TestE2SmRcPreControlMsg(t *testing.T) {
 
 	xer, err = rcprectypes.XerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Indication Message: %s", string(xer))
+	t.Logf("XER Encoded Control Message: \n%s", string(xer))
 
 	per, err = rcprectypes.PerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Indication Message: %v", hex.Dump(per))
+	t.Logf("PER Encoded Control Message: \n%v", hex.Dump(per))
 
 	ranParameter = CreateRanParameterValueBitS(&e2sm_rc_pre_v2.BitString{
-		Value: 0x98745,
+		Value: []byte{0x45, 0x87, 0x90},
 		Len:   22,
 	})
 	newE2SmRcPrePdu, err = CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
@@ -67,11 +67,11 @@ func TestE2SmRcPreControlMsg(t *testing.T) {
 
 	xer, err = rcprectypes.XerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Indication Message: %s", string(xer))
+	t.Logf("XER Encoded Control Message: \n%s", string(xer))
 
 	per, err = rcprectypes.PerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Indication Message: %v", hex.Dump(per))
+	t.Logf("PER Encoded Control Message: \n%v", hex.Dump(per))
 
 	ranParameter = CreateRanParameterValueOctS("ONF")
 	newE2SmRcPrePdu, err = CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
@@ -80,11 +80,11 @@ func TestE2SmRcPreControlMsg(t *testing.T) {
 
 	xer, err = rcprectypes.XerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Indication Message: %s", string(xer))
+	t.Logf("XER Encoded Control Message: \n%s", string(xer))
 
 	per, err = rcprectypes.PerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Indication Message: %v", hex.Dump(per))
+	t.Logf("PER Encoded Control Message: \n%v", hex.Dump(per))
 
 	ranParameter = CreateRanParameterValuePrtS("onf")
 	newE2SmRcPrePdu, err = CreateE2SmRcPreControlMessage(ranParameterID, ranParameterName, ranParameter)
@@ -93,9 +93,9 @@ func TestE2SmRcPreControlMsg(t *testing.T) {
 
 	xer, err = rcprectypes.XerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Indication Message: %s", string(xer))
+	t.Logf("XER Encoded Control Message: \n%s", string(xer))
 
 	per, err = rcprectypes.PerEncodeE2SmRcPreControlMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Indication Message: %v", hex.Dump(per))
+	t.Logf("PER Encoded Control Message: \n%v", hex.Dump(per))
 }

@@ -374,6 +374,6 @@ message NrcellIdentity {
 }
 
 message BitString {
-    uint64 value = 1 [json_name="BIT_STRING:value"];
-    uint32 len = 2 [(validate.v1.rules).uint32.lte = 64, json_name="BIT_STRING:len"];
+    bytes value = 1 [json_name="BIT_STRING:value"];
+    uint32 len = 2 [json_name="BIT_STRING:len"];
 }

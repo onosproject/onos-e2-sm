@@ -17,8 +17,8 @@ func Test_XerEncodeE2SmRcPreControlHeader(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x90},
+		Len:   28, //uint32
 	}
 
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
@@ -38,8 +38,8 @@ func Test_XerDecodeE2SmRcPreControlHeader(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x90},
+		Len:   28, //uint32
 	}
 
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
@@ -55,18 +55,19 @@ func Test_XerDecodeE2SmRcPreControlHeader(t *testing.T) {
 	result, err := XerDecodeE2SmRcPreControlHeader(xer)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-ControlHeader decoded XER is\n%v", result)
-
-	//assert.Equal(t, e2SmRcPreControlHeader.GetRicStyleType().GetValue(), result.GetRicStyleType().GetValue(), "Encoded and decoded values are not the same")
+	assert.DeepEqual(t, e2SmRcPreControlHeader.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, e2SmRcPreControlHeader.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }
 
 func Test_PerDecodeE2SmRcPreControlHeader(t *testing.T) {
 	var controlMessagePriority int32 = 1
 	var plmnID = "12f410"
-	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x90},
+		Len:   28, //uint32
 	}
 
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
@@ -82,6 +83,6 @@ func Test_PerDecodeE2SmRcPreControlHeader(t *testing.T) {
 	result, err := PerDecodeE2SmRcPreControlHeader(per)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RC-PRE-ControlHeader decoded PER is\n%v", result)
-
-	//assert.Equal(t, e2SmRcPreControlHeader.GetRicStyleType().GetValue(), result.GetRicStyleType().GetValue(), "Encoded and decoded values are not the same")
+	assert.DeepEqual(t, e2SmRcPreControlHeader.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, e2SmRcPreControlHeader.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetControlHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }

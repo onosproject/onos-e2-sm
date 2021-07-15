@@ -57,6 +57,7 @@ func Test_xerDecodeRicReportStyleList(t *testing.T) {
 
 	result, err := xerDecodeRicReportStyleItem(xer)
 	assert.NilError(t, err)
+	t.Logf("RIC-ReportStyle-List XER - decoded\n%v", result)
 	assert.Equal(t, ricReportStyleItem.RicReportStyleType.Value, result.RicReportStyleType.Value, "Encoded and decoded RicStyleType values are not the same")
 	assert.Equal(t, ricReportStyleItem.RicReportStyleName.Value, result.RicReportStyleName.Value, "Encoded and decoded RicStyleName values are not the same")
 	assert.Equal(t, ricReportStyleItem.RicIndicationHeaderFormatType.Value, result.RicIndicationHeaderFormatType.Value, "Encoded and decoded RicIndicationHeaderFormatType values are not the same")
@@ -84,6 +85,7 @@ func Test_perDecodeRicReportStyleList(t *testing.T) {
 
 	result, err := perDecodeRicReportStyleItem(per)
 	assert.NilError(t, err)
+	t.Logf("RIC-ReportStyle-List PER - decoded\n%v", result)
 	assert.Equal(t, ricReportStyleItem.RicReportStyleType.Value, result.RicReportStyleType.Value, "Encoded and decoded RicStyleType values are not the same")
 	assert.Equal(t, ricReportStyleItem.RicReportStyleName.Value, result.RicReportStyleName.Value, "Encoded and decoded RicStyleName values are not the same")
 	assert.Equal(t, ricReportStyleItem.RicIndicationHeaderFormatType.Value, result.RicIndicationHeaderFormatType.Value, "Encoded and decoded RicIndicationHeaderFormatType values are not the same")

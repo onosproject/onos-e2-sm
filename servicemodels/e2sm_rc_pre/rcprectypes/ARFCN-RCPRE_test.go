@@ -67,7 +67,7 @@ func Test_perDecodeARFCN(t *testing.T) {
 	per, err := perEncodeARFCN(nrarfcn)
 	assert.NilError(t, err)
 	assert.Equal(t, 2, len(per))
-	t.Logf("ARFCN (NRARFCN) PER\n%s", hex.Dump(per))
+	t.Logf("ARFCN (NRARFCN) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeARFCN(per)
 	assert.NilError(t, err)
@@ -79,7 +79,7 @@ func Test_perDecodeARFCN(t *testing.T) {
 	per, err = perEncodeARFCN(earfcn)
 	assert.NilError(t, err)
 	assert.Equal(t, 2, len(per))
-	t.Logf("ARFCN (EARFCN) PER\n%s", hex.Dump(per))
+	t.Logf("ARFCN (EARFCN) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeARFCN(per)
 	assert.NilError(t, err)

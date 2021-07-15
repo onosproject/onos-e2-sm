@@ -16,10 +16,11 @@ import (
 func Test_XerEncodeE2SmRcPreIndicationHeader(t *testing.T) {
 
 	var plmnID = "12f410"
-	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x90},
+		Len:   28, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -42,14 +43,16 @@ func Test_XerDecodeE2SmRcPreIndicationHeader(t *testing.T) {
 	E2SmRcPrePdu, err := XerDecodeE2SmRcPreIndicationHeader(E2SmRcPreRanfunctionDescription)
 	assert.NilError(t, err)
 	assert.NilError(t, E2SmRcPrePdu.Validate())
+	t.Logf("E2SM-RC-PRE-IndicationHeader (EUTRACGI) XER - decoded\n%v", E2SmRcPrePdu)
 }
 
 func Test_PerDecodeE2SmRcPreIndicationHeader(t *testing.T) {
 	var plmnID = "12f410"
-	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x90},
+		Len:   28, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -64,16 +67,19 @@ func Test_PerDecodeE2SmRcPreIndicationHeader(t *testing.T) {
 	result, err := PerDecodeE2SmRcPreIndicationHeader(per)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-IndicationHeader is \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }
 
 func Test_PerDecodeE2SmRcPreIndicationHeadeNrCGI(t *testing.T) {
 
 	var plmnID = "12f410"
-	plmnIDBytes, _ := hex.DecodeString(plmnID)
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xba, 0x4d, 0xcb, 0x9f, 0xf0},
+		Len:   36, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -87,7 +93,9 @@ func Test_PerDecodeE2SmRcPreIndicationHeadeNrCGI(t *testing.T) {
 
 	result, err := XerDecodeE2SmRcPreIndicationHeader(xer)
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) XER - decoded\n%s", result)
+	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) XER - decoded\n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 
 	per, err := PerEncodeE2SmRcPreIndicationHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
@@ -95,5 +103,7 @@ func Test_PerDecodeE2SmRcPreIndicationHeadeNrCGI(t *testing.T) {
 
 	resultPer, err := PerDecodeE2SmRcPreIndicationHeader(per)
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) PER - decoded\n%s", resultPer)
+	t.Logf("E2SM-RC-PRE-IndicationHeader (NRCGI) PER - decoded\n%v", resultPer)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }

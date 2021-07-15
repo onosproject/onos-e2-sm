@@ -20,8 +20,8 @@ func Test_xerEncodeNRCGI(t *testing.T) {
 		},
 		NRcellIdentity: &e2sm_rc_pre_v2.NrcellIdentity{
 			Value: &e2sm_rc_pre_v2.BitString{
-				Value: 0x9bcd4, //uint64
-				Len:   22,      //uint32
+				Value: []byte{0xd4, 0xbc, 0x90},
+				Len:   22, //uint32
 			},
 		},
 	}

@@ -5,6 +5,7 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -37,6 +38,7 @@ func Test_xerDecodeCellSize(t *testing.T) {
 	result, err := xerDecodeCellSize(xer)
 	assert.NilError(t, err)
 	assert.Equal(t, cellSize, result, "Encoded and decoded CellSize values are not the same")
+	t.Logf("Cell-Size XER - decoded\n%v", result)
 }
 
 func Test_perEncodeCellSize(t *testing.T) {
@@ -46,7 +48,7 @@ func Test_perEncodeCellSize(t *testing.T) {
 	per, err := perEncodeCellSize(cellSize)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("Cell-Size PER\n%s", string(per))
+	t.Logf("Cell-Size PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeCellSize(t *testing.T) {
@@ -56,9 +58,10 @@ func Test_perDecodeCellSize(t *testing.T) {
 	per, err := perEncodeCellSize(cellSize)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("Cell-Size PER\n%s", string(per))
+	t.Logf("Cell-Size PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeCellSize(per)
 	assert.NilError(t, err)
 	assert.Equal(t, cellSize, result, "Encoded and decoded CellSize values are not the same")
+	t.Logf("Cell-Size PER - decoded\n%v", result)
 }

@@ -49,7 +49,7 @@ func Test_perEncodingBoolean(t *testing.T) {
 	per, err := perEncodeBoolean(false)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("BOOLEAN (False) PER\n%s", hex.Dump(per))
+	t.Logf("BOOLEAN (False) PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeBoolean(per)
 	assert.NilError(t, err)
@@ -59,7 +59,7 @@ func Test_perEncodingBoolean(t *testing.T) {
 	per, err = perEncodeBoolean(true)
 	assert.NilError(t, err)
 	assert.Equal(t, 1, len(per))
-	t.Logf("BOOLEAN (True) PER\n%s", hex.Dump(per))
+	t.Logf("BOOLEAN (True) PER\n%v", hex.Dump(per))
 
 	result, err = perDecodeBoolean(per)
 	assert.NilError(t, err)

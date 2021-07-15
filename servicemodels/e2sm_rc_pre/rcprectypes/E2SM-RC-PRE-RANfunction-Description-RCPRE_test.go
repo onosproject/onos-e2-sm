@@ -71,6 +71,7 @@ func Test_XerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 	result, err := XerDecodeE2SmRcPreRanfunctionDescription(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RC-PRE-RANfunction-Description XER - decoded\n%v", result)
 }
 
 func Test_PerEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
@@ -81,7 +82,7 @@ func Test_PerEncodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 	per, err := PerEncodeE2SmRcPreRanfunctionDescription(ranfunctionDescriptionMsg)
 	assert.NilError(t, err)
 	assert.Equal(t, 74, len(per))
-	t.Logf("E2SM-RC-PRE-RANfunction-Description PER\n%x", hex.Dump(per))
+	t.Logf("E2SM-RC-PRE-RANfunction-Description PER\n%v", hex.Dump(per))
 }
 
 func Test_PerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
@@ -97,4 +98,5 @@ func Test_PerDecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 	result, err := PerDecodeE2SmRcPreRanfunctionDescription(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RC-PRE-RANfunction-Description PER - decoded\n%v", result)
 }

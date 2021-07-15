@@ -18,7 +18,10 @@ import (
 )
 
 func xerEncodeEUTRACellIdentity(eUTRACellIdentity *e2sm_rc_pre_v2.EutracellIdentity) ([]byte, error) {
-	eUTRACellIdentityCP := newEUTRACellIdentity(eUTRACellIdentity)
+	eUTRACellIdentityCP, err := newEUTRACellIdentity(eUTRACellIdentity)
+	if err != nil {
+		return nil, err
+	}
 
 	bytes, err := encodeXer(&C.asn_DEF_EUTRACellIdentity_RCPRE, unsafe.Pointer(eUTRACellIdentityCP))
 	if err != nil {
@@ -28,7 +31,10 @@ func xerEncodeEUTRACellIdentity(eUTRACellIdentity *e2sm_rc_pre_v2.EutracellIdent
 }
 
 func perEncodeEUTRACellIdentity(eUTRACellIdentity *e2sm_rc_pre_v2.EutracellIdentity) ([]byte, error) {
-	eUTRACellIdentityCP := newEUTRACellIdentity(eUTRACellIdentity)
+	eUTRACellIdentityCP, err := newEUTRACellIdentity(eUTRACellIdentity)
+	if err != nil {
+		return nil, err
+	}
 
 	bytes, err := encodePerBuffer(&C.asn_DEF_EUTRACellIdentity_RCPRE, unsafe.Pointer(eUTRACellIdentityCP))
 	if err != nil {
@@ -37,10 +43,13 @@ func perEncodeEUTRACellIdentity(eUTRACellIdentity *e2sm_rc_pre_v2.EutracellIdent
 	return bytes, nil
 }
 
-func newEUTRACellIdentity(eUTRACellIdentity *e2sm_rc_pre_v2.EutracellIdentity) *C.EUTRACellIdentity_RCPRE_t {
-	eUTRACellIdentityC := newBitString(eUTRACellIdentity.Value)
+func newEUTRACellIdentity(eUTRACellIdentity *e2sm_rc_pre_v2.EutracellIdentity) (*C.EUTRACellIdentity_RCPRE_t, error) {
+	eUTRACellIdentityC, err := newBitString(eUTRACellIdentity.Value)
+	if err != nil {
+		return nil, err
+	}
 
-	return eUTRACellIdentityC
+	return eUTRACellIdentityC, nil
 }
 
 func decodeEUTRACellIdentity(eUTRACellIdentityC *C.EUTRACellIdentity_RCPRE_t) (*e2sm_rc_pre_v2.EutracellIdentity, error) {

@@ -39,6 +39,7 @@ func Test_xerDecodeEARFCN(t *testing.T) {
 	result, err := xerDecodeEARFCN(xer)
 	assert.NilError(t, err)
 	assert.Equal(t, earfcn, result.GetValue(), "Something went wrong, comparison is incorrect")
+	t.Logf("EARFCN XER - decoded\n%v", result)
 }
 
 func Test_perEncodeEARFCN(t *testing.T) {

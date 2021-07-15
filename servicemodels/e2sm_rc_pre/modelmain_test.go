@@ -20,8 +20,8 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90},
+		Len:   28, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -35,7 +35,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 
 	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreIndicationHeader to bytes")
-	assert.Equal(t, 24, len(protoBytes))
+	assert.Equal(t, 25, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.IndicationHeaderProtoToASN1(protoBytes)
 
@@ -54,7 +54,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 24, len(protoBytes))
+	assert.Equal(t, 25, len(protoBytes))
 	testIH := &e2sm_rc_pre_v2.E2SmRcPreIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
@@ -67,8 +67,8 @@ func TestServicemodel_IndicationHeaderNrCGIProtoToASN1(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90, 0x00},
+		Len:   36, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -82,7 +82,7 @@ func TestServicemodel_IndicationHeaderNrCGIProtoToASN1(t *testing.T) {
 
 	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreIndicationHeader (NrCGI) to bytes")
-	assert.Equal(t, 24, len(protoBytes))
+	assert.Equal(t, 26, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.IndicationHeaderProtoToASN1(protoBytes)
 
@@ -101,7 +101,7 @@ func TestServicemodel_IndicationHeaderNrCGIASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 24, len(protoBytes))
+	assert.Equal(t, 26, len(protoBytes))
 	testIH := &e2sm_rc_pre_v2.E2SmRcPreIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
@@ -118,8 +118,8 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	cellSize := e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ac, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xac, 0xd4, 0xbc, 0x90},
+		Len:   28, //uint32
 	}
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
@@ -143,7 +143,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreIndicationMessage to bytes")
 
-	assert.Equal(t, 52, len(protoBytes))
+	assert.Equal(t, 53, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.IndicationMessageProtoToASN1(protoBytes)
 
@@ -160,7 +160,7 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 52, len(protoBytes))
+	assert.Equal(t, 53, len(protoBytes))
 	testIM := &e2sm_rc_pre_v2.E2SmRcPreIndicationMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
@@ -274,8 +274,8 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   28,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90},
+		Len:   28, //uint32
 	}
 
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
@@ -289,7 +289,7 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreControlHeader to bytes")
-	assert.Equal(t, 28, len(protoBytes))
+	assert.Equal(t, 29, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.ControlHeaderProtoToASN1(protoBytes)
 
@@ -305,7 +305,7 @@ func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 28, len(protoBytes))
+	assert.Equal(t, 29, len(protoBytes))
 	testCH := &e2sm_rc_pre_v2.E2SmRcPreControlHeader{}
 	err = proto.Unmarshal(protoBytes, testCH)
 	assert.NilError(t, err)
@@ -322,8 +322,8 @@ func TestServicemodel_ControlHeaderNrCGIProtoToASN1(t *testing.T) {
 	plmnIDBytes, _ := hex.DecodeString(plmnID)
 
 	cellID := e2sm_rc_pre_v2.BitString{
-		Value: 0x9bcd4ab, //uint64
-		Len:   36,        //uint32
+		Value: []byte{0xab, 0xd4, 0xbc, 0x90, 0x00},
+		Len:   36, //uint32
 	}
 
 	cgi, err := pdubuilder.CreateCellGlobalIDNrCgi(plmnIDBytes, &cellID)
@@ -337,7 +337,7 @@ func TestServicemodel_ControlHeaderNrCGIProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmRcPrePdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmRcPreControlHeader to bytes")
-	assert.Equal(t, 28, len(protoBytes))
+	assert.Equal(t, 30, len(protoBytes))
 
 	asn1Bytes, err := rcPreTestSm.ControlHeaderProtoToASN1(protoBytes)
 
@@ -353,7 +353,7 @@ func TestServicemodel_ControlHeaderNrCGIASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 28, len(protoBytes))
+	assert.Equal(t, 30, len(protoBytes))
 	testCH := &e2sm_rc_pre_v2.E2SmRcPreControlHeader{}
 	err = proto.Unmarshal(protoBytes, testCH)
 	assert.NilError(t, err)

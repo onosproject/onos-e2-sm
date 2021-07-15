@@ -5,6 +5,7 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -48,6 +49,7 @@ func Test_xerDecodeRanfunctionName(t *testing.T) {
 
 	result, err := xerDecodeRanfunctionName(xer)
 	assert.NilError(t, err)
+	t.Logf("RANfunction-Name XER\n%v", result)
 	assert.Equal(t, ranfunctionName.RanFunctionShortName, result.RanFunctionShortName, "Encoded and decoded RanFunctionShortName values are not the same")
 	assert.Equal(t, ranfunctionName.RanFunctionE2SmOid, result.RanFunctionE2SmOid, "Encoded and decoded RanFunctionE2SmOid values are not the same")
 	assert.Equal(t, ranfunctionName.RanFunctionDescription, result.RanFunctionDescription, "Encoded and decoded RanFunctionDescription values are not the same")
@@ -61,7 +63,7 @@ func Test_perEncodeRanfunctionName(t *testing.T) {
 	per, err := perEncodeRanfunctionName(ranfunctionName)
 	assert.NilError(t, err)
 	assert.Equal(t, 29, len(per))
-	t.Logf("RANfunction-Name PER\n%s", string(per))
+	t.Logf("RANfunction-Name PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeRanfunctionName(t *testing.T) {
@@ -71,10 +73,11 @@ func Test_perDecodeRanfunctionName(t *testing.T) {
 	per, err := perEncodeRanfunctionName(ranfunctionName)
 	assert.NilError(t, err)
 	assert.Equal(t, 29, len(per))
-	t.Logf("RANfunction-Name PER\n%s", string(per))
+	t.Logf("RANfunction-Name PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRanfunctionName(per)
 	assert.NilError(t, err)
+	t.Logf("RANfunction-Name PER\n%v", result)
 	assert.Equal(t, ranfunctionName.RanFunctionShortName, result.RanFunctionShortName, "Encoded and decoded RanFunctionShortName values are not the same")
 	assert.Equal(t, ranfunctionName.RanFunctionE2SmOid, result.RanFunctionE2SmOid, "Encoded and decoded RanFunctionE2SmOid values are not the same")
 	assert.Equal(t, ranfunctionName.RanFunctionDescription, result.RanFunctionDescription, "Encoded and decoded RanFunctionDescription values are not the same")
