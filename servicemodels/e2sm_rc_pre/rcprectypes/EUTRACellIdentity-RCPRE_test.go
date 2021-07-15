@@ -26,6 +26,6 @@ func Test_xerEncodeEUTRACellIdentity(t *testing.T) {
 
 	per, err := perEncodeEUTRACellIdentity(eUTRACellIdentity)
 	assert.NilError(t, err)
-	t.Logf("EUTRACellIdentity XER\n%v", hex.Dump(per))
+	t.Logf("EUTRACellIdentity PER\n%v", hex.Dump(per))
 
 }

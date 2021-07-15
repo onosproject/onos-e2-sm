@@ -33,7 +33,7 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1EutraCGI(t *testing.T) {
 
 	result, err := XerDecodeE2SmRcPreIndicationHeaderFormat1(xer)
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) XER - decoded\n%s", result)
+	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) XER - decoded\n%v", result)
 	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
 	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 
@@ -43,7 +43,7 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1EutraCGI(t *testing.T) {
 
 	resultPer, err := PerDecodeE2SmRcPreIndicationHeaderFormat1(per)
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) PER - decoded\n%s", resultPer)
+	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (EutraCGI) PER - decoded\n%v", resultPer)
 	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
 	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }
@@ -69,7 +69,7 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1NrCGI(t *testing.T) {
 
 	result, err := XerDecodeE2SmRcPreIndicationHeaderFormat1(xer)
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (NRCGI) XER - decoded\n%s", result)
+	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (NRCGI) XER - decoded\n%v", result)
 	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
 	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 
@@ -79,7 +79,7 @@ func Test_EncodingE2SmRcPreIndicationHeaderFormat1NrCGI(t *testing.T) {
 
 	resultPer, err := PerDecodeE2SmRcPreIndicationHeaderFormat1(per)
 	assert.NilError(t, err)
-	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (NRCGI) PER - decoded\n%s", resultPer)
+	t.Logf("E2SM-RC-PRE-IndicationHeader-Format1 (NRCGI) PER - decoded\n%v", resultPer)
 	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
 	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), result.GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }

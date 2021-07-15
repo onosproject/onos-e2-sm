@@ -37,7 +37,7 @@ func Test_XerDecodeE2SmRcPreControlOutcome(t *testing.T) {
 	assert.Equal(t, 1, len(result.GetControlOutcomeFormat1().GetOutcomeElementList()))
 	oe0 := result.GetControlOutcomeFormat1().GetOutcomeElementList()[0]
 	assert.Equal(t, int32(20), oe0.GetRanParameterId().Value)
-	t.Logf("E2SM-RC-PRE-ControlOutcome XER\n%s", result)
+	t.Logf("E2SM-RC-PRE-ControlOutcome XER\n%v", result)
 }
 
 func Test_PerDecodeE2SmRcPreControlOutcome(t *testing.T) {

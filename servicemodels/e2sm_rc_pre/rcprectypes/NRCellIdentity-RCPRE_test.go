@@ -26,6 +26,5 @@ func Test_xerEncodeNRCellIdentity(t *testing.T) {
 
 	per, err := perEncodeNRCellIdentity(nrCellIdentity)
 	assert.NilError(t, err)
-	t.Logf("NRCellIdentity XER\n%v", hex.Dump(per))
-
+	t.Logf("NRCellIdentity PER\n%v", hex.Dump(per))
 }

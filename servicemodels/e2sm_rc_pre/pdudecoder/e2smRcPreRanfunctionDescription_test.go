@@ -5,6 +5,7 @@
 package pdudecoder
 
 import (
+	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
 	"gotest.tools/assert"
 	"io/ioutil"
@@ -28,6 +29,7 @@ func Test_DecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
 }
 
 func Test_DecodeE2SmRcPreRanfunctionDescriptionBytes(t *testing.T) {
+	t.Logf("Obtained bytes to decode are\n%v", hex.Dump(ranFuncDescBytesRadysis))
 	rfd, err := rcprectypes.PerDecodeE2SmRcPreRanfunctionDescription(ranFuncDescBytesRadysis)
 	assert.NilError(t, err)
 	err = rfd.Validate()

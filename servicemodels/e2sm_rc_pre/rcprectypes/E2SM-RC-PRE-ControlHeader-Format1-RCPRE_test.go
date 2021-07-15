@@ -32,7 +32,7 @@ func Test_XerDecodeE2SmRcPreControlHeaderFormat1(t *testing.T) {
 	////
 	////result, err := XerDecodeE2SmRcPreControlHeader(xer)
 	////assert.NilError(t, err)
-	////t.Logf("E2SM-RC-PRE-ControlHeader XER\n%s", result)
+	////t.Logf("E2SM-RC-PRE-ControlHeader XER\n%v", result)
 	//
 	////assert.Equal(t, e2SmRcPreControlHeader.GetRicStyleType().GetValue(), result.GetRicStyleType().GetValue(), "Encoded and decoded values are not the same")
 }

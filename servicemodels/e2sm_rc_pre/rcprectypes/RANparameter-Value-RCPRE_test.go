@@ -119,7 +119,7 @@ func Test_xerDecodeRanParameterValue(t *testing.T) {
 	result, err := xerDecodeRanparameterValue(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("RANparameterValue (Integer) XER - decoded\n%s", result)
+	t.Logf("RANparameterValue (Integer) XER - decoded\n%v", result)
 	assert.Equal(t, rpv.GetValueInt(), result.GetValueInt())
 
 	rpv = createRanparameterValueValueEnum()
@@ -132,7 +132,7 @@ func Test_xerDecodeRanParameterValue(t *testing.T) {
 	result, err = xerDecodeRanparameterValue(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("RANparameterValue (Enum) XER - decoded\n%s", result)
+	t.Logf("RANparameterValue (Enum) XER - decoded\n%v", result)
 	assert.Equal(t, rpv.GetValueEnum(), result.GetValueEnum())
 
 	rpv = createRanparameterValueValueBool()
@@ -145,7 +145,7 @@ func Test_xerDecodeRanParameterValue(t *testing.T) {
 	result, err = xerDecodeRanparameterValue(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("RANparameterValue (Bool) XER - decoded\n%s", result)
+	t.Logf("RANparameterValue (Bool) XER - decoded\n%v", result)
 	assert.Equal(t, rpv.GetValueBool(), result.GetValueBool())
 
 	rpv = createRanparameterValueValueOctS()
@@ -158,7 +158,7 @@ func Test_xerDecodeRanParameterValue(t *testing.T) {
 	result, err = xerDecodeRanparameterValue(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("RANparameterValue (OctetString) XER - decoded\n%s", result)
+	t.Logf("RANparameterValue (OctetString) XER - decoded\n%v", result)
 	assert.Equal(t, rpv.GetValueOctS(), result.GetValueOctS())
 
 	rpv = createRanparameterValueValuePrtS()
@@ -171,7 +171,7 @@ func Test_xerDecodeRanParameterValue(t *testing.T) {
 	result, err = xerDecodeRanparameterValue(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("RANparameterValue (PrintableString) XER - decoded\n%s", result)
+	t.Logf("RANparameterValue (PrintableString) XER - decoded\n%v", result)
 	assert.Equal(t, rpv.GetValuePrtS(), result.GetValuePrtS())
 
 	rpv = createRanparameterValueValueBitS()
@@ -184,7 +184,7 @@ func Test_xerDecodeRanParameterValue(t *testing.T) {
 	result, err = xerDecodeRanparameterValue(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
-	t.Logf("RANparameterValue (BitString) XER - decoded\n%s", result)
+	t.Logf("RANparameterValue (BitString) XER - decoded\n%v", result)
 	assert.Equal(t, rpv.GetValueBitS().GetLen(), result.GetValueBitS().GetLen())
 	assert.DeepEqual(t, rpv.GetValueBitS().GetValue(), result.GetValueBitS().GetValue())
 }

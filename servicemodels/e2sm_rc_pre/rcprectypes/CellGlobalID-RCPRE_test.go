@@ -38,7 +38,7 @@ func Test_EncodeCellGlobalIDEutraCGI(t *testing.T) {
 
 	result, err := xerDecodeCellGlobalID(xer)
 	assert.NilError(t, err)
-	t.Logf("CellGlobalID (EutraCGI) XER - decoded\n%s", result)
+	t.Logf("CellGlobalID (EutraCGI) XER - decoded\n%v", result)
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetPLmnIdentity().GetValue(), result.GetEUtraCgi().GetPLmnIdentity().GetValue())
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
 	assert.Equal(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
@@ -49,7 +49,7 @@ func Test_EncodeCellGlobalIDEutraCGI(t *testing.T) {
 
 	resultPer, err := perDecodeCellGlobalID(per)
 	assert.NilError(t, err)
-	t.Logf("CellGlobalID (EutraCGI) PER - decoded\n%s", resultPer)
+	t.Logf("CellGlobalID (EutraCGI) PER - decoded\n%v", resultPer)
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetPLmnIdentity().GetValue(), result.GetEUtraCgi().GetPLmnIdentity().GetValue())
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
 	assert.Equal(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
@@ -82,7 +82,7 @@ func Test_EncodeCellGlobalIDNrCGI(t *testing.T) {
 
 	result, err := xerDecodeCellGlobalID(xer)
 	assert.NilError(t, err)
-	t.Logf("CellGlobalID (NrCGI) XER - decoded\n%s", result)
+	t.Logf("CellGlobalID (NrCGI) XER - decoded\n%v", result)
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetPLmnIdentity().GetValue(), result.GetEUtraCgi().GetPLmnIdentity().GetValue())
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
 	assert.Equal(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
@@ -93,7 +93,7 @@ func Test_EncodeCellGlobalIDNrCGI(t *testing.T) {
 
 	resultPer, err := perDecodeCellGlobalID(per)
 	assert.NilError(t, err)
-	t.Logf("CellGlobalID (NrCGI) PER - decoded\n%s", resultPer)
+	t.Logf("CellGlobalID (NrCGI) PER - decoded\n%v", resultPer)
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetPLmnIdentity().GetValue(), result.GetEUtraCgi().GetPLmnIdentity().GetValue())
 	assert.DeepEqual(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
 	assert.Equal(t, cellGlobalID.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())

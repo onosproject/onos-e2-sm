@@ -5,6 +5,7 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -38,6 +39,7 @@ func Test_xerDecodeRicStyleName(t *testing.T) {
 	result, err := xerDecodeRicStyleName(xer)
 	assert.NilError(t, err)
 	assert.Equal(t, ricStyleName.Value, result.Value, "Encoded and decoded values are not the same")
+	t.Logf("RIC-Style-Name XER - decoded\n%v", result)
 }
 
 func Test_perEncodeRicStyleName(t *testing.T) {
@@ -50,7 +52,7 @@ func Test_perEncodeRicStyleName(t *testing.T) {
 	per, err := perEncodeRicStyleName(ricStyleName)
 	assert.NilError(t, err)
 	assert.Equal(t, 14, len(per))
-	t.Logf("RIC-Style-Name PER\n%s", string(per))
+	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 }
 
 func Test_perDecodeRicStyleName(t *testing.T) {
@@ -63,9 +65,10 @@ func Test_perDecodeRicStyleName(t *testing.T) {
 	per, err := perEncodeRicStyleName(ricStyleName)
 	assert.NilError(t, err)
 	assert.Equal(t, 14, len(per))
-	t.Logf("RIC-Style-Name PER\n%s", string(per))
+	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeRicStyleName(per)
 	assert.NilError(t, err)
 	assert.Equal(t, ricStyleName.Value, result.Value, "Encoded and decoded values are not the same")
+	t.Logf("RIC-Style-Name PER - decoded\n%v", result)
 }

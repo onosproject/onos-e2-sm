@@ -5,6 +5,7 @@
 package rcprectypes
 
 import (
+	"encoding/hex"
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -47,7 +48,7 @@ func Test_perEncodePCI(t *testing.T) {
 	pciPer, err := perEncodePCI(c)
 	assert.NilError(t, err)
 	assert.Assert(t, pciPer != nil)
-	t.Logf("PCI PER\n%v", pciPer)
+	t.Logf("PCI PER\n%v", hex.Dump(pciPer))
 }
 
 func Test_perDecodePCI(t *testing.T) {
@@ -61,7 +62,7 @@ func Test_perDecodePCI(t *testing.T) {
 	pciPer, err := perEncodePCI(c)
 	assert.NilError(t, err)
 	assert.Assert(t, pciPer != nil)
-	t.Logf("PCI PER\n%v", pciPer)
+	t.Logf("PCI PER\n%v", hex.Dump(pciPer))
 
 	result, err := perDecodePCI(pciPer)
 	assert.NilError(t, err)

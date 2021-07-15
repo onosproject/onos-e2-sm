@@ -42,10 +42,21 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 
 	xer, err := rcprectypes.XerEncodeE2SmRcPreIndicationMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Ind Message: %s", string(xer))
+	t.Logf("XER Encoded Indication Message: \n%s", string(xer))
+
+	result, err := rcprectypes.XerDecodeE2SmRcPreIndicationMessage(xer)
+	assert.NilError(t, err)
+	t.Logf("XER decoded RC-PRE-IndicationMessage is \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 
 	per, err := rcprectypes.PerEncodeE2SmRcPreIndicationMessage(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Indication Message: %v", hex.Dump(per))
+	t.Logf("PER Encoded Indication Message: \n%v", hex.Dump(per))
 
+	resultPer, err := rcprectypes.PerDecodeE2SmRcPreIndicationMessage(per)
+	assert.NilError(t, err)
+	t.Logf("PER decoded RC-PRE-IndicationMessage is \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), resultPer.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), resultPer.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }

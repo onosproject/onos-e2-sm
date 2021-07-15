@@ -35,6 +35,7 @@ func Test_XerDecodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
 	result, err := XerDecodeE2SmRcPreEventTriggerDefinition(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("Decoded EventTriggerDefinition from XER is \n%v", result)
 }
 
 func Test_PerEncodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
@@ -44,7 +45,7 @@ func Test_PerEncodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
 	per, err := PerEncodeE2SmRcPreEventTriggerDefinition(E2SmRcPreEventTriggerDefinition)
 	assert.NilError(t, err)
 	assert.Equal(t, 2, len(per))
-	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%s", hex.Dump(per))
+	t.Logf("E2SM-RC-PRE-EventTriggerDefinition PER\n%v", hex.Dump(per))
 }
 
 func Test_PerDecodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
@@ -60,4 +61,5 @@ func Test_PerDecodeE2SmRcPreEventTriggerDefinition(t *testing.T) {
 	result, err := PerDecodeE2SmRcPreEventTriggerDefinition(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
+	t.Logf("Decoded EventTriggerDefinition from XER is \n%v", result)
 }

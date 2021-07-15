@@ -28,10 +28,22 @@ func TestE2SmRcPreIndicationHeader(t *testing.T) {
 
 	xer, err := rcprectypes.XerEncodeE2SmRcPreIndicationHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("XER Encoded Ind Header: %s", string(xer))
+	t.Logf("XER Encoded Indication Header: \n%s", string(xer))
+
+	result, err := rcprectypes.XerDecodeE2SmRcPreIndicationHeader(xer)
+	assert.NilError(t, err)
+	t.Logf("XER decoded RC-PRE-IndicationHeader is \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 
 	per, err := rcprectypes.PerEncodeE2SmRcPreIndicationHeader(newE2SmRcPrePdu)
 	assert.NilError(t, err)
-	t.Logf("PER Encoded Ind Header: % x", per)
+	t.Logf("PER Encoded Indication Header: \n%v", hex.Dump(per))
+
+	resultPer, err := rcprectypes.PerDecodeE2SmRcPreIndicationHeader(per)
+	assert.NilError(t, err)
+	t.Logf("PER decoded RC-PRE-IndicationHeader is \n%v", result)
+	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), resultPer.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, newE2SmRcPrePdu.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), resultPer.GetIndicationHeaderFormat1().GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 
 }
