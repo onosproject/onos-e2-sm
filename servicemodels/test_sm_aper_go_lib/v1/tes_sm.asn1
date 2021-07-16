@@ -143,8 +143,19 @@ ItemExtensible ::= SEQUENCE {
     ...
 }
 
-TEST-ListExtensible1 ::= SEQUENCE (SIZE(1..4, ...)) OF Item
-TEST-ListExtensible2 ::= SEQUENCE (SIZE(1..4, ...)) OF ItemExtensible
+TEST-FullyOptionalSequence ::= SEQUENCE {
+    item1   INTEGER OPTIONAL,
+    item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
+    item3   BOOLEAN OPTIONAL,
+    item4   ENUMERATED {one, two, ...} OPTIONAL,
+    item5   NULL OPTIONAL,
+    ...
+}
+
+TEST-ListExtensible1 ::= SEQUENCE (SIZE(0..4, ...)) OF Item
+TEST-ListExtensible2 ::= SEQUENCE (SIZE(0..4, ...)) OF ItemExtensible
+TEST-ListExtensible3 ::= SEQUENCE (SIZE(0..4, ...)) OF TEST-FullyOptionalSequence
+TEST-List3 ::= SEQUENCE (SIZE(0..12)) OF TEST-FullyOptionalSequence
 
 TEST-Enumerated ::= ENUMERATED{
 	enum1,
