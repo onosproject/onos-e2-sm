@@ -35,5 +35,11 @@ protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
   --go_out=. \
   e2sm_mho/v1/e2sm_mho.proto
 
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
+  --proto_path=servicemodels \
+  --go_out=./servicemodels/ \
+  test_sm_aper_go_lib/v1/test_sm.proto
+protoc-go-inject-tag -input=servicemodels/test_sm_aper_go_lib/v1/test-sm-ies/test_sm.pb.go
+
 cp -r github.com/onosproject/onos-e2-sm/* .
 rm -rf github.com
