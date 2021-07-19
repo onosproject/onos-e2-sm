@@ -17,6 +17,7 @@ import "validate/v1/validate.proto";
 import "asn1/v1/asn1.proto";
 
 // enumerated from tes_sm.asn1:161
+//{TEST-Enumerated}
 enum TestEnumerated {
     TEST_ENUMERATED_ENUM1 = 0;
     TEST_ENUMERATED_ENUM2 = 1;
@@ -27,6 +28,7 @@ enum TestEnumerated {
 };
 
 // enumerated from tes_sm.asn1:170
+//{TEST-EnumeratedExtensible}
 enum TestEnumeratedExtensible {
     TEST_ENUMERATED_EXTENSIBLE_ENUM1 = 0;
     TEST_ENUMERATED_EXTENSIBLE_ENUM2 = 1;
