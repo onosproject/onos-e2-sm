@@ -269,12 +269,12 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 var ServiceModel servicemodel
 
 func bitStringToUint64(bitString []byte, bitCount int) uint64 {
-	unusedBits := 8 - bitCount%8
 	var result uint64 = 0
 	for i, b := range bitString {
-		result += (uint64(b) << ((len(bitString)-i-1) * 8))
-
+		result += uint64(b) << ((len(bitString)-i-1) * 8)
 	}
-
-	return result >> unusedBits
+	if bitCount%8 != 0 {
+		return result >> (8 - bitCount%8)
+	}
+	return result
 }
