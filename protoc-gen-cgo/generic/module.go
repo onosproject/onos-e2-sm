@@ -422,7 +422,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		//	fmt.Errorf("parameter cgo wasn't found in the input set %v", err)
 		//}
 
-		// Printing basic types
+		// Printing basic types and encoders
 		if cgo {
 			basicTypesList := getBasicTypes()
 			for _, item := range basicTypesList {
@@ -438,6 +438,17 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 				// Generating new .go file
 				m.OverwriteGeneratorTemplateFile(item+".go", basicTpl, basicTypesInfo)
+			}
+			encoders := getEncoders()
+			for _, encdr := range encoders {
+				encoderTpl, err := template.New(encdr + ".tpl").ParseFiles(encdr + ".tpl")
+				if err != nil {
+					//fmt.Errorf("couldn't parse template :/ %v", err)
+					panic(err)
+				}
+
+				// Generating new .go file
+				m.OverwriteGeneratorTemplateFile(encdr+".go", encoderTpl, basicTypesInfo)
 			}
 		}
 
@@ -554,7 +565,7 @@ func decodeDataType(dataType string) string {
 	case "int32", "uint32", "uint64":
 		return dataType
 	case "[]byte": // ToDo - sometimes could be OctetString
-		return "newOctetString"
+		return "decodeOctetString"
 	case "string":
 		return "decodePrintableString"
 	case "bool":
@@ -574,7 +585,7 @@ func encodeDataType(dataType string) string {
 	case "int32", "uint32", "uint64":
 		return "C.long"
 	case "[]byte": // ToDo - sometimes could be OctetString
-		return "decodeOctetString"
+		return "newOctetString"
 	case "string":
 		return "newPrintableString"
 	case "bool":
@@ -652,6 +663,10 @@ func extractProtoFileName(proto string) string {
 
 func getBasicTypes() []string {
 	return []string{"asn_codecs_prim", "BIT_STRING", "INTEGER", "OCTET_STRING", "PrintableString", "BOOLEAN"}
+}
+
+func getEncoders() []string {
+	return []string{"per_encoder", "per_decoder", "xer_encoder", "xer_decoder"}
 }
 
 func findWithinBasicTypes(fileName string) bool {

@@ -31,7 +31,7 @@ Here is a set of parameters you could pass to the plugin:
 
 A valid example of plugin usage:
 ```bash
-protoc -I="../servicemodels/" --plugin="./protoc-gen-cgo" --cgo_out="cgo=true,ut=false,t=false:./generated" ../servicemodels/e2sm_kpm_v2/v2/e2sm_kpm_v2.proto
+protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api" --plugin="./protoc-gen-cgo" --cgo_out="cgo=true,ut=false,t=false:./generated" ../servicemodels/e2sm_kpm_v2/v2/e2sm_kpm_v2.proto
 ```
 
 ## Additonal changes

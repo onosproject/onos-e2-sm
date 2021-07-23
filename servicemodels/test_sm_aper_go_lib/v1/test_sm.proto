@@ -65,25 +65,25 @@ message TestConstrainedInt {
 // sequence from tes_sm.asn1:29
 // {TEST-UnconstrainedReal}
 message TestUnconstrainedReal {
-    int32 attr_ucr_a = 1 [ json_name="attrUcrA"];
-    int32 attr_ucr_b = 2 [ json_name="attrUcrB"];
+    double attr_ucr_a = 1 [ json_name="attrUcrA"];
+    double attr_ucr_b = 2 [ json_name="attrUcrB"];
 };
 
 // sequence from tes_sm.asn1:34
 // {TEST-ConstrainedReal}
 message TestConstrainedReal {
     // @inject_tag: aper:"valueLB:10,valueUB:100"
-    int32 attr_cr_a = 1 [ json_name="attrCrA"];
+    double attr_cr_a = 1 [ json_name="attrCrA"];
     // @inject_tag: aper:"valueLB:10"
-    int32 attr_cr_b = 2 [ json_name="attrCrB"];
+    double attr_cr_b = 2 [ json_name="attrCrB"];
     // @inject_tag: aper:"valueUB:100"
-    int32 attr_cr_c = 3 [ json_name="attrCrC"];
+    double attr_cr_c = 3 [ json_name="attrCrC"];
     // @inject_tag: aper:"valueLB:10,valueUB:20"
-    int32 attr_cr_d = 4 [ json_name="attrCrD"];
+    double attr_cr_d = 4 [ json_name="attrCrD"];
     // @inject_tag: aper:"valueLB:10,valueUB:10"
-    int32 attr_cr_e = 5 [ json_name="attrCrE"];
+    double attr_cr_e = 5 [ json_name="attrCrE"];
     // @inject_tag: aper:"valueLB:10,valueUB:10,valueExt"
-    int32 attr_cr_f = 6 [ json_name="attrCrF"];
+    double attr_cr_f = 6 [ json_name="attrCrF"];
 };
 
 // sequence from tes_sm.asn1:43
