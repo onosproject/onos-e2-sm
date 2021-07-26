@@ -72,8 +72,8 @@ func newItem(item *test_sm_ies.Item) (*C.Item_t, error) {
 	itemC := C.Item_t{}
 
 	if item.Item1 != nil {
-		item1C := C.long(item.Item1)
-		itemC.item1 = *item1C
+		item1C := C.long(*item.Item1)
+		itemC.item1 = &item1C
 	}
 
 	item2C, err := newBitString(item.Item2)
@@ -81,7 +81,7 @@ func newItem(item *test_sm_ies.Item) (*C.Item_t, error) {
 		return nil, fmt.Errorf("new.asn1.v1.BitString() %s", err.Error())
 	}
 
-	itemC.item2 = item2C
+	itemC.item2 = *item2C
 
 	return &itemC, nil
 }
@@ -92,10 +92,10 @@ func decodeItem(itemC *C.Item_t) (*test_sm_ies.Item, error) {
 	item := test_sm_ies.Item{}
 
 	if itemC.item1 != nil {
-		ie1 := int32(itemC.item1)
+		ie1 := int32(*itemC.item1)
 		item.Item1 = &ie1
 	}
-	item.Item2, err = decodeBitString(itemC.item2)
+	item.Item2, err = decodeBitString(&itemC.item2)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}

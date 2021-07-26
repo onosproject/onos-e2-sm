@@ -71,8 +71,8 @@ func newTestFullyOptionalSequence(testFullyOptionalSequence *test_sm_ies.TestFul
 	testFullyOptionalSequenceC := C.TEST_FullyOptionalSequence_t{}
 
 	if testFullyOptionalSequence.Item1 != nil {
-		item1C := C.long(testFullyOptionalSequence.Item1)
-		testFullyOptionalSequenceC.item1 = item1C
+		item1C := C.long(*testFullyOptionalSequence.Item1)
+		testFullyOptionalSequenceC.item1 = &item1C
 	}
 
 	if testFullyOptionalSequence.Item2 != nil {
@@ -89,13 +89,13 @@ func newTestFullyOptionalSequence(testFullyOptionalSequence *test_sm_ies.TestFul
 	}
 
 	if testFullyOptionalSequence.Item4 != nil {
-		item4C := C.long(testFullyOptionalSequence.Item4)
-		testFullyOptionalSequenceC.item4 = item4C
+		item4C := C.long(*testFullyOptionalSequence.Item4)
+		testFullyOptionalSequenceC.item4 = &item4C
 	}
 
 	if testFullyOptionalSequence.Item5 != nil {
-		item5C := C.long(testFullyOptionalSequence.Item5)
-		testFullyOptionalSequenceC.item5 = item5C
+		item5C := C.int(*testFullyOptionalSequence.Item5)
+		testFullyOptionalSequenceC.item5 = &item5C
 	}
 
 	return &testFullyOptionalSequenceC, nil
@@ -107,7 +107,7 @@ func decodeTestFullyOptionalSequence(testFullyOptionalSequenceC *C.TEST_FullyOpt
 	testFullyOptionalSequence := test_sm_ies.TestFullyOptionalSequence{}
 
 	if testFullyOptionalSequenceC.item1 != nil {
-		ie1 := int32(testFullyOptionalSequenceC.item1)
+		ie1 := int32(*testFullyOptionalSequenceC.item1)
 		testFullyOptionalSequence.Item1 = &ie1
 	}
 
@@ -124,12 +124,12 @@ func decodeTestFullyOptionalSequence(testFullyOptionalSequenceC *C.TEST_FullyOpt
 	}
 
 	if testFullyOptionalSequenceC.item4 != nil {
-		ie4 := int32(testFullyOptionalSequenceC.item4)
+		ie4 := int32(*testFullyOptionalSequenceC.item4)
 		testFullyOptionalSequence.Item4 = &ie4
 	}
 
 	if testFullyOptionalSequenceC.item5 != nil {
-		ie5 := int32(testFullyOptionalSequenceC.item5)
+		ie5 := int32(*testFullyOptionalSequenceC.item5)
 		testFullyOptionalSequence.Item5 = &ie5
 	}
 

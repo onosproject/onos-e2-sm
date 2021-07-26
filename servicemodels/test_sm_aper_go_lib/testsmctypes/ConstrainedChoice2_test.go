@@ -17,10 +17,10 @@ func createConstrainedChoice2Msg() (*test_sm_ies.ConstrainedChoice2, error) {
 
 	constrainedChoice2 := test_sm_ies.ConstrainedChoice2{
 		ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2A{
-			ConstrainedChoice2A: 32,
+			ConstrainedChoice2A: 15,
 		},
 		//ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
-		//	ConstrainedChoice2B: 32,
+		//	ConstrainedChoice2B: 1,
 		//},
 	}
 

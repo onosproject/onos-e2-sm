@@ -77,7 +77,7 @@ func newChoice1(choice1 *test_sm_ies.Choice1) (*C.Choice1_t, error) {
 		pr = C.Choice1_PR_choice1A
 
 		im := C.long(choice.Choice1A)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(&im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	default:
 		return nil, fmt.Errorf("newChoice1() %T not yet implemented", choice)
 	}
@@ -96,7 +96,7 @@ func decodeChoice1(choice1C *C.Choice1_t) (*test_sm_ies.Choice1, error) {
 
 	switch choice1C.present {
 	case C.Choice1_PR_choice1A:
-		choice1structC := int32(binary.LittleEndian.Uint64(choice1C.choice))
+		choice1structC := int32(binary.LittleEndian.Uint64(choice1C.choice[0:8]))
 		choice1.Choice1 = &test_sm_ies.Choice1_Choice1A{
 			Choice1A: choice1structC,
 		}

@@ -79,7 +79,7 @@ func newTestList1(testList1 *test_sm_ies.TestList1) (*C.TEST_List1_t, error) {
 		}
 	}
 
-	return &testList1C, nil
+	return testList1C, nil
 }
 
 func decodeTestList1(testList1C *C.TEST_List1_t) (*test_sm_ies.TestList1, error) {

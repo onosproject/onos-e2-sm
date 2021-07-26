@@ -101,12 +101,12 @@ func newTestBitString(testBitString *test_sm_ies.TestBitString) (*C.TEST_BitStri
 		return nil, fmt.Errorf("new.asn1.v1.BitString() %s", err.Error())
 	}
 
-	testBitStringC.attrBs1 = attrBs1C
-	testBitStringC.attrBs2 = attrBs2C
-	testBitStringC.attrBs3 = attrBs3C
-	testBitStringC.attrBs4 = attrBs4C
-	testBitStringC.attrBs5 = attrBs5C
-	testBitStringC.attrBs6 = attrBs6C
+	testBitStringC.attrBs1 = *attrBs1C
+	testBitStringC.attrBs2 = *attrBs2C
+	testBitStringC.attrBs3 = *attrBs3C
+	testBitStringC.attrBs4 = *attrBs4C
+	testBitStringC.attrBs5 = *attrBs5C
+	testBitStringC.attrBs6 = *attrBs6C
 
 	if testBitString.AttrBs7 != nil {
 		attrBs7C, err := newBitString(testBitString.AttrBs7)
@@ -123,32 +123,32 @@ func decodeTestBitString(testBitStringC *C.TEST_BitString_t) (*test_sm_ies.TestB
 	var err error
 	testBitString := test_sm_ies.TestBitString{}
 
-	testBitString.AttrBs1, err = decodeBitString(testBitStringC.attrBs1)
+	testBitString.AttrBs1, err = decodeBitString(&testBitStringC.attrBs1)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}
 
-	testBitString.AttrBs2, err = decodeBitString(testBitStringC.attrBs2)
+	testBitString.AttrBs2, err = decodeBitString(&testBitStringC.attrBs2)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}
 
-	testBitString.AttrBs3, err = decodeBitString(testBitStringC.attrBs3)
+	testBitString.AttrBs3, err = decodeBitString(&testBitStringC.attrBs3)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}
 
-	testBitString.AttrBs4, err = decodeBitString(testBitStringC.attrBs4)
+	testBitString.AttrBs4, err = decodeBitString(&testBitStringC.attrBs4)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}
 
-	testBitString.AttrBs5, err = decodeBitString(testBitStringC.attrBs5)
+	testBitString.AttrBs5, err = decodeBitString(&testBitStringC.attrBs5)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}
 
-	testBitString.AttrBs6, err = decodeBitString(testBitStringC.attrBs6)
+	testBitString.AttrBs6, err = decodeBitString(&testBitStringC.attrBs6)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}

@@ -77,12 +77,12 @@ func newConstrainedChoice2(constrainedChoice2 *test_sm_ies.ConstrainedChoice2) (
 		pr = C.ConstrainedChoice2_PR_constrainedChoice2A
 
 		im := C.long(choice.ConstrainedChoice2A)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	case *test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B:
 		pr = C.ConstrainedChoice2_PR_constrainedChoice2B
 
 		im := C.ulong(choice.ConstrainedChoice2B)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	default:
 		return nil, fmt.Errorf("newConstrainedChoice2() %T not yet implemented", choice)
 	}
@@ -101,12 +101,12 @@ func decodeConstrainedChoice2(constrainedChoice2C *C.ConstrainedChoice2_t) (*tes
 
 	switch constrainedChoice2C.present {
 	case C.ConstrainedChoice2_PR_constrainedChoice2A:
-		constrainedChoice2structC := int32(binary.LittleEndian.Uint64(constrainedChoice2C.choice))
+		constrainedChoice2structC := int32(binary.LittleEndian.Uint64(constrainedChoice2C.choice[0:8]))
 		constrainedChoice2.ConstrainedChoice2 = &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2A{
 			ConstrainedChoice2A: constrainedChoice2structC,
 		}
 	case C.ConstrainedChoice2_PR_constrainedChoice2B:
-		constrainedChoice2structC:= int32(binary.LittleEndian.Uint64(constrainedChoice2C.choice))
+		constrainedChoice2structC:= int32(binary.LittleEndian.Uint64(constrainedChoice2C.choice[0:8]))
 		constrainedChoice2.ConstrainedChoice2 = &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
 			ConstrainedChoice2B: constrainedChoice2structC,
 		}

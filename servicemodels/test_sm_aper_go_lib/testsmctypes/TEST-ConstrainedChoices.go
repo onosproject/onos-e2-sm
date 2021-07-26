@@ -96,11 +96,11 @@ func newTestConstrainedChoices(testConstrainedChoices *test_sm_ies.TestConstrain
 		return nil, fmt.Errorf("newConstrainedChoice4() %s", err.Error())
 	}
 
-	testConstrainedChoicesC.otherCAttr = otherCattrC
-	testConstrainedChoicesC.constrainedChoice1 = constrainedChoice1C
-	testConstrainedChoicesC.constrainedChoice2 = constrainedChoice2C
-	testConstrainedChoicesC.constrainedChoice3 = constrainedChoice3C
-	testConstrainedChoicesC.constrainedChoice4 = constrainedChoice4C
+	testConstrainedChoicesC.otherCAttr = *otherCattrC
+	testConstrainedChoicesC.constrainedChoice1 = *constrainedChoice1C
+	testConstrainedChoicesC.constrainedChoice2 = *constrainedChoice2C
+	testConstrainedChoicesC.constrainedChoice3 = *constrainedChoice3C
+	testConstrainedChoicesC.constrainedChoice4 = *constrainedChoice4C
 
 	return &testConstrainedChoicesC, nil
 }
@@ -110,27 +110,27 @@ func decodeTestConstrainedChoices(testConstrainedChoicesC *C.TEST_ConstrainedCho
 	var err error
 	testConstrainedChoices := test_sm_ies.TestConstrainedChoices{}
 
-	testConstrainedChoices.OtherCattr, err = decodePrintableString(testConstrainedChoicesC.otherCAttr)
+	testConstrainedChoices.OtherCattr, err = decodePrintableString(&testConstrainedChoicesC.otherCAttr)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testConstrainedChoices.ConstrainedChoice1, err = decodeConstrainedChoice1(testConstrainedChoicesC.constrainedChoice1)
+	testConstrainedChoices.ConstrainedChoice1, err = decodeConstrainedChoice1(&testConstrainedChoicesC.constrainedChoice1)
 	if err != nil {
 		return nil, fmt.Errorf("decodeConstrainedChoice1() %s", err.Error())
 	}
 
-	testConstrainedChoices.ConstrainedChoice2, err = decodeConstrainedChoice2(testConstrainedChoicesC.constrainedChoice2)
+	testConstrainedChoices.ConstrainedChoice2, err = decodeConstrainedChoice2(&testConstrainedChoicesC.constrainedChoice2)
 	if err != nil {
 		return nil, fmt.Errorf("decodeConstrainedChoice2() %s", err.Error())
 	}
 
-	testConstrainedChoices.ConstrainedChoice3, err = decodeConstrainedChoice3(testConstrainedChoicesC.constrainedChoice3)
+	testConstrainedChoices.ConstrainedChoice3, err = decodeConstrainedChoice3(&testConstrainedChoicesC.constrainedChoice3)
 	if err != nil {
 		return nil, fmt.Errorf("decodeConstrainedChoice3() %s", err.Error())
 	}
 
-	testConstrainedChoices.ConstrainedChoice4, err = decodeConstrainedChoice4(testConstrainedChoicesC.constrainedChoice4)
+	testConstrainedChoices.ConstrainedChoice4, err = decodeConstrainedChoice4(&testConstrainedChoicesC.constrainedChoice4)
 	if err != nil {
 		return nil, fmt.Errorf("decodeConstrainedChoice4() %s", err.Error())
 	}

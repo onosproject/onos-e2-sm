@@ -77,22 +77,22 @@ func newConstrainedChoice3(constrainedChoice3 *test_sm_ies.ConstrainedChoice3) (
 		pr = C.ConstrainedChoice3_PR_constrainedChoice3A
 
 		im := C.long(choice.ConstrainedChoice3A)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	case *test_sm_ies.ConstrainedChoice3_ConstrainedChoice3B:
 		pr = C.ConstrainedChoice3_PR_constrainedChoice3B
 
 		im := C.long(choice.ConstrainedChoice3B)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	case *test_sm_ies.ConstrainedChoice3_ConstrainedChoice3C:
 		pr = C.ConstrainedChoice3_PR_constrainedChoice3C
 
 		im := C.ulong(choice.ConstrainedChoice3C)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	case *test_sm_ies.ConstrainedChoice3_ConstrainedChoice3D:
 		pr = C.ConstrainedChoice3_PR_constrainedChoice3D
 
 		im := C.long(choice.ConstrainedChoice3D)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	default:
 		return nil, fmt.Errorf("newConstrainedChoice3() %T not yet implemented", choice)
 	}
@@ -111,22 +111,22 @@ func decodeConstrainedChoice3(constrainedChoice3C *C.ConstrainedChoice3_t) (*tes
 
 	switch constrainedChoice3C.present {
 	case C.ConstrainedChoice3_PR_constrainedChoice3A:
-		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice))
+		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice[0:8]))
 		constrainedChoice3.ConstrainedChoice3 = &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3A{
 			ConstrainedChoice3A: constrainedChoice3structC,
 		}
 	case C.ConstrainedChoice3_PR_constrainedChoice3B:
-		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice))
+		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice[0:8]))
 		constrainedChoice3.ConstrainedChoice3 = &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3B{
 			ConstrainedChoice3B: constrainedChoice3structC,
 		}
 	case C.ConstrainedChoice3_PR_constrainedChoice3C:
-		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice))
+		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice[0:8]))
 		constrainedChoice3.ConstrainedChoice3 = &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3C{
 			ConstrainedChoice3C: constrainedChoice3structC,
 		}
 	case C.ConstrainedChoice3_PR_constrainedChoice3D:
-		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice))
+		constrainedChoice3structC := int32(binary.LittleEndian.Uint64(constrainedChoice3C.choice[0:8]))
 		constrainedChoice3.ConstrainedChoice3 = &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3D{
 			ConstrainedChoice3D: constrainedChoice3structC,
 		}

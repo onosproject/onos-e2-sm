@@ -12,6 +12,7 @@ package testsmctypes
 //#include "INTEGER.h"
 import "C"
 import (
+	"encoding/binary"
 	"fmt"
 	"math"
 	"math/big"

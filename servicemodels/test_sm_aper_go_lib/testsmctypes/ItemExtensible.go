@@ -74,7 +74,7 @@ func newItemExtensible(itemExtensible *test_sm_ies.ItemExtensible) (*C.ItemExten
 	itemExtensibleC.item1 = item1C
 
 	if itemExtensible.Item2 != nil {
-		item2C, err := decodeOctetString(itemExtensible.Item2)
+		item2C, err := newOctetString(itemExtensible.Item2)
 		if err != nil {
 			return nil, err
 		}
@@ -92,7 +92,7 @@ func decodeItemExtensible(itemExtensibleC *C.ItemExtensible_t) (*test_sm_ies.Ite
 	itemExtensible.Item1 = int32(itemExtensibleC.item1)
 
 	if itemExtensibleC.item2 != nil {
-		itemExtensible.Item2, err = decodeOctetString(&itemExtensibleC.item2)
+		itemExtensible.Item2, err = decodeOctetString(itemExtensibleC.item2)
 		if err != nil {
 			return nil, err
 		}

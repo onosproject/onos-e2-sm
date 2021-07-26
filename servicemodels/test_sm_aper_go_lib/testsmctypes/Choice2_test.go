@@ -13,20 +13,15 @@ import (
 
 func createChoice2Msg() (*test_sm_ies.Choice2, error) {
 
-	// choice2 := pdubuilder.CreateChoice2() //ToDo - fill in arguments here(if this function exists
-
 	choice2 := test_sm_ies.Choice2{
 		Choice2: &test_sm_ies.Choice2_Choice2A{
-			Choice2A: 32,
+			Choice2A: -153,
 		},
 		//Choice2: &test_sm.Choice2_Choice2B{
-		//	Choice2B: 32,
+		//	Choice2B: -153,
 		//},
 	}
 
-	//if err := choice2.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating Choice2 %s", err.Error())
-	//}
 	return &choice2, nil
 }
 
@@ -37,7 +32,6 @@ func Test_xerEncodingChoice2(t *testing.T) {
 
 	xer, err := xerEncodeChoice2(choice2)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("Choice2 XER\n%s", string(xer))
 
 	result, err := xerDecodeChoice2(xer)
@@ -55,7 +49,6 @@ func Test_perEncodingChoice2(t *testing.T) {
 
 	per, err := perEncodeChoice2(choice2)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("Choice2 PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeChoice2(per)

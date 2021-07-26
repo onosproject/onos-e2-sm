@@ -79,7 +79,7 @@ func newTestListExtensible1(testListExtensible1 *test_sm_ies.TestListExtensible1
 		}
 	}
 
-	return &testListExtensible1C, nil
+	return testListExtensible1C, nil
 }
 
 func decodeTestListExtensible1(testListExtensible1C *C.TEST_ListExtensible1_t) (*test_sm_ies.TestListExtensible1, error) {

@@ -20,13 +20,13 @@ func createConstrainedChoice3Msg() (*test_sm_ies.ConstrainedChoice3, error) {
 			ConstrainedChoice3A: 32,
 		},
 		//ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3B{
-		//	ConstrainedChoice3B: 32,
+		//	ConstrainedChoice3B: 15,
 		//},
 		//ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3C{
-		//	ConstrainedChoice3C: 32,
+		//	ConstrainedChoice3C: 1,
 		//},
 		//ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3D{
-		//	ConstrainedChoice3D: 32,
+		//	ConstrainedChoice3D: 1,
 		//},
 	}
 
@@ -43,7 +43,6 @@ func Test_xerEncodingConstrainedChoice3(t *testing.T) {
 
 	xer, err := xerEncodeConstrainedChoice3(constrainedChoice3)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("ConstrainedChoice3 XER\n%s", string(xer))
 
 	result, err := xerDecodeConstrainedChoice3(xer)
@@ -63,7 +62,6 @@ func Test_perEncodingConstrainedChoice3(t *testing.T) {
 
 	per, err := perEncodeConstrainedChoice3(constrainedChoice3)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("ConstrainedChoice3 PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeConstrainedChoice3(per)

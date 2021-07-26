@@ -6,29 +6,22 @@ package testsmctypes
 
 import (
 	"encoding/hex"
-	"fmt"
-	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/test_sm/pdubuilder"
-	test_sm "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm" //ToDo - Make imports more dynamic
+	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createTestConstrainedRealMsg() (*test_sm.TestConstrainedReal, error) {
+func createTestConstrainedRealMsg() (*test_sm_ies.TestConstrainedReal, error) {
 
-	// testConstrainedReal := pdubuilder.CreateTestConstrainedReal() //ToDo - fill in arguments here(if this function exists
-
-	testConstrainedReal := test_sm.TestConstrainedReal{
-		AttrCrA: nil,
-		AttrCrB: nil,
-		AttrCrC: nil,
-		AttrCrD: nil,
-		AttrCrE: nil,
-		AttrCrF: nil,
+	testConstrainedReal := test_sm_ies.TestConstrainedReal{
+		AttrCrA: 99.97,
+		AttrCrB: 11.20,
+		AttrCrC: -153.0,
+		AttrCrD: 20.0,
+		AttrCrE: 10.0,
+		AttrCrF: 10.0,
 	}
 
-	if err := testConstrainedReal.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating TestConstrainedReal %s", err.Error())
-	}
 	return &testConstrainedReal, nil
 }
 
@@ -39,21 +32,18 @@ func Test_xerEncodingTestConstrainedReal(t *testing.T) {
 
 	xer, err := xerEncodeTestConstrainedReal(testConstrainedReal)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("TestConstrainedReal XER\n%s", string(xer))
 
 	result, err := xerDecodeTestConstrainedReal(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestConstrainedReal XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
 	assert.Equal(t, testConstrainedReal.GetAttrCrA(), result.GetAttrCrA())
 	assert.Equal(t, testConstrainedReal.GetAttrCrB(), result.GetAttrCrB())
 	assert.Equal(t, testConstrainedReal.GetAttrCrC(), result.GetAttrCrC())
 	assert.Equal(t, testConstrainedReal.GetAttrCrD(), result.GetAttrCrD())
 	assert.Equal(t, testConstrainedReal.GetAttrCrE(), result.GetAttrCrE())
 	assert.Equal(t, testConstrainedReal.GetAttrCrF(), result.GetAttrCrF())
-
 }
 
 func Test_perEncodingTestConstrainedReal(t *testing.T) {
@@ -63,19 +53,16 @@ func Test_perEncodingTestConstrainedReal(t *testing.T) {
 
 	per, err := perEncodeTestConstrainedReal(testConstrainedReal)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("TestConstrainedReal PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeTestConstrainedReal(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestConstrainedReal PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
 	assert.Equal(t, testConstrainedReal.GetAttrCrA(), result.GetAttrCrA())
 	assert.Equal(t, testConstrainedReal.GetAttrCrB(), result.GetAttrCrB())
 	assert.Equal(t, testConstrainedReal.GetAttrCrC(), result.GetAttrCrC())
 	assert.Equal(t, testConstrainedReal.GetAttrCrD(), result.GetAttrCrD())
 	assert.Equal(t, testConstrainedReal.GetAttrCrE(), result.GetAttrCrE())
 	assert.Equal(t, testConstrainedReal.GetAttrCrF(), result.GetAttrCrF())
-
 }

@@ -101,19 +101,19 @@ func newTestPrintableString(testPrintableString *test_sm_ies.TestPrintableString
 		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 	}
 
-	testPrintableStringC.attrPs1 = attrPs1C
-	testPrintableStringC.attrPs2 = attrPs2C
-	testPrintableStringC.attrPs3 = attrPs3C
-	testPrintableStringC.attrPs4 = attrPs4C
-	testPrintableStringC.attrPs5 = attrPs5C
-	testPrintableStringC.attrPs6 = attrPs6C
+	testPrintableStringC.attrPs1 = *attrPs1C
+	testPrintableStringC.attrPs2 = *attrPs2C
+	testPrintableStringC.attrPs3 = *attrPs3C
+	testPrintableStringC.attrPs4 = *attrPs4C
+	testPrintableStringC.attrPs5 = *attrPs5C
+	testPrintableStringC.attrPs6 = *attrPs6C
 
 	if testPrintableString.AttrPs7 != nil {
 		attrPs7C, err := newPrintableString(*testPrintableString.AttrPs7)
 		if err != nil {
 			return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 		}
-		testPrintableStringC.attrPs7 = *attrPs7C
+		testPrintableStringC.attrPs7 = attrPs7C
 	}
 
 	return &testPrintableStringC, nil
@@ -124,38 +124,38 @@ func decodeTestPrintableString(testPrintableStringC *C.TEST_PrintableString_t) (
 	var err error
 	testPrintableString := test_sm_ies.TestPrintableString{}
 
-	testPrintableString.AttrPs1, err = decodePrintableString(testPrintableStringC.attrPs1)
+	testPrintableString.AttrPs1, err = decodePrintableString(&testPrintableStringC.attrPs1)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testPrintableString.AttrPs2, err = decodePrintableString(testPrintableStringC.attrPs2)
+	testPrintableString.AttrPs2, err = decodePrintableString(&testPrintableStringC.attrPs2)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testPrintableString.AttrPs3, err = decodePrintableString(testPrintableStringC.attrPs3)
+	testPrintableString.AttrPs3, err = decodePrintableString(&testPrintableStringC.attrPs3)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testPrintableString.AttrPs4, err = decodePrintableString(testPrintableStringC.attrPs4)
+	testPrintableString.AttrPs4, err = decodePrintableString(&testPrintableStringC.attrPs4)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testPrintableString.AttrPs5, err = decodePrintableString(testPrintableStringC.attrPs5)
+	testPrintableString.AttrPs5, err = decodePrintableString(&testPrintableStringC.attrPs5)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testPrintableString.AttrPs6, err = decodePrintableString(testPrintableStringC.attrPs6)
+	testPrintableString.AttrPs6, err = decodePrintableString(&testPrintableStringC.attrPs6)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
 	if testPrintableStringC.attrPs7 != nil {
-		res, err := decodePrintableString(&testPrintableStringC.attrPs7)
+		res, err := decodePrintableString(testPrintableStringC.attrPs7)
 		if err != nil {
 			return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 		}

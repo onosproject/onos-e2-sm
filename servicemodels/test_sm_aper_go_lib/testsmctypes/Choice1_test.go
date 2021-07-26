@@ -13,17 +13,12 @@ import (
 
 func createChoice1Msg() (*test_sm_ies.Choice1, error) {
 
-	// choice1 := pdubuilder.CreateChoice1() //ToDo - fill in arguments here(if this function exists
-
 	choice1 := test_sm_ies.Choice1{
 		Choice1: &test_sm_ies.Choice1_Choice1A{
 			Choice1A: 32,
 		},
 	}
 
-	//if err := choice1.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating Choice1 %s", err.Error())
-	//}
 	return &choice1, nil
 }
 
@@ -34,19 +29,13 @@ func Test_xerEncodingChoice1(t *testing.T) {
 
 	xer, err := xerEncodeChoice1(choice1)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("Choice1 XER\n%s", string(xer))
 
 	result, err := xerDecodeChoice1(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("Choice1 XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
-
-	//This one if for OneOf fields
-
-	assert.DeepEqual(t, choice1.GetChoice1A(), result.GetChoice1A())
-
+	assert.Equal(t, choice1.GetChoice1A(), result.GetChoice1A())
 }
 
 func Test_perEncodingChoice1(t *testing.T) {
@@ -56,17 +45,11 @@ func Test_perEncodingChoice1(t *testing.T) {
 
 	per, err := perEncodeChoice1(choice1)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("Choice1 PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeChoice1(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("Choice1 PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
-
-	//This one if for OneOf fields
-
-	assert.DeepEqual(t, choice1.GetChoice1A(), result.GetChoice1A())
-
+	assert.Equal(t, choice1.GetChoice1A(), result.GetChoice1A())
 }

@@ -76,11 +76,8 @@ func newConstrainedChoice4(constrainedChoice4 *test_sm_ies.ConstrainedChoice4) (
 	case *test_sm_ies.ConstrainedChoice4_ConstrainedChoice4A:
 		pr = C.ConstrainedChoice4_PR_constrainedChoice4A
 
-		im, err := C.long(choice.ConstrainedChoice4A)
-		if err != nil {
-			return nil, fmt.Errorf("C.long() %s", err.Error())
-		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		im := C.long(choice.ConstrainedChoice4A)
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	default:
 		return nil, fmt.Errorf("newConstrainedChoice4() %T not yet implemented", choice)
 	}
@@ -99,7 +96,7 @@ func decodeConstrainedChoice4(constrainedChoice4C *C.ConstrainedChoice4_t) (*tes
 
 	switch constrainedChoice4C.present {
 	case C.ConstrainedChoice4_PR_constrainedChoice4A:
-		constrainedChoice4structC := int32(binary.LittleEndian.Uint64(constrainedChoice4C.choice))
+		constrainedChoice4structC := int32(binary.LittleEndian.Uint64(constrainedChoice4C.choice[0:8]))
 		constrainedChoice4.ConstrainedChoice4 = &test_sm_ies.ConstrainedChoice4_ConstrainedChoice4A{
 			ConstrainedChoice4A: constrainedChoice4structC,
 		}

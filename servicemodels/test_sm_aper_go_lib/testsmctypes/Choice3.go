@@ -77,17 +77,17 @@ func newChoice3(choice3 *test_sm_ies.Choice3) (*C.Choice3_t, error) {
 		pr = C.Choice3_PR_choice3A
 
 		im := C.long(choice.Choice3A)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	case *test_sm_ies.Choice3_Choice3B:
 		pr = C.Choice3_PR_choice3B
 
 		im := C.long(choice.Choice3B)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	case *test_sm_ies.Choice3_Choice3C:
 		pr = C.Choice3_PR_choice3C
 
 		im := C.long(choice.Choice3C)
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
 	default:
 		return nil, fmt.Errorf("newChoice3() %T not yet implemented", choice)
 	}
@@ -106,17 +106,17 @@ func decodeChoice3(choice3C *C.Choice3_t) (*test_sm_ies.Choice3, error) {
 
 	switch choice3C.present {
 	case C.Choice3_PR_choice3A:
-		choice3structC := int32(binary.LittleEndian.Uint64(choice3C.choice))
+		choice3structC := int32(binary.LittleEndian.Uint64(choice3C.choice[0:8]))
 		choice3.Choice3 = &test_sm_ies.Choice3_Choice3A{
 			Choice3A: choice3structC,
 		}
 	case C.Choice3_PR_choice3B:
-		choice3structC := int32(binary.LittleEndian.Uint64(choice3C.choice))
+		choice3structC := int32(binary.LittleEndian.Uint64(choice3C.choice[0:8]))
 		choice3.Choice3 = &test_sm_ies.Choice3_Choice3B{
 			Choice3B: choice3structC,
 		}
 	case C.Choice3_PR_choice3C:
-		choice3structC := int32(binary.LittleEndian.Uint64(choice3C.choice))
+		choice3structC := int32(binary.LittleEndian.Uint64(choice3C.choice[0:8]))
 		choice3.Choice3 = &test_sm_ies.Choice3_Choice3C{
 			Choice3C: choice3structC,
 		}

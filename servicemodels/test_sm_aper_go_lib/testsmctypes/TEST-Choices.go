@@ -96,11 +96,11 @@ func newTestChoices(testChoices *test_sm_ies.TestChoices) (*C.TEST_Choices_t, er
 		return nil, fmt.Errorf("newChoice4() %s", err.Error())
 	}
 
-	testChoicesC.otherAttr = otherAttrC
-	testChoicesC.choice1 = choice1C
-	testChoicesC.choice2 = choice2C
-	testChoicesC.choice3 = choice3C
-	testChoicesC.choice4 = choice4C
+	testChoicesC.otherAttr = *otherAttrC
+	testChoicesC.choice1 = *choice1C
+	testChoicesC.choice2 = *choice2C
+	testChoicesC.choice3 = *choice3C
+	testChoicesC.choice4 = *choice4C
 
 	return &testChoicesC, nil
 }
@@ -110,27 +110,27 @@ func decodeTestChoices(testChoicesC *C.TEST_Choices_t) (*test_sm_ies.TestChoices
 	var err error
 	testChoices := test_sm_ies.TestChoices{}
 
-	testChoices.OtherAttr, err = decodePrintableString(testChoicesC.otherAttr)
+	testChoices.OtherAttr, err = decodePrintableString(&testChoicesC.otherAttr)
 	if err != nil {
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testChoices.Choice1, err = decodeChoice1(testChoicesC.choice1)
+	testChoices.Choice1, err = decodeChoice1(&testChoicesC.choice1)
 	if err != nil {
 		return nil, fmt.Errorf("decodeChoice1() %s", err.Error())
 	}
 
-	testChoices.Choice2, err = decodeChoice2(testChoicesC.choice2)
+	testChoices.Choice2, err = decodeChoice2(&testChoicesC.choice2)
 	if err != nil {
 		return nil, fmt.Errorf("decodeChoice2() %s", err.Error())
 	}
 
-	testChoices.Choice3, err = decodeChoice3(testChoicesC.choice3)
+	testChoices.Choice3, err = decodeChoice3(&testChoicesC.choice3)
 	if err != nil {
 		return nil, fmt.Errorf("decodeChoice3() %s", err.Error())
 	}
 
-	testChoices.Choice4, err = decodeChoice4(testChoicesC.choice4)
+	testChoices.Choice4, err = decodeChoice4(&testChoicesC.choice4)
 	if err != nil {
 		return nil, fmt.Errorf("decodeChoice4() %s", err.Error())
 	}
