@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,44 +68,28 @@ func perDecodeTestConstrainedInt(bytes []byte) (*test_sm_ies.TestConstrainedInt,
 
 func newTestConstrainedInt(testConstrainedInt *test_sm_ies.TestConstrainedInt) (*C.TEST_ConstrainedInt_t, error) {
 
-	var err error
-	testConstrainedIntC := C.TEST_ConstrainedInt_t{}
-
-	attrCiAC := C.long(testConstrainedInt.AttrCiA)
-	attrCiBC := C.long(testConstrainedInt.AttrCiB)
-	attrCiCC := C.long(testConstrainedInt.AttrCiC)
-	attrCiDC := C.long(testConstrainedInt.AttrCiD)
-	attrCiEC := C.long(testConstrainedInt.AttrCiE)
-	attrCiFC := C.long(testConstrainedInt.AttrCiF)
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	testConstrainedIntC.attrCiA = attrCiAC
-	testConstrainedIntC.attrCiB = attrCiBC
-	testConstrainedIntC.attrCiC = attrCiCC
-	testConstrainedIntC.attrCiD = attrCiDC
-	testConstrainedIntC.attrCiE = attrCiEC
-	testConstrainedIntC.attrCiF = attrCiFC
+	testConstrainedIntC := C.TEST_ConstrainedInt_t{
+		attrCiA: C.long(testConstrainedInt.AttrCiA),
+		attrCiB: C.ulong(testConstrainedInt.AttrCiB),
+		attrCiC: C.long(testConstrainedInt.AttrCiC),
+		attrCiD: C.long(testConstrainedInt.AttrCiD),
+		attrCiE: C.long(testConstrainedInt.AttrCiE),
+		attrCiF: C.long(testConstrainedInt.AttrCiF),
+	}
 
 	return &testConstrainedIntC, nil
 }
 
 func decodeTestConstrainedInt(testConstrainedIntC *C.TEST_ConstrainedInt_t) (*test_sm_ies.TestConstrainedInt, error) {
 
-	var err error
 	testConstrainedInt := test_sm_ies.TestConstrainedInt{
+		AttrCiA: int32(testConstrainedIntC.attrCiA),
+		AttrCiB: int32(testConstrainedIntC.attrCiB),
+		AttrCiC: int32(testConstrainedIntC.attrCiC),
+		AttrCiD: int32(testConstrainedIntC.attrCiD),
+		AttrCiE: int32(testConstrainedIntC.attrCiE),
+		AttrCiF: int32(testConstrainedIntC.attrCiF),
 	}
 
-	testConstrainedInt.AttrCiA = int32(testConstrainedIntC.attrCiA)
-	testConstrainedInt.AttrCiB = int32(testConstrainedIntC.attrCiB)
-	testConstrainedInt.AttrCiC = int32(testConstrainedIntC.attrCiC)
-	testConstrainedInt.AttrCiD = int32(testConstrainedIntC.attrCiD)
-	testConstrainedInt.AttrCiE = int32(testConstrainedIntC.attrCiE)
-	testConstrainedInt.AttrCiF = int32(testConstrainedIntC.attrCiF)
-
 	return &testConstrainedInt, nil
-}
-
-func decodeTestConstrainedIntBytes(array [8]byte) (*test_sm_ies.TestConstrainedInt, error) {
-	testConstrainedIntC := (*C.TEST_ConstrainedInt_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestConstrainedInt(testConstrainedIntC)
 }

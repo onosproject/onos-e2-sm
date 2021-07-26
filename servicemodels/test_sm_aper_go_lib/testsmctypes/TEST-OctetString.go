@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -96,18 +95,21 @@ func newTestOctetString(testOctetString *test_sm_ies.TestOctetString) (*C.TEST_O
 	if err != nil {
 		return nil, err
 	}
-	attrOs7C, err := newOctetString(testOctetString.AttrOs7)
-	if err != nil {
-		return nil, err
-	}
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+
 	testOctetStringC.attrOs1 = attrOs1C
 	testOctetStringC.attrOs2 = attrOs2C
 	testOctetStringC.attrOs3 = attrOs3C
 	testOctetStringC.attrOs4 = attrOs4C
 	testOctetStringC.attrOs5 = attrOs5C
 	testOctetStringC.attrOs6 = attrOs6C
-	testOctetStringC.attrOs7 = attrOs7C
+
+	if testOctetString.AttrOs7 != nil {
+		attrOs7C, err := newOctetString(testOctetString.AttrOs7)
+		if err != nil {
+			return nil, err
+		}
+		testOctetStringC.attrOs7 = *attrOs7C
+	}
 
 	return &testOctetStringC, nil
 }
@@ -141,16 +143,13 @@ func decodeTestOctetString(testOctetStringC *C.TEST_OctetString_t) (*test_sm_ies
 	if err != nil {
 		return nil, err
 	}
-	testOctetString.AttrOs7, err = decodeOctetString(testOctetStringC.attrOs7)
-	if err != nil {
-		return nil, err
+
+	if testOctetStringC.attrOs7 != nil {
+		testOctetString.AttrOs7, err = decodeOctetString(&testOctetStringC.attrOs7)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &testOctetString, nil
-}
-
-func decodeTestOctetStringBytes(array [8]byte) (*test_sm_ies.TestOctetString, error) {
-	testOctetStringC := (*C.TEST_OctetString_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestOctetString(testOctetStringC)
 }

@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,29 +68,20 @@ func perDecodeTestUnconstrainedReal(bytes []byte) (*test_sm_ies.TestUnconstraine
 
 func newTestUnconstrainedReal(testUnconstrainedReal *test_sm_ies.TestUnconstrainedReal) (*C.TEST_UnconstrainedReal_t, error) {
 
-	testUnconstrainedRealC := C.TEST_UnconstrainedReal_t{}
-
-	attrUcrAC := C.double(testUnconstrainedReal.AttrUcrA)
-	attrUcrBC := C.double(testUnconstrainedReal.AttrUcrB)
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	testUnconstrainedRealC.attrUcrA = attrUcrAC
-	testUnconstrainedRealC.attrUcrB = attrUcrBC
+	testUnconstrainedRealC := C.TEST_UnconstrainedReal_t{
+		attrUcrA: C.double(testUnconstrainedReal.AttrUcrA),
+		attrUcrB: C.double(testUnconstrainedReal.AttrUcrB),
+	}
 
 	return &testUnconstrainedRealC, nil
 }
 
 func decodeTestUnconstrainedReal(testUnconstrainedRealC *C.TEST_UnconstrainedReal_t) (*test_sm_ies.TestUnconstrainedReal, error) {
 
-	testUnconstrainedReal := test_sm_ies.TestUnconstrainedReal{}
-
-	testUnconstrainedReal.AttrUcrA = float64(testUnconstrainedRealC.attrUcrA)
-	testUnconstrainedReal.AttrUcrB = float64(testUnconstrainedRealC.attrUcrB)
+	testUnconstrainedReal := test_sm_ies.TestUnconstrainedReal{
+		AttrUcrA: float64(testUnconstrainedRealC.attrUcrA),
+		AttrUcrB: float64(testUnconstrainedRealC.attrUcrB),
+	}
 
 	return &testUnconstrainedReal, nil
-}
-
-func decodeTestUnconstrainedRealBytes(array [8]byte) (*test_sm_ies.TestUnconstrainedReal, error) {
-	testUnconstrainedRealC := (*C.TEST_UnconstrainedReal_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestUnconstrainedReal(testUnconstrainedRealC)
 }

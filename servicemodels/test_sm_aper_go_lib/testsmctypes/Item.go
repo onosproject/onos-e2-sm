@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -72,14 +71,16 @@ func newItem(item *test_sm_ies.Item) (*C.Item_t, error) {
 	var err error
 	itemC := C.Item_t{}
 
-	item1C := C.long(item.Item1)
-	item2C, err := newBitString(item.Item2) //ToDo - verify it
+	if item.Item1 != nil {
+		item1C := C.long(item.Item1)
+		itemC.item1 = *item1C
+	}
+
+	item2C, err := newBitString(item.Item2)
 	if err != nil {
 		return nil, fmt.Errorf("new.asn1.v1.BitString() %s", err.Error())
 	}
 
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	itemC.item1 = item1C
 	itemC.item2 = item2C
 
 	return &itemC, nil
@@ -88,24 +89,16 @@ func newItem(item *test_sm_ies.Item) (*C.Item_t, error) {
 func decodeItem(itemC *C.Item_t) (*test_sm_ies.Item, error) {
 
 	var err error
-	item := test_sm_ies.Item{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
-		//Item1: item1,
-		//Item2: item2,
+	item := test_sm_ies.Item{}
 
+	if itemC.item1 != nil {
+		ie1 := int32(itemC.item1)
+		item.Item1 = &ie1
 	}
-
-	item.Item1 = int32(itemC.item1)
 	item.Item2, err = decodeBitString(itemC.item2)
 	if err != nil {
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}
 
 	return &item, nil
-}
-
-func decodeItemBytes(array [8]byte) (*test_sm_ies.Item, error) {
-	itemC := (*C.Item_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeItem(itemC)
 }

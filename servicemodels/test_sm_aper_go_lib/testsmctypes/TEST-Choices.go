@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -97,7 +96,6 @@ func newTestChoices(testChoices *test_sm_ies.TestChoices) (*C.TEST_Choices_t, er
 		return nil, fmt.Errorf("newChoice4() %s", err.Error())
 	}
 
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	testChoicesC.otherAttr = otherAttrC
 	testChoicesC.choice1 = choice1C
 	testChoicesC.choice2 = choice2C
@@ -138,10 +136,4 @@ func decodeTestChoices(testChoicesC *C.TEST_Choices_t) (*test_sm_ies.TestChoices
 	}
 
 	return &testChoices, nil
-}
-
-func decodeTestChoicesBytes(array [8]byte) (*test_sm_ies.TestChoices, error) {
-	testChoicesC := (*C.TEST_Choices_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestChoices(testChoicesC)
 }

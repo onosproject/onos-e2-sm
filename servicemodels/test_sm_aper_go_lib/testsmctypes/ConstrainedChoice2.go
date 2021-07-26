@@ -69,25 +69,19 @@ func perDecodeConstrainedChoice2(bytes []byte) (*test_sm_ies.ConstrainedChoice2,
 
 func newConstrainedChoice2(constrainedChoice2 *test_sm_ies.ConstrainedChoice2) (*C.ConstrainedChoice2_t, error) {
 
-	var pr C.ConstrainedChoice2_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}           //ToDo - Check if number of bytes is sufficient
+	var pr C.ConstrainedChoice2_PR
+	choiceC := [8]byte{}
 
 	switch choice := constrainedChoice2.ConstrainedChoice2.(type) {
 	case *test_sm_ies.ConstrainedChoice2_ConstrainedChoice2A:
-		pr = C.ConstrainedChoice2_PR_constrainedChoice2A //ToDo - Check if it's correct PR's name
+		pr = C.ConstrainedChoice2_PR_constrainedChoice2A
 
-		im, err := C.long(choice.ConstrainedChoice2A)
-		if err != nil {
-			return nil, fmt.Errorf("C.long() %s", err.Error())
-		}
+		im := C.long(choice.ConstrainedChoice2A)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B:
-		pr = C.ConstrainedChoice2_PR_constrainedChoice2B //ToDo - Check if it's correct PR's name
+		pr = C.ConstrainedChoice2_PR_constrainedChoice2B
 
-		im, err := C.long(choice.ConstrainedChoice2B)
-		if err != nil {
-			return nil, fmt.Errorf("C.long() %s", err.Error())
-		}
+		im := C.ulong(choice.ConstrainedChoice2B)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newConstrainedChoice2() %T not yet implemented", choice)
@@ -107,19 +101,13 @@ func decodeConstrainedChoice2(constrainedChoice2C *C.ConstrainedChoice2_t) (*tes
 
 	switch constrainedChoice2C.present {
 	case C.ConstrainedChoice2_PR_constrainedChoice2A:
-		constrainedChoice2structC, err := int32Bytes(constrainedChoice2C.choice) //ToDo - Verify if decodeSmthBytes function exists
-		if err != nil {
-			return nil, fmt.Errorf("int32Bytes() %s", err.Error())
-		}
+		constrainedChoice2structC := int32(binary.LittleEndian.Uint64(constrainedChoice2C.choice))
 		constrainedChoice2.ConstrainedChoice2 = &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2A{
 			ConstrainedChoice2A: constrainedChoice2structC,
 		}
 	case C.ConstrainedChoice2_PR_constrainedChoice2B:
-		constrainedChoice2structC, err := int32Bytes(constrainedChoice2C.choice) //ToDo - Verify if decodeSmthBytes function exists
-		if err != nil {
-			return nil, fmt.Errorf("int32Bytes() %s", err.Error())
-		}
-		constrainedChoice2.ConstrainedChoice2B = &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
+		constrainedChoice2structC:= int32(binary.LittleEndian.Uint64(constrainedChoice2C.choice))
+		constrainedChoice2.ConstrainedChoice2 = &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
 			ConstrainedChoice2B: constrainedChoice2structC,
 		}
 	default:
@@ -127,10 +115,4 @@ func decodeConstrainedChoice2(constrainedChoice2C *C.ConstrainedChoice2_t) (*tes
 	}
 
 	return constrainedChoice2, nil
-}
-
-func decodeConstrainedChoice2Bytes(array [8]byte) (*test_sm_ies.ConstrainedChoice2, error) {
-	constrainedChoice2C := (*C.ConstrainedChoice2_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeConstrainedChoice2(constrainedChoice2C)
 }

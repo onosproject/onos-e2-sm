@@ -69,12 +69,12 @@ func perDecodeConstrainedChoice4(bytes []byte) (*test_sm_ies.ConstrainedChoice4,
 
 func newConstrainedChoice4(constrainedChoice4 *test_sm_ies.ConstrainedChoice4) (*C.ConstrainedChoice4_t, error) {
 
-	var pr C.ConstrainedChoice4_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}           //ToDo - Check if number of bytes is sufficient
+	var pr C.ConstrainedChoice4_PR
+	choiceC := [8]byte{}
 
 	switch choice := constrainedChoice4.ConstrainedChoice4.(type) {
 	case *test_sm_ies.ConstrainedChoice4_ConstrainedChoice4A:
-		pr = C.ConstrainedChoice4_PR_constrainedChoice4A //ToDo - Check if it's correct PR's name
+		pr = C.ConstrainedChoice4_PR_constrainedChoice4A
 
 		im, err := C.long(choice.ConstrainedChoice4A)
 		if err != nil {
@@ -99,10 +99,7 @@ func decodeConstrainedChoice4(constrainedChoice4C *C.ConstrainedChoice4_t) (*tes
 
 	switch constrainedChoice4C.present {
 	case C.ConstrainedChoice4_PR_constrainedChoice4A:
-		constrainedChoice4structC, err := int32Bytes(constrainedChoice4C.choice) //ToDo - Verify if decodeSmthBytes function exists
-		if err != nil {
-			return nil, fmt.Errorf("int32Bytes() %s", err.Error())
-		}
+		constrainedChoice4structC := int32(binary.LittleEndian.Uint64(constrainedChoice4C.choice))
 		constrainedChoice4.ConstrainedChoice4 = &test_sm_ies.ConstrainedChoice4_ConstrainedChoice4A{
 			ConstrainedChoice4A: constrainedChoice4structC,
 		}
@@ -113,8 +110,8 @@ func decodeConstrainedChoice4(constrainedChoice4C *C.ConstrainedChoice4_t) (*tes
 	return constrainedChoice4, nil
 }
 
-func decodeConstrainedChoice4Bytes(array [8]byte) (*test_sm_ies.ConstrainedChoice4, error) {
-	constrainedChoice4C := (*C.ConstrainedChoice4_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeConstrainedChoice4(constrainedChoice4C)
-}
+//func decodeConstrainedChoice4Bytes(array [8]byte) (*test_sm_ies.ConstrainedChoice4, error) {
+//	constrainedChoice4C := (*C.ConstrainedChoice4_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+//
+//	return decodeConstrainedChoice4(constrainedChoice4C)
+//}

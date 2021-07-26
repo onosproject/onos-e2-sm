@@ -9,11 +9,10 @@ package testsmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "TEST-ListExtensible1.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
-//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
+//#include "TEST-ListExtensible1.h"
+//#include "Item.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,8 +68,8 @@ func perDecodeTestListExtensible1(bytes []byte) (*test_sm_ies.TestListExtensible
 
 func newTestListExtensible1(testListExtensible1 *test_sm_ies.TestListExtensible1) (*C.TEST_ListExtensible1_t, error) {
 
-	testListExtensible1C := new(C.TEST_ListExtensible1_t) //ToDo - verify correctness of the variable's name
-	for _, ie := range testListExtensible1.GetValue() {   //ToDo - Verify if GetSmth() function is called correctly
+	testListExtensible1C := new(C.TEST_ListExtensible1_t)
+	for _, ie := range testListExtensible1.GetValue() {
 		ieC, err := newItem(ie)
 		if err != nil {
 			return nil, fmt.Errorf("newItem() %s", err.Error())
@@ -86,7 +85,6 @@ func newTestListExtensible1(testListExtensible1 *test_sm_ies.TestListExtensible1
 func decodeTestListExtensible1(testListExtensible1C *C.TEST_ListExtensible1_t) (*test_sm_ies.TestListExtensible1, error) {
 
 	var ieCount int
-
 	testListExtensible1 := test_sm_ies.TestListExtensible1{}
 
 	ieCount = int(testListExtensible1C.list.count)
@@ -101,10 +99,4 @@ func decodeTestListExtensible1(testListExtensible1C *C.TEST_ListExtensible1_t) (
 	}
 
 	return &testListExtensible1, nil
-}
-
-func decodeTestListExtensible1Bytes(array [8]byte) (*test_sm_ies.TestListExtensible1, error) {
-	testListExtensible1C := (*C.TEST_ListExtensible1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestListExtensible1(testListExtensible1C)
 }

@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,24 +68,35 @@ func perDecodeTestFullyOptionalSequence(bytes []byte) (*test_sm_ies.TestFullyOpt
 
 func newTestFullyOptionalSequence(testFullyOptionalSequence *test_sm_ies.TestFullyOptionalSequence) (*C.TEST_FullyOptionalSequence_t, error) {
 
-	var err error
 	testFullyOptionalSequenceC := C.TEST_FullyOptionalSequence_t{}
 
-	item1C := C.long(testFullyOptionalSequence.Item1)
-	item2C, err := newOctetString(testFullyOptionalSequence.Item2)
-	if err != nil {
-		return nil, err
+	if testFullyOptionalSequence.Item1 != nil {
+		item1C := C.long(testFullyOptionalSequence.Item1)
+		testFullyOptionalSequenceC.item1 = item1C
 	}
-	item3C := newBoolean(*testFullyOptionalSequence.Item3)
 
-	item4C := C.long(testFullyOptionalSequence.Item4)
-	item5C := C.long(testFullyOptionalSequence.Item5)
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	testFullyOptionalSequenceC.item1 = item1C
-	testFullyOptionalSequenceC.item2 = item2C
-	testFullyOptionalSequenceC.item3 = item3C
-	testFullyOptionalSequenceC.item4 = item4C
-	testFullyOptionalSequenceC.item5 = item5C
+	if testFullyOptionalSequence.Item2 != nil {
+		item2C, err := newOctetString(testFullyOptionalSequence.Item2)
+		if err != nil {
+			return nil, err
+		}
+		testFullyOptionalSequenceC.item2 = item2C
+	}
+
+	if testFullyOptionalSequence.Item3 != nil {
+		item3C := newBoolean(*testFullyOptionalSequence.Item3)
+		testFullyOptionalSequenceC.item3 = item3C
+	}
+
+	if testFullyOptionalSequence.Item4 != nil {
+		item4C := C.long(testFullyOptionalSequence.Item4)
+		testFullyOptionalSequenceC.item4 = item4C
+	}
+
+	if testFullyOptionalSequence.Item5 != nil {
+		item5C := C.long(testFullyOptionalSequence.Item5)
+		testFullyOptionalSequenceC.item5 = item5C
+	}
 
 	return &testFullyOptionalSequenceC, nil
 }
@@ -96,24 +106,32 @@ func decodeTestFullyOptionalSequence(testFullyOptionalSequenceC *C.TEST_FullyOpt
 	var err error
 	testFullyOptionalSequence := test_sm_ies.TestFullyOptionalSequence{}
 
-	testFullyOptionalSequence.Item1 = int32(testFullyOptionalSequenceC.item1)
-	testFullyOptionalSequence.Item2, err = decodeOctetString(testFullyOptionalSequenceC.item2)
-	if err != nil {
-		return nil, err
-	}
-	testFullyOptionalSequence.Item3 = decodeBoolean(testFullyOptionalSequenceC.item3)
-	if err != nil {
-		return nil, fmt.Errorf("decodeBoolean() %s", err.Error())
+	if testFullyOptionalSequenceC.item1 != nil {
+		ie1 := int32(testFullyOptionalSequenceC.item1)
+		testFullyOptionalSequence.Item1 = &ie1
 	}
 
-	testFullyOptionalSequence.Item4 = int32(testFullyOptionalSequenceC.item4)
-	testFullyOptionalSequence.Item5 = int32(testFullyOptionalSequenceC.item5)
+	if testFullyOptionalSequenceC.item2 != nil {
+		testFullyOptionalSequence.Item2, err = decodeOctetString(testFullyOptionalSequenceC.item2)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if testFullyOptionalSequenceC.item3 != nil {
+		bl := decodeBoolean(testFullyOptionalSequenceC.item3)
+		testFullyOptionalSequence.Item3 = &bl
+	}
+
+	if testFullyOptionalSequenceC.item4 != nil {
+		ie4 := int32(testFullyOptionalSequenceC.item4)
+		testFullyOptionalSequence.Item4 = &ie4
+	}
+
+	if testFullyOptionalSequenceC.item5 != nil {
+		ie5 := int32(testFullyOptionalSequenceC.item5)
+		testFullyOptionalSequence.Item5 = &ie5
+	}
 
 	return &testFullyOptionalSequence, nil
-}
-
-func decodeTestFullyOptionalSequenceBytes(array [8]byte) (*test_sm_ies.TestFullyOptionalSequence, error) {
-	testFullyOptionalSequenceC := (*C.TEST_FullyOptionalSequence_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestFullyOptionalSequence(testFullyOptionalSequenceC)
 }

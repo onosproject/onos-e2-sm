@@ -9,11 +9,10 @@ package testsmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "ItemExtensible.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "ItemExtensible.h"
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,17 +68,18 @@ func perDecodeItemExtensible(bytes []byte) (*test_sm_ies.ItemExtensible, error) 
 
 func newItemExtensible(itemExtensible *test_sm_ies.ItemExtensible) (*C.ItemExtensible_t, error) {
 
-	var err error
 	itemExtensibleC := C.ItemExtensible_t{}
 
 	item1C := C.long(itemExtensible.Item1)
-	item2C, err := decodeOctetString(itemExtensible.Item2)
-	if err != nil {
-		return nil, err
-	}
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	itemExtensibleC.item1 = item1C
-	itemExtensibleC.item2 = item2C
+
+	if itemExtensible.Item2 != nil {
+		item2C, err := decodeOctetString(itemExtensible.Item2)
+		if err != nil {
+			return nil, err
+		}
+		itemExtensibleC.item2 = item2C
+	}
 
 	return &itemExtensibleC, nil
 }
@@ -90,16 +90,13 @@ func decodeItemExtensible(itemExtensibleC *C.ItemExtensible_t) (*test_sm_ies.Ite
 	itemExtensible := test_sm_ies.ItemExtensible{}
 
 	itemExtensible.Item1 = int32(itemExtensibleC.item1)
-	itemExtensible.Item2, err = decodeOctetString(itemExtensibleC.item2)
-	if err != nil {
-		return nil, err
+
+	if itemExtensibleC.item2 != nil {
+		itemExtensible.Item2, err = decodeOctetString(&itemExtensibleC.item2)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &itemExtensible, nil
-}
-
-func decodeItemExtensibleBytes(array [8]byte) (*test_sm_ies.ItemExtensible, error) {
-	itemExtensibleC := (*C.ItemExtensible_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeItemExtensible(itemExtensibleC)
 }

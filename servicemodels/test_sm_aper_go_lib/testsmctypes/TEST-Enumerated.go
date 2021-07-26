@@ -12,7 +12,6 @@ package testsmctypes
 //#include "TEST-Enumerated.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -24,7 +23,7 @@ func xerEncodeTestEnumerated(testEnumerated *test_sm_ies.TestEnumerated) ([]byte
 		return nil, err
 	}
 
-	bytes, err := encodeXer(&C.asn_DEF_TEST_Enumerated, unsafe.Pointer(testEnumeratedCP)) //ToDo - change name of C-encoder tag
+	bytes, err := encodeXer(&C.asn_DEF_TEST_Enumerated, unsafe.Pointer(testEnumeratedCP))
 	if err != nil {
 		return nil, fmt.Errorf("xerEncodeTestEnumerated() %s", err.Error())
 	}
@@ -52,7 +51,7 @@ func xerDecodeTestEnumerated(bytes []byte) (*test_sm_ies.TestEnumerated, error) 
 	if unsafePtr == nil {
 		return nil, fmt.Errorf("pointer decoded from XER is nil")
 	}
-	return decodeTestEnumerated((*C.TEST_Enumerated_t)(unsafePtr)) //ToDo - change name of C-struct
+	return decodeTestEnumerated((*C.TEST_Enumerated_t)(unsafePtr))
 }
 
 func perDecodeTestEnumerated(bytes []byte) (*test_sm_ies.TestEnumerated, error) {
@@ -70,17 +69,17 @@ func newTestEnumerated(testEnumerated *test_sm_ies.TestEnumerated) (*C.TEST_Enum
 	var ret C.TEST_Enumerated_t
 	switch *testEnumerated {
 	case test_sm_ies.TestEnumerated_TEST_ENUMERATED_ENUM1:
-		ret = C.TEST_Enumerated_enum1 //ToDo - double-check correctness of the name
+		ret = C.TEST_Enumerated_enum1
 	case test_sm_ies.TestEnumerated_TEST_ENUMERATED_ENUM2:
-		ret = C.TEST_Enumerated_enum2 //ToDo - double-check correctness of the name
+		ret = C.TEST_Enumerated_enum2
 	case test_sm_ies.TestEnumerated_TEST_ENUMERATED_ENUM3:
-		ret = C.TEST_Enumerated_enum3 //ToDo - double-check correctness of the name
+		ret = C.TEST_Enumerated_enum3
 	case test_sm_ies.TestEnumerated_TEST_ENUMERATED_ENUM4:
-		ret = C.TEST_Enumerated_enum4 //ToDo - double-check correctness of the name
+		ret = C.TEST_Enumerated_enum4
 	case test_sm_ies.TestEnumerated_TEST_ENUMERATED_ENUM5:
-		ret = C.TEST_Enumerated_enum5 //ToDo - double-check correctness of the name
+		ret = C.TEST_Enumerated_enum5
 	case test_sm_ies.TestEnumerated_TEST_ENUMERATED_ENUM6:
-		ret = C.TEST_Enumerated_enum6 //ToDo - double-check correctness of the name
+		ret = C.TEST_Enumerated_enum6
 	default:
 		return nil, fmt.Errorf("unexpected TestEnumerated %v", testEnumerated)
 	}
@@ -90,14 +89,7 @@ func newTestEnumerated(testEnumerated *test_sm_ies.TestEnumerated) (*C.TEST_Enum
 
 func decodeTestEnumerated(testEnumeratedC *C.TEST_Enumerated_t) (*test_sm_ies.TestEnumerated, error) {
 
-	//ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
 	testEnumerated := test_sm_ies.TestEnumerated(int32(*testEnumeratedC))
 
 	return &testEnumerated, nil
-}
-
-func decodeTestEnumeratedBytes(array [8]byte) (*test_sm_ies.TestEnumerated, error) { //ToDo - Check addressing correct structure in Protobuf
-	testEnumeratedC := (*C.TestEnumerated_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
-
-	return decodeTestEnumerated(testEnumeratedC)
 }

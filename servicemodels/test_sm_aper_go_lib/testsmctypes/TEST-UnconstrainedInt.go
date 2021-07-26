@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,31 +68,20 @@ func perDecodeTestUnconstrainedInt(bytes []byte) (*test_sm_ies.TestUnconstrained
 
 func newTestUnconstrainedInt(testUnconstrainedInt *test_sm_ies.TestUnconstrainedInt) (*C.TEST_UnconstrainedInt_t, error) {
 
-	var err error
-	testUnconstrainedIntC := C.TEST_UnconstrainedInt_t{}
-
-	attrUciAC := C.long(testUnconstrainedInt.AttrUciA)
-	attrUciBC := C.long(testUnconstrainedInt.AttrUciB)
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	testUnconstrainedIntC.attrUciA = attrUciAC
-	testUnconstrainedIntC.attrUciB = attrUciBC
+	testUnconstrainedIntC := C.TEST_UnconstrainedInt_t{
+		attrUciA: C.long(testUnconstrainedInt.AttrUciA),
+		attrUciB: C.long(testUnconstrainedInt.AttrUciB),
+	}
 
 	return &testUnconstrainedIntC, nil
 }
 
 func decodeTestUnconstrainedInt(testUnconstrainedIntC *C.TEST_UnconstrainedInt_t) (*test_sm_ies.TestUnconstrainedInt, error) {
 
-	var err error
-	testUnconstrainedInt := test_sm_ies.TestUnconstrainedInt{}
-
-	testUnconstrainedInt.AttrUciA = int32(testUnconstrainedIntC.attrUciA)
-	testUnconstrainedInt.AttrUciB = int32(testUnconstrainedIntC.attrUciB)
+	testUnconstrainedInt := test_sm_ies.TestUnconstrainedInt{
+		AttrUciA: int32(testUnconstrainedIntC.attrUciA),
+		AttrUciB: int32(testUnconstrainedIntC.attrUciB),
+	}
 
 	return &testUnconstrainedInt, nil
-}
-
-func decodeTestUnconstrainedIntBytes(array [8]byte) (*test_sm_ies.TestUnconstrainedInt, error) {
-	testUnconstrainedIntC := (*C.TEST_UnconstrainedInt_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestUnconstrainedInt(testUnconstrainedIntC)
 }

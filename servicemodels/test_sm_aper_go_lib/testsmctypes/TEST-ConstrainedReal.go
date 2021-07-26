@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,41 +68,28 @@ func perDecodeTestConstrainedReal(bytes []byte) (*test_sm_ies.TestConstrainedRea
 
 func newTestConstrainedReal(testConstrainedReal *test_sm_ies.TestConstrainedReal) (*C.TEST_ConstrainedReal_t, error) {
 
-	testConstrainedRealC := C.TEST_ConstrainedReal_t{}
-
-	attrCrAC := C.double(testConstrainedReal.AttrCrA)
-	attrCrBC := C.double(testConstrainedReal.AttrCrB)
-	attrCrCC := C.double(testConstrainedReal.AttrCrC)
-	attrCrDC := C.double(testConstrainedReal.AttrCrD)
-	attrCrEC := C.double(testConstrainedReal.AttrCrE)
-	attrCrFC := C.double(testConstrainedReal.AttrCrF)
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-	testConstrainedRealC.attrCrA = attrCrAC
-	testConstrainedRealC.attrCrB = attrCrBC
-	testConstrainedRealC.attrCrC = attrCrCC
-	testConstrainedRealC.attrCrD = attrCrDC
-	testConstrainedRealC.attrCrE = attrCrEC
-	testConstrainedRealC.attrCrF = attrCrFC
+	testConstrainedRealC := C.TEST_ConstrainedReal_t{
+		attrCrA: C.double(testConstrainedReal.AttrCrA),
+		attrCrB: C.double(testConstrainedReal.AttrCrB),
+		attrCrC: C.double(testConstrainedReal.AttrCrC),
+		attrCrD: C.double(testConstrainedReal.AttrCrD),
+		attrCrE: C.double(testConstrainedReal.AttrCrE),
+		attrCrF: C.double(testConstrainedReal.AttrCrF),
+	}
 
 	return &testConstrainedRealC, nil
 }
 
 func decodeTestConstrainedReal(testConstrainedRealC *C.TEST_ConstrainedReal_t) (*test_sm_ies.TestConstrainedReal, error) {
 
-	testConstrainedReal := test_sm_ies.TestConstrainedReal{}
-
-	testConstrainedReal.AttrCrA = float64(testConstrainedRealC.attrCrA)
-	testConstrainedReal.AttrCrB = float64(testConstrainedRealC.attrCrB)
-	testConstrainedReal.AttrCrC = float64(testConstrainedRealC.attrCrC)
-	testConstrainedReal.AttrCrD = float64(testConstrainedRealC.attrCrD)
-	testConstrainedReal.AttrCrE = float64(testConstrainedRealC.attrCrE)
-	testConstrainedReal.AttrCrF = float64(testConstrainedRealC.attrCrF)
+	testConstrainedReal := test_sm_ies.TestConstrainedReal{
+		AttrCrA: float64(testConstrainedRealC.attrCrA),
+		AttrCrB: float64(testConstrainedRealC.attrCrB),
+		AttrCrC: float64(testConstrainedRealC.attrCrC),
+		AttrCrD: float64(testConstrainedRealC.attrCrD),
+		AttrCrE: float64(testConstrainedRealC.attrCrE),
+		AttrCrF: float64(testConstrainedRealC.attrCrF),
+	}
 
 	return &testConstrainedReal, nil
-}
-
-func decodeTestConstrainedRealBytes(array [8]byte) (*test_sm_ies.TestConstrainedReal, error) {
-	testConstrainedRealC := (*C.TEST_ConstrainedReal_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestConstrainedReal(testConstrainedRealC)
 }

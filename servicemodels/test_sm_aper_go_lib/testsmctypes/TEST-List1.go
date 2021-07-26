@@ -9,11 +9,10 @@ package testsmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "TEST-List1.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
-//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
+//#include "TEST-List1.h"
+//#include "Item.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,8 +68,8 @@ func perDecodeTestList1(bytes []byte) (*test_sm_ies.TestList1, error) {
 
 func newTestList1(testList1 *test_sm_ies.TestList1) (*C.TEST_List1_t, error) {
 
-	testList1C := new(C.TEST_List1_t)         //ToDo - verify correctness of the variable's name
-	for _, ie := range testList1.GetValue() { //ToDo - Verify if GetSmth() function is called correctly
+	testList1C := new(C.TEST_List1_t)
+	for _, ie := range testList1.GetValue() {
 		ieC, err := newItem(ie)
 		if err != nil {
 			return nil, fmt.Errorf("newItem() %s", err.Error())
@@ -86,7 +85,6 @@ func newTestList1(testList1 *test_sm_ies.TestList1) (*C.TEST_List1_t, error) {
 func decodeTestList1(testList1C *C.TEST_List1_t) (*test_sm_ies.TestList1, error) {
 
 	var ieCount int
-
 	testList1 := test_sm_ies.TestList1{}
 
 	ieCount = int(testList1C.list.count)
@@ -101,10 +99,4 @@ func decodeTestList1(testList1C *C.TEST_List1_t) (*test_sm_ies.TestList1, error)
 	}
 
 	return &testList1, nil
-}
-
-func decodeTestList1Bytes(array [8]byte) (*test_sm_ies.TestList1, error) {
-	testList1C := (*C.TEST_List1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestList1(testList1C)
 }

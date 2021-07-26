@@ -69,17 +69,14 @@ func perDecodeConstrainedChoice1(bytes []byte) (*test_sm_ies.ConstrainedChoice1,
 
 func newConstrainedChoice1(constrainedChoice1 *test_sm_ies.ConstrainedChoice1) (*C.ConstrainedChoice1_t, error) {
 
-	var pr C.ConstrainedChoice1_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}           //ToDo - Check if number of bytes is sufficient
+	var pr C.ConstrainedChoice1_PR
+	choiceC := [8]byte{}
 
 	switch choice := constrainedChoice1.ConstrainedChoice1.(type) {
 	case *test_sm_ies.ConstrainedChoice1_ConstrainedChoice1A:
-		pr = C.ConstrainedChoice1_PR_constrainedChoice1A //ToDo - Check if it's correct PR's name
+		pr = C.ConstrainedChoice1_PR_constrainedChoice1A
 
-		im, err := C.long(choice.ConstrainedChoice1A)
-		if err != nil {
-			return nil, fmt.Errorf("C.long() %s", err.Error())
-		}
+		im := C.long(choice.ConstrainedChoice1A)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newConstrainedChoice1() %T not yet implemented", choice)
@@ -99,10 +96,7 @@ func decodeConstrainedChoice1(constrainedChoice1C *C.ConstrainedChoice1_t) (*tes
 
 	switch constrainedChoice1C.present {
 	case C.ConstrainedChoice1_PR_constrainedChoice1A:
-		constrainedChoice1structC, err := int32Bytes(constrainedChoice1C.choice) //ToDo - Verify if decodeSmthBytes function exists
-		if err != nil {
-			return nil, fmt.Errorf("int32Bytes() %s", err.Error())
-		}
+		constrainedChoice1structC:= int32(binary.LittleEndian.Uint64(constrainedChoice1C.choice))
 		constrainedChoice1.ConstrainedChoice1 = &test_sm_ies.ConstrainedChoice1_ConstrainedChoice1A{
 			ConstrainedChoice1A: constrainedChoice1structC,
 		}
@@ -111,10 +105,4 @@ func decodeConstrainedChoice1(constrainedChoice1C *C.ConstrainedChoice1_t) (*tes
 	}
 
 	return constrainedChoice1, nil
-}
-
-func decodeConstrainedChoice1Bytes(array [8]byte) (*test_sm_ies.ConstrainedChoice1, error) {
-	constrainedChoice1C := (*C.ConstrainedChoice1_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeConstrainedChoice1(constrainedChoice1C)
 }

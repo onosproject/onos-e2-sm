@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -102,20 +101,20 @@ func newTestBitString(testBitString *test_sm_ies.TestBitString) (*C.TEST_BitStri
 		return nil, fmt.Errorf("new.asn1.v1.BitString() %s", err.Error())
 	}
 
-	attrBs7C, err := newBitString(testBitString.AttrBs7)
-	if err != nil {
-		return nil, fmt.Errorf("new.asn1.v1.BitString() %s", err.Error())
-	}
-
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	testBitStringC.attrBs1 = attrBs1C
 	testBitStringC.attrBs2 = attrBs2C
 	testBitStringC.attrBs3 = attrBs3C
 	testBitStringC.attrBs4 = attrBs4C
 	testBitStringC.attrBs5 = attrBs5C
 	testBitStringC.attrBs6 = attrBs6C
-	testBitStringC.attrBs7 = attrBs7C
 
+	if testBitString.AttrBs7 != nil {
+		attrBs7C, err := newBitString(testBitString.AttrBs7)
+		if err != nil {
+			return nil, fmt.Errorf("new.asn1.v1.BitString() %s", err.Error())
+		}
+		testBitStringC.attrBs7 = attrBs7C
+	}
 	return &testBitStringC, nil
 }
 
@@ -154,16 +153,12 @@ func decodeTestBitString(testBitStringC *C.TEST_BitString_t) (*test_sm_ies.TestB
 		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
 	}
 
-	testBitString.AttrBs7, err = decodeBitString(testBitStringC.attrBs7)
-	if err != nil {
-		return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
+	if testBitStringC.attrBs7 != nil {
+		testBitString.AttrBs7, err = decodeBitString(testBitStringC.attrBs7)
+		if err != nil {
+			return nil, fmt.Errorf("decode.asn1.v1.BitString() %s", err.Error())
+		}
 	}
 
 	return &testBitString, nil
-}
-
-func decodeTestBitStringBytes(array [8]byte) (*test_sm_ies.TestBitString, error) {
-	testBitStringC := (*C.TEST_BitString_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestBitString(testBitStringC)
 }

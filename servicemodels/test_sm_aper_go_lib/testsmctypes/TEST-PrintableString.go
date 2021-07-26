@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -102,18 +101,20 @@ func newTestPrintableString(testPrintableString *test_sm_ies.TestPrintableString
 		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
 	}
 
-	attrPs7C, err := newPrintableString(*testPrintableString.AttrPs7)
-	if err != nil {
-		return nil, fmt.Errorf("newPrintableString() %s", err.Error())
-	}
-
 	testPrintableStringC.attrPs1 = attrPs1C
 	testPrintableStringC.attrPs2 = attrPs2C
 	testPrintableStringC.attrPs3 = attrPs3C
 	testPrintableStringC.attrPs4 = attrPs4C
 	testPrintableStringC.attrPs5 = attrPs5C
 	testPrintableStringC.attrPs6 = attrPs6C
-	testPrintableStringC.attrPs7 = attrPs7C
+
+	if testPrintableString.AttrPs7 != nil {
+		attrPs7C, err := newPrintableString(*testPrintableString.AttrPs7)
+		if err != nil {
+			return nil, fmt.Errorf("newPrintableString() %s", err.Error())
+		}
+		testPrintableStringC.attrPs7 = *attrPs7C
+	}
 
 	return &testPrintableStringC, nil
 }
@@ -153,16 +154,12 @@ func decodeTestPrintableString(testPrintableStringC *C.TEST_PrintableString_t) (
 		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
 	}
 
-	testPrintableString.AttrPs7, err = decodePrintableString(testPrintableStringC.attrPs7)
-	if err != nil {
-		return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
+	if testPrintableStringC.attrPs7 != nil {
+		res, err := decodePrintableString(&testPrintableStringC.attrPs7)
+		if err != nil {
+			return nil, fmt.Errorf("decodePrintableString() %s", err.Error())
+		}
+		testPrintableString.AttrPs7 = &res
 	}
-
 	return &testPrintableString, nil
-}
-
-func decodeTestPrintableStringBytes(array [8]byte) (*test_sm_ies.TestPrintableString, error) {
-	testPrintableStringC := (*C.TEST_PrintableString_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestPrintableString(testPrintableStringC)
 }

@@ -10,10 +10,9 @@ package testsmctypes
 //#include <stdlib.h>
 //#include <assert.h>
 //#include "TEST-ListExtensible3.h"
-//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
+//#include "TEST-FullyOptionalSequence.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,8 +68,8 @@ func perDecodeTestListExtensible3(bytes []byte) (*test_sm_ies.TestListExtensible
 
 func newTestListExtensible3(testListExtensible3 *test_sm_ies.TestListExtensible3) (*C.TEST_ListExtensible3_t, error) {
 
-	testListExtensible3C := new(C.TEST_ListExtensible3_t) //ToDo - verify correctness of the variable's name
-	for _, ie := range testListExtensible3.GetValue() {   //ToDo - Verify if GetSmth() function is called correctly
+	testListExtensible3C := new(C.TEST_ListExtensible3_t)
+	for _, ie := range testListExtensible3.GetValue() {
 		ieC, err := newTestFullyOptionalSequence(ie)
 		if err != nil {
 			return nil, fmt.Errorf("newTestFullyOptionalSequence() %s", err.Error())
@@ -86,13 +85,12 @@ func newTestListExtensible3(testListExtensible3 *test_sm_ies.TestListExtensible3
 func decodeTestListExtensible3(testListExtensible3C *C.TEST_ListExtensible3_t) (*test_sm_ies.TestListExtensible3, error) {
 
 	var ieCount int
-
 	testListExtensible3 := test_sm_ies.TestListExtensible3{}
 
 	ieCount = int(testListExtensible3C.list.count)
 	for i := 0; i < ieCount; i++ {
 		offset := unsafe.Sizeof(unsafe.Pointer(testListExtensible3C.list.array)) * uintptr(i)
-		ieC := *(**C.TestFullyOptionalSequence_t)(unsafe.Pointer(uintptr(unsafe.Pointer(testListExtensible3C.list.array)) + offset))
+		ieC := *(**C.TEST_FullyOptionalSequence_t)(unsafe.Pointer(uintptr(unsafe.Pointer(testListExtensible3C.list.array)) + offset))
 		ie, err := decodeTestFullyOptionalSequence(ieC)
 		if err != nil {
 			return nil, fmt.Errorf("decodeTestFullyOptionalSequence() %s", err.Error())
@@ -101,10 +99,4 @@ func decodeTestListExtensible3(testListExtensible3C *C.TEST_ListExtensible3_t) (
 	}
 
 	return &testListExtensible3, nil
-}
-
-func decodeTestListExtensible3Bytes(array [8]byte) (*test_sm_ies.TestListExtensible3, error) {
-	testListExtensible3C := (*C.TEST_ListExtensible3_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestListExtensible3(testListExtensible3C)
 }

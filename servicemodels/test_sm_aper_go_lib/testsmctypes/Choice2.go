@@ -69,25 +69,19 @@ func perDecodeChoice2(bytes []byte) (*test_sm_ies.Choice2, error) {
 
 func newChoice2(choice2 *test_sm_ies.Choice2) (*C.Choice2_t, error) {
 
-	var pr C.Choice2_PR  //ToDo - verify correctness of the name
-	choiceC := [8]byte{} //ToDo - Check if number of bytes is sufficient
+	var pr C.Choice2_PR
+	choiceC := [8]byte{}
 
 	switch choice := choice2.Choice2.(type) {
 	case *test_sm_ies.Choice2_Choice2A:
-		pr = C.Choice2_PR_choice2A //ToDo - Check if it's correct PR's name
+		pr = C.Choice2_PR_choice2A
 
-		im, err := C.long(choice.Choice2A)
-		if err != nil {
-			return nil, fmt.Errorf("C.long() %s", err.Error())
-		}
+		im := C.long(choice.Choice2A)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *test_sm_ies.Choice2_Choice2B:
-		pr = C.Choice2_PR_choice2B //ToDo - Check if it's correct PR's name
+		pr = C.Choice2_PR_choice2B
 
-		im, err := C.long(choice.Choice2B)
-		if err != nil {
-			return nil, fmt.Errorf("C.long() %s", err.Error())
-		}
+		im := C.long(choice.Choice2B)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newChoice2() %T not yet implemented", choice)
@@ -107,18 +101,12 @@ func decodeChoice2(choice2C *C.Choice2_t) (*test_sm_ies.Choice2, error) {
 
 	switch choice2C.present {
 	case C.Choice2_PR_choice2A:
-		choice2structC, err := int32Bytes(choice2C.choice) //ToDo - Verify if decodeSmthBytes function exists
-		if err != nil {
-			return nil, fmt.Errorf("int32Bytes() %s", err.Error())
-		}
+		choice2structC := int32(binary.LittleEndian.Uint64(choice2C.choice))
 		choice2.Choice2 = &test_sm_ies.Choice2_Choice2A{
 			Choice2A: choice2structC,
 		}
 	case C.Choice2_PR_choice2B:
-		choice2structC, err := int32Bytes(choice2C.choice) //ToDo - Verify if decodeSmthBytes function exists
-		if err != nil {
-			return nil, fmt.Errorf("int32Bytes() %s", err.Error())
-		}
+		choice2structC := int32(binary.LittleEndian.Uint64(choice2C.choice))
 		choice2.Choice2 = &test_sm_ies.Choice2_Choice2B{
 			Choice2B: choice2structC,
 		}
@@ -127,10 +115,4 @@ func decodeChoice2(choice2C *C.Choice2_t) (*test_sm_ies.Choice2, error) {
 	}
 
 	return choice2, nil
-}
-
-func decodeChoice2Bytes(array [8]byte) (*test_sm_ies.Choice2, error) {
-	choice2C := (*C.Choice2_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeChoice2(choice2C)
 }

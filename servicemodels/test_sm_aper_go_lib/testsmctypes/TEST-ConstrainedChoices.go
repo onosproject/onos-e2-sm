@@ -13,7 +13,6 @@ package testsmctypes
 import "C"
 
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -137,10 +136,4 @@ func decodeTestConstrainedChoices(testConstrainedChoicesC *C.TEST_ConstrainedCho
 	}
 
 	return &testConstrainedChoices, nil
-}
-
-func decodeTestConstrainedChoicesBytes(array [8]byte) (*test_sm_ies.TestConstrainedChoices, error) {
-	testConstrainedChoicesC := (*C.TEST_ConstrainedChoices_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestConstrainedChoices(testConstrainedChoicesC)
 }

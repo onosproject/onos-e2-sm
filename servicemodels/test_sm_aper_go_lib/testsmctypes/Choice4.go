@@ -69,17 +69,14 @@ func perDecodeChoice4(bytes []byte) (*test_sm_ies.Choice4, error) {
 
 func newChoice4(choice4 *test_sm_ies.Choice4) (*C.Choice4_t, error) {
 
-	var pr C.Choice4_PR  //ToDo - verify correctness of the name
-	choiceC := [8]byte{} //ToDo - Check if number of bytes is sufficient
+	var pr C.Choice4_PR
+	choiceC := [8]byte{}
 
 	switch choice := choice4.Choice4.(type) {
 	case *test_sm_ies.Choice4_Choice4A:
-		pr = C.Choice4_PR_choice4A //ToDo - Check if it's correct PR's name
+		pr = C.Choice4_PR_choice4A
 
-		im, err := C.long(choice.Choice4A)
-		if err != nil {
-			return nil, fmt.Errorf("C.long() %s", err.Error())
-		}
+		im := C.long(choice.Choice4A)
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newChoice4() %T not yet implemented", choice)
@@ -99,10 +96,7 @@ func decodeChoice4(choice4C *C.Choice4_t) (*test_sm_ies.Choice4, error) {
 
 	switch choice4C.present {
 	case C.Choice4_PR_choice4A:
-		choice4structC, err := int32Bytes(choice4C.choice) //ToDo - Verify if decodeSmthBytes function exists
-		if err != nil {
-			return nil, fmt.Errorf("int32Bytes() %s", err.Error())
-		}
+		choice4structC := int32(binary.LittleEndian.Uint64(choice4C.choice))
 		choice4.Choice4 = &test_sm_ies.Choice4_Choice4A{
 			Choice4A: choice4structC,
 		}
@@ -111,10 +105,4 @@ func decodeChoice4(choice4C *C.Choice4_t) (*test_sm_ies.Choice4, error) {
 	}
 
 	return choice4, nil
-}
-
-func decodeChoice4Bytes(array [8]byte) (*test_sm_ies.Choice4, error) {
-	choice4C := (*C.Choice4_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeChoice4(choice4C)
 }

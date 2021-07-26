@@ -9,11 +9,10 @@ package testsmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "TEST-ListExtensible2.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
-//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
+//#include "TEST-ListExtensible2.h"
+//#include "ItemExtensible.h"
 import "C"
 import (
-	"encoding/binary"
 	"fmt"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"unsafe"
@@ -69,8 +68,8 @@ func perDecodeTestListExtensible2(bytes []byte) (*test_sm_ies.TestListExtensible
 
 func newTestListExtensible2(testListExtensible2 *test_sm_ies.TestListExtensible2) (*C.TEST_ListExtensible2_t, error) {
 
-	testListExtensible2C := new(C.TEST_ListExtensible2_t) //ToDo - verify correctness of the variable's name
-	for _, ie := range testListExtensible2.GetValue() {   //ToDo - Verify if GetSmth() function is called correctly
+	testListExtensible2C := new(C.TEST_ListExtensible2_t)
+	for _, ie := range testListExtensible2.GetValue() {
 		ieC, err := newItemExtensible(ie)
 		if err != nil {
 			return nil, fmt.Errorf("newItemExtensible() %s", err.Error())
@@ -86,7 +85,6 @@ func newTestListExtensible2(testListExtensible2 *test_sm_ies.TestListExtensible2
 func decodeTestListExtensible2(testListExtensible2C *C.TEST_ListExtensible2_t) (*test_sm_ies.TestListExtensible2, error) {
 
 	var ieCount int
-
 	testListExtensible2 := test_sm_ies.TestListExtensible2{}
 
 	ieCount = int(testListExtensible2C.list.count)
@@ -101,10 +99,4 @@ func decodeTestListExtensible2(testListExtensible2C *C.TEST_ListExtensible2_t) (
 	}
 
 	return &testListExtensible2, nil
-}
-
-func decodeTestListExtensible2Bytes(array [8]byte) (*test_sm_ies.TestListExtensible2, error) {
-	testListExtensible2C := (*C.TEST_ListExtensible2_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-
-	return decodeTestListExtensible2(testListExtensible2C)
 }
