@@ -1397,18 +1397,18 @@ type TestOctetString struct {
 	unknownFields protoimpl.UnknownFields
 
 	AttrOs1 []byte `protobuf:"bytes,1,opt,name=attr_os1,json=attrOs1,proto3" json:"attr_os1,omitempty"`
-	// @inject_tag: aper:"sizeLB:20,sizeUB:20"
-	AttrOs2 []byte `protobuf:"bytes,2,opt,name=attr_os2,json=attrOs2,proto3" json:"attr_os2,omitempty" aper:"sizeLB:20,sizeUB:20"`
-	// @inject_tag: aper:"sizeLB:127,sizeUB:127,sizeExt"
-	AttrOs3 []byte `protobuf:"bytes,3,opt,name=attr_os3,json=attrOs3,proto3" json:"attr_os3,omitempty" aper:"sizeLB:127,sizeUB:127,sizeExt"`
-	// @inject_tag: aper:"sizeLB:0,sizeUB:32"
-	AttrOs4 []byte `protobuf:"bytes,4,opt,name=attr_os4,json=attrOs4,proto3" json:"attr_os4,omitempty" aper:"sizeLB:0,sizeUB:32"`
-	// @inject_tag: aper:"sizeLB:22,sizeUB:32"
-	AttrOs5 []byte `protobuf:"bytes,5,opt,name=attr_os5,json=attrOs5,proto3" json:"attr_os5,omitempty" aper:"sizeLB:22,sizeUB:32"`
-	// @inject_tag: aper:"sizeLB:28,sizeUB:32,sizeExt"
-	AttrOs6 []byte `protobuf:"bytes,6,opt,name=attr_os6,json=attrOs6,proto3" json:"attr_os6,omitempty" aper:"sizeLB:28,sizeUB:32,sizeExt"`
-	// @inject_tag: aper:"optional,sizeLB:22,sizeUB:36"
-	AttrOs7 []byte `protobuf:"bytes,7,opt,name=attr_os7,json=attrOs7,proto3,oneof" json:"attr_os7,omitempty" aper:"optional,sizeLB:22,sizeUB:36"`
+	// @inject_tag: aper:"sizeLB:2,sizeUB:2"
+	AttrOs2 []byte `protobuf:"bytes,2,opt,name=attr_os2,json=attrOs2,proto3" json:"attr_os2,omitempty" aper:"sizeLB:2,sizeUB:2"`
+	// @inject_tag: aper:"sizeLB:2,sizeUB:2,sizeExt"
+	AttrOs3 []byte `protobuf:"bytes,3,opt,name=attr_os3,json=attrOs3,proto3" json:"attr_os3,omitempty" aper:"sizeLB:2,sizeUB:2,sizeExt"`
+	// @inject_tag: aper:"sizeLB:0,sizeUB:3"
+	AttrOs4 []byte `protobuf:"bytes,4,opt,name=attr_os4,json=attrOs4,proto3" json:"attr_os4,omitempty" aper:"sizeLB:0,sizeUB:3"`
+	// @inject_tag: aper:"sizeLB:2,sizeUB:3"
+	AttrOs5 []byte `protobuf:"bytes,5,opt,name=attr_os5,json=attrOs5,proto3" json:"attr_os5,omitempty" aper:"sizeLB:2,sizeUB:3"`
+	// @inject_tag: aper:"sizeLB:1,sizeUB:3,sizeExt"
+	AttrOs6 []byte `protobuf:"bytes,6,opt,name=attr_os6,json=attrOs6,proto3" json:"attr_os6,omitempty" aper:"sizeLB:1,sizeUB:3,sizeExt"`
+	// @inject_tag: aper:"optional,sizeLB:2,sizeUB:6"
+	AttrOs7 []byte `protobuf:"bytes,7,opt,name=attr_os7,json=attrOs7,proto3,oneof" json:"attr_os7,omitempty" aper:"optional,sizeLB:2,sizeUB:6"`
 }
 
 func (x *TestOctetString) Reset() {
@@ -1500,18 +1500,18 @@ type TestPrintableString struct {
 	unknownFields protoimpl.UnknownFields
 
 	AttrPs1 string `protobuf:"bytes,1,opt,name=attr_ps1,json=attrPs1,proto3" json:"attr_ps1,omitempty"`
-	// @inject_tag: aper:"sizeLB:20,sizeUB:20"
-	AttrPs2 string `protobuf:"bytes,2,opt,name=attr_ps2,json=attrPs2,proto3" json:"attr_ps2,omitempty" aper:"sizeLB:20,sizeUB:20"`
-	// @inject_tag: aper:"sizeLB:127,sizeUB:127,sizeExt"
-	AttrPs3 string `protobuf:"bytes,3,opt,name=attr_ps3,json=attrPs3,proto3" json:"attr_ps3,omitempty" aper:"sizeLB:127,sizeUB:127,sizeExt"`
-	// @inject_tag: aper:"sizeLB:0,sizeUB:32"
-	AttrPs4 string `protobuf:"bytes,4,opt,name=attr_ps4,json=attrPs4,proto3" json:"attr_ps4,omitempty" aper:"sizeLB:0,sizeUB:32"`
-	// @inject_tag: aper:"sizeLB:22,sizeUB:32"
-	AttrPs5 string `protobuf:"bytes,5,opt,name=attr_ps5,json=attrPs5,proto3" json:"attr_ps5,omitempty" aper:"sizeLB:22,sizeUB:32"`
-	// @inject_tag: aper:"sizeLB:28,sizeUB:32,sizeExt"
-	AttrPs6 string `protobuf:"bytes,6,opt,name=attr_ps6,json=attrPs6,proto3" json:"attr_ps6,omitempty" aper:"sizeLB:28,sizeUB:32,sizeExt"`
-	// @inject_tag: aper:"optional,sizeLB:22,sizeUB:36"
-	AttrPs7 *string `protobuf:"bytes,7,opt,name=attr_ps7,json=attrPs7,proto3,oneof" json:"attr_ps7,omitempty" aper:"optional,sizeLB:22,sizeUB:36"`
+	// @inject_tag: aper:"sizeLB:2,sizeUB:2"
+	AttrPs2 string `protobuf:"bytes,2,opt,name=attr_ps2,json=attrPs2,proto3" json:"attr_ps2,omitempty" aper:"sizeLB:2,sizeUB:2"`
+	// @inject_tag: aper:"sizeLB:2,sizeUB:2,sizeExt"
+	AttrPs3 string `protobuf:"bytes,3,opt,name=attr_ps3,json=attrPs3,proto3" json:"attr_ps3,omitempty" aper:"sizeLB:2,sizeUB:2,sizeExt"`
+	// @inject_tag: aper:"sizeLB:0,sizeUB:3"
+	AttrPs4 string `protobuf:"bytes,4,opt,name=attr_ps4,json=attrPs4,proto3" json:"attr_ps4,omitempty" aper:"sizeLB:0,sizeUB:3"`
+	// @inject_tag: aper:"sizeLB:2,sizeUB:3"
+	AttrPs5 string `protobuf:"bytes,5,opt,name=attr_ps5,json=attrPs5,proto3" json:"attr_ps5,omitempty" aper:"sizeLB:2,sizeUB:3"`
+	// @inject_tag: aper:"sizeLB:1,sizeUB:3,sizeExt"
+	AttrPs6 string `protobuf:"bytes,6,opt,name=attr_ps6,json=attrPs6,proto3" json:"attr_ps6,omitempty" aper:"sizeLB:1,sizeUB:3,sizeExt"`
+	// @inject_tag: aper:"optional,sizeLB:2,sizeUB:6"
+	AttrPs7 *string `protobuf:"bytes,7,opt,name=attr_ps7,json=attrPs7,proto3,oneof" json:"attr_ps7,omitempty" aper:"optional,sizeLB:2,sizeUB:6"`
 }
 
 func (x *TestPrintableString) Reset() {

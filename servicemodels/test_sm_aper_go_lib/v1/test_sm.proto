@@ -227,17 +227,17 @@ message ConstrainedChoice4 {
 // {TEST-OctetString}
 message TestOctetString {
     bytes attr_os1 = 1 [ json_name="attrOs1"];
-    // @inject_tag: aper:"sizeLB:20,sizeUB:20"
+    // @inject_tag: aper:"sizeLB:2,sizeUB:2"
     bytes attr_os2 = 2 [(validate.v1.rules).bytes.len = 20, json_name="attrOs2"];
-    // @inject_tag: aper:"sizeLB:127,sizeUB:127,sizeExt"
+    // @inject_tag: aper:"sizeLB:2,sizeUB:2,sizeExt"
     bytes attr_os3 = 3 [(validate.v1.rules).bytes.len = 127, json_name="attrOs3"];
-    // @inject_tag: aper:"sizeLB:0,sizeUB:32"
+    // @inject_tag: aper:"sizeLB:0,sizeUB:3"
     bytes attr_os4 = 4 [json_name="attrOs4"];
-    // @inject_tag: aper:"sizeLB:22,sizeUB:32"
+    // @inject_tag: aper:"sizeLB:2,sizeUB:3"
     bytes attr_os5 = 5 [json_name="attrOs5"];
-    // @inject_tag: aper:"sizeLB:28,sizeUB:32,sizeExt"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:3,sizeExt"
     bytes attr_os6 = 6 [json_name="attrOs6"];
-    // @inject_tag: aper:"optional,sizeLB:22,sizeUB:36"
+    // @inject_tag: aper:"optional,sizeLB:2,sizeUB:6"
     optional bytes attr_os7 = 7 [json_name="attrOs7"];
 };
 
@@ -245,17 +245,17 @@ message TestOctetString {
 // {TEST-PrintableString}
 message TestPrintableString {
     string attr_ps1 = 1 [ json_name="attrPs1"];
-    // @inject_tag: aper:"sizeLB:20,sizeUB:20"
+    // @inject_tag: aper:"sizeLB:2,sizeUB:2"
     string attr_ps2 = 2 [(validate.v1.rules).string = {min_len: 20, max_len: 20}, json_name="attrPs2"];
-    // @inject_tag: aper:"sizeLB:127,sizeUB:127,sizeExt"
+    // @inject_tag: aper:"sizeLB:2,sizeUB:2,sizeExt"
     string attr_ps3 = 3 [(validate.v1.rules).string = {min_len: 127, max_len: 127}, json_name="attrPs3"];
-    // @inject_tag: aper:"sizeLB:0,sizeUB:32"
+    // @inject_tag: aper:"sizeLB:0,sizeUB:3"
     string attr_ps4 = 4 [(validate.v1.rules).string = {min_len: 0, max_len: 32}, json_name="attrPs4"];
-    // @inject_tag: aper:"sizeLB:22,sizeUB:32"
+    // @inject_tag: aper:"sizeLB:2,sizeUB:3"
     string attr_ps5 = 5 [(validate.v1.rules).string = {min_len: 22, max_len: 32}, json_name="attrPs5"];
-    // @inject_tag: aper:"sizeLB:28,sizeUB:32,sizeExt"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:3,sizeExt"
     string attr_ps6 = 6 [(validate.v1.rules).string = {min_len: 28, max_len: 32}, json_name="attrPs6"];
-    // @inject_tag: aper:"optional,sizeLB:22,sizeUB:36"
+    // @inject_tag: aper:"optional,sizeLB:2,sizeUB:6"
     optional string attr_ps7 = 7 [(validate.v1.rules).string = {min_len: 22, max_len: 36}, json_name="attrPs7"];
 };
 

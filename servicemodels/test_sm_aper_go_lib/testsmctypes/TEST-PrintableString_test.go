@@ -6,30 +6,40 @@ package testsmctypes
 
 import (
 	"encoding/hex"
-	"fmt"
-	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/test_sm/pdubuilder"
-	test_sm "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm" //ToDo - Make imports more dynamic
+	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"gotest.tools/assert"
 	"testing"
 )
 
-func createTestPrintableStringMsg() (*test_sm.TestPrintableString, error) {
+func createTestPrintableStringMsg() (*test_sm_ies.TestPrintableString, error) {
 
-	// testPrintableString := pdubuilder.CreateTestPrintableString() //ToDo - fill in arguments here(if this function exists
-
-	testPrintableString := test_sm.TestPrintableString{
-		AttrPs1: nil,
-		AttrPs2: nil,
-		AttrPs3: nil,
-		AttrPs4: nil,
-		AttrPs5: nil,
-		AttrPs6: nil,
-		AttrPs7: nil,
+	optStr := "omgls"
+	testPrintableString := test_sm_ies.TestPrintableString{
+		AttrPs1: "Yay",
+		AttrPs2: "on",
+		AttrPs3: "on",
+		AttrPs4: "",
+		AttrPs5: "ONF",
+		AttrPs6: "X",
+		AttrPs7: &optStr,
 	}
 
-	if err := testPrintableString.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating TestPrintableString %s", err.Error())
+	return &testPrintableString, nil
+}
+
+func createTestPrintableStringExcludeOptional() (*test_sm_ies.TestPrintableString, error) {
+
+	//optStr := "omgls"
+	testPrintableString := test_sm_ies.TestPrintableString{
+		AttrPs1: "Yay",
+		AttrPs2: "on",
+		AttrPs3: "on",
+		AttrPs4: "",
+		AttrPs5: "ONF",
+		AttrPs6: "X",
+		//AttrPs7: &optStr,
 	}
+
 	return &testPrintableString, nil
 }
 
@@ -40,14 +50,12 @@ func Test_xerEncodingTestPrintableString(t *testing.T) {
 
 	xer, err := xerEncodeTestPrintableString(testPrintableString)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("TestPrintableString XER\n%s", string(xer))
 
 	result, err := xerDecodeTestPrintableString(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestPrintableString XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
 	assert.Equal(t, testPrintableString.GetAttrPs1(), result.GetAttrPs1())
 	assert.Equal(t, testPrintableString.GetAttrPs2(), result.GetAttrPs2())
 	assert.Equal(t, testPrintableString.GetAttrPs3(), result.GetAttrPs3())
@@ -56,6 +64,24 @@ func Test_xerEncodingTestPrintableString(t *testing.T) {
 	assert.Equal(t, testPrintableString.GetAttrPs6(), result.GetAttrPs6())
 	assert.Equal(t, testPrintableString.GetAttrPs7(), result.GetAttrPs7())
 
+	testPrintableStringExcludeOptional, err := createTestPrintableStringExcludeOptional()
+	assert.NilError(t, err, "Error creating TestPrintableString PDU")
+
+	xer2, err := xerEncodeTestPrintableString(testPrintableStringExcludeOptional)
+	assert.NilError(t, err)
+	t.Logf("TestPrintableString XER\n%s", string(xer2))
+
+	result2, err := xerDecodeTestPrintableString(xer2)
+	assert.NilError(t, err)
+	assert.Assert(t, result2 != nil)
+	t.Logf("TestPrintableString XER - decoded\n%v", result2)
+	assert.Equal(t, testPrintableString.GetAttrPs1(), result2.GetAttrPs1())
+	assert.Equal(t, testPrintableString.GetAttrPs2(), result2.GetAttrPs2())
+	assert.Equal(t, testPrintableString.GetAttrPs3(), result2.GetAttrPs3())
+	assert.Equal(t, testPrintableString.GetAttrPs4(), result2.GetAttrPs4())
+	assert.Equal(t, testPrintableString.GetAttrPs5(), result2.GetAttrPs5())
+	assert.Equal(t, testPrintableString.GetAttrPs6(), result2.GetAttrPs6())
+	assert.Equal(t, testPrintableString.GetAttrPs7(), result2.GetAttrPs7())
 }
 
 func Test_perEncodingTestPrintableString(t *testing.T) {
@@ -65,14 +91,12 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 
 	per, err := perEncodeTestPrintableString(testPrintableString)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeTestPrintableString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestPrintableString PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
 	assert.Equal(t, testPrintableString.GetAttrPs1(), result.GetAttrPs1())
 	assert.Equal(t, testPrintableString.GetAttrPs2(), result.GetAttrPs2())
 	assert.Equal(t, testPrintableString.GetAttrPs3(), result.GetAttrPs3())
@@ -81,4 +105,22 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	assert.Equal(t, testPrintableString.GetAttrPs6(), result.GetAttrPs6())
 	assert.Equal(t, testPrintableString.GetAttrPs7(), result.GetAttrPs7())
 
+	testPrintableStringExcludeOptional, err := createTestPrintableStringExcludeOptional()
+	assert.NilError(t, err, "Error creating TestPrintableString PDU")
+
+	per2, err := perEncodeTestPrintableString(testPrintableStringExcludeOptional)
+	assert.NilError(t, err)
+	t.Logf("TestPrintableString PER\n%v", hex.Dump(per2))
+
+	result2, err := perDecodeTestPrintableString(per2)
+	assert.NilError(t, err)
+	assert.Assert(t, result2 != nil)
+	t.Logf("TestPrintableString PER - decoded\n%v", result2)
+	assert.Equal(t, testPrintableString.GetAttrPs1(), result2.GetAttrPs1())
+	assert.Equal(t, testPrintableString.GetAttrPs2(), result2.GetAttrPs2())
+	assert.Equal(t, testPrintableString.GetAttrPs3(), result2.GetAttrPs3())
+	assert.Equal(t, testPrintableString.GetAttrPs4(), result2.GetAttrPs4())
+	assert.Equal(t, testPrintableString.GetAttrPs5(), result2.GetAttrPs5())
+	assert.Equal(t, testPrintableString.GetAttrPs6(), result2.GetAttrPs6())
+	assert.Equal(t, testPrintableString.GetAttrPs7(), result2.GetAttrPs7())
 }

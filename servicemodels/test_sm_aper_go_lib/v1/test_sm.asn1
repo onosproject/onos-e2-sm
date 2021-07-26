@@ -110,22 +110,22 @@ ConstrainedChoice4 ::= CHOICE {
 
 TEST-OctetString ::= SEQUENCE {
     attrOs1     OCTET STRING,
-    attrOs2     OCTET STRING (SIZE(20)),
-    attrOs3     OCTET STRING (SIZE(127, ...)),
-    attrOs4     OCTET STRING (SIZE(0..32)),
-    attrOs5     OCTET STRING (SIZE(22..32)),
-    attrOs6     OCTET STRING (SIZE(28..32, ...)),
-    attrOs7     OCTET STRING (SIZE(22..36)) OPTIONAL
+    attrOs2     OCTET STRING (SIZE(2)),
+    attrOs3     OCTET STRING (SIZE(2, ...)),
+    attrOs4     OCTET STRING (SIZE(0..3)),
+    attrOs5     OCTET STRING (SIZE(2..3)),
+    attrOs6     OCTET STRING (SIZE(1..3, ...)),
+    attrOs7     OCTET STRING (SIZE(2..6)) OPTIONAL
 }
 
 TEST-PrintableString ::= SEQUENCE {
     attrPs1     PrintableString,
-    attrPs2     PrintableString (SIZE(20)),
-    attrPs3     PrintableString (SIZE(127, ...)),
-    attrPs4     PrintableString (SIZE(0..32)),
-    attrPs5     PrintableString (SIZE(22..32)),
-    attrPs6     PrintableString (SIZE(28..32, ...)),
-    attrPs7     PrintableString (SIZE(22..36)) OPTIONAL
+    attrPs2     PrintableString (SIZE(2)),
+    attrPs3     PrintableString (SIZE(2, ...)),
+    attrPs4     PrintableString (SIZE(0..3)),
+    attrPs5     PrintableString (SIZE(2..3)),
+    attrPs6     PrintableString (SIZE(1..3, ...)),
+    attrPs7     PrintableString (SIZE(2..6)) OPTIONAL
 }
 
 TEST-List1 ::= SEQUENCE (SIZE(0..12)) OF Item
