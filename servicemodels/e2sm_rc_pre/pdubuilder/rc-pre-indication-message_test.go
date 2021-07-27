@@ -56,7 +56,35 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 
 	resultPer, err := rcprectypes.PerDecodeE2SmRcPreIndicationMessage(per)
 	assert.NilError(t, err)
-	t.Logf("PER decoded RC-PRE-IndicationMessage is \n%v", result)
+	t.Logf("PER decoded RC-PRE-IndicationMessage is \n%v", resultPer)
 	assert.DeepEqual(t, newE2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), resultPer.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
 	assert.Equal(t, newE2SmRcPrePdu.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), resultPer.GetIndicationMessageFormat1().GetNeighbors()[0].GetCgi().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
+}
+
+func TestE2SmRcPreIndicationMsgNoNeighbors(t *testing.T) {
+	var plmnID = "12f410"
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
+	var pci int32 = 11
+	cellSize := e2sm_rc_pre_v2.CellSize_CELL_SIZE_MACRO
+
+	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, CreateEArfcn(253), cellSize, pci, nil)
+	assert.NilError(t, err)
+	assert.Assert(t, newE2SmRcPrePdu != nil)
+
+	xer, err := rcprectypes.XerEncodeE2SmRcPreIndicationMessage(newE2SmRcPrePdu)
+	assert.NilError(t, err)
+	t.Logf("XER Encoded Indication Message: \n%s", string(xer))
+
+	result, err := rcprectypes.XerDecodeE2SmRcPreIndicationMessage(xer)
+	assert.NilError(t, err)
+	t.Logf("XER decoded RC-PRE-IndicationMessage is \n%v", result)
+
+	per, err := rcprectypes.PerEncodeE2SmRcPreIndicationMessage(newE2SmRcPrePdu)
+	assert.NilError(t, err)
+	t.Logf("PER Encoded Indication Message: \n%v", hex.Dump(per))
+
+	resultPer, err := rcprectypes.PerDecodeE2SmRcPreIndicationMessage(per)
+	assert.NilError(t, err)
+	t.Logf("PER decoded RC-PRE-IndicationMessage is \n%v", resultPer)
 }
