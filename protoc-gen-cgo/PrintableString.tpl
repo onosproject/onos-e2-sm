@@ -17,7 +17,7 @@ import "fmt"
 // TODO: Change the argument to a []byte
 func newPrintableString(msg string) (*C.PrintableString_t, error) {
 	// PrintableString is defined via OctetString --> see PrintableString.h
-	prntStrC, err := newOctetString(msg)
+	prntStrC, err := newOctetString([]byte(msg))
 	if err != nil {
 		return nil, fmt.Errorf("newOctetString() %s", err.Error())
 	}
@@ -32,7 +32,7 @@ func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 		return "", fmt.Errorf("decodeOctetString() %s", err.Error())
 	}
 
-	return bytes, nil
+	return string(bytes), nil
 }
 
 func newPrintableStringFromArray(array [16]byte) *C.PrintableString_t {
