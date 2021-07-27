@@ -25,7 +25,7 @@ Installing this plugin in your environment would allow you to run it from anywhe
 To use this plugin please run Protobuf compiler on `*.proto` files you want to process in the following way:
 
 ```bash
-protoc -I="servicemodels/" --choice_out="servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2/" servicemodels/e2sm_kpm_v2/v2/e2sm_kpm_v2.proto
+protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api" --proto_path="servicemodels/" --choice_out="servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go/" servicemodels/e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto
 ```
 
 Here are the parameters you should pass:

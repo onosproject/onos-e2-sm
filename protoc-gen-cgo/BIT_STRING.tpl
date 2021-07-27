@@ -32,7 +32,7 @@ func xerEncodeBitString(bs *{{.ProtoFileName}}.BitString) ([]byte, error) {
 	return bytes, nil
 }
 
-func xerDecodeBitString(bytes []byte) (*{{.ProtoFileName}}, error) {
+func xerDecodeBitString(bytes []byte) (*{{.ProtoFileName}}.BitString, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_BIT_STRING)
 	if err != nil {
 		return nil, err

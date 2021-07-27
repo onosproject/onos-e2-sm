@@ -1,0 +1,179 @@
+-- **************************************************************
+-- Test SM for APER Go library validation
+-- Information Element Definitions
+--
+-- **************************************************************
+
+TEST-SM-IEs {
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(0) e2(1) version1 (1) e2sm(1) test-sm-IEs (0)}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+TEST-UnconstrainedInt ::= SEQUENCE {
+    attrUciA    INTEGER,
+    attrUciB    INTEGER
+}
+
+TEST-ConstrainedInt ::= SEQUENCE {
+    attrCiA    INTEGER(10..100),
+    attrCiB    INTEGER(10..MAX),
+    attrCiC    INTEGER(MIN..100),
+    attrCiD    INTEGER(10..20),
+    attrCiE    INTEGER(10),
+    attrCiF    INTEGER(10, ...)
+}
+
+TEST-UnconstrainedReal ::= SEQUENCE {
+    attrUcrA    REAL,
+    attrUcrB    REAL
+}
+
+TEST-ConstrainedReal ::= SEQUENCE {
+    attrCrA    REAL(10..100),
+    attrCrB    REAL(10..MAX),
+    attrCrC    REAL(MIN..100),
+    attrCrD    REAL(10..20),
+    attrCrE    REAL(10),
+    attrCrF    REAL(10, ...)
+}
+
+TEST-BitString ::= SEQUENCE {
+    attrBs1     BIT STRING,
+    attrBs2     BIT STRING (SIZE(20)),
+    attrBs3     BIT STRING (SIZE(20, ...)),
+    attrBs4     BIT STRING (SIZE(0..18)),
+    attrBs5     BIT STRING (SIZE(22..32)),
+    attrBs6     BIT STRING (SIZE(28..32, ...)),
+    attrBs7     BIT STRING (SIZE(22..36)) OPTIONAL
+}
+
+TEST-Choices ::= SEQUENCE {
+    otherAttr   PrintableString,
+    choice1     Choice1,
+    choice2     Choice2,
+    choice3     Choice3,
+    choice4     Choice4
+}
+
+Choice1 ::= CHOICE {
+    choice1A    INTEGER(...)
+}
+
+Choice2 ::= CHOICE {
+    choice2A    INTEGER(...),
+    choice2B    INTEGER(...)
+}
+
+Choice3 ::= CHOICE {
+    choice3A    INTEGER(...),
+    choice3B    INTEGER(...),
+    choice3C    INTEGER(...)
+}
+
+-- Extensible unconstrained choice
+Choice4 ::= CHOICE {
+    choice4A    INTEGER(...),
+    ...
+}
+
+TEST-ConstrainedChoices ::= SEQUENCE {
+    otherCAttr             PrintableString (SIZE(1..50)),
+    constrainedChoice1     ConstrainedChoice1,
+    constrainedChoice2     ConstrainedChoice2,
+    constrainedChoice3     ConstrainedChoice3,
+    constrainedChoice4     ConstrainedChoice4
+}
+
+ConstrainedChoice1 ::= CHOICE {
+    constrainedChoice1A    INTEGER(1..128, ...)
+}
+
+ConstrainedChoice2 ::= CHOICE {
+    constrainedChoice2A    INTEGER(0..15, ...),
+    constrainedChoice2B    INTEGER(1..MAX, ...)
+}
+
+ConstrainedChoice3 ::= CHOICE {
+    constrainedChoice3A    INTEGER(...),
+    constrainedChoice3B    INTEGER(0..15, ...),
+    constrainedChoice3C    INTEGER(1..MAX, ...),
+    constrainedChoice3D    INTEGER(1..1, ...)
+}
+
+-- Extensible constrained choice
+ConstrainedChoice4 ::= CHOICE {
+    constrainedChoice4A    INTEGER(1..128, ...),
+    ...
+}
+
+TEST-OctetString ::= SEQUENCE {
+    attrOs1     OCTET STRING,
+    attrOs2     OCTET STRING (SIZE(2)),
+    attrOs3     OCTET STRING (SIZE(2, ...)),
+    attrOs4     OCTET STRING (SIZE(0..3)),
+    attrOs5     OCTET STRING (SIZE(2..3)),
+    attrOs6     OCTET STRING (SIZE(1..3, ...)),
+    attrOs7     OCTET STRING (SIZE(2..6)) OPTIONAL
+}
+
+TEST-PrintableString ::= SEQUENCE {
+    attrPs1     PrintableString,
+    attrPs2     PrintableString (SIZE(2)),
+    attrPs3     PrintableString (SIZE(2, ...)),
+    attrPs4     PrintableString (SIZE(0..3)),
+    attrPs5     PrintableString (SIZE(2..3)),
+    attrPs6     PrintableString (SIZE(1..3, ...)),
+    attrPs7     PrintableString (SIZE(2..6)) OPTIONAL
+}
+
+TEST-List1 ::= SEQUENCE (SIZE(0..12)) OF Item
+
+Item ::= SEQUENCE {
+    item1   INTEGER OPTIONAL,
+    item2   BIT STRING (SIZE(3..7))
+}
+
+TEST-List2 ::= SEQUENCE (SIZE(0..12)) OF ItemExtensible
+
+ItemExtensible ::= SEQUENCE {
+    item1   INTEGER,
+    item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ...
+}
+
+TEST-FullyOptionalSequence ::= SEQUENCE {
+    item1   INTEGER OPTIONAL,
+    item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
+    item3   BOOLEAN OPTIONAL,
+    item4   ENUMERATED {one, two, ...} OPTIONAL,
+    item5   NULL OPTIONAL,
+    ...
+}
+
+TEST-ListExtensible1 ::= SEQUENCE (SIZE(0..4, ...)) OF Item
+TEST-ListExtensible2 ::= SEQUENCE (SIZE(0..4, ...)) OF ItemExtensible
+TEST-ListExtensible3 ::= SEQUENCE (SIZE(0..4, ...)) OF TEST-FullyOptionalSequence
+TEST-List3 ::= SEQUENCE (SIZE(0..12)) OF TEST-FullyOptionalSequence
+
+TEST-Enumerated ::= ENUMERATED{
+	enum1,
+	enum2,
+	enum3,
+	enum4,
+	enum5,
+	enum6
+}
+
+TEST-EnumeratedExtensible ::= ENUMERATED{
+	enum1,
+	enum2,
+	enum3,
+	enum4,
+	enum5,
+	enum6,
+	...
+}
+
+END
