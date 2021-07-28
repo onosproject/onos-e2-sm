@@ -1,0 +1,164 @@
+-- **************************************************************
+-- E2SM-RSM - E2 Service Model for Ran Slicing Management
+-- Information Element Definitions
+--
+-- **************************************************************
+
+E2SM-RSM-IEs {
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1 (1) e2sm(2) e2sm-RSM-IEs (102)}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+-- **************************************************************
+-- E2SM Common IEs
+-- **************************************************************
+
+PLMN-Identity ::= OCTET STRING (SIZE(3))
+
+EUTRACellIdentity ::= BIT STRING (SIZE(28))
+
+NRCellIdentity ::= BIT STRING (SIZE(36))
+
+EUTRACGI ::= SEQUENCE {
+    pLMN-Identity PLMN-Identity,
+    eUTRACellIdentity EUTRACellIdentity,
+    ...
+}
+
+NRCGI ::= SEQUENCE {
+    pLMN-Identity PLMN-Identity,
+    nRCellIdentity NRCellIdentity,
+    ...
+}
+
+CellGlobalID ::= CHOICE {
+    nr-CGI NRCGI,
+    eUTRA-CGI EUTRACGI,
+    ...
+}
+
+UE-Identity ::= OCTET STRING
+RIC-Style-Type ::= INTEGER (0..maxofRICstyles, ...)
+RIC-Style-Name ::= PrintableString(SIZE(1..150,...))
+RIC-Format-Typ ::= INTEGER (0..255, ...)
+RIC-Control-Message-Priority ::= INTEGER (0..255, ...)
+
+maxofRICstyles INTEGER ::= 63
+
+-- **************************************************************
+-- E2SM-RSM defined values, types and objects
+-- **************************************************************
+
+maxNumSlices INTEGER ::= 256
+maxNumUes INTEGER ::= 65535
+
+SliceID ::= INTEGER (0..255, ...)
+
+Command ::= ENUMERATED {
+    sliceConfig,
+    sliceDelete,
+    ueConfig,
+    ...
+}
+
+Outcome ::= ENUMERATED {
+    failure (0),
+    success (1),
+    ...
+}
+
+SliceAlgorithm ::= ENUMERATED {
+    static,
+    ...
+}
+
+Scheduler ::= ENUMERATED {
+    rrScheduler,
+    ...
+}
+
+-- TODO
+Static ::= SEQUENCE {
+}
+
+TimeSched ::= INTEGER (10..80, ...)
+
+Slice ::= SEQUENCE {
+    sliceID     SliceID,
+    scheduler   Scheduler OPTIONAL,
+    static      Static OPTIONAL,
+    timeSched   TimeSched OPTIONAL,
+    ...
+}
+
+SliceConfig ::= SEQUENCE {
+    algo    SliceAlgorithm OPTIONAL,
+    slices  SEQUENCE (SIZE (1..maxNumSlices)) OF Slice,
+    ...
+}
+
+SliceConfigRequest ::= SEQUENCE {
+    dl  SliceConfig OPTIONAL,
+    ul  SliceConfig OPTIONAL,
+    ...
+}
+
+SliceDeleteRequest ::= SEQUENCE {
+    sliceIDs  SEQUENCE (SIZE(1..maxNumSlices)) OF SliceID,
+    ...
+}
+
+UeConfig ::= SEQUENCE {
+    ueId    UE-Identity,
+    dlID    SliceID OPTIONAL,
+    ulID    SliceID OPTIONAL,
+    ...
+}
+
+UeConfigRequest ::= SEQUENCE {
+    ueConfigs   SEQUENCE(SIZE (1..maxNumUes)) OF UeConfig,
+    ...
+}
+
+-- **************************************************************
+-- E2AP IEs defined by E2SM-RSM
+-- **************************************************************
+
+-- E2SM-RSM-RANfunction-Description
+E2SM-RSM-RANfunction-Description ::= SEQUENCE{
+    ranFunction-Name    RANfunction-Name,
+    ...
+}
+
+RANfunction-Name ::= SEQUENCE{
+    ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
+    ranFunction-E2SM-OID        PrintableString(SIZE(1..1000,...)),
+    ranFunction-Description     PrintableString(SIZE(1..150,...)),
+    ranFunction-Instance        INTEGER OPTIONAL,
+    ...
+}
+
+-- E2SM-RSM-ControlHeader IE
+E2SM-RSM-ControlHeader ::= SEQUENCE {
+    command     Command,
+    ...
+}
+
+-- E2SM-RSM-ControlMessage IE
+E2SM-RSM-ControlMessage ::= CHOICE {
+    sliceConfigRequest  SliceConfigRequest,
+    sliceDeleteRequest  SliceDeleteRequest,
+    ueConfigRequest     UeConfigRequest,
+    ...
+}
+
+-- E2SM-RSM-ControlOutcome IE
+E2SM-RSM-ControlOutcome ::= CHOICE{
+	sliceOutcome    SEQUENCE (SIZE(1..maxNumSlices)) OF Outcome,
+	ueOutcome       SEQUENCE (SIZE(1..maxNumUes)) OF Outcome,
+	...
+}
+
+END
