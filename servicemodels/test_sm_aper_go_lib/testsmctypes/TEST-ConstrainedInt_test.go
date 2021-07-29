@@ -16,7 +16,7 @@ func createTestConstrainedIntMsg() (*test_sm_ies.TestConstrainedInt, error) {
 	testConstrainedInt := test_sm_ies.TestConstrainedInt{
 		AttrCiA: 99,
 		AttrCiB: 11,
-		AttrCiC: -153,
+		AttrCiC: -424684151,
 		AttrCiD: 15,
 		AttrCiE: 10,
 		AttrCiF: 10,

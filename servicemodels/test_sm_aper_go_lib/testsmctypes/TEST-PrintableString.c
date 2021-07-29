@@ -214,7 +214,7 @@ memb_attrPs2_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	size = st->size;
 	
-	if((size == 20)
+	if((size == 2)
 		 && !check_permitted_alphabet_3(st)) {
 		/* Constraint check succeeded */
 		return 0;
@@ -251,7 +251,7 @@ memb_attrPs3_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	size = st->size;
 	
-	if((size == 127)
+	if((size == 2)
 		 && !check_permitted_alphabet_4(st)) {
 		/* Constraint check succeeded */
 		return 0;
@@ -288,7 +288,7 @@ memb_attrPs4_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	size = st->size;
 	
-	if((size <= 32)
+	if((size <= 3)
 		 && !check_permitted_alphabet_5(st)) {
 		/* Constraint check succeeded */
 		return 0;
@@ -325,7 +325,7 @@ memb_attrPs5_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	size = st->size;
 	
-	if((size >= 22 && size <= 32)
+	if((size >= 2 && size <= 3)
 		 && !check_permitted_alphabet_6(st)) {
 		/* Constraint check succeeded */
 		return 0;
@@ -362,7 +362,7 @@ memb_attrPs6_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	size = st->size;
 	
-	if((size >= 28 && size <= 32)
+	if((size >= 1 && size <= 3)
 		 && !check_permitted_alphabet_7(st)) {
 		/* Constraint check succeeded */
 		return 0;
@@ -399,7 +399,7 @@ memb_attrPs7_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	size = st->size;
 	
-	if((size >= 22 && size <= 36)
+	if((size >= 2 && size <= 6)
 		 && !check_permitted_alphabet_8(st)) {
 		/* Constraint check succeeded */
 		return 0;
@@ -423,37 +423,37 @@ static int asn_PER_MAP_attrPs7_8_c2v(unsigned int code) {
 }
 static asn_per_constraints_t asn_PER_memb_attrPs2_constr_3 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 7,  7,  32,  122 }	/* (32..122) */,
-	{ APC_CONSTRAINED,	 0,  0,  20,  20 }	/* (SIZE(20..20)) */,
+	{ APC_CONSTRAINED,	 0,  0,  2,  2 }	/* (SIZE(2..2)) */,
 	asn_PER_MAP_attrPs2_3_v2c,	/* Value to PER code map */
 	asn_PER_MAP_attrPs2_3_c2v	/* PER code to value map */
 };
 static asn_per_constraints_t asn_PER_memb_attrPs3_constr_4 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 7,  7,  32,  122 }	/* (32..122) */,
-	{ APC_CONSTRAINED | APC_EXTENSIBLE,  0,  0,  127,  127 }	/* (SIZE(127..127,...)) */,
+	{ APC_CONSTRAINED | APC_EXTENSIBLE,  0,  0,  2,  2 }	/* (SIZE(2..2,...)) */,
 	asn_PER_MAP_attrPs3_4_v2c,	/* Value to PER code map */
 	asn_PER_MAP_attrPs3_4_c2v	/* PER code to value map */
 };
 static asn_per_constraints_t asn_PER_memb_attrPs4_constr_5 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 7,  7,  32,  122 }	/* (32..122) */,
-	{ APC_CONSTRAINED,	 6,  6,  0,  32 }	/* (SIZE(0..32)) */,
+	{ APC_CONSTRAINED,	 2,  2,  0,  3 }	/* (SIZE(0..3)) */,
 	asn_PER_MAP_attrPs4_5_v2c,	/* Value to PER code map */
 	asn_PER_MAP_attrPs4_5_c2v	/* PER code to value map */
 };
 static asn_per_constraints_t asn_PER_memb_attrPs5_constr_6 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 7,  7,  32,  122 }	/* (32..122) */,
-	{ APC_CONSTRAINED,	 4,  4,  22,  32 }	/* (SIZE(22..32)) */,
+	{ APC_CONSTRAINED,	 1,  1,  2,  3 }	/* (SIZE(2..3)) */,
 	asn_PER_MAP_attrPs5_6_v2c,	/* Value to PER code map */
 	asn_PER_MAP_attrPs5_6_c2v	/* PER code to value map */
 };
 static asn_per_constraints_t asn_PER_memb_attrPs6_constr_7 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 7,  7,  32,  122 }	/* (32..122) */,
-	{ APC_CONSTRAINED | APC_EXTENSIBLE,  3,  3,  28,  32 }	/* (SIZE(28..32,...)) */,
+	{ APC_CONSTRAINED | APC_EXTENSIBLE,  2,  2,  1,  3 }	/* (SIZE(1..3,...)) */,
 	asn_PER_MAP_attrPs6_7_v2c,	/* Value to PER code map */
 	asn_PER_MAP_attrPs6_7_c2v	/* PER code to value map */
 };
 static asn_per_constraints_t asn_PER_memb_attrPs7_constr_8 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 7,  7,  32,  122 }	/* (32..122) */,
-	{ APC_CONSTRAINED,	 4,  4,  22,  36 }	/* (SIZE(22..36)) */,
+	{ APC_CONSTRAINED,	 3,  3,  2,  6 }	/* (SIZE(2..6)) */,
 	asn_PER_MAP_attrPs7_8_v2c,	/* Value to PER code map */
 	asn_PER_MAP_attrPs7_8_c2v	/* PER code to value map */
 };

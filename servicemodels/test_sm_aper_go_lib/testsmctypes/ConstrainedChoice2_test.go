@@ -14,12 +14,12 @@ import (
 func createConstrainedChoice2Msg() (*test_sm_ies.ConstrainedChoice2, error) {
 
 	constrainedChoice2 := test_sm_ies.ConstrainedChoice2{
-		ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2A{
-			ConstrainedChoice2A: 15,
-		},
-		//ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
-		//	ConstrainedChoice2B: 1,
+		//ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2A{
+		//	ConstrainedChoice2A: 15,
 		//},
+		ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
+			ConstrainedChoice2B: 156,
+		},
 	}
 
 	return &constrainedChoice2, nil
@@ -38,8 +38,8 @@ func Test_xerEncodingConstrainedChoice2(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("ConstrainedChoice2 XER - decoded\n%v", result)
-	assert.Equal(t, constrainedChoice2.GetConstrainedChoice2A(), result.GetConstrainedChoice2A())
-	//assert.Equal(t, constrainedChoice2.GetConstrainedChoice2B(), result.GetConstrainedChoice2B())
+	//assert.Equal(t, constrainedChoice2.GetConstrainedChoice2A(), result.GetConstrainedChoice2A())
+	assert.Equal(t, constrainedChoice2.GetConstrainedChoice2B(), result.GetConstrainedChoice2B())
 }
 
 func Test_perEncodingConstrainedChoice2(t *testing.T) {
@@ -55,6 +55,6 @@ func Test_perEncodingConstrainedChoice2(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("ConstrainedChoice2 PER - decoded\n%v", result)
-	assert.Equal(t, constrainedChoice2.GetConstrainedChoice2A(), result.GetConstrainedChoice2A())
-	//assert.Equal(t, constrainedChoice2.GetConstrainedChoice2B(), result.GetConstrainedChoice2B())
+	//assert.Equal(t, constrainedChoice2.GetConstrainedChoice2A(), result.GetConstrainedChoice2A())
+	assert.Equal(t, constrainedChoice2.GetConstrainedChoice2B(), result.GetConstrainedChoice2B())
 }

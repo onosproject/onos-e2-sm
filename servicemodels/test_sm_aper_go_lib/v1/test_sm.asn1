@@ -11,6 +11,10 @@ DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
+-- For some reason INTEGERs don't want ot work with MAX value at all.. PER gives "bad file descriptor error"
+maxInt32 INTEGER ::= 4294967295 -- 32 bits value, which is size of
+maxInt64 INTEGER ::= 18446744073709551615 -- 64 bits value, which is size of unsigned long in C
+
 TEST-UnconstrainedInt ::= SEQUENCE {
     attrUciA    INTEGER,
     attrUciB    INTEGER
@@ -18,7 +22,7 @@ TEST-UnconstrainedInt ::= SEQUENCE {
 
 TEST-ConstrainedInt ::= SEQUENCE {
     attrCiA    INTEGER(10..100),
-    attrCiB    INTEGER(10..MAX),
+    attrCiB    INTEGER(10..maxInt32),
     attrCiC    INTEGER(MIN..100),
     attrCiD    INTEGER(10..20),
     attrCiE    INTEGER(10),
@@ -92,14 +96,14 @@ ConstrainedChoice1 ::= CHOICE {
 
 ConstrainedChoice2 ::= CHOICE {
     constrainedChoice2A    INTEGER(0..15, ...),
-    constrainedChoice2B    INTEGER(1..MAX, ...)
+    constrainedChoice2B    INTEGER(1..maxInt32, ...)
 }
 
 ConstrainedChoice3 ::= CHOICE {
     constrainedChoice3A    INTEGER(...),
     constrainedChoice3B    INTEGER(0..15, ...),
-    constrainedChoice3C    INTEGER(1..MAX, ...),
-    constrainedChoice3D    INTEGER(1..1, ...)
+    constrainedChoice3C    INTEGER(1..maxInt32, ...),
+    constrainedChoice3D    INTEGER(1, ...)
 }
 
 -- Extensible constrained choice

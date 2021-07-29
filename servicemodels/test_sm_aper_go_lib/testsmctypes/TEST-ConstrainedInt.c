@@ -21,7 +21,7 @@ attrCiB_3_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	value = *(const unsigned long *)sptr;
 	
-	if((value >= 10)) {
+	if((value >= 10 && value <= 4294967295)) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {
@@ -75,7 +75,7 @@ memb_attrCiB_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	
 	value = *(const unsigned long *)sptr;
 	
-	if((value >= 10)) {
+	if((value >= 10 && value <= 4294967295)) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {
@@ -187,7 +187,7 @@ memb_attrCiF_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 }
 
 static asn_per_constraints_t asn_PER_type_attrCiB_constr_3 CC_NOTUSED = {
-	{ APC_SEMI_CONSTRAINED,	-1, -1,  10,  0 }	/* (10..MAX) */,
+	{ APC_CONSTRAINED,	 32, -1,  10,  4294967295 }	/* (10..4294967295) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };
@@ -197,7 +197,7 @@ static asn_per_constraints_t asn_PER_memb_attrCiA_constr_2 CC_NOTUSED = {
 	0, 0	/* No PER value map */
 };
 static asn_per_constraints_t asn_PER_memb_attrCiB_constr_3 CC_NOTUSED = {
-	{ APC_SEMI_CONSTRAINED,	-1, -1,  10,  0 }	/* (10..MAX) */,
+	{ APC_CONSTRAINED,	 32, -1,  10,  4294967295 }	/* (10..4294967295) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };

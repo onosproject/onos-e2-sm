@@ -68,9 +68,14 @@ func perDecodeTestConstrainedInt(bytes []byte) (*test_sm_ies.TestConstrainedInt,
 
 func newTestConstrainedInt(testConstrainedInt *test_sm_ies.TestConstrainedInt) (*C.TEST_ConstrainedInt_t, error) {
 
+	//ni, err := newInteger(int64(testConstrainedInt.AttrCiC))
+	//if err != nil {
+	//	return nil, err
+	//}
 	testConstrainedIntC := C.TEST_ConstrainedInt_t{
 		attrCiA: C.long(testConstrainedInt.AttrCiA),
 		attrCiB: C.ulong(testConstrainedInt.AttrCiB),
+		//attrCiC: *ni,
 		attrCiC: C.long(testConstrainedInt.AttrCiC),
 		attrCiD: C.long(testConstrainedInt.AttrCiD),
 		attrCiE: C.long(testConstrainedInt.AttrCiE),
@@ -82,9 +87,14 @@ func newTestConstrainedInt(testConstrainedInt *test_sm_ies.TestConstrainedInt) (
 
 func decodeTestConstrainedInt(testConstrainedIntC *C.TEST_ConstrainedInt_t) (*test_sm_ies.TestConstrainedInt, error) {
 
+	//ni, err := decodeInteger(&testConstrainedIntC.attrCiC)
+	//if err != nil {
+	//	return nil, err
+	//}
 	testConstrainedInt := test_sm_ies.TestConstrainedInt{
 		AttrCiA: int32(testConstrainedIntC.attrCiA),
 		AttrCiB: int32(testConstrainedIntC.attrCiB),
+		//AttrCiC: int32(ni),
 		AttrCiC: int32(testConstrainedIntC.attrCiC),
 		AttrCiD: int32(testConstrainedIntC.attrCiD),
 		AttrCiE: int32(testConstrainedIntC.attrCiE),
