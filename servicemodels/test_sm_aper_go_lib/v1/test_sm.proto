@@ -38,6 +38,12 @@ enum TestEnumeratedExtensible {
     TEST_ENUMERATED_EXTENSIBLE_ENUM6 = 5;
 };
 
+//{TEST-EnumeratedExtensible}
+enum TestFullyOptionalSequenceItem4 {
+    TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_ONE = 0;
+    TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_TWO = 1;
+};
+
 // sequence from tes_sm.asn1:15
 // {TEST-UnconstrainedInt}
 message TestUnconstrainedInt {
@@ -300,7 +306,7 @@ message TestFullyOptionalSequence {
     // @inject_tag: aper:"optional"
     optional bool item3 = 3 [ json_name="item3"];
     // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
-    optional int32 item4 = 4 [ json_name="item4"];
+    optional TestFullyOptionalSequenceItem4 item4 = 4 [ json_name="item4"];
     // @inject_tag: aper:"optional,valueLB:0,valueUB:0"
     optional int32 item5 = 5 [ json_name="item5"];
 };

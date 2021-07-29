@@ -13,13 +13,11 @@ import (
 
 func createTestFullyOptionalSequenceMsg() (*test_sm_ies.TestFullyOptionalSequence, error) {
 
-	// testFullyOptionalSequence := pdubuilder.CreateTestFullyOptionalSequence() //ToDo - fill in arguments here(if this function exists
-
 	var ie1 int32 = 32
-	ie2 := []byte{0xF0}
+	ie2 := []byte{0xF0, 0xB9, 0x32}
 	var ie3 bool = true
-	var ie4 int32 = 32
-	var ie5 int32 = 32
+	ie4 := test_sm_ies.TestFullyOptionalSequenceItem4_TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_ONE
+	var ie5 int32 = 0 // it's NULL
 	testFullyOptionalSequence := test_sm_ies.TestFullyOptionalSequence{
 		Item1: &ie1,
 		Item2: ie2,
@@ -28,13 +26,24 @@ func createTestFullyOptionalSequenceMsg() (*test_sm_ies.TestFullyOptionalSequenc
 		Item5: &ie5,
 	}
 
-	//if err := testFullyOptionalSequence.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating TestFullyOptionalSequence %s", err.Error())
-	//}
+	return &testFullyOptionalSequence, nil
+}
+
+func createTestFullyOptionalSequenceMsgEmpty() (*test_sm_ies.TestFullyOptionalSequence, error) {
+
+	testFullyOptionalSequence := test_sm_ies.TestFullyOptionalSequence{}
+
 	return &testFullyOptionalSequence, nil
 }
 
 func Test_xerEncodingTestFullyOptionalSequence(t *testing.T) {
+
+	testFullyOptionalSequence0, err := createTestFullyOptionalSequenceMsgEmpty()
+	assert.NilError(t, err, "Error creating TestFullyOptionalSequence PDU")
+
+	xer0, err := xerEncodeTestFullyOptionalSequence(testFullyOptionalSequence0)
+	assert.NilError(t, err)
+	t.Logf("TestFullyOptionalSequence XER\n%s", string(xer0))
 
 	testFullyOptionalSequence, err := createTestFullyOptionalSequenceMsg()
 	assert.NilError(t, err, "Error creating TestFullyOptionalSequence PDU")
@@ -48,13 +57,20 @@ func Test_xerEncodingTestFullyOptionalSequence(t *testing.T) {
 	assert.Assert(t, result != nil)
 	t.Logf("TestFullyOptionalSequence XER - decoded\n%v", result)
 	assert.Equal(t, testFullyOptionalSequence.GetItem1(), result.GetItem1())
-	assert.Equal(t, testFullyOptionalSequence.GetItem2(), result.GetItem2())
+	assert.DeepEqual(t, testFullyOptionalSequence.GetItem2(), result.GetItem2())
 	assert.Equal(t, testFullyOptionalSequence.GetItem3(), result.GetItem3())
 	assert.Equal(t, testFullyOptionalSequence.GetItem4(), result.GetItem4())
 	assert.Equal(t, testFullyOptionalSequence.GetItem5(), result.GetItem5())
 }
 
 func Test_perEncodingTestFullyOptionalSequence(t *testing.T) {
+
+	testFullyOptionalSequence0, err := createTestFullyOptionalSequenceMsgEmpty()
+	assert.NilError(t, err, "Error creating TestFullyOptionalSequence PDU")
+
+	per0, err := perEncodeTestFullyOptionalSequence(testFullyOptionalSequence0)
+	assert.NilError(t, err)
+	t.Logf("TestFullyOptionalSequence PER\n%v", hex.Dump(per0))
 
 	testFullyOptionalSequence, err := createTestFullyOptionalSequenceMsg()
 	assert.NilError(t, err, "Error creating TestFullyOptionalSequence PDU")
@@ -68,7 +84,7 @@ func Test_perEncodingTestFullyOptionalSequence(t *testing.T) {
 	assert.Assert(t, result != nil)
 	t.Logf("TestFullyOptionalSequence PER - decoded\n%v", result)
 	assert.Equal(t, testFullyOptionalSequence.GetItem1(), result.GetItem1())
-	assert.Equal(t, testFullyOptionalSequence.GetItem2(), result.GetItem2())
+	assert.DeepEqual(t, testFullyOptionalSequence.GetItem2(), result.GetItem2())
 	assert.Equal(t, testFullyOptionalSequence.GetItem3(), result.GetItem3())
 	assert.Equal(t, testFullyOptionalSequence.GetItem4(), result.GetItem4())
 	assert.Equal(t, testFullyOptionalSequence.GetItem5(), result.GetItem5())

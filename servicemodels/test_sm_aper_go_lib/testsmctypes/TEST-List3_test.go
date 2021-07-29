@@ -29,8 +29,8 @@ func createTestList3Msg3Items() (*test_sm_ies.TestList3, error) {
 	var ie11 int32 = 153
 	var ie12 = []byte{0x02, 0x3F, 0x5D, 0x9A}
 	var ie13 bool = true
-	var ie14 int32 = 584236
-	var ie15 int32 = -654
+	ie14 := test_sm_ies.TestFullyOptionalSequenceItem4_TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_ONE
+	var ie15 int32 = 0 // It's null
 
 	item1 := test_sm_ies.TestFullyOptionalSequence{
 		Item1: &ie11,
@@ -42,31 +42,20 @@ func createTestList3Msg3Items() (*test_sm_ies.TestList3, error) {
 
 	testList3.Value = append(testList3.Value, &item1)
 
-	item2 := test_sm_ies.TestFullyOptionalSequence{
-		//Item1: &ie11,
-		//Item2: ie12,
-		//Item3: &ie13,
-		//Item4: &ie14,
-		//Item5: &ie15,
-	}
+	item2 := test_sm_ies.TestFullyOptionalSequence{}
 	testList3.Value = append(testList3.Value, &item2)
 
 	var ie32 = []byte{0xC2, 0xF3, 0xD3, 0x9A}
 	var ie33 bool = true
-	var ie35 int32 = -153
+	var ie35 int32 = 0 // it's NULL
 
 	item3 := test_sm_ies.TestFullyOptionalSequence{
-		//Item1: &ie11,
 		Item2: ie32,
 		Item3: &ie33,
-		//Item4: &ie14,
 		Item5: &ie35,
 	}
 	testList3.Value = append(testList3.Value, &item3)
 
-	//if err := testList3.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating TestList3 %s", err.Error())
-	//}
 	return &testList3, nil
 }
 
@@ -101,9 +90,9 @@ func Test_xerEncodingTestList3(t *testing.T) {
 	assert.Equal(t, testList32.GetValue()[0].GetItem3(), result2.GetValue()[0].GetItem3())
 	assert.Equal(t, testList32.GetValue()[0].GetItem4(), result2.GetValue()[0].GetItem4())
 	assert.Equal(t, testList32.GetValue()[0].GetItem5(), result2.GetValue()[0].GetItem5())
-	assert.DeepEqual(t, testList32.GetValue()[3].GetItem2(), result2.GetValue()[3].GetItem2())
-	assert.Equal(t, testList32.GetValue()[3].GetItem3(), result2.GetValue()[3].GetItem3())
-	assert.Equal(t, testList32.GetValue()[3].GetItem5(), result2.GetValue()[3].GetItem5())
+	assert.DeepEqual(t, testList32.GetValue()[2].GetItem2(), result2.GetValue()[2].GetItem2())
+	assert.Equal(t, testList32.GetValue()[2].GetItem3(), result2.GetValue()[2].GetItem3())
+	assert.Equal(t, testList32.GetValue()[2].GetItem5(), result2.GetValue()[2].GetItem5())
 }
 
 func Test_perEncodingTestList3(t *testing.T) {
@@ -137,7 +126,7 @@ func Test_perEncodingTestList3(t *testing.T) {
 	assert.Equal(t, testList32.GetValue()[0].GetItem3(), result2.GetValue()[0].GetItem3())
 	assert.Equal(t, testList32.GetValue()[0].GetItem4(), result2.GetValue()[0].GetItem4())
 	assert.Equal(t, testList32.GetValue()[0].GetItem5(), result2.GetValue()[0].GetItem5())
-	assert.DeepEqual(t, testList32.GetValue()[3].GetItem2(), result2.GetValue()[3].GetItem2())
-	assert.Equal(t, testList32.GetValue()[3].GetItem3(), result2.GetValue()[3].GetItem3())
-	assert.Equal(t, testList32.GetValue()[3].GetItem5(), result2.GetValue()[3].GetItem5())
+	assert.DeepEqual(t, testList32.GetValue()[2].GetItem2(), result2.GetValue()[2].GetItem2())
+	assert.Equal(t, testList32.GetValue()[2].GetItem3(), result2.GetValue()[2].GetItem3())
+	assert.Equal(t, testList32.GetValue()[2].GetItem5(), result2.GetValue()[2].GetItem5())
 }

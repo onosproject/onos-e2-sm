@@ -32,12 +32,15 @@ typedef enum TEST_FullyOptionalSequence__item4 {
 	 */
 } e_TEST_FullyOptionalSequence__item4;
 
+/* MeasurementLabel_KPMv2__startEndInd */
+typedef long	 TEST_FullyOptionalSequence__item4_t;
+
 /* TEST-FullyOptionalSequence */
 typedef struct TEST_FullyOptionalSequence {
 	long	*item1;	/* OPTIONAL */
 	OCTET_STRING_t	*item2;	/* OPTIONAL */
 	BOOLEAN_t	*item3;	/* OPTIONAL */
-	long	*item4;	/* OPTIONAL */
+	TEST_FullyOptionalSequence__item4_t	*item4;	/* OPTIONAL */
 	NULL_t	*item5;	/* OPTIONAL */
 	/*
 	 * This type is extensible,

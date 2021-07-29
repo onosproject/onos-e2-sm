@@ -39,8 +39,8 @@ func createTestListExtensible3MsgFull() (*test_sm_ies.TestListExtensible3, error
 	var ie11 int32 = 153
 	var ie12 = []byte{0x02, 0x3F, 0x5D, 0x9A}
 	var ie13 bool = true
-	var ie14 int32 = 584236
-	var ie15 int32 = -654
+	ie14 := test_sm_ies.TestFullyOptionalSequenceItem4_TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_ONE
+	var ie15 int32 = 0
 
 	item1 := test_sm_ies.TestFullyOptionalSequence{
 		Item1: &ie11,
@@ -52,24 +52,16 @@ func createTestListExtensible3MsgFull() (*test_sm_ies.TestListExtensible3, error
 
 	testListExtensible3.Value = append(testListExtensible3.Value, &item1)
 
-	item2 := test_sm_ies.TestFullyOptionalSequence{
-		//Item1: &ie11,
-		//Item2: ie12,
-		//Item3: &ie13,
-		//Item4: &ie14,
-		//Item5: &ie15,
-	}
+	item2 := test_sm_ies.TestFullyOptionalSequence{}
 	testListExtensible3.Value = append(testListExtensible3.Value, &item2)
 
 	var ie32 = []byte{0xC2, 0xF3, 0xD3, 0x9A}
 	var ie33 bool = true
-	var ie35 int32 = -153
+	var ie35 int32 = 0
 
 	item3 := test_sm_ies.TestFullyOptionalSequence{
-		//Item1: &ie11,
 		Item2: ie32,
 		Item3: &ie33,
-		//Item4: &ie14,
 		Item5: &ie35,
 	}
 	testListExtensible3.Value = append(testListExtensible3.Value, &item3)
@@ -77,11 +69,7 @@ func createTestListExtensible3MsgFull() (*test_sm_ies.TestListExtensible3, error
 	var ie43 bool = false
 
 	item4 := test_sm_ies.TestFullyOptionalSequence{
-		//Item1: &ie41,
-		//Item2: ie42,
 		Item3: &ie43,
-		//Item4: &ie44,
-		//Item5: &ie45,
 	}
 	testListExtensible3.Value = append(testListExtensible3.Value, &item4)
 

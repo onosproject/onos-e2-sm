@@ -81,7 +81,6 @@ func Test_xerEncodingTestPrintableString(t *testing.T) {
 	assert.Equal(t, testPrintableString.GetAttrPs4(), result2.GetAttrPs4())
 	assert.Equal(t, testPrintableString.GetAttrPs5(), result2.GetAttrPs5())
 	assert.Equal(t, testPrintableString.GetAttrPs6(), result2.GetAttrPs6())
-	assert.Equal(t, testPrintableString.GetAttrPs7(), result2.GetAttrPs7())
 }
 
 func Test_perEncodingTestPrintableString(t *testing.T) {
@@ -122,5 +121,4 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	assert.Equal(t, testPrintableString.GetAttrPs4(), result2.GetAttrPs4())
 	assert.Equal(t, testPrintableString.GetAttrPs5(), result2.GetAttrPs5())
 	assert.Equal(t, testPrintableString.GetAttrPs6(), result2.GetAttrPs6())
-	assert.Equal(t, testPrintableString.GetAttrPs7(), result2.GetAttrPs7())
 }

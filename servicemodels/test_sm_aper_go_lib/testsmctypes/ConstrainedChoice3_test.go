@@ -13,8 +13,6 @@ import (
 
 func createConstrainedChoice3Msg() (*test_sm_ies.ConstrainedChoice3, error) {
 
-	// constrainedChoice3 := pdubuilder.CreateConstrainedChoice3() //ToDo - fill in arguments here(if this function exists
-
 	constrainedChoice3 := test_sm_ies.ConstrainedChoice3{
 		ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3A{
 			ConstrainedChoice3A: 32,
@@ -30,9 +28,6 @@ func createConstrainedChoice3Msg() (*test_sm_ies.ConstrainedChoice3, error) {
 		//},
 	}
 
-	//if err := constrainedChoice3.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating ConstrainedChoice3 %s", err.Error())
-	//}
 	return &constrainedChoice3, nil
 }
 

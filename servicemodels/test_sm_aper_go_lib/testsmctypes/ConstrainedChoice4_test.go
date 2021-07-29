@@ -13,17 +13,12 @@ import (
 
 func createConstrainedChoice4Msg() (*test_sm_ies.ConstrainedChoice4, error) {
 
-	// constrainedChoice4 := pdubuilder.CreateConstrainedChoice4() //ToDo - fill in arguments here(if this function exists
-
 	constrainedChoice4 := test_sm_ies.ConstrainedChoice4{
 		ConstrainedChoice4: &test_sm_ies.ConstrainedChoice4_ConstrainedChoice4A{
 			ConstrainedChoice4A: 32,
 		},
 	}
 
-	//if err := constrainedChoice4.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating ConstrainedChoice4 %s", err.Error())
-	//}
 	return &constrainedChoice4, nil
 }
 
@@ -34,7 +29,6 @@ func Test_xerEncodingConstrainedChoice4(t *testing.T) {
 
 	xer, err := xerEncodeConstrainedChoice4(constrainedChoice4)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("ConstrainedChoice4 XER\n%s", string(xer))
 
 	result, err := xerDecodeConstrainedChoice4(xer)
@@ -51,7 +45,6 @@ func Test_perEncodingConstrainedChoice4(t *testing.T) {
 
 	per, err := perEncodeConstrainedChoice4(constrainedChoice4)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("ConstrainedChoice4 PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeConstrainedChoice4(per)
