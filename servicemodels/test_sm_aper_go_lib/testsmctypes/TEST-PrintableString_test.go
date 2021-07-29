@@ -17,7 +17,7 @@ func createTestPrintableStringMsg() (*test_sm_ies.TestPrintableString, error) {
 	testPrintableString := test_sm_ies.TestPrintableString{
 		AttrPs1: "Yay",
 		AttrPs2: "on",
-		AttrPs3: "on",
+		AttrPs3: "onONonON",
 		AttrPs4: "abc", // it doesn't like anything less than 3 chars
 		AttrPs5: "ONF", // It doesn't like anything less than 3 chars again...
 		AttrPs6: "X1N", // It doesn't like anything less than 3 chars again... and again...
