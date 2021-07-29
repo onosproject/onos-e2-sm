@@ -9,7 +9,7 @@ package testsmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "ConstrainedChoice1.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "ConstrainedChoice1.h"
 import "C"
 
 import (
@@ -96,7 +96,7 @@ func decodeConstrainedChoice1(constrainedChoice1C *C.ConstrainedChoice1_t) (*tes
 
 	switch constrainedChoice1C.present {
 	case C.ConstrainedChoice1_PR_constrainedChoice1A:
-		constrainedChoice1structC:= int32(binary.LittleEndian.Uint64(constrainedChoice1C.choice[0:8]))
+		constrainedChoice1structC := int32(binary.LittleEndian.Uint64(constrainedChoice1C.choice[0:8]))
 		constrainedChoice1.ConstrainedChoice1 = &test_sm_ies.ConstrainedChoice1_ConstrainedChoice1A{
 			ConstrainedChoice1A: constrainedChoice1structC,
 		}

@@ -19,7 +19,7 @@ func createItemMsg() (*test_sm_ies.Item, error) {
 		Item1: &ie1,
 		Item2: &asn1.BitString{
 			Value: []byte{0x60},
-			Len: 3,
+			Len:   3,
 		},
 	}
 

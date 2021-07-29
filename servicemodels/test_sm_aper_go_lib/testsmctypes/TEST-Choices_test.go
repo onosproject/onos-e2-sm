@@ -15,22 +15,22 @@ func createTestChoicesMsg() (*test_sm_ies.TestChoices, error) {
 
 	testChoices := test_sm_ies.TestChoices{
 		OtherAttr: "nil",
-		Choice1:   &test_sm_ies.Choice1{
+		Choice1: &test_sm_ies.Choice1{
 			Choice1: &test_sm_ies.Choice1_Choice1A{
 				Choice1A: 32,
 			},
 		},
-		Choice2:   &test_sm_ies.Choice2{
+		Choice2: &test_sm_ies.Choice2{
 			Choice2: &test_sm_ies.Choice2_Choice2B{
 				Choice2B: -153,
 			},
 		},
-		Choice3:   &test_sm_ies.Choice3{
+		Choice3: &test_sm_ies.Choice3{
 			Choice3: &test_sm_ies.Choice3_Choice3C{
 				Choice3C: 32,
 			},
 		},
-		Choice4:   &test_sm_ies.Choice4{
+		Choice4: &test_sm_ies.Choice4{
 			Choice4: &test_sm_ies.Choice4_Choice4A{
 				Choice4A: 32,
 			},

@@ -14,7 +14,7 @@ import (
 func createTestConstrainedChoicesMsg() (*test_sm_ies.TestConstrainedChoices, error) {
 
 	testConstrainedChoices := test_sm_ies.TestConstrainedChoices{
-		OtherCattr:         "nil",
+		OtherCattr: "nil",
 		ConstrainedChoice1: &test_sm_ies.ConstrainedChoice1{
 			ConstrainedChoice1: &test_sm_ies.ConstrainedChoice1_ConstrainedChoice1A{
 				ConstrainedChoice1A: 32,

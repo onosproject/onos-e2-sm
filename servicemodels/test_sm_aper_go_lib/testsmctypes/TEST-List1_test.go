@@ -31,7 +31,7 @@ func createTestList1Msg12Items() (*test_sm_ies.TestList1, error) {
 		Item1: &ie11,
 		Item2: &asn1.BitString{
 			Value: []byte{0xF0},
-			Len: 4,
+			Len:   4,
 		},
 	}
 	testList1.Value = append(testList1.Value, item1)

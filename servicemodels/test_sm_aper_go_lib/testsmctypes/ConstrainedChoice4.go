@@ -9,7 +9,7 @@ package testsmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "ConstrainedChoice4.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "ConstrainedChoice4.h"
 import "C"
 
 import (
