@@ -25,6 +25,20 @@ func createTestConstrainedIntMsg() (*test_sm_ies.TestConstrainedInt, error) {
 	return &testConstrainedInt, nil
 }
 
+func createTestConstrainedIntMsgCmpr() (*test_sm_ies.TestConstrainedInt, error) {
+
+	testConstrainedInt := test_sm_ies.TestConstrainedInt{
+		AttrCiA: 100,
+		AttrCiB: 100,
+		AttrCiC: 100,
+		AttrCiD: 20,
+		AttrCiE: 10,
+		AttrCiF: 20,
+	}
+
+	return &testConstrainedInt, nil
+}
+
 func Test_xerEncodingTestConstrainedInt(t *testing.T) {
 
 	testConstrainedInt, err := createTestConstrainedIntMsg()
@@ -49,6 +63,27 @@ func Test_xerEncodingTestConstrainedInt(t *testing.T) {
 func Test_perEncodingTestConstrainedInt(t *testing.T) {
 
 	testConstrainedInt, err := createTestConstrainedIntMsg()
+	assert.NilError(t, err, "Error creating TestConstrainedInt PDU")
+
+	per, err := perEncodeTestConstrainedInt(testConstrainedInt)
+	assert.NilError(t, err)
+	t.Logf("TestConstrainedInt PER\n%v", hex.Dump(per))
+
+	result, err := perDecodeTestConstrainedInt(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("TestConstrainedInt PER - decoded\n%v", result)
+	assert.Equal(t, testConstrainedInt.GetAttrCiA(), result.GetAttrCiA())
+	assert.Equal(t, testConstrainedInt.GetAttrCiB(), result.GetAttrCiB())
+	assert.Equal(t, testConstrainedInt.GetAttrCiC(), result.GetAttrCiC())
+	assert.Equal(t, testConstrainedInt.GetAttrCiD(), result.GetAttrCiD())
+	assert.Equal(t, testConstrainedInt.GetAttrCiE(), result.GetAttrCiE())
+	assert.Equal(t, testConstrainedInt.GetAttrCiF(), result.GetAttrCiF())
+}
+
+func Test_perEncodingTestConstrainedIntCmpr(t *testing.T) {
+
+	testConstrainedInt, err := createTestConstrainedIntMsgCmpr()
 	assert.NilError(t, err, "Error creating TestConstrainedInt PDU")
 
 	per, err := perEncodeTestConstrainedInt(testConstrainedInt)
