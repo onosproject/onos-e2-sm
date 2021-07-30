@@ -1,4 +1,4 @@
--- **************************************************************
+--*************************************************************
 -- E2SM-RSM - E2 Service Model for Ran Slicing Management
 -- Information Element Definitions
 --
@@ -34,131 +34,174 @@ NRCGI ::= SEQUENCE {
 }
 
 CellGlobalID ::= CHOICE {
-    nr-CGI NRCGI,
-    eUTRA-CGI EUTRACGI,
-    ...
+	nr-CGI					NRCGI,
+	eUTRA-CGI				EUTRACGI,
+	...
 }
 
-UE-Identity ::= OCTET STRING
-RIC-Style-Type ::= INTEGER (0..maxofRICstyles, ...)
-RIC-Style-Name ::= PrintableString(SIZE(1..150,...))
-RIC-Format-Typ ::= INTEGER (0..255, ...)
 RIC-Control-Message-Priority ::= INTEGER (0..255, ...)
 
-maxofRICstyles INTEGER ::= 63
 
--- **************************************************************
--- E2SM-RSM defined values, types and objects
--- **************************************************************
+ -- **************************************************************
+ -- E2SM-RSM IDs
+ -- **************************************************************
 
-maxNumSlices INTEGER ::= 256
-maxNumUes INTEGER ::= 65535
+SliceID ::= INTEGER (1..4294967295)
+UE-Identity ::= OCTET STRING
 
-SliceID ::= INTEGER (0..255, ...)
 
-Command ::= ENUMERATED {
-    sliceConfig,
+ -- **************************************************************
+ -- E2SM-RSM control command types
+ -- **************************************************************
+
+E2SM-RSM-Command ::= ENUMERATED {
+    sliceCreate,
+    sliceUpdate,
     sliceDelete,
-    ueConfig,
+    ueAssociate,
     ...
 }
 
-Outcome ::= ENUMERATED {
-    failure (0),
-    success (1),
+
+ -- **************************************************************
+ -- E2SM-RSM slice management
+ -- **************************************************************
+
+SchedulerType ::= ENUMERATED {
+    roundRobin,
+    proportionallyFair,
+    qosBased,
     ...
 }
 
-SliceAlgorithm ::= ENUMERATED {
-    static,
-    ...
-}
-
-Scheduler ::= ENUMERATED {
-    rrScheduler,
-    ...
-}
-
--- TODO
-Static ::= SEQUENCE {
-}
-
-TimeSched ::= INTEGER (10..80, ...)
-
-Slice ::= SEQUENCE {
-    sliceID     SliceID,
-    scheduler   Scheduler OPTIONAL,
-    static      Static OPTIONAL,
-    timeSched   TimeSched OPTIONAL,
+SliceParameters ::= SEQUENCE {
+    schedulerType           SchedulerType,
+    weight                  INTEGER(1.. 100)        OPTIONAL,
+    qosLevel                INTEGER(1.. 129, ...)   OPTIONAL,
+    scheduleInfo            ScheduleConfig          OPTIONAL,
     ...
 }
 
 SliceConfig ::= SEQUENCE {
-    algo    SliceAlgorithm OPTIONAL,
-    slices  SEQUENCE (SIZE (1..maxNumSlices)) OF Slice,
+   sliceID                  SliceID,
+   sliceDescription         PrintableString(SIZE(1.. 160, ...)) OPTIONAL,
+   sliceConfigParameters    SliceParameters,
+   ...
+}
+
+SliceDelete ::= SEQUENCE {
+    sliceID                  SliceID,
     ...
 }
 
-SliceConfigRequest ::= SEQUENCE {
-    dl  SliceConfig OPTIONAL,
-    ul  SliceConfig OPTIONAL,
+
+ -- **************************************************************
+ -- E2SM-RSM UE to Slice association
+ -- **************************************************************
+
+SliceAssociate ::= SEQUENCE {
+    ueId               UE-Identity,
+    downLinkSliceID    SliceID,
+    uplinkSliceID      SliceID OPTIONAL,
     ...
 }
 
-SliceDeleteRequest ::= SEQUENCE {
-    sliceIDs  SEQUENCE (SIZE(1..maxNumSlices)) OF SliceID,
+
+ -- **************************************************************
+ -- E2AP IEs defined by E2SM-RSM
+ -- **************************************************************
+
+ -- E2SM-RSM-RANfunction-Description
+ E2SM-RSM-RANfunction-Description ::= SEQUENCE {
+     ranFunction-Name    RANfunction-Name,
+     ...
+ }
+
+ RANfunction-Name ::= SEQUENCE {
+     ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
+     ranFunction-E2SM-OID        PrintableString(SIZE(1..1000,...)),
+     ranFunction-Description     PrintableString(SIZE(1..150,...)),
+     ranFunction-Instance        INTEGER OPTIONAL,
+     ...
+ }
+
+ -- E2SM-RSM-ControlHeader IE
+ E2SM-RSM-ControlHeader ::= SEQUENCE {
+     cgi            CellGlobalID OPTIONAL,
+     rsm-command    E2SM-RSM-Command,
+     ...
+ }
+
+ -- E2SM-RSM-ControlMessage IE
+ E2SM-RSM-ControlMessage ::= CHOICE {
+     sliceCreate        SliceConfig,
+     sliceUpdate        SliceConfig,
+     sliceDelete        SliceDelete,
+     sliceAssociate     SliceAssociate,
+     ...
+ }
+
+
+ -- **************************************************************
+ -- E2SM-RSM optional, advanced slice management
+ -- **************************************************************
+
+ ScheduleConfig ::= SEQUENCE {
+    linkAdaptation              LinkAdaptation                      OPTIONAL,
+    features                    FeatureConfig                       OPTIONAL,
+    carrierAggregationCap       CarrierAggregationLevelCap          OPTIONAL,
+    ulPowerControl              ULpowerControl                      OPTIONAL,
     ...
 }
 
-UeConfig ::= SEQUENCE {
-    ueId    UE-Identity,
-    dlID    SliceID OPTIONAL,
-    ulID    SliceID OPTIONAL,
+LinkAdaptation ::= SEQUENCE {
+    cqiCap                  INTEGER(0..15)                      OPTIONAL,
+    riCap                   ENUMERATED{one, two, ...}           OPTIONAL,
+    aggregationLevelCap     AggregationLevelCap                 OPTIONAL,
+    targetBlerDL            INTEGER(0.. 100)                    OPTIONAL,
+    targetBlerUL            INTEGER(0.. 100)                    OPTIONAL,
+    maxMCS                  INTEGER(0..28)                      OPTIONAL,
+    minMCS                  INTEGER(0..28)                      OPTIONAL,
+    transmissionMode        ENUMERATED{one, two, three, ...}    OPTIONAL,
+    harqRetxCap             HARQrextCap                         OPTIONAL,
     ...
 }
 
-UeConfigRequest ::= SEQUENCE {
-    ueConfigs   SEQUENCE(SIZE (1..maxNumUes)) OF UeConfig,
+AggregationLevelCap ::= ENUMERATED {
+    one,
+    two,
+    four,
+    eight,
+    sixteen
+}
+
+HARQrextCap ::= SEQUENCE {
+    dl  INTEGER(1.. MAX) OPTIONAL,
+    ul  INTEGER(1.. MAX) OPTIONAL
+}
+
+FeatureConfig ::= SEQUENCE {
+    ttiBundling FeatureStatus OPTIONAL,
     ...
 }
 
--- **************************************************************
--- E2AP IEs defined by E2SM-RSM
--- **************************************************************
+FeatureStatus ::= ENUMERATED {
+    enable,
+    disable
+}
 
--- E2SM-RSM-RANfunction-Description
-E2SM-RSM-RANfunction-Description ::= SEQUENCE{
-    ranFunction-Name    RANfunction-Name,
+CarrierAggregationLevelCap ::= ENUMERATED {
+    one,
+    two,
+    three,
+    four,
     ...
 }
 
-RANfunction-Name ::= SEQUENCE{
-    ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
-    ranFunction-E2SM-OID        PrintableString(SIZE(1..1000,...)),
-    ranFunction-Description     PrintableString(SIZE(1..150,...)),
-    ranFunction-Instance        INTEGER OPTIONAL,
+ULpowerControl ::= SEQUENCE {
+    puschTargetSNR  INTEGER OPTIONAL,
+    pucchTargetSNR  INTEGER OPTIONAL,
     ...
-}
-
--- E2SM-RSM-ControlHeader IE
-E2SM-RSM-ControlHeader ::= SEQUENCE {
-    command     Command,
-    ...
-}
-
--- E2SM-RSM-ControlMessage IE
-E2SM-RSM-ControlMessage ::= CHOICE {
-    sliceConfigRequest  SliceConfigRequest,
-    sliceDeleteRequest  SliceDeleteRequest,
-    ueConfigRequest     UeConfigRequest,
-    ...
-}
-
--- E2SM-RSM-ControlOutcome IE
-E2SM-RSM-ControlOutcome ::= CHOICE{
-	sliceOutcome    SEQUENCE (SIZE(1..maxNumSlices)) OF Outcome,
-	ueOutcome       SEQUENCE (SIZE(1..maxNumUes)) OF Outcome,
-	...
 }
 
 END
