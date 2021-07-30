@@ -56,7 +56,7 @@ message TestUnconstrainedInt {
 message TestConstrainedInt {
     // @inject_tag: aper:"valueLB:10,valueUB:100"
     int32 attr_ci_a = 1 [json_name = "attrCiA"];
-    // @inject_tag: aper:"valueLB:10,valueUB:65535"
+    // @inject_tag: aper:"valueLB:255,valueUB:65535"
     int32 attr_ci_b = 2 [json_name = "attrCiB"];
     // @inject_tag: aper:"valueLB:10,valueUB:4294967295"
     int32 attr_ci_c = 3 [json_name = "attrCiC"];

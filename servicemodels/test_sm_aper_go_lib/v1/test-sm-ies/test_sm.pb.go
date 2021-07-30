@@ -254,8 +254,8 @@ type TestConstrainedInt struct {
 
 	// @inject_tag: aper:"valueLB:10,valueUB:100"
 	AttrCiA int32 `protobuf:"varint,1,opt,name=attr_ci_a,json=attrCiA,proto3" json:"attr_ci_a,omitempty" aper:"valueLB:10,valueUB:100"`
-	// @inject_tag: aper:"valueLB:10,valueUB:65535"
-	AttrCiB int32 `protobuf:"varint,2,opt,name=attr_ci_b,json=attrCiB,proto3" json:"attr_ci_b,omitempty" aper:"valueLB:10,valueUB:65535"`
+	// @inject_tag: aper:"valueLB:255,valueUB:65535"
+	AttrCiB int32 `protobuf:"varint,2,opt,name=attr_ci_b,json=attrCiB,proto3" json:"attr_ci_b,omitempty" aper:"valueLB:255,valueUB:65535"`
 	// @inject_tag: aper:"valueLB:10,valueUB:4294967295"
 	AttrCiC int32 `protobuf:"varint,3,opt,name=attr_ci_c,json=attrCiC,proto3" json:"attr_ci_c,omitempty" aper:"valueLB:10,valueUB:4294967295"`
 	// @inject_tag: aper:"valueUB:100"
