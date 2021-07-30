@@ -16,9 +16,6 @@ func createTestListExtensible1Msg0Items() (*test_sm_ies.TestListExtensible1, err
 
 	testListExtensible1 := test_sm_ies.TestListExtensible1{}
 
-	//if err := testListExtensible1.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating TestListExtensible1 %s", err.Error())
-	//}
 	return &testListExtensible1, nil
 }
 
@@ -40,7 +37,6 @@ func createTestListExtensible1MsgFull() (*test_sm_ies.TestListExtensible1, error
 	testListExtensible1.Value = append(testListExtensible1.Value, &ie1)
 
 	ie2 := test_sm_ies.Item{
-		//Item1: &ie21,
 		Item2: &asn1.BitString{
 			Value: []byte{0xAE},
 			Len:   7,
@@ -70,9 +66,6 @@ func createTestListExtensible1MsgFull() (*test_sm_ies.TestListExtensible1, error
 	}
 	testListExtensible1.Value = append(testListExtensible1.Value, &ie4)
 
-	//if err := testListExtensible1.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating TestListExtensible1 %s", err.Error())
-	//}
 	return &testListExtensible1, nil
 }
 
@@ -101,7 +94,7 @@ func Test_xerEncodingTestListExtensible1(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result1 != nil)
 	t.Logf("TestListExtensible1 XER - decoded\n%v", result1)
-	assert.Equal(t, 4, len(result.GetValue()))
+	assert.Equal(t, 4, len(result1.GetValue()))
 	assert.Equal(t, testListExtensible11.GetValue()[0].GetItem1(), result1.GetValue()[0].GetItem1())
 	assert.DeepEqual(t, testListExtensible11.GetValue()[0].GetItem2().GetValue(), result1.GetValue()[0].GetItem2().GetValue())
 	assert.Equal(t, testListExtensible11.GetValue()[0].GetItem2().GetLen(), result1.GetValue()[0].GetItem2().GetLen())
@@ -130,7 +123,7 @@ func Test_perEncodingTestListExtensible1(t *testing.T) {
 	assert.Assert(t, result != nil)
 	t.Logf("TestListExtensible1 PER - decoded\n%v", result)
 
-	testListExtensible11, err := createTestListExtensible1Msg0Items()
+	testListExtensible11, err := createTestListExtensible1MsgFull()
 	assert.NilError(t, err, "Error creating TestListExtensible1 PDU")
 
 	per1, err := perEncodeTestListExtensible1(testListExtensible11)

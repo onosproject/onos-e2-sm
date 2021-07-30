@@ -13,16 +13,11 @@ import (
 
 func createItemExtensibleMsg() (*test_sm_ies.ItemExtensible, error) {
 
-	// itemExtensible := pdubuilder.CreateItemExtensible() //ToDo - fill in arguments here(if this function exists
-
 	itemExtensible := test_sm_ies.ItemExtensible{
 		Item1: 32,
 		Item2: []byte{0xab, 0xcd, 0xef},
 	}
 
-	//if err := itemExtensible.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating ItemExtensible %s", err.Error())
-	//}
 	return &itemExtensible, nil
 }
 
@@ -33,7 +28,6 @@ func Test_xerEncodingItemExtensible(t *testing.T) {
 
 	xer, err := xerEncodeItemExtensible(itemExtensible)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("ItemExtensible XER\n%s", string(xer))
 
 	result, err := xerDecodeItemExtensible(xer)
@@ -51,7 +45,6 @@ func Test_perEncodingItemExtensible(t *testing.T) {
 
 	per, err := perEncodeItemExtensible(itemExtensible)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("ItemExtensible PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeItemExtensible(per)

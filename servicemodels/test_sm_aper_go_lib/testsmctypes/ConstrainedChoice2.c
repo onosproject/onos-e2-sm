@@ -21,7 +21,7 @@ constrainedChoice2B_3_constraint(const asn_TYPE_descriptor_t *td, const void *sp
 	
 	value = *(const unsigned long *)sptr;
 	
-	if((value >= 1)) {
+	if((value >= 1 && value <= 4294967295)) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {
@@ -75,7 +75,7 @@ memb_constrainedChoice2B_constraint_1(const asn_TYPE_descriptor_t *td, const voi
 	
 	value = *(const unsigned long *)sptr;
 	
-	if((value >= 1)) {
+	if((value >= 1 && value <= 4294967295)) {
 		/* Constraint check succeeded */
 		return 0;
 	} else {
@@ -87,7 +87,7 @@ memb_constrainedChoice2B_constraint_1(const asn_TYPE_descriptor_t *td, const voi
 }
 
 static asn_per_constraints_t asn_PER_type_constrainedChoice2B_constr_3 CC_NOTUSED = {
-	{ APC_SEMI_CONSTRAINED | APC_EXTENSIBLE, -1, -1,  1,  0 }	/* (1..MAX,...) */,
+	{ APC_CONSTRAINED | APC_EXTENSIBLE,  32, -1,  1,  4294967295 }	/* (1..4294967295,...) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };
@@ -97,7 +97,7 @@ static asn_per_constraints_t asn_PER_memb_constrainedChoice2A_constr_2 CC_NOTUSE
 	0, 0	/* No PER value map */
 };
 static asn_per_constraints_t asn_PER_memb_constrainedChoice2B_constr_3 CC_NOTUSED = {
-	{ APC_SEMI_CONSTRAINED | APC_EXTENSIBLE, -1, -1,  1,  0 }	/* (1..MAX,...) */,
+	{ APC_CONSTRAINED | APC_EXTENSIBLE,  32, -1,  1,  4294967295 }	/* (1..4294967295,...) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };

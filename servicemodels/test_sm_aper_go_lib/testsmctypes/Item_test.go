@@ -14,20 +14,15 @@ import (
 
 func createItemMsg() (*test_sm_ies.Item, error) {
 
-	// item := pdubuilder.CreateItem() //ToDo - fill in arguments here(if this function exists
-
 	var ie1 int32 = 32
 	item := test_sm_ies.Item{
 		Item1: &ie1,
 		Item2: &asn1.BitString{
-			Value: []byte{0x00, 0x00, 0x40},
-			Len: 20,
+			Value: []byte{0x60},
+			Len:   3,
 		},
 	}
 
-	//if err := item.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating Item %s", err.Error())
-	//}
 	return &item, nil
 }
 
@@ -38,7 +33,6 @@ func Test_xerEncodingItem(t *testing.T) {
 
 	xer, err := xerEncodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
 	t.Logf("Item XER\n%s", string(xer))
 
 	result, err := xerDecodeItem(xer)
@@ -57,7 +51,6 @@ func Test_perEncodingItem(t *testing.T) {
 
 	per, err := perEncodeItem(item)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(per)) // ToDo - adjust length of the PER encoded message
 	t.Logf("Item PER\n%v", hex.Dump(per))
 
 	result, err := perDecodeItem(per)

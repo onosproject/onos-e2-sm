@@ -11,6 +11,7 @@ extern struct asn_TYPE_descriptor_s asn_DEF_TEST_ConstrainedReal;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_BitString;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_Choices;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_ConstrainedChoices;
+extern struct asn_TYPE_descriptor_s asn_DEF_TEST_NestedChoice;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_OctetString;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_PrintableString;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_List1;
@@ -32,6 +33,7 @@ struct asn_TYPE_descriptor_s *asn_pdu_collection[] = {
 	&asn_DEF_TEST_BitString,	
 	&asn_DEF_TEST_Choices,	
 	&asn_DEF_TEST_ConstrainedChoices,	
+	&asn_DEF_TEST_NestedChoice,	
 	&asn_DEF_TEST_OctetString,	
 	&asn_DEF_TEST_PrintableString,	
 	&asn_DEF_TEST_List1,	

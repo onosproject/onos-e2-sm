@@ -39,9 +39,6 @@ func createTestList2Msg2Items() (*test_sm_ies.TestList2, error) {
 	testList2.Value = append(testList2.Value, &ie1)
 	testList2.Value = append(testList2.Value, &ie2)
 
-	//if err := testList2.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating TestList2 %s", err.Error())
-	//}
 	return &testList2, nil
 }
 
@@ -96,7 +93,7 @@ func Test_perEncodingTestList2(t *testing.T) {
 
 	per2, err := perEncodeTestList2(testList22)
 	assert.NilError(t, err)
-	t.Logf("TestList2 PER\n%v", hex.Dump(per))
+	t.Logf("TestList2 PER\n%v", hex.Dump(per2))
 
 	result2, err := perDecodeTestList2(per2)
 	assert.NilError(t, err)

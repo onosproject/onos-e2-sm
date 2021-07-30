@@ -13,26 +13,21 @@ import (
 
 func createConstrainedChoice3Msg() (*test_sm_ies.ConstrainedChoice3, error) {
 
-	// constrainedChoice3 := pdubuilder.CreateConstrainedChoice3() //ToDo - fill in arguments here(if this function exists
-
 	constrainedChoice3 := test_sm_ies.ConstrainedChoice3{
-		ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3A{
-			ConstrainedChoice3A: 32,
-		},
+		//ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3A{
+		//	ConstrainedChoice3A: 32,
+		//},
 		//ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3B{
 		//	ConstrainedChoice3B: 15,
 		//},
-		//ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3C{
-		//	ConstrainedChoice3C: 1,
-		//},
+		ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3C{
+			ConstrainedChoice3C: 1,
+		},
 		//ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3D{
 		//	ConstrainedChoice3D: 1,
 		//},
 	}
 
-	//if err := constrainedChoice3.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating ConstrainedChoice3 %s", err.Error())
-	//}
 	return &constrainedChoice3, nil
 }
 
@@ -49,9 +44,9 @@ func Test_xerEncodingConstrainedChoice3(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("ConstrainedChoice3 XER - decoded\n%v", result)
-	assert.Equal(t, constrainedChoice3.GetConstrainedChoice3A(), result.GetConstrainedChoice3A())
+	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3A(), result.GetConstrainedChoice3A())
 	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3B(), result.GetConstrainedChoice3B())
-	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3C(), result.GetConstrainedChoice3C())
+	assert.Equal(t, constrainedChoice3.GetConstrainedChoice3C(), result.GetConstrainedChoice3C())
 	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3D(), result.GetConstrainedChoice3D())
 }
 
@@ -68,8 +63,8 @@ func Test_perEncodingConstrainedChoice3(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("ConstrainedChoice3 PER - decoded\n%v", result)
-	assert.Equal(t, constrainedChoice3.GetConstrainedChoice3A(), result.GetConstrainedChoice3A())
+	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3A(), result.GetConstrainedChoice3A())
 	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3B(), result.GetConstrainedChoice3B())
-	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3C(), result.GetConstrainedChoice3C())
+	assert.Equal(t, constrainedChoice3.GetConstrainedChoice3C(), result.GetConstrainedChoice3C())
 	//assert.Equal(t, constrainedChoice3.GetConstrainedChoice3D(), result.GetConstrainedChoice3D())
 }

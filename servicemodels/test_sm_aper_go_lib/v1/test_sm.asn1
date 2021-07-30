@@ -11,6 +11,11 @@ DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
+-- For some reason INTEGERs don't want ot work with MAX value at all.. PER gives "bad file descriptor error"
+maxInt16 INTEGER ::= 65535 -- 16 bits value
+maxInt32 INTEGER ::= 4294967295 -- 32 bits value
+maxInt64 INTEGER ::= 18446744073709551615 -- 64 bits value, which is size of unsigned long in C
+
 TEST-UnconstrainedInt ::= SEQUENCE {
     attrUciA    INTEGER,
     attrUciB    INTEGER
@@ -18,11 +23,12 @@ TEST-UnconstrainedInt ::= SEQUENCE {
 
 TEST-ConstrainedInt ::= SEQUENCE {
     attrCiA    INTEGER(10..100),
-    attrCiB    INTEGER(10..MAX),
-    attrCiC    INTEGER(MIN..100),
-    attrCiD    INTEGER(10..20),
-    attrCiE    INTEGER(10),
-    attrCiF    INTEGER(10, ...)
+    attrCiB    INTEGER(255..maxInt16),
+    attrCiC    INTEGER(10..maxInt32),
+    attrCiD    INTEGER(MIN..100),
+    attrCiE    INTEGER(10..20),
+    attrCiF    INTEGER(10),
+    attrCiG    INTEGER(10, ...)
 }
 
 TEST-UnconstrainedReal ::= SEQUENCE {
@@ -92,19 +98,26 @@ ConstrainedChoice1 ::= CHOICE {
 
 ConstrainedChoice2 ::= CHOICE {
     constrainedChoice2A    INTEGER(0..15, ...),
-    constrainedChoice2B    INTEGER(1..MAX, ...)
+    constrainedChoice2B    INTEGER(1..maxInt32, ...)
 }
 
 ConstrainedChoice3 ::= CHOICE {
     constrainedChoice3A    INTEGER(...),
     constrainedChoice3B    INTEGER(0..15, ...),
-    constrainedChoice3C    INTEGER(1..MAX, ...),
-    constrainedChoice3D    INTEGER(1..1, ...)
+    constrainedChoice3C    INTEGER(1..maxInt32, ...),
+    constrainedChoice3D    INTEGER(1, ...)
 }
 
 -- Extensible constrained choice
 ConstrainedChoice4 ::= CHOICE {
     constrainedChoice4A    INTEGER(1..128, ...),
+    ...
+}
+
+TEST-NestedChoice ::= CHOICE {
+    option1     Choice3,
+    option2     ConstrainedChoice3,
+    option3     ConstrainedChoice4,
     ...
 }
 

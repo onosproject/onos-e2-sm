@@ -89,7 +89,17 @@ func newTestFullyOptionalSequence(testFullyOptionalSequence *test_sm_ies.TestFul
 	}
 
 	if testFullyOptionalSequence.Item4 != nil {
-		item4C := C.long(*testFullyOptionalSequence.Item4)
+		var item4C C.TEST_FullyOptionalSequence__item4_t
+		switch *testFullyOptionalSequence.Item4 {
+		case test_sm_ies.TestFullyOptionalSequenceItem4_TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_ONE:
+			item4C = C.TEST_FullyOptionalSequence__item4_one
+		case test_sm_ies.TestFullyOptionalSequenceItem4_TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_TWO:
+			item4C = C.TEST_FullyOptionalSequence__item4_two
+		default:
+			return nil, fmt.Errorf("unexpected FullyOptionalSequence Item4 %v", testFullyOptionalSequence.Item4)
+		}
+
+		//item4C := C.long(*testFullyOptionalSequence.Item4)
 		testFullyOptionalSequenceC.item4 = &item4C
 	}
 
@@ -124,7 +134,7 @@ func decodeTestFullyOptionalSequence(testFullyOptionalSequenceC *C.TEST_FullyOpt
 	}
 
 	if testFullyOptionalSequenceC.item4 != nil {
-		ie4 := int32(*testFullyOptionalSequenceC.item4)
+		ie4 := test_sm_ies.TestFullyOptionalSequenceItem4(int32(*testFullyOptionalSequenceC.item4))
 		testFullyOptionalSequence.Item4 = &ie4
 	}
 

@@ -120,7 +120,7 @@ func decodeTestOctetString(testOctetStringC *C.TEST_OctetString_t) (*test_sm_ies
 	testOctetString := test_sm_ies.TestOctetString{}
 
 	testOctetString.AttrOs1, err = decodeOctetString(&testOctetStringC.attrOs1)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	testOctetString.AttrOs2, err = decodeOctetString(&testOctetStringC.attrOs2)

@@ -16,10 +16,10 @@ func createTestOctetStringMsg() (*test_sm_ies.TestOctetString, error) {
 	testOctetString := test_sm_ies.TestOctetString{
 		AttrOs1: []byte{0x12, 0x34, 0x56, 0xA4},
 		AttrOs2: []byte{0xFF, 0xFF},
-		AttrOs3: []byte{0xFF, 0xFF},
-		AttrOs4: []byte{},
-		AttrOs5: []byte{0xDE, 0xC7, 0x23},
-		AttrOs6: []byte{0x01},
+		AttrOs3: []byte{0xFF, 0xFF, 0xBD, 0x4C},
+		AttrOs4: []byte{0xAA, 0xBB, 0xCC}, // it doesn't like anything less than 3 bytes
+		AttrOs5: []byte{0xDE, 0xC7, 0x23}, // It doesn't like anything less than 3 bytes again...
+		AttrOs6: []byte{0x02, 0x4C, 0xF6}, // It doesn't like anything less than 3 bytes again... and again...
 		AttrOs7: []byte{0x21, 0x44, 0xA8, 0xDF, 0x11},
 	}
 
@@ -32,9 +32,9 @@ func createTestOctetStringExcludeOptional() (*test_sm_ies.TestOctetString, error
 		AttrOs1: []byte{0x12, 0x34, 0x56, 0xA4},
 		AttrOs2: []byte{0xFF, 0xFF},
 		AttrOs3: []byte{0xFF, 0xFF},
-		AttrOs4: []byte{},
-		AttrOs5: []byte{0xDE, 0xC7, 0x23},
-		AttrOs6: []byte{0x01},
+		AttrOs4: []byte{0xBC, 0x7D, 0xA1},             // It doesn't like anything less than 3 bytes...
+		AttrOs5: []byte{0xDE, 0xC7, 0x23},             // It doesn't like anything less than 3 bytes again...
+		AttrOs6: []byte{0x02, 0x31, 0xF6, 0x7D, 0x19}, // It doesn't like anything less than 3 bytes again... aand again...
 		//AttrOs7: []byte{0x21, 0x44, 0xA8, 0xDF, 0x11},
 	}
 
