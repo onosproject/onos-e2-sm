@@ -14,6 +14,7 @@ ASN_MODULE_SRCS=	\
 	./ConstrainedChoice2.c	\
 	./ConstrainedChoice3.c	\
 	./ConstrainedChoice4.c	\
+	./TEST-NestedChoice.c	\
 	./TEST-OctetString.c	\
 	./TEST-PrintableString.c	\
 	./TEST-List1.c	\
@@ -44,6 +45,7 @@ ASN_MODULE_HDRS=	\
 	./ConstrainedChoice2.h	\
 	./ConstrainedChoice3.h	\
 	./ConstrainedChoice4.h	\
+	./TEST-NestedChoice.h	\
 	./TEST-OctetString.h	\
 	./TEST-PrintableString.h	\
 	./TEST-List1.h	\

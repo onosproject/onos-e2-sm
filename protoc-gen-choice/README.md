@@ -33,3 +33,10 @@ Here are the parameters you should pass:
 - `--plugin="..."` specifies path to your custom plugin if it is not located in one of the folders in `$PATH`. Ignore it, if you've already run `make build_protoc_gen_choice`.
 - `--choice_out="..."` specifies path where to store generated files
 - `*.proto` is a path to the source `.proto` file(s) to process
+
+Inside `$proto_imports` you should store path to the imported files in the proto - usually absolute path to the repo - 
+otherwise it would through a warning that your `--proto_path` is not relative. 
+Example of `$proto_imports`
+```bash
+proto_imports=${GOPATH}/src/github.com/onosproject/onos-e2-sm/
+```

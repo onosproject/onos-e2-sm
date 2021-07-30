@@ -112,6 +112,13 @@ ConstrainedChoice4 ::= CHOICE {
     ...
 }
 
+TEST-NestedChoice ::= CHOICE {
+    option1     Choice3,
+    option2     ConstrainedChoice3,
+    option3     ConstrainedChoice4,
+    ...
+}
+
 TEST-OctetString ::= SEQUENCE {
     attrOs1     OCTET STRING,
     attrOs2     OCTET STRING (SIZE(2)),

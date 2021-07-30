@@ -136,3 +136,9 @@ func decodeConstrainedChoice3(constrainedChoice3C *C.ConstrainedChoice3_t) (*tes
 
 	return constrainedChoice3, nil
 }
+
+func decodeConstrainedChoice3Bytes(array [8]byte) (*test_sm_ies.ConstrainedChoice3, error) {
+	ch3C := (*C.ConstrainedChoice3_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+
+	return decodeConstrainedChoice3(ch3C)
+}

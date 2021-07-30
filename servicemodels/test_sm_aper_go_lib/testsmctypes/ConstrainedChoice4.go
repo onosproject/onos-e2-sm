@@ -107,8 +107,8 @@ func decodeConstrainedChoice4(constrainedChoice4C *C.ConstrainedChoice4_t) (*tes
 	return constrainedChoice4, nil
 }
 
-//func decodeConstrainedChoice4Bytes(array [8]byte) (*test_sm_ies.ConstrainedChoice4, error) {
-//	constrainedChoice4C := (*C.ConstrainedChoice4_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
-//
-//	return decodeConstrainedChoice4(constrainedChoice4C)
-//}
+func decodeConstrainedChoice4Bytes(array [8]byte) (*test_sm_ies.ConstrainedChoice4, error) {
+	constrainedChoice4C := (*C.ConstrainedChoice4_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+
+	return decodeConstrainedChoice4(constrainedChoice4C)
+}

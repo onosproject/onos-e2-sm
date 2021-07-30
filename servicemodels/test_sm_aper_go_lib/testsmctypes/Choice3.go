@@ -126,3 +126,9 @@ func decodeChoice3(choice3C *C.Choice3_t) (*test_sm_ies.Choice3, error) {
 
 	return choice3, nil
 }
+
+func decodeChoice3Bytes(array [8]byte) (*test_sm_ies.Choice3, error) {
+	ch3C := (*C.Choice3_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:8]))))
+
+	return decodeChoice3(ch3C)
+}
