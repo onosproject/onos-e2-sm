@@ -9,6 +9,7 @@
 extern "C" {
 #endif
 
+#define maxInt16 (65535)
 #define maxInt32 (4294967295)
 #define maxInt64 (18446744073709551615U)
 

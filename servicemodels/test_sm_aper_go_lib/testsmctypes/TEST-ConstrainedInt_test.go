@@ -15,11 +15,12 @@ func createTestConstrainedIntMsg() (*test_sm_ies.TestConstrainedInt, error) {
 
 	testConstrainedInt := test_sm_ies.TestConstrainedInt{
 		AttrCiA: 99,
-		AttrCiB: 11,
-		AttrCiC: -424684151,
-		AttrCiD: 15,
-		AttrCiE: 10,
+		AttrCiB: 65534,
+		AttrCiC: 11,
+		AttrCiD: -424684151,
+		AttrCiE: 15,
 		AttrCiF: 10,
+		AttrCiG: 10,
 	}
 
 	return &testConstrainedInt, nil
@@ -29,11 +30,12 @@ func createTestConstrainedIntMsgCmpr() (*test_sm_ies.TestConstrainedInt, error) 
 
 	testConstrainedInt := test_sm_ies.TestConstrainedInt{
 		AttrCiA: 100,
-		AttrCiB: 100,
+		AttrCiB: 65534,
 		AttrCiC: 100,
-		AttrCiD: 20,
-		AttrCiE: 10,
-		AttrCiF: 20,
+		AttrCiD: 100,
+		AttrCiE: 20,
+		AttrCiF: 10,
+		AttrCiG: 20,
 	}
 
 	return &testConstrainedInt, nil

@@ -74,12 +74,13 @@ func newTestConstrainedInt(testConstrainedInt *test_sm_ies.TestConstrainedInt) (
 	//}
 	testConstrainedIntC := C.TEST_ConstrainedInt_t{
 		attrCiA: C.long(testConstrainedInt.AttrCiA),
-		attrCiB: C.ulong(testConstrainedInt.AttrCiB),
+		attrCiB: C.long(testConstrainedInt.AttrCiB),
+		attrCiC: C.ulong(testConstrainedInt.AttrCiC),
 		//attrCiC: *ni,
-		attrCiC: C.long(testConstrainedInt.AttrCiC),
 		attrCiD: C.long(testConstrainedInt.AttrCiD),
 		attrCiE: C.long(testConstrainedInt.AttrCiE),
 		attrCiF: C.long(testConstrainedInt.AttrCiF),
+		attrCiG: C.long(testConstrainedInt.AttrCiG),
 	}
 
 	return &testConstrainedIntC, nil
@@ -99,6 +100,7 @@ func decodeTestConstrainedInt(testConstrainedIntC *C.TEST_ConstrainedInt_t) (*te
 		AttrCiD: int32(testConstrainedIntC.attrCiD),
 		AttrCiE: int32(testConstrainedIntC.attrCiE),
 		AttrCiF: int32(testConstrainedIntC.attrCiF),
+		AttrCiG: int32(testConstrainedIntC.attrCiG),
 	}
 
 	return &testConstrainedInt, nil

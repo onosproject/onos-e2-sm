@@ -22,18 +22,19 @@ extern "C" {
 /* TEST-ConstrainedInt */
 typedef struct TEST_ConstrainedInt {
 	long	 attrCiA;
-	unsigned long	 attrCiB;
-	long	 attrCiC;
+	long	 attrCiB;
+	unsigned long	 attrCiC;
 	long	 attrCiD;
 	long	 attrCiE;
 	long	 attrCiF;
+	long	 attrCiG;
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
 } TEST_ConstrainedInt_t;
 
 /* Implementation */
-/* extern asn_TYPE_descriptor_t asn_DEF_attrCiB_3;	// (Use -fall-defs-global to expose) */
+/* extern asn_TYPE_descriptor_t asn_DEF_attrCiC_4;	// (Use -fall-defs-global to expose) */
 extern asn_TYPE_descriptor_t asn_DEF_TEST_ConstrainedInt;
 
 #ifdef __cplusplus
