@@ -11,42 +11,13 @@ DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
--- **************************************************************
--- E2SM Common IEs
--- **************************************************************
-
-PLMN-Identity ::= OCTET STRING (SIZE(3))
-
-EUTRACellIdentity ::= BIT STRING (SIZE(28))
-
-NRCellIdentity ::= BIT STRING (SIZE(36))
-
-EUTRACGI ::= SEQUENCE {
-    pLMN-Identity PLMN-Identity,
-    eUTRACellIdentity EUTRACellIdentity,
-    ...
-}
-
-NRCGI ::= SEQUENCE {
-    pLMN-Identity PLMN-Identity,
-    nRCellIdentity NRCellIdentity,
-    ...
-}
-
-CellGlobalID ::= CHOICE {
-	nr-CGI					NRCGI,
-	eUTRA-CGI				EUTRACGI,
-	...
-}
-
-RIC-Control-Message-Priority ::= INTEGER (0..255, ...)
-
-
  -- **************************************************************
  -- E2SM-RSM IDs
  -- **************************************************************
 
 SliceID ::= INTEGER (1..4294967295)
+SliceIDAssoc ::= INTEGER(0..4294967295)
+
 UE-Identity ::= OCTET STRING
 
 
@@ -101,8 +72,8 @@ SliceDelete ::= SEQUENCE {
 
 SliceAssociate ::= SEQUENCE {
     ueId               UE-Identity,
-    downLinkSliceID    SliceID,
-    uplinkSliceID      SliceID OPTIONAL,
+    downLinkSliceID    SliceIDAssoc,
+    uplinkSliceID      SliceIDAssoc OPTIONAL,
     ...
 }
 
@@ -127,7 +98,6 @@ SliceAssociate ::= SEQUENCE {
 
  -- E2SM-RSM-ControlHeader IE
  E2SM-RSM-ControlHeader ::= SEQUENCE {
-     cgi            CellGlobalID OPTIONAL,
      rsm-command    E2SM-RSM-Command,
      ...
  }
