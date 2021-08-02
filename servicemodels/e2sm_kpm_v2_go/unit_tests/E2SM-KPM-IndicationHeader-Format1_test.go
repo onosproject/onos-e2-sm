@@ -22,7 +22,7 @@ var refPerE2SmKpmIndicationHeaderFormat1 = "00000000  7c 21 22 23 24 18 74 78  7
 func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1, error) {
 
 	bs := asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}

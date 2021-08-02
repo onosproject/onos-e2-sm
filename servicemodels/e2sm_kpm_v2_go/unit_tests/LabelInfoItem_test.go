@@ -26,7 +26,7 @@ func createLabelInfoItem() *e2sm_kpm_v2_go.LabelInfoItem {
 	var dby int32 = 456
 	var dbz int32 = 789
 	plo := e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
+	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
 
 	return &e2sm_kpm_v2_go.LabelInfoItem{
 		MeasLabel: &e2sm_kpm_v2_go.MeasurementLabel{

@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-var refPerGlobalKPMnodeEnGnbID = "00000000  60 21 22 23 50 e4 cd 9b  00 00 2a 00 20           |`!\"#P.....*. |"
+var refPerGlobalKPMnodeEnGnbID = "00000000  60 21 22 23 50 d4 bc 09  00 00 2a 00 20           |`!\"#P.....*. |"
 
 func createGlobalKpmnodeEnGnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 

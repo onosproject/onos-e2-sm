@@ -19,7 +19,7 @@ var refPerNrCellID = "00000000  d4 bc 09 00 00                                  
 func createNrcellIdentity() *e2sm_kpm_v2_go.NrcellIdentity {
 	return &e2sm_kpm_v2_go.NrcellIdentity{
 		Value: &asn1.BitString{
-			Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+			Value: []byte{0xd4, 0xbc, 0x09, 0x00, 0x00},
 			Len:   36,
 		},
 	}

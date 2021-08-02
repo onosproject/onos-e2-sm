@@ -15,7 +15,7 @@ import (
 	"testing"
 )
 
-var refPerGlobalKPMEnbID = "00000000  00 21 22 23 40 e4 cd 9b  00                       |.!\"#@....|"
+var refPerGlobalKPMEnbID = "00000000  00 21 22 23 40 d4 bc 09  00                       |.!\"#@....|"
 
 func Test_perEncodingGlobalKPMnodeEnbID(t *testing.T) {
 

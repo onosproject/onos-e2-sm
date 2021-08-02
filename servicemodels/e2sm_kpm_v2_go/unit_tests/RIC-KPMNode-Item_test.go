@@ -27,7 +27,7 @@ func createRicKpmNodeItem() (*e2sm_kpm_v2_go.RicKpmnodeItem, error) {
 						GnbId: &e2sm_kpm_v2_go.GnbIdChoice{
 							GnbIdChoice: &e2sm_kpm_v2_go.GnbIdChoice_GnbId{
 								GnbId: &asn1.BitString{
-									Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+									Value: []byte{0xd4, 0xbc, 0x08},
 									Len:   22,
 								},
 							},

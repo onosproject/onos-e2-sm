@@ -22,7 +22,7 @@ func createEnbIDMacro() *e2sm_kpm_v2_go.EnbId {
 	return &e2sm_kpm_v2_go.EnbId{
 		EnbId: &e2sm_kpm_v2_go.EnbId_MacroENbId{
 			MacroENbId: &asn1.BitString{
-				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+				Value: []byte{0xd4, 0xbc, 0x00},
 				Len:   20,
 			},
 		},

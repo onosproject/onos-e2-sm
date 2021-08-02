@@ -15,21 +15,21 @@ import (
 	"testing"
 )
 
-var refPerGlobalKPMnodeNgEnbID = "00000000  40 21 22 23 00 e4 cd 90  e4 cd 80 e4 cd 98 2a     |@!\"#..........*|"
+var refPerGlobalKPMnodeNgEnbID = "00000000  40 21 22 23 00 d4 bc 30  d4 bc c0 d4 bc 38 2a     |@!\"#...0.....8*|"
 
 func createGlobalKpmnodeNgEnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	bs := asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0x30},
 		Len:   20,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	shortMacroEnbID := asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0xc0},
 		Len:   18,
 	}
 	longMacroEnbID := asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0x38},
 		Len:   21,
 	}
 	var gnbDuID int64 = 42

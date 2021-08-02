@@ -24,21 +24,21 @@ func createMatchingCondItem1() (*e2sm_kpm_v2_go.MatchingCondItem, error) {
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
 	sd := []byte{0x01, 0x02, 0x03}
-	var fiveQI int32 = 10
-	var qfi int32 = 62
-	var qci int32 = 15
+	var fiveQI int32 = 23
+	var qfi int32 = 52
+	var qci int32 = 24
 	var qciMin int32 = 1
-	var qciMax int32 = 15
+	var qciMax int32 = 30
 	var arpMax int32 = 15
-	var arpMin int32 = 10
-	var bitrateRange int32 = 251
-	var layerMuMimo int32 = 5
+	var arpMin int32 = 1
+	var bitrateRange int32 = 25
+	var layerMuMimo int32 = 1
 	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
 	var plo = e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
+	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
 
 	labelInfoItem, err := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
 		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
