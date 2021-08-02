@@ -9,7 +9,7 @@ package testsmctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "TEST-UnconstrainedInt.h" //ToDo - fill in correct IndicationMessage dependency here
+//#include "TEST-TopLevelPDU.h"
 import "C"
 import (
 	"fmt"

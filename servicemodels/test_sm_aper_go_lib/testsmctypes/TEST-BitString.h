@@ -35,6 +35,8 @@ typedef struct TEST_BitString {
 
 /* Implementation */
 extern asn_TYPE_descriptor_t asn_DEF_TEST_BitString;
+extern asn_SEQUENCE_specifics_t asn_SPC_TEST_BitString_specs_1;
+extern asn_TYPE_member_t asn_MBR_TEST_BitString_1[7];
 
 #ifdef __cplusplus
 }
