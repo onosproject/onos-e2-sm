@@ -75,12 +75,12 @@ func Test_xerEncodingTestPrintableString(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result2 != nil)
 	t.Logf("TestPrintableString XER - decoded\n%v", result2)
-	assert.Equal(t, testPrintableString.GetAttrPs1(), result2.GetAttrPs1())
-	assert.Equal(t, testPrintableString.GetAttrPs2(), result2.GetAttrPs2())
-	assert.Equal(t, testPrintableString.GetAttrPs3(), result2.GetAttrPs3())
-	assert.Equal(t, testPrintableString.GetAttrPs4(), result2.GetAttrPs4())
-	assert.Equal(t, testPrintableString.GetAttrPs5(), result2.GetAttrPs5())
-	assert.Equal(t, testPrintableString.GetAttrPs6(), result2.GetAttrPs6())
+	assert.Equal(t, testPrintableStringExcludeOptional.GetAttrPs1(), result2.GetAttrPs1())
+	assert.Equal(t, testPrintableStringExcludeOptional.GetAttrPs2(), result2.GetAttrPs2())
+	assert.Equal(t, testPrintableStringExcludeOptional.GetAttrPs3(), result2.GetAttrPs3())
+	assert.Equal(t, testPrintableStringExcludeOptional.GetAttrPs4(), result2.GetAttrPs4())
+	assert.Equal(t, testPrintableStringExcludeOptional.GetAttrPs5(), result2.GetAttrPs5())
+	assert.Equal(t, testPrintableStringExcludeOptional.GetAttrPs6(), result2.GetAttrPs6())
 }
 
 func Test_perEncodingTestPrintableString(t *testing.T) {

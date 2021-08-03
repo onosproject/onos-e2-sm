@@ -15,6 +15,8 @@
 #include "asn_SEQUENCE_OF.h"
 #include "constr_SEQUENCE_OF.h"
 
+#include "TEST-FullyOptionalSequence.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

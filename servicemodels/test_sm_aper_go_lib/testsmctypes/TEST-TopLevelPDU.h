@@ -13,8 +13,10 @@
 
 /* Including external dependencies */
 #include "TEST-UnconstrainedInt.h"
+#include "TEST-ConstrainedReal.h"
 #include "TEST-NestedChoice.h"
 #include "TEST-BitString.h"
+#include "TEST-OctetString.h"
 #include "TEST-ListExtensible3.h"
 #include "TEST-EnumeratedExtensible.h"
 #include "constr_SEQUENCE.h"
@@ -30,10 +32,10 @@ struct TEST_OctetString;
 /* TEST-TopLevelPDU */
 typedef struct TEST_TopLevelPDU {
 	TEST_UnconstrainedInt_t	 opt1;
-	struct TEST_ConstrainedReal	*opt2;	/* OPTIONAL */
+	TEST_ConstrainedReal_t	*opt2;	/* OPTIONAL */
 	TEST_NestedChoice_t	 opt3;
 	TEST_BitString_t	 opt4;
-	struct TEST_OctetString	*opt5;	/* OPTIONAL */
+	TEST_OctetString_t	*opt5;	/* OPTIONAL */
 	TEST_ListExtensible3_t	 opt6;
 	TEST_EnumeratedExtensible_t	 opt7;
 	/*

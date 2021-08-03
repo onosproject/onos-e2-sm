@@ -90,11 +90,11 @@ func newTestTopLevelPDU(testTopLevelPDU *test_sm_ies.TestTopLevelPdu) (*C.TEST_T
 	}
 
 	nestedChoiceC := C.TEST_TopLevelPDU_t{
-		opt1: opt1C,
-		opt3: opt3C,
-		opt4: opt4C,
-		opt6: opt6C,
-		opt7: opt7C,
+		opt1: *opt1C,
+		opt3: *opt3C,
+		opt4: *opt4C,
+		opt6: *opt6C,
+		opt7: *opt7C,
 	}
 
 	if testTopLevelPDU.GetOpt2() != nil {
@@ -102,14 +102,14 @@ func newTestTopLevelPDU(testTopLevelPDU *test_sm_ies.TestTopLevelPdu) (*C.TEST_T
 		if err != nil {
 			return nil, err
 		}
-		nestedChoiceC.opt2 = &opt2C
+		nestedChoiceC.opt2 = opt2C
 	}
 	if testTopLevelPDU.GetOpt5() != nil {
 		opt5C, err := newTestOctetString(testTopLevelPDU.GetOpt5())
 		if err != nil {
 			return nil, err
 		}
-		nestedChoiceC.opt5 = &opt5C
+		nestedChoiceC.opt5 = opt5C
 	}
 
 	return &nestedChoiceC, nil
@@ -120,23 +120,23 @@ func decodeTestTopLevelPDU(testTopLevelPDUC *C.TEST_TopLevelPDU_t) (*test_sm_ies
 	var err error
 	testNestedChoice := test_sm_ies.TestTopLevelPdu{}
 
-	testNestedChoice.Opt1, err = decodeTestUnconstrainedInt(testTopLevelPDUC.opt1)
+	testNestedChoice.Opt1, err = decodeTestUnconstrainedInt(&testTopLevelPDUC.opt1)
 	if err != nil {
 		return nil, err
 	}
-	testNestedChoice.Opt3, err = decodeTestNestedChoice(testTopLevelPDUC.opt3)
+	testNestedChoice.Opt3, err = decodeTestNestedChoice(&testTopLevelPDUC.opt3)
 	if err != nil {
 		return nil, err
 	}
-	testNestedChoice.Opt4, err = decodeTestBitString(testTopLevelPDUC.opt4)
+	testNestedChoice.Opt4, err = decodeTestBitString(&testTopLevelPDUC.opt4)
 	if err != nil {
 		return nil, err
 	}
-	testNestedChoice.Opt6, err = decodeTestListExtensible3(testTopLevelPDUC.opt6)
+	testNestedChoice.Opt6, err = decodeTestListExtensible3(&testTopLevelPDUC.opt6)
 	if err != nil {
 		return nil, err
 	}
-	opt7, err := decodeTestEnumeratedExtensible(testTopLevelPDUC.opt7)
+	opt7, err := decodeTestEnumeratedExtensible(&testTopLevelPDUC.opt7)
 	if err != nil {
 		return nil, err
 	}

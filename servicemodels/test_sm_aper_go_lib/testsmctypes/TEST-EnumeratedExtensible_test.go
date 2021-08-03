@@ -45,9 +45,8 @@ func Test_xerEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result1, err := xerDecodeTestEnumeratedExtensible(xer1)
 	assert.NilError(t, err)
-	assert.Assert(t, result1 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum1) XER - decoded\n%v", result1)
-	assert.Equal(t, int32(enum1), int32(*result1))
+	assert.Equal(t, enum1.Number(), result1.Number())
 
 	enum2 := createTestEnum2Ext()
 
@@ -57,9 +56,8 @@ func Test_xerEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result2, err := xerDecodeTestEnumeratedExtensible(xer2)
 	assert.NilError(t, err)
-	assert.Assert(t, result2 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum2) XER - decoded\n%v", result2)
-	assert.Equal(t, int32(enum2), int32(*result2))
+	assert.Equal(t, enum2.Number(), result2.Number())
 
 	enum3 := createTestEnum3Ext()
 
@@ -69,9 +67,8 @@ func Test_xerEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result3, err := xerDecodeTestEnumeratedExtensible(xer3)
 	assert.NilError(t, err)
-	assert.Assert(t, result3 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum3) XER - decoded\n%v", result3)
-	assert.Equal(t, int32(enum3), int32(*result3))
+	assert.Equal(t, enum3.Number(), result3.Number())
 
 	enum4 := createTestEnum4Ext()
 
@@ -81,9 +78,8 @@ func Test_xerEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result4, err := xerDecodeTestEnumeratedExtensible(xer4)
 	assert.NilError(t, err)
-	assert.Assert(t, result4 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum4) XER - decoded\n%v", result4)
-	assert.Equal(t, int32(enum4), int32(*result4))
+	assert.Equal(t, enum4.Number(), result4.Number())
 
 	enum5 := createTestEnum5Ext()
 
@@ -93,9 +89,8 @@ func Test_xerEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result5, err := xerDecodeTestEnumeratedExtensible(xer5)
 	assert.NilError(t, err)
-	assert.Assert(t, result5 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum5) XER - decoded\n%v", result5)
-	assert.Equal(t, int32(enum5), int32(*result5))
+	assert.Equal(t, enum5.Number(), result5.Number())
 
 	enum6 := createTestEnum6Ext()
 
@@ -105,9 +100,8 @@ func Test_xerEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result6, err := xerDecodeTestEnumeratedExtensible(xer6)
 	assert.NilError(t, err)
-	assert.Assert(t, result6 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum6) XER - decoded\n%v", result6)
-	assert.Equal(t, int32(enum6), int32(*result6))
+	assert.Equal(t, enum6.Number(), result6.Number())
 }
 
 func Test_perEncodingTestEnumeratedExtensible(t *testing.T) {
@@ -120,9 +114,8 @@ func Test_perEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result1, err := perDecodeTestEnumeratedExtensible(per1)
 	assert.NilError(t, err)
-	assert.Assert(t, result1 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum1) PER - decoded\n%v", result1)
-	assert.Equal(t, int32(enum1), int32(*result1))
+	assert.Equal(t, enum1.Number(), result1.Number())
 
 	enum2 := createTestEnum2Ext()
 
@@ -132,9 +125,8 @@ func Test_perEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result2, err := perDecodeTestEnumeratedExtensible(per2)
 	assert.NilError(t, err)
-	assert.Assert(t, result2 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum2) PER - decoded\n%v", result2)
-	assert.Equal(t, int32(enum2), int32(*result2))
+	assert.Equal(t, enum2.Number(), result2.Number())
 
 	enum3 := createTestEnum3Ext()
 
@@ -144,9 +136,8 @@ func Test_perEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result3, err := perDecodeTestEnumeratedExtensible(per3)
 	assert.NilError(t, err)
-	assert.Assert(t, result3 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum3) XER - decoded\n%v", result3)
-	assert.Equal(t, int32(enum3), int32(*result3))
+	assert.Equal(t, enum3.Number(), result3.Number())
 
 	enum4 := createTestEnum4Ext()
 
@@ -156,9 +147,8 @@ func Test_perEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result4, err := perDecodeTestEnumeratedExtensible(per4)
 	assert.NilError(t, err)
-	assert.Assert(t, result4 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum4) PER - decoded\n%v", result4)
-	assert.Equal(t, int32(enum4), int32(*result4))
+	assert.Equal(t, enum4.Number(), result4.Number())
 
 	enum5 := createTestEnum5Ext()
 
@@ -168,9 +158,8 @@ func Test_perEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result5, err := perDecodeTestEnumeratedExtensible(per5)
 	assert.NilError(t, err)
-	assert.Assert(t, result5 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum5) PER - decoded\n%v", result5)
-	assert.Equal(t, int32(enum5), int32(*result5))
+	assert.Equal(t, enum5.Number(), result5.Number())
 
 	enum6 := createTestEnum6Ext()
 
@@ -180,7 +169,6 @@ func Test_perEncodingTestEnumeratedExtensible(t *testing.T) {
 
 	result6, err := perDecodeTestEnumeratedExtensible(per6)
 	assert.NilError(t, err)
-	assert.Assert(t, result6 != nil)
 	t.Logf("TestEnumeratedExtensible (Enum6) PER - decoded\n%v", result6)
-	assert.Equal(t, int32(enum6), int32(*result6))
+	assert.Equal(t, enum6.Number(), result6.Number())
 }

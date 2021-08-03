@@ -4,7 +4,7 @@
 // 	protoc        v3.17.1
 // source: test_sm_aper_go_lib/v1/test_sm.proto
 
-package test_sm_ies
+package testsmies
 
 import (
 	asn1 "github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
