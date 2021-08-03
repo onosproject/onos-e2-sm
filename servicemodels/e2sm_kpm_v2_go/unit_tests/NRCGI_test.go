@@ -23,7 +23,7 @@ func createNrcgi() *e2sm_kpm_v2_go.Nrcgi {
 		},
 		NRcellIdentity: &e2sm_kpm_v2_go.NrcellIdentity{
 			Value: &asn1.BitString{
-				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+				Value: []byte{0xd4, 0xbc, 0x09, 0x00, 0x00},
 				Len:   36,
 			},
 		},

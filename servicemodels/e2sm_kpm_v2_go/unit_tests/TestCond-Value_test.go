@@ -118,7 +118,7 @@ func Test_perTestCondValueBoolCompareBytes(t *testing.T) {
 func Test_perEncodingTestCondValueBS(t *testing.T) {
 
 	bs := &asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	testCondValue := pdubuilder.CreateTestCondValueBitS(bs)
@@ -138,7 +138,7 @@ func Test_perEncodingTestCondValueBS(t *testing.T) {
 func Test_perTestCondValueBSCompareBytes(t *testing.T) {
 
 	bs := &asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	testCondValue := pdubuilder.CreateTestCondValueBitS(bs)

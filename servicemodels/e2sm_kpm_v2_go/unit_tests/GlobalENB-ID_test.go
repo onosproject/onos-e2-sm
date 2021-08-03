@@ -26,7 +26,7 @@ func createGlobalEnbID1() *e2sm_kpm_v2_go.GlobalEnbId {
 		ENbId: &e2sm_kpm_v2_go.EnbId{
 			EnbId: &e2sm_kpm_v2_go.EnbId_MacroENbId{
 				MacroENbId: &asn1.BitString{
-					Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+					Value: []byte{0xd4, 0xbc, 0x00},
 					Len:   20,
 				},
 			},
@@ -85,6 +85,7 @@ func Test_perGlobalEnbID1CompareBytes(t *testing.T) {
 func Test_perEncodingGlobalEnbID2(t *testing.T) {
 	globalEnbID2 := createGlobalEnbID2()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per2, err := aper.MarshalWithParams(*globalEnbID2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per2))
@@ -99,6 +100,7 @@ func Test_perEncodingGlobalEnbID2(t *testing.T) {
 func Test_perGlobalEnbID2CompareBytes(t *testing.T) {
 	globalEnbID2 := createGlobalEnbID2()
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	per2, err := aper.MarshalWithParams(*globalEnbID2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per2))

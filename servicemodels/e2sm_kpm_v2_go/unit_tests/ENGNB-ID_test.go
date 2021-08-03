@@ -14,15 +14,15 @@ import (
 	"testing"
 )
 
-var refPerEnGnbID = "00000000  00 e4 cd 98                                       |....|"
-var refPerEnGnbIDlen32 = "00000000  50 e4 cd 9b 00                                    |P....|"
+var refPerEnGnbID = "00000000  00 d4 bc 0c                                       |....|"
+var refPerEnGnbIDlen32 = "00000000  50 d4 bc 0c 98                                    |P....|"
 
 func createEngnbID() *e2sm_kpm_v2_go.EngnbId {
 
 	return &e2sm_kpm_v2_go.EngnbId{
 		EngnbId: &e2sm_kpm_v2_go.EngnbId_GNbId{
 			GNbId: &asn1.BitString{
-				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+				Value: []byte{0xd4, 0xbc, 0x0c},
 				Len:   22,
 			},
 		},
@@ -34,7 +34,7 @@ func createEngnbIDlen32() *e2sm_kpm_v2_go.EngnbId {
 	return &e2sm_kpm_v2_go.EngnbId{
 		EngnbId: &e2sm_kpm_v2_go.EngnbId_GNbId{
 			GNbId: &asn1.BitString{
-				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+				Value: []byte{0xd4, 0xbc, 0x0c, 0x98},
 				Len:   32,
 			},
 		},

@@ -81,7 +81,7 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2_go.GlobalKpmnodeId {
 					EnbId: &e2sm_kpm_v2_go.EnbIdChoice{
 						EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdMacro{
 							EnbIdMacro: &asn1.BitString{
-								Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+								Value: []byte{0xd4, 0xbc, 0x00},
 								Len:   20,
 							},
 						},
@@ -90,11 +90,11 @@ func createGlobalKpmnodeID3() *e2sm_kpm_v2_go.GlobalKpmnodeId {
 						Value: []byte{0x21, 0x22, 0x23},
 					},
 					ShortMacroENbId: &asn1.BitString{
-						Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+						Value: []byte{0xd4, 0xbc, 0x00},
 						Len:   18,
 					},
 					LongMacroENbId: &asn1.BitString{
-						Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+						Value: []byte{0xd4, 0xbc, 0x08},
 						Len:   21,
 					},
 				},

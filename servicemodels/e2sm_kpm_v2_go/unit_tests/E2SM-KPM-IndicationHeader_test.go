@@ -22,7 +22,7 @@ var refPerE2SmKpmIndicationHeader = "00000000  1f 21 22 23 24 18 74 78  74 00 00
 func createE2SmKpmIndicationHeader() *e2sm_kpm_v2_go.E2SmKpmIndicationHeader {
 
 	bs := asn1.BitString{
-		Value:[]byte{0xd4, 0xbc, 0x09, 0x00},
+		Value:[]byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x37, 0x34, 0x37}

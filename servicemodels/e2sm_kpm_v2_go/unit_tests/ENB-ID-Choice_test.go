@@ -23,7 +23,7 @@ func createEnbIDChoiceMacro() *e2sm_kpm_v2_go.EnbIdChoice {
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdMacro{
 			EnbIdMacro: &asn1.BitString{
-				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+				Value: []byte{0xd4, 0xbc, 0x00},
 				Len:   20,
 			},
 		},
@@ -35,7 +35,7 @@ func createEnbIDChoiceShortMacro() *e2sm_kpm_v2_go.EnbIdChoice {
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdShortmacro{
 			EnbIdShortmacro: &asn1.BitString{
-				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+				Value: []byte{0xd4, 0xbc, 0x00},
 				Len:   18,
 			},
 		},
@@ -47,7 +47,7 @@ func createEnbIDChoiceLongMacro() *e2sm_kpm_v2_go.EnbIdChoice {
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdLongmacro{
 			EnbIdLongmacro: &asn1.BitString{
-				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+				Value: []byte{0xd4, 0xbc, 0x08},
 				Len:   21,
 			},
 		},
