@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package test_sm_ies
+package testsmies
 
 import "reflect"
 

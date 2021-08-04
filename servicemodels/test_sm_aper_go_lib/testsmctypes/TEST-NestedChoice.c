@@ -10,12 +10,12 @@
 #include "Choice3.h"
 #include "ConstrainedChoice3.h"
 #include "ConstrainedChoice4.h"
-static asn_per_constraints_t asn_PER_type_TEST_NestedChoice_constr_1 CC_NOTUSED = {
+asn_per_constraints_t asn_PER_type_TEST_NestedChoice_constr_1 CC_NOTUSED = {
 	{ APC_CONSTRAINED | APC_EXTENSIBLE,  2,  2,  0,  2 }	/* (0..2,...) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };
-static asn_TYPE_member_t asn_MBR_TEST_NestedChoice_1[] = {
+asn_TYPE_member_t asn_MBR_TEST_NestedChoice_1[] = {
 	{ ATF_POINTER, 0, offsetof(struct TEST_NestedChoice, choice.option1),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		+1,	/* EXPLICIT tag at current level */
@@ -49,7 +49,7 @@ static const asn_TYPE_tag2member_t asn_MAP_TEST_NestedChoice_tag2el_1[] = {
     { (ASN_TAG_CLASS_CONTEXT | (1 << 2)), 1, 0, 0 }, /* option2 */
     { (ASN_TAG_CLASS_CONTEXT | (2 << 2)), 2, 0, 0 } /* option3 */
 };
-static asn_CHOICE_specifics_t asn_SPC_TEST_NestedChoice_specs_1 = {
+asn_CHOICE_specifics_t asn_SPC_TEST_NestedChoice_specs_1 = {
 	sizeof(struct TEST_NestedChoice),
 	offsetof(struct TEST_NestedChoice, _asn_ctx),
 	offsetof(struct TEST_NestedChoice, present),

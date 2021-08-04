@@ -43,6 +43,7 @@ test: license_check build build_protoc_gen_cgo build_protoc_gen_choice linters
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/test_sm_aper_go_lib && GODEBUG=cgocheck=0 go test -race ./...
 
 jenkins-test:  # @HELP run the unit tests and source code validation producing a junit style report for Jenkins
 jenkins-test: build-tools license_check linters
@@ -72,6 +73,7 @@ linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_mho && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-cgo/ && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-choice/ && golangci-lint run --timeout 5m && cd ..
 

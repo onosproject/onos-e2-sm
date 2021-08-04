@@ -11,7 +11,7 @@
  * This type is implemented using NativeEnumerated,
  * so here we adjust the DEF accordingly.
  */
-static asn_per_constraints_t asn_PER_type_TEST_EnumeratedExtensible_constr_1 CC_NOTUSED = {
+asn_per_constraints_t asn_PER_type_TEST_EnumeratedExtensible_constr_1 CC_NOTUSED = {
 	{ APC_CONSTRAINED | APC_EXTENSIBLE,  3,  3,  0,  5 }	/* (0..5,...) */,
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
@@ -34,7 +34,7 @@ static const unsigned int asn_MAP_TEST_EnumeratedExtensible_enum2value_1[] = {
 	5	/* enum6(5) */
 	/* This list is extensible */
 };
-static const asn_INTEGER_specifics_t asn_SPC_TEST_EnumeratedExtensible_specs_1 = {
+const asn_INTEGER_specifics_t asn_SPC_TEST_EnumeratedExtensible_specs_1 = {
 	asn_MAP_TEST_EnumeratedExtensible_value2enum_1,	/* "tag" => N; sorted by tag */
 	asn_MAP_TEST_EnumeratedExtensible_enum2value_1,	/* N => "tag"; sorted by N */
 	6,	/* Number of elements in the maps */

@@ -189,4 +189,15 @@ TEST-EnumeratedExtensible ::= ENUMERATED{
 	...
 }
 
+TEST-TopLevelPDU ::= SEQUENCE {
+    opt1    TEST-UnconstrainedInt,
+    opt2    TEST-ConstrainedReal    OPTIONAL,
+    opt3    TEST-NestedChoice,
+    opt4    TEST-BitString,
+    opt5    TEST-OctetString        OPTIONAL,
+    opt6    TEST-ListExtensible3,
+    opt7    TEST-EnumeratedExtensible,
+    ...
+}
+
 END

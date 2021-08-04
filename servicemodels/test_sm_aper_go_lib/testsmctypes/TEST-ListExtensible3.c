@@ -8,12 +8,12 @@
 #include "TEST-ListExtensible3.h"
 
 #include "TEST-FullyOptionalSequence.h"
-static asn_per_constraints_t asn_PER_type_TEST_ListExtensible3_constr_1 CC_NOTUSED = {
+asn_per_constraints_t asn_PER_type_TEST_ListExtensible3_constr_1 CC_NOTUSED = {
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	{ APC_CONSTRAINED | APC_EXTENSIBLE,  3,  3,  0,  4 }	/* (SIZE(0..4,...)) */,
 	0, 0	/* No PER value map */
 };
-static asn_TYPE_member_t asn_MBR_TEST_ListExtensible3_1[] = {
+asn_TYPE_member_t asn_MBR_TEST_ListExtensible3_1[] = {
 	{ ATF_POINTER, 0, 0,
 		(ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
 		0,
@@ -27,7 +27,7 @@ static asn_TYPE_member_t asn_MBR_TEST_ListExtensible3_1[] = {
 static const ber_tlv_tag_t asn_DEF_TEST_ListExtensible3_tags_1[] = {
 	(ASN_TAG_CLASS_UNIVERSAL | (16 << 2))
 };
-static asn_SET_OF_specifics_t asn_SPC_TEST_ListExtensible3_specs_1 = {
+asn_SET_OF_specifics_t asn_SPC_TEST_ListExtensible3_specs_1 = {
 	sizeof(struct TEST_ListExtensible3),
 	offsetof(struct TEST_ListExtensible3, _asn_ctx),
 	0,	/* XER encoding is XMLDelimitedItemList */

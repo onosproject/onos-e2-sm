@@ -34,6 +34,8 @@ typedef struct TEST_ConstrainedReal {
 
 /* Implementation */
 extern asn_TYPE_descriptor_t asn_DEF_TEST_ConstrainedReal;
+extern asn_SEQUENCE_specifics_t asn_SPC_TEST_ConstrainedReal_specs_1;
+extern asn_TYPE_member_t asn_MBR_TEST_ConstrainedReal_1[6];
 
 #ifdef __cplusplus
 }

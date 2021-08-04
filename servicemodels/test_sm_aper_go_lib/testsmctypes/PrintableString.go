@@ -34,14 +34,14 @@ func decodePrintableString(octC *C.PrintableString_t) (string, error) {
 	return string(bytes), nil
 }
 
-func newPrintableStringFromArray(array [16]byte) *C.PrintableString_t {
-
-	prtStrC := newOctetStringFromArray(array)
-	return prtStrC
-}
-
-func decodePrintableStringBytes(array [16]byte) (string, error) {
-	prtStrC := newPrintableStringFromArray(array)
-
-	return decodePrintableString(prtStrC)
-}
+//func newPrintableStringFromArray(array [16]byte) *C.PrintableString_t {
+//
+//	prtStrC := newOctetStringFromArray(array)
+//	return prtStrC
+//}
+//
+//func decodePrintableStringBytes(array [16]byte) (string, error) {
+//	prtStrC := newPrintableStringFromArray(array)
+//
+//	return decodePrintableString(prtStrC)
+//}

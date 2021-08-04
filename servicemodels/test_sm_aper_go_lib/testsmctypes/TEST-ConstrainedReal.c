@@ -187,7 +187,7 @@ static asn_per_constraints_t asn_PER_memb_attrCrF_constr_7 CC_NOTUSED = {
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	0, 0	/* No PER value map */
 };
-static asn_TYPE_member_t asn_MBR_TEST_ConstrainedReal_1[] = {
+asn_TYPE_member_t asn_MBR_TEST_ConstrainedReal_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct TEST_ConstrainedReal, attrCrA),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
@@ -254,7 +254,7 @@ static const asn_TYPE_tag2member_t asn_MAP_TEST_ConstrainedReal_tag2el_1[] = {
     { (ASN_TAG_CLASS_CONTEXT | (4 << 2)), 4, 0, 0 }, /* attrCrE */
     { (ASN_TAG_CLASS_CONTEXT | (5 << 2)), 5, 0, 0 } /* attrCrF */
 };
-static asn_SEQUENCE_specifics_t asn_SPC_TEST_ConstrainedReal_specs_1 = {
+asn_SEQUENCE_specifics_t asn_SPC_TEST_ConstrainedReal_specs_1 = {
 	sizeof(struct TEST_ConstrainedReal),
 	offsetof(struct TEST_ConstrainedReal, _asn_ctx),
 	asn_MAP_TEST_ConstrainedReal_tag2el_1,

@@ -223,7 +223,7 @@ static asn_per_constraints_t asn_PER_memb_attrBs7_constr_8 CC_NOTUSED = {
 	{ APC_CONSTRAINED,	 4,  4,  22,  36 }	/* (SIZE(22..36)) */,
 	0, 0	/* No PER value map */
 };
-static asn_TYPE_member_t asn_MBR_TEST_BitString_1[] = {
+asn_TYPE_member_t asn_MBR_TEST_BitString_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct TEST_BitString, attrBs1),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
 		-1,	/* IMPLICIT tag at current level */
@@ -301,7 +301,7 @@ static const asn_TYPE_tag2member_t asn_MAP_TEST_BitString_tag2el_1[] = {
     { (ASN_TAG_CLASS_CONTEXT | (5 << 2)), 5, 0, 0 }, /* attrBs6 */
     { (ASN_TAG_CLASS_CONTEXT | (6 << 2)), 6, 0, 0 } /* attrBs7 */
 };
-static asn_SEQUENCE_specifics_t asn_SPC_TEST_BitString_specs_1 = {
+asn_SEQUENCE_specifics_t asn_SPC_TEST_BitString_specs_1 = {
 	sizeof(struct TEST_BitString),
 	offsetof(struct TEST_BitString, _asn_ctx),
 	asn_MAP_TEST_BitString_tag2el_1,
