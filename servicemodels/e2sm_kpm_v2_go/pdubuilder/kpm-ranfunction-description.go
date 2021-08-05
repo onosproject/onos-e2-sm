@@ -47,9 +47,9 @@ func CreateRicKpmnodeItem(globalKpmnodeID *e2sm_kpm_v2_go.GlobalKpmnodeId, cmol 
 	}
 
 	//// optional instance
-	//if cmol != nil {
-	//	res.CellMeasurementObjectList = cmol
-	//}
+	if cmol != nil {
+		res.CellMeasurementObjectList = cmol
+	}
 
 	return &res
 }

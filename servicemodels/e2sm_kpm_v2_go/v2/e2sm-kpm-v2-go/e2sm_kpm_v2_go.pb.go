@@ -5609,8 +5609,8 @@ type RicKpmnodeItem struct {
 
 	// @inject_tag: aper:"valueExt"
 	RicKpmnodeType *GlobalKpmnodeId `protobuf:"bytes,1,opt,name=ric_kpmnode_type,json=ric-KPMNode-Type,proto3" json:"ric_kpmnode_type,omitempty" aper:"valueExt"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:16384"
-	CellMeasurementObjectList []*CellMeasurementObjectItem `protobuf:"bytes,2,rep,name=cell_measurement_object_list,json=cell-Measurement-Object-List,proto3" json:"cell_measurement_object_list,omitempty" aper:"valueExt,sizeLB:1,sizeUB:16384"`
+	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
+	CellMeasurementObjectList []*CellMeasurementObjectItem `protobuf:"bytes,2,rep,name=cell_measurement_object_list,json=cell-Measurement-Object-List,proto3" json:"cell_measurement_object_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:16384"`
 }
 
 func (x *RicKpmnodeItem) Reset() {

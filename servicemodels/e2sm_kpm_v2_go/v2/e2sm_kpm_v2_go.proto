@@ -809,7 +809,7 @@ message E2SmKpmRanfunctionDescription {
 message RicKpmnodeItem {
     // @inject_tag: aper:"valueExt"
     GlobalKpmnodeId ric_kpmnode_type = 1 [ json_name="ric-KPMNode-Type"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:16384"
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
     repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name="cell-Measurement-Object-List"];
 };
 
