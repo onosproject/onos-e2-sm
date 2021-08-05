@@ -17,10 +17,12 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion *string, 
 	}
 
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmIndicationHeader{
-		E2SmKpmIndicationHeader: &e2sm_kpm_v2_go.E2SmKpmIndicationHeader_IndicationHeaderFormat1{
-			IndicationHeaderFormat1: &e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1{
-				ColletStartTime: &e2sm_kpm_v2_go.TimeStamp{
-					Value: timeStamp,
+		IndicationHeaderFormats: &e2sm_kpm_v2_go.IndicationHeaderFormats{
+			E2SmKpmIndicationHeader: &e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1{
+				IndicationHeaderFormat1: &e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1{
+					ColletStartTime: &e2sm_kpm_v2_go.TimeStamp{
+						Value: timeStamp,
+					},
 				},
 			},
 		},
@@ -28,23 +30,23 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion *string, 
 
 	// optional instance
 	if fileFormatVersion != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().FileFormatversion = fileFormatVersion
+		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().FileFormatversion = fileFormatVersion
 	}
 	// optional instance
 	if senderName != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderName = senderName
+		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderName = senderName
 	}
 	// optional instance
 	if senderType != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().SenderType = senderType
+		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderType = senderType
 	}
 	// optional instance
 	if vendorName != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().VendorName = vendorName
+		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().VendorName = vendorName
 	}
 	// optional instance
 	if globalKpmNodeID != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormat1().KpmNodeId = globalKpmNodeID
+		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().KpmNodeId = globalKpmNodeID
 	}
 
 	//if err := e2SmKpmPdu.Validate(); err != nil {

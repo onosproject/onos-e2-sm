@@ -656,11 +656,16 @@ message MatchingUeidItem {
 // {E2SM-KPM-EventTriggerDefinition}
 message E2SmKpmEventTriggerDefinition {
     // choice from e2sm-kpm-ies_v2.asn1:337
+    // @inject_tag: aper:"valueExt"
+    EventTriggerDefinitionFormats event_definition_formats = 1 [ json_name="eventDefinition-formats"];
+};
+
+message EventTriggerDefinitionFormats {
     oneof e2_sm_kpm_event_trigger_definition {
         // @inject_tag: aper:"choiceIdx:1,valueExt"
         E2SmKpmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [json_name = "eventDefinition_Format1"];
     }
-};
+}
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:342
 // {E2SM-KPM-EventTriggerDefinition-Format1}
@@ -673,6 +678,11 @@ message E2SmKpmEventTriggerDefinitionFormat1 {
 // {E2SM-KPM-ActionDefinition}
 message E2SmKpmActionDefinition {
     RicStyleType ric_style_type = 1 [ json_name="ric-Style-Type"];
+    // @inject_tag: aper:"valueExt"
+    ActionDefinitionFormats action_definition_formats = 2 [ json_name="actionDefinition-formats"];
+};
+
+message ActionDefinitionFormats {
     oneof e2_sm_kpm_action_definition {
         // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmKpmActionDefinitionFormat1 action_definition_format1 = 2 [json_name = "actionDefinition_Format1"];
@@ -681,7 +691,7 @@ message E2SmKpmActionDefinition {
         // @inject_tag: aper:"valueExt,choiceIdx:3"
         E2SmKpmActionDefinitionFormat3 action_definition_format3 = 4 [json_name = "actionDefinition_Format3"];
     }
-};
+}
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:362
 // {E2SM-KPM-ActionDefinition-Format1}
@@ -712,11 +722,16 @@ message E2SmKpmActionDefinitionFormat3 {
 // {E2SM-KPM-IndicationHeader}
 message E2SmKpmIndicationHeader {
     // choice from e2sm-kpm-v01.00.asn1:391
+    // @inject_tag: aper:"valueExt"
+    IndicationHeaderFormats indication_header_formats = 1 [ json_name="indicationHeader-formats"];
+};
+
+message IndicationHeaderFormats {
     oneof e2_sm_kpm_indication_header {
         // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmKpmIndicationHeaderFormat1 indication_header_format1 = 1 [json_name = "indicationHeader_Format1"];
     }
-};
+}
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:396
 // {E2SM-KPM-IndicationHeader-Format1}
@@ -738,13 +753,18 @@ message E2SmKpmIndicationHeaderFormat1 {
 // {E2SM-KPM-IndicationMessage}
 message E2SmKpmIndicationMessage {
     // choice from e2sm_kpm_ies_v2.asn:414
+    // @inject_tag: aper:"valueExt"
+    IndicationMessageFormats indication_message_formats = 1 [ json_name="indicationMessage-formats"];
+};
+
+message IndicationMessageFormats {
     oneof e2_sm_kpm_indication_message {
         // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmKpmIndicationMessageFormat1 indication_message_format1 = 1 [json_name = "indicationMessage_Format1"];
         // @inject_tag: aper:"valueExt,choiceIdx:2"
         E2SmKpmIndicationMessageFormat2 indication_message_format2 = 2 [json_name = "indicationMessage_Format2"];
     }
-};
+}
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:419
 // {E2SM-KPM-IndicationMessage-Format1}
@@ -789,7 +809,7 @@ message E2SmKpmRanfunctionDescription {
 message RicKpmnodeItem {
     // @inject_tag: aper:"valueExt"
     GlobalKpmnodeId ric_kpmnode_type = 1 [ json_name="ric-KPMNode-Type"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:16384"
+    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
     repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name="cell-Measurement-Object-List"];
 };
 

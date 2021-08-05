@@ -11,32 +11,34 @@ func CreateE2SmKpmIndicationMessageFormat1(subscriptionID int64, gp *int64, cell
 	measData *e2sm_kpm_v2_go.MeasurementData) (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
 
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmIndicationMessage{
-		E2SmKpmIndicationMessage: &e2sm_kpm_v2_go.E2SmKpmIndicationMessage_IndicationMessageFormat1{
-			IndicationMessageFormat1: &e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat1{
-				SubscriptId: &e2sm_kpm_v2_go.SubscriptionId{
-					Value: subscriptionID,
+		IndicationMessageFormats: &e2sm_kpm_v2_go.IndicationMessageFormats{
+			E2SmKpmIndicationMessage: &e2sm_kpm_v2_go.IndicationMessageFormats_IndicationMessageFormat1{
+				IndicationMessageFormat1: &e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat1{
+					SubscriptId: &e2sm_kpm_v2_go.SubscriptionId{
+						Value: subscriptionID,
+					},
+					MeasData: measData,
 				},
-				MeasData: measData,
 			},
 		},
 	}
 
 	// optional instance
 	if gp != nil {
-		e2SmKpmPdu.GetIndicationMessageFormat1().GranulPeriod = &e2sm_kpm_v2_go.GranularityPeriod{
+		e2SmKpmPdu.GetIndicationMessageFormats().GetIndicationMessageFormat1().GranulPeriod = &e2sm_kpm_v2_go.GranularityPeriod{
 			Value: *gp,
 		}
 	}
 
 	// optional instance
 	if cellObjID != nil {
-		e2SmKpmPdu.GetIndicationMessageFormat1().CellObjId = &e2sm_kpm_v2_go.CellObjectId{
+		e2SmKpmPdu.GetIndicationMessageFormats().GetIndicationMessageFormat1().CellObjId = &e2sm_kpm_v2_go.CellObjectId{
 			Value: *cellObjID,
 		}
 	}
 	// optional instance
 	if measInfoList != nil {
-		e2SmKpmPdu.GetIndicationMessageFormat1().MeasInfoList = measInfoList
+		e2SmKpmPdu.GetIndicationMessageFormats().GetIndicationMessageFormat1().MeasInfoList = measInfoList
 	}
 
 	//if err := e2SmKpmPdu.Validate(); err != nil {
@@ -49,27 +51,29 @@ func CreateE2SmKpmIndicationMessageFormat2(subscriptionID int64, gp *int64, cell
 	measData *e2sm_kpm_v2_go.MeasurementData) (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
 
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmIndicationMessage{
-		E2SmKpmIndicationMessage: &e2sm_kpm_v2_go.E2SmKpmIndicationMessage_IndicationMessageFormat2{
-			IndicationMessageFormat2: &e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat2{
-				SubscriptId: &e2sm_kpm_v2_go.SubscriptionId{
-					Value: subscriptionID,
+		IndicationMessageFormats: &e2sm_kpm_v2_go.IndicationMessageFormats{
+			E2SmKpmIndicationMessage: &e2sm_kpm_v2_go.IndicationMessageFormats_IndicationMessageFormat2{
+				IndicationMessageFormat2: &e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat2{
+					SubscriptId: &e2sm_kpm_v2_go.SubscriptionId{
+						Value: subscriptionID,
+					},
+					MeasCondUeidList: measCondUEList,
+					MeasData:         measData,
 				},
-				MeasCondUeidList: measCondUEList,
-				MeasData:         measData,
 			},
 		},
 	}
 
 	// optional instance
 	if gp != nil {
-		e2SmKpmPdu.GetIndicationMessageFormat2().GranulPeriod = &e2sm_kpm_v2_go.GranularityPeriod{
+		e2SmKpmPdu.GetIndicationMessageFormats().GetIndicationMessageFormat2().GranulPeriod = &e2sm_kpm_v2_go.GranularityPeriod{
 			Value: *gp,
 		}
 	}
 
 	// optional instance
 	if cellObjID != nil {
-		e2SmKpmPdu.GetIndicationMessageFormat2().CellObjId = &e2sm_kpm_v2_go.CellObjectId{
+		e2SmKpmPdu.GetIndicationMessageFormats().GetIndicationMessageFormat2().CellObjId = &e2sm_kpm_v2_go.CellObjectId{
 			Value: *cellObjID,
 		}
 	}

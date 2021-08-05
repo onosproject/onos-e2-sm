@@ -88,7 +88,7 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}
-	return newE2SmKpmPdu.GetIndicationMessageFormat1(), nil
+	return newE2SmKpmPdu.GetIndicationMessageFormats().GetIndicationMessageFormat1(), nil
 }
 
 func Test_perEncodingE2SmKpmIndicationMessageFormat1(t *testing.T) {

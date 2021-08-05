@@ -9,9 +9,11 @@ import (
 
 func CreateE2SmKpmEventTriggerDefinition(rtPeriod int64) (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition{
-		E2SmKpmEventTriggerDefinition: &e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition_EventDefinitionFormat1{
-			EventDefinitionFormat1: &e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1{
-				ReportingPeriod: rtPeriod,
+		EventDefinitionFormats: &e2sm_kpm_v2_go.EventTriggerDefinitionFormats{
+			E2SmKpmEventTriggerDefinition: &e2sm_kpm_v2_go.EventTriggerDefinitionFormats_EventDefinitionFormat1{
+				EventDefinitionFormat1: &e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1{
+					ReportingPeriod: rtPeriod,
+				},
 			},
 		},
 	}

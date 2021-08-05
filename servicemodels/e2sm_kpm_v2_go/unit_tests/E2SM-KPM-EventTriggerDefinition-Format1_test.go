@@ -16,18 +16,22 @@ import (
 
 var refPerEventTriggerDefinitionFormat1 = "00000000  00 0e                                             |..|"
 
-func createE2SMKPMEventTriggerDefinitionFormat1() *e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1 {
+func createE2SMKPMEventTriggerDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1, error) {
 
 	var rtPeriod int64 = 15
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
+	if err != nil {
+		return nil, err
+	}
 
-	return newE2SmKpmPdu.GetEventDefinitionFormat1()
+	return newE2SmKpmPdu.GetEventDefinitionFormats().GetEventDefinitionFormat1(), nil
 }
 
 func Test_perEncodingE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
-	etdf1 := createE2SMKPMEventTriggerDefinitionFormat1()
+	etdf1, err := createE2SMKPMEventTriggerDefinitionFormat1()
+	assert.NilError(t, err)
 
 	per, err := aper.MarshalWithParams(etdf1, "valueExt")
 	assert.NilError(t, err)
@@ -42,7 +46,8 @@ func Test_perEncodingE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 
 func Test_perE2SmKpmEventTriggerDefinitionFormat1CompareBytes(t *testing.T) {
 
-	etdf1 := createE2SMKPMEventTriggerDefinitionFormat1()
+	etdf1, err := createE2SMKPMEventTriggerDefinitionFormat1()
+	assert.NilError(t, err)
 
 	per, err := aper.MarshalWithParams(etdf1, "valueExt")
 	assert.NilError(t, err)

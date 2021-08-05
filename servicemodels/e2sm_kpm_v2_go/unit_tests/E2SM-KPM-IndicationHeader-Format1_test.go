@@ -15,20 +15,20 @@ import (
 	"testing"
 )
 
-var refPerE2SmKpmIndicationHeaderFormat1 = "00000000  7c 21 22 23 24 18 74 78  74 00 00 03 4f 4e 46 40  ||!\"#$.txt...ONF@|" +
-	"00000010  73 6f 6d 65 54 79 70 65  06 6f 6e 66 0c 37 34 37  |someType.onf.747|" +
-	"00000020  00 d4 bc 08 80 30 39 20  1a 85                    |.....09 ..|"
+var refPerE2SmKpmIndicationHeaderFormat1 = "00000000  7c 21 22 23 24 18 74 78  74 00 00 03 4f 4e 46 40  ||!\"#$.txt...ONF@|\n" +
+	"00000010  73 6f 6d 65 54 79 70 65  06 6f 6e 66 0c 21 22 23  |someType.onf.!\"#|\n" +
+	"00000020  30 d4 bc 09 00 15 00 20                           |0...... |"
 
 func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1, error) {
 
 	bs := asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x08},
-		Len:   22,
+		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Len:   28,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 	timeStamp := []byte{0x21, 0x22, 0x23, 0x24}
-	var gnbCuUpID int64 = 12345
-	var gnbDuID int64 = 6789
+	var gnbCuUpID int64 = 21
+	var gnbDuID int64 = 32
 	var fileFormatVersion string = "txt"
 	var senderName string = "ONF"
 	var senderType string = "someType"
@@ -48,7 +48,7 @@ func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHe
 	if err != nil {
 		return nil, err
 	}
-	return newE2SmKpmPdu.GetIndicationHeaderFormat1(), nil
+	return newE2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1(), nil
 }
 
 func Test_perEncodingE2SmKpmIndicationHeaderFormat1(t *testing.T) {
@@ -80,6 +80,7 @@ func Test_perE2SmKpmIndicationHeaderFormat1CompareBytes(t *testing.T) {
 
 	//Comparing with reference bytes
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmIndicationHeaderFormat1)
+	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER\n%v", hex.Dump(perRefBytes))
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }

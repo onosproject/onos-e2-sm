@@ -10,4 +10,4 @@ require (
 	gotest.tools v2.2.0+incompatible
 )
 
-//replace github.com/onosproject/onos-lib-go => ../../../onos-lib-go
+replace github.com/onosproject/onos-lib-go => ../../../onos-lib-go

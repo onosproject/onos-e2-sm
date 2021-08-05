@@ -16,18 +16,22 @@ import (
 
 var refPerEventTriggerDefinition = "00000000  00 0e                                             |..|"
 
-func createE2SMKPMEventTriggerDefinition() *e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition {
+func createE2SMKPMEventTriggerDefinition() (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
 
 	var rtPeriod int64 = 15
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
+	if err != nil {
+		return nil, err
+	}
 
-	return newE2SmKpmPdu
+	return newE2SmKpmPdu, nil
 }
 
 func Test_perEncodingE2SmKpmEventTriggerDefinition(t *testing.T) {
 
-	etd := createE2SMKPMEventTriggerDefinition()
+	etd, err := createE2SMKPMEventTriggerDefinition()
+	assert.NilError(t, err)
 
 	per, err := encoder.PerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
@@ -41,7 +45,8 @@ func Test_perEncodingE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 func Test_perE2SmKpmEventTriggerDefinitionCompareBytes(t *testing.T) {
 
-	etd := createE2SMKPMEventTriggerDefinition()
+	etd, err := createE2SMKPMEventTriggerDefinition()
+	assert.NilError(t, err)
 
 	per, err := encoder.PerEncodeE2SmKpmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
