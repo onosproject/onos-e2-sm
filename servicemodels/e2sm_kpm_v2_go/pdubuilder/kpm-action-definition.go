@@ -16,8 +16,10 @@ func CreateE2SmKpmActionDefinitionFormat1(ricStyleType int32,
 		RicStyleType: &e2sm_kpm_v2_go.RicStyleType{
 			Value: ricStyleType,
 		},
-		E2SmKpmActionDefinition: &e2sm_kpm_v2_go.E2SmKpmActionDefinition_ActionDefinitionFormat1{
-			ActionDefinitionFormat1: actionDefinition,
+		ActionDefinitionFormats: &e2sm_kpm_v2_go.ActionDefinitionFormats{
+			E2SmKpmActionDefinition: &e2sm_kpm_v2_go.ActionDefinitionFormats_ActionDefinitionFormat1{
+				ActionDefinitionFormat1: actionDefinition,
+			},
 		},
 	}
 
@@ -34,8 +36,10 @@ func CreateE2SmKpmActionDefinitionFormat2(ricStyleType int32,
 		RicStyleType: &e2sm_kpm_v2_go.RicStyleType{
 			Value: ricStyleType,
 		},
-		E2SmKpmActionDefinition: &e2sm_kpm_v2_go.E2SmKpmActionDefinition_ActionDefinitionFormat2{
-			ActionDefinitionFormat2: actionDefinitionFormat2,
+		ActionDefinitionFormats: &e2sm_kpm_v2_go.ActionDefinitionFormats{
+			E2SmKpmActionDefinition: &e2sm_kpm_v2_go.ActionDefinitionFormats_ActionDefinitionFormat2{
+				ActionDefinitionFormat2: actionDefinitionFormat2,
+			},
 		},
 	}
 
@@ -52,8 +56,10 @@ func CreateE2SmKpmActionDefinitionFormat3(ricStyleType int32,
 		RicStyleType: &e2sm_kpm_v2_go.RicStyleType{
 			Value: ricStyleType,
 		},
-		E2SmKpmActionDefinition: &e2sm_kpm_v2_go.E2SmKpmActionDefinition_ActionDefinitionFormat3{
-			ActionDefinitionFormat3: actionDefinitionFormat3,
+		ActionDefinitionFormats: &e2sm_kpm_v2_go.ActionDefinitionFormats{
+			E2SmKpmActionDefinition: &e2sm_kpm_v2_go.ActionDefinitionFormats_ActionDefinitionFormat3{
+				ActionDefinitionFormat3: actionDefinitionFormat3,
+			},
 		},
 	}
 

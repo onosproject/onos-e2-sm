@@ -148,6 +148,8 @@ func Test_perEncodingGlobalKpmNodeIDgnb(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GlobalKpmnodeID (GNb) PER - decoded\n%v", result)
+	assert.Equal(t, globalKpmnodeID.GetGNb().GetGNbCuUpId().GetValue(), result.GetGNb().GetGNbCuUpId().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetGNb().GetGNbDuId().GetValue(), result.GetGNb().GetGNbDuId().GetValue())
 }
 
 func Test_perGlobalKpmNodeIDgnbCompareBytes(t *testing.T) {

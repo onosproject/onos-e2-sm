@@ -62,18 +62,18 @@ var Choicemape2smKpm = map[string]map[int]reflect.Type{
 		2: reflect.TypeOf(MatchingCondItem_TestCondInfo{}),
 	},
 	"e2_sm_kpm_event_trigger_definition": {
-		1: reflect.TypeOf(E2SmKpmEventTriggerDefinition_EventDefinitionFormat1{}),
+		1: reflect.TypeOf(EventTriggerDefinitionFormats_EventDefinitionFormat1{}),
 	},
 	"e2_sm_kpm_action_definition": {
-		1: reflect.TypeOf(E2SmKpmActionDefinition_ActionDefinitionFormat1{}),
-		2: reflect.TypeOf(E2SmKpmActionDefinition_ActionDefinitionFormat2{}),
-		3: reflect.TypeOf(E2SmKpmActionDefinition_ActionDefinitionFormat3{}),
+		1: reflect.TypeOf(ActionDefinitionFormats_ActionDefinitionFormat1{}),
+		2: reflect.TypeOf(ActionDefinitionFormats_ActionDefinitionFormat2{}),
+		3: reflect.TypeOf(ActionDefinitionFormats_ActionDefinitionFormat3{}),
 	},
 	"e2_sm_kpm_indication_header": {
-		1: reflect.TypeOf(E2SmKpmIndicationHeader_IndicationHeaderFormat1{}),
+		1: reflect.TypeOf(IndicationHeaderFormats_IndicationHeaderFormat1{}),
 	},
 	"e2_sm_kpm_indication_message": {
-		1: reflect.TypeOf(E2SmKpmIndicationMessage_IndicationMessageFormat1{}),
-		2: reflect.TypeOf(E2SmKpmIndicationMessage_IndicationMessageFormat2{}),
+		1: reflect.TypeOf(IndicationMessageFormats_IndicationMessageFormat1{}),
+		2: reflect.TypeOf(IndicationMessageFormats_IndicationMessageFormat2{}),
 	},
 }

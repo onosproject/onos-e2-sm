@@ -207,6 +207,7 @@ func Test_perDecodeRadysisBytes(t *testing.T) {
 		0x07, 0x00, 0x01, 0x00, 0x01}
 	t.Logf("Radysis E2SmKpmRanfunctionDescription PER\n%v", hex.Dump(radisysBytesRanFunctionDefinition))
 
+	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{}
 	err := aper.UnmarshalWithParams(radisysBytesRanFunctionDefinition, &result, "valueExt")
 	assert.NilError(t, err)
