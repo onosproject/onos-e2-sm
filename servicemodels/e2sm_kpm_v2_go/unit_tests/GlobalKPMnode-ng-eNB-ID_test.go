@@ -59,7 +59,15 @@ func Test_perEncodingGlobalKPMnodeNgEnbID(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GlobalKPMnodeNgEnbID PER - decoded\n%v", result)
+	t.Logf("GlobalKPMnodeNgEnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetPlmnId().GetValue(), result.GetGlobalNgENbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue(), result.GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetLen(), result.GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetLen())
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetValue(), result.GetGlobalNgENbId().GetShortMacroENbId().GetValue())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetLen(), result.GetGlobalNgENbId().GetShortMacroENbId().GetLen())
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetValue(), result.GetGlobalNgENbId().GetLongMacroENbId().GetValue())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetLen(), result.GetGlobalNgENbId().GetLongMacroENbId().GetLen())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGNbDuId().GetValue(), result.GetGNbDuId().GetValue())
 }
 
 func Test_perGlobalKPMnodeNgEnbIDCompareBytes(t *testing.T) {

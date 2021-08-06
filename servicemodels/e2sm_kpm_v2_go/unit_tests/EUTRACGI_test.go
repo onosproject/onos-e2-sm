@@ -43,7 +43,10 @@ func Test_perEncodingEutraCGI(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("EUTRACGI PER - decoded\n%v", result)
+	t.Logf("EUTRACGI PER - decoded\n%v", &result)
+	assert.DeepEqual(t, eCgi.GetPLmnIdentity().GetValue(), result.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, eCgi.GetEUtracellIdentity().GetValue().GetValue(), result.GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, eCgi.GetEUtracellIdentity().GetValue().GetLen(), result.GetEUtracellIdentity().GetValue().GetLen())
 }
 
 func Test_perEutraCGICompareBytes(t *testing.T) {

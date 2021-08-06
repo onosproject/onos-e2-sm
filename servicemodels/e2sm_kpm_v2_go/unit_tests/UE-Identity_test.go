@@ -29,7 +29,8 @@ func Test_perEncodeUeIdentity(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("UE-Identity PER - decoded\n%v", result)
+	t.Logf("UE-Identity PER - decoded\n%v", &result)
+	assert.DeepEqual(t, ueIdentity.GetValue(), result.GetValue())
 }
 
 func Test_perUeIdentityCompareBytes(t *testing.T) {

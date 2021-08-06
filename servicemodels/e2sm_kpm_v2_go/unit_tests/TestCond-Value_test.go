@@ -35,7 +35,8 @@ func Test_perEncodingTestCondValueInt(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondValue (Integer) PER - decoded\n%v", result)
+	t.Logf("TestCondValue (Integer) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondValue.GetValueInt(), result.GetValueInt())
 }
 
 func Test_perTestCondValueIntCompareBytes(t *testing.T) {
@@ -66,7 +67,8 @@ func Test_perEncodingTestCondValueEnum(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondValue (Enumerator) PER - decoded\n%v", result)
+	t.Logf("TestCondValue (Enumerator) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondValue.GetValueEnum(), result.GetValueEnum())
 }
 
 func Test_perTestCondValueEnumCompareBytes(t *testing.T) {
@@ -97,7 +99,8 @@ func Test_perEncodingTestCondValueBool(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondValue (Boolean) PER - decoded\n%v", result)
+	t.Logf("TestCondValue (Boolean) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondValue.GetValueBool(), result.GetValueBool())
 }
 
 func Test_perTestCondValueBoolCompareBytes(t *testing.T) {
@@ -132,7 +135,9 @@ func Test_perEncodingTestCondValueBS(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondValue (BitString) PER - decoded\n%v", result)
+	t.Logf("TestCondValue (BitString) PER - decoded\n%v", &result)
+	assert.DeepEqual(t, testCondValue.GetValueBitS().GetValue(), result.GetValueBitS().GetValue())
+	assert.Equal(t, testCondValue.GetValueBitS().GetLen(), result.GetValueBitS().GetLen())
 }
 
 func Test_perTestCondValueBSCompareBytes(t *testing.T) {
@@ -167,7 +172,8 @@ func Test_perEncodingTestCondValueOS(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondValue (OctetString) PER - decoded\n%v", result)
+	t.Logf("TestCondValue (OctetString) PER - decoded\n%v", &result)
+	assert.DeepEqual(t, testCondValue.GetValueOctS(), result.GetValueOctS())
 }
 
 func Test_perTestCondValueOSCompareBytes(t *testing.T) {
@@ -198,7 +204,8 @@ func Test_perEncodingTestCondValuePS(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondValue (PrintableString) PER - decoded\n%v", result)
+	t.Logf("TestCondValue (PrintableString) PER - decoded\n%v", &result)
+	assert.DeepEqual(t, testCondValue.GetValuePrtS(), result.GetValuePrtS())
 }
 
 func Test_perTestCondValuePSCompareBytes(t *testing.T) {

@@ -29,7 +29,8 @@ func Test_perEncodingSubscriptionID(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("SubscriptionID PER - decoded\n%v", result)
+	t.Logf("SubscriptionID PER - decoded\n%v", &result)
+	assert.Equal(t, subID.GetValue(), result.GetValue())
 }
 
 func Test_perSubscriptionIDCompareBytes(t *testing.T) {

@@ -35,6 +35,7 @@ func Test_perEncodingGnbCuUpID(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("GnbCuUpID PER - decoded\n%v", result.GetValue())
+	assert.Equal(t, gnbCuUpID.GetValue(), result.GetValue())
 }
 
 func Test_perGnbCuUpIDCompareBytes(t *testing.T) {

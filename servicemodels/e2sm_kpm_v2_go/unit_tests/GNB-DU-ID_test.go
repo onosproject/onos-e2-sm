@@ -50,7 +50,8 @@ func Test_perEncodingGnbDuID(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GnbDuID PER - decoded\n%v", result)
+	t.Logf("GnbDuID PER - decoded\n%v", &result)
+	assert.Equal(t, gnbDuID.GetValue(), result.GetValue())
 }
 
 func Test_perGnbDuIDCompareBytes(t *testing.T) {
@@ -79,7 +80,8 @@ func Test_perEncodingGnbDuIDhigh(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GnbDuID PER - decoded\n%v", result)
+	t.Logf("GnbDuID PER - decoded\n%v", &result)
+	assert.Equal(t, gnbDuID.GetValue(), result.GetValue())
 }
 
 func Test_perGnbDuIDhighCompareBytes(t *testing.T) {
@@ -108,7 +110,8 @@ func Test_perEncodingGnbDuIDub(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GnbDuID PER - decoded\n%v", result)
+	t.Logf("GnbDuID PER - decoded\n%v", &result)
+	assert.Equal(t, gnbDuID.GetValue(), result.GetValue())
 }
 
 func Test_perGnbDuIDubCompareBytes(t *testing.T) {

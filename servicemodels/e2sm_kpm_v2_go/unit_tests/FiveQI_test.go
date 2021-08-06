@@ -34,7 +34,8 @@ func Test_perEncodingFiveQi(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("FiveQI PER - decoded\n%v", result)
+	t.Logf("FiveQI PER - decoded\n%v", &result)
+	assert.Equal(t, fqi.GetValue(), result.GetValue())
 }
 
 func Test_perFiveQiCompareBytes(t *testing.T) {

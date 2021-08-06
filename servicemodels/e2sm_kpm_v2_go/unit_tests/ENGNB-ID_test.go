@@ -46,15 +46,17 @@ func Test_perEncodingEnGnbID(t *testing.T) {
 	gnbIDc := createEngnbID()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "sizeExt")
+	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EngnbId{}
-	err = aper.UnmarshalWithParams(per, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("enGnbID PER - decoded\n%v", result)
+	t.Logf("enGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetGNbId().GetValue(), result.GetGNbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGNbId().GetLen(), result.GetGNbId().GetLen())
 }
 
 func Test_perEnGnbIDCompareBytes(t *testing.T) {
@@ -62,7 +64,7 @@ func Test_perEnGnbIDCompareBytes(t *testing.T) {
 	gnbIDc := createEngnbID()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "sizeExt")
+	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
@@ -77,16 +79,17 @@ func Test_perEncodingEnGnbIDlen32(t *testing.T) {
 	gnbIDc := createEngnbIDlen32()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "sizeExt")
+	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EngnbId{}
-	//ToDo - Encodes correctly, but doesn't decode now.. Problems with finding choice index..
-	err = aper.UnmarshalWithParams(per, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("enGnbID PER - decoded\n%v", result)
+	t.Logf("enGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetGNbId().GetValue(), result.GetGNbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGNbId().GetLen(), result.GetGNbId().GetLen())
 }
 
 func Test_perEnGnbIDlen32CompareBytes(t *testing.T) {
@@ -94,7 +97,7 @@ func Test_perEnGnbIDlen32CompareBytes(t *testing.T) {
 	gnbIDc := createEngnbIDlen32()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "sizeExt")
+	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
@@ -104,7 +107,6 @@ func Test_perEnGnbIDlen32CompareBytes(t *testing.T) {
 	assert.DeepEqual(t, per, perRefBytes)
 }
 
-// Doesn't work - deals with incorrect choice index.. :(
 func Test_stupidExperiment3(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerEnGnbIDlen32)
 	assert.NilError(t, err)
@@ -112,8 +114,8 @@ func Test_stupidExperiment3(t *testing.T) {
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.EngnbId{}
-	err = aper.UnmarshalWithParams(perRefBytes, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("enGnbID PER - decoded\n%v", result)
+	t.Logf("enGnbID PER - decoded\n%v", &result)
 }

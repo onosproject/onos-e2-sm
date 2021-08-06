@@ -29,7 +29,8 @@ func Test_perEncodingRicFormatType(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("RIC-Format-Type - decoded\n%v", result)
+	t.Logf("RIC-Format-Type - decoded\n%v", &result)
+	assert.Equal(t, ricFormatType.GetValue(), result.GetValue())
 }
 
 func Test_perRicFormatTypeCompareBytes(t *testing.T) {

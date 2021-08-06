@@ -29,7 +29,8 @@ func Test_perEncodingRicStyleType(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("RIC-Style-Type PER - decoded\n%v", result)
+	t.Logf("RIC-Style-Type PER - decoded\n%v", &result)
+	assert.Equal(t, ricStyleType.GetValue(), result.GetValue())
 }
 
 func Test_perRicStyleTypeCompareBytes(t *testing.T) {

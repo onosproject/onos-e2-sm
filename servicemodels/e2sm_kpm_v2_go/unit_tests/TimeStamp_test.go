@@ -30,7 +30,8 @@ func Test_perEncodingTimeStamp(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TimeStamp PER - decoded\n%v", result)
+	t.Logf("TimeStamp PER - decoded\n%v", &result)
+	assert.DeepEqual(t, timeStamp.GetValue(), result.GetValue())
 }
 
 func Test_perTimeStampCompareBytes(t *testing.T) {

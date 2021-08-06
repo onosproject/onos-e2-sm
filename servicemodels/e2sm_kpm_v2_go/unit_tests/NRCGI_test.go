@@ -42,7 +42,10 @@ func Test_perEncodingNrCGI(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("NrCGI PER - decoded\n%v", result)
+	t.Logf("NrCGI PER - decoded\n%v", &result)
+	assert.DeepEqual(t, nrCgi.GetPLmnIdentity().GetValue(), result.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, nrCgi.GetNRcellIdentity().GetValue().GetValue(), result.GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, nrCgi.GetNRcellIdentity().GetValue().GetLen(), result.GetNRcellIdentity().GetValue().GetLen())
 }
 
 func Test_perNrCGICompareBytes(t *testing.T) {

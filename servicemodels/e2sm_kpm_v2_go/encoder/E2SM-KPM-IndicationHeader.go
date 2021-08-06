@@ -34,7 +34,7 @@ func PerDecodeE2SmKpmIndicationHeader(per []byte) (*e2sm_kpm_v2_go.E2SmKpmIndica
 		return nil, err
 	}
 
-	log.Debugf("Decoded E2SM-KPM-IndicationHeader from PER is\n%v", result)
+	log.Debugf("Decoded E2SM-KPM-IndicationHeader from PER is\n%v", &result)
 
 	return &result, nil
 }

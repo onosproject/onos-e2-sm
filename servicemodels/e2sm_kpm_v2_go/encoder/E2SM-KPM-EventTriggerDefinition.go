@@ -34,7 +34,7 @@ func PerDecodeE2SmKpmEventTriggerDefinition(per []byte) (*e2sm_kpm_v2_go.E2SmKpm
 		return nil, err
 	}
 
-	log.Debugf("Decoded E2SM-KPM-EventTriggerDefinition from PER is\n%v", result)
+	log.Debugf("Decoded E2SM-KPM-EventTriggerDefinition from PER is\n%v", &result)
 
 	return &result, nil
 }

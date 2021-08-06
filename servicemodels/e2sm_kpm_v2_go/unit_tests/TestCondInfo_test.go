@@ -32,9 +32,6 @@ func Test_perEncodingTestCondInfo(t *testing.T) {
 	}
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	// ToDo - if we exclude valueExt from the parameters, then first bit is different (shifted on one place to the left),
-	// otherwise second bit is different (shifted one place to the left as well).
-	// If we try backward compatibility with CGo approach, decoding of these new bytes fails
 	per, err := aper.MarshalWithParams(*testCondInfo, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
@@ -43,7 +40,10 @@ func Test_perEncodingTestCondInfo(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondInfo PER - decoded\n%v", result)
+	t.Logf("TestCondInfo PER - decoded\n%v", &result)
+	assert.Equal(t, testCondInfo.GetTestValue().GetValueInt(), result.GetTestValue().GetValueInt())
+	assert.Equal(t, testCondInfo.GetTestExpr().Number(), result.GetTestExpr().Number())
+	assert.Equal(t, testCondInfo.GetTestType().GetAMbr().Number(), result.GetTestType().GetAMbr().Number())
 }
 
 func Test_perTestCondInfoCompareBytes(t *testing.T) {
@@ -63,9 +63,6 @@ func Test_perTestCondInfoCompareBytes(t *testing.T) {
 	}
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	// ToDo - if we exclude valueExt from the parameters, then first bit is different (shifted on one place to the left),
-	// otherwise second bit is different (shifted one place to the left as well).
-	// If we try backward compatibility with CGo approach, decoding of these new bytes fails
 	per, err := aper.MarshalWithParams(*testCondInfo, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
@@ -76,7 +73,6 @@ func Test_perTestCondInfoCompareBytes(t *testing.T) {
 	assert.DeepEqual(t, per, perRefBytes)
 }
 
-// Odd, but it decodes it correctly..
 func Test_stupidExperiment2(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerTCI)
 	assert.NilError(t, err)
@@ -87,5 +83,5 @@ func Test_stupidExperiment2(t *testing.T) {
 	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondInfo PER - decoded\n%v", result)
+	t.Logf("TestCondInfo PER - decoded\n%v", &result)
 }

@@ -29,7 +29,8 @@ func Test_perEncodingPlmnID(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("PLMN-Identity PER - decoded\n%v", result)
+	t.Logf("PLMN-Identity PER - decoded\n%v", &result)
+	assert.DeepEqual(t, plmnID.GetValue(), result.GetValue())
 }
 
 func Test_perPlmnIDCompareBytes(t *testing.T) {

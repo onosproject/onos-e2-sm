@@ -37,7 +37,9 @@ func Test_perEncodingNrCellIdentity(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("NrCellIdentity PER - decoded\n%v", result)
+	t.Logf("NrCellIdentity PER - decoded\n%v", &result)
+	assert.DeepEqual(t, nrCgi.GetValue().GetValue(), result.GetValue().GetValue())
+	assert.Equal(t, nrCgi.GetValue().GetLen(), result.GetValue().GetLen())
 }
 
 func Test_perNrCellIdentityCompareBytes(t *testing.T) {

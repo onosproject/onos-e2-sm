@@ -38,7 +38,9 @@ func Test_perEncodingEutracellIdentity(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("EutraCellIdentity PER - decoded\n%v", result)
+	t.Logf("EutraCellIdentity PER - decoded\n%v", &result)
+	assert.DeepEqual(t, eCellID.GetValue().GetValue(), result.GetValue().GetValue())
+	assert.Equal(t, eCellID.GetValue().GetLen(), result.GetValue().GetLen())
 }
 
 func Test_perEutracellIdentityCompareBytes(t *testing.T) {

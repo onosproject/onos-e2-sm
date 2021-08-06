@@ -29,7 +29,8 @@ func Test_perEncodingGranularityPeriod(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GranularityPeriod PER - decoded\n%v", result)
+	t.Logf("GranularityPeriod PER - decoded\n%v", &result)
+	assert.Equal(t, gp.GetValue(), result.GetValue())
 }
 
 func Test_perGranularityPeriodCompareBytes(t *testing.T) {

@@ -13,9 +13,11 @@ import (
 	"testing"
 )
 
-var refPerArp = "00000000  70                                                |p|"
+var refPerArpLB = "00000000  00                                                |.|"
+var refPerArpUB = "00000000  70                                                |p|"
+var refPerArpExt = "00000000  80 01 79                                          |..y|"
 
-func Test_perEncodingArp(t *testing.T) {
+func Test_perEncodingArpLB(t *testing.T) {
 
 	arp := &e2sm_kpm_v2_go.Arp{
 		Value: 15,
@@ -29,15 +31,45 @@ func Test_perEncodingArp(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("ARP PER - decoded\n%v", result)
+	t.Logf("ARP PER - decoded\n%v", &result)
+	assert.Equal(t, arp.GetValue(), result.GetValue())
+}
+
+func Test_perArpCompareBytesLB(t *testing.T) {
+
+	arp := &e2sm_kpm_v2_go.Arp{
+		Value: 1,
+	}
+
+	per, err := aper.Marshal(*arp)
+	assert.NilError(t, err)
+	t.Logf("ARP PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
-	perRefBytes, err := hexlib.DumpToByte(refPerArp)
+	perRefBytes, err := hexlib.DumpToByte(refPerArpLB)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }
 
-func Test_perArpCompareBytes(t *testing.T) {
+func Test_perEncodingArpUB(t *testing.T) {
+
+	arp := &e2sm_kpm_v2_go.Arp{
+		Value: 15,
+	}
+
+	per, err := aper.Marshal(*arp)
+	assert.NilError(t, err)
+	t.Logf("ARP PER\n%v", hex.Dump(per))
+
+	result := e2sm_kpm_v2_go.Arp{}
+	err = aper.Unmarshal(per, &result)
+	assert.NilError(t, err)
+	assert.Assert(t, &result != nil)
+	t.Logf("ARP PER - decoded\n%v", &result)
+	assert.Equal(t, arp.GetValue(), result.GetValue())
+}
+
+func Test_perArpCompareBytesUB(t *testing.T) {
 
 	arp := &e2sm_kpm_v2_go.Arp{
 		Value: 15,
@@ -48,7 +80,41 @@ func Test_perArpCompareBytes(t *testing.T) {
 	t.Logf("ARP PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
-	perRefBytes, err := hexlib.DumpToByte(refPerArp)
+	perRefBytes, err := hexlib.DumpToByte(refPerArpUB)
+	assert.NilError(t, err)
+	assert.DeepEqual(t, per, perRefBytes)
+}
+
+func Test_perEncodingArpExt(t *testing.T) {
+
+	arp := &e2sm_kpm_v2_go.Arp{
+		Value: 121,
+	}
+
+	per, err := aper.Marshal(*arp)
+	assert.NilError(t, err)
+	t.Logf("ARP PER\n%v", hex.Dump(per))
+
+	result := e2sm_kpm_v2_go.Arp{}
+	err = aper.Unmarshal(per, &result)
+	assert.NilError(t, err)
+	assert.Assert(t, &result != nil)
+	t.Logf("ARP PER - decoded\n%v", &result)
+	assert.Equal(t, arp.GetValue(), result.GetValue())
+}
+
+func Test_perArpCompareBytesExt(t *testing.T) {
+
+	arp := &e2sm_kpm_v2_go.Arp{
+		Value: 121,
+	}
+
+	per, err := aper.Marshal(*arp)
+	assert.NilError(t, err)
+	t.Logf("ARP PER\n%v", hex.Dump(per))
+
+	//Comparing with reference bytes
+	perRefBytes, err := hexlib.DumpToByte(refPerArpExt)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }

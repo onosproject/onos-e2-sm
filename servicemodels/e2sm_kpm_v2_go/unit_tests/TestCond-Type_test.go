@@ -34,7 +34,8 @@ func Test_perEncodingTestCondTypeGBR(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondType (GBR) PER - decoded\n%v", result)
+	t.Logf("TestCondType (GBR) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondType.GetGBr().Number(), testCondType.GetGBr().Number())
 }
 
 func Test_perTestCondTypeGBRCompareBytes(t *testing.T) {
@@ -65,7 +66,8 @@ func Test_perEncodingTestCondTypeAMBR(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondType (AMBR) PER - decoded\n%v", result)
+	t.Logf("TestCondType (AMBR) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondType.GetAMbr().Number(), testCondType.GetAMbr().Number())
 }
 
 func Test_perTestCondTypeAMBRCompareBytes(t *testing.T) {
@@ -96,7 +98,8 @@ func Test_perEncodingTestCondTypeIsStat(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondType (IsStat) PER - decoded\n%v", result)
+	t.Logf("TestCondType (IsStat) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondType.GetIsStat().Number(), testCondType.GetIsStat().Number())
 }
 
 func Test_perTestCondTypeIsStatCompareBytes(t *testing.T) {
@@ -127,7 +130,8 @@ func Test_perEncodingTestCondTypeIsCatM(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondType (IsCatM) PER - decoded\n%v", result)
+	t.Logf("TestCondType (IsCatM) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondType.GetIsCatM().Number(), testCondType.GetIsCatM().Number())
 }
 
 func Test_perTestCondTypeIsCatMCompareBytes(t *testing.T) {
@@ -158,7 +162,8 @@ func Test_perEncodingTestCondTypeRSRP(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondType (RSRP) PER - decoded\n%v", result)
+	t.Logf("TestCondType (RSRP) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondType.GetRSrp().Number(), testCondType.GetRSrp().Number())
 }
 
 func Test_perTestCondTypeRSRPCompareBytes(t *testing.T) {
@@ -189,7 +194,8 @@ func Test_perEncodingTestCondTypeRSRQ(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondType (RSRQ) PER - decoded\n%v", result)
+	t.Logf("TestCondType (RSRQ) PER - decoded\n%v", &result)
+	assert.Equal(t, testCondType.GetRSrq().Number(), testCondType.GetRSrq().Number())
 }
 
 func Test_perTestCondTypeRSRQCompareBytes(t *testing.T) {

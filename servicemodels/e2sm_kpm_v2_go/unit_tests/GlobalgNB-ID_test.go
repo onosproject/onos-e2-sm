@@ -64,7 +64,10 @@ func Test_perEncodingGlobalGnbID(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GlobalGnbID PER - decoded\n%v", result)
+	t.Logf("GlobalGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetPlmnId().GetValue(), result.GetPlmnId().GetValue())
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetGnbId().GetValue(), result.GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetGnbId().GetLen(), result.GetGnbId().GetGnbId().GetLen())
 }
 
 func Test_perGlobalGnbIDCompareBytes(t *testing.T) {
@@ -95,7 +98,10 @@ func Test_perEncodingGlobalGnbIDlen31(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GlobalGnbID PER - decoded\n%v", result)
+	t.Logf("GlobalGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetPlmnId().GetValue(), result.GetPlmnId().GetValue())
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetGnbId().GetValue(), result.GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetGnbId().GetLen(), result.GetGnbId().GetGnbId().GetLen())
 }
 
 func Test_perGlobalGnbIDlen31CompareBytes(t *testing.T) {

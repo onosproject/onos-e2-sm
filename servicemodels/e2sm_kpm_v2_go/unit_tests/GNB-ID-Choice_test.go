@@ -54,7 +54,9 @@ func Test_perEncodingGnbIDChoice(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GnbIDchoice PER - decoded\n%v", result)
+	t.Logf("GnbIDchoice PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetValue(), result.GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetLen(), result.GetGnbId().GetLen())
 }
 
 func Test_perGnbIDChoiceCompareBytes(t *testing.T) {
@@ -85,7 +87,9 @@ func Test_perEncodingGnbIDChoiceLen30(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("GnbIDchoice PER - decoded\n%v", result)
+	t.Logf("GnbIDchoice PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetValue(), result.GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetLen(), result.GetGnbId().GetLen())
 }
 
 func Test_perGnbIDChoiceLen30CompareBytes(t *testing.T) {

@@ -28,7 +28,8 @@ func Test_perEncodingTestCondExpression(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt,valueLB:0,valueUB:4")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("TestCondExpression PER - decoded\n%v", result)
+	t.Logf("TestCondExpression PER - decoded\n%v", &result)
+	assert.Equal(t, int32(testCondExpression.Number()), result)
 }
 
 func Test_perTestCondExpressionCompareBytes(t *testing.T) {
