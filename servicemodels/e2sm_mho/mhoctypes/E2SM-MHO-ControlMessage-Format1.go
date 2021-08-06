@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package mhoctypes
 
@@ -15,7 +15,7 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/sdran/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -69,35 +69,35 @@ func perDecodeE2SmMhoControlMessageFormat1(bytes []byte) (*e2sm_mho.E2SmMhoContr
 
 func newE2SmMhoControlMessageFormat1(e2SmMhoControlMessageFormat1 *e2sm_mho.E2SmMhoControlMessageFormat1) (*C.E2SM_MHO_ControlMessage_Format1_t, error) {
 
-    var err error
+	var err error
 	e2SmMhoControlMessageFormat1C := C.E2SM_MHO_ControlMessage_Format1_t{}
 
-    servingCgiC, err := newCellGlobalID(e2SmMhoControlMessageFormat1.ServingCgi)
-    if err != nil {
-        return nil, fmt.Errorf("newCellGlobalID() %s", err.Error())
-    }
+	servingCgiC, err := newCellGlobalID(e2SmMhoControlMessageFormat1.ServingCgi)
+	if err != nil {
+		return nil, fmt.Errorf("newCellGlobalID() %s", err.Error())
+	}
 
-    uedIDC, err := newUeIdentity(e2SmMhoControlMessageFormat1.UedId)
-    if err != nil {
-        return nil, fmt.Errorf("newUeIdentity() %s", err.Error())
-    }
+	uedIDC, err := newUeIdentity(e2SmMhoControlMessageFormat1.UedId)
+	if err != nil {
+		return nil, fmt.Errorf("newUeIdentity() %s", err.Error())
+	}
 
-    targetCgiC, err := newCellGlobalID(e2SmMhoControlMessageFormat1.TargetCgi)
-    if err != nil {
-        return nil, fmt.Errorf("newCellGlobalID() %s", err.Error())
-    }
+	targetCgiC, err := newCellGlobalID(e2SmMhoControlMessageFormat1.TargetCgi)
+	if err != nil {
+		return nil, fmt.Errorf("newCellGlobalID() %s", err.Error())
+	}
 
 	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-    e2SmMhoControlMessageFormat1C.serving_cgi = *servingCgiC
-    e2SmMhoControlMessageFormat1C.uedID = *uedIDC
-    e2SmMhoControlMessageFormat1C.target_cgi = *targetCgiC
+	e2SmMhoControlMessageFormat1C.serving_cgi = *servingCgiC
+	e2SmMhoControlMessageFormat1C.uedID = *uedIDC
+	e2SmMhoControlMessageFormat1C.target_cgi = *targetCgiC
 
 	return &e2SmMhoControlMessageFormat1C, nil
 }
 
 func decodeE2SmMhoControlMessageFormat1(e2SmMhoControlMessageFormat1C *C.E2SM_MHO_ControlMessage_Format1_t) (*e2sm_mho.E2SmMhoControlMessageFormat1, error) {
 
-    var err error
+	var err error
 	e2SmMhoControlMessageFormat1 := e2sm_mho.E2SmMhoControlMessageFormat1{
 		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		//ServingCgi: servingCgi,
@@ -106,20 +106,20 @@ func decodeE2SmMhoControlMessageFormat1(e2SmMhoControlMessageFormat1C *C.E2SM_MH
 
 	}
 
-    e2SmMhoControlMessageFormat1.ServingCgi, err = decodeCellGlobalID(&e2SmMhoControlMessageFormat1C.serving_cgi)
-    if err != nil {
-        return nil, fmt.Errorf("decodeCellGlobalID() %s", err.Error())
-    }
+	e2SmMhoControlMessageFormat1.ServingCgi, err = decodeCellGlobalID(&e2SmMhoControlMessageFormat1C.serving_cgi)
+	if err != nil {
+		return nil, fmt.Errorf("decodeCellGlobalID() %s", err.Error())
+	}
 
-    e2SmMhoControlMessageFormat1.UedId, err = decodeUeIdentity(&e2SmMhoControlMessageFormat1C.uedID)
-    if err != nil {
-        return nil, fmt.Errorf("decodeUeIdentity() %s", err.Error())
-    }
+	e2SmMhoControlMessageFormat1.UedId, err = decodeUeIdentity(&e2SmMhoControlMessageFormat1C.uedID)
+	if err != nil {
+		return nil, fmt.Errorf("decodeUeIdentity() %s", err.Error())
+	}
 
-    e2SmMhoControlMessageFormat1.TargetCgi, err = decodeCellGlobalID(&e2SmMhoControlMessageFormat1C.target_cgi)
-    if err != nil {
-        return nil, fmt.Errorf("decodeCellGlobalID() %s", err.Error())
-    }
+	e2SmMhoControlMessageFormat1.TargetCgi, err = decodeCellGlobalID(&e2SmMhoControlMessageFormat1C.target_cgi)
+	if err != nil {
+		return nil, fmt.Errorf("decodeCellGlobalID() %s", err.Error())
+	}
 
 	return &e2SmMhoControlMessageFormat1, nil
 }

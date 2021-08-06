@@ -1,4 +1,4 @@
-module github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ni
+module github.com/sdran/onos-e2-sm/servicemodels/e2sm_ni
 
 go 1.15
 

@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package kpmv2ctypes
 
@@ -15,7 +15,7 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	e2sm_kpm_v2 "github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
@@ -80,11 +80,11 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1 *e2sm_kp
 	}
 
 	e2SmKpmIndicationMessageFormat1C := C.E2SM_KPMv2_IndicationMessage_Format1_t{
-		subscriptID:  *subscriptIDC,
+		subscriptID: *subscriptIDC,
 		//cellObjID:    cellObjIDC,
 		//granulPeriod: granulPeriodC,
 		//measInfoList: measInfoListC,
-		measData:     *measDataC,
+		measData: *measDataC,
 	}
 
 	if e2SmKpmIndicationMessageFormat1.CellObjId != nil {
@@ -96,9 +96,9 @@ func newE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1 *e2sm_kp
 
 	if e2SmKpmIndicationMessageFormat1.GranulPeriod != nil {
 		e2SmKpmIndicationMessageFormat1C.granulPeriod, err = newGranularityPeriod(e2SmKpmIndicationMessageFormat1.GranulPeriod)
-		if err != nil{
-		return nil, fmt.Errorf("newGranularityPeriod() %s", err.Error())
-	}
+		if err != nil {
+			return nil, fmt.Errorf("newGranularityPeriod() %s", err.Error())
+		}
 	}
 
 	if e2SmKpmIndicationMessageFormat1.MeasInfoList != nil {
@@ -124,11 +124,11 @@ func decodeE2SmKpmIndicationMessageFormat1(e2SmKpmIndicationMessageFormat1C *C.E
 	}
 
 	e2SmKpmIndicationMessageFormat1 := e2sm_kpm_v2.E2SmKpmIndicationMessageFormat1{
-		SubscriptId:  subscriptID,
+		SubscriptId: subscriptID,
 		//CellObjId:    cellObjID,
 		//GranulPeriod: granulPeriod,
 		//MeasInfoList: measInfoList,
-		MeasData:     measData,
+		MeasData: measData,
 	}
 
 	if e2SmKpmIndicationMessageFormat1C.cellObjID != nil {

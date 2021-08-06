@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package kpmv2ctypes
 
@@ -15,7 +15,7 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	e2sm_kpm_v2 "github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
@@ -75,7 +75,7 @@ func newE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1 *e2sm_kpm_
 	}
 
 	e2SmKpmIndicationHeaderFormat1C := C.E2SM_KPMv2_IndicationHeader_Format1_t{
-		colletStartTime:   *colletStartTimeC,
+		colletStartTime: *colletStartTimeC,
 		//fileFormatversion: fileFormatversionC,
 		//senderName:        senderNameC,
 		//senderType:        senderTypeC,
@@ -125,7 +125,7 @@ func decodeE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1C *C.E2S
 	}
 
 	e2SmKpmIndicationHeaderFormat1 := e2sm_kpm_v2.E2SmKpmIndicationHeaderFormat1{
-		ColletStartTime:   colletStartTime,
+		ColletStartTime: colletStartTime,
 		//FileFormatversion: fileFormatversion,
 		//SenderName:        senderName,
 		//SenderType:        senderType,

@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 //nolint
 package main
@@ -13,9 +13,9 @@ import (
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
-	kpmv2ctypes "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdudecoder"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	kpmv2ctypes "github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
+	"github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm_v2/pdudecoder"
+	e2sm_kpm_v2 "github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"google.golang.org/protobuf/proto"
 )
 

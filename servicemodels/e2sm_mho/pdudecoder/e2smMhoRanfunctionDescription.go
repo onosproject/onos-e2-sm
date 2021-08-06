@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package pdudecoder
 
@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
+	e2sm_mho "github.com/sdran/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 )
 
 func DecodeE2SmMhoRanfunctionDescription(e2smMhoPdu *e2sm_mho.E2SmMhoRanfunctionDescription) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {

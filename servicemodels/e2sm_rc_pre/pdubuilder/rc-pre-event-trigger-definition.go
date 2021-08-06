@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 package pdubuilder
 
 import (
 	"fmt"
-	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
+	e2sm_rc_pre_v2 "github.com/sdran/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 )
 
 func CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod uint32) (*e2sm_rc_pre_v2.E2SmRcPreEventTriggerDefinition, error) {

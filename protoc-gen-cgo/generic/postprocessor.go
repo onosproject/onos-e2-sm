@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package generic
 
@@ -36,7 +36,7 @@ func (cpp copyrightPostProcessor) Match(a pgs.Artifact) bool {
 // Process attaches the copyright header to the top of the input bytes
 func (cpp copyrightPostProcessor) Process(in []byte) (out []byte, err error) {
 	cmt := fmt.Sprintf("// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>\n//\n" +
-		"// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0\n")
+		"// SPDX-License-Identifier: Apache-2.0\n")
 
 	return append([]byte(cmt), in...), nil
 }

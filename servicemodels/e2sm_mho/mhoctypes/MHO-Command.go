@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package mhoctypes
 
@@ -13,7 +13,7 @@ package mhoctypes
 import "C"
 import (
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
+	e2sm_mho "github.com/sdran/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"unsafe"
 )
 
@@ -30,16 +30,16 @@ import (
 //}
 
 func PerEncodeMhoCommand(mhoCommand *e2sm_mho.MhoCommand) ([]byte, error) {
-    mhoCommandCP, err := newMhoCommand(mhoCommand)
-    if err != nil {
-        return nil, err
-    }
+	mhoCommandCP, err := newMhoCommand(mhoCommand)
+	if err != nil {
+		return nil, err
+	}
 
-    bytes, err := encodePerBuffer(&C.asn_DEF_MHO_Command, unsafe.Pointer(mhoCommandCP))
-    if err != nil {
-        return nil, fmt.Errorf("perEncodeMhoCommand() %s", err.Error())
-    }
-    return bytes, nil
+	bytes, err := encodePerBuffer(&C.asn_DEF_MHO_Command, unsafe.Pointer(mhoCommandCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMhoCommand() %s", err.Error())
+	}
+	return bytes, nil
 }
 
 //func xerDecodeMhoCommand(bytes []byte) (*e2sm_mho.MhoCommand, error) {
@@ -66,12 +66,12 @@ func PerEncodeMhoCommand(mhoCommand *e2sm_mho.MhoCommand) ([]byte, error) {
 
 func newMhoCommand(mhoCommand *e2sm_mho.MhoCommand) (*C.MHO_Command_t, error) {
 	var ret C.MHO_Command_t
-    switch *mhoCommand {
-    case e2sm_mho.MhoCommand_MHO_COMMAND_INITIATE_HANDOVER:
-        ret = C.MHO_Command_initiateHandover //ToDo - double-check correctness of the name
-    default:
-        return nil, fmt.Errorf("unexpected MhoCommand %v", mhoCommand)
-    }
+	switch *mhoCommand {
+	case e2sm_mho.MhoCommand_MHO_COMMAND_INITIATE_HANDOVER:
+		ret = C.MHO_Command_initiateHandover //ToDo - double-check correctness of the name
+	default:
+		return nil, fmt.Errorf("unexpected MhoCommand %v", mhoCommand)
+	}
 
 	return &ret, nil
 }

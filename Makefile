@@ -78,18 +78,18 @@ golang-ci: # @HELP install golang-ci if not present
 
 license_check: build-tools # @HELP examine and ensure license headers exist
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
-	./../build-tools/licensing/boilerplate.py -v --rootdir=${CURDIR} --boilerplate LicenseRef-ONF-Member-1.0
+	./../build-tools/licensing/boilerplate.py -v --rootdir=${CURDIR} --boilerplate SPDX-Apache-2.0
 
 buflint: #@HELP run the "buf check lint" command on the proto files in 'api'
 	docker run -it -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
-		-w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
+		-w /go/src/github.com/sdran/onos-e2-sm/servicemodels \
 		bufbuild/buf:${BUF_VERSION} lint
 
 protos: # @HELP compile the protobuf files (using protoc-go Docker)
 protos: buflint
 	docker run -it -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
 		-w /go/src/github.com/onosproject/onos-e2-sm \
-		--entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos.sh \
+		--entrypoint /go/src/github.com/sdran/onos-e2-sm/build/bin/compile-protos.sh \
 		onosproject/protoc-go:${ONOS_PROTOC_VERSION}
 
 PHONY: service-model-docker-e2sm_kpm-1.0.0
@@ -221,7 +221,7 @@ bumponosdeps: # @HELP update "onosproject" go dependencies and push patch to git
 
 clean: # @HELP remove all the build artifacts
 	rm -rf ./build/_output ./vendor ./cmd/onos-e2-sm/onos-e2-sm ./cmd/onos/onos
-	go clean -testcache github.com/onosproject/onos-e2-sm/...
+	go clean -testcache github.com/sdran/onos-e2-sm/...
 
 help:
 	@grep -E '^.*: *# *@HELP' $(MAKEFILE_LIST) \

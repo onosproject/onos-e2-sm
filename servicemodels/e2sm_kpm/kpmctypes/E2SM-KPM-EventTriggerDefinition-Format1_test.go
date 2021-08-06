@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package kpmctypes
 
 import (
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdubuilder"
-	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm/pdubuilder"
+	e2sm_kpm_ies "github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"gotest.tools/assert"
 	"testing"
 )

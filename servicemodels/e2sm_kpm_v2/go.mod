@@ -1,4 +1,4 @@
-module github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2
+module github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm_v2
 
 go 1.15
 

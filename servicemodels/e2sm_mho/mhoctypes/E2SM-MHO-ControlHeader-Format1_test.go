@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package mhoctypes
 
 import (
-	//"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
+	//"github.com/sdran/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
 	//"gotest.tools/assert"
 	"testing"
 )

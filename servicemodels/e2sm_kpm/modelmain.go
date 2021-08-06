@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 //nolint
 package main
@@ -9,9 +9,9 @@ import (
 	"fmt"
 
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdudecoder"
-	e2sm_kpm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
+	"github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
+	"github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm/pdudecoder"
+	e2sm_kpm_ies "github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm/v1beta1/e2sm-kpm-ies"
 	"google.golang.org/protobuf/proto"
 )
 

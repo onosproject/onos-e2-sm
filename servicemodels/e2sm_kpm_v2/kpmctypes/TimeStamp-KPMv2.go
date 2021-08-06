@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package kpmv2ctypes
 
@@ -14,7 +14,7 @@ import "C"
 
 import (
 	"fmt"
-	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
+	e2sm_kpm_v2 "github.com/sdran/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"unsafe"
 )
 
@@ -79,7 +79,7 @@ func newTimeStamp(timeStamp *e2sm_kpm_v2.TimeStamp) (*C.TimeStamp_KPMv2_t, error
 func decodeTimeStamp(timeStampC *C.TimeStamp_KPMv2_t) (*e2sm_kpm_v2.TimeStamp, error) {
 
 	res, err := decodeOctetString(timeStampC)
-	if err!= nil {
+	if err != nil {
 		return nil, err
 	}
 
