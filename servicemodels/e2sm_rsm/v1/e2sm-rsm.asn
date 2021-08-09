@@ -1,0 +1,177 @@
+--*************************************************************
+-- E2SM-RSM - E2 Service Model for Ran Slicing Management
+-- Information Element Definitions
+--
+-- **************************************************************
+
+E2SM-RSM-IEs {
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1 (1) e2sm(2) e2sm-RSM-IEs (102)}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+ -- **************************************************************
+ -- E2SM-RSM IDs
+ -- **************************************************************
+
+SliceID ::= INTEGER (1..4294967295)
+SliceIDAssoc ::= INTEGER(0..4294967295)
+
+UE-Identity ::= OCTET STRING
+
+
+ -- **************************************************************
+ -- E2SM-RSM control command types
+ -- **************************************************************
+
+E2SM-RSM-Command ::= ENUMERATED {
+    sliceCreate,
+    sliceUpdate,
+    sliceDelete,
+    ueAssociate,
+    ...
+}
+
+
+ -- **************************************************************
+ -- E2SM-RSM slice management
+ -- **************************************************************
+
+SchedulerType ::= ENUMERATED {
+    roundRobin,
+    proportionallyFair,
+    qosBased,
+    ...
+}
+
+SliceParameters ::= SEQUENCE {
+    schedulerType           SchedulerType,
+    weight                  INTEGER(1.. 100)        OPTIONAL,
+    qosLevel                INTEGER(1.. 129, ...)   OPTIONAL,
+    scheduleInfo            ScheduleConfig          OPTIONAL,
+    ...
+}
+
+SliceConfig ::= SEQUENCE {
+   sliceID                  SliceID,
+   sliceDescription         PrintableString(SIZE(1.. 160, ...)) OPTIONAL,
+   sliceConfigParameters    SliceParameters,
+   ...
+}
+
+SliceDelete ::= SEQUENCE {
+    sliceID                  SliceID,
+    ...
+}
+
+
+ -- **************************************************************
+ -- E2SM-RSM UE to Slice association
+ -- **************************************************************
+
+SliceAssociate ::= SEQUENCE {
+    ueId               UE-Identity,
+    downLinkSliceID    SliceIDAssoc,
+    uplinkSliceID      SliceIDAssoc OPTIONAL,
+    ...
+}
+
+
+ -- **************************************************************
+ -- E2AP IEs defined by E2SM-RSM
+ -- **************************************************************
+
+ -- E2SM-RSM-RANfunction-Description
+ E2SM-RSM-RANfunction-Description ::= SEQUENCE {
+     ranFunction-Name    RANfunction-Name,
+     ...
+ }
+
+ RANfunction-Name ::= SEQUENCE {
+     ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
+     ranFunction-E2SM-OID        PrintableString(SIZE(1..1000,...)),
+     ranFunction-Description     PrintableString(SIZE(1..150,...)),
+     ranFunction-Instance        INTEGER OPTIONAL,
+     ...
+ }
+
+ -- E2SM-RSM-ControlHeader IE
+ E2SM-RSM-ControlHeader ::= SEQUENCE {
+     rsm-command    E2SM-RSM-Command,
+     ...
+ }
+
+ -- E2SM-RSM-ControlMessage IE
+ E2SM-RSM-ControlMessage ::= CHOICE {
+     sliceCreate        SliceConfig,
+     sliceUpdate        SliceConfig,
+     sliceDelete        SliceDelete,
+     sliceAssociate     SliceAssociate,
+     ...
+ }
+
+
+ -- **************************************************************
+ -- E2SM-RSM optional, advanced slice management
+ -- **************************************************************
+
+ ScheduleConfig ::= SEQUENCE {
+    linkAdaptation              LinkAdaptation                      OPTIONAL,
+    features                    FeatureConfig                       OPTIONAL,
+    carrierAggregationCap       CarrierAggregationLevelCap          OPTIONAL,
+    ulPowerControl              ULpowerControl                      OPTIONAL,
+    ...
+}
+
+LinkAdaptation ::= SEQUENCE {
+    cqiCap                  INTEGER(0..15)                      OPTIONAL,
+    riCap                   ENUMERATED{one, two, ...}           OPTIONAL,
+    aggregationLevelCap     AggregationLevelCap                 OPTIONAL,
+    targetBlerDL            INTEGER(0.. 100)                    OPTIONAL,
+    targetBlerUL            INTEGER(0.. 100)                    OPTIONAL,
+    maxMCS                  INTEGER(0..28)                      OPTIONAL,
+    minMCS                  INTEGER(0..28)                      OPTIONAL,
+    transmissionMode        ENUMERATED{one, two, three, ...}    OPTIONAL,
+    harqRetxCap             HARQrextCap                         OPTIONAL,
+    ...
+}
+
+AggregationLevelCap ::= ENUMERATED {
+    one,
+    two,
+    four,
+    eight,
+    sixteen
+}
+
+HARQrextCap ::= SEQUENCE {
+    dl  INTEGER(1.. MAX) OPTIONAL,
+    ul  INTEGER(1.. MAX) OPTIONAL
+}
+
+FeatureConfig ::= SEQUENCE {
+    ttiBundling FeatureStatus OPTIONAL,
+    ...
+}
+
+FeatureStatus ::= ENUMERATED {
+    enable,
+    disable
+}
+
+CarrierAggregationLevelCap ::= ENUMERATED {
+    one,
+    two,
+    three,
+    four,
+    ...
+}
+
+ULpowerControl ::= SEQUENCE {
+    puschTargetSNR  INTEGER OPTIONAL,
+    pucchTargetSNR  INTEGER OPTIONAL,
+    ...
+}
+
+END
