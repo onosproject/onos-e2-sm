@@ -1,0 +1,311 @@
+ASN_MODULE_SRCS=	\
+	./SliceID.c	\
+	./SliceIDAssoc.c	\
+	./UE-Identity.c	\
+	./CU-UE-F1AP-ID.c	\
+	./DU-UE-F1AP-ID.c	\
+	./GlobalSlicingNodeID.c	\
+	./SlicingType.c	\
+	./NodeSlicingCapability-Item.c	\
+	./SliceMetrics.c	\
+	./RSM-Trigger-Type.c	\
+	./E2SM-RSM-EventTriggerDefinition.c	\
+	./E2SM-RSM-EventTriggerDefinition-Format1.c	\
+	./E2SM-RSM-IndicationHeader.c	\
+	./E2SM-RSM-IndicationHeader-Format1.c	\
+	./EMMCase.c	\
+	./E2SM-RSM-IndicationMessage.c	\
+	./E2SM-RSM-IndicationMessage-Format1.c	\
+	./E2SM-RSM-Command.c	\
+	./SchedulerType.c	\
+	./SliceParameters.c	\
+	./SliceConfig.c	\
+	./SliceDelete.c	\
+	./SliceAssociate.c	\
+	./E2SM-RSM-RANfunction-Description.c	\
+	./E2SM-RSM-ControlHeader.c	\
+	./E2SM-RSM-ControlMessage.c	\
+	./ScheduleConfig.c	\
+	./LinkAdaptation.c	\
+	./AggregationLevelCap.c	\
+	./HARQrextCap.c	\
+	./FeatureConfig.c	\
+	./FeatureStatus.c	\
+	./CarrierAggregationLevelCap.c	\
+	./ULpowerControl.c	\
+	./CGI.c	\
+	./CoreCPID.c	\
+	./InterfaceIdentifier.c	\
+	./InterfaceID-NG.c	\
+	./InterfaceID-Xn.c	\
+	./InterfaceID-F1.c	\
+	./InterfaceID-E1.c	\
+	./InterfaceID-S1.c	\
+	./InterfaceID-X2.c	\
+	./InterfaceID-W1.c	\
+	./Interface-MessageID.c	\
+	./InterfaceType.c	\
+	./GroupID.c	\
+	./QoSID.c	\
+	./RANfunction-Name.c	\
+	./RIC-Format-Type.c	\
+	./RIC-Style-Type.c	\
+	./RIC-Style-Name.c	\
+	./RRC-MessageID.c	\
+	./RRCclass-LTE.c	\
+	./RRCclass-NR.c	\
+	./ServingCell-ARFCN.c	\
+	./ServingCell-PCI.c	\
+	./UEID.c	\
+	./UEID-GNB.c	\
+	./UEID-GNB-CU-CP-E1AP-ID-List.c	\
+	./UEID-GNB-CU-CP-E1AP-ID-Item.c	\
+	./UEID-GNB-CU-F1AP-ID-List.c	\
+	./UEID-GNB-CU-CP-F1AP-ID-Item.c	\
+	./UEID-GNB-DU.c	\
+	./UEID-GNB-CU-UP.c	\
+	./UEID-NG-ENB.c	\
+	./UEID-NG-ENB-DU.c	\
+	./UEID-EN-GNB.c	\
+	./UEID-ENB.c	\
+	./ENB-ID.c	\
+	./GlobalENB-ID.c	\
+	./GUMMEI.c	\
+	./MME-Group-ID.c	\
+	./MME-Code.c	\
+	./MME-UE-S1AP-ID.c	\
+	./QCI.c	\
+	./SubscriberProfileIDforRFP.c	\
+	./EN-GNB-ID.c	\
+	./ENB-UE-X2AP-ID.c	\
+	./ENB-UE-X2AP-ID-Extension.c	\
+	./E-UTRA-ARFCN.c	\
+	./E-UTRA-PCI.c	\
+	./E-UTRA-TAC.c	\
+	./GlobalenGNB-ID.c	\
+	./NGENB-CU-UE-W1AP-ID.c	\
+	./NGENB-DU-ID.c	\
+	./AMFPointer.c	\
+	./AMFRegionID.c	\
+	./AMFSetID.c	\
+	./AMF-UE-NGAP-ID.c	\
+	./EUTRACellIdentity.c	\
+	./EUTRA-CGI.c	\
+	./FiveQI.c	\
+	./GlobalGNB-ID.c	\
+	./GlobalNgENB-ID.c	\
+	./GlobalRANNodeID.c	\
+	./GNB-ID.c	\
+	./GUAMI.c	\
+	./IndexToRFSP.c	\
+	./NgENB-ID.c	\
+	./NRCellIdentity.c	\
+	./NR-CGI.c	\
+	./PLMNIdentity.c	\
+	./QosFlowIdentifier.c	\
+	./SD.c	\
+	./S-NSSAI.c	\
+	./SST.c	\
+	./NG-RANnodeUEXnAPID.c	\
+	./GNB-CU-CP-UE-E1AP-ID.c	\
+	./GNB-CU-UP-ID.c	\
+	./FiveGS-TAC.c	\
+	./GNB-CU-UE-F1AP-ID.c	\
+	./GNB-DU-ID.c	\
+	./NR-PCI.c	\
+	./NR-ARFCN.c	\
+	./FreqBandNrItem.c	\
+	./RANUEID.c
+
+ASN_MODULE_HDRS=	\
+	./SliceID.h	\
+	./SliceIDAssoc.h	\
+	./UE-Identity.h	\
+	./CU-UE-F1AP-ID.h	\
+	./DU-UE-F1AP-ID.h	\
+	./GlobalSlicingNodeID.h	\
+	./SlicingType.h	\
+	./NodeSlicingCapability-Item.h	\
+	./SliceMetrics.h	\
+	./RSM-Trigger-Type.h	\
+	./E2SM-RSM-EventTriggerDefinition.h	\
+	./E2SM-RSM-EventTriggerDefinition-Format1.h	\
+	./E2SM-RSM-IndicationHeader.h	\
+	./E2SM-RSM-IndicationHeader-Format1.h	\
+	./EMMCase.h	\
+	./E2SM-RSM-IndicationMessage.h	\
+	./E2SM-RSM-IndicationMessage-Format1.h	\
+	./E2SM-RSM-Command.h	\
+	./SchedulerType.h	\
+	./SliceParameters.h	\
+	./SliceConfig.h	\
+	./SliceDelete.h	\
+	./SliceAssociate.h	\
+	./E2SM-RSM-RANfunction-Description.h	\
+	./E2SM-RSM-ControlHeader.h	\
+	./E2SM-RSM-ControlMessage.h	\
+	./ScheduleConfig.h	\
+	./LinkAdaptation.h	\
+	./AggregationLevelCap.h	\
+	./HARQrextCap.h	\
+	./FeatureConfig.h	\
+	./FeatureStatus.h	\
+	./CarrierAggregationLevelCap.h	\
+	./ULpowerControl.h	\
+	./CGI.h	\
+	./CoreCPID.h	\
+	./InterfaceIdentifier.h	\
+	./InterfaceID-NG.h	\
+	./InterfaceID-Xn.h	\
+	./InterfaceID-F1.h	\
+	./InterfaceID-E1.h	\
+	./InterfaceID-S1.h	\
+	./InterfaceID-X2.h	\
+	./InterfaceID-W1.h	\
+	./Interface-MessageID.h	\
+	./InterfaceType.h	\
+	./GroupID.h	\
+	./QoSID.h	\
+	./RANfunction-Name.h	\
+	./RIC-Format-Type.h	\
+	./RIC-Style-Type.h	\
+	./RIC-Style-Name.h	\
+	./RRC-MessageID.h	\
+	./RRCclass-LTE.h	\
+	./RRCclass-NR.h	\
+	./ServingCell-ARFCN.h	\
+	./ServingCell-PCI.h	\
+	./UEID.h	\
+	./UEID-GNB.h	\
+	./UEID-GNB-CU-CP-E1AP-ID-List.h	\
+	./UEID-GNB-CU-CP-E1AP-ID-Item.h	\
+	./UEID-GNB-CU-F1AP-ID-List.h	\
+	./UEID-GNB-CU-CP-F1AP-ID-Item.h	\
+	./UEID-GNB-DU.h	\
+	./UEID-GNB-CU-UP.h	\
+	./UEID-NG-ENB.h	\
+	./UEID-NG-ENB-DU.h	\
+	./UEID-EN-GNB.h	\
+	./UEID-ENB.h	\
+	./ENB-ID.h	\
+	./GlobalENB-ID.h	\
+	./GUMMEI.h	\
+	./MME-Group-ID.h	\
+	./MME-Code.h	\
+	./MME-UE-S1AP-ID.h	\
+	./QCI.h	\
+	./SubscriberProfileIDforRFP.h	\
+	./EN-GNB-ID.h	\
+	./ENB-UE-X2AP-ID.h	\
+	./ENB-UE-X2AP-ID-Extension.h	\
+	./E-UTRA-ARFCN.h	\
+	./E-UTRA-PCI.h	\
+	./E-UTRA-TAC.h	\
+	./GlobalenGNB-ID.h	\
+	./NGENB-CU-UE-W1AP-ID.h	\
+	./NGENB-DU-ID.h	\
+	./AMFPointer.h	\
+	./AMFRegionID.h	\
+	./AMFSetID.h	\
+	./AMF-UE-NGAP-ID.h	\
+	./EUTRACellIdentity.h	\
+	./EUTRA-CGI.h	\
+	./FiveQI.h	\
+	./GlobalGNB-ID.h	\
+	./GlobalNgENB-ID.h	\
+	./GlobalRANNodeID.h	\
+	./GNB-ID.h	\
+	./GUAMI.h	\
+	./IndexToRFSP.h	\
+	./NgENB-ID.h	\
+	./NRCellIdentity.h	\
+	./NR-CGI.h	\
+	./PLMNIdentity.h	\
+	./QosFlowIdentifier.h	\
+	./SD.h	\
+	./S-NSSAI.h	\
+	./SST.h	\
+	./NG-RANnodeUEXnAPID.h	\
+	./GNB-CU-CP-UE-E1AP-ID.h	\
+	./GNB-CU-UP-ID.h	\
+	./FiveGS-TAC.h	\
+	./GNB-CU-UE-F1AP-ID.h	\
+	./GNB-DU-ID.h	\
+	./NR-PCI.h	\
+	./NR-ARFCN.h	\
+	./FreqBandNrItem.h	\
+	./RANUEID.h
+
+ASN_MODULE_HDRS+=./OPEN_TYPE.h
+ASN_MODULE_SRCS+=./OPEN_TYPE.c
+ASN_MODULE_HDRS+=./constr_CHOICE.h
+ASN_MODULE_HDRS+=./INTEGER.h
+ASN_MODULE_SRCS+=./INTEGER.c
+ASN_MODULE_HDRS+=./NativeEnumerated.h
+ASN_MODULE_SRCS+=./NativeEnumerated.c
+ASN_MODULE_HDRS+=./NativeInteger.h
+ASN_MODULE_SRCS+=./NativeInteger.c
+ASN_MODULE_HDRS+=./PrintableString.h
+ASN_MODULE_SRCS+=./PrintableString.c
+ASN_MODULE_HDRS+=./OCTET_STRING.h
+ASN_MODULE_HDRS+=./asn_SEQUENCE_OF.h
+ASN_MODULE_SRCS+=./asn_SEQUENCE_OF.c
+ASN_MODULE_HDRS+=./asn_SET_OF.h
+ASN_MODULE_SRCS+=./asn_SET_OF.c
+ASN_MODULE_SRCS+=./constr_CHOICE.c
+ASN_MODULE_HDRS+=./constr_SEQUENCE.h
+ASN_MODULE_SRCS+=./constr_SEQUENCE.c
+ASN_MODULE_HDRS+=./constr_SEQUENCE_OF.h
+ASN_MODULE_SRCS+=./constr_SEQUENCE_OF.c
+ASN_MODULE_HDRS+=./constr_SET_OF.h
+ASN_MODULE_SRCS+=./constr_SET_OF.c
+ASN_MODULE_HDRS+=./asn_application.h
+ASN_MODULE_SRCS+=./asn_application.c
+ASN_MODULE_HDRS+=./asn_ioc.h
+ASN_MODULE_HDRS+=./asn_system.h
+ASN_MODULE_HDRS+=./asn_codecs.h
+ASN_MODULE_HDRS+=./asn_internal.h
+ASN_MODULE_SRCS+=./asn_internal.c
+ASN_MODULE_HDRS+=./asn_random_fill.h
+ASN_MODULE_SRCS+=./asn_random_fill.c
+ASN_MODULE_HDRS+=./asn_bit_data.h
+ASN_MODULE_SRCS+=./asn_bit_data.c
+ASN_MODULE_SRCS+=./OCTET_STRING.c
+ASN_MODULE_HDRS+=./BIT_STRING.h
+ASN_MODULE_SRCS+=./BIT_STRING.c
+ASN_MODULE_SRCS+=./asn_codecs_prim.c
+ASN_MODULE_HDRS+=./asn_codecs_prim.h
+ASN_MODULE_HDRS+=./ber_tlv_length.h
+ASN_MODULE_SRCS+=./ber_tlv_length.c
+ASN_MODULE_HDRS+=./ber_tlv_tag.h
+ASN_MODULE_SRCS+=./ber_tlv_tag.c
+ASN_MODULE_HDRS+=./ber_decoder.h
+ASN_MODULE_SRCS+=./ber_decoder.c
+ASN_MODULE_HDRS+=./der_encoder.h
+ASN_MODULE_SRCS+=./der_encoder.c
+ASN_MODULE_HDRS+=./constr_TYPE.h
+ASN_MODULE_SRCS+=./constr_TYPE.c
+ASN_MODULE_HDRS+=./constraints.h
+ASN_MODULE_SRCS+=./constraints.c
+ASN_MODULE_HDRS+=./xer_support.h
+ASN_MODULE_SRCS+=./xer_support.c
+ASN_MODULE_HDRS+=./xer_decoder.h
+ASN_MODULE_SRCS+=./xer_decoder.c
+ASN_MODULE_HDRS+=./xer_encoder.h
+ASN_MODULE_SRCS+=./xer_encoder.c
+ASN_MODULE_HDRS+=./per_support.h
+ASN_MODULE_SRCS+=./per_support.c
+ASN_MODULE_HDRS+=./per_decoder.h
+ASN_MODULE_SRCS+=./per_decoder.c
+ASN_MODULE_HDRS+=./per_encoder.h
+ASN_MODULE_SRCS+=./per_encoder.c
+ASN_MODULE_HDRS+=./per_opentype.h
+ASN_MODULE_SRCS+=./per_opentype.c
+
+ASN_MODULE_CFLAGS=-DASN_DISABLE_OER_SUPPORT 
+
+lib_LTLIBRARIES+=libasncodec.la
+libasncodec_la_SOURCES=$(ASN_MODULE_SRCS) $(ASN_MODULE_HDRS)
+libasncodec_la_CPPFLAGS=-I$(top_srcdir)/./
+libasncodec_la_CFLAGS=$(ASN_MODULE_CFLAGS)
+libasncodec_la_LDFLAGS=-lm

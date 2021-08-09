@@ -23,6 +23,7 @@ FROM E2SM-COMMON-IEs;
  -- E2SM-RSM IDs
  -- **************************************************************
 
+maxnoofUEs INTEGER ::= 4294967295
 maxnoofSlices INTEGER ::= 4294967295
 SliceID ::= INTEGER (1..maxnoofSlices)
 SliceIDAssoc ::= INTEGER(0..maxnoofSlices)
@@ -75,7 +76,7 @@ SliceMetrics ::= SEQUENCE {
 -- ***************************************************************
 RSM-Trigger-Type ::= ENUMERATED{
     upon-emm-case-report,
-    Periodic, -- Do we need this? Otherwise, will remove it.
+    periodic, -- Do we need this? Otherwise, will remove it.
     ...
 }
 
@@ -104,7 +105,7 @@ E2SM-RSM-IndicationHeader ::= CHOICE {
 }
 
 E2SM-RSM-IndicationHeader-Format1 ::= SEQUENCE {
-    cgi                             CGI
+    cgi                             CGI,
     ...
 }
 
