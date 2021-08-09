@@ -29,7 +29,8 @@ func Test_perEncodingQci(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("QCI PER - decoded\n%v", result)
+	t.Logf("QCI PER - decoded\n%v", &result)
+	assert.Equal(t, qci.GetValue(), result.GetValue())
 }
 
 func Test_perQciCompareBytes(t *testing.T) {

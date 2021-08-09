@@ -91,7 +91,17 @@ func Test_perEncodingRicKpmNodeItem(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("RIC-KPMnodeItem PER - decoded\n%v", result)
+	t.Logf("RIC-KPMnodeItem PER - decoded\n%v", &result)
+	assert.Equal(t, rkni.GetRicKpmnodeType().GetGNb().GetGNbDuId().GetValue(), result.GetRicKpmnodeType().GetGNb().GetGNbDuId().GetValue())
+	assert.Equal(t, rkni.GetRicKpmnodeType().GetGNb().GetGNbCuUpId().GetValue(), result.GetRicKpmnodeType().GetGNb().GetGNbCuUpId().GetValue())
+	assert.DeepEqual(t, rkni.GetRicKpmnodeType().GetGNb().GetGlobalGNbId().GetPlmnId().GetValue(), result.GetRicKpmnodeType().GetGNb().GetGlobalGNbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, rkni.GetRicKpmnodeType().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue(), result.GetRicKpmnodeType().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, rkni.GetRicKpmnodeType().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen(), result.GetRicKpmnodeType().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen())
+	assert.Equal(t, len(rkni.GetCellMeasurementObjectList()), 1)
+	assert.Equal(t, rkni.GetCellMeasurementObjectList()[0].GetCellObjectId().GetValue(), result.GetCellMeasurementObjectList()[0].GetCellObjectId().GetValue())
+	assert.DeepEqual(t, rkni.GetCellMeasurementObjectList()[0].GetCellGlobalId().GetEUtraCgi().GetPLmnIdentity().GetValue(), result.GetCellMeasurementObjectList()[0].GetCellGlobalId().GetEUtraCgi().GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, rkni.GetCellMeasurementObjectList()[0].GetCellGlobalId().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue(), result.GetCellMeasurementObjectList()[0].GetCellGlobalId().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, rkni.GetCellMeasurementObjectList()[0].GetCellGlobalId().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen(), result.GetCellMeasurementObjectList()[0].GetCellGlobalId().GetEUtraCgi().GetEUtracellIdentity().GetValue().GetLen())
 }
 
 func Test_perRicKpmNodeItemCompareBytes(t *testing.T) {

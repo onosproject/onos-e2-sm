@@ -33,7 +33,8 @@ func Test_perEncodingMeasurementTypeName(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementTypeName - decoded\n%v", result)
+	t.Logf("MeasurementTypeName - decoded\n%v", &result)
+	assert.Equal(t, mtn.GetValue(), result.GetValue())
 }
 
 func Test_perMeasurementTypeNameCompareBytes(t *testing.T) {

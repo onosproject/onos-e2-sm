@@ -72,7 +72,15 @@ func Test_perEncodingRicReportStyleItem(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("RIC-ReportStyle-Item - decoded\n%v", result)
+	t.Logf("RIC-ReportStyle-Item - decoded\n%v", &result)
+	assert.Equal(t, item.GetRicReportStyleName().GetValue(), result.GetRicReportStyleName().GetValue())
+	assert.Equal(t, item.GetRicReportStyleName().GetValue(), result.GetRicReportStyleName().GetValue())
+	assert.Equal(t, item.GetRicActionFormatType().GetValue(), result.GetRicActionFormatType().GetValue())
+	assert.Equal(t, item.GetRicIndicationHeaderFormatType().GetValue(), result.GetRicIndicationHeaderFormatType().GetValue())
+	assert.Equal(t, item.GetRicIndicationMessageFormatType().GetValue(), result.GetRicIndicationMessageFormatType().GetValue())
+	assert.Equal(t, len(result.GetMeasInfoActionList().GetValue()), 1)
+	assert.Equal(t, item.GetMeasInfoActionList().GetValue()[0].GetMeasName().GetValue(), result.GetMeasInfoActionList().GetValue()[0].GetMeasName().GetValue())
+	assert.Equal(t, item.GetMeasInfoActionList().GetValue()[0].GetMeasId().GetValue(), result.GetMeasInfoActionList().GetValue()[0].GetMeasId().GetValue())
 }
 
 func Test_perRicReportStyleItemCompareBytes(t *testing.T) {

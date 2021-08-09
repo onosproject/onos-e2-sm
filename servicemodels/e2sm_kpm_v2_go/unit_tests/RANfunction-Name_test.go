@@ -56,7 +56,11 @@ func Test_perEncodingRanFunctionName(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("RanFunctionName PER - decoded\n%v", result)
+	t.Logf("RanFunctionName PER - decoded\n%v", &result)
+	assert.Equal(t, rfn.GetRanFunctionInstance(), result.GetRanFunctionInstance())
+	assert.Equal(t, rfn.GetRanFunctionDescription(), result.GetRanFunctionDescription())
+	assert.Equal(t, rfn.GetRanFunctionE2SmOid(), result.GetRanFunctionE2SmOid())
+	assert.Equal(t, rfn.GetRanFunctionShortName(), result.GetRanFunctionShortName())
 }
 
 func Test_perRanFunctionNameCompareBytes(t *testing.T) {
@@ -87,7 +91,10 @@ func Test_perEncodingRanFunctionNameNoOptional(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("RanFunctionName PER - decoded\n%v", result)
+	t.Logf("RanFunctionName PER - decoded\n%v", &result)
+	assert.Equal(t, rfn.GetRanFunctionDescription(), result.GetRanFunctionDescription())
+	assert.Equal(t, rfn.GetRanFunctionE2SmOid(), result.GetRanFunctionE2SmOid())
+	assert.Equal(t, rfn.GetRanFunctionShortName(), result.GetRanFunctionShortName())
 }
 
 func Test_perRanFunctionNameCompareBytesNoOptional(t *testing.T) {

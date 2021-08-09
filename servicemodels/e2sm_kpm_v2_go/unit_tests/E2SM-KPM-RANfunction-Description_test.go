@@ -31,7 +31,8 @@ var refPerE2SmKpmRanFunctionDescriptionNodeListOnly = "00000000  44 04 6f 6e 66 
 
 var refPerE2SmKpmRanFunctionDescriptionEventListOnly = "00000000  24 04 6f 6e 66 00 00 05  6f 69 64 31 32 33 07 00  |$.onf...oid123..|\n" +
 	"00000010  73 6f 6d 65 44 65 73 63  72 69 70 74 69 6f 6e 00  |someDescription.|\n" +
-	"00000020  15 00 0b 01 00 6f 6e 66  00 0f                    |.....onf..|"
+	"00000020  15 00 0b 0c 00 53 6f 6d  65 52 65 61 6c 6c 79 43  |.....SomeReallyC|\n" +
+	"00000030  6f 6f 6c 44 65 73 63 72  69 70 74 69 6f 6e 00 0f  |oolDescription..|"
 
 var refPerE2SmKpmRanFunctionDescriptionReportListOnly = "00000000  14 04 6f 6e 66 00 00 05  6f 69 64 31 32 33 07 00  |..onf...oid123..|\n" +
 	"00000010  73 6f 6d 65 44 65 73 63  72 69 70 74 69 6f 6e 00  |someDescription.|\n" +
@@ -169,7 +170,7 @@ func createE2SmKpmRanFunctionDescriptionEventList() (*e2sm_kpm_v2_go.E2SmKpmRanf
 	var rfi int32 = 21
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "onf"
+	var ricStyleName string = "SomeReallyCoolDescription"
 	var ricFormatType int32 = 15
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
@@ -281,6 +282,10 @@ func Test_perE2SmKpmRanFunctionDescriptionCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionFull)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perE2SmKpmRanFunctionDescriptionNodeListCompareBytes(t *testing.T) {
@@ -296,6 +301,10 @@ func Test_perE2SmKpmRanFunctionDescriptionNodeListCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionNodeListOnly)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perE2SmKpmRanFunctionDescriptionEventListCompareBytes(t *testing.T) {
@@ -311,6 +320,10 @@ func Test_perE2SmKpmRanFunctionDescriptionEventListCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionEventListOnly)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perE2SmKpmRanFunctionDescriptionReportListCompareBytes(t *testing.T) {
@@ -326,6 +339,10 @@ func Test_perE2SmKpmRanFunctionDescriptionReportListCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionReportListOnly)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perEncodingE2SmKpmRanFunctionDescriptionMndtOnly(t *testing.T) {

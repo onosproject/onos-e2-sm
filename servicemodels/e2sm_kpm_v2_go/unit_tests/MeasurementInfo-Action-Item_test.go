@@ -39,7 +39,9 @@ func Test_perEncodingMeasurementInfoActionItem(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementInfoActionItem - decoded\n%v", result)
+	t.Logf("MeasurementInfoActionItem - decoded\n%v", &result)
+	assert.Equal(t, miai.GetMeasName().GetValue(), result.GetMeasName().GetValue())
+	assert.Equal(t, miai.GetMeasId().GetValue(), result.GetMeasId().GetValue())
 }
 
 func Test_perMeasurementInfoActionItemCompareBytes(t *testing.T) {

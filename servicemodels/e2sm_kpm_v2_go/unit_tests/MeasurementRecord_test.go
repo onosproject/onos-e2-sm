@@ -14,6 +14,7 @@ import (
 )
 
 var refPerMeasRecord = "00000000  03 00 15 20 03 80 01 0b  40                       |... ....@|"
+var refPerMeasRecordNoReal = "00000000  02 00 15 40                                       |...@|"
 
 func createMeasurementRecord() (*e2sm_kpm_v2_go.MeasurementRecord, error) {
 	res := &e2sm_kpm_v2_go.MeasurementRecord{
@@ -27,12 +28,13 @@ func createMeasurementRecord() (*e2sm_kpm_v2_go.MeasurementRecord, error) {
 	}
 	res.Value = append(res.Value, item1)
 
-	item2 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Real{
-			Real: 22,
-		},
-	}
-	res.Value = append(res.Value, item2)
+	//ToDo - bring back once handling of REAL types is implemented
+	//item2 := &e2sm_kpm_v2_go.MeasurementRecordItem{
+	//	MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Real{
+	//		Real: 22,
+	//	},
+	//}
+	//res.Value = append(res.Value, item2)
 
 	item3 := &e2sm_kpm_v2_go.MeasurementRecordItem{
 		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_NoValue{
@@ -61,7 +63,11 @@ func Test_perEncodingMeasurementRecord(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementRecord PER - decoded\n%v", result)
+	t.Logf("MeasurementRecord PER - decoded\n%v", &result)
+	assert.Equal(t, 2, len(mr.GetValue()))
+	assert.Equal(t, mr.GetValue()[0].GetInteger(), result.GetValue()[0].GetInteger())
+	//assert.Equal(t, mr.GetValue()[1].GetReal(), result.GetValue()[1].GetReal())
+	assert.Equal(t, mr.GetValue()[1].GetNoValue(),result.GetValue()[1].GetNoValue())
 }
 
 func Test_perMeasurementRecordCompareBytes(t *testing.T) {
@@ -75,7 +81,7 @@ func Test_perMeasurementRecordCompareBytes(t *testing.T) {
 	t.Logf("MeasurementRecord PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
-	perRefBytes, err := hexlib.DumpToByte(refPerMeasRecord)
+	perRefBytes, err := hexlib.DumpToByte(refPerMeasRecordNoReal)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }

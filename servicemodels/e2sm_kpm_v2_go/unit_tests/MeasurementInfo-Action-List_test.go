@@ -50,7 +50,10 @@ func Test_perEncodingMeasurementInfoActionList(t *testing.T) {
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementInfoActionList - decoded\n%v", result)
+	t.Logf("MeasurementInfoActionList - decoded\n%v", &result)
+	assert.Equal(t, 1, len(mial.GetValue()))
+	assert.Equal(t, mial.GetValue()[0].GetMeasName().GetValue(), result.GetValue()[0].GetMeasName().GetValue())
+	assert.Equal(t, mial.GetValue()[0].GetMeasId().GetValue(), result.GetValue()[0].GetMeasId().GetValue())
 }
 
 func Test_perMeasurementInfoActionListCompareBytes(t *testing.T) {

@@ -16,6 +16,7 @@ import (
 //ToDo - find out why encoder prepends with three zero bytes..
 var refPerMUeIDL string = "00000000  00 00 00 06 53 6f 6d 65  55 45                    |....SomeUE|"
 
+//ToDo - encoding of the structure is not done properly
 func Test_perEncodeMatchingUeIDList(t *testing.T) {
 
 	muei := &e2sm_kpm_v2_go.MatchingUeidItem{
@@ -37,7 +38,8 @@ func Test_perEncodeMatchingUeIDList(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MatchingUeIDList PER - decoded\n%v", result)
+	t.Logf("MatchingUeIDList PER - decoded\n%v", &result)
+	assert.DeepEqual(t, muel.GetValue()[0].GetUeId().GetValue(), result.GetValue()[0].GetUeId().GetValue())
 }
 
 func Test_perMatchingUeIDListCompareBytes(t *testing.T) {
@@ -74,5 +76,5 @@ func Test_stupidExperiment1(t *testing.T) {
 	err = aper.UnmarshalWithParams(perRefBytes, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MatchingUeIDList PER - decoded\n%v", result)
+	t.Logf("MatchingUeIDList PER - decoded\n%v", &result)
 }

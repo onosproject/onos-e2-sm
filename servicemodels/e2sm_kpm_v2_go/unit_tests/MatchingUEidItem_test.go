@@ -32,7 +32,8 @@ func Test_perEncodeMatchingUeIDItem(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MatchingUeIDItem PER - decoded\n%v", result)
+	t.Logf("MatchingUeIDItem PER - decoded\n%v", &result)
+	assert.DeepEqual(t, muei.GetUeId().GetValue(), result.GetUeId().GetValue())
 }
 
 func Test_perMatchingUeIDItemCompareBytes(t *testing.T) {

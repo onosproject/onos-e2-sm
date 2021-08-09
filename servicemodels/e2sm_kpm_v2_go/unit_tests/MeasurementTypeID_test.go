@@ -54,7 +54,8 @@ func Test_perEncodingMeasurementTypeID(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementTypeID - decoded\n%v", result)
+	t.Logf("MeasurementTypeID - decoded\n%v", &result)
+	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }
 
 func Test_perMeasurementTypeIDCompareBytes(t *testing.T) {
@@ -83,7 +84,8 @@ func Test_perEncodingMeasurementTypeID65535(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementTypeID - decoded\n%v", result)
+	t.Logf("MeasurementTypeID - decoded\n%v", &result)
+	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }
 
 func Test_perMeasurementTypeID65535CompareBytes(t *testing.T) {
@@ -112,7 +114,8 @@ func Test_perEncodingMeasurementTypeID65536(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementTypeID - decoded\n%v", result)
+	t.Logf("MeasurementTypeID - decoded\n%v", &result)
+	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }
 
 func Test_perMeasurementTypeID65536CompareBytes(t *testing.T) {
@@ -141,7 +144,8 @@ func Test_perEncodingMeasurementTypeID1(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementTypeID - decoded\n%v", result)
+	t.Logf("MeasurementTypeID - decoded\n%v", &result)
+	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }
 
 func Test_perMeasurementTypeID1CompareBytes(t *testing.T) {

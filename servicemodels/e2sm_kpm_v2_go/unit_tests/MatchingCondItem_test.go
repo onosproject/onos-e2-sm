@@ -129,7 +129,10 @@ func Test_perEncodingMatchingCondItem2(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MatchingCondItem (TestCondInfo) PER - decoded\n%v", result)
+	t.Logf("MatchingCondItem (TestCondInfo) PER - decoded\n%v", &result)
+	assert.Equal(t, mci.GetTestCondInfo().GetTestValue().GetValueInt(), result.GetTestCondInfo().GetTestValue().GetValueInt())
+	assert.Equal(t, mci.GetTestCondInfo().GetTestType().GetAMbr().Number(), result.GetTestCondInfo().GetTestType().GetAMbr().Number())
+	assert.Equal(t, mci.GetTestCondInfo().GetTestExpr().Number(), result.GetTestCondInfo().GetTestExpr().Number())
 }
 
 func Test_perMatchingCondItem2CompareBytes(t *testing.T) {
