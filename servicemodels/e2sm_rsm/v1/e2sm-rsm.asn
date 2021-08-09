@@ -11,15 +11,123 @@ DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
+IMPORTS
+	RANfunction-Name,
+    GlobalGNB-ID,
+    GlobalENB-ID,
+CGI
+
+FROM E2SM-COMMON-IEs;
+
  -- **************************************************************
  -- E2SM-RSM IDs
  -- **************************************************************
 
-SliceID ::= INTEGER (1..4294967295)
-SliceIDAssoc ::= INTEGER(0..4294967295)
+maxnoofSlices INTEGER ::= 4294967295
+SliceID ::= INTEGER (1..maxnoofSlices)
+SliceIDAssoc ::= INTEGER(0..maxnoofSlices)
 
 UE-Identity ::= OCTET STRING
+CU-UE-F1AP-ID ::= INTEGER(0..4294967295)
+DU-UE-F1AP-ID ::= INTEGER(0..4294967295)
 
+-- ***************************************************************
+-- Slicing capabilities
+-- ***************************************************************
+
+maxnoofSlicingNodes INTEGER ::= 4294967295
+
+GlobalSlicingNodeID ::= CHOICE {
+	globalGNB-ID			GlobalGNB-ID,
+	globalENB-ID            GlobalENB-ID,
+	...
+}
+
+SlicingType ::= ENUMERATED{
+    static,
+    dynamic,
+    ...
+}
+
+NodeSlicingCapability-Item ::= SEQUENCE {
+    maxNumberOfSlicesDL       INTEGER(0..maxnoofSlices),
+    maxNumberOfSlicesUL       INTEGER(0..maxnoofSlices),
+    slicingType               SlicingType,
+    maxNumberOfUEsPerSlice    INTEGER,
+    ...
+}
+
+-- ***************************************************************
+-- Slicing metrics
+-- ***************************************************************
+
+SliceMetrics ::= SEQUENCE {
+    prbUtilization              INTEGER(0..100), -- Tells % of Radio Resources utilized per slice
+    numUeAssocToSlice           INTEGER(0..maxnoofUEs),
+    sliceLevelBLER              INTEGER(0..100), -- Number of retransmission happened in slice, BLock Error Rate (BLER)
+    avgCQI                      INTEGER(0..15), -- Channel Quality Indicator (CQI)
+    ...
+}
+
+
+-- ***************************************************************
+-- E2SM-RSM Event Trigger Definition OCTET STRING
+-- ***************************************************************
+RSM-Trigger-Type ::= ENUMERATED{
+    upon-emm-case-report,
+    Periodic, -- Do we need this? Otherwise, will remove it.
+    ...
+}
+
+E2SM-RSM-EventTriggerDefinition ::= SEQUENCE{
+    eventDefinition-formats    CHOICE{
+     eventDefinition-Format1 E2SM-RSM-EventTriggerDefinition-Format1,
+        ...
+    },
+    ...
+}
+
+E2SM-RSM-EventTriggerDefinition-Format1 ::= SEQUENCE{
+   triggerType                  RSM-Trigger-Type,
+   reportingPeriod-ms          INTEGER  OPTIONAL,
+   ...
+}
+
+
+ -- **************************************************************
+ -- E2SM-RSM Indication Header - to report attach/detach
+ -- **************************************************************
+
+E2SM-RSM-IndicationHeader ::= CHOICE {
+    indicationHeader-Format1        E2SM-RSM-IndicationHeader-Format1,
+    ...
+}
+
+E2SM-RSM-IndicationHeader-Format1 ::= SEQUENCE {
+    cgi                             CGI
+    ...
+}
+
+ -- **************************************************************
+ -- E2SM-RSM Indication Message
+ -- **************************************************************
+
+EMMCase::= ENUMERATED {attached, detached, ...}
+
+E2SM-RSM-IndicationMessage ::= CHOICE {
+    indicationMessage-Format1      E2SM-RSM-IndicationMessage-Format1,
+    ...
+}
+
+E2SM-RSM-IndicationMessage-Format1 ::= SEQUENCE {
+    ueId                          UE-Identity,
+    cuUeF1apId             CU-UE-F1AP-ID,
+    duUeF1apId             DU-UE-F1AP-ID,
+    emmCase                 EMMCase,
+    ulSlicingMetrics          SEQUENCE (SIZE(1..maxnoofSlices)) OF SliceMetrics,
+    dlSlicingMetrics          SEQUENCE (SIZE(1..maxnoofSlices)) OF SliceMetrics,
+    ...
+}
 
  -- **************************************************************
  -- E2SM-RSM control command types
@@ -65,7 +173,6 @@ SliceDelete ::= SEQUENCE {
     ...
 }
 
-
  -- **************************************************************
  -- E2SM-RSM UE to Slice association
  -- **************************************************************
@@ -85,14 +192,8 @@ SliceAssociate ::= SEQUENCE {
  -- E2SM-RSM-RANfunction-Description
  E2SM-RSM-RANfunction-Description ::= SEQUENCE {
      ranFunction-Name    RANfunction-Name,
-     ...
- }
-
- RANfunction-Name ::= SEQUENCE {
-     ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
-     ranFunction-E2SM-OID        PrintableString(SIZE(1..1000,...)),
-     ranFunction-Description     PrintableString(SIZE(1..150,...)),
-     ranFunction-Instance        INTEGER OPTIONAL,
+     ric-Slicing-Node-List					            SEQUENCE (SIZE(1..maxnoofSlicingNodes)) OF GlobalSlicingNodeID,
+     ric-Slicing-Node-Capability-List  					SEQUENCE (SIZE(1..maxnoofSlicingNodes)) OF NodeSlicingCapability-Item,
      ...
  }
 
