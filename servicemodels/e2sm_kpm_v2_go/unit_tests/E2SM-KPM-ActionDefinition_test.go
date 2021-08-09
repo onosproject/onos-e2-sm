@@ -43,7 +43,7 @@ func createE2SmKpmActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 	var qciMin int32 = 1
 	var qciMax int32 = 15
 	var arpMax int32 = 15
-	var arpMin int32 = 10
+	var arpMin int32 = 1
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
 	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
@@ -109,7 +109,7 @@ func createE2SmKpmActionDefinitionFormat2() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 	var qciMin int32 = 1
 	var qciMax int32 = 15
 	var arpMax int32 = 15
-	var arpMin int32 = 10
+	var arpMin int32 = 1
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
 	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
@@ -145,7 +145,7 @@ func createE2SmKpmActionDefinitionFormat2() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 	measInfoList.Value = append(measInfoList.Value, measInfoItem)
 
 	actionDefinitionFormat1, err := pdubuilder.CreateActionDefinitionFormat1(cellObjID, measInfoList, granularity, subscriptionID)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 

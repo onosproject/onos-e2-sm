@@ -42,12 +42,12 @@ func Test_perEncodingRicStyleName1(t *testing.T) {
 		Value: "O",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RicStyleName{}
-	err = aper.UnmarshalWithParams(per, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
@@ -60,7 +60,7 @@ func Test_perRicStyleName1CompareBytes(t *testing.T) {
 		Value: "O",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
@@ -76,12 +76,12 @@ func Test_perEncodingRicStyleName2(t *testing.T) {
 		Value: "SomeName",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RicStyleName{}
-	err = aper.UnmarshalWithParams(per, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
@@ -94,7 +94,7 @@ func Test_perRicStyleNameCompareBytes2(t *testing.T) {
 		Value: "SomeName",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
@@ -110,12 +110,12 @@ func Test_perEncodingRicStyleName3(t *testing.T) {
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RicStyleName{}
-	err = aper.UnmarshalWithParams(per, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
@@ -128,7 +128,7 @@ func Test_perRicStyleNameCompareBytes3(t *testing.T) {
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
@@ -144,12 +144,12 @@ func Test_perEncodingRicStyleName4(t *testing.T) {
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????Extended",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RicStyleName{}
-	err = aper.UnmarshalWithParams(per, &result, "sizeExt")
+	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
@@ -162,7 +162,7 @@ func Test_perRicStyleNameCompareBytes4(t *testing.T) {
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????Extended",
 	}
 
-	per, err := aper.MarshalWithParams(ricStyleName, "sizeExt")
+	per, err := aper.MarshalWithParams(ricStyleName, "")
 	assert.NilError(t, err)
 	t.Logf("RIC-Style-Name PER\n%v", hex.Dump(per))
 

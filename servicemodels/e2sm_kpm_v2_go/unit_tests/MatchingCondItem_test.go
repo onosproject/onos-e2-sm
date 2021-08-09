@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-var refPerMCI1 string = "00000000  1f ff f0 01 02 03 40 40  01 02 03 00 17 68 18 00  |......@@.....h..|\n" +
+var refPerMCI1 string = "00000000  1f ff f0 21 22 23 40 40  01 02 03 00 17 68 18 00  |...!\"#@@.....h..|\n" +
 	"00000010  1e 00 01 70 00 00 18 00  00 00 00 00 7a 00 01 c7  |...p........z...|\n" +
 	"00000020  00 03 14 20                                       |... |"
 var refPerMCI2 string = "00000000  42 10 01 15                                       |B...|"
@@ -96,7 +96,7 @@ func Test_perEncodingMatchingCondItem1(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("MatchingCondItem (MeasLabel) PER - decoded\n%v", result)
+	t.Logf("MatchingCondItem (MeasLabel) PER - decoded\n%v", &result)
 }
 
 func Test_perMatchingCondItem1CompareBytes(t *testing.T) {

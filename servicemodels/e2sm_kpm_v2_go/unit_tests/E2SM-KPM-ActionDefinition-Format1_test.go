@@ -15,7 +15,7 @@ import (
 )
 
 var refPerAD1 string = "00000000  00 00 03 6f 6e 66 00 00  40 20 74 72 69 61 6c 01  |...onf..@ trial.|\n" +
-	"00000010  3f ff e0 21 22 23 40 40  01 02 03 00 0a 7c 0f 00  |?..!\"#@@.....|..|\n" +
+	"00000010  3f ff e0 21 22 23 43 c0  01 02 03 00 0a 7c 0f 00  |?..!\"#@@.....|..|\n" +
 	"00000020  0f 00 01 70 00 00 fa 00  00 04 00 00 7a 00 01 c7  |...p........z...|\n" +
 	"00000030  00 03 14 00 14 40 30 38                           |.....@08|"
 
@@ -27,7 +27,7 @@ func createActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefinitionFor
 	var measurementName string = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
-	sst := []byte{0x01}
+	sst := []byte{0x0f}
 	sd := []byte{0x01, 0x02, 0x03}
 	var fiveQI int32 = 10
 	var qfi int32 = 62
@@ -35,7 +35,7 @@ func createActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefinitionFor
 	var qciMin int32 = 1
 	var qciMax int32 = 15
 	var arpMax int32 = 15
-	var arpMin int32 = 10
+	var arpMin int32 = 1
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
 	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
@@ -93,7 +93,29 @@ func Test_perEncodingE2SmKpmActionDefinitionFormat1(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("E2SM-KPM-ActionDefinition-Format1 PER - decoded\n%v", result)
+	t.Logf("E2SM-KPM-ActionDefinition-Format1 PER - decoded\n%v", &result)
+	assert.Equal(t, actionDefFormat1.GetCellObjId().GetValue(), result.GetCellObjId().GetValue())
+	assert.Equal(t, actionDefFormat1.GetGranulPeriod().GetValue(), result.GetGranulPeriod().GetValue())
+	assert.Equal(t, actionDefFormat1.GetSubscriptId().GetValue(), result.GetSubscriptId().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetMeasType().GetMeasName().GetValue(), result.GetMeasInfoList().GetValue()[0].GetMeasType().GetMeasName().GetValue())
+	assert.DeepEqual(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetPlmnId().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetPlmnId().GetValue())
+	assert.DeepEqual(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSliceId().GetSD(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSliceId().GetSD())
+	assert.DeepEqual(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSliceId().GetSSt(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSliceId().GetSSt())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetFiveQi().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetFiveQi().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQFi().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQFi().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQCi().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQCi().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQCimax().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQCimax().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQCimin().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetQCimin().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetARpmax().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetARpmax().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetARpmin().GetValue(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetARpmin().GetValue())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetBitrateRange(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetBitrateRange())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetLayerMuMimo(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetLayerMuMimo())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSUm().Number(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSUm().Number())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetDistBinX(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetDistBinX())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetDistBinY(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetDistBinY())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetDistBinZ(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetDistBinZ())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetPreLabelOverride().Number(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetPreLabelOverride().Number())
+	assert.Equal(t, actionDefFormat1.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetStartEndInd().Number(), result.GetMeasInfoList().GetValue()[0].GetLabelInfoList().GetValue()[0].GetMeasLabel().GetStartEndInd().Number())
 }
 
 func Test_perE2SmKpmActionDefinitionFormat1CompareBytes(t *testing.T) {

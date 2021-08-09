@@ -1185,22 +1185,22 @@ type MeasurementLabel struct {
 
 	// @inject_tag: aper:"optional"
 	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmnID,proto3,oneof" json:"plmn_id,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional,valueExt"
+	SliceId *Snssai `protobuf:"bytes,2,opt,name=slice_id,json=sliceID,proto3,oneof" json:"slice_id,omitempty" aper:"optional,valueExt"`
 	// @inject_tag: aper:"optional"
-	SliceId *Snssai `protobuf:"bytes,2,opt,name=slice_id,json=sliceID,proto3,oneof" json:"slice_id,omitempty" aper:"optional"`
-	// @inject_tag: aper:"optional,valueExt"
-	FiveQi *FiveQi `protobuf:"bytes,3,opt,name=five_qi,json=fiveQI,proto3,oneof" json:"five_qi,omitempty" aper:"optional,valueExt"`
-	// @inject_tag: aper:"optional,valueExt"
-	QFi *Qfi `protobuf:"bytes,4,opt,name=q_fi,json=qFI,proto3,oneof" json:"q_fi,omitempty" aper:"optional,valueExt"`
-	// @inject_tag: aper:"optional,valueExt"
-	QCi *Qci `protobuf:"bytes,5,opt,name=q_ci,json=qCI,proto3,oneof" json:"q_ci,omitempty" aper:"optional,valueExt"`
-	// @inject_tag: aper:"optional,valueExt"
-	QCimax *Qci `protobuf:"bytes,6,opt,name=q_cimax,json=qCImax,proto3,oneof" json:"q_cimax,omitempty" aper:"optional,valueExt"`
-	// @inject_tag: aper:"optional,valueExt"
-	QCimin *Qci `protobuf:"bytes,7,opt,name=q_cimin,json=qCImin,proto3,oneof" json:"q_cimin,omitempty" aper:"optional,valueExt"`
-	// @inject_tag: aper:"optional,valueExt"
-	ARpmax *Arp `protobuf:"bytes,8,opt,name=a_rpmax,json=aRPmax,proto3,oneof" json:"a_rpmax,omitempty" aper:"optional,valueExt"`
-	// @inject_tag: aper:"optional,valueExt"
-	ARpmin *Arp `protobuf:"bytes,9,opt,name=a_rpmin,json=aRPmin,proto3,oneof" json:"a_rpmin,omitempty" aper:"optional,valueExt"`
+	FiveQi *FiveQi `protobuf:"bytes,3,opt,name=five_qi,json=fiveQI,proto3,oneof" json:"five_qi,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional"
+	QFi *Qfi `protobuf:"bytes,4,opt,name=q_fi,json=qFI,proto3,oneof" json:"q_fi,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional"
+	QCi *Qci `protobuf:"bytes,5,opt,name=q_ci,json=qCI,proto3,oneof" json:"q_ci,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional"
+	QCimax *Qci `protobuf:"bytes,6,opt,name=q_cimax,json=qCImax,proto3,oneof" json:"q_cimax,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional"
+	QCimin *Qci `protobuf:"bytes,7,opt,name=q_cimin,json=qCImin,proto3,oneof" json:"q_cimin,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional"
+	ARpmax *Arp `protobuf:"bytes,8,opt,name=a_rpmax,json=aRPmax,proto3,oneof" json:"a_rpmax,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional"
+	ARpmin *Arp `protobuf:"bytes,9,opt,name=a_rpmin,json=aRPmin,proto3,oneof" json:"a_rpmin,omitempty" aper:"optional"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
 	BitrateRange *int32 `protobuf:"varint,10,opt,name=bitrate_range,json=bitrateRange,proto3,oneof" json:"bitrate_range,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
@@ -1215,8 +1215,8 @@ type MeasurementLabel struct {
 	DistBinZ *int32 `protobuf:"varint,15,opt,name=dist_bin_z,json=distBinZ,proto3,oneof" json:"dist_bin_z,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
 	PreLabelOverride *PreLabelOverride `protobuf:"varint,16,opt,name=pre_label_override,json=preLabelOverride,proto3,enum=e2sm_kpm_v2_go.v2.PreLabelOverride,oneof" json:"pre_label_override,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:0"`
-	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:1"
-	StartEndInd *StartEndInd `protobuf:"varint,17,opt,name=start_end_ind,json=startEndInd,proto3,enum=e2sm_kpm_v2_go.v2.StartEndInd,oneof" json:"start_end_ind,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:1"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:1"
+	StartEndInd *StartEndInd `protobuf:"varint,17,opt,name=start_end_ind,json=startEndInd,proto3,enum=e2sm_kpm_v2_go.v2.StartEndInd,oneof" json:"start_end_ind,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:1"`
 }
 
 func (x *MeasurementLabel) Reset() {
@@ -3504,8 +3504,10 @@ type MeasurementInfoItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MeasType      *MeasurementType `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty"`
-	LabelInfoList *LabelInfoList   `protobuf:"bytes,2,opt,name=label_info_list,json=labelInfoList,proto3,oneof" json:"label_info_list,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	MeasType *MeasurementType `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"optional"
+	LabelInfoList *LabelInfoList `protobuf:"bytes,2,opt,name=label_info_list,json=labelInfoList,proto3,oneof" json:"label_info_list,omitempty" aper:"optional"`
 }
 
 func (x *MeasurementInfoItem) Reset() {
@@ -3611,7 +3613,8 @@ type LabelInfoItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3" json:"meas_label,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3" json:"meas_label,omitempty" aper:"valueExt"`
 }
 
 func (x *LabelInfoItem) Reset() {
