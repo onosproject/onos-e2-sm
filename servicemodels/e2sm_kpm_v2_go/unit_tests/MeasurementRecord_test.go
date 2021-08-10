@@ -55,12 +55,12 @@ func Test_perEncodingMeasurementRecord(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mr, "valueExt")
+	per, err := aper.MarshalWithParams(mr, "")
 	assert.NilError(t, err)
 	t.Logf("MeasurementRecord PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementRecord{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
 	t.Logf("MeasurementRecord PER - decoded\n%v", &result)
@@ -76,7 +76,7 @@ func Test_perMeasurementRecordCompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mr, "valueExt")
+	per, err := aper.MarshalWithParams(mr, "")
 	assert.NilError(t, err)
 	t.Logf("MeasurementRecord PER\n%v", hex.Dump(per))
 
