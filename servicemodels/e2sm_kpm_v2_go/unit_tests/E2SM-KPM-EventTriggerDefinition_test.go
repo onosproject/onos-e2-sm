@@ -39,7 +39,7 @@ func Test_perEncodingE2SmKpmEventTriggerDefinition(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmEventTriggerDefinition(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-EventTriggerDefinition PER - decoded\n%v", result)
 }
 

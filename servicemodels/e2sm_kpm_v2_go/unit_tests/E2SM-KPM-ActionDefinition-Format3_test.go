@@ -79,7 +79,14 @@ func Test_perEncodingE2SmKpmActionDefinitionFormat3(t *testing.T) {
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
 	assert.Assert(t, &result != nil)
-	t.Logf("E2SM-KPM-ActionDefinition-Format3 PER - decoded\n%v", result)
+	t.Logf("E2SM-KPM-ActionDefinition-Format3 PER - decoded\n%v", &result)
+	assert.Equal(t, actionDefFormat3.GetGranulPeriod().GetValue(), result.GetGranulPeriod().GetValue())
+	assert.Equal(t, actionDefFormat3.GetSubscriptId().GetValue(), result.GetSubscriptId().GetValue())
+	assert.Equal(t, actionDefFormat3.GetCellObjId().GetValue(), result.GetCellObjId().GetValue())
+	assert.Equal(t, actionDefFormat3.GetMeasCondList().GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestValue().GetValueEnum(), result.GetMeasCondList().GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestValue().GetValueEnum())
+	assert.Equal(t, actionDefFormat3.GetMeasCondList().GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestType().GetRSrp().Number(), result.GetMeasCondList().GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestType().GetRSrp().Number())
+	assert.Equal(t, actionDefFormat3.GetMeasCondList().GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestExpr().Number(), result.GetMeasCondList().GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestExpr().Number())
+	assert.Equal(t, actionDefFormat3.GetMeasCondList().GetValue()[0].GetMeasType().GetMeasName().GetValue(), result.GetMeasCondList().GetValue()[0].GetMeasType().GetMeasName().GetValue())
 }
 
 func Test_perE2SmKpmActionDefinitionFormat3CompareBytes(t *testing.T) {

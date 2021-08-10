@@ -182,7 +182,7 @@ func CreateMeasurementTypeMeasName(measName string) (*e2sm_kpm_v2_go.Measurement
 }
 
 func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI *int32, qfi *int32, qci *int32, qciMax *int32,
-	qciMin *int32, arpMin *int32, arpMax *int32, br *int32, lmm *int32, sum *e2sm_kpm_v2_go.SUM, dbx *int32, dby *int32,
+	qciMin *int32, arpMax *int32, arpMin *int32, br *int32, lmm *int32, sum *e2sm_kpm_v2_go.SUM, dbx *int32, dby *int32,
 	dbz *int32, plo *e2sm_kpm_v2_go.PreLabelOverride, seind *e2sm_kpm_v2_go.StartEndInd) (*e2sm_kpm_v2_go.LabelInfoItem, error) {
 
 	labelInfoItem := e2sm_kpm_v2_go.LabelInfoItem{
@@ -236,14 +236,14 @@ func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI *int32, qf
 			Value: *qciMin,
 		}
 	}
-	if arpMin != nil {
-		labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2_go.Arp{
-			Value: *arpMin,
-		}
-	}
 	if arpMax != nil {
 		labelInfoItem.MeasLabel.ARpmax = &e2sm_kpm_v2_go.Arp{
 			Value: *arpMax,
+		}
+	}
+	if arpMin != nil {
+		labelInfoItem.MeasLabel.ARpmin = &e2sm_kpm_v2_go.Arp{
+			Value: *arpMin,
 		}
 	}
 	if br != nil {

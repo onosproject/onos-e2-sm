@@ -64,7 +64,7 @@ func Test_perEncodingE2SmKpmIndicationHeader(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmIndicationHeader(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-IndicationHeader PER - decoded\n%v", result)
 }
 

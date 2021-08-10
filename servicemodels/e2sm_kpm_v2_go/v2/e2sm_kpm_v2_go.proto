@@ -603,6 +603,7 @@ message MeasurementCondList {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:296
 // {MeasurementCondItem}
 message MeasurementCondItem {
+    // @inject_tag: aper:"valueExt"
     MeasurementType meas_type = 1 [ json_name="measType"];
     MatchingCondList matching_cond = 2 [ json_name="matchingCond"];
 };
@@ -617,6 +618,7 @@ message MeasurementCondUeidList {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:304
 // {MeasurementCondUEidItem}
 message MeasurementCondUeidItem {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
     MeasurementType meas_type = 1 [ json_name="measType"];
     MatchingCondList matching_cond = 2 [ json_name="matchingCond"];
     // @inject_tag: aper:"optional"
@@ -626,7 +628,7 @@ message MeasurementCondUeidItem {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:312
 // {MatchingCondList}
 message MatchingCondList {
-    // @inject_tag: aper:"sizeLB:1,sizeUB:32768"
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32768"
     repeated MatchingCondItem value = 1 [ json_name="value"];
 };
 

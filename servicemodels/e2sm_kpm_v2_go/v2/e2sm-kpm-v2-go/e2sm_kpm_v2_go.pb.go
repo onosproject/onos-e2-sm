@@ -4080,7 +4080,8 @@ type MeasurementCondItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty"`
+	// @inject_tag: aper:"valueExt"
+	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"valueExt"`
 	MatchingCond *MatchingCondList `protobuf:"bytes,2,opt,name=matching_cond,json=matchingCond,proto3" json:"matching_cond,omitempty"`
 }
 
@@ -4187,7 +4188,8 @@ type MeasurementCondUeidItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty"`
+	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
 	MatchingCond *MatchingCondList `protobuf:"bytes,2,opt,name=matching_cond,json=matchingCond,proto3" json:"matching_cond,omitempty"`
 	// @inject_tag: aper:"optional"
 	MatchingUeidList *MatchingUeidList `protobuf:"bytes,3,opt,name=matching_ueid_list,json=matchingUEidList,proto3,oneof" json:"matching_ueid_list,omitempty" aper:"optional"`
@@ -4253,8 +4255,8 @@ type MatchingCondList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1,sizeUB:32768"
-	Value []*MatchingCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"sizeLB:1,sizeUB:32768"`
+	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32768"
+	Value []*MatchingCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:32768"`
 }
 
 func (x *MatchingCondList) Reset() {

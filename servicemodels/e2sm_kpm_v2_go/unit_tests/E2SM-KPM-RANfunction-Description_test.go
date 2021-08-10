@@ -265,7 +265,7 @@ func Test_perEncodingE2SmKpmRanFunctionDescription(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
@@ -285,6 +285,7 @@ func Test_perE2SmKpmRanFunctionDescriptionCompareBytes(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
@@ -304,6 +305,7 @@ func Test_perE2SmKpmRanFunctionDescriptionNodeListCompareBytes(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
@@ -323,6 +325,7 @@ func Test_perE2SmKpmRanFunctionDescriptionEventListCompareBytes(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
@@ -342,6 +345,7 @@ func Test_perE2SmKpmRanFunctionDescriptionReportListCompareBytes(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
@@ -356,7 +360,7 @@ func Test_perEncodingE2SmKpmRanFunctionDescriptionMndtOnly(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription (mandatory part only) PER - decoded\n%v", result)
 }
 
@@ -404,6 +408,6 @@ func Test_perDecodeRadysisBytes(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(radisysBytesRanFunctionDefinition)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription (Radisys) PER - decoded\n%v", result)
 }
