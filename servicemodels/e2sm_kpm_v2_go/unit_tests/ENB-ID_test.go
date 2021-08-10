@@ -53,7 +53,7 @@ func Test_perEncodingEnbID(t *testing.T) {
 	result := e2sm_kpm_v2_go.EnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("EnbID (Macro) PER - decoded\n%v", &result)
 	assert.DeepEqual(t, enbID.GetMacroENbId().GetValue(), result.GetMacroENbId().GetValue())
 	assert.Equal(t, enbID.GetMacroENbId().GetLen(), result.GetMacroENbId().GetLen())
@@ -86,7 +86,7 @@ func Test_perEncodingEnbIDhome(t *testing.T) {
 	result := e2sm_kpm_v2_go.EnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("EnbID (Home) PER - decoded\n%v", &result)
 	assert.DeepEqual(t, enbID.GetHomeENbId().GetValue(), result.GetHomeENbId().GetValue())
 	assert.Equal(t, enbID.GetHomeENbId().GetLen(), result.GetHomeENbId().GetLen())

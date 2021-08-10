@@ -13,12 +13,12 @@ import (
 	"testing"
 )
 
-var refPerIndMsgF2 = "00000000  68 30 38 00 00 03 31 32  33 00 14 00 00 40 10 6f  |h08...123....@.o|\n" +
-	"00000010  6e 66 00 01 1f ff f0 21  22 23 40 40 01 02 03 00  |nf.....!\"#@@....|\n" +
-	"00000020  17 68 18 00 1e 00 01 70  00 00 18 00 00 00 00 00  |.h.....p........|\n" +
-	"00000030  7a 00 01 c7 00 03 14 28  42 00 01 15 00 00 00 06  |z......(B.......|\n" +
-	"00000040  53 6f 6d 65 55 45 00 00  40 03 00 15 20 09 80 d0  |SomeUE..@... ...|\n" +
-	"00000050  16 33 33 33 33 33 33 40                           |.333333@|"
+//var refPerIndMsgF2 = "00000000  68 30 38 00 00 03 31 32  33 00 14 00 00 40 10 6f  |h08...123....@.o|\n" +
+//	"00000010  6e 66 00 01 1f ff f0 21  22 23 40 40 01 02 03 00  |nf.....!\"#@@....|\n" +
+//	"00000020  17 68 18 00 1e 00 01 70  00 00 18 00 00 00 00 00  |.h.....p........|\n" +
+//	"00000030  7a 00 01 c7 00 03 14 28  42 00 01 15 00 00 00 06  |z......(B.......|\n" +
+//	"00000040  53 6f 6d 65 55 45 00 00  40 03 00 15 20 09 80 d0  |SomeUE..@... ...|\n" +
+//	"00000050  16 33 33 33 33 33 33 40                           |.333333@|"
 var refPerIndMsgF2noReal = "00000000  68 30 38 00 00 03 31 32  33 00 14 00 00 40 10 6f  |h08...123....@.o|\n" +
 	"00000010  6e 66 00 01 1f ff f0 21  22 23 40 40 01 02 03 00  |nf.....!\"#@@....|\n" +
 	"00000020  17 68 18 00 1e 00 01 70  00 00 18 00 00 00 00 00  |.h.....p........|\n" +
@@ -202,14 +202,14 @@ func Test_perEncodingE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*imf2, "valueExt")
+	per, err := aper.MarshalWithParams(imf2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat2{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER - decoded\n%v", &result)
 	assert.Equal(t, imf2.GetGranulPeriod().GetValue(), result.GetGranulPeriod().GetValue())
 	assert.Equal(t, imf2.GetSubscriptId().GetValue(), result.GetSubscriptId().GetValue())
@@ -249,7 +249,7 @@ func Test_perE2SmKpmIndicationMessageFormat2CompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*imf2, "valueExt")
+	per, err := aper.MarshalWithParams(imf2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%v", hex.Dump(per))
 

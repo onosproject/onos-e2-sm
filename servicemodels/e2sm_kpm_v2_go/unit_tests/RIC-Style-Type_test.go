@@ -17,7 +17,7 @@ var refPerRicStyleType = "00000000  00 6f                                       
 
 func Test_perEncodingRicStyleType(t *testing.T) {
 
-	ricStyleType := e2sm_kpm_v2_go.RicStyleType{
+	ricStyleType := &e2sm_kpm_v2_go.RicStyleType{
 		Value: 111,
 	}
 
@@ -28,14 +28,14 @@ func Test_perEncodingRicStyleType(t *testing.T) {
 	result := e2sm_kpm_v2_go.RicStyleType{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Type PER - decoded\n%v", &result)
 	assert.Equal(t, ricStyleType.GetValue(), result.GetValue())
 }
 
 func Test_perRicStyleTypeCompareBytes(t *testing.T) {
 
-	ricStyleType := e2sm_kpm_v2_go.RicStyleType{
+	ricStyleType := &e2sm_kpm_v2_go.RicStyleType{
 		Value: 111,
 	}
 

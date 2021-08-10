@@ -40,8 +40,9 @@ func Test_perEncodingE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 	result := e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER - decoded\n%v", &result)
+	assert.Equal(t, etdf1.GetReportingPeriod(), result.GetReportingPeriod())
 }
 
 func Test_perE2SmKpmEventTriggerDefinitionFormat1CompareBytes(t *testing.T) {

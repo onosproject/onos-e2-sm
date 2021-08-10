@@ -120,14 +120,14 @@ func Test_perEncodeMeasurementCondList(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*mcl, "")
+	per, err := aper.MarshalWithParams(mcl, "")
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondList PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementCondList{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementCondList PER - decoded\n%v", &result)
 	assert.Equal(t, mcl.GetValue()[0].GetMeasType().GetMeasId().GetValue(), result.GetValue()[0].GetMeasType().GetMeasId().GetValue())
 	assert.Equal(t, mcl.GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestValue().GetValueInt(), result.GetValue()[0].GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestValue().GetValueInt())
@@ -159,7 +159,7 @@ func Test_perMeasurementCondListCompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*mcl, "")
+	per, err := aper.MarshalWithParams(mcl, "")
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondList PER\n%v", hex.Dump(per))
 

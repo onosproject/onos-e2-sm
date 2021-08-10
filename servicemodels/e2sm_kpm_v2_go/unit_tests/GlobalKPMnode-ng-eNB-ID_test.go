@@ -58,7 +58,7 @@ func Test_perEncodingGlobalKPMnodeNgEnbID(t *testing.T) {
 	result := e2sm_kpm_v2_go.GlobalKpmnodeNgEnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("GlobalKPMnodeNgEnbID PER - decoded\n%v", &result)
 	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetPlmnId().GetValue(), result.GetGlobalNgENbId().GetPlmnId().GetValue())
 	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue(), result.GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue())

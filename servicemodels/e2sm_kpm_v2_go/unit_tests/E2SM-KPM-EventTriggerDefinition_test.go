@@ -41,6 +41,7 @@ func Test_perEncodingE2SmKpmEventTriggerDefinition(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-EventTriggerDefinition PER - decoded\n%v", result)
+	assert.Equal(t, etd.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetReportingPeriod(), result.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetReportingPeriod())
 }
 
 func Test_perE2SmKpmEventTriggerDefinitionCompareBytes(t *testing.T) {

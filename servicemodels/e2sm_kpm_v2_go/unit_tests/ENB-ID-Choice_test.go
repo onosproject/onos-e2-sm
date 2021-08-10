@@ -66,7 +66,7 @@ func Test_perEncodingEnbIDchoiceMacro(t *testing.T) {
 	result := e2sm_kpm_v2_go.EnbIdChoice{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("EnbIDchoice (Macro) PER - decoded\n%v", &result)
 	assert.DeepEqual(t, enbID.GetEnbIdMacro().GetValue(), result.GetEnbIdMacro().GetValue())
 	assert.Equal(t, enbID.GetEnbIdMacro().GetLen(), result.GetEnbIdMacro().GetLen())
@@ -99,8 +99,8 @@ func Test_perEncodingEnbIDchoiceShortMacro(t *testing.T) {
 	result := e2sm_kpm_v2_go.EnbIdChoice{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("EnbIDchoice (Short Macro) PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("EnbIDchoice (Short Macro) PER - decoded\n%v", &result)
 	assert.DeepEqual(t, enbID.GetEnbIdShortmacro().GetValue(), result.GetEnbIdShortmacro().GetValue())
 	assert.Equal(t, enbID.GetEnbIdShortmacro().GetLen(), result.GetEnbIdShortmacro().GetLen())
 }
@@ -132,8 +132,8 @@ func Test_perEncodingEnbIDchoiceLongMacro(t *testing.T) {
 	result := e2sm_kpm_v2_go.EnbIdChoice{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("EnbIDchoice (Long Macro) PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("EnbIDchoice (Long Macro) PER - decoded\n%v", &result)
 	assert.DeepEqual(t, enbID.GetEnbIdShortmacro().GetValue(), result.GetEnbIdShortmacro().GetValue())
 	assert.Equal(t, enbID.GetEnbIdShortmacro().GetLen(), result.GetEnbIdShortmacro().GetLen())
 }

@@ -15,7 +15,7 @@ func PerEncodeE2SmKpmIndicationHeader(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader
 
 	log.Debugf("Obtained E2SM-KPM-IndicationHeader message is\n%v", ih)
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*ih, "valueExt")
+	per, err := aper.MarshalWithParams(ih, "valueExt")
 	if err != nil {
 		return nil, err
 	}

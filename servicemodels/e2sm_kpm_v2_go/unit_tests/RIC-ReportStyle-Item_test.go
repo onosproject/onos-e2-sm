@@ -64,14 +64,14 @@ func Test_perEncodingRicReportStyleItem(t *testing.T) {
 	item, err := createRicReportStyleItem()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(*item, "valueExt")
+	per, err := aper.MarshalWithParams(item, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("RIC-ReportStyle-Item PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RicReportStyleItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-ReportStyle-Item - decoded\n%v", &result)
 	assert.Equal(t, item.GetRicReportStyleName().GetValue(), result.GetRicReportStyleName().GetValue())
 	assert.Equal(t, item.GetRicReportStyleName().GetValue(), result.GetRicReportStyleName().GetValue())
@@ -88,7 +88,7 @@ func Test_perRicReportStyleItemCompareBytes(t *testing.T) {
 	item, err := createRicReportStyleItem()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(*item, "valueExt")
+	per, err := aper.MarshalWithParams(item, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("RIC-ReportStyle-Item PER\n%v", hex.Dump(per))
 

@@ -29,14 +29,14 @@ func Test_perEncodingNrCellIdentity(t *testing.T) {
 
 	nrCgi := createNrcellIdentity()
 
-	per, err := aper.Marshal(*nrCgi)
+	per, err := aper.Marshal(nrCgi)
 	assert.NilError(t, err)
 	t.Logf("NrCellIdentity PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.NrcellIdentity{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("NrCellIdentity PER - decoded\n%v", &result)
 	assert.DeepEqual(t, nrCgi.GetValue().GetValue(), result.GetValue().GetValue())
 	assert.Equal(t, nrCgi.GetValue().GetLen(), result.GetValue().GetLen())
@@ -46,7 +46,7 @@ func Test_perNrCellIdentityCompareBytes(t *testing.T) {
 
 	nrCgi := createNrcellIdentity()
 
-	per, err := aper.Marshal(*nrCgi)
+	per, err := aper.Marshal(nrCgi)
 	assert.NilError(t, err)
 	t.Logf("NrCellIdentity PER\n%v", hex.Dump(per))
 

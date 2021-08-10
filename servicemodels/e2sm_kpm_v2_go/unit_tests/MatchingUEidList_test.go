@@ -29,14 +29,14 @@ func Test_perEncodeMatchingUeIDList(t *testing.T) {
 	//muel.Value = append(muel.Value, muei)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*muel, "")
+	per, err := aper.MarshalWithParams(muel, "")
 	assert.NilError(t, err)
 	t.Logf("MatchingUeIDList PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MatchingUeidList{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingUeIDList PER - decoded\n%v", &result)
 	assert.DeepEqual(t, muel.GetValue()[0].GetUeId().GetValue(), result.GetValue()[0].GetUeId().GetValue())
 }
@@ -54,7 +54,7 @@ func Test_perMatchingUeIDListCompareBytes(t *testing.T) {
 	muel.Value = append(muel.Value, muei)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*muel, "")
+	per, err := aper.MarshalWithParams(muel, "")
 	assert.NilError(t, err)
 	t.Logf("MatchingUeIDList PER\n%v", hex.Dump(per))
 
@@ -73,6 +73,6 @@ func Test_stupidExperiment1(t *testing.T) {
 	result := e2sm_kpm_v2_go.MatchingUeidList{}
 	err = aper.UnmarshalWithParams(perRefBytes, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingUeIDList PER - decoded\n%v", &result)
 }

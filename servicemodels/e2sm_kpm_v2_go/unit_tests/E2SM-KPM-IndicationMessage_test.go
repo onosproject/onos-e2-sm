@@ -14,15 +14,15 @@ import (
 	"testing"
 )
 
-var refPerIndMsg1 = "00000000  0e 80 30 38 00 00 03 6f  6e 66 00 14 00 00 40 20  |..08...onf....@ |\n" +
-	"00000010  74 72 69 61 6c 01 3f ff  e0 21 22 23 40 40 01 02  |trial.?..!\"#@@..|\n" +
-	"00000020  03 00 0a 7c 0f 00 0f 00  01 72 40 00 fa 00 00 04  |...|.....r@.....|\n" +
-	"00000030  00 00 7a 00 01 c7 00 03  14 00 00 00 40 03 08 30  |..z.........@..0|\n" +
-	"00000040  39 44 09 80 d0 16 33 33  33 33 33 33 00           |9D....333333.|"
-var refPerIndMsg2 = "00000000  2d 30 38 00 00 03 6f 6e  66 00 14 00 00 40 20 74  |-08...onf....@ t|\n" +
-	"00000010  72 69 61 6c 00 00 48 21  02 00 c9 00 00 00 06 53  |rial..H!.......S|\n" +
-	"00000020  6f 6d 65 55 45 00 00 40  03 08 30 39 44 09 80 d0  |omeUE..@..09D...|\n" +
-	"00000030  16 33 33 33 33 33 33 00                           |.333333.|"
+//var refPerIndMsg1 = "00000000  0e 80 30 38 00 00 03 6f  6e 66 00 14 00 00 40 20  |..08...onf....@ |\n" +
+//	"00000010  74 72 69 61 6c 01 3f ff  e0 21 22 23 40 40 01 02  |trial.?..!\"#@@..|\n" +
+//	"00000020  03 00 0a 7c 0f 00 0f 00  01 72 40 00 fa 00 00 04  |...|.....r@.....|\n" +
+//	"00000030  00 00 7a 00 01 c7 00 03  14 00 00 00 40 03 08 30  |..z.........@..0|\n" +
+//	"00000040  39 44 09 80 d0 16 33 33  33 33 33 33 00           |9D....333333.|"
+//var refPerIndMsg2 = "00000000  2d 30 38 00 00 03 6f 6e  66 00 14 00 00 40 20 74  |-08...onf....@ t|\n" +
+//	"00000010  72 69 61 6c 00 00 48 21  02 00 c9 00 00 00 06 53  |rial..H!.......S|\n" +
+//	"00000020  6f 6d 65 55 45 00 00 40  03 08 30 39 44 09 80 d0  |omeUE..@..09D...|\n" +
+//	"00000030  16 33 33 33 33 33 33 00                           |.333333.|"
 var refPerIndMsg1noReal = "00000000  0e 80 30 38 00 00 03 6f  6e 66 00 14 00 00 40 20  |..08...onf....@ |\n" +
 	"00000010  74 72 69 61 6c 01 3f ff  e0 21 22 23 40 40 01 02  |trial.?..!\"#@@..|\n" +
 	"00000020  03 00 0a 7c 0f 00 0f 00  01 72 40 00 fa 00 00 04  |...|.....r@.....|\n" +
@@ -173,7 +173,7 @@ func Test_perEncodingE2SmKpmIndicationMessage1(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmIndicationMessage(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SmKpmIndicationMessage (Format1) PER - decoded\n%v", &result)
 	assert.Equal(t, im.GetIndicationMessageFormats().GetIndicationMessageFormat1().GetGranulPeriod().GetValue(), result.GetIndicationMessageFormats().GetIndicationMessageFormat1().GetGranulPeriod().GetValue())
 	assert.Equal(t, im.GetIndicationMessageFormats().GetIndicationMessageFormat1().GetSubscriptId().GetValue(), result.GetIndicationMessageFormats().GetIndicationMessageFormat1().GetSubscriptId().GetValue())

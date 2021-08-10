@@ -71,14 +71,14 @@ func Test_perEncodingE2SmKpmActionDefinitionFormat3(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*actionDefFormat3, "valueExt")
+	per, err := aper.MarshalWithParams(actionDefFormat3, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-ActionDefinition-Format3 PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.E2SmKpmActionDefinitionFormat3{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-ActionDefinition-Format3 PER - decoded\n%v", &result)
 	assert.Equal(t, actionDefFormat3.GetGranulPeriod().GetValue(), result.GetGranulPeriod().GetValue())
 	assert.Equal(t, actionDefFormat3.GetSubscriptId().GetValue(), result.GetSubscriptId().GetValue())
@@ -95,7 +95,7 @@ func Test_perE2SmKpmActionDefinitionFormat3CompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*actionDefFormat3, "valueExt")
+	per, err := aper.MarshalWithParams(actionDefFormat3, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-ActionDefinition-Format3 PER\n%v", hex.Dump(per))
 

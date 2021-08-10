@@ -38,7 +38,7 @@ var refPerRicStyleName4 = "00000000  80 80 9d 54 68 69 73 49  73 4f 6e 65 48 75 
 
 func Test_perEncodingRicStyleName1(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "O",
 	}
 
@@ -49,14 +49,14 @@ func Test_perEncodingRicStyleName1(t *testing.T) {
 	result := e2sm_kpm_v2_go.RicStyleName{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
 	assert.Equal(t, ricStyleName.GetValue(), result.GetValue())
 }
 
 func Test_perRicStyleName1CompareBytes(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "O",
 	}
 
@@ -72,7 +72,7 @@ func Test_perRicStyleName1CompareBytes(t *testing.T) {
 
 func Test_perEncodingRicStyleName2(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "SomeName",
 	}
 
@@ -83,14 +83,14 @@ func Test_perEncodingRicStyleName2(t *testing.T) {
 	result := e2sm_kpm_v2_go.RicStyleName{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
 	assert.Equal(t, ricStyleName.GetValue(), result.GetValue())
 }
 
 func Test_perRicStyleNameCompareBytes2(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "SomeName",
 	}
 
@@ -106,7 +106,7 @@ func Test_perRicStyleNameCompareBytes2(t *testing.T) {
 
 func Test_perEncodingRicStyleName3(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????",
 	}
 
@@ -117,14 +117,14 @@ func Test_perEncodingRicStyleName3(t *testing.T) {
 	result := e2sm_kpm_v2_go.RicStyleName{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
 	assert.Equal(t, ricStyleName.GetValue(), result.GetValue())
 }
 
 func Test_perRicStyleNameCompareBytes3(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????",
 	}
 
@@ -140,7 +140,7 @@ func Test_perRicStyleNameCompareBytes3(t *testing.T) {
 
 func Test_perEncodingRicStyleName4(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????Extended",
 	}
 
@@ -151,14 +151,14 @@ func Test_perEncodingRicStyleName4(t *testing.T) {
 	result := e2sm_kpm_v2_go.RicStyleName{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-Style-Name - decoded\n%v", &result)
 	assert.Equal(t, ricStyleName.GetValue(), result.GetValue())
 }
 
 func Test_perRicStyleNameCompareBytes4(t *testing.T) {
 
-	ricStyleName := e2sm_kpm_v2_go.RicStyleName{
+	ricStyleName := &e2sm_kpm_v2_go.RicStyleName{
 		Value: "ThisIsOneHundredFiftyCharsLongStringWhichSupposedToTestUpperBoundOfRicStyleNameStructure.ItIsImportantForFurtherAPERGoLibraryVerification,isit???????Extended",
 	}
 

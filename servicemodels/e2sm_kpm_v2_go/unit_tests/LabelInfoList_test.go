@@ -88,14 +88,14 @@ func Test_perEncodingLabelInfoList(t *testing.T) {
 	lil, err := createLabelInfoList()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(*lil, "")
+	per, err := aper.MarshalWithParams(lil, "")
 	assert.NilError(t, err)
 	t.Logf("LabelInfoList PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.LabelInfoList{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("LabelInfoList PER - decoded\n%v", &result)
 	assert.DeepEqual(t, lil.GetValue()[0].GetMeasLabel().GetPlmnId().GetValue(), result.GetValue()[0].GetMeasLabel().GetPlmnId().GetValue())
 	assert.DeepEqual(t, lil.GetValue()[0].GetMeasLabel().GetSliceId().GetSD(), result.GetValue()[0].GetMeasLabel().GetSliceId().GetSD())
@@ -140,7 +140,7 @@ func Test_perLabelInfoListCompareBytes(t *testing.T) {
 	lil, err := createLabelInfoList()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(*lil, "")
+	per, err := aper.MarshalWithParams(lil, "")
 	assert.NilError(t, err)
 	t.Logf("LabelInfoList PER\n%v", hex.Dump(per))
 

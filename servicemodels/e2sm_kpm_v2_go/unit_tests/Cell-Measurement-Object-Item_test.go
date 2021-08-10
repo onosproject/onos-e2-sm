@@ -72,14 +72,14 @@ func Test_perEncodingCellMeasurementObjectItem1(t *testing.T) {
 	cmoi := createCellMeasurementObjectItem1()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*cmoi, "valueExt")
+	per, err := aper.MarshalWithParams(cmoi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.CellMeasurementObjectItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("CellMeasurementObjectItem PER - decoded\n%v", &result)
 	assert.Equal(t, cmoi.GetCellObjectId().GetValue(), result.GetCellObjectId().GetValue())
 	assert.DeepEqual(t, cmoi.GetCellGlobalId().GetEUtraCgi().GetPLmnIdentity().GetValue(), result.GetCellGlobalId().GetEUtraCgi().GetPLmnIdentity().GetValue())
@@ -92,7 +92,7 @@ func Test_perCellMeasurementObjectItem1CompareBytes(t *testing.T) {
 	cmoi := createCellMeasurementObjectItem1()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*cmoi, "valueExt")
+	per, err := aper.MarshalWithParams(cmoi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
@@ -107,14 +107,14 @@ func Test_perEncodingCellMeasurementObjectItem2(t *testing.T) {
 	cmoi := createCellMeasurementObjectItem2()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*cmoi, "valueExt")
+	per, err := aper.MarshalWithParams(cmoi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.CellMeasurementObjectItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("CellMeasurementObjectItem PER - decoded\n%v", &result)
 	assert.Equal(t, cmoi.GetCellObjectId().GetValue(), result.GetCellObjectId().GetValue())
 	assert.DeepEqual(t, cmoi.GetCellGlobalId().GetEUtraCgi().GetPLmnIdentity().GetValue(), result.GetCellGlobalId().GetEUtraCgi().GetPLmnIdentity().GetValue())
@@ -127,7 +127,7 @@ func Test_perCellMeasurementObjectItem2CompareBytes(t *testing.T) {
 	cmoi := createCellMeasurementObjectItem2()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*cmoi, "valueExt")
+	per, err := aper.MarshalWithParams(cmoi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 

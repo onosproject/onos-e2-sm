@@ -24,14 +24,14 @@ func Test_perEncodeMatchingUeIDItem(t *testing.T) {
 	}
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*muei, "valueExt")
+	per, err := aper.MarshalWithParams(muei, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MatchingUeIDitem PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MatchingUeidItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingUeIDItem PER - decoded\n%v", &result)
 	assert.DeepEqual(t, muei.GetUeId().GetValue(), result.GetUeId().GetValue())
 }
@@ -45,7 +45,7 @@ func Test_perMatchingUeIDItemCompareBytes(t *testing.T) {
 	}
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*muei, "valueExt")
+	per, err := aper.MarshalWithParams(muei, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MatchingUeIDitem PER\n%v", hex.Dump(per))
 

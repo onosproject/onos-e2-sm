@@ -38,7 +38,7 @@ func Test_perEncodingMeasurementInfoActionItem(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementInfoActionItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfoActionItem - decoded\n%v", &result)
 	assert.Equal(t, miai.GetMeasName().GetValue(), result.GetMeasName().GetValue())
 	assert.Equal(t, miai.GetMeasId().GetValue(), result.GetMeasId().GetValue())

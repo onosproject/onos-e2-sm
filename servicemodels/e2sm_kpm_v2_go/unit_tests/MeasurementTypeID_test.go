@@ -53,7 +53,7 @@ func Test_perEncodingMeasurementTypeID(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementTypeID - decoded\n%v", &result)
 	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }
@@ -83,7 +83,7 @@ func Test_perEncodingMeasurementTypeID65535(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementTypeID - decoded\n%v", &result)
 	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }
@@ -113,7 +113,7 @@ func Test_perEncodingMeasurementTypeID65536(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementTypeID - decoded\n%v", &result)
 	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }
@@ -143,7 +143,7 @@ func Test_perEncodingMeasurementTypeID1(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementTypeID - decoded\n%v", &result)
 	assert.Equal(t, mtID.GetValue(), result.GetValue())
 }

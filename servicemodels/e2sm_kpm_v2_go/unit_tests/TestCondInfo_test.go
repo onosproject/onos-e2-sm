@@ -32,14 +32,14 @@ func Test_perEncodingTestCondInfo(t *testing.T) {
 	}
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*testCondInfo, "valueExt")
+	per, err := aper.MarshalWithParams(testCondInfo, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.TestCondInfo{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondInfo PER - decoded\n%v", &result)
 	assert.Equal(t, testCondInfo.GetTestValue().GetValueInt(), result.GetTestValue().GetValueInt())
 	assert.Equal(t, testCondInfo.GetTestExpr().Number(), result.GetTestExpr().Number())
@@ -63,7 +63,7 @@ func Test_perTestCondInfoCompareBytes(t *testing.T) {
 	}
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*testCondInfo, "valueExt")
+	per, err := aper.MarshalWithParams(testCondInfo, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
 
@@ -82,6 +82,6 @@ func Test_stupidExperiment2(t *testing.T) {
 	result := e2sm_kpm_v2_go.TestCondInfo{}
 	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondInfo PER - decoded\n%v", &result)
 }

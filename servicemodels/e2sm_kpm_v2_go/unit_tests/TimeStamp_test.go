@@ -18,7 +18,7 @@ var refPerTimeStamp = "00000000  01 02 03 04                                    
 func Test_perEncodingTimeStamp(t *testing.T) {
 
 	stamp := []byte{0x01, 0x02, 0x03, 0x04}
-	timeStamp := e2sm_kpm_v2_go.TimeStamp{
+	timeStamp := &e2sm_kpm_v2_go.TimeStamp{
 		Value: stamp,
 	}
 
@@ -29,7 +29,7 @@ func Test_perEncodingTimeStamp(t *testing.T) {
 	result := e2sm_kpm_v2_go.TimeStamp{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("TimeStamp PER - decoded\n%v", &result)
 	assert.DeepEqual(t, timeStamp.GetValue(), result.GetValue())
 }
@@ -37,7 +37,7 @@ func Test_perEncodingTimeStamp(t *testing.T) {
 func Test_perTimeStampCompareBytes(t *testing.T) {
 
 	stamp := []byte{0x01, 0x02, 0x03, 0x04}
-	timeStamp := e2sm_kpm_v2_go.TimeStamp{
+	timeStamp := &e2sm_kpm_v2_go.TimeStamp{
 		Value: stamp,
 	}
 

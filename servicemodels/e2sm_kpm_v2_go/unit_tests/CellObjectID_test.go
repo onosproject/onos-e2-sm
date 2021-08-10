@@ -43,14 +43,14 @@ func Test_perEncodingCellObjectID0(t *testing.T) {
 
 	coID := createCellObjectID0()
 
-	per, err := aper.MarshalWithParams(*coID, "")
+	per, err := aper.MarshalWithParams(coID, "")
 	assert.NilError(t, err)
 	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.CellObjectId{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("CellObjectID PER - decoded\n%v", &result)
 	assert.Equal(t, coID.GetValue(), result.GetValue())
 }
@@ -59,7 +59,7 @@ func Test_perCellObjectID0CompareBytes(t *testing.T) {
 
 	coID := createCellObjectID0()
 
-	per, err := aper.MarshalWithParams(*coID, "")
+	per, err := aper.MarshalWithParams(coID, "")
 	assert.NilError(t, err)
 	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
@@ -73,14 +73,14 @@ func Test_perEncodingCellObjectID1(t *testing.T) {
 
 	coID := createCellObjectID1()
 
-	per, err := aper.MarshalWithParams(*coID, "")
+	per, err := aper.MarshalWithParams(coID, "")
 	assert.NilError(t, err)
 	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.CellObjectId{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("CellObjectID PER - decoded\n%v", &result)
 	assert.Equal(t, coID.GetValue(), result.GetValue())
 }
@@ -89,7 +89,7 @@ func Test_perCellObjectID1CompareBytes(t *testing.T) {
 
 	coID := createCellObjectID1()
 
-	per, err := aper.MarshalWithParams(*coID, "")
+	per, err := aper.MarshalWithParams(coID, "")
 	assert.NilError(t, err)
 	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
@@ -103,14 +103,14 @@ func Test_perEncodingCellObjectID2(t *testing.T) {
 
 	coID := createCellObjectID2()
 
-	per, err := aper.MarshalWithParams(*coID, "")
+	per, err := aper.MarshalWithParams(coID, "")
 	assert.NilError(t, err)
 	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.CellObjectId{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("CellObjectID PER - decoded\n%v", &result)
 	assert.Equal(t, coID.GetValue(), result.GetValue())
 }
@@ -119,7 +119,7 @@ func Test_perCellObjectID2CompareBytes(t *testing.T) {
 
 	coID := createCellObjectID2()
 
-	per, err := aper.MarshalWithParams(*coID, "")
+	per, err := aper.MarshalWithParams(coID, "")
 	assert.NilError(t, err)
 	t.Logf("CellObjectID PER\n%v", hex.Dump(per))
 

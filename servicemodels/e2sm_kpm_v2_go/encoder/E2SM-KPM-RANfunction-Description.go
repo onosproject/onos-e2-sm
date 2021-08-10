@@ -15,7 +15,7 @@ func PerEncodeE2SmKpmRanFunctionDescription(rfd *e2sm_kpm_v2_go.E2SmKpmRanfuncti
 
 	log.Debugf("Obtained E2SM-KPM-RANfunctionDescription message is\n%v", rfd)
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*rfd, "valueExt")
+	per, err := aper.MarshalWithParams(rfd, "valueExt")
 	if err != nil {
 		return nil, err
 	}

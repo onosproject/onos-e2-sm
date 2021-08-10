@@ -230,7 +230,7 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 			}
 			switch cellGlobalID := cell.CellGlobalId.GetCellGlobalId().(type) {
 			case *e2sm_kpm_v2_go.CellGlobalId_NrCgi:
-				cellObject.CellGlobalID.Value = fmt.Sprintf("%x",bitStringToUint64(cellGlobalID.NrCgi.NRcellIdentity.Value.Value, int(cellGlobalID.NrCgi.NRcellIdentity.Value.Len)))
+				cellObject.CellGlobalID.Value = fmt.Sprintf("%x", bitStringToUint64(cellGlobalID.NrCgi.NRcellIdentity.Value.Value, int(cellGlobalID.NrCgi.NRcellIdentity.Value.Len)))
 				cellObject.CellGlobalID.Type = topoapi.CellGlobalIDType_NRCGI
 			case *e2sm_kpm_v2_go.CellGlobalId_EUtraCgi:
 				cellObject.CellGlobalID.Value = fmt.Sprintf("%x", bitStringToUint64(cellGlobalID.EUtraCgi.EUtracellIdentity.Value.Value, int(cellGlobalID.EUtraCgi.EUtracellIdentity.Value.Len)))
@@ -269,7 +269,7 @@ var ServiceModel servicemodel
 func bitStringToUint64(bitString []byte, bitCount int) uint64 {
 	var result uint64 = 0
 	for i, b := range bitString {
-		result += uint64(b) << ((len(bitString)-i-1) * 8)
+		result += uint64(b) << ((len(bitString) - i - 1) * 8)
 	}
 	if bitCount%8 != 0 {
 		return result >> (8 - bitCount%8)

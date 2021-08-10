@@ -42,14 +42,14 @@ func Test_perEncodingGnbDuID(t *testing.T) {
 
 	gnbDuID := createGnbDuID()
 
-	per, err := aper.Marshal(*gnbDuID)
+	per, err := aper.Marshal(gnbDuID)
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbDuId{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("GnbDuID PER - decoded\n%v", &result)
 	assert.Equal(t, gnbDuID.GetValue(), result.GetValue())
 }
@@ -58,7 +58,7 @@ func Test_perGnbDuIDCompareBytes(t *testing.T) {
 
 	gnbDuID := createGnbDuID()
 
-	per, err := aper.Marshal(*gnbDuID)
+	per, err := aper.Marshal(gnbDuID)
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
@@ -72,14 +72,14 @@ func Test_perEncodingGnbDuIDhigh(t *testing.T) {
 
 	gnbDuID := createGnbDuIDhigh()
 
-	per, err := aper.Marshal(*gnbDuID)
+	per, err := aper.Marshal(gnbDuID)
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbDuId{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("GnbDuID PER - decoded\n%v", &result)
 	assert.Equal(t, gnbDuID.GetValue(), result.GetValue())
 }
@@ -88,7 +88,7 @@ func Test_perGnbDuIDhighCompareBytes(t *testing.T) {
 
 	gnbDuID := createGnbDuIDhigh()
 
-	per, err := aper.Marshal(*gnbDuID)
+	per, err := aper.Marshal(gnbDuID)
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
@@ -102,14 +102,14 @@ func Test_perEncodingGnbDuIDub(t *testing.T) {
 
 	gnbDuID := createGnbDuIDub()
 
-	per, err := aper.Marshal(*gnbDuID)
+	per, err := aper.Marshal(gnbDuID)
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbDuId{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("GnbDuID PER - decoded\n%v", &result)
 	assert.Equal(t, gnbDuID.GetValue(), result.GetValue())
 }
@@ -118,7 +118,7 @@ func Test_perGnbDuIDubCompareBytes(t *testing.T) {
 
 	gnbDuID := createGnbDuIDub()
 
-	per, err := aper.Marshal(*gnbDuID)
+	per, err := aper.Marshal(gnbDuID)
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 

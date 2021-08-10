@@ -123,7 +123,7 @@ func Test_perEncodeMeasurementInfoItem(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementInfoItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfo-Item PER - decoded\n%v", &result)
 	assert.DeepEqual(t, mii.GetLabelInfoList().GetValue()[0].GetMeasLabel().GetPlmnId().GetValue(), result.GetLabelInfoList().GetValue()[0].GetMeasLabel().GetPlmnId().GetValue())
 	assert.DeepEqual(t, mii.GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSliceId().GetSD(), result.GetLabelInfoList().GetValue()[0].GetMeasLabel().GetSliceId().GetSD())
@@ -175,7 +175,7 @@ func Test_perEncodeMeasurementInfoItemNoOptional(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementInfoItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfo-Item PER - decoded\n%v", &result)
 	assert.Equal(t, mii.GetMeasType().GetMeasId().GetValue(), result.GetMeasType().GetMeasId().GetValue())
 }

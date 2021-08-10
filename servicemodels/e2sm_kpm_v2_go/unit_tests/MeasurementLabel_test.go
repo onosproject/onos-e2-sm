@@ -110,14 +110,14 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 	ml := createMeasurementLabel()
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(*ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementLabel{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementLabel PER - decoded\n%v", &result)
 	assert.DeepEqual(t, ml.GetPlmnId().GetValue(), result.GetPlmnId().GetValue())
 	assert.DeepEqual(t, ml.GetSliceId().GetSD(), result.GetSliceId().GetSD())
@@ -144,7 +144,7 @@ func Test_perMeasurementLabelCompareBytes(t *testing.T) {
 	ml := createMeasurementLabel()
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(*ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
@@ -159,14 +159,14 @@ func Test_perEncodeMeasurementLabelXcldSomeOptnl(t *testing.T) {
 	ml := createMeasurementLabelXcldSomeOptnl()
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(*ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementLabel{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementLabel PER - decoded\n%v", &result)
 	assert.DeepEqual(t, ml.GetPlmnId().GetValue(), result.GetPlmnId().GetValue())
 	assert.DeepEqual(t, ml.GetSliceId().GetSD(), result.GetSliceId().GetSD())
@@ -188,7 +188,7 @@ func Test_perMeasurementLabelXcldSomeOptnlCompareBytes(t *testing.T) {
 	ml := createMeasurementLabelXcldSomeOptnl()
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(*ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 

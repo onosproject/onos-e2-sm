@@ -26,14 +26,14 @@ func Test_perEncodingGnbCuUpID(t *testing.T) {
 
 	gnbCuUpID := createGnbCuUpID()
 
-	per, err := aper.Marshal(*gnbCuUpID)
+	per, err := aper.Marshal(gnbCuUpID)
 	assert.NilError(t, err)
 	t.Logf("GnbCuUpID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbCuUpId{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	//assert.Assert(t, &result != nil)
 	t.Logf("GnbCuUpID PER - decoded\n%v", result.GetValue())
 	assert.Equal(t, gnbCuUpID.GetValue(), result.GetValue())
 }
@@ -42,7 +42,7 @@ func Test_perGnbCuUpIDCompareBytes(t *testing.T) {
 
 	gnbCuUpID := createGnbCuUpID()
 
-	per, err := aper.Marshal(*gnbCuUpID)
+	per, err := aper.Marshal(gnbCuUpID)
 	assert.NilError(t, err)
 	t.Logf("GnbCuUpID PER\n%v", hex.Dump(per))
 
