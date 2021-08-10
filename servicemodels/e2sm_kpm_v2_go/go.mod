@@ -4,6 +4,8 @@ go 1.16
 
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.1.0
+	github.com/gogo/protobuf v1.3.2
+	github.com/onosproject/onos-api/go v0.7.85
 	github.com/onosproject/onos-lib-go v0.7.14
 	github.com/prometheus/common v0.4.0
 	google.golang.org/protobuf v1.26.0

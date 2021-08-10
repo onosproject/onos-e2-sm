@@ -13,7 +13,7 @@ import (
 
 func TestE2SmKpmIndicationHeader(t *testing.T) {
 	bs := asn1.BitString{
-		Value: 0x9bcd4,
+		Value: []byte{0x9b, 0xcd, 0x40},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
