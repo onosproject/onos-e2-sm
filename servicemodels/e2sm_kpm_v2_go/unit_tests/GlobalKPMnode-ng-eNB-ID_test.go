@@ -34,7 +34,11 @@ func createGlobalKpmnodeNgEnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID)
+	enbIDchoiceMacro, err := pdubuilder.CreateEnbIDchoiceMacro(&bs)
+	if err != nil {
+		return nil, err
+	}
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(enbIDchoiceMacro, plmnID, &shortMacroEnbID, &longMacroEnbID)
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +62,16 @@ func Test_perEncodingGlobalKPMnodeNgEnbID(t *testing.T) {
 	result := e2sm_kpm_v2_go.GlobalKpmnodeNgEnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalKPMnodeNgEnbID PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalKPMnodeNgEnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetPlmnId().GetValue(), result.GetGlobalNgENbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue(), result.GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetLen(), result.GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetLen())
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetValue(), result.GetGlobalNgENbId().GetShortMacroENbId().GetValue())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetLen(), result.GetGlobalNgENbId().GetShortMacroENbId().GetLen())
+	assert.DeepEqual(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetValue(), result.GetGlobalNgENbId().GetLongMacroENbId().GetValue())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetLen(), result.GetGlobalNgENbId().GetLongMacroENbId().GetLen())
+	assert.Equal(t, ngeNbID.GetNgENb().GetGNbDuId().GetValue(), result.GetGNbDuId().GetValue())
 }
 
 func Test_perGlobalKPMnodeNgEnbIDCompareBytes(t *testing.T) {

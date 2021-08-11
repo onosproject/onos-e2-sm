@@ -48,15 +48,19 @@ func Test_perEncodingRanFunctionName(t *testing.T) {
 	rfn := createRanFunctionName()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*rfn, "valueExt")
+	per, err := aper.MarshalWithParams(rfn, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("RanFunctionName PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RanfunctionName{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("RanFunctionName PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("RanFunctionName PER - decoded\n%v", &result)
+	assert.Equal(t, rfn.GetRanFunctionInstance(), result.GetRanFunctionInstance())
+	assert.Equal(t, rfn.GetRanFunctionDescription(), result.GetRanFunctionDescription())
+	assert.Equal(t, rfn.GetRanFunctionE2SmOid(), result.GetRanFunctionE2SmOid())
+	assert.Equal(t, rfn.GetRanFunctionShortName(), result.GetRanFunctionShortName())
 }
 
 func Test_perRanFunctionNameCompareBytes(t *testing.T) {
@@ -64,7 +68,7 @@ func Test_perRanFunctionNameCompareBytes(t *testing.T) {
 	rfn := createRanFunctionName()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*rfn, "valueExt")
+	per, err := aper.MarshalWithParams(rfn, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("RanFunctionName PER\n%v", hex.Dump(per))
 
@@ -79,15 +83,18 @@ func Test_perEncodingRanFunctionNameNoOptional(t *testing.T) {
 	rfn := createRanFunctionNameNoOptional()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*rfn, "valueExt")
+	per, err := aper.MarshalWithParams(rfn, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("RanFunctionName PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RanfunctionName{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("RanFunctionName PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("RanFunctionName PER - decoded\n%v", &result)
+	assert.Equal(t, rfn.GetRanFunctionDescription(), result.GetRanFunctionDescription())
+	assert.Equal(t, rfn.GetRanFunctionE2SmOid(), result.GetRanFunctionE2SmOid())
+	assert.Equal(t, rfn.GetRanFunctionShortName(), result.GetRanFunctionShortName())
 }
 
 func Test_perRanFunctionNameCompareBytesNoOptional(t *testing.T) {
@@ -95,7 +102,7 @@ func Test_perRanFunctionNameCompareBytesNoOptional(t *testing.T) {
 	rfn := createRanFunctionNameNoOptional()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*rfn, "valueExt")
+	per, err := aper.MarshalWithParams(rfn, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("RanFunctionName PER\n%v", hex.Dump(per))
 

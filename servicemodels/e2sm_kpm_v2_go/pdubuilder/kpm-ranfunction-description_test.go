@@ -5,6 +5,8 @@
 package pdubuilder
 
 import (
+	"encoding/hex"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
@@ -19,10 +21,10 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	bs := asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
-	cellIDbits := []byte{0x12, 0xF0, 0xDE, 0xBC, 0x0A, 0x00}
+	cellIDbits := []byte{0x12, 0xF0, 0xDE, 0xBC, 0xF0}
 	cellGlobalID, err := CreateCellGlobalIDNRCGI(plmnID, cellIDbits) // 36 bit
 	assert.NilError(t, err)
 	var cellObjID string = "ONF"
@@ -42,7 +44,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := CreateRicKpmnodeItem(globalKpmnodeID, cmol)
+	kpmNodeItem := CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -74,10 +76,15 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
+	newE2SmKpmPdu := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl)
 	assert.NilError(t, err)
-	if newE2SmKpmPdu != nil {
-		newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
-	}
 	assert.Assert(t, newE2SmKpmPdu != nil)
+
+	per, err := encoder.PerEncodeE2SmKpmRanFunctionDescription(newE2SmKpmPdu)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RANfunctionDescription PER is \n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RANfunctionDescription PER - decoded\n%v", result)
 }

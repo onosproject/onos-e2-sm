@@ -21,15 +21,16 @@ func Test_perEncodeUeIdentity(t *testing.T) {
 		Value: []byte("SomeUE"),
 	}
 
-	per, err := aper.Marshal(*ueIdentity)
+	per, err := aper.Marshal(ueIdentity)
 	assert.NilError(t, err)
 	t.Logf("UE-Identity PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.UeIdentity{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("UE-Identity PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("UE-Identity PER - decoded\n%v", &result)
+	assert.DeepEqual(t, ueIdentity.GetValue(), result.GetValue())
 }
 
 func Test_perUeIdentityCompareBytes(t *testing.T) {
@@ -38,7 +39,7 @@ func Test_perUeIdentityCompareBytes(t *testing.T) {
 		Value: []byte("SomeUE"),
 	}
 
-	per, err := aper.Marshal(*ueIdentity)
+	per, err := aper.Marshal(ueIdentity)
 	assert.NilError(t, err)
 	t.Logf("UE-Identity PER\n%v", hex.Dump(per))
 

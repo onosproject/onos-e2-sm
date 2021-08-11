@@ -116,15 +116,37 @@ func Test_perEncodeMeasurementCondItem(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*mci, "valueExt")
+	per, err := aper.MarshalWithParams(mci, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementCondItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementCondItem PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("MeasurementCondItem PER - decoded\n%v", &result)
+	assert.Equal(t, mci.GetMeasType().GetMeasId().GetValue(), result.GetMeasType().GetMeasId().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestValue().GetValueInt(), result.GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestValue().GetValueInt())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestType().GetAMbr().Number(), result.GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestType().GetAMbr().Number())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestExpr().Number(), result.GetMatchingCond().GetValue()[0].GetTestCondInfo().GetTestExpr().Number())
+	assert.DeepEqual(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetPlmnId().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetPlmnId().GetValue())
+	assert.DeepEqual(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetSliceId().GetSD(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetSliceId().GetSD())
+	assert.DeepEqual(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetSliceId().GetSSt(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetSliceId().GetSSt())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetFiveQi().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetFiveQi().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQFi().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQFi().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQCi().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQCi().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQCimax().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQCimax().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQCimin().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetQCimin().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetARpmax().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetARpmax().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetARpmin().GetValue(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetARpmin().GetValue())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetBitrateRange(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetBitrateRange())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetLayerMuMimo(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetLayerMuMimo())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetSUm().Number(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetSUm().Number())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetDistBinX(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetDistBinX())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetDistBinY(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetDistBinY())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetDistBinZ(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetDistBinZ())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetPreLabelOverride().Number(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetPreLabelOverride().Number())
+	assert.Equal(t, mci.GetMatchingCond().GetValue()[1].GetMeasLabel().GetStartEndInd().Number(), result.GetMatchingCond().GetValue()[1].GetMeasLabel().GetStartEndInd().Number())
 }
 
 func Test_perMeasurementCondItemCompareBytes(t *testing.T) {
@@ -133,7 +155,7 @@ func Test_perMeasurementCondItemCompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*mci, "valueExt")
+	per, err := aper.MarshalWithParams(mci, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 

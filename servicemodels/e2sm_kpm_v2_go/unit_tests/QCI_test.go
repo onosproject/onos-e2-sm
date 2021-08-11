@@ -21,15 +21,16 @@ func Test_perEncodingQci(t *testing.T) {
 		Value: 32,
 	}
 
-	per, err := aper.Marshal(*qci)
+	per, err := aper.Marshal(qci)
 	assert.NilError(t, err)
 	t.Logf("QCI PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Qci{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("QCI PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("QCI PER - decoded\n%v", &result)
+	assert.Equal(t, qci.GetValue(), result.GetValue())
 }
 
 func Test_perQciCompareBytes(t *testing.T) {
@@ -38,7 +39,7 @@ func Test_perQciCompareBytes(t *testing.T) {
 		Value: 32,
 	}
 
-	per, err := aper.Marshal(*qci)
+	per, err := aper.Marshal(qci)
 	assert.NilError(t, err)
 	t.Logf("QCI PER\n%v", hex.Dump(per))
 

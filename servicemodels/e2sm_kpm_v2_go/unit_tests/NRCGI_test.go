@@ -34,22 +34,25 @@ func Test_perEncodingNrCGI(t *testing.T) {
 
 	nrCgi := createNrcgi()
 
-	per, err := aper.MarshalWithParams(*nrCgi, "valueExt")
+	per, err := aper.MarshalWithParams(nrCgi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("NrCGI PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Nrcgi{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("NrCGI PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("NrCGI PER - decoded\n%v", &result)
+	assert.DeepEqual(t, nrCgi.GetPLmnIdentity().GetValue(), result.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, nrCgi.GetNRcellIdentity().GetValue().GetValue(), result.GetNRcellIdentity().GetValue().GetValue())
+	assert.Equal(t, nrCgi.GetNRcellIdentity().GetValue().GetLen(), result.GetNRcellIdentity().GetValue().GetLen())
 }
 
 func Test_perNrCGICompareBytes(t *testing.T) {
 
 	nrCgi := createNrcgi()
 
-	per, err := aper.MarshalWithParams(*nrCgi, "valueExt")
+	per, err := aper.MarshalWithParams(nrCgi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("NrCGI PER\n%v", hex.Dump(per))
 

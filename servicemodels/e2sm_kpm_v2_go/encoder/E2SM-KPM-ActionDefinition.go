@@ -11,30 +11,30 @@ import (
 	"github.com/prometheus/common/log"
 )
 
-func PerEncodeE2SmKpmIndicationHeader(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader) ([]byte, error) {
+func PerEncodeE2SmKpmActionDefinition(ad *e2sm_kpm_v2_go.E2SmKpmActionDefinition) ([]byte, error) {
 
-	log.Debugf("Obtained E2SM-KPM-IndicationHeader message is\n%v", ih)
+	log.Debugf("Obtained E2SM-KPM-ActionDefinition message is\n%v", ad)
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ih, "valueExt")
+	per, err := aper.MarshalWithParams(ad, "valueExt")
 	if err != nil {
 		return nil, err
 	}
-	log.Debugf("Encoded E2SM-KPM-IndicationHeader PER bytes are\n%v", hex.Dump(per))
+	log.Debugf("Encoded E2SM-KPM-ActionDefinition PER bytes are\n%v", hex.Dump(per))
 
 	return per, nil
 }
 
-func PerDecodeE2SmKpmIndicationHeader(per []byte) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+func PerDecodeE2SmKpmActionDefinition(per []byte) (*e2sm_kpm_v2_go.E2SmKpmActionDefinition, error) {
 
-	log.Debugf("Obtained E2SM-KPM-IndicationHeader PER bytes are\n%v", hex.Dump(per))
+	log.Debugf("Obtained E2SM-KPM-ActionDefinition PER bytes are\n%v", hex.Dump(per))
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	result := e2sm_kpm_v2_go.E2SmKpmIndicationHeader{}
+	result := e2sm_kpm_v2_go.E2SmKpmActionDefinition{}
 	err := aper.UnmarshalWithParams(per, &result, "valueExt")
 	if err != nil {
 		return nil, err
 	}
 
-	log.Debugf("Decoded E2SM-KPM-IndicationHeader from PER is\n%v", &result)
+	log.Debugf("Decoded E2SM-KPM-ActionDefinition from PER is\n%v", &result)
 
 	return &result, nil
 }

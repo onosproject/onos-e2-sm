@@ -41,8 +41,11 @@ func Test_perEncodingRicEventTriggerStyleItem(t *testing.T) {
 	result := e2sm_kpm_v2_go.RicEventTriggerStyleItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("RIC-EventTriggerStyle-Item - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("RIC-EventTriggerStyle-Item - decoded\n%v", &result)
+	assert.Equal(t, item.GetRicEventTriggerStyleType().GetValue(), result.GetRicEventTriggerStyleType().GetValue())
+	assert.Equal(t, item.GetRicEventTriggerStyleName().GetValue(), result.GetRicEventTriggerStyleName().GetValue())
+	assert.Equal(t, item.GetRicEventTriggerFormatType().GetValue(), result.GetRicEventTriggerFormatType().GetValue())
 }
 
 func Test_perRicEventTriggerStyleItemCompareBytes(t *testing.T) {

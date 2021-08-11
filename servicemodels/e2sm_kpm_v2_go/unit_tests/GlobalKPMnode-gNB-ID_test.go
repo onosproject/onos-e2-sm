@@ -15,11 +15,11 @@ import (
 	"testing"
 )
 
-var refPerGlobalKPMnodeGnbID = "00000000  60 21 22 23 00 e4 cd 98  00 1f 00 2a              |`!\"#.......*|"
+var refPerGlobalKPMnodeGnbID = "00000000  60 21 22 23 00 d4 bc 08  00 1f 00 2a              |`!\"#.......*|"
 
 func createGlobalKpmnodeGnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 	bs := asn1.BitString{
-		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
+		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -53,8 +53,13 @@ func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 	result := e2sm_kpm_v2_go.GlobalKpmnodeGnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalKPMnodeGnbID PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalKPMnodeGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gNbID.GetGNb().GetGlobalGNbId().GetPlmnId().GetValue(), result.GetGlobalGNbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, gNbID.GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue(), result.GetGlobalGNbId().GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, gNbID.GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen(), result.GetGlobalGNbId().GetGnbId().GetGnbId().GetLen())
+	assert.Equal(t, gNbID.GetGNb().GetGNbCuUpId().GetValue(), result.GetGNbCuUpId().GetValue())
+	assert.Equal(t, gNbID.GetGNb().GetGNbDuId().GetValue(), result.GetGNbDuId().GetValue())
 }
 
 func Test_perGlobalKpmnodeGnbIDCompareBytes(t *testing.T) {

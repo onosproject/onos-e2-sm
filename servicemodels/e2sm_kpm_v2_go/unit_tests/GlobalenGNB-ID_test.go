@@ -74,15 +74,18 @@ func Test_perEncodingGlobalenGnbID(t *testing.T) {
 	gnbIDc := createGlobalenGnbID()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalenGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalenGnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalenGnbID PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalenGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetPLmnIdentity().GetValue(), result.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, gnbIDc.GetGNbId().GetGNbId().GetValue(), result.GetGNbId().GetGNbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGNbId().GetGNbId().GetLen(), result.GetGNbId().GetGNbId().GetLen())
 }
 
 func Test_perGlobalenGnbIDCompareBytes(t *testing.T) {
@@ -90,7 +93,7 @@ func Test_perGlobalenGnbIDCompareBytes(t *testing.T) {
 	gnbIDc := createGlobalenGnbID()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalenGnbID PER\n%v", hex.Dump(per))
 
@@ -105,15 +108,18 @@ func Test_perEncodingGlobalenGnbIDlen31(t *testing.T) {
 	gnbIDc := createGlobalenGnbIDlen31()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalenGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalenGnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalenGnbID PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalenGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetPLmnIdentity().GetValue(), result.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, gnbIDc.GetGNbId().GetGNbId().GetValue(), result.GetGNbId().GetGNbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGNbId().GetGNbId().GetLen(), result.GetGNbId().GetGNbId().GetLen())
 }
 
 func Test_perGlobalenGnbIDlen31CompareBytes(t *testing.T) {
@@ -121,7 +127,7 @@ func Test_perGlobalenGnbIDlen31CompareBytes(t *testing.T) {
 	gnbIDc := createGlobalenGnbIDlen31()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalenGnbID PER\n%v", hex.Dump(per))
 
@@ -136,15 +142,18 @@ func Test_perEncodingGlobalenGnbIDlen32(t *testing.T) {
 	gnbIDc := createGlobalenGnbIDlen32()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalenGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalenGnbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalenGnbID PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalenGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetPLmnIdentity().GetValue(), result.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, gnbIDc.GetGNbId().GetGNbId().GetValue(), result.GetGNbId().GetGNbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGNbId().GetGNbId().GetLen(), result.GetGNbId().GetGNbId().GetLen())
 }
 
 func Test_perGlobalenGnbIDlen32CompareBytes(t *testing.T) {
@@ -152,7 +161,7 @@ func Test_perGlobalenGnbIDlen32CompareBytes(t *testing.T) {
 	gnbIDc := createGlobalenGnbIDlen32()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalenGnbID PER\n%v", hex.Dump(per))
 

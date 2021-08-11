@@ -56,15 +56,18 @@ func Test_perEncodingGlobalEnbID1(t *testing.T) {
 	globalEnbID1 := createGlobalEnbID1()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per1, err := aper.MarshalWithParams(*globalEnbID1, "valueExt")
+	per1, err := aper.MarshalWithParams(globalEnbID1, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Macro) PER\n%v", hex.Dump(per1))
 
 	result1 := e2sm_kpm_v2_go.GlobalEnbId{}
 	err = aper.UnmarshalWithParams(per1, &result1, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result1 != nil)
-	t.Logf("GlobalEnbID (Macro) PER - decoded\n%v", result1)
+	//assert.Assert(t, &result1 != nil)
+	t.Logf("GlobalEnbID (Macro) PER - decoded\n%v", &result1)
+	assert.DeepEqual(t, globalEnbID1.GetPLmnIdentity().GetValue(), result1.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, globalEnbID1.GetENbId().GetMacroENbId().GetValue(), result1.GetENbId().GetMacroENbId().GetValue())
+	assert.Equal(t, globalEnbID1.GetENbId().GetMacroENbId().GetLen(), result1.GetENbId().GetMacroENbId().GetLen())
 }
 
 func Test_perGlobalEnbID1CompareBytes(t *testing.T) {
@@ -72,7 +75,7 @@ func Test_perGlobalEnbID1CompareBytes(t *testing.T) {
 	globalEnbID1 := createGlobalEnbID1()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per1, err := aper.MarshalWithParams(*globalEnbID1, "valueExt")
+	per1, err := aper.MarshalWithParams(globalEnbID1, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Macro) PER\n%v", hex.Dump(per1))
 
@@ -86,22 +89,25 @@ func Test_perEncodingGlobalEnbID2(t *testing.T) {
 	globalEnbID2 := createGlobalEnbID2()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per2, err := aper.MarshalWithParams(*globalEnbID2, "valueExt")
+	per2, err := aper.MarshalWithParams(globalEnbID2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per2))
 
 	result2 := e2sm_kpm_v2_go.GlobalEnbId{}
 	err = aper.UnmarshalWithParams(per2, &result2, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result2 != nil)
-	t.Logf("GlobalEnbID (Home) PER - decoded\n%v", result2)
+	//assert.Assert(t, &result2 != nil)
+	t.Logf("GlobalEnbID (Home) PER - decoded\n%v", &result2)
+	assert.DeepEqual(t, globalEnbID2.GetPLmnIdentity().GetValue(), result2.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, globalEnbID2.GetENbId().GetHomeENbId().GetValue(), result2.GetENbId().GetHomeENbId().GetValue())
+	assert.Equal(t, globalEnbID2.GetENbId().GetHomeENbId().GetLen(), result2.GetENbId().GetHomeENbId().GetLen())
 }
 
 func Test_perGlobalEnbID2CompareBytes(t *testing.T) {
 	globalEnbID2 := createGlobalEnbID2()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per2, err := aper.MarshalWithParams(*globalEnbID2, "valueExt")
+	per2, err := aper.MarshalWithParams(globalEnbID2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per2))
 

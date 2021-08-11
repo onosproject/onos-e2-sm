@@ -46,15 +46,17 @@ func Test_perEncodingGnbIDChoice(t *testing.T) {
 	gnbIDc := createGnbIDChoice()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbIdChoice{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GnbIDchoice PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GnbIDchoice PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetValue(), result.GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetLen(), result.GetGnbId().GetLen())
 }
 
 func Test_perGnbIDChoiceCompareBytes(t *testing.T) {
@@ -62,7 +64,7 @@ func Test_perGnbIDChoiceCompareBytes(t *testing.T) {
 	gnbIDc := createGnbIDChoice()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 
@@ -77,15 +79,17 @@ func Test_perEncodingGnbIDChoiceLen30(t *testing.T) {
 	gnbIDc := createGnbIDChoiceLen30()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbIdChoice{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GnbIDchoice PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GnbIDchoice PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetValue(), result.GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetLen(), result.GetGnbId().GetLen())
 }
 
 func Test_perGnbIDChoiceLen30CompareBytes(t *testing.T) {
@@ -93,7 +97,7 @@ func Test_perGnbIDChoiceLen30CompareBytes(t *testing.T) {
 	gnbIDc := createGnbIDChoiceLen30()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 

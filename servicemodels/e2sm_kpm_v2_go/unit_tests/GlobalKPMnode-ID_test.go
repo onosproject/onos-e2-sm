@@ -139,15 +139,18 @@ func Test_perEncodingGlobalKpmNodeIDgnb(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID1()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (GNb) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalKpmnodeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalKpmnodeID (GNb) PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalKpmnodeID (GNb) PER - decoded\n%v", &result)
+	assert.DeepEqual(t, globalKpmnodeID.GetGNb().GetGlobalGNbId().GetPlmnId().GetValue(), result.GetGNb().GetGlobalGNbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, globalKpmnodeID.GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue(), result.GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen(), result.GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen())
 	assert.Equal(t, globalKpmnodeID.GetGNb().GetGNbCuUpId().GetValue(), result.GetGNb().GetGNbCuUpId().GetValue())
 	assert.Equal(t, globalKpmnodeID.GetGNb().GetGNbDuId().GetValue(), result.GetGNb().GetGNbDuId().GetValue())
 }
@@ -157,7 +160,7 @@ func Test_perGlobalKpmNodeIDgnbCompareBytes(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID1()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (GNb) PER\n%v", hex.Dump(per))
 
@@ -172,15 +175,20 @@ func Test_perEncodingGlobalKpmNodeIDenGnb(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID2()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (enGNb) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalKpmnodeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalKpmnodeID (enGNb) PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalKpmnodeID (enGNb) PER - decoded\n%v", &result)
+	assert.DeepEqual(t, globalKpmnodeID.GetEnGNb().GetGlobalGNbId().GetPLmnIdentity().GetValue(), result.GetEnGNb().GetGlobalGNbId().GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, globalKpmnodeID.GetEnGNb().GetGlobalGNbId().GetGNbId().GetGNbId().GetValue(), result.GetEnGNb().GetGlobalGNbId().GetGNbId().GetGNbId().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetEnGNb().GetGlobalGNbId().GetGNbId().GetGNbId().GetLen(), result.GetEnGNb().GetGlobalGNbId().GetGNbId().GetGNbId().GetLen())
+	assert.Equal(t, globalKpmnodeID.GetEnGNb().GetGNbCuUpId().GetValue(), result.GetEnGNb().GetGNbCuUpId().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetEnGNb().GetGNbDuId().GetValue(), result.GetEnGNb().GetGNbDuId().GetValue())
 }
 
 func Test_perGlobalKpmNodeIDenGnbCompareBytes(t *testing.T) {
@@ -188,7 +196,7 @@ func Test_perGlobalKpmNodeIDenGnbCompareBytes(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID2()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (enGNb) PER\n%v", hex.Dump(per))
 
@@ -203,15 +211,23 @@ func Test_perEncodingGlobalKpmNodeIDngEnb(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID3()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (ngENb) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalKpmnodeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalKpmnodeID (ngENb) PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalKpmnodeID (ngENb) PER - decoded\n%v", &result)
+	assert.DeepEqual(t, globalKpmnodeID.GetNgENb().GetGlobalNgENbId().GetPlmnId().GetValue(), result.GetNgENb().GetGlobalNgENbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, globalKpmnodeID.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue(), result.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetLen(), result.GetNgENb().GetGlobalNgENbId().GetEnbId().GetEnbIdMacro().GetLen())
+	assert.DeepEqual(t, globalKpmnodeID.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetValue(), result.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetLen(), result.GetNgENb().GetGlobalNgENbId().GetShortMacroENbId().GetLen())
+	assert.DeepEqual(t, globalKpmnodeID.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetValue(), result.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetLen(), result.GetNgENb().GetGlobalNgENbId().GetLongMacroENbId().GetLen())
+	assert.Equal(t, globalKpmnodeID.GetNgENb().GetGNbDuId().GetValue(), result.GetNgENb().GetGNbDuId().GetValue())
 }
 
 func Test_perGlobalKpmNodeIDngEnbCompareBytes(t *testing.T) {
@@ -219,7 +235,7 @@ func Test_perGlobalKpmNodeIDngEnbCompareBytes(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID3()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (ngENb) PER\n%v", hex.Dump(per))
 
@@ -234,15 +250,18 @@ func Test_perEncodingGlobalKpmNodeIDenb(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID4()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (ENb) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalKpmnodeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalKpmnodeID (ENb) PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalKpmnodeID (ENb) PER - decoded\n%v", &result)
+	assert.DeepEqual(t, globalKpmnodeID.GetENb().GetGlobalENbId().GetPLmnIdentity().GetValue(), result.GetENb().GetGlobalENbId().GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, globalKpmnodeID.GetENb().GetGlobalENbId().GetENbId().GetHomeENbId().GetValue(), result.GetENb().GetGlobalENbId().GetENbId().GetHomeENbId().GetValue())
+	assert.Equal(t, globalKpmnodeID.GetENb().GetGlobalENbId().GetENbId().GetHomeENbId().GetLen(), result.GetENb().GetGlobalENbId().GetENbId().GetHomeENbId().GetLen())
 }
 
 func Test_perGlobalKpmNodeIDenbCompareBytes(t *testing.T) {
@@ -250,7 +269,7 @@ func Test_perGlobalKpmNodeIDenbCompareBytes(t *testing.T) {
 	globalKpmnodeID := createGlobalKpmnodeID4()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*globalKpmnodeID, "valueExt")
+	per, err := aper.MarshalWithParams(globalKpmnodeID, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalKpmnodeID (ENb) PER\n%v", hex.Dump(per))
 

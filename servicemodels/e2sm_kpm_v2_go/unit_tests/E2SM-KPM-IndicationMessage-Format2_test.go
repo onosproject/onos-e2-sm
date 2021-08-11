@@ -13,11 +13,17 @@ import (
 	"testing"
 )
 
-var refPerIndMsgF2 = "00000000  08 30 38 00 00 40 10 6f  6e 66 00 01 1f ff f0 01  |.08..@.onf......|\n" +
-	"00000010  02 03 40 40 01 02 03 00  17 68 18 00 1e 00 01 70  |..@@.....h.....p|\n" +
-	"00000020  00 00 18 00 00 00 00 00  7a 00 01 c7 00 03 14 28  |........z......(|\n" +
-	"00000030  42 00 01 15 00 00 00 06  53 6f 6d 65 55 45 00 00  |B.......SomeUE..|\n" +
-	"00000040  40 03 00 15 20 09 80 d0  16 33 33 33 33 33 33 40  |@... ....333333@|"
+//var refPerIndMsgF2 = "00000000  68 30 38 00 00 03 31 32  33 00 14 00 00 40 10 6f  |h08...123....@.o|\n" +
+//	"00000010  6e 66 00 01 1f ff f0 21  22 23 40 40 01 02 03 00  |nf.....!\"#@@....|\n" +
+//	"00000020  17 68 18 00 1e 00 01 70  00 00 18 00 00 00 00 00  |.h.....p........|\n" +
+//	"00000030  7a 00 01 c7 00 03 14 28  42 00 01 15 00 00 00 06  |z......(B.......|\n" +
+//	"00000040  53 6f 6d 65 55 45 00 00  40 03 00 15 20 09 80 d0  |SomeUE..@... ...|\n" +
+//	"00000050  16 33 33 33 33 33 33 40                           |.333333@|"
+var refPerIndMsgF2noReal = "00000000  68 30 38 00 00 03 31 32  33 00 14 00 00 40 10 6f  |h08...123....@.o|\n" +
+	"00000010  6e 66 00 01 1f ff f0 21  22 23 40 40 01 02 03 00  |nf.....!\"#@@....|\n" +
+	"00000020  17 68 18 00 1e 00 01 70  00 00 18 00 00 00 00 00  |.h.....p........|\n" +
+	"00000030  7a 00 01 c7 00 03 14 28  42 00 01 15 00 00 00 06  |z......(B.......|\n" +
+	"00000040  53 6f 6d 65 55 45 00 00  40 02 00 15 40           |SomeUE..@...@|"
 
 func createIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat2, error) {
 
@@ -44,7 +50,7 @@ func createIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 		MatchingCondItem: &e2sm_kpm_v2_go.MatchingCondItem_MeasLabel{
 			MeasLabel: &e2sm_kpm_v2_go.MeasurementLabel{
 				PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
-					Value: []byte{0x1, 0x2, 0x3},
+					Value: []byte{0x21, 0x22, 0x23},
 				},
 				SliceId: &e2sm_kpm_v2_go.Snssai{
 					SD:  []byte{0x01, 0x02, 0x03},
@@ -145,12 +151,12 @@ func createIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	}
 	measRecord.Value = append(measRecord.Value, item1)
 
-	item2 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Real{
-			Real: 22.2,
-		},
-	}
-	measRecord.Value = append(measRecord.Value, item2)
+	//item2 := &e2sm_kpm_v2_go.MeasurementRecordItem{
+	//	MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Real{
+	//		Real: 22.2,
+	//	},
+	//}
+	//measRecord.Value = append(measRecord.Value, item2)
 
 	item3 := &e2sm_kpm_v2_go.MeasurementRecordItem{
 		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_NoValue{
@@ -196,15 +202,45 @@ func Test_perEncodingE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*imf2, "valueExt")
+	per, err := aper.MarshalWithParams(imf2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat2{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("E2SmKpmIndicationMessageFormat2 PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("E2SmKpmIndicationMessageFormat2 PER - decoded\n%v", &result)
+	assert.Equal(t, imf2.GetGranulPeriod().GetValue(), result.GetGranulPeriod().GetValue())
+	assert.Equal(t, imf2.GetSubscriptId().GetValue(), result.GetSubscriptId().GetValue())
+	assert.Equal(t, imf2.GetCellObjId().GetValue(), result.GetCellObjId().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMeasType().GetMeasName().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMeasType().GetMeasName().GetValue())
+	assert.DeepEqual(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetPlmnId().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetPlmnId().GetValue())
+	assert.DeepEqual(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetSliceId().GetSD(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetSliceId().GetSD())
+	assert.DeepEqual(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetSliceId().GetSSt(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetSliceId().GetSSt())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetFiveQi().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetFiveQi().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQFi().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQFi().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQCi().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQCi().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQCimax().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQCimax().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQCimin().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetQCimin().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetARpmax().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetARpmax().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetARpmin().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetARpmin().GetValue())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetBitrateRange(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetBitrateRange())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetLayerMuMimo(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetLayerMuMimo())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetSUm().Number(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetSUm().Number())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetDistBinX(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetDistBinX())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetDistBinY(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetDistBinY())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetDistBinZ(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetDistBinZ())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetPreLabelOverride().Number(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetPreLabelOverride().Number())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetStartEndInd().Number(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[0].GetMeasLabel().GetStartEndInd().Number())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[1].GetTestCondInfo().GetTestValue().GetValueInt(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[1].GetTestCondInfo().GetTestValue().GetValueInt())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[1].GetTestCondInfo().GetTestType().GetAMbr().Number(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[1].GetTestCondInfo().GetTestType().GetAMbr().Number())
+	assert.Equal(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[1].GetTestCondInfo().GetTestExpr().Number(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingCond().GetValue()[1].GetTestCondInfo().GetTestExpr().Number())
+	assert.DeepEqual(t, imf2.GetMeasCondUeidList().GetValue()[0].GetMatchingUeidList().GetValue()[0].GetUeId().GetValue(), result.GetMeasCondUeidList().GetValue()[0].GetMatchingUeidList().GetValue()[0].GetUeId().GetValue())
+	assert.Equal(t, imf2.GetMeasData().GetValue()[0].GetIncompleteFlag().Number(), result.GetMeasData().GetValue()[0].GetIncompleteFlag().Number())
+	assert.Equal(t, imf2.GetMeasData().GetValue()[0].GetMeasRecord().GetValue()[0].GetInteger(), result.GetMeasData().GetValue()[0].GetMeasRecord().GetValue()[0].GetInteger())
+	//assert.Equal(t, imf2.GetMeasData().GetValue()[0].GetMeasRecord().GetValue()[1].GetReal(), result.GetMeasData().GetValue()[0].GetMeasRecord().GetValue()[1].GetReal())
+	assert.Equal(t, imf2.GetMeasData().GetValue()[0].GetMeasRecord().GetValue()[1].GetNoValue(), result.GetMeasData().GetValue()[0].GetMeasRecord().GetValue()[1].GetNoValue())
 }
 
 func Test_perE2SmKpmIndicationMessageFormat2CompareBytes(t *testing.T) {
@@ -213,12 +249,12 @@ func Test_perE2SmKpmIndicationMessageFormat2CompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*imf2, "valueExt")
+	per, err := aper.MarshalWithParams(imf2, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("E2SmKpmIndicationMessageFormat2 PER\n%v", hex.Dump(per))
 
 	//Comparing with reference bytes
-	perRefBytes, err := hexlib.DumpToByte(refPerIndMsgF2)
+	perRefBytes, err := hexlib.DumpToByte(refPerIndMsgF2noReal)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
 }

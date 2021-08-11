@@ -56,15 +56,18 @@ func Test_perEncodingGlobalGnbID(t *testing.T) {
 	gnbIDc := createGlobalgNbID()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalgNbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalGnbID PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetPlmnId().GetValue(), result.GetPlmnId().GetValue())
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetGnbId().GetValue(), result.GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetGnbId().GetLen(), result.GetGnbId().GetGnbId().GetLen())
 }
 
 func Test_perGlobalGnbIDCompareBytes(t *testing.T) {
@@ -72,7 +75,7 @@ func Test_perGlobalGnbIDCompareBytes(t *testing.T) {
 	gnbIDc := createGlobalgNbID()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
@@ -87,15 +90,18 @@ func Test_perEncodingGlobalGnbIDlen31(t *testing.T) {
 	gnbIDc := createGlobalgNbIDlen31()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalgNbId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("GlobalGnbID PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("GlobalGnbID PER - decoded\n%v", &result)
+	assert.DeepEqual(t, gnbIDc.GetPlmnId().GetValue(), result.GetPlmnId().GetValue())
+	assert.DeepEqual(t, gnbIDc.GetGnbId().GetGnbId().GetValue(), result.GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, gnbIDc.GetGnbId().GetGnbId().GetLen(), result.GetGnbId().GetGnbId().GetLen())
 }
 
 func Test_perGlobalGnbIDlen31CompareBytes(t *testing.T) {
@@ -103,7 +109,7 @@ func Test_perGlobalGnbIDlen31CompareBytes(t *testing.T) {
 	gnbIDc := createGlobalgNbIDlen31()
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*gnbIDc, "valueExt")
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 

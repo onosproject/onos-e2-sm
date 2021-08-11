@@ -44,10 +44,12 @@ func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHe
 	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
 		Value: gnbDuID,
 	}
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp)
 	if err != nil {
 		return nil, err
 	}
+	newE2SmKpmPdu.SetFileFormatVersion(fileFormatVersion).SetSenderName(senderName).SetSenderType(senderType).SetVendorName(vendorName).SetGlobalKPMnodeID(globalKpmNodeID)
+
 	return newE2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1(), nil
 }
 
@@ -64,8 +66,18 @@ func Test_perEncodingE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 	result := e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER - decoded\n%v", &result)
+	assert.Equal(t, ihf1.GetFileFormatversion(), result.GetFileFormatversion())
+	assert.Equal(t, ihf1.GetKpmNodeId().GetGNb().GetGNbDuId().GetValue(), result.GetKpmNodeId().GetGNb().GetGNbDuId().GetValue())
+	assert.Equal(t, ihf1.GetKpmNodeId().GetGNb().GetGNbCuUpId().GetValue(), result.GetKpmNodeId().GetGNb().GetGNbCuUpId().GetValue())
+	assert.DeepEqual(t, ihf1.GetKpmNodeId().GetGNb().GetGlobalGNbId().GetPlmnId().GetValue(), result.GetKpmNodeId().GetGNb().GetGlobalGNbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, ihf1.GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue(), result.GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, ihf1.GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen(), result.GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen())
+	assert.Equal(t, ihf1.GetSenderName(), result.GetSenderName())
+	assert.Equal(t, ihf1.GetSenderType(), result.GetSenderType())
+	assert.DeepEqual(t, ihf1.GetColletStartTime().GetValue(), result.GetColletStartTime().GetValue())
+	assert.Equal(t, ihf1.GetVendorName(), result.GetVendorName())
 }
 
 func Test_perE2SmKpmIndicationHeaderFormat1CompareBytes(t *testing.T) {

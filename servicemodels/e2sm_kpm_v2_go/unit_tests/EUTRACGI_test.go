@@ -35,22 +35,25 @@ func Test_perEncodingEutraCGI(t *testing.T) {
 
 	eCgi := createEutracgi()
 
-	per, err := aper.MarshalWithParams(*eCgi, "valueExt")
+	per, err := aper.MarshalWithParams(eCgi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("EUTRACGI PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Eutracgi{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("EUTRACGI PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("EUTRACGI PER - decoded\n%v", &result)
+	assert.DeepEqual(t, eCgi.GetPLmnIdentity().GetValue(), result.GetPLmnIdentity().GetValue())
+	assert.DeepEqual(t, eCgi.GetEUtracellIdentity().GetValue().GetValue(), result.GetEUtracellIdentity().GetValue().GetValue())
+	assert.Equal(t, eCgi.GetEUtracellIdentity().GetValue().GetLen(), result.GetEUtracellIdentity().GetValue().GetLen())
 }
 
 func Test_perEutraCGICompareBytes(t *testing.T) {
 
 	eCgi := createEutracgi()
 
-	per, err := aper.MarshalWithParams(*eCgi, "valueExt")
+	per, err := aper.MarshalWithParams(eCgi, "valueExt")
 	assert.NilError(t, err)
 	t.Logf("EUTRACGI PER\n%v", hex.Dump(per))
 

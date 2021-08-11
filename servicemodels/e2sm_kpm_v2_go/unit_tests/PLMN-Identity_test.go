@@ -17,7 +17,7 @@ var refPerPlmnID = "00000000  21 22 23                                          
 
 func Test_perEncodingPlmnID(t *testing.T) {
 
-	plmnID := e2sm_kpm_v2_go.PlmnIdentity{
+	plmnID := &e2sm_kpm_v2_go.PlmnIdentity{
 		Value: []byte{0x21, 0x22, 0x23},
 	}
 
@@ -28,13 +28,14 @@ func Test_perEncodingPlmnID(t *testing.T) {
 	result := e2sm_kpm_v2_go.PlmnIdentity{}
 	err = aper.Unmarshal(per, &result)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("PLMN-Identity PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("PLMN-Identity PER - decoded\n%v", &result)
+	assert.DeepEqual(t, plmnID.GetValue(), result.GetValue())
 }
 
 func Test_perPlmnIDCompareBytes(t *testing.T) {
 
-	plmnID := e2sm_kpm_v2_go.PlmnIdentity{
+	plmnID := &e2sm_kpm_v2_go.PlmnIdentity{
 		Value: []byte{0x21, 0x22, 0x23},
 	}
 

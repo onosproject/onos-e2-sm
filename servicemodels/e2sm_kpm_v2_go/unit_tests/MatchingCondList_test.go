@@ -32,7 +32,7 @@ func createMatchingCondList() (*e2sm_kpm_v2_go.MatchingCondList, error) {
 		MatchingCondItem: &e2sm_kpm_v2_go.MatchingCondItem_MeasLabel{
 			MeasLabel: &e2sm_kpm_v2_go.MeasurementLabel{
 				PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
-					Value: []byte{0x1, 0x2, 0x3},
+					Value: []byte{0x01, 0x02, 0x03},
 				},
 				SliceId: &e2sm_kpm_v2_go.Snssai{
 					SD:  []byte{0x01, 0x02, 0x03},
@@ -115,15 +115,36 @@ func Test_perEncodeMatchingCondList(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*mcl, "")
+	per, err := aper.MarshalWithParams(mcl, "")
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MatchingCondList{}
 	err = aper.UnmarshalWithParams(per, &result, "")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("MatchingCondList PER - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("MatchingCondList PER - decoded\n%v", &result)
+	assert.DeepEqual(t, mcl.GetValue()[0].GetMeasLabel().GetPlmnId().GetValue(), result.GetValue()[0].GetMeasLabel().GetPlmnId().GetValue())
+	assert.DeepEqual(t, mcl.GetValue()[0].GetMeasLabel().GetSliceId().GetSD(), result.GetValue()[0].GetMeasLabel().GetSliceId().GetSD())
+	assert.DeepEqual(t, mcl.GetValue()[0].GetMeasLabel().GetSliceId().GetSSt(), result.GetValue()[0].GetMeasLabel().GetSliceId().GetSSt())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetFiveQi().GetValue(), result.GetValue()[0].GetMeasLabel().GetFiveQi().GetValue())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetQFi().GetValue(), result.GetValue()[0].GetMeasLabel().GetQFi().GetValue())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetQCi().GetValue(), result.GetValue()[0].GetMeasLabel().GetQCi().GetValue())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetQCimax().GetValue(), result.GetValue()[0].GetMeasLabel().GetQCimax().GetValue())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetQCimin().GetValue(), result.GetValue()[0].GetMeasLabel().GetQCimin().GetValue())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetARpmax().GetValue(), result.GetValue()[0].GetMeasLabel().GetARpmax().GetValue())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetARpmin().GetValue(), result.GetValue()[0].GetMeasLabel().GetARpmin().GetValue())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetBitrateRange(), result.GetValue()[0].GetMeasLabel().GetBitrateRange())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetLayerMuMimo(), result.GetValue()[0].GetMeasLabel().GetLayerMuMimo())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetSUm().Number(), result.GetValue()[0].GetMeasLabel().GetSUm().Number())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetDistBinX(), result.GetValue()[0].GetMeasLabel().GetDistBinX())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetDistBinY(), result.GetValue()[0].GetMeasLabel().GetDistBinY())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetDistBinZ(), result.GetValue()[0].GetMeasLabel().GetDistBinZ())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetPreLabelOverride().Number(), result.GetValue()[0].GetMeasLabel().GetPreLabelOverride().Number())
+	assert.Equal(t, mcl.GetValue()[0].GetMeasLabel().GetStartEndInd().Number(), result.GetValue()[0].GetMeasLabel().GetStartEndInd().Number())
+	assert.Equal(t, mcl.GetValue()[1].GetTestCondInfo().GetTestValue().GetValueInt(), result.GetValue()[1].GetTestCondInfo().GetTestValue().GetValueInt())
+	assert.Equal(t, mcl.GetValue()[1].GetTestCondInfo().GetTestType().GetAMbr().Number(), result.GetValue()[1].GetTestCondInfo().GetTestType().GetAMbr().Number())
+	assert.Equal(t, mcl.GetValue()[1].GetTestCondInfo().GetTestExpr().Number(), result.GetValue()[1].GetTestCondInfo().GetTestExpr().Number())
 }
 
 func Test_perMatchingCondListCompareBytes(t *testing.T) {
@@ -132,7 +153,7 @@ func Test_perMatchingCondListCompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(*mcl, "")
+	per, err := aper.MarshalWithParams(mcl, "")
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem PER\n%v", hex.Dump(per))
 

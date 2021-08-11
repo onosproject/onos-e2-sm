@@ -38,8 +38,9 @@ func Test_perEncodingMeasurementType1(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementType{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementType (Name) - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("MeasurementType (Name) - decoded\n%v", &result)
+	assert.Equal(t, mt1.GetMeasName().GetValue(), result.GetMeasName().GetValue())
 }
 
 func Test_perMeasurementType1CompareBytes(t *testing.T) {
@@ -71,8 +72,9 @@ func Test_perEncodingMeasurementType2(t *testing.T) {
 	result := e2sm_kpm_v2_go.MeasurementType{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt")
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
-	t.Logf("MeasurementType (ID) - decoded\n%v", result)
+	//assert.Assert(t, &result != nil)
+	t.Logf("MeasurementType (ID) - decoded\n%v", &result)
+	assert.Equal(t, mt2.GetMeasId().GetValue(), result.GetMeasId().GetValue())
 }
 
 func Test_perMeasurementType2CompareBytes(t *testing.T) {

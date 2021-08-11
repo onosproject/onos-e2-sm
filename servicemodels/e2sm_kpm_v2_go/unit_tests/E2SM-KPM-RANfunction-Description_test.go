@@ -6,6 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
+	"fmt"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
@@ -31,7 +32,8 @@ var refPerE2SmKpmRanFunctionDescriptionNodeListOnly = "00000000  44 04 6f 6e 66 
 
 var refPerE2SmKpmRanFunctionDescriptionEventListOnly = "00000000  24 04 6f 6e 66 00 00 05  6f 69 64 31 32 33 07 00  |$.onf...oid123..|\n" +
 	"00000010  73 6f 6d 65 44 65 73 63  72 69 70 74 69 6f 6e 00  |someDescription.|\n" +
-	"00000020  15 00 0b 01 00 6f 6e 66  00 0f                    |.....onf..|"
+	"00000020  15 00 0b 0c 00 53 6f 6d  65 52 65 61 6c 6c 79 43  |.....SomeReallyC|\n" +
+	"00000030  6f 6f 6c 44 65 73 63 72  69 70 74 69 6f 6e 00 0f  |oolDescription..|"
 
 var refPerE2SmKpmRanFunctionDescriptionReportListOnly = "00000000  14 04 6f 6e 66 00 00 05  6f 69 64 31 32 33 07 00  |..onf...oid123..|\n" +
 	"00000010  73 6f 6d 65 44 65 73 63  72 69 70 74 69 6f 6e 00  |someDescription.|\n" +
@@ -79,7 +81,7 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -111,12 +113,8 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
-	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
-	if err != nil {
-		return nil, err
-	}
-	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl).SetRicEventTriggerStyleList(retsl)
+	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
 }
@@ -151,12 +149,8 @@ func createE2SmKpmRanFunctionDescriptionReportList() (*e2sm_kpm_v2_go.E2SmKpmRan
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, nil, nil, rrsl)
-	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
-	if err != nil {
-		return nil, err
-	}
-	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicReportStyleList(rrsl)
+	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
 }
@@ -169,19 +163,15 @@ func createE2SmKpmRanFunctionDescriptionEventList() (*e2sm_kpm_v2_go.E2SmKpmRanf
 	var rfi int32 = 21
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "onf"
+	var ricStyleName string = "SomeReallyCoolDescription"
 	var ricFormatType int32 = 15
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
 	retsl := make([]*e2sm_kpm_v2_go.RicEventTriggerStyleItem, 0)
 	retsl = append(retsl, retsi)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, nil, retsl, nil)
-	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
-	if err != nil {
-		return nil, err
-	}
-	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl)
+	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
 }
@@ -223,17 +213,13 @@ func createE2SmKpmRanFunctionDescriptionNodeList() (*e2sm_kpm_v2_go.E2SmKpmRanfu
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, nil, nil)
-	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
-	if err != nil {
-		return nil, err
-	}
-	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl)
+	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
 }
@@ -244,11 +230,8 @@ func createE2SmKpmRanFunctionDescriptionMndtOnly() (*e2sm_kpm_v2_go.E2SmKpmRanfu
 	var rfE2SMoid string = "oid123"
 	var rfd string = "someDescription"
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, nil, nil, nil)
-	if err != nil {
-		return nil, err
-	}
-	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
 }
@@ -264,7 +247,7 @@ func Test_perEncodingE2SmKpmRanFunctionDescription(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
@@ -281,6 +264,11 @@ func Test_perE2SmKpmRanFunctionDescriptionCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionFull)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perE2SmKpmRanFunctionDescriptionNodeListCompareBytes(t *testing.T) {
@@ -296,6 +284,11 @@ func Test_perE2SmKpmRanFunctionDescriptionNodeListCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionNodeListOnly)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perE2SmKpmRanFunctionDescriptionEventListCompareBytes(t *testing.T) {
@@ -311,6 +304,11 @@ func Test_perE2SmKpmRanFunctionDescriptionEventListCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionEventListOnly)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perE2SmKpmRanFunctionDescriptionReportListCompareBytes(t *testing.T) {
@@ -326,6 +324,11 @@ func Test_perE2SmKpmRanFunctionDescriptionReportListCompareBytes(t *testing.T) {
 	perRefBytes, err := hexlib.DumpToByte(refPerE2SmKpmRanFunctionDescriptionReportListOnly)
 	assert.NilError(t, err)
 	assert.DeepEqual(t, per, perRefBytes)
+
+	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-KPM-RANfunctionDescription PER - decoded\n%v", result)
 }
 
 func Test_perEncodingE2SmKpmRanFunctionDescriptionMndtOnly(t *testing.T) {
@@ -339,7 +342,7 @@ func Test_perEncodingE2SmKpmRanFunctionDescriptionMndtOnly(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription (mandatory part only) PER - decoded\n%v", result)
 }
 
@@ -387,6 +390,6 @@ func Test_perDecodeRadysisBytes(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(radisysBytesRanFunctionDefinition)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-RANfunctionDescription (Radisys) PER - decoded\n%v", result)
 }

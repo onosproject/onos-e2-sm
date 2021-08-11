@@ -45,10 +45,11 @@ func createE2SmKpmIndicationHeader() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, e
 		Value: gnbDuID,
 	}
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp)
 	if err != nil {
 		return nil, err
 	}
+	newE2SmKpmPdu.SetFileFormatVersion(fileFormatVersion).SetSenderName(senderName).SetSenderType(senderType).SetVendorName(vendorName).SetGlobalKPMnodeID(globalKpmNodeID)
 
 	return newE2SmKpmPdu, nil
 }
@@ -64,8 +65,18 @@ func Test_perEncodingE2SmKpmIndicationHeader(t *testing.T) {
 
 	result, err := encoder.PerDecodeE2SmKpmIndicationHeader(per)
 	assert.NilError(t, err)
-	assert.Assert(t, &result != nil)
+	assert.Assert(t, result != nil)
 	t.Logf("E2SM-KPM-IndicationHeader PER - decoded\n%v", result)
+	assert.Equal(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetFileFormatversion(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetFileFormatversion())
+	assert.Equal(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGNbDuId().GetValue(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGNbDuId().GetValue())
+	assert.Equal(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGNbCuUpId().GetValue(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGNbCuUpId().GetValue())
+	assert.DeepEqual(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGlobalGNbId().GetPlmnId().GetValue(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGlobalGNbId().GetPlmnId().GetValue())
+	assert.DeepEqual(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetValue())
+	assert.Equal(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetKpmNodeId().GetGNb().GetGlobalGNbId().GetGnbId().GetGnbId().GetLen())
+	assert.Equal(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetSenderName(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetSenderName())
+	assert.Equal(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetSenderType(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetSenderType())
+	assert.DeepEqual(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetColletStartTime().GetValue(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetColletStartTime().GetValue())
+	assert.Equal(t, ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetVendorName(), result.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().GetVendorName())
 }
 
 func Test_perE2SmKpmIndicationHeaderCompareBytes(t *testing.T) {
