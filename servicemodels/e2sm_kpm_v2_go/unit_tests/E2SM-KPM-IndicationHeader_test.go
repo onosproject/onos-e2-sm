@@ -45,7 +45,27 @@ func createE2SmKpmIndicationHeader() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, e
 		Value: gnbDuID,
 	}
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetFileFormatVersion(newE2SmKpmPdu, fileFormatVersion)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetSenderName(newE2SmKpmPdu, senderName)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetSenderType(newE2SmKpmPdu, senderType)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetVendorName(newE2SmKpmPdu, vendorName)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetGlobalKPMnodeID(newE2SmKpmPdu, globalKpmNodeID)
 	if err != nil {
 		return nil, err
 	}

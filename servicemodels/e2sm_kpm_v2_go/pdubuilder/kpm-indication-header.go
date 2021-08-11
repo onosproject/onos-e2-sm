@@ -9,8 +9,7 @@ import (
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 )
 
-func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion *string, senderName *string, senderType *string,
-	vendorName *string, globalKpmNodeID *e2sm_kpm_v2_go.GlobalKpmnodeId) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+func CreateE2SmKpmIndicationHeader(timeStamp []byte) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
 
 	if len(timeStamp) != 4 {
 		return nil, fmt.Errorf("TimeStamp should be 4 chars")
@@ -28,37 +27,70 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte, fileFormatVersion *string, 
 		},
 	}
 
-	// optional instance
-	if fileFormatVersion != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().FileFormatversion = fileFormatVersion
-	}
-	// optional instance
-	if senderName != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderName = senderName
-	}
-	// optional instance
-	if senderType != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderType = senderType
-	}
-	// optional instance
-	if vendorName != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().VendorName = vendorName
-	}
-	// optional instance
-	if globalKpmNodeID != nil {
-		e2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().KpmNodeId = globalKpmNodeID
-	}
-
 	//if err := e2SmKpmPdu.Validate(); err != nil {
 	//	return nil, fmt.Errorf("error validating E2SmKpmPDU %s", err.Error())
 	//}
 	return &e2SmKpmPdu, nil
 }
 
+func SetFileFormatVersion(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, ffv string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
+	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
+		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().FileFormatversion = &ffv
+	default:
+		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
+	}
+	return ih, nil
+}
+
+func SetSenderName(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, sn string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
+	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
+		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderName = &sn
+	default:
+		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
+	}
+	return ih, nil
+}
+
+func SetSenderType(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, st string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
+	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
+		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderType = &st
+	default:
+		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
+	}
+	return ih, nil
+}
+
+func SetVendorName(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, vn string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
+	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
+		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().VendorName = &vn
+	default:
+		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
+	}
+	return ih, nil
+}
+
+func SetGlobalKPMnodeID(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, gknID *e2sm_kpm_v2_go.GlobalKpmnodeId) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
+	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
+		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().KpmNodeId = gknID
+	default:
+		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
+	}
+	return ih, nil
+}
+
 func CreateGlobalKpmnodeIDgNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
+	}
+
+	if bs.GetLen() < 22 && bs.GetLen() > 32 {
+		return nil, fmt.Errorf("expecting GNbID length in range 22 to 32 bits, got %d", bs.GetLen())
 	}
 
 	return &e2sm_kpm_v2_go.GlobalKpmnodeId{
@@ -85,6 +117,10 @@ func CreateGlobalKpmnodeIDenGNbID(bsValue []byte, bsLen uint32, plmnID []byte) (
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
 	}
 
+	if bsLen < 22 && bsLen > 32 {
+		return nil, fmt.Errorf("expecting GNbID length in range 22 to 32 bits, got %d", bsLen)
+	}
+
 	return &e2sm_kpm_v2_go.GlobalKpmnodeId{
 		GlobalKpmnodeId: &e2sm_kpm_v2_go.GlobalKpmnodeId_EnGNb{
 			EnGNb: &e2sm_kpm_v2_go.GlobalKpmnodeEnGnbId{
@@ -106,7 +142,7 @@ func CreateGlobalKpmnodeIDenGNbID(bsValue []byte, bsLen uint32, plmnID []byte) (
 	}, nil
 }
 
-func CreateGlobalKpmnodeIDngENbID(bs *asn1.BitString, plmnID []byte, shortMacroEnbID *asn1.BitString,
+func CreateGlobalKpmnodeIDngENbID(enbID *e2sm_kpm_v2_go.EnbIdChoice, plmnID []byte, shortMacroEnbID *asn1.BitString,
 	longMacroEnbID *asn1.BitString) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
@@ -117,11 +153,7 @@ func CreateGlobalKpmnodeIDngENbID(bs *asn1.BitString, plmnID []byte, shortMacroE
 		GlobalKpmnodeId: &e2sm_kpm_v2_go.GlobalKpmnodeId_NgENb{
 			NgENb: &e2sm_kpm_v2_go.GlobalKpmnodeNgEnbId{
 				GlobalNgENbId: &e2sm_kpm_v2_go.GlobalngeNbId{
-					EnbId: &e2sm_kpm_v2_go.EnbIdChoice{
-						EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdMacro{
-							EnbIdMacro: bs,
-						},
-					},
+					EnbId: enbID,
 					PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
 						Value: plmnID,
 					},
@@ -133,7 +165,52 @@ func CreateGlobalKpmnodeIDngENbID(bs *asn1.BitString, plmnID []byte, shortMacroE
 	}, nil
 }
 
-func CreateGlobalKpmnodeIDeNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
+func CreateEnbIDchoiceMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice, error) {
+
+	if len(bs.GetValue()) != 3 {
+		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+	}
+	if bs.GetValue()[2]&0x0f > 0 {
+		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+	}
+	return &e2sm_kpm_v2_go.EnbIdChoice{
+		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdMacro{
+			EnbIdMacro: bs,
+		},
+	}, nil
+}
+
+func CreateEnbIDchoiceShortMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice, error) {
+
+	if len(bs.GetValue()) != 3 {
+		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+	}
+	if bs.GetValue()[2]&0x3f > 0 {
+		return nil, fmt.Errorf("expected last 6 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+	}
+	return &e2sm_kpm_v2_go.EnbIdChoice{
+		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdShortmacro{
+			EnbIdShortmacro: bs,
+		},
+	}, nil
+}
+
+func CreateEnbIDchoiceLongMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice, error) {
+
+	if len(bs.GetValue()) != 3 {
+		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+	}
+	if bs.GetValue()[2]&0x07 > 0 {
+		return nil, fmt.Errorf("expected last 3 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+	}
+	return &e2sm_kpm_v2_go.EnbIdChoice{
+		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdLongmacro{
+			EnbIdLongmacro: bs,
+		},
+	}, nil
+}
+
+func CreateGlobalKpmnodeIDeNBID(enbID *e2sm_kpm_v2_go.EnbId, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
@@ -143,16 +220,44 @@ func CreateGlobalKpmnodeIDeNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2
 		GlobalKpmnodeId: &e2sm_kpm_v2_go.GlobalKpmnodeId_ENb{
 			ENb: &e2sm_kpm_v2_go.GlobalKpmnodeEnbId{
 				GlobalENbId: &e2sm_kpm_v2_go.GlobalEnbId{
-					ENbId: &e2sm_kpm_v2_go.EnbId{
-						EnbId: &e2sm_kpm_v2_go.EnbId_HomeENbId{
-							HomeENbId: bs,
-						},
-					},
+					ENbId: enbID,
 					PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
 						Value: plmnID,
 					},
 				},
 			},
+		},
+	}, nil
+}
+
+func CreateHomeEnbID(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbId, error) {
+
+	if len(bs.GetValue()) != 4 {
+		return nil, fmt.Errorf("expecting length to be exactly 4 bytes, got %d", len(bs.GetValue()))
+	}
+	if bs.GetValue()[3]&0x0f > 0 {
+		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[3])
+	}
+
+	return &e2sm_kpm_v2_go.EnbId{
+		EnbId: &e2sm_kpm_v2_go.EnbId_HomeENbId{
+			HomeENbId: bs,
+		},
+	}, nil
+}
+
+func CreateMacroEnbID(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbId, error) {
+
+	if len(bs.GetValue()) != 3 {
+		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+	}
+	if bs.GetValue()[2]&0x0f > 0 {
+		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+	}
+
+	return &e2sm_kpm_v2_go.EnbId{
+		EnbId: &e2sm_kpm_v2_go.EnbId_MacroENbId{
+			MacroENbId: bs,
 		},
 	}, nil
 }

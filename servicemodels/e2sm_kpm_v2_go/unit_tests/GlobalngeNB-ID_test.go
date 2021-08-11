@@ -34,7 +34,11 @@ func createGlobalNgEnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 	}
 	var gnbDuID int64 = 42
 
-	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(&bs, plmnID, &shortMacroEnbID, &longMacroEnbID)
+	enbIDchoiceMacro, err := pdubuilder.CreateEnbIDchoiceMacro(&bs)
+	if err != nil {
+		return nil, err
+	}
+	ngeNbID, err := pdubuilder.CreateGlobalKpmnodeIDngENbID(enbIDchoiceMacro, plmnID, &shortMacroEnbID, &longMacroEnbID)
 	if err != nil {
 		return nil, err
 	}

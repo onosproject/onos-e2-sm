@@ -89,7 +89,23 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &granularity, &cellObjID, &measInfoList, measData)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, measData)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetCellObjectID(newE2SmKpmPdu, cellObjID)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetGranularityPeriod(newE2SmKpmPdu, granularity)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetMeasInfoList(newE2SmKpmPdu, &measInfoList)
+	if err != nil {
+		return nil, err
+	}
+
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}

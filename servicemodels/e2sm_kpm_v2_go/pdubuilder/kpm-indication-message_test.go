@@ -116,19 +116,24 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemNoValue())
 	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemReal(rl))
 
-	var incf = e2sm_kpm_v2_go.IncompleteFlag_INCOMPLETE_FLAG_TRUE
 	measDataItem, err := CreateMeasurementDataItem(&measRecord)
-	measDataItem.IncompleteFlag = &incf
 	assert.NilError(t, err)
+	measDataItem = SetIncompleteFlag(measDataItem)
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &granularity, &cellObjID, &measInfoList, &measData)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	newE2SmKpmPdu, err = SetGranularityPeriod(newE2SmKpmPdu, granularity)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = SetCellObjectID(newE2SmKpmPdu, cellObjID)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = SetMeasInfoList(newE2SmKpmPdu, &measInfoList)
+	assert.NilError(t, err)
 	t.Logf("Composed IndicationMessage-Format1 is \n %v \n", newE2SmKpmPdu)
 }
 
@@ -165,8 +170,9 @@ func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	}
 	mUEIDlist.Value = append(mUEIDlist.Value, mUEIDitem)
 
-	measCondUEIDItem, err := CreateMeasurementCondUEIDItem(measName, mcl, mUEIDlist)
+	measCondUEIDItem, err := CreateMeasurementCondUEIDItem(measName, mcl)
 	assert.NilError(t, err)
+	measCondUEIDItem = SetMatchingUEUDlist(measCondUEIDItem, mUEIDlist)
 
 	measCondUEIDList := e2sm_kpm_v2_go.MeasurementCondUeidList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementCondUeidItem, 0),
@@ -180,18 +186,21 @@ func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemNoValue())
 	measRecord.Value = append(measRecord.Value, CreateMeasurementRecordItemReal(rl))
 
-	var incf = e2sm_kpm_v2_go.IncompleteFlag_INCOMPLETE_FLAG_TRUE
 	measDataItem, err := CreateMeasurementDataItem(&measRecord)
-	measDataItem.IncompleteFlag = &incf
 	assert.NilError(t, err)
+	measDataItem = SetIncompleteFlag(measDataItem)
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &granularity, &cellObjID, &measCondUEIDList, &measData)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	newE2SmKpmPdu, err = SetGranularityPeriod(newE2SmKpmPdu, granularity)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = SetCellObjectID(newE2SmKpmPdu, cellObjID)
+	assert.NilError(t, err)
 	t.Logf("Composed IndicationMessage-Format2 is \n %v \n", newE2SmKpmPdu)
 }

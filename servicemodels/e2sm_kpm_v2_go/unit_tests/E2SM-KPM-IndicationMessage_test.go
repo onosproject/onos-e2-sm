@@ -86,16 +86,33 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemNoValue())
 	//measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemReal(rl))
 
-	incf := e2sm_kpm_v2_go.IncompleteFlag_INCOMPLETE_FLAG_TRUE
-	measDataItem, _ := pdubuilder.CreateMeasurementDataItem(&measRecord)
-	measDataItem.IncompleteFlag = &incf
+	measDataItem, err := pdubuilder.CreateMeasurementDataItem(&measRecord)
+	if err != nil {
+		return nil, err
+	}
+	measDataItem = pdubuilder.SetIncompleteFlag(measDataItem)
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &granularity, &cellObjID, &measInfoList, &measData)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetGranularityPeriod(newE2SmKpmPdu, granularity)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetCellObjectID(newE2SmKpmPdu, cellObjID)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetMeasInfoList(newE2SmKpmPdu, &measInfoList)
+	if err != nil {
+		return nil, err
+	}
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}
@@ -132,7 +149,11 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	mUEIDlist.Value = append(mUEIDlist.Value, mUEIDitem)
 
-	measCondUEIDItem, _ := pdubuilder.CreateMeasurementCondUEIDItem(measName, mcl, mUEIDlist)
+	measCondUEIDItem, err := pdubuilder.CreateMeasurementCondUEIDItem(measName, mcl)
+	if err != nil {
+		return nil, err
+	}
+	measCondUEIDItem = pdubuilder.SetMatchingUEUDlist(measCondUEIDItem, mUEIDlist)
 
 	measCondUEIDList := e2sm_kpm_v2_go.MeasurementCondUeidList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementCondUeidItem, 0),
@@ -146,16 +167,29 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemNoValue())
 	//measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemReal(rl))
 
-	measDataItem, _ := pdubuilder.CreateMeasurementDataItem(&measRecord)
-	incf := e2sm_kpm_v2_go.IncompleteFlag_INCOMPLETE_FLAG_TRUE
-	measDataItem.IncompleteFlag = &incf
+	measDataItem, err := pdubuilder.CreateMeasurementDataItem(&measRecord)
+	if err != nil {
+		return nil, err
+	}
+	measDataItem = pdubuilder.SetIncompleteFlag(measDataItem)
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, _ := pdubuilder.CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &granularity, &cellObjID, &measCondUEIDList, &measData)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetCellObjectID(newE2SmKpmPdu, cellObjID)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu, err = pdubuilder.SetGranularityPeriod(newE2SmKpmPdu, granularity)
+	if err != nil {
+		return nil, err
+	}
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}

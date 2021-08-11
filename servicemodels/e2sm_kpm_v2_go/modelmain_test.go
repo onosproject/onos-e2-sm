@@ -39,7 +39,17 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	}
 	assert.NilError(t, err)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp, &fileFormatVersion, &senderName, &senderType, &vendorName, globalKpmNodeID)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = pdubuilder.SetFileFormatVersion(newE2SmKpmPdu, fileFormatVersion)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = pdubuilder.SetSenderName(newE2SmKpmPdu, senderName)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = pdubuilder.SetSenderType(newE2SmKpmPdu, senderType)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = pdubuilder.SetVendorName(newE2SmKpmPdu, vendorName)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = pdubuilder.SetGlobalKPMnodeID(newE2SmKpmPdu, globalKpmNodeID)
 	assert.NilError(t, err)
 
 	//err = newE2SmKpmPdu.Validate()
@@ -127,18 +137,23 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	//measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemReal(rl))
 
 	measDataItem, err := pdubuilder.CreateMeasurementDataItem(&measRecord)
-	incf := e2sm_kpm_v2_go.IncompleteFlag_INCOMPLETE_FLAG_TRUE
-	measDataItem.IncompleteFlag = &incf
 	assert.NilError(t, err)
+	measDataItem = pdubuilder.SetIncompleteFlag(measDataItem)
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &granularity, &cellObjID, &measInfoList, &measData)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	newE2SmKpmPdu, err = pdubuilder.SetGranularityPeriod(newE2SmKpmPdu, granularity)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = pdubuilder.SetCellObjectID(newE2SmKpmPdu, cellObjID)
+	assert.NilError(t, err)
+	newE2SmKpmPdu, err = pdubuilder.SetMeasInfoList(newE2SmKpmPdu, &measInfoList)
+	assert.NilError(t, err)
 
 	//err = newE2SmKpmPdu.Validate()
 	//assert.NilError(t, err, "error validating E2SmPDU")
@@ -209,7 +224,8 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID)
+	kpmNodeItem = pdubuilder.SetCellMeasurementObjectList(kpmNodeItem, cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -241,12 +257,13 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, newE2SmKpmPdu != nil)
-	if newE2SmKpmPdu != nil {
-		newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
-	}
+	newE2SmKpmPdu = pdubuilder.SetRanFunctionInstance(newE2SmKpmPdu, rfi)
+	newE2SmKpmPdu = pdubuilder.SetRicKpmNodeList(newE2SmKpmPdu, rknl)
+	newE2SmKpmPdu = pdubuilder.SetRicReportStyleList(newE2SmKpmPdu, rrsl)
+	newE2SmKpmPdu = pdubuilder.SetRicEventTriggerStyleList(newE2SmKpmPdu, retsl)
 
 	//err = newE2SmKpmPdu.Validate()
 	//assert.NilError(t, err, "error validating E2SmPDU")

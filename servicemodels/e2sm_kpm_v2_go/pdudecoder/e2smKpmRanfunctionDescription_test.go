@@ -51,7 +51,8 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID)
+	kpmNodeItem = pdubuilder.SetCellMeasurementObjectList(kpmNodeItem, cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -83,11 +84,14 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd, rknl, retsl, rrsl)
-	newE2SmKpmPdu.RanFunctionName.RanFunctionInstance = &rfi
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
 	if err != nil {
 		return nil, err
 	}
+	newE2SmKpmPdu = pdubuilder.SetRanFunctionInstance(newE2SmKpmPdu, rfi)
+	newE2SmKpmPdu = pdubuilder.SetRicEventTriggerStyleList(newE2SmKpmPdu, retsl)
+	newE2SmKpmPdu = pdubuilder.SetRicReportStyleList(newE2SmKpmPdu, rrsl)
+	newE2SmKpmPdu = pdubuilder.SetRicKpmNodeList(newE2SmKpmPdu, rknl)
 	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil

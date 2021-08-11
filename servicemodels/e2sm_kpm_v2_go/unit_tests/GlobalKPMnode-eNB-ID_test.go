@@ -25,7 +25,9 @@ func Test_perEncodingGlobalKPMnodeEnbID(t *testing.T) {
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 
-	enbID, err := pdubuilder.CreateGlobalKpmnodeIDeNBID(&bs, plmnID)
+	homeEnbID, err := pdubuilder.CreateHomeEnbID(&bs)
+	assert.NilError(t, err)
+	enbID, err := pdubuilder.CreateGlobalKpmnodeIDeNBID(homeEnbID, plmnID)
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
@@ -51,7 +53,9 @@ func Test_perGlobalKPMnodeEnbIDCompareBytes(t *testing.T) {
 	}
 	plmnID := []byte{0x21, 0x22, 0x23}
 
-	enbID, err := pdubuilder.CreateGlobalKpmnodeIDeNBID(&bs, plmnID)
+	homeEnbID, err := pdubuilder.CreateHomeEnbID(&bs)
+	assert.NilError(t, err)
+	enbID, err := pdubuilder.CreateGlobalKpmnodeIDeNBID(homeEnbID, plmnID)
 	assert.NilError(t, err)
 
 	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
