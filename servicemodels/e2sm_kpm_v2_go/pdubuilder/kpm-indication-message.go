@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 package pdubuilder
 
-import "C"
 import (
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 )
