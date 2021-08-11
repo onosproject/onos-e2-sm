@@ -6,6 +6,7 @@ package pdudecoder
 
 import (
 	"encoding/hex"
+	"fmt"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
@@ -51,8 +52,7 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID)
-	kpmNodeItem = pdubuilder.SetCellMeasurementObjectList(kpmNodeItem, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -84,15 +84,8 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu = pdubuilder.SetRanFunctionInstance(newE2SmKpmPdu, rfi)
-	newE2SmKpmPdu = pdubuilder.SetRicEventTriggerStyleList(newE2SmKpmPdu, retsl)
-	newE2SmKpmPdu = pdubuilder.SetRicReportStyleList(newE2SmKpmPdu, rrsl)
-	newE2SmKpmPdu = pdubuilder.SetRicKpmNodeList(newE2SmKpmPdu, rknl)
-	//fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl).SetRicReportStyleList(rrsl).SetRicKpmNodeList(rknl)
+	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
 }

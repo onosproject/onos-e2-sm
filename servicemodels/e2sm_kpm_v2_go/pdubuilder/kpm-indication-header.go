@@ -33,56 +33,6 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte) (*e2sm_kpm_v2_go.E2SmKpmInd
 	return &e2SmKpmPdu, nil
 }
 
-func SetFileFormatVersion(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, ffv string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
-	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
-	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
-		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().FileFormatversion = &ffv
-	default:
-		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
-	}
-	return ih, nil
-}
-
-func SetSenderName(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, sn string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
-	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
-	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
-		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderName = &sn
-	default:
-		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
-	}
-	return ih, nil
-}
-
-func SetSenderType(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, st string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
-	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
-	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
-		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().SenderType = &st
-	default:
-		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
-	}
-	return ih, nil
-}
-
-func SetVendorName(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, vn string) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
-	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
-	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
-		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().VendorName = &vn
-	default:
-		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
-	}
-	return ih, nil
-}
-
-func SetGlobalKPMnodeID(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader, gknID *e2sm_kpm_v2_go.GlobalKpmnodeId) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
-	switch choice := ih.GetIndicationHeaderFormats().E2SmKpmIndicationHeader.(type) {
-	case *e2sm_kpm_v2_go.IndicationHeaderFormats_IndicationHeaderFormat1:
-		ih.GetIndicationHeaderFormats().GetIndicationHeaderFormat1().KpmNodeId = gknID
-	default:
-		return nil, fmt.Errorf("unexpected IndicationHeaderFormat %v", choice)
-	}
-	return ih, nil
-}
-
 func CreateGlobalKpmnodeIDgNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {

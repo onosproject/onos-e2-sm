@@ -44,8 +44,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := CreateRicKpmnodeItem(globalKpmnodeID)
-	kpmNodeItem = SetCellMeasurementObjectList(kpmNodeItem, cmol)
+	kpmNodeItem := CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -77,13 +76,9 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	newE2SmKpmPdu := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
-	newE2SmKpmPdu = SetRanFunctionInstance(newE2SmKpmPdu, rfi)
-	newE2SmKpmPdu = SetRicEventTriggerStyleList(newE2SmKpmPdu, retsl)
-	newE2SmKpmPdu = SetRicKpmNodeList(newE2SmKpmPdu, rknl)
-	newE2SmKpmPdu = SetRicReportStyleList(newE2SmKpmPdu, rrsl)
 
 	per, err := encoder.PerEncodeE2SmKpmRanFunctionDescription(newE2SmKpmPdu)
 	assert.NilError(t, err)

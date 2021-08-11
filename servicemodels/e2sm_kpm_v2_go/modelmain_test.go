@@ -41,15 +41,7 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 
 	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp)
 	assert.NilError(t, err)
-	newE2SmKpmPdu, err = pdubuilder.SetFileFormatVersion(newE2SmKpmPdu, fileFormatVersion)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = pdubuilder.SetSenderName(newE2SmKpmPdu, senderName)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = pdubuilder.SetSenderType(newE2SmKpmPdu, senderType)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = pdubuilder.SetVendorName(newE2SmKpmPdu, vendorName)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = pdubuilder.SetGlobalKPMnodeID(newE2SmKpmPdu, globalKpmNodeID)
+	newE2SmKpmPdu.SetFileFormatVersion(fileFormatVersion).SetSenderName(senderName).SetSenderType(senderType).SetVendorName(vendorName).SetGlobalKPMnodeID(globalKpmNodeID)
 	assert.NilError(t, err)
 
 	//err = newE2SmKpmPdu.Validate()
@@ -121,8 +113,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 
 	measName, err := pdubuilder.CreateMeasurementTypeMeasName(measurementName)
 	assert.NilError(t, err)
-	measInfoItem, err := pdubuilder.CreateMeasurementInfoItem(measName, &labelInfoList)
-	assert.NilError(t, err)
+	measInfoItem := pdubuilder.CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -138,22 +129,15 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 
 	measDataItem, err := pdubuilder.CreateMeasurementDataItem(&measRecord)
 	assert.NilError(t, err)
-	measDataItem = pdubuilder.SetIncompleteFlag(measDataItem)
+	measDataItem.SetIncompleteFlag()
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
-	assert.NilError(t, err)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData).SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
 	assert.Assert(t, newE2SmKpmPdu != nil)
-	newE2SmKpmPdu, err = pdubuilder.SetGranularityPeriod(newE2SmKpmPdu, granularity)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = pdubuilder.SetCellObjectID(newE2SmKpmPdu, cellObjID)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = pdubuilder.SetMeasInfoList(newE2SmKpmPdu, &measInfoList)
-	assert.NilError(t, err)
 
 	//err = newE2SmKpmPdu.Validate()
 	//assert.NilError(t, err, "error validating E2SmPDU")
@@ -224,8 +208,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
-	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID)
-	kpmNodeItem = pdubuilder.SetCellMeasurementObjectList(kpmNodeItem, cmol)
+	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
@@ -257,13 +240,9 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl).SetRicEventTriggerStyleList(retsl)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, newE2SmKpmPdu != nil)
-	newE2SmKpmPdu = pdubuilder.SetRanFunctionInstance(newE2SmKpmPdu, rfi)
-	newE2SmKpmPdu = pdubuilder.SetRicKpmNodeList(newE2SmKpmPdu, rknl)
-	newE2SmKpmPdu = pdubuilder.SetRicReportStyleList(newE2SmKpmPdu, rrsl)
-	newE2SmKpmPdu = pdubuilder.SetRicEventTriggerStyleList(newE2SmKpmPdu, retsl)
 
 	//err = newE2SmKpmPdu.Validate()
 	//assert.NilError(t, err, "error validating E2SmPDU")

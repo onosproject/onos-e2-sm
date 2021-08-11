@@ -48,26 +48,7 @@ func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHe
 	if err != nil {
 		return nil, err
 	}
-	newE2SmKpmPdu, err = pdubuilder.SetFileFormatVersion(newE2SmKpmPdu, fileFormatVersion)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetSenderName(newE2SmKpmPdu, senderName)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetSenderType(newE2SmKpmPdu, senderType)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetVendorName(newE2SmKpmPdu, vendorName)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetGlobalKPMnodeID(newE2SmKpmPdu, globalKpmNodeID)
-	if err != nil {
-		return nil, err
-	}
+	newE2SmKpmPdu.SetFileFormatVersion(fileFormatVersion).SetSenderName(senderName).SetSenderType(senderType).SetVendorName(vendorName).SetGlobalKPMnodeID(globalKpmNodeID)
 
 	return newE2SmKpmPdu.GetIndicationHeaderFormats().GetIndicationHeaderFormat1(), nil
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 )
 
-func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd string) (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
+func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd string) *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription {
 
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{
 		RanFunctionName: &e2sm_kpm_v2_go.RanfunctionName{
@@ -22,39 +22,7 @@ func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd stri
 	//if err := e2SmKpmPdu.Validate(); err != nil {
 	//	return nil, fmt.Errorf("error validating E2SmKpmRanfunctionDescription %s", err.Error())
 	//}
-	return &e2SmKpmPdu, nil
-}
-
-func SetRanFunctionInstance(rfd *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, rfi int32) *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription {
-	rfd.GetRanFunctionName().RanFunctionInstance = &rfi
-	//if err := rfd.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmRanfunctionDescription %s", err.Error())
-	//}
-	return rfd
-}
-
-func SetRicKpmNodeList(rfd *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, rknl []*e2sm_kpm_v2_go.RicKpmnodeItem) *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription {
-	rfd.RicKpmNodeList = rknl
-	//if err := rfd.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmRanfunctionDescription %s", err.Error())
-	//}
-	return rfd
-}
-
-func SetRicEventTriggerStyleList(rfd *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, retsl []*e2sm_kpm_v2_go.RicEventTriggerStyleItem) *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription {
-	rfd.RicEventTriggerStyleList = retsl
-	//if err := rfd.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmRanfunctionDescription %s", err.Error())
-	//}
-	return rfd
-}
-
-func SetRicReportStyleList(rfd *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, rrsl []*e2sm_kpm_v2_go.RicReportStyleItem) *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription {
-	rfd.RicReportStyleList = rrsl
-	//if err := rfd.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmRanfunctionDescription %s", err.Error())
-	//}
-	return rfd
+	return &e2SmKpmPdu
 }
 
 func CreateRicKpmnodeItem(globalKpmnodeID *e2sm_kpm_v2_go.GlobalKpmnodeId) *e2sm_kpm_v2_go.RicKpmnodeItem {
@@ -64,14 +32,6 @@ func CreateRicKpmnodeItem(globalKpmnodeID *e2sm_kpm_v2_go.GlobalKpmnodeId) *e2sm
 	}
 
 	return &res
-}
-
-func SetCellMeasurementObjectList(rkni *e2sm_kpm_v2_go.RicKpmnodeItem, cmol []*e2sm_kpm_v2_go.CellMeasurementObjectItem) *e2sm_kpm_v2_go.RicKpmnodeItem {
-	rkni.CellMeasurementObjectList = cmol
-	//if err := rkni.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating RicKpmnodeItem %s", err.Error())
-	//}
-	return rkni
 }
 
 func CreateCellMeasurementObjectItem(cellObjID string, cellGlobalID *e2sm_kpm_v2_go.CellGlobalId) *e2sm_kpm_v2_go.CellMeasurementObjectItem {

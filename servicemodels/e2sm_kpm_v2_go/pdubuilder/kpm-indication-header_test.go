@@ -36,15 +36,6 @@ func TestE2SmKpmIndicationHeader(t *testing.T) {
 
 	newE2SmKpmPdu, err := CreateE2SmKpmIndicationHeader(timeStamp)
 	assert.NilError(t, err)
-	newE2SmKpmPdu, err = SetFileFormatVersion(newE2SmKpmPdu, fileFormatVersion)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = SetSenderName(newE2SmKpmPdu, senderName)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = SetSenderType(newE2SmKpmPdu, senderType)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = SetVendorName(newE2SmKpmPdu, vendorName)
-	assert.NilError(t, err)
-	newE2SmKpmPdu, err = SetGlobalKPMnodeID(newE2SmKpmPdu, globalKpmNodeID)
-	assert.NilError(t, err)
+	newE2SmKpmPdu.SetFileFormatVersion(fileFormatVersion).SetSenderName(senderName).SetSenderType(senderType).SetVendorName(vendorName).SetGlobalKPMnodeID(globalKpmNodeID)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 }

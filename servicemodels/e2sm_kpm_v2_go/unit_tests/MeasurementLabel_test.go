@@ -6,6 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -70,39 +71,24 @@ func createMeasurementLabel() *e2sm_kpm_v2_go.MeasurementLabel {
 	}
 }
 
-func createMeasurementLabelXcldSomeOptnl() *e2sm_kpm_v2_go.MeasurementLabel {
+func createMeasurementLabelXcldSomeOptnl() (*e2sm_kpm_v2_go.MeasurementLabel, error) {
 
 	var br int32 = 25
 	var lmm int32 = 1
-	sum := e2sm_kpm_v2_go.SUM_SUM_TRUE
 	var dbx int32 = 123
 	var dbz int32 = 789
 	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
 
-	return &e2sm_kpm_v2_go.MeasurementLabel{
-		PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
-			Value: []byte{0x01, 0x02, 0x03},
-		},
-		SliceId: &e2sm_kpm_v2_go.Snssai{
-			SD:  []byte{0x01, 0x02, 0x03},
-			SSt: []byte{0x01},
-		},
-		QCi: &e2sm_kpm_v2_go.Qci{
-			Value: 24,
-		},
-		QCimax: &e2sm_kpm_v2_go.Qci{
-			Value: 30,
-		},
-		ARpmin: &e2sm_kpm_v2_go.Arp{
-			Value: 1,
-		},
-		BitrateRange: &br,
-		LayerMuMimo:  &lmm,
-		SUm:          &sum,
-		DistBinX:     &dbx,
-		DistBinZ:     &dbz,
-		StartEndInd:  &seind,
+	plmnID := &e2sm_kpm_v2_go.PlmnIdentity{
+		Value: []byte{0x01, 0x02, 0x03},
 	}
+	sliceID, err := pdubuilder.CreateSnssai([]byte{0x01})
+	if err != nil {
+		return nil, err
+	}
+	sliceID.SetSliceID([]byte{0x01, 0x02, 0x03})
+
+	return pdubuilder.CreateMeasurementLabelEmpty().SetPlmnID(plmnID).SetSliceID(sliceID).SetQci(24).SetQciMax(30).SetArpMin(1).SetBitRange(br).SetLayerMuMIMO(lmm).SetSUm().SetDistBinX(dbx).SetDistBinZ(dbz).SetStartEndIndication(seind), nil
 }
 
 func Test_perEncodeMeasurementLabel(t *testing.T) {
@@ -156,7 +142,8 @@ func Test_perMeasurementLabelCompareBytes(t *testing.T) {
 
 func Test_perEncodeMeasurementLabelXcldSomeOptnl(t *testing.T) {
 
-	ml := createMeasurementLabelXcldSomeOptnl()
+	ml, err := createMeasurementLabelXcldSomeOptnl()
+	assert.NilError(t, err)
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
 	per, err := aper.MarshalWithParams(ml, "valueExt")
@@ -185,7 +172,8 @@ func Test_perEncodeMeasurementLabelXcldSomeOptnl(t *testing.T) {
 
 func Test_perMeasurementLabelXcldSomeOptnlCompareBytes(t *testing.T) {
 
-	ml := createMeasurementLabelXcldSomeOptnl()
+	ml, err := createMeasurementLabelXcldSomeOptnl()
+	assert.NilError(t, err)
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
 	per, err := aper.MarshalWithParams(ml, "valueExt")

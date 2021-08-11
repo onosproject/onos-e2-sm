@@ -71,8 +71,11 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
-	measName, _ := pdubuilder.CreateMeasurementTypeMeasName(measurementName)
-	measInfoItem, _ := pdubuilder.CreateMeasurementInfoItem(measName, &labelInfoList)
+	measName, err := pdubuilder.CreateMeasurementTypeMeasName(measurementName)
+	if err != nil {
+		return nil, err
+	}
+	measInfoItem := pdubuilder.CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -90,29 +93,14 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	if err != nil {
 		return nil, err
 	}
-	measDataItem = pdubuilder.SetIncompleteFlag(measDataItem)
+	measDataItem.SetIncompleteFlag()
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetGranularityPeriod(newE2SmKpmPdu, granularity)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetCellObjectID(newE2SmKpmPdu, cellObjID)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetMeasInfoList(newE2SmKpmPdu, &measInfoList)
-	if err != nil {
-		return nil, err
-	}
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData).SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}
@@ -153,7 +141,7 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	if err != nil {
 		return nil, err
 	}
-	measCondUEIDItem = pdubuilder.SetMatchingUEUDlist(measCondUEIDItem, mUEIDlist)
+	measCondUEIDItem.SetMatchingUEUDlist(mUEIDlist)
 
 	measCondUEIDList := e2sm_kpm_v2_go.MeasurementCondUeidList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementCondUeidItem, 0),
@@ -171,25 +159,14 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	if err != nil {
 		return nil, err
 	}
-	measDataItem = pdubuilder.SetIncompleteFlag(measDataItem)
+	measDataItem.SetIncompleteFlag()
 
 	measData := e2sm_kpm_v2_go.MeasurementData{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetCellObjectID(newE2SmKpmPdu, cellObjID)
-	if err != nil {
-		return nil, err
-	}
-	newE2SmKpmPdu, err = pdubuilder.SetGranularityPeriod(newE2SmKpmPdu, granularity)
-	if err != nil {
-		return nil, err
-	}
+	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData).SetCellObjectID(cellObjID).SetGranularityPeriod(granularity)
 	//if err := newE2SmKpmPdu.Validate(); err != nil {
 	//	return nil, err
 	//}
