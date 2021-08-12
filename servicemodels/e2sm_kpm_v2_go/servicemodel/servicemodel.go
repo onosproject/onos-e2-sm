@@ -256,9 +256,12 @@ func (sm Kpm2ServiceModel) OnSetup(request *types.OnSetupRequest) error {
 		kpmReportStyle.Measurements = measurements
 		ranFunction.ReportStyles = append(ranFunction.ReportStyles, kpmReportStyle)
 	}
-	ranFunctionAny, _ := prototypes.MarshalAny(ranFunction)
-	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
+	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
+	if err != nil {
+		return err
+	}
 
+	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
 	return nil
 }
 
