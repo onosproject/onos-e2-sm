@@ -2,4 +2,10 @@
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
+//nolint
 package main
+
+import "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/servicemodel"
+
+// ServiceModel is the exported symbol that gives an entry point to this shared module
+var ServiceModel servicemodel.Kpm2ServiceModel

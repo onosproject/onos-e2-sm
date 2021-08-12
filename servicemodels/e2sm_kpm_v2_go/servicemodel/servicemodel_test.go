@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-var kpmv2TestSm servicemodel
+var kpmv2TestSm Kpm2ServiceModel
 
 func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	bs := asn1.BitString{
