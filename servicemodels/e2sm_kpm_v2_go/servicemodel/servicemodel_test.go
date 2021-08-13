@@ -1,8 +1,8 @@
-// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+// SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetworking.org>
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-package main
+package servicemodel
 
 import (
 	"encoding/hex"
@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-var kpmv2TestSm servicemodel
+var kpmv2TestSm Kpm2ServiceModel
 
 func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	bs := asn1.BitString{

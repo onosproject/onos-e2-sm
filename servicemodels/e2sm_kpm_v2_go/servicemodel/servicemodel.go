@@ -1,9 +1,8 @@
-// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+// SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetworking.org>
 //
 // SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
-//nolint
-package main
+package servicemodel
 
 import (
 	"fmt"
@@ -16,14 +15,14 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-type servicemodel string
+type Kpm2ServiceModel string
 
 const smName = "e2sm_kpm"
 const smVersion = "v2_go"
 const moduleName = "e2sm_kpm_v2_go.so.2.0"
 const smOIDKpmV2 = "1.3.6.1.4.1.53148.1.2.2.2"
 
-func (sm servicemodel) ServiceModelData() types.ServiceModelData {
+func (sm Kpm2ServiceModel) ServiceModelData() types.ServiceModelData {
 	smData := types.ServiceModelData{
 		Name:       smName,
 		Version:    smVersion,
@@ -33,7 +32,7 @@ func (sm servicemodel) ServiceModelData() types.ServiceModelData {
 	return smData
 }
 
-func (sm servicemodel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmIndicationHeader(asn1Bytes)
 	if err != nil {
 		return nil, fmt.Errorf("error decoding E2SmKpmIndicationHeader to PER %s", err)
@@ -47,7 +46,7 @@ func (sm servicemodel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, er
 	return protoBytes, nil
 }
 
-func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmIndicationHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmIndicationHeader %s", err)
@@ -61,7 +60,7 @@ func (sm servicemodel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, e
 	return perBytes, nil
 }
 
-func (sm servicemodel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmIndicationMessage(asn1Bytes)
 	if err != nil {
 		return nil, fmt.Errorf("error decoding E2SmKpmIndicationMessage to PER %s", err)
@@ -75,7 +74,7 @@ func (sm servicemodel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, e
 	return protoBytes, nil
 }
 
-func (sm servicemodel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmIndicationMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmIndicationMessage %s", err)
@@ -89,7 +88,7 @@ func (sm servicemodel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, 
 	return perBytes, nil
 }
 
-func (sm servicemodel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(asn1Bytes)
 	if err != nil {
 		return nil, fmt.Errorf("error decoding E2SmKpmRanFunctionDescription to PER %s", err)
@@ -103,7 +102,7 @@ func (sm servicemodel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, 
 	return protoBytes, nil
 }
 
-func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmRanfunctionDescription %s", err)
@@ -117,7 +116,7 @@ func (sm servicemodel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte,
 	return perBytes, nil
 }
 
-func (sm servicemodel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmEventTriggerDefinition(asn1Bytes)
 	if err != nil {
 		return nil, fmt.Errorf("error decoding E2SmKpmEventTriggerDefinition to PER %s", err)
@@ -131,7 +130,7 @@ func (sm servicemodel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]by
 	return protoBytes, nil
 }
 
-func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmEventTriggerDefinition %s", err)
@@ -145,7 +144,7 @@ func (sm servicemodel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]b
 	return perBytes, nil
 }
 
-func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmActionDefinition(asn1Bytes)
 	if err != nil {
 		return nil, fmt.Errorf("error decoding E2SmKpmActionDefinitio to PER %s", err)
@@ -159,7 +158,7 @@ func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, er
 	return protoBytes, nil
 }
 
-func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmActionDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmActionDefinition %s", err)
@@ -174,7 +173,7 @@ func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, e
 }
 
 //It is redundant so far - could be reused for future, if you need to extract something specific from RanFunctionDescription message
-func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
+func (sm Kpm2ServiceModel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
 	e2SmKpmPdu, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(asn1bytes)
 	if err != nil {
 		return nil, nil, nil, err
@@ -182,31 +181,31 @@ func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.Ra
 	return pdudecoder.DecodeE2SmKpmRanFunctionDescription(e2SmKpmPdu)
 }
 
-func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
 }
 
-func (sm servicemodel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
 }
 
-func (sm servicemodel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
 }
 
-func (sm servicemodel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
 }
 
-func (sm servicemodel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
 }
 
-func (sm servicemodel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm Kpm2ServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on KPM")
 }
 
-func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
+func (sm Kpm2ServiceModel) OnSetup(request *types.OnSetupRequest) error {
 	protoBytes, err := sm.RanFuncDescriptionASN1toProto(request.RANFunctionDescription)
 	if err != nil {
 		return err
@@ -258,13 +257,13 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 		ranFunction.ReportStyles = append(ranFunction.ReportStyles, kpmReportStyle)
 	}
 	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
-	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
+	if err != nil {
+		return err
+	}
 
+	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
 	return nil
 }
-
-//ServiceModel is the exported symbol that gives an entry point to this shared module
-var ServiceModel servicemodel
 
 func bitStringToUint64(bitString []byte, bitCount int) uint64 {
 	var result uint64 = 0
