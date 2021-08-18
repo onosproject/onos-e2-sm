@@ -32,25 +32,30 @@ maxnoofSlices INTEGER ::= 4294967295
 SliceID ::= INTEGER (1..maxnoofSlices)
 SliceIDAssoc ::= INTEGER(0..maxnoofSlices)
 
--- UE-Identity ::= OCTET STRING
-UE-Identity ::= SEQUENCE {
-    ueIDtype    UE-ID-Type,
-    ueID        OCTET STRING
+UE-Identity ::= CHOICE {
+    cuUeF1ApID      CU-UE-F1AP-ID,
+    duUeF1ApID      DU-UE-F1AP-ID,
+    ranUeNgapID     RAN-UE-NGAP-ID,
+    amfUeNgapID     AMF-UE-NGAP-ID,
+    enbUeS1ApID     ENB-UE-S1AP-ID,
+    ...
 }
 
 UE-ID-Type ::= ENUMERATED{
     cuUeF1ApID,
     duUeF1ApID,
     ranUeNgapID,
+    amfUeNgapID,
     enbUeS1ApID,
     ...
 }
 
 CU-UE-F1AP-ID ::= INTEGER(0..4294967295)
 DU-UE-F1AP-ID ::= INTEGER(0..4294967295)
+RAN-UE-NGAP-ID ::= INTEGER (0..1099511627775)
+ENB-UE-S1AP-ID ::= INTEGER (0..16777215)
 
 QFI ::= INTEGER (0.. 63, ...)
-RAN-UE-NGAP-ID ::= INTEGER (0..1099511627775)
 
 -- ***************************************************************
 -- Slicing capabilities
