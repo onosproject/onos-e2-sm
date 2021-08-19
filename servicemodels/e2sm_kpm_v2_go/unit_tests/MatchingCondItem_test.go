@@ -14,10 +14,10 @@ import (
 	"testing"
 )
 
-var refPerMCI1 string = "00000000  1f ff f0 21 22 23 40 40  01 02 03 00 17 68 18 00  |...!\"#@@.....h..|\n" +
+var refPerMCI1 = "00000000  1f ff f0 21 22 23 40 40  01 02 03 00 17 68 18 00  |...!\"#@@.....h..|\n" +
 	"00000010  1e 00 01 70 00 00 18 00  00 00 00 00 7a 00 01 c7  |...p........z...|\n" +
 	"00000020  00 03 14 20                                       |... |"
-var refPerMCI2 string = "00000000  42 10 01 15                                       |B...|"
+var refPerMCI2 = "00000000  42 10 01 15                                       |B...|"
 
 func createMatchingCondItem1() (*e2sm_kpm_v2_go.MatchingCondItem, error) {
 

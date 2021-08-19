@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-var refPerUeID string = "00000000  06 53 6f 6d 65 55 45                              |.SomeUE|"
+var refPerUeID = "00000000  06 53 6f 6d 65 55 45                              |.SomeUE|"
 
 func Test_perEncodeUeIdentity(t *testing.T) {
 

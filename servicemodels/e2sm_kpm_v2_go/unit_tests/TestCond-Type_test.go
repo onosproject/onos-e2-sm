@@ -14,12 +14,12 @@ import (
 	"testing"
 )
 
-var refPerTCTgbr string = "00000000  00                                                |.|"
-var refPerTCTambr string = "00000000  10                                                |.|"
-var refPerTCTisstat string = "00000000  20                                                | |"
-var refPerTCTiscatm string = "00000000  30                                                |0|"
-var refPerTCTrsrp string = "00000000  40                                                |@|"
-var refPerTCTrsrq string = "00000000  50                                                |P|"
+var refPerTCTgbr = "00000000  00                                                |.|"
+var refPerTCTambr = "00000000  10                                                |.|"
+var refPerTCTisstat = "00000000  20                                                | |"
+var refPerTCTiscatm = "00000000  30                                                |0|"
+var refPerTCTrsrp = "00000000  40                                                |@|"
+var refPerTCTrsrq = "00000000  50                                                |P|"
 
 func Test_perEncodingTestCondTypeGBR(t *testing.T) {
 

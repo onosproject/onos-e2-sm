@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-var refPerTCI string = "00000000  08 40 01 15                                       |.@..|"
+var refPerTCI = "00000000  08 40 01 15                                       |.@..|"
 
 func Test_perEncodingTestCondInfo(t *testing.T) {
 

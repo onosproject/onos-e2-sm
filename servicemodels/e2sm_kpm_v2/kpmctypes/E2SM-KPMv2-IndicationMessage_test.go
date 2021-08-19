@@ -15,8 +15,8 @@ import (
 func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
 
 	var integer int64 = 12345
-	var rl float64 = 22.2
-	var cellObjID string = "onf"
+	var rl = 22.2
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -35,7 +35,7 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2.E2SmKpmIndicationMess
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd)
 	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
@@ -107,12 +107,12 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2.E2SmKpmIndicationMess
 func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2.E2SmKpmIndicationMessage, error) {
 
 	var integer int64 = 12345
-	var rl float64 = 22.2
-	var cellObjID string = "onf"
+	var rl = 22.2
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
-	var ueID string = "SomeUE"
+	var measurementName = "trial"
+	var ueID = "SomeUE"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

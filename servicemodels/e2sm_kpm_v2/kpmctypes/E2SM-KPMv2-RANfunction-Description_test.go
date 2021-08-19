@@ -14,9 +14,9 @@ import (
 
 func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2.E2SmKpmRanfunctionDescription, error) {
 
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 	var rfi int32 = 21
 
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -26,7 +26,7 @@ func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2.E2SmKpmRanfunctionDescr
 	}
 	cellGlobalID, _ := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, []byte{0xd5, 0xbc, 0x09, 0x00, 0x00}) // 36 bits
 
-	var cellObjID string = "ONF"
+	var cellObjID = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
@@ -48,7 +48,7 @@ func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2.E2SmKpmRanfunctionDescr
 	rknl = append(rknl, kpmNodeItem)
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "onf"
+	var ricStyleName = "onf"
 	var ricFormatType int32 = 15
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
@@ -59,7 +59,7 @@ func createE2SMKPMRanfunctionDescription() (*e2sm_kpm_v2.E2SmKpmRanfunctionDescr
 		Value: make([]*e2sm_kpm_v2.MeasurementInfoActionItem, 0),
 	}
 
-	var measTypeName string = "OpenNetworking"
+	var measTypeName = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := pdubuilder.CreateMeasurementInfoActionItem(measTypeName)
 	measInfoActionItem.MeasId = &e2sm_kpm_v2.MeasurementTypeId{

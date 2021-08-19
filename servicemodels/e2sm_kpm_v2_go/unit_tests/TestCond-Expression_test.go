@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-var refPerTestCondExpr string = "00000000  40                                                |@|"
+var refPerTestCondExpr = "00000000  40                                                |@|"
 
 func Test_perEncodingTestCondExpression(t *testing.T) {
 

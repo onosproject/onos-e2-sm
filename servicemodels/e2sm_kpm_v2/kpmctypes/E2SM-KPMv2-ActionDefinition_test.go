@@ -16,7 +16,7 @@ import (
 func createE2SMKPMActionDefinitionFormat1() (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) {
 
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -35,7 +35,7 @@ func createE2SMKPMActionDefinitionFormat1() (*e2sm_kpm_v2.E2SmKpmActionDefinitio
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd)
 	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
@@ -93,7 +93,7 @@ func createE2SMKPMActionDefinitionFormat1() (*e2sm_kpm_v2.E2SmKpmActionDefinitio
 func createE2SMKPMActionDefinitionFormat2() (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) {
 
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -112,7 +112,7 @@ func createE2SMKPMActionDefinitionFormat2() (*e2sm_kpm_v2.E2SmKpmActionDefinitio
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd)
 	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
@@ -173,10 +173,10 @@ func createE2SMKPMActionDefinitionFormat2() (*e2sm_kpm_v2.E2SmKpmActionDefinitio
 func createE2SMKPMActionDefinitionFormat3() (*e2sm_kpm_v2.E2SmKpmActionDefinition, error) {
 
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

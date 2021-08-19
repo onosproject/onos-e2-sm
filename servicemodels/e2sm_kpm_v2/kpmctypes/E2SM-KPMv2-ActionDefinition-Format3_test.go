@@ -15,10 +15,10 @@ import (
 
 func createActionDefinitionFormat3() (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3, error) {
 
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

@@ -14,25 +14,25 @@ import (
 	"testing"
 )
 
-var refPerADF1 string = "00000000  00 0c 00 00 03 6f 6e 66  00 00 40 20 74 72 69 61  |.....onf..@ tria|\n" +
+var refPerADF1 = "00000000  00 0c 00 00 03 6f 6e 66  00 00 40 20 74 72 69 61  |.....onf..@ tria|\n" +
 	"00000010  6c 01 3f ff e0 21 22 23  40 40 01 02 03 00 0a 7c  |l.?..!\"#@@.....||\n" +
 	"00000020  0f 00 0f 00 01 70 00 00  fa 00 00 04 00 00 7a 00  |.....p........z.|\n" +
 	"00000030  01 c7 00 03 14 00 14 40  30 38                    |.......@08|"
-var refPerADF2 string = "00000000  00 0c 20 06 53 6f 6d 65  55 45 00 00 03 6f 6e 66  |.. .SomeUE...onf|\n" +
+var refPerADF2 = "00000000  00 0c 20 06 53 6f 6d 65  55 45 00 00 03 6f 6e 66  |.. .SomeUE...onf|\n" +
 	"00000010  00 00 40 20 74 72 69 61  6c 01 3f ff e0 21 22 23  |..@ trial.?..!\"#|\n" +
 	"00000020  40 40 01 02 03 00 0a 7c  0f 00 0f 00 01 70 00 00  |@@.....|.....p..|\n" +
 	"00000030  fa 00 00 04 00 00 7a 00  01 c7 00 03 14 00 14 40  |......z........@|\n" +
 	"00000040  30 38                                             |08|"
-var refPerADF3 string = "00000000  00 0c 40 00 03 6f 6e 66  00 00 00 40 74 72 69 61  |..@..onf...@tria|\n" +
+var refPerADF3 = "00000000  00 0c 40 00 03 6f 6e 66  00 00 00 40 74 72 69 61  |..@..onf...@tria|\n" +
 	"00000010  6c 00 00 48 21 02 00 c9  00 14 40 30 38           |l..H!.....@08|"
 
 func createE2SmKpmActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefinition, error) {
 
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -93,10 +93,10 @@ func createE2SmKpmActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 func createE2SmKpmActionDefinitionFormat2() (*e2sm_kpm_v2_go.E2SmKpmActionDefinition, error) {
 
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -163,10 +163,10 @@ func createE2SmKpmActionDefinitionFormat2() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 func createE2SmKpmActionDefinitionFormat3() (*e2sm_kpm_v2_go.E2SmKpmActionDefinition, error) {
 
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

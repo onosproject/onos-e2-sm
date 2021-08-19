@@ -12,10 +12,10 @@ import (
 
 func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -65,10 +65,10 @@ func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -121,10 +121,10 @@ func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 
 func TestE2SmKpmActionDefinitionFormat3(t *testing.T) {
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

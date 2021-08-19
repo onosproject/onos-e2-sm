@@ -29,10 +29,10 @@ func createIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessageF
 
 	var integer int64 = 12345
 	//var rl float64 = 6789.51
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}

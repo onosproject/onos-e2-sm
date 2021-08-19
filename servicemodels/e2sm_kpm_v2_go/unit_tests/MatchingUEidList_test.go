@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-var refPerMUeIDL string = "00000000  00 00 00 06 53 6f 6d 65  55 45                    |....SomeUE|"
+var refPerMUeIDL = "00000000  00 00 00 06 53 6f 6d 65  55 45                    |....SomeUE|"
 
 func Test_perEncodeMatchingUeIDList(t *testing.T) {
 

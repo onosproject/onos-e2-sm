@@ -12,7 +12,7 @@ import (
 
 func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -31,7 +31,7 @@ func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd)
 	assert.NilError(t, err)
@@ -88,7 +88,7 @@ func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -107,7 +107,7 @@ func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd)
 	assert.NilError(t, err)
@@ -168,10 +168,10 @@ func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 
 func TestE2SmKpmActionDefinitionFormat3(t *testing.T) {
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

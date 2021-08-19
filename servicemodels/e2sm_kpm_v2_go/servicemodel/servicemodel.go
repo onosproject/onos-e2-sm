@@ -266,7 +266,7 @@ func (sm Kpm2ServiceModel) OnSetup(request *types.OnSetupRequest) error {
 }
 
 func bitStringToUint64(bitString []byte, bitCount int) uint64 {
-	var result uint64 = 0
+	var result uint64
 	for i, b := range bitString {
 		result += uint64(b) << ((len(bitString) - i - 1) * 8)
 	}

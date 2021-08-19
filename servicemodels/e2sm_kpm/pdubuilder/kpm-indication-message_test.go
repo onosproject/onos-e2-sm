@@ -12,16 +12,16 @@ import (
 
 func TestE2SmKpmIndicationMsg(t *testing.T) {
 	var plmnID = "ONF"
-	var cellIdentityValue uint64 = 0
-	var cellIdentityLen uint32 = 0
-	var ulTotalAvlblProbs int32 = 0
-	var dlTotalAvlblProbs int32 = 0
-	var fiveQi int32 = 0
-	var dlPrbusage int32 = 0
-	var ulPrbusage int32 = 0
-	var qCi int32 = 0
-	var qciDlPrbusage int32 = 0
-	var qciUlPrbusage int32 = 0
+	var cellIdentityValue uint64
+	var cellIdentityLen uint32
+	var ulTotalAvlblProbs int32
+	var dlTotalAvlblProbs int32
+	var fiveQi int32
+	var dlPrbusage int32
+	var ulPrbusage int32
+	var qCi int32
+	var qciDlPrbusage int32
+	var qciUlPrbusage int32
 	var sst = "1"
 	var sd = "SD1"
 	var gNbCuName = "OpenNetworking"

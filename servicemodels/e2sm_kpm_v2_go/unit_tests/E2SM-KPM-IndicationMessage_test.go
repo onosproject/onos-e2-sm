@@ -36,10 +36,10 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 
 	var integer int64 = 12345
 	//var rl float64 = 22.2
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -111,11 +111,11 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 
 	var integer int64 = 12345
 	//var rl float64 = 22.2
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
-	var ueID string = "SomeUE"
+	var measurementName = "trial"
+	var ueID = "SomeUE"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

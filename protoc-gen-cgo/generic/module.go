@@ -214,7 +214,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				repeated := false
 				oneof := false
 				var cstructName string
-				var items int = 0
+				var items int
 				valueFound := false
 
 				fieldItems := fieldList{

@@ -15,12 +15,12 @@ import (
 	"testing"
 )
 
-var refPerTCVint string = "00000000  00 01 15                                          |...|"
-var refPerTCVenum string = "00000000  10 01 36                                          |..6|"
-var refPerTCVbool string = "00000000  28                                                |(|"
-var refPerTCVbs string = "00000000  30 16 d4 bc 08                                    |0....|"
-var refPerTCVos string = "00000000  40 03 6f 6e 66                                    |@.onf|"
-var refPerTCVps string = "00000000  50 03 4f 4e 46                                    |P.ONF|"
+var refPerTCVint = "00000000  00 01 15                                          |...|"
+var refPerTCVenum = "00000000  10 01 36                                          |..6|"
+var refPerTCVbool = "00000000  28                                                |(|"
+var refPerTCVbs = "00000000  30 16 d4 bc 08                                    |0....|"
+var refPerTCVos = "00000000  40 03 6f 6e 66                                    |@.onf|"
+var refPerTCVps = "00000000  50 03 4f 4e 46                                    |P.ONF|"
 
 func Test_perEncodingTestCondValueInt(t *testing.T) {
 

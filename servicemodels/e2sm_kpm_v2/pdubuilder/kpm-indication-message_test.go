@@ -13,7 +13,7 @@ import (
 func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -32,7 +32,7 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd)
 	assert.NilError(t, err)
@@ -105,11 +105,11 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
-	var ueID string = "SomeUE"
+	var measurementName = "trial"
+	var ueID = "SomeUE"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

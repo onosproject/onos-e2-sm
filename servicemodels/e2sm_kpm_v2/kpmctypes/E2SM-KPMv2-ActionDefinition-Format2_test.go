@@ -15,7 +15,7 @@ import (
 
 func createActionDefinitionFormat2() (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat2, error) {
 
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -34,7 +34,7 @@ func createActionDefinitionFormat2() (*e2sm_kpm_v2.E2SmKpmActionDefinitionFormat
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, _ := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd)
 	labelInfoItem.MeasLabel.FiveQi = &e2sm_kpm_v2.FiveQi{
