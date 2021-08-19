@@ -1,6 +1,6 @@
 module github.com/onosproject/ran-simulator
 
-go 1.15
+go 1.16
 // Just a dummy go.mod file that's needed to build the modelplugins in Docker
 // contents should match go.mod in sub folders here
 require (

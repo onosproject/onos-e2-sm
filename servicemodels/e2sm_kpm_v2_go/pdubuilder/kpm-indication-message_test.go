@@ -67,7 +67,7 @@ func TestMeasurementLabelPartially(t *testing.T) {
 func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -88,7 +88,7 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	var distZ int32 = 789
 	var plo = e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
 	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
 		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
@@ -133,11 +133,11 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
-	var ueID string = "SomeUE"
+	var measurementName = "trial"
+	var ueID = "SomeUE"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

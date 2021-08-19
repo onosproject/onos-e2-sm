@@ -46,9 +46,9 @@ var refPerE2SmKpmRanFunctionDescriptionMndtOnly = "00000000  00 04 6f 6e 66 00 0
 
 func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 	var rfi int32 = 21
 
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -62,7 +62,7 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 		return nil, err
 	}
 
-	var cellObjID string = "ONF"
+	var cellObjID = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
@@ -87,7 +87,7 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	rknl = append(rknl, kpmNodeItem)
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "onf"
+	var ricStyleName = "onf"
 	var ricFormatType int32 = 15
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
@@ -98,7 +98,7 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoActionItem, 0),
 	}
 
-	var measTypeName string = "OpenNetworking"
+	var measTypeName = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := pdubuilder.CreateMeasurementInfoActionItem(measTypeName)
 	measInfoActionItem.MeasId = &e2sm_kpm_v2_go.MeasurementTypeId{
@@ -121,20 +121,20 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 
 func createE2SmKpmRanFunctionDescriptionReportList() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 	var rfi int32 = 21
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "onf"
+	var ricStyleName = "onf"
 	var ricFormatType int32 = 15
 
 	measInfoActionList := e2sm_kpm_v2_go.MeasurementInfoActionList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoActionItem, 0),
 	}
 
-	var measTypeName string = "OpenNetworking"
+	var measTypeName = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := pdubuilder.CreateMeasurementInfoActionItem(measTypeName)
 	measInfoActionItem.MeasId = &e2sm_kpm_v2_go.MeasurementTypeId{
@@ -157,13 +157,13 @@ func createE2SmKpmRanFunctionDescriptionReportList() (*e2sm_kpm_v2_go.E2SmKpmRan
 
 func createE2SmKpmRanFunctionDescriptionEventList() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 	var rfi int32 = 21
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "SomeReallyCoolDescription"
+	var ricStyleName = "SomeReallyCoolDescription"
 	var ricFormatType int32 = 15
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
@@ -178,9 +178,9 @@ func createE2SmKpmRanFunctionDescriptionEventList() (*e2sm_kpm_v2_go.E2SmKpmRanf
 
 func createE2SmKpmRanFunctionDescriptionNodeList() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 	var rfi int32 = 21
 
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -194,7 +194,7 @@ func createE2SmKpmRanFunctionDescriptionNodeList() (*e2sm_kpm_v2_go.E2SmKpmRanfu
 		return nil, err
 	}
 
-	var cellObjID string = "ONF"
+	var cellObjID = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
@@ -226,9 +226,9 @@ func createE2SmKpmRanFunctionDescriptionNodeList() (*e2sm_kpm_v2_go.E2SmKpmRanfu
 
 func createE2SmKpmRanFunctionDescriptionMndtOnly() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 
 	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
 	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)

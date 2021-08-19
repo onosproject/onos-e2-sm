@@ -1,6 +1,6 @@
 module github.com/onosproject/onos-e2-sm
 
-go 1.14
+go 1.16
 
 require (
 	github.com/onosproject/onos-lib-go v0.7.16

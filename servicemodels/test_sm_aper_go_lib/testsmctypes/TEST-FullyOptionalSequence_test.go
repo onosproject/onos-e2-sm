@@ -15,9 +15,9 @@ func createTestFullyOptionalSequenceMsg() (*test_sm_ies.TestFullyOptionalSequenc
 
 	var ie1 int32 = 32
 	ie2 := []byte{0xF0, 0xB9, 0x32}
-	var ie3 bool = true
+	var ie3 = true
 	ie4 := test_sm_ies.TestFullyOptionalSequenceItem4_TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_ONE
-	var ie5 int32 = 0 // it's NULL
+	var ie5 int32 // it's NULL
 	testFullyOptionalSequence := test_sm_ies.TestFullyOptionalSequence{
 		Item1: &ie1,
 		Item2: ie2,

@@ -17,7 +17,7 @@ import (
 
 const moduleName = "choice"
 
-var templateDir string = os.Getenv("GOPATH")
+var templateDir = os.Getenv("GOPATH")
 var templates = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-choice/templates/choice.tpl")))
 
 // Defines data structure to pass to enum template

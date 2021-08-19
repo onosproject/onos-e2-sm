@@ -29,10 +29,10 @@ func createE2SmKpmIndicationHeader() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, e
 	timeStamp := []byte{0x21, 0x22, 0x23, 0x24}
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	var fileFormatVersion string = "txt"
-	var senderName string = "ONF"
-	var senderType string = "someType"
-	var vendorName string = "onf"
+	var fileFormatVersion = "txt"
+	var senderName = "ONF"
+	var senderType = "someType"
+	var vendorName = "onf"
 
 	globalKpmNodeID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
 	if err != nil {

@@ -28,9 +28,9 @@ func createTestList3Msg3Items() (*test_sm_ies.TestList3, error) {
 
 	var ie11 int32 = 153
 	var ie12 = []byte{0x02, 0x3F, 0x5D, 0x9A}
-	var ie13 bool = true
+	var ie13 = true
 	ie14 := test_sm_ies.TestFullyOptionalSequenceItem4_TEST_FULLY_OPTIONAL_SEQUENCE_ITEM4_ONE
-	var ie15 int32 = 0 // It's null
+	var ie15 int32 // It's null
 
 	item1 := test_sm_ies.TestFullyOptionalSequence{
 		Item1: &ie11,
@@ -46,8 +46,8 @@ func createTestList3Msg3Items() (*test_sm_ies.TestList3, error) {
 	testList3.Value = append(testList3.Value, &item2)
 
 	var ie32 = []byte{0xC2, 0xF3, 0xD3, 0x9A}
-	var ie33 bool = true
-	var ie35 int32 = 0 // it's NULL
+	var ie33 = true
+	var ie35 int32 // it's NULL
 
 	item3 := test_sm_ies.TestFullyOptionalSequence{
 		Item2: ie32,

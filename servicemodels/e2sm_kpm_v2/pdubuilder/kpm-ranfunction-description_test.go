@@ -11,9 +11,9 @@ import (
 )
 
 func TestE2SmKpmRanfunctionDescription(t *testing.T) {
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 	var rfi int32 = 21
 
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -23,7 +23,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	}
 	cellGlobalID, err := CreateCellGlobalIDNRCGI(plmnID, []byte{0xd5, 0xbc, 0x09, 0x00, 0x00}) // 36 bit
 	assert.NilError(t, err)
-	var cellObjID string = "ONF"
+	var cellObjID = "ONF"
 	cellMeasObjItem := CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
@@ -46,7 +46,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	rknl = append(rknl, kpmNodeItem)
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "onf"
+	var ricStyleName = "onf"
 	var ricFormatType int32 = 15
 	retsi := CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
@@ -57,7 +57,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 		Value: make([]*e2sm_kpm_v2.MeasurementInfoActionItem, 0),
 	}
 
-	var measTypeName string = "OpenNetworking"
+	var measTypeName = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := CreateMeasurementInfoActionItem(measTypeName)
 	measInfoActionItem.MeasId = &e2sm_kpm_v2.MeasurementTypeId{

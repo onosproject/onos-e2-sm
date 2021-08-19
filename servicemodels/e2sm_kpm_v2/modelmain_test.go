@@ -24,10 +24,10 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	timeStamp := []byte{0x21, 0x22, 0x23, 0x24}
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
-	var fileFormatVersion string = "txt"
-	var senderName string = "ONF"
-	var senderType string = "someType"
-	var vendorName string = "onf"
+	var fileFormatVersion = "txt"
+	var senderName = "ONF"
+	var senderType = "someType"
+	var vendorName = "onf"
 
 	globalKpmNodeID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
 	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2.GnbCuUpId{
@@ -79,7 +79,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var integer int64 = 12345
 	var rl float64 = 6789
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -98,7 +98,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var distY int32 = 456
 	var distZ int32 = 789
 	startEndIndication := e2sm_kpm_v2.StartEndInd_START_END_IND_START
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	labelInfoItem, err := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd)
 	assert.NilError(t, err)
@@ -206,9 +206,9 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
-	var rfSn string = "onf"
-	var rfE2SMoid string = "oid123"
-	var rfd string = "someDescription"
+	var rfSn = "onf"
+	var rfE2SMoid = "oid123"
+	var rfd = "someDescription"
 	var rfi int32 = 21
 
 	plmnID := []byte{0x21, 0x22, 0x23}
@@ -218,7 +218,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	}
 	cellGlobalID, err := pdubuilder.CreateCellGlobalIDNRCGI(plmnID, []byte{0xd5, 0xbc, 0x09, 0x00, 0x00}) // 36 bit
 	assert.NilError(t, err)
-	var cellObjID string = "ONF"
+	var cellObjID = "ONF"
 	cellMeasObjItem := pdubuilder.CreateCellMeasurementObjectItem(cellObjID, cellGlobalID)
 
 	var gnbCuUpID int64 = 12345
@@ -241,7 +241,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	rknl = append(rknl, kpmNodeItem)
 
 	var ricStyleType int32 = 11
-	var ricStyleName string = "onf"
+	var ricStyleName = "onf"
 	var ricFormatType int32 = 15
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
@@ -252,7 +252,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 		Value: make([]*e2sm_kpm_v2.MeasurementInfoActionItem, 0),
 	}
 
-	var measTypeName string = "OpenNetworking"
+	var measTypeName = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := pdubuilder.CreateMeasurementInfoActionItem(measTypeName)
 	measInfoActionItem.MeasId = &e2sm_kpm_v2.MeasurementTypeId{
@@ -351,10 +351,10 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 
 func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	var ricStyleType int32 = 12
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity uint32 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

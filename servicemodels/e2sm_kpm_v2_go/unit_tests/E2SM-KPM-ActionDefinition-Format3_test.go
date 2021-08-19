@@ -14,15 +14,15 @@ import (
 	"testing"
 )
 
-var refPerAD3 string = "00000000  00 00 03 6f 6e 66 00 00  00 40 74 72 69 61 6c 00  |...onf...@trial.|\n" +
+var refPerAD3 = "00000000  00 00 03 6f 6e 66 00 00  00 40 74 72 69 61 6c 00  |...onf...@trial.|\n" +
 	"00000010  00 48 21 02 00 c9 00 14  40 30 38                 |.H!.....@08|"
 
 func createActionDefinitionFormat3() (*e2sm_kpm_v2_go.E2SmKpmActionDefinitionFormat3, error) {
 
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	var valEnum int64 = 201
 	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN

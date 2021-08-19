@@ -14,17 +14,17 @@ import (
 	"testing"
 )
 
-var refPerAD1 string = "00000000  00 00 03 6f 6e 66 00 00  40 20 74 72 69 61 6c 01  |...onf..@ trial.|\n" +
+var refPerAD1 = "00000000  00 00 03 6f 6e 66 00 00  40 20 74 72 69 61 6c 01  |...onf..@ trial.|\n" +
 	"00000010  3f ff e0 21 22 23 43 c0  01 02 03 00 0a 7c 0f 00  |?..!\"#@@.....|..|\n" +
 	"00000020  0f 00 01 70 00 00 fa 00  00 04 00 00 7a 00 01 c7  |...p........z...|\n" +
 	"00000030  00 03 14 00 14 40 30 38                           |.....@08|"
 
 func createActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefinitionFormat1, error) {
 
-	var cellObjID string = "onf"
+	var cellObjID = "onf"
 	var granularity int64 = 21
 	var subscriptionID int64 = 12345
-	var measurementName string = "trial"
+	var measurementName = "trial"
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x0f}
