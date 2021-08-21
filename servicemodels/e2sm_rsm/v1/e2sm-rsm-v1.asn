@@ -80,6 +80,12 @@ NodeSlicingCapability-Item ::= SEQUENCE {
     maxNumberOfSlicesUL       INTEGER(0..maxnoofSlices),
     slicingType               SlicingType,
     maxNumberOfUEsPerSlice    INTEGER,
+    supportedConfig           SEQUENCE (SIZE(1..5, ...)) OF SupportedSlicingConfig-Item,
+    ...
+}
+
+SupportedSlicingConfig-Item ::= SEQUENCE {
+    slicingConfigType     E2SM-RSM-Command,
     ...
 }
 
@@ -168,6 +174,7 @@ E2SM-RSM-Command ::= ENUMERATED {
     sliceUpdate,
     sliceDelete,
     ueAssociate,
+    eventTriggers,
     ...
 }
 
