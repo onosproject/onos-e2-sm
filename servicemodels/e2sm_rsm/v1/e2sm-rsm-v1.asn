@@ -5,7 +5,7 @@
 -- **************************************************************
 
 E2SM-RSM-IEs {
-iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1 (1) e2sm(2) e2sm-RSM-IEs (102)}
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version1 (1) e2sm(2) e2sm-RSM-IEs (102)}
 
 DEFINITIONS AUTOMATIC TAGS ::=
 

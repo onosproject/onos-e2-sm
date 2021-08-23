@@ -1,0 +1,505 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+*/
+
+////////////////////// e2sm-rsm-ies.proto //////////////////////
+// Protobuf generated from /e2sm-rsm-v1.asn by asn1c-0.9.29
+// E2SM-RSM-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1(1) e2sm(2) e2sm-RSM-IEs(102) }
+
+syntax = "proto3";
+
+package e2sm_rsm.v1;
+option go_package = "e2sm_rsm/v1/e2sm-rsm-ies";
+
+import "e2sm_rsm/v1/e2sm_v2.proto";
+//import "validate/v1/validate.proto";
+import "asn1/v1/asn1.proto";
+
+// enumerated from e2sm-rsm-v1.asn:45
+enum UeIdType {
+    UE_ID_TYPE_CU_UE_F1_AP_ID = 0;
+    UE_ID_TYPE_DU_UE_F1_AP_ID = 1;
+    UE_ID_TYPE_RAN_UE_NGAP_ID = 2;
+    UE_ID_TYPE_AMF_UE_NGAP_ID = 3;
+    UE_ID_TYPE_ENB_UE_S1_AP_ID = 4;
+};
+
+// enumerated from e2sm-rsm-v1.asn:73
+enum SlicingType {
+    SLICING_TYPE_STATIC = 0;
+    SLICING_TYPE_DYNAMIC = 1;
+};
+
+// enumerated from e2sm-rsm-v1.asn:109
+enum RsmTriggerType {
+    RSM_TRIGGER_TYPE_UE_ATTACH = 0;
+    RSM_TRIGGER_TYPE_UE_DETACH = 1;
+    RSM_TRIGGER_TYPE_HAND_IN_UE_ATTACH = 2;
+    RSM_TRIGGER_TYPE_HAND_OUT_UE_ATTACH = 3;
+};
+
+// enumerated from e2sm-rsm-v1.asn:151
+enum Emmcase {
+    EMMCASE_ATTACHED = 0;
+    EMMCASE_DETACHED = 1;
+};
+
+// enumerated from e2sm-rsm-v1.asn:173
+enum E2SmRsmCommand {
+    E2SM_RSM_COMMAND_SLICE_CREATE = 0;
+    E2SM_RSM_COMMAND_SLICE_UPDATE = 1;
+    E2SM_RSM_COMMAND_SLICE_DELETE = 2;
+    E2SM_RSM_COMMAND_UE_ASSOCIATE = 3;
+    E2SM_RSM_COMMAND_EVENT_TRIGGERS = 4;
+};
+
+// enumerated from e2sm-rsm-v1.asn:187
+enum SchedulerType {
+    SCHEDULER_TYPE_ROUND_ROBIN = 0;
+    SCHEDULER_TYPE_PROPORTIONALLY_FAIR = 1;
+    SCHEDULER_TYPE_QOS_BASED = 2;
+};
+
+// enumerated from e2sm-rsm-v1.asn:321
+enum AggregationLevelCap {
+    AGGREGATION_LEVEL_CAP_ONE = 0;
+    AGGREGATION_LEVEL_CAP_TWO = 1;
+    AGGREGATION_LEVEL_CAP_FOUR = 2;
+    AGGREGATION_LEVEL_CAP_EIGHT = 3;
+    AGGREGATION_LEVEL_CAP_SIXTEEN = 4;
+};
+
+// enumerated from e2sm-rsm-v1.asn:339
+enum FeatureStatus {
+    FEATURE_STATUS_ENABLE = 0;
+    FEATURE_STATUS_DISABLE = 1;
+};
+
+// enumerated from e2sm-rsm-v1.asn:344
+enum CarrierAggregationLevelCap {
+    CARRIER_AGGREGATION_LEVEL_CAP_ONE = 0;
+    CARRIER_AGGREGATION_LEVEL_CAP_TWO = 1;
+    CARRIER_AGGREGATION_LEVEL_CAP_THREE = 2;
+    CARRIER_AGGREGATION_LEVEL_CAP_FOUR = 3;
+};
+
+// constant Integer from e2sm-rsm-v1.asn:29
+// {-}
+message MaxnoofBearers {
+    // @inject_tag: aper:"valueLB:32,valueUB:32"
+    int32 value = 1 [(validate.v1.rules).int32.const = 32, json_name="value"];
+};
+
+// constant Integer from e2sm-rsm-v1.asn:30
+// {-}
+message MaxnoofUes {
+    // @inject_tag: aper:""
+    int32 value = 1 [(validate.v1.rules).int32.const = -1, json_name="value"];
+};
+
+// constant Integer from e2sm-rsm-v1.asn:31
+// {-}
+message MaxnoofSlices {
+    // @inject_tag: aper:"valueLB:4294967295,valueUB:4294967295"
+    int64 value = 1 [(validate.v1.rules).int32.const = -1, json_name="value"];
+};
+
+// range of Integer from e2sm-rsm-v1.asn:32
+// {SliceID}
+message SliceId {
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295"
+    int64 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 4294967295}, json_name="value"];
+};
+
+// range of Integer from e2sm-rsm-v1.asn:33
+// {SliceIDAssoc}
+message SliceIdassoc {
+    // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+};
+
+// sequence from e2sm-rsm-v1.asn:36
+// {UE-Identity}
+message UeIdentity {
+    // choice from e2sm-rsm-v1.asn:36
+    oneof ue_identity {
+        // @inject_tag: aper:"choiceIdx:1"
+        CuUeF1ApId cu_ue_f1_ap_id = 1 [ json_name="cuUeF1ApID"];
+        // @inject_tag: aper:"choiceIdx:2"
+        DuUeF1ApId du_ue_f1_ap_id = 2 [ json_name="duUeF1ApID"];
+        // @inject_tag: aper:"choiceIdx:3"
+        RanUeNgapId ran_ue_ngap_id = 3 [ json_name="ranUeNgapID"];
+        // @inject_tag: aper:"choiceIdx:4"
+        AmfUeNgapId amf_ue_ngap_id = 4 [ json_name="amfUeNgapID"];
+        // @inject_tag: aper:"choiceIdx:5"
+        EnbUeS1ApId enb_ue_s1_ap_id = 5 [ json_name="enbUeS1ApID"];
+    }
+};
+
+// range of Integer from e2sm-rsm-v1.asn:53
+// {CU-UE-F1AP-ID}
+message CuUeF1ApId {
+    // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+};
+
+// range of Integer from e2sm-rsm-v1.asn:54
+// {DU-UE-F1AP-ID}
+message DuUeF1ApId {
+    // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+};
+
+// range of Integer from e2sm-rsm-v1.asn:55
+// {RAN-UE-NGAP-ID}
+message RanUeNgapId {
+    // @inject_tag: aper:"valueLB:0,valueUB:1099511627775"
+    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 1099511627775}, json_name="value"];
+};
+
+// range of Integer from e2sm-rsm-v1.asn:56
+// {ENB-UE-S1AP-ID}
+message EnbUeS1ApId {
+    // @inject_tag: aper:"valueLB:0,valueUB:16777215"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 16777215}, json_name="value"];
+};
+
+// range of Integer from e2sm-rsm-v1.asn:58
+// {QFI}
+message Qfi {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:63"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 63}, json_name="value"];
+};
+
+// constant Integer from e2sm-rsm-v1.asn:64
+// {-}
+message MaxnoofSlicingNodes {
+    // @inject_tag: aper:"valueLB:4294967295,valueUB:4294967295"
+    int32 value = 1 [(validate.v1.rules).int32.const = -1, json_name="value"];
+};
+
+// sequence from e2sm-rsm-v1.asn:67
+// {GlobalSlicingNodeID}
+message GlobalSlicingNodeId {
+    // choice from e2sm-rsm-v1.asn:67
+    oneof global_slicing_node_id {
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
+        GlobalGnbId global_gnb_id = 1 [ json_name="globalGNB-ID"];
+        // @inject_tag: aper:"valueExt,choiceIdx:2"
+        GlobalEnbId global_enb_id = 2 [ json_name="globalENB-ID"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:79
+// {NodeSlicingCapability-Item}
+message NodeSlicingCapabilityItem {
+    // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+    int32 max_number_of_slices_dl = 1 [ json_name="maxNumberOfSlicesDL"];
+    // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+    int32 max_number_of_slices_ul = 2 [ json_name="maxNumberOfSlicesUL"];
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:1"
+    SlicingType slicing_type = 3 [ json_name="slicingType"];
+    int32 max_number_of_ues_per_slice = 4 [ json_name="maxNumberOfUEsPerSlice"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:5,sizeExt"
+    repeated SupportedSlicingConfigItem supported_config = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 5}, json_name="supportedConfig"];
+};
+
+// sequence from e2sm-rsm-v1.asn:88
+// {SupportedSlicingConfig-Item}
+message SupportedSlicingConfigItem {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
+    E2SmRsmCommand slicing_config_type = 1 [ json_name="slicingConfigType"];
+};
+
+// sequence from e2sm-rsm-v1.asn:97
+// {SliceMetrics}
+message SliceMetrics {
+    // @inject_tag: aper:"valueLB:0,valueUB:100"
+    int32 prb_utilization = 1 [ json_name="prbUtilization"];
+    // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+    int32 num_ue_assoc_to_slice = 2 [ json_name="numUeAssocToSlice"];
+    // @inject_tag: aper:"valueLB:0,valueUB:100"
+    int32 slice_level_bler = 3 [ json_name="sliceLevelBLER"];
+    // @inject_tag: aper:"valueLB:0,valueUB:15"
+    int32 avg_cqi = 4 [ json_name="avgCQI"];
+};
+
+// sequence from e2sm-rsm-v1.asn:120
+// {E2SM-RSM-EventTriggerDefinition}
+message E2SmRsmEventTriggerDefinition {
+    // @inject_tag: aper:"valueExt"
+    EventDefinitionFormats event_definition_formats = 1 [ json_name="eventDefinition-formats"];
+};
+
+// choice from e2sm-rsm-v1.asn:117
+// {E2SM-RSM-EventTriggerDefinition}
+message EventDefinitionFormats {
+    // choice from e2sm-rsm-v1.asn:117
+    oneof e2_sm_rsm_indication_header {
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
+        E2SmRsmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [ json_name="eventDefinition-Format1"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:125
+// {E2SM-RSM-EventTriggerDefinition-Format1}
+message E2SmRsmEventTriggerDefinitionFormat1 {
+    // @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:3"
+    RsmTriggerType trigger_type = 1 [ json_name="triggerType"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
+    repeated UeIdentity ue_idlist = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4}, json_name="ueIDlist"];
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
+    UeIdType preffered_ue_idtype = 3 [ json_name="prefferedUeIDType"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
+    repeated BearerId bearer_id = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 32}, json_name="bearerID"];
+};
+
+// sequence from e2sm-rsm-v1.asn:138
+// {E2SM-RSM-IndicationHeader}
+message E2SmRsmIndicationHeader {
+    // choice from e2sm-rsm-v1.asn:138
+    oneof e2_sm_rsm_indication_header {
+        // @inject_tag: aper:"valueExt"
+        E2SmRsmIndicationHeaderFormat1 indication_header_format1 = 1 [ json_name="indicationHeader-Format1"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:143
+// {E2SM-RSM-IndicationHeader-Format1}
+message E2SmRsmIndicationHeaderFormat1 {
+    // @inject_tag: aper:"valueExt"
+    Cgi cgi = 1 [ json_name="cgi"];
+};
+
+// sequence from e2sm-rsm-v1.asn:154
+// {E2SM-RSM-IndicationMessage}
+message E2SmRsmIndicationMessage {
+    // choice from e2sm-rsm-v1.asn:154
+    oneof e2_sm_rsm_indication_message {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRsmIndicationMessageFormat1 indication_message_format1 = 1 [ json_name="indicationMessage-Format1"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:159
+// {E2SM-RSM-IndicationMessage-Format1}
+message E2SmRsmIndicationMessageFormat1 {
+    // @inject_tag: aper:"valueExt"
+    UeIdentity ue_id = 1 [ json_name="ueId"];
+    CuUeF1ApId cu_ue_f1ap_id = 2 [ json_name="cuUeF1apId"];
+    DuUeF1ApId du_ue_f1ap_id = 3 [ json_name="duUeF1apId"];
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:1"
+    Emmcase emm_case = 4 [ json_name="emmCase"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4294967295"
+    repeated SliceMetrics ul_slicing_metrics = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="ulSlicingMetrics"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4294967295"
+    repeated SliceMetrics dl_slicing_metrics = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="dlSlicingMetrics"];
+};
+
+// sequence from e2sm-rsm-v1.asn:194
+// {SliceParameters}
+message SliceParameters {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:2"
+    SchedulerType scheduler_type = 1 [ json_name="schedulerType"];
+    // @inject_tag: aper:"optional,valueLB:1,valueUB:100"
+    optional int32 weight = 2 [ json_name="weight"];
+    // @inject_tag: aper:"optional,valueLB:1,valueUB:129,valueExt"
+    optional int32 qos_level = 3 [ json_name="qosLevel"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional ScheduleConfig schedule_info = 4 [ json_name="scheduleInfo"];
+};
+
+// sequence from e2sm-rsm-v1.asn:202
+// {SliceConfig}
+message SliceConfig {
+    SliceId slice_id = 1 [ json_name="sliceID"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:160,sizeExt"
+    optional string slice_description = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 160}, json_name="sliceDescription"];
+    // @inject_tag: aper:"valueExt"
+    SliceParameters slice_config_parameters = 3 [ json_name="sliceConfigParameters"];
+};
+
+// sequence from e2sm-rsm-v1.asn:209
+// {SliceDelete}
+message SliceDelete {
+    SliceId slice_id = 1 [ json_name="sliceID"];
+};
+
+// sequence from e2sm-rsm-v1.asn:218
+// {SliceAssociate}
+message SliceAssociate {
+    // @inject_tag: aper:"valueExt"
+    UeIdentity ue_id = 1 [ json_name="ueId"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
+    repeated BearerId bearer_id = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 32}, json_name="bearerID"];
+    SliceIdassoc down_link_slice_id = 3 [ json_name="downLinkSliceID"];
+    // @inject_tag: aper:"optional"
+    optional SliceIdassoc uplink_slice_id = 4 [ json_name="uplinkSliceID"];
+};
+
+// sequence from e2sm-rsm-v1.asn:226
+// {Bearer-ID}
+message BearerId {
+    // choice from e2sm-rsm-v1.asn:226
+    oneof bearer_id {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        DrbId drb_id = 1 [ json_name="drbID"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:231
+// {Drb-ID}
+message DrbId {
+    // choice from e2sm-rsm-v1.asn:231
+    oneof drb_id {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        FourGDrbId four_gdrb_id = 1 [ json_name="fourGDrbID"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        FiveGDrbId five_gdrb_id = 2 [ json_name="fiveGDrbID"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:237
+// {FiveG-Drb-ID}
+message FiveGDrbId {
+    // @inject_tag: aper:"valueLB:1,valueUB:32"
+    int32 value = 1 [ json_name="value"];
+    Qfi qfi = 2 [ json_name="qfi"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:64"
+    repeated QoSflowLevelParameters flows_map_to_drb = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 64}, json_name="flowsMapToDrb"];
+};
+
+// sequence from e2sm-rsm-v1.asn:244
+// {QoSflowLevelParameters}
+message QoSflowLevelParameters {
+    // choice from e2sm-rsm-v1.asn:244
+    oneof qo_sflow_level_parameters {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        DynamicFiveQi dynamic_five_qi = 1 [ json_name="dynamicFiveQi"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        NonDynamicFiveQi non_dynamic_five_qi = 2 [ json_name="nonDynamicFiveQi"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:250
+// {DynamicFiveQI}
+message DynamicFiveQi {
+    // @inject_tag: aper:"valueLB:0,valueUB:127,valueExt"
+    int32 priority_level = 1 [ json_name="priorityLevel"];
+    // @inject_tag: aper:"valueLB:0,valueUB:63,valueExt"
+    int32 packet_delay_budget = 2 [ json_name="packetDelayBudget"];
+    // @inject_tag: aper:"valueLB:0,valueUB:63,valueExt"
+    int32 packet_error_rate = 3 [ json_name="packetErrorRate"];
+};
+
+// sequence from e2sm-rsm-v1.asn:257
+// {NonDynamicFiveQI}
+message NonDynamicFiveQi {
+    FiveQi five_qi = 1 [ json_name="fiveQi"];
+};
+
+// sequence from e2sm-rsm-v1.asn:262
+// {FourG-Drb-ID}
+message FourGDrbId {
+    // @inject_tag: aper:"valueLB:1,valueUB:32"
+    int32 value = 1 [ json_name="value"];
+    Qci qci = 2 [ json_name="qci"];
+};
+
+// sequence from e2sm-rsm-v1.asn:273
+// {E2SM-RSM-RANfunction-Description}
+message E2SmRsmRanfunctionDescription {
+    // @inject_tag: aper:"valueExt"
+    RanfunctionName ran_function_name = 1 [ json_name="ranFunction-Name"];
+    // @inject_tag: aper:"sizeLB:1,sizeUB:4294967295,valueExt"
+    repeated GlobalSlicingNodeId ric_slicing_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="ric-Slicing-Node-List"];
+    // @inject_tag: aper:"sizeLB:1,sizeUB:4294967295,valueExt"
+    repeated NodeSlicingCapabilityItem ric_slicing_node_capability_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="ric-Slicing-Node-Capability-List"];
+};
+
+// sequence from e2sm-rsm-v1.asn:281
+// {E2SM-RSM-ControlHeader}
+message E2SmRsmControlHeader {
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
+    E2SmRsmCommand rsm_command = 1 [ json_name="rsm-command"];
+};
+
+// sequence from e2sm-rsm-v1.asn:287
+// {E2SM-RSM-ControlMessage}
+message E2SmRsmControlMessage {
+    // choice from e2sm-rsm-v1.asn:287
+    // @inject_tag: aper:"valueExt"
+    oneof e2_sm_rsm_control_message {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        SliceConfig slice_create = 1 [ json_name="sliceCreate"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        SliceConfig slice_update = 2 [ json_name="sliceUpdate"];
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        SliceDelete slice_delete = 3 [ json_name="sliceDelete"];
+        // @inject_tag: aper:"choiceIdx:4,valueExt"
+        SliceAssociate slice_associate = 4 [ json_name="sliceAssociate"];
+    }
+};
+
+// sequence from e2sm-rsm-v1.asn:300
+// {ScheduleConfig}
+message ScheduleConfig {
+    // @inject_tag: aper:"optional,valueExt"
+    optional LinkAdaptation link_adaptation = 1 [ json_name="linkAdaptation"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional FeatureConfig features = 2 [ json_name="features"];
+    // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:3"
+    optional CarrierAggregationLevelCap carrier_aggregation_cap = 3 [ json_name="carrierAggregationCap"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional UlpowerControl ul_power_control = 4 [ json_name="ulPowerControl"];
+};
+
+// sequence from e2sm-rsm-v1.asn:308
+// {LinkAdaptation}
+message LinkAdaptation {
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:15"
+    optional int32 cqi_cap = 1 [ json_name="cqiCap"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional int32 ri_cap = 2 [ json_name="riCap"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:4"
+    optional AggregationLevelCap aggregation_level_cap = 3 [ json_name="aggregationLevelCap"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:100"
+    optional int32 target_bler_dl = 4 [ json_name="targetBlerDL"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:100"
+    optional int32 target_bler_ul = 5 [ json_name="targetBlerUL"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:28"
+    optional int32 max_mcs = 6 [ json_name="maxMCS"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:28"
+    optional int32 min_mcs = 7 [ json_name="minMCS"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:2,valueExt"
+    optional int32 transmission_mode = 8 [ json_name="transmissionMode"];
+    // @inject_tag: aper:"optional"
+    optional HarqrextCap harq_retx_cap = 9 [ json_name="harqRetxCap"];
+};
+
+// sequence from e2sm-rsm-v1.asn:329
+// {HARQrextCap}
+message HarqrextCap {
+    // @inject_tag: aper:"optional,valueLB:1"
+    optional int64 dl = 1 [ json_name="dl"];
+    // @inject_tag: aper:"optional,valueLB:1"
+    optional int64 ul = 2 [ json_name="ul"];
+};
+
+// sequence from e2sm-rsm-v1.asn:334
+// {FeatureConfig}
+message FeatureConfig {
+    // @inject_tag: aper:"valueLB:0,valueUB:1"
+    optional FeatureStatus tti_bundling = 1 [ json_name="ttiBundling"];
+};
+
+// sequence from e2sm-rsm-v1.asn:352
+// {ULpowerControl}
+message UlpowerControl {
+    // @inject_tag: aper:"optional"
+    optional int64 pusch_target_snr = 1 [ json_name="puschTargetSNR"];
+    // @inject_tag: aper:"optional"
+    optional int64 pucch_target_snr = 2 [ json_name="pucchTargetSNR"];
+};
