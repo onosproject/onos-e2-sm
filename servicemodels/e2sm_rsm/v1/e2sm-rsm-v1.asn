@@ -13,8 +13,6 @@ BEGIN
 
 IMPORTS
 	RANfunction-Name,
-    GlobalGNB-ID,
-    GlobalENB-ID,
     FiveQI,
     QCI,
     AMF-UE-NGAP-ID,
@@ -62,12 +60,6 @@ QFI ::= INTEGER (0.. 63, ...)
 -- ***************************************************************
 
 maxnoofSlicingNodes INTEGER ::= 4294967295
-
-GlobalSlicingNodeID ::= CHOICE {
-	globalGNB-ID			GlobalGNB-ID,
-	globalENB-ID            GlobalENB-ID,
-	...
-}
 
 SlicingType ::= ENUMERATED{
     static,
@@ -271,7 +263,6 @@ FourG-Drb-ID ::= SEQUENCE {
  -- E2SM-RSM-RANfunction-Description
  E2SM-RSM-RANfunction-Description ::= SEQUENCE {
      ranFunction-Name    RANfunction-Name,
-     ric-Slicing-Node-List					            SEQUENCE (SIZE(1..maxnoofSlicingNodes)) OF GlobalSlicingNodeID,
      ric-Slicing-Node-Capability-List  					SEQUENCE (SIZE(1..maxnoofSlicingNodes)) OF NodeSlicingCapability-Item,
      ...
  }

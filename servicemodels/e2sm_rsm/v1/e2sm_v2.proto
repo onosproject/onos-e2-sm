@@ -10,7 +10,7 @@ SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 
 syntax = "proto3";
 
-package e2sm_v2.v1;
+package e2sm_rsm.v1;
 option go_package = "e2sm_rsm/v1/e2sm-v2-ies";
 
 import "validate/v1/validate.proto";
@@ -29,9 +29,9 @@ enum InterfaceType {
 
 // enumerated from ORAN-WG3.E2SM-v02.00.asn:101
 enum MessageType {
-    INITIATING_MESSAGE = 0;
-    SUCCESSFUL_OUTCOME = 1;
-    UNSUCCESSFUL_OUTCOME = 2;
+    MESSAGE_TYPE_INITIATING_MESSAGE = 0;
+    MESSAGE_TYPE_SUCCESSFUL_OUTCOME = 1;
+    MESSAGE_TYPE_UNSUCCESSFUL_OUTCOME = 2;
 };
 
 // enumerated from ORAN-WG3.E2SM-v02.00.asn:144
@@ -486,7 +486,7 @@ message Gummei {
 // {MME-UE-S1AP-ID}
 message MmeUeS1ApId {
     // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from ORAN-WG3.E2SM-v02.00.asn:301
@@ -545,7 +545,7 @@ message EUtraPci {
 // {E-UTRA-TAC}
 message EUtraTac {
     // @inject_tag: aper:"sizeLB:2,sizeUB:2"
-    bytes value = 1 [(validate.v1.rules).bytes = 2, json_name="value"];
+    bytes value = 1 [(validate.v1.rules).bytes.len = 2, json_name="value"];
 };
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:343
@@ -687,21 +687,21 @@ message SNssai {
 // {NG-RANnodeUEXnAPID}
 message NgRannodeUexnApid {
     // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from ORAN-WG3.E2SM-v02.00.asn:492
 // {GNB-CU-CP-UE-E1AP-ID}
 message GnbCuCpUeE1ApId {
     // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from ORAN-WG3.E2SM-v02.00.asn:495
 // {GNB-CU-UP-ID}
 message GnbCuUpId {
     // @inject_tag: aper:"valueLB:0,valueUB:68719476735"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 68719476735}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="value"];
 };
 
 // range of Integer from ORAN-WG3.E2SM-v02.00.asn:507
@@ -715,14 +715,14 @@ message FiveGsTac {
 // {GNB-CU-UE-F1AP-ID}
 message GnbCuUeF1ApId {
     // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from ORAN-WG3.E2SM-v02.00.asn:513
 // {GNB-DU-ID}
 message GnbDuId {
     // @inject_tag: aper:"valueLB:0,valueUB:68719476735"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 68719476735}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="value"];
 };
 
 // range of Integer from ORAN-WG3.E2SM-v02.00.asn:516

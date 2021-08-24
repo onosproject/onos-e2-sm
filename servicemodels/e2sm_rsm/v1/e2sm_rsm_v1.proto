@@ -14,7 +14,7 @@ package e2sm_rsm.v1;
 option go_package = "e2sm_rsm/v1/e2sm-rsm-ies";
 
 import "e2sm_rsm/v1/e2sm_v2.proto";
-//import "validate/v1/validate.proto";
+import "validate/v1/validate.proto";
 import "asn1/v1/asn1.proto";
 
 // enumerated from e2sm-rsm-v1.asn:45
@@ -48,11 +48,11 @@ enum Emmcase {
 
 // enumerated from e2sm-rsm-v1.asn:173
 enum E2SmRsmCommand {
-    E2SM_RSM_COMMAND_SLICE_CREATE = 0;
-    E2SM_RSM_COMMAND_SLICE_UPDATE = 1;
-    E2SM_RSM_COMMAND_SLICE_DELETE = 2;
-    E2SM_RSM_COMMAND_UE_ASSOCIATE = 3;
-    E2SM_RSM_COMMAND_EVENT_TRIGGERS = 4;
+    E2_SM_RSM_COMMAND_SLICE_CREATE = 0;
+    E2_SM_RSM_COMMAND_SLICE_UPDATE = 1;
+    E2_SM_RSM_COMMAND_SLICE_DELETE = 2;
+    E2_SM_RSM_COMMAND_UE_ASSOCIATE = 3;
+    E2_SM_RSM_COMMAND_EVENT_TRIGGERS = 4;
 };
 
 // enumerated from e2sm-rsm-v1.asn:187
@@ -110,14 +110,14 @@ message MaxnoofSlices {
 // {SliceID}
 message SliceId {
     // @inject_tag: aper:"valueLB:1,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from e2sm-rsm-v1.asn:33
 // {SliceIDAssoc}
 message SliceIdassoc {
     // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
 };
 
 // sequence from e2sm-rsm-v1.asn:36
@@ -142,21 +142,21 @@ message UeIdentity {
 // {CU-UE-F1AP-ID}
 message CuUeF1ApId {
     // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from e2sm-rsm-v1.asn:54
 // {DU-UE-F1AP-ID}
 message DuUeF1ApId {
     // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from e2sm-rsm-v1.asn:55
 // {RAN-UE-NGAP-ID}
 message RanUeNgapId {
     // @inject_tag: aper:"valueLB:0,valueUB:1099511627775"
-    int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 1099511627775}, json_name="value"];
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 1099511627775}, json_name="value"];
 };
 
 // range of Integer from e2sm-rsm-v1.asn:56
@@ -178,18 +178,6 @@ message Qfi {
 message MaxnoofSlicingNodes {
     // @inject_tag: aper:"valueLB:4294967295,valueUB:4294967295"
     int32 value = 1 [(validate.v1.rules).int32.const = -1, json_name="value"];
-};
-
-// sequence from e2sm-rsm-v1.asn:67
-// {GlobalSlicingNodeID}
-message GlobalSlicingNodeId {
-    // choice from e2sm-rsm-v1.asn:67
-    oneof global_slicing_node_id {
-        // @inject_tag: aper:"valueExt,choiceIdx:1"
-        GlobalGnbId global_gnb_id = 1 [ json_name="globalGNB-ID"];
-        // @inject_tag: aper:"valueExt,choiceIdx:2"
-        GlobalEnbId global_enb_id = 2 [ json_name="globalENB-ID"];
-    }
 };
 
 // sequence from e2sm-rsm-v1.asn:79
@@ -413,8 +401,6 @@ message FourGDrbId {
 message E2SmRsmRanfunctionDescription {
     // @inject_tag: aper:"valueExt"
     RanfunctionName ran_function_name = 1 [ json_name="ranFunction-Name"];
-    // @inject_tag: aper:"sizeLB:1,sizeUB:4294967295,valueExt"
-    repeated GlobalSlicingNodeId ric_slicing_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="ric-Slicing-Node-List"];
     // @inject_tag: aper:"sizeLB:1,sizeUB:4294967295,valueExt"
     repeated NodeSlicingCapabilityItem ric_slicing_node_capability_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="ric-Slicing-Node-Capability-List"];
 };
