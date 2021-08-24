@@ -225,7 +225,7 @@ message E2SmRsmEventTriggerDefinition {
 // {E2SM-RSM-EventTriggerDefinition}
 message EventDefinitionFormats {
     // choice from e2sm-rsm-v1.asn:117
-    oneof e2_sm_rsm_indication_header {
+    oneof e2_sm_rsm_event_definition {
         // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmRsmEventTriggerDefinitionFormat1 event_definition_format1 = 1 [ json_name="eventDefinition-Format1"];
     }
