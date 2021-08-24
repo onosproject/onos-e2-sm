@@ -55,3 +55,6 @@ protoc-go-inject-tag -input=servicemodels/test_sm_aper_go_lib/v1/test-sm-ies/tes
 
 cp -r github.com/onosproject/onos-e2-sm/* .
 rm -rf github.com
+
+cp -r servicemodels/github.com/onosproject/onos-e2-sm/* .
+rm -rf servicemodels/github.com

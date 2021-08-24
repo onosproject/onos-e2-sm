@@ -11,7 +11,7 @@ SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
 syntax = "proto3";
 
 package e2sm_rsm.v1;
-option go_package = "e2sm_rsm/v1/e2sm-v2-ies";
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies";
 
 import "validate/v1/validate.proto";
 import "asn1/v1/asn1.proto";

@@ -7,8 +7,8 @@
 package e2sm_rsm_ies
 
 import (
-	e2sm_v2_ies "e2sm_rsm/v1/e2sm-v2-ies"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
 	_ "github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -496,7 +496,7 @@ type MaxnoofBearers struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:32,valueUB:32"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:32,valueUB:32"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofBearers) Reset() {
@@ -596,7 +596,7 @@ type MaxnoofSlices struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:4294967295,valueUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:4294967295,valueUB:4294967295"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofSlices) Reset() {
@@ -646,7 +646,7 @@ type SliceId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:1,valueUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:4294967295"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *SliceId) Reset() {
@@ -696,7 +696,7 @@ type SliceIdassoc struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:4294967295"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *SliceIdassoc) Reset() {
@@ -836,27 +836,27 @@ type isUeIdentity_UeIdentity interface {
 
 type UeIdentity_CuUeF1ApId struct {
 	// @inject_tag: aper:"choiceIdx:1"
-	CuUeF1ApId *CuUeF1ApId `protobuf:"bytes,1,opt,name=cu_ue_f1_ap_id,json=cuUeF1ApID,proto3,oneof" aper:"choiceIdx:1"`
+	CuUeF1ApId *CuUeF1ApId `protobuf:"bytes,1,opt,name=cu_ue_f1_ap_id,json=cuUeF1ApID,proto3,oneof"`
 }
 
 type UeIdentity_DuUeF1ApId struct {
 	// @inject_tag: aper:"choiceIdx:2"
-	DuUeF1ApId *DuUeF1ApId `protobuf:"bytes,2,opt,name=du_ue_f1_ap_id,json=duUeF1ApID,proto3,oneof" aper:"choiceIdx:2"`
+	DuUeF1ApId *DuUeF1ApId `protobuf:"bytes,2,opt,name=du_ue_f1_ap_id,json=duUeF1ApID,proto3,oneof"`
 }
 
 type UeIdentity_RanUeNgapId struct {
 	// @inject_tag: aper:"choiceIdx:3"
-	RanUeNgapId *RanUeNgapId `protobuf:"bytes,3,opt,name=ran_ue_ngap_id,json=ranUeNgapID,proto3,oneof" aper:"choiceIdx:3"`
+	RanUeNgapId *RanUeNgapId `protobuf:"bytes,3,opt,name=ran_ue_ngap_id,json=ranUeNgapID,proto3,oneof"`
 }
 
 type UeIdentity_AmfUeNgapId struct {
 	// @inject_tag: aper:"choiceIdx:4"
-	AmfUeNgapId *e2sm_v2_ies.AmfUeNgapId `protobuf:"bytes,4,opt,name=amf_ue_ngap_id,json=amfUeNgapID,proto3,oneof" aper:"choiceIdx:4"`
+	AmfUeNgapId *e2sm_v2_ies.AmfUeNgapId `protobuf:"bytes,4,opt,name=amf_ue_ngap_id,json=amfUeNgapID,proto3,oneof"`
 }
 
 type UeIdentity_EnbUeS1ApId struct {
 	// @inject_tag: aper:"choiceIdx:5"
-	EnbUeS1ApId *EnbUeS1ApId `protobuf:"bytes,5,opt,name=enb_ue_s1_ap_id,json=enbUeS1ApID,proto3,oneof" aper:"choiceIdx:5"`
+	EnbUeS1ApId *EnbUeS1ApId `protobuf:"bytes,5,opt,name=enb_ue_s1_ap_id,json=enbUeS1ApID,proto3,oneof"`
 }
 
 func (*UeIdentity_CuUeF1ApId) isUeIdentity_UeIdentity() {}
@@ -877,7 +877,7 @@ type CuUeF1ApId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:4294967295"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *CuUeF1ApId) Reset() {
@@ -927,7 +927,7 @@ type DuUeF1ApId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:4294967295"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *DuUeF1ApId) Reset() {
@@ -977,7 +977,7 @@ type RanUeNgapId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:1099511627775"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:1099511627775"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *RanUeNgapId) Reset() {
@@ -1027,7 +1027,7 @@ type EnbUeS1ApId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:16777215"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:16777215"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *EnbUeS1ApId) Reset() {
@@ -1077,7 +1077,7 @@ type Qfi struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:63"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:63"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *Qfi) Reset() {
@@ -1127,7 +1127,7 @@ type MaxnoofSlicingNodes struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:4294967295,valueUB:4294967295"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:4294967295,valueUB:4294967295"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofSlicingNodes) Reset() {
@@ -1177,14 +1177,14 @@ type NodeSlicingCapabilityItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-	MaxNumberOfSlicesDl int32 `protobuf:"varint,1,opt,name=max_number_of_slices_dl,json=maxNumberOfSlicesDL,proto3" json:"max_number_of_slices_dl,omitempty" aper:"valueLB:0,valueUB:4294967295"`
+	MaxNumberOfSlicesDl int32 `protobuf:"varint,1,opt,name=max_number_of_slices_dl,json=maxNumberOfSlicesDL,proto3" json:"max_number_of_slices_dl,omitempty"`
 	// @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-	MaxNumberOfSlicesUl int32 `protobuf:"varint,2,opt,name=max_number_of_slices_ul,json=maxNumberOfSlicesUL,proto3" json:"max_number_of_slices_ul,omitempty" aper:"valueLB:0,valueUB:4294967295"`
+	MaxNumberOfSlicesUl int32 `protobuf:"varint,2,opt,name=max_number_of_slices_ul,json=maxNumberOfSlicesUL,proto3" json:"max_number_of_slices_ul,omitempty"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:1"
-	SlicingType            SlicingType `protobuf:"varint,3,opt,name=slicing_type,json=slicingType,proto3,enum=e2sm_rsm.v1.SlicingType" json:"slicing_type,omitempty" aper:"valueExt,valueLB:0,valueUB:1"`
+	SlicingType            SlicingType `protobuf:"varint,3,opt,name=slicing_type,json=slicingType,proto3,enum=e2sm_rsm.v1.SlicingType" json:"slicing_type,omitempty"`
 	MaxNumberOfUesPerSlice int32       `protobuf:"varint,4,opt,name=max_number_of_ues_per_slice,json=maxNumberOfUEsPerSlice,proto3" json:"max_number_of_ues_per_slice,omitempty"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:5,sizeExt"
-	SupportedConfig []*SupportedSlicingConfigItem `protobuf:"bytes,5,rep,name=supported_config,json=supportedConfig,proto3" json:"supported_config,omitempty" aper:"valueExt,sizeLB:1,sizeUB:5,sizeExt"`
+	SupportedConfig []*SupportedSlicingConfigItem `protobuf:"bytes,5,rep,name=supported_config,json=supportedConfig,proto3" json:"supported_config,omitempty"`
 }
 
 func (x *NodeSlicingCapabilityItem) Reset() {
@@ -1262,7 +1262,7 @@ type SupportedSlicingConfigItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
-	SlicingConfigType E2SmRsmCommand `protobuf:"varint,1,opt,name=slicing_config_type,json=slicingConfigType,proto3,enum=e2sm_rsm.v1.E2SmRsmCommand" json:"slicing_config_type,omitempty" aper:"valueExt,valueLB:0,valueUB:4"`
+	SlicingConfigType E2SmRsmCommand `protobuf:"varint,1,opt,name=slicing_config_type,json=slicingConfigType,proto3,enum=e2sm_rsm.v1.E2SmRsmCommand" json:"slicing_config_type,omitempty"`
 }
 
 func (x *SupportedSlicingConfigItem) Reset() {
@@ -1312,13 +1312,13 @@ type SliceMetrics struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:100"
-	PrbUtilization int32 `protobuf:"varint,1,opt,name=prb_utilization,json=prbUtilization,proto3" json:"prb_utilization,omitempty" aper:"valueLB:0,valueUB:100"`
+	PrbUtilization int32 `protobuf:"varint,1,opt,name=prb_utilization,json=prbUtilization,proto3" json:"prb_utilization,omitempty"`
 	// @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-	NumUeAssocToSlice int32 `protobuf:"varint,2,opt,name=num_ue_assoc_to_slice,json=numUeAssocToSlice,proto3" json:"num_ue_assoc_to_slice,omitempty" aper:"valueLB:0,valueUB:4294967295"`
+	NumUeAssocToSlice int32 `protobuf:"varint,2,opt,name=num_ue_assoc_to_slice,json=numUeAssocToSlice,proto3" json:"num_ue_assoc_to_slice,omitempty"`
 	// @inject_tag: aper:"valueLB:0,valueUB:100"
-	SliceLevelBler int32 `protobuf:"varint,3,opt,name=slice_level_bler,json=sliceLevelBLER,proto3" json:"slice_level_bler,omitempty" aper:"valueLB:0,valueUB:100"`
+	SliceLevelBler int32 `protobuf:"varint,3,opt,name=slice_level_bler,json=sliceLevelBLER,proto3" json:"slice_level_bler,omitempty"`
 	// @inject_tag: aper:"valueLB:0,valueUB:15"
-	AvgCqi int32 `protobuf:"varint,4,opt,name=avg_cqi,json=avgCQI,proto3" json:"avg_cqi,omitempty" aper:"valueLB:0,valueUB:15"`
+	AvgCqi int32 `protobuf:"varint,4,opt,name=avg_cqi,json=avgCQI,proto3" json:"avg_cqi,omitempty"`
 }
 
 func (x *SliceMetrics) Reset() {
@@ -1389,7 +1389,7 @@ type E2SmRsmEventTriggerDefinition struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	EventDefinitionFormats *EventDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"valueExt"`
+	EventDefinitionFormats *EventDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty"`
 }
 
 func (x *E2SmRsmEventTriggerDefinition) Reset() {
@@ -1497,7 +1497,7 @@ type isEventDefinitionFormats_E2SmRsmIndicationHeader interface {
 
 type EventDefinitionFormats_EventDefinitionFormat1 struct {
 	// @inject_tag: aper:"valueExt,choiceIdx:1"
-	EventDefinitionFormat1 *E2SmRsmEventTriggerDefinitionFormat1 `protobuf:"bytes,1,opt,name=event_definition_format1,json=eventDefinition-Format1,proto3,oneof" aper:"valueExt,choiceIdx:1"`
+	EventDefinitionFormat1 *E2SmRsmEventTriggerDefinitionFormat1 `protobuf:"bytes,1,opt,name=event_definition_format1,json=eventDefinition-Format1,proto3,oneof"`
 }
 
 func (*EventDefinitionFormats_EventDefinitionFormat1) isEventDefinitionFormats_E2SmRsmIndicationHeader() {
@@ -1511,13 +1511,13 @@ type E2SmRsmEventTriggerDefinitionFormat1 struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:3"
-	TriggerType RsmTriggerType `protobuf:"varint,1,opt,name=trigger_type,json=triggerType,proto3,enum=e2sm_rsm.v1.RsmTriggerType" json:"trigger_type,omitempty" aper:"valueExt,sizeLB:0,sizeUB:3"`
+	TriggerType RsmTriggerType `protobuf:"varint,1,opt,name=trigger_type,json=triggerType,proto3,enum=e2sm_rsm.v1.RsmTriggerType" json:"trigger_type,omitempty"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
-	UeIdlist []*UeIdentity `protobuf:"bytes,2,rep,name=ue_idlist,json=ueIDlist,proto3" json:"ue_idlist,omitempty" aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"`
+	UeIdlist []*UeIdentity `protobuf:"bytes,2,rep,name=ue_idlist,json=ueIDlist,proto3" json:"ue_idlist,omitempty"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
-	PrefferedUeIdtype UeIdType `protobuf:"varint,3,opt,name=preffered_ue_idtype,json=prefferedUeIDType,proto3,enum=e2sm_rsm.v1.UeIdType" json:"preffered_ue_idtype,omitempty" aper:"valueExt,valueLB:0,valueUB:4"`
+	PrefferedUeIdtype UeIdType `protobuf:"varint,3,opt,name=preffered_ue_idtype,json=prefferedUeIDType,proto3,enum=e2sm_rsm.v1.UeIdType" json:"preffered_ue_idtype,omitempty"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
-	BearerId []*BearerId `protobuf:"bytes,4,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"valueExt,sizeLB:1,sizeUB:32"`
+	BearerId []*BearerId `protobuf:"bytes,4,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty"`
 }
 
 func (x *E2SmRsmEventTriggerDefinitionFormat1) Reset() {
@@ -1646,7 +1646,7 @@ type isE2SmRsmIndicationHeader_E2SmRsmIndicationHeader interface {
 
 type E2SmRsmIndicationHeader_IndicationHeaderFormat1 struct {
 	// @inject_tag: aper:"valueExt"
-	IndicationHeaderFormat1 *E2SmRsmIndicationHeaderFormat1 `protobuf:"bytes,1,opt,name=indication_header_format1,json=indicationHeader-Format1,proto3,oneof" aper:"valueExt"`
+	IndicationHeaderFormat1 *E2SmRsmIndicationHeaderFormat1 `protobuf:"bytes,1,opt,name=indication_header_format1,json=indicationHeader-Format1,proto3,oneof"`
 }
 
 func (*E2SmRsmIndicationHeader_IndicationHeaderFormat1) isE2SmRsmIndicationHeader_E2SmRsmIndicationHeader() {
@@ -1660,7 +1660,7 @@ type E2SmRsmIndicationHeaderFormat1 struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	Cgi *e2sm_v2_ies.Cgi `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"valueExt"`
+	Cgi *e2sm_v2_ies.Cgi `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty"`
 }
 
 func (x *E2SmRsmIndicationHeaderFormat1) Reset() {
@@ -1768,7 +1768,7 @@ type isE2SmRsmIndicationMessage_E2SmRsmIndicationMessage interface {
 
 type E2SmRsmIndicationMessage_IndicationMessageFormat1 struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	IndicationMessageFormat1 *E2SmRsmIndicationMessageFormat1 `protobuf:"bytes,1,opt,name=indication_message_format1,json=indicationMessage-Format1,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	IndicationMessageFormat1 *E2SmRsmIndicationMessageFormat1 `protobuf:"bytes,1,opt,name=indication_message_format1,json=indicationMessage-Format1,proto3,oneof"`
 }
 
 func (*E2SmRsmIndicationMessage_IndicationMessageFormat1) isE2SmRsmIndicationMessage_E2SmRsmIndicationMessage() {
@@ -1782,15 +1782,15 @@ type E2SmRsmIndicationMessageFormat1 struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	UeId       *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty" aper:"valueExt"`
+	UeId       *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty"`
 	CuUeF1ApId *CuUeF1ApId `protobuf:"bytes,2,opt,name=cu_ue_f1ap_id,json=cuUeF1apId,proto3" json:"cu_ue_f1ap_id,omitempty"`
 	DuUeF1ApId *DuUeF1ApId `protobuf:"bytes,3,opt,name=du_ue_f1ap_id,json=duUeF1apId,proto3" json:"du_ue_f1ap_id,omitempty"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:1"
-	EmmCase Emmcase `protobuf:"varint,4,opt,name=emm_case,json=emmCase,proto3,enum=e2sm_rsm.v1.Emmcase" json:"emm_case,omitempty" aper:"valueExt,valueLB:0,valueUB:1"`
+	EmmCase Emmcase `protobuf:"varint,4,opt,name=emm_case,json=emmCase,proto3,enum=e2sm_rsm.v1.Emmcase" json:"emm_case,omitempty"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4294967295"
-	UlSlicingMetrics []*SliceMetrics `protobuf:"bytes,5,rep,name=ul_slicing_metrics,json=ulSlicingMetrics,proto3" json:"ul_slicing_metrics,omitempty" aper:"valueExt,sizeLB:1,sizeUB:4294967295"`
+	UlSlicingMetrics []*SliceMetrics `protobuf:"bytes,5,rep,name=ul_slicing_metrics,json=ulSlicingMetrics,proto3" json:"ul_slicing_metrics,omitempty"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4294967295"
-	DlSlicingMetrics []*SliceMetrics `protobuf:"bytes,6,rep,name=dl_slicing_metrics,json=dlSlicingMetrics,proto3" json:"dl_slicing_metrics,omitempty" aper:"valueExt,sizeLB:1,sizeUB:4294967295"`
+	DlSlicingMetrics []*SliceMetrics `protobuf:"bytes,6,rep,name=dl_slicing_metrics,json=dlSlicingMetrics,proto3" json:"dl_slicing_metrics,omitempty"`
 }
 
 func (x *E2SmRsmIndicationMessageFormat1) Reset() {
@@ -1875,13 +1875,13 @@ type SliceParameters struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:2"
-	SchedulerType SchedulerType `protobuf:"varint,1,opt,name=scheduler_type,json=schedulerType,proto3,enum=e2sm_rsm.v1.SchedulerType" json:"scheduler_type,omitempty" aper:"valueExt,valueLB:0,valueUB:2"`
+	SchedulerType SchedulerType `protobuf:"varint,1,opt,name=scheduler_type,json=schedulerType,proto3,enum=e2sm_rsm.v1.SchedulerType" json:"scheduler_type,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:1,valueUB:100"
-	Weight *int32 `protobuf:"varint,2,opt,name=weight,proto3,oneof" json:"weight,omitempty" aper:"optional,valueLB:1,valueUB:100"`
+	Weight *int32 `protobuf:"varint,2,opt,name=weight,proto3,oneof" json:"weight,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:1,valueUB:129,valueExt"
-	QosLevel *int32 `protobuf:"varint,3,opt,name=qos_level,json=qosLevel,proto3,oneof" json:"qos_level,omitempty" aper:"optional,valueLB:1,valueUB:129,valueExt"`
+	QosLevel *int32 `protobuf:"varint,3,opt,name=qos_level,json=qosLevel,proto3,oneof" json:"qos_level,omitempty"`
 	// @inject_tag: aper:"optional,valueExt"
-	ScheduleInfo *ScheduleConfig `protobuf:"bytes,4,opt,name=schedule_info,json=scheduleInfo,proto3,oneof" json:"schedule_info,omitempty" aper:"optional,valueExt"`
+	ScheduleInfo *ScheduleConfig `protobuf:"bytes,4,opt,name=schedule_info,json=scheduleInfo,proto3,oneof" json:"schedule_info,omitempty"`
 }
 
 func (x *SliceParameters) Reset() {
@@ -1953,9 +1953,9 @@ type SliceConfig struct {
 
 	SliceId *SliceId `protobuf:"bytes,1,opt,name=slice_id,json=sliceID,proto3" json:"slice_id,omitempty"`
 	// @inject_tag: aper:"optional,sizeLB:1,sizeUB:160,sizeExt"
-	SliceDescription *string `protobuf:"bytes,2,opt,name=slice_description,json=sliceDescription,proto3,oneof" json:"slice_description,omitempty" aper:"optional,sizeLB:1,sizeUB:160,sizeExt"`
+	SliceDescription *string `protobuf:"bytes,2,opt,name=slice_description,json=sliceDescription,proto3,oneof" json:"slice_description,omitempty"`
 	// @inject_tag: aper:"valueExt"
-	SliceConfigParameters *SliceParameters `protobuf:"bytes,3,opt,name=slice_config_parameters,json=sliceConfigParameters,proto3" json:"slice_config_parameters,omitempty" aper:"valueExt"`
+	SliceConfigParameters *SliceParameters `protobuf:"bytes,3,opt,name=slice_config_parameters,json=sliceConfigParameters,proto3" json:"slice_config_parameters,omitempty"`
 }
 
 func (x *SliceConfig) Reset() {
@@ -2068,12 +2068,12 @@ type SliceAssociate struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	UeId *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty" aper:"valueExt"`
+	UeId *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
-	BearerId        []*BearerId   `protobuf:"bytes,2,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"valueExt,sizeLB:1,sizeUB:32"`
+	BearerId        []*BearerId   `protobuf:"bytes,2,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty"`
 	DownLinkSliceId *SliceIdassoc `protobuf:"bytes,3,opt,name=down_link_slice_id,json=downLinkSliceID,proto3" json:"down_link_slice_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	UplinkSliceId *SliceIdassoc `protobuf:"bytes,4,opt,name=uplink_slice_id,json=uplinkSliceID,proto3,oneof" json:"uplink_slice_id,omitempty" aper:"optional"`
+	UplinkSliceId *SliceIdassoc `protobuf:"bytes,4,opt,name=uplink_slice_id,json=uplinkSliceID,proto3,oneof" json:"uplink_slice_id,omitempty"`
 }
 
 func (x *SliceAssociate) Reset() {
@@ -2202,7 +2202,7 @@ type isBearerId_BearerId interface {
 
 type BearerId_DrbId struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	DrbId *DrbId `protobuf:"bytes,1,opt,name=drb_id,json=drbID,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	DrbId *DrbId `protobuf:"bytes,1,opt,name=drb_id,json=drbID,proto3,oneof"`
 }
 
 func (*BearerId_DrbId) isBearerId_BearerId() {}
@@ -2281,12 +2281,12 @@ type isDrbId_DrbId interface {
 
 type DrbId_FourGdrbId struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	FourGdrbId *FourGDrbId `protobuf:"bytes,1,opt,name=four_gdrb_id,json=fourGDrbID,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	FourGdrbId *FourGDrbId `protobuf:"bytes,1,opt,name=four_gdrb_id,json=fourGDrbID,proto3,oneof"`
 }
 
 type DrbId_FiveGdrbId struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt"
-	FiveGdrbId *FiveGDrbId `protobuf:"bytes,2,opt,name=five_gdrb_id,json=fiveGDrbID,proto3,oneof" aper:"choiceIdx:2,valueExt"`
+	FiveGdrbId *FiveGDrbId `protobuf:"bytes,2,opt,name=five_gdrb_id,json=fiveGDrbID,proto3,oneof"`
 }
 
 func (*DrbId_FourGdrbId) isDrbId_DrbId() {}
@@ -2301,10 +2301,10 @@ type FiveGDrbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:1,valueUB:32"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:32"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	Qfi   *Qfi  `protobuf:"bytes,2,opt,name=qfi,proto3" json:"qfi,omitempty"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:64"
-	FlowsMapToDrb []*QoSflowLevelParameters `protobuf:"bytes,3,rep,name=flows_map_to_drb,json=flowsMapToDrb,proto3" json:"flows_map_to_drb,omitempty" aper:"valueExt,sizeLB:1,sizeUB:64"`
+	FlowsMapToDrb []*QoSflowLevelParameters `protobuf:"bytes,3,rep,name=flows_map_to_drb,json=flowsMapToDrb,proto3" json:"flows_map_to_drb,omitempty"`
 }
 
 func (x *FiveGDrbId) Reset() {
@@ -2434,12 +2434,12 @@ type isQoSflowLevelParameters_QoSflowLevelParameters interface {
 
 type QoSflowLevelParameters_DynamicFiveQi struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	DynamicFiveQi *DynamicFiveQi `protobuf:"bytes,1,opt,name=dynamic_five_qi,json=dynamicFiveQi,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	DynamicFiveQi *DynamicFiveQi `protobuf:"bytes,1,opt,name=dynamic_five_qi,json=dynamicFiveQi,proto3,oneof"`
 }
 
 type QoSflowLevelParameters_NonDynamicFiveQi struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt"
-	NonDynamicFiveQi *NonDynamicFiveQi `protobuf:"bytes,2,opt,name=non_dynamic_five_qi,json=nonDynamicFiveQi,proto3,oneof" aper:"choiceIdx:2,valueExt"`
+	NonDynamicFiveQi *NonDynamicFiveQi `protobuf:"bytes,2,opt,name=non_dynamic_five_qi,json=nonDynamicFiveQi,proto3,oneof"`
 }
 
 func (*QoSflowLevelParameters_DynamicFiveQi) isQoSflowLevelParameters_QoSflowLevelParameters() {}
@@ -2454,11 +2454,11 @@ type DynamicFiveQi struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:127,valueExt"
-	PriorityLevel int32 `protobuf:"varint,1,opt,name=priority_level,json=priorityLevel,proto3" json:"priority_level,omitempty" aper:"valueLB:0,valueUB:127,valueExt"`
+	PriorityLevel int32 `protobuf:"varint,1,opt,name=priority_level,json=priorityLevel,proto3" json:"priority_level,omitempty"`
 	// @inject_tag: aper:"valueLB:0,valueUB:63,valueExt"
-	PacketDelayBudget int32 `protobuf:"varint,2,opt,name=packet_delay_budget,json=packetDelayBudget,proto3" json:"packet_delay_budget,omitempty" aper:"valueLB:0,valueUB:63,valueExt"`
+	PacketDelayBudget int32 `protobuf:"varint,2,opt,name=packet_delay_budget,json=packetDelayBudget,proto3" json:"packet_delay_budget,omitempty"`
 	// @inject_tag: aper:"valueLB:0,valueUB:63,valueExt"
-	PacketErrorRate int32 `protobuf:"varint,3,opt,name=packet_error_rate,json=packetErrorRate,proto3" json:"packet_error_rate,omitempty" aper:"valueLB:0,valueUB:63,valueExt"`
+	PacketErrorRate int32 `protobuf:"varint,3,opt,name=packet_error_rate,json=packetErrorRate,proto3" json:"packet_error_rate,omitempty"`
 }
 
 func (x *DynamicFiveQi) Reset() {
@@ -2571,7 +2571,7 @@ type FourGDrbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:1,valueUB:32"
-	Value int32            `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:32"`
+	Value int32            `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	Qci   *e2sm_v2_ies.Qci `protobuf:"bytes,2,opt,name=qci,proto3" json:"qci,omitempty"`
 }
 
@@ -2629,9 +2629,9 @@ type E2SmRsmRanfunctionDescription struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	RanFunctionName *e2sm_v2_ies.RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty" aper:"valueExt"`
+	RanFunctionName *e2sm_v2_ies.RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty"`
 	// @inject_tag: aper:"sizeLB:1,sizeUB:4294967295,valueExt"
-	RicSlicingNodeCapabilityList []*NodeSlicingCapabilityItem `protobuf:"bytes,3,rep,name=ric_slicing_node_capability_list,json=ric-Slicing-Node-Capability-List,proto3" json:"ric_slicing_node_capability_list,omitempty" aper:"sizeLB:1,sizeUB:4294967295,valueExt"`
+	RicSlicingNodeCapabilityList []*NodeSlicingCapabilityItem `protobuf:"bytes,3,rep,name=ric_slicing_node_capability_list,json=ric-Slicing-Node-Capability-List,proto3" json:"ric_slicing_node_capability_list,omitempty"`
 }
 
 func (x *E2SmRsmRanfunctionDescription) Reset() {
@@ -2688,7 +2688,7 @@ type E2SmRsmControlHeader struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
-	RsmCommand E2SmRsmCommand `protobuf:"varint,1,opt,name=rsm_command,json=rsm-command,proto3,enum=e2sm_rsm.v1.E2SmRsmCommand" json:"rsm_command,omitempty" aper:"valueExt,valueLB:0,valueUB:4"`
+	RsmCommand E2SmRsmCommand `protobuf:"varint,1,opt,name=rsm_command,json=rsm-command,proto3,enum=e2sm_rsm.v1.E2SmRsmCommand" json:"rsm_command,omitempty"`
 }
 
 func (x *E2SmRsmControlHeader) Reset() {
@@ -2745,7 +2745,7 @@ type E2SmRsmControlMessage struct {
 	//	*E2SmRsmControlMessage_SliceUpdate
 	//	*E2SmRsmControlMessage_SliceDelete
 	//	*E2SmRsmControlMessage_SliceAssociate
-	E2SmRsmControlMessage isE2SmRsmControlMessage_E2SmRsmControlMessage `protobuf_oneof:"e2_sm_rsm_control_message" aper:"valueExt"`
+	E2SmRsmControlMessage isE2SmRsmControlMessage_E2SmRsmControlMessage `protobuf_oneof:"e2_sm_rsm_control_message"`
 }
 
 func (x *E2SmRsmControlMessage) Reset() {
@@ -2821,22 +2821,22 @@ type isE2SmRsmControlMessage_E2SmRsmControlMessage interface {
 
 type E2SmRsmControlMessage_SliceCreate struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	SliceCreate *SliceConfig `protobuf:"bytes,1,opt,name=slice_create,json=sliceCreate,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	SliceCreate *SliceConfig `protobuf:"bytes,1,opt,name=slice_create,json=sliceCreate,proto3,oneof"`
 }
 
 type E2SmRsmControlMessage_SliceUpdate struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt"
-	SliceUpdate *SliceConfig `protobuf:"bytes,2,opt,name=slice_update,json=sliceUpdate,proto3,oneof" aper:"choiceIdx:2,valueExt"`
+	SliceUpdate *SliceConfig `protobuf:"bytes,2,opt,name=slice_update,json=sliceUpdate,proto3,oneof"`
 }
 
 type E2SmRsmControlMessage_SliceDelete struct {
 	// @inject_tag: aper:"choiceIdx:3,valueExt"
-	SliceDelete *SliceDelete `protobuf:"bytes,3,opt,name=slice_delete,json=sliceDelete,proto3,oneof" aper:"choiceIdx:3,valueExt"`
+	SliceDelete *SliceDelete `protobuf:"bytes,3,opt,name=slice_delete,json=sliceDelete,proto3,oneof"`
 }
 
 type E2SmRsmControlMessage_SliceAssociate struct {
 	// @inject_tag: aper:"choiceIdx:4,valueExt"
-	SliceAssociate *SliceAssociate `protobuf:"bytes,4,opt,name=slice_associate,json=sliceAssociate,proto3,oneof" aper:"choiceIdx:4,valueExt"`
+	SliceAssociate *SliceAssociate `protobuf:"bytes,4,opt,name=slice_associate,json=sliceAssociate,proto3,oneof"`
 }
 
 func (*E2SmRsmControlMessage_SliceCreate) isE2SmRsmControlMessage_E2SmRsmControlMessage() {}
@@ -2855,13 +2855,13 @@ type ScheduleConfig struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"optional,valueExt"
-	LinkAdaptation *LinkAdaptation `protobuf:"bytes,1,opt,name=link_adaptation,json=linkAdaptation,proto3,oneof" json:"link_adaptation,omitempty" aper:"optional,valueExt"`
+	LinkAdaptation *LinkAdaptation `protobuf:"bytes,1,opt,name=link_adaptation,json=linkAdaptation,proto3,oneof" json:"link_adaptation,omitempty"`
 	// @inject_tag: aper:"optional,valueExt"
-	Features *FeatureConfig `protobuf:"bytes,2,opt,name=features,proto3,oneof" json:"features,omitempty" aper:"optional,valueExt"`
+	Features *FeatureConfig `protobuf:"bytes,2,opt,name=features,proto3,oneof" json:"features,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:3"
-	CarrierAggregationCap *CarrierAggregationLevelCap `protobuf:"varint,3,opt,name=carrier_aggregation_cap,json=carrierAggregationCap,proto3,enum=e2sm_rsm.v1.CarrierAggregationLevelCap,oneof" json:"carrier_aggregation_cap,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:3"`
+	CarrierAggregationCap *CarrierAggregationLevelCap `protobuf:"varint,3,opt,name=carrier_aggregation_cap,json=carrierAggregationCap,proto3,enum=e2sm_rsm.v1.CarrierAggregationLevelCap,oneof" json:"carrier_aggregation_cap,omitempty"`
 	// @inject_tag: aper:"optional,valueExt"
-	UlPowerControl *UlpowerControl `protobuf:"bytes,4,opt,name=ul_power_control,json=ulPowerControl,proto3,oneof" json:"ul_power_control,omitempty" aper:"optional,valueExt"`
+	UlPowerControl *UlpowerControl `protobuf:"bytes,4,opt,name=ul_power_control,json=ulPowerControl,proto3,oneof" json:"ul_power_control,omitempty"`
 }
 
 func (x *ScheduleConfig) Reset() {
@@ -2932,23 +2932,23 @@ type LinkAdaptation struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:15"
-	CqiCap *int32 `protobuf:"varint,1,opt,name=cqi_cap,json=cqiCap,proto3,oneof" json:"cqi_cap,omitempty" aper:"optional,valueLB:0,valueUB:15"`
+	CqiCap *int32 `protobuf:"varint,1,opt,name=cqi_cap,json=cqiCap,proto3,oneof" json:"cqi_cap,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
-	RiCap *int32 `protobuf:"varint,2,opt,name=ri_cap,json=riCap,proto3,oneof" json:"ri_cap,omitempty" aper:"optional,valueLB:0,valueUB:1,valueExt"`
+	RiCap *int32 `protobuf:"varint,2,opt,name=ri_cap,json=riCap,proto3,oneof" json:"ri_cap,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:4"
-	AggregationLevelCap *AggregationLevelCap `protobuf:"varint,3,opt,name=aggregation_level_cap,json=aggregationLevelCap,proto3,enum=e2sm_rsm.v1.AggregationLevelCap,oneof" json:"aggregation_level_cap,omitempty" aper:"optional,valueLB:0,valueUB:4"`
+	AggregationLevelCap *AggregationLevelCap `protobuf:"varint,3,opt,name=aggregation_level_cap,json=aggregationLevelCap,proto3,enum=e2sm_rsm.v1.AggregationLevelCap,oneof" json:"aggregation_level_cap,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:100"
-	TargetBlerDl *int32 `protobuf:"varint,4,opt,name=target_bler_dl,json=targetBlerDL,proto3,oneof" json:"target_bler_dl,omitempty" aper:"optional,valueLB:0,valueUB:100"`
+	TargetBlerDl *int32 `protobuf:"varint,4,opt,name=target_bler_dl,json=targetBlerDL,proto3,oneof" json:"target_bler_dl,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:100"
-	TargetBlerUl *int32 `protobuf:"varint,5,opt,name=target_bler_ul,json=targetBlerUL,proto3,oneof" json:"target_bler_ul,omitempty" aper:"optional,valueLB:0,valueUB:100"`
+	TargetBlerUl *int32 `protobuf:"varint,5,opt,name=target_bler_ul,json=targetBlerUL,proto3,oneof" json:"target_bler_ul,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:28"
-	MaxMcs *int32 `protobuf:"varint,6,opt,name=max_mcs,json=maxMCS,proto3,oneof" json:"max_mcs,omitempty" aper:"optional,valueLB:0,valueUB:28"`
+	MaxMcs *int32 `protobuf:"varint,6,opt,name=max_mcs,json=maxMCS,proto3,oneof" json:"max_mcs,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:28"
-	MinMcs *int32 `protobuf:"varint,7,opt,name=min_mcs,json=minMCS,proto3,oneof" json:"min_mcs,omitempty" aper:"optional,valueLB:0,valueUB:28"`
+	MinMcs *int32 `protobuf:"varint,7,opt,name=min_mcs,json=minMCS,proto3,oneof" json:"min_mcs,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:2,valueExt"
-	TransmissionMode *int32 `protobuf:"varint,8,opt,name=transmission_mode,json=transmissionMode,proto3,oneof" json:"transmission_mode,omitempty" aper:"optional,valueLB:0,valueUB:2,valueExt"`
+	TransmissionMode *int32 `protobuf:"varint,8,opt,name=transmission_mode,json=transmissionMode,proto3,oneof" json:"transmission_mode,omitempty"`
 	// @inject_tag: aper:"optional"
-	HarqRetxCap *HarqrextCap `protobuf:"bytes,9,opt,name=harq_retx_cap,json=harqRetxCap,proto3,oneof" json:"harq_retx_cap,omitempty" aper:"optional"`
+	HarqRetxCap *HarqrextCap `protobuf:"bytes,9,opt,name=harq_retx_cap,json=harqRetxCap,proto3,oneof" json:"harq_retx_cap,omitempty"`
 }
 
 func (x *LinkAdaptation) Reset() {
@@ -3054,9 +3054,9 @@ type HarqrextCap struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"optional,valueLB:1"
-	Dl *int64 `protobuf:"varint,1,opt,name=dl,proto3,oneof" json:"dl,omitempty" aper:"optional,valueLB:1"`
+	Dl *int64 `protobuf:"varint,1,opt,name=dl,proto3,oneof" json:"dl,omitempty"`
 	// @inject_tag: aper:"optional,valueLB:1"
-	Ul *int64 `protobuf:"varint,2,opt,name=ul,proto3,oneof" json:"ul,omitempty" aper:"optional,valueLB:1"`
+	Ul *int64 `protobuf:"varint,2,opt,name=ul,proto3,oneof" json:"ul,omitempty"`
 }
 
 func (x *HarqrextCap) Reset() {
@@ -3113,7 +3113,7 @@ type FeatureConfig struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:1"
-	TtiBundling *FeatureStatus `protobuf:"varint,1,opt,name=tti_bundling,json=ttiBundling,proto3,enum=e2sm_rsm.v1.FeatureStatus,oneof" json:"tti_bundling,omitempty" aper:"valueLB:0,valueUB:1"`
+	TtiBundling *FeatureStatus `protobuf:"varint,1,opt,name=tti_bundling,json=ttiBundling,proto3,enum=e2sm_rsm.v1.FeatureStatus,oneof" json:"tti_bundling,omitempty"`
 }
 
 func (x *FeatureConfig) Reset() {
@@ -3163,9 +3163,9 @@ type UlpowerControl struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"optional"
-	PuschTargetSnr *int64 `protobuf:"varint,1,opt,name=pusch_target_snr,json=puschTargetSNR,proto3,oneof" json:"pusch_target_snr,omitempty" aper:"optional"`
+	PuschTargetSnr *int64 `protobuf:"varint,1,opt,name=pusch_target_snr,json=puschTargetSNR,proto3,oneof" json:"pusch_target_snr,omitempty"`
 	// @inject_tag: aper:"optional"
-	PucchTargetSnr *int64 `protobuf:"varint,2,opt,name=pucch_target_snr,json=pucchTargetSNR,proto3,oneof" json:"pucch_target_snr,omitempty" aper:"optional"`
+	PucchTargetSnr *int64 `protobuf:"varint,2,opt,name=pucch_target_snr,json=pucchTargetSNR,proto3,oneof" json:"pucch_target_snr,omitempty"`
 }
 
 func (x *UlpowerControl) Reset() {
@@ -3719,7 +3719,10 @@ var file_e2sm_rsm_v1_e2sm_rsm_v1_proto_rawDesc = []byte{
 	0x45, 0x4c, 0x5f, 0x43, 0x41, 0x50, 0x5f, 0x54, 0x48, 0x52, 0x45, 0x45, 0x10, 0x02, 0x12, 0x26,
 	0x0a, 0x22, 0x43, 0x41, 0x52, 0x52, 0x49, 0x45, 0x52, 0x5f, 0x41, 0x47, 0x47, 0x52, 0x45, 0x47,
 	0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x5f, 0x43, 0x41, 0x50, 0x5f,
-	0x46, 0x4f, 0x55, 0x52, 0x10, 0x03, 0x42, 0x1a, 0x5a, 0x18, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x72,
+	0x46, 0x4f, 0x55, 0x52, 0x10, 0x03, 0x42, 0x4a, 0x5a, 0x48, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6f, 0x6e, 0x6f, 0x73, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x2f, 0x6f, 0x6e, 0x6f, 0x73, 0x2d, 0x65, 0x32, 0x2d, 0x73, 0x6d, 0x2f, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x73, 0x2f, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x72,
 	0x73, 0x6d, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x32, 0x73, 0x6d, 0x2d, 0x72, 0x73, 0x6d, 0x2d, 0x69,
 	0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
