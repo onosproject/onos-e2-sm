@@ -10,7 +10,7 @@ ONOS_E2_SM_VERSION := latest
 ONOS_BUILD_VERSION := v0.6.9
 ONOS_PROTOC_VERSION := v0.6.9
 
-BUF_VERSION := 0.49.0
+BUF_VERSION := 0.52.0
 
 build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
 	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
@@ -47,6 +47,7 @@ test: license_check build build_protoc_gen_cgo build_protoc_gen_choice linters
 	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_kpm_v2_go && go test -race ./...
 	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_rsm && go test -race ./...
 	cd servicemodels/test_sm_aper_go_lib && GODEBUG=cgocheck=0 go test -race ./...
 
 jenkins-test:  # @HELP run the unit tests and source code validation producing a junit style report for Jenkins
@@ -79,6 +80,7 @@ linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_mho && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_rsm && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-cgo/ && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-choice/ && golangci-lint run --timeout 5m && cd ..
