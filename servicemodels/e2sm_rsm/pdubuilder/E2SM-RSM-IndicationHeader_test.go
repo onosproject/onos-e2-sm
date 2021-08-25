@@ -5,6 +5,8 @@
 package pdubuilder
 
 import (
+	"encoding/hex"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
@@ -25,6 +27,15 @@ func Test_E2SmRsmIndicationHeaderNrCellID(t *testing.T) {
 	t.Logf("Created E2SM-RSM-IndicationHeader is \n%v", ih)
 
 	//ToDo - embed APER validation
+	per, err := encoder.PerEncodeE2SmRsmIndicationHeader(ih)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-IndicationHeader PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmIndicationHeader(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-IndicationHeader PER - decoded\n%v", result)
+	assert.DeepEqual(t, ih.String(), result.String())
 }
 
 func Test_E2SmRsmIndicationHeaderEutraCellID(t *testing.T) {
@@ -42,4 +53,13 @@ func Test_E2SmRsmIndicationHeaderEutraCellID(t *testing.T) {
 	t.Logf("Created E2SM-RSM-IndicationHeader is \n%v", ih)
 
 	//ToDo - embed APER validation
+	per, err := encoder.PerEncodeE2SmRsmIndicationHeader(ih)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-IndicationHeader PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmIndicationHeader(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-IndicationHeader PER - decoded\n%v", result)
+	assert.DeepEqual(t, ih.String(), result.String())
 }

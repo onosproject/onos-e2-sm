@@ -9,7 +9,7 @@ import (
 	"reflect"
 )
 
-var rsmChoicemap = map[string]map[int]reflect.Type{
+var RsmChoicemap = map[string]map[int]reflect.Type{
 	"ue_identity": {
 		1: reflect.TypeOf(UeIdentity_CuUeF1ApId{}),
 		2: reflect.TypeOf(UeIdentity_DuUeF1ApId{}),

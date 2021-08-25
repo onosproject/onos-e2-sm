@@ -5,6 +5,8 @@
 package pdubuilder
 
 import (
+	"encoding/hex"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"gotest.tools/assert"
 	"testing"
@@ -32,4 +34,13 @@ func TestCreateE2SmRsmRanFunctionDescription(t *testing.T) {
 	t.Logf("Created E2SM-RSM-RanFunctionDescription is \n%v", rfd)
 
 	//ToDo - embed APER encoding validation
+	per, err := encoder.PerEncodeE2SmRsmRanFunctionDescription(rfd)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-RanFunctionDescription PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmRanFunctionDescription(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-RanFunctionDescription PER - decoded\n%v", result)
+	assert.DeepEqual(t, rfd.String(), result.String())
 }

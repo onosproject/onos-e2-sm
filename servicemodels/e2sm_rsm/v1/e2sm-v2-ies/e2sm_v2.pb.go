@@ -528,7 +528,7 @@ func (x *MaxnoofNrCellBands) GetValue() int32 {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:35
 // {CGI}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type Cgi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -615,7 +615,7 @@ func (*Cgi_EUtraCgi) isCgi_Cgi() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:41
 // {CoreCPID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type CoreCpid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -702,7 +702,7 @@ func (*CoreCpid_EPc) isCoreCpid_CoreCpid() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:47
 // {InterfaceIdentifier}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type InterfaceIdentifier struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1324,7 +1324,7 @@ func (x *InterfaceIdW1) GetNgENbDuId() *NgenbDuId {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:100
 // {Interface-MessageID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type InterfaceMessageId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1383,7 +1383,7 @@ func (x *InterfaceMessageId) GetMessageType() MessageType {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:108
 // {GroupID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type GroupId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1470,7 +1470,7 @@ func (*GroupId_EPc) isGroupId_GroupId() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:114
 // {QoSID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type QoSid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1557,7 +1557,7 @@ func (*QoSid_EPc) isQoSid_QoSid() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:120
 // {RANfunction-Name}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type RanfunctionName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1733,7 +1733,7 @@ func (x *RicStyleType) GetValue() int32 {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:139
 // {RRC-MessageID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type RrcMessageId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1877,7 +1877,7 @@ func (*RrcType_Nr) isRrcType_RrcType() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:149
 // {ServingCell-ARFCN}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type ServingCellArfcn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1964,7 +1964,7 @@ func (*ServingCellArfcn_EUtra) isServingCellArfcn_ServingCellArfcn() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:155
 // {ServingCell-PCI}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type ServingCellPci struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2051,7 +2051,7 @@ func (*ServingCellPci_EUtra) isServingCellPci_ServingCellPci() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:162
 // {UEID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type Ueid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3653,7 +3653,7 @@ func (x *EUtraTac) GetValue() []byte {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:343
 // {GlobalenGNB-ID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type GlobalenGnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4573,7 +4573,7 @@ func (x *QosFlowIdentifier) GetValue() int32 {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:464
 // {S-NSSAI}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 type SNssai struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

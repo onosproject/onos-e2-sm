@@ -6,7 +6,7 @@ package e2sm_v2_ies
 
 import "reflect"
 
-var e2smChoicemap = map[string]map[int]reflect.Type{
+var E2SmChoicemap = map[string]map[int]reflect.Type{
 	"cgi": {
 		1: reflect.TypeOf(Cgi_NRCgi{}),
 		2: reflect.TypeOf(Cgi_EUtraCgi{}),

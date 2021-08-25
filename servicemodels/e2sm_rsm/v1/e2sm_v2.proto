@@ -99,7 +99,7 @@ message MaxnoofNrCellBands {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:35
 // {CGI}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message Cgi {
     // choice from ORAN-WG3.E2SM-v02.00.asn:35
     oneof cgi {
@@ -112,7 +112,7 @@ message Cgi {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:41
 // {CoreCPID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message CoreCpid {
     // choice from ORAN-WG3.E2SM-v02.00.asn:41
     oneof core_cpid {
@@ -125,7 +125,7 @@ message CoreCpid {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:47
 // {InterfaceIdentifier}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message InterfaceIdentifier {
     // choice from ORAN-WG3.E2SM-v02.00.asn:47
     oneof interface_identifier {
@@ -212,7 +212,7 @@ message InterfaceIdW1 {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:100
 // {Interface-MessageID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message InterfaceMessageId {
     int32 interface_procedure_id = 1 [ json_name="interfaceProcedureID"];
     // @inject_tag: aper:"valueExt,valueLB:0,valueUB:2"
@@ -221,7 +221,7 @@ message InterfaceMessageId {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:108
 // {GroupID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message GroupId {
     // choice from ORAN-WG3.E2SM-v02.00.asn:108
     oneof group_id {
@@ -234,7 +234,7 @@ message GroupId {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:114
 // {QoSID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message QoSid {
     // choice from ORAN-WG3.E2SM-v02.00.asn:114
     oneof qo_sid {
@@ -247,7 +247,7 @@ message QoSid {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:120
 // {RANfunction-Name}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message RanfunctionName {
     // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
     string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="ranFunction-ShortName"];
@@ -273,7 +273,7 @@ message RicStyleType {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:139
 // {RRC-MessageID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message RrcMessageId {
     // @inject_tag: aper:"valueExt"
     RrcType rrc_type = 1 [ json_name="rrcType"];
@@ -293,7 +293,7 @@ message RrcType {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:149
 // {ServingCell-ARFCN}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message ServingCellArfcn {
     // choice from ORAN-WG3.E2SM-v02.00.asn:149
     oneof serving_cell_arfcn {
@@ -306,7 +306,7 @@ message ServingCellArfcn {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:155
 // {ServingCell-PCI}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message ServingCellPci {
     // choice from ORAN-WG3.E2SM-v02.00.asn:155
     oneof serving_cell_pci {
@@ -319,7 +319,7 @@ message ServingCellPci {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:162
 // {UEID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message Ueid {
     // choice from ORAN-WG3.E2SM-v02.00.asn:162
     oneof ueid {
@@ -550,7 +550,7 @@ message EUtraTac {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:343
 // {GlobalenGNB-ID}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message GlobalenGnbId {
     PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
     // @inject_tag: aper:"valueExt"
@@ -676,7 +676,7 @@ message QosFlowIdentifier {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:464
 // {S-NSSAI}
-// @inject_tag: aper:"valueExt"
+// aper:"valueExt"
 message SNssai {
     Sst s_st = 1 [ json_name="sST"];
     // @inject_tag: aper:"optional"

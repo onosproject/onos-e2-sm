@@ -5,10 +5,20 @@
 package pdubuilder
 
 import (
+	"encoding/hex"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/logging"
 	"gotest.tools/assert"
+	"os"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	log := logging.GetLogger("asn1")
+	log.SetLevel(logging.DebugLevel)
+	os.Exit(m.Run())
+}
 
 func Test_E2SmRsmControlMessageSliceCreate(t *testing.T) {
 
@@ -20,6 +30,15 @@ func Test_E2SmRsmControlMessageSliceCreate(t *testing.T) {
 	t.Logf("Created E2SM-RSM-ControlMessage (Create Slice) is \n%v", cm)
 
 	//ToDo - embed APER validation
+	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-ControlMessage (Create Slice) PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmControlMessage(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-ControlMessage (Create Slice) PER - decoded\n%v", result)
+	assert.DeepEqual(t, cm.String(), result.String())
 }
 
 func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
@@ -42,6 +61,15 @@ func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 	t.Logf("Created E2SM-RSM-ControlMessage (Update Slice) is \n%v", cm)
 
 	//ToDo - embed APER validation
+	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-ControlMessage (Update Slice) PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmControlMessage(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-ControlMessage (Update Slice) PER - decoded\n%v", result)
+	assert.DeepEqual(t, cm.String(), result.String())
 }
 
 func Test_E2SmRsmControlMessageSliceDelete(t *testing.T) {
@@ -50,6 +78,15 @@ func Test_E2SmRsmControlMessageSliceDelete(t *testing.T) {
 	t.Logf("Created E2SM-RSM-ControlMessage (Delete Slice) is \n%v", cm)
 
 	//ToDo - embed APER validation
+	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-ControlMessage (Delete Slice) PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmControlMessage(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-ControlMessage (Delete Slice) PER - decoded\n%v", result)
+	assert.DeepEqual(t, cm.String(), result.String())
 }
 
 func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
@@ -87,4 +124,13 @@ func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 	t.Logf("Created E2SM-RSM-ControlMessage (Associate Slice) is \n%v", cm)
 
 	//ToDo - embed APER validation
+	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-ControlMessage (Associate Slice) PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmControlMessage(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-ControlMessage (Associate Slice) PER - decoded\n%v", result)
+	assert.DeepEqual(t, cm.String(), result.String())
 }
