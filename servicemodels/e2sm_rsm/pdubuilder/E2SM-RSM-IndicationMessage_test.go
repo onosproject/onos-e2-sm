@@ -18,17 +18,22 @@ func TestCreateE2SmRsmIndicationMessage(t *testing.T) {
 
 	ulSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
 	ulM1, err := CreateSliceMetrics(100, 100, 100, 15)
+	assert.NilError(t, err)
 	ulSm = append(ulSm, ulM1)
 	ulM2, err := CreateSliceMetrics(10, 1, 50, 7)
+	assert.NilError(t, err)
 	ulSm = append(ulSm, ulM2)
 	ulM3, err := CreateSliceMetrics(47, 16, 12, 1)
+	assert.NilError(t, err)
 	ulSm = append(ulSm, ulM3)
 
 	dlSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
 	dlM1, err := CreateSliceMetrics(91, 31, 54, 11)
-	dlSm = append(ulSm, dlM1)
+	assert.NilError(t, err)
+	dlSm = append(dlSm, dlM1)
 	dlM2, err := CreateSliceMetrics(84, 37, 41, 6)
-	dlSm = append(ulSm, dlM2)
+	assert.NilError(t, err)
+	dlSm = append(dlSm, dlM2)
 
 	im, err := CreateE2SmRsmIndicationMessageFormat1(ueID, 27, 14, CreateEmmCaseAttach(),
 		ulSm, dlSm)
@@ -36,7 +41,7 @@ func TestCreateE2SmRsmIndicationMessage(t *testing.T) {
 	assert.Assert(t, im != nil)
 	t.Logf("Created E2SM-RSM-IndicationMessage is \n%v", im)
 
-	//ToDo - embed APER encoding validation
+	// APER encoding validation
 	per, err := encoder.PerEncodeE2SmRsmIndicationMessage(im)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-IndicationMessage PER\n%v", hex.Dump(per))

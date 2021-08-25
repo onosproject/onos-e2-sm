@@ -29,7 +29,7 @@ func Test_E2SmRsmControlMessageSliceCreate(t *testing.T) {
 	cm := CreateE2SmRsmControlMessageSliceCreate(config)
 	t.Logf("Created E2SM-RSM-ControlMessage (Create Slice) is \n%v", cm)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlMessage (Create Slice) PER\n%v", hex.Dump(per))
@@ -45,22 +45,22 @@ func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 
 	parameters := CreateSliceParameters(CreateSchedulerTypeQosBased()).
 		SetWeight(21).SetQoSLevel(129).SetScheduleInfo(CreateScheduleConfigEmpty().
-			SetCarrierAggregationLevelCap(CreateCarrierAggregationLevelCapThree()).
-			SetUlPowerControl(CreateUlPowerControlEmpty().
-				SetPUSCHtargetSNR(117).SetPUCCHtargetSNR(84)).
-			SetFeatures(CreateFeatureStatusEnable()).SetLinkAdaptation(CreateLinkAdaptationEmpty().
-				SetCqiCap(11).SetRiCap(CreateRiCapTwo()).SetAggregationLevelCap(CreateAggregationLevelCapEight()).
-				SetTargetBlerDL(91).SetTargetBlerUL(89).SetMaxMcs(28).
-				SetMinMcs(0).SetTransmissionMode(CreateTransmissionModeThree()).
-				SetHarqRextCap(CreateHarqRextCapEmpty().
-					SetUL(21).SetDL(58))))
+		SetCarrierAggregationLevelCap(CreateCarrierAggregationLevelCapThree()).
+		SetUlPowerControl(CreateUlPowerControlEmpty().
+			SetPUSCHtargetSNR(117).SetPUCCHtargetSNR(84)).
+		SetFeatures(CreateFeatureStatusEnable()).SetLinkAdaptation(CreateLinkAdaptationEmpty().
+		SetCqiCap(11).SetRiCap(CreateRiCapTwo()).SetAggregationLevelCap(CreateAggregationLevelCapEight()).
+		SetTargetBlerDL(91).SetTargetBlerUL(89).SetMaxMcs(28).
+		SetMinMcs(0).SetTransmissionMode(CreateTransmissionModeThree()).
+		SetHarqRextCap(CreateHarqRextCapEmpty().
+			SetUL(21).SetDL(58))))
 
 	config := CreateSliceConfig(1, parameters).SetSliceDescription("Automotive")
 
 	cm := CreateE2SmRsmControlMessageSliceUpdate(config)
 	t.Logf("Created E2SM-RSM-ControlMessage (Update Slice) is \n%v", cm)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlMessage (Update Slice) PER\n%v", hex.Dump(per))
@@ -77,7 +77,7 @@ func Test_E2SmRsmControlMessageSliceDelete(t *testing.T) {
 	cm := CreateE2SmRsmControlMessageSliceDelete(3)
 	t.Logf("Created E2SM-RSM-ControlMessage (Delete Slice) is \n%v", cm)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlMessage (Delete Slice) PER\n%v", hex.Dump(per))
@@ -93,13 +93,6 @@ func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 
 	ueID := CreateUeIDRanUeNgapID(7)
 
-	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
-	ueIDlist = append(ueIDlist, CreateUeIDAmfUeNgapID(21))
-	ueIDlist = append(ueIDlist, CreateUeIDCuUeF1ApID(43))
-	ueIDlist = append(ueIDlist, CreateUeIDRanUeNgapID(7))
-	ueIDlist = append(ueIDlist, CreateUeIDDuUeF1ApID(59))
-	ueIDlist = append(ueIDlist, CreateUeIDEnbUeS1ApID(1))
-
 	drbIDfourG, err := CreateDrbIDfourG(12, 127)
 	assert.NilError(t, err)
 	bearerID1 := CreateBearerIDdrb(drbIDfourG)
@@ -108,7 +101,7 @@ func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 	flowMap = append(flowMap, CreateQosFlowLevelParametersDynamic(10, 62, 54))
 	flowMap = append(flowMap, CreateQosFlowLevelParametersNonDynamic(11))
 
-	drbIDfiveG, err := CreateDrbIDfiveG(37, 62, flowMap)
+	drbIDfiveG, err := CreateDrbIDfiveG(27, 62, flowMap)
 	assert.NilError(t, err)
 	bearerID2 := CreateBearerIDdrb(drbIDfiveG)
 
@@ -123,7 +116,7 @@ func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 	cm := CreateE2SmRsmControlMessageSliceAssociate(config)
 	t.Logf("Created E2SM-RSM-ControlMessage (Associate Slice) is \n%v", cm)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per, err := encoder.PerEncodeE2SmRsmControlMessage(cm)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlMessage (Associate Slice) PER\n%v", hex.Dump(per))

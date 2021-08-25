@@ -27,7 +27,7 @@ func Test_E2SmRsmEventTriggerDefinition(t *testing.T) {
 	flowMap = append(flowMap, CreateQosFlowLevelParametersDynamic(10, 62, 54))
 	flowMap = append(flowMap, CreateQosFlowLevelParametersNonDynamic(11))
 
-	drbIDfiveG, err := CreateDrbIDfiveG(37, 62, flowMap)
+	drbIDfiveG, err := CreateDrbIDfiveG(32, 62, flowMap)
 	assert.NilError(t, err)
 	bearerID2 := CreateBearerIDdrb(drbIDfiveG)
 
@@ -39,7 +39,7 @@ func Test_E2SmRsmEventTriggerDefinition(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", etd)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per, err := encoder.PerEncodeE2SmRsmEventTriggerDefinition(etd)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-EventTriggerDefinition PER\n%v", hex.Dump(per))

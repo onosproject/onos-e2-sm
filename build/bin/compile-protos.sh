@@ -27,13 +27,13 @@ protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${
   --proto_path=servicemodels \
   --go_out=./servicemodels/ \
   e2sm_rsm/v1/e2sm_rsm_v1.proto e2sm_rsm/v1/e2sm_v2.proto
-protoc-go-inject-tag -input=servicemodels/e2sm_rsm/v1/e2sm-rsm-ies/e2sm_rsm_v1.pb.go
+protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies/e2sm_rsm_v1.pb.go
 
 protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
   --proto_path=servicemodels \
   --go_out=./servicemodels/ \
   e2sm_rsm/v1/e2sm_v2.proto
-protoc-go-inject-tag -input=servicemodels/e2sm_rsm/v1/e2sm-v2-ies/e2sm_v2.pb.go
+protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies/e2sm_v2.pb.go
 
 #protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
 #  --go_out=. \

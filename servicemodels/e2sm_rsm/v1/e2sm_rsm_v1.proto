@@ -262,7 +262,7 @@ message E2SmRsmEventTriggerDefinitionFormat1 {
 message E2SmRsmIndicationHeader {
     // choice from e2sm-rsm-v1.asn:138
     oneof e2_sm_rsm_indication_header {
-        // @inject_tag: aper:"valueExt"
+        // @inject_tag: aper:"valueExt,choiceIdx:1"
         E2SmRsmIndicationHeaderFormat1 indication_header_format1 = 1 [ json_name="indicationHeader-Format1"];
     }
 };
@@ -429,7 +429,6 @@ message E2SmRsmControlHeader {
 // {E2SM-RSM-ControlMessage}
 message E2SmRsmControlMessage {
     // choice from e2sm-rsm-v1.asn:287
-    // @inject_tag: aper:"valueExt"
     oneof e2_sm_rsm_control_message {
         // @inject_tag: aper:"choiceIdx:1,valueExt"
         SliceConfig slice_create = 1 [ json_name="sliceCreate"];

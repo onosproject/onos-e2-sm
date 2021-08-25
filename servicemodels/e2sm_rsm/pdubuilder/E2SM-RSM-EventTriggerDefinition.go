@@ -100,6 +100,10 @@ func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
 
 func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevelParameters) (*e2sm_rsm_ies.DrbId, error) {
 
+	if val < 1 || val > 32 {
+		return nil, fmt.Errorf("FiveGdrbID value should be in range 1 to 32")
+	}
+
 	if qfi < 0 || qfi > 63 {
 		return nil, fmt.Errorf("QCI value should be in range 0 to 255")
 	}
@@ -126,9 +130,9 @@ func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) *
 	return &e2sm_rsm_ies.QoSflowLevelParameters{
 		QoSflowLevelParameters: &e2sm_rsm_ies.QoSflowLevelParameters_DynamicFiveQi{
 			DynamicFiveQi: &e2sm_rsm_ies.DynamicFiveQi{
-				PriorityLevel: prlvl,
+				PriorityLevel:     prlvl,
 				PacketDelayBudget: pDelay,
-				PacketErrorRate: per,
+				PacketErrorRate:   per,
 			},
 		},
 	}

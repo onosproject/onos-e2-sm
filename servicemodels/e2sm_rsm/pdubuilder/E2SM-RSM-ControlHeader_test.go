@@ -16,7 +16,7 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	ch1 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceCreate())
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch1)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per1, err := encoder.PerEncodeE2SmRsmControlHeader(ch1)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlHeader (Slice Create) PER\n%v", hex.Dump(per1))
@@ -30,7 +30,7 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	ch2 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceUpdate())
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch2)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per2, err := encoder.PerEncodeE2SmRsmControlHeader(ch2)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlHeader (Slice Update) PER\n%v", hex.Dump(per2))
@@ -44,7 +44,7 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	ch3 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceDelete())
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch3)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per3, err := encoder.PerEncodeE2SmRsmControlHeader(ch3)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlHeader (Slice Delete) PER\n%v", hex.Dump(per3))
@@ -58,7 +58,7 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	ch4 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandUeAssociate())
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch4)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per4, err := encoder.PerEncodeE2SmRsmControlHeader(ch4)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlHeader (UE Associate) PER\n%v", hex.Dump(per4))
@@ -72,7 +72,7 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	ch5 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandEventTriggers())
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch5)
 
-	//ToDo - embed APER validation
+	// APER validation
 	per5, err := encoder.PerEncodeE2SmRsmControlHeader(ch5)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-ControlHeader (Event Triggers) PER\n%v", hex.Dump(per5))

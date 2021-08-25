@@ -33,7 +33,7 @@ func TestCreateE2SmRsmRanFunctionDescription(t *testing.T) {
 	assert.Assert(t, rfd != nil)
 	t.Logf("Created E2SM-RSM-RanFunctionDescription is \n%v", rfd)
 
-	//ToDo - embed APER encoding validation
+	// APER encoding validation
 	per, err := encoder.PerEncodeE2SmRsmRanFunctionDescription(rfd)
 	assert.NilError(t, err)
 	t.Logf("E2SM-RSM-RanFunctionDescription PER\n%v", hex.Dump(per))

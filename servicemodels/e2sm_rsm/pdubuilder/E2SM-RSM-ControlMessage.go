@@ -81,7 +81,6 @@ func CreateHarqRextCapEmpty() *e2sm_rsm_ies.HarqrextCap {
 	return new(e2sm_rsm_ies.HarqrextCap)
 }
 
-
 func CreateSchedulerTypeRoundRobin() e2sm_rsm_ies.SchedulerType {
 	return e2sm_rsm_ies.SchedulerType_SCHEDULER_TYPE_ROUND_ROBIN
 }

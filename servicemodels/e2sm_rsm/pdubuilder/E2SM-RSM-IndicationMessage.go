@@ -14,11 +14,11 @@ func CreateE2SmRsmIndicationMessageFormat1(ueID *e2sm_rsm_ies.UeIdentity, cuUeID
 	emmcase e2sm_rsm_ies.Emmcase, ulSm []*e2sm_rsm_ies.SliceMetrics, dlSm []*e2sm_rsm_ies.SliceMetrics) (*e2sm_rsm_ies.E2SmRsmIndicationMessage, error) {
 
 	if len(ulSm) == 0 {
-		return nil, fmt.Errorf("UL Slicing Metrics list should have at least 1 item.")
+		return nil, fmt.Errorf("UL Slicing Metrics list should have at least 1 item")
 	}
 
 	if len(dlSm) == 0 {
-		return nil, fmt.Errorf("DL Slicing Metrics list should have at least 1 item.")
+		return nil, fmt.Errorf("DL Slicing Metrics list should have at least 1 item")
 	}
 
 	im := e2sm_rsm_ies.E2SmRsmIndicationMessage{
