@@ -68,5 +68,5 @@ func TestCreateE2SmRsmIndicationMessageErrors(t *testing.T) {
 
 	_, err = CreateE2SmRsmIndicationMessageFormat1(ueID, 27, 14, CreateEmmCaseAttach(),
 		nil, nil)
-	assert.ErrorContains(t, err, "Slicing Metrics list should have at least 1 item.")
+	assert.ErrorContains(t, err, "Slicing Metrics list should have at least 1 item")
 }
