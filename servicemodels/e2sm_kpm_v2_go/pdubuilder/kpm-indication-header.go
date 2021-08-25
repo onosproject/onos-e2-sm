@@ -39,7 +39,7 @@ func CreateGlobalKpmnodeIDgNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
 	}
 
-	if bs.GetLen() < 22 && bs.GetLen() > 32 {
+	if bs.GetLen() < 22 || bs.GetLen() > 32 {
 		return nil, fmt.Errorf("expecting GNbID length in range 22 to 32 bits, got %d", bs.GetLen())
 	}
 
@@ -67,7 +67,7 @@ func CreateGlobalKpmnodeIDenGNbID(bsValue []byte, bsLen uint32, plmnID []byte) (
 		return nil, fmt.Errorf("PlmnID should be 3 chars")
 	}
 
-	if bsLen < 22 && bsLen > 32 {
+	if bsLen < 22 || bsLen > 32 {
 		return nil, fmt.Errorf("expecting GNbID length in range 22 to 32 bits, got %d", bsLen)
 	}
 
