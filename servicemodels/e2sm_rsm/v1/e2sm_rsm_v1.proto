@@ -85,6 +85,19 @@ enum CarrierAggregationLevelCap {
     CARRIER_AGGREGATION_LEVEL_CAP_FOUR = 3;
 };
 
+// enumerated from e2sm-rsm-v1.asn:300
+enum RiCap {
+    RI_CAP_ONE = 0;
+    RI_CAP_TWO = 1;
+};
+
+// enumerated from e2sm-rsm-v1.asn:306
+enum TransmissionMode {
+    TRANSMISSION_MODE_ONE = 0;
+    TRANSMISSION_MODE_TWO = 1;
+    TRANSMISSION_MODE_THREE = 2;
+};
+
 // constant Integer from e2sm-rsm-v1.asn:29
 // {-}
 message MaxnoofBearers {
@@ -448,7 +461,7 @@ message LinkAdaptation {
     // @inject_tag: aper:"optional,valueLB:0,valueUB:15"
     optional int32 cqi_cap = 1 [ json_name="cqiCap"];
     // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
-    optional int32 ri_cap = 2 [ json_name="riCap"];
+    optional RiCap ri_cap = 2 [ json_name="riCap"];
     // @inject_tag: aper:"optional,valueLB:0,valueUB:4"
     optional AggregationLevelCap aggregation_level_cap = 3 [ json_name="aggregationLevelCap"];
     // @inject_tag: aper:"optional,valueLB:0,valueUB:100"
@@ -460,7 +473,7 @@ message LinkAdaptation {
     // @inject_tag: aper:"optional,valueLB:0,valueUB:28"
     optional int32 min_mcs = 7 [ json_name="minMCS"];
     // @inject_tag: aper:"optional,valueLB:0,valueUB:2,valueExt"
-    optional int32 transmission_mode = 8 [ json_name="transmissionMode"];
+    optional TransmissionMode transmission_mode = 8 [ json_name="transmissionMode"];
     // @inject_tag: aper:"optional"
     optional HarqrextCap harq_retx_cap = 9 [ json_name="harqRetxCap"];
 };

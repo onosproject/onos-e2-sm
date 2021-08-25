@@ -29,7 +29,7 @@ func TestCreateE2SmRsmRanFunctionDescription(t *testing.T) {
 	rfd := CreateE2SmRsmRanFunctionDescription("E2SM-RSM",
 		"1.3.6.1.4.1.53148.1.1.2.102", "RAN Slicing Service Model", slicingCapList)
 	assert.Assert(t, rfd != nil)
-	t.Logf("Created E2SM-RSM-RanFunctionDescription is \n%s", rfd.String())
+	t.Logf("Created E2SM-RSM-RanFunctionDescription is \n%v", rfd)
 
 	//ToDo - embed APER encoding validation
 }

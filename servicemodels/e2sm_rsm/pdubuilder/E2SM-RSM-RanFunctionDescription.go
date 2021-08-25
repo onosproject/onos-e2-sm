@@ -31,7 +31,7 @@ func CreateE2SmRsmRanFunctionDescription(rfSn string, rfE2SMoid string, rfd stri
 func CreateSlicingCapabilityItem(maxDlSlice int32, maxUlSlice int32, slicingType e2sm_rsm_ies.SlicingType,
 	maxUeSlice int32, supportedConfig []*e2sm_rsm_ies.SupportedSlicingConfigItem) (*e2sm_rsm_ies.NodeSlicingCapabilityItem, error) {
 
-	if len(supportedConfig) < 1 && len(supportedConfig) > 5 {
+	if len(supportedConfig) < 1 || len(supportedConfig) > 5 {
 		return nil, fmt.Errorf("this least should contain up to 5 E2SM-RSM-Commands. Minimum requirement is to have at least 1 E2SM-RSM-Command")
 	}
 
