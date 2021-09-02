@@ -12,7 +12,6 @@ import (
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/mhoctypes"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdudecoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"google.golang.org/protobuf/proto"
 )
@@ -152,14 +151,6 @@ func (sm servicemodel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, er
 
 func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, fmt.Errorf("not implemented on MHO")
-}
-
-func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
-	e2SmMhoPdu, err := mhoctypes.PerDecodeE2SmMhoRanfunctionDescription(asn1bytes)
-	if err != nil {
-		return nil, nil, nil, err
-	}
-	return pdudecoder.DecodeE2SmMhoRanfunctionDescription(e2SmMhoPdu)
 }
 
 func (sm servicemodel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {

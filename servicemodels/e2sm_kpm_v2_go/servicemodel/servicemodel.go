@@ -10,7 +10,6 @@ import (
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdudecoder"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"google.golang.org/protobuf/proto"
 )
@@ -170,15 +169,6 @@ func (sm Kpm2ServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byt
 	}
 
 	return perBytes, nil
-}
-
-//It is redundant so far - could be reused for future, if you need to extract something specific from RanFunctionDescription message
-func (sm Kpm2ServiceModel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
-	e2SmKpmPdu, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(asn1bytes)
-	if err != nil {
-		return nil, nil, nil, err
-	}
-	return pdudecoder.DecodeE2SmKpmRanFunctionDescription(e2SmKpmPdu)
 }
 
 func (sm Kpm2ServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
