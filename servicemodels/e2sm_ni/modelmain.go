@@ -64,9 +64,5 @@ func (sm servicemodel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, e
 	return nil, fmt.Errorf("not yet implemented")
 }
 
-func (sm servicemodel) DecodeRanFunctionDescription(asn1bytes []byte) (*types.RanfunctionNameDef, *types.RicEventTriggerList, *types.RicReportList, error) {
-	return nil, nil, nil, fmt.Errorf("not yet implemented")
-}
-
 // ServiceModel is the exported symbol that gives an entry point to this shared module
 var ServiceModel servicemodel

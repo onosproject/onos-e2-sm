@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.1.0 // indirect
-	github.com/onosproject/onos-api/go v0.7.89 // indirect
+	github.com/onosproject/onos-api/go v0.7.93 // indirect
 	github.com/onosproject/onos-lib-go v0.7.16
 	github.com/rogpeppe/go-internal v1.8.0
 	github.com/spf13/cobra v1.1.3
