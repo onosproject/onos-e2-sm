@@ -117,6 +117,15 @@ protos: buflint
 		--entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos.sh \
 		onosproject/protoc-go:${ONOS_PROTOC_VERSION}
 
+protos-py: # @HELP compile the protobuf files for python (using protoc-go Docker)
+protos-py:
+	docker run -it \
+		-v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
+		-v `pwd`/../onos-lib-go:/go/src/github.com/onosproject/onos-lib-go \
+		-w /go/src/github.com/onosproject/onos-e2-sm \
+		--entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos-py.sh \
+		onosproject/protoc-go:${ONOS_PROTOC_VERSION}
+
 PHONY: service-model-docker-e2sm_kpm-1.0.0
 service-model-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_kpm ${E2T_MOD}
@@ -267,6 +276,7 @@ bumponosdeps: # @HELP update "onosproject" go dependencies and push patch to git
 clean: # @HELP remove all the build artifacts
 	rm -rf ./build/_output ./vendor ./cmd/onos-e2-sm/onos-e2-sm ./cmd/onos/onos
 	rm -fr servicemodels/*/vendor
+	rm -rf ./python
 	go clean -testcache github.com/onosproject/onos-e2-sm/...
 
 help:
