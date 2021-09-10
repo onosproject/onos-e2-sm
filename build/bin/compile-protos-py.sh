@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# TODO: refactor all the compile-protos-*.sh and use command line paramters to distinguish
-
 set -e
 
 echo "** generate python bindings"
