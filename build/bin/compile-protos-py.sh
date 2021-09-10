@@ -4,14 +4,13 @@
 
 set -e
 
-echo "** generate bindings"
+echo "** generate python bindings"
 proto_imports=".:${GOPATH}/src/github.com/gogo/protobuf/protobuf:${GOPATH}/src/github.com/gogo/protobuf:${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate:${GOPATH}/src"
 
 OUTPUTPATH="python"
 rm -rf "$OUTPUTPATH"
 mkdir -p "$OUTPUTPATH"
 
-echo "* generate onos bindings"
 cd servicemodels
 
 # betterproto client bindings into $OUTPUTPATH

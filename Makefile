@@ -276,7 +276,6 @@ bumponosdeps: # @HELP update "onosproject" go dependencies and push patch to git
 clean: # @HELP remove all the build artifacts
 	rm -rf ./build/_output ./vendor ./cmd/onos-e2-sm/onos-e2-sm ./cmd/onos/onos
 	rm -fr servicemodels/*/vendor
-	rm -rf ./python
 	go clean -testcache github.com/onosproject/onos-e2-sm/...
 
 help:
