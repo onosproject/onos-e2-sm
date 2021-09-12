@@ -1,4 +1,5 @@
-FROM onosproject/golang-build:v0.6.7 as pluginbuild
+FROM onosproject/golang-build:v1.0 as pluginbuild
+
 ENV GO111MODULE=on
 ARG PLUGIN_MAKE_TARGET
 ARG PLUGIN_MAKE_VERSION
