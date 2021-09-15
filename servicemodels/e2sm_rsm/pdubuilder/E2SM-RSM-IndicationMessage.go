@@ -41,6 +41,29 @@ func CreateE2SmRsmIndicationMessageFormat1(ueID *e2sm_rsm_ies.UeIdentity, cuUeID
 	return &im, nil
 }
 
+func CreateE2SmRsmIndicationMessageFormat2(tt e2sm_rsm_ies.RsmEmmTriggerType, ueIDlist []*e2sm_rsm_ies.UeIdentity,
+	pt e2sm_rsm_ies.UeIdType, bearerList []*e2sm_rsm_ies.BearerId) (*e2sm_rsm_ies.E2SmRsmIndicationMessage, error) {
+
+	if len(ueIDlist) == 0 {
+		return nil, fmt.Errorf("UE ID list should contain at least 1 element. All elements of the list should be different UE identifiers")
+	}
+
+	if len(bearerList) < 1 || len(bearerList) > 32 {
+		return nil, fmt.Errorf("BearerID list should have 1 to 32 items")
+	}
+
+	return &e2sm_rsm_ies.E2SmRsmIndicationMessage{
+		E2SmRsmIndicationMessage: &e2sm_rsm_ies.E2SmRsmIndicationMessage_IndicationMessageFormat2{
+			IndicationMessageFormat2: &e2sm_rsm_ies.E2SmRsmIndicationMessageFormat2{
+				TriggerType:       tt,
+				UeIdlist:          ueIDlist,
+				PrefferedUeIdtype: pt,
+				BearerId:          bearerList,
+			},
+		},
+	}, nil
+}
+
 func CreateUeIDCuUeF1ApID(val int64) *e2sm_rsm_ies.UeIdentity {
 
 	return &e2sm_rsm_ies.UeIdentity{

@@ -25,6 +25,7 @@ var RsmChoicemap = map[string]map[int]reflect.Type{
 	},
 	"e2_sm_rsm_indication_message": {
 		1: reflect.TypeOf(E2SmRsmIndicationMessage_IndicationMessageFormat1{}),
+		2: reflect.TypeOf(E2SmRsmIndicationMessage_IndicationMessageFormat2{}),
 	},
 	"bearer_id": {
 		1: reflect.TypeOf(BearerId_DrbId{}),

@@ -10,45 +10,41 @@ import (
 	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
 )
 
-func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmTriggerType, ueIDlist []*e2sm_rsm_ies.UeIdentity,
-	pt e2sm_rsm_ies.UeIdType, bearerList []*e2sm_rsm_ies.BearerId) (*e2sm_rsm_ies.E2SmRsmEventTriggerDefinition, error) {
-
-	if len(ueIDlist) == 0 {
-		return nil, fmt.Errorf("UE ID list should contain at least 1 element. All elements of the list should be different UE identifiers")
-	}
-
-	if len(bearerList) < 1 || len(bearerList) > 32 {
-		return nil, fmt.Errorf("BearerID list should have 1 to 32 items")
-	}
+func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindicationTriggerType) (*e2sm_rsm_ies.E2SmRsmEventTriggerDefinition, error) {
 
 	return &e2sm_rsm_ies.E2SmRsmEventTriggerDefinition{
 		EventDefinitionFormats: &e2sm_rsm_ies.EventDefinitionFormats{
 			E2SmRsmEventDefinition: &e2sm_rsm_ies.EventDefinitionFormats_EventDefinitionFormat1{
 				EventDefinitionFormat1: &e2sm_rsm_ies.E2SmRsmEventTriggerDefinitionFormat1{
-					TriggerType:       tt,
-					UeIdlist:          ueIDlist,
-					PrefferedUeIdtype: pt,
-					BearerId:          bearerList,
+					TriggerType: tt,
 				},
 			},
 		},
 	}, nil
 }
 
-func CreateRsmTriggerTypeUeAttach() e2sm_rsm_ies.RsmTriggerType {
-	return e2sm_rsm_ies.RsmTriggerType_RSM_TRIGGER_TYPE_UE_ATTACH
+func CreateRsmRicindicationTriggerTypePeriodicMetrics() e2sm_rsm_ies.RsmRicindicationTriggerType {
+	return e2sm_rsm_ies.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_PERIODIC_METRICS
 }
 
-func CreateRsmTriggerTypeUeDetach() e2sm_rsm_ies.RsmTriggerType {
-	return e2sm_rsm_ies.RsmTriggerType_RSM_TRIGGER_TYPE_UE_DETACH
+func CreateRsmRicindicationTriggerTypeUponEmmEvent() e2sm_rsm_ies.RsmRicindicationTriggerType {
+	return e2sm_rsm_ies.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_UPON_EMM_EVENT
 }
 
-func CreateRsmTriggerTypeHandInUeAttach() e2sm_rsm_ies.RsmTriggerType {
-	return e2sm_rsm_ies.RsmTriggerType_RSM_TRIGGER_TYPE_HAND_IN_UE_ATTACH
+func CreateRsmEmmTriggerTypeUeAttach() e2sm_rsm_ies.RsmEmmTriggerType {
+	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_UE_ATTACH
 }
 
-func CreateRsmTriggerTypeHandOutUeAttach() e2sm_rsm_ies.RsmTriggerType {
-	return e2sm_rsm_ies.RsmTriggerType_RSM_TRIGGER_TYPE_HAND_OUT_UE_ATTACH
+func CreateRsmEmmTriggerTypeUeDetach() e2sm_rsm_ies.RsmEmmTriggerType {
+	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_UE_DETACH
+}
+
+func CreateRsmEmmTriggerTypeHandInUeAttach() e2sm_rsm_ies.RsmEmmTriggerType {
+	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_HAND_IN_UE_ATTACH
+}
+
+func CreateRsmEmmTriggerTypeHandOutUeAttach() e2sm_rsm_ies.RsmEmmTriggerType {
+	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_HAND_OUT_UE_ATTACH
 }
 
 func CreateUeIDtypeCuUeF1ApID() e2sm_rsm_ies.UeIdType {

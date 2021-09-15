@@ -94,7 +94,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 }
 
 func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
-	indicationMessageAsn1 := []byte{0x0c, 0x00, 0x01, 0x00, 0x1b, 0x00, 0x0e, 0x00, 0x03, 0x64, 0x00, 0x64, 0xc9, 0xe1, 0x40, 0x01,
+	indicationMessageAsn1 := []byte{0x06, 0x00, 0x01, 0x00, 0x1b, 0x00, 0x0e, 0x00, 0x03, 0x64, 0x00, 0x64, 0xc9, 0xe1, 0x40, 0x01,
 		0x64, 0xe5, 0xe0, 0x10, 0x18, 0x20, 0x02, 0x5b, 0x00, 0x1f, 0x6d, 0x6a, 0x80, 0x25, 0x52, 0xc0}
 
 	protoBytes, err := rsmv1TestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
@@ -168,28 +168,8 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
-	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
-	ueIDlist = append(ueIDlist, pdubuilder.CreateUeIDAmfUeNgapID(21))
-	ueIDlist = append(ueIDlist, pdubuilder.CreateUeIDCuUeF1ApID(43))
-	ueIDlist = append(ueIDlist, pdubuilder.CreateUeIDEnbUeS1ApID(1))
 
-	drbIDfourG, err := pdubuilder.CreateDrbIDfourG(12, 127)
-	assert.NilError(t, err)
-	bearerID1 := pdubuilder.CreateBearerIDdrb(drbIDfourG)
-
-	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
-	flowMap = append(flowMap, pdubuilder.CreateQosFlowLevelParametersDynamic(10, 62, 54))
-	flowMap = append(flowMap, pdubuilder.CreateQosFlowLevelParametersNonDynamic(11))
-
-	drbIDfiveG, err := pdubuilder.CreateDrbIDfiveG(32, 62, flowMap)
-	assert.NilError(t, err)
-	bearerID2 := pdubuilder.CreateBearerIDdrb(drbIDfiveG)
-
-	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
-	bearerList = append(bearerList, bearerID1)
-	bearerList = append(bearerList, bearerID2)
-
-	etd, err := pdubuilder.CreateE2SmRsmEventTriggerDefinitionFormat1(pdubuilder.CreateRsmTriggerTypeUeAttach(), ueIDlist, pdubuilder.CreateUeIDtypeAmfUeNgapID(), bearerList)
+	etd, err := pdubuilder.CreateE2SmRsmEventTriggerDefinitionFormat1(pdubuilder.CreateRsmRicindicationTriggerTypeUponEmmEvent())
 	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", etd)
 
@@ -217,10 +197,7 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	err = proto.Unmarshal(protoBytes, testETD)
 	t.Logf("Decoded message is \n%v", testETD)
 	assert.NilError(t, err)
-	assert.Equal(t, pdubuilder.CreateRsmTriggerTypeUeAttach().Number(), testETD.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetTriggerType().Number())
-	assert.Equal(t, 3, len(testETD.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetUeIdlist()))
-	assert.Equal(t, pdubuilder.CreateUeIDtypeAmfUeNgapID().Number(), testETD.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetPrefferedUeIdtype().Number())
-	assert.Equal(t, 2, len(testETD.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetBearerId()))
+	assert.Equal(t, pdubuilder.CreateRsmEmmTriggerTypeUeAttach().Number(), testETD.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetTriggerType().Number())
 }
 
 func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {

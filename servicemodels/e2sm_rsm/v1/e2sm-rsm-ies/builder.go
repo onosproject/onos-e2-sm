@@ -4,6 +4,16 @@
 
 package e2sm_rsm_ies
 
+func (m *E2SmRsmEventTriggerDefinitionFormat1) SetReportingPeriodMs(rp int32) *E2SmRsmEventTriggerDefinitionFormat1 {
+	m.ReportingPeriodMs = &rp
+	return m
+}
+
+func (m *E2SmRsmIndicationHeaderFormat1) SetColletStartTime(cst string) *E2SmRsmIndicationHeaderFormat1 {
+	m.ColletStartTime = &cst
+	return m
+}
+
 func (m *SliceConfig) SetSliceDescription(description string) *SliceConfig {
 	m.SliceDescription = &description
 	return m
