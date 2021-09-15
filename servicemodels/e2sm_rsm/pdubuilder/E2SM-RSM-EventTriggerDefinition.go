@@ -16,7 +16,7 @@ func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindication
 		EventDefinitionFormats: &e2sm_rsm_ies.EventDefinitionFormats{
 			E2SmRsmEventDefinition: &e2sm_rsm_ies.EventDefinitionFormats_EventDefinitionFormat1{
 				EventDefinitionFormat1: &e2sm_rsm_ies.E2SmRsmEventTriggerDefinitionFormat1{
-					TriggerType:       tt,
+					TriggerType: tt,
 				},
 			},
 		},
