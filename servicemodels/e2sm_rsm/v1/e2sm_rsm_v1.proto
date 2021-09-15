@@ -33,11 +33,17 @@ enum SlicingType {
 };
 
 // enumerated from e2sm-rsm-v1.asn:109
-enum RsmTriggerType {
-    RSM_TRIGGER_TYPE_UE_ATTACH = 0;
-    RSM_TRIGGER_TYPE_UE_DETACH = 1;
-    RSM_TRIGGER_TYPE_HAND_IN_UE_ATTACH = 2;
-    RSM_TRIGGER_TYPE_HAND_OUT_UE_ATTACH = 3;
+enum RsmEmmTriggerType {
+    RSM_EMM_TRIGGER_TYPE_UE_ATTACH = 0;
+    RSM_EMM_TRIGGER_TYPE_UE_DETACH = 1;
+    RSM_EMM_TRIGGER_TYPE_HAND_IN_UE_ATTACH = 2;
+    RSM_EMM_TRIGGER_TYPE_HAND_OUT_UE_ATTACH = 3;
+};
+
+// enumerated from e2sm-rsm-v1.asn:109
+enum RsmRicindicationTriggerType {
+    RSM_RICINDICATION_TRIGGER_TYPE_PERIODIC_METRICS = 0;
+    RSM_RICINDICATION_TRIGGER_TYPE_UPON_EMM_EVENT = 1;
 };
 
 // enumerated from e2sm-rsm-v1.asn:151
@@ -247,14 +253,10 @@ message EventDefinitionFormats {
 // sequence from e2sm-rsm-v1.asn:125
 // {E2SM-RSM-EventTriggerDefinition-Format1}
 message E2SmRsmEventTriggerDefinitionFormat1 {
-    // @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:3"
-    RsmTriggerType trigger_type = 1 [ json_name="triggerType"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
-    repeated UeIdentity ue_idlist = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4}, json_name="ueIDlist"];
-    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
-    UeIdType preffered_ue_idtype = 3 [ json_name="prefferedUeIDType"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
-    repeated BearerId bearer_id = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 32}, json_name="bearerID"];
+    // @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:1"
+    RsmRicindicationTriggerType trigger_type = 1 [ json_name="triggerType"];
+    // @inject_tag: aper:"optional"
+    optional int32 reporting_period_ms = 2 [json_name="reportingPeriod-ms"];
 };
 
 // sequence from e2sm-rsm-v1.asn:138
@@ -272,6 +274,8 @@ message E2SmRsmIndicationHeader {
 message E2SmRsmIndicationHeaderFormat1 {
     // @inject_tag: aper:"valueExt"
     Cgi cgi = 1 [ json_name="cgi"];
+    // @inject_tag: aper:"sizeLB:4,sizeUB:4,optional"
+    optional string collet_start_time = 2 [json_name="colletStartTime"];
 };
 
 // sequence from e2sm-rsm-v1.asn:154
@@ -281,6 +285,8 @@ message E2SmRsmIndicationMessage {
     oneof e2_sm_rsm_indication_message {
         // @inject_tag: aper:"choiceIdx:1,valueExt"
         E2SmRsmIndicationMessageFormat1 indication_message_format1 = 1 [ json_name="indicationMessage-Format1"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        E2SmRsmIndicationMessageFormat2 indication_message_format2 = 2 [ json_name="indicationMessage-Format2"];
     }
 };
 
@@ -297,6 +303,19 @@ message E2SmRsmIndicationMessageFormat1 {
     repeated SliceMetrics ul_slicing_metrics = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="ulSlicingMetrics"];
     // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4294967295"
     repeated SliceMetrics dl_slicing_metrics = 6 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4294967295}, json_name="dlSlicingMetrics"];
+};
+
+// sequence from e2sm-rsm-v1.asn:125
+// {E2SM-RSM-EventTriggerDefinition-Format2}
+message E2SmRsmIndicationMessageFormat2 {
+    // @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:3"
+    RsmEmmTriggerType trigger_type = 1 [ json_name="triggerType"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
+    repeated UeIdentity ue_idlist = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4}, json_name="ueIDlist"];
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
+    UeIdType preffered_ue_idtype = 3 [ json_name="prefferedUeIDType"];
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
+    repeated BearerId bearer_id = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 32}, json_name="bearerID"];
 };
 
 // sequence from e2sm-rsm-v1.asn:194

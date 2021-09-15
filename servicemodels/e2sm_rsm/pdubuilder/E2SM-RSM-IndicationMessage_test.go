@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func TestCreateE2SmRsmIndicationMessage(t *testing.T) {
+func TestCreateE2SmRsmIndicationMessageFormat1(t *testing.T) {
 
 	ueID := CreateUeIDAmfUeNgapID(1)
 
@@ -37,6 +37,46 @@ func TestCreateE2SmRsmIndicationMessage(t *testing.T) {
 
 	im, err := CreateE2SmRsmIndicationMessageFormat1(ueID, 27, 14, CreateEmmCaseAttach(),
 		ulSm, dlSm)
+	assert.NilError(t, err)
+	assert.Assert(t, im != nil)
+	t.Logf("Created E2SM-RSM-IndicationMessage is \n%v", im)
+
+	// APER encoding validation
+	per, err := encoder.PerEncodeE2SmRsmIndicationMessage(im)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-IndicationMessage PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmIndicationMessage(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-IndicationMessage PER - decoded\n%v", result)
+	assert.DeepEqual(t, im.String(), result.String())
+}
+
+func TestCreateE2SmRsmIndicationMessageFormat2(t *testing.T) {
+
+	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
+	ueIDlist = append(ueIDlist, CreateUeIDAmfUeNgapID(21))
+	ueIDlist = append(ueIDlist, CreateUeIDCuUeF1ApID(43))
+	ueIDlist = append(ueIDlist, CreateUeIDEnbUeS1ApID(1))
+
+	drbIDfourG, err := CreateDrbIDfourG(12, 127)
+	assert.NilError(t, err)
+	bearerID1 := CreateBearerIDdrb(drbIDfourG)
+
+	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
+	flowMap = append(flowMap, CreateQosFlowLevelParametersDynamic(10, 62, 54))
+	flowMap = append(flowMap, CreateQosFlowLevelParametersNonDynamic(11))
+
+	drbIDfiveG, err := CreateDrbIDfiveG(32, 62, flowMap)
+	assert.NilError(t, err)
+	bearerID2 := CreateBearerIDdrb(drbIDfiveG)
+
+	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
+	bearerList = append(bearerList, bearerID1)
+	bearerList = append(bearerList, bearerID2)
+
+	im, err := CreateE2SmRsmIndicationMessageFormat2(CreateRsmEmmTriggerTypeUeAttach(), ueIDlist, CreateUeIDtypeAmfUeNgapID(), bearerList)
 	assert.NilError(t, err)
 	assert.Assert(t, im != nil)
 	t.Logf("Created E2SM-RSM-IndicationMessage is \n%v", im)
