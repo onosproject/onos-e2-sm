@@ -1,4 +1,4 @@
-ARG PLUGIN_BUILD_VERSION=stable
+ARG PLUGIN_BUILD_VERSION=v1.0
 
 FROM onosproject/golang-build:$PLUGIN_BUILD_VERSION as pluginbuild
 ENV GO111MODULE=on
