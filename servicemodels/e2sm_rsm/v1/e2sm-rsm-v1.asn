@@ -97,7 +97,7 @@ SliceMetrics ::= SEQUENCE {
 -- ***************************************************************
 -- E2SM-RSM Event Trigger Definition OCTET STRING
 -- ***************************************************************
-RSM-Trigger-Type ::= ENUMERATED{
+RSM-EMM-Trigger-Type ::= ENUMERATED{
     ueAttach,
     ueDetach,
     handInUeAttach,
@@ -114,13 +114,16 @@ E2SM-RSM-EventTriggerDefinition ::= SEQUENCE{
 }
 
 E2SM-RSM-EventTriggerDefinition-Format1 ::= SEQUENCE{
-   triggerType                  RSM-Trigger-Type,
-   ueIDlist                     SEQUENCE (SIZE(1..4, ...)) OF UE-Identity, -- all UE IDs in the list should belong to same UE
-   prefferedUeIDType            UE-ID-Type,
-   bearerID                     SEQUENCE (SIZE(1..maxnoofBearers)) OF Bearer-ID     OPTIONAL, -- Should be mandatory included in case of UeAttach and handInUeAttach
+   triggerType                  RSM-RICindication-Trigger-Type,
+   reportingPeriod-ms           INTEGER  OPTIONAL,
    ...
 }
 
+RSM-RICindication-Trigger-Type ::= ENUMERATED{
+    periodic-metrics,
+    upon-emm-event,
+    ...
+}
 
  -- **************************************************************
  -- E2SM-RSM Indication Header - to report attach/detach
@@ -133,6 +136,7 @@ E2SM-RSM-IndicationHeader ::= CHOICE {
 
 E2SM-RSM-IndicationHeader-Format1 ::= SEQUENCE {
     cgi                             CGI,
+    colletStartTime                 OCTET STRING (SIZE(4))  OPTIONAL,
     ...
 }
 
@@ -144,6 +148,7 @@ EMMCase::= ENUMERATED {attached, detached, ...}
 
 E2SM-RSM-IndicationMessage ::= CHOICE {
     indicationMessage-Format1      E2SM-RSM-IndicationMessage-Format1,
+    indicationMessage-Format2      E2SM-RSM-IndicationMessage-Format2,
     ...
 }
 
@@ -155,6 +160,14 @@ E2SM-RSM-IndicationMessage-Format1 ::= SEQUENCE {
     ulSlicingMetrics          SEQUENCE (SIZE(1..maxnoofSlices)) OF SliceMetrics,
     dlSlicingMetrics          SEQUENCE (SIZE(1..maxnoofSlices)) OF SliceMetrics,
     ...
+}
+
+E2SM-RSM-IndicationMessage-Format2 ::= SEQUENCE{
+   emmType                      RSM-EMM-Trigger-Type,
+   ueIDlist                     SEQUENCE (SIZE(1..4, ...)) OF UE-Identity, -- all UE IDs in the list should belong to same UE
+   prefferedUeIDType            UE-ID-Type,
+   bearerID                     SEQUENCE (SIZE(1..maxnoofBearers)) OF Bearer-ID     OPTIONAL, -- Should be mandatory included in case of UeAttach and handInUeAttach
+   ...
 }
 
  -- **************************************************************
