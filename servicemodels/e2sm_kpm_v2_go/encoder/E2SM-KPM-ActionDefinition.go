@@ -6,12 +6,10 @@ package encoder
 
 import (
 	"encoding/hex"
+	"github.com/google/martian/log"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
-	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
-
-var log = logging.GetLogger("e2sm_kpm_v2_go")
 
 func PerEncodeE2SmKpmActionDefinition(ad *e2sm_kpm_v2_go.E2SmKpmActionDefinition) ([]byte, error) {
 
