@@ -6,6 +6,7 @@ package encoder
 
 import (
 	"encoding/hex"
+	"github.com/google/martian/log"
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )

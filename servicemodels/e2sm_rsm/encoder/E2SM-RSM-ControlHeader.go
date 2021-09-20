@@ -6,12 +6,10 @@ package encoder
 
 import (
 	"encoding/hex"
+	"github.com/google/martian/log"
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
-	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
-
-var log = logging.GetLogger("e2sm_rsm_v1_go")
 
 func PerEncodeE2SmRsmControlHeader(ch *e2sm_rsm_ies.E2SmRsmControlHeader) ([]byte, error) {
 
