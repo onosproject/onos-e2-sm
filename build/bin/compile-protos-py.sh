@@ -5,7 +5,7 @@ set -e
 echo "** generate python bindings"
 proto_imports=".:${GOPATH}/src/github.com/gogo/protobuf/protobuf:${GOPATH}/src/github.com/gogo/protobuf:${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate:${GOPATH}/src"
 
-OUTPUTPATH="python"
+OUTPUTPATH="python/onos_e2_sm"
 rm -rf "$OUTPUTPATH"
 mkdir -p "$OUTPUTPATH"
 
