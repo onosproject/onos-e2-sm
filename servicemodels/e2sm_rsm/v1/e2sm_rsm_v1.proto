@@ -26,6 +26,11 @@ enum UeIdType {
     UE_ID_TYPE_ENB_UE_S1_AP_ID = 4;
 };
 
+enum SliceType {
+    SLICE_TYPE_DL_SLICE = 0;
+    SLICE_TYPE_UL_SLICE = 1;
+}
+
 // enumerated from e2sm-rsm-v1.asn:73
 enum SlicingType {
     SLICING_TYPE_STATIC = 0;
@@ -253,7 +258,7 @@ message EventDefinitionFormats {
 // sequence from e2sm-rsm-v1.asn:125
 // {E2SM-RSM-EventTriggerDefinition-Format1}
 message E2SmRsmEventTriggerDefinitionFormat1 {
-    // @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:1"
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:1"
     RsmRicindicationTriggerType trigger_type = 1 [ json_name="triggerType"];
     // @inject_tag: aper:"optional"
     optional int32 reporting_period_ms = 2 [json_name="reportingPeriod-ms"];
@@ -339,6 +344,8 @@ message SliceConfig {
     optional string slice_description = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 160}, json_name="sliceDescription"];
     // @inject_tag: aper:"valueExt"
     SliceParameters slice_config_parameters = 3 [ json_name="sliceConfigParameters"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1"
+    SliceType slice_type = 4 [json_name="sliceType"];
 };
 
 // sequence from e2sm-rsm-v1.asn:209
