@@ -74,7 +74,7 @@ func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 
 func Test_E2SmRsmControlMessageSliceDelete(t *testing.T) {
 
-	cm := CreateE2SmRsmControlMessageSliceDelete(3)
+	cm := CreateE2SmRsmControlMessageSliceDelete(3, CreateSliceTypeUL())
 	t.Logf("Created E2SM-RSM-ControlMessage (Delete Slice) is \n%v", cm)
 
 	// APER validation

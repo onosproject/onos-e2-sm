@@ -27,7 +27,7 @@ func CreateE2SmRsmControlMessageSliceUpdate(config *e2sm_rsm_ies.SliceConfig) *e
 	}
 }
 
-func CreateE2SmRsmControlMessageSliceDelete(sliceID int64) *e2sm_rsm_ies.E2SmRsmControlMessage {
+func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ies.SliceType) *e2sm_rsm_ies.E2SmRsmControlMessage {
 
 	return &e2sm_rsm_ies.E2SmRsmControlMessage{
 		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceDelete{
@@ -35,6 +35,7 @@ func CreateE2SmRsmControlMessageSliceDelete(sliceID int64) *e2sm_rsm_ies.E2SmRsm
 				SliceId: &e2sm_rsm_ies.SliceId{
 					Value: sliceID,
 				},
+				SliceType: sliceType,
 			},
 		},
 	}

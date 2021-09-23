@@ -352,6 +352,8 @@ message SliceConfig {
 // {SliceDelete}
 message SliceDelete {
     SliceId slice_id = 1 [ json_name="sliceID"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1"
+    SliceType slice_type = 2 [json_name="sliceType"];
 };
 
 // sequence from e2sm-rsm-v1.asn:218

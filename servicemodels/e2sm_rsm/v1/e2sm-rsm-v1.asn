@@ -218,6 +218,7 @@ SliceType ::= ENUMERATED{
 
 SliceDelete ::= SEQUENCE {
     sliceID                  SliceID,
+    sliceType                SliceType,
     ...
 }
 
