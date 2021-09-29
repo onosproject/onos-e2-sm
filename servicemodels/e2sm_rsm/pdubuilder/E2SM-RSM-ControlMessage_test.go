@@ -24,7 +24,7 @@ func Test_E2SmRsmControlMessageSliceCreate(t *testing.T) {
 
 	parameters := CreateSliceParameters(CreateSchedulerTypeQosBased())
 
-	config := CreateSliceConfig(1, parameters).SetSliceDescription("IoT")
+	config := CreateSliceConfig(1, parameters, CreateSliceTypeUL()).SetSliceDescription("IoT")
 
 	cm := CreateE2SmRsmControlMessageSliceCreate(config)
 	t.Logf("Created E2SM-RSM-ControlMessage (Create Slice) is \n%v", cm)
@@ -55,7 +55,7 @@ func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 		SetHarqRextCap(CreateHarqRextCapEmpty().
 			SetUL(21).SetDL(58))))
 
-	config := CreateSliceConfig(1, parameters).SetSliceDescription("Automotive")
+	config := CreateSliceConfig(1, parameters, CreateSliceTypeDL()).SetSliceDescription("Automotive")
 
 	cm := CreateE2SmRsmControlMessageSliceUpdate(config)
 	t.Logf("Created E2SM-RSM-ControlMessage (Update Slice) is \n%v", cm)
@@ -74,7 +74,7 @@ func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 
 func Test_E2SmRsmControlMessageSliceDelete(t *testing.T) {
 
-	cm := CreateE2SmRsmControlMessageSliceDelete(3)
+	cm := CreateE2SmRsmControlMessageSliceDelete(3, CreateSliceTypeUL())
 	t.Logf("Created E2SM-RSM-ControlMessage (Delete Slice) is \n%v", cm)
 
 	// APER validation

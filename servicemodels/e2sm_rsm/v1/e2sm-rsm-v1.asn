@@ -207,11 +207,18 @@ SliceConfig ::= SEQUENCE {
    sliceID                  SliceID,
    sliceDescription         PrintableString(SIZE(1.. 160, ...)) OPTIONAL,
    sliceConfigParameters    SliceParameters,
+   sliceType                SliceType,
    ...
+}
+
+SliceType ::= ENUMERATED{
+    dlSlice,
+    ulSlice
 }
 
 SliceDelete ::= SEQUENCE {
     sliceID                  SliceID,
+    sliceType                SliceType,
     ...
 }
 
