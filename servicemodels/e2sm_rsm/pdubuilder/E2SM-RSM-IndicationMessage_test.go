@@ -110,3 +110,45 @@ func TestCreateE2SmRsmIndicationMessageErrors(t *testing.T) {
 		nil, nil)
 	assert.ErrorContains(t, err, "Slicing Metrics list should have at least 1 item")
 }
+
+func TestWoojong(t *testing.T) {
+
+	//bytes := []byte{0x50, 0x81, 0xe6, 0xf5, 0x14, 0xe6, 0xf5, 0x48, 0xb7, 0xbc, 0x2f, 0x10, 0x01, 0x00, 0x09} //UeAttach case
+	bytes := []byte{0x52, 0x12, 0xb7, 0xbc, 0x2f, 0x40, 0x01, 0x00, 0x09} // UeDetach
+	t.Logf("PER bytes are \n%v", hex.Dump(bytes))
+
+	res, err := encoder.PerDecodeE2SmRsmIndicationMessage(bytes)
+	assert.NilError(t, err)
+	t.Logf("Decoded message is \n%v", res)
+}
+
+func TestKushal(t *testing.T) {
+
+	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
+	ueIDlist = append(ueIDlist, CreateUeIDCuUeF1ApID(59125))
+	ueIDlist = append(ueIDlist, CreateUeIDDuUeF1ApID(59125))
+	ueIDlist = append(ueIDlist, CreateUeIDEnbUeS1ApID(12041263))
+
+	drbIDfourG, err := CreateDrbIDfourG(5, 9)
+	assert.NilError(t, err)
+	bearerID1 := CreateBearerIDdrb(drbIDfourG)
+
+	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
+	bearerList = append(bearerList, bearerID1)
+
+	im, err := CreateE2SmRsmIndicationMessageFormat2(CreateRsmEmmTriggerTypeUeAttach(), ueIDlist, CreateUeIDtypeDuUeF1ApID(), bearerList)
+	assert.NilError(t, err)
+	assert.Assert(t, im != nil)
+	t.Logf("Created E2SM-RSM-IndicationMessage is \n%v", im)
+
+	// APER encoding validation
+	per, err := encoder.PerEncodeE2SmRsmIndicationMessage(im)
+	assert.NilError(t, err)
+	t.Logf("E2SM-RSM-IndicationMessage PER\n%v", hex.Dump(per))
+
+	result, err := encoder.PerDecodeE2SmRsmIndicationMessage(per)
+	assert.NilError(t, err)
+	assert.Assert(t, result != nil)
+	t.Logf("E2SM-RSM-IndicationMessage PER - decoded\n%v", result)
+	assert.DeepEqual(t, im.String(), result.String())
+}

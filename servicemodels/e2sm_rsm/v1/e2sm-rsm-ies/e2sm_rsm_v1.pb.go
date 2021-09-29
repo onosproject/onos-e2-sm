@@ -2077,8 +2077,8 @@ type E2SmRsmIndicationMessageFormat2 struct {
 	UeIdlist []*UeIdentity `protobuf:"bytes,2,rep,name=ue_idlist,json=ueIDlist,proto3" json:"ue_idlist,omitempty" aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
 	PrefferedUeIdtype UeIdType `protobuf:"varint,3,opt,name=preffered_ue_idtype,json=prefferedUeIDType,proto3,enum=e2sm_rsm.v1.UeIdType" json:"preffered_ue_idtype,omitempty" aper:"valueExt,valueLB:0,valueUB:4"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
-	BearerId []*BearerId `protobuf:"bytes,4,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"valueExt,sizeLB:1,sizeUB:32"`
+	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:32"
+	BearerId []*BearerId `protobuf:"bytes,4,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:32"`
 }
 
 func (x *E2SmRsmIndicationMessageFormat2) Reset() {
@@ -3403,8 +3403,8 @@ type FeatureConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueLB:0,valueUB:1"
-	TtiBundling *FeatureStatus `protobuf:"varint,1,opt,name=tti_bundling,json=ttiBundling,proto3,enum=e2sm_rsm.v1.FeatureStatus,oneof" json:"tti_bundling,omitempty" aper:"valueLB:0,valueUB:1"`
+	// @inject_tag: aper:"optional,valueLB:0,valueUB:1"
+	TtiBundling *FeatureStatus `protobuf:"varint,1,opt,name=tti_bundling,json=ttiBundling,proto3,enum=e2sm_rsm.v1.FeatureStatus,oneof" json:"tti_bundling,omitempty" aper:"optional,valueLB:0,valueUB:1"`
 }
 
 func (x *FeatureConfig) Reset() {
