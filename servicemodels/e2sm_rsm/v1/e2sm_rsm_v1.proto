@@ -313,7 +313,7 @@ message E2SmRsmIndicationMessageFormat1 {
 // sequence from e2sm-rsm-v1.asn:125
 // {E2SM-RSM-EventTriggerDefinition-Format2}
 message E2SmRsmIndicationMessageFormat2 {
-    // @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:3"
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:3"
     RsmEmmTriggerType trigger_type = 1 [ json_name="triggerType"];
     // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
     repeated UeIdentity ue_idlist = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4}, json_name="ueIDlist"];

@@ -2071,8 +2071,8 @@ type E2SmRsmIndicationMessageFormat2 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt,sizeLB:0,sizeUB:3"
-	TriggerType RsmEmmTriggerType `protobuf:"varint,1,opt,name=trigger_type,json=triggerType,proto3,enum=e2sm_rsm.v1.RsmEmmTriggerType" json:"trigger_type,omitempty" aper:"valueExt,sizeLB:0,sizeUB:3"`
+	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:3"
+	TriggerType RsmEmmTriggerType `protobuf:"varint,1,opt,name=trigger_type,json=triggerType,proto3,enum=e2sm_rsm.v1.RsmEmmTriggerType" json:"trigger_type,omitempty" aper:"valueExt,valueLB:0,valueUB:3"`
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
 	UeIdlist []*UeIdentity `protobuf:"bytes,2,rep,name=ue_idlist,json=ueIDlist,proto3" json:"ue_idlist,omitempty" aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
