@@ -27,7 +27,7 @@ func CreateE2SmRsmControlMessageSliceUpdate(config *e2sm_rsm_ies.SliceConfig) *e
 	}
 }
 
-func CreateE2SmRsmControlMessageSliceDelete(sliceID int64) *e2sm_rsm_ies.E2SmRsmControlMessage {
+func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ies.SliceType) *e2sm_rsm_ies.E2SmRsmControlMessage {
 
 	return &e2sm_rsm_ies.E2SmRsmControlMessage{
 		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceDelete{
@@ -35,6 +35,7 @@ func CreateE2SmRsmControlMessageSliceDelete(sliceID int64) *e2sm_rsm_ies.E2SmRsm
 				SliceId: &e2sm_rsm_ies.SliceId{
 					Value: sliceID,
 				},
+				SliceType: sliceType,
 			},
 		},
 	}
@@ -49,13 +50,14 @@ func CreateE2SmRsmControlMessageSliceAssociate(config *e2sm_rsm_ies.SliceAssocia
 	}
 }
 
-func CreateSliceConfig(sliceID int64, parameters *e2sm_rsm_ies.SliceParameters) *e2sm_rsm_ies.SliceConfig {
+func CreateSliceConfig(sliceID int64, parameters *e2sm_rsm_ies.SliceParameters, sliceType e2sm_rsm_ies.SliceType) *e2sm_rsm_ies.SliceConfig {
 
 	return &e2sm_rsm_ies.SliceConfig{
 		SliceId: &e2sm_rsm_ies.SliceId{
 			Value: sliceID,
 		},
 		SliceConfigParameters: parameters,
+		SliceType:             sliceType,
 	}
 }
 func CreateSliceParameters(schType e2sm_rsm_ies.SchedulerType) *e2sm_rsm_ies.SliceParameters {
@@ -171,4 +173,12 @@ func CreateTransmissionModeTwo() e2sm_rsm_ies.TransmissionMode {
 
 func CreateTransmissionModeThree() e2sm_rsm_ies.TransmissionMode {
 	return e2sm_rsm_ies.TransmissionMode_TRANSMISSION_MODE_THREE
+}
+
+func CreateSliceTypeDL() e2sm_rsm_ies.SliceType {
+	return e2sm_rsm_ies.SliceType_SLICE_TYPE_DL_SLICE
+}
+
+func CreateSliceTypeUL() e2sm_rsm_ies.SliceType {
+	return e2sm_rsm_ies.SliceType_SLICE_TYPE_UL_SLICE
 }

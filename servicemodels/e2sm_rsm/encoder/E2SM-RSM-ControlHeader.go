@@ -11,6 +11,10 @@ import (
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )
 
+func init() {
+	log.SetLevel(log.Debug)
+}
+
 func PerEncodeE2SmRsmControlHeader(ch *e2sm_rsm_ies.E2SmRsmControlHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RSM-ControlHeader message is\n%v", ch)
