@@ -242,7 +242,7 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 	}
 
 	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
-	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
+	serviceModel.RanFunctions = append(serviceModel.RanFunctions, ranFunctionAny)
 	return nil
 }
 

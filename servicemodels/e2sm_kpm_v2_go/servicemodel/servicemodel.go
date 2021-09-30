@@ -6,6 +6,7 @@ package servicemodel
 
 import (
 	"fmt"
+
 	prototypes "github.com/gogo/protobuf/types"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
@@ -251,7 +252,7 @@ func (sm Kpm2ServiceModel) OnSetup(request *types.OnSetupRequest) error {
 		return err
 	}
 
-	serviceModel.RanFunctions = []*prototypes.Any{ranFunctionAny}
+	serviceModel.RanFunctions = append(serviceModel.RanFunctions, ranFunctionAny)
 	return nil
 }
 
