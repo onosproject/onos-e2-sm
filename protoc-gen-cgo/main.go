@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-1.0
+// SPDX-License-Identifier: LicenseRef-ONF-Member-Only-1.0
 
 // ToDo: delete it (logs generation) once plugin is complete - necessity only in debugging
 // Later on log files are stored to the /tmp/report.txt file (basically, it's ALMOST output of the Execute() function in module.go)
