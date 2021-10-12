@@ -26,6 +26,12 @@ protoc-go-inject-tag -input=servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go/e2sm_
 protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
   --proto_path=servicemodels \
   --go_out=./servicemodels/ \
+  e2sm_rc_pre_go/v2/e2sm_rc_pre_v2_go.proto
+protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go/e2sm_rc_pre_v2_go.pb.go
+
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
+  --proto_path=servicemodels \
+  --go_out=./servicemodels/ \
   e2sm_rsm/v1/e2sm_rsm_v1.proto e2sm_rsm/v1/e2sm_v2.proto
 protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies/e2sm_rsm_v1.pb.go
 

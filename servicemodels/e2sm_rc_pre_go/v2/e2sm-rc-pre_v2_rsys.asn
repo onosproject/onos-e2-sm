@@ -1,0 +1,276 @@
+-- **************************************************************
+-- E2SM-RC-PRE
+-- Information Element Definitions
+-- Updated by Radysis (unbounded Integers)
+-- **************************************************************
+
+
+E2SM-RC-PRE-IEs {
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version2 (2) e2sm(2) e2sm-RC-PRE-IEs (100)}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+PLMN-Identity-RCPRE ::= OCTET STRING (SIZE(3))
+
+EUTRACellIdentity-RCPRE ::= BIT STRING (SIZE(28))
+
+NRCellIdentity-RCPRE ::= BIT STRING (SIZE(36))
+
+EUTRACGI-RCPRE ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity-RCPRE,
+	eUTRACellIdentity		EUTRACellIdentity-RCPRE,
+	...
+}
+
+NRCGI-RCPRE ::= SEQUENCE {
+	pLMN-Identity			PLMN-Identity-RCPRE,
+	nRCellIdentity			NRCellIdentity-RCPRE,
+	...
+}
+
+CellGlobalID-RCPRE ::= CHOICE {
+	nr-CGI					NRCGI-RCPRE,
+	eUTRA-CGI				EUTRACGI-RCPRE,
+	...
+}
+
+
+EARFCN-RCPRE ::= INTEGER(0..maxEARFCN-RCPRE)
+NRARFCN-RCPRE ::= INTEGER(0..maxNRARFCN-RCPRE)
+PCI-RCPRE    ::= INTEGER(0..maxPCI-RCPRE)
+
+ARFCN-RCPRE ::= CHOICE {
+    eARFCN      EARFCN-RCPRE,
+    nrARFCN     NRARFCN-RCPRE
+}
+
+Cell-Size-RCPRE ::= ENUMERATED {
+   femto, enterprise, outdoorSmall, macro, ... }
+
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+
+maxofMessageProtocolTests-RCPRE          INTEGER ::= 15
+maxofRICstyles-RCPRE                     INTEGER ::= 63
+maxPLMN-RCPRE                            INTEGER ::= 12 -- Maximum number of PLMNs broadcast and reported by UE at establishment
+maxNR-RCPRE                              INTEGER ::= 4096
+maxEARFCN-RCPRE                          INTEGER ::= 262143
+maxNRARFCN-RCPRE                         INTEGER ::= 3279167
+maxPCI-RCPRE                             INTEGER ::= 1007
+maxPciRange-RCPRE                        INTEGER ::= 100
+maxofRANparameters-RCPRE					  INTEGER ::= 65535
+
+RIC-Style-Type-RCPRE  ::= INTEGER (0.. 255, ...)
+RIC-Style-Name-RCPRE  ::= PrintableString(SIZE(1..150,...))
+RIC-Format-Type-RCPRE ::= INTEGER (0.. 255, ...)
+
+
+-- **************************************************************
+-- E2SM-RC-PRE Common IEs
+-- **************************************************************
+RIC-Control-Message-Priority-RCPRE ::= INTEGER (0.. 255, ...)
+
+RANparameter-Item-RCPRE ::= SEQUENCE {
+	ranParameter-ID			RANparameter-ID-RCPRE,
+	...
+}
+
+RANparameter-ID-RCPRE ::= INTEGER (0..maxofRANparameters-RCPRE)
+
+RANparameter-Value-RCPRE ::= CHOICE{
+	valueInt	INTEGER (0.. 4294967295),
+	valueEnum	INTEGER,
+	valueBool	BOOLEAN,
+	valueBitS	BIT STRING,
+	valueOctS	OCTET STRING,
+	valuePrtS	PrintableString,
+	...
+}
+
+RANparameterDef-Item-RCPRE ::= SEQUENCE {
+	ranParameter-ID		RANparameter-ID-RCPRE,
+	ranParameter-Name		RANparameter-Name-RCPRE,
+	ranParameter-Type		RANparameter-Type-RCPRE,
+	...
+}
+
+RANparameter-Name-RCPRE ::= PrintableString(SIZE(1..150,...))
+
+RANparameter-Type-RCPRE ::= ENUMERATED{
+	integer,
+	enumerated,
+	boolean,
+	bit-string,
+	octet-string,
+	printable-string,
+	...
+}
+
+RC-PRE-Trigger-Type-RCPRE ::= ENUMERATED{
+    upon-change,
+    periodic,
+    ...
+}
+
+-- **************************************************************
+-- Event Trigger Definition OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-EventTriggerDefinition IE
+E2SM-RC-PRE-EventTriggerDefinition-RCPRE ::= SEQUENCE{
+	eventDefinition-formats			CHOICE{
+		eventDefinition-Format1			E2SM-RC-PRE-EventTriggerDefinition-Format1-RCPRE,
+		...
+	},
+	...
+}
+
+E2SM-RC-PRE-EventTriggerDefinition-Format1-RCPRE ::= SEQUENCE{
+   triggerType                      RC-PRE-Trigger-Type-RCPRE,
+	reportingPeriod-ms					INTEGER (1.. 4294967295) OPTIONAL,
+	...
+}
+
+-- **************************************************************
+-- Indication Header OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-IndicationHeader IE
+E2SM-RC-PRE-IndicationHeader-RCPRE ::= CHOICE {
+   indicationHeader-Format1                E2SM-RC-PRE-IndicationHeader-Format1-RCPRE,
+   ...
+}
+
+-- E2SM-RC-PRE-IndicationHeader Format 1
+E2SM-RC-PRE-IndicationHeader-Format1-RCPRE ::= SEQUENCE {
+    cgi         CellGlobalID-RCPRE    OPTIONAL,
+    ...
+}
+
+-- **************************************************************
+-- Indication Message OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-IndicationMessage IE
+E2SM-RC-PRE-IndicationMessage-RCPRE ::= CHOICE {
+   ric-Style-Type                          RIC-Style-Type-RCPRE,
+   indicationMessage-Format1               E2SM-RC-PRE-IndicationMessage-Format1-RCPRE,
+   ...
+}
+
+-- E2SM-RC-PRE-IndicationMessage-Format 1 IE
+E2SM-RC-PRE-IndicationMessage-Format1-RCPRE ::= SEQUENCE {
+   dl-ARFCN    ARFCN-RCPRE,
+   cell-Size   Cell-Size-RCPRE,
+   pci         PCI-RCPRE,
+   neighbors   SEQUENCE (SIZE(0..maxNR-RCPRE)) OF NRT-RCPRE,
+   ...
+}
+
+NRT-RCPRE ::= SEQUENCE {
+    cgi         CellGlobalID-RCPRE,
+    dl-ARFCN    ARFCN-RCPRE,
+    cell-Size   Cell-Size-RCPRE,
+    pci         PCI-RCPRE,
+    ...
+}
+
+-- **************************************************************
+-- Control Header OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-ControlHeader IE
+E2SM-RC-PRE-ControlHeader-RCPRE ::= CHOICE{
+	controlHeader-Format1		E2SM-RC-PRE-ControlHeader-Format1-RCPRE,
+	...
+}
+
+-- E2SM-RC-PRE-ControlHeader Format 1
+E2SM-RC-PRE-ControlHeader-Format1-RCPRE ::= SEQUENCE{
+    cgi         CellGlobalID-RCPRE       OPTIONAL,
+	rc-command					   RC-PRE-Command-RCPRE,
+	ric-Control-Message-Priority	RIC-Control-Message-Priority-RCPRE	OPTIONAL,
+	...
+}
+
+RC-PRE-Command-RCPRE ::= ENUMERATED {setParameters, ... }
+
+
+-- **************************************************************
+-- Control Message OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-ControlMessage IE
+E2SM-RC-PRE-ControlMessage-RCPRE ::= CHOICE{
+	controlMessage		E2SM-RC-PRE-ControlMessage-Format1-RCPRE,
+	...
+}
+
+-- E2SM-RC-PRE-ControlMessage Format 1
+E2SM-RC-PRE-ControlMessage-Format1-RCPRE ::= SEQUENCE{
+	parameterType			RANparameterDef-Item-RCPRE,
+    parameterVal         RANparameter-Value-RCPRE,
+	...
+}
+
+-- **************************************************************
+-- Control Outcome OCTET STRING contents
+-- **************************************************************
+
+-- E2SM-RC-PRE-ControlOutcome IE
+E2SM-RC-PRE-ControlOutcome-RCPRE ::= CHOICE{
+	controlOutcome-Format1		E2SM-RC-PRE-ControlOutcome-Format1-RCPRE,
+	...
+}
+
+-- E2SM-RC-PRE-ControlOutcome Format 1
+E2SM-RC-PRE-ControlOutcome-Format1-RCPRE ::= SEQUENCE{
+	outcomeElement-List		SEQUENCE (SIZE(1..maxofRANparameters-RCPRE)) OF RANparameter-Item-RCPRE OPTIONAL,
+	...
+}
+
+-- ***************************************************************
+-- RAN Function Description OCTET STRING contents
+-- ***************************************************************
+
+-- E2SM-RC-PRE-RANfunction-Description
+E2SM-RC-PRE-RANfunction-Description-RCPRE ::= SEQUENCE{
+	ranFunction-Name	RANfunction-Name-RCPRE,
+    e2SM-RC-PRE-RANfunction-Item SEQUENCE{
+	    ric-EventTriggerStyle-List	SEQUENCE (SIZE(1..maxofRICstyles-RCPRE)) OF RIC-EventTriggerStyle-List-RCPRE OPTIONAL,
+	    ric-ReportStyle-List		SEQUENCE (SIZE(1..maxofRICstyles-RCPRE)) OF RIC-ReportStyle-List-RCPRE OPTIONAL,
+	    ...
+    },
+	...
+}
+
+RANfunction-Name-RCPRE ::= SEQUENCE{
+    ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
+    ranFunction-E2SM-OID		PrintableString(SIZE(1..1000,...)),
+    ranFunction-Description     PrintableString(SIZE(1..150,...)),
+    ranFunction-Instance        INTEGER (0.. 255, ...) OPTIONAL,
+    ...
+}
+
+RIC-EventTriggerStyle-List-RCPRE ::= SEQUENCE{
+	ric-EventTriggerStyle-Type			RIC-Style-Type-RCPRE,
+	ric-EventTriggerStyle-Name			RIC-Style-Name-RCPRE,
+	ric-EventTriggerFormat-Type			RIC-Format-Type-RCPRE,
+	...
+}
+
+RIC-ReportStyle-List-RCPRE ::= SEQUENCE{
+	ric-ReportStyle-Type				RIC-Style-Type-RCPRE,
+	ric-ReportStyle-Name				RIC-Style-Name-RCPRE,
+	ric-IndicationHeaderFormat-Type		RIC-Format-Type-RCPRE,
+	ric-IndicationMessageFormat-Type	RIC-Format-Type-RCPRE,
+	...
+}
+
+END
