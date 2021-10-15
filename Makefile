@@ -21,8 +21,11 @@ build/_output/e2sm_kpm_v2.so.1.0.0: # @HELP build the e2sm_kpm_v2.so.1.0.0
 build/_output/e2sm_kpm_v2_go.so.1.0.0: # @HELP build the e2sm_kpm_v2.so.1.0.0
 	cd servicemodels/e2sm_kpm_v2_go && go build -o build/_output/e2sm_kpm_v2_go.so.1.0.0 -buildmode=plugin .
 
-build/_output/e2sm_rc_pre_go.so.1.0.0: # @HELP build the e2sm_rsm.so.1.0.0
-	cd servicemodels/e2sm_rc_pre_go && go build -o build/_output/e2sm_rc_pre_go.so.1.0.0 -buildmode=plugin .
+build/_output/e2sm_rc_pre_go.so.1.0.0: # @HELP build the e2sm_rc_pre_go.so.1.0.0
+	cd servicemodels/e2sm_rc_pre_go && go build -o build/_output/e2sm_mho_go.so.1.0.0 -buildmode=plugin .
+
+build/_output/e2sm_mho_go.so.1.0.0: # @HELP build the e2sm_mho_go.so.1.0.0
+	cd servicemodels/e2sm_mho_go && go build -o build/_output/e2sm_rc_pre_go.so.1.0.0 -buildmode=plugin .
 
 build/_output/e2sm_rsm.so.1.0.0: # @HELP build the e2sm_rsm.so.1.0.0
 	cd servicemodels/e2sm_rsm && go build -o build/_output/e2sm_rsm.so.1.0.0 -buildmode=plugin .
@@ -38,7 +41,7 @@ build/_output/e2sm_mho.so.1.0.0: # @HELP build the e2sm_mho.so.1.0.1
 
 PHONY:build
 build: # @HELP build all libraries
-build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_kpm_v2.so.1.0.0 build/_output/e2sm_kpm_v2_go.so.1.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0 build/_output/e2sm_mho.so.1.0.0 build/_output/e2sm_rsm.so.1.0.0 build/_output/e2sm_rc_pre_go.so.1.0.0
+build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_kpm_v2.so.1.0.0 build/_output/e2sm_kpm_v2_go.so.1.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0 build/_output/e2sm_mho.so.1.0.0 build/_output/e2sm_rsm.so.1.0.0 build/_output/e2sm_rc_pre_go.so.1.0.0 build/_output/e2sm_mho_go.so.1.0.0
 
 build_protoc_gen_cgo:
 	cd protoc-gen-cgo/ && go build -v -o ./protoc-gen-cgo && cd ..
@@ -51,9 +54,10 @@ test: license_check build build_protoc_gen_cgo build_protoc_gen_choice linters
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre_go && go test -race ./...
-	#cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_kpm_v2_go && go test -race ./...
 	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_mho_go && go test -race ./...
 	cd servicemodels/e2sm_rsm && go test -race ./...
 	cd servicemodels/test_sm_aper_go_lib && GODEBUG=cgocheck=0 go test -race ./...
 
@@ -218,7 +222,7 @@ service-model-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin D
 	@rm -rf vendor
 
 PHONY: service-model-docker-e2sm_rc_pre_go-1.0.0
-service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
+service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_rc_pre_go ${E2T_MOD} onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre_go" \
@@ -249,6 +253,22 @@ service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker 
 	@rm -rf vendor
 
 
+PHONY: service-model-docker-e2sm_mho_go-1.0.0
+service-model-docker-e2sm_mho_go-1.0.0: # @HELP build e2sm_mho_go 1.0.0 plugin Docker image
+	./build/bin/build-deps e2sm_mho_go ${E2T_MOD} onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	docker build . -f build/plugins/Dockerfile \
+			--build-arg PLUGIN_MAKE_TARGET="e2sm_mho_go" \
+			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
+			-t onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	@cd servicemodels/e2sm_mho_go && go mod vendor && cd ../..
+	docker build . -f build/plugins/ransim.Dockerfile \
+		--build-arg PLUGIN_MAKE_TARGET=e2sm_mho_go\
+		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+		--build-arg DUMMY_FILE_NAME=mod.ran-sim-dummy-onos-lib-go \
+		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+		-t onosproject/service-model-ransim-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	@rm -rf vendor
+
 images: # @HELP build all Docker images
 images: build service-model-docker-e2sm_kpm-1.0.0 \
 	service-model-docker-e2sm_kpm_v2-1.0.0 \
@@ -257,7 +277,8 @@ images: build service-model-docker-e2sm_kpm-1.0.0 \
 	service-model-docker-e2sm_ni-1.0.0 \
 	service-model-docker-e2sm_rc_pre-1.0.0 \
 	service-model-docker-e2sm_rc_pre_go-1.0.0 \
-	service-model-docker-e2sm_mho-1.0.0
+	service-model-docker-e2sm_mho-1.0.0 \
+	service-model-docker-e2sm_mho_go-1.0.0
 
 kind: # @HELP build Docker images and add them to the currently configured kind cluster
 kind: images
@@ -273,8 +294,12 @@ kind: images
 	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-ransim-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 
 
 all: build images
