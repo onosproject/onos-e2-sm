@@ -199,8 +199,6 @@ github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRW
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/onosproject/onos-api/go v0.7.93 h1:iG9x1eSLHnvVO+bIKAjV6MMDdxXvy4f7AM/8T5qM9H8=
 github.com/onosproject/onos-api/go v0.7.93/go.mod h1:dUChRuNCBGrF6sVdaAZl5T2ZeyEC6ybsAdEBu0YwlMw=
-github.com/onosproject/onos-lib-go v0.7.20 h1:z6TvBWOxqb1ybO40iZAtvKyDMQxbaCNxRf4XKlbTbCo=
-github.com/onosproject/onos-lib-go v0.7.20/go.mod h1:RbD0kyWQaFqcNlBNGInP1yRGcCVq1gaQsCTtkOptNK0=
 github.com/onosproject/onos-lib-go v0.7.22 h1:lfbG97eyp9GqcDWgoIueCsX8mnfEDNZB/NSwLpsr/hs=
 github.com/onosproject/onos-lib-go v0.7.22/go.mod h1:RbD0kyWQaFqcNlBNGInP1yRGcCVq1gaQsCTtkOptNK0=
 github.com/openconfig/gnmi v0.0.0-20200617225440-d2b4e6a45802/go.mod h1:M/EcuapNQgvzxo1DDXHK4tx3QpYM/uG4l591v33jG2A=
