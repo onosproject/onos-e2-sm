@@ -23,6 +23,7 @@ func TestE2SmMhoIndicationMsgF1(t *testing.T) {
 	newE2SmMhoPdu, err := CreateE2SmMhoIndicationMsgFormat1(ueID, rsrp)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmMhoPdu != nil)
+	t.Logf("E2SM-MHO-IndicationMessage is \n%v", newE2SmMhoPdu)
 
 	per, err := encoder.PerEncodeE2SmMhoIndicationMessage(newE2SmMhoPdu)
 	assert.NilError(t, err)
@@ -31,7 +32,7 @@ func TestE2SmMhoIndicationMsgF1(t *testing.T) {
 	result, err := encoder.PerDecodeE2SmMhoIndicationMessage(per)
 	assert.NilError(t, err)
 	t.Logf("Decoded E2SM-MHO-IndicationMessage is \n%v", result)
-	assert.Equal(t, newE2SmMhoPdu.String(), result.String())
+	assert.DeepEqual(t, newE2SmMhoPdu.String(), result.String())
 }
 
 func TestE2SmMhoIndicationMsgF2(t *testing.T) {
