@@ -31,15 +31,27 @@ This is the first E2 Service Model to be handled by SD-RAN - it is for extractin
 Currently supported version is E2SM KPM v2 (with CGo approach). E2SM KPMv2 with purely Go approach is 
 under maintenance and yet far away from the release. E2SM KPM v1 is partially implemented and not supported anymore.
 
+There is also an experimental implementation of KPMv2 SM with Go-based APER library (produces APER bytes out of Protobuf). 
+This is still under verification, bugs may be expected.
+
 
 ### Native Interface (E2SM_NI)
-While the Proto definitions have been created for this Service Model, the Go mapping code has not been implemented in SD-RAN yet
+While the Proto definitions have been created for this Service Model, the Go mapping code has not been implemented in SD-RAN yet.
 
 ### RAN Control (E2SM_RC_PRE)
 Pre-standard E2 Service model with PCI and Neighbor relation table information from E2 Nodes.
 
+There is also an experimental implementation of RC-PRE SM with Go-based APER library. This is still under verification, 
+bugs may be expected.
+
 ### Mobile HandOver (E2SM_MHO)
 E2 Service model for handling Mobile HandOver use case.
+
+There is also an experimental implementation of MHO SM with Go-based APER library. This is still under verification, 
+bugs may be expected.
+
+### RAN Slicing (E2SM_RSM)
+E2 service model for handling RAN Slicing use case. It was implemented with Go-based APER library.
 
 ## Development
 Service models are created from the ASN1 models stored at:
