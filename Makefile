@@ -69,7 +69,7 @@ jenkins-test: build-tools license_check linters
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_rc_pre_go && TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_mho && TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
+	cd servicemodels/e2sm_mho_go && TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 
 deps_kpm: # @HELP ensure that the required dependencies are in place
 	cd servicemodels/e2sm_kpm
