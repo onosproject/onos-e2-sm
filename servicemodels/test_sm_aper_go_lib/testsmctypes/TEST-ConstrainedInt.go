@@ -31,7 +31,7 @@ func xerEncodeTestConstrainedInt(testConstrainedInt *test_sm_ies.TestConstrained
 	return bytes, nil
 }
 
-func perEncodeTestConstrainedInt(testConstrainedInt *test_sm_ies.TestConstrainedInt) ([]byte, error) {
+func PerEncodeTestConstrainedInt(testConstrainedInt *test_sm_ies.TestConstrainedInt) ([]byte, error) {
 	testConstrainedIntCP, err := newTestConstrainedInt(testConstrainedInt)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestConstrainedInt() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestConstrainedInt(bytes []byte) (*test_sm_ies.TestConstrainedInt,
 	return decodeTestConstrainedInt((*C.TEST_ConstrainedInt_t)(unsafePtr))
 }
 
-func perDecodeTestConstrainedInt(bytes []byte) (*test_sm_ies.TestConstrainedInt, error) {
+func PerDecodeTestConstrainedInt(bytes []byte) (*test_sm_ies.TestConstrainedInt, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_ConstrainedInt)
 	if err != nil {
 		return nil, err

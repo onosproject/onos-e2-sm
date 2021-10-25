@@ -67,11 +67,11 @@ func Test_perEncodingTestConstrainedInt(t *testing.T) {
 	testConstrainedInt, err := createTestConstrainedIntMsg()
 	assert.NilError(t, err, "Error creating TestConstrainedInt PDU")
 
-	per, err := perEncodeTestConstrainedInt(testConstrainedInt)
+	per, err := PerEncodeTestConstrainedInt(testConstrainedInt)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedInt PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestConstrainedInt(per)
+	result, err := PerDecodeTestConstrainedInt(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestConstrainedInt PER - decoded\n%v", result)
@@ -88,11 +88,11 @@ func Test_perEncodingTestConstrainedIntCmpr(t *testing.T) {
 	testConstrainedInt, err := createTestConstrainedIntMsgCmpr()
 	assert.NilError(t, err, "Error creating TestConstrainedInt PDU")
 
-	per, err := perEncodeTestConstrainedInt(testConstrainedInt)
+	per, err := PerEncodeTestConstrainedInt(testConstrainedInt)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedInt PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestConstrainedInt(per)
+	result, err := PerDecodeTestConstrainedInt(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestConstrainedInt PER - decoded\n%v", result)
