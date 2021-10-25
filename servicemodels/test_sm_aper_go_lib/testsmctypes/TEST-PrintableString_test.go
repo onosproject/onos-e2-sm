@@ -88,11 +88,11 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	testPrintableString, err := createTestPrintableStringMsg()
 	assert.NilError(t, err, "Error creating TestPrintableString PDU")
 
-	per, err := perEncodeTestPrintableString(testPrintableString)
+	per, err := PerEncodeTestPrintableString(testPrintableString)
 	assert.NilError(t, err)
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestPrintableString(per)
+	result, err := PerDecodeTestPrintableString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestPrintableString PER - decoded\n%v", result)
@@ -107,11 +107,11 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	testPrintableStringExcludeOptional, err := createTestPrintableStringExcludeOptional()
 	assert.NilError(t, err, "Error creating TestPrintableString PDU")
 
-	per2, err := perEncodeTestPrintableString(testPrintableStringExcludeOptional)
+	per2, err := PerEncodeTestPrintableString(testPrintableStringExcludeOptional)
 	assert.NilError(t, err)
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestPrintableString(per2)
+	result2, err := PerDecodeTestPrintableString(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result2 != nil)
 	t.Logf("TestPrintableString PER - decoded\n%v", result2)

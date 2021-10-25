@@ -31,7 +31,7 @@ func xerEncodeTestPrintableString(testPrintableString *test_sm_ies.TestPrintable
 	return bytes, nil
 }
 
-func perEncodeTestPrintableString(testPrintableString *test_sm_ies.TestPrintableString) ([]byte, error) {
+func PerEncodeTestPrintableString(testPrintableString *test_sm_ies.TestPrintableString) ([]byte, error) {
 	testPrintableStringCP, err := newTestPrintableString(testPrintableString)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestPrintableString() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestPrintableString(bytes []byte) (*test_sm_ies.TestPrintableStrin
 	return decodeTestPrintableString((*C.TEST_PrintableString_t)(unsafePtr))
 }
 
-func perDecodeTestPrintableString(bytes []byte) (*test_sm_ies.TestPrintableString, error) {
+func PerDecodeTestPrintableString(bytes []byte) (*test_sm_ies.TestPrintableString, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_PrintableString)
 	if err != nil {
 		return nil, err
