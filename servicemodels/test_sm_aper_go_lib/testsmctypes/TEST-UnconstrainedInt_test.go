@@ -43,11 +43,11 @@ func Test_perEncodingTestUnconstrainedInt(t *testing.T) {
 	testUnconstrainedInt, err := createTestUnconstrainedIntMsg()
 	assert.NilError(t, err, "Error creating TestUnconstrainedInt PDU")
 
-	per, err := perEncodeTestUnconstrainedInt(testUnconstrainedInt)
+	per, err := PerEncodeTestUnconstrainedInt(testUnconstrainedInt)
 	assert.NilError(t, err)
 	t.Logf("TestUnconstrainedInt PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestUnconstrainedInt(per)
+	result, err := PerDecodeTestUnconstrainedInt(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestUnconstrainedInt PER - decoded\n%v", result)
