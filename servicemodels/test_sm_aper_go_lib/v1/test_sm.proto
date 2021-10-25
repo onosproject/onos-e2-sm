@@ -318,7 +318,7 @@ message TestFullyOptionalSequence {
     optional int32 item1 = 1 [json_name = "item1"];
     // @inject_tag: aper:"optional,sizeLB:3,sizeUB:7"
     optional bytes item2 = 2 [json_name = "item2"];
-    // @inject_tag: aper:"optional"
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1"
     optional bool item3 = 3 [json_name = "item3"];
     // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
     optional TestFullyOptionalSequenceItem4 item4 = 4 [json_name = "item4"];

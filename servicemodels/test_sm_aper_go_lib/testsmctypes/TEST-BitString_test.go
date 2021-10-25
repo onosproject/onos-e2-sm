@@ -86,11 +86,11 @@ func Test_perEncodingTestBitString(t *testing.T) {
 	testBitString, err := createTestBitStringMsg()
 	assert.NilError(t, err, "Error creating TestBitString PDU")
 
-	per, err := perEncodeTestBitString(testBitString)
+	per, err := PerEncodeTestBitString(testBitString)
 	assert.NilError(t, err)
 	t.Logf("TestBitString PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestBitString(per)
+	result, err := PerDecodeTestBitString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestBitString PER - decoded\n%v", result)

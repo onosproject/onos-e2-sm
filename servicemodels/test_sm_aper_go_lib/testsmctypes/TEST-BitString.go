@@ -31,7 +31,7 @@ func xerEncodeTestBitString(testBitString *test_sm_ies.TestBitString) ([]byte, e
 	return bytes, nil
 }
 
-func perEncodeTestBitString(testBitString *test_sm_ies.TestBitString) ([]byte, error) {
+func PerEncodeTestBitString(testBitString *test_sm_ies.TestBitString) ([]byte, error) {
 	testBitStringCP, err := newTestBitString(testBitString)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestBitString() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestBitString(bytes []byte) (*test_sm_ies.TestBitString, error) {
 	return decodeTestBitString((*C.TEST_BitString_t)(unsafePtr))
 }
 
-func perDecodeTestBitString(bytes []byte) (*test_sm_ies.TestBitString, error) {
+func PerDecodeTestBitString(bytes []byte) (*test_sm_ies.TestBitString, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_BitString)
 	if err != nil {
 		return nil, err
