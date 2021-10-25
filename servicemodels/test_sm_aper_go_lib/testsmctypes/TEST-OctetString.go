@@ -31,7 +31,7 @@ func xerEncodeTestOctetString(testOctetString *test_sm_ies.TestOctetString) ([]b
 	return bytes, nil
 }
 
-func perEncodeTestOctetString(testOctetString *test_sm_ies.TestOctetString) ([]byte, error) {
+func PerEncodeTestOctetString(testOctetString *test_sm_ies.TestOctetString) ([]byte, error) {
 	testOctetStringCP, err := newTestOctetString(testOctetString)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestOctetString() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestOctetString(bytes []byte) (*test_sm_ies.TestOctetString, error
 	return decodeTestOctetString((*C.TEST_OctetString_t)(unsafePtr))
 }
 
-func perDecodeTestOctetString(bytes []byte) (*test_sm_ies.TestOctetString, error) {
+func PerDecodeTestOctetString(bytes []byte) (*test_sm_ies.TestOctetString, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_OctetString)
 	if err != nil {
 		return nil, err

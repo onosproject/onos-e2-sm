@@ -86,11 +86,11 @@ func Test_perEncodingTestOctetString(t *testing.T) {
 	testOctetString, err := createTestOctetStringMsg()
 	assert.NilError(t, err, "Error creating TestOctetString PDU")
 
-	per, err := perEncodeTestOctetString(testOctetString)
+	per, err := PerEncodeTestOctetString(testOctetString)
 	assert.NilError(t, err)
 	t.Logf("TestOctetString PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestOctetString(per)
+	result, err := PerDecodeTestOctetString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestOctetString PER - decoded\n%v", result)
@@ -105,11 +105,11 @@ func Test_perEncodingTestOctetString(t *testing.T) {
 	testOctetStringExcludeOptional, err := createTestOctetStringExcludeOptional()
 	assert.NilError(t, err, "Error creating TestOctetString PDU")
 
-	per2, err := perEncodeTestOctetString(testOctetStringExcludeOptional)
+	per2, err := PerEncodeTestOctetString(testOctetStringExcludeOptional)
 	assert.NilError(t, err)
 	t.Logf("TestOctetString PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestOctetString(per2)
+	result2, err := PerDecodeTestOctetString(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result2 != nil)
 	t.Logf("TestOctetString PER - decoded\n%v", result2)
