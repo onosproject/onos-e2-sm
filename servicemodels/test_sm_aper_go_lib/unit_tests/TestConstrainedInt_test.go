@@ -33,7 +33,7 @@ func TestConstrainedInt(t *testing.T) {
 		testSM.AttrCiF = 10
 		testSM.AttrCiG = 10 + int32(rand.Intn(max-10))
 
-		t.Logf("Testing Test-ConstrainedInt with values:\n" +
+		t.Logf("Testing Test-ConstrainedInt with values:\n"+
 			"%v, %v, %v, %v, %v, %v, %v", testSM.GetAttrCiA(), testSM.GetAttrCiB(), testSM.GetAttrCiC(),
 			testSM.GetAttrCiD(), testSM.GetAttrCiE(), testSM.GetAttrCiF(), testSM.GetAttrCiG())
 
