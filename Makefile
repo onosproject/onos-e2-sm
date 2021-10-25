@@ -161,12 +161,12 @@ service-model-docker-e2sm_kpm_v2-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin D
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 	@cd servicemodels/e2sm_kpm_v2 && go mod vendor && cd ../..
-	docker build . -f build/plugins/ransim.Dockerfile \
-		--build-arg PLUGIN_MAKE_TARGET=e2sm_kpm_v2\
-		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
-		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
-		-t onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
-	@rm -rf vendor
+#	docker build . -f build/plugins/ransim.Dockerfile \
+#		--build-arg PLUGIN_MAKE_TARGET=e2sm_kpm_v2\
+#		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+#		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+#		-t onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
 PHONY: service-model-docker-e2sm_kpm_v2_go-1.0.0
 service-model-docker-e2sm_kpm_v2_go-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
@@ -176,13 +176,13 @@ service-model-docker-e2sm_kpm_v2_go-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugi
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
 	@cd servicemodels/e2sm_kpm_v2_go && go mod vendor && cd ../..
-	docker build . -f build/plugins/ransim.Dockerfile \
-		--build-arg PLUGIN_MAKE_TARGET=e2sm_kpm_v2_go\
-		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
-		--build-arg DUMMY_FILE_NAME=mod.ran-sim-dummy-onos-lib-go \
-		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
-		-t onosproject/service-model-ransim-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
-	@rm -rf vendor
+#	docker build . -f build/plugins/ransim.Dockerfile \
+#		--build-arg PLUGIN_MAKE_TARGET=e2sm_kpm_v2_go\
+#		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+#		--build-arg DUMMY_FILE_NAME=mod.ran-sim-dummy-onos-lib-go \
+#		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+#		-t onosproject/service-model-ransim-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
 PHONY: service-model-docker-e2sm_rsm-1.0.0
 service-model-docker-e2sm_rsm-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
@@ -216,12 +216,12 @@ service-model-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin D
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	@cd servicemodels/e2sm_rc_pre && go mod vendor && cd ../..
-	docker build . -f build/plugins/ransim.Dockerfile \
-		--build-arg PLUGIN_MAKE_TARGET=e2sm_rc_pre \
-		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
-		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
-		-t onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
-	@rm -rf vendor
+#	docker build . -f build/plugins/ransim.Dockerfile \
+#		--build-arg PLUGIN_MAKE_TARGET=e2sm_rc_pre \
+#		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+#		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+#		-t onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
 PHONY: service-model-docker-e2sm_rc_pre_go-1.0.0
 service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Docker image
@@ -231,13 +231,13 @@ service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 pl
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
 	@cd servicemodels/e2sm_rc_pre_go && go mod vendor && cd ../..
-	docker build . -f build/plugins/ransim.Dockerfile \
-		--build-arg PLUGIN_MAKE_TARGET=e2sm_rc_pre_go\
-		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
-		--build-arg DUMMY_FILE_NAME=mod.ran-sim-dummy-onos-lib-go \
-		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
-		-t onosproject/service-model-ransim-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
-	@rm -rf vendor
+#	docker build . -f build/plugins/ransim.Dockerfile \
+#		--build-arg PLUGIN_MAKE_TARGET=e2sm_rc_pre_go\
+#		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+#		--build-arg DUMMY_FILE_NAME=mod.ran-sim-dummy-onos-lib-go \
+#		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+#		-t onosproject/service-model-ransim-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
 PHONY: service-model-docker-e2sm_mho-1.0.0
 service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker image
@@ -247,12 +247,12 @@ service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker 
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 	@cd servicemodels/e2sm_mho && go mod vendor && cd ../..
-	docker build . -f build/plugins/ransim.Dockerfile \
-		--build-arg PLUGIN_MAKE_TARGET=e2sm_mho \
-		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
-		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
-		-t onosproject/service-model-ransim-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
-	@rm -rf vendor
+#	docker build . -f build/plugins/ransim.Dockerfile \
+#		--build-arg PLUGIN_MAKE_TARGET=e2sm_mho \
+#		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+#		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+#		-t onosproject/service-model-ransim-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
 
 PHONY: service-model-docker-e2sm_mho_go-1.0.0
@@ -263,13 +263,13 @@ service-model-docker-e2sm_mho_go-1.0.0: # @HELP build e2sm_mho_go 1.0.0 plugin D
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 	@cd servicemodels/e2sm_mho_go && go mod vendor && cd ../..
-	docker build . -f build/plugins/ransim.Dockerfile \
-		--build-arg PLUGIN_MAKE_TARGET=e2sm_mho_go\
-		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
-		--build-arg DUMMY_FILE_NAME=mod.ran-sim-dummy-onos-lib-go \
-		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
-		-t onosproject/service-model-ransim-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
-	@rm -rf vendor
+#	docker build . -f build/plugins/ransim.Dockerfile \
+#		--build-arg PLUGIN_MAKE_TARGET=e2sm_mho_go\
+#		--build-arg PLUGIN_MAKE_VERSION=1.0.0 \
+#		--build-arg DUMMY_FILE_NAME=mod.ran-sim-dummy-onos-lib-go \
+#		--build-arg PLUGIN_BUILD_VERSION=${ONOS_BUILD_VERSION} \
+#		-t onosproject/service-model-ransim-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+#	@rm -rf vendor
 
 images: # @HELP build all Docker images
 images: build service-model-docker-e2sm_kpm-1.0.0 \
@@ -288,20 +288,20 @@ kind: images
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
+	#kind load docker-image onosproject/service-model-ransim-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
+	#kind load docker-image onosproject/service-model-ransim-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-ransim-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+	#kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
+	#kind load docker-image onosproject/service-model-ransim-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
+	#kind load docker-image onosproject/service-model-ransim-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	#kind load docker-image onosproject/service-model-ransim-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 
 
 all: build images
