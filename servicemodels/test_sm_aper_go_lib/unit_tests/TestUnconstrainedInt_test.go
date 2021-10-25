@@ -11,6 +11,7 @@ import (
 	"gotest.tools/assert"
 	"math/rand"
 	"testing"
+	"time"
 )
 
 func TestUnconstrainedIntAllOption1(t *testing.T) {
@@ -34,7 +35,6 @@ func TestUnconstrainedIntAllOption1(t *testing.T) {
 	t.Logf("Testing of Test-UnconstrainedInt was successfully finished")
 }
 
-
 func TestUnconstrainedIntAllOption2(t *testing.T) {
 
 	testSM := new(test_sm_ies.TestUnconstrainedInt)
@@ -43,15 +43,21 @@ func TestUnconstrainedIntAllOption2(t *testing.T) {
 	max := 2147483648
 
 	for i := 1; i < 1000; i++ {
-		testSM.AttrUciA = int32(rand.Intn(max - min) + min)
-		testSM.AttrUciB = int32(rand.Intn(max - min) + min)
+		// Seeding randomizer first
+		rand.Seed(time.Now().UnixNano())
+		// Generating random numbers
+		testSM.AttrUciA = int32(rand.Intn(max-min) + min)
+		testSM.AttrUciB = int32(rand.Intn(max-min) + min)
 		t.Logf("Testing Test-UnconstrainedInt with values %v and %v", testSM.GetAttrUciA(), testSM.GetAttrUciB())
 
+		// Generating APER with reference CGo approach
 		perRef, err := testsmctypes.PerEncodeTestUnconstrainedInt(testSM)
 		assert.NilError(t, err)
+		// Generating APER bytes with Go APER lib
 		per, err := aper.Marshal(testSM)
 		assert.NilError(t, err)
 
+		//Comparing bytes against each other
 		assert.DeepEqual(t, per, perRef)
 	}
 	t.Logf("Testing of Test-UnconstrainedInt (with randomness) was successfully finished")
