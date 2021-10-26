@@ -66,11 +66,11 @@ func Test_perEncodingTestConstrainedChoices(t *testing.T) {
 	testConstrainedChoices, err := createTestConstrainedChoicesMsg()
 	assert.NilError(t, err, "Error creating TestConstrainedChoices PDU")
 
-	per, err := perEncodeTestConstrainedChoices(testConstrainedChoices)
+	per, err := PerEncodeTestConstrainedChoices(testConstrainedChoices)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedChoices PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestConstrainedChoices(per)
+	result, err := PerDecodeTestConstrainedChoices(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestConstrainedChoices PER - decoded\n%v", result)

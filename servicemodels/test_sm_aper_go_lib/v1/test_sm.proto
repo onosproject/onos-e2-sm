@@ -173,7 +173,7 @@ message Choice4 {
 // sequence from tes_sm.asn1:82
 // {TEST-ConstrainedChoices}
 message TestConstrainedChoices {
-    // @inject_tag: aper:"sizeLB:1,sizeUB:50,sizeExt"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:50"
     string other_cattr = 1 [json_name = "otherCAttr"];
     ConstrainedChoice1 constrained_choice1 = 2 [json_name = "constrainedChoice1"];
     ConstrainedChoice2 constrained_choice2 = 3 [json_name = "constrainedChoice2"];

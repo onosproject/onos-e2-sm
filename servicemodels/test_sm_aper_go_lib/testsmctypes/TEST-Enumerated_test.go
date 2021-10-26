@@ -108,66 +108,66 @@ func Test_perEncodingTestEnumerated(t *testing.T) {
 
 	enum1 := createTestEnum1()
 
-	per1, err := perEncodeTestEnumerated(&enum1)
+	per1, err := PerEncodeTestEnumerated(&enum1)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum1) PER\n%v", hex.Dump(per1))
 
-	result1, err := perDecodeTestEnumerated(per1)
+	result1, err := PerDecodeTestEnumerated(per1)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum1) PER - decoded\n%v", result1)
 	assert.Equal(t, enum1.Number(), result1.Number())
 
 	enum2 := createTestEnum2()
 
-	per2, err := perEncodeTestEnumerated(&enum2)
+	per2, err := PerEncodeTestEnumerated(&enum2)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum2) PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestEnumerated(per2)
+	result2, err := PerDecodeTestEnumerated(per2)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum2) PER - decoded\n%v", result2)
 	assert.Equal(t, enum2.Number(), result2.Number())
 
 	enum3 := createTestEnum3()
 
-	per3, err := perEncodeTestEnumerated(&enum3)
+	per3, err := PerEncodeTestEnumerated(&enum3)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum3) PER\n%v", hex.Dump(per3))
 
-	result3, err := perDecodeTestEnumerated(per3)
+	result3, err := PerDecodeTestEnumerated(per3)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum3) XER - decoded\n%v", result3)
 	assert.Equal(t, enum3.Number(), result3.Number())
 
 	enum4 := createTestEnum4()
 
-	per4, err := perEncodeTestEnumerated(&enum4)
+	per4, err := PerEncodeTestEnumerated(&enum4)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum4) PER\n%v", hex.Dump(per4))
 
-	result4, err := perDecodeTestEnumerated(per4)
+	result4, err := PerDecodeTestEnumerated(per4)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum4) PER - decoded\n%v", result4)
 	assert.Equal(t, enum4.Number(), result4.Number())
 
 	enum5 := createTestEnum5()
 
-	per5, err := perEncodeTestEnumerated(&enum5)
+	per5, err := PerEncodeTestEnumerated(&enum5)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum5) PER\n%v", hex.Dump(per5))
 
-	result5, err := perDecodeTestEnumerated(per5)
+	result5, err := PerDecodeTestEnumerated(per5)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum5) PER - decoded\n%v", result5)
 	assert.Equal(t, enum5.Number(), result5.Number())
 
 	enum6 := createTestEnum6()
 
-	per6, err := perEncodeTestEnumerated(&enum6)
+	per6, err := PerEncodeTestEnumerated(&enum6)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum6) PER\n%v", hex.Dump(per6))
 
-	result6, err := perDecodeTestEnumerated(per6)
+	result6, err := PerDecodeTestEnumerated(per6)
 	assert.NilError(t, err)
 	t.Logf("TestEnumerated (Enum6) PER - decoded\n%v", result6)
 	assert.Equal(t, enum6.Number(), result6.Number())

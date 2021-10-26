@@ -65,11 +65,11 @@ func Test_perEncodingTestChoices(t *testing.T) {
 	testChoices, err := createTestChoicesMsg()
 	assert.NilError(t, err, "Error creating TestChoices PDU")
 
-	per, err := perEncodeTestChoices(testChoices)
+	per, err := PerEncodeTestChoices(testChoices)
 	assert.NilError(t, err)
 	t.Logf("TestChoices PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestChoices(per)
+	result, err := PerDecodeTestChoices(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestChoices PER - decoded\n%v", result)

@@ -31,7 +31,7 @@ func xerEncodeTestConstrainedChoices(testConstrainedChoices *test_sm_ies.TestCon
 	return bytes, nil
 }
 
-func perEncodeTestConstrainedChoices(testConstrainedChoices *test_sm_ies.TestConstrainedChoices) ([]byte, error) {
+func PerEncodeTestConstrainedChoices(testConstrainedChoices *test_sm_ies.TestConstrainedChoices) ([]byte, error) {
 	testConstrainedChoicesCP, err := newTestConstrainedChoices(testConstrainedChoices)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestConstrainedChoices() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestConstrainedChoices(bytes []byte) (*test_sm_ies.TestConstrained
 	return decodeTestConstrainedChoices((*C.TEST_ConstrainedChoices_t)(unsafePtr))
 }
 
-func perDecodeTestConstrainedChoices(bytes []byte) (*test_sm_ies.TestConstrainedChoices, error) {
+func PerDecodeTestConstrainedChoices(bytes []byte) (*test_sm_ies.TestConstrainedChoices, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_ConstrainedChoices)
 	if err != nil {
 		return nil, err

@@ -1023,8 +1023,8 @@ type TestConstrainedChoices struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1,sizeUB:50,sizeExt"
-	OtherCattr         string              `protobuf:"bytes,1,opt,name=other_cattr,json=otherCAttr,proto3" json:"other_cattr,omitempty" aper:"sizeLB:1,sizeUB:50,sizeExt"`
+	// @inject_tag: aper:"sizeLB:1,sizeUB:50"
+	OtherCattr         string              `protobuf:"bytes,1,opt,name=other_cattr,json=otherCAttr,proto3" json:"other_cattr,omitempty" aper:"sizeLB:1,sizeUB:50"`
 	ConstrainedChoice1 *ConstrainedChoice1 `protobuf:"bytes,2,opt,name=constrained_choice1,json=constrainedChoice1,proto3" json:"constrained_choice1,omitempty"`
 	ConstrainedChoice2 *ConstrainedChoice2 `protobuf:"bytes,3,opt,name=constrained_choice2,json=constrainedChoice2,proto3" json:"constrained_choice2,omitempty"`
 	ConstrainedChoice3 *ConstrainedChoice3 `protobuf:"bytes,4,opt,name=constrained_choice3,json=constrainedChoice3,proto3" json:"constrained_choice3,omitempty"`
