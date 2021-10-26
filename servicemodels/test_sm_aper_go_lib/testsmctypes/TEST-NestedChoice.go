@@ -32,7 +32,7 @@ func xerEncodeTestNestedChoice(testNestedChoice *test_sm_ies.TestNestedChoice) (
 	return bytes, nil
 }
 
-func perEncodeTestNestedChoice(testNestedChoice *test_sm_ies.TestNestedChoice) ([]byte, error) {
+func PerEncodeTestNestedChoice(testNestedChoice *test_sm_ies.TestNestedChoice) ([]byte, error) {
 	testNestedChoiceCP, err := newTestNestedChoice(testNestedChoice)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestNestedChoice() %s", err.Error())
@@ -56,7 +56,7 @@ func xerDecodeTestNestedChoice(bytes []byte) (*test_sm_ies.TestNestedChoice, err
 	return decodeTestNestedChoice((*C.TEST_NestedChoice_t)(unsafePtr))
 }
 
-func perDecodeTestNestedChoice(bytes []byte) (*test_sm_ies.TestNestedChoice, error) {
+func PerDecodeTestNestedChoice(bytes []byte) (*test_sm_ies.TestNestedChoice, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_NestedChoice)
 	if err != nil {
 		return nil, err

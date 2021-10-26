@@ -99,11 +99,11 @@ func Test_perEncodingTestNestedChoice(t *testing.T) {
 
 	nestedChoiceOpt1 := createTestNestedChoiceOpt1()
 
-	per, err := perEncodeTestNestedChoice(nestedChoiceOpt1)
+	per, err := PerEncodeTestNestedChoice(nestedChoiceOpt1)
 	assert.NilError(t, err)
 	t.Logf("TestNestedChoice (Option1) PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestNestedChoice(per)
+	result, err := PerDecodeTestNestedChoice(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestNestedChoice (Option1) PER - decoded\n%v", result)
@@ -111,11 +111,11 @@ func Test_perEncodingTestNestedChoice(t *testing.T) {
 
 	nestedChoiceOpt2 := createTestNestedChoiceOpt2()
 
-	per2, err := perEncodeTestNestedChoice(nestedChoiceOpt2)
+	per2, err := PerEncodeTestNestedChoice(nestedChoiceOpt2)
 	assert.NilError(t, err)
 	t.Logf("TestNestedChoice (Option2) PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestNestedChoice(per2)
+	result2, err := PerDecodeTestNestedChoice(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestNestedChoice (Option2) PER - decoded\n%v", result2)
@@ -123,11 +123,11 @@ func Test_perEncodingTestNestedChoice(t *testing.T) {
 
 	nestedChoiceOpt3 := createTestNestedChoiceOpt3()
 
-	per3, err := perEncodeTestNestedChoice(nestedChoiceOpt3)
+	per3, err := PerEncodeTestNestedChoice(nestedChoiceOpt3)
 	assert.NilError(t, err)
 	t.Logf("TestNestedChoice (Option3) PER\n%v", hex.Dump(per3))
 
-	result3, err := perDecodeTestNestedChoice(per3)
+	result3, err := PerDecodeTestNestedChoice(per3)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestNestedChoice (Option3) PER - decoded\n%v", result3)

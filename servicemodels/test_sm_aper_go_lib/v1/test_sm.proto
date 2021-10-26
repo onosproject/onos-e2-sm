@@ -237,9 +237,11 @@ message TestNestedChoice {
     // choice from tes_sm.asn1:107
     // @inject_tag: aper:"valueExt"
     oneof test_nested_choice {
+        // @inject_tag: aper:"choiceIdx:1"
         Choice3 option1 = 1 [json_name = "option1"];
+        // @inject_tag: aper:"choiceIdx:2"
         ConstrainedChoice3 option2 = 2 [json_name = "option2"];
-        // @inject_tag: aper:"valueExt"
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
         ConstrainedChoice4 option3 = 3 [json_name = "option3"];
     }
 };

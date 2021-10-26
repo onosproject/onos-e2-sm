@@ -51,10 +51,10 @@ func createTestChoicesMsg() *test_sm_ies.TestChoices {
 	switch ch2 {
 	case 0:
 		testChoices.Choice2 = &test_sm_ies.Choice2{
-				Choice2: &test_sm_ies.Choice2_Choice2A{
-					Choice2A: createRandomInteger(),
-				},
-			}
+			Choice2: &test_sm_ies.Choice2_Choice2A{
+				Choice2A: createRandomInteger(),
+			},
+		}
 	case 1:
 		testChoices.Choice2 = &test_sm_ies.Choice2{
 			Choice2: &test_sm_ies.Choice2_Choice2B{

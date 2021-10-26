@@ -12,30 +12,6 @@ import (
 	"testing"
 )
 
-func createTestEnum1Ext() test_sm_ies.TestEnumeratedExtensible {
-	return test_sm_ies.TestEnumeratedExtensible_TEST_ENUMERATED_EXTENSIBLE_ENUM1
-}
-
-func createTestEnum2Ext() test_sm_ies.TestEnumeratedExtensible {
-	return test_sm_ies.TestEnumeratedExtensible_TEST_ENUMERATED_EXTENSIBLE_ENUM2
-}
-
-func createTestEnum3Ext() test_sm_ies.TestEnumeratedExtensible {
-	return test_sm_ies.TestEnumeratedExtensible_TEST_ENUMERATED_EXTENSIBLE_ENUM3
-}
-
-func createTestEnum4Ext() test_sm_ies.TestEnumeratedExtensible {
-	return test_sm_ies.TestEnumeratedExtensible_TEST_ENUMERATED_EXTENSIBLE_ENUM4
-}
-
-func createTestEnum5Ext() test_sm_ies.TestEnumeratedExtensible {
-	return test_sm_ies.TestEnumeratedExtensible_TEST_ENUMERATED_EXTENSIBLE_ENUM5
-}
-
-func createTestEnum6Ext() test_sm_ies.TestEnumeratedExtensible {
-	return test_sm_ies.TestEnumeratedExtensible_TEST_ENUMERATED_EXTENSIBLE_ENUM6
-}
-
 func TestEnumeratedExtensible(t *testing.T) {
 
 	for i := 0; i < 6; i++ {

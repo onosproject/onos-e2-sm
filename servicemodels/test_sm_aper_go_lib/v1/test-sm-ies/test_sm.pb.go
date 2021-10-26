@@ -1526,16 +1526,18 @@ type isTestNestedChoice_TestNestedChoice interface {
 }
 
 type TestNestedChoice_Option1 struct {
-	Option1 *Choice3 `protobuf:"bytes,1,opt,name=option1,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:1"
+	Option1 *Choice3 `protobuf:"bytes,1,opt,name=option1,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type TestNestedChoice_Option2 struct {
-	Option2 *ConstrainedChoice3 `protobuf:"bytes,2,opt,name=option2,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:2"
+	Option2 *ConstrainedChoice3 `protobuf:"bytes,2,opt,name=option2,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type TestNestedChoice_Option3 struct {
-	// @inject_tag: aper:"valueExt"
-	Option3 *ConstrainedChoice4 `protobuf:"bytes,3,opt,name=option3,proto3,oneof" aper:"valueExt"`
+	// @inject_tag: aper:"choiceIdx:3,valueExt"
+	Option3 *ConstrainedChoice4 `protobuf:"bytes,3,opt,name=option3,proto3,oneof" aper:"choiceIdx:3,valueExt"`
 }
 
 func (*TestNestedChoice_Option1) isTestNestedChoice_TestNestedChoice() {}
