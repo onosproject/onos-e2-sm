@@ -114,11 +114,11 @@ func Test_perEncodingTestListExtensible1(t *testing.T) {
 	testListExtensible1, err := createTestListExtensible1Msg0Items()
 	assert.NilError(t, err, "Error creating TestListExtensible1 PDU")
 
-	per, err := perEncodeTestListExtensible1(testListExtensible1)
+	per, err := PerEncodeTestListExtensible1(testListExtensible1)
 	assert.NilError(t, err)
 	t.Logf("TestListExtensible1 PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestListExtensible1(per)
+	result, err := PerDecodeTestListExtensible1(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestListExtensible1 PER - decoded\n%v", result)
@@ -126,11 +126,11 @@ func Test_perEncodingTestListExtensible1(t *testing.T) {
 	testListExtensible11, err := createTestListExtensible1MsgFull()
 	assert.NilError(t, err, "Error creating TestListExtensible1 PDU")
 
-	per1, err := perEncodeTestListExtensible1(testListExtensible11)
+	per1, err := PerEncodeTestListExtensible1(testListExtensible11)
 	assert.NilError(t, err)
 	t.Logf("TestListExtensible1 PER\n%v", hex.Dump(per1))
 
-	result1, err := perDecodeTestListExtensible1(per1)
+	result1, err := PerDecodeTestListExtensible1(per1)
 	assert.NilError(t, err)
 	assert.Assert(t, result1 != nil)
 	t.Logf("TestListExtensible1 PER - decoded\n%v", result1)
