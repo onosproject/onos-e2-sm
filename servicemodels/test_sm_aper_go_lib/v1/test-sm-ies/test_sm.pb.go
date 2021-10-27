@@ -1759,8 +1759,8 @@ type TestList1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:0,sizeUB:12,valueExt"
-	Value []*Item `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"sizeLB:0,sizeUB:12,valueExt"`
+	// @inject_tag: aper:"sizeLB:0,sizeUB:12"
+	Value []*Item `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"sizeLB:0,sizeUB:12"`
 }
 
 func (x *TestList1) Reset() {

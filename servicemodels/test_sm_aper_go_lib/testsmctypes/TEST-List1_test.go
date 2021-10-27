@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -92,23 +93,43 @@ func Test_perEncodingTestList1(t *testing.T) {
 	testList11, err := createTestList1Msg0Items()
 	assert.NilError(t, err, "Error creating TestList1 PDU")
 
-	per, err := perEncodeTestList1(testList11)
+	per, err := PerEncodeTestList1(testList11)
 	assert.NilError(t, err)
 	t.Logf("TestList1 (0 items) PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestList1(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testList11)
+	assert.NilError(t, err)
+
+	t.Logf("Go APER library output: \n%v", hex.Dump(perNew))
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestList1(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestList1 (0 items) PER - decoded\n%v", result)
+}
 
+func Test_perEncodingTestList12(t *testing.T) {
 	testList12, err := createTestList1Msg12Items()
 	assert.NilError(t, err, "Error creating TestList1 PDU")
 
-	per2, err := perEncodeTestList1(testList12)
+	per2, err := PerEncodeTestList1(testList12)
 	assert.NilError(t, err)
 	t.Logf("TestList1 (12 items) PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestList1(per2)
+	// Generating APER bytes with Go APER lib
+	perNew2, err := aper.Marshal(testList12)
+	assert.NilError(t, err)
+
+	t.Logf("Go APER library output: \n%v", hex.Dump(perNew2))
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per2, perNew2)
+
+	result2, err := PerDecodeTestList1(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result2 != nil)
 	t.Logf("TestList1 (12 items) PER - decoded\n%v", result2)

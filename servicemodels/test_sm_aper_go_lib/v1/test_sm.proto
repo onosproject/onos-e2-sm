@@ -285,7 +285,7 @@ message TestPrintableString {
 // sequence from tes_sm.asn1:133
 // {TEST-List1}
 message TestList1 {
-    // @inject_tag: aper:"sizeLB:0,sizeUB:12,valueExt"
+    // @inject_tag: aper:"sizeLB:0,sizeUB:12"
     repeated Item value = 1 [json_name = "value"];
 };
 
