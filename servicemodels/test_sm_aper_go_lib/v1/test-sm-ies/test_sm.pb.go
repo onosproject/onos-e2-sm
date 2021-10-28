@@ -2272,8 +2272,8 @@ type TestTopLevelPdu struct {
 	Opt5 *TestOctetString `protobuf:"bytes,5,opt,name=opt5,proto3,oneof" json:"opt5,omitempty" aper:"optional"`
 	// @inject_tag: aper:""
 	Opt6 *TestListExtensible3 `protobuf:"bytes,6,opt,name=opt6,proto3" json:"opt6,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	Opt7 TestEnumeratedExtensible `protobuf:"varint,7,opt,name=opt7,proto3,enum=test_sm_aper_go_lib.v1.TestEnumeratedExtensible" json:"opt7,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"valueLB:0,valueUB:5,valueExt"
+	Opt7 TestEnumeratedExtensible `protobuf:"varint,7,opt,name=opt7,proto3,enum=test_sm_aper_go_lib.v1.TestEnumeratedExtensible" json:"opt7,omitempty" aper:"valueLB:0,valueUB:5,valueExt"`
 }
 
 func (x *TestTopLevelPdu) Reset() {

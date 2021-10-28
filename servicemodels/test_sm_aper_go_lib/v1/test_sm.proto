@@ -369,6 +369,6 @@ message TestTopLevelPdu {
     optional TestOctetString opt5 = 5 [json_name = "opt5"];
     // @inject_tag: aper:""
     TestListExtensible3 opt6 = 6 [json_name = "opt6"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"valueLB:0,valueUB:5,valueExt"
     TestEnumeratedExtensible opt7 = 7 [json_name = "opt7"];
 };
