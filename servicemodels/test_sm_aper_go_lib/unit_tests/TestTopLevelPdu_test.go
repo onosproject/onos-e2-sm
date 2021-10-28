@@ -54,7 +54,6 @@ func createTestTopLevelPDU() (*test_sm_ies.TestTopLevelPdu, error) {
 	rand.Seed(time.Now().UnixNano())
 	ttlpdu.Opt7 = test_sm_ies.TestEnumeratedExtensible(rand.Intn(6))
 
-
 	return ttlpdu, nil
 }
 
