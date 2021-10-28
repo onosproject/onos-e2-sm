@@ -100,11 +100,11 @@ func Test_perEncodingTestList3(t *testing.T) {
 	testList31, err := createTestList3Msg0Items()
 	assert.NilError(t, err, "Error creating TestList3 PDU")
 
-	per, err := perEncodeTestList3(testList31)
+	per, err := PerEncodeTestList3(testList31)
 	assert.NilError(t, err)
 	t.Logf("TestList3 PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestList3(per)
+	result, err := PerDecodeTestList3(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestList3 PER - decoded\n%v", result)
@@ -112,11 +112,11 @@ func Test_perEncodingTestList3(t *testing.T) {
 	testList32, err := createTestList3Msg3Items()
 	assert.NilError(t, err, "Error creating TestList3 PDU")
 
-	per2, err := perEncodeTestList3(testList32)
+	per2, err := PerEncodeTestList3(testList32)
 	assert.NilError(t, err)
 	t.Logf("TestList3 PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestList3(per2)
+	result2, err := PerDecodeTestList3(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result2 != nil)
 	t.Logf("TestList3 PER - decoded\n%v", result2)

@@ -31,7 +31,7 @@ func xerEncodeTestFullyOptionalSequence(testFullyOptionalSequence *test_sm_ies.T
 	return bytes, nil
 }
 
-func perEncodeTestFullyOptionalSequence(testFullyOptionalSequence *test_sm_ies.TestFullyOptionalSequence) ([]byte, error) {
+func PerEncodeTestFullyOptionalSequence(testFullyOptionalSequence *test_sm_ies.TestFullyOptionalSequence) ([]byte, error) {
 	testFullyOptionalSequenceCP, err := newTestFullyOptionalSequence(testFullyOptionalSequence)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestFullyOptionalSequence() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestFullyOptionalSequence(bytes []byte) (*test_sm_ies.TestFullyOpt
 	return decodeTestFullyOptionalSequence((*C.TEST_FullyOptionalSequence_t)(unsafePtr))
 }
 
-func perDecodeTestFullyOptionalSequence(bytes []byte) (*test_sm_ies.TestFullyOptionalSequence, error) {
+func PerDecodeTestFullyOptionalSequence(bytes []byte) (*test_sm_ies.TestFullyOptionalSequence, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_FullyOptionalSequence)
 	if err != nil {
 		return nil, err

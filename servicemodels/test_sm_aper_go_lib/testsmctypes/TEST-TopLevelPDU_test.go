@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -229,11 +230,11 @@ func Test_perEncodingTestTopLevelPdu(t *testing.T) {
 	testTopLevelPDU, err := createTestTopLevelPDU()
 	assert.NilError(t, err, "Error creating TestTopLevelPDU PDU")
 
-	per, err := perEncodeTestTopLevelPDU(testTopLevelPDU)
+	per, err := PerEncodeTestTopLevelPDU(testTopLevelPDU)
 	assert.NilError(t, err)
 	t.Logf("TestTopLevelPDU PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestTopLevelPDU(per)
+	result, err := PerDecodeTestTopLevelPDU(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestTopLevelPDU PER - decoded\n%v", result)
@@ -328,11 +329,21 @@ func Test_perEncodingTestTopLevelPduExcludeOptional(t *testing.T) {
 	testTopLevelPDU, err := createTestTopLevelPDUxclOptnl()
 	assert.NilError(t, err, "Error creating TestTopLevelPDU PDU")
 
-	per, err := perEncodeTestTopLevelPDU(testTopLevelPDU)
+	per, err := PerEncodeTestTopLevelPDU(testTopLevelPDU)
 	assert.NilError(t, err)
 	t.Logf("TestTopLevelPDU (w/o optional) PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestTopLevelPDU(per)
+	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
+	aper.ChoiceMap = test_sm_ies.Choicemap
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.MarshalWithParams(testTopLevelPDU, "valueExt")
+	assert.NilError(t, err)
+	t.Logf("TestTopLevelPDU (w/o optional) PER\n%v", hex.Dump(perNew))
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestTopLevelPDU(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestTopLevelPDU (w/o optional) PER - decoded\n%v", result)

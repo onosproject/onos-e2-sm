@@ -31,7 +31,7 @@ func xerEncodeTestTopLevelPDU(testTopLevelPDU *test_sm_ies.TestTopLevelPdu) ([]b
 	return bytes, nil
 }
 
-func perEncodeTestTopLevelPDU(testTopLevelPDU *test_sm_ies.TestTopLevelPdu) ([]byte, error) {
+func PerEncodeTestTopLevelPDU(testTopLevelPDU *test_sm_ies.TestTopLevelPdu) ([]byte, error) {
 	testTopLevelPDUCP, err := newTestTopLevelPDU(testTopLevelPDU)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestTopLevelPDU() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestTopLevelPDU(bytes []byte) (*test_sm_ies.TestTopLevelPdu, error
 	return decodeTestTopLevelPDU((*C.TEST_TopLevelPDU_t)(unsafePtr))
 }
 
-func perDecodeTestTopLevelPDU(bytes []byte) (*test_sm_ies.TestTopLevelPdu, error) {
+func PerDecodeTestTopLevelPDU(bytes []byte) (*test_sm_ies.TestTopLevelPdu, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_TopLevelPDU)
 	if err != nil {
 		return nil, err
