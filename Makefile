@@ -225,11 +225,9 @@ kind: # @HELP build Docker images and add them to the currently configured kind 
 kind: images
 	@if [ "`kind get clusters`" = '' ]; then echo "no kind cluster found" && exit 1; fi
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-ransim-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
