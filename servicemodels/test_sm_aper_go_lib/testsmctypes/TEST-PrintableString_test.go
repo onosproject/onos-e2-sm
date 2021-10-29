@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -92,6 +93,13 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per))
 
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testPrintableString)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
 	result, err := PerDecodeTestPrintableString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
@@ -110,6 +118,13 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	per2, err := PerEncodeTestPrintableString(testPrintableStringExcludeOptional)
 	assert.NilError(t, err)
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per2))
+
+	// Generating APER bytes with Go APER lib
+	perNew2, err := aper.Marshal(testPrintableStringExcludeOptional)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per2, perNew2)
 
 	result2, err := PerDecodeTestPrintableString(per2)
 	assert.NilError(t, err)

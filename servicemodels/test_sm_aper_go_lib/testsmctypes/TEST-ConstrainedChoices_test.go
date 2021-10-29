@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -69,6 +70,15 @@ func Test_perEncodingTestConstrainedChoices(t *testing.T) {
 	per, err := PerEncodeTestConstrainedChoices(testConstrainedChoices)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedChoices PER\n%v", hex.Dump(per))
+
+	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
+	aper.ChoiceMap = test_sm_ies.Choicemap
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testConstrainedChoices)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
 
 	result, err := PerDecodeTestConstrainedChoices(per)
 	assert.NilError(t, err)
