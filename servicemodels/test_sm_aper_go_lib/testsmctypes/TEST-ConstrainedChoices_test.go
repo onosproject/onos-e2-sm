@@ -18,22 +18,22 @@ func createTestConstrainedChoicesMsg() (*test_sm_ies.TestConstrainedChoices, err
 		OtherCattr: "nil",
 		ConstrainedChoice1: &test_sm_ies.ConstrainedChoice1{
 			ConstrainedChoice1: &test_sm_ies.ConstrainedChoice1_ConstrainedChoice1A{
-				ConstrainedChoice1A: 32,
+				ConstrainedChoice1A: 129,
 			},
 		},
 		ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2{
 			ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
-				ConstrainedChoice2B: 1,
+				ConstrainedChoice2B: 4294967296,
 			},
 		},
 		ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3{
 			ConstrainedChoice3: &test_sm_ies.ConstrainedChoice3_ConstrainedChoice3D{
-				ConstrainedChoice3D: 1,
+				ConstrainedChoice3D: 2,
 			},
 		},
 		ConstrainedChoice4: &test_sm_ies.ConstrainedChoice4{
 			ConstrainedChoice4: &test_sm_ies.ConstrainedChoice4_ConstrainedChoice4A{
-				ConstrainedChoice4A: 32,
+				ConstrainedChoice4A: 130,
 			},
 		},
 	}

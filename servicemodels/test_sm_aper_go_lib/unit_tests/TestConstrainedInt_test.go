@@ -18,8 +18,8 @@ func TestConstrainedInt(t *testing.T) {
 
 	testSM := new(test_sm_ies.TestConstrainedInt)
 
-	min := -2147483648
-	max := 2147483648
+	min := -2147483647
+	max := 2147483647
 
 	for i := 1; i < 100000; i++ {
 		// Seeding randomizer first

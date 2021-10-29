@@ -21,6 +21,13 @@ func createRandomIntegerInRange(min int32, max int32) int32 {
 	return int32(rand.Intn(int(max-min))) + min
 }
 
+func createRandomInteger64InRange(min int64, max int64) int64 {
+	// Seeding randomizer first
+	rand.Seed(time.Now().UnixNano())
+
+	return int64(rand.Intn(int(max-min))) + min
+}
+
 func createTestConstrainedChoicesMsg() *test_sm_ies.TestConstrainedChoices {
 
 	var otherCAttr []rune
@@ -57,7 +64,7 @@ func createTestConstrainedChoicesMsg() *test_sm_ies.TestConstrainedChoices {
 	case 1:
 		testChoices.ConstrainedChoice2 = &test_sm_ies.ConstrainedChoice2{
 			ConstrainedChoice2: &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
-				ConstrainedChoice2B: createRandomIntegerInRange(1, 2147483647),
+				ConstrainedChoice2B: createRandomInteger64InRange(1, 4294967350),
 			},
 		}
 	default:

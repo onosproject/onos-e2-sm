@@ -258,8 +258,8 @@ type TestConstrainedInt struct {
 	AttrCiB int32 `protobuf:"varint,2,opt,name=attr_ci_b,json=attrCiB,proto3" json:"attr_ci_b,omitempty" aper:"valueLB:255,valueUB:65535"`
 	// @inject_tag: aper:"valueLB:10,valueUB:4294967295"
 	AttrCiC int32 `protobuf:"varint,3,opt,name=attr_ci_c,json=attrCiC,proto3" json:"attr_ci_c,omitempty" aper:"valueLB:10,valueUB:4294967295"`
-	// @inject_tag: aper:"valueUB:100"
-	AttrCiD int32 `protobuf:"varint,4,opt,name=attr_ci_d,json=attrCiD,proto3" json:"attr_ci_d,omitempty" aper:"valueUB:100"`
+	// @inject_tag: aper:"valueLB:4294967295,valueUB:100"
+	AttrCiD int32 `protobuf:"varint,4,opt,name=attr_ci_d,json=attrCiD,proto3" json:"attr_ci_d,omitempty" aper:"valueLB:4294967295,valueUB:100"`
 	// @inject_tag: aper:"valueLB:10,valueUB:20"
 	AttrCiE int32 `protobuf:"varint,5,opt,name=attr_ci_e,json=attrCiE,proto3" json:"attr_ci_e,omitempty" aper:"valueLB:10,valueUB:20"`
 	// @inject_tag: aper:"valueLB:10,valueUB:10"
@@ -1231,7 +1231,7 @@ func (x *ConstrainedChoice2) GetConstrainedChoice2A() int32 {
 	return 0
 }
 
-func (x *ConstrainedChoice2) GetConstrainedChoice2B() int32 {
+func (x *ConstrainedChoice2) GetConstrainedChoice2B() int64 {
 	if x, ok := x.GetConstrainedChoice2().(*ConstrainedChoice2_ConstrainedChoice2B); ok {
 		return x.ConstrainedChoice2B
 	}
@@ -1249,7 +1249,7 @@ type ConstrainedChoice2_ConstrainedChoice2A struct {
 
 type ConstrainedChoice2_ConstrainedChoice2B struct {
 	// @inject_tag: aper:"choiceIdx:2,valueLB:1,valueUB:4294967295,valueExt"
-	ConstrainedChoice2B int32 `protobuf:"varint,2,opt,name=constrained_choice2_b,json=constrainedChoice2B,proto3,oneof" aper:"choiceIdx:2,valueLB:1,valueUB:4294967295,valueExt"`
+	ConstrainedChoice2B int64 `protobuf:"varint,2,opt,name=constrained_choice2_b,json=constrainedChoice2B,proto3,oneof" aper:"choiceIdx:2,valueLB:1,valueUB:4294967295,valueExt"`
 }
 
 func (*ConstrainedChoice2_ConstrainedChoice2A) isConstrainedChoice2_ConstrainedChoice2() {}
@@ -2500,7 +2500,7 @@ var file_test_sm_aper_go_lib_v1_test_sm_proto_rawDesc = []byte{
 	0x5f, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x13, 0x63, 0x6f, 0x6e, 0x73,
 	0x74, 0x72, 0x61, 0x69, 0x6e, 0x65, 0x64, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x41, 0x12,
 	0x34, 0x0a, 0x15, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x72, 0x61, 0x69, 0x6e, 0x65, 0x64, 0x5f, 0x63,
-	0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x5f, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x48, 0x00,
+	0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x5f, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x48, 0x00,
 	0x52, 0x13, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x72, 0x61, 0x69, 0x6e, 0x65, 0x64, 0x43, 0x68, 0x6f,
 	0x69, 0x63, 0x65, 0x32, 0x42, 0x42, 0x15, 0x0a, 0x13, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x72, 0x61,
 	0x69, 0x6e, 0x65, 0x64, 0x5f, 0x63, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x22, 0x83, 0x02, 0x0a,

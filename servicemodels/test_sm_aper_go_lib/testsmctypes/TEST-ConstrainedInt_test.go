@@ -32,11 +32,11 @@ func createTestConstrainedIntMsgCmpr() (*test_sm_ies.TestConstrainedInt, error) 
 	testConstrainedInt := test_sm_ies.TestConstrainedInt{
 		AttrCiA: 100,
 		AttrCiB: 65534,
-		AttrCiC: 100,
-		AttrCiD: 100,
+		AttrCiC: 2147483647,
+		AttrCiD: -2147483647, //minimum value by default (defined as MIN is ASN1 syntax, MAX is not possible to estimate)
 		AttrCiE: 20,
 		AttrCiF: 10,
-		AttrCiG: 20,
+		AttrCiG: 12,
 	}
 
 	return &testConstrainedInt, nil
@@ -75,6 +75,7 @@ func Test_perEncodingTestConstrainedInt(t *testing.T) {
 	// Generating APER bytes with Go APER lib
 	perNew, err := aper.Marshal(testConstrainedInt)
 	assert.NilError(t, err)
+	t.Logf("TestConstrainedInt PER (with Go APER library)\n%v", hex.Dump(perNew))
 
 	//Comparing bytes against each other
 	assert.DeepEqual(t, per, perNew)
@@ -103,6 +104,7 @@ func Test_perEncodingTestConstrainedIntCmpr(t *testing.T) {
 	// Generating APER bytes with Go APER lib
 	perNew, err := aper.Marshal(testConstrainedInt)
 	assert.NilError(t, err)
+	t.Logf("TestConstrainedInt PER (with Go APER library)\n%v", hex.Dump(perNew))
 
 	//Comparing bytes against each other
 	assert.DeepEqual(t, per, perNew)

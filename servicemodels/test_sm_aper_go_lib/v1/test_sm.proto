@@ -60,7 +60,7 @@ message TestConstrainedInt {
     int32 attr_ci_b = 2 [json_name = "attrCiB"];
     // @inject_tag: aper:"valueLB:10,valueUB:4294967295"
     int32 attr_ci_c = 3 [json_name = "attrCiC"];
-    // @inject_tag: aper:"valueUB:100"
+    // @inject_tag: aper:"valueLB:4294967295,valueUB:100"
     int32 attr_ci_d = 4 [json_name = "attrCiD"];
     // @inject_tag: aper:"valueLB:10,valueUB:20"
     int32 attr_ci_e = 5 [json_name = "attrCiE"];
@@ -200,7 +200,7 @@ message ConstrainedChoice2 {
         // @inject_tag: aper:"choiceIdx:1,valueLB:0,valueUB:15,valueExt"
         int32 constrained_choice2_a = 1 [json_name = "constrainedChoice2A"];
         // @inject_tag: aper:"choiceIdx:2,valueLB:1,valueUB:4294967295,valueExt"
-        int32 constrained_choice2_b = 2 [json_name = "constrainedChoice2B"];
+        int64 constrained_choice2_b = 2 [json_name = "constrainedChoice2B"];
     }
 };
 
