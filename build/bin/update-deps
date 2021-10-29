@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for sm in servicemodels/e2sm* servicemodels/test*; do
+    echo $sm:
+    pushd $sm
+    go mod tidy
+    popd
+done
