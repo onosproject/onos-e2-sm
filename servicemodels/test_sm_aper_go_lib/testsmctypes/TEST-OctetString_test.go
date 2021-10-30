@@ -18,8 +18,8 @@ func createTestOctetStringMsg() (*test_sm_ies.TestOctetString, error) {
 		AttrOs1: []byte{0x12, 0x34, 0x56, 0xA4},
 		AttrOs2: []byte{0xFF, 0xFF},
 		AttrOs3: []byte{0xFF, 0xFF, 0xBD, 0x4C},
-		AttrOs4: []byte{0xAA, 0xBB, 0xCC}, // it doesn't like anything less than 3 bytes
-		AttrOs5: []byte{0xDE, 0xC7, 0x23}, // It doesn't like anything less than 3 bytes again...
+		AttrOs4: []byte{0xAA, 0xBB, 0xCC},       // it doesn't like anything less than 3 bytes
+		AttrOs5: []byte{0xDE, 0xC7, 0x23},       // It doesn't like anything less than 3 bytes again...
 		AttrOs6: []byte{0x02, 0x4C, 0xF6, 0xAA}, // It doesn't like anything less than 3 bytes again... and again...
 		AttrOs7: []byte{0x21, 0x44, 0xA8, 0xDF, 0x11},
 	}
