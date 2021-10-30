@@ -24,9 +24,14 @@ func createTestBitStringMsg() (*test_sm_ies.TestBitString, error) {
 			Value: []byte{0x00, 0x00, 0x40},
 			Len:   20,
 		},
+		//ToDo - comment out once sizeExt for BitString is on-boarded
+		//AttrBs3: &asn1.BitString{
+		//	Value: []byte{0x00, 0x00, 0x41},
+		//	Len:   24,
+		//},
 		AttrBs3: &asn1.BitString{
-			Value: []byte{0x00, 0x00, 0x41},
-			Len:   24,
+			Value: []byte{0x00, 0x00, 0x40},
+			Len:   20,
 		},
 		//AttrBs4: &asn1.BitString{  // ToDo - there should be no Octet-Alignment - BitStrings is less than 16!!
 		//	Value: []byte{0x01},
@@ -41,7 +46,7 @@ func createTestBitStringMsg() (*test_sm_ies.TestBitString, error) {
 			Len:   32,
 		},
 		AttrBs6: &asn1.BitString{
-			Value: []byte{0x00, 0x00, 0x4F, 0x80},
+			Value: []byte{0x00, 0x00, 0x4F, 0x80, 0x00},
 			Len:   33,
 		},
 		AttrBs7: &asn1.BitString{
