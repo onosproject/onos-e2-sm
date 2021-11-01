@@ -31,7 +31,7 @@ func xerEncodeTestListExtensible2(testListExtensible2 *test_sm_ies.TestListExten
 	return bytes, nil
 }
 
-func perEncodeTestListExtensible2(testListExtensible2 *test_sm_ies.TestListExtensible2) ([]byte, error) {
+func PerEncodeTestListExtensible2(testListExtensible2 *test_sm_ies.TestListExtensible2) ([]byte, error) {
 	testListExtensible2CP, err := newTestListExtensible2(testListExtensible2)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestListExtensible2() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestListExtensible2(bytes []byte) (*test_sm_ies.TestListExtensible
 	return decodeTestListExtensible2((*C.TEST_ListExtensible2_t)(unsafePtr))
 }
 
-func perDecodeTestListExtensible2(bytes []byte) (*test_sm_ies.TestListExtensible2, error) {
+func PerDecodeTestListExtensible2(bytes []byte) (*test_sm_ies.TestListExtensible2, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_ListExtensible2)
 	if err != nil {
 		return nil, err

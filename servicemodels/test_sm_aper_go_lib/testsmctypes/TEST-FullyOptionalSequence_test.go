@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -68,18 +69,25 @@ func Test_perEncodingTestFullyOptionalSequence(t *testing.T) {
 	testFullyOptionalSequence0, err := createTestFullyOptionalSequenceMsgEmpty()
 	assert.NilError(t, err, "Error creating TestFullyOptionalSequence PDU")
 
-	per0, err := perEncodeTestFullyOptionalSequence(testFullyOptionalSequence0)
+	per0, err := PerEncodeTestFullyOptionalSequence(testFullyOptionalSequence0)
 	assert.NilError(t, err)
 	t.Logf("TestFullyOptionalSequence PER\n%v", hex.Dump(per0))
 
 	testFullyOptionalSequence, err := createTestFullyOptionalSequenceMsg()
 	assert.NilError(t, err, "Error creating TestFullyOptionalSequence PDU")
 
-	per, err := perEncodeTestFullyOptionalSequence(testFullyOptionalSequence)
+	per, err := PerEncodeTestFullyOptionalSequence(testFullyOptionalSequence)
 	assert.NilError(t, err)
 	t.Logf("TestFullyOptionalSequence PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestFullyOptionalSequence(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.MarshalWithParams(testFullyOptionalSequence, "valueExt")
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestFullyOptionalSequence(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestFullyOptionalSequence PER - decoded\n%v", result)

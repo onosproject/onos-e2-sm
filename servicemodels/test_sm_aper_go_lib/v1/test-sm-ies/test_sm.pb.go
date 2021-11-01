@@ -258,8 +258,8 @@ type TestConstrainedInt struct {
 	AttrCiB int32 `protobuf:"varint,2,opt,name=attr_ci_b,json=attrCiB,proto3" json:"attr_ci_b,omitempty" aper:"valueLB:255,valueUB:65535"`
 	// @inject_tag: aper:"valueLB:10,valueUB:4294967295"
 	AttrCiC int32 `protobuf:"varint,3,opt,name=attr_ci_c,json=attrCiC,proto3" json:"attr_ci_c,omitempty" aper:"valueLB:10,valueUB:4294967295"`
-	// @inject_tag: aper:"valueUB:100"
-	AttrCiD int32 `protobuf:"varint,4,opt,name=attr_ci_d,json=attrCiD,proto3" json:"attr_ci_d,omitempty" aper:"valueUB:100"`
+	// @inject_tag: aper:"valueLB:4294967295,valueUB:100"
+	AttrCiD int32 `protobuf:"varint,4,opt,name=attr_ci_d,json=attrCiD,proto3" json:"attr_ci_d,omitempty" aper:"valueLB:4294967295,valueUB:100"`
 	// @inject_tag: aper:"valueLB:10,valueUB:20"
 	AttrCiE int32 `protobuf:"varint,5,opt,name=attr_ci_e,json=attrCiE,proto3" json:"attr_ci_e,omitempty" aper:"valueLB:10,valueUB:20"`
 	// @inject_tag: aper:"valueLB:10,valueUB:10"
@@ -1023,8 +1023,8 @@ type TestConstrainedChoices struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1,sizeUB:50,sizeExt"
-	OtherCattr         string              `protobuf:"bytes,1,opt,name=other_cattr,json=otherCAttr,proto3" json:"other_cattr,omitempty" aper:"sizeLB:1,sizeUB:50,sizeExt"`
+	// @inject_tag: aper:"sizeLB:1,sizeUB:50"
+	OtherCattr         string              `protobuf:"bytes,1,opt,name=other_cattr,json=otherCAttr,proto3" json:"other_cattr,omitempty" aper:"sizeLB:1,sizeUB:50"`
 	ConstrainedChoice1 *ConstrainedChoice1 `protobuf:"bytes,2,opt,name=constrained_choice1,json=constrainedChoice1,proto3" json:"constrained_choice1,omitempty"`
 	ConstrainedChoice2 *ConstrainedChoice2 `protobuf:"bytes,3,opt,name=constrained_choice2,json=constrainedChoice2,proto3" json:"constrained_choice2,omitempty"`
 	ConstrainedChoice3 *ConstrainedChoice3 `protobuf:"bytes,4,opt,name=constrained_choice3,json=constrainedChoice3,proto3" json:"constrained_choice3,omitempty"`
@@ -1231,7 +1231,7 @@ func (x *ConstrainedChoice2) GetConstrainedChoice2A() int32 {
 	return 0
 }
 
-func (x *ConstrainedChoice2) GetConstrainedChoice2B() int32 {
+func (x *ConstrainedChoice2) GetConstrainedChoice2B() int64 {
 	if x, ok := x.GetConstrainedChoice2().(*ConstrainedChoice2_ConstrainedChoice2B); ok {
 		return x.ConstrainedChoice2B
 	}
@@ -1249,7 +1249,7 @@ type ConstrainedChoice2_ConstrainedChoice2A struct {
 
 type ConstrainedChoice2_ConstrainedChoice2B struct {
 	// @inject_tag: aper:"choiceIdx:2,valueLB:1,valueUB:4294967295,valueExt"
-	ConstrainedChoice2B int32 `protobuf:"varint,2,opt,name=constrained_choice2_b,json=constrainedChoice2B,proto3,oneof" aper:"choiceIdx:2,valueLB:1,valueUB:4294967295,valueExt"`
+	ConstrainedChoice2B int64 `protobuf:"varint,2,opt,name=constrained_choice2_b,json=constrainedChoice2B,proto3,oneof" aper:"choiceIdx:2,valueLB:1,valueUB:4294967295,valueExt"`
 }
 
 func (*ConstrainedChoice2_ConstrainedChoice2A) isConstrainedChoice2_ConstrainedChoice2() {}
@@ -1526,16 +1526,18 @@ type isTestNestedChoice_TestNestedChoice interface {
 }
 
 type TestNestedChoice_Option1 struct {
-	Option1 *Choice3 `protobuf:"bytes,1,opt,name=option1,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:1"
+	Option1 *Choice3 `protobuf:"bytes,1,opt,name=option1,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type TestNestedChoice_Option2 struct {
-	Option2 *ConstrainedChoice3 `protobuf:"bytes,2,opt,name=option2,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:2"
+	Option2 *ConstrainedChoice3 `protobuf:"bytes,2,opt,name=option2,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type TestNestedChoice_Option3 struct {
-	// @inject_tag: aper:"valueExt"
-	Option3 *ConstrainedChoice4 `protobuf:"bytes,3,opt,name=option3,proto3,oneof" aper:"valueExt"`
+	// @inject_tag: aper:"choiceIdx:3,valueExt"
+	Option3 *ConstrainedChoice4 `protobuf:"bytes,3,opt,name=option3,proto3,oneof" aper:"choiceIdx:3,valueExt"`
 }
 
 func (*TestNestedChoice_Option1) isTestNestedChoice_TestNestedChoice() {}
@@ -1757,8 +1759,8 @@ type TestList1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:0,sizeUB:12,valueExt"
-	Value []*Item `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"sizeLB:0,sizeUB:12,valueExt"`
+	// @inject_tag: aper:"sizeLB:0,sizeUB:12"
+	Value []*Item `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"sizeLB:0,sizeUB:12"`
 }
 
 func (x *TestList1) Reset() {
@@ -1978,8 +1980,8 @@ type TestFullyOptionalSequence struct {
 	Item1 *int32 `protobuf:"varint,1,opt,name=item1,proto3,oneof" json:"item1,omitempty" aper:"optional"`
 	// @inject_tag: aper:"optional,sizeLB:3,sizeUB:7"
 	Item2 []byte `protobuf:"bytes,2,opt,name=item2,proto3,oneof" json:"item2,omitempty" aper:"optional,sizeLB:3,sizeUB:7"`
-	// @inject_tag: aper:"optional"
-	Item3 *bool `protobuf:"varint,3,opt,name=item3,proto3,oneof" json:"item3,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional,valueLB:0,valueUB:1"
+	Item3 *bool `protobuf:"varint,3,opt,name=item3,proto3,oneof" json:"item3,omitempty" aper:"optional,valueLB:0,valueUB:1"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
 	Item4 *TestFullyOptionalSequenceItem4 `protobuf:"varint,4,opt,name=item4,proto3,enum=test_sm_aper_go_lib.v1.TestFullyOptionalSequenceItem4,oneof" json:"item4,omitempty" aper:"optional,valueLB:0,valueUB:1,valueExt"`
 	// @inject_tag: aper:"optional,valueLB:0,valueUB:0"
@@ -2270,8 +2272,8 @@ type TestTopLevelPdu struct {
 	Opt5 *TestOctetString `protobuf:"bytes,5,opt,name=opt5,proto3,oneof" json:"opt5,omitempty" aper:"optional"`
 	// @inject_tag: aper:""
 	Opt6 *TestListExtensible3 `protobuf:"bytes,6,opt,name=opt6,proto3" json:"opt6,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	Opt7 TestEnumeratedExtensible `protobuf:"varint,7,opt,name=opt7,proto3,enum=test_sm_aper_go_lib.v1.TestEnumeratedExtensible" json:"opt7,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"valueLB:0,valueUB:5,valueExt"
+	Opt7 TestEnumeratedExtensible `protobuf:"varint,7,opt,name=opt7,proto3,enum=test_sm_aper_go_lib.v1.TestEnumeratedExtensible" json:"opt7,omitempty" aper:"valueLB:0,valueUB:5,valueExt"`
 }
 
 func (x *TestTopLevelPdu) Reset() {
@@ -2498,7 +2500,7 @@ var file_test_sm_aper_go_lib_v1_test_sm_proto_rawDesc = []byte{
 	0x5f, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x13, 0x63, 0x6f, 0x6e, 0x73,
 	0x74, 0x72, 0x61, 0x69, 0x6e, 0x65, 0x64, 0x43, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x41, 0x12,
 	0x34, 0x0a, 0x15, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x72, 0x61, 0x69, 0x6e, 0x65, 0x64, 0x5f, 0x63,
-	0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x5f, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x48, 0x00,
+	0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x5f, 0x62, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x48, 0x00,
 	0x52, 0x13, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x72, 0x61, 0x69, 0x6e, 0x65, 0x64, 0x43, 0x68, 0x6f,
 	0x69, 0x63, 0x65, 0x32, 0x42, 0x42, 0x15, 0x0a, 0x13, 0x63, 0x6f, 0x6e, 0x73, 0x74, 0x72, 0x61,
 	0x69, 0x6e, 0x65, 0x64, 0x5f, 0x63, 0x68, 0x6f, 0x69, 0x63, 0x65, 0x32, 0x22, 0x83, 0x02, 0x0a,

@@ -30,7 +30,7 @@ func xerEncodeTestEnumerated(testEnumerated *test_sm_ies.TestEnumerated) ([]byte
 	return bytes, nil
 }
 
-func perEncodeTestEnumerated(testEnumerated *test_sm_ies.TestEnumerated) ([]byte, error) {
+func PerEncodeTestEnumerated(testEnumerated *test_sm_ies.TestEnumerated) ([]byte, error) {
 	testEnumeratedCP, err := newTestEnumerated(testEnumerated)
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func xerDecodeTestEnumerated(bytes []byte) (*test_sm_ies.TestEnumerated, error) 
 	return decodeTestEnumerated((*C.TEST_Enumerated_t)(unsafePtr))
 }
 
-func perDecodeTestEnumerated(bytes []byte) (*test_sm_ies.TestEnumerated, error) {
+func PerDecodeTestEnumerated(bytes []byte) (*test_sm_ies.TestEnumerated, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_Enumerated)
 	if err != nil {
 		return nil, err

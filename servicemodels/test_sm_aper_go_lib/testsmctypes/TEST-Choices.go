@@ -31,7 +31,7 @@ func xerEncodeTestChoices(testChoices *test_sm_ies.TestChoices) ([]byte, error) 
 	return bytes, nil
 }
 
-func perEncodeTestChoices(testChoices *test_sm_ies.TestChoices) ([]byte, error) {
+func PerEncodeTestChoices(testChoices *test_sm_ies.TestChoices) ([]byte, error) {
 	testChoicesCP, err := newTestChoices(testChoices)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestChoices() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestChoices(bytes []byte) (*test_sm_ies.TestChoices, error) {
 	return decodeTestChoices((*C.TEST_Choices_t)(unsafePtr))
 }
 
-func perDecodeTestChoices(bytes []byte) (*test_sm_ies.TestChoices, error) {
+func PerDecodeTestChoices(bytes []byte) (*test_sm_ies.TestChoices, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_Choices)
 	if err != nil {
 		return nil, err

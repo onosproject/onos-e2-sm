@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -31,11 +32,11 @@ func createTestConstrainedIntMsgCmpr() (*test_sm_ies.TestConstrainedInt, error) 
 	testConstrainedInt := test_sm_ies.TestConstrainedInt{
 		AttrCiA: 100,
 		AttrCiB: 65534,
-		AttrCiC: 100,
-		AttrCiD: 100,
+		AttrCiC: 2147483647,
+		AttrCiD: -2147483647, //minimum value by default (defined as MIN is ASN1 syntax, MAX is not possible to estimate)
 		AttrCiE: 20,
 		AttrCiF: 10,
-		AttrCiG: 20,
+		AttrCiG: 12,
 	}
 
 	return &testConstrainedInt, nil
@@ -67,11 +68,19 @@ func Test_perEncodingTestConstrainedInt(t *testing.T) {
 	testConstrainedInt, err := createTestConstrainedIntMsg()
 	assert.NilError(t, err, "Error creating TestConstrainedInt PDU")
 
-	per, err := perEncodeTestConstrainedInt(testConstrainedInt)
+	per, err := PerEncodeTestConstrainedInt(testConstrainedInt)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedInt PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestConstrainedInt(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testConstrainedInt)
+	assert.NilError(t, err)
+	t.Logf("TestConstrainedInt PER (with Go APER library)\n%v", hex.Dump(perNew))
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestConstrainedInt(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestConstrainedInt PER - decoded\n%v", result)
@@ -88,11 +97,19 @@ func Test_perEncodingTestConstrainedIntCmpr(t *testing.T) {
 	testConstrainedInt, err := createTestConstrainedIntMsgCmpr()
 	assert.NilError(t, err, "Error creating TestConstrainedInt PDU")
 
-	per, err := perEncodeTestConstrainedInt(testConstrainedInt)
+	per, err := PerEncodeTestConstrainedInt(testConstrainedInt)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedInt PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestConstrainedInt(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testConstrainedInt)
+	assert.NilError(t, err)
+	t.Logf("TestConstrainedInt PER (with Go APER library)\n%v", hex.Dump(perNew))
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestConstrainedInt(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestConstrainedInt PER - decoded\n%v", result)

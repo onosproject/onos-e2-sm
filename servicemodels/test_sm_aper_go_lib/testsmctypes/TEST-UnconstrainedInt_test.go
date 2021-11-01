@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -43,11 +44,18 @@ func Test_perEncodingTestUnconstrainedInt(t *testing.T) {
 	testUnconstrainedInt, err := createTestUnconstrainedIntMsg()
 	assert.NilError(t, err, "Error creating TestUnconstrainedInt PDU")
 
-	per, err := perEncodeTestUnconstrainedInt(testUnconstrainedInt)
+	per, err := PerEncodeTestUnconstrainedInt(testUnconstrainedInt)
 	assert.NilError(t, err)
 	t.Logf("TestUnconstrainedInt PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestUnconstrainedInt(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testUnconstrainedInt)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestUnconstrainedInt(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestUnconstrainedInt PER - decoded\n%v", result)

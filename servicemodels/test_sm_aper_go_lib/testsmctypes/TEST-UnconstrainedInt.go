@@ -31,7 +31,7 @@ func xerEncodeTestUnconstrainedInt(testUnconstrainedInt *test_sm_ies.TestUnconst
 	return bytes, nil
 }
 
-func perEncodeTestUnconstrainedInt(testUnconstrainedInt *test_sm_ies.TestUnconstrainedInt) ([]byte, error) {
+func PerEncodeTestUnconstrainedInt(testUnconstrainedInt *test_sm_ies.TestUnconstrainedInt) ([]byte, error) {
 	testUnconstrainedIntCP, err := newTestUnconstrainedInt(testUnconstrainedInt)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestUnconstrainedInt() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestUnconstrainedInt(bytes []byte) (*test_sm_ies.TestUnconstrained
 	return decodeTestUnconstrainedInt((*C.TEST_UnconstrainedInt_t)(unsafePtr))
 }
 
-func perDecodeTestUnconstrainedInt(bytes []byte) (*test_sm_ies.TestUnconstrainedInt, error) {
+func PerDecodeTestUnconstrainedInt(bytes []byte) (*test_sm_ies.TestUnconstrainedInt, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_UnconstrainedInt)
 	if err != nil {
 		return nil, err

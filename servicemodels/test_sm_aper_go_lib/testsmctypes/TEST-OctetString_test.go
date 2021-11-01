@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -17,9 +18,9 @@ func createTestOctetStringMsg() (*test_sm_ies.TestOctetString, error) {
 		AttrOs1: []byte{0x12, 0x34, 0x56, 0xA4},
 		AttrOs2: []byte{0xFF, 0xFF},
 		AttrOs3: []byte{0xFF, 0xFF, 0xBD, 0x4C},
-		AttrOs4: []byte{0xAA, 0xBB, 0xCC}, // it doesn't like anything less than 3 bytes
-		AttrOs5: []byte{0xDE, 0xC7, 0x23}, // It doesn't like anything less than 3 bytes again...
-		AttrOs6: []byte{0x02, 0x4C, 0xF6}, // It doesn't like anything less than 3 bytes again... and again...
+		AttrOs4: []byte{0xAA, 0xBB, 0xCC},       // it doesn't like anything less than 3 bytes
+		AttrOs5: []byte{0xDE, 0xC7, 0x23},       // It doesn't like anything less than 3 bytes again...
+		AttrOs6: []byte{0x02, 0x4C, 0xF6, 0xAA}, // It doesn't like anything less than 3 bytes again... and again...
 		AttrOs7: []byte{0x21, 0x44, 0xA8, 0xDF, 0x11},
 	}
 
@@ -31,7 +32,7 @@ func createTestOctetStringExcludeOptional() (*test_sm_ies.TestOctetString, error
 	testOctetString := test_sm_ies.TestOctetString{
 		AttrOs1: []byte{0x12, 0x34, 0x56, 0xA4},
 		AttrOs2: []byte{0xFF, 0xFF},
-		AttrOs3: []byte{0xFF, 0xFF},
+		AttrOs3: []byte{0xFF, 0xFF, 0xAA},
 		AttrOs4: []byte{0xBC, 0x7D, 0xA1},             // It doesn't like anything less than 3 bytes...
 		AttrOs5: []byte{0xDE, 0xC7, 0x23},             // It doesn't like anything less than 3 bytes again...
 		AttrOs6: []byte{0x02, 0x31, 0xF6, 0x7D, 0x19}, // It doesn't like anything less than 3 bytes again... aand again...
@@ -86,11 +87,18 @@ func Test_perEncodingTestOctetString(t *testing.T) {
 	testOctetString, err := createTestOctetStringMsg()
 	assert.NilError(t, err, "Error creating TestOctetString PDU")
 
-	per, err := perEncodeTestOctetString(testOctetString)
+	per, err := PerEncodeTestOctetString(testOctetString)
 	assert.NilError(t, err)
 	t.Logf("TestOctetString PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestOctetString(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testOctetString)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestOctetString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestOctetString PER - decoded\n%v", result)
@@ -105,11 +113,18 @@ func Test_perEncodingTestOctetString(t *testing.T) {
 	testOctetStringExcludeOptional, err := createTestOctetStringExcludeOptional()
 	assert.NilError(t, err, "Error creating TestOctetString PDU")
 
-	per2, err := perEncodeTestOctetString(testOctetStringExcludeOptional)
+	per2, err := PerEncodeTestOctetString(testOctetStringExcludeOptional)
 	assert.NilError(t, err)
 	t.Logf("TestOctetString PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestOctetString(per2)
+	// Generating APER bytes with Go APER lib
+	perNew2, err := aper.Marshal(testOctetStringExcludeOptional)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per2, perNew2)
+
+	result2, err := PerDecodeTestOctetString(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result2 != nil)
 	t.Logf("TestOctetString PER - decoded\n%v", result2)

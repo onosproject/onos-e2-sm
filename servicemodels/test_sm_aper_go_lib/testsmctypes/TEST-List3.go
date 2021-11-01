@@ -31,7 +31,7 @@ func xerEncodeTestList3(testList3 *test_sm_ies.TestList3) ([]byte, error) {
 	return bytes, nil
 }
 
-func perEncodeTestList3(testList3 *test_sm_ies.TestList3) ([]byte, error) {
+func PerEncodeTestList3(testList3 *test_sm_ies.TestList3) ([]byte, error) {
 	testList3CP, err := newTestList3(testList3)
 	if err != nil {
 		return nil, fmt.Errorf("perEncodeTestList3() %s", err.Error())
@@ -55,7 +55,7 @@ func xerDecodeTestList3(bytes []byte) (*test_sm_ies.TestList3, error) {
 	return decodeTestList3((*C.TEST_List3_t)(unsafePtr))
 }
 
-func perDecodeTestList3(bytes []byte) (*test_sm_ies.TestList3, error) {
+func PerDecodeTestList3(bytes []byte) (*test_sm_ies.TestList3, error) {
 	unsafePtr, err := decodePer(bytes, len(bytes), &C.asn_DEF_TEST_List3)
 	if err != nil {
 		return nil, err

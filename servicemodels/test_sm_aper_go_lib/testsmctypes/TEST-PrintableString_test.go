@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -18,9 +19,9 @@ func createTestPrintableStringMsg() (*test_sm_ies.TestPrintableString, error) {
 		AttrPs1: "Yay",
 		AttrPs2: "on",
 		AttrPs3: "onONonON",
-		AttrPs4: "abc", // it doesn't like anything less than 3 chars
-		AttrPs5: "ONF", // It doesn't like anything less than 3 chars again...
-		AttrPs6: "X1N", // It doesn't like anything less than 3 chars again... and again...
+		AttrPs4: "abc",    // it doesn't like anything less than 3 chars
+		AttrPs5: "ONF",    // It doesn't like anything less than 3 chars again...
+		AttrPs6: "X1N5fg", // It doesn't like anything less than 3 chars again... and again...
 		AttrPs7: &optStr,
 	}
 
@@ -33,7 +34,7 @@ func createTestPrintableStringExcludeOptional() (*test_sm_ies.TestPrintableStrin
 	testPrintableString := test_sm_ies.TestPrintableString{
 		AttrPs1: "Yay",
 		AttrPs2: "on",
-		AttrPs3: "on",
+		AttrPs3: "onLP",
 		AttrPs4: "abc",    // it doesn't like anything less than 3 chars
 		AttrPs5: "ONF",    // It doesn't like anything less than 3 chars again...
 		AttrPs6: "X1N5fg", // It doesn't like anything less than 3 chars again... and again...
@@ -88,11 +89,18 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	testPrintableString, err := createTestPrintableStringMsg()
 	assert.NilError(t, err, "Error creating TestPrintableString PDU")
 
-	per, err := perEncodeTestPrintableString(testPrintableString)
+	per, err := PerEncodeTestPrintableString(testPrintableString)
 	assert.NilError(t, err)
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestPrintableString(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testPrintableString)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestPrintableString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestPrintableString PER - decoded\n%v", result)
@@ -107,11 +115,18 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	testPrintableStringExcludeOptional, err := createTestPrintableStringExcludeOptional()
 	assert.NilError(t, err, "Error creating TestPrintableString PDU")
 
-	per2, err := perEncodeTestPrintableString(testPrintableStringExcludeOptional)
+	per2, err := PerEncodeTestPrintableString(testPrintableStringExcludeOptional)
 	assert.NilError(t, err)
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestPrintableString(per2)
+	// Generating APER bytes with Go APER lib
+	perNew2, err := aper.Marshal(testPrintableStringExcludeOptional)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per2, perNew2)
+
+	result2, err := PerDecodeTestPrintableString(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result2 != nil)
 	t.Logf("TestPrintableString PER - decoded\n%v", result2)

@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -23,6 +24,13 @@ func createTestBitStringMsg() (*test_sm_ies.TestBitString, error) {
 			Value: []byte{0x00, 0x00, 0x40},
 			Len:   20,
 		},
+		// ToDo - There is one drawback with BitString - encoder doesn't
+		// allow to encode BitString with SizeExt which has set an Upper bound
+		//ToDo - comment out once sizeExt for BitString is on-boarded
+		//AttrBs3: &asn1.BitString{
+		//	Value: []byte{0x00, 0x00, 0x41},
+		//	Len:   24,
+		//},
 		AttrBs3: &asn1.BitString{
 			Value: []byte{0x00, 0x00, 0x40},
 			Len:   20,
@@ -40,8 +48,8 @@ func createTestBitStringMsg() (*test_sm_ies.TestBitString, error) {
 			Len:   32,
 		},
 		AttrBs6: &asn1.BitString{
-			Value: []byte{0x00, 0x00, 0x4F, 0x00},
-			Len:   32,
+			Value: []byte{0x00, 0x00, 0x4F, 0x80, 0x00},
+			Len:   33,
 		},
 		AttrBs7: &asn1.BitString{
 			Value: []byte{0x00, 0x00, 0x4F, 0xE0, 0x00},
@@ -86,11 +94,18 @@ func Test_perEncodingTestBitString(t *testing.T) {
 	testBitString, err := createTestBitStringMsg()
 	assert.NilError(t, err, "Error creating TestBitString PDU")
 
-	per, err := perEncodeTestBitString(testBitString)
+	per, err := PerEncodeTestBitString(testBitString)
 	assert.NilError(t, err)
 	t.Logf("TestBitString PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestBitString(per)
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testBitString)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestBitString(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestBitString PER - decoded\n%v", result)

@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -99,11 +100,20 @@ func Test_perEncodingTestNestedChoice(t *testing.T) {
 
 	nestedChoiceOpt1 := createTestNestedChoiceOpt1()
 
-	per, err := perEncodeTestNestedChoice(nestedChoiceOpt1)
+	per, err := PerEncodeTestNestedChoice(nestedChoiceOpt1)
 	assert.NilError(t, err)
 	t.Logf("TestNestedChoice (Option1) PER\n%v", hex.Dump(per))
 
-	result, err := perDecodeTestNestedChoice(per)
+	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
+	aper.ChoiceMap = test_sm_ies.Choicemap
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.MarshalWithParams(nestedChoiceOpt1, "valueExt")
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
+	result, err := PerDecodeTestNestedChoice(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestNestedChoice (Option1) PER - decoded\n%v", result)
@@ -111,11 +121,20 @@ func Test_perEncodingTestNestedChoice(t *testing.T) {
 
 	nestedChoiceOpt2 := createTestNestedChoiceOpt2()
 
-	per2, err := perEncodeTestNestedChoice(nestedChoiceOpt2)
+	per2, err := PerEncodeTestNestedChoice(nestedChoiceOpt2)
 	assert.NilError(t, err)
 	t.Logf("TestNestedChoice (Option2) PER\n%v", hex.Dump(per2))
 
-	result2, err := perDecodeTestNestedChoice(per2)
+	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
+	aper.ChoiceMap = test_sm_ies.Choicemap
+	// Generating APER bytes with Go APER lib
+	perNew2, err := aper.MarshalWithParams(nestedChoiceOpt2, "valueExt")
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per2, perNew2)
+
+	result2, err := PerDecodeTestNestedChoice(per2)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestNestedChoice (Option2) PER - decoded\n%v", result2)
@@ -123,11 +142,20 @@ func Test_perEncodingTestNestedChoice(t *testing.T) {
 
 	nestedChoiceOpt3 := createTestNestedChoiceOpt3()
 
-	per3, err := perEncodeTestNestedChoice(nestedChoiceOpt3)
+	per3, err := PerEncodeTestNestedChoice(nestedChoiceOpt3)
 	assert.NilError(t, err)
 	t.Logf("TestNestedChoice (Option3) PER\n%v", hex.Dump(per3))
 
-	result3, err := perDecodeTestNestedChoice(per3)
+	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
+	aper.ChoiceMap = test_sm_ies.Choicemap
+	// Generating APER bytes with Go APER lib
+	perNew3, err := aper.MarshalWithParams(nestedChoiceOpt3, "valueExt")
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per3, perNew3)
+
+	result3, err := PerDecodeTestNestedChoice(per3)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TestNestedChoice (Option3) PER - decoded\n%v", result3)
