@@ -131,7 +131,7 @@ func TestBitString(t *testing.T) {
 	// Seeding randomizer first
 	rand.Seed(time.Now().UnixNano())
 
-	for i := 1; i < 100000; i++ {
+	for i := 1; i < 10000; i++ {
 
 		testSM, err := createTestBitString()
 		assert.NilError(t, err)

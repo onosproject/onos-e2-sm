@@ -24,6 +24,8 @@ func createTestBitStringMsg() (*test_sm_ies.TestBitString, error) {
 			Value: []byte{0x00, 0x00, 0x40},
 			Len:   20,
 		},
+		// ToDo - There is one drawback with BitString - encoder doesn't
+		// allow to encode BitString with SizeExt which has set an Upper bound
 		//ToDo - comment out once sizeExt for BitString is on-boarded
 		//AttrBs3: &asn1.BitString{
 		//	Value: []byte{0x00, 0x00, 0x41},
