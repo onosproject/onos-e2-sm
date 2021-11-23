@@ -40,3 +40,14 @@ Example of `$proto_imports`
 ```bash
 proto_imports=${GOPATH}/src/github.com/onosproject/onos-e2-sm/
 ```
+
+For E2AP Choice map generation, you should run following command under `onos-e2t/api/` folder for each Protobuf file:
+```bash
+protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/sarc/github.com/onosproject/onos-e2t/api" --proto_path="." --choice_out="./e2ap/v2/" e2ap/v2/e2ap_pdu_descriptions.proto
+```
+Once you run it for the first file, store choice map somewhere and run this command for the next file. Final `ChoiceMap` would be composed as a summary of output produced for each file, see
+A good example could be a `ChoiceMap` file for RSM service model, see:
+
+`onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies/choiceOptions.go`
+
+To avoid cycle dependency in Go, please move file under `e2ap-pdu-descriptions` folder or any other `e2ap-*` folder with generated Protobuf.
