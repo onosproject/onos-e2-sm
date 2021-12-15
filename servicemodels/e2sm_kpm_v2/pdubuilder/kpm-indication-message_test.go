@@ -5,6 +5,8 @@
 package pdubuilder
 
 import (
+	"encoding/hex"
+	kpmv2ctypes "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -164,4 +166,74 @@ func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 	t.Logf("Composed IndicationMessage-Format2 is \n %v \n", newE2SmKpmPdu)
+}
+
+var obtainedBytes = []byte{
+	0x1C, 0x00, 0x00, 0x00, 0x01, 0x30, 0x40, 0x03, 0xE7, 0x00, 0x07, 0x10, 0x00, 0x00, 0x10, 0x00,
+	0x01, 0x10, 0x00, 0x02, 0x10, 0x00, 0x03, 0x10, 0x00, 0x04, 0x10, 0x00, 0x05, 0x10, 0x00, 0x06,
+	0x10, 0x00, 0x07, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00}
+
+func TestSercommBytesKpmIndication(t *testing.T) {
+	t.Logf("Obtained bytes are\n%v", hex.Dump(obtainedBytes))
+
+	e2smkpm, err := kpmv2ctypes.PerDecodeE2SmKpmIndicationMessage(obtainedBytes)
+	assert.NilError(t, err)
+
+	xer, err := kpmv2ctypes.XerEncodeE2SmKpmIndicationMessage(e2smkpm)
+	assert.NilError(t, err)
+	t.Logf("KPM IndicationMessage is\n%s", string(xer))
+}
+
+func TestReferenceE2SmKpmIndicationMessageFormat1(t *testing.T) {
+	var cellObjID = "1"
+	var granularity uint32 = 1000
+	var subscriptionID int64 = 1
+
+	measurementInfoList := &e2sm_kpm_v2.MeasurementInfoList{
+		Value: make([]*e2sm_kpm_v2.MeasurementInfoItem, 0),
+	}
+
+	for i := 1; i <= 8; i++ {
+		measID, err := CreateMeasurementTypeMeasID(int32(i))
+		assert.NilError(t, err)
+
+		item, err := CreateMeasurementInfoItem(measID, nil)
+		assert.NilError(t, err)
+
+		measurementInfoList.Value = append(measurementInfoList.Value, item)
+	}
+
+	measurementData := &e2sm_kpm_v2.MeasurementData{
+		Value: make([]*e2sm_kpm_v2.MeasurementDataItem, 0),
+	}
+
+	for j := 0; j <= 7; j++ {
+		measurementRecordList := &e2sm_kpm_v2.MeasurementRecord{
+			Value: make([]*e2sm_kpm_v2.MeasurementRecordItem, 0),
+		}
+		measRecordItem := CreateMeasurementRecordItemInteger(0)
+		measurementRecordList.Value = append(measurementRecordList.Value, measRecordItem)
+
+		dataItem, err := CreateMeasurementDataItem(measurementRecordList)
+		assert.NilError(t, err)
+		dataItem.IncompleteFlag = e2sm_kpm_v2.IncompleteFlag_INCOMPLETE_FLAG_TRUE
+
+		measurementData.Value = append(measurementData.Value, dataItem)
+	}
+
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat1(subscriptionID, cellObjID, measurementInfoList, measurementData)
+	newE2SmKpmPdu.GetIndicationMessageFormat1().GranulPeriod.Value = granularity
+	assert.NilError(t, err)
+	assert.Assert(t, newE2SmKpmPdu != nil)
+	t.Logf("Composed IndicationMessage-Format1 is \n %v \n", newE2SmKpmPdu)
+
+	xer, err := kpmv2ctypes.XerEncodeE2SmKpmIndicationMessage(newE2SmKpmPdu)
+	assert.NilError(t, err)
+	t.Logf("Kpm IndicationMessage is\n%s", string(xer))
+
+	per, err := kpmv2ctypes.PerEncodeE2SmKpmIndicationMessage(newE2SmKpmPdu)
+	assert.NilError(t, err)
+	t.Logf("PER bytes for KPM IndicationMessage are\n%v", hex.Dump(per))
 }
