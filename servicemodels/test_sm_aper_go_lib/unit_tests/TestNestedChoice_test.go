@@ -128,7 +128,7 @@ func TestNestedChoices(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestNestedChoice(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.MarshalWithParams(testSM, "valueExt")
+		per, err := aper.MarshalWithParams(testSM, "choiceExt")
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other

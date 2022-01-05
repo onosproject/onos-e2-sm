@@ -99,7 +99,7 @@ message MaxnoofNrCellBands {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:35
 // {CGI}
-// aper:"valueExt"
+// aper:"choiceExt"
 message Cgi {
     // choice from ORAN-WG3.E2SM-v02.00.asn:35
     oneof cgi {
@@ -112,7 +112,7 @@ message Cgi {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:41
 // {CoreCPID}
-// aper:"valueExt"
+// aper:"choiceExt"
 message CoreCpid {
     // choice from ORAN-WG3.E2SM-v02.00.asn:41
     oneof core_cpid {
@@ -125,7 +125,7 @@ message CoreCpid {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:47
 // {InterfaceIdentifier}
-// aper:"valueExt"
+// aper:"choiceExt"
 message InterfaceIdentifier {
     // choice from ORAN-WG3.E2SM-v02.00.asn:47
     oneof interface_identifier {
@@ -156,14 +156,14 @@ message InterfaceIdNg {
 // sequence from ORAN-WG3.E2SM-v02.00.asn:63
 // {InterfaceID-Xn}
 message InterfaceIdXn {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     GlobalRannodeId global_ng_ran_id = 1 [ json_name="global-NG-RAN-ID"];
 };
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:68
 // {InterfaceID-F1}
 message InterfaceIdF1 {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     GlobalRannodeId global_ng_ran_id = 1 [ json_name="global-NG-RAN-ID"];
     GnbDuId g_nb_du_id = 2 [ json_name="gNB-DU-ID"];
 };
@@ -171,7 +171,7 @@ message InterfaceIdF1 {
 // sequence from ORAN-WG3.E2SM-v02.00.asn:74
 // {InterfaceID-E1}
 message InterfaceIdE1 {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     GlobalRannodeId global_ng_ran_id = 1 [ json_name="global-NG-RAN-ID"];
     GnbCuUpId g_nb_cu_up_id = 2 [ json_name="gNB-CU-UP-ID"];
 };
@@ -186,7 +186,7 @@ message InterfaceIdS1 {
 // sequence from ORAN-WG3.E2SM-v02.00.asn:89
 // {InterfaceID-X2}
 message InterfaceIdX2 {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     NodeType node_type = 1 [ json_name="nodeType"];
 };
 
@@ -221,7 +221,7 @@ message InterfaceMessageId {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:108
 // {GroupID}
-// aper:"valueExt"
+// aper:"choiceExt"
 message GroupId {
     // choice from ORAN-WG3.E2SM-v02.00.asn:108
     oneof group_id {
@@ -234,7 +234,7 @@ message GroupId {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:114
 // {QoSID}
-// aper:"valueExt"
+// aper:"choiceExt"
 message QoSid {
     // choice from ORAN-WG3.E2SM-v02.00.asn:114
     oneof qo_sid {
@@ -275,7 +275,7 @@ message RicStyleType {
 // {RRC-MessageID}
 // aper:"valueExt"
 message RrcMessageId {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     RrcType rrc_type = 1 [ json_name="rrcType"];
     int64 message_id = 2 [ json_name="messageID"];
 };
@@ -293,7 +293,7 @@ message RrcType {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:149
 // {ServingCell-ARFCN}
-// aper:"valueExt"
+// aper:"choiceExt"
 message ServingCellArfcn {
     // choice from ORAN-WG3.E2SM-v02.00.asn:149
     oneof serving_cell_arfcn {
@@ -306,7 +306,7 @@ message ServingCellArfcn {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:155
 // {ServingCell-PCI}
-// aper:"valueExt"
+// aper:"choiceExt"
 message ServingCellPci {
     // choice from ORAN-WG3.E2SM-v02.00.asn:155
     oneof serving_cell_pci {
@@ -319,7 +319,7 @@ message ServingCellPci {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:162
 // {UEID}
-// aper:"valueExt"
+// aper:"choiceExt"
 message Ueid {
     // choice from ORAN-WG3.E2SM-v02.00.asn:162
     oneof ueid {
@@ -459,9 +459,9 @@ message EnbId {
         asn1.v1.BitString macro_e_nb_id = 1 [ json_name="macro-eNB-ID"];
         // @inject_tag: aper:"choiceIdx:2,sizeLB:28,sizeUB:28"
         asn1.v1.BitString home_e_nb_id = 2 [ json_name="home-eNB-ID"];
-        // @inject_tag: aper:"choiceIdx:3,sizeLB:18,sizeUB:18"
+        // @inject_tag: aper:"choiceIdx:3,sizeLB:18,sizeUB:18,fromChoiceExt"
         asn1.v1.BitString short_macro_e_nb_id = 3 [ json_name="short-Macro-eNB-ID"];
-        // @inject_tag: aper:"choiceIdx:4,sizeLB:21,sizeUB:21"
+        // @inject_tag: aper:"choiceIdx:4,sizeLB:21,sizeUB:21,fromChoiceExt"
         asn1.v1.BitString long_macro_e_nb_id = 4 [ json_name="long-Macro-eNB-ID"];
     }
 };
@@ -470,7 +470,7 @@ message EnbId {
 // {GlobalENB-ID}
 message GlobalEnbId {
     PlmnIdentity p_lmnidentity = 1 [ json_name="pLMNIdentity"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EnbId e_nb_id = 2 [ json_name="eNB-ID"];
 };
 
@@ -553,7 +553,7 @@ message EUtraTac {
 // aper:"valueExt"
 message GlobalenGnbId {
     PlmnIdentity p_lmn_identity = 1 [ json_name="pLMN-Identity"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EnGnbId en_g_nb_id = 2 [ json_name="en-gNB-ID"];
 };
 
@@ -596,7 +596,7 @@ message FiveQi {
 // {GlobalGNB-ID}
 message GlobalGnbId {
     PlmnIdentity p_lmnidentity = 1 [ json_name="pLMNIdentity"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     GnbId g_nb_id = 2 [ json_name="gNB-ID"];
 };
 
@@ -604,7 +604,7 @@ message GlobalGnbId {
 // {GlobalNgENB-ID}
 message GlobalNgEnbId {
     PlmnIdentity p_lmnidentity = 1 [ json_name="pLMNIdentity"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     NgEnbId ng_enb_id = 2 [ json_name="ngENB-ID"];
 };
 

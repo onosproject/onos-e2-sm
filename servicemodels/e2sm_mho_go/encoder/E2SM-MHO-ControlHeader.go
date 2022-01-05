@@ -19,7 +19,7 @@ func PerEncodeE2SmMhoControlHeader(ch *e2sm_mho_go.E2SmMhoControlHeader) ([]byte
 
 	log.Debugf("Obtained E2SM-RC-PRE-ControlHeader message is\n%v", ch)
 	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(ch, "valueExt")
+	per, err := aper.MarshalWithParams(ch, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
@@ -33,7 +33,7 @@ func PerDecodeE2SmMhoControlHeader(per []byte) (*e2sm_mho_go.E2SmMhoControlHeade
 	log.Debugf("Obtained E2SM-RC-PRE-ControlHeader PER bytes are\n%v", hex.Dump(per))
 	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
 	result := e2sm_mho_go.E2SmMhoControlHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
 	if err != nil {
 		return nil, err
 	}

@@ -119,7 +119,7 @@ message RicControlMessagePriority {
 // sequence from e2sm-mho.asn1:79
 // {E2SM-MHO-EventTriggerDefinition}
 message E2SmMhoEventTriggerDefinition {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     MhoEventTriggerDefinitionFormats event_definition_formats = 1 [json_name = "eventDefinition-formats"];
 };
 
@@ -152,7 +152,7 @@ message E2SmMhoIndicationHeader {
 // sequence from e2sm-mho.asn1:101
 // {E2SM-MHO-IndicationHeader-Format1}
 message E2SmMhoIndicationHeaderFormat1 {
-    //@inject_tag: aper:"valueExt"
+    //@inject_tag: aper:"choiceExt"
     CellGlobalId cgi = 1 [json_name = "cgi"];
 };
 
@@ -179,7 +179,7 @@ message E2SmMhoIndicationMessageFormat1 {
 // sequence from e2sm-mho.asn1:128
 // {E2SM-MHO-MeasurementReportItem}
 message E2SmMhoMeasurementReportItem {
-    //@inject_tag: aper:"valueExt"
+    //@inject_tag: aper:"choiceExt"
     CellGlobalId cgi = 1 [json_name = "cgi"];
     Rsrp rsrp = 2 [json_name = "rsrp"];
 };
@@ -224,10 +224,10 @@ message E2SmMhoControlMessage {
 // sequence from e2sm-mho.asn1:169
 // {E2SM-MHO-ControlMessage-Format1}
 message E2SmMhoControlMessageFormat1 {
-    //@inject_tag: aper:"valueExt"
+    //@inject_tag: aper:"choiceExt"
     CellGlobalId serving_cgi = 1 [json_name = "serving_cgi"];
     UeIdentity ued_id = 2 [json_name = "uedID"];
-    //@inject_tag: aper:"valueExt"
+    //@inject_tag: aper:"choiceExt"
     CellGlobalId target_cgi = 3 [json_name = "target_cgi"];
 };
 

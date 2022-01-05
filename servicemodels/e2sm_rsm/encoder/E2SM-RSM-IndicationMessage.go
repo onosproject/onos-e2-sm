@@ -15,7 +15,7 @@ func PerEncodeE2SmRsmIndicationMessage(im *e2sm_rsm_ies.E2SmRsmIndicationMessage
 
 	log.Debugf("Obtained E2SM-RSM-IndicationMessage message is\n%v", im)
 	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
-	per, err := aper.MarshalWithParams(im, "valueExt")
+	per, err := aper.MarshalWithParams(im, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func PerDecodeE2SmRsmIndicationMessage(per []byte) (*e2sm_rsm_ies.E2SmRsmIndicat
 	log.Debugf("Obtained E2SM-RSM-IndicationMessage PER bytes are\n%v", hex.Dump(per))
 	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
 	result := e2sm_rsm_ies.E2SmRsmIndicationMessage{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
