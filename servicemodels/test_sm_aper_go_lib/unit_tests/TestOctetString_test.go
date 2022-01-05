@@ -97,7 +97,7 @@ func TestOctetString(t *testing.T) {
 	// Seeding randomizer first
 	rand.Seed(time.Now().UnixNano())
 
-	for i := 1; i < 100000; i++ {
+	for i := 1; i < 1000; i++ {
 
 		testSM := createTestOctetString()
 
