@@ -42,7 +42,7 @@ func TestUnconstrainedIntAllOption2(t *testing.T) {
 	min := -2147483648
 	max := 2147483648
 
-	for i := 1; i < 100000; i++ {
+	for i := 1; i < 1000; i++ {
 		// Seeding randomizer first
 		rand.Seed(time.Now().UnixNano())
 		// Generating random numbers
