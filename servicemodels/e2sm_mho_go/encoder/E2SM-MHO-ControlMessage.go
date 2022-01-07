@@ -15,7 +15,7 @@ func PerEncodeE2SmMhoControlMessage(cm *e2sm_mho_go.E2SmMhoControlMessage) ([]by
 
 	log.Debugf("Obtained E2SM-MHO-ControlMessage message is\n%v", cm)
 	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(cm, "valueExt")
+	per, err := aper.MarshalWithParams(cm, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func PerDecodeE2SmMhoControlMessage(per []byte) (*e2sm_mho_go.E2SmMhoControlMess
 	log.Debugf("Obtained E2SM-MHO-ControlMessage PER bytes are\n%v", hex.Dump(per))
 	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
 	result := e2sm_mho_go.E2SmMhoControlMessage{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
 	if err != nil {
 		return nil, err
 	}

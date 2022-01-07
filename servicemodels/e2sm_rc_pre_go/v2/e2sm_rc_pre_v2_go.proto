@@ -228,7 +228,7 @@ message RanparameterDefItem {
 // sequence from e2sm_rc_pre_v2.asn:130
 //{E2SM-RC-PRE-EventTriggerDefinition}
 message E2SmRcPreEventTriggerDefinition {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EventTriggerDefinitionFormats event_definition_formats = 1 [json_name = "eventDefinition-formats"];
 };
 
@@ -262,7 +262,7 @@ message E2SmRcPreIndicationHeader {
 // sequence from e2sm_rc_pre_v2.asn:152
 //{E2SM-RC-PRE-IndicationHeader-Format1} -- the only instance is OPTIONAL - any reason to treat it differently?
 message E2SmRcPreIndicationHeaderFormat1 {
-    //@inject_tag: aper:"optional,valueExt"
+    //@inject_tag: aper:"optional,choiceExt"
    optional CellGlobalId cgi = 1 [json_name="cgi"];
 };
 
@@ -292,7 +292,7 @@ message E2SmRcPreIndicationMessageFormat1 {
 // sequence from e2sm_rc_pre_v2.asn:177
 //{NRT}
 message Nrt {
-    //@inject_tag: aper:"valueExt"
+    //@inject_tag: aper:"choiceExt"
     CellGlobalId cgi = 1 [json_name="cgi"];
     Arfcn dl_arfcn = 2 [json_name="dl_ARFCN"];
     //@inject_tag: aper:"valueLB:0,valueUB:3,valueExt"
@@ -313,7 +313,7 @@ message E2SmRcPreControlHeader {
 // sequence from e2sm_rc_pre_v2.asn:196
 //{E2SM-RC-PRE-ControlHeader-Format1}
 message E2SmRcPreControlHeaderFormat1 {
-    //@inject_tag: aper:"optional,valueExt"
+    //@inject_tag: aper:"optional,choiceExt"
     optional CellGlobalId cgi = 1 [json_name="cgi:OPTIONAL"];
     // @inject_tag: aper:"valueLB:0,valueUB:0,valueExt"
     RcPreCommand rc_command = 2 [json_name="rc_command"];
@@ -336,7 +336,7 @@ message E2SmRcPreControlMessage {
 message E2SmRcPreControlMessageFormat1 {
     //@inject_tag: aper:"valueExt"
     RanparameterDefItem parameter_type = 1 [json_name="parameterType"];
-    //@inject_tag: aper:"valueExt"
+    //@inject_tag: aper:"choiceExt"
     RanparameterValue parameter_val = 2 [json_name="parameterVal"];
 };
 

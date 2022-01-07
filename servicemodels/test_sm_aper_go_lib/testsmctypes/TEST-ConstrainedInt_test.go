@@ -33,7 +33,7 @@ func createTestConstrainedIntMsgCmpr() (*test_sm_ies.TestConstrainedInt, error) 
 		AttrCiA: 100,
 		AttrCiB: 65534,
 		AttrCiC: 2147483647,
-		AttrCiD: -2147483647, //minimum value by default (defined as MIN is ASN1 syntax, MAX is not possible to estimate)
+		AttrCiD: -2147483647, //minimum value by default (defined as MIN in ASN1 syntax, MAX is not possible to estimate)
 		AttrCiE: 20,
 		AttrCiF: 10,
 		AttrCiG: 12,

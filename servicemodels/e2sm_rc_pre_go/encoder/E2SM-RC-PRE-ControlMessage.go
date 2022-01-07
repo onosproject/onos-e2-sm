@@ -15,7 +15,7 @@ func PerEncodeE2SmRcPreControlMessage(cm *e2sm_rc_pre_go.E2SmRcPreControlMessage
 
 	log.Debugf("Obtained E2SM-RC-PRE-ControlMessage message is\n%v", cm)
 	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
-	per, err := aper.MarshalWithParams(cm, "valueExt")
+	per, err := aper.MarshalWithParams(cm, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func PerDecodeE2SmRcPreControlMessage(per []byte) (*e2sm_rc_pre_go.E2SmRcPreCont
 	log.Debugf("Obtained E2SM-RC-PRE-ControlMessage PER bytes are\n%v", hex.Dump(per))
 	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
 	result := e2sm_rc_pre_go.E2SmRcPreControlMessage{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
 	if err != nil {
 		return nil, err
 	}

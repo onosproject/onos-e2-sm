@@ -1578,8 +1578,8 @@ type E2SmRsmEventTriggerDefinition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	EventDefinitionFormats *EventDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	EventDefinitionFormats *EventDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmRsmEventTriggerDefinition) Reset() {
@@ -1831,8 +1831,8 @@ type E2SmRsmIndicationHeaderFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	Cgi *e2sm_v2_ies.Cgi `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	Cgi *e2sm_v2_ies.Cgi `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"choiceExt"`
 	// @inject_tag: aper:"sizeLB:4,sizeUB:4,optional"
 	ColletStartTime *string `protobuf:"bytes,2,opt,name=collet_start_time,json=colletStartTime,proto3,oneof" json:"collet_start_time,omitempty" aper:"sizeLB:4,sizeUB:4,optional"`
 }
@@ -1978,8 +1978,8 @@ type E2SmRsmIndicationMessageFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	UeId       *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	UeId       *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty" aper:"choiceExt"`
 	CuUeF1ApId *CuUeF1ApId `protobuf:"bytes,2,opt,name=cu_ue_f1ap_id,json=cuUeF1apId,proto3" json:"cu_ue_f1ap_id,omitempty"`
 	DuUeF1ApId *DuUeF1ApId `protobuf:"bytes,3,opt,name=du_ue_f1ap_id,json=duUeF1apId,proto3" json:"du_ue_f1ap_id,omitempty"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:1"
@@ -2073,12 +2073,12 @@ type E2SmRsmIndicationMessageFormat2 struct {
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:3"
 	TriggerType RsmEmmTriggerType `protobuf:"varint,1,opt,name=trigger_type,json=triggerType,proto3,enum=e2sm_rsm.v1.RsmEmmTriggerType" json:"trigger_type,omitempty" aper:"valueExt,valueLB:0,valueUB:3"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
-	UeIdlist []*UeIdentity `protobuf:"bytes,2,rep,name=ue_idlist,json=ueIDlist,proto3" json:"ue_idlist,omitempty" aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"`
+	// @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:4,sizeExt"
+	UeIdlist []*UeIdentity `protobuf:"bytes,2,rep,name=ue_idlist,json=ueIDlist,proto3" json:"ue_idlist,omitempty" aper:"choiceExt,sizeLB:1,sizeUB:4,sizeExt"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
 	PrefferedUeIdtype UeIdType `protobuf:"varint,3,opt,name=preffered_ue_idtype,json=prefferedUeIDType,proto3,enum=e2sm_rsm.v1.UeIdType" json:"preffered_ue_idtype,omitempty" aper:"valueExt,valueLB:0,valueUB:4"`
-	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:32"
-	BearerId []*BearerId `protobuf:"bytes,4,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:32"`
+	// @inject_tag: aper:"optional,choiceExt,sizeLB:1,sizeUB:32"
+	BearerId []*BearerId `protobuf:"bytes,4,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"optional,choiceExt,sizeLB:1,sizeUB:32"`
 }
 
 func (x *E2SmRsmIndicationMessageFormat2) Reset() {
@@ -2359,10 +2359,10 @@ type SliceAssociate struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	UeId *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty" aper:"valueExt"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
-	BearerId        []*BearerId   `protobuf:"bytes,2,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"valueExt,sizeLB:1,sizeUB:32"`
+	// @inject_tag: aper:"choiceExt"
+	UeId *UeIdentity `protobuf:"bytes,1,opt,name=ue_id,json=ueId,proto3" json:"ue_id,omitempty" aper:"choiceExt"`
+	// @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:32"
+	BearerId        []*BearerId   `protobuf:"bytes,2,rep,name=bearer_id,json=bearerID,proto3" json:"bearer_id,omitempty" aper:"choiceExt,sizeLB:1,sizeUB:32"`
 	DownLinkSliceId *SliceIdassoc `protobuf:"bytes,3,opt,name=down_link_slice_id,json=downLinkSliceID,proto3" json:"down_link_slice_id,omitempty"`
 	// @inject_tag: aper:"optional"
 	UplinkSliceId *SliceIdassoc `protobuf:"bytes,4,opt,name=uplink_slice_id,json=uplinkSliceID,proto3,oneof" json:"uplink_slice_id,omitempty" aper:"optional"`
@@ -2493,8 +2493,8 @@ type isBearerId_BearerId interface {
 }
 
 type BearerId_DrbId struct {
-	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	DrbId *DrbId `protobuf:"bytes,1,opt,name=drb_id,json=drbID,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	// @inject_tag: aper:"choiceIdx:1,choiceExt"
+	DrbId *DrbId `protobuf:"bytes,1,opt,name=drb_id,json=drbID,proto3,oneof" aper:"choiceIdx:1,choiceExt"`
 }
 
 func (*BearerId_DrbId) isBearerId_BearerId() {}
@@ -2595,8 +2595,8 @@ type FiveGDrbId struct {
 	// @inject_tag: aper:"valueLB:1,valueUB:32"
 	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:32"`
 	Qfi   *Qfi  `protobuf:"bytes,2,opt,name=qfi,proto3" json:"qfi,omitempty"`
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:64"
-	FlowsMapToDrb []*QoSflowLevelParameters `protobuf:"bytes,3,rep,name=flows_map_to_drb,json=flowsMapToDrb,proto3" json:"flows_map_to_drb,omitempty" aper:"valueExt,sizeLB:1,sizeUB:64"`
+	// @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:64"
+	FlowsMapToDrb []*QoSflowLevelParameters `protobuf:"bytes,3,rep,name=flows_map_to_drb,json=flowsMapToDrb,proto3" json:"flows_map_to_drb,omitempty" aper:"choiceExt,sizeLB:1,sizeUB:64"`
 }
 
 func (x *FiveGDrbId) Reset() {

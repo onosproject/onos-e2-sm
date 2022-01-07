@@ -15,7 +15,7 @@ func PerEncodeE2SmRcPreIndicationHeader(ih *e2sm_rc_pre_go.E2SmRcPreIndicationHe
 
 	log.Debugf("Obtained E2SM-RC-PRE-IndicationHeader message is\n%v", ih)
 	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
-	per, err := aper.MarshalWithParams(ih, "valueExt")
+	per, err := aper.MarshalWithParams(ih, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func PerDecodeE2SmRcPreIndicationHeader(per []byte) (*e2sm_rc_pre_go.E2SmRcPreIn
 	log.Debugf("Obtained E2SM-RC-PRE-IndicationHeader PER bytes are\n%v", hex.Dump(per))
 	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
 	result := e2sm_rc_pre_go.E2SmRcPreIndicationHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
 	if err != nil {
 		return nil, err
 	}

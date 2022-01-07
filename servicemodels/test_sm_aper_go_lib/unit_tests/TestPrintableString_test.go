@@ -25,7 +25,7 @@ func TestPrintableString(t *testing.T) {
 
 	testSM := new(test_sm_ies.TestPrintableString)
 
-	for i := 1; i < 100000; i++ {
+	for i := 1; i < 1000; i++ {
 
 		var ps1 []rune
 		// Limiting it on 1000 on purpose, otherwise test scenario would take too long

@@ -1574,8 +1574,8 @@ type E2SmRcPreEventTriggerDefinition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	EventDefinitionFormats *EventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	EventDefinitionFormats *EventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmRcPreEventTriggerDefinition) Reset() {
@@ -1823,8 +1823,8 @@ type E2SmRcPreIndicationHeaderFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//@inject_tag: aper:"optional,valueExt"
-	Cgi *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3,oneof" json:"cgi,omitempty" aper:"optional,valueExt"`
+	//@inject_tag: aper:"optional,choiceExt"
+	Cgi *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3,oneof" json:"cgi,omitempty" aper:"optional,choiceExt"`
 }
 
 func (x *E2SmRcPreIndicationHeaderFormat1) Reset() {
@@ -2036,8 +2036,8 @@ type Nrt struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//@inject_tag: aper:"valueExt"
-	Cgi     *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"valueExt"`
+	//@inject_tag: aper:"choiceExt"
+	Cgi     *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"choiceExt"`
 	DlArfcn *Arfcn        `protobuf:"bytes,2,opt,name=dl_arfcn,json=dl_ARFCN,proto3" json:"dl_arfcn,omitempty"`
 	//@inject_tag: aper:"valueLB:0,valueUB:3,valueExt"
 	CellSize CellSize `protobuf:"varint,3,opt,name=cell_size,json=cell_Size,proto3,enum=e2sm_rc_pre_go.v2.CellSize" json:"cell_size,omitempty" aper:"valueLB:0,valueUB:3,valueExt"`
@@ -2183,8 +2183,8 @@ type E2SmRcPreControlHeaderFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//@inject_tag: aper:"optional,valueExt"
-	Cgi *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,json=cgi:OPTIONAL,proto3,oneof" json:"cgi,omitempty" aper:"optional,valueExt"`
+	//@inject_tag: aper:"optional,choiceExt"
+	Cgi *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,json=cgi:OPTIONAL,proto3,oneof" json:"cgi,omitempty" aper:"optional,choiceExt"`
 	// @inject_tag: aper:"valueLB:0,valueUB:0,valueExt"
 	RcCommand RcPreCommand `protobuf:"varint,2,opt,name=rc_command,proto3,enum=e2sm_rc_pre_go.v2.RcPreCommand" json:"rc_command,omitempty" aper:"valueLB:0,valueUB:0,valueExt"`
 	// @inject_tag: aper:"optional"
@@ -2324,8 +2324,8 @@ type E2SmRcPreControlMessageFormat1 struct {
 
 	//@inject_tag: aper:"valueExt"
 	ParameterType *RanparameterDefItem `protobuf:"bytes,1,opt,name=parameter_type,json=parameterType,proto3" json:"parameter_type,omitempty" aper:"valueExt"`
-	//@inject_tag: aper:"valueExt"
-	ParameterVal *RanparameterValue `protobuf:"bytes,2,opt,name=parameter_val,json=parameterVal,proto3" json:"parameter_val,omitempty" aper:"valueExt"`
+	//@inject_tag: aper:"choiceExt"
+	ParameterVal *RanparameterValue `protobuf:"bytes,2,opt,name=parameter_val,json=parameterVal,proto3" json:"parameter_val,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmRcPreControlMessageFormat1) Reset() {

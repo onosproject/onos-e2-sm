@@ -241,7 +241,7 @@ message SliceMetrics {
 // sequence from e2sm-rsm-v1.asn:120
 // {E2SM-RSM-EventTriggerDefinition}
 message E2SmRsmEventTriggerDefinition {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EventDefinitionFormats event_definition_formats = 1 [ json_name="eventDefinition-formats"];
 };
 
@@ -277,7 +277,7 @@ message E2SmRsmIndicationHeader {
 // sequence from e2sm-rsm-v1.asn:143
 // {E2SM-RSM-IndicationHeader-Format1}
 message E2SmRsmIndicationHeaderFormat1 {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     Cgi cgi = 1 [ json_name="cgi"];
     // @inject_tag: aper:"sizeLB:4,sizeUB:4,optional"
     optional string collet_start_time = 2 [json_name="colletStartTime"];
@@ -298,7 +298,7 @@ message E2SmRsmIndicationMessage {
 // sequence from e2sm-rsm-v1.asn:159
 // {E2SM-RSM-IndicationMessage-Format1}
 message E2SmRsmIndicationMessageFormat1 {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     UeIdentity ue_id = 1 [ json_name="ueId"];
     CuUeF1ApId cu_ue_f1ap_id = 2 [ json_name="cuUeF1apId"];
     DuUeF1ApId du_ue_f1ap_id = 3 [ json_name="duUeF1apId"];
@@ -315,11 +315,11 @@ message E2SmRsmIndicationMessageFormat1 {
 message E2SmRsmIndicationMessageFormat2 {
     // @inject_tag: aper:"valueExt,valueLB:0,valueUB:3"
     RsmEmmTriggerType trigger_type = 1 [ json_name="triggerType"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4,sizeExt"
+    // @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:4,sizeExt"
     repeated UeIdentity ue_idlist = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 4}, json_name="ueIDlist"];
     // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
     UeIdType preffered_ue_idtype = 3 [ json_name="prefferedUeIDType"];
-    // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:32"
+    // @inject_tag: aper:"optional,choiceExt,sizeLB:1,sizeUB:32"
     repeated BearerId bearer_id = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 32}, json_name="bearerID"];
 };
 
@@ -359,9 +359,9 @@ message SliceDelete {
 // sequence from e2sm-rsm-v1.asn:218
 // {SliceAssociate}
 message SliceAssociate {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     UeIdentity ue_id = 1 [ json_name="ueId"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32"
+    // @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:32"
     repeated BearerId bearer_id = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 32}, json_name="bearerID"];
     SliceIdassoc down_link_slice_id = 3 [ json_name="downLinkSliceID"];
     // @inject_tag: aper:"optional"
@@ -373,7 +373,7 @@ message SliceAssociate {
 message BearerId {
     // choice from e2sm-rsm-v1.asn:226
     oneof bearer_id {
-        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        // @inject_tag: aper:"choiceIdx:1,choiceExt"
         DrbId drb_id = 1 [ json_name="drbID"];
     }
 };
@@ -396,7 +396,7 @@ message FiveGDrbId {
     // @inject_tag: aper:"valueLB:1,valueUB:32"
     int32 value = 1 [ json_name="value"];
     Qfi qfi = 2 [ json_name="qfi"];
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:64"
+    // @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:64"
     repeated QoSflowLevelParameters flows_map_to_drb = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 64}, json_name="flowsMapToDrb"];
 };
 

@@ -528,7 +528,7 @@ func (x *MaxnoofNrCellBands) GetValue() int32 {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:35
 // {CGI}
-// aper:"valueExt"
+// aper:"choiceExt"
 type Cgi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -615,7 +615,7 @@ func (*Cgi_EUtraCgi) isCgi_Cgi() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:41
 // {CoreCPID}
-// aper:"valueExt"
+// aper:"choiceExt"
 type CoreCpid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -702,7 +702,7 @@ func (*CoreCpid_EPc) isCoreCpid_CoreCpid() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:47
 // {InterfaceIdentifier}
-// aper:"valueExt"
+// aper:"choiceExt"
 type InterfaceIdentifier struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -919,8 +919,8 @@ type InterfaceIdXn struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	GlobalNgRanId *GlobalRannodeId `protobuf:"bytes,1,opt,name=global_ng_ran_id,json=global-NG-RAN-ID,proto3" json:"global_ng_ran_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	GlobalNgRanId *GlobalRannodeId `protobuf:"bytes,1,opt,name=global_ng_ran_id,json=global-NG-RAN-ID,proto3" json:"global_ng_ran_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *InterfaceIdXn) Reset() {
@@ -969,8 +969,8 @@ type InterfaceIdF1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	GlobalNgRanId *GlobalRannodeId `protobuf:"bytes,1,opt,name=global_ng_ran_id,json=global-NG-RAN-ID,proto3" json:"global_ng_ran_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	GlobalNgRanId *GlobalRannodeId `protobuf:"bytes,1,opt,name=global_ng_ran_id,json=global-NG-RAN-ID,proto3" json:"global_ng_ran_id,omitempty" aper:"choiceExt"`
 	GNbDuId       *GnbDuId         `protobuf:"bytes,2,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3" json:"g_nb_du_id,omitempty"`
 }
 
@@ -1027,8 +1027,8 @@ type InterfaceIdE1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	GlobalNgRanId *GlobalRannodeId `protobuf:"bytes,1,opt,name=global_ng_ran_id,json=global-NG-RAN-ID,proto3" json:"global_ng_ran_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	GlobalNgRanId *GlobalRannodeId `protobuf:"bytes,1,opt,name=global_ng_ran_id,json=global-NG-RAN-ID,proto3" json:"global_ng_ran_id,omitempty" aper:"choiceExt"`
 	GNbCuUpId     *GnbCuUpId       `protobuf:"bytes,2,opt,name=g_nb_cu_up_id,json=gNB-CU-UP-ID,proto3" json:"g_nb_cu_up_id,omitempty"`
 }
 
@@ -1135,8 +1135,8 @@ type InterfaceIdX2 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	NodeType *NodeType `protobuf:"bytes,1,opt,name=node_type,json=nodeType,proto3" json:"node_type,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	NodeType *NodeType `protobuf:"bytes,1,opt,name=node_type,json=nodeType,proto3" json:"node_type,omitempty" aper:"choiceExt"`
 }
 
 func (x *InterfaceIdX2) Reset() {
@@ -1383,7 +1383,7 @@ func (x *InterfaceMessageId) GetMessageType() MessageType {
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:108
 // {GroupID}
-// aper:"valueExt"
+// aper:"choiceExt"
 type GroupId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1470,7 +1470,7 @@ func (*GroupId_EPc) isGroupId_GroupId() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:114
 // {QoSID}
-// aper:"valueExt"
+// aper:"choiceExt"
 type QoSid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1739,8 +1739,8 @@ type RrcMessageId struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	RrcType   *RrcType `protobuf:"bytes,1,opt,name=rrc_type,json=rrcType,proto3" json:"rrc_type,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	RrcType   *RrcType `protobuf:"bytes,1,opt,name=rrc_type,json=rrcType,proto3" json:"rrc_type,omitempty" aper:"choiceExt"`
 	MessageId int64    `protobuf:"varint,2,opt,name=message_id,json=messageID,proto3" json:"message_id,omitempty"`
 }
 
@@ -1877,7 +1877,7 @@ func (*RrcType_Nr) isRrcType_RrcType() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:149
 // {ServingCell-ARFCN}
-// aper:"valueExt"
+// aper:"choiceExt"
 type ServingCellArfcn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1964,7 +1964,7 @@ func (*ServingCellArfcn_EUtra) isServingCellArfcn_ServingCellArfcn() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:155
 // {ServingCell-PCI}
-// aper:"valueExt"
+// aper:"choiceExt"
 type ServingCellPci struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2051,7 +2051,7 @@ func (*ServingCellPci_EUtra) isServingCellPci_ServingCellPci() {}
 
 // sequence from ORAN-WG3.E2SM-v02.00.asn:162
 // {UEID}
-// aper:"valueExt"
+// aper:"choiceExt"
 type Ueid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3040,13 +3040,13 @@ type EnbId_HomeENbId struct {
 }
 
 type EnbId_ShortMacroENbId struct {
-	// @inject_tag: aper:"choiceIdx:3,sizeLB:18,sizeUB:18"
-	ShortMacroENbId *asn1.BitString `protobuf:"bytes,3,opt,name=short_macro_e_nb_id,json=short-Macro-eNB-ID,proto3,oneof" aper:"choiceIdx:3,sizeLB:18,sizeUB:18"`
+	// @inject_tag: aper:"choiceIdx:3,sizeLB:18,sizeUB:18,fromChoiceExt"
+	ShortMacroENbId *asn1.BitString `protobuf:"bytes,3,opt,name=short_macro_e_nb_id,json=short-Macro-eNB-ID,proto3,oneof" aper:"choiceIdx:3,sizeLB:18,sizeUB:18,fromChoiceExt"`
 }
 
 type EnbId_LongMacroENbId struct {
-	// @inject_tag: aper:"choiceIdx:4,sizeLB:21,sizeUB:21"
-	LongMacroENbId *asn1.BitString `protobuf:"bytes,4,opt,name=long_macro_e_nb_id,json=long-Macro-eNB-ID,proto3,oneof" aper:"choiceIdx:4,sizeLB:21,sizeUB:21"`
+	// @inject_tag: aper:"choiceIdx:4,sizeLB:21,sizeUB:21,fromChoiceExt"
+	LongMacroENbId *asn1.BitString `protobuf:"bytes,4,opt,name=long_macro_e_nb_id,json=long-Macro-eNB-ID,proto3,oneof" aper:"choiceIdx:4,sizeLB:21,sizeUB:21,fromChoiceExt"`
 }
 
 func (*EnbId_MacroENbId) isEnbId_EnbId() {}
@@ -3065,8 +3065,8 @@ type GlobalEnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PLmnidentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmnidentity,json=pLMNIdentity,proto3" json:"p_lmnidentity,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	ENbId *EnbId `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	ENbId *EnbId `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *GlobalEnbId) Reset() {
@@ -3660,8 +3660,8 @@ type GlobalenGnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PLmnIdentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmn_identity,json=pLMN-Identity,proto3" json:"p_lmn_identity,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	EnGNbId *EnGnbId `protobuf:"bytes,2,opt,name=en_g_nb_id,json=en-gNB-ID,proto3" json:"en_g_nb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	EnGNbId *EnGnbId `protobuf:"bytes,2,opt,name=en_g_nb_id,json=en-gNB-ID,proto3" json:"en_g_nb_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *GlobalenGnbId) Reset() {
@@ -3975,8 +3975,8 @@ type GlobalGnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PLmnidentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmnidentity,json=pLMNIdentity,proto3" json:"p_lmnidentity,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	GNbId *GnbId `protobuf:"bytes,2,opt,name=g_nb_id,json=gNB-ID,proto3" json:"g_nb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	GNbId *GnbId `protobuf:"bytes,2,opt,name=g_nb_id,json=gNB-ID,proto3" json:"g_nb_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *GlobalGnbId) Reset() {
@@ -4033,8 +4033,8 @@ type GlobalNgEnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PLmnidentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmnidentity,json=pLMNIdentity,proto3" json:"p_lmnidentity,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	NgEnbId *NgEnbId `protobuf:"bytes,2,opt,name=ng_enb_id,json=ngENB-ID,proto3" json:"ng_enb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	NgEnbId *NgEnbId `protobuf:"bytes,2,opt,name=ng_enb_id,json=ngENB-ID,proto3" json:"ng_enb_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *GlobalNgEnbId) Reset() {

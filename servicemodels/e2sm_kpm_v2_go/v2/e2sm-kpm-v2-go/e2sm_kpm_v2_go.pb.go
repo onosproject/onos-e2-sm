@@ -1427,12 +1427,12 @@ type TestCondInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	TestType *TestCondType `protobuf:"bytes,1,opt,name=test_type,json=testType,proto3" json:"test_type,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	TestType *TestCondType `protobuf:"bytes,1,opt,name=test_type,json=testType,proto3" json:"test_type,omitempty" aper:"choiceExt"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
 	TestExpr TestCondExpression `protobuf:"varint,2,opt,name=test_expr,json=testExpr,proto3,enum=e2sm_kpm_v2_go.v2.TestCondExpression" json:"test_expr,omitempty" aper:"valueExt,valueLB:0,valueUB:4"`
-	// @inject_tag: aper:"valueExt"
-	TestValue *TestCondValue `protobuf:"bytes,3,opt,name=test_value,json=testValue,proto3" json:"test_value,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	TestValue *TestCondValue `protobuf:"bytes,3,opt,name=test_value,json=testValue,proto3" json:"test_value,omitempty" aper:"choiceExt"`
 }
 
 func (x *TestCondInfo) Reset() {
@@ -1972,8 +1972,8 @@ type GlobalgNbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmn-id,proto3" json:"plmn_id,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	GnbId *GnbIdChoice `protobuf:"bytes,2,opt,name=gnb_id,json=gnb-id,proto3" json:"gnb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	GnbId *GnbIdChoice `protobuf:"bytes,2,opt,name=gnb_id,json=gnb-id,proto3" json:"gnb_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *GlobalgNbId) Reset() {
@@ -2269,8 +2269,8 @@ type GlobalenGnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PLmnIdentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmn_identity,json=pLMN-Identity,proto3" json:"p_lmn_identity,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	GNbId *EngnbId `protobuf:"bytes,2,opt,name=g_nb_id,json=gNB-ID,proto3" json:"g_nb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	GNbId *EngnbId `protobuf:"bytes,2,opt,name=g_nb_id,json=gNB-ID,proto3" json:"g_nb_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *GlobalenGnbId) Reset() {
@@ -2457,8 +2457,8 @@ type GlobalngeNbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmn-id,proto3" json:"plmn_id,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	EnbId *EnbIdChoice `protobuf:"bytes,2,opt,name=enb_id,json=enb-id,proto3" json:"enb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	EnbId *EnbIdChoice `protobuf:"bytes,2,opt,name=enb_id,json=enb-id,proto3" json:"enb_id,omitempty" aper:"choiceExt"`
 	// @inject_tag: aper:"sizeLB:18,sizeUB:18"
 	ShortMacroENbId *asn1.BitString `protobuf:"bytes,3,opt,name=short_macro_e_nb_id,json=short-Macro-eNB-ID,proto3" json:"short_macro_e_nb_id,omitempty" aper:"sizeLB:18,sizeUB:18"`
 	// @inject_tag: aper:"sizeLB:21,sizeUB:21"
@@ -2684,8 +2684,8 @@ type GlobalEnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	PLmnIdentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmn_identity,json=pLMN-Identity,proto3" json:"p_lmn_identity,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	ENbId *EnbId `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	ENbId *EnbId `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *GlobalEnbId) Reset() {
@@ -3504,8 +3504,8 @@ type MeasurementInfoItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	MeasType *MeasurementType `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	MeasType *MeasurementType `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"choiceExt"`
 	// @inject_tag: aper:"optional"
 	LabelInfoList *LabelInfoList `protobuf:"bytes,2,opt,name=label_info_list,json=labelInfoList,proto3,oneof" json:"label_info_list,omitempty" aper:"optional"`
 }
@@ -3771,8 +3771,8 @@ type MeasurementRecord struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:2147483647"
-	Value []*MeasurementRecordItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:2147483647"`
+	// @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:2147483647"
+	Value []*MeasurementRecordItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"choiceExt,sizeLB:1,sizeUB:2147483647"`
 }
 
 func (x *MeasurementRecord) Reset() {
@@ -4080,8 +4080,8 @@ type MeasurementCondItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"choiceExt"`
 	MatchingCond *MatchingCondList `protobuf:"bytes,2,opt,name=matching_cond,json=matchingCond,proto3" json:"matching_cond,omitempty"`
 }
 
@@ -4188,8 +4188,8 @@ type MeasurementCondUeidItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
-	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
+	// @inject_tag: aper:"choiceExt"
+	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"choiceExt"`
 	MatchingCond *MatchingCondList `protobuf:"bytes,2,opt,name=matching_cond,json=matchingCond,proto3" json:"matching_cond,omitempty"`
 	// @inject_tag: aper:"optional"
 	MatchingUeidList *MatchingUeidList `protobuf:"bytes,3,opt,name=matching_ueid_list,json=matchingUEidList,proto3,oneof" json:"matching_ueid_list,omitempty" aper:"optional"`
@@ -4255,8 +4255,8 @@ type MatchingCondList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32768"
-	Value []*MatchingCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:32768"`
+	// @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:32768"
+	Value []*MatchingCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"choiceExt,sizeLB:1,sizeUB:32768"`
 }
 
 func (x *MatchingCondList) Reset() {
@@ -4491,8 +4491,8 @@ type E2SmKpmEventTriggerDefinition struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm-kpm-ies_v2.asn1:337
-	// @inject_tag: aper:"valueExt"
-	EventDefinitionFormats *EventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	EventDefinitionFormats *EventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmKpmEventTriggerDefinition) Reset() {
@@ -4660,8 +4660,8 @@ type E2SmKpmActionDefinition struct {
 	unknownFields protoimpl.UnknownFields
 
 	RicStyleType *RicStyleType `protobuf:"bytes,1,opt,name=ric_style_type,json=ric-Style-Type,proto3" json:"ric_style_type,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	ActionDefinitionFormats *ActionDefinitionFormats `protobuf:"bytes,2,opt,name=action_definition_formats,json=actionDefinition-formats,proto3" json:"action_definition_formats,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	ActionDefinitionFormats *ActionDefinitionFormats `protobuf:"bytes,2,opt,name=action_definition_formats,json=actionDefinition-formats,proto3" json:"action_definition_formats,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmKpmActionDefinition) Reset() {
@@ -5021,8 +5021,8 @@ type E2SmKpmIndicationHeader struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm-kpm-v01.00.asn1:391
-	// @inject_tag: aper:"valueExt"
-	IndicationHeaderFormats *IndicationHeaderFormats `protobuf:"bytes,1,opt,name=indication_header_formats,json=indicationHeader-formats,proto3" json:"indication_header_formats,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	IndicationHeaderFormats *IndicationHeaderFormats `protobuf:"bytes,1,opt,name=indication_header_formats,json=indicationHeader-formats,proto3" json:"indication_header_formats,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmKpmIndicationHeader) Reset() {
@@ -5148,8 +5148,8 @@ type E2SmKpmIndicationHeaderFormat1 struct {
 	SenderType *string `protobuf:"bytes,4,opt,name=sender_type,json=senderType,proto3,oneof" json:"sender_type,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:8"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
 	VendorName *string `protobuf:"bytes,5,opt,name=vendor_name,json=vendorName,proto3,oneof" json:"vendor_name,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:32"`
-	// @inject_tag: aper:"optional,valueExt"
-	KpmNodeId *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty" aper:"optional,valueExt"`
+	// @inject_tag: aper:"optional,choiceExt"
+	KpmNodeId *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty" aper:"optional,choiceExt"`
 }
 
 func (x *E2SmKpmIndicationHeaderFormat1) Reset() {
@@ -5234,8 +5234,8 @@ type E2SmKpmIndicationMessage struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from e2sm_kpm_ies_v2.asn:414
-	// @inject_tag: aper:"valueExt"
-	IndicationMessageFormats *IndicationMessageFormats `protobuf:"bytes,1,opt,name=indication_message_formats,json=indicationMessage-formats,proto3" json:"indication_message_formats,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	IndicationMessageFormats *IndicationMessageFormats `protobuf:"bytes,1,opt,name=indication_message_formats,json=indicationMessage-formats,proto3" json:"indication_message_formats,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmKpmIndicationMessage) Reset() {
@@ -5612,8 +5612,8 @@ type RicKpmnodeItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	RicKpmnodeType *GlobalKpmnodeId `protobuf:"bytes,1,opt,name=ric_kpmnode_type,json=ric-KPMNode-Type,proto3" json:"ric_kpmnode_type,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	RicKpmnodeType *GlobalKpmnodeId `protobuf:"bytes,1,opt,name=ric_kpmnode_type,json=ric-KPMNode-Type,proto3" json:"ric_kpmnode_type,omitempty" aper:"choiceExt"`
 	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
 	CellMeasurementObjectList []*CellMeasurementObjectItem `protobuf:"bytes,2,rep,name=cell_measurement_object_list,json=cell-Measurement-Object-List,proto3" json:"cell_measurement_object_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:16384"`
 }
@@ -5672,8 +5672,8 @@ type CellMeasurementObjectItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	CellObjectId *CellObjectId `protobuf:"bytes,1,opt,name=cell_object_id,json=cell-object-ID,proto3" json:"cell_object_id,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	CellGlobalId *CellGlobalId `protobuf:"bytes,2,opt,name=cell_global_id,json=cell-global-ID,proto3" json:"cell_global_id,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	CellGlobalId *CellGlobalId `protobuf:"bytes,2,opt,name=cell_global_id,json=cell-global-ID,proto3" json:"cell_global_id,omitempty" aper:"choiceExt"`
 }
 
 func (x *CellMeasurementObjectItem) Reset() {
@@ -6273,10 +6273,10 @@ var file_e2sm_kpm_v2_go_v2_e2sm_kpm_v2_go_proto_rawDesc = []byte{
 	0x0a, 0x26, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6b, 0x70, 0x6d, 0x5f, 0x76, 0x32, 0x5f, 0x67, 0x6f,
 	0x2f, 0x76, 0x32, 0x2f, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6b, 0x70, 0x6d, 0x5f, 0x76, 0x32, 0x5f,
 	0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x11, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6b,
-	0x70, 0x6d, 0x5f, 0x76, 0x32, 0x5f, 0x67, 0x6f, 0x2e, 0x76, 0x32, 0x1a, 0x1a, 0x76, 0x61, 0x6c,
-	0x69, 0x64, 0x61, 0x74, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
-	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x12, 0x61, 0x73, 0x6e, 0x31, 0x2f, 0x76, 0x31,
-	0x2f, 0x61, 0x73, 0x6e, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa8, 0x01, 0x0a, 0x08,
+	0x70, 0x6d, 0x5f, 0x76, 0x32, 0x5f, 0x67, 0x6f, 0x2e, 0x76, 0x32, 0x1a, 0x12, 0x61, 0x73, 0x6e,
+	0x31, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x73, 0x6e, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
+	0x1a, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x76, 0x61, 0x6c,
+	0x69, 0x64, 0x61, 0x74, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa8, 0x01, 0x0a, 0x08,
 	0x45, 0x75, 0x74, 0x72, 0x61, 0x63, 0x67, 0x69, 0x12, 0x46, 0x0a, 0x0e, 0x70, 0x5f, 0x6c, 0x6d,
 	0x6e, 0x5f, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x1f, 0x2e, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6b, 0x70, 0x6d, 0x5f, 0x76, 0x32, 0x5f, 0x67,

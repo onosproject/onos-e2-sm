@@ -772,8 +772,8 @@ type E2SmMhoEventTriggerDefinition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueExt"
-	EventDefinitionFormats *MhoEventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	EventDefinitionFormats *MhoEventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmMhoEventTriggerDefinition) Reset() {
@@ -1021,8 +1021,8 @@ type E2SmMhoIndicationHeaderFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//@inject_tag: aper:"valueExt"
-	Cgi *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"valueExt"`
+	//@inject_tag: aper:"choiceExt"
+	Cgi *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmMhoIndicationHeaderFormat1) Reset() {
@@ -1217,8 +1217,8 @@ type E2SmMhoMeasurementReportItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//@inject_tag: aper:"valueExt"
-	Cgi  *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"valueExt"`
+	//@inject_tag: aper:"choiceExt"
+	Cgi  *CellGlobalId `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"choiceExt"`
 	Rsrp *Rsrp         `protobuf:"bytes,2,opt,name=rsrp,proto3" json:"rsrp,omitempty"`
 }
 
@@ -1534,11 +1534,11 @@ type E2SmMhoControlMessageFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//@inject_tag: aper:"valueExt"
-	ServingCgi *CellGlobalId `protobuf:"bytes,1,opt,name=serving_cgi,proto3" json:"serving_cgi,omitempty" aper:"valueExt"`
+	//@inject_tag: aper:"choiceExt"
+	ServingCgi *CellGlobalId `protobuf:"bytes,1,opt,name=serving_cgi,proto3" json:"serving_cgi,omitempty" aper:"choiceExt"`
 	UedId      *UeIdentity   `protobuf:"bytes,2,opt,name=ued_id,json=uedID,proto3" json:"ued_id,omitempty"`
-	//@inject_tag: aper:"valueExt"
-	TargetCgi *CellGlobalId `protobuf:"bytes,3,opt,name=target_cgi,proto3" json:"target_cgi,omitempty" aper:"valueExt"`
+	//@inject_tag: aper:"choiceExt"
+	TargetCgi *CellGlobalId `protobuf:"bytes,3,opt,name=target_cgi,proto3" json:"target_cgi,omitempty" aper:"choiceExt"`
 }
 
 func (x *E2SmMhoControlMessageFormat1) Reset() {

@@ -258,8 +258,8 @@ type TestConstrainedInt struct {
 	AttrCiB int32 `protobuf:"varint,2,opt,name=attr_ci_b,json=attrCiB,proto3" json:"attr_ci_b,omitempty" aper:"valueLB:255,valueUB:65535"`
 	// @inject_tag: aper:"valueLB:10,valueUB:4294967295"
 	AttrCiC int32 `protobuf:"varint,3,opt,name=attr_ci_c,json=attrCiC,proto3" json:"attr_ci_c,omitempty" aper:"valueLB:10,valueUB:4294967295"`
-	// @inject_tag: aper:"valueLB:4294967295,valueUB:100"
-	AttrCiD int32 `protobuf:"varint,4,opt,name=attr_ci_d,json=attrCiD,proto3" json:"attr_ci_d,omitempty" aper:"valueLB:4294967295,valueUB:100"`
+	// @inject_tag: aper:"valueUB:100"
+	AttrCiD int32 `protobuf:"varint,4,opt,name=attr_ci_d,json=attrCiD,proto3" json:"attr_ci_d,omitempty" aper:"valueUB:100"`
 	// @inject_tag: aper:"valueLB:10,valueUB:20"
 	AttrCiE int32 `protobuf:"varint,5,opt,name=attr_ci_e,json=attrCiE,proto3" json:"attr_ci_e,omitempty" aper:"valueLB:10,valueUB:20"`
 	// @inject_tag: aper:"valueLB:10,valueUB:10"
@@ -615,8 +615,8 @@ type TestChoices struct {
 	Choice1   *Choice1 `protobuf:"bytes,2,opt,name=choice1,proto3" json:"choice1,omitempty"`
 	Choice2   *Choice2 `protobuf:"bytes,3,opt,name=choice2,proto3" json:"choice2,omitempty"`
 	Choice3   *Choice3 `protobuf:"bytes,4,opt,name=choice3,proto3" json:"choice3,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	Choice4 *Choice4 `protobuf:"bytes,5,opt,name=choice4,proto3" json:"choice4,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	Choice4 *Choice4 `protobuf:"bytes,5,opt,name=choice4,proto3" json:"choice4,omitempty" aper:"choiceExt"`
 }
 
 func (x *TestChoices) Reset() {
@@ -952,11 +952,10 @@ type Choice4 struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from tes_sm.asn1:77
-	// @inject_tag: aper:"valueExt"
 	//
 	// Types that are assignable to Choice4:
 	//	*Choice4_Choice4A
-	Choice4 isChoice4_Choice4 `protobuf_oneof:"choice4" aper:"valueExt"`
+	Choice4 isChoice4_Choice4 `protobuf_oneof:"choice4"`
 }
 
 func (x *Choice4) Reset() {
@@ -1028,8 +1027,8 @@ type TestConstrainedChoices struct {
 	ConstrainedChoice1 *ConstrainedChoice1 `protobuf:"bytes,2,opt,name=constrained_choice1,json=constrainedChoice1,proto3" json:"constrained_choice1,omitempty"`
 	ConstrainedChoice2 *ConstrainedChoice2 `protobuf:"bytes,3,opt,name=constrained_choice2,json=constrainedChoice2,proto3" json:"constrained_choice2,omitempty"`
 	ConstrainedChoice3 *ConstrainedChoice3 `protobuf:"bytes,4,opt,name=constrained_choice3,json=constrainedChoice3,proto3" json:"constrained_choice3,omitempty"`
-	// @inject_tag: aper:"valueExt"
-	ConstrainedChoice4 *ConstrainedChoice4 `protobuf:"bytes,5,opt,name=constrained_choice4,json=constrainedChoice4,proto3" json:"constrained_choice4,omitempty" aper:"valueExt"`
+	// @inject_tag: aper:"choiceExt"
+	ConstrainedChoice4 *ConstrainedChoice4 `protobuf:"bytes,5,opt,name=constrained_choice4,json=constrainedChoice4,proto3" json:"constrained_choice4,omitempty" aper:"choiceExt"`
 }
 
 func (x *TestConstrainedChoices) Reset() {
@@ -1452,13 +1451,13 @@ type TestNestedChoice struct {
 	unknownFields protoimpl.UnknownFields
 
 	// choice from tes_sm.asn1:107
-	// @inject_tag: aper:"valueExt"
+	// @inject_tag: aper:"choiceExt"
 	//
 	// Types that are assignable to TestNestedChoice:
 	//	*TestNestedChoice_Option1
 	//	*TestNestedChoice_Option2
 	//	*TestNestedChoice_Option3
-	TestNestedChoice isTestNestedChoice_TestNestedChoice `protobuf_oneof:"test_nested_choice" aper:"valueExt"`
+	TestNestedChoice isTestNestedChoice_TestNestedChoice `protobuf_oneof:"test_nested_choice" aper:"choiceExt"`
 }
 
 func (x *TestNestedChoice) Reset() {

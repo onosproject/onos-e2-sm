@@ -225,11 +225,11 @@ message SubscriptionId {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:99
 // {TestCondInfo}
 message TestCondInfo {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     TestCondType test_type = 1 [json_name = "testType"];
     // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
     TestCondExpression test_expr = 2 [json_name = "testExpr"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     TestCondValue test_value = 3 [json_name = "testValue"];
 };
 
@@ -304,7 +304,7 @@ message GlobalKpmnodeGnbId {
 // {GlobalgNB-ID}
 message GlobalgNbId {
     PlmnIdentity plmn_id = 1 [json_name = "plmn-id"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     GnbIdChoice gnb_id = 2 [json_name = "gnb-id"];
 };
 
@@ -347,7 +347,7 @@ message GlobalKpmnodeEnGnbId {
 // {GlobalenGNB-ID}
 message GlobalenGnbId {
     PlmnIdentity p_lmn_identity = 1 [json_name = "pLMN-Identity"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EngnbId g_nb_id = 2 [json_name = "gNB-ID"];
 };
 
@@ -374,7 +374,7 @@ message GlobalKpmnodeNgEnbId {
 // {GlobalngeNB-ID}
 message GlobalngeNbId {
     PlmnIdentity plmn_id = 1 [json_name = "plmn-id"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EnbIdChoice enb_id = 2 [json_name = "enb-id"];
     // @inject_tag: aper:"sizeLB:18,sizeUB:18"
     asn1.v1.BitString short_macro_e_nb_id = 3 [json_name = "short-Macro-eNB-ID"];
@@ -407,7 +407,7 @@ message GlobalKpmnodeEnbId {
 // {GlobalENB-ID}
 message GlobalEnbId {
     PlmnIdentity p_lmn_identity = 1 [json_name = "pLMN-Identity"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EnbId e_nb_id = 2 [json_name = "eNB-ID"];
 };
 
@@ -523,7 +523,7 @@ message MeasurementInfoList {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:256
 // {MeasurementInfoItem}
 message MeasurementInfoItem {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     MeasurementType meas_type = 1 [json_name = "measType"];
     // @inject_tag: aper:"optional"
     optional LabelInfoList label_info_list = 2 [json_name = "labelInfoList"];
@@ -561,7 +561,7 @@ message MeasurementDataItem {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:278
 // {MeasurementRecord}
 message MeasurementRecord {
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:2147483647"
+    // @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:2147483647"
     repeated MeasurementRecordItem value = 1 [json_name = "value"];
 };
 
@@ -604,7 +604,7 @@ message MeasurementCondList {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:296
 // {MeasurementCondItem}
 message MeasurementCondItem {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     MeasurementType meas_type = 1 [json_name = "measType"];
     MatchingCondList matching_cond = 2 [json_name = "matchingCond"];
 };
@@ -619,7 +619,7 @@ message MeasurementCondUeidList {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:304
 // {MeasurementCondUEidItem}
 message MeasurementCondUeidItem {
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+    // @inject_tag: aper:"choiceExt"
     MeasurementType meas_type = 1 [json_name = "measType"];
     MatchingCondList matching_cond = 2 [json_name = "matchingCond"];
     // @inject_tag: aper:"optional"
@@ -629,7 +629,7 @@ message MeasurementCondUeidItem {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:312
 // {MatchingCondList}
 message MatchingCondList {
-    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:32768"
+    // @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:32768"
     repeated MatchingCondItem value = 1 [json_name = "value"];
 };
 
@@ -662,7 +662,7 @@ message MatchingUeidItem {
 // {E2SM-KPM-EventTriggerDefinition}
 message E2SmKpmEventTriggerDefinition {
     // choice from e2sm-kpm-ies_v2.asn1:337
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     EventTriggerDefinitionFormats event_definition_formats = 1 [json_name = "eventDefinition-formats"];
 };
 
@@ -684,7 +684,7 @@ message E2SmKpmEventTriggerDefinitionFormat1 {
 // {E2SM-KPM-ActionDefinition}
 message E2SmKpmActionDefinition {
     RicStyleType ric_style_type = 1 [json_name = "ric-Style-Type"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     ActionDefinitionFormats action_definition_formats = 2 [json_name = "actionDefinition-formats"];
 };
 
@@ -728,7 +728,7 @@ message E2SmKpmActionDefinitionFormat3 {
 // {E2SM-KPM-IndicationHeader}
 message E2SmKpmIndicationHeader {
     // choice from e2sm-kpm-v01.00.asn1:391
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     IndicationHeaderFormats indication_header_formats = 1 [json_name = "indicationHeader-formats"];
 };
 
@@ -751,7 +751,7 @@ message E2SmKpmIndicationHeaderFormat1 {
     optional string sender_type = 4 [(validate.v1.rules).string = {min_len: 0, max_len: 8}, json_name = "senderType"];
     // @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
     optional string vendor_name = 5 [(validate.v1.rules).string = {min_len: 0, max_len: 32}, json_name = "vendorName"];
-    // @inject_tag: aper:"optional,valueExt"
+    // @inject_tag: aper:"optional,choiceExt"
     optional GlobalKpmnodeId kpm_node_id = 6 [json_name = "kpmNodeID"];
 };
 
@@ -759,7 +759,7 @@ message E2SmKpmIndicationHeaderFormat1 {
 // {E2SM-KPM-IndicationMessage}
 message E2SmKpmIndicationMessage {
     // choice from e2sm_kpm_ies_v2.asn:414
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     IndicationMessageFormats indication_message_formats = 1 [json_name = "indicationMessage-formats"];
 };
 
@@ -813,7 +813,7 @@ message E2SmKpmRanfunctionDescription {
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:449
 // {RIC-KPMNode-Item}
 message RicKpmnodeItem {
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     GlobalKpmnodeId ric_kpmnode_type = 1 [json_name = "ric-KPMNode-Type"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
     repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name = "cell-Measurement-Object-List"];
@@ -823,7 +823,7 @@ message RicKpmnodeItem {
 // {Cell-Measurement-Object-Item}
 message CellMeasurementObjectItem {
     CellObjectId cell_object_id = 1 [json_name = "cell-object-ID"];
-    // @inject_tag: aper:"valueExt"
+    // @inject_tag: aper:"choiceExt"
     CellGlobalId cell_global_id = 2 [json_name = "cell-global-ID"];
 };
 

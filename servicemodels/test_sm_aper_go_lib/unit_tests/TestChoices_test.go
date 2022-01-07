@@ -107,7 +107,7 @@ func TestChoices(t *testing.T) {
 	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
 	aper.ChoiceMap = test_sm_ies.Choicemap
 
-	for i := 1; i < 100000; i++ {
+	for i := 1; i < 1000; i++ {
 
 		testSM := createTestChoicesMsg()
 		t.Logf("Testing Test-Choices with value \n%v", testSM)
