@@ -311,43 +311,43 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	assert.Equal(t, int32(21), testRFD.GetRanFunctionName().GetRanFunctionInstance())
 }
 
-func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
-	var rtPeriod uint32 = 12
-	e2SmKpmEventTriggerDefinition, err := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
-	assert.NilError(t, err, "error creating E2SmPDU")
-	assert.Assert(t, e2SmKpmEventTriggerDefinition != nil, "Created E2SmPDU is nil")
-
-	err = e2SmKpmEventTriggerDefinition.Validate()
-	assert.NilError(t, err, "error validating E2SmPDU")
-
-	assert.NilError(t, err)
-	protoBytes, err := proto.Marshal(e2SmKpmEventTriggerDefinition)
-	assert.NilError(t, err, "unexpected error marshalling E2SmKpmEventTriggerDefinition to bytes")
-	assert.Equal(t, 4, len(protoBytes))
-
-	asn1Bytes, err := kpmv2TestSm.EventTriggerDefinitionProtoToASN1(protoBytes)
-	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
-	assert.Assert(t, asn1Bytes != nil)
-	assert.Equal(t, 2, len(asn1Bytes))
-	t.Logf("E2SM-KPM-EventTriggerDefinition asn1Bytes are \n%v", hex.Dump(asn1Bytes))
-}
-
-func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
-	// This value is taken from Shad and passed as a byte array directly to the function
-	// It's the encoding of what's in the file ../test/E2SM-KPM-EventTriggerDefinition.xml
-	eventTriggerDefinitionAsn1 := []byte{0x00, 0x0b}
-
-	protoBytes, err := kpmv2TestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
-	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
-	assert.Assert(t, protoBytes != nil)
-	assert.Equal(t, 4, len(protoBytes))
-	testETD := &e2sm_kpm_v2.E2SmKpmEventTriggerDefinition{}
-	err = proto.Unmarshal(protoBytes, testETD)
-	t.Logf("Decoded message is \n%v", testETD)
-	assert.NilError(t, err)
-	t.Logf("Reporting period is \n%v", testETD.GetEventDefinitionFormat1().GetReportingPeriod())
-	assert.Equal(t, uint32(12), testETD.GetEventDefinitionFormat1().GetReportingPeriod())
-}
+//func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
+//	var rtPeriod uint32 = 12
+//	e2SmKpmEventTriggerDefinition, err := pdubuilder.CreateE2SmKpmEventTriggerDefinition(rtPeriod)
+//	assert.NilError(t, err, "error creating E2SmPDU")
+//	assert.Assert(t, e2SmKpmEventTriggerDefinition != nil, "Created E2SmPDU is nil")
+//
+//	err = e2SmKpmEventTriggerDefinition.Validate()
+//	assert.NilError(t, err, "error validating E2SmPDU")
+//
+//	assert.NilError(t, err)
+//	protoBytes, err := proto.Marshal(e2SmKpmEventTriggerDefinition)
+//	assert.NilError(t, err, "unexpected error marshalling E2SmKpmEventTriggerDefinition to bytes")
+//	assert.Equal(t, 4, len(protoBytes))
+//
+//	asn1Bytes, err := kpmv2TestSm.EventTriggerDefinitionProtoToASN1(protoBytes)
+//	assert.NilError(t, err, "unexpected error converting protoBytes to asnBytes")
+//	assert.Assert(t, asn1Bytes != nil)
+//	assert.Equal(t, 2, len(asn1Bytes))
+//	t.Logf("E2SM-KPM-EventTriggerDefinition asn1Bytes are \n%v", hex.Dump(asn1Bytes))
+//}
+//
+//func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
+//	// This value is taken from Shad and passed as a byte array directly to the function
+//	// It's the encoding of what's in the file ../test/E2SM-KPM-EventTriggerDefinition.xml
+//	eventTriggerDefinitionAsn1 := []byte{0x00, 0x0b}
+//
+//	protoBytes, err := kpmv2TestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
+//	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
+//	assert.Assert(t, protoBytes != nil)
+//	assert.Equal(t, 4, len(protoBytes))
+//	testETD := &e2sm_kpm_v2.E2SmKpmEventTriggerDefinition{}
+//	err = proto.Unmarshal(protoBytes, testETD)
+//	t.Logf("Decoded message is \n%v", testETD)
+//	assert.NilError(t, err)
+//	t.Logf("Reporting period is \n%v", testETD.GetEventDefinitionFormat1().GetReportingPeriod())
+//	assert.Equal(t, uint32(12), testETD.GetEventDefinitionFormat1().GetReportingPeriod())
+//}
 
 func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	var ricStyleType int32 = 12
