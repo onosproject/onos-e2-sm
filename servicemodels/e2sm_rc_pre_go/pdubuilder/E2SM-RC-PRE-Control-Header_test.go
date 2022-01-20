@@ -81,3 +81,12 @@ func TestE2SmRcPreControlHeaderExcludeAllOptionalFields(t *testing.T) {
 	t.Logf("PER ControlHeader - decoded \n%v", resultPer)
 	assert.Equal(t, newE2SmRcPrePdu.String(), resultPer.String())
 }
+
+var bytes = []byte{0x30, 0x26, 0x84, 0x13, 0x01, 0x45, 0x4c, 0x00, 0x10, 0x0a}
+
+func Test1(t *testing.T) {
+	resultPer, err := encoder.PerDecodeE2SmRcPreControlHeader(bytes)
+	assert.NilError(t, err)
+	t.Logf("PER ControlHeader - decoded \n%v", resultPer)
+	//assert.Equal(t, newE2SmRcPrePdu.String(), resultPer.String())
+}

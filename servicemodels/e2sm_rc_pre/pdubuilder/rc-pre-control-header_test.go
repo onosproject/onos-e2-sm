@@ -110,3 +110,12 @@ func TestE2SmRcPreControlHeaderExcludeAllOptionalFields(t *testing.T) {
 	assert.DeepEqual(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetValue())
 	assert.Equal(t, newE2SmRcPrePdu.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen(), resultPer.GetControlHeaderFormat1().GetCgi().GetNrCgi().GetNRcellIdentity().GetValue().GetLen())
 }
+
+var bytes = []byte{0x30, 0x26, 0x84, 0x13, 0x01, 0x45, 0x4c, 0x00, 0x10, 0x0a}
+
+func Test1(t *testing.T) {
+	resultPer, err := rcprectypes.PerDecodeE2SmRcPreControlHeader(bytes)
+	assert.NilError(t, err)
+	t.Logf("PER ControlHeader - decoded \n%v", resultPer)
+	//assert.Equal(t, newE2SmRcPrePdu.String(), resultPer.String())
+}

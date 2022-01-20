@@ -5,6 +5,7 @@
 package servicemodel
 
 import (
+	"encoding/hex"
 	"fmt"
 
 	prototypes "github.com/gogo/protobuf/types"
@@ -35,7 +36,7 @@ func (sm Kpm2ServiceModel) ServiceModelData() types.ServiceModelData {
 func (sm Kpm2ServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmIndicationHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmIndicationHeader to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmKpmIndicationHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -63,7 +64,7 @@ func (sm Kpm2ServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byt
 func (sm Kpm2ServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmIndicationMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmIndicationMessage to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmKpmIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -91,7 +92,7 @@ func (sm Kpm2ServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]by
 func (sm Kpm2ServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmRanFunctionDescription to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmKpmRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -119,7 +120,7 @@ func (sm Kpm2ServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]b
 func (sm Kpm2ServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmEventTriggerDefinition(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmEventTriggerDefinition to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmKpmEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -147,7 +148,7 @@ func (sm Kpm2ServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) 
 func (sm Kpm2ServiceModel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmActionDefinition(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmActionDefinitio to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmKpmActionDefinitio to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
