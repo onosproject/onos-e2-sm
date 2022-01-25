@@ -38,8 +38,8 @@ protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/serv
 protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
   --proto_path=servicemodels \
   --go_out=./servicemodels/ \
-  e2sm_mho_go/v1/e2sm_mho_go.proto
-protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go/e2sm_mho_go.pb.go
+  e2sm_mho_go/v2/e2sm_mho_go.proto
+protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go/e2sm_mho_go.pb.go
 
 protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
   --proto_path=servicemodels \
@@ -58,6 +58,11 @@ protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
 protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
   --go_out=. \
   e2sm_mho/v1/e2sm_mho.proto
+
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
+  --validate_out=lang=go:. --proto_path=servicemodels \
+  --go_out=. \
+  e2sm_mho_go/v2/e2sm_mho_go.proto
 
 protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
   --proto_path=servicemodels \

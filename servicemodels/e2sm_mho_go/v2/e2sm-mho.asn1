@@ -5,11 +5,13 @@
 -- **************************************************************
 
 E2SM-MHO-IEs {
-iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1 (1) e2sm(2) e2sm-MHO-IEs (101)}
+iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) e2(1) version1 (2) e2sm(2) e2sm-MHO-IEs (101)}
 
 DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
+
+FiveQI ::= INTEGER (0..255, ...)
 
 PLMN-Identity ::= OCTET STRING (SIZE(3))
 
@@ -127,6 +129,7 @@ E2SM-MHO-IndicationMessage-Format1 ::= SEQUENCE {
 E2SM-MHO-MeasurementReportItem ::= SEQUENCE {
    cgi         CellGlobalID,
    rsrp        RSRP,
+   fiveQI      FiveQI   OPTIONAL,
    ...
 }
 

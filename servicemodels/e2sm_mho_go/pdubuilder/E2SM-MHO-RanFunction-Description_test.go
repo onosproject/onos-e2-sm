@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/encoder"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -25,12 +25,14 @@ func TestE2SmMhoRanfunctionDescriptionMsg(t *testing.T) {
 	var ricIndicationHeaderFormatType int32 = 21
 	var ricIndicationMessageFormatType int32 = 56
 	retsl := make([]*e2sm_mho_go.RicEventTriggerStyleList, 0)
-	retsi := CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
+	retsi, err := CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
+	assert.NilError(t, err)
 	retsl = append(retsl, retsi)
 
 	rrsl := make([]*e2sm_mho_go.RicReportStyleList, 0)
-	rrsi := CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
+	rrsi, err := CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
 		ricIndicationMessageFormatType)
+	assert.NilError(t, err)
 	rrsl = append(rrsl, rrsi)
 	newE2SmMhoPdu, err := CreateE2SmMhoRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid,
 		ranFunctionDescription)

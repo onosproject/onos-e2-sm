@@ -10,16 +10,16 @@ import (
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/encoder"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"google.golang.org/protobuf/proto"
 )
 
 type MhoServiceModel string
 
 const smName = "e2sm_mho_go"
-const smVersion = "v1"
+const smVersion = "v2"
 const moduleName = "e2sm_mho_go.so.1.0.1"
-const smOIDMho = "1.3.6.1.4.1.53148.1.1.2.101"
+const smOIDMho = "1.3.6.1.4.1.53148.1.2.2.101"
 
 func (sm MhoServiceModel) ServiceModelData() types.ServiceModelData {
 	smData := types.ServiceModelData{

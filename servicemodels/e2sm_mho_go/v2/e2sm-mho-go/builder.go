@@ -9,8 +9,10 @@ func (ed *E2SmMhoEventTriggerDefinitionFormat1) SetReportingPeriodInMs(rp int32)
 	return ed
 }
 
-func (ed *E2SmMhoControlHeaderFormat1) SetRicControlMessagePriority(cmp RicControlMessagePriority) *E2SmMhoControlHeaderFormat1 {
-	ed.RicControlMessagePriority = &cmp
+func (ed *E2SmMhoControlHeaderFormat1) SetRicControlMessagePriority(cmp int32) *E2SmMhoControlHeaderFormat1 {
+	ed.RicControlMessagePriority = &RicControlMessagePriority{
+		Value: cmp,
+	}
 	return ed
 }
 
@@ -29,4 +31,11 @@ func (rfd *E2SmMhoRanfunctionDescription) SetRicReportStyleList(rrsl []*RicRepor
 func (rfn *RanfunctionName) SetRanFunctionInstance(rfi int32) *RanfunctionName {
 	rfn.RanFunctionInstance = &rfi
 	return rfn
+}
+
+func (mri *E2SmMhoMeasurementReportItem) SetFiveQi(fiveQI int32) *E2SmMhoMeasurementReportItem {
+	mri.FiveQi = &FiveQi{
+		Value: fiveQI,
+	}
+	return mri
 }

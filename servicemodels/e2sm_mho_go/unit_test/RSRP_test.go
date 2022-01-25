@@ -7,7 +7,7 @@ package unit_test
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -21,6 +21,7 @@ var rsrpN32000 string = "00000000  20 83 00                                     
 var rsrpN1234 string = "00000000  20 fb 2e                                          | ..|"
 var rsrpN156 string = "00000000  20 ff 64                                          | .d|"
 var rsrpN1 string = "00000000  20 ff ff                                          | ..|"
+
 //Set of positive values
 var rsrp0 string = "00000000  40 01 00 00                                       |@...|"
 var rsrp1 string = "00000000  40 01 00 01                                       |@...|"
