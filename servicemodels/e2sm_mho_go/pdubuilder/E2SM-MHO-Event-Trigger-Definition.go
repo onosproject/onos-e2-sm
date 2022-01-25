@@ -4,13 +4,14 @@
 package pdubuilder
 
 import (
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	"fmt"
+	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 )
 
 func CreateE2SmMhoEventTriggerDefinition(triggerType e2sm_mho_go.MhoTriggerType) (*e2sm_mho_go.E2SmMhoEventTriggerDefinition, error) {
 
 	eventDefinitionFormat1 := &e2sm_mho_go.E2SmMhoEventTriggerDefinitionFormat1{
-		TriggerType:       triggerType,
+		TriggerType: triggerType,
 		//ReportingPeriodMs: &rtPeriod,
 	}
 
@@ -22,9 +23,9 @@ func CreateE2SmMhoEventTriggerDefinition(triggerType e2sm_mho_go.MhoTriggerType)
 		},
 	}
 
-	//if err := E2SmMhoPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmMhoPDU %s", err.Error())
-	//}
+	if err := E2SmMhoPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmMhoEventTriggerDefinition(): error validating E2SmMhoPDU %s", err.Error())
+	}
 	return &E2SmMhoPdu, nil
 }
 
@@ -43,9 +44,9 @@ func CreateE2SmMhoEventTriggerDefinitionPeriodic(rtPeriod int32) (*e2sm_mho_go.E
 		},
 	}
 
-	//if err := E2SmMhoPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmMhoPDU %s", err.Error())
-	//}
+	if err := E2SmMhoPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmMhoEventTriggerDefinitionPeriodic(): error validating E2SmMhoPDU %s", err.Error())
+	}
 	return &E2SmMhoPdu, nil
 }
 
@@ -64,8 +65,8 @@ func CreateE2SmMhoEventTriggerDefinitionUponRcvMeasReport() (*e2sm_mho_go.E2SmMh
 		},
 	}
 
-	//if err := E2SmMhoPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmMhoPDU %s", err.Error())
-	//}
+	if err := E2SmMhoPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmMhoEventTriggerDefinitionUponRcvMeasReport(): error validating E2SmMhoPDU %s", err.Error())
+	}
 	return &E2SmMhoPdu, nil
 }

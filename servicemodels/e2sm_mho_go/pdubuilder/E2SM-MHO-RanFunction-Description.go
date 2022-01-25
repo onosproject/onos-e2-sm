@@ -4,7 +4,8 @@
 package pdubuilder
 
 import (
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	"fmt"
+	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 )
 
 func CreateE2SmMhoRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunctionE2SmOid string, ranFunctionDescription string) (*e2sm_mho_go.E2SmMhoRanfunctionDescription, error) {
@@ -18,15 +19,15 @@ func CreateE2SmMhoRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunc
 		E2SmMhoRanfunctionItem: &e2sm_mho_go.E2SmMhoRanfunctionDescription_E2SmMhoRanfunctionItem001{},
 	}
 
-	//if err := e2smMhoPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smMhoPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmMhoRanfunctionDescriptionMsg(): error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smMhoPdu, nil
 }
 
-func CreateRicEventTriggerStyleItem(ricStyleType int32, ricStyleName string, ricFormatType int32) *e2sm_mho_go.RicEventTriggerStyleList {
+func CreateRicEventTriggerStyleItem(ricStyleType int32, ricStyleName string, ricFormatType int32) (*e2sm_mho_go.RicEventTriggerStyleList, error) {
 
-	return &e2sm_mho_go.RicEventTriggerStyleList{
+	res := &e2sm_mho_go.RicEventTriggerStyleList{
 		RicEventTriggerStyleType: &e2sm_mho_go.RicStyleType{
 			Value: ricStyleType,
 		},
@@ -37,11 +38,17 @@ func CreateRicEventTriggerStyleItem(ricStyleType int32, ricStyleName string, ric
 			Value: ricFormatType,
 		},
 	}
+
+	if err := res.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateRicEventTriggerStyleItem(): error validationg E2SmPDU %s", err)
+	}
+
+	return res, nil
 }
 
-func CreateRicReportStyleItem(ricStyleType int32, ricStyleName string, indHdrFormatType int32, indMsgFormatType int32) *e2sm_mho_go.RicReportStyleList {
+func CreateRicReportStyleItem(ricStyleType int32, ricStyleName string, indHdrFormatType int32, indMsgFormatType int32) (*e2sm_mho_go.RicReportStyleList, error) {
 
-	return &e2sm_mho_go.RicReportStyleList{
+	res := &e2sm_mho_go.RicReportStyleList{
 		RicReportStyleType: &e2sm_mho_go.RicStyleType{
 			Value: ricStyleType,
 		},
@@ -55,4 +62,10 @@ func CreateRicReportStyleItem(ricStyleType int32, ricStyleName string, indHdrFor
 			Value: indMsgFormatType,
 		},
 	}
+
+	if err := res.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateRicReportStyleItem(): error validationg E2SmPDU %s", err)
+	}
+
+	return res, nil
 }

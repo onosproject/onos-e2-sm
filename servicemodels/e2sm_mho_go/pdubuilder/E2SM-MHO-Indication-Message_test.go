@@ -7,7 +7,8 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/encoder"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -17,10 +18,23 @@ func TestE2SmMhoIndicationMsgF1(t *testing.T) {
 	ueID := &e2sm_mho_go.UeIdentity{
 		Value: []byte("1234"),
 	}
+
+	cgi, err := CreateCellGlobalIDNrCGI([]byte{0xAA, 0xFD, 0xD4}, &asn1.BitString{
+		Value: []byte{0x00, 0x00, 0x00, 0x40, 0x00},
+		Len:   36,
+	})
+	assert.NilError(t, err)
 	rsrp := &e2sm_mho_go.Rsrp{
 		Value: 1234,
 	}
-	newE2SmMhoPdu, err := CreateE2SmMhoIndicationMsgFormat1(ueID, rsrp)
+	measItem, err := CreateMeasurementRecordItem(cgi, rsrp)
+	assert.NilError(t, err)
+	measItem.SetFiveQi(21)
+
+	measReport := make([]*e2sm_mho_go.E2SmMhoMeasurementReportItem, 0)
+	measReport = append(measReport, measItem)
+
+	newE2SmMhoPdu, err := CreateE2SmMhoIndicationMsgFormat1(ueID, measReport)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmMhoPdu != nil)
 	t.Logf("E2SM-MHO-IndicationMessage is \n%v", newE2SmMhoPdu)

@@ -7,7 +7,7 @@ package servicemodel
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/pdubuilder"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"google.golang.org/protobuf/proto"
 	"gotest.tools/assert"
@@ -23,15 +23,15 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 
 	cellID := asn1.BitString{
 		Value: []byte{0x9b, 0xcd, 0x4a, 0xb0},
-		Len:   28,        //uint32
+		Len:   28, //uint32
 	}
-	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
+	cgi, err := pdubuilder.CreateCellGlobalIDEutraCGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
 	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoIndicationHeader(cgi)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
-	//err = newE2SmMhoPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = newE2SmMhoPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	protoBytes, err := proto.Marshal(newE2SmMhoPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmMhoIndicationHeader to bytes")
@@ -62,16 +62,27 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	ueID := &e2sm_mho_go.UeIdentity{
 		Value: []byte("1234"),
 	}
+	cgi, err := pdubuilder.CreateCellGlobalIDNrCGI([]byte{0xAA, 0xFD, 0xD4}, &asn1.BitString{
+		Value: []byte{0x00, 0x00, 0x00, 0x40, 0x00},
+		Len:   36,
+	})
+	assert.NilError(t, err)
 	rsrp := &e2sm_mho_go.Rsrp{
 		Value: 1234,
 	}
-	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoIndicationMsgFormat1(ueID, rsrp)
+	measItem, err := pdubuilder.CreateMeasurementRecordItem(cgi, rsrp)
+	assert.NilError(t, err)
+
+	measReport := make([]*e2sm_mho_go.E2SmMhoMeasurementReportItem, 0)
+	measReport = append(measReport, measItem)
+
+	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoIndicationMsgFormat1(ueID, measReport)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, newE2SmMhoPdu != nil)
 
-	//err = newE2SmMhoPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
-	//
+	err = newE2SmMhoPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
+
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmMhoPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmMhoIndicationMessage to bytes")
@@ -87,8 +98,8 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 
 func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	indicationMessageAsn1 := []byte{
-		0x00, 0x04, 0x31, 0x32, 0x33, 0x34, 0x00, 0x40, 0x12, 0xf4, 0x10, 0xab, 0xd4, 0xbc, 0x04, 0x01,
-		0x04, 0xd2,
+		0x00, 0x04, 0x31, 0x32, 0x33, 0x34, 0x00, 0x80, 0xaa, 0xfd, 0xd4, 0x00, 0x00, 0x00, 0x40, 0x04,
+		0x01, 0x04, 0xd2, 0x00, 0x15,
 	}
 	protoBytes, err := mhoTestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
@@ -117,12 +128,14 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	var ricIndicationMessageFormatType int32 = 56
 
 	retsl := make([]*e2sm_mho_go.RicEventTriggerStyleList, 0)
-	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
+	retsi, err := pdubuilder.CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
+	assert.NilError(t, err)
 	retsl = append(retsl, retsi)
 
 	rrsl := make([]*e2sm_mho_go.RicReportStyleList, 0)
-	rrsi := pdubuilder.CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
+	rrsi, err := pdubuilder.CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
 		ricIndicationMessageFormatType)
+	assert.NilError(t, err)
 	rrsl = append(rrsl, rrsi)
 	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoRanfunctionDescriptionMsg(ranFunctionShortName, ranFunctionE2SmOid,
 		ranFunctionDescription)
@@ -130,8 +143,8 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	assert.Assert(t, newE2SmMhoPdu != nil)
 	newE2SmMhoPdu.SetRicReportStyleList(rrsl).SetRicEventTriggerStyleList(retsl).GetRanFunctionName().SetRanFunctionInstance(ranFunctionInstance)
 
-	//err = newE2SmMhoPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = newE2SmMhoPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	protoBytes, err := proto.Marshal(newE2SmMhoPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmMhoRanfunctionDescription to bytes")
@@ -171,8 +184,8 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, e2SmMhoEventTriggerDefinition != nil, "Created E2SmPDU is nil")
 
-	//err = e2SmMhoEventTriggerDefinition.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = e2SmMhoEventTriggerDefinition.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(e2SmMhoEventTriggerDefinition)
@@ -205,8 +218,8 @@ func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
 	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoControlHeader(controlMessagePriority)
 	assert.NilError(t, err, "error creating E2SmPDU")
 
-	//err = newE2SmMhoPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = newE2SmMhoPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmMhoPdu)
@@ -251,7 +264,7 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 				EUtracellIdentity: &e2sm_mho_go.EutracellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0x9b, 0xcd, 0x4a, 0xb0},
-						Len:   28,        //uint32
+						Len:   28, //uint32
 					},
 				},
 			},
@@ -266,7 +279,7 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 				EUtracellIdentity: &e2sm_mho_go.EutracellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0x9b, 0xcd, 0x4a, 0xb0},
-						Len:   28,        //uint32
+						Len:   28, //uint32
 					},
 				},
 			},

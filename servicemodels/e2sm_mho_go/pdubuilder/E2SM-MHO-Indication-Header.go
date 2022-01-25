@@ -4,7 +4,8 @@
 package pdubuilder
 
 import (
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
+	"fmt"
+	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 )
 
 func CreateE2SmMhoIndicationHeader(cgi *e2sm_mho_go.CellGlobalId) (*e2sm_mho_go.E2SmMhoIndicationHeader, error) {
@@ -17,8 +18,8 @@ func CreateE2SmMhoIndicationHeader(cgi *e2sm_mho_go.CellGlobalId) (*e2sm_mho_go.
 		},
 	}
 
-	//if err := E2SmMhoPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmMhoPDU %s", err.Error())
-	//}
+	if err := E2SmMhoPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmMhoIndicationHeader(): error validating E2SmMhoPDU %s", err.Error())
+	}
 	return &E2SmMhoPdu, nil
 }
