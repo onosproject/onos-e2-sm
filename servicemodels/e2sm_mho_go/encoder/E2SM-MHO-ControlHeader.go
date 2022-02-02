@@ -7,8 +7,8 @@ package encoder
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/goaperlib"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
-	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )
 
 func init() {
@@ -18,8 +18,8 @@ func init() {
 func PerEncodeE2SmMhoControlHeader(ch *e2sm_mho_go.E2SmMhoControlHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-ControlHeader message is\n%v", ch)
-	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(ch, "choiceExt")
+	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
+	per, err := goaperlib.MarshalWithParams(ch, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
@@ -31,9 +31,9 @@ func PerEncodeE2SmMhoControlHeader(ch *e2sm_mho_go.E2SmMhoControlHeader) ([]byte
 func PerDecodeE2SmMhoControlHeader(per []byte) (*e2sm_mho_go.E2SmMhoControlHeader, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-ControlHeader PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
+	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
 	result := e2sm_mho_go.E2SmMhoControlHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
+	err := goaperlib.UnmarshalWithParams(per, &result, "choiceExt")
 	if err != nil {
 		return nil, err
 	}

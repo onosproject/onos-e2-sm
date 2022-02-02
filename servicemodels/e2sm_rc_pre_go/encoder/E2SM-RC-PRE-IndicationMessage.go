@@ -7,15 +7,15 @@ package encoder
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/goaperlib"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
-	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )
 
 func PerEncodeE2SmRcPreIndicationMessage(im *e2sm_rc_pre_go.E2SmRcPreIndicationMessage) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-IndicationMessage message is\n%v", im)
-	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
-	per, err := aper.MarshalWithParams(im, "choiceExt")
+	//aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
+	per, err := goaperlib.MarshalWithParams(im, "choiceExt")
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmRcPreIndicationMessage(im *e2sm_rc_pre_go.E2SmRcPreIndicationM
 func PerDecodeE2SmRcPreIndicationMessage(per []byte) (*e2sm_rc_pre_go.E2SmRcPreIndicationMessage, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-IndicationMessage PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
+	//aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
 	result := e2sm_rc_pre_go.E2SmRcPreIndicationMessage{}
-	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
+	err := goaperlib.UnmarshalWithParams(per, &result, "choiceExt")
 	if err != nil {
 		return nil, err
 	}

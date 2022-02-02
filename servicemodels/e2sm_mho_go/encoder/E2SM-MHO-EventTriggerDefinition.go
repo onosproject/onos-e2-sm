@@ -7,15 +7,15 @@ package encoder
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/goaperlib"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v1/e2sm-mho-go"
-	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )
 
 func PerEncodeE2SmMhoEventTriggerDefinition(etd *e2sm_mho_go.E2SmMhoEventTriggerDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-MHO-EventTriggerDefinition message is\n%v", etd)
-	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(etd, "valueExt")
+	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
+	per, err := goaperlib.MarshalWithParams(etd, "valueExt")
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmMhoEventTriggerDefinition(etd *e2sm_mho_go.E2SmMhoEventTrigger
 func PerDecodeE2SmMhoEventTriggerDefinition(per []byte) (*e2sm_mho_go.E2SmMhoEventTriggerDefinition, error) {
 
 	log.Debugf("Obtained E2SM-MHO-EventTriggerDefinition PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
+	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
 	result := e2sm_mho_go.E2SmMhoEventTriggerDefinition{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := goaperlib.UnmarshalWithParams(per, &result, "valueExt")
 	if err != nil {
 		return nil, err
 	}
