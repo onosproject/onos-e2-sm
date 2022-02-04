@@ -7,15 +7,15 @@ package encoder
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/goaperlib"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )
 
 func PerEncodeE2SmRcPreEventTriggerDefinition(etd *e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-EventTriggerDefinition message is\n%v", etd)
 	//aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
-	per, err := goaperlib.MarshalWithParams(etd, "valueExt")
+	per, err := aper.MarshalWithParams(etd, "valueExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func PerDecodeE2SmRcPreEventTriggerDefinition(per []byte) (*e2sm_rc_pre_go.E2SmR
 	log.Debugf("Obtained E2SM-RC-PRE-EventTriggerDefinition PER bytes are\n%v", hex.Dump(per))
 	//aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
 	result := e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition{}
-	err := goaperlib.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

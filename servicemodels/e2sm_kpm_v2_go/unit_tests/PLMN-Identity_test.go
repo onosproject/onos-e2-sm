@@ -21,12 +21,12 @@ func Test_perEncodingPlmnID(t *testing.T) {
 		Value: []byte{0x21, 0x22, 0x23},
 	}
 
-	per, err := aper.Marshal(plmnID)
+	per, err := aper.Marshal(plmnID, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("PLMN-Identity PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.PlmnIdentity{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("PLMN-Identity PER - decoded\n%v", &result)
@@ -39,7 +39,7 @@ func Test_perPlmnIDCompareBytes(t *testing.T) {
 		Value: []byte{0x21, 0x22, 0x23},
 	}
 
-	per, err := aper.Marshal(plmnID)
+	per, err := aper.Marshal(plmnID, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("PLMN-Identity PER\n%v", hex.Dump(per))
 

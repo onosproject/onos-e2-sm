@@ -31,13 +31,13 @@ func Test_perEncodingTestCondInfo(t *testing.T) {
 		},
 	}
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondInfo, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondInfo, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.TestCondInfo{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondInfo PER - decoded\n%v", &result)
@@ -62,8 +62,8 @@ func Test_perTestCondInfoCompareBytes(t *testing.T) {
 		},
 	}
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondInfo, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondInfo, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
 
@@ -78,9 +78,9 @@ func Test_stupidExperiment2(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(perRefBytes))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.TestCondInfo{}
-	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt")
+	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondInfo PER - decoded\n%v", &result)

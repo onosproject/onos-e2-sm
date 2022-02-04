@@ -58,13 +58,13 @@ func Test_perEncodingE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 	ihf1, err := createE2SmKpmIndicationHeaderFormat1()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ihf1, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(ihf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER - decoded\n%v", &result)
@@ -85,8 +85,8 @@ func Test_perE2SmKpmIndicationHeaderFormat1CompareBytes(t *testing.T) {
 	ihf1, err := createE2SmKpmIndicationHeaderFormat1()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ihf1, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(ihf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER\n%v", hex.Dump(per))
 

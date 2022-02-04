@@ -22,12 +22,12 @@ func Test_perEncodingTimeStamp(t *testing.T) {
 		Value: stamp,
 	}
 
-	per, err := aper.Marshal(timeStamp)
+	per, err := aper.Marshal(timeStamp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("TimeStamp PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.TimeStamp{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TimeStamp PER - decoded\n%v", &result)
@@ -41,7 +41,7 @@ func Test_perTimeStampCompareBytes(t *testing.T) {
 		Value: stamp,
 	}
 
-	per, err := aper.Marshal(timeStamp)
+	per, err := aper.Marshal(timeStamp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("TimeStamp PER\n%v", hex.Dump(per))
 

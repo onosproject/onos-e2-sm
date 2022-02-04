@@ -45,13 +45,13 @@ func Test_perEncodingEnGnbID(t *testing.T) {
 
 	gnbIDc := createEngnbID()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EngnbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("enGnbID PER - decoded\n%v", &result)
@@ -63,8 +63,8 @@ func Test_perEnGnbIDCompareBytes(t *testing.T) {
 
 	gnbIDc := createEngnbID()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
@@ -78,13 +78,13 @@ func Test_perEncodingEnGnbIDlen32(t *testing.T) {
 
 	gnbIDc := createEngnbIDlen32()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EngnbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("enGnbID PER - decoded\n%v", &result)
@@ -96,8 +96,8 @@ func Test_perEnGnbIDlen32CompareBytes(t *testing.T) {
 
 	gnbIDc := createEngnbIDlen32()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(per))
 
@@ -112,9 +112,9 @@ func Test_stupidExperiment3(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("enGnbID PER\n%v", hex.Dump(perRefBytes))
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.EngnbId{}
-	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt")
+	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("enGnbID PER - decoded\n%v", &result)

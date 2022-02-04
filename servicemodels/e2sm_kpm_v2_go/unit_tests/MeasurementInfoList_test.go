@@ -125,13 +125,13 @@ func Test_perEncodeMeasurementInfoList(t *testing.T) {
 	mil, err := createMeasurementInfoList()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementInfoList{}
-	err = aper.UnmarshalWithParams(per, &result, "")
+	err = aper.UnmarshalWithParams(per, &result, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfo-List PER - decoded\n%v", &result)
@@ -161,8 +161,8 @@ func Test_perMeasurementInfoListCompareBytes(t *testing.T) {
 	mil, err := createMeasurementInfoList()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 
@@ -177,13 +177,13 @@ func Test_perEncodeMeasurementInfoListNoOptional(t *testing.T) {
 	mil, err := createMeasurementInfoListNoOptional()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementInfoList{}
-	err = aper.UnmarshalWithParams(per, &result, "")
+	err = aper.UnmarshalWithParams(per, &result, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfo-List PER - decoded\n%v", &result)
@@ -195,8 +195,8 @@ func Test_perMeasurementInfoListCompareBytesNoOptional(t *testing.T) {
 	mil, err := createMeasurementInfoListNoOptional()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 

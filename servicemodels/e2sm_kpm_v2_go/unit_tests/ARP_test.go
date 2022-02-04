@@ -23,12 +23,12 @@ func Test_perEncodingArpLB(t *testing.T) {
 		Value: 15,
 	}
 
-	per, err := aper.Marshal(arp)
+	per, err := aper.Marshal(arp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("ARP PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Arp{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, result != nil)
 	t.Logf("ARP PER - decoded\n%v", &result)
@@ -41,7 +41,7 @@ func Test_perArpCompareBytesLB(t *testing.T) {
 		Value: 1,
 	}
 
-	per, err := aper.Marshal(arp)
+	per, err := aper.Marshal(arp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("ARP PER\n%v", hex.Dump(per))
 
@@ -57,12 +57,12 @@ func Test_perEncodingArpUB(t *testing.T) {
 		Value: 15,
 	}
 
-	per, err := aper.Marshal(arp)
+	per, err := aper.Marshal(arp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("ARP PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Arp{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("ARP PER - decoded\n%v", &result)
@@ -75,7 +75,7 @@ func Test_perArpCompareBytesUB(t *testing.T) {
 		Value: 15,
 	}
 
-	per, err := aper.Marshal(arp)
+	per, err := aper.Marshal(arp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("ARP PER\n%v", hex.Dump(per))
 
@@ -91,12 +91,12 @@ func Test_perEncodingArpExt(t *testing.T) {
 		Value: 121,
 	}
 
-	per, err := aper.Marshal(arp)
+	per, err := aper.Marshal(arp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("ARP PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Arp{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("ARP PER - decoded\n%v", &result)
@@ -109,7 +109,7 @@ func Test_perArpCompareBytesExt(t *testing.T) {
 		Value: 121,
 	}
 
-	per, err := aper.Marshal(arp)
+	per, err := aper.Marshal(arp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("ARP PER\n%v", hex.Dump(per))
 

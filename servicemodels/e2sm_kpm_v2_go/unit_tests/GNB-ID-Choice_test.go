@@ -45,13 +45,13 @@ func Test_perEncodingGnbIDChoice(t *testing.T) {
 
 	gnbIDc := createGnbIDChoice()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbIdChoice{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GnbIDchoice PER - decoded\n%v", &result)
@@ -63,8 +63,8 @@ func Test_perGnbIDChoiceCompareBytes(t *testing.T) {
 
 	gnbIDc := createGnbIDChoice()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 
@@ -78,13 +78,13 @@ func Test_perEncodingGnbIDChoiceLen30(t *testing.T) {
 
 	gnbIDc := createGnbIDChoiceLen30()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GnbIdChoice{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GnbIDchoice PER - decoded\n%v", &result)
@@ -96,8 +96,8 @@ func Test_perGnbIDChoiceLen30CompareBytes(t *testing.T) {
 
 	gnbIDc := createGnbIDChoiceLen30()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GnbIDchoice PER\n%v", hex.Dump(per))
 

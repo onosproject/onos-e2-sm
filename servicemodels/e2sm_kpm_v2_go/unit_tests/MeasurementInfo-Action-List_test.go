@@ -42,12 +42,12 @@ func Test_perEncodingMeasurementInfoActionList(t *testing.T) {
 	mial, err := createMeasurementInfoActionList()
 	assert.NilError(t, err)
 
-	per, err := aper.Marshal(mial)
+	per, err := aper.Marshal(mial, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfoActionList PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementInfoActionList{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfoActionList - decoded\n%v", &result)
@@ -61,7 +61,7 @@ func Test_perMeasurementInfoActionListCompareBytes(t *testing.T) {
 	mial, err := createMeasurementInfoActionList()
 	assert.NilError(t, err)
 
-	per, err := aper.Marshal(mial)
+	per, err := aper.Marshal(mial, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfoActionList PER\n%v", hex.Dump(per))
 

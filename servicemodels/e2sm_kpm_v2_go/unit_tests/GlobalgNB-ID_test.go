@@ -55,13 +55,13 @@ func Test_perEncodingGlobalGnbID(t *testing.T) {
 
 	gnbIDc := createGlobalgNbID()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalgNbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GlobalGnbID PER - decoded\n%v", &result)
@@ -74,8 +74,8 @@ func Test_perGlobalGnbIDCompareBytes(t *testing.T) {
 
 	gnbIDc := createGlobalgNbID()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
@@ -89,13 +89,13 @@ func Test_perEncodingGlobalGnbIDlen31(t *testing.T) {
 
 	gnbIDc := createGlobalgNbIDlen31()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalgNbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GlobalGnbID PER - decoded\n%v", &result)
@@ -108,8 +108,8 @@ func Test_perGlobalGnbIDlen31CompareBytes(t *testing.T) {
 
 	gnbIDc := createGlobalgNbIDlen31()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gnbIDc, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gnbIDc, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalGnbID PER\n%v", hex.Dump(per))
 

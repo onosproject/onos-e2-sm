@@ -34,12 +34,12 @@ func Test_perEncodingRicEventTriggerStyleItem(t *testing.T) {
 
 	item := createRicEventTriggerStyleItem()
 
-	per, err := aper.MarshalWithParams(item, "valueExt")
+	per, err := aper.MarshalWithParams(item, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("RIC-EventTriggerStyle-Item PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RicEventTriggerStyleItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-EventTriggerStyle-Item - decoded\n%v", &result)
@@ -52,7 +52,7 @@ func Test_perRicEventTriggerStyleItemCompareBytes(t *testing.T) {
 
 	item := createRicEventTriggerStyleItem()
 
-	per, err := aper.MarshalWithParams(item, "valueExt")
+	per, err := aper.MarshalWithParams(item, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("RIC-EventTriggerStyle-Item PER\n%v", hex.Dump(per))
 

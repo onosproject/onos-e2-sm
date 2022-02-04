@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmRsmEventTriggerDefinition(etd *e2sm_rsm_ies.E2SmRsmEventTriggerDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RSM-EventTriggerDefinition message is\n%v", etd)
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
-	per, err := aper.MarshalWithParams(etd, "valueExt")
+	//aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
+	per, err := aper.MarshalWithParams(etd, "valueExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmRsmEventTriggerDefinition(etd *e2sm_rsm_ies.E2SmRsmEventTrigge
 func PerDecodeE2SmRsmEventTriggerDefinition(per []byte) (*e2sm_rsm_ies.E2SmRsmEventTriggerDefinition, error) {
 
 	log.Debugf("Obtained E2SM-RSM-EventTriggerDefinition PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
+	//aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
 	result := e2sm_rsm_ies.E2SmRsmEventTriggerDefinition{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

@@ -46,13 +46,13 @@ func Test_perEncodingMeasurementRecordItemInteger(t *testing.T) {
 
 	mri := createMeasurementRecordItemInteger()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mri, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mri, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementRecordItem (Integer) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementRecordItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementRecordItem (Integer) PER - decoded\n%v", &result)
@@ -63,8 +63,8 @@ func Test_perMeasurementRecordItemIntegerCompareBytes(t *testing.T) {
 
 	mri := createMeasurementRecordItemInteger()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mri, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mri, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementRecordItem (Integer) PER\n%v", hex.Dump(per))
 
@@ -110,13 +110,13 @@ func Test_perEncodingMeasurementRecordItemNull(t *testing.T) {
 
 	mri := createMeasurementRecordItemNoValue()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mri, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mri, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementRecordItem (No value) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementRecordItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementRecordItem (No value) PER - decoded\n%v", &result)
@@ -127,8 +127,8 @@ func Test_perMeasurementRecordItemNullCompareBytes(t *testing.T) {
 
 	mri := createMeasurementRecordItemNoValue()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mri, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mri, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementRecordItem (No value) PER\n%v", hex.Dump(per))
 

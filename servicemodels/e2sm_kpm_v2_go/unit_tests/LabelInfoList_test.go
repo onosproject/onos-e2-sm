@@ -88,12 +88,12 @@ func Test_perEncodingLabelInfoList(t *testing.T) {
 	lil, err := createLabelInfoList()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(lil, "")
+	per, err := aper.MarshalWithParams(lil, "", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("LabelInfoList PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.LabelInfoList{}
-	err = aper.UnmarshalWithParams(per, &result, "")
+	err = aper.UnmarshalWithParams(per, &result, "", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("LabelInfoList PER - decoded\n%v", &result)
@@ -140,7 +140,7 @@ func Test_perLabelInfoListCompareBytes(t *testing.T) {
 	lil, err := createLabelInfoList()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(lil, "")
+	per, err := aper.MarshalWithParams(lil, "", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("LabelInfoList PER\n%v", hex.Dump(per))
 

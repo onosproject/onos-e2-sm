@@ -7,15 +7,15 @@ package encoder
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/goaperlib"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )
 
 func PerEncodeE2SmKpmIndicationHeader(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-KPM-IndicationHeader message is\n%v", ih)
 	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := goaperlib.MarshalWithParams(ih, "valueExt")
+	per, err := aper.MarshalWithParams(ih, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func PerDecodeE2SmKpmIndicationHeader(per []byte) (*e2sm_kpm_v2_go.E2SmKpmIndica
 	log.Debugf("Obtained E2SM-KPM-IndicationHeader PER bytes are\n%v", hex.Dump(per))
 	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
 	result := e2sm_kpm_v2_go.E2SmKpmIndicationHeader{}
-	err := goaperlib.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
