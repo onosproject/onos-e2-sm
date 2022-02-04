@@ -1,0 +1,5 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+
+Files: VERSION .gitreview go.mod go.sum */go.mod */go.sum servicemodels/*/*.c servicemodels/*/*.h servicemodels/*/*.xml python/* */Makefile.am.* *.pb.* *example.mk *.asn *.asn1 *converter-example.see
+Copyright: 2021 Open Networking Foundation
+License: Apache-2.0

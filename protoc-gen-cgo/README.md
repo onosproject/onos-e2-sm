@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Protoc-Gen-CGo
 This plugin takes as an input Protobuf file and generates a CGo code appropriately.
 > Plugin was written with `Protoc-Gen-Star (PG*)` tool and it handles CGo code generation for O-RAN defined **Service Models**.

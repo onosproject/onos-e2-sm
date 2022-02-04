@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+
 ARG PLUGIN_BUILD_VERSION=v1.0
 
 FROM onosproject/golang-build:$PLUGIN_BUILD_VERSION as pluginbuild

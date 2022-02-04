@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+
 export CGO_ENABLED=1
 export GO111MODULE=on
 
@@ -110,7 +114,7 @@ golang-ci: # @HELP install golang-ci if not present
 
 license_check: build-tools # @HELP examine and ensure license headers exist
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
-	./../build-tools/licensing/boilerplate.py -v --rootdir=${CURDIR} --boilerplate LicenseRef-ONF-Member-Only-1.0 --skipped-dir=python
+	./../build-tools/licensing/boilerplate.py -v --rootdir=${CURDIR} --boilerplate SPDX-Apache-2.0 --skipped-dir=python
 
 buflint: #@HELP run the "buf check lint" command on the proto files in 'api'
 	docker run -it \

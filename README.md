@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # onos-e2-sm
 [O-RAN] defines the **E2 Service Models** in the form of "ASN.1" specifications. 
 
