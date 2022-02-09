@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmRsmIndicationHeader(ih *e2sm_rsm_ies.E2SmRsmIndicationHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RSM-IndicationHeader message is\n%v", ih)
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
-	per, err := aper.MarshalWithParams(ih, "choiceExt")
+
+	per, err := aper.MarshalWithParams(ih, "choiceExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmRsmIndicationHeader(ih *e2sm_rsm_ies.E2SmRsmIndicationHeader) 
 func PerDecodeE2SmRsmIndicationHeader(per []byte) (*e2sm_rsm_ies.E2SmRsmIndicationHeader, error) {
 
 	log.Debugf("Obtained E2SM-RSM-IndicationHeader PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
+
 	result := e2sm_rsm_ies.E2SmRsmIndicationHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

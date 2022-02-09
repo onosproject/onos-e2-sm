@@ -33,12 +33,12 @@ func Test_perEncodingE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 	etdf1, err := createE2SMKPMEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(etdf1, "valueExt")
+	per, err := aper.MarshalWithParams(etdf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER - decoded\n%v", &result)
@@ -50,7 +50,7 @@ func Test_perE2SmKpmEventTriggerDefinitionFormat1CompareBytes(t *testing.T) {
 	etdf1, err := createE2SMKPMEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(etdf1, "valueExt")
+	per, err := aper.MarshalWithParams(etdf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER\n%v", hex.Dump(per))
 

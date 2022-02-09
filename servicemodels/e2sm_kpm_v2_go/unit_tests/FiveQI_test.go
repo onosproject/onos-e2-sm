@@ -26,12 +26,12 @@ func Test_perEncodingFiveQi(t *testing.T) {
 
 	fqi := createFiveQi()
 
-	per, err := aper.Marshal(fqi)
+	per, err := aper.Marshal(fqi, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("FiveQI PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.FiveQi{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("FiveQI PER - decoded\n%v", &result)
@@ -42,7 +42,7 @@ func Test_perFiveQiCompareBytes(t *testing.T) {
 
 	fqi := createFiveQi()
 
-	per, err := aper.Marshal(fqi)
+	per, err := aper.Marshal(fqi, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("FiveQI PER\n%v", hex.Dump(per))
 

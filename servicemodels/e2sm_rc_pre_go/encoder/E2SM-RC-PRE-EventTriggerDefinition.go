@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmRcPreEventTriggerDefinition(etd *e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-EventTriggerDefinition message is\n%v", etd)
-	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
-	per, err := aper.MarshalWithParams(etd, "valueExt")
+
+	per, err := aper.MarshalWithParams(etd, "valueExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmRcPreEventTriggerDefinition(etd *e2sm_rc_pre_go.E2SmRcPreEvent
 func PerDecodeE2SmRcPreEventTriggerDefinition(per []byte) (*e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-EventTriggerDefinition PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
+
 	result := e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

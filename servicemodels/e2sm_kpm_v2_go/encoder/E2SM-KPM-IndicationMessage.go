@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmKpmIndicationMessage(im *e2sm_kpm_v2_go.E2SmKpmIndicationMessage) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-KPM-IndicationMessage message is\n%v", im)
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(im, "valueExt")
+
+	per, err := aper.MarshalWithParams(im, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmKpmIndicationMessage(im *e2sm_kpm_v2_go.E2SmKpmIndicationMessa
 func PerDecodeE2SmKpmIndicationMessage(per []byte) (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
 
 	log.Debugf("Obtained E2SM-KPM-IndicationMessage PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+
 	result := e2sm_kpm_v2_go.E2SmKpmIndicationMessage{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}

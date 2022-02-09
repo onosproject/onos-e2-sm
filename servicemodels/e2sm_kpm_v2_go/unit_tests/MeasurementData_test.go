@@ -176,13 +176,13 @@ func Test_perEncodingMeasurementDataNoReal(t *testing.T) {
 	md, err := createMeasurementDataNoReal()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md)
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementData{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementData PER - decoded\n%v", &result)
@@ -196,8 +196,8 @@ func Test_perMeasurementDataNoRealCompareBytes(t *testing.T) {
 	md, err := createMeasurementDataNoReal()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md)
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 
@@ -212,13 +212,13 @@ func Test_perEncodingMeasurementDataNoRealNoOptional(t *testing.T) {
 	md, err := createMeasurementDataNoRealNoOptional()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md)
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementData{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementData PER - decoded\n%v", &result)
@@ -231,8 +231,8 @@ func Test_perMeasurementDataNoRealNoOptionalCompareBytes(t *testing.T) {
 	md, err := createMeasurementDataNoRealNoOptional()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md)
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 

@@ -96,12 +96,12 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 	ml := createMeasurementLabel()
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementLabel{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementLabel PER - decoded\n%v", &result)
@@ -130,7 +130,7 @@ func Test_perMeasurementLabelCompareBytes(t *testing.T) {
 	ml := createMeasurementLabel()
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
@@ -146,12 +146,12 @@ func Test_perEncodeMeasurementLabelXcldSomeOptnl(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementLabel{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementLabel PER - decoded\n%v", &result)
@@ -176,7 +176,7 @@ func Test_perMeasurementLabelXcldSomeOptnlCompareBytes(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel message is\n%v", ml)
 
-	per, err := aper.MarshalWithParams(ml, "valueExt")
+	per, err := aper.MarshalWithParams(ml, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 

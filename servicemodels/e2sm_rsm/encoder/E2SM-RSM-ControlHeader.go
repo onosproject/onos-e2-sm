@@ -18,8 +18,8 @@ func init() {
 func PerEncodeE2SmRsmControlHeader(ch *e2sm_rsm_ies.E2SmRsmControlHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RSM-ControlHeader message is\n%v", ch)
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
-	per, err := aper.MarshalWithParams(ch, "valueExt")
+
+	per, err := aper.MarshalWithParams(ch, "valueExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -31,9 +31,9 @@ func PerEncodeE2SmRsmControlHeader(ch *e2sm_rsm_ies.E2SmRsmControlHeader) ([]byt
 func PerDecodeE2SmRsmControlHeader(per []byte) (*e2sm_rsm_ies.E2SmRsmControlHeader, error) {
 
 	log.Debugf("Obtained E2SM-RSM-ControlHeader PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
+
 	result := e2sm_rsm_ies.E2SmRsmControlHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

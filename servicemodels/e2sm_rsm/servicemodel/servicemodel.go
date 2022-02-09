@@ -5,6 +5,7 @@
 package servicemodel
 
 import (
+	"encoding/hex"
 	"fmt"
 
 	prototypes "github.com/gogo/protobuf/types"
@@ -35,7 +36,7 @@ func (sm RsmServiceModel) ServiceModelData() types.ServiceModelData {
 func (sm RsmServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRsmIndicationHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRsmIndicationHeader to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRsmIndicationHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -63,7 +64,7 @@ func (sm RsmServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte
 func (sm RsmServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRsmIndicationMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRsmIndicationMessage to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRsmIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -91,7 +92,7 @@ func (sm RsmServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byt
 func (sm RsmServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRsmRanFunctionDescription(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRsmRanFunctionDescription to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRsmRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -119,7 +120,7 @@ func (sm RsmServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]by
 func (sm RsmServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRsmEventTriggerDefinition(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRsmEventTriggerDefinition to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRsmEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -155,7 +156,7 @@ func (sm RsmServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte
 func (sm RsmServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRsmControlHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRsmControlHeader to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRsmControlHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -183,7 +184,7 @@ func (sm RsmServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, e
 func (sm RsmServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRsmControlMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRsmControlMessage to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRsmControlMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)

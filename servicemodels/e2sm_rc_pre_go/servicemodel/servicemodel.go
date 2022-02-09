@@ -5,6 +5,7 @@
 package servicemodel
 
 import (
+	"encoding/hex"
 	"fmt"
 	prototypes "github.com/gogo/protobuf/types"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
@@ -34,7 +35,7 @@ func (sm RcPreServiceModel) ServiceModelData() types.ServiceModelData {
 func (sm RcPreServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreIndicationHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreIndicationHeader to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRcPreIndicationHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -62,7 +63,7 @@ func (sm RcPreServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]by
 func (sm RcPreServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreIndicationMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreIndicationMessage to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRcPreIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -90,7 +91,7 @@ func (sm RcPreServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]b
 func (sm RcPreServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreRanFunctionDescription(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreRanFunctionDescription to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRcPreRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -118,7 +119,7 @@ func (sm RcPreServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]
 func (sm RcPreServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreEventTriggerDefinition(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreEventTriggerDefinition to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRcPreEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -154,7 +155,7 @@ func (sm RcPreServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]by
 func (sm RcPreServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreControlHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreControlHeader to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRcPreControlHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -182,7 +183,7 @@ func (sm RcPreServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte,
 func (sm RcPreServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreControlMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreControlMessage to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRcPreControlMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
@@ -210,7 +211,7 @@ func (sm RcPreServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte
 func (sm RcPreServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreControlOutcome(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreControlOutcome to PER %s", err)
+		return nil, fmt.Errorf("error decoding E2SmRcPreControlOutcome to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)

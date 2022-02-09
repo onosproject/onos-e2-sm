@@ -54,13 +54,13 @@ func Test_perEncodingGlobalNgEnbID(t *testing.T) {
 	ngeNbID, err := createGlobalNgEnbID()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ngeNbID.GetNgENb().GetGlobalNgENbId(), "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(ngeNbID.GetNgENb().GetGlobalNgENbId(), "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalNgEnbID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GlobalngeNbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GlobalNgEnbID PER - decoded\n%v", &result)
@@ -78,8 +78,8 @@ func Test_perGlobalNgEnbIDCompareBytes(t *testing.T) {
 	ngeNbID, err := createGlobalNgEnbID()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ngeNbID.GetNgENb().GetGlobalNgENbId(), "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(ngeNbID.GetNgENb().GetGlobalNgENbId(), "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalNgEnbID PER\n%v", hex.Dump(per))
 

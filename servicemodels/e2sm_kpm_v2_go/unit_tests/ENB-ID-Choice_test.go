@@ -58,13 +58,13 @@ func Test_perEncodingEnbIDchoiceMacro(t *testing.T) {
 
 	enbID := createEnbIDChoiceMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbIDchoice (Macro) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EnbIdChoice{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("EnbIDchoice (Macro) PER - decoded\n%v", &result)
@@ -76,8 +76,8 @@ func Test_perEnbIDchoiceMacroCompareBytes(t *testing.T) {
 
 	enbID := createEnbIDChoiceMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbIDchoice (Macro) PER\n%v", hex.Dump(per))
 
@@ -91,13 +91,13 @@ func Test_perEncodingEnbIDchoiceShortMacro(t *testing.T) {
 
 	enbID := createEnbIDChoiceShortMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbIDchoice (Short Macro) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EnbIdChoice{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("EnbIDchoice (Short Macro) PER - decoded\n%v", &result)
@@ -109,8 +109,8 @@ func Test_perEnbIDchoiceShortMacroCompareBytes(t *testing.T) {
 
 	enbID := createEnbIDChoiceShortMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbIDchoice (Short Macro) PER\n%v", hex.Dump(per))
 
@@ -124,13 +124,13 @@ func Test_perEncodingEnbIDchoiceLongMacro(t *testing.T) {
 
 	enbID := createEnbIDChoiceLongMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbIDchoice (Long Macro) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EnbIdChoice{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("EnbIDchoice (Long Macro) PER - decoded\n%v", &result)
@@ -142,8 +142,8 @@ func Test_perEnbIDchoiceLongMacroCompareBytes(t *testing.T) {
 
 	enbID := createEnbIDChoiceLongMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbIDchoice (Long Macro) PER\n%v", hex.Dump(per))
 

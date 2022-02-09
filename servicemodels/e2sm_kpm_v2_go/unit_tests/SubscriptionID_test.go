@@ -21,12 +21,12 @@ func Test_perEncodingSubscriptionID(t *testing.T) {
 		Value: 12345,
 	}
 
-	per, err := aper.Marshal(subID)
+	per, err := aper.Marshal(subID, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("SubscriptionID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.SubscriptionId{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("SubscriptionID PER - decoded\n%v", &result)
@@ -39,7 +39,7 @@ func Test_perSubscriptionIDCompareBytes(t *testing.T) {
 		Value: 12345,
 	}
 
-	per, err := aper.Marshal(subID)
+	per, err := aper.Marshal(subID, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("SubscriptionID PER\n%v", hex.Dump(per))
 

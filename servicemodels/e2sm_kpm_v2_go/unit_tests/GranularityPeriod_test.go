@@ -21,12 +21,12 @@ func Test_perEncodingGranularityPeriod(t *testing.T) {
 		Value: 21,
 	}
 
-	per, err := aper.Marshal(gp)
+	per, err := aper.Marshal(gp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("GranularityPeriod PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.GranularityPeriod{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GranularityPeriod PER - decoded\n%v", &result)
@@ -39,7 +39,7 @@ func Test_perGranularityPeriodCompareBytes(t *testing.T) {
 		Value: 21,
 	}
 
-	per, err := aper.Marshal(gp)
+	per, err := aper.Marshal(gp, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("GranularityPeriod PER\n%v", hex.Dump(per))
 

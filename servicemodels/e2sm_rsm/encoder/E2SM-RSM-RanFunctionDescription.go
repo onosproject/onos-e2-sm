@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmRsmRanFunctionDescription(rfd *e2sm_rsm_ies.E2SmRsmRanfunctionDescription) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RSM-RanFunctionDescription message is\n%v", rfd)
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
-	per, err := aper.MarshalWithParams(rfd, "valueExt")
+
+	per, err := aper.MarshalWithParams(rfd, "valueExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmRsmRanFunctionDescription(rfd *e2sm_rsm_ies.E2SmRsmRanfunction
 func PerDecodeE2SmRsmRanFunctionDescription(per []byte) (*e2sm_rsm_ies.E2SmRsmRanfunctionDescription, error) {
 
 	log.Debugf("Obtained E2SM-RSM-RanFunctionDescription PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_rsm_ies.RsmChoicemap
+
 	result := e2sm_rsm_ies.E2SmRsmRanfunctionDescription{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
