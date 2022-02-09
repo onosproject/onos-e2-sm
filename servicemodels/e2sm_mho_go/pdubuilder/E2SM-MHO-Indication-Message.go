@@ -6,10 +6,11 @@ package pdubuilder
 import (
 	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 )
 
-func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_mho_go.UeIdentity, measReport []*e2sm_mho_go.E2SmMhoMeasurementReportItem) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
+func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_v2_ies.Ueid, measReport []*e2sm_mho_go.E2SmMhoMeasurementReportItem) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
 
 	E2SmMhoPdu := e2sm_mho_go.E2SmMhoIndicationMessage{
 		E2SmMhoIndicationMessage: &e2sm_mho_go.E2SmMhoIndicationMessage_IndicationMessageFormat1{
@@ -26,7 +27,7 @@ func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_mho_go.UeIdentity, measReport 
 	return &E2SmMhoPdu, nil
 }
 
-func CreateE2SmMhoIndicationMsgFormat2(ueID *e2sm_mho_go.UeIdentity, rrcStatus e2sm_mho_go.Rrcstatus) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
+func CreateE2SmMhoIndicationMsgFormat2(ueID *e2sm_v2_ies.Ueid, rrcStatus e2sm_mho_go.Rrcstatus) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
 	E2SmMhoPdu := e2sm_mho_go.E2SmMhoIndicationMessage{
 		E2SmMhoIndicationMessage: &e2sm_mho_go.E2SmMhoIndicationMessage_IndicationMessageFormat2{
 			IndicationMessageFormat2: &e2sm_mho_go.E2SmMhoIndicationMessageFormat2{
@@ -42,7 +43,7 @@ func CreateE2SmMhoIndicationMsgFormat2(ueID *e2sm_mho_go.UeIdentity, rrcStatus e
 	return &E2SmMhoPdu, nil
 }
 
-func CreateMeasurementRecordItem(cgi *e2sm_mho_go.CellGlobalId, rsrp *e2sm_mho_go.Rsrp) (*e2sm_mho_go.E2SmMhoMeasurementReportItem, error) {
+func CreateMeasurementRecordItem(cgi *e2sm_v2_ies.Cgi, rsrp *e2sm_mho_go.Rsrp) (*e2sm_mho_go.E2SmMhoMeasurementReportItem, error) {
 	res := &e2sm_mho_go.E2SmMhoMeasurementReportItem{
 		Cgi:  cgi,
 		Rsrp: rsrp,
@@ -55,7 +56,7 @@ func CreateMeasurementRecordItem(cgi *e2sm_mho_go.CellGlobalId, rsrp *e2sm_mho_g
 	return res, nil
 }
 
-func CreateCellGlobalIDNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_mho_go.CellGlobalId, error) {
+func CreateCellGlobalIDNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("CreateCellGlobalIDNrCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
@@ -68,13 +69,13 @@ func CreateCellGlobalIDNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_mho_go
 		return nil, fmt.Errorf("CreateCellGlobalIDNrCGI(): EutraCellIdentity should be of length 36 bits (5 bytes), got %v bytes", len(nrCGI.Value))
 	}
 
-	cgi := &e2sm_mho_go.CellGlobalId{
-		CellGlobalId: &e2sm_mho_go.CellGlobalId_NrCgi{
-			NrCgi: &e2sm_mho_go.Nrcgi{
-				PLmnIdentity: &e2sm_mho_go.PlmnIdentity{
+	cgi := &e2sm_v2_ies.Cgi{
+		Cgi: &e2sm_v2_ies.Cgi_NRCgi{
+			NRCgi: &e2sm_v2_ies.NrCgi{
+				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
 					Value: plmnID,
 				},
-				NRcellIdentity: &e2sm_mho_go.NrcellIdentity{
+				NRcellIdentity: &e2sm_v2_ies.NrcellIdentity{
 					Value: nrCGI,
 				},
 			},
@@ -88,7 +89,7 @@ func CreateCellGlobalIDNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_mho_go
 	return cgi, nil
 }
 
-func CreateCellGlobalIDEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_mho_go.CellGlobalId, error) {
+func CreateCellGlobalIDEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
@@ -101,13 +102,13 @@ func CreateCellGlobalIDEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_
 		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): EutraCellIdentity should be of length 28 bits (4 bytes), got %v bytes", len(eutraCGI.Value))
 	}
 
-	cgi := &e2sm_mho_go.CellGlobalId{
-		CellGlobalId: &e2sm_mho_go.CellGlobalId_EUtraCgi{
-			EUtraCgi: &e2sm_mho_go.Eutracgi{
-				PLmnIdentity: &e2sm_mho_go.PlmnIdentity{
+	cgi := &e2sm_v2_ies.Cgi{
+		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
+			EUtraCgi: &e2sm_v2_ies.EutraCgi{
+				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
 					Value: plmnID,
 				},
-				EUtracellIdentity: &e2sm_mho_go.EutracellIdentity{
+				EUtracellIdentity: &e2sm_v2_ies.EutracellIdentity{
 					Value: eutraCGI,
 				},
 			},

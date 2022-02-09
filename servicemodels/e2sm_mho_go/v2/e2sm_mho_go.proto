@@ -15,6 +15,7 @@ option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go
 
 import "validate/v1/validate.proto";
 import "asn1/v1/asn1.proto";
+import "e2sm_mho_go/v2/e2sm_v2.proto";
 
 // enumerated from e2sm-mho.asn1:64
 //{MHO-Trigger-Type}
@@ -36,39 +37,6 @@ enum Rrcstatus {
 //{MHO-Command}
 enum MhoCommand {
     MHO_COMMAND_INITIATE_HANDOVER = 0;
-};
-
-// range of Integer from e2sm-mho.asn1:40
-// {RSRP}
-message FiveQi {
-    // @inject_tag: aper:"valueLB:0,valueUB:255,valueExt"
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte:255}, json_name = "value"];
-};
-
-// sequence from e2sm-mho.asn1:21
-// {EUTRACGI}
-message Eutracgi {
-    PlmnIdentity p_lmn_identity = 1 [json_name = "pLMN_Identity"];
-    EutracellIdentity e_utracell_identity = 2 [json_name = "eUTRACellIdentity"];
-};
-
-// sequence from e2sm-mho.asn1:27
-// {NRCGI}
-message Nrcgi {
-    PlmnIdentity p_lmn_identity = 1 [json_name = "pLMN_Identity"];
-    NrcellIdentity n_rcell_identity = 2 [json_name = "nRCellIdentity"];
-};
-
-// sequence from e2sm-mho.asn1:33
-//{CellGlobalID}
-message CellGlobalId {
-    // choice from e2sm-mho.asn1:33
-    oneof cell_global_id {
-        // @inject_tag: aper:"choiceIdx:1,valueExt"
-        Nrcgi nr_cgi = 1 [json_name = "nr_CGI"];
-        // @inject_tag: aper:"choiceIdx:2,valueExt"
-        Eutracgi e_utra_cgi = 2 [json_name = "eUTRA_CGI"];
-    }
 };
 
 // range of Integer from e2sm-mho.asn1:40
@@ -100,20 +68,6 @@ message MaxPlmn {
 //{-}
 message MaxNr {
     int32 value = 1 [(validate.v1.rules).int32.const = 4096, json_name = "value"];
-};
-
-// range of Integer from e2sm-mho.asn1:55
-// {RIC-Style-Type}
-message RicStyleType {
-    // @inject_tag: aper:"valueLB:0,valueUB:63,valueExt"
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 63}, json_name = "value"];
-};
-
-// range of Integer from e2sm-mho.asn1:61
-//{RIC-Format-Type}
-message RicFormatType {
-    // @inject_tag: aper:"valueLB:0,valueUB:255,valueExt"
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name = "value"];
 };
 
 // range of Integer from e2sm-mho.asn1:63
@@ -160,7 +114,7 @@ message E2SmMhoIndicationHeader {
 // {E2SM-MHO-IndicationHeader-Format1}
 message E2SmMhoIndicationHeaderFormat1 {
     // @inject_tag: aper:"choiceExt"
-    CellGlobalId cgi = 1 [json_name = "cgi"];
+    Cgi cgi = 1 [json_name = "cgi"];
 };
 
 // sequence from e2sm-mho.asn1:111
@@ -178,7 +132,7 @@ message E2SmMhoIndicationMessage {
 // sequence from e2sm-mho.asn1:121
 // {E2SM-MHO-IndicationMessage-Format1}
 message E2SmMhoIndicationMessageFormat1 {
-    UeIdentity ue_id = 1 [json_name = "ueID"];
+    Ueid ue_id = 1 [json_name = "ueID"];
     // @inject_tag: aper:"sizeLB:1,sizeUB:100,valueExt"
     repeated E2SmMhoMeasurementReportItem meas_report = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 100}, json_name = "measReport"];
 };
@@ -187,7 +141,7 @@ message E2SmMhoIndicationMessageFormat1 {
 // {E2SM-MHO-MeasurementReportItem}
 message E2SmMhoMeasurementReportItem {
     // @inject_tag: aper:"choiceExt"
-    CellGlobalId cgi = 1 [json_name = "cgi"];
+    Cgi cgi = 1 [json_name = "cgi"];
     Rsrp rsrp = 2 [json_name = "rsrp"];
     // @inject_tag: aper:"optional"
     optional FiveQi five_qi = 3 [json_name = "fiveQI"];
@@ -196,7 +150,7 @@ message E2SmMhoMeasurementReportItem {
 // sequence from e2sm-mho.asn1:129
 // {E2SM-MHO-IndicationMessage-Format2}
 message E2SmMhoIndicationMessageFormat2 {
-    UeIdentity ue_id = 1 [json_name = "ueID"];
+    Ueid ue_id = 1 [json_name = "ueID"];
     // @inject_tag: aper:"valueLB:0,valueUB:2,valueExt"
     Rrcstatus rrc_status = 2 [json_name = "rrcStatus"];
 };
@@ -234,10 +188,10 @@ message E2SmMhoControlMessage {
 // {E2SM-MHO-ControlMessage-Format1}
 message E2SmMhoControlMessageFormat1 {
     // @inject_tag: aper:"choiceExt"
-    CellGlobalId serving_cgi = 1 [json_name = "serving_cgi"];
-    UeIdentity ued_id = 2 [json_name = "uedID"];
+    Cgi serving_cgi = 1 [json_name = "serving_cgi"];
+    Ueid ued_id = 2 [json_name = "uedID"];
     // @inject_tag: aper:"choiceExt"
-    CellGlobalId target_cgi = 3 [json_name = "target_cgi"];
+    Cgi target_cgi = 3 [json_name = "target_cgi"];
 };
 
 // sequence from e2sm-mho.asn1:181
@@ -257,19 +211,6 @@ message E2SmMhoRanfunctionDescription {
     }
 };
 
-// sequence from e2sm-mho.asn1:191
-// {RANfunction-Name}
-message RanfunctionName {
-    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
-    string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "ranFunction_ShortName"];
-    // @inject_tag: aper:"sizeLB:1,sizeUB:1000,sizeExt"
-    string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}, json_name = "ranFunction_E2SM_OID"];
-    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
-    string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "ranFunction_Decsription"];
-    // @inject_tag: aper:"optional"
-    optional int32 ran_function_instance = 4 [json_name = "ranFunction_Instance:OPTIONAL"];
-};
-
 // sequence from e2sm-mho.asn1:199
 // {RIC-EventTriggerStyle-List}
 message RicEventTriggerStyleList {
@@ -286,32 +227,3 @@ message RicReportStyleList {
     RicFormatType ric_indication_header_format_type = 3 [json_name="ric_IndicationHeaderFormat_Type"];
     RicFormatType ric_indication_message_format_type = 4 [json_name="ric_IndicationMessageFormat_Type"];
 };
-
-// {RIC-Style-Name}
-message RicStyleName {
-    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
-    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="value"];
-}
-
-// {UE-Identity}
-message UeIdentity {
-    bytes value = 1 [json_name="value"];
-}
-
-// {PLMN-Identity}
-message PlmnIdentity {
-    // @inject_tag: aper:"sizeLB:3,sizeUB:3"
-    bytes value = 1 [(validate.v1.rules).bytes.len = 3, json_name="value"];
-}
-
-// {EUTRACellIdentity}
-message EutracellIdentity {
-    // @inject_tag: aper:"sizeLB:28,sizeUB:28"
-    asn1.v1.BitString value = 1 [json_name="value"]; //28
-}
-
-// {NRCellIdentity}
-message NrcellIdentity {
-    // @inject_tag: aper:"sizeLB:36,sizeUB:36"
-    asn1.v1.BitString value = 1 [json_name="value"]; //36
-}

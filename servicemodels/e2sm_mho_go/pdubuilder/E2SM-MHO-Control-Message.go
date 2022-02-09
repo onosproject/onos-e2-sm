@@ -6,9 +6,10 @@ package pdubuilder
 import (
 	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 )
 
-func CreateE2SmMhoControlMessage(servingCgi *e2sm_mho_go.CellGlobalId, uedID *e2sm_mho_go.UeIdentity, targetCgi *e2sm_mho_go.CellGlobalId) (*e2sm_mho_go.E2SmMhoControlMessage, error) {
+func CreateE2SmMhoControlMessage(servingCgi *e2sm_v2_ies.Cgi, uedID *e2sm_v2_ies.Ueid, targetCgi *e2sm_v2_ies.Cgi) (*e2sm_mho_go.E2SmMhoControlMessage, error) {
 
 	e2smMhoMsgFormat1 := e2sm_mho_go.E2SmMhoControlMessageFormat1{
 		ServingCgi: servingCgi,

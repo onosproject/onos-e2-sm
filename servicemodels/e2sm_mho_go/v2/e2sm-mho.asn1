@@ -11,35 +11,18 @@ DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
 
-FiveQI ::= INTEGER (0..255, ...)
+IMPORTS
+	RANfunction-Name,
+    FiveQI,
+    CGI,
+    UEID,
+    RIC-Style-Type,
+    RIC-Style-Name,
+    RIC-Format-Type
 
-PLMN-Identity ::= OCTET STRING (SIZE(3))
-
-EUTRACellIdentity ::= BIT STRING (SIZE(28))
-
-NRCellIdentity ::= BIT STRING (SIZE(36))
-
-EUTRACGI ::= SEQUENCE {
-    pLMN-Identity            PLMN-Identity,
-    eUTRACellIdentity            EUTRACellIdentity,
-    ...
-}
-
-NRCGI ::= SEQUENCE {
-    pLMN-Identity            PLMN-Identity,
-    nRCellIdentity            NRCellIdentity,
-    ...
-}
-
-CellGlobalID ::= CHOICE {
-    nr-CGI                    NRCGI,
-    eUTRA-CGI                EUTRACGI,
-    ...
-}
+FROM E2SM-COMMON-IEs;
 
 RSRP ::= INTEGER (-65536..65536, ...)
-
-UE-Identity ::= OCTET STRING
 
 -- **************************************************************
 --
@@ -52,10 +35,6 @@ maxofRICstyles                     INTEGER ::= 63
 maxPLMN                            INTEGER ::= 12 -- Maximum number of PLMNs broadcast and reported by UE at establishment
 maxNR                              INTEGER ::= 4096
 
-
-RIC-Style-Type  ::= INTEGER (0..maxofRICstyles, ...)
-RIC-Style-Name  ::= PrintableString(SIZE(1..150,...))
-RIC-Format-Type ::= INTEGER (0..255, ...)
 
 -- **************************************************************
 -- E2SM-MHO Common IEs
@@ -100,7 +79,7 @@ E2SM-MHO-IndicationHeader ::= CHOICE {
 
 -- E2SM-MHO-IndicationHeader Format 1
 E2SM-MHO-IndicationHeader-Format1 ::= SEQUENCE {
-    cgi         CellGlobalID,
+    cgi         CGI,
     ...
 }
 
@@ -120,14 +99,14 @@ E2SM-MHO-IndicationMessage ::= CHOICE {
 -- E2SM-MHO-IndicationMessage-Format 1 IE
 -- for UE measurement reports
 E2SM-MHO-IndicationMessage-Format1 ::= SEQUENCE {
-   ueID       UE-Identity,
+   ueID       UEID,
    measReport  SEQUENCE (SIZE (1..100)) OF E2SM-MHO-MeasurementReportItem,
    ...
 }
 
 -- Measured RSRP for a cell
 E2SM-MHO-MeasurementReportItem ::= SEQUENCE {
-   cgi         CellGlobalID,
+   cgi         CGI,
    rsrp        RSRP,
    fiveQI      FiveQI   OPTIONAL,
    ...
@@ -136,7 +115,7 @@ E2SM-MHO-MeasurementReportItem ::= SEQUENCE {
 -- E2SM-MHO-IndicationMessage-Format 2 IE
 -- for UE RRC status
 E2SM-MHO-IndicationMessage-Format2 ::= SEQUENCE {
-   ueID       UE-Identity,
+   ueID       UEID,
    rrcStatus   RRCStatus,
    ...
 }
@@ -176,9 +155,9 @@ E2SM-MHO-ControlMessage ::= CHOICE{
 
 -- E2SM-MHO-ControlMessage Format 1
 E2SM-MHO-ControlMessage-Format1 ::= SEQUENCE{
-    serving-cgi                 CellGlobalID,
-    uedID                    UE-Identity,
-    target-cgi                CellGlobalID,
+    serving-cgi                 CGI,
+    uedID                    UEID,
+    target-cgi                CGI,
     ...
 }
 
@@ -194,14 +173,6 @@ E2SM-MHO-RANfunction-Description ::= SEQUENCE{
         ric-ReportStyle-List    SEQUENCE (SIZE(1..maxofRICstyles)) OF RIC-ReportStyle-List OPTIONAL,
         ...
     },
-    ...
-}
-
-RANfunction-Name ::= SEQUENCE{
-    ranFunction-ShortName       PrintableString(SIZE(1..150,...)),
-    ranFunction-E2SM-OID    PrintableString(SIZE(1..1000,...)),
-    ranFunction-Description     PrintableString(SIZE(1..150,...)),
-    ranFunction-Instance        INTEGER OPTIONAL,
     ...
 }
 
