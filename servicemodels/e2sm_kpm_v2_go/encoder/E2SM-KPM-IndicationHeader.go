@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmKpmIndicationHeader(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-KPM-IndicationHeader message is\n%v", ih)
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ih, "valueExt")
+
+	per, err := aper.MarshalWithParams(ih, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmKpmIndicationHeader(ih *e2sm_kpm_v2_go.E2SmKpmIndicationHeader
 func PerDecodeE2SmKpmIndicationHeader(per []byte) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
 
 	log.Debugf("Obtained E2SM-KPM-IndicationHeader PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+
 	result := e2sm_kpm_v2_go.E2SmKpmIndicationHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}

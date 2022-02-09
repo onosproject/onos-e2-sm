@@ -18,8 +18,8 @@ func init() {
 func PerEncodeE2SmRcPreControlHeader(ch *e2sm_rc_pre_go.E2SmRcPreControlHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-ControlHeader message is\n%v", ch)
-	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
-	per, err := aper.MarshalWithParams(ch, "choiceExt")
+
+	per, err := aper.MarshalWithParams(ch, "choiceExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -31,9 +31,9 @@ func PerEncodeE2SmRcPreControlHeader(ch *e2sm_rc_pre_go.E2SmRcPreControlHeader) 
 func PerDecodeE2SmRcPreControlHeader(per []byte) (*e2sm_rc_pre_go.E2SmRcPreControlHeader, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-ControlHeader PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_rc_pre_go.RcPreChoicemap
+
 	result := e2sm_rc_pre_go.E2SmRcPreControlHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "choiceExt")
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

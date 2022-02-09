@@ -25,12 +25,12 @@ func Test_perEncodingMeasurementTypeName(t *testing.T) {
 
 	mtn := createMeasurementTypeName()
 
-	per, err := aper.MarshalWithParams(mtn, "")
+	per, err := aper.MarshalWithParams(mtn, "", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementTypeName PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementTypeName{}
-	err = aper.UnmarshalWithParams(per, &result, "")
+	err = aper.UnmarshalWithParams(per, &result, "", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementTypeName - decoded\n%v", &result)
@@ -41,7 +41,7 @@ func Test_perMeasurementTypeNameCompareBytes(t *testing.T) {
 
 	mtn := createMeasurementTypeName()
 
-	per, err := aper.MarshalWithParams(mtn, "")
+	per, err := aper.MarshalWithParams(mtn, "", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementTypeName PER\n%v", hex.Dump(per))
 

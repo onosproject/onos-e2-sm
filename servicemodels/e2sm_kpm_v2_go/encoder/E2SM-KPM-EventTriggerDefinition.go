@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmKpmEventTriggerDefinition(etd *e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-KPM-EventTriggerDefinition message is\n%v", etd)
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(etd, "valueExt")
+
+	per, err := aper.MarshalWithParams(etd, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmKpmEventTriggerDefinition(etd *e2sm_kpm_v2_go.E2SmKpmEventTrig
 func PerDecodeE2SmKpmEventTriggerDefinition(per []byte) (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
 
 	log.Debugf("Obtained E2SM-KPM-EventTriggerDefinition PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+
 	result := e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}

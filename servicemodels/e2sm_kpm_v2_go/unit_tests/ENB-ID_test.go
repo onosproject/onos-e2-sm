@@ -45,13 +45,13 @@ func Test_perEncodingEnbID(t *testing.T) {
 
 	enbID := createEnbIDMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbID (Macro) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EnbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("EnbID (Macro) PER - decoded\n%v", &result)
@@ -63,8 +63,8 @@ func Test_perEnbIDCompareBytes(t *testing.T) {
 
 	enbID := createEnbIDMacro()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbID (Macro) PER\n%v", hex.Dump(per))
 
@@ -78,13 +78,13 @@ func Test_perEncodingEnbIDhome(t *testing.T) {
 
 	enbID := createEnbIDHome()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbID (Home) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EnbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("EnbID (Home) PER - decoded\n%v", &result)
@@ -96,8 +96,8 @@ func Test_perEnbIDhomeComapreBytes(t *testing.T) {
 
 	enbID := createEnbIDHome()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("EnbID (Home) PER\n%v", hex.Dump(per))
 

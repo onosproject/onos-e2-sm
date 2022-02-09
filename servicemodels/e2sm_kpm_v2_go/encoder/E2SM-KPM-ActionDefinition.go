@@ -14,8 +14,8 @@ import (
 func PerEncodeE2SmKpmActionDefinition(ad *e2sm_kpm_v2_go.E2SmKpmActionDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-KPM-ActionDefinition message is\n%v", ad)
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ad, "valueExt")
+
+	per, err := aper.MarshalWithParams(ad, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +27,9 @@ func PerEncodeE2SmKpmActionDefinition(ad *e2sm_kpm_v2_go.E2SmKpmActionDefinition
 func PerDecodeE2SmKpmActionDefinition(per []byte) (*e2sm_kpm_v2_go.E2SmKpmActionDefinition, error) {
 
 	log.Debugf("Obtained E2SM-KPM-ActionDefinition PER bytes are\n%v", hex.Dump(per))
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+
 	result := e2sm_kpm_v2_go.E2SmKpmActionDefinition{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt")
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}

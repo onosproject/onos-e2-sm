@@ -87,13 +87,13 @@ func Test_perEncodingMatchingCondItem1(t *testing.T) {
 	mci, err := createMatchingCondItem1()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (MeasLabel) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MatchingCondItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingCondItem (MeasLabel) PER - decoded\n%v", &result)
@@ -122,8 +122,8 @@ func Test_perMatchingCondItem1CompareBytes(t *testing.T) {
 	mci, err := createMatchingCondItem1()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (MeasLabel) PER\n%v", hex.Dump(per))
 
@@ -138,13 +138,13 @@ func Test_perEncodingMatchingCondItem2(t *testing.T) {
 	mci, err := createMatchingCondItem2()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (TestCondInfo) PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MatchingCondItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingCondItem (TestCondInfo) PER - decoded\n%v", &result)
@@ -158,8 +158,8 @@ func Test_perMatchingCondItem2CompareBytes(t *testing.T) {
 	mci, err := createMatchingCondItem2()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (TestCondInfo) PER\n%v", hex.Dump(per))
 

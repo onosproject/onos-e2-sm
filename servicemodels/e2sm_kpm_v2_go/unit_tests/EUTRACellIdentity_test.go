@@ -30,12 +30,12 @@ func Test_perEncodingEutracellIdentity(t *testing.T) {
 
 	eCellID := createEutracellIdentity()
 
-	per, err := aper.Marshal(eCellID)
+	per, err := aper.Marshal(eCellID, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("EutraCellIdentity PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.EutracellIdentity{}
-	err = aper.Unmarshal(per, &result)
+	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("EutraCellIdentity PER - decoded\n%v", &result)
@@ -47,7 +47,7 @@ func Test_perEutracellIdentityCompareBytes(t *testing.T) {
 
 	eCellID := createEutracellIdentity()
 
-	per, err := aper.Marshal(eCellID)
+	per, err := aper.Marshal(eCellID, nil, nil)
 	assert.NilError(t, err)
 	t.Logf("EutraCellIdentity PER\n%v", hex.Dump(per))
 

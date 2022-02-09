@@ -34,12 +34,12 @@ func Test_perEncodingNrCGI(t *testing.T) {
 
 	nrCgi := createNrcgi()
 
-	per, err := aper.MarshalWithParams(nrCgi, "valueExt")
+	per, err := aper.MarshalWithParams(nrCgi, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("NrCGI PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.Nrcgi{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("NrCGI PER - decoded\n%v", &result)
@@ -52,7 +52,7 @@ func Test_perNrCGICompareBytes(t *testing.T) {
 
 	nrCgi := createNrcgi()
 
-	per, err := aper.MarshalWithParams(nrCgi, "valueExt")
+	per, err := aper.MarshalWithParams(nrCgi, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("NrCGI PER\n%v", hex.Dump(per))
 

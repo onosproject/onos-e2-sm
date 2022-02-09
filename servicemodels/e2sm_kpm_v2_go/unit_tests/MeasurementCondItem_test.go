@@ -115,13 +115,13 @@ func Test_perEncodeMeasurementCondItem(t *testing.T) {
 	mci, err := createMeasurementCondItem()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.MeasurementCondItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementCondItem PER - decoded\n%v", &result)
@@ -154,8 +154,8 @@ func Test_perMeasurementCondItemCompareBytes(t *testing.T) {
 	mci, err := createMeasurementCondItem()
 	assert.NilError(t, err)
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 

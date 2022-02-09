@@ -21,12 +21,12 @@ func Test_perEncodingRicFormatType(t *testing.T) {
 		Value: 32,
 	}
 
-	per, err := aper.MarshalWithParams(ricFormatType, "valueExt")
+	per, err := aper.MarshalWithParams(ricFormatType, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("RIC-Format-Type PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.RicFormatType{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-Format-Type - decoded\n%v", &result)
@@ -39,7 +39,7 @@ func Test_perRicFormatTypeCompareBytes(t *testing.T) {
 		Value: 32,
 	}
 
-	per, err := aper.MarshalWithParams(ricFormatType, "valueExt")
+	per, err := aper.MarshalWithParams(ricFormatType, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	t.Logf("RIC-Format-Type PER\n%v", hex.Dump(per))
 

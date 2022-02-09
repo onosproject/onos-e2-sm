@@ -67,13 +67,13 @@ func Test_perEncodingCellGlobalID1(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID1()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.CellGlobalId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("CellGlobalID PER - decoded\n%v", &result)
@@ -86,8 +86,8 @@ func Test_perCellGlobalID1CompareBytes(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID1()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
@@ -101,13 +101,13 @@ func Test_perEncodingCellGlobalID2(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID2()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
 	result := e2sm_kpm_v2_go.CellGlobalId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt")
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("CellGlobalID PER - decoded\n%v", &result)
@@ -120,8 +120,8 @@ func Test_perCellGlobalID2CompareBytes(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID2()
 
-	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt")
+	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
