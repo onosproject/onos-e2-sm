@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/encoder"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
@@ -19,13 +19,13 @@ func TestE2SmMhoControlMsg(t *testing.T) {
 	plmnIDBytes, err := hex.DecodeString(plmnID)
 	assert.NilError(t, err)
 
-	servingCgi := &e2sm_mho_go.CellGlobalId{
-		CellGlobalId: &e2sm_mho_go.CellGlobalId_EUtraCgi{
-			EUtraCgi: &e2sm_mho_go.Eutracgi{
-				PLmnIdentity: &e2sm_mho_go.PlmnIdentity{
+	servingCgi := &e2sm_v2_ies.Cgi{
+		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
+			EUtraCgi: &e2sm_v2_ies.EutraCgi{
+				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
 					Value: plmnIDBytes,
 				},
-				EUtracellIdentity: &e2sm_mho_go.EutracellIdentity{
+				EUtracellIdentity: &e2sm_v2_ies.EutracellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0x9b, 0xcd, 0x4a, 0xb0},
 						Len:   28, //uint32
@@ -35,17 +35,16 @@ func TestE2SmMhoControlMsg(t *testing.T) {
 		},
 	}
 
-	ueID := &e2sm_mho_go.UeIdentity{
-		Value: []byte("1234"),
-	}
+	ueID, err := CreateUeIDGNb(1, []byte{0x01, 0x02, 0x03}, []byte{0xFF}, []byte{0xFF, 0xC0}, []byte{0xFC})
+	assert.NilError(t, err)
 
-	targetCgi := &e2sm_mho_go.CellGlobalId{
-		CellGlobalId: &e2sm_mho_go.CellGlobalId_EUtraCgi{
-			EUtraCgi: &e2sm_mho_go.Eutracgi{
-				PLmnIdentity: &e2sm_mho_go.PlmnIdentity{
+	targetCgi := &e2sm_v2_ies.Cgi{
+		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
+			EUtraCgi: &e2sm_v2_ies.EutraCgi{
+				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
 					Value: plmnIDBytes,
 				},
-				EUtracellIdentity: &e2sm_mho_go.EutracellIdentity{
+				EUtracellIdentity: &e2sm_v2_ies.EutracellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0x9b, 0xcd, 0x4a, 0xb0},
 						Len:   28, //uint32

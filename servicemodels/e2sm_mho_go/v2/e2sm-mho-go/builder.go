@@ -4,6 +4,8 @@
 
 package e2sm_mho_go
 
+import e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
+
 func (ed *E2SmMhoEventTriggerDefinitionFormat1) SetReportingPeriodInMs(rp int32) *E2SmMhoEventTriggerDefinitionFormat1 {
 	ed.ReportingPeriodMs = &rp
 	return ed
@@ -28,13 +30,8 @@ func (rfd *E2SmMhoRanfunctionDescription) SetRicReportStyleList(rrsl []*RicRepor
 	return rfd
 }
 
-func (rfn *RanfunctionName) SetRanFunctionInstance(rfi int32) *RanfunctionName {
-	rfn.RanFunctionInstance = &rfi
-	return rfn
-}
-
 func (mri *E2SmMhoMeasurementReportItem) SetFiveQi(fiveQI int32) *E2SmMhoMeasurementReportItem {
-	mri.FiveQi = &FiveQi{
+	mri.FiveQi = &e2sm_v2_ies.FiveQi{
 		Value: fiveQI,
 	}
 	return mri

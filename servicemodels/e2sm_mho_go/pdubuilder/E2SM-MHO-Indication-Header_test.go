@@ -21,7 +21,7 @@ func TestE2SmMhoIndicationHeader(t *testing.T) {
 		Len:   28, //uint32
 	}
 
-	cgi, err := CreateCellGlobalIDEutraCGI(plmnIDBytes, &cellID)
+	cgi, err := CreateCgiEutraCGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
 
 	newE2SmMhoPdu, err := CreateE2SmMhoIndicationHeader(cgi)

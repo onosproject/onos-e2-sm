@@ -6,9 +6,10 @@ package pdubuilder
 import (
 	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 )
 
-func CreateE2SmMhoIndicationHeader(cgi *e2sm_mho_go.CellGlobalId) (*e2sm_mho_go.E2SmMhoIndicationHeader, error) {
+func CreateE2SmMhoIndicationHeader(cgi *e2sm_v2_ies.Cgi) (*e2sm_mho_go.E2SmMhoIndicationHeader, error) {
 
 	E2SmMhoPdu := e2sm_mho_go.E2SmMhoIndicationHeader{
 		E2SmMhoIndicationHeader: &e2sm_mho_go.E2SmMhoIndicationHeader_IndicationHeaderFormat1{
