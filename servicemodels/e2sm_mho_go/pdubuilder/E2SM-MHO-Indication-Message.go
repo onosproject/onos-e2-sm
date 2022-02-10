@@ -56,7 +56,7 @@ func CreateMeasurementRecordItem(cgi *e2sm_v2_ies.Cgi, rsrp *e2sm_mho_go.Rsrp) (
 	return res, nil
 }
 
-func CreateCellGlobalIDNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
+func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("CreateCellGlobalIDNrCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
@@ -89,12 +89,11 @@ func CreateCellGlobalIDNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies
 	return cgi, nil
 }
 
-func CreateCellGlobalIDEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
+func CreateCgiEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
 	}
-
 	if eutraCGI.Len != uint32(28) {
 		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): EutraCellIdentity should be of length 28 bits, got %v", eutraCGI.Len)
 	}

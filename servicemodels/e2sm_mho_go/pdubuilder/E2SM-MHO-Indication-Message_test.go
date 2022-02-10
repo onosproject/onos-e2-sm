@@ -15,11 +15,10 @@ import (
 
 func TestE2SmMhoIndicationMsgF1(t *testing.T) {
 
-	ueID := &e2sm_mho_go.UeIdentity{
-		Value: []byte("1234"),
-	}
+	ueID, err := CreateUeIDGNb(1, []byte{0x01, 0x02, 0x03}, []byte{0xFF}, []byte{0xFF, 0xC0}, []byte{0xFC})
+	assert.NilError(t, err)
 
-	cgi, err := CreateCellGlobalIDNrCGI([]byte{0xAA, 0xFD, 0xD4}, &asn1.BitString{
+	cgi, err := CreateCgiNrCGI([]byte{0xAA, 0xFD, 0xD4}, &asn1.BitString{
 		Value: []byte{0x00, 0x00, 0x00, 0x40, 0x00},
 		Len:   36,
 	})
@@ -51,9 +50,8 @@ func TestE2SmMhoIndicationMsgF1(t *testing.T) {
 
 func TestE2SmMhoIndicationMsgF2(t *testing.T) {
 
-	ueID := &e2sm_mho_go.UeIdentity{
-		Value: []byte("1234"),
-	}
+	ueID, err := CreateUeIDGNb(1, []byte{0x01, 0x02, 0x03}, []byte{0xFF}, []byte{0xFF, 0xC0}, []byte{0xFC})
+	assert.NilError(t, err)
 
 	newE2SmMhoPdu, err := CreateE2SmMhoIndicationMsgFormat2(ueID, CreateRrcStatusConnected())
 	assert.NilError(t, err)
