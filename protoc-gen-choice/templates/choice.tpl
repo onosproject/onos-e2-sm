@@ -4,10 +4,13 @@
 
 package {{.ProtoFileName}}
 
-import "reflect"
+import (
+    "reflect"
+    {{.Imports}}
+    )
 
-var Choicemap = map[string]map[int]reflect.Type{ {{ $ch := .Choices }}{{ range $fieldIndex, $field := $ch }}{{ $ie := .Items }}{{ range $fieldIndex1, $field1 := $ie }}
+var {{.MapName}}Choicemap = map[string]map[int]reflect.Type{ {{ $ch := .Choices }}{{ range $fieldIndex, $field := $ch }}{{ $ie := .Items }}{{ range $fieldIndex1, $field1 := $ie }}
     "{{.ChoiceName}}":{ {{ $lf := .Leafs }}{{ range $innerFieldIndex, $innerField := $lf }}
-        {{.Index}}:reflect.TypeOf({{.LeafName}}{}),{{end}}
+    {{if .FromOtherProto}}{{.Index}}:reflect.TypeOf({{.OtherProtoName}}.{{.LeafName}}{}),{{else}}{{.Index}}:reflect.TypeOf({{.LeafName}}{}),{{end}}{{end}}
     },{{end}}{{end}}
 }
