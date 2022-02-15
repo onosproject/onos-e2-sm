@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	log.SetLevel(log.Debug)
+	log.SetLevel(log.Info)
 }
 
 func PerEncodeE2SmRsmControlHeader(ch *e2sm_rsm_ies.E2SmRsmControlHeader) ([]byte, error) {
