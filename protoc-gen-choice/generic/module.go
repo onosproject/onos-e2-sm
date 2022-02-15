@@ -72,18 +72,18 @@ func (m *reportModule) Name() string {
 func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.Package) []pgs.Artifact {
 	buf := &bytes.Buffer{}
 
-	path, err := os.Getwd()
+	dir, err := os.Getwd()
 	// handle err
 	if err != nil {
 		return nil
 	}
 	//printFiles(path)
-	_, err = fmt.Fprintf(buf, "Working directory is %v\n", path)
+	_, err = fmt.Fprintf(buf, "Working directory is %v\n", dir)
 	if err != nil {
 		return nil
 	}
 
-	files, err := os.ReadDir(path)
+	files, err := os.ReadDir(dir)
 	if err != nil {
 		return nil
 	}
@@ -95,22 +95,73 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	}
 
 	choices := choiceStruct{
-		//ProtoFileName: "",
-		//MapName:       "",
 		Choices:          make([]choiceMsg, 0),
 		CanonicalChoices: make([]choiceMsg, 0),
 	}
 
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
-		_, err := fmt.Fprintf(buf, "Processing following Proto file %v\n", f.InputPath())
+		_, err := fmt.Fprintf(buf, "Processing following Proto file %v\n", f.File().InputPath().BaseName())
+		if err != nil {
+			return nil
+		}
+
+		//ToDo - rework imports better - we should stick to the only place in the directory,
+		// where we will store generated map. It is usually in the same folder as generated Protobuf in Golang. Stick to this proto and go through imports.
+		// Relatively to that proto generate a map and insert all necessary imports. Functionality is there, it just need some rework of the logic.
+		protoFilePath := ""
+		err = filepath.Walk(dir,
+			func(path string, info os.FileInfo, err error) error {
+				if err != nil {
+					return err
+				}
+				if strings.Contains(path, f.File().InputPath().BaseName()+".pb.go") && !strings.Contains(path, "/_") {
+					protoFilePath = path
+					_, err = fmt.Fprintf(buf, "Hooray! Found file %v with path %v\n", info.Name(), path)
+					if err != nil {
+						return nil
+					}
+				}
+
+				return nil
+			})
+		if err != nil {
+			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path.. %v\n", err)
+			if err != nil {
+				return nil
+			}
+		}
+
+		//Composing protoFilePath to correspond to the correct input for Golang imports
+		index := strings.Index(protoFilePath, "github.com/")
+		if index == -1 {
+			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
+			if err != nil {
+				return nil
+			}
+		}
+		protoFilePath = protoFilePath[index:]
+
+		//Taking out file name from the path
+		indexx := strings.LastIndex(protoFilePath, "/")
+		if indexx == -1 {
+			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
+			if err != nil {
+				return nil
+			}
+		}
+		protoFilePath = protoFilePath[:indexx]
+
+		_, err = fmt.Fprintf(buf, "Proto file path is %v\n", protoFilePath)
 		if err != nil {
 			return nil
 		}
 
 		if choices.ProtoFileName == "" {
 			choices.ProtoFileName = adjustProtoFileName(extractProtoFileName(f.Name().Split()[0]))
-			choices.Imports = choices.Imports + "\n" + adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])) + " \"" + f.Package().Files()[0].Name().String() + "\"" // f.Name().String()
+		}
+		if !strings.EqualFold(choices.ProtoFileName, adjustProtoFileName(extractProtoFileName(f.Name().Split()[0]))) {
+			choices.Imports = choices.Imports + adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])) + " \"" + protoFilePath + "\"" + "\n"
 		}
 		if choices.MapName == "" {
 			choices.MapName = adjustMapVariableName(extractProtoFileName(f.Name().Split()[0]))
@@ -146,7 +197,6 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 							Leafs:      make([]leaf, 0),
 						}
 						for j, field := range plg.Fields() {
-							//plg.Fields()
 							_, err = fmt.Fprintf(buf, "%v, OneOf field is %v\n", j+1, field.Name())
 							if err != nil {
 								return nil
@@ -166,14 +216,6 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					}
 				}
 
-				//for j, oneof := range msg.OneOfFields() {
-				//	oneofItem := choiceItem{
-				//		Index:    j + 1,
-				//		LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(oneof.Name().String()),
-				//	}
-				//	chItem.Leafs = append(chItem.Leafs, oneofItem)
-				//	fmt.Fprintf(buf, "Obtained OneOf leaf is \n%v\n", oneofItem)
-				//}
 				_, err = fmt.Fprintf(buf, "Obtained OneOf item is \n%v\n", chMsg)
 				if err != nil {
 					return nil
