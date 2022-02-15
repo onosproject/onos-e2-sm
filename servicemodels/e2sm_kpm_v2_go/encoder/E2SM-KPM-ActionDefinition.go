@@ -9,7 +9,13 @@ import (
 	"github.com/google/martian/log"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
+	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
+
+func init() {
+	log := logging.GetLogger("asn1")
+	log.SetLevel(logging.InfoLevel)
+}
 
 func PerEncodeE2SmKpmActionDefinition(ad *e2sm_kpm_v2_go.E2SmKpmActionDefinition) ([]byte, error) {
 
