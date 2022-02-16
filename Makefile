@@ -26,7 +26,7 @@ build/_output/e2sm_kpm_v2_go.so.1.0.0: # @HELP build the e2sm_kpm_v2.so.1.0.0
 	cd servicemodels/e2sm_kpm_v2_go && go build -o build/_output/e2sm_kpm_v2_go.so.1.0.0 -buildmode=plugin .
 
 build/_output/e2sm_rc_pre_go.so.1.0.0: # @HELP build the e2sm_rc_pre_go.so.1.0.0
-	cd servicemodels/e2sm_rc_pre_go && go build -o build/_output/e2sm_mho_go.so.1.0.0 -buildmode=plugin .
+	cd servicemodels/e2sm_rc_pre_go && go build -o build/_output/e2sm_rc_pre_go.so.1.0.0 -buildmode=plugin .
 
 build/_output/e2sm_mho_go.so.1.0.0: # @HELP build the e2sm_mho_go.so.1.0.0
 	cd servicemodels/e2sm_mho_go && go build -o build/_output/e2sm_mho_go.so.1.0.0 -buildmode=plugin .

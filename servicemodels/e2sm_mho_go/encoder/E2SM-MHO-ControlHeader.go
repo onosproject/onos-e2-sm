@@ -6,14 +6,12 @@ package encoder
 
 import (
 	"encoding/hex"
-	"github.com/google/martian/log"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
+	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
 
-func init() {
-	log.SetLevel(log.Info)
-}
+var log = logging.GetLogger("e2sm", "mhov2", "encoder")
 
 func PerEncodeE2SmMhoControlHeader(ch *e2sm_mho_go.E2SmMhoControlHeader) ([]byte, error) {
 
