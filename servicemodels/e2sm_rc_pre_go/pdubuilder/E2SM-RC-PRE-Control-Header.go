@@ -21,9 +21,9 @@ func CreateE2SmRcPreControlHeader() (*e2sm_rc_pre_go.E2SmRcPreControlHeader, err
 		},
 	}
 
-	//if err := e2smRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smRcPrePdu.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smRcPrePdu, nil
 }
 
@@ -49,9 +49,9 @@ func CreateCellGlobalIDEUTRACGI(plmnIDBytes []byte, cellID *asn1.BitString) (*e2
 		},
 	}
 
-	//if err := cgi.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := cgi.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
 	return &cgi, nil
 }
 
@@ -77,8 +77,8 @@ func CreateCellGlobalIDNrCgi(plmnIDBytes []byte, cellID *asn1.BitString) (*e2sm_
 		},
 	}
 
-	//if err := cgi.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := cgi.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
 	return &cgi, nil
 }

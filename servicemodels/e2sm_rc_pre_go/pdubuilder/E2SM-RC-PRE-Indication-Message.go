@@ -29,9 +29,9 @@ func CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes []byte, arfcn *e2sm_rc_pre_
 		E2SmRcPreIndicationMessage: &e2SmIindicationMsg,
 	}
 
-	//if err := E2SmRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := E2SmRcPrePdu.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
 	return &E2SmRcPrePdu, nil
 }
 
@@ -45,9 +45,9 @@ func CreateE2SmRcPreIndicationMsgRicStyleType(ricStyleType int32) (*e2sm_rc_pre_
 		},
 	}
 
-	//if err := E2SmRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := E2SmRcPrePdu.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
 	return &E2SmRcPrePdu, nil
 }
 
@@ -82,8 +82,8 @@ func CreateNrt(cgi *e2sm_rc_pre_go.CellGlobalId, arfcn *e2sm_rc_pre_go.Arfcn, ce
 		Pci:      pci,
 	}
 
-	//if err := nrt.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := nrt.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
 	return &nrt, nil
 }

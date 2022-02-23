@@ -6,6 +6,7 @@ package encoder
 
 import (
 	"encoding/hex"
+	"fmt"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 )
@@ -13,6 +14,9 @@ import (
 func PerEncodeE2SmRcPreControlMessage(cm *e2sm_rc_pre_go.E2SmRcPreControlMessage) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-ControlMessage message is\n%v", cm)
+	if err := cm.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SM-RC-PRE-ControlMessage PDU %s", err.Error())
+	}
 
 	per, err := aper.MarshalWithParams(cm, "choiceExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
 	if err != nil {
@@ -34,6 +38,9 @@ func PerDecodeE2SmRcPreControlMessage(per []byte) (*e2sm_rc_pre_go.E2SmRcPreCont
 	}
 
 	log.Debugf("Decoded E2SM-RC-PRE-ControlMessage from PER is\n%v", &result)
+	if err := result.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SM-RC-PRE-ControlMessage PDU %s", err.Error())
+	}
 
 	return &result, nil
 }

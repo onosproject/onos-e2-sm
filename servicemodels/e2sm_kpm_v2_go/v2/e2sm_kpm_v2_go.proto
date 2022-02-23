@@ -803,11 +803,11 @@ message E2SmKpmRanfunctionDescription {
     // @inject_tag: aper:"valueExt"
     RanfunctionName ran_function_name = 1 [json_name = "ranFunction-Name"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:1024"
-    repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name = "ric-KPM-Node-List"];
+    repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 1024}, json_name = "ric-KPM-Node-List"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-    repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "ric-EventTriggerStyle-List"];
+    repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 0, max_items: 63}, json_name = "ric-EventTriggerStyle-List"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-    repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "ric-ReportStyle-List"];
+    repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 0, max_items: 63}, json_name = "ric-ReportStyle-List"];
 };
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:449
@@ -816,7 +816,7 @@ message RicKpmnodeItem {
     // @inject_tag: aper:"choiceExt"
     GlobalKpmnodeId ric_kpmnode_type = 1 [json_name = "ric-KPMNode-Type"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
-    repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name = "cell-Measurement-Object-List"];
+    repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 16384}, json_name = "cell-Measurement-Object-List"];
 };
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:455

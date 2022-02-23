@@ -27,9 +27,9 @@ func CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod int64) (*e2sm_rc_pre
 		},
 	}
 
-	//if err := E2SmRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmRcPrePDU %s", err.Error())
-	//}
+	if err := E2SmRcPrePdu.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmRcPrePDU %s", err.Error())
+	}
 	return &E2SmRcPrePdu, nil
 }
 
@@ -47,8 +47,8 @@ func CreateE2SmRcPreEventTriggerDefinitionUponChange() (*e2sm_rc_pre_go.E2SmRcPr
 		},
 	}
 
-	//if err := E2SmRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmRcPrePDU %s", err.Error())
-	//}
+	if err := E2SmRcPrePdu.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmRcPrePDU %s", err.Error())
+	}
 	return &E2SmRcPrePdu, nil
 }

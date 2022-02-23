@@ -57,9 +57,9 @@ func CreateE2SmRcPreControlMessage(RANparameterID int32, RANparameterName string
 		},
 	}
 
-	//if err := e2smRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smRcPrePdu.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smRcPrePdu, nil
 }
 
