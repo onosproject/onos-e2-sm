@@ -5,9 +5,9 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindicationTriggerType) (*e2sm_rsm_ies.E2SmRsmEventTriggerDefinition, error) {
@@ -23,7 +23,7 @@ func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindication
 	}
 
 	if err := etd.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmRsmEventTriggerDefinitionFormat1(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmRsmEventTriggerDefinitionFormat1(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return etd, nil
 }
@@ -81,7 +81,7 @@ func CreateBearerIDdrb(drbID *e2sm_rsm_ies.DrbId) (*e2sm_rsm_ies.BearerId, error
 	}
 
 	if err := drb.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateBearerIDdrb(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateBearerIDdrb(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return drb, nil
 }
@@ -89,7 +89,7 @@ func CreateBearerIDdrb(drbID *e2sm_rsm_ies.DrbId) (*e2sm_rsm_ies.BearerId, error
 func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
 
 	if qci < 0 || qci > 255 {
-		return nil, fmt.Errorf("QCI value should be in range 0 to 255")
+		return nil, errors.NewInvalid("QCI value should be in range 0 to 255")
 	}
 
 	fourg := &e2sm_rsm_ies.DrbId{
@@ -104,7 +104,7 @@ func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
 	}
 
 	if err := fourg.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateDrbIDfourG(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateDrbIDfourG(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return fourg, nil
 }
@@ -112,15 +112,15 @@ func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
 func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevelParameters) (*e2sm_rsm_ies.DrbId, error) {
 
 	if val < 1 || val > 32 {
-		return nil, fmt.Errorf("FiveGdrbID value should be in range 1 to 32")
+		return nil, errors.NewInvalid("FiveGdrbID value should be in range 1 to 32")
 	}
 
 	if qfi < 0 || qfi > 63 {
-		return nil, fmt.Errorf("QCI value should be in range 0 to 255")
+		return nil, errors.NewInvalid("QCI value should be in range 0 to 255")
 	}
 
 	if len(flowMap) < 1 || len(flowMap) > 64 {
-		return nil, fmt.Errorf("FlowsMapToDrb list should have 1 to 64 items")
+		return nil, errors.NewInvalid("FlowsMapToDrb list should have 1 to 64 items")
 	}
 
 	fiveg := &e2sm_rsm_ies.DrbId{
@@ -136,7 +136,7 @@ func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevel
 	}
 
 	if err := fiveg.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateDrbIDfiveG(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateDrbIDfiveG(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return fiveg, nil
 }
@@ -154,7 +154,7 @@ func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) (
 	}
 
 	if err := qos.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateQosFlowLevelParametersDynamic(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateQosFlowLevelParametersDynamic(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return qos, nil
 }
@@ -172,7 +172,7 @@ func CreateQosFlowLevelParametersNonDynamic(fiveQI int32) (*e2sm_rsm_ies.QoSflow
 	}
 
 	if err := qos.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateQosFlowLevelParametersNonDynamic(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateQosFlowLevelParametersNonDynamic(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return qos, nil
 }

@@ -4,15 +4,15 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmKpmIndicationHeader(timeStamp []byte) (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
 
 	if len(timeStamp) != 4 {
-		return nil, fmt.Errorf("TimeStamp should be 4 chars")
+		return nil, errors.NewInvalid("TimeStamp should be 4 chars")
 	}
 
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmIndicationHeader{
@@ -28,7 +28,7 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte) (*e2sm_kpm_v2_go.E2SmKpmInd
 	}
 
 	if err := e2SmKpmPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmKpmIndicationHeader(): error validating E2SmKpmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmKpmIndicationHeader(): error validating E2SmKpmPDU %s", err.Error())
 	}
 	return &e2SmKpmPdu, nil
 }
@@ -36,11 +36,11 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte) (*e2sm_kpm_v2_go.E2SmKpmInd
 func CreateGlobalKpmnodeIDgNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
-		return nil, fmt.Errorf("PlmnID should be 3 chars")
+		return nil, errors.NewInvalid("PlmnID should be 3 chars")
 	}
 
 	if bs.GetLen() < 22 || bs.GetLen() > 32 {
-		return nil, fmt.Errorf("expecting GNbID length in range 22 to 32 bits, got %d", bs.GetLen())
+		return nil, errors.NewInvalid("expecting GNbID length in range 22 to 32 bits, got %d", bs.GetLen())
 	}
 
 	return &e2sm_kpm_v2_go.GlobalKpmnodeId{
@@ -64,11 +64,11 @@ func CreateGlobalKpmnodeIDgNBID(bs *asn1.BitString, plmnID []byte) (*e2sm_kpm_v2
 func CreateGlobalKpmnodeIDenGNbID(bsValue []byte, bsLen uint32, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
-		return nil, fmt.Errorf("PlmnID should be 3 chars")
+		return nil, errors.NewInvalid("PlmnID should be 3 chars")
 	}
 
 	if bsLen < 22 || bsLen > 32 {
-		return nil, fmt.Errorf("expecting GNbID length in range 22 to 32 bits, got %d", bsLen)
+		return nil, errors.NewInvalid("expecting GNbID length in range 22 to 32 bits, got %d", bsLen)
 	}
 
 	return &e2sm_kpm_v2_go.GlobalKpmnodeId{
@@ -96,7 +96,7 @@ func CreateGlobalKpmnodeIDngENbID(enbID *e2sm_kpm_v2_go.EnbIdChoice, plmnID []by
 	longMacroEnbID *asn1.BitString) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
-		return nil, fmt.Errorf("PlmnID should be 3 chars")
+		return nil, errors.NewInvalid("PlmnID should be 3 chars")
 	}
 
 	return &e2sm_kpm_v2_go.GlobalKpmnodeId{
@@ -118,10 +118,10 @@ func CreateGlobalKpmnodeIDngENbID(enbID *e2sm_kpm_v2_go.EnbIdChoice, plmnID []by
 func CreateEnbIDchoiceMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice, error) {
 
 	if len(bs.GetValue()) != 3 {
-		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+		return nil, errors.NewInvalid("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
 	}
 	if bs.GetValue()[2]&0x0f > 0 {
-		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+		return nil, errors.NewInvalid("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
 	}
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdMacro{
@@ -133,10 +133,10 @@ func CreateEnbIDchoiceMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice, er
 func CreateEnbIDchoiceShortMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice, error) {
 
 	if len(bs.GetValue()) != 3 {
-		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+		return nil, errors.NewInvalid("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
 	}
 	if bs.GetValue()[2]&0x3f > 0 {
-		return nil, fmt.Errorf("expected last 6 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+		return nil, errors.NewInvalid("expected last 6 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
 	}
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdShortmacro{
@@ -148,10 +148,10 @@ func CreateEnbIDchoiceShortMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoic
 func CreateEnbIDchoiceLongMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice, error) {
 
 	if len(bs.GetValue()) != 3 {
-		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+		return nil, errors.NewInvalid("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
 	}
 	if bs.GetValue()[2]&0x07 > 0 {
-		return nil, fmt.Errorf("expected last 3 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+		return nil, errors.NewInvalid("expected last 3 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
 	}
 	return &e2sm_kpm_v2_go.EnbIdChoice{
 		EnbIdChoice: &e2sm_kpm_v2_go.EnbIdChoice_EnbIdLongmacro{
@@ -163,7 +163,7 @@ func CreateEnbIDchoiceLongMacro(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbIdChoice
 func CreateGlobalKpmnodeIDeNBID(enbID *e2sm_kpm_v2_go.EnbId, plmnID []byte) (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 
 	if len(plmnID) != 3 {
-		return nil, fmt.Errorf("PlmnID should be 3 chars")
+		return nil, errors.NewInvalid("PlmnID should be 3 chars")
 	}
 
 	return &e2sm_kpm_v2_go.GlobalKpmnodeId{
@@ -183,10 +183,10 @@ func CreateGlobalKpmnodeIDeNBID(enbID *e2sm_kpm_v2_go.EnbId, plmnID []byte) (*e2
 func CreateHomeEnbID(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbId, error) {
 
 	if len(bs.GetValue()) != 4 {
-		return nil, fmt.Errorf("expecting length to be exactly 4 bytes, got %d", len(bs.GetValue()))
+		return nil, errors.NewInvalid("expecting length to be exactly 4 bytes, got %d", len(bs.GetValue()))
 	}
 	if bs.GetValue()[3]&0x0f > 0 {
-		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[3])
+		return nil, errors.NewInvalid("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[3])
 	}
 
 	return &e2sm_kpm_v2_go.EnbId{
@@ -199,10 +199,10 @@ func CreateHomeEnbID(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbId, error) {
 func CreateMacroEnbID(bs *asn1.BitString) (*e2sm_kpm_v2_go.EnbId, error) {
 
 	if len(bs.GetValue()) != 3 {
-		return nil, fmt.Errorf("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
+		return nil, errors.NewInvalid("expecting length to be exactly 3 bytes, got %d", len(bs.GetValue()))
 	}
 	if bs.GetValue()[2]&0x0f > 0 {
-		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
+		return nil, errors.NewInvalid("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[2])
 	}
 
 	return &e2sm_kpm_v2_go.EnbId{

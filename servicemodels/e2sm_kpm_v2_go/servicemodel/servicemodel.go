@@ -7,6 +7,7 @@ package servicemodel
 import (
 	"encoding/hex"
 	"fmt"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 
 	prototypes "github.com/gogo/protobuf/types"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
@@ -36,12 +37,12 @@ func (sm Kpm2ServiceModel) ServiceModelData() types.ServiceModelData {
 func (sm Kpm2ServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmIndicationHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmIndicationHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmKpmIndicationHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmIndicationHeader %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmKpmIndicationHeader %s", err)
 	}
 
 	return protoBytes, nil
@@ -50,12 +51,12 @@ func (sm Kpm2ServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte
 func (sm Kpm2ServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmIndicationHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmIndicationHeader %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmIndicationHeader %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmKpmIndicationHeader(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmKpmIndicationHeader to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmKpmIndicationHeader to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -64,12 +65,12 @@ func (sm Kpm2ServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byt
 func (sm Kpm2ServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmIndicationMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmKpmIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmIndicationMessage %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmKpmIndicationMessage %s", err)
 	}
 
 	return protoBytes, nil
@@ -78,12 +79,12 @@ func (sm Kpm2ServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byt
 func (sm Kpm2ServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmIndicationMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmIndicationMessage %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmIndicationMessage %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmKpmIndicationMessage(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmKpmIndicationMessage to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmKpmIndicationMessage to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -92,12 +93,12 @@ func (sm Kpm2ServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]by
 func (sm Kpm2ServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmRanFunctionDescription(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmKpmRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmRanFunctionDescription %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmKpmRanFunctionDescription %s", err)
 	}
 
 	return protoBytes, nil
@@ -106,12 +107,12 @@ func (sm Kpm2ServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]by
 func (sm Kpm2ServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmRanfunctionDescription %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmRanfunctionDescription %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmKpmRanFunctionDescription(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmKpmRanfunctionDescription to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmKpmRanfunctionDescription to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -120,12 +121,12 @@ func (sm Kpm2ServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]b
 func (sm Kpm2ServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmEventTriggerDefinition(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmKpmEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmEventTriggerDefinition %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmKpmEventTriggerDefinition %s", err)
 	}
 
 	return protoBytes, nil
@@ -134,12 +135,12 @@ func (sm Kpm2ServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) (
 func (sm Kpm2ServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmEventTriggerDefinition %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmEventTriggerDefinition %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmKpmEventTriggerDefinition(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmKpmEventTriggerDefinition to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmKpmEventTriggerDefinition to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -148,12 +149,12 @@ func (sm Kpm2ServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) 
 func (sm Kpm2ServiceModel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmKpmActionDefinition(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmKpmActionDefinitio to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmKpmActionDefinitio to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmKpmActionDefinition %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmKpmActionDefinition %s", err)
 	}
 
 	return protoBytes, nil
@@ -162,39 +163,39 @@ func (sm Kpm2ServiceModel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte
 func (sm Kpm2ServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_kpm_v2_go.E2SmKpmActionDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmKpmActionDefinition %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmActionDefinition %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmKpmActionDefinition(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmKpmActionDefinition to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmKpmActionDefinition to PER %s", err)
 	}
 
 	return perBytes, nil
 }
 
 func (sm Kpm2ServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
+	return nil, errors.NewInvalid("not implemented on KPM")
 }
 
 func (sm Kpm2ServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
+	return nil, errors.NewInvalid("not implemented on KPM")
 }
 
 func (sm Kpm2ServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
+	return nil, errors.NewInvalid("not implemented on KPM")
 }
 
 func (sm Kpm2ServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
+	return nil, errors.NewInvalid("not implemented on KPM")
 }
 
 func (sm Kpm2ServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
+	return nil, errors.NewInvalid("not implemented on KPM")
 }
 
 func (sm Kpm2ServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on KPM")
+	return nil, errors.NewInvalid("not implemented on KPM")
 }
 
 func (sm Kpm2ServiceModel) OnSetup(request *types.OnSetupRequest) error {

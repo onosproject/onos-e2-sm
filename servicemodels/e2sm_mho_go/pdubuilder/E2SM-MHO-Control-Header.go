@@ -4,8 +4,8 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmMhoControlHeader(controlMessagePriority int32) (*e2sm_mho_go.E2SmMhoControlHeader, error) {
@@ -23,7 +23,7 @@ func CreateE2SmMhoControlHeader(controlMessagePriority int32) (*e2sm_mho_go.E2Sm
 	}
 
 	if err := e2smMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoControlHeader(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoControlHeader(): error validating E2SmPDU %s", err.Error())
 	}
 	return &e2smMhoPdu, nil
 }

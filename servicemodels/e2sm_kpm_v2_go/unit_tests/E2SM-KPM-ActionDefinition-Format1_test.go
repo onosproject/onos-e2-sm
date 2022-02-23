@@ -76,7 +76,7 @@ func createActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefinitionFor
 		return nil, err
 	}
 	//if err := actionDefinitionFormat1.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinitionFormat1 %s", err.Error())
+	//	return nil, errors.NewInvalid("error validating E2SmKpmActionDefinitionFormat1 %s", err.Error())
 	//}
 	return actionDefinitionFormat1, nil
 }

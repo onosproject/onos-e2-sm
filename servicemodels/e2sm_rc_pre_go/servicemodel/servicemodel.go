@@ -6,12 +6,12 @@ package servicemodel
 
 import (
 	"encoding/hex"
-	"fmt"
 	prototypes "github.com/gogo/protobuf/types"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/encoder"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -35,12 +35,12 @@ func (sm RcPreServiceModel) ServiceModelData() types.ServiceModelData {
 func (sm RcPreServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreIndicationHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreIndicationHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmRcPreIndicationHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreIndicationHeader %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmRcPreIndicationHeader %s", err)
 	}
 
 	return protoBytes, nil
@@ -49,12 +49,12 @@ func (sm RcPreServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byt
 func (sm RcPreServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_rc_pre_go.E2SmRcPreIndicationHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreIndicationHeader %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreIndicationHeader %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmRcPreIndicationHeader(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmRcPreIndicationHeader to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmRcPreIndicationHeader to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -63,12 +63,12 @@ func (sm RcPreServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]by
 func (sm RcPreServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreIndicationMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmRcPreIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreIndicationMessage %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmRcPreIndicationMessage %s", err)
 	}
 
 	return protoBytes, nil
@@ -77,12 +77,12 @@ func (sm RcPreServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]by
 func (sm RcPreServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_rc_pre_go.E2SmRcPreIndicationMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreIndicationMessage %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreIndicationMessage %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmRcPreIndicationMessage(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmRcPreIndicationMessage to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmRcPreIndicationMessage to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -91,12 +91,12 @@ func (sm RcPreServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]b
 func (sm RcPreServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreRanFunctionDescription(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmRcPreRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreRanFunctionDescription %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmRcPreRanFunctionDescription %s", err)
 	}
 
 	return protoBytes, nil
@@ -105,12 +105,12 @@ func (sm RcPreServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]b
 func (sm RcPreServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_rc_pre_go.E2SmRcPreRanfunctionDescription)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreRanfunctionDescription %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreRanfunctionDescription %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmRcPreRanFunctionDescription(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmRcPreRanfunctionDescription to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmRcPreRanfunctionDescription to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -119,12 +119,12 @@ func (sm RcPreServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]
 func (sm RcPreServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreEventTriggerDefinition(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmRcPreEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreEventTriggerDefinition %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmRcPreEventTriggerDefinition %s", err)
 	}
 
 	return protoBytes, nil
@@ -133,34 +133,34 @@ func (sm RcPreServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) 
 func (sm RcPreServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreEventTriggerDefinition %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreEventTriggerDefinition %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmRcPreEventTriggerDefinition(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmRcPreEventTriggerDefinition to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmRcPreEventTriggerDefinition to PER %s", err)
 	}
 
 	return perBytes, nil
 }
 
 func (sm RcPreServiceModel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on RC-PRE")
+	return nil, errors.NewInvalid("not implemented on RC-PRE")
 }
 
 func (sm RcPreServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, fmt.Errorf("not implemented on RC-PRE")
+	return nil, errors.NewInvalid("not implemented on RC-PRE")
 }
 
 func (sm RcPreServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreControlHeader(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreControlHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmRcPreControlHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreControlHeader %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmRcPreControlHeader %s", err)
 	}
 
 	return protoBytes, nil
@@ -169,12 +169,12 @@ func (sm RcPreServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, 
 func (sm RcPreServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_rc_pre_go.E2SmRcPreControlHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreControlHeader %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreControlHeader %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmRcPreControlHeader(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmRcPreControlHeader to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmRcPreControlHeader to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -183,12 +183,12 @@ func (sm RcPreServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte,
 func (sm RcPreServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreControlMessage(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreControlMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmRcPreControlMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreControlMessage %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmRcPreControlMessage %s", err)
 	}
 
 	return protoBytes, nil
@@ -197,12 +197,12 @@ func (sm RcPreServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte,
 func (sm RcPreServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_rc_pre_go.E2SmRcPreControlMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreControlMessage %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreControlMessage %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmRcPreControlMessage(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmRcPreControlMessage to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmRcPreControlMessage to PER %s", err)
 	}
 
 	return perBytes, nil
@@ -211,12 +211,12 @@ func (sm RcPreServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte
 func (sm RcPreServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
 	perBytes, err := encoder.PerDecodeE2SmRcPreControlOutcome(asn1Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("error decoding E2SmRcPreControlOutcome to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding E2SmRcPreControlOutcome to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error marshalling asn1Bytes to E2SmRcPreControlOutcome %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmRcPreControlOutcome %s", err)
 	}
 
 	return protoBytes, nil
@@ -225,12 +225,12 @@ func (sm RcPreServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte,
 func (sm RcPreServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
 	protoObj := new(e2sm_rc_pre_go.E2SmRcPreControlOutcome)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, fmt.Errorf("error unmarshalling protoBytes to E2SmRcPreControlOutcome %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreControlOutcome %s", err)
 	}
 
 	perBytes, err := encoder.PerEncodeE2SmRcPreControlOutcome(protoObj)
 	if err != nil {
-		return nil, fmt.Errorf("error encoding E2SmRcPreControlOutcome to PER %s", err)
+		return nil, errors.NewInvalid("error encoding E2SmRcPreControlOutcome to PER %s", err)
 	}
 
 	return perBytes, nil

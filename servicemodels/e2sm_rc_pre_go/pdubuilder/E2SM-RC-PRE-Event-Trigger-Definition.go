@@ -4,14 +4,14 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod int64) (*e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition, error) {
 
 	if rtPeriod > 4294967295 || rtPeriod < 0 {
-		return nil, fmt.Errorf("RT-Period should be within range 0 to 4294967295")
+		return nil, errors.NewInvalid("RT-Period should be within range 0 to 4294967295")
 	}
 
 	eventDefinitionFormat1 := &e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinitionFormat1{
@@ -28,7 +28,7 @@ func CreateE2SmRcPreEventTriggerDefinitionPeriodic(rtPeriod int64) (*e2sm_rc_pre
 	}
 
 	if err := E2SmRcPrePdu.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2SmRcPrePDU %s", err.Error())
+		return nil, errors.NewInvalid("error validating E2SmRcPrePDU %s", err.Error())
 	}
 	return &E2SmRcPrePdu, nil
 }
@@ -48,7 +48,7 @@ func CreateE2SmRcPreEventTriggerDefinitionUponChange() (*e2sm_rc_pre_go.E2SmRcPr
 	}
 
 	if err := E2SmRcPrePdu.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2SmRcPrePDU %s", err.Error())
+		return nil, errors.NewInvalid("error validating E2SmRcPrePDU %s", err.Error())
 	}
 	return &E2SmRcPrePdu, nil
 }

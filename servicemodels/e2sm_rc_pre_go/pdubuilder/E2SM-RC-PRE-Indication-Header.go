@@ -4,8 +4,8 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcPreIndicationHeader(cgi *e2sm_rc_pre_go.CellGlobalId) (*e2sm_rc_pre_go.E2SmRcPreIndicationHeader, error) {
@@ -19,7 +19,7 @@ func CreateE2SmRcPreIndicationHeader(cgi *e2sm_rc_pre_go.CellGlobalId) (*e2sm_rc
 	}
 
 	if err := E2SmRcPrePdu.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2SmRcPrePDU %s", err.Error())
+		return nil, errors.NewInvalid("error validating E2SmRcPrePDU %s", err.Error())
 	}
 	return &E2SmRcPrePdu, nil
 }

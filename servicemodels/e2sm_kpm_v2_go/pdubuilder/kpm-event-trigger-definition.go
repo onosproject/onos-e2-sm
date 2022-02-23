@@ -4,8 +4,8 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmKpmEventTriggerDefinition(rtPeriod int64) (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
@@ -20,7 +20,7 @@ func CreateE2SmKpmEventTriggerDefinition(rtPeriod int64) (*e2sm_kpm_v2_go.E2SmKp
 	}
 
 	if err := e2SmKpmPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmKpmEventTriggerDefinition(): error validating E2SmKpmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmKpmEventTriggerDefinition(): error validating E2SmKpmPDU %s", err.Error())
 	}
 	return &e2SmKpmPdu, nil
 }

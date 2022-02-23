@@ -5,8 +5,8 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRsmControlMessageSliceCreate(config *e2sm_rsm_ies.SliceConfig) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
@@ -18,7 +18,7 @@ func CreateE2SmRsmControlMessageSliceCreate(config *e2sm_rsm_ies.SliceConfig) (*
 	}
 
 	if err := cm.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceCreate(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmRsmControlMessageSliceCreate(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return cm, nil
 }
@@ -32,7 +32,7 @@ func CreateE2SmRsmControlMessageSliceUpdate(config *e2sm_rsm_ies.SliceConfig) (*
 	}
 
 	if err := cm.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceUpdate(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmRsmControlMessageSliceUpdate(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return cm, nil
 }
@@ -51,7 +51,7 @@ func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ie
 	}
 
 	if err := cm.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceDelete(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmRsmControlMessageSliceDelete(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return cm, nil
 }
@@ -65,7 +65,7 @@ func CreateE2SmRsmControlMessageSliceAssociate(config *e2sm_rsm_ies.SliceAssocia
 	}
 
 	if err := cm.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceAssociate(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmRsmControlMessageSliceAssociate(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return cm, nil
 }
@@ -81,7 +81,7 @@ func CreateSliceConfig(sliceID int64, parameters *e2sm_rsm_ies.SliceParameters, 
 	}
 
 	if err := sc.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateSliceConfig(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateSliceConfig(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return sc, nil
 }
@@ -93,7 +93,7 @@ func CreateSliceParameters(schType e2sm_rsm_ies.SchedulerType) (*e2sm_rsm_ies.Sl
 	}
 
 	if err := sp.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateSliceParameters(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateSliceParameters(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return sp, nil
 }
@@ -174,7 +174,7 @@ func CreateSliceAssociate(ueID *e2sm_rsm_ies.UeIdentity, bearerIDlist []*e2sm_rs
 	dlSliceID int64) (*e2sm_rsm_ies.SliceAssociate, error) {
 
 	if len(bearerIDlist) < 1 || len(bearerIDlist) > 32 {
-		return nil, fmt.Errorf("BearerID list should have 1 to 32 items")
+		return nil, errors.NewInvalid("BearerID list should have 1 to 32 items")
 	}
 
 	sa := &e2sm_rsm_ies.SliceAssociate{
@@ -186,7 +186,7 @@ func CreateSliceAssociate(ueID *e2sm_rsm_ies.UeIdentity, bearerIDlist []*e2sm_rs
 	}
 
 	if err := sa.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateSliceAssociate(): error validating E2SM-RSM PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateSliceAssociate(): error validating E2SM-RSM PDU %s", err.Error())
 	}
 	return sa, nil
 }

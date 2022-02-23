@@ -78,7 +78,7 @@ func createLabelInfoList() (*e2sm_kpm_v2_go.LabelInfoList, error) {
 	labelInfoList.Value = append(labelInfoList.Value, item)
 
 	//if err := labelInfoList.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating labelInfoList %s", err.Error())
+	//	return nil, errors.NewInvalid("error validating labelInfoList %s", err.Error())
 	//}
 	return labelInfoList, nil
 }

@@ -4,9 +4,9 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmMhoRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunctionE2SmOid string, ranFunctionDescription string) (*e2sm_mho_go.E2SmMhoRanfunctionDescription, error) {
@@ -21,7 +21,7 @@ func CreateE2SmMhoRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunc
 	}
 
 	if err := e2smMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoRanfunctionDescriptionMsg(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoRanfunctionDescriptionMsg(): error validating E2SmPDU %s", err.Error())
 	}
 	return &e2smMhoPdu, nil
 }
@@ -41,7 +41,7 @@ func CreateRicEventTriggerStyleItem(ricStyleType int32, ricStyleName string, ric
 	}
 
 	if err := res.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateRicEventTriggerStyleItem(): error validationg E2SmPDU %s", err)
+		return nil, errors.NewInvalid("CreateRicEventTriggerStyleItem(): error validationg E2SmPDU %s", err)
 	}
 
 	return res, nil
@@ -65,7 +65,7 @@ func CreateRicReportStyleItem(ricStyleType int32, ricStyleName string, indHdrFor
 	}
 
 	if err := res.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateRicReportStyleItem(): error validationg E2SmPDU %s", err)
+		return nil, errors.NewInvalid("CreateRicReportStyleItem(): error validationg E2SmPDU %s", err)
 	}
 
 	return res, nil

@@ -4,8 +4,8 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmKpmIndicationMessageFormat1(subscriptionID int64, measData *e2sm_kpm_v2_go.MeasurementData) (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
@@ -24,7 +24,7 @@ func CreateE2SmKpmIndicationMessageFormat1(subscriptionID int64, measData *e2sm_
 	}
 
 	if err := e2SmKpmPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmKpmIndicationMessageFormat1(): error validating E2SmKpmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmKpmIndicationMessageFormat1(): error validating E2SmKpmPDU %s", err.Error())
 	}
 	return &e2SmKpmPdu, nil
 }
@@ -47,7 +47,7 @@ func CreateE2SmKpmIndicationMessageFormat2(subscriptionID int64, measCondUEList 
 	}
 
 	if err := e2SmKpmPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2SmKpmPDU %s", err.Error())
+		return nil, errors.NewInvalid("error validating E2SmKpmPDU %s", err.Error())
 	}
 	return &e2SmKpmPdu, nil
 }
@@ -87,7 +87,7 @@ func CreateMeasurementCondUEIDItem(measType *e2sm_kpm_v2_go.MeasurementType, mc 
 	}
 
 	if err := measCondUEIDItem.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateMeasurementCondUEIDItem(): error validating MeasurementCondUeidItem %s", err.Error())
+		return nil, errors.NewInvalid("CreateMeasurementCondUEIDItem(): error validating MeasurementCondUeidItem %s", err.Error())
 	}
 	return &measCondUEIDItem, nil
 }
@@ -101,7 +101,7 @@ func CreateMatchingUEIDItem(ueID []byte) (*e2sm_kpm_v2_go.MatchingUeidItem, erro
 	}
 
 	if err := mueIDi.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateMatchingUEIDItem(): error validating MatchingUeidItem %s", err.Error())
+		return nil, errors.NewInvalid("CreateMatchingUEIDItem(): error validating MatchingUeidItem %s", err.Error())
 	}
 	return &mueIDi, nil
 }
@@ -113,7 +113,7 @@ func CreateMeasurementDataItem(mr *e2sm_kpm_v2_go.MeasurementRecord) (*e2sm_kpm_
 	}
 
 	if err := mdi.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateMeasurementDataItem(): error validating MatchingUeidItem %s", err.Error())
+		return nil, errors.NewInvalid("CreateMeasurementDataItem(): error validating MatchingUeidItem %s", err.Error())
 	}
 	return &mdi, nil
 }

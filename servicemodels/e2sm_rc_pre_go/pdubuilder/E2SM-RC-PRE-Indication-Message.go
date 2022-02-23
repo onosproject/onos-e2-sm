@@ -4,14 +4,14 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes []byte, arfcn *e2sm_rc_pre_go.Arfcn, cellSize e2sm_rc_pre_go.CellSize,
 	pci int32, neighbor []*e2sm_rc_pre_go.Nrt) (*e2sm_rc_pre_go.E2SmRcPreIndicationMessage, error) {
 	if len(plmnIDBytes) != 3 {
-		return nil, fmt.Errorf("error: Plmn ID should be 3 bytes, actual length is %d", len(plmnIDBytes))
+		return nil, errors.NewInvalid("error: Plmn ID should be 3 bytes, actual length is %d", len(plmnIDBytes))
 	}
 
 	e2SmIindicationMsg := e2sm_rc_pre_go.E2SmRcPreIndicationMessage_IndicationMessageFormat1{
@@ -30,7 +30,7 @@ func CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes []byte, arfcn *e2sm_rc_pre_
 	}
 
 	if err := E2SmRcPrePdu.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
 	}
 	return &E2SmRcPrePdu, nil
 }
@@ -46,7 +46,7 @@ func CreateE2SmRcPreIndicationMsgRicStyleType(ricStyleType int32) (*e2sm_rc_pre_
 	}
 
 	if err := E2SmRcPrePdu.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
 	}
 	return &E2SmRcPrePdu, nil
 }
@@ -62,7 +62,7 @@ func CreateEArfcn(value int32) (*e2sm_rc_pre_go.Arfcn, error) {
 	}
 
 	if err := earfcn.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateEArfcn(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateEArfcn(): error validating E2SmPDU %s", err.Error())
 	}
 	return earfcn, nil
 }
@@ -78,7 +78,7 @@ func CreateNrArfcn(value int32) (*e2sm_rc_pre_go.Arfcn, error) {
 	}
 
 	if err := nrarfcn.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateNrArfcn(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateNrArfcn(): error validating E2SmPDU %s", err.Error())
 	}
 	return nrarfcn, nil
 }
@@ -93,7 +93,7 @@ func CreateNrt(cgi *e2sm_rc_pre_go.CellGlobalId, arfcn *e2sm_rc_pre_go.Arfcn, ce
 	}
 
 	if err := nrt.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateNrt(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateNrt(): error validating E2SmPDU %s", err.Error())
 	}
 	return &nrt, nil
 }
