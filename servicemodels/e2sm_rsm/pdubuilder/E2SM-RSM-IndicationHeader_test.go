@@ -23,7 +23,8 @@ func Test_E2SmRsmIndicationHeaderNrCellID(t *testing.T) {
 	cgi, err := CreateNrCGI(plmnID, nrCellID)
 	assert.NilError(t, err)
 
-	ih := CreateE2SmRsmIndicationHeaderFormat1(cgi)
+	ih, err := CreateE2SmRsmIndicationHeaderFormat1(cgi)
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-IndicationHeader is \n%v", ih)
 
 	// APER validation
@@ -49,7 +50,8 @@ func Test_E2SmRsmIndicationHeaderEutraCellID(t *testing.T) {
 	cgi, err := CreateEutraCGI(plmnID, eutraCellID)
 	assert.NilError(t, err)
 
-	ih := CreateE2SmRsmIndicationHeaderFormat1(cgi)
+	ih, err := CreateE2SmRsmIndicationHeaderFormat1(cgi)
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-IndicationHeader is \n%v", ih)
 
 	// APER validation

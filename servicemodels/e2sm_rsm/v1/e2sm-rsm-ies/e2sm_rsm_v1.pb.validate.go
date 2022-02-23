@@ -3389,16 +3389,16 @@ func (m *SliceConfig) validate(all bool) error {
 	//
 	//case *SliceConfig_SliceDescription:
 
-	if l := utf8.RuneCountInString(m.GetSliceDescription()); l < 1 || l > 160 {
-		err := SliceConfigValidationError{
-			field:  "SliceDescription",
-			reason: "value length must be between 1 and 160 runes, inclusive",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	//if l := utf8.RuneCountInString(m.GetSliceDescription()); l < 1 || l > 160 {
+	//	err := SliceConfigValidationError{
+	//		field:  "SliceDescription",
+	//		reason: "value length must be between 1 and 160 runes, inclusive",
+	//	}
+	//	if !all {
+	//		return err
+	//	}
+	//	errors = append(errors, err)
+	//}
 
 	//}
 

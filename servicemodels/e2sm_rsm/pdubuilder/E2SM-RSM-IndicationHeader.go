@@ -11,15 +11,20 @@ import (
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 )
 
-func CreateE2SmRsmIndicationHeaderFormat1(cgi *e2sm_v2_ies.Cgi) *e2sm_rsm_ies.E2SmRsmIndicationHeader {
+func CreateE2SmRsmIndicationHeaderFormat1(cgi *e2sm_v2_ies.Cgi) (*e2sm_rsm_ies.E2SmRsmIndicationHeader, error) {
 
-	return &e2sm_rsm_ies.E2SmRsmIndicationHeader{
+	ih := &e2sm_rsm_ies.E2SmRsmIndicationHeader{
 		E2SmRsmIndicationHeader: &e2sm_rsm_ies.E2SmRsmIndicationHeader_IndicationHeaderFormat1{
 			IndicationHeaderFormat1: &e2sm_rsm_ies.E2SmRsmIndicationHeaderFormat1{
 				Cgi: cgi,
 			},
 		},
 	}
+
+	if err := ih.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmIndicationHeaderFormat1(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return ih, nil
 }
 
 func CreateNrCGI(plmnID []byte, nrCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
@@ -36,7 +41,7 @@ func CreateNrCGI(plmnID []byte, nrCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", nrCellID.GetValue()[3])
 	}
 
-	return &e2sm_v2_ies.Cgi{
+	nrcgi := &e2sm_v2_ies.Cgi{
 		Cgi: &e2sm_v2_ies.Cgi_NRCgi{
 			NRCgi: &e2sm_v2_ies.NrCgi{
 				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
@@ -47,7 +52,12 @@ func CreateNrCGI(plmnID []byte, nrCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := nrcgi.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateNrCGI(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return nrcgi, nil
 }
 
 func CreateEutraCGI(plmnID []byte, eutraCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
@@ -64,7 +74,7 @@ func CreateEutraCGI(plmnID []byte, eutraCellID *asn1.BitString) (*e2sm_v2_ies.Cg
 		return nil, fmt.Errorf("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", eutraCellID.GetValue()[3])
 	}
 
-	return &e2sm_v2_ies.Cgi{
+	eutracgi := &e2sm_v2_ies.Cgi{
 		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
 			EUtraCgi: &e2sm_v2_ies.EutraCgi{
 				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
@@ -75,5 +85,10 @@ func CreateEutraCGI(plmnID []byte, eutraCellID *asn1.BitString) (*e2sm_v2_ies.Cg
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := eutracgi.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateEutraCGI(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return eutracgi, nil
 }

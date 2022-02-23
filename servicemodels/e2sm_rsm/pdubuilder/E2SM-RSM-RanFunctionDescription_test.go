@@ -15,11 +15,21 @@ import (
 func TestCreateE2SmRsmRanFunctionDescription(t *testing.T) {
 
 	supportedConfigList := make([]*e2sm_rsm_ies.SupportedSlicingConfigItem, 0)
-	supportedConfigList = append(supportedConfigList, CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandSliceUpdate()))
-	supportedConfigList = append(supportedConfigList, CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandSliceCreate()))
-	supportedConfigList = append(supportedConfigList, CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandSliceDelete()))
-	supportedConfigList = append(supportedConfigList, CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandUeAssociate()))
-	supportedConfigList = append(supportedConfigList, CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandEventTriggers()))
+	su, err := CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandSliceUpdate())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, su)
+	sc, err := CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandSliceCreate())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, sc)
+	sd, err := CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandSliceDelete())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, sd)
+	ueassoc, err := CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandUeAssociate())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, ueassoc)
+	etd, err := CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandEventTriggers())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, etd)
 
 	slicingCapability, err := CreateSlicingCapabilityItem(71, 27, CreateSlicingTypeDynamic(), 10,
 		supportedConfigList)
@@ -28,8 +38,9 @@ func TestCreateE2SmRsmRanFunctionDescription(t *testing.T) {
 	slicingCapList := make([]*e2sm_rsm_ies.NodeSlicingCapabilityItem, 0)
 	slicingCapList = append(slicingCapList, slicingCapability)
 
-	rfd := CreateE2SmRsmRanFunctionDescription("E2SM-RSM",
+	rfd, err := CreateE2SmRsmRanFunctionDescription("E2SM-RSM",
 		"1.3.6.1.4.1.53148.1.1.2.102", "RAN Slicing Service Model", slicingCapList)
+	assert.NilError(t, err)
 	assert.Assert(t, rfd != nil)
 	rfd.GetRanFunctionName().SetRanFunctionInstance(2)
 	t.Logf("Created E2SM-RSM-RanFunctionDescription is \n%v", rfd)

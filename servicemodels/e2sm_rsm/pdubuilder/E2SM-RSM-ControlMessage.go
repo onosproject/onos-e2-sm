@@ -9,27 +9,37 @@ import (
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 )
 
-func CreateE2SmRsmControlMessageSliceCreate(config *e2sm_rsm_ies.SliceConfig) *e2sm_rsm_ies.E2SmRsmControlMessage {
+func CreateE2SmRsmControlMessageSliceCreate(config *e2sm_rsm_ies.SliceConfig) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
 
-	return &e2sm_rsm_ies.E2SmRsmControlMessage{
+	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
 		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceCreate{
 			SliceCreate: config,
 		},
 	}
+
+	if err := cm.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceCreate(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return cm, nil
 }
 
-func CreateE2SmRsmControlMessageSliceUpdate(config *e2sm_rsm_ies.SliceConfig) *e2sm_rsm_ies.E2SmRsmControlMessage {
+func CreateE2SmRsmControlMessageSliceUpdate(config *e2sm_rsm_ies.SliceConfig) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
 
-	return &e2sm_rsm_ies.E2SmRsmControlMessage{
+	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
 		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceUpdate{
 			SliceUpdate: config,
 		},
 	}
+
+	if err := cm.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceUpdate(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return cm, nil
 }
 
-func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ies.SliceType) *e2sm_rsm_ies.E2SmRsmControlMessage {
+func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ies.SliceType) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
 
-	return &e2sm_rsm_ies.E2SmRsmControlMessage{
+	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
 		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceDelete{
 			SliceDelete: &e2sm_rsm_ies.SliceDelete{
 				SliceId: &e2sm_rsm_ies.SliceId{
@@ -39,32 +49,53 @@ func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ie
 			},
 		},
 	}
+
+	if err := cm.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceDelete(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return cm, nil
 }
 
-func CreateE2SmRsmControlMessageSliceAssociate(config *e2sm_rsm_ies.SliceAssociate) *e2sm_rsm_ies.E2SmRsmControlMessage {
+func CreateE2SmRsmControlMessageSliceAssociate(config *e2sm_rsm_ies.SliceAssociate) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
 
-	return &e2sm_rsm_ies.E2SmRsmControlMessage{
+	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
 		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceAssociate{
 			SliceAssociate: config,
 		},
 	}
+
+	if err := cm.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmControlMessageSliceAssociate(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return cm, nil
 }
 
-func CreateSliceConfig(sliceID int64, parameters *e2sm_rsm_ies.SliceParameters, sliceType e2sm_rsm_ies.SliceType) *e2sm_rsm_ies.SliceConfig {
+func CreateSliceConfig(sliceID int64, parameters *e2sm_rsm_ies.SliceParameters, sliceType e2sm_rsm_ies.SliceType) (*e2sm_rsm_ies.SliceConfig, error) {
 
-	return &e2sm_rsm_ies.SliceConfig{
+	sc := &e2sm_rsm_ies.SliceConfig{
 		SliceId: &e2sm_rsm_ies.SliceId{
 			Value: sliceID,
 		},
 		SliceConfigParameters: parameters,
 		SliceType:             sliceType,
 	}
-}
-func CreateSliceParameters(schType e2sm_rsm_ies.SchedulerType) *e2sm_rsm_ies.SliceParameters {
 
-	return &e2sm_rsm_ies.SliceParameters{
+	if err := sc.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateSliceConfig(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return sc, nil
+}
+
+func CreateSliceParameters(schType e2sm_rsm_ies.SchedulerType) (*e2sm_rsm_ies.SliceParameters, error) {
+
+	sp := &e2sm_rsm_ies.SliceParameters{
 		SchedulerType: schType,
 	}
+
+	if err := sp.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateSliceParameters(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return sp, nil
 }
 
 func CreateScheduleConfigEmpty() *e2sm_rsm_ies.ScheduleConfig {
@@ -146,13 +177,18 @@ func CreateSliceAssociate(ueID *e2sm_rsm_ies.UeIdentity, bearerIDlist []*e2sm_rs
 		return nil, fmt.Errorf("BearerID list should have 1 to 32 items")
 	}
 
-	return &e2sm_rsm_ies.SliceAssociate{
+	sa := &e2sm_rsm_ies.SliceAssociate{
 		UeId:     ueID,
 		BearerId: bearerIDlist,
 		DownLinkSliceId: &e2sm_rsm_ies.SliceIdassoc{
 			Value: dlSliceID,
 		},
-	}, nil
+	}
+
+	if err := sa.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateSliceAssociate(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return sa, nil
 }
 
 func CreateRiCapOne() e2sm_rsm_ies.RiCap {

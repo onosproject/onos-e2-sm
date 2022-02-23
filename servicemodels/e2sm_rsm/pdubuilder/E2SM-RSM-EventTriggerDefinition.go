@@ -12,7 +12,7 @@ import (
 
 func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindicationTriggerType) (*e2sm_rsm_ies.E2SmRsmEventTriggerDefinition, error) {
 
-	return &e2sm_rsm_ies.E2SmRsmEventTriggerDefinition{
+	etd := &e2sm_rsm_ies.E2SmRsmEventTriggerDefinition{
 		EventDefinitionFormats: &e2sm_rsm_ies.EventDefinitionFormats{
 			E2SmRsmEventDefinition: &e2sm_rsm_ies.EventDefinitionFormats_EventDefinitionFormat1{
 				EventDefinitionFormat1: &e2sm_rsm_ies.E2SmRsmEventTriggerDefinitionFormat1{
@@ -20,7 +20,12 @@ func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindication
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := etd.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmEventTriggerDefinitionFormat1(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return etd, nil
 }
 
 func CreateRsmRicindicationTriggerTypePeriodicMetrics() e2sm_rsm_ies.RsmRicindicationTriggerType {
@@ -67,13 +72,18 @@ func CreateUeIDtypeEnbUeS1ApID() e2sm_rsm_ies.UeIdType {
 	return e2sm_rsm_ies.UeIdType_UE_ID_TYPE_ENB_UE_S1_AP_ID
 }
 
-func CreateBearerIDdrb(drbID *e2sm_rsm_ies.DrbId) *e2sm_rsm_ies.BearerId {
+func CreateBearerIDdrb(drbID *e2sm_rsm_ies.DrbId) (*e2sm_rsm_ies.BearerId, error) {
 
-	return &e2sm_rsm_ies.BearerId{
+	drb := &e2sm_rsm_ies.BearerId{
 		BearerId: &e2sm_rsm_ies.BearerId_DrbId{
 			DrbId: drbID,
 		},
 	}
+
+	if err := drb.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateBearerIDdrb(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return drb, nil
 }
 
 func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
@@ -82,7 +92,7 @@ func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
 		return nil, fmt.Errorf("QCI value should be in range 0 to 255")
 	}
 
-	return &e2sm_rsm_ies.DrbId{
+	fourg := &e2sm_rsm_ies.DrbId{
 		DrbId: &e2sm_rsm_ies.DrbId_FourGdrbId{
 			FourGdrbId: &e2sm_rsm_ies.FourGDrbId{
 				Value: val,
@@ -91,7 +101,12 @@ func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := fourg.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateDrbIDfourG(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return fourg, nil
 }
 
 func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevelParameters) (*e2sm_rsm_ies.DrbId, error) {
@@ -108,7 +123,7 @@ func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevel
 		return nil, fmt.Errorf("FlowsMapToDrb list should have 1 to 64 items")
 	}
 
-	return &e2sm_rsm_ies.DrbId{
+	fiveg := &e2sm_rsm_ies.DrbId{
 		DrbId: &e2sm_rsm_ies.DrbId_FiveGdrbId{
 			FiveGdrbId: &e2sm_rsm_ies.FiveGDrbId{
 				Value: val,
@@ -118,12 +133,17 @@ func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevel
 				FlowsMapToDrb: flowMap,
 			},
 		},
-	}, nil
+	}
+
+	if err := fiveg.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateDrbIDfiveG(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return fiveg, nil
 }
 
-func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) *e2sm_rsm_ies.QoSflowLevelParameters {
+func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) (*e2sm_rsm_ies.QoSflowLevelParameters, error) {
 
-	return &e2sm_rsm_ies.QoSflowLevelParameters{
+	qos := &e2sm_rsm_ies.QoSflowLevelParameters{
 		QoSflowLevelParameters: &e2sm_rsm_ies.QoSflowLevelParameters_DynamicFiveQi{
 			DynamicFiveQi: &e2sm_rsm_ies.DynamicFiveQi{
 				PriorityLevel:     prlvl,
@@ -132,11 +152,16 @@ func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) *
 			},
 		},
 	}
+
+	if err := qos.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateQosFlowLevelParametersDynamic(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return qos, nil
 }
 
-func CreateQosFlowLevelParametersNonDynamic(fiveQI int32) *e2sm_rsm_ies.QoSflowLevelParameters {
+func CreateQosFlowLevelParametersNonDynamic(fiveQI int32) (*e2sm_rsm_ies.QoSflowLevelParameters, error) {
 
-	return &e2sm_rsm_ies.QoSflowLevelParameters{
+	qos := &e2sm_rsm_ies.QoSflowLevelParameters{
 		QoSflowLevelParameters: &e2sm_rsm_ies.QoSflowLevelParameters_NonDynamicFiveQi{
 			NonDynamicFiveQi: &e2sm_rsm_ies.NonDynamicFiveQi{
 				FiveQi: &e2sm_v2_ies.FiveQi{
@@ -145,4 +170,9 @@ func CreateQosFlowLevelParametersNonDynamic(fiveQI int32) *e2sm_rsm_ies.QoSflowL
 			},
 		},
 	}
+
+	if err := qos.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateQosFlowLevelParametersNonDynamic(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return qos, nil
 }

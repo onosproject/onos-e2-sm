@@ -12,7 +12,7 @@ import (
 	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
 
-var log = logging.GetLogger("e2sm", "mhov2", "encoder")
+var log = logging.GetLogger()
 
 func PerEncodeE2SmMhoControlHeader(ch *e2sm_mho_go.E2SmMhoControlHeader) ([]byte, error) {
 

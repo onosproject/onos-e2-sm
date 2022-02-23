@@ -38,6 +38,9 @@ func CreateE2SmRsmIndicationMessageFormat1(ueID *e2sm_rsm_ies.UeIdentity, cuUeID
 		},
 	}
 
+	if err := im.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmIndicationMessageFormat1(): error validating E2SM-RSM PDU %s", err.Error())
+	}
 	return &im, nil
 }
 
@@ -52,7 +55,7 @@ func CreateE2SmRsmIndicationMessageFormat2(tt e2sm_rsm_ies.RsmEmmTriggerType, ue
 		return nil, fmt.Errorf("BearerID list should have 1 to 32 items")
 	}
 
-	return &e2sm_rsm_ies.E2SmRsmIndicationMessage{
+	im := &e2sm_rsm_ies.E2SmRsmIndicationMessage{
 		E2SmRsmIndicationMessage: &e2sm_rsm_ies.E2SmRsmIndicationMessage_IndicationMessageFormat2{
 			IndicationMessageFormat2: &e2sm_rsm_ies.E2SmRsmIndicationMessageFormat2{
 				TriggerType:       tt,
@@ -61,62 +64,92 @@ func CreateE2SmRsmIndicationMessageFormat2(tt e2sm_rsm_ies.RsmEmmTriggerType, ue
 				BearerId:          bearerList,
 			},
 		},
-	}, nil
+	}
+
+	if err := im.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmRsmIndicationMessageFormat2(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return im, nil
 }
 
-func CreateUeIDCuUeF1ApID(val int64) *e2sm_rsm_ies.UeIdentity {
+func CreateUeIDCuUeF1ApID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 
-	return &e2sm_rsm_ies.UeIdentity{
+	ueID := &e2sm_rsm_ies.UeIdentity{
 		UeIdentity: &e2sm_rsm_ies.UeIdentity_CuUeF1ApId{
 			CuUeF1ApId: &e2sm_rsm_ies.CuUeF1ApId{
 				Value: val,
 			},
 		},
 	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateUeIDCuUeF1ApID(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return ueID, nil
 }
 
-func CreateUeIDDuUeF1ApID(val int64) *e2sm_rsm_ies.UeIdentity {
+func CreateUeIDDuUeF1ApID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 
-	return &e2sm_rsm_ies.UeIdentity{
+	ueID := &e2sm_rsm_ies.UeIdentity{
 		UeIdentity: &e2sm_rsm_ies.UeIdentity_DuUeF1ApId{
 			DuUeF1ApId: &e2sm_rsm_ies.DuUeF1ApId{
 				Value: val,
 			},
 		},
 	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateUeIDDuUeF1ApID(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return ueID, nil
 }
 
-func CreateUeIDRanUeNgapID(val int64) *e2sm_rsm_ies.UeIdentity {
+func CreateUeIDRanUeNgapID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 
-	return &e2sm_rsm_ies.UeIdentity{
+	ueID := &e2sm_rsm_ies.UeIdentity{
 		UeIdentity: &e2sm_rsm_ies.UeIdentity_RanUeNgapId{
 			RanUeNgapId: &e2sm_rsm_ies.RanUeNgapId{
 				Value: val,
 			},
 		},
 	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateUeIDRanUeNgapID(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return ueID, nil
 }
 
-func CreateUeIDAmfUeNgapID(val int64) *e2sm_rsm_ies.UeIdentity {
+func CreateUeIDAmfUeNgapID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 
-	return &e2sm_rsm_ies.UeIdentity{
+	ueID := &e2sm_rsm_ies.UeIdentity{
 		UeIdentity: &e2sm_rsm_ies.UeIdentity_AmfUeNgapId{
 			AmfUeNgapId: &e2sm_v2_ies.AmfUeNgapId{
 				Value: val,
 			},
 		},
 	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateUeIDAmfUeNgapID(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return ueID, nil
 }
 
-func CreateUeIDEnbUeS1ApID(val int32) *e2sm_rsm_ies.UeIdentity {
+func CreateUeIDEnbUeS1ApID(val int32) (*e2sm_rsm_ies.UeIdentity, error) {
 
-	return &e2sm_rsm_ies.UeIdentity{
+	ueID := &e2sm_rsm_ies.UeIdentity{
 		UeIdentity: &e2sm_rsm_ies.UeIdentity_EnbUeS1ApId{
 			EnbUeS1ApId: &e2sm_rsm_ies.EnbUeS1ApId{
 				Value: val,
 			},
 		},
 	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateUeIDEnbUeS1ApID(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return ueID, nil
 }
 
 func CreateEmmCaseAttach() e2sm_rsm_ies.Emmcase {
@@ -141,10 +174,15 @@ func CreateSliceMetrics(prb int32, ueToSlice int32, bler int32, cqi int32) (*e2s
 		return nil, fmt.Errorf("average CQI value should be within range 0 to 15")
 	}
 
-	return &e2sm_rsm_ies.SliceMetrics{
+	sm := &e2sm_rsm_ies.SliceMetrics{
 		PrbUtilization:    prb,
 		NumUeAssocToSlice: ueToSlice,
 		SliceLevelBler:    bler,
 		AvgCqi:            cqi,
-	}, nil
+	}
+
+	if err := sm.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateSliceMetrics(): error validating E2SM-RSM PDU %s", err.Error())
+	}
+	return sm, nil
 }

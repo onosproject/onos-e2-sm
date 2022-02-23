@@ -6,16 +6,20 @@ package encoder
 
 import (
 	"encoding/hex"
+	"fmt"
 	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
 
-var log = logging.GetLogger("e2sm", "rsm", "encoder")
+var log = logging.GetLogger()
 
 func PerEncodeE2SmRsmControlHeader(ch *e2sm_rsm_ies.E2SmRsmControlHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RSM-ControlHeader message is\n%v", ch)
+	if err := ch.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SM-RSM-ControlHeader PDU %s", err.Error())
+	}
 
 	per, err := aper.MarshalWithParams(ch, "valueExt", e2sm_rsm_ies.RsmChoicemap, nil)
 	if err != nil {
@@ -37,6 +41,9 @@ func PerDecodeE2SmRsmControlHeader(per []byte) (*e2sm_rsm_ies.E2SmRsmControlHead
 	}
 
 	log.Debugf("Decoded E2SM-RSM-ControlHeader from PER is\n%v", &result)
+	if err = result.Validate(); err != nil {
+		return nil, fmt.Errorf("error validating E2SM-RSM-ControlHeader PDU %s", err.Error())
+	}
 
 	return &result, nil
 }
