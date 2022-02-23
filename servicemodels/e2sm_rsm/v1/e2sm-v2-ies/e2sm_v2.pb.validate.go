@@ -9926,40 +9926,40 @@ func (m *SNssai) validate(all bool) error {
 		}
 	}
 
-	switch m.XSD.(type) {
+	//switch m.XSD.(type) {
+	//
+	//case *SNssai_SD:
 
-	case *SNssai_SD:
-
-		if all {
-			switch v := interface{}(m.GetSD()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, SNssaiValidationError{
-						field:  "SD",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, SNssaiValidationError{
-						field:  "SD",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetSD()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SNssaiValidationError{
+	if all {
+		switch v := interface{}(m.GetSD()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SNssaiValidationError{
 					field:  "SD",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SNssaiValidationError{
+					field:  "SD",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetSD()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SNssaiValidationError{
+				field:  "SD",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return SNssaiMultiError(errors)

@@ -38,7 +38,7 @@ func PerDecodeE2SmRcPreIndicationMessage(per []byte) (*e2sm_rc_pre_go.E2SmRcPreI
 	}
 
 	log.Debugf("Decoded E2SM-RC-PRE-IndicationMessage from PER is\n%v", &result)
-	if err := result.Validate(); err != nil {
+	if err = result.Validate(); err != nil {
 		return nil, fmt.Errorf("error validating E2SM-RC-PRE-IndicationMessage PDU %s", err.Error())
 	}
 

@@ -38,7 +38,7 @@ func PerDecodeE2SmRcPreEventTriggerDefinition(per []byte) (*e2sm_rc_pre_go.E2SmR
 	}
 
 	log.Debugf("Decoded E2SM-RC-PRE-EventTriggerDefinition from PER is\n%v", &result)
-	if err := result.Validate(); err != nil {
+	if err = result.Validate(); err != nil {
 		return nil, fmt.Errorf("error validating E2SM-RC-PRE-EventTriggerDefinition PDU %s", err.Error())
 	}
 

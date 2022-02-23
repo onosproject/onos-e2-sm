@@ -51,26 +51,36 @@ func CreateE2SmRcPreIndicationMsgRicStyleType(ricStyleType int32) (*e2sm_rc_pre_
 	return &E2SmRcPrePdu, nil
 }
 
-func CreateEArfcn(value int32) *e2sm_rc_pre_go.Arfcn {
+func CreateEArfcn(value int32) (*e2sm_rc_pre_go.Arfcn, error) {
 
-	return &e2sm_rc_pre_go.Arfcn{
+	earfcn := &e2sm_rc_pre_go.Arfcn{
 		Arfcn: &e2sm_rc_pre_go.Arfcn_EArfcn{
 			EArfcn: &e2sm_rc_pre_go.Earfcn{
 				Value: value,
 			},
 		},
 	}
+
+	if err := earfcn.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateEArfcn(): error validating E2SmPDU %s", err.Error())
+	}
+	return earfcn, nil
 }
 
-func CreateNrArfcn(value int32) *e2sm_rc_pre_go.Arfcn {
+func CreateNrArfcn(value int32) (*e2sm_rc_pre_go.Arfcn, error) {
 
-	return &e2sm_rc_pre_go.Arfcn{
+	nrarfcn := &e2sm_rc_pre_go.Arfcn{
 		Arfcn: &e2sm_rc_pre_go.Arfcn_NrArfcn{
 			NrArfcn: &e2sm_rc_pre_go.Nrarfcn{
 				Value: value,
 			},
 		},
 	}
+
+	if err := nrarfcn.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateNrArfcn(): error validating E2SmPDU %s", err.Error())
+	}
+	return nrarfcn, nil
 }
 
 func CreateNrt(cgi *e2sm_rc_pre_go.CellGlobalId, arfcn *e2sm_rc_pre_go.Arfcn, cellSize e2sm_rc_pre_go.CellSize, pci *e2sm_rc_pre_go.Pci) (*e2sm_rc_pre_go.Nrt, error) {
@@ -83,7 +93,7 @@ func CreateNrt(cgi *e2sm_rc_pre_go.CellGlobalId, arfcn *e2sm_rc_pre_go.Arfcn, ce
 	}
 
 	if err := nrt.Validate(); err != nil {
-		return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
+		return nil, fmt.Errorf("CreateNrt(): error validating E2SmPDU %s", err.Error())
 	}
 	return &nrt, nil
 }
