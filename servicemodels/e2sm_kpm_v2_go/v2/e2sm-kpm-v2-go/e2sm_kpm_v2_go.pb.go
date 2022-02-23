@@ -4,7 +4,7 @@
 // 	protoc        v3.17.1
 // source: e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto
 
-package e2sm_kpm_v2_go
+package e2smkpmv2
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"

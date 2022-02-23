@@ -4,7 +4,7 @@
 // 	protoc        v3.17.1
 // source: e2sm_rsm/v1/e2sm_rsm_v1.proto
 
-package e2sm_rsm_ies
+package e2smrsmies
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"

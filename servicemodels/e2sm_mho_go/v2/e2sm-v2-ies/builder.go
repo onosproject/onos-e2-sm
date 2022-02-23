@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package e2sm_v2_ies
+package e2smv2ies
 
 import "github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 

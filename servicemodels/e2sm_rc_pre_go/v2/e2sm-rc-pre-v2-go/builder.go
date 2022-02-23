@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package e2sm_rc_pre_v2_go
+package e2smrcprev2
 
 func (ed *E2SmRcPreEventTriggerDefinitionFormat1) SetReportingPeriodInMs(rp int64) *E2SmRcPreEventTriggerDefinitionFormat1 {
 	ed.ReportingPeriodMs = &rp

@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package e2sm_kpm_v2_go
+package e2smkpmv2
 
 func (mii *MeasurementInfoItem) SetLabelInfoList(labelInfoList *LabelInfoList) *MeasurementInfoItem {
 	mii.LabelInfoList = labelInfoList

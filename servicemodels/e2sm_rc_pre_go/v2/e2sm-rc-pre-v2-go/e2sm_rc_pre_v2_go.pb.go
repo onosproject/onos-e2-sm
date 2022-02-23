@@ -4,7 +4,7 @@
 // 	protoc        v3.17.1
 // source: e2sm_rc_pre_go/v2/e2sm_rc_pre_v2_go.proto
 
-package e2sm_rc_pre_v2_go
+package e2smrcprev2
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
