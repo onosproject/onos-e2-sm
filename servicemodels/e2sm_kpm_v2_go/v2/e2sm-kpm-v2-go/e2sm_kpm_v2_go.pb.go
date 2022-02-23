@@ -4,7 +4,7 @@
 // 	protoc        v3.17.1
 // source: e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto
 
-package e2smkpmv2go
+package e2sm_kpm_v2_go
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
@@ -719,12 +719,12 @@ type isCellGlobalId_CellGlobalId interface {
 
 type CellGlobalId_NrCgi struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	NrCgi *Nrcgi `protobuf:"bytes,1,opt,name=nr_cgi,json=nr-CGI,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	NrCgi *Nrcgi `protobuf:"bytes,1,opt,name=nr_cgi,json=nr-CGI,proto3,oneof"`
 }
 
 type CellGlobalId_EUtraCgi struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt"
-	EUtraCgi *Eutracgi `protobuf:"bytes,2,opt,name=e_utra_cgi,json=eUTRA-CGI,proto3,oneof" aper:"choiceIdx:2,valueExt"`
+	EUtraCgi *Eutracgi `protobuf:"bytes,2,opt,name=e_utra_cgi,json=eUTRA-CGI,proto3,oneof"`
 }
 
 func (*CellGlobalId_NrCgi) isCellGlobalId_CellGlobalId() {}
@@ -739,9 +739,9 @@ type Snssai struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeLB:1,sizeUB:1"
-	SSt []byte `protobuf:"bytes,1,opt,name=s_st,json=sST,proto3" json:"s_st,omitempty" aper:"sizeLB:1,sizeUB:1"`
+	SSt []byte `protobuf:"bytes,1,opt,name=s_st,json=sST,proto3" json:"s_st,omitempty"`
 	// @inject_tag: aper:"optional,sizeLB:3,sizeUB:3"
-	SD []byte `protobuf:"bytes,2,opt,name=s_d,json=sD,proto3,oneof" json:"s_d,omitempty" aper:"optional,sizeLB:3,sizeUB:3"`
+	SD []byte `protobuf:"bytes,2,opt,name=s_d,json=sD,proto3,oneof" json:"s_d,omitempty"`
 }
 
 func (x *Snssai) Reset() {
@@ -798,7 +798,7 @@ type FiveQi struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *FiveQi) Reset() {
@@ -848,7 +848,7 @@ type Qci struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *Qci) Reset() {
@@ -898,7 +898,7 @@ type Qfi struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:63"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:63"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *Qfi) Reset() {
@@ -948,7 +948,7 @@ type Arp struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:1,valueUB:15"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:1,valueUB:15"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *Arp) Reset() {
@@ -998,7 +998,7 @@ type GranularityPeriod struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:1,valueUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:4294967295"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *GranularityPeriod) Reset() {
@@ -1114,12 +1114,12 @@ type isMeasurementType_MeasurementType interface {
 
 type MeasurementType_MeasName struct {
 	// @inject_tag: aper:"choiceIdx:1"
-	MeasName *MeasurementTypeName `protobuf:"bytes,1,opt,name=meas_name,json=measName,proto3,oneof" aper:"choiceIdx:1"`
+	MeasName *MeasurementTypeName `protobuf:"bytes,1,opt,name=meas_name,json=measName,proto3,oneof"`
 }
 
 type MeasurementType_MeasId struct {
 	// @inject_tag: aper:"choiceIdx:2"
-	MeasId *MeasurementTypeId `protobuf:"bytes,2,opt,name=meas_id,json=measID,proto3,oneof" aper:"choiceIdx:2"`
+	MeasId *MeasurementTypeId `protobuf:"bytes,2,opt,name=meas_id,json=measID,proto3,oneof"`
 }
 
 func (*MeasurementType_MeasName) isMeasurementType_MeasurementType() {}
@@ -1134,7 +1134,7 @@ type MeasurementTypeId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:1,valueUB:65536"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:1,valueUB:65536"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementTypeId) Reset() {
@@ -1184,39 +1184,39 @@ type MeasurementLabel struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"optional"
-	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmnID,proto3,oneof" json:"plmn_id,omitempty" aper:"optional"`
+	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmnID,proto3,oneof" json:"plmn_id,omitempty"`
 	// @inject_tag: aper:"optional,valueExt"
-	SliceId *Snssai `protobuf:"bytes,2,opt,name=slice_id,json=sliceID,proto3,oneof" json:"slice_id,omitempty" aper:"optional,valueExt"`
+	SliceId *Snssai `protobuf:"bytes,2,opt,name=slice_id,json=sliceID,proto3,oneof" json:"slice_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	FiveQi *FiveQi `protobuf:"bytes,3,opt,name=five_qi,json=fiveQI,proto3,oneof" json:"five_qi,omitempty" aper:"optional"`
+	FiveQi *FiveQi `protobuf:"bytes,3,opt,name=five_qi,json=fiveQI,proto3,oneof" json:"five_qi,omitempty"`
 	// @inject_tag: aper:"optional"
-	QFi *Qfi `protobuf:"bytes,4,opt,name=q_fi,json=qFI,proto3,oneof" json:"q_fi,omitempty" aper:"optional"`
+	QFi *Qfi `protobuf:"bytes,4,opt,name=q_fi,json=qFI,proto3,oneof" json:"q_fi,omitempty"`
 	// @inject_tag: aper:"optional"
-	QCi *Qci `protobuf:"bytes,5,opt,name=q_ci,json=qCI,proto3,oneof" json:"q_ci,omitempty" aper:"optional"`
+	QCi *Qci `protobuf:"bytes,5,opt,name=q_ci,json=qCI,proto3,oneof" json:"q_ci,omitempty"`
 	// @inject_tag: aper:"optional"
-	QCimax *Qci `protobuf:"bytes,6,opt,name=q_cimax,json=qCImax,proto3,oneof" json:"q_cimax,omitempty" aper:"optional"`
+	QCimax *Qci `protobuf:"bytes,6,opt,name=q_cimax,json=qCImax,proto3,oneof" json:"q_cimax,omitempty"`
 	// @inject_tag: aper:"optional"
-	QCimin *Qci `protobuf:"bytes,7,opt,name=q_cimin,json=qCImin,proto3,oneof" json:"q_cimin,omitempty" aper:"optional"`
+	QCimin *Qci `protobuf:"bytes,7,opt,name=q_cimin,json=qCImin,proto3,oneof" json:"q_cimin,omitempty"`
 	// @inject_tag: aper:"optional"
-	ARpmax *Arp `protobuf:"bytes,8,opt,name=a_rpmax,json=aRPmax,proto3,oneof" json:"a_rpmax,omitempty" aper:"optional"`
+	ARpmax *Arp `protobuf:"bytes,8,opt,name=a_rpmax,json=aRPmax,proto3,oneof" json:"a_rpmax,omitempty"`
 	// @inject_tag: aper:"optional"
-	ARpmin *Arp `protobuf:"bytes,9,opt,name=a_rpmin,json=aRPmin,proto3,oneof" json:"a_rpmin,omitempty" aper:"optional"`
+	ARpmin *Arp `protobuf:"bytes,9,opt,name=a_rpmin,json=aRPmin,proto3,oneof" json:"a_rpmin,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
-	BitrateRange *int32 `protobuf:"varint,10,opt,name=bitrate_range,json=bitrateRange,proto3,oneof" json:"bitrate_range,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	BitrateRange *int32 `protobuf:"varint,10,opt,name=bitrate_range,json=bitrateRange,proto3,oneof" json:"bitrate_range,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
-	LayerMuMimo *int32 `protobuf:"varint,11,opt,name=layer_mu_mimo,json=layerMU-MIMO,proto3,oneof" json:"layer_mu_mimo,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	LayerMuMimo *int32 `protobuf:"varint,11,opt,name=layer_mu_mimo,json=layerMU-MIMO,proto3,oneof" json:"layer_mu_mimo,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
-	SUm *SUM `protobuf:"varint,12,opt,name=s_um,json=sUM,proto3,enum=e2sm_kpm_v2_go.v2.SUM,oneof" json:"s_um,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:0"`
+	SUm *SUM `protobuf:"varint,12,opt,name=s_um,json=sUM,proto3,enum=e2sm_kpm_v2_go.v2.SUM,oneof" json:"s_um,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
-	DistBinX *int32 `protobuf:"varint,13,opt,name=dist_bin_x,json=distBinX,proto3,oneof" json:"dist_bin_x,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	DistBinX *int32 `protobuf:"varint,13,opt,name=dist_bin_x,json=distBinX,proto3,oneof" json:"dist_bin_x,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
-	DistBinY *int32 `protobuf:"varint,14,opt,name=dist_bin_y,json=distBinY,proto3,oneof" json:"dist_bin_y,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	DistBinY *int32 `protobuf:"varint,14,opt,name=dist_bin_y,json=distBinY,proto3,oneof" json:"dist_bin_y,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:1,valueUB:65536"
-	DistBinZ *int32 `protobuf:"varint,15,opt,name=dist_bin_z,json=distBinZ,proto3,oneof" json:"dist_bin_z,omitempty" aper:"optional,valueExt,valueLB:1,valueUB:65536"`
+	DistBinZ *int32 `protobuf:"varint,15,opt,name=dist_bin_z,json=distBinZ,proto3,oneof" json:"dist_bin_z,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
-	PreLabelOverride *PreLabelOverride `protobuf:"varint,16,opt,name=pre_label_override,json=preLabelOverride,proto3,enum=e2sm_kpm_v2_go.v2.PreLabelOverride,oneof" json:"pre_label_override,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:0"`
+	PreLabelOverride *PreLabelOverride `protobuf:"varint,16,opt,name=pre_label_override,json=preLabelOverride,proto3,enum=e2sm_kpm_v2_go.v2.PreLabelOverride,oneof" json:"pre_label_override,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:1"
-	StartEndInd *StartEndInd `protobuf:"varint,17,opt,name=start_end_ind,json=startEndInd,proto3,enum=e2sm_kpm_v2_go.v2.StartEndInd,oneof" json:"start_end_ind,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:1"`
+	StartEndInd *StartEndInd `protobuf:"varint,17,opt,name=start_end_ind,json=startEndInd,proto3,enum=e2sm_kpm_v2_go.v2.StartEndInd,oneof" json:"start_end_ind,omitempty"`
 }
 
 func (x *MeasurementLabel) Reset() {
@@ -1378,7 +1378,7 @@ type SubscriptionId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:1,valueUB:4294967295"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:4294967295"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *SubscriptionId) Reset() {
@@ -1428,11 +1428,11 @@ type TestCondInfo struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt"
-	TestType *TestCondType `protobuf:"bytes,1,opt,name=test_type,json=testType,proto3" json:"test_type,omitempty" aper:"choiceExt"`
+	TestType *TestCondType `protobuf:"bytes,1,opt,name=test_type,json=testType,proto3" json:"test_type,omitempty"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:4"
-	TestExpr TestCondExpression `protobuf:"varint,2,opt,name=test_expr,json=testExpr,proto3,enum=e2sm_kpm_v2_go.v2.TestCondExpression" json:"test_expr,omitempty" aper:"valueExt,valueLB:0,valueUB:4"`
+	TestExpr TestCondExpression `protobuf:"varint,2,opt,name=test_expr,json=testExpr,proto3,enum=e2sm_kpm_v2_go.v2.TestCondExpression" json:"test_expr,omitempty"`
 	// @inject_tag: aper:"choiceExt"
-	TestValue *TestCondValue `protobuf:"bytes,3,opt,name=test_value,json=testValue,proto3" json:"test_value,omitempty" aper:"choiceExt"`
+	TestValue *TestCondValue `protobuf:"bytes,3,opt,name=test_value,json=testValue,proto3" json:"test_value,omitempty"`
 }
 
 func (x *TestCondInfo) Reset() {
@@ -1594,32 +1594,32 @@ type isTestCondType_TestCondType interface {
 
 type TestCondType_GBr struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:0"
-	GBr GBR `protobuf:"varint,1,opt,name=g_br,json=gBR,proto3,enum=e2sm_kpm_v2_go.v2.GBR,oneof" aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:0"`
+	GBr GBR `protobuf:"varint,1,opt,name=g_br,json=gBR,proto3,enum=e2sm_kpm_v2_go.v2.GBR,oneof"`
 }
 
 type TestCondType_AMbr struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:0"
-	AMbr AMBR `protobuf:"varint,2,opt,name=a_mbr,json=aMBR,proto3,enum=e2sm_kpm_v2_go.v2.AMBR,oneof" aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:0"`
+	AMbr AMBR `protobuf:"varint,2,opt,name=a_mbr,json=aMBR,proto3,enum=e2sm_kpm_v2_go.v2.AMBR,oneof"`
 }
 
 type TestCondType_IsStat struct {
 	// @inject_tag: aper:"choiceIdx:3,valueExt,valueLB:0,valueUB:0"
-	IsStat ISSTAT `protobuf:"varint,3,opt,name=is_stat,json=isStat,proto3,enum=e2sm_kpm_v2_go.v2.ISSTAT,oneof" aper:"choiceIdx:3,valueExt,valueLB:0,valueUB:0"`
+	IsStat ISSTAT `protobuf:"varint,3,opt,name=is_stat,json=isStat,proto3,enum=e2sm_kpm_v2_go.v2.ISSTAT,oneof"`
 }
 
 type TestCondType_IsCatM struct {
 	// @inject_tag: aper:"choiceIdx:4,valueExt,valueLB:0,valueUB:0"
-	IsCatM ISCATM `protobuf:"varint,4,opt,name=is_cat_m,json=isCatM,proto3,enum=e2sm_kpm_v2_go.v2.ISCATM,oneof" aper:"choiceIdx:4,valueExt,valueLB:0,valueUB:0"`
+	IsCatM ISCATM `protobuf:"varint,4,opt,name=is_cat_m,json=isCatM,proto3,enum=e2sm_kpm_v2_go.v2.ISCATM,oneof"`
 }
 
 type TestCondType_RSrp struct {
 	// @inject_tag: aper:"choiceIdx:5,valueExt,valueLB:0,valueUB:0"
-	RSrp RSRP `protobuf:"varint,5,opt,name=r_srp,json=rSRP,proto3,enum=e2sm_kpm_v2_go.v2.RSRP,oneof" aper:"choiceIdx:5,valueExt,valueLB:0,valueUB:0"`
+	RSrp RSRP `protobuf:"varint,5,opt,name=r_srp,json=rSRP,proto3,enum=e2sm_kpm_v2_go.v2.RSRP,oneof"`
 }
 
 type TestCondType_RSrq struct {
 	// @inject_tag: aper:"choiceIdx:6,valueExt,valueLB:0,valueUB:0"
-	RSrq RSRQ `protobuf:"varint,6,opt,name=r_srq,json=rSRQ,proto3,enum=e2sm_kpm_v2_go.v2.RSRQ,oneof" aper:"choiceIdx:6,valueExt,valueLB:0,valueUB:0"`
+	RSrq RSRQ `protobuf:"varint,6,opt,name=r_srq,json=rSRQ,proto3,enum=e2sm_kpm_v2_go.v2.RSRQ,oneof"`
 }
 
 func (*TestCondType_GBr) isTestCondType_TestCondType() {}
@@ -1740,32 +1740,32 @@ type isTestCondValue_TestCondValue interface {
 
 type TestCondValue_ValueInt struct {
 	// @inject_tag: aper:"choiceIdx:1"
-	ValueInt int64 `protobuf:"varint,1,opt,name=value_int,json=valueInt,proto3,oneof" aper:"choiceIdx:1"`
+	ValueInt int64 `protobuf:"varint,1,opt,name=value_int,json=valueInt,proto3,oneof"`
 }
 
 type TestCondValue_ValueEnum struct {
 	// @inject_tag: aper:"choiceIdx:2"
-	ValueEnum int64 `protobuf:"varint,2,opt,name=value_enum,json=valueEnum,proto3,oneof" aper:"choiceIdx:2"`
+	ValueEnum int64 `protobuf:"varint,2,opt,name=value_enum,json=valueEnum,proto3,oneof"`
 }
 
 type TestCondValue_ValueBool struct {
 	// @inject_tag: aper:"choiceIdx:3"
-	ValueBool bool `protobuf:"varint,3,opt,name=value_bool,json=valueBool,proto3,oneof" aper:"choiceIdx:3"`
+	ValueBool bool `protobuf:"varint,3,opt,name=value_bool,json=valueBool,proto3,oneof"`
 }
 
 type TestCondValue_ValueBitS struct {
 	// @inject_tag: aper:"choiceIdx:4"
-	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof" aper:"choiceIdx:4"`
+	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof"`
 }
 
 type TestCondValue_ValueOctS struct {
 	// @inject_tag: aper:"choiceIdx:5"
-	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof" aper:"choiceIdx:5"`
+	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof"`
 }
 
 type TestCondValue_ValuePrtS struct {
 	// @inject_tag: aper:"choiceIdx:6"
-	ValuePrtS string `protobuf:"bytes,6,opt,name=value_prt_s,json=valuePrtS,proto3,oneof" aper:"choiceIdx:6"`
+	ValuePrtS string `protobuf:"bytes,6,opt,name=value_prt_s,json=valuePrtS,proto3,oneof"`
 }
 
 func (*TestCondValue_ValueInt) isTestCondValue_TestCondValue() {}
@@ -1870,22 +1870,22 @@ type isGlobalKpmnodeId_GlobalKpmnodeId interface {
 
 type GlobalKpmnodeId_GNb struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	GNb *GlobalKpmnodeGnbId `protobuf:"bytes,1,opt,name=g_nb,json=gNB,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	GNb *GlobalKpmnodeGnbId `protobuf:"bytes,1,opt,name=g_nb,json=gNB,proto3,oneof"`
 }
 
 type GlobalKpmnodeId_EnGNb struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt"
-	EnGNb *GlobalKpmnodeEnGnbId `protobuf:"bytes,2,opt,name=en_g_nb,json=en-gNB,proto3,oneof" aper:"choiceIdx:2,valueExt"`
+	EnGNb *GlobalKpmnodeEnGnbId `protobuf:"bytes,2,opt,name=en_g_nb,json=en-gNB,proto3,oneof"`
 }
 
 type GlobalKpmnodeId_NgENb struct {
 	// @inject_tag: aper:"choiceIdx:3,valueExt"
-	NgENb *GlobalKpmnodeNgEnbId `protobuf:"bytes,3,opt,name=ng_e_nb,json=ng-eNB,proto3,oneof" aper:"choiceIdx:3,valueExt"`
+	NgENb *GlobalKpmnodeNgEnbId `protobuf:"bytes,3,opt,name=ng_e_nb,json=ng-eNB,proto3,oneof"`
 }
 
 type GlobalKpmnodeId_ENb struct {
 	// @inject_tag: aper:"choiceIdx:4,valueExt"
-	ENb *GlobalKpmnodeEnbId `protobuf:"bytes,4,opt,name=e_nb,json=eNB,proto3,oneof" aper:"choiceIdx:4,valueExt"`
+	ENb *GlobalKpmnodeEnbId `protobuf:"bytes,4,opt,name=e_nb,json=eNB,proto3,oneof"`
 }
 
 func (*GlobalKpmnodeId_GNb) isGlobalKpmnodeId_GlobalKpmnodeId() {}
@@ -1904,11 +1904,11 @@ type GlobalKpmnodeGnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	GlobalGNbId *GlobalgNbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty" aper:"valueExt"`
+	GlobalGNbId *GlobalgNbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	GNbCuUpId *GnbCuUpId `protobuf:"bytes,2,opt,name=g_nb_cu_up_id,json=gNB-CU-UP-ID,proto3,oneof" json:"g_nb_cu_up_id,omitempty" aper:"optional"`
+	GNbCuUpId *GnbCuUpId `protobuf:"bytes,2,opt,name=g_nb_cu_up_id,json=gNB-CU-UP-ID,proto3,oneof" json:"g_nb_cu_up_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	GNbDuId *GnbDuId `protobuf:"bytes,3,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3,oneof" json:"g_nb_du_id,omitempty" aper:"optional"`
+	GNbDuId *GnbDuId `protobuf:"bytes,3,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3,oneof" json:"g_nb_du_id,omitempty"`
 }
 
 func (x *GlobalKpmnodeGnbId) Reset() {
@@ -1973,7 +1973,7 @@ type GlobalgNbId struct {
 
 	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmn-id,proto3" json:"plmn_id,omitempty"`
 	// @inject_tag: aper:"choiceExt"
-	GnbId *GnbIdChoice `protobuf:"bytes,2,opt,name=gnb_id,json=gnb-id,proto3" json:"gnb_id,omitempty" aper:"choiceExt"`
+	GnbId *GnbIdChoice `protobuf:"bytes,2,opt,name=gnb_id,json=gnb-id,proto3" json:"gnb_id,omitempty"`
 }
 
 func (x *GlobalgNbId) Reset() {
@@ -2030,7 +2030,7 @@ type GnbCuUpId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:68719476735"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:68719476735"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *GnbCuUpId) Reset() {
@@ -2080,7 +2080,7 @@ type GnbDuId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:0,valueUB:68719476735"
-	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:68719476735"`
+	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *GnbDuId) Reset() {
@@ -2188,7 +2188,7 @@ type isGnbIdChoice_GnbIdChoice interface {
 
 type GnbIdChoice_GnbId struct {
 	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
-	GnbId *asn1.BitString `protobuf:"bytes,1,opt,name=gnb_id,json=gnb-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32"`
+	GnbId *asn1.BitString `protobuf:"bytes,1,opt,name=gnb_id,json=gnb-ID,proto3,oneof"`
 }
 
 func (*GnbIdChoice_GnbId) isGnbIdChoice_GnbIdChoice() {}
@@ -2201,11 +2201,11 @@ type GlobalKpmnodeEnGnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	GlobalGNbId *GlobalenGnbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty" aper:"valueExt"`
+	GlobalGNbId *GlobalenGnbId `protobuf:"bytes,1,opt,name=global_g_nb_id,json=global-gNB-ID,proto3" json:"global_g_nb_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	GNbCuUpId *GnbCuUpId `protobuf:"bytes,2,opt,name=g_nb_cu_up_id,json=gNB-CU-UP-ID,proto3,oneof" json:"g_nb_cu_up_id,omitempty" aper:"optional"`
+	GNbCuUpId *GnbCuUpId `protobuf:"bytes,2,opt,name=g_nb_cu_up_id,json=gNB-CU-UP-ID,proto3,oneof" json:"g_nb_cu_up_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	GNbDuId *GnbDuId `protobuf:"bytes,3,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3,oneof" json:"g_nb_du_id,omitempty" aper:"optional"`
+	GNbDuId *GnbDuId `protobuf:"bytes,3,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3,oneof" json:"g_nb_du_id,omitempty"`
 }
 
 func (x *GlobalKpmnodeEnGnbId) Reset() {
@@ -2270,7 +2270,7 @@ type GlobalenGnbId struct {
 
 	PLmnIdentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmn_identity,json=pLMN-Identity,proto3" json:"p_lmn_identity,omitempty"`
 	// @inject_tag: aper:"choiceExt"
-	GNbId *EngnbId `protobuf:"bytes,2,opt,name=g_nb_id,json=gNB-ID,proto3" json:"g_nb_id,omitempty" aper:"choiceExt"`
+	GNbId *EngnbId `protobuf:"bytes,2,opt,name=g_nb_id,json=gNB-ID,proto3" json:"g_nb_id,omitempty"`
 }
 
 func (x *GlobalenGnbId) Reset() {
@@ -2385,7 +2385,7 @@ type isEngnbId_EngnbId interface {
 
 type EngnbId_GNbId struct {
 	// @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
-	GNbId *asn1.BitString `protobuf:"bytes,1,opt,name=g_nb_id,json=gNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:22,sizeUB:32"`
+	GNbId *asn1.BitString `protobuf:"bytes,1,opt,name=g_nb_id,json=gNB-ID,proto3,oneof"`
 }
 
 func (*EngnbId_GNbId) isEngnbId_EngnbId() {}
@@ -2398,9 +2398,9 @@ type GlobalKpmnodeNgEnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	GlobalNgENbId *GlobalngeNbId `protobuf:"bytes,1,opt,name=global_ng_e_nb_id,json=global-ng-eNB-ID,proto3" json:"global_ng_e_nb_id,omitempty" aper:"valueExt"`
+	GlobalNgENbId *GlobalngeNbId `protobuf:"bytes,1,opt,name=global_ng_e_nb_id,json=global-ng-eNB-ID,proto3" json:"global_ng_e_nb_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	GNbDuId *GnbDuId `protobuf:"bytes,2,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3,oneof" json:"g_nb_du_id,omitempty" aper:"optional"`
+	GNbDuId *GnbDuId `protobuf:"bytes,2,opt,name=g_nb_du_id,json=gNB-DU-ID,proto3,oneof" json:"g_nb_du_id,omitempty"`
 }
 
 func (x *GlobalKpmnodeNgEnbId) Reset() {
@@ -2458,11 +2458,11 @@ type GlobalngeNbId struct {
 
 	PlmnId *PlmnIdentity `protobuf:"bytes,1,opt,name=plmn_id,json=plmn-id,proto3" json:"plmn_id,omitempty"`
 	// @inject_tag: aper:"choiceExt"
-	EnbId *EnbIdChoice `protobuf:"bytes,2,opt,name=enb_id,json=enb-id,proto3" json:"enb_id,omitempty" aper:"choiceExt"`
+	EnbId *EnbIdChoice `protobuf:"bytes,2,opt,name=enb_id,json=enb-id,proto3" json:"enb_id,omitempty"`
 	// @inject_tag: aper:"sizeLB:18,sizeUB:18"
-	ShortMacroENbId *asn1.BitString `protobuf:"bytes,3,opt,name=short_macro_e_nb_id,json=short-Macro-eNB-ID,proto3" json:"short_macro_e_nb_id,omitempty" aper:"sizeLB:18,sizeUB:18"`
+	ShortMacroENbId *asn1.BitString `protobuf:"bytes,3,opt,name=short_macro_e_nb_id,json=short-Macro-eNB-ID,proto3" json:"short_macro_e_nb_id,omitempty"`
 	// @inject_tag: aper:"sizeLB:21,sizeUB:21"
-	LongMacroENbId *asn1.BitString `protobuf:"bytes,4,opt,name=long_macro_e_nb_id,json=long-Macro-eNB-ID,proto3" json:"long_macro_e_nb_id,omitempty" aper:"sizeLB:21,sizeUB:21"`
+	LongMacroENbId *asn1.BitString `protobuf:"bytes,4,opt,name=long_macro_e_nb_id,json=long-Macro-eNB-ID,proto3" json:"long_macro_e_nb_id,omitempty"`
 }
 
 func (x *GlobalngeNbId) Reset() {
@@ -2607,17 +2607,17 @@ type isEnbIdChoice_EnbIdChoice interface {
 
 type EnbIdChoice_EnbIdMacro struct {
 	// @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
-	EnbIdMacro *asn1.BitString `protobuf:"bytes,1,opt,name=enb_id_macro,json=enb-ID-macro,proto3,oneof" aper:"choiceIdx:1,sizeLB:20,sizeUB:20"`
+	EnbIdMacro *asn1.BitString `protobuf:"bytes,1,opt,name=enb_id_macro,json=enb-ID-macro,proto3,oneof"`
 }
 
 type EnbIdChoice_EnbIdShortmacro struct {
 	// @inject_tag: aper:"choiceIdx:2,sizeLB:18,sizeUB:18"
-	EnbIdShortmacro *asn1.BitString `protobuf:"bytes,2,opt,name=enb_id_shortmacro,json=enb-ID-shortmacro,proto3,oneof" aper:"choiceIdx:2,sizeLB:18,sizeUB:18"`
+	EnbIdShortmacro *asn1.BitString `protobuf:"bytes,2,opt,name=enb_id_shortmacro,json=enb-ID-shortmacro,proto3,oneof"`
 }
 
 type EnbIdChoice_EnbIdLongmacro struct {
 	// @inject_tag: aper:"choiceIdx:3,sizeLB:21,sizeUB:21"
-	EnbIdLongmacro *asn1.BitString `protobuf:"bytes,3,opt,name=enb_id_longmacro,json=enb-ID-longmacro,proto3,oneof" aper:"choiceIdx:3,sizeLB:21,sizeUB:21"`
+	EnbIdLongmacro *asn1.BitString `protobuf:"bytes,3,opt,name=enb_id_longmacro,json=enb-ID-longmacro,proto3,oneof"`
 }
 
 func (*EnbIdChoice_EnbIdMacro) isEnbIdChoice_EnbIdChoice() {}
@@ -2634,7 +2634,7 @@ type GlobalKpmnodeEnbId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	GlobalENbId *GlobalEnbId `protobuf:"bytes,1,opt,name=global_e_nb_id,json=global-eNB-ID,proto3" json:"global_e_nb_id,omitempty" aper:"valueExt"`
+	GlobalENbId *GlobalEnbId `protobuf:"bytes,1,opt,name=global_e_nb_id,json=global-eNB-ID,proto3" json:"global_e_nb_id,omitempty"`
 }
 
 func (x *GlobalKpmnodeEnbId) Reset() {
@@ -2685,7 +2685,7 @@ type GlobalEnbId struct {
 
 	PLmnIdentity *PlmnIdentity `protobuf:"bytes,1,opt,name=p_lmn_identity,json=pLMN-Identity,proto3" json:"p_lmn_identity,omitempty"`
 	// @inject_tag: aper:"choiceExt"
-	ENbId *EnbId `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty" aper:"choiceExt"`
+	ENbId *EnbId `protobuf:"bytes,2,opt,name=e_nb_id,json=eNB-ID,proto3" json:"e_nb_id,omitempty"`
 }
 
 func (x *GlobalEnbId) Reset() {
@@ -2808,12 +2808,12 @@ type isEnbId_EnbId interface {
 
 type EnbId_MacroENbId struct {
 	// @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
-	MacroENbId *asn1.BitString `protobuf:"bytes,1,opt,name=macro_e_nb_id,json=macro-eNB-ID,proto3,oneof" aper:"choiceIdx:1,sizeLB:20,sizeUB:20"`
+	MacroENbId *asn1.BitString `protobuf:"bytes,1,opt,name=macro_e_nb_id,json=macro-eNB-ID,proto3,oneof"`
 }
 
 type EnbId_HomeENbId struct {
 	// @inject_tag: aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28"
-	HomeENbId *asn1.BitString `protobuf:"bytes,2,opt,name=home_e_nb_id,json=home-eNB-ID,proto3,oneof" aper:"choiceIdx:2,sizeExt,sizeLB:28,sizeUB:28"`
+	HomeENbId *asn1.BitString `protobuf:"bytes,2,opt,name=home_e_nb_id,json=home-eNB-ID,proto3,oneof"`
 }
 
 func (*EnbId_MacroENbId) isEnbId_EnbId() {}
@@ -2828,13 +2828,13 @@ type RanfunctionName struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
-	RanFunctionShortName string `protobuf:"bytes,1,opt,name=ran_function_short_name,json=ranFunction-ShortName,proto3" json:"ran_function_short_name,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:150"`
+	RanFunctionShortName string `protobuf:"bytes,1,opt,name=ran_function_short_name,json=ranFunction-ShortName,proto3" json:"ran_function_short_name,omitempty"`
 	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:1000"
-	RanFunctionE2SmOid string `protobuf:"bytes,2,opt,name=ran_function_e2_sm_oid,json=ranFunction-E2SM-OID,proto3" json:"ran_function_e2_sm_oid,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:1000"`
+	RanFunctionE2SmOid string `protobuf:"bytes,2,opt,name=ran_function_e2_sm_oid,json=ranFunction-E2SM-OID,proto3" json:"ran_function_e2_sm_oid,omitempty"`
 	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
-	RanFunctionDescription string `protobuf:"bytes,3,opt,name=ran_function_description,json=ranFunction-Description,proto3" json:"ran_function_description,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:150"`
+	RanFunctionDescription string `protobuf:"bytes,3,opt,name=ran_function_description,json=ranFunction-Description,proto3" json:"ran_function_description,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:255"
-	RanFunctionInstance *int32 `protobuf:"varint,4,opt,name=ran_function_instance,json=ranFunction-Instance,proto3,oneof" json:"ran_function_instance,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:255"`
+	RanFunctionInstance *int32 `protobuf:"varint,4,opt,name=ran_function_instance,json=ranFunction-Instance,proto3,oneof" json:"ran_function_instance,omitempty"`
 }
 
 func (x *RanfunctionName) Reset() {
@@ -2905,7 +2905,7 @@ type RicStyleType struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *RicStyleType) Reset() {
@@ -2955,7 +2955,7 @@ type RicFormatType struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueExt,valueLB:0,valueUB:255"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *RicFormatType) Reset() {
@@ -3005,7 +3005,7 @@ type MaxnoofKpmnodes struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:1024,valueUB:1024"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1024,valueUB:1024"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofKpmnodes) Reset() {
@@ -3055,7 +3055,7 @@ type MaxnoofCells struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:16384,valueUB:16384"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:16384,valueUB:16384"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofCells) Reset() {
@@ -3105,7 +3105,7 @@ type MaxnoofRicstyles struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:63,valueUB:63"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:63,valueUB:63"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofRicstyles) Reset() {
@@ -3155,7 +3155,7 @@ type MaxnoofMeasurementInfo struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:65535,valueUB:65535"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:65535,valueUB:65535"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofMeasurementInfo) Reset() {
@@ -3205,7 +3205,7 @@ type MaxnoofLabelInfo struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:2147483647,valueUB:2147483647"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:2147483647,valueUB:2147483647"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofLabelInfo) Reset() {
@@ -3255,7 +3255,7 @@ type MaxnoofMeasurementRecord struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:65535,valueUB:65535"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:65535,valueUB:65535"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofMeasurementRecord) Reset() {
@@ -3305,7 +3305,7 @@ type MaxnoofMeasurementValue struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:2147483647,valueUB:2147483647"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:2147483647,valueUB:2147483647"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofMeasurementValue) Reset() {
@@ -3355,7 +3355,7 @@ type MaxnoofConditionInfo struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:32768,valueUB:32768"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:32768,valueUB:32768"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofConditionInfo) Reset() {
@@ -3405,7 +3405,7 @@ type MaxnoofUeid struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:65535,valueUB:65535"
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:65535,valueUB:65535"`
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MaxnoofUeid) Reset() {
@@ -3455,7 +3455,7 @@ type MeasurementInfoList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
-	Value []*MeasurementInfoItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
+	Value []*MeasurementInfoItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementInfoList) Reset() {
@@ -3505,9 +3505,9 @@ type MeasurementInfoItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt"
-	MeasType *MeasurementType `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"choiceExt"`
+	MeasType *MeasurementType `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty"`
 	// @inject_tag: aper:"optional"
-	LabelInfoList *LabelInfoList `protobuf:"bytes,2,opt,name=label_info_list,json=labelInfoList,proto3,oneof" json:"label_info_list,omitempty" aper:"optional"`
+	LabelInfoList *LabelInfoList `protobuf:"bytes,2,opt,name=label_info_list,json=labelInfoList,proto3,oneof" json:"label_info_list,omitempty"`
 }
 
 func (x *MeasurementInfoItem) Reset() {
@@ -3564,7 +3564,7 @@ type LabelInfoList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:2147483647"
-	Value []*LabelInfoItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:2147483647"`
+	Value []*LabelInfoItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *LabelInfoList) Reset() {
@@ -3614,7 +3614,7 @@ type LabelInfoItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3" json:"meas_label,omitempty" aper:"valueExt"`
+	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3" json:"meas_label,omitempty"`
 }
 
 func (x *LabelInfoItem) Reset() {
@@ -3664,7 +3664,7 @@ type MeasurementData struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
-	Value []*MeasurementDataItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
+	Value []*MeasurementDataItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementData) Reset() {
@@ -3715,7 +3715,7 @@ type MeasurementDataItem struct {
 
 	MeasRecord *MeasurementRecord `protobuf:"bytes,1,opt,name=meas_record,json=measRecord,proto3" json:"meas_record,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:0"
-	IncompleteFlag *IncompleteFlag `protobuf:"varint,2,opt,name=incomplete_flag,json=incompleteFlag,proto3,enum=e2sm_kpm_v2_go.v2.IncompleteFlag,oneof" json:"incomplete_flag,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:0"`
+	IncompleteFlag *IncompleteFlag `protobuf:"varint,2,opt,name=incomplete_flag,json=incompleteFlag,proto3,enum=e2sm_kpm_v2_go.v2.IncompleteFlag,oneof" json:"incomplete_flag,omitempty"`
 }
 
 func (x *MeasurementDataItem) Reset() {
@@ -3772,7 +3772,7 @@ type MeasurementRecord struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:2147483647"
-	Value []*MeasurementRecordItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"choiceExt,sizeLB:1,sizeUB:2147483647"`
+	Value []*MeasurementRecordItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementRecord) Reset() {
@@ -3896,17 +3896,17 @@ type isMeasurementRecordItem_MeasurementRecordItem interface {
 
 type MeasurementRecordItem_Integer struct {
 	// @inject_tag: aper:"choiceIdx:1,valueLB:0,valueUB:4294967295"
-	Integer int64 `protobuf:"varint,1,opt,name=integer,proto3,oneof" aper:"choiceIdx:1,valueLB:0,valueUB:4294967295"`
+	Integer int64 `protobuf:"varint,1,opt,name=integer,proto3,oneof"`
 }
 
 type MeasurementRecordItem_Real struct {
 	// @inject_tag: aper:"choiceIdx:2"
-	Real float64 `protobuf:"fixed64,2,opt,name=real,proto3,oneof" aper:"choiceIdx:2"`
+	Real float64 `protobuf:"fixed64,2,opt,name=real,proto3,oneof"`
 }
 
 type MeasurementRecordItem_NoValue struct {
 	// @inject_tag: aper:"choiceIdx:3,valueLB:0,valueUB:0"
-	NoValue int32 `protobuf:"varint,3,opt,name=no_value,json=noValue,proto3,oneof" aper:"choiceIdx:3,valueLB:0,valueUB:0"`
+	NoValue int32 `protobuf:"varint,3,opt,name=no_value,json=noValue,proto3,oneof"`
 }
 
 func (*MeasurementRecordItem_Integer) isMeasurementRecordItem_MeasurementRecordItem() {}
@@ -3923,7 +3923,7 @@ type MeasurementInfoActionList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
-	Value []*MeasurementInfoActionItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
+	Value []*MeasurementInfoActionItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementInfoActionList) Reset() {
@@ -3974,7 +3974,7 @@ type MeasurementInfoActionItem struct {
 
 	MeasName *MeasurementTypeName `protobuf:"bytes,1,opt,name=meas_name,json=measName,proto3" json:"meas_name,omitempty"`
 	// @inject_tag: aper:"optional"
-	MeasId *MeasurementTypeId `protobuf:"bytes,2,opt,name=meas_id,json=measID,proto3,oneof" json:"meas_id,omitempty" aper:"optional"`
+	MeasId *MeasurementTypeId `protobuf:"bytes,2,opt,name=meas_id,json=measID,proto3,oneof" json:"meas_id,omitempty"`
 }
 
 func (x *MeasurementInfoActionItem) Reset() {
@@ -4031,7 +4031,7 @@ type MeasurementCondList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
-	Value []*MeasurementCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
+	Value []*MeasurementCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementCondList) Reset() {
@@ -4081,7 +4081,7 @@ type MeasurementCondItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt"
-	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"choiceExt"`
+	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty"`
 	MatchingCond *MatchingCondList `protobuf:"bytes,2,opt,name=matching_cond,json=matchingCond,proto3" json:"matching_cond,omitempty"`
 }
 
@@ -4139,7 +4139,7 @@ type MeasurementCondUeidList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
-	Value []*MeasurementCondUeidItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
+	Value []*MeasurementCondUeidItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementCondUeidList) Reset() {
@@ -4189,10 +4189,10 @@ type MeasurementCondUeidItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt"
-	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty" aper:"choiceExt"`
+	MeasType     *MeasurementType  `protobuf:"bytes,1,opt,name=meas_type,json=measType,proto3" json:"meas_type,omitempty"`
 	MatchingCond *MatchingCondList `protobuf:"bytes,2,opt,name=matching_cond,json=matchingCond,proto3" json:"matching_cond,omitempty"`
 	// @inject_tag: aper:"optional"
-	MatchingUeidList *MatchingUeidList `protobuf:"bytes,3,opt,name=matching_ueid_list,json=matchingUEidList,proto3,oneof" json:"matching_ueid_list,omitempty" aper:"optional"`
+	MatchingUeidList *MatchingUeidList `protobuf:"bytes,3,opt,name=matching_ueid_list,json=matchingUEidList,proto3,oneof" json:"matching_ueid_list,omitempty"`
 }
 
 func (x *MeasurementCondUeidItem) Reset() {
@@ -4256,7 +4256,7 @@ type MatchingCondList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt,sizeLB:1,sizeUB:32768"
-	Value []*MatchingCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"choiceExt,sizeLB:1,sizeUB:32768"`
+	Value []*MatchingCondItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MatchingCondList) Reset() {
@@ -4372,12 +4372,12 @@ type isMatchingCondItem_MatchingCondItem interface {
 
 type MatchingCondItem_MeasLabel struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	MeasLabel *MeasurementLabel `protobuf:"bytes,1,opt,name=meas_label,json=measLabel,proto3,oneof"`
 }
 
 type MatchingCondItem_TestCondInfo struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt"
-	TestCondInfo *TestCondInfo `protobuf:"bytes,2,opt,name=test_cond_info,json=testCondInfo,proto3,oneof" aper:"choiceIdx:2,valueExt"`
+	TestCondInfo *TestCondInfo `protobuf:"bytes,2,opt,name=test_cond_info,json=testCondInfo,proto3,oneof"`
 }
 
 func (*MatchingCondItem_MeasLabel) isMatchingCondItem_MatchingCondItem() {}
@@ -4392,7 +4392,7 @@ type MatchingUeidList struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
-	Value []*MatchingUeidItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty" aper:"valueExt,sizeLB:1,sizeUB:65535"`
+	Value []*MatchingUeidItem `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MatchingUeidList) Reset() {
@@ -4492,7 +4492,7 @@ type E2SmKpmEventTriggerDefinition struct {
 
 	// choice from e2sm-kpm-ies_v2.asn1:337
 	// @inject_tag: aper:"choiceExt"
-	EventDefinitionFormats *EventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty" aper:"choiceExt"`
+	EventDefinitionFormats *EventTriggerDefinitionFormats `protobuf:"bytes,1,opt,name=event_definition_formats,json=eventDefinition-formats,proto3" json:"event_definition_formats,omitempty"`
 }
 
 func (x *E2SmKpmEventTriggerDefinition) Reset() {
@@ -4596,7 +4596,7 @@ type isEventTriggerDefinitionFormats_E2SmKpmEventTriggerDefinition interface {
 
 type EventTriggerDefinitionFormats_EventDefinitionFormat1 struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt"
-	EventDefinitionFormat1 *E2SmKpmEventTriggerDefinitionFormat1 `protobuf:"bytes,1,opt,name=event_definition_format1,json=eventDefinition_Format1,proto3,oneof" aper:"choiceIdx:1,valueExt"`
+	EventDefinitionFormat1 *E2SmKpmEventTriggerDefinitionFormat1 `protobuf:"bytes,1,opt,name=event_definition_format1,json=eventDefinition_Format1,proto3,oneof"`
 }
 
 func (*EventTriggerDefinitionFormats_EventDefinitionFormat1) isEventTriggerDefinitionFormats_E2SmKpmEventTriggerDefinition() {
@@ -4610,7 +4610,7 @@ type E2SmKpmEventTriggerDefinitionFormat1 struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueLB:1,valueUB:4294967295"
-	ReportingPeriod int64 `protobuf:"varint,1,opt,name=reporting_period,json=reportingPeriod,proto3" json:"reporting_period,omitempty" aper:"valueLB:1,valueUB:4294967295"`
+	ReportingPeriod int64 `protobuf:"varint,1,opt,name=reporting_period,json=reportingPeriod,proto3" json:"reporting_period,omitempty"`
 }
 
 func (x *E2SmKpmEventTriggerDefinitionFormat1) Reset() {
@@ -4661,7 +4661,7 @@ type E2SmKpmActionDefinition struct {
 
 	RicStyleType *RicStyleType `protobuf:"bytes,1,opt,name=ric_style_type,json=ric-Style-Type,proto3" json:"ric_style_type,omitempty"`
 	// @inject_tag: aper:"choiceExt"
-	ActionDefinitionFormats *ActionDefinitionFormats `protobuf:"bytes,2,opt,name=action_definition_formats,json=actionDefinition-formats,proto3" json:"action_definition_formats,omitempty" aper:"choiceExt"`
+	ActionDefinitionFormats *ActionDefinitionFormats `protobuf:"bytes,2,opt,name=action_definition_formats,json=actionDefinition-formats,proto3" json:"action_definition_formats,omitempty"`
 }
 
 func (x *E2SmKpmActionDefinition) Reset() {
@@ -4788,17 +4788,17 @@ type isActionDefinitionFormats_E2SmKpmActionDefinition interface {
 
 type ActionDefinitionFormats_ActionDefinitionFormat1 struct {
 	// @inject_tag: aper:"valueExt,choiceIdx:1"
-	ActionDefinitionFormat1 *E2SmKpmActionDefinitionFormat1 `protobuf:"bytes,2,opt,name=action_definition_format1,json=actionDefinition_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1"`
+	ActionDefinitionFormat1 *E2SmKpmActionDefinitionFormat1 `protobuf:"bytes,2,opt,name=action_definition_format1,json=actionDefinition_Format1,proto3,oneof"`
 }
 
 type ActionDefinitionFormats_ActionDefinitionFormat2 struct {
 	// @inject_tag: aper:"valueExt,choiceIdx:2"
-	ActionDefinitionFormat2 *E2SmKpmActionDefinitionFormat2 `protobuf:"bytes,3,opt,name=action_definition_format2,json=actionDefinition_Format2,proto3,oneof" aper:"valueExt,choiceIdx:2"`
+	ActionDefinitionFormat2 *E2SmKpmActionDefinitionFormat2 `protobuf:"bytes,3,opt,name=action_definition_format2,json=actionDefinition_Format2,proto3,oneof"`
 }
 
 type ActionDefinitionFormats_ActionDefinitionFormat3 struct {
 	// @inject_tag: aper:"valueExt,choiceIdx:3"
-	ActionDefinitionFormat3 *E2SmKpmActionDefinitionFormat3 `protobuf:"bytes,4,opt,name=action_definition_format3,json=actionDefinition_Format3,proto3,oneof" aper:"valueExt,choiceIdx:3"`
+	ActionDefinitionFormat3 *E2SmKpmActionDefinitionFormat3 `protobuf:"bytes,4,opt,name=action_definition_format3,json=actionDefinition_Format3,proto3,oneof"`
 }
 
 func (*ActionDefinitionFormats_ActionDefinitionFormat1) isActionDefinitionFormats_E2SmKpmActionDefinition() {
@@ -5022,7 +5022,7 @@ type E2SmKpmIndicationHeader struct {
 
 	// choice from e2sm-kpm-v01.00.asn1:391
 	// @inject_tag: aper:"choiceExt"
-	IndicationHeaderFormats *IndicationHeaderFormats `protobuf:"bytes,1,opt,name=indication_header_formats,json=indicationHeader-formats,proto3" json:"indication_header_formats,omitempty" aper:"choiceExt"`
+	IndicationHeaderFormats *IndicationHeaderFormats `protobuf:"bytes,1,opt,name=indication_header_formats,json=indicationHeader-formats,proto3" json:"indication_header_formats,omitempty"`
 }
 
 func (x *E2SmKpmIndicationHeader) Reset() {
@@ -5126,7 +5126,7 @@ type isIndicationHeaderFormats_E2SmKpmIndicationHeader interface {
 
 type IndicationHeaderFormats_IndicationHeaderFormat1 struct {
 	// @inject_tag: aper:"valueExt,choiceIdx:1"
-	IndicationHeaderFormat1 *E2SmKpmIndicationHeaderFormat1 `protobuf:"bytes,1,opt,name=indication_header_format1,json=indicationHeader_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1"`
+	IndicationHeaderFormat1 *E2SmKpmIndicationHeaderFormat1 `protobuf:"bytes,1,opt,name=indication_header_format1,json=indicationHeader_Format1,proto3,oneof"`
 }
 
 func (*IndicationHeaderFormats_IndicationHeaderFormat1) isIndicationHeaderFormats_E2SmKpmIndicationHeader() {
@@ -5141,15 +5141,15 @@ type E2SmKpmIndicationHeaderFormat1 struct {
 
 	ColletStartTime *TimeStamp `protobuf:"bytes,1,opt,name=collet_start_time,json=colletStartTime,proto3" json:"collet_start_time,omitempty"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:15"
-	FileFormatversion *string `protobuf:"bytes,2,opt,name=file_formatversion,json=fileFormatversion,proto3,oneof" json:"file_formatversion,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:15"`
+	FileFormatversion *string `protobuf:"bytes,2,opt,name=file_formatversion,json=fileFormatversion,proto3,oneof" json:"file_formatversion,omitempty"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:400"
-	SenderName *string `protobuf:"bytes,3,opt,name=sender_name,json=senderName,proto3,oneof" json:"sender_name,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:400"`
+	SenderName *string `protobuf:"bytes,3,opt,name=sender_name,json=senderName,proto3,oneof" json:"sender_name,omitempty"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:8"
-	SenderType *string `protobuf:"bytes,4,opt,name=sender_type,json=senderType,proto3,oneof" json:"sender_type,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:8"`
+	SenderType *string `protobuf:"bytes,4,opt,name=sender_type,json=senderType,proto3,oneof" json:"sender_type,omitempty"`
 	// @inject_tag: aper:"optional,sizeExt,sizeLB:0,sizeUB:32"
-	VendorName *string `protobuf:"bytes,5,opt,name=vendor_name,json=vendorName,proto3,oneof" json:"vendor_name,omitempty" aper:"optional,sizeExt,sizeLB:0,sizeUB:32"`
+	VendorName *string `protobuf:"bytes,5,opt,name=vendor_name,json=vendorName,proto3,oneof" json:"vendor_name,omitempty"`
 	// @inject_tag: aper:"optional,choiceExt"
-	KpmNodeId *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty" aper:"optional,choiceExt"`
+	KpmNodeId *GlobalKpmnodeId `protobuf:"bytes,6,opt,name=kpm_node_id,json=kpmNodeID,proto3,oneof" json:"kpm_node_id,omitempty"`
 }
 
 func (x *E2SmKpmIndicationHeaderFormat1) Reset() {
@@ -5235,7 +5235,7 @@ type E2SmKpmIndicationMessage struct {
 
 	// choice from e2sm_kpm_ies_v2.asn:414
 	// @inject_tag: aper:"choiceExt"
-	IndicationMessageFormats *IndicationMessageFormats `protobuf:"bytes,1,opt,name=indication_message_formats,json=indicationMessage-formats,proto3" json:"indication_message_formats,omitempty" aper:"choiceExt"`
+	IndicationMessageFormats *IndicationMessageFormats `protobuf:"bytes,1,opt,name=indication_message_formats,json=indicationMessage-formats,proto3" json:"indication_message_formats,omitempty"`
 }
 
 func (x *E2SmKpmIndicationMessage) Reset() {
@@ -5347,12 +5347,12 @@ type isIndicationMessageFormats_E2SmKpmIndicationMessage interface {
 
 type IndicationMessageFormats_IndicationMessageFormat1 struct {
 	// @inject_tag: aper:"valueExt,choiceIdx:1"
-	IndicationMessageFormat1 *E2SmKpmIndicationMessageFormat1 `protobuf:"bytes,1,opt,name=indication_message_format1,json=indicationMessage_Format1,proto3,oneof" aper:"valueExt,choiceIdx:1"`
+	IndicationMessageFormat1 *E2SmKpmIndicationMessageFormat1 `protobuf:"bytes,1,opt,name=indication_message_format1,json=indicationMessage_Format1,proto3,oneof"`
 }
 
 type IndicationMessageFormats_IndicationMessageFormat2 struct {
 	// @inject_tag: aper:"valueExt,choiceIdx:2"
-	IndicationMessageFormat2 *E2SmKpmIndicationMessageFormat2 `protobuf:"bytes,2,opt,name=indication_message_format2,json=indicationMessage_Format2,proto3,oneof" aper:"valueExt,choiceIdx:2"`
+	IndicationMessageFormat2 *E2SmKpmIndicationMessageFormat2 `protobuf:"bytes,2,opt,name=indication_message_format2,json=indicationMessage_Format2,proto3,oneof"`
 }
 
 func (*IndicationMessageFormats_IndicationMessageFormat1) isIndicationMessageFormats_E2SmKpmIndicationMessage() {
@@ -5370,11 +5370,11 @@ type E2SmKpmIndicationMessageFormat1 struct {
 
 	SubscriptId *SubscriptionId `protobuf:"bytes,1,opt,name=subscript_id,json=subscriptID,proto3" json:"subscript_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	CellObjId *CellObjectId `protobuf:"bytes,2,opt,name=cell_obj_id,json=cellObjID,proto3,oneof" json:"cell_obj_id,omitempty" aper:"optional"`
+	CellObjId *CellObjectId `protobuf:"bytes,2,opt,name=cell_obj_id,json=cellObjID,proto3,oneof" json:"cell_obj_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	GranulPeriod *GranularityPeriod `protobuf:"bytes,3,opt,name=granul_period,json=granulPeriod,proto3,oneof" json:"granul_period,omitempty" aper:"optional"`
+	GranulPeriod *GranularityPeriod `protobuf:"bytes,3,opt,name=granul_period,json=granulPeriod,proto3,oneof" json:"granul_period,omitempty"`
 	// @inject_tag: aper:"optional"
-	MeasInfoList *MeasurementInfoList `protobuf:"bytes,4,opt,name=meas_info_list,json=measInfoList,proto3,oneof" json:"meas_info_list,omitempty" aper:"optional"`
+	MeasInfoList *MeasurementInfoList `protobuf:"bytes,4,opt,name=meas_info_list,json=measInfoList,proto3,oneof" json:"meas_info_list,omitempty"`
 	MeasData     *MeasurementData     `protobuf:"bytes,5,opt,name=meas_data,json=measData,proto3" json:"meas_data,omitempty"`
 }
 
@@ -5454,9 +5454,9 @@ type E2SmKpmIndicationMessageFormat2 struct {
 
 	SubscriptId *SubscriptionId `protobuf:"bytes,1,opt,name=subscript_id,json=subscriptID,proto3" json:"subscript_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	CellObjId *CellObjectId `protobuf:"bytes,2,opt,name=cell_obj_id,json=cellObjID,proto3,oneof" json:"cell_obj_id,omitempty" aper:"optional"`
+	CellObjId *CellObjectId `protobuf:"bytes,2,opt,name=cell_obj_id,json=cellObjID,proto3,oneof" json:"cell_obj_id,omitempty"`
 	// @inject_tag: aper:"optional"
-	GranulPeriod     *GranularityPeriod       `protobuf:"bytes,3,opt,name=granul_period,json=granulPeriod,proto3,oneof" json:"granul_period,omitempty" aper:"optional"`
+	GranulPeriod     *GranularityPeriod       `protobuf:"bytes,3,opt,name=granul_period,json=granulPeriod,proto3,oneof" json:"granul_period,omitempty"`
 	MeasCondUeidList *MeasurementCondUeidList `protobuf:"bytes,4,opt,name=meas_cond_ueid_list,json=measCondUEidList,proto3" json:"meas_cond_ueid_list,omitempty"`
 	MeasData         *MeasurementData         `protobuf:"bytes,5,opt,name=meas_data,json=measData,proto3" json:"meas_data,omitempty"`
 }
@@ -5536,13 +5536,13 @@ type E2SmKpmRanfunctionDescription struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	RanFunctionName *RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty" aper:"valueExt"`
+	RanFunctionName *RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:1024"
-	RicKpmNodeList []*RicKpmnodeItem `protobuf:"bytes,2,rep,name=ric_kpm_node_list,json=ric-KPM-Node-List,proto3" json:"ric_kpm_node_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:1024"`
+	RicKpmNodeList []*RicKpmnodeItem `protobuf:"bytes,2,rep,name=ric_kpm_node_list,json=ric-KPM-Node-List,proto3" json:"ric_kpm_node_list,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-	RicEventTriggerStyleList []*RicEventTriggerStyleItem `protobuf:"bytes,3,rep,name=ric_event_trigger_style_list,json=ric-EventTriggerStyle-List,proto3" json:"ric_event_trigger_style_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:63"`
+	RicEventTriggerStyleList []*RicEventTriggerStyleItem `protobuf:"bytes,3,rep,name=ric_event_trigger_style_list,json=ric-EventTriggerStyle-List,proto3" json:"ric_event_trigger_style_list,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-	RicReportStyleList []*RicReportStyleItem `protobuf:"bytes,4,rep,name=ric_report_style_list,json=ric-ReportStyle-List,proto3" json:"ric_report_style_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:63"`
+	RicReportStyleList []*RicReportStyleItem `protobuf:"bytes,4,rep,name=ric_report_style_list,json=ric-ReportStyle-List,proto3" json:"ric_report_style_list,omitempty"`
 }
 
 func (x *E2SmKpmRanfunctionDescription) Reset() {
@@ -5613,9 +5613,9 @@ type RicKpmnodeItem struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt"
-	RicKpmnodeType *GlobalKpmnodeId `protobuf:"bytes,1,opt,name=ric_kpmnode_type,json=ric-KPMNode-Type,proto3" json:"ric_kpmnode_type,omitempty" aper:"choiceExt"`
+	RicKpmnodeType *GlobalKpmnodeId `protobuf:"bytes,1,opt,name=ric_kpmnode_type,json=ric-KPMNode-Type,proto3" json:"ric_kpmnode_type,omitempty"`
 	// @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
-	CellMeasurementObjectList []*CellMeasurementObjectItem `protobuf:"bytes,2,rep,name=cell_measurement_object_list,json=cell-Measurement-Object-List,proto3" json:"cell_measurement_object_list,omitempty" aper:"optional,valueExt,sizeLB:1,sizeUB:16384"`
+	CellMeasurementObjectList []*CellMeasurementObjectItem `protobuf:"bytes,2,rep,name=cell_measurement_object_list,json=cell-Measurement-Object-List,proto3" json:"cell_measurement_object_list,omitempty"`
 }
 
 func (x *RicKpmnodeItem) Reset() {
@@ -5673,7 +5673,7 @@ type CellMeasurementObjectItem struct {
 
 	CellObjectId *CellObjectId `protobuf:"bytes,1,opt,name=cell_object_id,json=cell-object-ID,proto3" json:"cell_object_id,omitempty"`
 	// @inject_tag: aper:"choiceExt"
-	CellGlobalId *CellGlobalId `protobuf:"bytes,2,opt,name=cell_global_id,json=cell-global-ID,proto3" json:"cell_global_id,omitempty" aper:"choiceExt"`
+	CellGlobalId *CellGlobalId `protobuf:"bytes,2,opt,name=cell_global_id,json=cell-global-ID,proto3" json:"cell_global_id,omitempty"`
 }
 
 func (x *CellMeasurementObjectItem) Reset() {
@@ -5883,7 +5883,7 @@ type RicStyleName struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
-	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:150"`
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *RicStyleName) Reset() {
@@ -5932,7 +5932,7 @@ type CellObjectId struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeExt,sizeLB:0,sizeUB:400"
-	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:0,sizeUB:400"`
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *CellObjectId) Reset() {
@@ -5981,7 +5981,7 @@ type MeasurementTypeName struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
-	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:150"`
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *MeasurementTypeName) Reset() {
@@ -6078,7 +6078,7 @@ type PlmnIdentity struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeLB:3,sizeUB:3"
-	Value []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:3,sizeUB:3"`
+	Value []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *PlmnIdentity) Reset() {
@@ -6127,7 +6127,7 @@ type TimeStamp struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeLB:4,sizeUB:4"
-	Value []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:4,sizeUB:4"`
+	Value []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
 func (x *TimeStamp) Reset() {
@@ -6176,7 +6176,7 @@ type EutracellIdentity struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeLB:28,sizeUB:28"
-	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:28,sizeUB:28"` //28
+	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"` //28
 }
 
 func (x *EutracellIdentity) Reset() {
@@ -6225,7 +6225,7 @@ type NrcellIdentity struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"sizeLB:36,sizeUB:36"
-	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty" aper:"sizeLB:36,sizeUB:36"` //36
+	Value *asn1.BitString `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"` //36
 }
 
 func (x *NrcellIdentity) Reset() {
@@ -7227,7 +7227,10 @@ var file_e2sm_kpm_v2_go_v2_e2sm_kpm_v2_go_proto_rawDesc = []byte{
 	0x64, 0x49, 0x6e, 0x64, 0x12, 0x17, 0x0a, 0x13, 0x53, 0x54, 0x41, 0x52, 0x54, 0x5f, 0x45, 0x4e,
 	0x44, 0x5f, 0x49, 0x4e, 0x44, 0x5f, 0x53, 0x54, 0x41, 0x52, 0x54, 0x10, 0x00, 0x12, 0x15, 0x0a,
 	0x11, 0x53, 0x54, 0x41, 0x52, 0x54, 0x5f, 0x45, 0x4e, 0x44, 0x5f, 0x49, 0x4e, 0x44, 0x5f, 0x45,
-	0x4e, 0x44, 0x10, 0x01, 0x42, 0x22, 0x5a, 0x20, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6b, 0x70, 0x6d,
+	0x4e, 0x44, 0x10, 0x01, 0x42, 0x52, 0x5a, 0x50, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x6f, 0x6e, 0x6f, 0x73, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2f, 0x6f,
+	0x6e, 0x6f, 0x73, 0x2d, 0x65, 0x32, 0x2d, 0x73, 0x6d, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x73, 0x2f, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6b, 0x70, 0x6d,
 	0x5f, 0x76, 0x32, 0x5f, 0x67, 0x6f, 0x2f, 0x76, 0x32, 0x2f, 0x65, 0x32, 0x73, 0x6d, 0x2d, 0x6b,
 	0x70, 0x6d, 0x2d, 0x76, 0x32, 0x2d, 0x67, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }

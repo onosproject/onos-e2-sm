@@ -540,22 +540,22 @@ func (m *Snssai) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	switch m.XSD.(type) {
+	//switch m.XSD.(type) {
+	//
+	//case *Snssai_SD:
 
-	case *Snssai_SD:
-
-		if len(m.GetSD()) != 3 {
-			err := SnssaiValidationError{
-				field:  "SD",
-				reason: "value length must be 3 bytes",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if len(m.GetSD()) != 3 {
+		err := SnssaiValidationError{
+			field:  "SD",
+			reason: "value length must be 3 bytes",
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return SnssaiMultiError(errors)
@@ -1476,376 +1476,376 @@ func (m *MeasurementLabel) validate(all bool) error {
 
 	var errors []error
 
-	switch m.XPlmnId.(type) {
+	//switch m.XPlmnId.(type) {
+	//
+	//case *MeasurementLabel_PlmnId:
 
-	case *MeasurementLabel_PlmnId:
-
-		if all {
-			switch v := interface{}(m.GetPlmnId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "PlmnId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "PlmnId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetPlmnId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetPlmnId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "PlmnId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "PlmnId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetPlmnId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "PlmnId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XSliceId.(type) {
+	//}
+	//
+	//switch m.XSliceId.(type) {
+	//
+	//case *MeasurementLabel_SliceId:
 
-	case *MeasurementLabel_SliceId:
-
-		if all {
-			switch v := interface{}(m.GetSliceId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "SliceId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "SliceId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetSliceId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetSliceId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "SliceId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "SliceId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetSliceId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "SliceId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XFiveQi.(type) {
+	//}
+	//
+	//switch m.XFiveQi.(type) {
+	//
+	//case *MeasurementLabel_FiveQi:
 
-	case *MeasurementLabel_FiveQi:
-
-		if all {
-			switch v := interface{}(m.GetFiveQi()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "FiveQi",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "FiveQi",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetFiveQi()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetFiveQi()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "FiveQi",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "FiveQi",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetFiveQi()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "FiveQi",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XQFi.(type) {
+	//}
+	//
+	//switch m.XQFi.(type) {
+	//
+	//case *MeasurementLabel_QFi:
 
-	case *MeasurementLabel_QFi:
-
-		if all {
-			switch v := interface{}(m.GetQFi()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QFi",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QFi",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetQFi()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetQFi()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "QFi",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "QFi",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetQFi()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "QFi",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XQCi.(type) {
+	//}
+	//
+	//switch m.XQCi.(type) {
+	//
+	//case *MeasurementLabel_QCi:
 
-	case *MeasurementLabel_QCi:
-
-		if all {
-			switch v := interface{}(m.GetQCi()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QCi",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QCi",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetQCi()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetQCi()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "QCi",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "QCi",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetQCi()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "QCi",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XQCimax.(type) {
+	//}
+	//
+	//switch m.XQCimax.(type) {
+	//
+	//case *MeasurementLabel_QCimax:
 
-	case *MeasurementLabel_QCimax:
-
-		if all {
-			switch v := interface{}(m.GetQCimax()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QCimax",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QCimax",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetQCimax()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetQCimax()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "QCimax",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "QCimax",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetQCimax()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "QCimax",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XQCimin.(type) {
+	//}
+	//
+	//switch m.XQCimin.(type) {
+	//
+	//case *MeasurementLabel_QCimin:
 
-	case *MeasurementLabel_QCimin:
-
-		if all {
-			switch v := interface{}(m.GetQCimin()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QCimin",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "QCimin",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetQCimin()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetQCimin()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "QCimin",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "QCimin",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetQCimin()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "QCimin",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XARpmax.(type) {
+	//}
+	//
+	//switch m.XARpmax.(type) {
+	//
+	//case *MeasurementLabel_ARpmax:
 
-	case *MeasurementLabel_ARpmax:
-
-		if all {
-			switch v := interface{}(m.GetARpmax()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "ARpmax",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "ARpmax",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetARpmax()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetARpmax()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "ARpmax",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "ARpmax",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetARpmax()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "ARpmax",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XARpmin.(type) {
+	//}
+	//
+	//switch m.XARpmin.(type) {
+	//
+	//case *MeasurementLabel_ARpmin:
 
-	case *MeasurementLabel_ARpmin:
-
-		if all {
-			switch v := interface{}(m.GetARpmin()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "ARpmin",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementLabelValidationError{
-						field:  "ARpmin",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetARpmin()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementLabelValidationError{
+	if all {
+		switch v := interface{}(m.GetARpmin()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
 					field:  "ARpmin",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementLabelValidationError{
+					field:  "ARpmin",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetARpmin()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementLabelValidationError{
+				field:  "ARpmin",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XBitrateRange.(type) {
+	//}
 
-	case *MeasurementLabel_BitrateRange:
-		// no validation rules for BitrateRange
-
-	}
-
-	switch m.XLayerMuMimo.(type) {
-
-	case *MeasurementLabel_LayerMuMimo:
-		// no validation rules for LayerMuMimo
-
-	}
-
-	switch m.XSUm.(type) {
-
-	case *MeasurementLabel_SUm:
-		// no validation rules for SUm
-
-	}
-
-	switch m.XDistBinX.(type) {
-
-	case *MeasurementLabel_DistBinX:
-		// no validation rules for DistBinX
-
-	}
-
-	switch m.XDistBinY.(type) {
-
-	case *MeasurementLabel_DistBinY:
-		// no validation rules for DistBinY
-
-	}
-
-	switch m.XDistBinZ.(type) {
-
-	case *MeasurementLabel_DistBinZ:
-		// no validation rules for DistBinZ
-
-	}
-
-	switch m.XPreLabelOverride.(type) {
-
-	case *MeasurementLabel_PreLabelOverride:
-		// no validation rules for PreLabelOverride
-
-	}
-
-	switch m.XStartEndInd.(type) {
-
-	case *MeasurementLabel_StartEndInd:
-		// no validation rules for StartEndInd
-
-	}
+	//switch m.XBitrateRange.(type) {
+	//
+	//case *MeasurementLabel_BitrateRange:
+	//	// no validation rules for BitrateRange
+	//
+	//}
+	//
+	//switch m.XLayerMuMimo.(type) {
+	//
+	//case *MeasurementLabel_LayerMuMimo:
+	//	// no validation rules for LayerMuMimo
+	//
+	//}
+	//
+	//switch m.XSUm.(type) {
+	//
+	//case *MeasurementLabel_SUm:
+	//	// no validation rules for SUm
+	//
+	//}
+	//
+	//switch m.XDistBinX.(type) {
+	//
+	//case *MeasurementLabel_DistBinX:
+	//	// no validation rules for DistBinX
+	//
+	//}
+	//
+	//switch m.XDistBinY.(type) {
+	//
+	//case *MeasurementLabel_DistBinY:
+	//	// no validation rules for DistBinY
+	//
+	//}
+	//
+	//switch m.XDistBinZ.(type) {
+	//
+	//case *MeasurementLabel_DistBinZ:
+	//	// no validation rules for DistBinZ
+	//
+	//}
+	//
+	//switch m.XPreLabelOverride.(type) {
+	//
+	//case *MeasurementLabel_PreLabelOverride:
+	//	// no validation rules for PreLabelOverride
+	//
+	//}
+	//
+	//switch m.XStartEndInd.(type) {
+	//
+	//case *MeasurementLabel_StartEndInd:
+	//	// no validation rules for StartEndInd
+	//
+	//}
 
 	if len(errors) > 0 {
 		return MeasurementLabelMultiError(errors)
@@ -2739,75 +2739,75 @@ func (m *GlobalKpmnodeGnbId) validate(all bool) error {
 		}
 	}
 
-	switch m.XGNbCuUpId.(type) {
+	//switch m.XGNbCuUpId.(type) {
+	//
+	//case *GlobalKpmnodeGnbId_GNbCuUpId:
 
-	case *GlobalKpmnodeGnbId_GNbCuUpId:
-
-		if all {
-			switch v := interface{}(m.GetGNbCuUpId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GlobalKpmnodeGnbIdValidationError{
-						field:  "GNbCuUpId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GlobalKpmnodeGnbIdValidationError{
-						field:  "GNbCuUpId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetGNbCuUpId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GlobalKpmnodeGnbIdValidationError{
+	if all {
+		switch v := interface{}(m.GetGNbCuUpId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GlobalKpmnodeGnbIdValidationError{
 					field:  "GNbCuUpId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GlobalKpmnodeGnbIdValidationError{
+					field:  "GNbCuUpId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetGNbCuUpId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GlobalKpmnodeGnbIdValidationError{
+				field:  "GNbCuUpId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XGNbDuId.(type) {
+	//}
+	//
+	//switch m.XGNbDuId.(type) {
+	//
+	//case *GlobalKpmnodeGnbId_GNbDuId:
 
-	case *GlobalKpmnodeGnbId_GNbDuId:
-
-		if all {
-			switch v := interface{}(m.GetGNbDuId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GlobalKpmnodeGnbIdValidationError{
-						field:  "GNbDuId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GlobalKpmnodeGnbIdValidationError{
-						field:  "GNbDuId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetGNbDuId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GlobalKpmnodeGnbIdValidationError{
+	if all {
+		switch v := interface{}(m.GetGNbDuId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GlobalKpmnodeGnbIdValidationError{
 					field:  "GNbDuId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GlobalKpmnodeGnbIdValidationError{
+					field:  "GNbDuId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetGNbDuId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GlobalKpmnodeGnbIdValidationError{
+				field:  "GNbDuId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return GlobalKpmnodeGnbIdMultiError(errors)
@@ -3445,75 +3445,75 @@ func (m *GlobalKpmnodeEnGnbId) validate(all bool) error {
 		}
 	}
 
-	switch m.XGNbCuUpId.(type) {
+	//switch m.XGNbCuUpId.(type) {
+	//
+	//case *GlobalKpmnodeEnGnbId_GNbCuUpId:
 
-	case *GlobalKpmnodeEnGnbId_GNbCuUpId:
-
-		if all {
-			switch v := interface{}(m.GetGNbCuUpId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
-						field:  "GNbCuUpId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
-						field:  "GNbCuUpId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetGNbCuUpId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GlobalKpmnodeEnGnbIdValidationError{
+	if all {
+		switch v := interface{}(m.GetGNbCuUpId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
 					field:  "GNbCuUpId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
+					field:  "GNbCuUpId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetGNbCuUpId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GlobalKpmnodeEnGnbIdValidationError{
+				field:  "GNbCuUpId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XGNbDuId.(type) {
+	//}
+	//
+	//switch m.XGNbDuId.(type) {
+	//
+	//case *GlobalKpmnodeEnGnbId_GNbDuId:
 
-	case *GlobalKpmnodeEnGnbId_GNbDuId:
-
-		if all {
-			switch v := interface{}(m.GetGNbDuId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
-						field:  "GNbDuId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
-						field:  "GNbDuId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetGNbDuId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GlobalKpmnodeEnGnbIdValidationError{
+	if all {
+		switch v := interface{}(m.GetGNbDuId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
 					field:  "GNbDuId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GlobalKpmnodeEnGnbIdValidationError{
+					field:  "GNbDuId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetGNbDuId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GlobalKpmnodeEnGnbIdValidationError{
+				field:  "GNbDuId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return GlobalKpmnodeEnGnbIdMultiError(errors)
@@ -3934,40 +3934,40 @@ func (m *GlobalKpmnodeNgEnbId) validate(all bool) error {
 		}
 	}
 
-	switch m.XGNbDuId.(type) {
+	//switch m.XGNbDuId.(type) {
+	//
+	//case *GlobalKpmnodeNgEnbId_GNbDuId:
 
-	case *GlobalKpmnodeNgEnbId_GNbDuId:
-
-		if all {
-			switch v := interface{}(m.GetGNbDuId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GlobalKpmnodeNgEnbIdValidationError{
-						field:  "GNbDuId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, GlobalKpmnodeNgEnbIdValidationError{
-						field:  "GNbDuId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetGNbDuId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GlobalKpmnodeNgEnbIdValidationError{
+	if all {
+		switch v := interface{}(m.GetGNbDuId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GlobalKpmnodeNgEnbIdValidationError{
 					field:  "GNbDuId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GlobalKpmnodeNgEnbIdValidationError{
+					field:  "GNbDuId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetGNbDuId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GlobalKpmnodeNgEnbIdValidationError{
+				field:  "GNbDuId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return GlobalKpmnodeNgEnbIdMultiError(errors)
@@ -4962,12 +4962,12 @@ func (m *RanfunctionName) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	switch m.XRanFunctionInstance.(type) {
-
-	case *RanfunctionName_RanFunctionInstance:
-		// no validation rules for RanFunctionInstance
-
-	}
+	//switch m.XRanFunctionInstance.(type) {
+	//
+	//case *RanfunctionName_RanFunctionInstance:
+	//	// no validation rules for RanFunctionInstance
+	//
+	//}
 
 	if len(errors) > 0 {
 		return RanfunctionNameMultiError(errors)
@@ -6447,40 +6447,40 @@ func (m *MeasurementInfoItem) validate(all bool) error {
 		}
 	}
 
-	switch m.XLabelInfoList.(type) {
+	//switch m.XLabelInfoList.(type) {
+	//
+	//case *MeasurementInfoItem_LabelInfoList:
 
-	case *MeasurementInfoItem_LabelInfoList:
-
-		if all {
-			switch v := interface{}(m.GetLabelInfoList()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementInfoItemValidationError{
-						field:  "LabelInfoList",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementInfoItemValidationError{
-						field:  "LabelInfoList",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetLabelInfoList()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementInfoItemValidationError{
+	if all {
+		switch v := interface{}(m.GetLabelInfoList()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementInfoItemValidationError{
 					field:  "LabelInfoList",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementInfoItemValidationError{
+					field:  "LabelInfoList",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetLabelInfoList()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementInfoItemValidationError{
+				field:  "LabelInfoList",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return MeasurementInfoItemMultiError(errors)
@@ -7006,12 +7006,12 @@ func (m *MeasurementDataItem) validate(all bool) error {
 		}
 	}
 
-	switch m.XIncompleteFlag.(type) {
-
-	case *MeasurementDataItem_IncompleteFlag:
-		// no validation rules for IncompleteFlag
-
-	}
+	//switch m.XIncompleteFlag.(type) {
+	//
+	//case *MeasurementDataItem_IncompleteFlag:
+	//	// no validation rules for IncompleteFlag
+	//
+	//}
 
 	if len(errors) > 0 {
 		return MeasurementDataItemMultiError(errors)
@@ -7527,40 +7527,40 @@ func (m *MeasurementInfoActionItem) validate(all bool) error {
 		}
 	}
 
-	switch m.XMeasId.(type) {
+	//switch m.XMeasId.(type) {
+	//
+	//case *MeasurementInfoActionItem_MeasId:
 
-	case *MeasurementInfoActionItem_MeasId:
-
-		if all {
-			switch v := interface{}(m.GetMeasId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementInfoActionItemValidationError{
-						field:  "MeasId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementInfoActionItemValidationError{
-						field:  "MeasId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetMeasId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementInfoActionItemValidationError{
+	if all {
+		switch v := interface{}(m.GetMeasId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementInfoActionItemValidationError{
 					field:  "MeasId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementInfoActionItemValidationError{
+					field:  "MeasId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetMeasId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementInfoActionItemValidationError{
+				field:  "MeasId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return MeasurementInfoActionItemMultiError(errors)
@@ -8150,40 +8150,40 @@ func (m *MeasurementCondUeidItem) validate(all bool) error {
 		}
 	}
 
-	switch m.XMatchingUeidList.(type) {
+	//switch m.XMatchingUeidList.(type) {
+	//
+	//case *MeasurementCondUeidItem_MatchingUeidList:
 
-	case *MeasurementCondUeidItem_MatchingUeidList:
-
-		if all {
-			switch v := interface{}(m.GetMatchingUeidList()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, MeasurementCondUeidItemValidationError{
-						field:  "MatchingUeidList",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, MeasurementCondUeidItemValidationError{
-						field:  "MatchingUeidList",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetMatchingUeidList()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return MeasurementCondUeidItemValidationError{
+	if all {
+		switch v := interface{}(m.GetMatchingUeidList()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, MeasurementCondUeidItemValidationError{
 					field:  "MatchingUeidList",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, MeasurementCondUeidItemValidationError{
+					field:  "MatchingUeidList",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetMatchingUeidList()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MeasurementCondUeidItemValidationError{
+				field:  "MatchingUeidList",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return MeasurementCondUeidItemMultiError(errors)
@@ -10467,108 +10467,108 @@ func (m *E2SmKpmIndicationHeaderFormat1) validate(all bool) error {
 		}
 	}
 
-	switch m.XFileFormatversion.(type) {
+	//switch m.XFileFormatversion.(type) {
+	//
+	//case *E2SmKpmIndicationHeaderFormat1_FileFormatversion:
 
-	case *E2SmKpmIndicationHeaderFormat1_FileFormatversion:
-
-		if l := utf8.RuneCountInString(m.GetFileFormatversion()); l < 0 || l > 15 {
-			err := E2SmKpmIndicationHeaderFormat1ValidationError{
-				field:  "FileFormatversion",
-				reason: "value length must be between 0 and 15 runes, inclusive",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if l := utf8.RuneCountInString(m.GetFileFormatversion()); l < 0 || l > 15 {
+		err := E2SmKpmIndicationHeaderFormat1ValidationError{
+			field:  "FileFormatversion",
+			reason: "value length must be between 0 and 15 runes, inclusive",
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
-	switch m.XSenderName.(type) {
+	//}
+	//
+	//switch m.XSenderName.(type) {
+	//
+	//case *E2SmKpmIndicationHeaderFormat1_SenderName:
 
-	case *E2SmKpmIndicationHeaderFormat1_SenderName:
-
-		if l := utf8.RuneCountInString(m.GetSenderName()); l < 0 || l > 400 {
-			err := E2SmKpmIndicationHeaderFormat1ValidationError{
-				field:  "SenderName",
-				reason: "value length must be between 0 and 400 runes, inclusive",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if l := utf8.RuneCountInString(m.GetSenderName()); l < 0 || l > 400 {
+		err := E2SmKpmIndicationHeaderFormat1ValidationError{
+			field:  "SenderName",
+			reason: "value length must be between 0 and 400 runes, inclusive",
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
-	switch m.XSenderType.(type) {
+	//}
+	//
+	//switch m.XSenderType.(type) {
+	//
+	//case *E2SmKpmIndicationHeaderFormat1_SenderType:
 
-	case *E2SmKpmIndicationHeaderFormat1_SenderType:
-
-		if l := utf8.RuneCountInString(m.GetSenderType()); l < 0 || l > 8 {
-			err := E2SmKpmIndicationHeaderFormat1ValidationError{
-				field:  "SenderType",
-				reason: "value length must be between 0 and 8 runes, inclusive",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if l := utf8.RuneCountInString(m.GetSenderType()); l < 0 || l > 8 {
+		err := E2SmKpmIndicationHeaderFormat1ValidationError{
+			field:  "SenderType",
+			reason: "value length must be between 0 and 8 runes, inclusive",
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
-	switch m.XVendorName.(type) {
+	//}
+	//
+	//switch m.XVendorName.(type) {
+	//
+	//case *E2SmKpmIndicationHeaderFormat1_VendorName:
 
-	case *E2SmKpmIndicationHeaderFormat1_VendorName:
-
-		if l := utf8.RuneCountInString(m.GetVendorName()); l < 0 || l > 32 {
-			err := E2SmKpmIndicationHeaderFormat1ValidationError{
-				field:  "VendorName",
-				reason: "value length must be between 0 and 32 runes, inclusive",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
+	if l := utf8.RuneCountInString(m.GetVendorName()); l < 0 || l > 32 {
+		err := E2SmKpmIndicationHeaderFormat1ValidationError{
+			field:  "VendorName",
+			reason: "value length must be between 0 and 32 runes, inclusive",
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
-	switch m.XKpmNodeId.(type) {
+	//}
+	//
+	//switch m.XKpmNodeId.(type) {
+	//
+	//case *E2SmKpmIndicationHeaderFormat1_KpmNodeId:
 
-	case *E2SmKpmIndicationHeaderFormat1_KpmNodeId:
-
-		if all {
-			switch v := interface{}(m.GetKpmNodeId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmKpmIndicationHeaderFormat1ValidationError{
-						field:  "KpmNodeId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmKpmIndicationHeaderFormat1ValidationError{
-						field:  "KpmNodeId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetKpmNodeId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return E2SmKpmIndicationHeaderFormat1ValidationError{
+	if all {
+		switch v := interface{}(m.GetKpmNodeId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, E2SmKpmIndicationHeaderFormat1ValidationError{
 					field:  "KpmNodeId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, E2SmKpmIndicationHeaderFormat1ValidationError{
+					field:  "KpmNodeId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetKpmNodeId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmKpmIndicationHeaderFormat1ValidationError{
+				field:  "KpmNodeId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return E2SmKpmIndicationHeaderFormat1MultiError(errors)
@@ -11027,110 +11027,110 @@ func (m *E2SmKpmIndicationMessageFormat1) validate(all bool) error {
 		}
 	}
 
-	switch m.XCellObjId.(type) {
+	//switch m.XCellObjId.(type) {
+	//
+	//case *E2SmKpmIndicationMessageFormat1_CellObjId:
 
-	case *E2SmKpmIndicationMessageFormat1_CellObjId:
-
-		if all {
-			switch v := interface{}(m.GetCellObjId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
-						field:  "CellObjId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
-						field:  "CellObjId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetCellObjId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return E2SmKpmIndicationMessageFormat1ValidationError{
+	if all {
+		switch v := interface{}(m.GetCellObjId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
 					field:  "CellObjId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
+					field:  "CellObjId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetCellObjId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmKpmIndicationMessageFormat1ValidationError{
+				field:  "CellObjId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XGranulPeriod.(type) {
+	//}
 
-	case *E2SmKpmIndicationMessageFormat1_GranulPeriod:
+	//switch m.XGranulPeriod.(type) {
+	//
+	//case *E2SmKpmIndicationMessageFormat1_GranulPeriod:
 
-		if all {
-			switch v := interface{}(m.GetGranulPeriod()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
-						field:  "GranulPeriod",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
-						field:  "GranulPeriod",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetGranulPeriod()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return E2SmKpmIndicationMessageFormat1ValidationError{
+	if all {
+		switch v := interface{}(m.GetGranulPeriod()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
 					field:  "GranulPeriod",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
+					field:  "GranulPeriod",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetGranulPeriod()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmKpmIndicationMessageFormat1ValidationError{
+				field:  "GranulPeriod",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XMeasInfoList.(type) {
+	//}
+	//
+	//switch m.XMeasInfoList.(type) {
+	//
+	//case *E2SmKpmIndicationMessageFormat1_MeasInfoList:
 
-	case *E2SmKpmIndicationMessageFormat1_MeasInfoList:
-
-		if all {
-			switch v := interface{}(m.GetMeasInfoList()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
-						field:  "MeasInfoList",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
-						field:  "MeasInfoList",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetMeasInfoList()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return E2SmKpmIndicationMessageFormat1ValidationError{
+	if all {
+		switch v := interface{}(m.GetMeasInfoList()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
 					field:  "MeasInfoList",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat1ValidationError{
+					field:  "MeasInfoList",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetMeasInfoList()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmKpmIndicationMessageFormat1ValidationError{
+				field:  "MeasInfoList",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return E2SmKpmIndicationMessageFormat1MultiError(errors)
@@ -11321,75 +11321,75 @@ func (m *E2SmKpmIndicationMessageFormat2) validate(all bool) error {
 		}
 	}
 
-	switch m.XCellObjId.(type) {
+	//switch m.XCellObjId.(type) {
+	//
+	//case *E2SmKpmIndicationMessageFormat2_CellObjId:
 
-	case *E2SmKpmIndicationMessageFormat2_CellObjId:
-
-		if all {
-			switch v := interface{}(m.GetCellObjId()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
-						field:  "CellObjId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
-						field:  "CellObjId",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetCellObjId()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return E2SmKpmIndicationMessageFormat2ValidationError{
+	if all {
+		switch v := interface{}(m.GetCellObjId()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
 					field:  "CellObjId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
+					field:  "CellObjId",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetCellObjId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmKpmIndicationMessageFormat2ValidationError{
+				field:  "CellObjId",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
-	switch m.XGranulPeriod.(type) {
+	//}
+	//
+	//switch m.XGranulPeriod.(type) {
+	//
+	//case *E2SmKpmIndicationMessageFormat2_GranulPeriod:
 
-	case *E2SmKpmIndicationMessageFormat2_GranulPeriod:
-
-		if all {
-			switch v := interface{}(m.GetGranulPeriod()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
-						field:  "GranulPeriod",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
-						field:  "GranulPeriod",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetGranulPeriod()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return E2SmKpmIndicationMessageFormat2ValidationError{
+	if all {
+		switch v := interface{}(m.GetGranulPeriod()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
 					field:  "GranulPeriod",
 					reason: "embedded message failed validation",
 					cause:  err,
-				}
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, E2SmKpmIndicationMessageFormat2ValidationError{
+					field:  "GranulPeriod",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
 			}
 		}
-
+	} else if v, ok := interface{}(m.GetGranulPeriod()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return E2SmKpmIndicationMessageFormat2ValidationError{
+				field:  "GranulPeriod",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
+
+	//}
 
 	if len(errors) > 0 {
 		return E2SmKpmIndicationMessageFormat2MultiError(errors)

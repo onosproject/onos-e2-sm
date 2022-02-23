@@ -21,7 +21,7 @@ protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
 #  e2sm_kpm_v2/v2/e2sm_kpm_v2.proto
 #protoc-go-inject-tag -input=servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2/e2sm_kpm_v2.pb.go
 
-protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
   --proto_path=servicemodels \
   --go_out=./servicemodels/ \
   e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto
