@@ -4,10 +4,10 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmMhoControlMessage(servingCgi *e2sm_v2_ies.Cgi, uedID *e2sm_v2_ies.Ueid, targetCgi *e2sm_v2_ies.Cgi) (*e2sm_mho_go.E2SmMhoControlMessage, error) {
@@ -25,7 +25,7 @@ func CreateE2SmMhoControlMessage(servingCgi *e2sm_v2_ies.Cgi, uedID *e2sm_v2_ies
 	}
 
 	if err := e2smMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoControlMessage(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoControlMessage(): error validating E2SmPDU %s", err.Error())
 	}
 	return &e2smMhoPdu, nil
 }
@@ -33,22 +33,22 @@ func CreateE2SmMhoControlMessage(servingCgi *e2sm_v2_ies.Cgi, uedID *e2sm_v2_ies
 func CreateUeIDGNb(amf int64, plmnID []byte, amfRegionID []byte, amfSetID []byte, amfPointer []byte) (*e2sm_v2_ies.Ueid, error) {
 
 	if len(plmnID) != 3 {
-		return nil, fmt.Errorf("CreateUeIDGNb() PlmnID should contain only 3 bytes, got %v", len(plmnID))
+		return nil, errors.NewInvalid("CreateUeIDGNb() PlmnID should contain only 3 bytes, got %v", len(plmnID))
 	}
 	if len(amfRegionID) != 1 {
-		return nil, fmt.Errorf("CreateUeIDGNb() AMfRegionID should contain only 1 byte, got %v", len(amfRegionID))
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfRegionID should contain only 1 byte, got %v", len(amfRegionID))
 	}
 	if len(amfSetID) != 2 {
-		return nil, fmt.Errorf("CreateUeIDGNb() AMfSetID should contain only 2 bytes, got %v", len(amfSetID))
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfSetID should contain only 2 bytes, got %v", len(amfSetID))
 	}
 	if amfSetID[1]&0x3F > 0 {
-		return nil, fmt.Errorf("CreateUeIDGNb() AMfSetID should contain only 10 bits, i.e., last 6 bits of last byte should be trailing zeros, got %v", amfSetID[1])
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfSetID should contain only 10 bits, i.e., last 6 bits of last byte should be trailing zeros, got %v", amfSetID[1])
 	}
 	if len(amfPointer) != 1 {
-		return nil, fmt.Errorf("CreateUeIDGNb() AMfPointer should contain only 1 byte, got %v", len(amfPointer))
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfPointer should contain only 1 byte, got %v", len(amfPointer))
 	}
 	if amfPointer[0]&0x03 > 0 {
-		return nil, fmt.Errorf("CreateUeIDGNb() AMfSetID should contain only 6 bits, i.e., last 2 bits should be trailing zeros, got %v", amfPointer)
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfSetID should contain only 6 bits, i.e., last 2 bits should be trailing zeros, got %v", amfPointer)
 	}
 
 	ueID := &e2sm_v2_ies.Ueid{
@@ -85,7 +85,7 @@ func CreateUeIDGNb(amf int64, plmnID []byte, amfRegionID []byte, amfSetID []byte
 	}
 
 	if err := ueID.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateUeIDGNb() validation of UeID failed with %v", err)
+		return nil, errors.NewInvalid("CreateUeIDGNb() validation of UeID failed with %v", err)
 	}
 
 	return ueID, nil

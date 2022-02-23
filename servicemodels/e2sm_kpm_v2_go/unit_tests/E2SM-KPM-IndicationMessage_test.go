@@ -75,7 +75,11 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	if err != nil {
 		return nil, err
 	}
-	measInfoItem := pdubuilder.CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := pdubuilder.CreateMeasurementInfoItem(measName)
+	if err != nil {
+		return nil, err
+	}
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -100,10 +104,14 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData).SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
-	//if err := newE2SmKpmPdu.Validate(); err != nil {
-	//	return nil, err
-	//}
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu.SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
+	if err = newE2SmKpmPdu.Validate(); err != nil {
+		return nil, err
+	}
 	return newE2SmKpmPdu, nil
 }
 
@@ -166,10 +174,14 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData).SetCellObjectID(cellObjID).SetGranularityPeriod(granularity)
-	//if err := newE2SmKpmPdu.Validate(); err != nil {
-	//	return nil, err
-	//}
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu.SetCellObjectID(cellObjID).SetGranularityPeriod(granularity)
+	if err := newE2SmKpmPdu.Validate(); err != nil {
+		return nil, err
+	}
 	return newE2SmKpmPdu, nil
 }
 

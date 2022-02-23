@@ -5,6 +5,7 @@ package pdubuilder
 
 import (
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName string, ranFunctionE2SmOid string, ranFunctionDescription string) (*e2sm_rc_pre_go.E2SmRcPreRanfunctionDescription, error) {
@@ -19,9 +20,9 @@ func CreateE2SmRcPreRanfunctionDescriptionMsg(ranFunctionShortName string, ranFu
 		E2SmRcPreRanfunctionItem: &e2sm_rc_pre_go.E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001{},
 	}
 
-	//if err := e2smRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smRcPrePdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smRcPrePdu, nil
 }
 

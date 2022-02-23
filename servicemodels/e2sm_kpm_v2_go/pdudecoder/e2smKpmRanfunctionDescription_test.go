@@ -84,7 +84,11 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl).SetRicReportStyleList(rrsl).SetRicKpmNodeList(rknl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu.SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl).SetRicReportStyleList(rrsl).SetRicKpmNodeList(rknl)
 	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil

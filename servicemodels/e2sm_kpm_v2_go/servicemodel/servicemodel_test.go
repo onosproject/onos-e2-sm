@@ -44,8 +44,8 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	newE2SmKpmPdu.SetFileFormatVersion(fileFormatVersion).SetSenderName(senderName).SetSenderType(senderType).SetVendorName(vendorName).SetGlobalKPMnodeID(globalKpmNodeID)
 	assert.NilError(t, err)
 
-	//err = newE2SmKpmPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = newE2SmKpmPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
 	assert.NilError(t, err, "unexpected error marshalling E2SmKpmIndicationHeader to bytes")
@@ -113,7 +113,9 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 
 	measName, err := pdubuilder.CreateMeasurementTypeMeasName(measurementName)
 	assert.NilError(t, err)
-	measInfoItem := pdubuilder.CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := pdubuilder.CreateMeasurementInfoItem(measName)
+	assert.NilError(t, err)
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -136,11 +138,13 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData).SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
+	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	newE2SmKpmPdu.SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
 
-	//err = newE2SmKpmPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = newE2SmKpmPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
@@ -240,12 +244,13 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl).SetRicEventTriggerStyleList(retsl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	newE2SmKpmPdu.SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl).SetRicEventTriggerStyleList(retsl)
 
-	//err = newE2SmKpmPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = newE2SmKpmPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)
@@ -285,8 +290,8 @@ func TestServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, e2SmKpmEventTriggerDefinition != nil, "Created E2SmPDU is nil")
 
-	//err = e2SmKpmEventTriggerDefinition.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = e2SmKpmEventTriggerDefinition.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(e2SmKpmEventTriggerDefinition)
@@ -352,8 +357,8 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	assert.NilError(t, err, "error creating E2SmPDU")
 	assert.Assert(t, newE2SmKpmPdu != nil, "Created E2SmPDU is nil")
 
-	//err = newE2SmKpmPdu.Validate()
-	//assert.NilError(t, err, "error validating E2SmPDU")
+	err = newE2SmKpmPdu.Validate()
+	assert.NilError(t, err, "error validating E2SmPDU")
 
 	assert.NilError(t, err)
 	protoBytes, err := proto.Marshal(newE2SmKpmPdu)

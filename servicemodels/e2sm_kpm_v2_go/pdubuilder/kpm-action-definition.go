@@ -4,9 +4,9 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmKpmActionDefinitionFormat1(ricStyleType int32,
@@ -23,9 +23,9 @@ func CreateE2SmKpmActionDefinitionFormat1(ricStyleType int32,
 		},
 	}
 
-	//if err := e2SmKpmPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinition %s", err.Error())
-	//}
+	if err := e2SmKpmPdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmKpmActionDefinitionFormat1(): error validating E2SmKpmActionDefinition %s", err.Error())
+	}
 	return &e2SmKpmPdu, nil
 }
 
@@ -43,9 +43,9 @@ func CreateE2SmKpmActionDefinitionFormat2(ricStyleType int32,
 		},
 	}
 
-	//if err := e2SmKpmPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinition %s", err.Error())
-	//}
+	if err := e2SmKpmPdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmKpmActionDefinitionFormat2(): error validating E2SmKpmActionDefinition %s", err.Error())
+	}
 	return &e2SmKpmPdu, nil
 }
 
@@ -63,9 +63,9 @@ func CreateE2SmKpmActionDefinitionFormat3(ricStyleType int32,
 		},
 	}
 
-	//if err := e2SmKpmPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinition %s", err.Error())
-	//}
+	if err := e2SmKpmPdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmKpmActionDefinitionFormat3(): error validating E2SmKpmActionDefinition %s", err.Error())
+	}
 	return &e2SmKpmPdu, nil
 }
 
@@ -85,10 +85,9 @@ func CreateActionDefinitionFormat1(cellObjID string, measInfoList *e2sm_kpm_v2_g
 		},
 	}
 
-	//if err := actionDefinitionFormat1.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinitionFormat1 %s", err.Error())
-	//}
-
+	if err := actionDefinitionFormat1.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateActionDefinitionFormat1(): error validating E2SmKpmActionDefinitionFormat1 %s", err.Error())
+	}
 	return &actionDefinitionFormat1, nil
 }
 
@@ -101,10 +100,9 @@ func CreateActionDefinitionFormat2(ueID []byte, actionDefinitionFormat1 *e2sm_kp
 		SubscriptInfo: actionDefinitionFormat1,
 	}
 
-	//if err := actionDefinitionFormat2.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinitionFormat2 %s", err.Error())
-	//}
-
+	if err := actionDefinitionFormat2.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateActionDefinitionFormat2(): error validating E2SmKpmActionDefinitionFormat2 %s", err.Error())
+	}
 	return &actionDefinitionFormat2, nil
 }
 
@@ -124,24 +122,22 @@ func CreateActionDefinitionFormat3(cellObjID string, measCondList *e2sm_kpm_v2_g
 		},
 	}
 
-	//if err := actionDefinitionFormat3.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinitionFormat3 %s", err.Error())
-	//}
-
+	if err := actionDefinitionFormat3.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateActionDefinitionFormat3(): error validating E2SmKpmActionDefinitionFormat3 %s", err.Error())
+	}
 	return &actionDefinitionFormat3, nil
 }
 
-func CreateMeasurementInfoItem(measType *e2sm_kpm_v2_go.MeasurementType) *e2sm_kpm_v2_go.MeasurementInfoItem {
+func CreateMeasurementInfoItem(measType *e2sm_kpm_v2_go.MeasurementType) (*e2sm_kpm_v2_go.MeasurementInfoItem, error) {
 
 	item := e2sm_kpm_v2_go.MeasurementInfoItem{
 		MeasType: measType,
 	}
 
-	//if err := item.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating MeasurementInfoItem %s", err.Error())
-	//}
-
-	return &item
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMeasurementInfoItem(): error validating MeasurementInfoItem %s", err.Error())
+	}
+	return &item, nil
 }
 
 func CreateMeasurementTypeMeasID(measTypeID int32) (*e2sm_kpm_v2_go.MeasurementType, error) {
@@ -153,10 +149,9 @@ func CreateMeasurementTypeMeasID(measTypeID int32) (*e2sm_kpm_v2_go.MeasurementT
 		},
 	}
 
-	//if err := measType.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating MeasurementType %s", err.Error())
-	//}
-
+	if err := measType.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMeasurementTypeMeasID(): error validating MeasurementType %s", err.Error())
+	}
 	return &measType, nil
 }
 
@@ -169,17 +164,16 @@ func CreateMeasurementTypeMeasName(measName string) (*e2sm_kpm_v2_go.Measurement
 		},
 	}
 
-	//if err := measType.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating MeasurementType %s", err.Error())
-	//}
-
+	if err := measType.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMeasurementTypeMeasName(): error validating MeasurementType %s", err.Error())
+	}
 	return &measType, nil
 }
 
 func CreateSnssai(sst []byte) (*e2sm_kpm_v2_go.Snssai, error) {
 
 	if len(sst) != 1 {
-		return nil, fmt.Errorf("SST should be of length 1 byte, got %d", len(sst))
+		return nil, errors.NewInvalid("SST should be of length 1 byte, got %d", len(sst))
 	}
 	return &e2sm_kpm_v2_go.Snssai{
 		SSt: sst,
@@ -196,7 +190,7 @@ func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI *int32, qf
 
 	if plmnID != nil {
 		if len(plmnID) != 3 {
-			return nil, fmt.Errorf("error: Plmn ID should be 3 chars")
+			return nil, errors.NewInvalid("error: Plmn ID should be 3 chars")
 		}
 		labelInfoItem.MeasLabel.PlmnId = &e2sm_kpm_v2_go.PlmnIdentity{
 			Value: plmnID,
@@ -204,14 +198,14 @@ func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI *int32, qf
 	}
 	if sst != nil {
 		if len(sst) != 1 {
-			return nil, fmt.Errorf("error: SST should be 1 char")
+			return nil, errors.NewInvalid("error: SST should be 1 char")
 		}
 		labelInfoItem.MeasLabel.SliceId = &e2sm_kpm_v2_go.Snssai{
 			SSt: sst,
 		}
 		if sd != nil {
 			if len(sd) != 3 {
-				return nil, fmt.Errorf("error: SD should be 3 chars")
+				return nil, errors.NewInvalid("error: SD should be 3 chars")
 			}
 			labelInfoItem.MeasLabel.SliceId.SD = sd
 		}
@@ -276,10 +270,9 @@ func CreateLabelInfoItem(plmnID []byte, sst []byte, sd []byte, fiveQI *int32, qf
 		labelInfoItem.MeasLabel.StartEndInd = seind
 	}
 
-	//if err := labelInfoItem.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating LabelInfoItem %s", err.Error())
-	//}
-
+	if err := labelInfoItem.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateLabelInfoItem(): error validating LabelInfoItem %s", err.Error())
+	}
 	return &labelInfoItem, nil
 }
 
@@ -294,9 +287,9 @@ func CreateMeasurementCondItem(measType *e2sm_kpm_v2_go.MeasurementType, measCon
 		MatchingCond: measCondList,
 	}
 
-	//if err := measCondItem.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating MeasurementCondItem %s", err.Error())
-	//}
+	if err := measCondItem.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMeasurementCondItem(): error validating MeasurementCondItem %s", err.Error())
+	}
 	return &measCondItem, nil
 }
 
@@ -308,9 +301,9 @@ func CreateMatchingCondItemMeasLabel(measLabel *e2sm_kpm_v2_go.MeasurementLabel)
 		},
 	}
 
-	//if err := res.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating MatchingCondItem (MeasLabel) %s", err.Error())
-	//}
+	if err := res.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMatchingCondItemMeasLabel(): error validating MatchingCondItem (MeasLabel) %s", err.Error())
+	}
 	return &res, nil
 }
 
@@ -322,9 +315,9 @@ func CreateMatchingCondItemTestCondInfo(testCondInfo *e2sm_kpm_v2_go.TestCondInf
 		},
 	}
 
-	//if err := res.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating MatchingCondItem (TestCondInfo) %s", err.Error())
-	//}
+	if err := res.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMatchingCondItemTestCondInfo(): error validating MatchingCondItem (TestCondInfo) %s", err.Error())
+	}
 	return &res, nil
 }
 
@@ -336,9 +329,9 @@ func CreateTestCondInfo(tct *e2sm_kpm_v2_go.TestCondType, tce e2sm_kpm_v2_go.Tes
 		TestType:  tct,
 	}
 
-	//if err := tci.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating TestCondInfo (TestCondInfo) %s", err.Error())
-	//}
+	if err := tci.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateTestCondInfo(): error validating TestCondInfo (TestCondInfo) %s", err.Error())
+	}
 	return &tci, nil
 }
 

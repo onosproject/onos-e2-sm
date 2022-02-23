@@ -4,9 +4,9 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcPreControlMessage(RANparameterID int32, RANparameterName string, ranParameter *e2sm_rc_pre_go.RanparameterValue) (*e2sm_rc_pre_go.E2SmRcPreControlMessage, error) {
@@ -48,7 +48,7 @@ func CreateE2SmRcPreControlMessage(RANparameterID int32, RANparameterName string
 		e2smRcPreMsgFormat1.ParameterVal = ranParameter
 
 	default:
-		return nil, fmt.Errorf("CreateE2SmRcPreControlMessage() unknown type of RANparameterValue %T", ranParameter)
+		return nil, errors.NewInvalid("CreateE2SmRcPreControlMessage() unknown type of RANparameterValue %T", ranParameter)
 	}
 
 	e2smRcPrePdu := e2sm_rc_pre_go.E2SmRcPreControlMessage{
@@ -57,15 +57,15 @@ func CreateE2SmRcPreControlMessage(RANparameterID int32, RANparameterName string
 		},
 	}
 
-	//if err := e2smRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smRcPrePdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smRcPrePdu, nil
 }
 
 func CreateRanParameterValueInt(value int64) (*e2sm_rc_pre_go.RanparameterValue, error) {
 	if value > 4294967295 || value < 0 {
-		return nil, fmt.Errorf("Value should be within range 0 to 4294967295")
+		return nil, errors.NewInvalid("Value should be within range 0 to 4294967295")
 	}
 	return &e2sm_rc_pre_go.RanparameterValue{
 		RanparameterValue: &e2sm_rc_pre_go.RanparameterValue_ValueInt{

@@ -17,7 +17,8 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, err := hex.DecodeString(plmnID)
 	assert.NilError(t, err)
-	dlArfcn := CreateEArfcn(253)
+	dlArfcn, err := CreateEArfcn(253)
+	assert.NilError(t, err)
 	var pci int32 = 11
 	cellSize := e2sm_rc_pre_go.CellSize_CELL_SIZE_MACRO
 
@@ -37,7 +38,10 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 	neighbors = append(neighbors, neighbor)
 	neighbors = append(neighbors, neighbor)
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, CreateEArfcn(253), cellSize, pci, neighbors)
+	earfcn, err := CreateEArfcn(253)
+	assert.NilError(t, err)
+
+	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, earfcn, cellSize, pci, neighbors)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 
@@ -58,7 +62,10 @@ func TestE2SmRcPreIndicationMsgNoNeighbors(t *testing.T) {
 	var pci int32 = 11
 	cellSize := e2sm_rc_pre_go.CellSize_CELL_SIZE_MACRO
 
-	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, CreateEArfcn(253), cellSize, pci, nil)
+	earfcn, err := CreateEArfcn(253)
+	assert.NilError(t, err)
+
+	newE2SmRcPrePdu, err := CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, earfcn, cellSize, pci, nil)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmRcPrePdu != nil)
 

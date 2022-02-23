@@ -100,7 +100,8 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var plmnID = "12f410"
 	plmnIDBytes, err := hex.DecodeString(plmnID)
 	assert.NilError(t, err)
-	dlArfcn := pdubuilder.CreateEArfcn(253)
+	dlArfcn, err := pdubuilder.CreateEArfcn(253)
+	assert.NilError(t, err)
 	var pci int32 = 11
 	cellSize := e2sm_rc_pre_go.CellSize_CELL_SIZE_MACRO
 

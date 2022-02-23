@@ -47,8 +47,9 @@ func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 
 	measName, err := CreateMeasurementTypeMeasName(measurementName)
 	assert.NilError(t, err)
-	measInfoItem := CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := CreateMeasurementInfoItem(measName)
 	assert.NilError(t, err)
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -100,7 +101,9 @@ func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 
 	measName, err := CreateMeasurementTypeMeasName(measurementName)
 	assert.NilError(t, err)
-	measInfoItem := CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := CreateMeasurementInfoItem(measName)
+	assert.NilError(t, err)
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := &e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),

@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package e2sm_rsm_ies
+package e2smrsmies
 
 func (m *E2SmRsmEventTriggerDefinitionFormat1) SetReportingPeriodMs(rp int32) *E2SmRsmEventTriggerDefinitionFormat1 {
 	m.ReportingPeriodMs = &rp

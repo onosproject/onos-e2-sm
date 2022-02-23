@@ -4,10 +4,10 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_v2_ies.Ueid, measReport []*e2sm_mho_go.E2SmMhoMeasurementReportItem) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
@@ -22,7 +22,7 @@ func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_v2_ies.Ueid, measReport []*e2s
 	}
 
 	if err := E2SmMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoIndicationMsgFormat1(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoIndicationMsgFormat1(): error validating E2SmPDU %s", err.Error())
 	}
 	return &E2SmMhoPdu, nil
 }
@@ -38,7 +38,7 @@ func CreateE2SmMhoIndicationMsgFormat2(ueID *e2sm_v2_ies.Ueid, rrcStatus e2sm_mh
 	}
 
 	if err := E2SmMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoIndicationMsgFormat2(): error validating E2SmPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoIndicationMsgFormat2(): error validating E2SmPDU %s", err.Error())
 	}
 	return &E2SmMhoPdu, nil
 }
@@ -50,7 +50,7 @@ func CreateMeasurementRecordItem(cgi *e2sm_v2_ies.Cgi, rsrp *e2sm_mho_go.Rsrp) (
 	}
 
 	if err := res.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateMeasurementRecordItem(): error validationg E2SmPDU %s", err)
+		return nil, errors.NewInvalid("CreateMeasurementRecordItem(): error validationg E2SmPDU %s", err)
 	}
 
 	return res, nil
@@ -59,14 +59,14 @@ func CreateMeasurementRecordItem(cgi *e2sm_v2_ies.Cgi, rsrp *e2sm_mho_go.Rsrp) (
 func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
 
 	if len(plmnID) != 3 {
-		return nil, fmt.Errorf("CreateCellGlobalIDNrCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
+		return nil, errors.NewInvalid("CreateCellGlobalIDNrCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
 	}
 
 	if nrCGI.Len != uint32(36) {
-		return nil, fmt.Errorf("CreateCellGlobalIDNrCGI(): EutraCellIdentity should be of length 36 bits, got %v", nrCGI.Len)
+		return nil, errors.NewInvalid("CreateCellGlobalIDNrCGI(): EutraCellIdentity should be of length 36 bits, got %v", nrCGI.Len)
 	}
 	if len(nrCGI.Value) != 5 {
-		return nil, fmt.Errorf("CreateCellGlobalIDNrCGI(): EutraCellIdentity should be of length 36 bits (5 bytes), got %v bytes", len(nrCGI.Value))
+		return nil, errors.NewInvalid("CreateCellGlobalIDNrCGI(): EutraCellIdentity should be of length 36 bits (5 bytes), got %v bytes", len(nrCGI.Value))
 	}
 
 	cgi := &e2sm_v2_ies.Cgi{
@@ -83,7 +83,7 @@ func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 	}
 
 	if err := cgi.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateCellGlobalIDNrCGI(): error validationg E2SmPDU %s", err)
+		return nil, errors.NewInvalid("CreateCellGlobalIDNrCGI(): error validationg E2SmPDU %s", err)
 	}
 
 	return cgi, nil
@@ -92,13 +92,13 @@ func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 func CreateCgiEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
 
 	if len(plmnID) != 3 {
-		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
+		return nil, errors.NewInvalid("CreateCellGlobalIDEutraCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
 	}
 	if eutraCGI.Len != uint32(28) {
-		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): EutraCellIdentity should be of length 28 bits, got %v", eutraCGI.Len)
+		return nil, errors.NewInvalid("CreateCellGlobalIDEutraCGI(): EutraCellIdentity should be of length 28 bits, got %v", eutraCGI.Len)
 	}
 	if len(eutraCGI.Value) != 4 {
-		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): EutraCellIdentity should be of length 28 bits (4 bytes), got %v bytes", len(eutraCGI.Value))
+		return nil, errors.NewInvalid("CreateCellGlobalIDEutraCGI(): EutraCellIdentity should be of length 28 bits (4 bytes), got %v bytes", len(eutraCGI.Value))
 	}
 
 	cgi := &e2sm_v2_ies.Cgi{
@@ -115,7 +115,7 @@ func CreateCgiEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cg
 	}
 
 	if err := cgi.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateCellGlobalIDEutraCGI(): error validationg E2SmPDU %s", err)
+		return nil, errors.NewInvalid("CreateCellGlobalIDEutraCGI(): error validationg E2SmPDU %s", err)
 	}
 
 	return cgi, nil

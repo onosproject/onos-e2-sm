@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package e2smkpmv2go
+package e2smkpmv2
 
 import "reflect"
 

@@ -14,7 +14,8 @@ import (
 
 func TestCreateE2SmRsmIndicationMessageFormat1(t *testing.T) {
 
-	ueID := CreateUeIDAmfUeNgapID(1)
+	ueID, err := CreateUeIDAmfUeNgapID(1)
+	assert.NilError(t, err)
 
 	ulSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
 	ulM1, err := CreateSliceMetrics(100, 100, 100, 15)
@@ -56,21 +57,33 @@ func TestCreateE2SmRsmIndicationMessageFormat1(t *testing.T) {
 func TestCreateE2SmRsmIndicationMessageFormat2(t *testing.T) {
 
 	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
-	ueIDlist = append(ueIDlist, CreateUeIDAmfUeNgapID(21))
-	ueIDlist = append(ueIDlist, CreateUeIDCuUeF1ApID(43))
-	ueIDlist = append(ueIDlist, CreateUeIDEnbUeS1ApID(1))
+	ngap, err := CreateUeIDAmfUeNgapID(21)
+	assert.NilError(t, err)
+	ueIDlist = append(ueIDlist, ngap)
+	f1ap, err := CreateUeIDCuUeF1ApID(43)
+	assert.NilError(t, err)
+	ueIDlist = append(ueIDlist, f1ap)
+	s1ap, err := CreateUeIDEnbUeS1ApID(1)
+	assert.NilError(t, err)
+	ueIDlist = append(ueIDlist, s1ap)
 
 	drbIDfourG, err := CreateDrbIDfourG(12, 127)
 	assert.NilError(t, err)
-	bearerID1 := CreateBearerIDdrb(drbIDfourG)
+	bearerID1, err := CreateBearerIDdrb(drbIDfourG)
+	assert.NilError(t, err)
 
 	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
-	flowMap = append(flowMap, CreateQosFlowLevelParametersDynamic(10, 62, 54))
-	flowMap = append(flowMap, CreateQosFlowLevelParametersNonDynamic(11))
+	dqos, err := CreateQosFlowLevelParametersDynamic(10, 62, 54)
+	assert.NilError(t, err)
+	flowMap = append(flowMap, dqos)
+	ndqos, err := CreateQosFlowLevelParametersNonDynamic(11)
+	assert.NilError(t, err)
+	flowMap = append(flowMap, ndqos)
 
 	drbIDfiveG, err := CreateDrbIDfiveG(32, 62, flowMap)
 	assert.NilError(t, err)
-	bearerID2 := CreateBearerIDdrb(drbIDfiveG)
+	bearerID2, err := CreateBearerIDdrb(drbIDfiveG)
+	assert.NilError(t, err)
 
 	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)
@@ -95,9 +108,10 @@ func TestCreateE2SmRsmIndicationMessageFormat2(t *testing.T) {
 
 func TestCreateE2SmRsmIndicationMessageErrors(t *testing.T) {
 
-	ueID := CreateUeIDAmfUeNgapID(1)
+	ueID, err := CreateUeIDAmfUeNgapID(1)
+	assert.NilError(t, err)
 
-	_, err := CreateSliceMetrics(101, 100, 100, 15)
+	_, err = CreateSliceMetrics(101, 100, 100, 15)
 	assert.ErrorContains(t, err, "PRB utilization value should be within range 0 to 100")
 
 	_, err = CreateSliceMetrics(99, 100, -10, 15)
@@ -125,13 +139,20 @@ func TestWoojong(t *testing.T) {
 func TestKushal(t *testing.T) {
 
 	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
-	ueIDlist = append(ueIDlist, CreateUeIDCuUeF1ApID(59125))
-	ueIDlist = append(ueIDlist, CreateUeIDDuUeF1ApID(59125))
-	ueIDlist = append(ueIDlist, CreateUeIDEnbUeS1ApID(12041263))
+	cuf1ap, err := CreateUeIDCuUeF1ApID(59125)
+	assert.NilError(t, err)
+	ueIDlist = append(ueIDlist, cuf1ap)
+	duf1ap, err := CreateUeIDDuUeF1ApID(59125)
+	assert.NilError(t, err)
+	ueIDlist = append(ueIDlist, duf1ap)
+	s1ap, err := CreateUeIDEnbUeS1ApID(12041263)
+	assert.NilError(t, err)
+	ueIDlist = append(ueIDlist, s1ap)
 
 	drbIDfourG, err := CreateDrbIDfourG(5, 9)
 	assert.NilError(t, err)
-	bearerID1 := CreateBearerIDdrb(drbIDfourG)
+	bearerID1, err := CreateBearerIDdrb(drbIDfourG)
+	assert.NilError(t, err)
 
 	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)

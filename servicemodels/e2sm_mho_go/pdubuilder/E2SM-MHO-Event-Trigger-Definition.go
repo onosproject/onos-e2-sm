@@ -4,8 +4,8 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmMhoEventTriggerDefinition(triggerType e2sm_mho_go.MhoTriggerType) (*e2sm_mho_go.E2SmMhoEventTriggerDefinition, error) {
@@ -24,7 +24,7 @@ func CreateE2SmMhoEventTriggerDefinition(triggerType e2sm_mho_go.MhoTriggerType)
 	}
 
 	if err := E2SmMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoEventTriggerDefinition(): error validating E2SmMhoPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoEventTriggerDefinition(): error validating E2SmMhoPDU %s", err.Error())
 	}
 	return &E2SmMhoPdu, nil
 }
@@ -45,7 +45,7 @@ func CreateE2SmMhoEventTriggerDefinitionPeriodic(rtPeriod int32) (*e2sm_mho_go.E
 	}
 
 	if err := E2SmMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoEventTriggerDefinitionPeriodic(): error validating E2SmMhoPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoEventTriggerDefinitionPeriodic(): error validating E2SmMhoPDU %s", err.Error())
 	}
 	return &E2SmMhoPdu, nil
 }
@@ -66,7 +66,7 @@ func CreateE2SmMhoEventTriggerDefinitionUponRcvMeasReport() (*e2sm_mho_go.E2SmMh
 	}
 
 	if err := E2SmMhoPdu.Validate(); err != nil {
-		return nil, fmt.Errorf("CreateE2SmMhoEventTriggerDefinitionUponRcvMeasReport(): error validating E2SmMhoPDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateE2SmMhoEventTriggerDefinitionUponRcvMeasReport(): error validating E2SmMhoPDU %s", err.Error())
 	}
 	return &E2SmMhoPdu, nil
 }

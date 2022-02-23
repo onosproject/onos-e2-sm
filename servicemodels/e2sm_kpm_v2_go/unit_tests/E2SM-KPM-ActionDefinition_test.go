@@ -68,7 +68,11 @@ func createE2SmKpmActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 	if err != nil {
 		return nil, err
 	}
-	measInfoItem := pdubuilder.CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := pdubuilder.CreateMeasurementInfoItem(measName)
+	if err != nil {
+		return nil, err
+	}
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -85,7 +89,7 @@ func createE2SmKpmActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 		return nil, err
 	}
 	//if err := actionDefinitionFormat1.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinitionFormat1 %s", err.Error())
+	//	return nil, errors.NewInvalid("error validating E2SmKpmActionDefinitionFormat1 %s", err.Error())
 	//}
 	return newE2SmKpmPdu, nil
 }
@@ -132,7 +136,11 @@ func createE2SmKpmActionDefinitionFormat2() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 	if err != nil {
 		return nil, err
 	}
-	measInfoItem := pdubuilder.CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := pdubuilder.CreateMeasurementInfoItem(measName)
+	if err != nil {
+		return nil, err
+	}
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := &e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -155,7 +163,7 @@ func createE2SmKpmActionDefinitionFormat2() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 		return nil, err
 	}
 	//if err := actionDefinitionFormat2.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinitionFormat3 %s", err.Error())
+	//	return nil, errors.NewInvalid("error validating E2SmKpmActionDefinitionFormat3 %s", err.Error())
 	//}
 	return newE2SmKpmPdu, nil
 }
@@ -209,7 +217,7 @@ func createE2SmKpmActionDefinitionFormat3() (*e2sm_kpm_v2_go.E2SmKpmActionDefini
 		return nil, err
 	}
 	//if err := actionDefinitionFormat3.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmActionDefinitionFormat3 %s", err.Error())
+	//	return nil, errors.NewInvalid("error validating E2SmKpmActionDefinitionFormat3 %s", err.Error())
 	//}
 	return newE2SmKpmPdu, nil
 }

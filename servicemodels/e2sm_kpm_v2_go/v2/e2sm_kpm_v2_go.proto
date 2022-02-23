@@ -10,12 +10,12 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-package e2smkpmv2go.v2;
+package e2sm_kpm_v2_go.v2;
 
 import "asn1/v1/asn1.proto";
 import "validate/v1/validate.proto";
 
-option go_package = "e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go";
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go";
 
 // enumerated from e2sm_kpm_v2.0.3-radisys.asn:116
 enum TestCondExpression {
@@ -803,11 +803,11 @@ message E2SmKpmRanfunctionDescription {
     // @inject_tag: aper:"valueExt"
     RanfunctionName ran_function_name = 1 [json_name = "ranFunction-Name"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:1024"
-    repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name = "ric-KPM-Node-List"];
+    repeated RicKpmnodeItem ric_kpm_node_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 1024}, json_name = "ric-KPM-Node-List"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-    repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "ric-EventTriggerStyle-List"];
+    repeated RicEventTriggerStyleItem ric_event_trigger_style_list = 3 [(validate.v1.rules).repeated = {min_items: 0, max_items: 63}, json_name = "ric-EventTriggerStyle-List"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-    repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name = "ric-ReportStyle-List"];
+    repeated RicReportStyleItem ric_report_style_list = 4 [(validate.v1.rules).repeated = {min_items: 0, max_items: 63}, json_name = "ric-ReportStyle-List"];
 };
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:449
@@ -816,7 +816,7 @@ message RicKpmnodeItem {
     // @inject_tag: aper:"choiceExt"
     GlobalKpmnodeId ric_kpmnode_type = 1 [json_name = "ric-KPMNode-Type"];
     // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:16384"
-    repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 16384}, json_name = "cell-Measurement-Object-List"];
+    repeated CellMeasurementObjectItem cell_measurement_object_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 16384}, json_name = "cell-Measurement-Object-List"];
 };
 
 // sequence from e2sm_kpm_v2.0.3-radisys.asn:455

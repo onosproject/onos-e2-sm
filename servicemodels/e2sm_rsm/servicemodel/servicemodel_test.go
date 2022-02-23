@@ -26,7 +26,8 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	cgi, err := pdubuilder.CreateNrCGI(plmnID, nrCellID)
 	assert.NilError(t, err)
 
-	ih := pdubuilder.CreateE2SmRsmIndicationHeaderFormat1(cgi)
+	ih, err := pdubuilder.CreateE2SmRsmIndicationHeaderFormat1(cgi)
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-IndicationHeader is \n%v", ih)
 
 	protoBytes, err := proto.Marshal(ih)
@@ -53,7 +54,8 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
-	ueID := pdubuilder.CreateUeIDAmfUeNgapID(1)
+	ueID, err := pdubuilder.CreateUeIDAmfUeNgapID(1)
+	assert.NilError(t, err)
 
 	ulSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
 	ulM1, err := pdubuilder.CreateSliceMetrics(100, 100, 100, 15)
@@ -114,11 +116,21 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 
 func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	supportedConfigList := make([]*e2sm_rsm_ies.SupportedSlicingConfigItem, 0)
-	supportedConfigList = append(supportedConfigList, pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandSliceUpdate()))
-	supportedConfigList = append(supportedConfigList, pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandSliceCreate()))
-	supportedConfigList = append(supportedConfigList, pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandSliceDelete()))
-	supportedConfigList = append(supportedConfigList, pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandUeAssociate()))
-	supportedConfigList = append(supportedConfigList, pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandEventTriggers()))
+	su, err := pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandSliceUpdate())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, su)
+	sc, err := pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandSliceCreate())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, sc)
+	sd, err := pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandSliceDelete())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, sd)
+	ueAssoc, err := pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandUeAssociate())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, ueAssoc)
+	etd, err := pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandEventTriggers())
+	assert.NilError(t, err)
+	supportedConfigList = append(supportedConfigList, etd)
 
 	slicingCapability, err := pdubuilder.CreateSlicingCapabilityItem(71, 27, pdubuilder.CreateSlicingTypeDynamic(), 10,
 		supportedConfigList)
@@ -127,8 +139,9 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	slicingCapList := make([]*e2sm_rsm_ies.NodeSlicingCapabilityItem, 0)
 	slicingCapList = append(slicingCapList, slicingCapability)
 
-	rfd := pdubuilder.CreateE2SmRsmRanFunctionDescription("E2SM-RSM",
+	rfd, err := pdubuilder.CreateE2SmRsmRanFunctionDescription("E2SM-RSM",
 		"1.3.6.1.4.1.53148.1.1.2.102", "RAN Slicing Service Model", slicingCapList)
+	assert.NilError(t, err)
 	assert.Assert(t, rfd != nil)
 	t.Logf("Created E2SM-RSM-RanFunctionDescription is \n%v", rfd)
 
@@ -201,7 +214,8 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_ControlHeaderProtoToASN1(t *testing.T) {
-	ch := pdubuilder.CreateE2SmRsmControlHeader(pdubuilder.CreateE2SmRsmCommandSliceUpdate())
+	ch, err := pdubuilder.CreateE2SmRsmControlHeader(pdubuilder.CreateE2SmRsmCommandSliceUpdate())
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-ControlHeader is \n%v", ch)
 
 	//err = newE2SmKpmPdu.Validate()
@@ -230,19 +244,26 @@ func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
-	ueID := pdubuilder.CreateUeIDRanUeNgapID(7)
+	ueID, err := pdubuilder.CreateUeIDRanUeNgapID(7)
+	assert.NilError(t, err)
 
 	drbIDfourG, err := pdubuilder.CreateDrbIDfourG(12, 127)
 	assert.NilError(t, err)
-	bearerID1 := pdubuilder.CreateBearerIDdrb(drbIDfourG)
+	bearerID1, err := pdubuilder.CreateBearerIDdrb(drbIDfourG)
+	assert.NilError(t, err)
 
 	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
-	flowMap = append(flowMap, pdubuilder.CreateQosFlowLevelParametersDynamic(10, 62, 54))
-	flowMap = append(flowMap, pdubuilder.CreateQosFlowLevelParametersNonDynamic(11))
+	dqos, err := pdubuilder.CreateQosFlowLevelParametersDynamic(10, 62, 54)
+	assert.NilError(t, err)
+	flowMap = append(flowMap, dqos)
+	ndqos, err := pdubuilder.CreateQosFlowLevelParametersNonDynamic(11)
+	assert.NilError(t, err)
+	flowMap = append(flowMap, ndqos)
 
 	drbIDfiveG, err := pdubuilder.CreateDrbIDfiveG(27, 62, flowMap)
 	assert.NilError(t, err)
-	bearerID2 := pdubuilder.CreateBearerIDdrb(drbIDfiveG)
+	bearerID2, err := pdubuilder.CreateBearerIDdrb(drbIDfiveG)
+	assert.NilError(t, err)
 
 	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)
@@ -252,7 +273,8 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	config.SetUplinkSliceID(19)
 
-	cm := pdubuilder.CreateE2SmRsmControlMessageSliceAssociate(config)
+	cm, err := pdubuilder.CreateE2SmRsmControlMessageSliceAssociate(config)
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-ControlMessage (Associate Slice) is \n%v", cm)
 
 	//err = newE2SmKpmPdu.Validate()

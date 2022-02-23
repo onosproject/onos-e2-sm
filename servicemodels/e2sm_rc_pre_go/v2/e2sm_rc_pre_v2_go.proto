@@ -367,9 +367,9 @@ message E2SmRcPreRanfunctionDescription {
     //{E2SM-RC-PRE-RANfunction-Item001}
     message E2SmRcPreRanfunctionItem001 {
         // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-        repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric_EventTriggerStyle_List:OPTIONAL"];
+        repeated RicEventTriggerStyleList ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 63}, json_name="ric_EventTriggerStyle_List:OPTIONAL"];
         // @inject_tag: aper:"optional,valueExt,sizeLB:1,sizeUB:63"
-        repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric_ReportStyle_List:OPTIONAL"];
+        repeated RicReportStyleList ric_report_style_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 63}, json_name="ric_ReportStyle_List:OPTIONAL"];
     }
 };
 

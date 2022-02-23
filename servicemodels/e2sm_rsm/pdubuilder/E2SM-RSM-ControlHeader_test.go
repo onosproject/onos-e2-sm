@@ -13,7 +13,8 @@ import (
 
 func Test_E2SmRsmControlHeader(t *testing.T) {
 
-	ch1 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceCreate())
+	ch1, err := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceCreate())
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch1)
 
 	// APER validation
@@ -27,7 +28,8 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	t.Logf("E2SM-RSM-ControlHeader (Slice Create) PER - decoded\n%v", result1)
 	assert.DeepEqual(t, ch1.String(), result1.String())
 
-	ch2 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceUpdate())
+	ch2, err := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceUpdate())
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch2)
 
 	// APER validation
@@ -41,7 +43,8 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	t.Logf("E2SM-RSM-ControlHeader (Slice Update) PER - decoded\n%v", result2)
 	assert.DeepEqual(t, ch2.String(), result2.String())
 
-	ch3 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceDelete())
+	ch3, err := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandSliceDelete())
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch3)
 
 	// APER validation
@@ -55,7 +58,8 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	t.Logf("E2SM-RSM-ControlHeader (Slice Delete) PER - decoded\n%v", result3)
 	assert.DeepEqual(t, ch3.String(), result3.String())
 
-	ch4 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandUeAssociate())
+	ch4, err := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandUeAssociate())
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch4)
 
 	// APER validation
@@ -69,7 +73,8 @@ func Test_E2SmRsmControlHeader(t *testing.T) {
 	t.Logf("E2SM-RSM-ControlHeader (UE Associate) PER - decoded\n%v", result4)
 	assert.DeepEqual(t, ch4.String(), result4.String())
 
-	ch5 := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandEventTriggers())
+	ch5, err := CreateE2SmRsmControlHeader(CreateE2SmRsmCommandEventTriggers())
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-EventTriggerDefinition is \n%v", ch5)
 
 	// APER validation

@@ -4,9 +4,9 @@
 package pdubuilder
 
 import (
-	"fmt"
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcPreControlHeader() (*e2sm_rc_pre_go.E2SmRcPreControlHeader, error) {
@@ -21,19 +21,19 @@ func CreateE2SmRcPreControlHeader() (*e2sm_rc_pre_go.E2SmRcPreControlHeader, err
 		},
 	}
 
-	//if err := e2smRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smRcPrePdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smRcPrePdu, nil
 }
 
 func CreateCellGlobalIDEUTRACGI(plmnIDBytes []byte, cellID *asn1.BitString) (*e2sm_rc_pre_go.CellGlobalId, error) {
 
 	if len(plmnIDBytes) != 3 {
-		return nil, fmt.Errorf("error: Plmn ID should be 3 chars")
+		return nil, errors.NewInvalid("error: Plmn ID should be 3 chars")
 	}
 	if cellID.Len != 28 {
-		return nil, fmt.Errorf("EutraCgi should be of length 28")
+		return nil, errors.NewInvalid("EutraCgi should be of length 28")
 	}
 
 	cgi := e2sm_rc_pre_go.CellGlobalId{
@@ -49,19 +49,19 @@ func CreateCellGlobalIDEUTRACGI(plmnIDBytes []byte, cellID *asn1.BitString) (*e2
 		},
 	}
 
-	//if err := cgi.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := cgi.Validate(); err != nil {
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
+	}
 	return &cgi, nil
 }
 
 func CreateCellGlobalIDNrCgi(plmnIDBytes []byte, cellID *asn1.BitString) (*e2sm_rc_pre_go.CellGlobalId, error) {
 
 	if len(plmnIDBytes) != 3 {
-		return nil, fmt.Errorf("error: Plmn ID should be 3 chars")
+		return nil, errors.NewInvalid("error: Plmn ID should be 3 chars")
 	}
 	if cellID.Len != 36 {
-		return nil, fmt.Errorf("NrCgi should be of length 36")
+		return nil, errors.NewInvalid("NrCgi should be of length 36")
 	}
 
 	cgi := e2sm_rc_pre_go.CellGlobalId{
@@ -77,8 +77,8 @@ func CreateCellGlobalIDNrCgi(plmnIDBytes []byte, cellID *asn1.BitString) (*e2sm_
 		},
 	}
 
-	//if err := cgi.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := cgi.Validate(); err != nil {
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
+	}
 	return &cgi, nil
 }

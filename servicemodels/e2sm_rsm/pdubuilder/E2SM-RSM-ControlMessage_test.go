@@ -22,11 +22,15 @@ func TestMain(m *testing.M) {
 
 func Test_E2SmRsmControlMessageSliceCreate(t *testing.T) {
 
-	parameters := CreateSliceParameters(CreateSchedulerTypeQosBased())
+	parameters, err := CreateSliceParameters(CreateSchedulerTypeQosBased())
+	assert.NilError(t, err)
 
-	config := CreateSliceConfig(1, parameters, CreateSliceTypeUL()).SetSliceDescription("IoT")
+	config, err := CreateSliceConfig(1, parameters, CreateSliceTypeUL())
+	assert.NilError(t, err)
+	config.SetSliceDescription("IoT")
 
-	cm := CreateE2SmRsmControlMessageSliceCreate(config)
+	cm, err := CreateE2SmRsmControlMessageSliceCreate(config)
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-ControlMessage (Create Slice) is \n%v", cm)
 
 	// APER validation
@@ -43,8 +47,9 @@ func Test_E2SmRsmControlMessageSliceCreate(t *testing.T) {
 
 func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 
-	parameters := CreateSliceParameters(CreateSchedulerTypeQosBased()).
-		SetWeight(21).SetQoSLevel(129).SetScheduleInfo(CreateScheduleConfigEmpty().
+	parameters, err := CreateSliceParameters(CreateSchedulerTypeQosBased())
+	assert.NilError(t, err)
+	parameters.SetWeight(21).SetQoSLevel(129).SetScheduleInfo(CreateScheduleConfigEmpty().
 		SetCarrierAggregationLevelCap(CreateCarrierAggregationLevelCapThree()).
 		SetUlPowerControl(CreateUlPowerControlEmpty().
 			SetPUSCHtargetSNR(117).SetPUCCHtargetSNR(84)).
@@ -55,9 +60,12 @@ func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 		SetHarqRextCap(CreateHarqRextCapEmpty().
 			SetUL(21).SetDL(58))))
 
-	config := CreateSliceConfig(1, parameters, CreateSliceTypeDL()).SetSliceDescription("Automotive")
+	config, err := CreateSliceConfig(1, parameters, CreateSliceTypeDL())
+	assert.NilError(t, err)
+	config.SetSliceDescription("Automotive")
 
-	cm := CreateE2SmRsmControlMessageSliceUpdate(config)
+	cm, err := CreateE2SmRsmControlMessageSliceUpdate(config)
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-ControlMessage (Update Slice) is \n%v", cm)
 
 	// APER validation
@@ -74,7 +82,8 @@ func Test_E2SmRsmControlMessageSliceUpdate(t *testing.T) {
 
 func Test_E2SmRsmControlMessageSliceDelete(t *testing.T) {
 
-	cm := CreateE2SmRsmControlMessageSliceDelete(3, CreateSliceTypeUL())
+	cm, err := CreateE2SmRsmControlMessageSliceDelete(3, CreateSliceTypeUL())
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-ControlMessage (Delete Slice) is \n%v", cm)
 
 	// APER validation
@@ -91,19 +100,26 @@ func Test_E2SmRsmControlMessageSliceDelete(t *testing.T) {
 
 func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 
-	ueID := CreateUeIDRanUeNgapID(7)
+	ueID, err := CreateUeIDRanUeNgapID(7)
+	assert.NilError(t, err)
 
 	drbIDfourG, err := CreateDrbIDfourG(12, 127)
 	assert.NilError(t, err)
-	bearerID1 := CreateBearerIDdrb(drbIDfourG)
+	bearerID1, err := CreateBearerIDdrb(drbIDfourG)
+	assert.NilError(t, err)
 
 	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
-	flowMap = append(flowMap, CreateQosFlowLevelParametersDynamic(10, 62, 54))
-	flowMap = append(flowMap, CreateQosFlowLevelParametersNonDynamic(11))
+	dqos, err := CreateQosFlowLevelParametersDynamic(10, 62, 54)
+	assert.NilError(t, err)
+	flowMap = append(flowMap, dqos)
+	ndqos, err := CreateQosFlowLevelParametersNonDynamic(11)
+	assert.NilError(t, err)
+	flowMap = append(flowMap, ndqos)
 
 	drbIDfiveG, err := CreateDrbIDfiveG(27, 62, flowMap)
 	assert.NilError(t, err)
-	bearerID2 := CreateBearerIDdrb(drbIDfiveG)
+	bearerID2, err := CreateBearerIDdrb(drbIDfiveG)
+	assert.NilError(t, err)
 
 	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)
@@ -113,7 +129,8 @@ func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 	assert.NilError(t, err)
 	config.SetUplinkSliceID(19)
 
-	cm := CreateE2SmRsmControlMessageSliceAssociate(config)
+	cm, err := CreateE2SmRsmControlMessageSliceAssociate(config)
+	assert.NilError(t, err)
 	t.Logf("Created E2SM-RSM-ControlMessage (Associate Slice) is \n%v", cm)
 
 	// APER validation

@@ -113,7 +113,11 @@ func createE2SmKpmRanFunctionDescription() (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDe
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl).SetRicEventTriggerStyleList(retsl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu.SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl).SetRicEventTriggerStyleList(retsl)
 	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
@@ -149,7 +153,11 @@ func createE2SmKpmRanFunctionDescriptionReportList() (*e2sm_kpm_v2_go.E2SmKpmRan
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicReportStyleList(rrsl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu.SetRanFunctionInstance(rfi).SetRicReportStyleList(rrsl)
 	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
@@ -170,7 +178,11 @@ func createE2SmKpmRanFunctionDescriptionEventList() (*e2sm_kpm_v2_go.E2SmKpmRanf
 	retsl := make([]*e2sm_kpm_v2_go.RicEventTriggerStyleItem, 0)
 	retsl = append(retsl, retsi)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu.SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl)
 	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
@@ -218,7 +230,11 @@ func createE2SmKpmRanFunctionDescriptionNodeList() (*e2sm_kpm_v2_go.E2SmKpmRanfu
 	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	if err != nil {
+		return nil, err
+	}
+	newE2SmKpmPdu.SetRanFunctionInstance(rfi).SetRicKpmNodeList(rknl)
 	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil
@@ -230,7 +246,10 @@ func createE2SmKpmRanFunctionDescriptionMndtOnly() (*e2sm_kpm_v2_go.E2SmKpmRanfu
 	var rfE2SMoid = "oid123"
 	var rfd = "someDescription"
 
-	newE2SmKpmPdu := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
+	if err != nil {
+		return nil, err
+	}
 	fmt.Printf("Created E2SM-KPM-RanFunctionDescription is \n %v \n", newE2SmKpmPdu)
 
 	return newE2SmKpmPdu, nil

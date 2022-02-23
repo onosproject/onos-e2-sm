@@ -5,6 +5,7 @@ package pdubuilder
 
 import (
 	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcPreControlOutcome(elementList []*e2sm_rc_pre_go.RanparameterItem) (*e2sm_rc_pre_go.E2SmRcPreControlOutcome, error) {
@@ -17,9 +18,9 @@ func CreateE2SmRcPreControlOutcome(elementList []*e2sm_rc_pre_go.RanparameterIte
 		},
 	}
 
-	//if err := e2smRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smRcPrePdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smRcPrePdu, nil
 }
 
@@ -32,9 +33,9 @@ func CreateE2SmRcPreControlOutcomeEmpty() (*e2sm_rc_pre_go.E2SmRcPreControlOutco
 		},
 	}
 
-	//if err := e2smRcPrePdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmPDU %s", err.Error())
-	//}
+	if err := e2smRcPrePdu.Validate(); err != nil {
+		return nil, errors.NewInvalid("error validating E2SmPDU %s", err.Error())
+	}
 	return &e2smRcPrePdu, nil
 }
 
