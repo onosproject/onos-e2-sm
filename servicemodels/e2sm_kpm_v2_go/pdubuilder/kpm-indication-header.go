@@ -27,9 +27,9 @@ func CreateE2SmKpmIndicationHeader(timeStamp []byte) (*e2sm_kpm_v2_go.E2SmKpmInd
 		},
 	}
 
-	//if err := e2SmKpmPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmPDU %s", err.Error())
-	//}
+	if err := e2SmKpmPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmKpmIndicationHeader(): error validating E2SmKpmPDU %s", err.Error())
+	}
 	return &e2SmKpmPdu, nil
 }
 

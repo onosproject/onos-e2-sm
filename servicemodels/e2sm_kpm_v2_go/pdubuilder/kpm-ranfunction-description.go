@@ -9,7 +9,7 @@ import (
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 )
 
-func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd string) *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription {
+func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd string) (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
 
 	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{
 		RanFunctionName: &e2sm_kpm_v2_go.RanfunctionName{
@@ -19,10 +19,10 @@ func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd stri
 		},
 	}
 
-	//if err := e2SmKpmPdu.Validate(); err != nil {
-	//	return nil, fmt.Errorf("error validating E2SmKpmRanfunctionDescription %s", err.Error())
-	//}
-	return &e2SmKpmPdu
+	if err := e2SmKpmPdu.Validate(); err != nil {
+		return nil, fmt.Errorf("CreateE2SmKpmRanfunctionDescription(): error validating E2SmKpmRanfunctionDescription %s", err.Error())
+	}
+	return &e2SmKpmPdu, nil
 }
 
 func CreateRicKpmnodeItem(globalKpmnodeID *e2sm_kpm_v2_go.GlobalKpmnodeId) *e2sm_kpm_v2_go.RicKpmnodeItem {

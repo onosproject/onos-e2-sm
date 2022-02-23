@@ -76,9 +76,10 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
-	newE2SmKpmPdu := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd).SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl)
+	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	newE2SmKpmPdu.SetRanFunctionInstance(rfi).SetRicEventTriggerStyleList(retsl).SetRicKpmNodeList(rknl).SetRicReportStyleList(rrsl)
 
 	per, err := encoder.PerEncodeE2SmKpmRanFunctionDescription(newE2SmKpmPdu)
 	assert.NilError(t, err)

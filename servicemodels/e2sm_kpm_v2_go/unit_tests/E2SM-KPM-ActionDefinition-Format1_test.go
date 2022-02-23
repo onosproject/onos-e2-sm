@@ -60,7 +60,11 @@ func createActionDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmActionDefinitionFor
 	if err != nil {
 		return nil, err
 	}
-	measInfoItem := pdubuilder.CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := pdubuilder.CreateMeasurementInfoItem(measName)
+	if err != nil {
+		return nil, err
+	}
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),

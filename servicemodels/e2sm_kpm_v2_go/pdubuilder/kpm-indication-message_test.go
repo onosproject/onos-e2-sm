@@ -101,7 +101,9 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 
 	measName, err := CreateMeasurementTypeMeasName(measurementName)
 	assert.NilError(t, err)
-	measInfoItem := CreateMeasurementInfoItem(measName).SetLabelInfoList(&labelInfoList)
+	measInfoItem, err := CreateMeasurementInfoItem(measName)
+	assert.NilError(t, err)
+	measInfoItem.SetLabelInfoList(&labelInfoList)
 
 	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
 		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
@@ -124,9 +126,10 @@ func TestE2SmKpmIndicationMessageFormat1(t *testing.T) {
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu := CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData).SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat1(subscriptionID, &measData)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+	newE2SmKpmPdu.SetGranularityPeriod(granularity).SetCellObjectID(cellObjID).SetMeasInfoList(&measInfoList)
 	t.Logf("Composed IndicationMessage-Format1 is \n %v \n", newE2SmKpmPdu)
 }
 
@@ -188,7 +191,9 @@ func TestE2SmKpmIndicationMessageFormat2(t *testing.T) {
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
-	newE2SmKpmPdu := CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData).SetGranularityPeriod(granularity).SetCellObjectID(cellObjID)
+	newE2SmKpmPdu, err := CreateE2SmKpmIndicationMessageFormat2(subscriptionID, &measCondUEIDList, &measData)
+	assert.NilError(t, err)
+	newE2SmKpmPdu.SetGranularityPeriod(granularity).SetCellObjectID(cellObjID)
 	assert.Assert(t, newE2SmKpmPdu != nil)
 	t.Logf("Composed IndicationMessage-Format2 is \n %v \n", newE2SmKpmPdu)
 }
