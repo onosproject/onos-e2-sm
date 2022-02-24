@@ -7,10 +7,13 @@ package unit_test
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/pdubuilder"
 	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
+	"strconv"
 	"testing"
 )
 
@@ -322,4 +325,56 @@ func TestRsrp65536(t *testing.T) {
 
 	assert.Equal(t, rsrp.GetValue(), result.GetValue())
 	assert.Equal(t, rsrp.String(), result.String())
+}
+
+func TestCgi(t *testing.T) {
+	var plmnID = "12f410"
+	plmnIDBytes, err := hex.DecodeString(plmnID)
+	assert.NilError(t, err)
+	cellID := asn1.BitString{
+		Value: []byte{0x9b, 0xcd, 0x4a, 0xFF, 0xb0},
+		Len:   36, //uint32
+	}
+
+	nrcgi, err := pdubuilder.CreateCgiNrCGI(plmnIDBytes, &cellID)
+	assert.NilError(t, err)
+	t.Logf("NrCgi is %v\n", nrcgi)
+
+	plmnid := uint32(plmnIDBytes[0])<<0 | uint32(plmnIDBytes[1])<<8 | uint32(plmnIDBytes[2])<<16
+	//nci := nrcgi.GetNRCgi().NRcellIdentity.Value.Value
+	nci := cellID.Value
+
+	newCgi := uint64(plmnid)<<36 | BitStringToUint64(nci, 36)
+	t.Logf("Composed CGI is %v", newCgi)
+
+	//alternative way of composing CGI
+
+	newCgi1 := strconv.FormatInt(int64(uint64(plmnid)<<36|(BitStringToUint64(nci, 36)&0xfffffffff)), 10)
+	t.Logf("Composed (alternative) CGI is %v", newCgi1)
+}
+
+// BitStringToUint64 converts bit string to uint 64
+func BitStringToUint64(bitString []byte, bitCount int) uint64 {
+	var result uint64
+	for i, b := range bitString {
+		result += uint64(b) << ((len(bitString) - i - 1) * 8)
+	}
+	if bitCount%8 != 0 {
+		return result >> (8 - bitCount%8)
+	}
+	return result
+}
+
+// Uint64ToBitString converts uint64 to a bit string byte array
+func Uint64ToBitString(value uint64, bitCount int) []byte {
+	result := make([]byte, bitCount/8+1)
+	if bitCount%8 > 0 {
+		value = value << (8 - bitCount%8)
+	}
+
+	for i := 0; i <= (bitCount / 8); i++ {
+		result[i] = byte(value >> (((bitCount / 8) - i) * 8) & 0xFF)
+	}
+
+	return result
 }
