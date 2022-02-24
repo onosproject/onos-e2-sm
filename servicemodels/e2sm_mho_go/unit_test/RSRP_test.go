@@ -345,12 +345,26 @@ func TestCgi(t *testing.T) {
 	nci := cellID.Value
 
 	newCgi := uint64(plmnid)<<36 | BitStringToUint64(nci, 36)
-	t.Logf("Composed CGI is %v", newCgi)
 
 	//alternative way of composing CGI
-
 	newCgi1 := strconv.FormatInt(int64(uint64(plmnid)<<36|(BitStringToUint64(nci, 36)&0xfffffffff)), 10)
+
+	altNewCgi1, err := strconv.ParseUint(newCgi1, 10, 64)
+	assert.NilError(t, err)
+
+	// Both options of conversion CGI work fine
+	t.Logf("Composed CGI is %v", newCgi)
 	t.Logf("Composed (alternative) CGI is %v", newCgi1)
+
+	// Problem starts, when you convert CGI to hexadecimal format.
+	// String to hex conversion produces different output. Lines 362-363 mimic
+	// the output of CLI (onos mho get cells)
+	t.Logf("Composed CGI is %x", newCgi)
+	t.Logf("Composed (alternative) CGI is %x", newCgi1)
+
+	// Here is the solution, how to overcome it locally
+	t.Logf("Composed CGI in hex is %x", newCgi)
+	t.Logf("Composed (alternative) CGI in hex is %x", altNewCgi1)
 }
 
 // BitStringToUint64 converts bit string to uint 64
