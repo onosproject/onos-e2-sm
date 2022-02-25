@@ -45,7 +45,7 @@ build/_output/e2sm_mho.so.1.0.0: # @HELP build the e2sm_mho.so.1.0.1
 
 PHONY:build
 build: # @HELP build all libraries
-build: build/_output/e2sm_kpm_v2_go.so.1.0.0 build/_output/e2sm_rsm.so.1.0.0 build/_output/e2sm_rc_pre_go.so.1.0.0 build/_output/e2sm_mho_go.so.1.0.0
+build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_kpm_v2.so.1.0.0 build/_output/e2sm_kpm_v2_go.so.1.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0 build/_output/e2sm_mho.so.1.0.0 build/_output/e2sm_rsm.so.1.0.0 build/_output/e2sm_rc_pre_go.so.1.0.0 build/_output/e2sm_mho_go.so.1.0.0
 
 build_protoc_gen_cgo:
 	cd protoc-gen-cgo/ && go build -v -o ./protoc-gen-cgo && cd ..
@@ -91,13 +91,13 @@ deps_mho: # @HELP ensure that the required dependencies are in place
 	cd servicemodels/e2sm_mho && go build -v -buildmode=plugin ./modelmain.go && bash -c "diff -u <(echo -n) <(git diff go.mod)" && bash -c "diff -u <(echo -n) <(git diff go.sum)"
 
 linters: golang-ci # @HELP examines Go source code and reports coding problems
-	#cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
-	#cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_kpm_v2_go && golangci-lint run --timeout 5m && cd ..
-	#cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
-	#cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rc_pre_go && golangci-lint run --timeout 5m && cd ..
-	#cd servicemodels/e2sm_mho && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_mho && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rsm && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-cgo/ && golangci-lint run --timeout 5m && cd ..
