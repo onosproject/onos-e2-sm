@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -18,41 +18,41 @@ import (
 var refPerMDnoReal = "0000000  00 00 40 02 00 15 40                              |..@...@|"
 var refPerMDnoRealnoOptional = "00000000  00 00 00 02 00 15 40                              |......@|"
 
-//func createMeasurementDataFull() (*e2sm_kpm_v2_go.MeasurementData, error) {
+//func createMeasurementDataFull() (*e2smkpmv2.MeasurementData, error) {
 //
-//	measRecord := &e2sm_kpm_v2_go.MeasurementRecord{
-//		Value: make([]*e2sm_kpm_v2_go.MeasurementRecordItem, 0),
+//	measRecord := &e2smkpmv2.MeasurementRecord{
+//		Value: make([]*e2smkpmv2.MeasurementRecordItem, 0),
 //	}
 //
-//	item1 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-//		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Integer{
+//	item1 := &e2smkpmv2.MeasurementRecordItem{
+//		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Integer{
 //			Integer: 21,
 //		},
 //	}
 //	measRecord.Value = append(measRecord.Value, item1)
 //
-//	item2 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-//		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Real{
+//	item2 := &e2smkpmv2.MeasurementRecordItem{
+//		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Real{
 //			Real: 22.2,
 //		},
 //	}
 //	measRecord.Value = append(measRecord.Value, item2)
 //
-//	item3 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-//		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_NoValue{
+//	item3 := &e2smkpmv2.MeasurementRecordItem{
+//		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_NoValue{
 //			NoValue: 0,
 //		},
 //	}
 //	measRecord.Value = append(measRecord.Value, item3)
 //
-//	incf := e2sm_kpm_v2_go.IncompleteFlag_INCOMPLETE_FLAG_TRUE
-//	measDataItem := &e2sm_kpm_v2_go.MeasurementDataItem{
+//	incf := e2smkpmv2.IncompleteFlag_INCOMPLETE_FLAG_TRUE
+//	measDataItem := &e2smkpmv2.MeasurementDataItem{
 //		MeasRecord:     measRecord,
 //		IncompleteFlag: &incf,
 //	}
 //
-//	measData := &e2sm_kpm_v2_go.MeasurementData{
-//		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
+//	measData := &e2smkpmv2.MeasurementData{
+//		Value: make([]*e2smkpmv2.MeasurementDataItem, 0),
 //	}
 //	measData.Value = append(measData.Value, measDataItem)
 //
@@ -62,34 +62,34 @@ var refPerMDnoRealnoOptional = "00000000  00 00 00 02 00 15 40                  
 //	return measData, nil
 //}
 
-func createMeasurementDataNoReal() (*e2sm_kpm_v2_go.MeasurementData, error) {
+func createMeasurementDataNoReal() (*e2smkpmv2.MeasurementData, error) {
 
-	measRecord := &e2sm_kpm_v2_go.MeasurementRecord{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementRecordItem, 0),
+	measRecord := &e2smkpmv2.MeasurementRecord{
+		Value: make([]*e2smkpmv2.MeasurementRecordItem, 0),
 	}
 
-	item1 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Integer{
+	item1 := &e2smkpmv2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Integer{
 			Integer: 21,
 		},
 	}
 	measRecord.Value = append(measRecord.Value, item1)
 
-	item3 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_NoValue{
+	item3 := &e2smkpmv2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_NoValue{
 			NoValue: 0,
 		},
 	}
 	measRecord.Value = append(measRecord.Value, item3)
 
-	incf := e2sm_kpm_v2_go.IncompleteFlag_INCOMPLETE_FLAG_TRUE
-	measDataItem := &e2sm_kpm_v2_go.MeasurementDataItem{
+	incf := e2smkpmv2.IncompleteFlag_INCOMPLETE_FLAG_TRUE
+	measDataItem := &e2smkpmv2.MeasurementDataItem{
 		MeasRecord:     measRecord,
 		IncompleteFlag: &incf,
 	}
 
-	measData := &e2sm_kpm_v2_go.MeasurementData{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
+	measData := &e2smkpmv2.MeasurementData{
+		Value: make([]*e2smkpmv2.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
@@ -99,32 +99,32 @@ func createMeasurementDataNoReal() (*e2sm_kpm_v2_go.MeasurementData, error) {
 	return measData, nil
 }
 
-func createMeasurementDataNoRealNoOptional() (*e2sm_kpm_v2_go.MeasurementData, error) {
+func createMeasurementDataNoRealNoOptional() (*e2smkpmv2.MeasurementData, error) {
 
-	measRecord := &e2sm_kpm_v2_go.MeasurementRecord{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementRecordItem, 0),
+	measRecord := &e2smkpmv2.MeasurementRecord{
+		Value: make([]*e2smkpmv2.MeasurementRecordItem, 0),
 	}
 
-	item1 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Integer{
+	item1 := &e2smkpmv2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Integer{
 			Integer: 21,
 		},
 	}
 	measRecord.Value = append(measRecord.Value, item1)
 
-	item3 := &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_NoValue{
+	item3 := &e2smkpmv2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_NoValue{
 			NoValue: 0,
 		},
 	}
 	measRecord.Value = append(measRecord.Value, item3)
 
-	measDataItem := &e2sm_kpm_v2_go.MeasurementDataItem{
+	measDataItem := &e2smkpmv2.MeasurementDataItem{
 		MeasRecord: measRecord,
 	}
 
-	measData := &e2sm_kpm_v2_go.MeasurementData{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
+	measData := &e2smkpmv2.MeasurementData{
+		Value: make([]*e2smkpmv2.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
@@ -139,12 +139,12 @@ func createMeasurementDataNoRealNoOptional() (*e2sm_kpm_v2_go.MeasurementData, e
 //	md, err := createMeasurementDataFull()
 //	assert.NilError(t, err)
 //
-//	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+//	aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
 //	per, err := aper.Marshal(md)
 //	assert.NilError(t, err)
 //	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 //
-//	result := e2sm_kpm_v2_go.MeasurementData{}
+//	result := e2smkpmv2.MeasurementData{}
 //	err = aper.Unmarshal(per, &result)
 //	assert.NilError(t, err)
 //	assert.Assert(t, &result != nil)
@@ -160,7 +160,7 @@ func createMeasurementDataNoRealNoOptional() (*e2sm_kpm_v2_go.MeasurementData, e
 //	md, err := createMeasurementDataFull()
 //	assert.NilError(t, err)
 //
-//	aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
+//	aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
 //	per, err := aper.Marshal(md)
 //	assert.NilError(t, err)
 //	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
@@ -176,13 +176,13 @@ func Test_perEncodingMeasurementDataNoReal(t *testing.T) {
 	md, err := createMeasurementDataNoReal()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementData{}
-	err = aper.Unmarshal(per, &result, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MeasurementData{}
+	err = aper.Unmarshal(per, &result, e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementData PER - decoded\n%v", &result)
@@ -196,8 +196,8 @@ func Test_perMeasurementDataNoRealCompareBytes(t *testing.T) {
 	md, err := createMeasurementDataNoReal()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 
@@ -212,13 +212,13 @@ func Test_perEncodingMeasurementDataNoRealNoOptional(t *testing.T) {
 	md, err := createMeasurementDataNoRealNoOptional()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementData{}
-	err = aper.Unmarshal(per, &result, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MeasurementData{}
+	err = aper.Unmarshal(per, &result, e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementData PER - decoded\n%v", &result)
@@ -231,8 +231,8 @@ func Test_perMeasurementDataNoRealNoOptionalCompareBytes(t *testing.T) {
 	md, err := createMeasurementDataNoRealNoOptional()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.Marshal(md, e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.Marshal(md, e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementData PER\n%v", hex.Dump(per))
 

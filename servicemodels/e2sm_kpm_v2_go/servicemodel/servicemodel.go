@@ -13,7 +13,7 @@ import (
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -21,7 +21,7 @@ type Kpm2ServiceModel string
 
 const smName = "e2sm_kpm"
 const smVersion = "v2_go"
-const moduleName = "e2sm_kpm_v2_go.so.2.0"
+const moduleName = "e2smkpmv2.so.2.0"
 const smOIDKpmV2 = "1.3.6.1.4.1.53148.1.2.2.2"
 
 func (sm Kpm2ServiceModel) ServiceModelData() types.ServiceModelData {
@@ -49,7 +49,7 @@ func (sm Kpm2ServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte
 }
 
 func (sm Kpm2ServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_kpm_v2_go.E2SmKpmIndicationHeader)
+	protoObj := new(e2smkpmv2.E2SmKpmIndicationHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmIndicationHeader %s", err)
 	}
@@ -77,7 +77,7 @@ func (sm Kpm2ServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byt
 }
 
 func (sm Kpm2ServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_kpm_v2_go.E2SmKpmIndicationMessage)
+	protoObj := new(e2smkpmv2.E2SmKpmIndicationMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmIndicationMessage %s", err)
 	}
@@ -105,7 +105,7 @@ func (sm Kpm2ServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]by
 }
 
 func (sm Kpm2ServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription)
+	protoObj := new(e2smkpmv2.E2SmKpmRanfunctionDescription)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmRanfunctionDescription %s", err)
 	}
@@ -133,7 +133,7 @@ func (sm Kpm2ServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) (
 }
 
 func (sm Kpm2ServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition)
+	protoObj := new(e2smkpmv2.E2SmKpmEventTriggerDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmEventTriggerDefinition %s", err)
 	}
@@ -161,7 +161,7 @@ func (sm Kpm2ServiceModel) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte
 }
 
 func (sm Kpm2ServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_kpm_v2_go.E2SmKpmActionDefinition)
+	protoObj := new(e2smkpmv2.E2SmKpmActionDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmKpmActionDefinition %s", err)
 	}
@@ -203,7 +203,7 @@ func (sm Kpm2ServiceModel) OnSetup(request *types.OnSetupRequest) error {
 	if err != nil {
 		return err
 	}
-	ranFunctionDescription := &e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{}
+	ranFunctionDescription := &e2smkpmv2.E2SmKpmRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
 	if err != nil {
 		return err
@@ -221,10 +221,10 @@ func (sm Kpm2ServiceModel) OnSetup(request *types.OnSetupRequest) error {
 				CellGlobalID: &topoapi.CellGlobalID{},
 			}
 			switch cellGlobalID := cell.CellGlobalId.GetCellGlobalId().(type) {
-			case *e2sm_kpm_v2_go.CellGlobalId_NrCgi:
+			case *e2smkpmv2.CellGlobalId_NrCgi:
 				cellObject.CellGlobalID.Value = fmt.Sprintf("%x", bitStringToUint64(cellGlobalID.NrCgi.NRcellIdentity.Value.Value, int(cellGlobalID.NrCgi.NRcellIdentity.Value.Len)))
 				cellObject.CellGlobalID.Type = topoapi.CellGlobalIDType_NRCGI
-			case *e2sm_kpm_v2_go.CellGlobalId_EUtraCgi:
+			case *e2smkpmv2.CellGlobalId_EUtraCgi:
 				cellObject.CellGlobalID.Value = fmt.Sprintf("%x", bitStringToUint64(cellGlobalID.EUtraCgi.EUtracellIdentity.Value.Value, int(cellGlobalID.EUtraCgi.EUtracellIdentity.Value.Len)))
 				cellObject.CellGlobalID.Type = topoapi.CellGlobalIDType_ECGI
 			}

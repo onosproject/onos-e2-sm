@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/encoder"
-	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	e2smrcprev2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -15,7 +15,7 @@ import (
 func TestE2SmRcPreControlOutcome(t *testing.T) {
 	var ranParameterID int32 = 20
 
-	elementList := make([]*e2sm_rc_pre_go.RanparameterItem, 0)
+	elementList := make([]*e2smrcprev2.RanparameterItem, 0)
 	elementList = append(elementList, CreateRanParameterItem(ranParameterID))
 
 	newE2SmRcPrePdu, err := CreateE2SmRcPreControlOutcome(elementList)

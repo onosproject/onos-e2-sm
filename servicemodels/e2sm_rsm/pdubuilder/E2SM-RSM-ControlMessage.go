@@ -5,14 +5,14 @@
 package pdubuilder
 
 import (
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmRsmControlMessageSliceCreate(config *e2sm_rsm_ies.SliceConfig) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
+func CreateE2SmRsmControlMessageSliceCreate(config *e2smrsm.SliceConfig) (*e2smrsm.E2SmRsmControlMessage, error) {
 
-	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
-		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceCreate{
+	cm := &e2smrsm.E2SmRsmControlMessage{
+		E2SmRsmControlMessage: &e2smrsm.E2SmRsmControlMessage_SliceCreate{
 			SliceCreate: config,
 		},
 	}
@@ -23,10 +23,10 @@ func CreateE2SmRsmControlMessageSliceCreate(config *e2sm_rsm_ies.SliceConfig) (*
 	return cm, nil
 }
 
-func CreateE2SmRsmControlMessageSliceUpdate(config *e2sm_rsm_ies.SliceConfig) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
+func CreateE2SmRsmControlMessageSliceUpdate(config *e2smrsm.SliceConfig) (*e2smrsm.E2SmRsmControlMessage, error) {
 
-	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
-		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceUpdate{
+	cm := &e2smrsm.E2SmRsmControlMessage{
+		E2SmRsmControlMessage: &e2smrsm.E2SmRsmControlMessage_SliceUpdate{
 			SliceUpdate: config,
 		},
 	}
@@ -37,12 +37,12 @@ func CreateE2SmRsmControlMessageSliceUpdate(config *e2sm_rsm_ies.SliceConfig) (*
 	return cm, nil
 }
 
-func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ies.SliceType) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
+func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2smrsm.SliceType) (*e2smrsm.E2SmRsmControlMessage, error) {
 
-	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
-		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceDelete{
-			SliceDelete: &e2sm_rsm_ies.SliceDelete{
-				SliceId: &e2sm_rsm_ies.SliceId{
+	cm := &e2smrsm.E2SmRsmControlMessage{
+		E2SmRsmControlMessage: &e2smrsm.E2SmRsmControlMessage_SliceDelete{
+			SliceDelete: &e2smrsm.SliceDelete{
+				SliceId: &e2smrsm.SliceId{
 					Value: sliceID,
 				},
 				SliceType: sliceType,
@@ -56,10 +56,10 @@ func CreateE2SmRsmControlMessageSliceDelete(sliceID int64, sliceType e2sm_rsm_ie
 	return cm, nil
 }
 
-func CreateE2SmRsmControlMessageSliceAssociate(config *e2sm_rsm_ies.SliceAssociate) (*e2sm_rsm_ies.E2SmRsmControlMessage, error) {
+func CreateE2SmRsmControlMessageSliceAssociate(config *e2smrsm.SliceAssociate) (*e2smrsm.E2SmRsmControlMessage, error) {
 
-	cm := &e2sm_rsm_ies.E2SmRsmControlMessage{
-		E2SmRsmControlMessage: &e2sm_rsm_ies.E2SmRsmControlMessage_SliceAssociate{
+	cm := &e2smrsm.E2SmRsmControlMessage{
+		E2SmRsmControlMessage: &e2smrsm.E2SmRsmControlMessage_SliceAssociate{
 			SliceAssociate: config,
 		},
 	}
@@ -70,10 +70,10 @@ func CreateE2SmRsmControlMessageSliceAssociate(config *e2sm_rsm_ies.SliceAssocia
 	return cm, nil
 }
 
-func CreateSliceConfig(sliceID int64, parameters *e2sm_rsm_ies.SliceParameters, sliceType e2sm_rsm_ies.SliceType) (*e2sm_rsm_ies.SliceConfig, error) {
+func CreateSliceConfig(sliceID int64, parameters *e2smrsm.SliceParameters, sliceType e2smrsm.SliceType) (*e2smrsm.SliceConfig, error) {
 
-	sc := &e2sm_rsm_ies.SliceConfig{
-		SliceId: &e2sm_rsm_ies.SliceId{
+	sc := &e2smrsm.SliceConfig{
+		SliceId: &e2smrsm.SliceId{
 			Value: sliceID,
 		},
 		SliceConfigParameters: parameters,
@@ -86,9 +86,9 @@ func CreateSliceConfig(sliceID int64, parameters *e2sm_rsm_ies.SliceParameters, 
 	return sc, nil
 }
 
-func CreateSliceParameters(schType e2sm_rsm_ies.SchedulerType) (*e2sm_rsm_ies.SliceParameters, error) {
+func CreateSliceParameters(schType e2smrsm.SchedulerType) (*e2smrsm.SliceParameters, error) {
 
-	sp := &e2sm_rsm_ies.SliceParameters{
+	sp := &e2smrsm.SliceParameters{
 		SchedulerType: schType,
 	}
 
@@ -98,89 +98,89 @@ func CreateSliceParameters(schType e2sm_rsm_ies.SchedulerType) (*e2sm_rsm_ies.Sl
 	return sp, nil
 }
 
-func CreateScheduleConfigEmpty() *e2sm_rsm_ies.ScheduleConfig {
-	return new(e2sm_rsm_ies.ScheduleConfig)
+func CreateScheduleConfigEmpty() *e2smrsm.ScheduleConfig {
+	return new(e2smrsm.ScheduleConfig)
 }
 
-func CreateUlPowerControlEmpty() *e2sm_rsm_ies.UlpowerControl {
-	return new(e2sm_rsm_ies.UlpowerControl)
+func CreateUlPowerControlEmpty() *e2smrsm.UlpowerControl {
+	return new(e2smrsm.UlpowerControl)
 }
 
-func CreateLinkAdaptationEmpty() *e2sm_rsm_ies.LinkAdaptation {
-	return new(e2sm_rsm_ies.LinkAdaptation)
+func CreateLinkAdaptationEmpty() *e2smrsm.LinkAdaptation {
+	return new(e2smrsm.LinkAdaptation)
 }
 
-func CreateHarqRextCapEmpty() *e2sm_rsm_ies.HarqrextCap {
-	return new(e2sm_rsm_ies.HarqrextCap)
+func CreateHarqRextCapEmpty() *e2smrsm.HarqrextCap {
+	return new(e2smrsm.HarqrextCap)
 }
 
-func CreateSchedulerTypeRoundRobin() e2sm_rsm_ies.SchedulerType {
-	return e2sm_rsm_ies.SchedulerType_SCHEDULER_TYPE_ROUND_ROBIN
+func CreateSchedulerTypeRoundRobin() e2smrsm.SchedulerType {
+	return e2smrsm.SchedulerType_SCHEDULER_TYPE_ROUND_ROBIN
 }
 
-func CreateSchedulerTypeProportionallyFair() e2sm_rsm_ies.SchedulerType {
-	return e2sm_rsm_ies.SchedulerType_SCHEDULER_TYPE_PROPORTIONALLY_FAIR
+func CreateSchedulerTypeProportionallyFair() e2smrsm.SchedulerType {
+	return e2smrsm.SchedulerType_SCHEDULER_TYPE_PROPORTIONALLY_FAIR
 }
 
-func CreateSchedulerTypeQosBased() e2sm_rsm_ies.SchedulerType {
-	return e2sm_rsm_ies.SchedulerType_SCHEDULER_TYPE_QOS_BASED
+func CreateSchedulerTypeQosBased() e2smrsm.SchedulerType {
+	return e2smrsm.SchedulerType_SCHEDULER_TYPE_QOS_BASED
 }
 
-func CreateAggregationLevelCapOne() e2sm_rsm_ies.AggregationLevelCap {
-	return e2sm_rsm_ies.AggregationLevelCap_AGGREGATION_LEVEL_CAP_ONE
+func CreateAggregationLevelCapOne() e2smrsm.AggregationLevelCap {
+	return e2smrsm.AggregationLevelCap_AGGREGATION_LEVEL_CAP_ONE
 }
 
-func CreateAggregationLevelCapTwo() e2sm_rsm_ies.AggregationLevelCap {
-	return e2sm_rsm_ies.AggregationLevelCap_AGGREGATION_LEVEL_CAP_TWO
+func CreateAggregationLevelCapTwo() e2smrsm.AggregationLevelCap {
+	return e2smrsm.AggregationLevelCap_AGGREGATION_LEVEL_CAP_TWO
 }
 
-func CreateAggregationLevelCapFour() e2sm_rsm_ies.AggregationLevelCap {
-	return e2sm_rsm_ies.AggregationLevelCap_AGGREGATION_LEVEL_CAP_FOUR
+func CreateAggregationLevelCapFour() e2smrsm.AggregationLevelCap {
+	return e2smrsm.AggregationLevelCap_AGGREGATION_LEVEL_CAP_FOUR
 }
 
-func CreateAggregationLevelCapEight() e2sm_rsm_ies.AggregationLevelCap {
-	return e2sm_rsm_ies.AggregationLevelCap_AGGREGATION_LEVEL_CAP_EIGHT
+func CreateAggregationLevelCapEight() e2smrsm.AggregationLevelCap {
+	return e2smrsm.AggregationLevelCap_AGGREGATION_LEVEL_CAP_EIGHT
 }
 
-func CreateAggregationLevelCapSixteen() e2sm_rsm_ies.AggregationLevelCap {
-	return e2sm_rsm_ies.AggregationLevelCap_AGGREGATION_LEVEL_CAP_SIXTEEN
+func CreateAggregationLevelCapSixteen() e2smrsm.AggregationLevelCap {
+	return e2smrsm.AggregationLevelCap_AGGREGATION_LEVEL_CAP_SIXTEEN
 }
 
-func CreateFeatureStatusEnable() e2sm_rsm_ies.FeatureStatus {
-	return e2sm_rsm_ies.FeatureStatus_FEATURE_STATUS_ENABLE
+func CreateFeatureStatusEnable() e2smrsm.FeatureStatus {
+	return e2smrsm.FeatureStatus_FEATURE_STATUS_ENABLE
 }
 
-func CreateFeatureStatusDisable() e2sm_rsm_ies.FeatureStatus {
-	return e2sm_rsm_ies.FeatureStatus_FEATURE_STATUS_DISABLE
+func CreateFeatureStatusDisable() e2smrsm.FeatureStatus {
+	return e2smrsm.FeatureStatus_FEATURE_STATUS_DISABLE
 }
 
-func CreateCarrierAggregationLevelCapOne() e2sm_rsm_ies.CarrierAggregationLevelCap {
-	return e2sm_rsm_ies.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_ONE
+func CreateCarrierAggregationLevelCapOne() e2smrsm.CarrierAggregationLevelCap {
+	return e2smrsm.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_ONE
 }
 
-func CreateCarrierAggregationLevelCapTwo() e2sm_rsm_ies.CarrierAggregationLevelCap {
-	return e2sm_rsm_ies.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_TWO
+func CreateCarrierAggregationLevelCapTwo() e2smrsm.CarrierAggregationLevelCap {
+	return e2smrsm.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_TWO
 }
 
-func CreateCarrierAggregationLevelCapThree() e2sm_rsm_ies.CarrierAggregationLevelCap {
-	return e2sm_rsm_ies.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_THREE
+func CreateCarrierAggregationLevelCapThree() e2smrsm.CarrierAggregationLevelCap {
+	return e2smrsm.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_THREE
 }
 
-func CreateCarrierAggregationLevelCapFour() e2sm_rsm_ies.CarrierAggregationLevelCap {
-	return e2sm_rsm_ies.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_FOUR
+func CreateCarrierAggregationLevelCapFour() e2smrsm.CarrierAggregationLevelCap {
+	return e2smrsm.CarrierAggregationLevelCap_CARRIER_AGGREGATION_LEVEL_CAP_FOUR
 }
 
-func CreateSliceAssociate(ueID *e2sm_rsm_ies.UeIdentity, bearerIDlist []*e2sm_rsm_ies.BearerId,
-	dlSliceID int64) (*e2sm_rsm_ies.SliceAssociate, error) {
+func CreateSliceAssociate(ueID *e2smrsm.UeIdentity, bearerIDlist []*e2smrsm.BearerId,
+	dlSliceID int64) (*e2smrsm.SliceAssociate, error) {
 
 	if len(bearerIDlist) < 1 || len(bearerIDlist) > 32 {
 		return nil, errors.NewInvalid("BearerID list should have 1 to 32 items")
 	}
 
-	sa := &e2sm_rsm_ies.SliceAssociate{
+	sa := &e2smrsm.SliceAssociate{
 		UeId:     ueID,
 		BearerId: bearerIDlist,
-		DownLinkSliceId: &e2sm_rsm_ies.SliceIdassoc{
+		DownLinkSliceId: &e2smrsm.SliceIdassoc{
 			Value: dlSliceID,
 		},
 	}
@@ -191,30 +191,30 @@ func CreateSliceAssociate(ueID *e2sm_rsm_ies.UeIdentity, bearerIDlist []*e2sm_rs
 	return sa, nil
 }
 
-func CreateRiCapOne() e2sm_rsm_ies.RiCap {
-	return e2sm_rsm_ies.RiCap_RI_CAP_ONE
+func CreateRiCapOne() e2smrsm.RiCap {
+	return e2smrsm.RiCap_RI_CAP_ONE
 }
 
-func CreateRiCapTwo() e2sm_rsm_ies.RiCap {
-	return e2sm_rsm_ies.RiCap_RI_CAP_TWO
+func CreateRiCapTwo() e2smrsm.RiCap {
+	return e2smrsm.RiCap_RI_CAP_TWO
 }
 
-func CreateTransmissionModeOne() e2sm_rsm_ies.TransmissionMode {
-	return e2sm_rsm_ies.TransmissionMode_TRANSMISSION_MODE_ONE
+func CreateTransmissionModeOne() e2smrsm.TransmissionMode {
+	return e2smrsm.TransmissionMode_TRANSMISSION_MODE_ONE
 }
 
-func CreateTransmissionModeTwo() e2sm_rsm_ies.TransmissionMode {
-	return e2sm_rsm_ies.TransmissionMode_TRANSMISSION_MODE_TWO
+func CreateTransmissionModeTwo() e2smrsm.TransmissionMode {
+	return e2smrsm.TransmissionMode_TRANSMISSION_MODE_TWO
 }
 
-func CreateTransmissionModeThree() e2sm_rsm_ies.TransmissionMode {
-	return e2sm_rsm_ies.TransmissionMode_TRANSMISSION_MODE_THREE
+func CreateTransmissionModeThree() e2smrsm.TransmissionMode {
+	return e2smrsm.TransmissionMode_TRANSMISSION_MODE_THREE
 }
 
-func CreateSliceTypeDL() e2sm_rsm_ies.SliceType {
-	return e2sm_rsm_ies.SliceType_SLICE_TYPE_DL_SLICE
+func CreateSliceTypeDL() e2smrsm.SliceType {
+	return e2smrsm.SliceType_SLICE_TYPE_DL_SLICE
 }
 
-func CreateSliceTypeUL() e2sm_rsm_ies.SliceType {
-	return e2sm_rsm_ies.SliceType_SLICE_TYPE_UL_SLICE
+func CreateSliceTypeUL() e2smrsm.SliceType {
+	return e2smrsm.SliceType_SLICE_TYPE_UL_SLICE
 }

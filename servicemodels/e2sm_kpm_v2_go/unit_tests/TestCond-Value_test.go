@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -26,13 +26,13 @@ func Test_perEncodingTestCondValueInt(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueInt(21)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (Integer) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TestCondValue{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.TestCondValue{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (Integer) PER - decoded\n%v", &result)
@@ -43,8 +43,8 @@ func Test_perTestCondValueIntCompareBytes(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueInt(21)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (Integer) PER\n%v", hex.Dump(per))
 
@@ -58,13 +58,13 @@ func Test_perEncodingTestCondValueEnum(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueEnum(54)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (Enumerator) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TestCondValue{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.TestCondValue{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (Enumerator) PER - decoded\n%v", &result)
@@ -75,8 +75,8 @@ func Test_perTestCondValueEnumCompareBytes(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueEnum(54)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (Enumerator) PER\n%v", hex.Dump(per))
 
@@ -90,13 +90,13 @@ func Test_perEncodingTestCondValueBool(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueBool(true)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (Boolean) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TestCondValue{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.TestCondValue{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (Boolean) PER - decoded\n%v", &result)
@@ -107,8 +107,8 @@ func Test_perTestCondValueBoolCompareBytes(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueBool(true)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (Boolean) PER\n%v", hex.Dump(per))
 
@@ -126,13 +126,13 @@ func Test_perEncodingTestCondValueBS(t *testing.T) {
 	}
 	testCondValue := pdubuilder.CreateTestCondValueBitS(bs)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (BitString) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TestCondValue{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.TestCondValue{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (BitString) PER - decoded\n%v", &result)
@@ -148,8 +148,8 @@ func Test_perTestCondValueBSCompareBytes(t *testing.T) {
 	}
 	testCondValue := pdubuilder.CreateTestCondValueBitS(bs)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (BitString) PER\n%v", hex.Dump(per))
 
@@ -163,13 +163,13 @@ func Test_perEncodingTestCondValueOS(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueOctS([]byte("onf"))
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (OctetString) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TestCondValue{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.TestCondValue{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (OctetString) PER - decoded\n%v", &result)
@@ -180,8 +180,8 @@ func Test_perTestCondValueOSCompareBytes(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValueOctS([]byte("onf"))
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (OctetString) PER\n%v", hex.Dump(per))
 
@@ -195,13 +195,13 @@ func Test_perEncodingTestCondValuePS(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValuePrtS("ONF")
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (PrintableString) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TestCondValue{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.TestCondValue{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondValue (PrintableString) PER - decoded\n%v", &result)
@@ -212,8 +212,8 @@ func Test_perTestCondValuePSCompareBytes(t *testing.T) {
 
 	testCondValue := pdubuilder.CreateTestCondValuePrtS("ONF")
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondValue, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondValue (PrintableString) PER\n%v", hex.Dump(per))
 

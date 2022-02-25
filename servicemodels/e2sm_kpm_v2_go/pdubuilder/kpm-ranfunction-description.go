@@ -4,15 +4,15 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd string) (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
+func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd string) (*e2smkpmv2.E2SmKpmRanfunctionDescription, error) {
 
-	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{
-		RanFunctionName: &e2sm_kpm_v2_go.RanfunctionName{
+	e2SmKpmPdu := e2smkpmv2.E2SmKpmRanfunctionDescription{
+		RanFunctionName: &e2smkpmv2.RanfunctionName{
 			RanFunctionShortName:   rfSn,
 			RanFunctionE2SmOid:     rfE2SMoid,
 			RanFunctionDescription: rfd,
@@ -25,26 +25,26 @@ func CreateE2SmKpmRanfunctionDescription(rfSn string, rfE2SMoid string, rfd stri
 	return &e2SmKpmPdu, nil
 }
 
-func CreateRicKpmnodeItem(globalKpmnodeID *e2sm_kpm_v2_go.GlobalKpmnodeId) *e2sm_kpm_v2_go.RicKpmnodeItem {
+func CreateRicKpmnodeItem(globalKpmnodeID *e2smkpmv2.GlobalKpmnodeId) *e2smkpmv2.RicKpmnodeItem {
 
-	res := e2sm_kpm_v2_go.RicKpmnodeItem{
+	res := e2smkpmv2.RicKpmnodeItem{
 		RicKpmnodeType: globalKpmnodeID,
 	}
 
 	return &res
 }
 
-func CreateCellMeasurementObjectItem(cellObjID string, cellGlobalID *e2sm_kpm_v2_go.CellGlobalId) *e2sm_kpm_v2_go.CellMeasurementObjectItem {
+func CreateCellMeasurementObjectItem(cellObjID string, cellGlobalID *e2smkpmv2.CellGlobalId) *e2smkpmv2.CellMeasurementObjectItem {
 
-	return &e2sm_kpm_v2_go.CellMeasurementObjectItem{
-		CellObjectId: &e2sm_kpm_v2_go.CellObjectId{
+	return &e2smkpmv2.CellMeasurementObjectItem{
+		CellObjectId: &e2smkpmv2.CellObjectId{
 			Value: cellObjID,
 		},
 		CellGlobalId: cellGlobalID,
 	}
 }
 
-func CreateCellGlobalIDNRCGI(plmnID []byte, cellIDBits36 []byte) (*e2sm_kpm_v2_go.CellGlobalId, error) {
+func CreateCellGlobalIDNRCGI(plmnID []byte, cellIDBits36 []byte) (*e2smkpmv2.CellGlobalId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, errors.NewInvalid("PlmnID should be 3 chars")
@@ -61,13 +61,13 @@ func CreateCellGlobalIDNRCGI(plmnID []byte, cellIDBits36 []byte) (*e2sm_kpm_v2_g
 		Len:   36,
 	}
 
-	return &e2sm_kpm_v2_go.CellGlobalId{
-		CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId_NrCgi{
-			NrCgi: &e2sm_kpm_v2_go.Nrcgi{
-				PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+	return &e2smkpmv2.CellGlobalId{
+		CellGlobalId: &e2smkpmv2.CellGlobalId_NrCgi{
+			NrCgi: &e2smkpmv2.Nrcgi{
+				PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 					Value: plmnID,
 				},
-				NRcellIdentity: &e2sm_kpm_v2_go.NrcellIdentity{
+				NRcellIdentity: &e2smkpmv2.NrcellIdentity{
 					Value: &bs,
 				},
 			},
@@ -75,7 +75,7 @@ func CreateCellGlobalIDNRCGI(plmnID []byte, cellIDBits36 []byte) (*e2sm_kpm_v2_g
 	}, nil
 }
 
-func CreateCellGlobalIDEUTRACGI(plmnID []byte, bs *asn1.BitString) (*e2sm_kpm_v2_go.CellGlobalId, error) {
+func CreateCellGlobalIDEUTRACGI(plmnID []byte, bs *asn1.BitString) (*e2smkpmv2.CellGlobalId, error) {
 
 	if len(plmnID) != 3 {
 		return nil, errors.NewInvalid("PlmnID should be 3 chars")
@@ -88,13 +88,13 @@ func CreateCellGlobalIDEUTRACGI(plmnID []byte, bs *asn1.BitString) (*e2sm_kpm_v2
 		return nil, errors.NewInvalid("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", bs.GetValue()[3])
 	}
 
-	return &e2sm_kpm_v2_go.CellGlobalId{
-		CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId_EUtraCgi{
-			EUtraCgi: &e2sm_kpm_v2_go.Eutracgi{
-				PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+	return &e2smkpmv2.CellGlobalId{
+		CellGlobalId: &e2smkpmv2.CellGlobalId_EUtraCgi{
+			EUtraCgi: &e2smkpmv2.Eutracgi{
+				PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 					Value: plmnID,
 				},
-				EUtracellIdentity: &e2sm_kpm_v2_go.EutracellIdentity{
+				EUtracellIdentity: &e2smkpmv2.EutracellIdentity{
 					Value: bs,
 				},
 			},
@@ -102,49 +102,49 @@ func CreateCellGlobalIDEUTRACGI(plmnID []byte, bs *asn1.BitString) (*e2sm_kpm_v2
 	}, nil
 }
 
-func CreateRicEventTriggerStyleItem(ricStyleType int32, ricStyleName string, ricFormatType int32) *e2sm_kpm_v2_go.RicEventTriggerStyleItem {
+func CreateRicEventTriggerStyleItem(ricStyleType int32, ricStyleName string, ricFormatType int32) *e2smkpmv2.RicEventTriggerStyleItem {
 
-	return &e2sm_kpm_v2_go.RicEventTriggerStyleItem{
-		RicEventTriggerStyleType: &e2sm_kpm_v2_go.RicStyleType{
+	return &e2smkpmv2.RicEventTriggerStyleItem{
+		RicEventTriggerStyleType: &e2smkpmv2.RicStyleType{
 			Value: ricStyleType,
 		},
-		RicEventTriggerStyleName: &e2sm_kpm_v2_go.RicStyleName{
+		RicEventTriggerStyleName: &e2smkpmv2.RicStyleName{
 			Value: ricStyleName,
 		},
-		RicEventTriggerFormatType: &e2sm_kpm_v2_go.RicFormatType{
+		RicEventTriggerFormatType: &e2smkpmv2.RicFormatType{
 			Value: ricFormatType,
 		},
 	}
 }
 
 func CreateRicReportStyleItem(ricStyleType int32, ricStyleName string, ricFormatType int32,
-	measInfoActionList *e2sm_kpm_v2_go.MeasurementInfoActionList, indHdrFormatType int32,
-	indMsgFormatType int32) *e2sm_kpm_v2_go.RicReportStyleItem {
+	measInfoActionList *e2smkpmv2.MeasurementInfoActionList, indHdrFormatType int32,
+	indMsgFormatType int32) *e2smkpmv2.RicReportStyleItem {
 
-	return &e2sm_kpm_v2_go.RicReportStyleItem{
-		RicReportStyleType: &e2sm_kpm_v2_go.RicStyleType{
+	return &e2smkpmv2.RicReportStyleItem{
+		RicReportStyleType: &e2smkpmv2.RicStyleType{
 			Value: ricStyleType,
 		},
-		RicReportStyleName: &e2sm_kpm_v2_go.RicStyleName{
+		RicReportStyleName: &e2smkpmv2.RicStyleName{
 			Value: ricStyleName,
 		},
-		RicActionFormatType: &e2sm_kpm_v2_go.RicFormatType{
+		RicActionFormatType: &e2smkpmv2.RicFormatType{
 			Value: ricFormatType,
 		},
 		MeasInfoActionList: measInfoActionList,
-		RicIndicationHeaderFormatType: &e2sm_kpm_v2_go.RicFormatType{
+		RicIndicationHeaderFormatType: &e2smkpmv2.RicFormatType{
 			Value: indHdrFormatType,
 		},
-		RicIndicationMessageFormatType: &e2sm_kpm_v2_go.RicFormatType{
+		RicIndicationMessageFormatType: &e2smkpmv2.RicFormatType{
 			Value: indMsgFormatType,
 		},
 	}
 }
 
-func CreateMeasurementInfoActionItem(measTypeName string) *e2sm_kpm_v2_go.MeasurementInfoActionItem {
+func CreateMeasurementInfoActionItem(measTypeName string) *e2smkpmv2.MeasurementInfoActionItem {
 
-	return &e2sm_kpm_v2_go.MeasurementInfoActionItem{
-		MeasName: &e2sm_kpm_v2_go.MeasurementTypeName{
+	return &e2smkpmv2.MeasurementInfoActionItem{
+		MeasName: &e2smkpmv2.MeasurementTypeName{
 			Value: measTypeName,
 		},
 	}

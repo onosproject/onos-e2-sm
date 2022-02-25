@@ -7,7 +7,7 @@ package servicemodel
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/pdubuilder"
-	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	e2smrcprev2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"google.golang.org/protobuf/proto"
 	"gotest.tools/assert"
@@ -50,7 +50,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
 
-	testIH := &e2sm_rc_pre_go.E2SmRcPreIndicationHeader{}
+	testIH := &e2smrcprev2.E2SmRcPreIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-IndicationHeader is \n%v", testIH)
@@ -89,7 +89,7 @@ func TestServicemodel_IndicationHeaderNrCGIASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	testIH := &e2sm_rc_pre_go.E2SmRcPreIndicationHeader{}
+	testIH := &e2smrcprev2.E2SmRcPreIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-IndicationHeader (NrCGI) is \n%v", testIH)
@@ -103,7 +103,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	dlArfcn, err := pdubuilder.CreateEArfcn(253)
 	assert.NilError(t, err)
 	var pci int32 = 11
-	cellSize := e2sm_rc_pre_go.CellSize_CELL_SIZE_MACRO
+	cellSize := e2smrcprev2.CellSize_CELL_SIZE_MACRO
 
 	cellID := asn1.BitString{
 		Value: []byte{0xac, 0xd4, 0xbc, 0x90},
@@ -112,12 +112,12 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	cgi, err := pdubuilder.CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
 
-	neighbor, err := pdubuilder.CreateNrt(cgi, dlArfcn, cellSize, &e2sm_rc_pre_go.Pci{
+	neighbor, err := pdubuilder.CreateNrt(cgi, dlArfcn, cellSize, &e2smrcprev2.Pci{
 		Value: pci,
 	})
 	assert.NilError(t, err)
 
-	neighbors := make([]*e2sm_rc_pre_go.Nrt, 0)
+	neighbors := make([]*e2smrcprev2.Nrt, 0)
 	neighbors = append(neighbors, neighbor)
 
 	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreIndicationMsgFormat1(plmnIDBytes, dlArfcn, cellSize, pci, neighbors)
@@ -142,7 +142,7 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testIM := &e2sm_rc_pre_go.E2SmRcPreIndicationMessage{}
+	testIM := &e2smrcprev2.E2SmRcPreIndicationMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-IndicationMessage is \n%v", testIM)
@@ -165,11 +165,11 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	var ricIndicationHeaderFormatType int32 = 21
 	var ricIndicationMessageFormatType int32 = 56
 
-	retsl := make([]*e2sm_rc_pre_go.RicEventTriggerStyleList, 0)
+	retsl := make([]*e2smrcprev2.RicEventTriggerStyleList, 0)
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
 	retsl = append(retsl, retsi)
 
-	rrsl := make([]*e2sm_rc_pre_go.RicReportStyleList, 0)
+	rrsl := make([]*e2smrcprev2.RicReportStyleList, 0)
 	rrsi := pdubuilder.CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
 		ricIndicationMessageFormatType)
 	rrsl = append(rrsl, rrsi)
@@ -198,7 +198,7 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.RanFuncDescriptionASN1toProto(ranFuncDescriptionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testRFD := &e2sm_rc_pre_go.E2SmRcPreRanfunctionDescription{}
+	testRFD := &e2smrcprev2.E2SmRcPreRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, testRFD)
 	t.Logf("Decoded RC-PRE-RanFunctionDescription is \n%v", testRFD)
 	assert.NilError(t, err)
@@ -226,7 +226,7 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testIM := &e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition{}
+	testIM := &e2smrcprev2.E2SmRcPreEventTriggerDefinition{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-EventTriggerDefinition is \n%v", testIM)
@@ -271,7 +271,7 @@ func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	testCH := &e2sm_rc_pre_go.E2SmRcPreControlHeader{}
+	testCH := &e2smrcprev2.E2SmRcPreControlHeader{}
 	err = proto.Unmarshal(protoBytes, testCH)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-ControlHeader is \n%v", testCH)
@@ -317,7 +317,7 @@ func TestServicemodel_ControlHeaderNrCGIASN1toProto(t *testing.T) {
 	protoBytes, err := rcPreTestSm.ControlHeaderASN1toProto(ControlHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	testCH := &e2sm_rc_pre_go.E2SmRcPreControlHeader{}
+	testCH := &e2smrcprev2.E2SmRcPreControlHeader{}
 	err = proto.Unmarshal(protoBytes, testCH)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-ControlHeader is \n%v", testCH)
@@ -352,7 +352,7 @@ func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
 	assert.Equal(t, 19, len(protoBytes))
-	testIM := &e2sm_rc_pre_go.E2SmRcPreControlMessage{}
+	testIM := &e2smrcprev2.E2SmRcPreControlMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-ControlMessage is \n%v", testIM)
@@ -362,7 +362,7 @@ func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
 func TestServicemodel_ControlOutcomeProtoToASN1(t *testing.T) {
 	var ranParameterID int32 = 20
 
-	elementList := make([]*e2sm_rc_pre_go.RanparameterItem, 0)
+	elementList := make([]*e2smrcprev2.RanparameterItem, 0)
 	elementList = append(elementList, pdubuilder.CreateRanParameterItem(ranParameterID))
 
 	newE2SmRcPrePdu, err := pdubuilder.CreateE2SmRcPreControlOutcome(elementList)
@@ -385,7 +385,7 @@ func TestServicemodel_ControlOutcomeASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 
-	testIM := &e2sm_rc_pre_go.E2SmRcPreControlOutcome{}
+	testIM := &e2smrcprev2.E2SmRcPreControlOutcome{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-PRE-ControlOutcome is \n%v", testIM)

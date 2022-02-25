@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/encoder"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
@@ -23,14 +23,14 @@ func TestE2SmMhoIndicationMsgF1(t *testing.T) {
 		Len:   36,
 	})
 	assert.NilError(t, err)
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 1234,
 	}
 	measItem, err := CreateMeasurementRecordItem(cgi, rsrp)
 	assert.NilError(t, err)
 	measItem.SetFiveQi(21)
 
-	measReport := make([]*e2sm_mho_go.E2SmMhoMeasurementReportItem, 0)
+	measReport := make([]*e2smmhov2.E2SmMhoMeasurementReportItem, 0)
 	measReport = append(measReport, measItem)
 
 	newE2SmMhoPdu, err := CreateE2SmMhoIndicationMsgFormat1(ueID, measReport)

@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -16,7 +16,7 @@ import (
 
 var refPerEventTriggerDefinitionFormat1 = "00000000  00 0e                                             |..|"
 
-func createE2SMKPMEventTriggerDefinitionFormat1() (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1, error) {
+func createE2SMKPMEventTriggerDefinitionFormat1() (*e2smkpmv2.E2SmKpmEventTriggerDefinitionFormat1, error) {
 
 	var rtPeriod int64 = 15
 
@@ -33,12 +33,12 @@ func Test_perEncodingE2SmKpmEventTriggerDefinitionFormat1(t *testing.T) {
 	etdf1, err := createE2SMKPMEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(etdf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	per, err := aper.MarshalWithParams(etdf1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.E2SmKpmEventTriggerDefinitionFormat1{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER - decoded\n%v", &result)
@@ -50,7 +50,7 @@ func Test_perE2SmKpmEventTriggerDefinitionFormat1CompareBytes(t *testing.T) {
 	etdf1, err := createE2SMKPMEventTriggerDefinitionFormat1()
 	assert.NilError(t, err)
 
-	per, err := aper.MarshalWithParams(etdf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	per, err := aper.MarshalWithParams(etdf1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-EventTriggerDefinition-Format1 PER\n%v", hex.Dump(per))
 

@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -17,7 +17,7 @@ func TestCreateE2SmRsmIndicationMessageFormat1(t *testing.T) {
 	ueID, err := CreateUeIDAmfUeNgapID(1)
 	assert.NilError(t, err)
 
-	ulSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
+	ulSm := make([]*e2smrsm.SliceMetrics, 0)
 	ulM1, err := CreateSliceMetrics(100, 100, 100, 15)
 	assert.NilError(t, err)
 	ulSm = append(ulSm, ulM1)
@@ -28,7 +28,7 @@ func TestCreateE2SmRsmIndicationMessageFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	ulSm = append(ulSm, ulM3)
 
-	dlSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
+	dlSm := make([]*e2smrsm.SliceMetrics, 0)
 	dlM1, err := CreateSliceMetrics(91, 31, 54, 11)
 	assert.NilError(t, err)
 	dlSm = append(dlSm, dlM1)
@@ -56,7 +56,7 @@ func TestCreateE2SmRsmIndicationMessageFormat1(t *testing.T) {
 
 func TestCreateE2SmRsmIndicationMessageFormat2(t *testing.T) {
 
-	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
+	ueIDlist := make([]*e2smrsm.UeIdentity, 0)
 	ngap, err := CreateUeIDAmfUeNgapID(21)
 	assert.NilError(t, err)
 	ueIDlist = append(ueIDlist, ngap)
@@ -72,7 +72,7 @@ func TestCreateE2SmRsmIndicationMessageFormat2(t *testing.T) {
 	bearerID1, err := CreateBearerIDdrb(drbIDfourG)
 	assert.NilError(t, err)
 
-	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
+	flowMap := make([]*e2smrsm.QoSflowLevelParameters, 0)
 	dqos, err := CreateQosFlowLevelParametersDynamic(10, 62, 54)
 	assert.NilError(t, err)
 	flowMap = append(flowMap, dqos)
@@ -85,7 +85,7 @@ func TestCreateE2SmRsmIndicationMessageFormat2(t *testing.T) {
 	bearerID2, err := CreateBearerIDdrb(drbIDfiveG)
 	assert.NilError(t, err)
 
-	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
+	bearerList := make([]*e2smrsm.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)
 	bearerList = append(bearerList, bearerID2)
 
@@ -138,7 +138,7 @@ func TestWoojong(t *testing.T) {
 
 func TestKushal(t *testing.T) {
 
-	ueIDlist := make([]*e2sm_rsm_ies.UeIdentity, 0)
+	ueIDlist := make([]*e2smrsm.UeIdentity, 0)
 	cuf1ap, err := CreateUeIDCuUeF1ApID(59125)
 	assert.NilError(t, err)
 	ueIDlist = append(ueIDlist, cuf1ap)
@@ -154,7 +154,7 @@ func TestKushal(t *testing.T) {
 	bearerID1, err := CreateBearerIDdrb(drbIDfourG)
 	assert.NilError(t, err)
 
-	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
+	bearerList := make([]*e2smrsm.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)
 
 	im, err := CreateE2SmRsmIndicationMessageFormat2(CreateRsmEmmTriggerTypeUeAttach(), ueIDlist, CreateUeIDtypeDuUeF1ApID(), bearerList)

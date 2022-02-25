@@ -5,17 +5,17 @@
 package pdubuilder
 
 import (
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindicationTriggerType) (*e2sm_rsm_ies.E2SmRsmEventTriggerDefinition, error) {
+func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2smrsm.RsmRicindicationTriggerType) (*e2smrsm.E2SmRsmEventTriggerDefinition, error) {
 
-	etd := &e2sm_rsm_ies.E2SmRsmEventTriggerDefinition{
-		EventDefinitionFormats: &e2sm_rsm_ies.EventDefinitionFormats{
-			E2SmRsmEventDefinition: &e2sm_rsm_ies.EventDefinitionFormats_EventDefinitionFormat1{
-				EventDefinitionFormat1: &e2sm_rsm_ies.E2SmRsmEventTriggerDefinitionFormat1{
+	etd := &e2smrsm.E2SmRsmEventTriggerDefinition{
+		EventDefinitionFormats: &e2smrsm.EventDefinitionFormats{
+			E2SmRsmEventDefinition: &e2smrsm.EventDefinitionFormats_EventDefinitionFormat1{
+				EventDefinitionFormat1: &e2smrsm.E2SmRsmEventTriggerDefinitionFormat1{
 					TriggerType: tt,
 				},
 			},
@@ -28,54 +28,54 @@ func CreateE2SmRsmEventTriggerDefinitionFormat1(tt e2sm_rsm_ies.RsmRicindication
 	return etd, nil
 }
 
-func CreateRsmRicindicationTriggerTypePeriodicMetrics() e2sm_rsm_ies.RsmRicindicationTriggerType {
-	return e2sm_rsm_ies.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_PERIODIC_METRICS
+func CreateRsmRicindicationTriggerTypePeriodicMetrics() e2smrsm.RsmRicindicationTriggerType {
+	return e2smrsm.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_PERIODIC_METRICS
 }
 
-func CreateRsmRicindicationTriggerTypeUponEmmEvent() e2sm_rsm_ies.RsmRicindicationTriggerType {
-	return e2sm_rsm_ies.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_UPON_EMM_EVENT
+func CreateRsmRicindicationTriggerTypeUponEmmEvent() e2smrsm.RsmRicindicationTriggerType {
+	return e2smrsm.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_UPON_EMM_EVENT
 }
 
-func CreateRsmEmmTriggerTypeUeAttach() e2sm_rsm_ies.RsmEmmTriggerType {
-	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_UE_ATTACH
+func CreateRsmEmmTriggerTypeUeAttach() e2smrsm.RsmEmmTriggerType {
+	return e2smrsm.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_UE_ATTACH
 }
 
-func CreateRsmEmmTriggerTypeUeDetach() e2sm_rsm_ies.RsmEmmTriggerType {
-	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_UE_DETACH
+func CreateRsmEmmTriggerTypeUeDetach() e2smrsm.RsmEmmTriggerType {
+	return e2smrsm.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_UE_DETACH
 }
 
-func CreateRsmEmmTriggerTypeHandInUeAttach() e2sm_rsm_ies.RsmEmmTriggerType {
-	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_HAND_IN_UE_ATTACH
+func CreateRsmEmmTriggerTypeHandInUeAttach() e2smrsm.RsmEmmTriggerType {
+	return e2smrsm.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_HAND_IN_UE_ATTACH
 }
 
-func CreateRsmEmmTriggerTypeHandOutUeAttach() e2sm_rsm_ies.RsmEmmTriggerType {
-	return e2sm_rsm_ies.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_HAND_OUT_UE_ATTACH
+func CreateRsmEmmTriggerTypeHandOutUeAttach() e2smrsm.RsmEmmTriggerType {
+	return e2smrsm.RsmEmmTriggerType_RSM_EMM_TRIGGER_TYPE_HAND_OUT_UE_ATTACH
 }
 
-func CreateUeIDtypeCuUeF1ApID() e2sm_rsm_ies.UeIdType {
-	return e2sm_rsm_ies.UeIdType_UE_ID_TYPE_CU_UE_F1_AP_ID
+func CreateUeIDtypeCuUeF1ApID() e2smrsm.UeIdType {
+	return e2smrsm.UeIdType_UE_ID_TYPE_CU_UE_F1_AP_ID
 }
 
-func CreateUeIDtypeDuUeF1ApID() e2sm_rsm_ies.UeIdType {
-	return e2sm_rsm_ies.UeIdType_UE_ID_TYPE_DU_UE_F1_AP_ID
+func CreateUeIDtypeDuUeF1ApID() e2smrsm.UeIdType {
+	return e2smrsm.UeIdType_UE_ID_TYPE_DU_UE_F1_AP_ID
 }
 
-func CreateUeIDtypeRanUeNgapID() e2sm_rsm_ies.UeIdType {
-	return e2sm_rsm_ies.UeIdType_UE_ID_TYPE_RAN_UE_NGAP_ID
+func CreateUeIDtypeRanUeNgapID() e2smrsm.UeIdType {
+	return e2smrsm.UeIdType_UE_ID_TYPE_RAN_UE_NGAP_ID
 }
 
-func CreateUeIDtypeAmfUeNgapID() e2sm_rsm_ies.UeIdType {
-	return e2sm_rsm_ies.UeIdType_UE_ID_TYPE_AMF_UE_NGAP_ID
+func CreateUeIDtypeAmfUeNgapID() e2smrsm.UeIdType {
+	return e2smrsm.UeIdType_UE_ID_TYPE_AMF_UE_NGAP_ID
 }
 
-func CreateUeIDtypeEnbUeS1ApID() e2sm_rsm_ies.UeIdType {
-	return e2sm_rsm_ies.UeIdType_UE_ID_TYPE_ENB_UE_S1_AP_ID
+func CreateUeIDtypeEnbUeS1ApID() e2smrsm.UeIdType {
+	return e2smrsm.UeIdType_UE_ID_TYPE_ENB_UE_S1_AP_ID
 }
 
-func CreateBearerIDdrb(drbID *e2sm_rsm_ies.DrbId) (*e2sm_rsm_ies.BearerId, error) {
+func CreateBearerIDdrb(drbID *e2smrsm.DrbId) (*e2smrsm.BearerId, error) {
 
-	drb := &e2sm_rsm_ies.BearerId{
-		BearerId: &e2sm_rsm_ies.BearerId_DrbId{
+	drb := &e2smrsm.BearerId{
+		BearerId: &e2smrsm.BearerId_DrbId{
 			DrbId: drbID,
 		},
 	}
@@ -86,17 +86,17 @@ func CreateBearerIDdrb(drbID *e2sm_rsm_ies.DrbId) (*e2sm_rsm_ies.BearerId, error
 	return drb, nil
 }
 
-func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
+func CreateDrbIDfourG(val int32, qci int32) (*e2smrsm.DrbId, error) {
 
 	if qci < 0 || qci > 255 {
 		return nil, errors.NewInvalid("QCI value should be in range 0 to 255")
 	}
 
-	fourg := &e2sm_rsm_ies.DrbId{
-		DrbId: &e2sm_rsm_ies.DrbId_FourGdrbId{
-			FourGdrbId: &e2sm_rsm_ies.FourGDrbId{
+	fourg := &e2smrsm.DrbId{
+		DrbId: &e2smrsm.DrbId_FourGdrbId{
+			FourGdrbId: &e2smrsm.FourGDrbId{
 				Value: val,
-				Qci: &e2sm_v2_ies.Qci{
+				Qci: &e2smv2.Qci{
 					Value: qci,
 				},
 			},
@@ -109,7 +109,7 @@ func CreateDrbIDfourG(val int32, qci int32) (*e2sm_rsm_ies.DrbId, error) {
 	return fourg, nil
 }
 
-func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevelParameters) (*e2sm_rsm_ies.DrbId, error) {
+func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2smrsm.QoSflowLevelParameters) (*e2smrsm.DrbId, error) {
 
 	if val < 1 || val > 32 {
 		return nil, errors.NewInvalid("FiveGdrbID value should be in range 1 to 32")
@@ -123,11 +123,11 @@ func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevel
 		return nil, errors.NewInvalid("FlowsMapToDrb list should have 1 to 64 items")
 	}
 
-	fiveg := &e2sm_rsm_ies.DrbId{
-		DrbId: &e2sm_rsm_ies.DrbId_FiveGdrbId{
-			FiveGdrbId: &e2sm_rsm_ies.FiveGDrbId{
+	fiveg := &e2smrsm.DrbId{
+		DrbId: &e2smrsm.DrbId_FiveGdrbId{
+			FiveGdrbId: &e2smrsm.FiveGDrbId{
 				Value: val,
-				Qfi: &e2sm_rsm_ies.Qfi{
+				Qfi: &e2smrsm.Qfi{
 					Value: qfi,
 				},
 				FlowsMapToDrb: flowMap,
@@ -141,11 +141,11 @@ func CreateDrbIDfiveG(val int32, qfi int32, flowMap []*e2sm_rsm_ies.QoSflowLevel
 	return fiveg, nil
 }
 
-func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) (*e2sm_rsm_ies.QoSflowLevelParameters, error) {
+func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) (*e2smrsm.QoSflowLevelParameters, error) {
 
-	qos := &e2sm_rsm_ies.QoSflowLevelParameters{
-		QoSflowLevelParameters: &e2sm_rsm_ies.QoSflowLevelParameters_DynamicFiveQi{
-			DynamicFiveQi: &e2sm_rsm_ies.DynamicFiveQi{
+	qos := &e2smrsm.QoSflowLevelParameters{
+		QoSflowLevelParameters: &e2smrsm.QoSflowLevelParameters_DynamicFiveQi{
+			DynamicFiveQi: &e2smrsm.DynamicFiveQi{
 				PriorityLevel:     prlvl,
 				PacketDelayBudget: pDelay,
 				PacketErrorRate:   per,
@@ -159,12 +159,12 @@ func CreateQosFlowLevelParametersDynamic(prlvl int32, pDelay int32, per int32) (
 	return qos, nil
 }
 
-func CreateQosFlowLevelParametersNonDynamic(fiveQI int32) (*e2sm_rsm_ies.QoSflowLevelParameters, error) {
+func CreateQosFlowLevelParametersNonDynamic(fiveQI int32) (*e2smrsm.QoSflowLevelParameters, error) {
 
-	qos := &e2sm_rsm_ies.QoSflowLevelParameters{
-		QoSflowLevelParameters: &e2sm_rsm_ies.QoSflowLevelParameters_NonDynamicFiveQi{
-			NonDynamicFiveQi: &e2sm_rsm_ies.NonDynamicFiveQi{
-				FiveQi: &e2sm_v2_ies.FiveQi{
+	qos := &e2smrsm.QoSflowLevelParameters{
+		QoSflowLevelParameters: &e2smrsm.QoSflowLevelParameters_NonDynamicFiveQi{
+			NonDynamicFiveQi: &e2smrsm.NonDynamicFiveQi{
+				FiveQi: &e2smv2.FiveQi{
 					Value: fiveQI,
 				},
 			},

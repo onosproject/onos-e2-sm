@@ -5,7 +5,7 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -29,19 +29,19 @@ func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 	var arpMin int32 = 10
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
-	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
+	var sum = e2smkpmv2.SUM_SUM_TRUE
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
-	var plo = e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
+	var plo = e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	startEndIndication := e2smkpmv2.StartEndInd_START_END_IND_START
 
 	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
 		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
 	assert.NilError(t, err)
 
-	labelInfoList := e2sm_kpm_v2_go.LabelInfoList{
-		Value: make([]*e2sm_kpm_v2_go.LabelInfoItem, 0),
+	labelInfoList := e2smkpmv2.LabelInfoList{
+		Value: make([]*e2smkpmv2.LabelInfoItem, 0),
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
@@ -51,8 +51,8 @@ func TestE2SmKpmActionDefinitionFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	measInfoItem.SetLabelInfoList(&labelInfoList)
 
-	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
+	measInfoList := e2smkpmv2.MeasurementInfoList{
+		Value: make([]*e2smkpmv2.MeasurementInfoItem, 0),
 	}
 	measInfoList.Value = append(measInfoList.Value, measInfoItem)
 
@@ -83,19 +83,19 @@ func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	var arpMin int32 = 10
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
-	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
+	var sum = e2smkpmv2.SUM_SUM_TRUE
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
-	var plo = e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
+	var plo = e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	startEndIndication := e2smkpmv2.StartEndInd_START_END_IND_START
 
 	labelInfoItem, err := CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
 		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
 	assert.NilError(t, err)
 
-	labelInfoList := e2sm_kpm_v2_go.LabelInfoList{
-		Value: make([]*e2sm_kpm_v2_go.LabelInfoItem, 0),
+	labelInfoList := e2smkpmv2.LabelInfoList{
+		Value: make([]*e2smkpmv2.LabelInfoItem, 0),
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
@@ -105,8 +105,8 @@ func TestE2SmKpmActionDefinitionFormat2(t *testing.T) {
 	assert.NilError(t, err)
 	measInfoItem.SetLabelInfoList(&labelInfoList)
 
-	measInfoList := &e2sm_kpm_v2_go.MeasurementInfoList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
+	measInfoList := &e2smkpmv2.MeasurementInfoList{
+		Value: make([]*e2smkpmv2.MeasurementInfoItem, 0),
 	}
 	measInfoList.Value = append(measInfoList.Value, measInfoItem)
 
@@ -130,15 +130,15 @@ func TestE2SmKpmActionDefinitionFormat3(t *testing.T) {
 	var measurementName = "trial"
 
 	var valEnum int64 = 201
-	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN
+	tce := e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN
 	tci, err := CreateTestCondInfo(CreateTestCondTypeRSRP(), tce, CreateTestCondValueEnum(valEnum))
 	assert.NilError(t, err)
 
 	mci, err := CreateMatchingCondItemTestCondInfo(tci)
 	assert.NilError(t, err)
 
-	mcl := &e2sm_kpm_v2_go.MatchingCondList{
-		Value: make([]*e2sm_kpm_v2_go.MatchingCondItem, 0),
+	mcl := &e2smkpmv2.MatchingCondList{
+		Value: make([]*e2smkpmv2.MatchingCondItem, 0),
 	}
 	mcl.Value = append(mcl.Value, mci)
 
@@ -147,8 +147,8 @@ func TestE2SmKpmActionDefinitionFormat3(t *testing.T) {
 	measCondItem, err := CreateMeasurementCondItem(measName, mcl)
 	assert.NilError(t, err)
 
-	measCondList := e2sm_kpm_v2_go.MeasurementCondList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementCondItem, 0),
+	measCondList := e2smkpmv2.MeasurementCondList{
+		Value: make([]*e2smkpmv2.MeasurementCondItem, 0),
 	}
 	measCondList.Value = append(measCondList.Value, measCondItem)
 

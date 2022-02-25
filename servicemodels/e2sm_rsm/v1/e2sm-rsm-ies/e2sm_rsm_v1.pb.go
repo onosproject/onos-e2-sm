@@ -8,7 +8,7 @@ package e2smrsmies
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
 	_ "github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1006,7 +1006,7 @@ func (x *UeIdentity) GetRanUeNgapId() *RanUeNgapId {
 	return nil
 }
 
-func (x *UeIdentity) GetAmfUeNgapId() *e2sm_v2_ies.AmfUeNgapId {
+func (x *UeIdentity) GetAmfUeNgapId() *e2smv2.AmfUeNgapId {
 	if x, ok := x.GetUeIdentity().(*UeIdentity_AmfUeNgapId); ok {
 		return x.AmfUeNgapId
 	}
@@ -1041,7 +1041,7 @@ type UeIdentity_RanUeNgapId struct {
 
 type UeIdentity_AmfUeNgapId struct {
 	// @inject_tag: aper:"choiceIdx:4"
-	AmfUeNgapId *e2sm_v2_ies.AmfUeNgapId `protobuf:"bytes,4,opt,name=amf_ue_ngap_id,json=amfUeNgapID,proto3,oneof" aper:"choiceIdx:4"`
+	AmfUeNgapId *e2smv2.AmfUeNgapId `protobuf:"bytes,4,opt,name=amf_ue_ngap_id,json=amfUeNgapID,proto3,oneof" aper:"choiceIdx:4"`
 }
 
 type UeIdentity_EnbUeS1ApId struct {
@@ -1832,7 +1832,7 @@ type E2SmRsmIndicationHeaderFormat1 struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"choiceExt"
-	Cgi *e2sm_v2_ies.Cgi `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"choiceExt"`
+	Cgi *e2smv2.Cgi `protobuf:"bytes,1,opt,name=cgi,proto3" json:"cgi,omitempty" aper:"choiceExt"`
 	// @inject_tag: aper:"sizeLB:4,sizeUB:4,optional"
 	ColletStartTime *string `protobuf:"bytes,2,opt,name=collet_start_time,json=colletStartTime,proto3,oneof" json:"collet_start_time,omitempty" aper:"sizeLB:4,sizeUB:4,optional"`
 }
@@ -1869,7 +1869,7 @@ func (*E2SmRsmIndicationHeaderFormat1) Descriptor() ([]byte, []int) {
 	return file_e2sm_rsm_v1_e2sm_rsm_v1_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *E2SmRsmIndicationHeaderFormat1) GetCgi() *e2sm_v2_ies.Cgi {
+func (x *E2SmRsmIndicationHeaderFormat1) GetCgi() *e2smv2.Cgi {
 	if x != nil {
 		return x.Cgi
 	}
@@ -2813,7 +2813,7 @@ type NonDynamicFiveQi struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FiveQi *e2sm_v2_ies.FiveQi `protobuf:"bytes,1,opt,name=five_qi,json=fiveQi,proto3" json:"five_qi,omitempty"`
+	FiveQi *e2smv2.FiveQi `protobuf:"bytes,1,opt,name=five_qi,json=fiveQi,proto3" json:"five_qi,omitempty"`
 }
 
 func (x *NonDynamicFiveQi) Reset() {
@@ -2848,7 +2848,7 @@ func (*NonDynamicFiveQi) Descriptor() ([]byte, []int) {
 	return file_e2sm_rsm_v1_e2sm_rsm_v1_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *NonDynamicFiveQi) GetFiveQi() *e2sm_v2_ies.FiveQi {
+func (x *NonDynamicFiveQi) GetFiveQi() *e2smv2.FiveQi {
 	if x != nil {
 		return x.FiveQi
 	}
@@ -2864,7 +2864,7 @@ type FourGDrbId struct {
 
 	// @inject_tag: aper:"valueLB:1,valueUB:32"
 	Value int32            `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:1,valueUB:32"`
-	Qci   *e2sm_v2_ies.Qci `protobuf:"bytes,2,opt,name=qci,proto3" json:"qci,omitempty"`
+	Qci   *e2smv2.Qci `protobuf:"bytes,2,opt,name=qci,proto3" json:"qci,omitempty"`
 }
 
 func (x *FourGDrbId) Reset() {
@@ -2906,7 +2906,7 @@ func (x *FourGDrbId) GetValue() int32 {
 	return 0
 }
 
-func (x *FourGDrbId) GetQci() *e2sm_v2_ies.Qci {
+func (x *FourGDrbId) GetQci() *e2smv2.Qci {
 	if x != nil {
 		return x.Qci
 	}
@@ -2921,7 +2921,7 @@ type E2SmRsmRanfunctionDescription struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: aper:"valueExt"
-	RanFunctionName *e2sm_v2_ies.RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty" aper:"valueExt"`
+	RanFunctionName *e2smv2.RanfunctionName `protobuf:"bytes,1,opt,name=ran_function_name,json=ranFunction-Name,proto3" json:"ran_function_name,omitempty" aper:"valueExt"`
 	// @inject_tag: aper:"sizeLB:1,sizeUB:4294967295,valueExt"
 	RicSlicingNodeCapabilityList []*NodeSlicingCapabilityItem `protobuf:"bytes,3,rep,name=ric_slicing_node_capability_list,json=ric-Slicing-Node-Capability-List,proto3" json:"ric_slicing_node_capability_list,omitempty" aper:"sizeLB:1,sizeUB:4294967295,valueExt"`
 }
@@ -2958,7 +2958,7 @@ func (*E2SmRsmRanfunctionDescription) Descriptor() ([]byte, []int) {
 	return file_e2sm_rsm_v1_e2sm_rsm_v1_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *E2SmRsmRanfunctionDescription) GetRanFunctionName() *e2sm_v2_ies.RanfunctionName {
+func (x *E2SmRsmRanfunctionDescription) GetRanFunctionName() *e2smv2.RanfunctionName {
 	if x != nil {
 		return x.RanFunctionName
 	}
@@ -4144,11 +4144,11 @@ var file_e2sm_rsm_v1_e2sm_rsm_v1_proto_goTypes = []interface{}{
 	(*HarqrextCap)(nil),                          // 52: e2sm_rsm.v1.HarqrextCap
 	(*FeatureConfig)(nil),                        // 53: e2sm_rsm.v1.FeatureConfig
 	(*UlpowerControl)(nil),                       // 54: e2sm_rsm.v1.UlpowerControl
-	(*e2sm_v2_ies.AmfUeNgapId)(nil),              // 55: e2sm_rsm.v1.AmfUeNgapId
-	(*e2sm_v2_ies.Cgi)(nil),                      // 56: e2sm_rsm.v1.Cgi
-	(*e2sm_v2_ies.FiveQi)(nil),                   // 57: e2sm_rsm.v1.FiveQi
-	(*e2sm_v2_ies.Qci)(nil),                      // 58: e2sm_rsm.v1.Qci
-	(*e2sm_v2_ies.RanfunctionName)(nil),          // 59: e2sm_rsm.v1.RanfunctionName
+	(*e2smv2.AmfUeNgapId)(nil),              // 55: e2sm_rsm.v1.AmfUeNgapId
+	(*e2smv2.Cgi)(nil),                      // 56: e2sm_rsm.v1.Cgi
+	(*e2smv2.FiveQi)(nil),                   // 57: e2sm_rsm.v1.FiveQi
+	(*e2smv2.Qci)(nil),                      // 58: e2sm_rsm.v1.Qci
+	(*e2smv2.RanfunctionName)(nil),          // 59: e2sm_rsm.v1.RanfunctionName
 }
 var file_e2sm_rsm_v1_e2sm_rsm_v1_proto_depIdxs = []int32{
 	19, // 0: e2sm_rsm.v1.UeIdentity.cu_ue_f1_ap_id:type_name -> e2sm_rsm.v1.CuUeF1ApId

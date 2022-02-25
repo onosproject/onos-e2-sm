@@ -6,19 +6,19 @@ package encoder
 
 import (
 	"encoding/hex"
-	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	e2smrcprev2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func PerEncodeE2SmRcPreIndicationHeader(ih *e2sm_rc_pre_go.E2SmRcPreIndicationHeader) ([]byte, error) {
+func PerEncodeE2SmRcPreIndicationHeader(ih *e2smrcprev2.E2SmRcPreIndicationHeader) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-IndicationHeader message is\n%v", ih)
 	if err := ih.Validate(); err != nil {
 		return nil, errors.NewInvalid("error validating E2SM-RC-PRE-IndicationHeader PDU %s", err.Error())
 	}
 
-	per, err := aper.MarshalWithParams(ih, "choiceExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
+	per, err := aper.MarshalWithParams(ih, "choiceExt", e2smrcprev2.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,12 +27,12 @@ func PerEncodeE2SmRcPreIndicationHeader(ih *e2sm_rc_pre_go.E2SmRcPreIndicationHe
 	return per, nil
 }
 
-func PerDecodeE2SmRcPreIndicationHeader(per []byte) (*e2sm_rc_pre_go.E2SmRcPreIndicationHeader, error) {
+func PerDecodeE2SmRcPreIndicationHeader(per []byte) (*e2smrcprev2.E2SmRcPreIndicationHeader, error) {
 
 	log.Debugf("Obtained E2SM-RC-PRE-IndicationHeader PER bytes are\n%v", hex.Dump(per))
 
-	result := e2sm_rc_pre_go.E2SmRcPreIndicationHeader{}
-	err := aper.UnmarshalWithParams(per, &result, "choiceExt", e2sm_rc_pre_go.RcPreChoicemap, nil)
+	result := e2smrcprev2.E2SmRcPreIndicationHeader{}
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt", e2smrcprev2.RcPreChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

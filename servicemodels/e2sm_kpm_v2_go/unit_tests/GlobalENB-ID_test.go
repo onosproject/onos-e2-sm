@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -17,14 +17,14 @@ import (
 var refPerGlobalEnbID1 = "00000000  00 21 22 23 00 d4 bc 00                           |.!\"#....|"
 var refPerGlobalEnbID2 = "00000000  00 21 22 23 40 d4 bc 09  00                       |.!\"#@....|"
 
-func createGlobalEnbID1() *e2sm_kpm_v2_go.GlobalEnbId {
+func createGlobalEnbID1() *e2smkpmv2.GlobalEnbId {
 
-	return &e2sm_kpm_v2_go.GlobalEnbId{
-		PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+	return &e2smkpmv2.GlobalEnbId{
+		PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 			Value: []byte{0x21, 0x22, 0x23},
 		},
-		ENbId: &e2sm_kpm_v2_go.EnbId{
-			EnbId: &e2sm_kpm_v2_go.EnbId_MacroENbId{
+		ENbId: &e2smkpmv2.EnbId{
+			EnbId: &e2smkpmv2.EnbId_MacroENbId{
 				MacroENbId: &asn1.BitString{
 					Value: []byte{0xd4, 0xbc, 0x00},
 					Len:   20,
@@ -34,14 +34,14 @@ func createGlobalEnbID1() *e2sm_kpm_v2_go.GlobalEnbId {
 	}
 }
 
-func createGlobalEnbID2() *e2sm_kpm_v2_go.GlobalEnbId {
+func createGlobalEnbID2() *e2smkpmv2.GlobalEnbId {
 
-	return &e2sm_kpm_v2_go.GlobalEnbId{
-		PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+	return &e2smkpmv2.GlobalEnbId{
+		PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 			Value: []byte{0x21, 0x22, 0x23},
 		},
-		ENbId: &e2sm_kpm_v2_go.EnbId{
-			EnbId: &e2sm_kpm_v2_go.EnbId_HomeENbId{
+		ENbId: &e2smkpmv2.EnbId{
+			EnbId: &e2smkpmv2.EnbId_HomeENbId{
 				HomeENbId: &asn1.BitString{
 					Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 					Len:   28,
@@ -55,13 +55,13 @@ func Test_perEncodingGlobalEnbID1(t *testing.T) {
 
 	globalEnbID1 := createGlobalEnbID1()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per1, err := aper.MarshalWithParams(globalEnbID1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per1, err := aper.MarshalWithParams(globalEnbID1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Macro) PER\n%v", hex.Dump(per1))
 
-	result1 := e2sm_kpm_v2_go.GlobalEnbId{}
-	err = aper.UnmarshalWithParams(per1, &result1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result1 := e2smkpmv2.GlobalEnbId{}
+	err = aper.UnmarshalWithParams(per1, &result1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result1 != nil)
 	t.Logf("GlobalEnbID (Macro) PER - decoded\n%v", &result1)
@@ -74,8 +74,8 @@ func Test_perGlobalEnbID1CompareBytes(t *testing.T) {
 
 	globalEnbID1 := createGlobalEnbID1()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per1, err := aper.MarshalWithParams(globalEnbID1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per1, err := aper.MarshalWithParams(globalEnbID1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Macro) PER\n%v", hex.Dump(per1))
 
@@ -88,13 +88,13 @@ func Test_perGlobalEnbID1CompareBytes(t *testing.T) {
 func Test_perEncodingGlobalEnbID2(t *testing.T) {
 	globalEnbID2 := createGlobalEnbID2()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per2, err := aper.MarshalWithParams(globalEnbID2, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per2, err := aper.MarshalWithParams(globalEnbID2, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per2))
 
-	result2 := e2sm_kpm_v2_go.GlobalEnbId{}
-	err = aper.UnmarshalWithParams(per2, &result2, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result2 := e2smkpmv2.GlobalEnbId{}
+	err = aper.UnmarshalWithParams(per2, &result2, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result2 != nil)
 	t.Logf("GlobalEnbID (Home) PER - decoded\n%v", &result2)
@@ -106,8 +106,8 @@ func Test_perEncodingGlobalEnbID2(t *testing.T) {
 func Test_perGlobalEnbID2CompareBytes(t *testing.T) {
 	globalEnbID2 := createGlobalEnbID2()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per2, err := aper.MarshalWithParams(globalEnbID2, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per2, err := aper.MarshalWithParams(globalEnbID2, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalEnbID (Home) PER\n%v", hex.Dump(per2))
 

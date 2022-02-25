@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -20,44 +20,44 @@ var refPerMeasLabel = "00000000  7f ff c0 01 02 03 4f c0  01 02 03 00 17 68 18 0
 var refPerMeasLabelXcldSomeOptnl = "00000000  66 7d 40 01 02 03 40 40  01 02 03 00 18 00 1e 00  |f}@...@@........|\n" +
 	"00000010  00 18 00 00 00 00 00 7a  00 03 14 40              |.......z...@|"
 
-func createMeasurementLabel() *e2sm_kpm_v2_go.MeasurementLabel {
+func createMeasurementLabel() *e2smkpmv2.MeasurementLabel {
 
 	var br int32 = 25
 	var lmm int32 = 1
-	sum := e2sm_kpm_v2_go.SUM_SUM_TRUE
+	sum := e2smkpmv2.SUM_SUM_TRUE
 	var dbx int32 = 123
 	var dby int32 = 456
 	var dbz int32 = 789
-	plo := e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
+	plo := e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	seind := e2smkpmv2.StartEndInd_START_END_IND_END
 
-	return &e2sm_kpm_v2_go.MeasurementLabel{
-		PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
+	return &e2smkpmv2.MeasurementLabel{
+		PlmnId: &e2smkpmv2.PlmnIdentity{
 			Value: []byte{0x01, 0x02, 0x03},
 		},
-		SliceId: &e2sm_kpm_v2_go.Snssai{
+		SliceId: &e2smkpmv2.Snssai{
 			SD:  []byte{0x01, 0x02, 0x03},
 			SSt: []byte{0x3f},
 		},
-		FiveQi: &e2sm_kpm_v2_go.FiveQi{
+		FiveQi: &e2smkpmv2.FiveQi{
 			Value: 23,
 		},
-		QFi: &e2sm_kpm_v2_go.Qfi{
+		QFi: &e2smkpmv2.Qfi{
 			Value: 52,
 		},
-		QCi: &e2sm_kpm_v2_go.Qci{
+		QCi: &e2smkpmv2.Qci{
 			Value: 24,
 		},
-		QCimax: &e2sm_kpm_v2_go.Qci{
+		QCimax: &e2smkpmv2.Qci{
 			Value: 30,
 		},
-		QCimin: &e2sm_kpm_v2_go.Qci{
+		QCimin: &e2smkpmv2.Qci{
 			Value: 1,
 		},
-		ARpmax: &e2sm_kpm_v2_go.Arp{
+		ARpmax: &e2smkpmv2.Arp{
 			Value: 15,
 		},
-		ARpmin: &e2sm_kpm_v2_go.Arp{
+		ARpmin: &e2smkpmv2.Arp{
 			Value: 1,
 		},
 		BitrateRange:     &br,
@@ -71,15 +71,15 @@ func createMeasurementLabel() *e2sm_kpm_v2_go.MeasurementLabel {
 	}
 }
 
-func createMeasurementLabelXcldSomeOptnl() (*e2sm_kpm_v2_go.MeasurementLabel, error) {
+func createMeasurementLabelXcldSomeOptnl() (*e2smkpmv2.MeasurementLabel, error) {
 
 	var br int32 = 25
 	var lmm int32 = 1
 	var dbx int32 = 123
 	var dbz int32 = 789
-	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
+	seind := e2smkpmv2.StartEndInd_START_END_IND_END
 
-	plmnID := &e2sm_kpm_v2_go.PlmnIdentity{
+	plmnID := &e2smkpmv2.PlmnIdentity{
 		Value: []byte{0x01, 0x02, 0x03},
 	}
 	sliceID, err := pdubuilder.CreateSnssai([]byte{0x01})
@@ -100,7 +100,7 @@ func Test_perEncodeMeasurementLabel(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementLabel{}
+	result := e2smkpmv2.MeasurementLabel{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -150,7 +150,7 @@ func Test_perEncodeMeasurementLabelXcldSomeOptnl(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementLabel PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementLabel{}
+	result := e2smkpmv2.MeasurementLabel{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

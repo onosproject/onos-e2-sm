@@ -7,7 +7,7 @@ package unit_test
 import (
 	"encoding/hex"
 	"github.com/google/martian/log"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -39,20 +39,20 @@ func TestRsrpSample(t *testing.T) {
 	//refPer, err := hexlib.DumpToByte(rsrpN65536)
 	//assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: -1234,
 	}
 
 	//t.Logf("Casting value to uint64 results in \n%v", uint64(-156))
 	t.Logf("Casting value to uint64 results in \n%v", uint64(rsrp.GetValue()))
 
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	//assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -65,18 +65,18 @@ func TestRsrpN65536(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrpN65536)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: -65536,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -89,18 +89,18 @@ func TestRsrpN32000(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrpN32000)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: -32000,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -113,18 +113,18 @@ func TestRsrpN1234(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrpN1234)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: -1234,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -137,18 +137,18 @@ func TestRsrpN156(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrpN156)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: -156,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -161,18 +161,18 @@ func TestRsrpN1(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrpN1)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: -1,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -185,18 +185,18 @@ func TestRsrp0(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrp0)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 0,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -209,18 +209,18 @@ func TestRsrp1(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrp1)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 1,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -233,18 +233,18 @@ func TestRsrp156(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrp156)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 156,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -257,18 +257,18 @@ func TestRsrp1234(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrp1234)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 1234,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -281,18 +281,18 @@ func TestRsrp32000(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrp32000)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 32000,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 
@@ -305,18 +305,18 @@ func TestRsrp65536(t *testing.T) {
 	refPer, err := hexlib.DumpToByte(rsrp65536)
 	assert.NilError(t, err)
 
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 65536,
 	}
 
-	//aper.ChoiceMap = e2sm_mho_go.MhoChoicemap
-	per, err := aper.MarshalWithParams(rsrp, "", e2sm_mho_go.MhoChoicemap, nil)
+	//aper.ChoiceMap = e2smmhov2.MhoChoicemap
+	per, err := aper.MarshalWithParams(rsrp, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Encoded RSRP PER bytes are\n%v", hex.Dump(per))
 	assert.DeepEqual(t, per, refPer)
 
-	result := e2sm_mho_go.Rsrp{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.Rsrp{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smmhov2.MhoChoicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("Decoded RSRP from PER is\n%v", &result)
 

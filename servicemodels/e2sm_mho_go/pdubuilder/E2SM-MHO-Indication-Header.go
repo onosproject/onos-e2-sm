@@ -4,16 +4,16 @@
 package pdubuilder
 
 import (
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmMhoIndicationHeader(cgi *e2sm_v2_ies.Cgi) (*e2sm_mho_go.E2SmMhoIndicationHeader, error) {
+func CreateE2SmMhoIndicationHeader(cgi *e2smv2.Cgi) (*e2smmhov2.E2SmMhoIndicationHeader, error) {
 
-	E2SmMhoPdu := e2sm_mho_go.E2SmMhoIndicationHeader{
-		E2SmMhoIndicationHeader: &e2sm_mho_go.E2SmMhoIndicationHeader_IndicationHeaderFormat1{
-			IndicationHeaderFormat1: &e2sm_mho_go.E2SmMhoIndicationHeaderFormat1{
+	E2SmMhoPdu := e2smmhov2.E2SmMhoIndicationHeader{
+		E2SmMhoIndicationHeader: &e2smmhov2.E2SmMhoIndicationHeader_IndicationHeaderFormat1{
+			IndicationHeaderFormat1: &e2smmhov2.E2SmMhoIndicationHeaderFormat1{
 				Cgi: cgi,
 			},
 		},

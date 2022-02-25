@@ -4,15 +4,15 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmKpmEventTriggerDefinition(rtPeriod int64) (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
-	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition{
-		EventDefinitionFormats: &e2sm_kpm_v2_go.EventTriggerDefinitionFormats{
-			E2SmKpmEventTriggerDefinition: &e2sm_kpm_v2_go.EventTriggerDefinitionFormats_EventDefinitionFormat1{
-				EventDefinitionFormat1: &e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinitionFormat1{
+func CreateE2SmKpmEventTriggerDefinition(rtPeriod int64) (*e2smkpmv2.E2SmKpmEventTriggerDefinition, error) {
+	e2SmKpmPdu := e2smkpmv2.E2SmKpmEventTriggerDefinition{
+		EventDefinitionFormats: &e2smkpmv2.EventTriggerDefinitionFormats{
+			E2SmKpmEventTriggerDefinition: &e2smkpmv2.EventTriggerDefinitionFormats_EventDefinitionFormat1{
+				EventDefinitionFormat1: &e2smkpmv2.E2SmKpmEventTriggerDefinitionFormat1{
 					ReportingPeriod: rtPeriod,
 				},
 			},

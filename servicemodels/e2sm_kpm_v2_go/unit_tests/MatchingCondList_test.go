@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,46 +17,46 @@ var refPerMCL = "00000000  00 01 1f ff f0 01 02 03  40 40 01 02 03 00 17 68  |..
 	"00000010  18 00 1e 00 01 70 00 00  18 00 00 00 00 00 7a 00  |.....p........z.|\n" +
 	"00000020  01 c7 00 03 14 28 42 00  01 15                    |.....(B...|"
 
-func createMatchingCondList() (*e2sm_kpm_v2_go.MatchingCondList, error) {
+func createMatchingCondList() (*e2smkpmv2.MatchingCondList, error) {
 
 	var br int32 = 25
 	var lmm int32 = 1
 	var dbx int32 = 123
 	var dby int32 = 456
 	var dbz int32 = 789
-	sum := e2sm_kpm_v2_go.SUM_SUM_TRUE
-	plo := e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
+	sum := e2smkpmv2.SUM_SUM_TRUE
+	plo := e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	seind := e2smkpmv2.StartEndInd_START_END_IND_END
 
-	mci1 := &e2sm_kpm_v2_go.MatchingCondItem{
-		MatchingCondItem: &e2sm_kpm_v2_go.MatchingCondItem_MeasLabel{
-			MeasLabel: &e2sm_kpm_v2_go.MeasurementLabel{
-				PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
+	mci1 := &e2smkpmv2.MatchingCondItem{
+		MatchingCondItem: &e2smkpmv2.MatchingCondItem_MeasLabel{
+			MeasLabel: &e2smkpmv2.MeasurementLabel{
+				PlmnId: &e2smkpmv2.PlmnIdentity{
 					Value: []byte{0x01, 0x02, 0x03},
 				},
-				SliceId: &e2sm_kpm_v2_go.Snssai{
+				SliceId: &e2smkpmv2.Snssai{
 					SD:  []byte{0x01, 0x02, 0x03},
 					SSt: []byte{0x01},
 				},
-				FiveQi: &e2sm_kpm_v2_go.FiveQi{
+				FiveQi: &e2smkpmv2.FiveQi{
 					Value: 23,
 				},
-				QFi: &e2sm_kpm_v2_go.Qfi{
+				QFi: &e2smkpmv2.Qfi{
 					Value: 52,
 				},
-				QCi: &e2sm_kpm_v2_go.Qci{
+				QCi: &e2smkpmv2.Qci{
 					Value: 24,
 				},
-				QCimax: &e2sm_kpm_v2_go.Qci{
+				QCimax: &e2smkpmv2.Qci{
 					Value: 30,
 				},
-				QCimin: &e2sm_kpm_v2_go.Qci{
+				QCimin: &e2smkpmv2.Qci{
 					Value: 1,
 				},
-				ARpmax: &e2sm_kpm_v2_go.Arp{
+				ARpmax: &e2smkpmv2.Arp{
 					Value: 15,
 				},
-				ARpmin: &e2sm_kpm_v2_go.Arp{
+				ARpmin: &e2smkpmv2.Arp{
 					Value: 1,
 				},
 				BitrateRange:     &br,
@@ -75,17 +75,17 @@ func createMatchingCondList() (*e2sm_kpm_v2_go.MatchingCondList, error) {
 	//	return nil, err
 	//}
 
-	mci2 := &e2sm_kpm_v2_go.MatchingCondItem{
-		MatchingCondItem: &e2sm_kpm_v2_go.MatchingCondItem_TestCondInfo{
-			TestCondInfo: &e2sm_kpm_v2_go.TestCondInfo{
-				TestType: &e2sm_kpm_v2_go.TestCondType{
-					TestCondType: &e2sm_kpm_v2_go.TestCondType_AMbr{
-						AMbr: e2sm_kpm_v2_go.AMBR_AMBR_TRUE,
+	mci2 := &e2smkpmv2.MatchingCondItem{
+		MatchingCondItem: &e2smkpmv2.MatchingCondItem_TestCondInfo{
+			TestCondInfo: &e2smkpmv2.TestCondInfo{
+				TestType: &e2smkpmv2.TestCondType{
+					TestCondType: &e2smkpmv2.TestCondType_AMbr{
+						AMbr: e2smkpmv2.AMBR_AMBR_TRUE,
 					},
 				},
-				TestExpr: e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
-				TestValue: &e2sm_kpm_v2_go.TestCondValue{
-					TestCondValue: &e2sm_kpm_v2_go.TestCondValue_ValueInt{
+				TestExpr: e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
+				TestValue: &e2smkpmv2.TestCondValue{
+					TestCondValue: &e2smkpmv2.TestCondValue_ValueInt{
 						ValueInt: 21,
 					},
 				},
@@ -97,8 +97,8 @@ func createMatchingCondList() (*e2sm_kpm_v2_go.MatchingCondList, error) {
 	//	return nil, err
 	//}
 
-	mcl := &e2sm_kpm_v2_go.MatchingCondList{
-		Value: make([]*e2sm_kpm_v2_go.MatchingCondItem, 0),
+	mcl := &e2smkpmv2.MatchingCondList{
+		Value: make([]*e2smkpmv2.MatchingCondItem, 0),
 	}
 	mcl.Value = append(mcl.Value, mci1)
 	mcl.Value = append(mcl.Value, mci2)
@@ -114,13 +114,13 @@ func Test_perEncodeMatchingCondList(t *testing.T) {
 	mcl, err := createMatchingCondList()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mcl, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mcl, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MatchingCondList{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MatchingCondList{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingCondList PER - decoded\n%v", &result)
@@ -152,8 +152,8 @@ func Test_perMatchingCondListCompareBytes(t *testing.T) {
 	mcl, err := createMatchingCondList()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mcl, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mcl, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem PER\n%v", hex.Dump(per))
 

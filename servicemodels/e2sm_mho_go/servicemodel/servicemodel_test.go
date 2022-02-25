@@ -7,8 +7,8 @@ package servicemodel
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/pdubuilder"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"google.golang.org/protobuf/proto"
 	"gotest.tools/assert"
@@ -52,7 +52,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
 	//assert.Equal(t, 24, len(protoBytes))
-	testIH := &e2sm_mho_go.E2SmMhoIndicationHeader{}
+	testIH := &e2smmhov2.E2SmMhoIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
 	t.Logf("Decoded MHO-IndicationHeader is \n%v", testIH)
@@ -68,13 +68,13 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 		Len:   36,
 	})
 	assert.NilError(t, err)
-	rsrp := &e2sm_mho_go.Rsrp{
+	rsrp := &e2smmhov2.Rsrp{
 		Value: 1234,
 	}
 	measItem, err := pdubuilder.CreateMeasurementRecordItem(cgi, rsrp)
 	assert.NilError(t, err)
 
-	measReport := make([]*e2sm_mho_go.E2SmMhoMeasurementReportItem, 0)
+	measReport := make([]*e2smmhov2.E2SmMhoMeasurementReportItem, 0)
 	measReport = append(measReport, measItem)
 
 	newE2SmMhoPdu, err := pdubuilder.CreateE2SmMhoIndicationMsgFormat1(ueID, measReport)
@@ -106,7 +106,7 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 	//assert.Equal(t, 39, len(protoBytes))
-	testIM := &e2sm_mho_go.E2SmMhoIndicationMessage{}
+	testIM := &e2smmhov2.E2SmMhoIndicationMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded MHO-IndicationMessage is \n%v", testIM)
@@ -128,12 +128,12 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	var ricIndicationHeaderFormatType int32 = 21
 	var ricIndicationMessageFormatType int32 = 56
 
-	retsl := make([]*e2sm_mho_go.RicEventTriggerStyleList, 0)
+	retsl := make([]*e2smmhov2.RicEventTriggerStyleList, 0)
 	retsi, err := pdubuilder.CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
 	assert.NilError(t, err)
 	retsl = append(retsl, retsi)
 
-	rrsl := make([]*e2sm_mho_go.RicReportStyleList, 0)
+	rrsl := make([]*e2smmhov2.RicReportStyleList, 0)
 	rrsi, err := pdubuilder.CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
 		ricIndicationMessageFormatType)
 	assert.NilError(t, err)
@@ -171,7 +171,7 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 	//assert.Equal(t, 79, len(protoBytes))
-	testRFD := &e2sm_mho_go.E2SmMhoRanfunctionDescription{}
+	testRFD := &e2smmhov2.E2SmMhoRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, testRFD)
 	t.Logf("Decoded MHO-RanFunctionDescription is \n%v", testRFD)
 	assert.NilError(t, err)
@@ -205,7 +205,7 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 	//assert.Equal(t, 6, len(protoBytes))
-	testIM := &e2sm_mho_go.E2SmMhoEventTriggerDefinition{}
+	testIM := &e2smmhov2.E2SmMhoEventTriggerDefinition{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded MHO-EventTriggerDefinition is \n%v", testIM)
@@ -242,7 +242,7 @@ func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
 	assert.Equal(t, 6, len(protoBytes))
-	testCH := &e2sm_mho_go.E2SmMhoControlHeader{}
+	testCH := &e2smmhov2.E2SmMhoControlHeader{}
 	err = proto.Unmarshal(protoBytes, testCH)
 	assert.NilError(t, err)
 	t.Logf("Decoded MHO-ControlHeader is \n%v", testCH)
@@ -256,13 +256,13 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 	plmnIDBytes, err := hex.DecodeString(plmnID)
 	assert.NilError(t, err)
 
-	servingCgi := &e2sm_v2_ies.Cgi{
-		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
-			EUtraCgi: &e2sm_v2_ies.EutraCgi{
-				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
+	servingCgi := &e2smv2.Cgi{
+		Cgi: &e2smv2.Cgi_EUtraCgi{
+			EUtraCgi: &e2smv2.EutraCgi{
+				PLmnidentity: &e2smv2.PlmnIdentity{
 					Value: plmnIDBytes,
 				},
-				EUtracellIdentity: &e2sm_v2_ies.EutracellIdentity{
+				EUtracellIdentity: &e2smv2.EutracellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0x9b, 0xcd, 0x4a, 0xb0},
 						Len:   28, //uint32
@@ -271,13 +271,13 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 			},
 		},
 	}
-	targetCgi := &e2sm_v2_ies.Cgi{
-		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
-			EUtraCgi: &e2sm_v2_ies.EutraCgi{
-				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
+	targetCgi := &e2smv2.Cgi{
+		Cgi: &e2smv2.Cgi_EUtraCgi{
+			EUtraCgi: &e2smv2.EutraCgi{
+				PLmnidentity: &e2smv2.PlmnIdentity{
 					Value: plmnIDBytes,
 				},
-				EUtracellIdentity: &e2sm_v2_ies.EutracellIdentity{
+				EUtracellIdentity: &e2smv2.EutracellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0x9b, 0xcd, 0x4a, 0xb0},
 						Len:   28, //uint32
@@ -315,7 +315,7 @@ func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
 	//assert.Equal(t, 54, len(protoBytes))
-	testIM := &e2sm_mho_go.E2SmMhoControlMessage{}
+	testIM := &e2smmhov2.E2SmMhoControlMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded MHO-ControlMessage is \n%v", testIM)

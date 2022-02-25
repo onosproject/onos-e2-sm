@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -30,13 +30,13 @@ func Test_perEncodingGlobalKPMnodeEnbID(t *testing.T) {
 	enbID, err := pdubuilder.CreateGlobalKpmnodeIDeNBID(homeEnbID, plmnID)
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID.GetENb(), "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID.GetENb(), "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnodeEnbID (Home) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.GlobalKpmnodeEnbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.GlobalKpmnodeEnbId{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GlobalKPMnodeEnbID (Home) PER - decoded\n%v", &result)
@@ -58,8 +58,8 @@ func Test_perGlobalKPMnodeEnbIDCompareBytes(t *testing.T) {
 	enbID, err := pdubuilder.CreateGlobalKpmnodeIDeNBID(homeEnbID, plmnID)
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(enbID.GetENb(), "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(enbID.GetENb(), "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnodeEnbID (Home) PER\n%v", hex.Dump(per))
 

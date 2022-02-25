@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -15,17 +15,17 @@ import (
 
 var refPerMeasurementInfoActionList = "00000000  00 00 40 40 6f 6e 66 00  00 14                    |..@@onf...|"
 
-func createMeasurementInfoActionList() (*e2sm_kpm_v2_go.MeasurementInfoActionList, error) {
+func createMeasurementInfoActionList() (*e2smkpmv2.MeasurementInfoActionList, error) {
 
-	res := &e2sm_kpm_v2_go.MeasurementInfoActionList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoActionItem, 0),
+	res := &e2smkpmv2.MeasurementInfoActionList{
+		Value: make([]*e2smkpmv2.MeasurementInfoActionItem, 0),
 	}
 
-	item := &e2sm_kpm_v2_go.MeasurementInfoActionItem{
-		MeasId: &e2sm_kpm_v2_go.MeasurementTypeId{
+	item := &e2smkpmv2.MeasurementInfoActionItem{
+		MeasId: &e2smkpmv2.MeasurementTypeId{
 			Value: 21,
 		},
-		MeasName: &e2sm_kpm_v2_go.MeasurementTypeName{
+		MeasName: &e2smkpmv2.MeasurementTypeName{
 			Value: "onf",
 		},
 	}
@@ -46,7 +46,7 @@ func Test_perEncodingMeasurementInfoActionList(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfoActionList PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementInfoActionList{}
+	result := e2smkpmv2.MeasurementInfoActionList{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

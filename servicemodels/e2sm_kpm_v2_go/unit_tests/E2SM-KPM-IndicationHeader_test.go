@@ -8,7 +8,7 @@ import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -19,7 +19,7 @@ var refPerE2SmKpmIndicationHeader = "00000000  1f 21 22 23 24 18 74 78  74 00 00
 	"00000010  73 6f 6d 65 54 79 70 65  06 6f 6e 66 0c 37 34 37  |someType.onf.747|\n" +
 	"00000020  00 d4 bc 08 80 30 39 20  1a 85                    |.....09 ..|"
 
-func createE2SmKpmIndicationHeader() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, error) {
+func createE2SmKpmIndicationHeader() (*e2smkpmv2.E2SmKpmIndicationHeader, error) {
 
 	bs := asn1.BitString{
 		Value: []byte{0xd4, 0xbc, 0x08},
@@ -38,10 +38,10 @@ func createE2SmKpmIndicationHeader() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeader, e
 	if err != nil {
 		return nil, err
 	}
-	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
+	globalKpmNodeID.GetGNb().GNbCuUpId = &e2smkpmv2.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
+	globalKpmNodeID.GetGNb().GNbDuId = &e2smkpmv2.GnbDuId{
 		Value: gnbDuID,
 	}
 

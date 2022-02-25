@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -18,7 +18,7 @@ var refPerTimeStamp = "00000000  01 02 03 04                                    
 func Test_perEncodingTimeStamp(t *testing.T) {
 
 	stamp := []byte{0x01, 0x02, 0x03, 0x04}
-	timeStamp := &e2sm_kpm_v2_go.TimeStamp{
+	timeStamp := &e2smkpmv2.TimeStamp{
 		Value: stamp,
 	}
 
@@ -26,7 +26,7 @@ func Test_perEncodingTimeStamp(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("TimeStamp PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TimeStamp{}
+	result := e2smkpmv2.TimeStamp{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -37,7 +37,7 @@ func Test_perEncodingTimeStamp(t *testing.T) {
 func Test_perTimeStampCompareBytes(t *testing.T) {
 
 	stamp := []byte{0x01, 0x02, 0x03, 0x04}
-	timeStamp := &e2sm_kpm_v2_go.TimeStamp{
+	timeStamp := &e2smkpmv2.TimeStamp{
 		Value: stamp,
 	}
 

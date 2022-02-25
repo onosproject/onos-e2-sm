@@ -7,7 +7,7 @@ package servicemodel
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"google.golang.org/protobuf/proto"
 	"gotest.tools/assert"
@@ -31,10 +31,10 @@ func TestServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 	var vendorName = "onf"
 
 	globalKpmNodeID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
-	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
+	globalKpmNodeID.GetGNb().GNbCuUpId = &e2smkpmv2.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
+	globalKpmNodeID.GetGNb().GNbDuId = &e2smkpmv2.GnbDuId{
 		Value: gnbDuID,
 	}
 	assert.NilError(t, err)
@@ -67,7 +67,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	protoBytes, err := kpmv2TestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	testIH := &e2sm_kpm_v2_go.E2SmKpmIndicationHeader{}
+	testIH := &e2smkpmv2.E2SmKpmIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
 	t.Logf("Decoded message is \n%v", testIH)
@@ -97,17 +97,17 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
-	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
+	startEndIndication := e2smkpmv2.StartEndInd_START_END_IND_START
 	var measurementName = "trial"
-	sum := e2sm_kpm_v2_go.SUM_SUM_TRUE
-	plo := e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	sum := e2smkpmv2.SUM_SUM_TRUE
+	plo := e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
 
 	labelInfoItem, err := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
 		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
 	assert.NilError(t, err)
 
-	labelInfoList := e2sm_kpm_v2_go.LabelInfoList{
-		Value: make([]*e2sm_kpm_v2_go.LabelInfoItem, 0),
+	labelInfoList := e2smkpmv2.LabelInfoList{
+		Value: make([]*e2smkpmv2.LabelInfoItem, 0),
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
@@ -117,13 +117,13 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	measInfoItem.SetLabelInfoList(&labelInfoList)
 
-	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
+	measInfoList := e2smkpmv2.MeasurementInfoList{
+		Value: make([]*e2smkpmv2.MeasurementInfoItem, 0),
 	}
 	measInfoList.Value = append(measInfoList.Value, measInfoItem)
 
-	measRecord := e2sm_kpm_v2_go.MeasurementRecord{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementRecordItem, 0),
+	measRecord := e2smkpmv2.MeasurementRecord{
+		Value: make([]*e2smkpmv2.MeasurementRecordItem, 0),
 	}
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemInteger(integer))
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemNoValue())
@@ -133,8 +133,8 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	measDataItem.SetIncompleteFlag()
 
-	measData := e2sm_kpm_v2_go.MeasurementData{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
+	measData := e2smkpmv2.MeasurementData{
+		Value: make([]*e2smkpmv2.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
@@ -167,7 +167,7 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 	assert.Equal(t, 124, len(protoBytes))
-	testIM := &e2sm_kpm_v2_go.E2SmKpmIndicationMessage{}
+	testIM := &e2smkpmv2.E2SmKpmIndicationMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded message is \n%v", testIM)
@@ -201,20 +201,20 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	var gnbCuUpID int64 = 12345
 	var gnbDuID int64 = 6789
 	globalKpmnodeID, err := pdubuilder.CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
-	globalKpmnodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
+	globalKpmnodeID.GetGNb().GNbCuUpId = &e2smkpmv2.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmnodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
+	globalKpmnodeID.GetGNb().GNbDuId = &e2smkpmv2.GnbDuId{
 		Value: gnbDuID,
 	}
 	assert.NilError(t, err)
 
-	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
+	cmol := make([]*e2smkpmv2.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
 	kpmNodeItem := pdubuilder.CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
-	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
+	rknl := make([]*e2smkpmv2.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
 
 	var ricStyleType int32 = 11
@@ -222,17 +222,17 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	var ricFormatType int32 = 15
 	retsi := pdubuilder.CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
-	retsl := make([]*e2sm_kpm_v2_go.RicEventTriggerStyleItem, 0)
+	retsl := make([]*e2smkpmv2.RicEventTriggerStyleItem, 0)
 	retsl = append(retsl, retsi)
 
-	measInfoActionList := e2sm_kpm_v2_go.MeasurementInfoActionList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoActionItem, 0),
+	measInfoActionList := e2smkpmv2.MeasurementInfoActionList{
+		Value: make([]*e2smkpmv2.MeasurementInfoActionItem, 0),
 	}
 
 	var measTypeName = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := pdubuilder.CreateMeasurementInfoActionItem(measTypeName)
-	measInfoActionItem.MeasId = &e2sm_kpm_v2_go.MeasurementTypeId{
+	measInfoActionItem.MeasId = &e2smkpmv2.MeasurementTypeId{
 		Value: measTypeID,
 	}
 	measInfoActionList.Value = append(measInfoActionList.Value, measInfoActionItem)
@@ -241,7 +241,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 	var indHdrFormat int32 = 47
 	rrsi := pdubuilder.CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, &measInfoActionList, indHdrFormat, indMsgFormat)
 
-	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
+	rrsl := make([]*e2smkpmv2.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
 	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)
@@ -276,7 +276,7 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 	assert.Equal(t, 171, len(protoBytes))
-	testRFD := &e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{}
+	testRFD := &e2smkpmv2.E2SmKpmRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, testRFD)
 	t.Logf("Decoded message is \n%v", testRFD)
 	assert.NilError(t, err)
@@ -312,7 +312,7 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
 	assert.Equal(t, 6, len(protoBytes))
-	testETD := &e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition{}
+	testETD := &e2smkpmv2.E2SmKpmEventTriggerDefinition{}
 	err = proto.Unmarshal(protoBytes, testETD)
 	t.Logf("Decoded message is \n%v", testETD)
 	assert.NilError(t, err)
@@ -328,15 +328,15 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	var measurementName = "trial"
 
 	var valEnum int64 = 201
-	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN
+	tce := e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN
 	tci, err := pdubuilder.CreateTestCondInfo(pdubuilder.CreateTestCondTypeRSRP(), tce, pdubuilder.CreateTestCondValueEnum(valEnum))
 	assert.NilError(t, err)
 
 	mci, err := pdubuilder.CreateMatchingCondItemTestCondInfo(tci)
 	assert.NilError(t, err)
 
-	mcl := &e2sm_kpm_v2_go.MatchingCondList{
-		Value: make([]*e2sm_kpm_v2_go.MatchingCondItem, 0),
+	mcl := &e2smkpmv2.MatchingCondList{
+		Value: make([]*e2smkpmv2.MatchingCondItem, 0),
 	}
 	mcl.Value = append(mcl.Value, mci)
 
@@ -345,8 +345,8 @@ func TestServicemodel_ActionDefinitionProtoToASN1(t *testing.T) {
 	measCondItem, err := pdubuilder.CreateMeasurementCondItem(measName, mcl)
 	assert.NilError(t, err)
 
-	measCondList := e2sm_kpm_v2_go.MeasurementCondList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementCondItem, 0),
+	measCondList := e2smkpmv2.MeasurementCondList{
+		Value: make([]*e2smkpmv2.MeasurementCondItem, 0),
 	}
 	measCondList.Value = append(measCondList.Value, measCondItem)
 
@@ -377,7 +377,7 @@ func TestServicemodel_ActionDefinitionASN1toProto(t *testing.T) {
 	protoBytes, err := kpmv2TestSm.ActionDefinitionASN1toProto(actionDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testAD := &e2sm_kpm_v2_go.E2SmKpmActionDefinition{}
+	testAD := &e2smkpmv2.E2SmKpmActionDefinition{}
 	err = proto.Unmarshal(protoBytes, testAD)
 	assert.NilError(t, err)
 	t.Logf("Decoded message is \n%v", testAD)

@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,11 +17,11 @@ import (
 var refPerMeasurementType1 = "00000000  00 40 6f 6e 66                                    |.@onf|" //Name
 var refPerMeasurementType2 = "00000000  40 00 7a                                          |@.z|"   //ID
 
-func createMeasurementType1() (*e2sm_kpm_v2_go.MeasurementType, error) {
+func createMeasurementType1() (*e2smkpmv2.MeasurementType, error) {
 	return pdubuilder.CreateMeasurementTypeMeasName("onf")
 }
 
-func createMeasurementType2() (*e2sm_kpm_v2_go.MeasurementType, error) {
+func createMeasurementType2() (*e2smkpmv2.MeasurementType, error) {
 	return pdubuilder.CreateMeasurementTypeMeasID(123)
 }
 
@@ -30,13 +30,13 @@ func Test_perEncodingMeasurementType1(t *testing.T) {
 	mt1, err := createMeasurementType1()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mt1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mt1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementType (Name) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementType{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MeasurementType{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementType (Name) - decoded\n%v", &result)
@@ -48,8 +48,8 @@ func Test_perMeasurementType1CompareBytes(t *testing.T) {
 	mt1, err := createMeasurementType1()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mt1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mt1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementType (Name) PER\n%v", hex.Dump(per))
 
@@ -64,13 +64,13 @@ func Test_perEncodingMeasurementType2(t *testing.T) {
 	mt2, err := createMeasurementType2()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mt2, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mt2, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementType (ID) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementType{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MeasurementType{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementType (ID) - decoded\n%v", &result)
@@ -82,8 +82,8 @@ func Test_perMeasurementType2CompareBytes(t *testing.T) {
 	mt2, err := createMeasurementType2()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mt2, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mt2, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementType (ID) PER\n%v", hex.Dump(per))
 

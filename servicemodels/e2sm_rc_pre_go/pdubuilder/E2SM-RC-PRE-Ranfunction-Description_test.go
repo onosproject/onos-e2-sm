@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/encoder"
-	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	e2smrcprev2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -24,11 +24,11 @@ func TestE2SmRcPreRanFunctionDescriptionMsg(t *testing.T) {
 	var ricReportStyleName = "ONFreport"
 	var ricIndicationHeaderFormatType int32 = 21
 	var ricIndicationMessageFormatType int32 = 56
-	retsl := make([]*e2sm_rc_pre_go.RicEventTriggerStyleList, 0)
+	retsl := make([]*e2smrcprev2.RicEventTriggerStyleList, 0)
 	retsi := CreateRicEventTriggerStyleItem(ricEventStyleType, ricEventStyleName, ricEventFormatType)
 	retsl = append(retsl, retsi)
 
-	rrsl := make([]*e2sm_rc_pre_go.RicReportStyleList, 0)
+	rrsl := make([]*e2smrcprev2.RicReportStyleList, 0)
 	rrsi := CreateRicReportStyleItem(ricReportStyleType, ricReportStyleName, ricIndicationHeaderFormatType,
 		ricIndicationMessageFormatType)
 	rrsl = append(rrsl, rrsi)

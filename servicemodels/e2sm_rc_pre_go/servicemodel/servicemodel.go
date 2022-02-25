@@ -10,7 +10,7 @@ import (
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/encoder"
-	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	e2smrcprev2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 	"google.golang.org/protobuf/proto"
 )
@@ -47,7 +47,7 @@ func (sm RcPreServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byt
 }
 
 func (sm RcPreServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rc_pre_go.E2SmRcPreIndicationHeader)
+	protoObj := new(e2smrcprev2.E2SmRcPreIndicationHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreIndicationHeader %s", err)
 	}
@@ -75,7 +75,7 @@ func (sm RcPreServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]by
 }
 
 func (sm RcPreServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rc_pre_go.E2SmRcPreIndicationMessage)
+	protoObj := new(e2smrcprev2.E2SmRcPreIndicationMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreIndicationMessage %s", err)
 	}
@@ -103,7 +103,7 @@ func (sm RcPreServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]b
 }
 
 func (sm RcPreServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rc_pre_go.E2SmRcPreRanfunctionDescription)
+	protoObj := new(e2smrcprev2.E2SmRcPreRanfunctionDescription)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreRanfunctionDescription %s", err)
 	}
@@ -131,7 +131,7 @@ func (sm RcPreServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) 
 }
 
 func (sm RcPreServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rc_pre_go.E2SmRcPreEventTriggerDefinition)
+	protoObj := new(e2smrcprev2.E2SmRcPreEventTriggerDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreEventTriggerDefinition %s", err)
 	}
@@ -167,7 +167,7 @@ func (sm RcPreServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, 
 }
 
 func (sm RcPreServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rc_pre_go.E2SmRcPreControlHeader)
+	protoObj := new(e2smrcprev2.E2SmRcPreControlHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreControlHeader %s", err)
 	}
@@ -195,7 +195,7 @@ func (sm RcPreServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte,
 }
 
 func (sm RcPreServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rc_pre_go.E2SmRcPreControlMessage)
+	protoObj := new(e2smrcprev2.E2SmRcPreControlMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreControlMessage %s", err)
 	}
@@ -223,7 +223,7 @@ func (sm RcPreServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte,
 }
 
 func (sm RcPreServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rc_pre_go.E2SmRcPreControlOutcome)
+	protoObj := new(e2smrcprev2.E2SmRcPreControlOutcome)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRcPreControlOutcome %s", err)
 	}
@@ -241,7 +241,7 @@ func (sm RcPreServiceModel) OnSetup(request *types.OnSetupRequest) error {
 	if err != nil {
 		return err
 	}
-	ranFunctionDescription := &e2sm_rc_pre_go.E2SmRcPreRanfunctionDescription{}
+	ranFunctionDescription := &e2smrcprev2.E2SmRcPreRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
 	if err != nil {
 		return err

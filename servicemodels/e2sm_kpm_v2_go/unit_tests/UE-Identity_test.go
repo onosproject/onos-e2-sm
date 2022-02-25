@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,7 +17,7 @@ var refPerUeID = "00000000  06 53 6f 6d 65 55 45                              |.
 
 func Test_perEncodeUeIdentity(t *testing.T) {
 
-	ueIdentity := &e2sm_kpm_v2_go.UeIdentity{
+	ueIdentity := &e2smkpmv2.UeIdentity{
 		Value: []byte("SomeUE"),
 	}
 
@@ -25,7 +25,7 @@ func Test_perEncodeUeIdentity(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("UE-Identity PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.UeIdentity{}
+	result := e2smkpmv2.UeIdentity{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -35,7 +35,7 @@ func Test_perEncodeUeIdentity(t *testing.T) {
 
 func Test_perUeIdentityCompareBytes(t *testing.T) {
 
-	ueIdentity := &e2sm_kpm_v2_go.UeIdentity{
+	ueIdentity := &e2smkpmv2.UeIdentity{
 		Value: []byte("SomeUE"),
 	}
 

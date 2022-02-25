@@ -7,14 +7,14 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"gotest.tools/assert"
 	"testing"
 )
 
 func TestCreateE2SmRsmRanFunctionDescription(t *testing.T) {
 
-	supportedConfigList := make([]*e2sm_rsm_ies.SupportedSlicingConfigItem, 0)
+	supportedConfigList := make([]*e2smrsm.SupportedSlicingConfigItem, 0)
 	su, err := CreateSupportedSlicingConfigItem(CreateE2SmRsmCommandSliceUpdate())
 	assert.NilError(t, err)
 	supportedConfigList = append(supportedConfigList, su)
@@ -35,7 +35,7 @@ func TestCreateE2SmRsmRanFunctionDescription(t *testing.T) {
 		supportedConfigList)
 	assert.NilError(t, err)
 
-	slicingCapList := make([]*e2sm_rsm_ies.NodeSlicingCapabilityItem, 0)
+	slicingCapList := make([]*e2smrsm.NodeSlicingCapabilityItem, 0)
 	slicingCapList = append(slicingCapList, slicingCapability)
 
 	rfd, err := CreateE2SmRsmRanFunctionDescription("E2SM-RSM",

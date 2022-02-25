@@ -8,7 +8,7 @@ import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
 	"testing"
@@ -32,7 +32,7 @@ var refPerIndMsg2noReal = "00000000  2d 30 38 00 00 03 6f 6e  66 00 14 00 00 40 
 	"00000010  72 69 61 6c 00 00 48 21  02 00 c9 00 00 00 06 53  |rial..H!.......S|\n" +
 	"00000020  6f 6d 65 55 45 00 00 40  02 08 30 39 40           |omeUE..@..09@|"
 
-func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
+func createE2SMKPMIndicationMessageFormat1() (*e2smkpmv2.E2SmKpmIndicationMessage, error) {
 
 	var integer int64 = 12345
 	//var rl float64 = 22.2
@@ -53,12 +53,12 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	var arpMin int32 = 10
 	var bitrateRange int32 = 251
 	var layerMuMimo int32 = 5
-	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
+	var sum = e2smkpmv2.SUM_SUM_TRUE
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
-	var plo = e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_START
+	var plo = e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	startEndIndication := e2smkpmv2.StartEndInd_START_END_IND_START
 
 	labelInfoItem, err := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
 		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
@@ -66,8 +66,8 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 		return nil, err
 	}
 
-	labelInfoList := e2sm_kpm_v2_go.LabelInfoList{
-		Value: make([]*e2sm_kpm_v2_go.LabelInfoItem, 0),
+	labelInfoList := e2smkpmv2.LabelInfoList{
+		Value: make([]*e2smkpmv2.LabelInfoItem, 0),
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
@@ -81,13 +81,13 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	measInfoItem.SetLabelInfoList(&labelInfoList)
 
-	measInfoList := e2sm_kpm_v2_go.MeasurementInfoList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
+	measInfoList := e2smkpmv2.MeasurementInfoList{
+		Value: make([]*e2smkpmv2.MeasurementInfoItem, 0),
 	}
 	measInfoList.Value = append(measInfoList.Value, measInfoItem)
 
-	measRecord := e2sm_kpm_v2_go.MeasurementRecord{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementRecordItem, 0),
+	measRecord := e2smkpmv2.MeasurementRecord{
+		Value: make([]*e2smkpmv2.MeasurementRecordItem, 0),
 	}
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemInteger(integer))
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemNoValue())
@@ -99,8 +99,8 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	measDataItem.SetIncompleteFlag()
 
-	measData := e2sm_kpm_v2_go.MeasurementData{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
+	measData := e2smkpmv2.MeasurementData{
+		Value: make([]*e2smkpmv2.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 
@@ -115,7 +115,7 @@ func createE2SMKPMIndicationMessageFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	return newE2SmKpmPdu, nil
 }
 
-func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
+func createE2SMKPMIndicationMessageFormat2() (*e2smkpmv2.E2SmKpmIndicationMessage, error) {
 
 	var integer int64 = 12345
 	//var rl float64 = 22.2
@@ -126,13 +126,13 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	var ueID = "SomeUE"
 
 	var valEnum int64 = 201
-	tce := e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN
+	tce := e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_LESSTHAN
 	tci, _ := pdubuilder.CreateTestCondInfo(pdubuilder.CreateTestCondTypeRSRP(), tce, pdubuilder.CreateTestCondValueEnum(valEnum))
 
 	mci, _ := pdubuilder.CreateMatchingCondItemTestCondInfo(tci)
 
-	mcl := &e2sm_kpm_v2_go.MatchingCondList{
-		Value: make([]*e2sm_kpm_v2_go.MatchingCondItem, 0),
+	mcl := &e2smkpmv2.MatchingCondList{
+		Value: make([]*e2smkpmv2.MatchingCondItem, 0),
 	}
 	mcl.Value = append(mcl.Value, mci)
 
@@ -140,8 +140,8 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 
 	mUEIDitem, _ := pdubuilder.CreateMatchingUEIDItem([]byte(ueID))
 
-	mUEIDlist := &e2sm_kpm_v2_go.MatchingUeidList{
-		Value: make([]*e2sm_kpm_v2_go.MatchingUeidItem, 0),
+	mUEIDlist := &e2smkpmv2.MatchingUeidList{
+		Value: make([]*e2smkpmv2.MatchingUeidItem, 0),
 	}
 	mUEIDlist.Value = append(mUEIDlist.Value, mUEIDitem)
 
@@ -151,13 +151,13 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	measCondUEIDItem.SetMatchingUEUDlist(mUEIDlist)
 
-	measCondUEIDList := e2sm_kpm_v2_go.MeasurementCondUeidList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementCondUeidItem, 0),
+	measCondUEIDList := e2smkpmv2.MeasurementCondUeidList{
+		Value: make([]*e2smkpmv2.MeasurementCondUeidItem, 0),
 	}
 	measCondUEIDList.Value = append(measCondUEIDList.Value, measCondUEIDItem)
 
-	measRecord := e2sm_kpm_v2_go.MeasurementRecord{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementRecordItem, 0),
+	measRecord := e2smkpmv2.MeasurementRecord{
+		Value: make([]*e2smkpmv2.MeasurementRecordItem, 0),
 	}
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemInteger(integer))
 	measRecord.Value = append(measRecord.Value, pdubuilder.CreateMeasurementRecordItemNoValue())
@@ -169,8 +169,8 @@ func createE2SMKPMIndicationMessageFormat2() (*e2sm_kpm_v2_go.E2SmKpmIndicationM
 	}
 	measDataItem.SetIncompleteFlag()
 
-	measData := e2sm_kpm_v2_go.MeasurementData{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementDataItem, 0),
+	measData := e2smkpmv2.MeasurementData{
+		Value: make([]*e2smkpmv2.MeasurementDataItem, 0),
 	}
 	measData.Value = append(measData.Value, measDataItem)
 

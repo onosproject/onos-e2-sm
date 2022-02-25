@@ -5,7 +5,7 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
@@ -26,10 +26,10 @@ func TestE2SmKpmIndicationHeader(t *testing.T) {
 	var vendorName = "onf"
 
 	globalKpmNodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
-	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
+	globalKpmNodeID.GetGNb().GNbCuUpId = &e2smkpmv2.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
+	globalKpmNodeID.GetGNb().GNbDuId = &e2smkpmv2.GnbDuId{
 		Value: gnbDuID,
 	}
 	assert.NilError(t, err)

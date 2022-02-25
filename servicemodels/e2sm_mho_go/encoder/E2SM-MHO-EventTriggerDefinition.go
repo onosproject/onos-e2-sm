@@ -6,19 +6,19 @@ package encoder
 
 import (
 	"encoding/hex"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func PerEncodeE2SmMhoEventTriggerDefinition(etd *e2sm_mho_go.E2SmMhoEventTriggerDefinition) ([]byte, error) {
+func PerEncodeE2SmMhoEventTriggerDefinition(etd *e2smmhov2.E2SmMhoEventTriggerDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-MHO-EventTriggerDefinition message is\n%v", etd)
 	if err := etd.Validate(); err != nil {
 		return nil, errors.NewInvalid("error validating E2SM-MHO-EventTriggerDefinition PDU %s", err.Error())
 	}
 
-	per, err := aper.MarshalWithParams(etd, "valueExt", e2sm_mho_go.MhoChoicemap, nil)
+	per, err := aper.MarshalWithParams(etd, "valueExt", e2smmhov2.MhoChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,12 +27,12 @@ func PerEncodeE2SmMhoEventTriggerDefinition(etd *e2sm_mho_go.E2SmMhoEventTrigger
 	return per, nil
 }
 
-func PerDecodeE2SmMhoEventTriggerDefinition(per []byte) (*e2sm_mho_go.E2SmMhoEventTriggerDefinition, error) {
+func PerDecodeE2SmMhoEventTriggerDefinition(per []byte) (*e2smmhov2.E2SmMhoEventTriggerDefinition, error) {
 
 	log.Debugf("Obtained E2SM-MHO-EventTriggerDefinition PER bytes are\n%v", hex.Dump(per))
 
-	result := e2sm_mho_go.E2SmMhoEventTriggerDefinition{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.E2SmMhoEventTriggerDefinition{}
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2smmhov2.MhoChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

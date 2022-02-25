@@ -4,22 +4,22 @@
 package pdubuilder
 
 import (
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmMhoControlMessage(servingCgi *e2sm_v2_ies.Cgi, uedID *e2sm_v2_ies.Ueid, targetCgi *e2sm_v2_ies.Cgi) (*e2sm_mho_go.E2SmMhoControlMessage, error) {
+func CreateE2SmMhoControlMessage(servingCgi *e2smv2.Cgi, uedID *e2smv2.Ueid, targetCgi *e2smv2.Cgi) (*e2smmhov2.E2SmMhoControlMessage, error) {
 
-	e2smMhoMsgFormat1 := e2sm_mho_go.E2SmMhoControlMessageFormat1{
+	e2smMhoMsgFormat1 := e2smmhov2.E2SmMhoControlMessageFormat1{
 		ServingCgi: servingCgi,
 		UedId:      uedID,
 		TargetCgi:  targetCgi,
 	}
 
-	e2smMhoPdu := e2sm_mho_go.E2SmMhoControlMessage{
-		E2SmMhoControlMessage: &e2sm_mho_go.E2SmMhoControlMessage_ControlMessageFormat1{
+	e2smMhoPdu := e2smmhov2.E2SmMhoControlMessage{
+		E2SmMhoControlMessage: &e2smmhov2.E2SmMhoControlMessage_ControlMessageFormat1{
 			ControlMessageFormat1: &e2smMhoMsgFormat1,
 		},
 	}
@@ -30,7 +30,7 @@ func CreateE2SmMhoControlMessage(servingCgi *e2sm_v2_ies.Cgi, uedID *e2sm_v2_ies
 	return &e2smMhoPdu, nil
 }
 
-func CreateUeIDGNb(amf int64, plmnID []byte, amfRegionID []byte, amfSetID []byte, amfPointer []byte) (*e2sm_v2_ies.Ueid, error) {
+func CreateUeIDGNb(amf int64, plmnID []byte, amfRegionID []byte, amfSetID []byte, amfPointer []byte) (*e2smv2.Ueid, error) {
 
 	if len(plmnID) != 3 {
 		return nil, errors.NewInvalid("CreateUeIDGNb() PlmnID should contain only 3 bytes, got %v", len(plmnID))
@@ -51,29 +51,29 @@ func CreateUeIDGNb(amf int64, plmnID []byte, amfRegionID []byte, amfSetID []byte
 		return nil, errors.NewInvalid("CreateUeIDGNb() AMfSetID should contain only 6 bits, i.e., last 2 bits should be trailing zeros, got %v", amfPointer)
 	}
 
-	ueID := &e2sm_v2_ies.Ueid{
-		Ueid: &e2sm_v2_ies.Ueid_GNbUeid{
-			GNbUeid: &e2sm_v2_ies.UeidGnb{
-				AmfUeNgapId: &e2sm_v2_ies.AmfUeNgapId{
+	ueID := &e2smv2.Ueid{
+		Ueid: &e2smv2.Ueid_GNbUeid{
+			GNbUeid: &e2smv2.UeidGnb{
+				AmfUeNgapId: &e2smv2.AmfUeNgapId{
 					Value: amf,
 				},
-				Guami: &e2sm_v2_ies.Guami{
-					PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
+				Guami: &e2smv2.Guami{
+					PLmnidentity: &e2smv2.PlmnIdentity{
 						Value: plmnID,
 					},
-					AMfregionId: &e2sm_v2_ies.AmfregionId{
+					AMfregionId: &e2smv2.AmfregionId{
 						Value: &asn1.BitString{
 							Value: amfRegionID,
 							Len:   8,
 						},
 					},
-					AMfsetId: &e2sm_v2_ies.AmfsetId{
+					AMfsetId: &e2smv2.AmfsetId{
 						Value: &asn1.BitString{
 							Value: amfSetID,
 							Len:   10,
 						},
 					},
-					AMfpointer: &e2sm_v2_ies.Amfpointer{
+					AMfpointer: &e2smv2.Amfpointer{
 						Value: &asn1.BitString{
 							Value: amfPointer,
 							Len:   6,

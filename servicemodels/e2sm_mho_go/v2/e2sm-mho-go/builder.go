@@ -4,7 +4,7 @@
 
 package e2smmho
 
-import e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
+import e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 
 func (ed *E2SmMhoEventTriggerDefinitionFormat1) SetReportingPeriodInMs(rp int32) *E2SmMhoEventTriggerDefinitionFormat1 {
 	ed.ReportingPeriodMs = &rp
@@ -31,7 +31,7 @@ func (rfd *E2SmMhoRanfunctionDescription) SetRicReportStyleList(rrsl []*RicRepor
 }
 
 func (mri *E2SmMhoMeasurementReportItem) SetFiveQi(fiveQI int32) *E2SmMhoMeasurementReportItem {
-	mri.FiveQi = &e2sm_v2_ies.FiveQi{
+	mri.FiveQi = &e2smv2.FiveQi{
 		Value: fiveQI,
 	}
 	return mri

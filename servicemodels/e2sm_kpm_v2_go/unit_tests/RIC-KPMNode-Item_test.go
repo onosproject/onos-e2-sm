@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -17,29 +17,29 @@ import (
 var refPerRicKPMnodeItem = "00000000  43 00 6f 6e 66 00 d4 bc  0c 00 15 00 16 00 00 00  |C.onf...........|\n" +
 	"00000010  00 03 31 32 33 40 4f 4e  46 09 bc d4 00           |..123@ONF....|"
 
-func createRicKpmNodeItem() (*e2sm_kpm_v2_go.RicKpmnodeItem, error) {
+func createRicKpmNodeItem() (*e2smkpmv2.RicKpmnodeItem, error) {
 
-	res := e2sm_kpm_v2_go.RicKpmnodeItem{
-		RicKpmnodeType: &e2sm_kpm_v2_go.GlobalKpmnodeId{
-			GlobalKpmnodeId: &e2sm_kpm_v2_go.GlobalKpmnodeId_GNb{
-				GNb: &e2sm_kpm_v2_go.GlobalKpmnodeGnbId{
-					GlobalGNbId: &e2sm_kpm_v2_go.GlobalgNbId{
-						GnbId: &e2sm_kpm_v2_go.GnbIdChoice{
-							GnbIdChoice: &e2sm_kpm_v2_go.GnbIdChoice_GnbId{
+	res := e2smkpmv2.RicKpmnodeItem{
+		RicKpmnodeType: &e2smkpmv2.GlobalKpmnodeId{
+			GlobalKpmnodeId: &e2smkpmv2.GlobalKpmnodeId_GNb{
+				GNb: &e2smkpmv2.GlobalKpmnodeGnbId{
+					GlobalGNbId: &e2smkpmv2.GlobalgNbId{
+						GnbId: &e2smkpmv2.GnbIdChoice{
+							GnbIdChoice: &e2smkpmv2.GnbIdChoice_GnbId{
 								GnbId: &asn1.BitString{
 									Value: []byte{0xd4, 0xbc, 0x0c},
 									Len:   22,
 								},
 							},
 						},
-						PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
+						PlmnId: &e2smkpmv2.PlmnIdentity{
 							Value: []byte("onf"),
 						},
 					},
-					GNbCuUpId: &e2sm_kpm_v2_go.GnbCuUpId{
+					GNbCuUpId: &e2smkpmv2.GnbCuUpId{
 						Value: 21,
 					},
-					GNbDuId: &e2sm_kpm_v2_go.GnbDuId{
+					GNbDuId: &e2smkpmv2.GnbDuId{
 						Value: 22,
 					},
 				},
@@ -48,20 +48,20 @@ func createRicKpmNodeItem() (*e2sm_kpm_v2_go.RicKpmnodeItem, error) {
 		CellMeasurementObjectList: nil,
 	}
 
-	item := &e2sm_kpm_v2_go.CellMeasurementObjectItem{
-		CellObjectId: &e2sm_kpm_v2_go.CellObjectId{
+	item := &e2smkpmv2.CellMeasurementObjectItem{
+		CellObjectId: &e2smkpmv2.CellObjectId{
 			Value: "123",
 		},
-		CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId{
-			CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId_EUtraCgi{
-				EUtraCgi: &e2sm_kpm_v2_go.Eutracgi{
-					EUtracellIdentity: &e2sm_kpm_v2_go.EutracellIdentity{
+		CellGlobalId: &e2smkpmv2.CellGlobalId{
+			CellGlobalId: &e2smkpmv2.CellGlobalId_EUtraCgi{
+				EUtraCgi: &e2smkpmv2.Eutracgi{
+					EUtracellIdentity: &e2smkpmv2.EutracellIdentity{
 						Value: &asn1.BitString{
 							Value: []byte{0x09, 0xbc, 0xd4, 0x00},
 							Len:   28,
 						},
 					},
-					PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+					PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 						Value: []byte("ONF"),
 					},
 				},
@@ -82,13 +82,13 @@ func Test_perEncodingRicKpmNodeItem(t *testing.T) {
 	rkni, err := createRicKpmNodeItem()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(rkni, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(rkni, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("RIC-KPMnodeItem PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.RicKpmnodeItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.RicKpmnodeItem{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("RIC-KPMnodeItem PER - decoded\n%v", &result)
@@ -109,8 +109,8 @@ func Test_perRicKpmNodeItemCompareBytes(t *testing.T) {
 	rkni, err := createRicKpmNodeItem()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(rkni, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(rkni, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("RIC-KPMnodeItem PER\n%v", hex.Dump(per))
 

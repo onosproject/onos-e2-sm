@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -19,22 +19,22 @@ var refPerCellMeasObjItem2 = "00000000  00 00 18 4f 70 65 6e 4e  65 74 77 6f 72 
 	"00000010  67 46 6f 75 6e 64 61 74  69 6f 6e 00 4f 4e 46 d4  |gFoundation.ONF.|\n" +
 	"00000020  bc 09 00 f0                                       |....|"
 
-func createCellMeasurementObjectItem1() *e2sm_kpm_v2_go.CellMeasurementObjectItem {
+func createCellMeasurementObjectItem1() *e2smkpmv2.CellMeasurementObjectItem {
 
-	return &e2sm_kpm_v2_go.CellMeasurementObjectItem{
-		CellObjectId: &e2sm_kpm_v2_go.CellObjectId{
+	return &e2smkpmv2.CellMeasurementObjectItem{
+		CellObjectId: &e2smkpmv2.CellObjectId{
 			Value: "123",
 		},
-		CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId{
-			CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId_EUtraCgi{
-				EUtraCgi: &e2sm_kpm_v2_go.Eutracgi{
-					EUtracellIdentity: &e2sm_kpm_v2_go.EutracellIdentity{
+		CellGlobalId: &e2smkpmv2.CellGlobalId{
+			CellGlobalId: &e2smkpmv2.CellGlobalId_EUtraCgi{
+				EUtraCgi: &e2smkpmv2.Eutracgi{
+					EUtracellIdentity: &e2smkpmv2.EutracellIdentity{
 						Value: &asn1.BitString{
 							Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 							Len:   28,
 						},
 					},
-					PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+					PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 						Value: []byte("ONF"),
 					},
 				},
@@ -43,22 +43,22 @@ func createCellMeasurementObjectItem1() *e2sm_kpm_v2_go.CellMeasurementObjectIte
 	}
 }
 
-func createCellMeasurementObjectItem2() *e2sm_kpm_v2_go.CellMeasurementObjectItem {
+func createCellMeasurementObjectItem2() *e2smkpmv2.CellMeasurementObjectItem {
 
-	return &e2sm_kpm_v2_go.CellMeasurementObjectItem{
-		CellObjectId: &e2sm_kpm_v2_go.CellObjectId{
+	return &e2smkpmv2.CellMeasurementObjectItem{
+		CellObjectId: &e2smkpmv2.CellObjectId{
 			Value: "OpenNetworkingFoundation",
 		},
-		CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId{
-			CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId_NrCgi{
-				NrCgi: &e2sm_kpm_v2_go.Nrcgi{
-					NRcellIdentity: &e2sm_kpm_v2_go.NrcellIdentity{
+		CellGlobalId: &e2smkpmv2.CellGlobalId{
+			CellGlobalId: &e2smkpmv2.CellGlobalId_NrCgi{
+				NrCgi: &e2smkpmv2.Nrcgi{
+					NRcellIdentity: &e2smkpmv2.NrcellIdentity{
 						Value: &asn1.BitString{
 							Value: []byte{0xd4, 0xbc, 0x09, 0x00, 0xf0},
 							Len:   36,
 						},
 					},
-					PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+					PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 						Value: []byte("ONF"),
 					},
 				},
@@ -71,13 +71,13 @@ func Test_perEncodingCellMeasurementObjectItem1(t *testing.T) {
 
 	cmoi := createCellMeasurementObjectItem1()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.CellMeasurementObjectItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.CellMeasurementObjectItem{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("CellMeasurementObjectItem PER - decoded\n%v", &result)
@@ -91,8 +91,8 @@ func Test_perCellMeasurementObjectItem1CompareBytes(t *testing.T) {
 
 	cmoi := createCellMeasurementObjectItem1()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
@@ -106,13 +106,13 @@ func Test_perEncodingCellMeasurementObjectItem2(t *testing.T) {
 
 	cmoi := createCellMeasurementObjectItem2()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.CellMeasurementObjectItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.CellMeasurementObjectItem{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("CellMeasurementObjectItem PER - decoded\n%v", &result)
@@ -126,8 +126,8 @@ func Test_perCellMeasurementObjectItem2CompareBytes(t *testing.T) {
 
 	cmoi := createCellMeasurementObjectItem2()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cmoi, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellMeasurementObjectItem PER\n%v", hex.Dump(per))
 

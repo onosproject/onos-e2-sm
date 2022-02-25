@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -25,18 +25,18 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func createCellGlobalID1() *e2sm_kpm_v2_go.CellGlobalId {
+func createCellGlobalID1() *e2smkpmv2.CellGlobalId {
 
-	return &e2sm_kpm_v2_go.CellGlobalId{
-		CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId_EUtraCgi{
-			EUtraCgi: &e2sm_kpm_v2_go.Eutracgi{
-				EUtracellIdentity: &e2sm_kpm_v2_go.EutracellIdentity{
+	return &e2smkpmv2.CellGlobalId{
+		CellGlobalId: &e2smkpmv2.CellGlobalId_EUtraCgi{
+			EUtraCgi: &e2smkpmv2.Eutracgi{
+				EUtracellIdentity: &e2smkpmv2.EutracellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 						Len:   28,
 					},
 				},
-				PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+				PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 					Value: []byte("ONF"),
 				},
 			},
@@ -44,18 +44,18 @@ func createCellGlobalID1() *e2sm_kpm_v2_go.CellGlobalId {
 	}
 }
 
-func createCellGlobalID2() *e2sm_kpm_v2_go.CellGlobalId {
+func createCellGlobalID2() *e2smkpmv2.CellGlobalId {
 
-	return &e2sm_kpm_v2_go.CellGlobalId{
-		CellGlobalId: &e2sm_kpm_v2_go.CellGlobalId_NrCgi{
-			NrCgi: &e2sm_kpm_v2_go.Nrcgi{
-				NRcellIdentity: &e2sm_kpm_v2_go.NrcellIdentity{
+	return &e2smkpmv2.CellGlobalId{
+		CellGlobalId: &e2smkpmv2.CellGlobalId_NrCgi{
+			NrCgi: &e2smkpmv2.Nrcgi{
+				NRcellIdentity: &e2smkpmv2.NrcellIdentity{
 					Value: &asn1.BitString{
 						Value: []byte{0xd4, 0xbc, 0x09, 0x00, 0xf0},
 						Len:   36,
 					},
 				},
-				PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+				PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 					Value: []byte("ONF"),
 				},
 			},
@@ -67,13 +67,13 @@ func Test_perEncodingCellGlobalID1(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID1()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.CellGlobalId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.CellGlobalId{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("CellGlobalID PER - decoded\n%v", &result)
@@ -86,8 +86,8 @@ func Test_perCellGlobalID1CompareBytes(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID1()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
@@ -101,13 +101,13 @@ func Test_perEncodingCellGlobalID2(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID2()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.CellGlobalId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.CellGlobalId{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("CellGlobalID PER - decoded\n%v", &result)
@@ -120,8 +120,8 @@ func Test_perCellGlobalID2CompareBytes(t *testing.T) {
 
 	cellGlobalID := createCellGlobalID2()
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(cellGlobalID, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("CellGlobalID PER\n%v", hex.Dump(per))
 
