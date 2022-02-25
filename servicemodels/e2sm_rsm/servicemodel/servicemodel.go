@@ -10,7 +10,7 @@ import (
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 	"google.golang.org/protobuf/proto"
 )
@@ -47,7 +47,7 @@ func (sm RsmServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte,
 }
 
 func (sm RsmServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rsm_ies.E2SmRsmIndicationHeader)
+	protoObj := new(e2smrsm.E2SmRsmIndicationHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRsmIndicationHeader %s", err)
 	}
@@ -75,7 +75,7 @@ func (sm RsmServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte
 }
 
 func (sm RsmServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rsm_ies.E2SmRsmIndicationMessage)
+	protoObj := new(e2smrsm.E2SmRsmIndicationMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRsmIndicationMessage %s", err)
 	}
@@ -103,7 +103,7 @@ func (sm RsmServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byt
 }
 
 func (sm RsmServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rsm_ies.E2SmRsmRanfunctionDescription)
+	protoObj := new(e2smrsm.E2SmRsmRanfunctionDescription)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRsmRanfunctionDescription %s", err)
 	}
@@ -131,7 +131,7 @@ func (sm RsmServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([
 }
 
 func (sm RsmServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rsm_ies.E2SmRsmEventTriggerDefinition)
+	protoObj := new(e2smrsm.E2SmRsmEventTriggerDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRsmEventTriggerDefinition %s", err)
 	}
@@ -167,7 +167,7 @@ func (sm RsmServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, er
 }
 
 func (sm RsmServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rsm_ies.E2SmRsmControlHeader)
+	protoObj := new(e2smrsm.E2SmRsmControlHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRsmControlHeader %s", err)
 	}
@@ -195,7 +195,7 @@ func (sm RsmServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, e
 }
 
 func (sm RsmServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_rsm_ies.E2SmRsmControlMessage)
+	protoObj := new(e2smrsm.E2SmRsmControlMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmRsmControlMessage %s", err)
 	}
@@ -221,7 +221,7 @@ func (sm RsmServiceModel) OnSetup(request *types.OnSetupRequest) error {
 	if err != nil {
 		return err
 	}
-	ranFunctionDescription := &e2sm_rsm_ies.E2SmRsmRanfunctionDescription{}
+	ranFunctionDescription := &e2smrsm.E2SmRsmRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
 	if err != nil {
 		return err

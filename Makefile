@@ -215,40 +215,26 @@ service-model-docker-e2sm_mho_go-1.0.0: # @HELP build e2sm_mho_go 1.0.0 plugin D
 			-t onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 
 images: # @HELP build all Docker images
-images: build service-model-docker-e2sm_kpm-1.0.0 \
-	service-model-docker-e2sm_kpm_v2-1.0.0 \
-	service-model-docker-e2sm_kpm_v2_go-1.0.0 \
+images: build service-model-docker-e2sm_kpm_v2_go-1.0.0 \
 	service-model-docker-e2sm_rsm-1.0.0 \
-	service-model-docker-e2sm_ni-1.0.0 \
-	service-model-docker-e2sm_rc_pre-1.0.0 \
 	service-model-docker-e2sm_rc_pre_go-1.0.0 \
-	service-model-docker-e2sm_mho-1.0.0 \
 	service-model-docker-e2sm_mho_go-1.0.0
+
 
 kind: # @HELP build Docker images and add them to the currently configured kind cluster
 kind: images
 	@if [ "`kind get clusters`" = '' ]; then echo "no kind cluster found" && exit 1; fi
-	kind load docker-image onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 
 
 all: build images
 
 publish: # @HELP publish version on github and dockerhub
-	./../build-tools/publish-version servicemodels/e2sm_kpm/${VERSION} onosproject/service-model-docker-e2sm_kpm-1.0.0
-	./../build-tools/publish-version servicemodels/e2sm_kpm_v2/${VERSION} onosproject/service-model-docker-e2sm_kpm_v2-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_kpm_v2_go/${VERSION} onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0
-	./../build-tools/publish-version servicemodels/e2sm_ni/${VERSION} onosproject/service-model-docker-e2sm_ni-1.0.0
-	./../build-tools/publish-version servicemodels/e2sm_rc_pre/${VERSION} onosproject/service-model-docker-e2sm_rc_pre-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_rc_pre_go/${VERSION} onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0
-	./../build-tools/publish-version servicemodels/e2sm_mho/${VERSION} onosproject/service-model-docker-e2sm_mho-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_mho_go/${VERSION} onosproject/service-model-docker-e2sm_mho_go-1.0.0
 	./../build-tools/publish-version servicemodels/e2sm_rsm/${VERSION} onosproject/service-model-docker-e2sm_rsm-1.0.0
 

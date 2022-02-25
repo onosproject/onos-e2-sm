@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -19,7 +19,7 @@ var refPerMCI1 = "00000000  1f ff f0 21 22 23 40 40  01 02 03 00 17 68 18 00  |.
 	"00000020  00 03 14 20                                       |... |"
 var refPerMCI2 = "00000000  42 10 01 15                                       |B...|"
 
-func createMatchingCondItem1() (*e2sm_kpm_v2_go.MatchingCondItem, error) {
+func createMatchingCondItem1() (*e2smkpmv2.MatchingCondItem, error) {
 
 	plmnID := []byte{0x21, 0x22, 0x23}
 	sst := []byte{0x01}
@@ -33,12 +33,12 @@ func createMatchingCondItem1() (*e2sm_kpm_v2_go.MatchingCondItem, error) {
 	var arpMin int32 = 1
 	var bitrateRange int32 = 25
 	var layerMuMimo int32 = 1
-	var sum = e2sm_kpm_v2_go.SUM_SUM_TRUE
+	var sum = e2smkpmv2.SUM_SUM_TRUE
 	var distX int32 = 123
 	var distY int32 = 456
 	var distZ int32 = 789
-	var plo = e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	startEndIndication := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
+	var plo = e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	startEndIndication := e2smkpmv2.StartEndInd_START_END_IND_END
 
 	labelInfoItem, err := pdubuilder.CreateLabelInfoItem(plmnID, sst, sd, &fiveQI, &qfi, &qci, &qciMax, &qciMin, &arpMax, &arpMin,
 		&bitrateRange, &layerMuMimo, &sum, &distX, &distY, &distZ, &plo, &startEndIndication)
@@ -56,17 +56,17 @@ func createMatchingCondItem1() (*e2sm_kpm_v2_go.MatchingCondItem, error) {
 	return mci, nil
 }
 
-func createMatchingCondItem2() (*e2sm_kpm_v2_go.MatchingCondItem, error) {
+func createMatchingCondItem2() (*e2smkpmv2.MatchingCondItem, error) {
 
-	testCondInfo := &e2sm_kpm_v2_go.TestCondInfo{
-		TestType: &e2sm_kpm_v2_go.TestCondType{
-			TestCondType: &e2sm_kpm_v2_go.TestCondType_AMbr{
-				AMbr: e2sm_kpm_v2_go.AMBR_AMBR_TRUE,
+	testCondInfo := &e2smkpmv2.TestCondInfo{
+		TestType: &e2smkpmv2.TestCondType{
+			TestCondType: &e2smkpmv2.TestCondType_AMbr{
+				AMbr: e2smkpmv2.AMBR_AMBR_TRUE,
 			},
 		},
-		TestExpr: e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
-		TestValue: &e2sm_kpm_v2_go.TestCondValue{
-			TestCondValue: &e2sm_kpm_v2_go.TestCondValue_ValueInt{
+		TestExpr: e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
+		TestValue: &e2smkpmv2.TestCondValue{
+			TestCondValue: &e2smkpmv2.TestCondValue_ValueInt{
 				ValueInt: 21,
 			},
 		},
@@ -87,13 +87,13 @@ func Test_perEncodingMatchingCondItem1(t *testing.T) {
 	mci, err := createMatchingCondItem1()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (MeasLabel) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MatchingCondItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MatchingCondItem{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingCondItem (MeasLabel) PER - decoded\n%v", &result)
@@ -122,8 +122,8 @@ func Test_perMatchingCondItem1CompareBytes(t *testing.T) {
 	mci, err := createMatchingCondItem1()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (MeasLabel) PER\n%v", hex.Dump(per))
 
@@ -138,13 +138,13 @@ func Test_perEncodingMatchingCondItem2(t *testing.T) {
 	mci, err := createMatchingCondItem2()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (TestCondInfo) PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MatchingCondItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MatchingCondItem{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MatchingCondItem (TestCondInfo) PER - decoded\n%v", &result)
@@ -158,8 +158,8 @@ func Test_perMatchingCondItem2CompareBytes(t *testing.T) {
 	mci, err := createMatchingCondItem2()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MatchingCondItem (TestCondInfo) PER\n%v", hex.Dump(per))
 

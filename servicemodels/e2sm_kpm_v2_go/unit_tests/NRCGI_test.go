@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -16,12 +16,12 @@ import (
 
 var refPerNrCGI = "00000000  00 21 22 23 d4 bc 09 00  00                       |.!\"#.....|"
 
-func createNrcgi() *e2sm_kpm_v2_go.Nrcgi {
-	return &e2sm_kpm_v2_go.Nrcgi{
-		PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+func createNrcgi() *e2smkpmv2.Nrcgi {
+	return &e2smkpmv2.Nrcgi{
+		PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 			Value: []byte{0x21, 0x22, 0x23},
 		},
-		NRcellIdentity: &e2sm_kpm_v2_go.NrcellIdentity{
+		NRcellIdentity: &e2smkpmv2.NrcellIdentity{
 			Value: &asn1.BitString{
 				Value: []byte{0xd4, 0xbc, 0x09, 0x00, 0x00},
 				Len:   36,
@@ -38,7 +38,7 @@ func Test_perEncodingNrCGI(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("NrCGI PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.Nrcgi{}
+	result := e2smkpmv2.Nrcgi{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

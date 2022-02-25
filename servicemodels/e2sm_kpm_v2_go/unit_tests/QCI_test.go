@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,7 +17,7 @@ var refPerQci = "00000000  00 20                                             |. 
 
 func Test_perEncodingQci(t *testing.T) {
 
-	qci := &e2sm_kpm_v2_go.Qci{
+	qci := &e2smkpmv2.Qci{
 		Value: 32,
 	}
 
@@ -25,7 +25,7 @@ func Test_perEncodingQci(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("QCI PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.Qci{}
+	result := e2smkpmv2.Qci{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -35,7 +35,7 @@ func Test_perEncodingQci(t *testing.T) {
 
 func Test_perQciCompareBytes(t *testing.T) {
 
-	qci := &e2sm_kpm_v2_go.Qci{
+	qci := &e2smkpmv2.Qci{
 		Value: 32,
 	}
 

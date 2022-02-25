@@ -4,17 +4,17 @@
 package pdubuilder
 
 import (
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_v2_ies.Ueid, measReport []*e2sm_mho_go.E2SmMhoMeasurementReportItem) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
+func CreateE2SmMhoIndicationMsgFormat1(ueID *e2smv2.Ueid, measReport []*e2smmhov2.E2SmMhoMeasurementReportItem) (*e2smmhov2.E2SmMhoIndicationMessage, error) {
 
-	E2SmMhoPdu := e2sm_mho_go.E2SmMhoIndicationMessage{
-		E2SmMhoIndicationMessage: &e2sm_mho_go.E2SmMhoIndicationMessage_IndicationMessageFormat1{
-			IndicationMessageFormat1: &e2sm_mho_go.E2SmMhoIndicationMessageFormat1{
+	E2SmMhoPdu := e2smmhov2.E2SmMhoIndicationMessage{
+		E2SmMhoIndicationMessage: &e2smmhov2.E2SmMhoIndicationMessage_IndicationMessageFormat1{
+			IndicationMessageFormat1: &e2smmhov2.E2SmMhoIndicationMessageFormat1{
 				UeId:       ueID,
 				MeasReport: measReport,
 			},
@@ -27,10 +27,10 @@ func CreateE2SmMhoIndicationMsgFormat1(ueID *e2sm_v2_ies.Ueid, measReport []*e2s
 	return &E2SmMhoPdu, nil
 }
 
-func CreateE2SmMhoIndicationMsgFormat2(ueID *e2sm_v2_ies.Ueid, rrcStatus e2sm_mho_go.Rrcstatus) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
-	E2SmMhoPdu := e2sm_mho_go.E2SmMhoIndicationMessage{
-		E2SmMhoIndicationMessage: &e2sm_mho_go.E2SmMhoIndicationMessage_IndicationMessageFormat2{
-			IndicationMessageFormat2: &e2sm_mho_go.E2SmMhoIndicationMessageFormat2{
+func CreateE2SmMhoIndicationMsgFormat2(ueID *e2smv2.Ueid, rrcStatus e2smmhov2.Rrcstatus) (*e2smmhov2.E2SmMhoIndicationMessage, error) {
+	E2SmMhoPdu := e2smmhov2.E2SmMhoIndicationMessage{
+		E2SmMhoIndicationMessage: &e2smmhov2.E2SmMhoIndicationMessage_IndicationMessageFormat2{
+			IndicationMessageFormat2: &e2smmhov2.E2SmMhoIndicationMessageFormat2{
 				UeId:      ueID,
 				RrcStatus: rrcStatus,
 			},
@@ -43,8 +43,8 @@ func CreateE2SmMhoIndicationMsgFormat2(ueID *e2sm_v2_ies.Ueid, rrcStatus e2sm_mh
 	return &E2SmMhoPdu, nil
 }
 
-func CreateMeasurementRecordItem(cgi *e2sm_v2_ies.Cgi, rsrp *e2sm_mho_go.Rsrp) (*e2sm_mho_go.E2SmMhoMeasurementReportItem, error) {
-	res := &e2sm_mho_go.E2SmMhoMeasurementReportItem{
+func CreateMeasurementRecordItem(cgi *e2smv2.Cgi, rsrp *e2smmhov2.Rsrp) (*e2smmhov2.E2SmMhoMeasurementReportItem, error) {
+	res := &e2smmhov2.E2SmMhoMeasurementReportItem{
 		Cgi:  cgi,
 		Rsrp: rsrp,
 	}
@@ -56,7 +56,7 @@ func CreateMeasurementRecordItem(cgi *e2sm_v2_ies.Cgi, rsrp *e2sm_mho_go.Rsrp) (
 	return res, nil
 }
 
-func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
+func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2smv2.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, errors.NewInvalid("CreateCellGlobalIDNrCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
@@ -69,13 +69,13 @@ func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 		return nil, errors.NewInvalid("CreateCellGlobalIDNrCGI(): EutraCellIdentity should be of length 36 bits (5 bytes), got %v bytes", len(nrCGI.Value))
 	}
 
-	cgi := &e2sm_v2_ies.Cgi{
-		Cgi: &e2sm_v2_ies.Cgi_NRCgi{
-			NRCgi: &e2sm_v2_ies.NrCgi{
-				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
+	cgi := &e2smv2.Cgi{
+		Cgi: &e2smv2.Cgi_NRCgi{
+			NRCgi: &e2smv2.NrCgi{
+				PLmnidentity: &e2smv2.PlmnIdentity{
 					Value: plmnID,
 				},
-				NRcellIdentity: &e2sm_v2_ies.NrcellIdentity{
+				NRcellIdentity: &e2smv2.NrcellIdentity{
 					Value: nrCGI,
 				},
 			},
@@ -89,7 +89,7 @@ func CreateCgiNrCGI(plmnID []byte, nrCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 	return cgi, nil
 }
 
-func CreateCgiEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
+func CreateCgiEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2smv2.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, errors.NewInvalid("CreateCellGlobalIDEutraCGI(): PlmnID should contain only 3 bytes, got %v", len(plmnID))
@@ -101,13 +101,13 @@ func CreateCgiEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cg
 		return nil, errors.NewInvalid("CreateCellGlobalIDEutraCGI(): EutraCellIdentity should be of length 28 bits (4 bytes), got %v bytes", len(eutraCGI.Value))
 	}
 
-	cgi := &e2sm_v2_ies.Cgi{
-		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
-			EUtraCgi: &e2sm_v2_ies.EutraCgi{
-				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
+	cgi := &e2smv2.Cgi{
+		Cgi: &e2smv2.Cgi_EUtraCgi{
+			EUtraCgi: &e2smv2.EutraCgi{
+				PLmnidentity: &e2smv2.PlmnIdentity{
 					Value: plmnID,
 				},
-				EUtracellIdentity: &e2sm_v2_ies.EutracellIdentity{
+				EUtracellIdentity: &e2smv2.EutracellIdentity{
 					Value: eutraCGI,
 				},
 			},
@@ -121,14 +121,14 @@ func CreateCgiEutraCGI(plmnID []byte, eutraCGI *asn1.BitString) (*e2sm_v2_ies.Cg
 	return cgi, nil
 }
 
-func CreateRrcStatusConnected() e2sm_mho_go.Rrcstatus {
-	return e2sm_mho_go.Rrcstatus_RRCSTATUS_CONNECTED
+func CreateRrcStatusConnected() e2smmhov2.Rrcstatus {
+	return e2smmhov2.Rrcstatus_RRCSTATUS_CONNECTED
 }
 
-func CreateRrcStatusInactive() e2sm_mho_go.Rrcstatus {
-	return e2sm_mho_go.Rrcstatus_RRCSTATUS_INACTIVE
+func CreateRrcStatusInactive() e2smmhov2.Rrcstatus {
+	return e2smmhov2.Rrcstatus_RRCSTATUS_INACTIVE
 }
 
-func CreateRrcStatusIdle() e2sm_mho_go.Rrcstatus {
-	return e2sm_mho_go.Rrcstatus_RRCSTATUS_IDLE
+func CreateRrcStatusIdle() e2smmhov2.Rrcstatus {
+	return e2smmhov2.Rrcstatus_RRCSTATUS_IDLE
 }

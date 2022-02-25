@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,23 +17,23 @@ var refPerGnbDuID = "00000000  20 04 d2                                         
 var refPerGnbDuIDhigh = "00000000  40 01 00 01                                          | ..|"
 var refPerGnbDuIDub = "00000000  80 0f ff ff ff ff                                 |......|"
 
-func createGnbDuID() *e2sm_kpm_v2_go.GnbDuId {
+func createGnbDuID() *e2smkpmv2.GnbDuId {
 
-	return &e2sm_kpm_v2_go.GnbDuId{
+	return &e2smkpmv2.GnbDuId{
 		Value: 1234,
 	}
 }
 
-func createGnbDuIDhigh() *e2sm_kpm_v2_go.GnbDuId {
+func createGnbDuIDhigh() *e2smkpmv2.GnbDuId {
 
-	return &e2sm_kpm_v2_go.GnbDuId{
+	return &e2smkpmv2.GnbDuId{
 		Value: 65537,
 	}
 }
 
-func createGnbDuIDub() *e2sm_kpm_v2_go.GnbDuId {
+func createGnbDuIDub() *e2smkpmv2.GnbDuId {
 
-	return &e2sm_kpm_v2_go.GnbDuId{
+	return &e2smkpmv2.GnbDuId{
 		Value: 68719476735,
 	}
 }
@@ -46,7 +46,7 @@ func Test_perEncodingGnbDuID(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.GnbDuId{}
+	result := e2smkpmv2.GnbDuId{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -76,7 +76,7 @@ func Test_perEncodingGnbDuIDhigh(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.GnbDuId{}
+	result := e2smkpmv2.GnbDuId{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -106,7 +106,7 @@ func Test_perEncodingGnbDuIDub(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("GnbDuID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.GnbDuId{}
+	result := e2smkpmv2.GnbDuId{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

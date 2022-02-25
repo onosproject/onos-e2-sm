@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/encoder"
-	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	e2smrcprev2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
@@ -20,7 +20,7 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 	dlArfcn, err := CreateEArfcn(253)
 	assert.NilError(t, err)
 	var pci int32 = 11
-	cellSize := e2sm_rc_pre_go.CellSize_CELL_SIZE_MACRO
+	cellSize := e2smrcprev2.CellSize_CELL_SIZE_MACRO
 
 	cellID := asn1.BitString{
 		Value: []byte{0xac, 0xd4, 0xbc, 0x90},
@@ -29,12 +29,12 @@ func TestE2SmRcPreIndicationMsg(t *testing.T) {
 	cgi, err := CreateCellGlobalIDEUTRACGI(plmnIDBytes, &cellID)
 	assert.NilError(t, err)
 
-	neighbor, err := CreateNrt(cgi, dlArfcn, cellSize, &e2sm_rc_pre_go.Pci{
+	neighbor, err := CreateNrt(cgi, dlArfcn, cellSize, &e2smrcprev2.Pci{
 		Value: pci,
 	})
 	assert.NilError(t, err)
 
-	neighbors := make([]*e2sm_rc_pre_go.Nrt, 0)
+	neighbors := make([]*e2smrcprev2.Nrt, 0)
 	neighbors = append(neighbors, neighbor)
 	neighbors = append(neighbors, neighbor)
 
@@ -60,7 +60,7 @@ func TestE2SmRcPreIndicationMsgNoNeighbors(t *testing.T) {
 	plmnIDBytes, err := hex.DecodeString(plmnID)
 	assert.NilError(t, err)
 	var pci int32 = 11
-	cellSize := e2sm_rc_pre_go.CellSize_CELL_SIZE_MACRO
+	cellSize := e2smrcprev2.CellSize_CELL_SIZE_MACRO
 
 	earfcn, err := CreateEArfcn(253)
 	assert.NilError(t, err)

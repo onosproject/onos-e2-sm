@@ -4,19 +4,19 @@
 package pdubuilder
 
 import (
-	e2sm_rc_pre_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
+	e2smrcprev2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre_go/v2/e2sm-rc-pre-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmRcPreControlHeader() (*e2sm_rc_pre_go.E2SmRcPreControlHeader, error) {
+func CreateE2SmRcPreControlHeader() (*e2smrcprev2.E2SmRcPreControlHeader, error) {
 
-	e2smRcPreFormat1 := e2sm_rc_pre_go.E2SmRcPreControlHeaderFormat1{
-		RcCommand: e2sm_rc_pre_go.RcPreCommand_RC_PRE_COMMAND_SET_PARAMETERS,
+	e2smRcPreFormat1 := e2smrcprev2.E2SmRcPreControlHeaderFormat1{
+		RcCommand: e2smrcprev2.RcPreCommand_RC_PRE_COMMAND_SET_PARAMETERS,
 	}
 
-	e2smRcPrePdu := e2sm_rc_pre_go.E2SmRcPreControlHeader{
-		E2SmRcPreControlHeader: &e2sm_rc_pre_go.E2SmRcPreControlHeader_ControlHeaderFormat1{
+	e2smRcPrePdu := e2smrcprev2.E2SmRcPreControlHeader{
+		E2SmRcPreControlHeader: &e2smrcprev2.E2SmRcPreControlHeader_ControlHeaderFormat1{
 			ControlHeaderFormat1: &e2smRcPreFormat1,
 		},
 	}
@@ -27,7 +27,7 @@ func CreateE2SmRcPreControlHeader() (*e2sm_rc_pre_go.E2SmRcPreControlHeader, err
 	return &e2smRcPrePdu, nil
 }
 
-func CreateCellGlobalIDEUTRACGI(plmnIDBytes []byte, cellID *asn1.BitString) (*e2sm_rc_pre_go.CellGlobalId, error) {
+func CreateCellGlobalIDEUTRACGI(plmnIDBytes []byte, cellID *asn1.BitString) (*e2smrcprev2.CellGlobalId, error) {
 
 	if len(plmnIDBytes) != 3 {
 		return nil, errors.NewInvalid("error: Plmn ID should be 3 chars")
@@ -36,13 +36,13 @@ func CreateCellGlobalIDEUTRACGI(plmnIDBytes []byte, cellID *asn1.BitString) (*e2
 		return nil, errors.NewInvalid("EutraCgi should be of length 28")
 	}
 
-	cgi := e2sm_rc_pre_go.CellGlobalId{
-		CellGlobalId: &e2sm_rc_pre_go.CellGlobalId_EUtraCgi{
-			EUtraCgi: &e2sm_rc_pre_go.Eutracgi{
-				PLmnIdentity: &e2sm_rc_pre_go.PlmnIdentity{
+	cgi := e2smrcprev2.CellGlobalId{
+		CellGlobalId: &e2smrcprev2.CellGlobalId_EUtraCgi{
+			EUtraCgi: &e2smrcprev2.Eutracgi{
+				PLmnIdentity: &e2smrcprev2.PlmnIdentity{
 					Value: plmnIDBytes,
 				},
-				EUtracellIdentity: &e2sm_rc_pre_go.EutracellIdentity{
+				EUtracellIdentity: &e2smrcprev2.EutracellIdentity{
 					Value: cellID,
 				},
 			},
@@ -55,7 +55,7 @@ func CreateCellGlobalIDEUTRACGI(plmnIDBytes []byte, cellID *asn1.BitString) (*e2
 	return &cgi, nil
 }
 
-func CreateCellGlobalIDNrCgi(plmnIDBytes []byte, cellID *asn1.BitString) (*e2sm_rc_pre_go.CellGlobalId, error) {
+func CreateCellGlobalIDNrCgi(plmnIDBytes []byte, cellID *asn1.BitString) (*e2smrcprev2.CellGlobalId, error) {
 
 	if len(plmnIDBytes) != 3 {
 		return nil, errors.NewInvalid("error: Plmn ID should be 3 chars")
@@ -64,13 +64,13 @@ func CreateCellGlobalIDNrCgi(plmnIDBytes []byte, cellID *asn1.BitString) (*e2sm_
 		return nil, errors.NewInvalid("NrCgi should be of length 36")
 	}
 
-	cgi := e2sm_rc_pre_go.CellGlobalId{
-		CellGlobalId: &e2sm_rc_pre_go.CellGlobalId_NrCgi{
-			NrCgi: &e2sm_rc_pre_go.Nrcgi{
-				PLmnIdentity: &e2sm_rc_pre_go.PlmnIdentity{
+	cgi := e2smrcprev2.CellGlobalId{
+		CellGlobalId: &e2smrcprev2.CellGlobalId_NrCgi{
+			NrCgi: &e2smrcprev2.Nrcgi{
+				PLmnIdentity: &e2smrcprev2.PlmnIdentity{
 					Value: plmnIDBytes,
 				},
-				NRcellIdentity: &e2sm_rc_pre_go.NrcellIdentity{
+				NRcellIdentity: &e2smrcprev2.NrcellIdentity{
 					Value: cellID,
 				},
 			},

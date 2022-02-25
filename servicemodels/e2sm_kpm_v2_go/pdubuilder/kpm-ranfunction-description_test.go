@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"gotest.tools/assert"
 	"testing"
@@ -34,19 +34,19 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	var gnbDuID int64 = 6789
 	globalKpmnodeID, err := CreateGlobalKpmnodeIDgNBID(&bs, plmnID)
 	assert.NilError(t, err)
-	globalKpmnodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
+	globalKpmnodeID.GetGNb().GNbCuUpId = &e2smkpmv2.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmnodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
+	globalKpmnodeID.GetGNb().GNbDuId = &e2smkpmv2.GnbDuId{
 		Value: gnbDuID,
 	}
 
-	cmol := make([]*e2sm_kpm_v2_go.CellMeasurementObjectItem, 0)
+	cmol := make([]*e2smkpmv2.CellMeasurementObjectItem, 0)
 	cmol = append(cmol, cellMeasObjItem)
 
 	kpmNodeItem := CreateRicKpmnodeItem(globalKpmnodeID).SetCellMeasurementObjectList(cmol)
 
-	rknl := make([]*e2sm_kpm_v2_go.RicKpmnodeItem, 0)
+	rknl := make([]*e2smkpmv2.RicKpmnodeItem, 0)
 	rknl = append(rknl, kpmNodeItem)
 
 	var ricStyleType int32 = 11
@@ -54,17 +54,17 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	var ricFormatType int32 = 15
 	retsi := CreateRicEventTriggerStyleItem(ricStyleType, ricStyleName, ricFormatType)
 
-	retsl := make([]*e2sm_kpm_v2_go.RicEventTriggerStyleItem, 0)
+	retsl := make([]*e2smkpmv2.RicEventTriggerStyleItem, 0)
 	retsl = append(retsl, retsi)
 
-	measInfoActionList := e2sm_kpm_v2_go.MeasurementInfoActionList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoActionItem, 0),
+	measInfoActionList := e2smkpmv2.MeasurementInfoActionList{
+		Value: make([]*e2smkpmv2.MeasurementInfoActionItem, 0),
 	}
 
 	var measTypeName = "OpenNetworking"
 	var measTypeID int32 = 24
 	measInfoActionItem := CreateMeasurementInfoActionItem(measTypeName)
-	measInfoActionItem.MeasId = &e2sm_kpm_v2_go.MeasurementTypeId{
+	measInfoActionItem.MeasId = &e2smkpmv2.MeasurementTypeId{
 		Value: measTypeID,
 	}
 	measInfoActionList.Value = append(measInfoActionList.Value, measInfoActionItem)
@@ -73,7 +73,7 @@ func TestE2SmKpmRanfunctionDescription(t *testing.T) {
 	var indHdrFormat int32 = 47
 	rrsi := CreateRicReportStyleItem(ricStyleType, ricStyleName, ricFormatType, &measInfoActionList, indHdrFormat, indMsgFormat)
 
-	rrsl := make([]*e2sm_kpm_v2_go.RicReportStyleItem, 0)
+	rrsl := make([]*e2smkpmv2.RicReportStyleItem, 0)
 	rrsl = append(rrsl, rrsi)
 
 	newE2SmKpmPdu, err := CreateE2SmKpmRanfunctionDescription(rfSn, rfE2SMoid, rfd)

@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,7 +17,7 @@ var refPerSubID = "00000000  40 30 38                                          |
 
 func Test_perEncodingSubscriptionID(t *testing.T) {
 
-	subID := &e2sm_kpm_v2_go.SubscriptionId{
+	subID := &e2smkpmv2.SubscriptionId{
 		Value: 12345,
 	}
 
@@ -25,7 +25,7 @@ func Test_perEncodingSubscriptionID(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("SubscriptionID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.SubscriptionId{}
+	result := e2smkpmv2.SubscriptionId{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -35,7 +35,7 @@ func Test_perEncodingSubscriptionID(t *testing.T) {
 
 func Test_perSubscriptionIDCompareBytes(t *testing.T) {
 
-	subID := &e2sm_kpm_v2_go.SubscriptionId{
+	subID := &e2smkpmv2.SubscriptionId{
 		Value: 12345,
 	}
 

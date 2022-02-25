@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -37,5 +37,5 @@ func Test_Woojong(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SM-RSM-EventTriggerDefinition PER - decoded\n%v", result)
-	assert.Equal(t, result.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetTriggerType().Number(), e2sm_rsm_ies.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_PERIODIC_METRICS.Number())
+	assert.Equal(t, result.GetEventDefinitionFormats().GetEventDefinitionFormat1().GetTriggerType().Number(), e2smrsm.RsmRicindicationTriggerType_RSM_RICINDICATION_TRIGGER_TYPE_PERIODIC_METRICS.Number())
 }

@@ -5,17 +5,17 @@
 package pdubuilder
 
 import (
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmRsmIndicationHeaderFormat1(cgi *e2sm_v2_ies.Cgi) (*e2sm_rsm_ies.E2SmRsmIndicationHeader, error) {
+func CreateE2SmRsmIndicationHeaderFormat1(cgi *e2smv2.Cgi) (*e2smrsm.E2SmRsmIndicationHeader, error) {
 
-	ih := &e2sm_rsm_ies.E2SmRsmIndicationHeader{
-		E2SmRsmIndicationHeader: &e2sm_rsm_ies.E2SmRsmIndicationHeader_IndicationHeaderFormat1{
-			IndicationHeaderFormat1: &e2sm_rsm_ies.E2SmRsmIndicationHeaderFormat1{
+	ih := &e2smrsm.E2SmRsmIndicationHeader{
+		E2SmRsmIndicationHeader: &e2smrsm.E2SmRsmIndicationHeader_IndicationHeaderFormat1{
+			IndicationHeaderFormat1: &e2smrsm.E2SmRsmIndicationHeaderFormat1{
 				Cgi: cgi,
 			},
 		},
@@ -27,7 +27,7 @@ func CreateE2SmRsmIndicationHeaderFormat1(cgi *e2sm_v2_ies.Cgi) (*e2sm_rsm_ies.E
 	return ih, nil
 }
 
-func CreateNrCGI(plmnID []byte, nrCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
+func CreateNrCGI(plmnID []byte, nrCellID *asn1.BitString) (*e2smv2.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, errors.NewInvalid("length of Plmn ID is expected to be exactly 3 bytes")
@@ -41,13 +41,13 @@ func CreateNrCGI(plmnID []byte, nrCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 		return nil, errors.NewInvalid("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", nrCellID.GetValue()[3])
 	}
 
-	nrcgi := &e2sm_v2_ies.Cgi{
-		Cgi: &e2sm_v2_ies.Cgi_NRCgi{
-			NRCgi: &e2sm_v2_ies.NrCgi{
-				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
+	nrcgi := &e2smv2.Cgi{
+		Cgi: &e2smv2.Cgi_NRCgi{
+			NRCgi: &e2smv2.NrCgi{
+				PLmnidentity: &e2smv2.PlmnIdentity{
 					Value: plmnID,
 				},
-				NRcellIdentity: &e2sm_v2_ies.NrcellIdentity{
+				NRcellIdentity: &e2smv2.NrcellIdentity{
 					Value: nrCellID,
 				},
 			},
@@ -60,7 +60,7 @@ func CreateNrCGI(plmnID []byte, nrCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, err
 	return nrcgi, nil
 }
 
-func CreateEutraCGI(plmnID []byte, eutraCellID *asn1.BitString) (*e2sm_v2_ies.Cgi, error) {
+func CreateEutraCGI(plmnID []byte, eutraCellID *asn1.BitString) (*e2smv2.Cgi, error) {
 
 	if len(plmnID) != 3 {
 		return nil, errors.NewInvalid("length of Plmn ID is expected to be exactly 3 bytes")
@@ -74,13 +74,13 @@ func CreateEutraCGI(plmnID []byte, eutraCellID *asn1.BitString) (*e2sm_v2_ies.Cg
 		return nil, errors.NewInvalid("expected last 4 bits of byte array to be unused, and to contain only trailing zeroes. %b", eutraCellID.GetValue()[3])
 	}
 
-	eutracgi := &e2sm_v2_ies.Cgi{
-		Cgi: &e2sm_v2_ies.Cgi_EUtraCgi{
-			EUtraCgi: &e2sm_v2_ies.EutraCgi{
-				PLmnidentity: &e2sm_v2_ies.PlmnIdentity{
+	eutracgi := &e2smv2.Cgi{
+		Cgi: &e2smv2.Cgi_EUtraCgi{
+			EUtraCgi: &e2smv2.EutraCgi{
+				PLmnidentity: &e2smv2.PlmnIdentity{
 					Value: plmnID,
 				},
-				EUtracellIdentity: &e2sm_v2_ies.EutracellIdentity{
+				EUtracellIdentity: &e2smv2.EutracellIdentity{
 					Value: eutraCellID,
 				},
 			},

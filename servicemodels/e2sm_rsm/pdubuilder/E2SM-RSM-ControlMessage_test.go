@@ -7,7 +7,7 @@ package pdubuilder
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/encoder"
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/pkg/logging"
 	"gotest.tools/assert"
 	"os"
@@ -108,7 +108,7 @@ func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 	bearerID1, err := CreateBearerIDdrb(drbIDfourG)
 	assert.NilError(t, err)
 
-	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
+	flowMap := make([]*e2smrsm.QoSflowLevelParameters, 0)
 	dqos, err := CreateQosFlowLevelParametersDynamic(10, 62, 54)
 	assert.NilError(t, err)
 	flowMap = append(flowMap, dqos)
@@ -121,7 +121,7 @@ func Test_E2SmRsmControlMessageSliceAssociate(t *testing.T) {
 	bearerID2, err := CreateBearerIDdrb(drbIDfiveG)
 	assert.NilError(t, err)
 
-	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
+	bearerList := make([]*e2smrsm.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)
 	bearerList = append(bearerList, bearerID2)
 

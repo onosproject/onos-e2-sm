@@ -5,13 +5,13 @@
 package pdubuilder
 
 import (
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmRsmControlHeader(command e2sm_rsm_ies.E2SmRsmCommand) (*e2sm_rsm_ies.E2SmRsmControlHeader, error) {
+func CreateE2SmRsmControlHeader(command e2smrsm.E2SmRsmCommand) (*e2smrsm.E2SmRsmControlHeader, error) {
 
-	ch := &e2sm_rsm_ies.E2SmRsmControlHeader{
+	ch := &e2smrsm.E2SmRsmControlHeader{
 		RsmCommand: command,
 	}
 

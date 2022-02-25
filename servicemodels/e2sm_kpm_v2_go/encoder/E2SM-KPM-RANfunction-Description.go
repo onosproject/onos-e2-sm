@@ -6,19 +6,19 @@ package encoder
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func PerEncodeE2SmKpmRanFunctionDescription(rfd *e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription) ([]byte, error) {
+func PerEncodeE2SmKpmRanFunctionDescription(rfd *e2smkpmv2.E2SmKpmRanfunctionDescription) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-KPMv2-RANfunctionDescription message is\n%v", rfd)
 	if err := rfd.Validate(); err != nil {
 		return nil, errors.NewInvalid("error validating E2SM-KPMv2-RANfunctionDescription PDU %s", err.Error())
 	}
 
-	per, err := aper.MarshalWithParams(rfd, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	per, err := aper.MarshalWithParams(rfd, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,12 +27,12 @@ func PerEncodeE2SmKpmRanFunctionDescription(rfd *e2sm_kpm_v2_go.E2SmKpmRanfuncti
 	return per, nil
 }
 
-func PerDecodeE2SmKpmRanFunctionDescription(per []byte) (*e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription, error) {
+func PerDecodeE2SmKpmRanFunctionDescription(per []byte) (*e2smkpmv2.E2SmKpmRanfunctionDescription, error) {
 
 	log.Debugf("Obtained E2SM-KPMv2-RANfunctionDescription PER bytes are\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.E2SmKpmRanfunctionDescription{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.E2SmKpmRanfunctionDescription{}
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}

@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -16,13 +16,13 @@ import (
 
 var refPerEutraCGI = "00000000  00 21 22 23 d4 bc 09 00                           |.!\"#....|"
 
-func createEutracgi() *e2sm_kpm_v2_go.Eutracgi {
+func createEutracgi() *e2smkpmv2.Eutracgi {
 
-	return &e2sm_kpm_v2_go.Eutracgi{
-		PLmnIdentity: &e2sm_kpm_v2_go.PlmnIdentity{
+	return &e2smkpmv2.Eutracgi{
+		PLmnIdentity: &e2smkpmv2.PlmnIdentity{
 			Value: []byte{0x21, 0x22, 0x23},
 		},
-		EUtracellIdentity: &e2sm_kpm_v2_go.EutracellIdentity{
+		EUtracellIdentity: &e2smkpmv2.EutracellIdentity{
 			Value: &asn1.BitString{
 				Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 				Len:   28,
@@ -39,7 +39,7 @@ func Test_perEncodingEutraCGI(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("EUTRACGI PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.Eutracgi{}
+	result := e2smkpmv2.Eutracgi{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

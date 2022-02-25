@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0-devel
 // 	protoc        v3.17.1
-// source: e2sm_mho_go/v2/e2sm_v2.proto
+// source: e2smmhov2/v2/e2sm_v2.proto
 
 package e2smv2ies
 
@@ -68,11 +68,11 @@ func (x InterfaceType) String() string {
 }
 
 func (InterfaceType) Descriptor() protoreflect.EnumDescriptor {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[0].Descriptor()
+	return file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[0].Descriptor()
 }
 
 func (InterfaceType) Type() protoreflect.EnumType {
-	return &file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[0]
+	return &file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[0]
 }
 
 func (x InterfaceType) Number() protoreflect.EnumNumber {
@@ -81,7 +81,7 @@ func (x InterfaceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use InterfaceType.Descriptor instead.
 func (InterfaceType) EnumDescriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{0}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{0}
 }
 
 // enumerated from ORAN-WG3.E2SM-v02.00.asn:101
@@ -118,11 +118,11 @@ func (x MessageType) String() string {
 }
 
 func (MessageType) Descriptor() protoreflect.EnumDescriptor {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[1].Descriptor()
+	return file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[1].Descriptor()
 }
 
 func (MessageType) Type() protoreflect.EnumType {
-	return &file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[1]
+	return &file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[1]
 }
 
 func (x MessageType) Number() protoreflect.EnumNumber {
@@ -131,7 +131,7 @@ func (x MessageType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MessageType.Descriptor instead.
 func (MessageType) EnumDescriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{1}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{1}
 }
 
 // enumerated from ORAN-WG3.E2SM-v02.00.asn:144
@@ -195,11 +195,11 @@ func (x RrcclassLte) String() string {
 }
 
 func (RrcclassLte) Descriptor() protoreflect.EnumDescriptor {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[2].Descriptor()
+	return file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[2].Descriptor()
 }
 
 func (RrcclassLte) Type() protoreflect.EnumType {
-	return &file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[2]
+	return &file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[2]
 }
 
 func (x RrcclassLte) Number() protoreflect.EnumNumber {
@@ -208,7 +208,7 @@ func (x RrcclassLte) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RrcclassLte.Descriptor instead.
 func (RrcclassLte) EnumDescriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{2}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{2}
 }
 
 // enumerated from ORAN-WG3.E2SM-v02.00.asn:146
@@ -260,11 +260,11 @@ func (x RrcclassNr) String() string {
 }
 
 func (RrcclassNr) Descriptor() protoreflect.EnumDescriptor {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[3].Descriptor()
+	return file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[3].Descriptor()
 }
 
 func (RrcclassNr) Type() protoreflect.EnumType {
-	return &file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes[3]
+	return &file_e2smmhov2_v2_e2sm_v2_proto_enumTypes[3]
 }
 
 func (x RrcclassNr) Number() protoreflect.EnumNumber {
@@ -273,7 +273,7 @@ func (x RrcclassNr) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RrcclassNr.Descriptor instead.
 func (RrcclassNr) EnumDescriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{3}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{3}
 }
 
 // constant Integer from ORAN-WG3.E2SM-v02.00.asn:19
@@ -290,7 +290,7 @@ type MaxE1Apid struct {
 func (x *MaxE1Apid) Reset() {
 	*x = MaxE1Apid{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[0]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -303,7 +303,7 @@ func (x *MaxE1Apid) String() string {
 func (*MaxE1Apid) ProtoMessage() {}
 
 func (x *MaxE1Apid) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[0]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -316,7 +316,7 @@ func (x *MaxE1Apid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MaxE1Apid.ProtoReflect.Descriptor instead.
 func (*MaxE1Apid) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{0}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *MaxE1Apid) GetValue() int32 {
@@ -340,7 +340,7 @@ type MaxF1Apid struct {
 func (x *MaxF1Apid) Reset() {
 	*x = MaxF1Apid{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[1]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -353,7 +353,7 @@ func (x *MaxF1Apid) String() string {
 func (*MaxF1Apid) ProtoMessage() {}
 
 func (x *MaxF1Apid) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[1]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -366,7 +366,7 @@ func (x *MaxF1Apid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MaxF1Apid.ProtoReflect.Descriptor instead.
 func (*MaxF1Apid) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{1}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *MaxF1Apid) GetValue() int32 {
@@ -390,7 +390,7 @@ type MaxEarfcn struct {
 func (x *MaxEarfcn) Reset() {
 	*x = MaxEarfcn{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[2]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -403,7 +403,7 @@ func (x *MaxEarfcn) String() string {
 func (*MaxEarfcn) ProtoMessage() {}
 
 func (x *MaxEarfcn) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[2]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -416,7 +416,7 @@ func (x *MaxEarfcn) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MaxEarfcn.ProtoReflect.Descriptor instead.
 func (*MaxEarfcn) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{2}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *MaxEarfcn) GetValue() int32 {
@@ -440,7 +440,7 @@ type MaxNrarfcn struct {
 func (x *MaxNrarfcn) Reset() {
 	*x = MaxNrarfcn{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[3]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -453,7 +453,7 @@ func (x *MaxNrarfcn) String() string {
 func (*MaxNrarfcn) ProtoMessage() {}
 
 func (x *MaxNrarfcn) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[3]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -466,7 +466,7 @@ func (x *MaxNrarfcn) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MaxNrarfcn.ProtoReflect.Descriptor instead.
 func (*MaxNrarfcn) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{3}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MaxNrarfcn) GetValue() int64 {
@@ -490,7 +490,7 @@ type MaxnoofNrCellBands struct {
 func (x *MaxnoofNrCellBands) Reset() {
 	*x = MaxnoofNrCellBands{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[4]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -503,7 +503,7 @@ func (x *MaxnoofNrCellBands) String() string {
 func (*MaxnoofNrCellBands) ProtoMessage() {}
 
 func (x *MaxnoofNrCellBands) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[4]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -516,7 +516,7 @@ func (x *MaxnoofNrCellBands) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MaxnoofNrCellBands.ProtoReflect.Descriptor instead.
 func (*MaxnoofNrCellBands) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{4}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *MaxnoofNrCellBands) GetValue() int32 {
@@ -545,7 +545,7 @@ type Cgi struct {
 func (x *Cgi) Reset() {
 	*x = Cgi{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[5]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -558,7 +558,7 @@ func (x *Cgi) String() string {
 func (*Cgi) ProtoMessage() {}
 
 func (x *Cgi) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[5]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -571,7 +571,7 @@ func (x *Cgi) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cgi.ProtoReflect.Descriptor instead.
 func (*Cgi) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{5}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{5}
 }
 
 func (m *Cgi) GetCgi() isCgi_Cgi {
@@ -632,7 +632,7 @@ type CoreCpid struct {
 func (x *CoreCpid) Reset() {
 	*x = CoreCpid{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[6]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -645,7 +645,7 @@ func (x *CoreCpid) String() string {
 func (*CoreCpid) ProtoMessage() {}
 
 func (x *CoreCpid) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[6]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -658,7 +658,7 @@ func (x *CoreCpid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CoreCpid.ProtoReflect.Descriptor instead.
 func (*CoreCpid) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{6}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{6}
 }
 
 func (m *CoreCpid) GetCoreCpid() isCoreCpid_CoreCpid {
@@ -724,7 +724,7 @@ type InterfaceIdentifier struct {
 func (x *InterfaceIdentifier) Reset() {
 	*x = InterfaceIdentifier{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[7]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -737,7 +737,7 @@ func (x *InterfaceIdentifier) String() string {
 func (*InterfaceIdentifier) ProtoMessage() {}
 
 func (x *InterfaceIdentifier) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[7]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -750,7 +750,7 @@ func (x *InterfaceIdentifier) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdentifier.ProtoReflect.Descriptor instead.
 func (*InterfaceIdentifier) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{7}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{7}
 }
 
 func (m *InterfaceIdentifier) GetInterfaceIdentifier() isInterfaceIdentifier_InterfaceIdentifier {
@@ -876,7 +876,7 @@ type InterfaceIdNg struct {
 func (x *InterfaceIdNg) Reset() {
 	*x = InterfaceIdNg{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[8]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -889,7 +889,7 @@ func (x *InterfaceIdNg) String() string {
 func (*InterfaceIdNg) ProtoMessage() {}
 
 func (x *InterfaceIdNg) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[8]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -902,7 +902,7 @@ func (x *InterfaceIdNg) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdNg.ProtoReflect.Descriptor instead.
 func (*InterfaceIdNg) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{8}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *InterfaceIdNg) GetGuami() *Guami {
@@ -926,7 +926,7 @@ type InterfaceIdXn struct {
 func (x *InterfaceIdXn) Reset() {
 	*x = InterfaceIdXn{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[9]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -939,7 +939,7 @@ func (x *InterfaceIdXn) String() string {
 func (*InterfaceIdXn) ProtoMessage() {}
 
 func (x *InterfaceIdXn) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[9]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -952,7 +952,7 @@ func (x *InterfaceIdXn) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdXn.ProtoReflect.Descriptor instead.
 func (*InterfaceIdXn) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{9}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *InterfaceIdXn) GetGlobalNgRanId() *GlobalRannodeId {
@@ -977,7 +977,7 @@ type InterfaceIdF1 struct {
 func (x *InterfaceIdF1) Reset() {
 	*x = InterfaceIdF1{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[10]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -990,7 +990,7 @@ func (x *InterfaceIdF1) String() string {
 func (*InterfaceIdF1) ProtoMessage() {}
 
 func (x *InterfaceIdF1) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[10]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1003,7 +1003,7 @@ func (x *InterfaceIdF1) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdF1.ProtoReflect.Descriptor instead.
 func (*InterfaceIdF1) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{10}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *InterfaceIdF1) GetGlobalNgRanId() *GlobalRannodeId {
@@ -1035,7 +1035,7 @@ type InterfaceIdE1 struct {
 func (x *InterfaceIdE1) Reset() {
 	*x = InterfaceIdE1{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[11]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1048,7 +1048,7 @@ func (x *InterfaceIdE1) String() string {
 func (*InterfaceIdE1) ProtoMessage() {}
 
 func (x *InterfaceIdE1) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[11]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1061,7 +1061,7 @@ func (x *InterfaceIdE1) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdE1.ProtoReflect.Descriptor instead.
 func (*InterfaceIdE1) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{11}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *InterfaceIdE1) GetGlobalNgRanId() *GlobalRannodeId {
@@ -1092,7 +1092,7 @@ type InterfaceIdS1 struct {
 func (x *InterfaceIdS1) Reset() {
 	*x = InterfaceIdS1{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[12]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1105,7 +1105,7 @@ func (x *InterfaceIdS1) String() string {
 func (*InterfaceIdS1) ProtoMessage() {}
 
 func (x *InterfaceIdS1) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[12]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1118,7 +1118,7 @@ func (x *InterfaceIdS1) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdS1.ProtoReflect.Descriptor instead.
 func (*InterfaceIdS1) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{12}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *InterfaceIdS1) GetGUmmei() *Gummei {
@@ -1142,7 +1142,7 @@ type InterfaceIdX2 struct {
 func (x *InterfaceIdX2) Reset() {
 	*x = InterfaceIdX2{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[13]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1155,7 +1155,7 @@ func (x *InterfaceIdX2) String() string {
 func (*InterfaceIdX2) ProtoMessage() {}
 
 func (x *InterfaceIdX2) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[13]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1168,7 +1168,7 @@ func (x *InterfaceIdX2) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdX2.ProtoReflect.Descriptor instead.
 func (*InterfaceIdX2) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{13}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *InterfaceIdX2) GetNodeType() *NodeType {
@@ -1196,7 +1196,7 @@ type NodeType struct {
 func (x *NodeType) Reset() {
 	*x = NodeType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[14]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1209,7 +1209,7 @@ func (x *NodeType) String() string {
 func (*NodeType) ProtoMessage() {}
 
 func (x *NodeType) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[14]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1222,7 +1222,7 @@ func (x *NodeType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeType.ProtoReflect.Descriptor instead.
 func (*NodeType) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{14}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{14}
 }
 
 func (m *NodeType) GetNodeType() isNodeType_NodeType {
@@ -1279,7 +1279,7 @@ type InterfaceIdW1 struct {
 func (x *InterfaceIdW1) Reset() {
 	*x = InterfaceIdW1{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[15]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1292,7 +1292,7 @@ func (x *InterfaceIdW1) String() string {
 func (*InterfaceIdW1) ProtoMessage() {}
 
 func (x *InterfaceIdW1) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[15]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1305,7 +1305,7 @@ func (x *InterfaceIdW1) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceIdW1.ProtoReflect.Descriptor instead.
 func (*InterfaceIdW1) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{15}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *InterfaceIdW1) GetGlobalNgENbId() *GlobalNgEnbId {
@@ -1332,13 +1332,13 @@ type InterfaceMessageId struct {
 
 	InterfaceProcedureId int32 `protobuf:"varint,1,opt,name=interface_procedure_id,json=interfaceProcedureID,proto3" json:"interface_procedure_id,omitempty"`
 	// @inject_tag: aper:"valueExt,valueLB:0,valueUB:2"
-	MessageType MessageType `protobuf:"varint,2,opt,name=message_type,json=messageType,proto3,enum=e2sm_mho_go.v2.MessageType" json:"message_type,omitempty" aper:"valueExt,valueLB:0,valueUB:2"`
+	MessageType MessageType `protobuf:"varint,2,opt,name=message_type,json=messageType,proto3,enum=e2smmhov2.v2.MessageType" json:"message_type,omitempty" aper:"valueExt,valueLB:0,valueUB:2"`
 }
 
 func (x *InterfaceMessageId) Reset() {
 	*x = InterfaceMessageId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[16]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1351,7 +1351,7 @@ func (x *InterfaceMessageId) String() string {
 func (*InterfaceMessageId) ProtoMessage() {}
 
 func (x *InterfaceMessageId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[16]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1364,7 +1364,7 @@ func (x *InterfaceMessageId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceMessageId.ProtoReflect.Descriptor instead.
 func (*InterfaceMessageId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{16}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *InterfaceMessageId) GetInterfaceProcedureId() int32 {
@@ -1400,7 +1400,7 @@ type GroupId struct {
 func (x *GroupId) Reset() {
 	*x = GroupId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[17]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1413,7 +1413,7 @@ func (x *GroupId) String() string {
 func (*GroupId) ProtoMessage() {}
 
 func (x *GroupId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[17]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1426,7 +1426,7 @@ func (x *GroupId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupId.ProtoReflect.Descriptor instead.
 func (*GroupId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{17}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{17}
 }
 
 func (m *GroupId) GetGroupId() isGroupId_GroupId {
@@ -1487,7 +1487,7 @@ type QoSid struct {
 func (x *QoSid) Reset() {
 	*x = QoSid{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[18]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1500,7 +1500,7 @@ func (x *QoSid) String() string {
 func (*QoSid) ProtoMessage() {}
 
 func (x *QoSid) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[18]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1513,7 +1513,7 @@ func (x *QoSid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QoSid.ProtoReflect.Descriptor instead.
 func (*QoSid) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{18}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{18}
 }
 
 func (m *QoSid) GetQoSid() isQoSid_QoSid {
@@ -1576,7 +1576,7 @@ type RanfunctionName struct {
 func (x *RanfunctionName) Reset() {
 	*x = RanfunctionName{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[19]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1589,7 +1589,7 @@ func (x *RanfunctionName) String() string {
 func (*RanfunctionName) ProtoMessage() {}
 
 func (x *RanfunctionName) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[19]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1602,7 +1602,7 @@ func (x *RanfunctionName) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RanfunctionName.ProtoReflect.Descriptor instead.
 func (*RanfunctionName) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{19}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *RanfunctionName) GetRanFunctionShortName() string {
@@ -1646,7 +1646,7 @@ type RicFormatType struct {
 func (x *RicFormatType) Reset() {
 	*x = RicFormatType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[20]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1659,7 +1659,7 @@ func (x *RicFormatType) String() string {
 func (*RicFormatType) ProtoMessage() {}
 
 func (x *RicFormatType) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[20]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1672,7 +1672,7 @@ func (x *RicFormatType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RicFormatType.ProtoReflect.Descriptor instead.
 func (*RicFormatType) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{20}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RicFormatType) GetValue() int32 {
@@ -1695,7 +1695,7 @@ type RicStyleType struct {
 func (x *RicStyleType) Reset() {
 	*x = RicStyleType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[21]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1708,7 +1708,7 @@ func (x *RicStyleType) String() string {
 func (*RicStyleType) ProtoMessage() {}
 
 func (x *RicStyleType) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[21]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1721,7 +1721,7 @@ func (x *RicStyleType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RicStyleType.ProtoReflect.Descriptor instead.
 func (*RicStyleType) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{21}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *RicStyleType) GetValue() int32 {
@@ -1747,7 +1747,7 @@ type RrcMessageId struct {
 func (x *RrcMessageId) Reset() {
 	*x = RrcMessageId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[22]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1760,7 +1760,7 @@ func (x *RrcMessageId) String() string {
 func (*RrcMessageId) ProtoMessage() {}
 
 func (x *RrcMessageId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[22]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1773,7 +1773,7 @@ func (x *RrcMessageId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RrcMessageId.ProtoReflect.Descriptor instead.
 func (*RrcMessageId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{22}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *RrcMessageId) GetRrcType() *RrcType {
@@ -1807,7 +1807,7 @@ type RrcType struct {
 func (x *RrcType) Reset() {
 	*x = RrcType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[23]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1820,7 +1820,7 @@ func (x *RrcType) String() string {
 func (*RrcType) ProtoMessage() {}
 
 func (x *RrcType) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[23]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1833,7 +1833,7 @@ func (x *RrcType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RrcType.ProtoReflect.Descriptor instead.
 func (*RrcType) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{23}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{23}
 }
 
 func (m *RrcType) GetRrcType() isRrcType_RrcType {
@@ -1863,12 +1863,12 @@ type isRrcType_RrcType interface {
 
 type RrcType_Lte struct {
 	// @inject_tag: aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:11"
-	Lte RrcclassLte `protobuf:"varint,1,opt,name=lte,json=lTE,proto3,enum=e2sm_mho_go.v2.RrcclassLte,oneof" aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:11"`
+	Lte RrcclassLte `protobuf:"varint,1,opt,name=lte,json=lTE,proto3,enum=e2smmhov2.v2.RrcclassLte,oneof" aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:11"`
 }
 
 type RrcType_Nr struct {
 	// @inject_tag: aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:7"
-	Nr RrcclassNr `protobuf:"varint,2,opt,name=nr,json=nR,proto3,enum=e2sm_mho_go.v2.RrcclassNr,oneof" aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:7"`
+	Nr RrcclassNr `protobuf:"varint,2,opt,name=nr,json=nR,proto3,enum=e2smmhov2.v2.RrcclassNr,oneof" aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:7"`
 }
 
 func (*RrcType_Lte) isRrcType_RrcType() {}
@@ -1894,7 +1894,7 @@ type ServingCellArfcn struct {
 func (x *ServingCellArfcn) Reset() {
 	*x = ServingCellArfcn{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[24]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1907,7 +1907,7 @@ func (x *ServingCellArfcn) String() string {
 func (*ServingCellArfcn) ProtoMessage() {}
 
 func (x *ServingCellArfcn) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[24]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1920,7 +1920,7 @@ func (x *ServingCellArfcn) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServingCellArfcn.ProtoReflect.Descriptor instead.
 func (*ServingCellArfcn) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{24}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{24}
 }
 
 func (m *ServingCellArfcn) GetServingCellArfcn() isServingCellArfcn_ServingCellArfcn {
@@ -1981,7 +1981,7 @@ type ServingCellPci struct {
 func (x *ServingCellPci) Reset() {
 	*x = ServingCellPci{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[25]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1994,7 +1994,7 @@ func (x *ServingCellPci) String() string {
 func (*ServingCellPci) ProtoMessage() {}
 
 func (x *ServingCellPci) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[25]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2007,7 +2007,7 @@ func (x *ServingCellPci) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServingCellPci.ProtoReflect.Descriptor instead.
 func (*ServingCellPci) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{25}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{25}
 }
 
 func (m *ServingCellPci) GetServingCellPci() isServingCellPci_ServingCellPci {
@@ -2073,7 +2073,7 @@ type Ueid struct {
 func (x *Ueid) Reset() {
 	*x = Ueid{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[26]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2086,7 +2086,7 @@ func (x *Ueid) String() string {
 func (*Ueid) ProtoMessage() {}
 
 func (x *Ueid) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[26]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2099,7 +2099,7 @@ func (x *Ueid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ueid.ProtoReflect.Descriptor instead.
 func (*Ueid) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{26}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{26}
 }
 
 func (m *Ueid) GetUeid() isUeid_Ueid {
@@ -2236,7 +2236,7 @@ type UeidGnb struct {
 func (x *UeidGnb) Reset() {
 	*x = UeidGnb{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[27]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2249,7 +2249,7 @@ func (x *UeidGnb) String() string {
 func (*UeidGnb) ProtoMessage() {}
 
 func (x *UeidGnb) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[27]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2262,7 +2262,7 @@ func (x *UeidGnb) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidGnb.ProtoReflect.Descriptor instead.
 func (*UeidGnb) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{27}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *UeidGnb) GetAmfUeNgapId() *AmfUeNgapId {
@@ -2328,7 +2328,7 @@ type UeidGnbCuCpE1ApIdList struct {
 func (x *UeidGnbCuCpE1ApIdList) Reset() {
 	*x = UeidGnbCuCpE1ApIdList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[28]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2341,7 +2341,7 @@ func (x *UeidGnbCuCpE1ApIdList) String() string {
 func (*UeidGnbCuCpE1ApIdList) ProtoMessage() {}
 
 func (x *UeidGnbCuCpE1ApIdList) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[28]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2354,7 +2354,7 @@ func (x *UeidGnbCuCpE1ApIdList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidGnbCuCpE1ApIdList.ProtoReflect.Descriptor instead.
 func (*UeidGnbCuCpE1ApIdList) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{28}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *UeidGnbCuCpE1ApIdList) GetValue() []*UeidGnbCuCpE1ApIdItem {
@@ -2377,7 +2377,7 @@ type UeidGnbCuCpE1ApIdItem struct {
 func (x *UeidGnbCuCpE1ApIdItem) Reset() {
 	*x = UeidGnbCuCpE1ApIdItem{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[29]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2390,7 +2390,7 @@ func (x *UeidGnbCuCpE1ApIdItem) String() string {
 func (*UeidGnbCuCpE1ApIdItem) ProtoMessage() {}
 
 func (x *UeidGnbCuCpE1ApIdItem) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[29]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2403,7 +2403,7 @@ func (x *UeidGnbCuCpE1ApIdItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidGnbCuCpE1ApIdItem.ProtoReflect.Descriptor instead.
 func (*UeidGnbCuCpE1ApIdItem) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{29}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *UeidGnbCuCpE1ApIdItem) GetGNbCuCpUeE1ApId() *GnbCuCpUeE1ApId {
@@ -2427,7 +2427,7 @@ type UeidGnbCuF1ApIdList struct {
 func (x *UeidGnbCuF1ApIdList) Reset() {
 	*x = UeidGnbCuF1ApIdList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[30]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2440,7 +2440,7 @@ func (x *UeidGnbCuF1ApIdList) String() string {
 func (*UeidGnbCuF1ApIdList) ProtoMessage() {}
 
 func (x *UeidGnbCuF1ApIdList) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[30]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2453,7 +2453,7 @@ func (x *UeidGnbCuF1ApIdList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidGnbCuF1ApIdList.ProtoReflect.Descriptor instead.
 func (*UeidGnbCuF1ApIdList) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{30}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *UeidGnbCuF1ApIdList) GetValue() []*UeidGnbCuCpF1ApIdItem {
@@ -2476,7 +2476,7 @@ type UeidGnbCuCpF1ApIdItem struct {
 func (x *UeidGnbCuCpF1ApIdItem) Reset() {
 	*x = UeidGnbCuCpF1ApIdItem{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[31]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2489,7 +2489,7 @@ func (x *UeidGnbCuCpF1ApIdItem) String() string {
 func (*UeidGnbCuCpF1ApIdItem) ProtoMessage() {}
 
 func (x *UeidGnbCuCpF1ApIdItem) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[31]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2502,7 +2502,7 @@ func (x *UeidGnbCuCpF1ApIdItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidGnbCuCpF1ApIdItem.ProtoReflect.Descriptor instead.
 func (*UeidGnbCuCpF1ApIdItem) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{31}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *UeidGnbCuCpF1ApIdItem) GetGNbCuUeF1ApId() *GnbCuUeF1ApId {
@@ -2527,7 +2527,7 @@ type UeidGnbDu struct {
 func (x *UeidGnbDu) Reset() {
 	*x = UeidGnbDu{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[32]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2540,7 +2540,7 @@ func (x *UeidGnbDu) String() string {
 func (*UeidGnbDu) ProtoMessage() {}
 
 func (x *UeidGnbDu) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[32]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2553,7 +2553,7 @@ func (x *UeidGnbDu) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidGnbDu.ProtoReflect.Descriptor instead.
 func (*UeidGnbDu) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{32}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *UeidGnbDu) GetGNbCuUeF1ApId() *GnbCuUeF1ApId {
@@ -2585,7 +2585,7 @@ type UeidGnbCuUp struct {
 func (x *UeidGnbCuUp) Reset() {
 	*x = UeidGnbCuUp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[33]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2598,7 +2598,7 @@ func (x *UeidGnbCuUp) String() string {
 func (*UeidGnbCuUp) ProtoMessage() {}
 
 func (x *UeidGnbCuUp) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[33]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2611,7 +2611,7 @@ func (x *UeidGnbCuUp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidGnbCuUp.ProtoReflect.Descriptor instead.
 func (*UeidGnbCuUp) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{33}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *UeidGnbCuUp) GetGNbCuCpUeE1ApId() *GnbCuCpUeE1ApId {
@@ -2649,7 +2649,7 @@ type UeidNgEnb struct {
 func (x *UeidNgEnb) Reset() {
 	*x = UeidNgEnb{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[34]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2662,7 +2662,7 @@ func (x *UeidNgEnb) String() string {
 func (*UeidNgEnb) ProtoMessage() {}
 
 func (x *UeidNgEnb) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[34]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2675,7 +2675,7 @@ func (x *UeidNgEnb) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidNgEnb.ProtoReflect.Descriptor instead.
 func (*UeidNgEnb) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{34}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *UeidNgEnb) GetAmfUeNgapId() *AmfUeNgapId {
@@ -2726,7 +2726,7 @@ type UeidNgEnbDu struct {
 func (x *UeidNgEnbDu) Reset() {
 	*x = UeidNgEnbDu{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[35]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2739,7 +2739,7 @@ func (x *UeidNgEnbDu) String() string {
 func (*UeidNgEnbDu) ProtoMessage() {}
 
 func (x *UeidNgEnbDu) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[35]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2752,7 +2752,7 @@ func (x *UeidNgEnbDu) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidNgEnbDu.ProtoReflect.Descriptor instead.
 func (*UeidNgEnbDu) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{35}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UeidNgEnbDu) GetNgENbCuUeW1ApId() *NgenbCuUeW1ApId {
@@ -2785,7 +2785,7 @@ type UeidEnGnb struct {
 func (x *UeidEnGnb) Reset() {
 	*x = UeidEnGnb{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[36]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2798,7 +2798,7 @@ func (x *UeidEnGnb) String() string {
 func (*UeidEnGnb) ProtoMessage() {}
 
 func (x *UeidEnGnb) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[36]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2811,7 +2811,7 @@ func (x *UeidEnGnb) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidEnGnb.ProtoReflect.Descriptor instead.
 func (*UeidEnGnb) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{36}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *UeidEnGnb) GetMENbUeX2ApId() *EnbUeX2ApId {
@@ -2877,7 +2877,7 @@ type UeidEnb struct {
 func (x *UeidEnb) Reset() {
 	*x = UeidEnb{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[37]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2890,7 +2890,7 @@ func (x *UeidEnb) String() string {
 func (*UeidEnb) ProtoMessage() {}
 
 func (x *UeidEnb) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[37]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2903,7 +2903,7 @@ func (x *UeidEnb) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UeidEnb.ProtoReflect.Descriptor instead.
 func (*UeidEnb) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{37}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *UeidEnb) GetMMeUeS1ApId() *MmeUeS1ApId {
@@ -2961,7 +2961,7 @@ type EnbId struct {
 func (x *EnbId) Reset() {
 	*x = EnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[38]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2974,7 +2974,7 @@ func (x *EnbId) String() string {
 func (*EnbId) ProtoMessage() {}
 
 func (x *EnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[38]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2987,7 +2987,7 @@ func (x *EnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnbId.ProtoReflect.Descriptor instead.
 func (*EnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{38}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{38}
 }
 
 func (m *EnbId) GetEnbId() isEnbId_EnbId {
@@ -3072,7 +3072,7 @@ type GlobalEnbId struct {
 func (x *GlobalEnbId) Reset() {
 	*x = GlobalEnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[39]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3085,7 +3085,7 @@ func (x *GlobalEnbId) String() string {
 func (*GlobalEnbId) ProtoMessage() {}
 
 func (x *GlobalEnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[39]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3098,7 +3098,7 @@ func (x *GlobalEnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalEnbId.ProtoReflect.Descriptor instead.
 func (*GlobalEnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{39}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GlobalEnbId) GetPLmnidentity() *PlmnIdentity {
@@ -3130,7 +3130,7 @@ type Gummei struct {
 func (x *Gummei) Reset() {
 	*x = Gummei{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[40]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3143,7 +3143,7 @@ func (x *Gummei) String() string {
 func (*Gummei) ProtoMessage() {}
 
 func (x *Gummei) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[40]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3156,7 +3156,7 @@ func (x *Gummei) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Gummei.ProtoReflect.Descriptor instead.
 func (*Gummei) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{40}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *Gummei) GetPLmnIdentity() *PlmnIdentity {
@@ -3194,7 +3194,7 @@ type MmeUeS1ApId struct {
 func (x *MmeUeS1ApId) Reset() {
 	*x = MmeUeS1ApId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[41]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3207,7 +3207,7 @@ func (x *MmeUeS1ApId) String() string {
 func (*MmeUeS1ApId) ProtoMessage() {}
 
 func (x *MmeUeS1ApId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[41]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3220,7 +3220,7 @@ func (x *MmeUeS1ApId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MmeUeS1ApId.ProtoReflect.Descriptor instead.
 func (*MmeUeS1ApId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{41}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *MmeUeS1ApId) GetValue() int64 {
@@ -3244,7 +3244,7 @@ type Qci struct {
 func (x *Qci) Reset() {
 	*x = Qci{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[42]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3257,7 +3257,7 @@ func (x *Qci) String() string {
 func (*Qci) ProtoMessage() {}
 
 func (x *Qci) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[42]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3270,7 +3270,7 @@ func (x *Qci) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Qci.ProtoReflect.Descriptor instead.
 func (*Qci) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{42}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *Qci) GetValue() int32 {
@@ -3294,7 +3294,7 @@ type SubscriberProfileIdforRfp struct {
 func (x *SubscriberProfileIdforRfp) Reset() {
 	*x = SubscriberProfileIdforRfp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[43]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3307,7 +3307,7 @@ func (x *SubscriberProfileIdforRfp) String() string {
 func (*SubscriberProfileIdforRfp) ProtoMessage() {}
 
 func (x *SubscriberProfileIdforRfp) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[43]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3320,7 +3320,7 @@ func (x *SubscriberProfileIdforRfp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscriberProfileIdforRfp.ProtoReflect.Descriptor instead.
 func (*SubscriberProfileIdforRfp) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{43}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *SubscriberProfileIdforRfp) GetValue() int32 {
@@ -3347,7 +3347,7 @@ type EnGnbId struct {
 func (x *EnGnbId) Reset() {
 	*x = EnGnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[44]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3360,7 +3360,7 @@ func (x *EnGnbId) String() string {
 func (*EnGnbId) ProtoMessage() {}
 
 func (x *EnGnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[44]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3373,7 +3373,7 @@ func (x *EnGnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnGnbId.ProtoReflect.Descriptor instead.
 func (*EnGnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{44}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{44}
 }
 
 func (m *EnGnbId) GetEnGnbId() isEnGnbId_EnGnbId {
@@ -3415,7 +3415,7 @@ type EnbUeX2ApId struct {
 func (x *EnbUeX2ApId) Reset() {
 	*x = EnbUeX2ApId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[45]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3428,7 +3428,7 @@ func (x *EnbUeX2ApId) String() string {
 func (*EnbUeX2ApId) ProtoMessage() {}
 
 func (x *EnbUeX2ApId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[45]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3441,7 +3441,7 @@ func (x *EnbUeX2ApId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnbUeX2ApId.ProtoReflect.Descriptor instead.
 func (*EnbUeX2ApId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{45}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *EnbUeX2ApId) GetValue() int32 {
@@ -3465,7 +3465,7 @@ type EnbUeX2ApIdExtension struct {
 func (x *EnbUeX2ApIdExtension) Reset() {
 	*x = EnbUeX2ApIdExtension{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[46]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3478,7 +3478,7 @@ func (x *EnbUeX2ApIdExtension) String() string {
 func (*EnbUeX2ApIdExtension) ProtoMessage() {}
 
 func (x *EnbUeX2ApIdExtension) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[46]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3491,7 +3491,7 @@ func (x *EnbUeX2ApIdExtension) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnbUeX2ApIdExtension.ProtoReflect.Descriptor instead.
 func (*EnbUeX2ApIdExtension) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{46}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *EnbUeX2ApIdExtension) GetValue() int32 {
@@ -3515,7 +3515,7 @@ type EUtraArfcn struct {
 func (x *EUtraArfcn) Reset() {
 	*x = EUtraArfcn{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[47]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3528,7 +3528,7 @@ func (x *EUtraArfcn) String() string {
 func (*EUtraArfcn) ProtoMessage() {}
 
 func (x *EUtraArfcn) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[47]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3541,7 +3541,7 @@ func (x *EUtraArfcn) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EUtraArfcn.ProtoReflect.Descriptor instead.
 func (*EUtraArfcn) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{47}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *EUtraArfcn) GetValue() int32 {
@@ -3565,7 +3565,7 @@ type EUtraPci struct {
 func (x *EUtraPci) Reset() {
 	*x = EUtraPci{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[48]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3578,7 +3578,7 @@ func (x *EUtraPci) String() string {
 func (*EUtraPci) ProtoMessage() {}
 
 func (x *EUtraPci) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[48]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3591,7 +3591,7 @@ func (x *EUtraPci) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EUtraPci.ProtoReflect.Descriptor instead.
 func (*EUtraPci) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{48}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *EUtraPci) GetValue() int32 {
@@ -3615,7 +3615,7 @@ type EUtraTac struct {
 func (x *EUtraTac) Reset() {
 	*x = EUtraTac{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[49]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3628,7 +3628,7 @@ func (x *EUtraTac) String() string {
 func (*EUtraTac) ProtoMessage() {}
 
 func (x *EUtraTac) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[49]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3641,7 +3641,7 @@ func (x *EUtraTac) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EUtraTac.ProtoReflect.Descriptor instead.
 func (*EUtraTac) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{49}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *EUtraTac) GetValue() []byte {
@@ -3667,7 +3667,7 @@ type GlobalenGnbId struct {
 func (x *GlobalenGnbId) Reset() {
 	*x = GlobalenGnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[50]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3680,7 +3680,7 @@ func (x *GlobalenGnbId) String() string {
 func (*GlobalenGnbId) ProtoMessage() {}
 
 func (x *GlobalenGnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[50]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3693,7 +3693,7 @@ func (x *GlobalenGnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalenGnbId.ProtoReflect.Descriptor instead.
 func (*GlobalenGnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{50}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *GlobalenGnbId) GetPLmnIdentity() *PlmnIdentity {
@@ -3724,7 +3724,7 @@ type NgenbCuUeW1ApId struct {
 func (x *NgenbCuUeW1ApId) Reset() {
 	*x = NgenbCuUeW1ApId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[51]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3737,7 +3737,7 @@ func (x *NgenbCuUeW1ApId) String() string {
 func (*NgenbCuUeW1ApId) ProtoMessage() {}
 
 func (x *NgenbCuUeW1ApId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[51]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3750,7 +3750,7 @@ func (x *NgenbCuUeW1ApId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NgenbCuUeW1ApId.ProtoReflect.Descriptor instead.
 func (*NgenbCuUeW1ApId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{51}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *NgenbCuUeW1ApId) GetValue() int64 {
@@ -3774,7 +3774,7 @@ type NgenbDuId struct {
 func (x *NgenbDuId) Reset() {
 	*x = NgenbDuId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[52]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3787,7 +3787,7 @@ func (x *NgenbDuId) String() string {
 func (*NgenbDuId) ProtoMessage() {}
 
 func (x *NgenbDuId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[52]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3800,7 +3800,7 @@ func (x *NgenbDuId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NgenbDuId.ProtoReflect.Descriptor instead.
 func (*NgenbDuId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{52}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *NgenbDuId) GetValue() int64 {
@@ -3824,7 +3824,7 @@ type AmfUeNgapId struct {
 func (x *AmfUeNgapId) Reset() {
 	*x = AmfUeNgapId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[53]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3837,7 +3837,7 @@ func (x *AmfUeNgapId) String() string {
 func (*AmfUeNgapId) ProtoMessage() {}
 
 func (x *AmfUeNgapId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[53]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3850,7 +3850,7 @@ func (x *AmfUeNgapId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AmfUeNgapId.ProtoReflect.Descriptor instead.
 func (*AmfUeNgapId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{53}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *AmfUeNgapId) GetValue() int64 {
@@ -3874,7 +3874,7 @@ type EutraCgi struct {
 func (x *EutraCgi) Reset() {
 	*x = EutraCgi{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[54]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3887,7 +3887,7 @@ func (x *EutraCgi) String() string {
 func (*EutraCgi) ProtoMessage() {}
 
 func (x *EutraCgi) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[54]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3900,7 +3900,7 @@ func (x *EutraCgi) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EutraCgi.ProtoReflect.Descriptor instead.
 func (*EutraCgi) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{54}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *EutraCgi) GetPLmnidentity() *PlmnIdentity {
@@ -3931,7 +3931,7 @@ type FiveQi struct {
 func (x *FiveQi) Reset() {
 	*x = FiveQi{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[55]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3944,7 +3944,7 @@ func (x *FiveQi) String() string {
 func (*FiveQi) ProtoMessage() {}
 
 func (x *FiveQi) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[55]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3957,7 +3957,7 @@ func (x *FiveQi) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FiveQi.ProtoReflect.Descriptor instead.
 func (*FiveQi) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{55}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *FiveQi) GetValue() int32 {
@@ -3982,7 +3982,7 @@ type GlobalGnbId struct {
 func (x *GlobalGnbId) Reset() {
 	*x = GlobalGnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[56]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3995,7 +3995,7 @@ func (x *GlobalGnbId) String() string {
 func (*GlobalGnbId) ProtoMessage() {}
 
 func (x *GlobalGnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[56]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4008,7 +4008,7 @@ func (x *GlobalGnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalGnbId.ProtoReflect.Descriptor instead.
 func (*GlobalGnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{56}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *GlobalGnbId) GetPLmnidentity() *PlmnIdentity {
@@ -4040,7 +4040,7 @@ type GlobalNgEnbId struct {
 func (x *GlobalNgEnbId) Reset() {
 	*x = GlobalNgEnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[57]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4053,7 +4053,7 @@ func (x *GlobalNgEnbId) String() string {
 func (*GlobalNgEnbId) ProtoMessage() {}
 
 func (x *GlobalNgEnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[57]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4066,7 +4066,7 @@ func (x *GlobalNgEnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalNgEnbId.ProtoReflect.Descriptor instead.
 func (*GlobalNgEnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{57}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *GlobalNgEnbId) GetPLmnidentity() *PlmnIdentity {
@@ -4101,7 +4101,7 @@ type GlobalRannodeId struct {
 func (x *GlobalRannodeId) Reset() {
 	*x = GlobalRannodeId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[58]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4114,7 +4114,7 @@ func (x *GlobalRannodeId) String() string {
 func (*GlobalRannodeId) ProtoMessage() {}
 
 func (x *GlobalRannodeId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[58]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4127,7 +4127,7 @@ func (x *GlobalRannodeId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalRannodeId.ProtoReflect.Descriptor instead.
 func (*GlobalRannodeId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{58}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{58}
 }
 
 func (m *GlobalRannodeId) GetGlobalRannodeId() isGlobalRannodeId_GlobalRannodeId {
@@ -4186,7 +4186,7 @@ type GnbId struct {
 func (x *GnbId) Reset() {
 	*x = GnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[59]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4199,7 +4199,7 @@ func (x *GnbId) String() string {
 func (*GnbId) ProtoMessage() {}
 
 func (x *GnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[59]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4212,7 +4212,7 @@ func (x *GnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GnbId.ProtoReflect.Descriptor instead.
 func (*GnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{59}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{59}
 }
 
 func (m *GnbId) GetGnbId() isGnbId_GnbId {
@@ -4256,7 +4256,7 @@ type Guami struct {
 func (x *Guami) Reset() {
 	*x = Guami{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[60]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4269,7 +4269,7 @@ func (x *Guami) String() string {
 func (*Guami) ProtoMessage() {}
 
 func (x *Guami) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[60]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4282,7 +4282,7 @@ func (x *Guami) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Guami.ProtoReflect.Descriptor instead.
 func (*Guami) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{60}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *Guami) GetPLmnidentity() *PlmnIdentity {
@@ -4327,7 +4327,7 @@ type IndexToRfsp struct {
 func (x *IndexToRfsp) Reset() {
 	*x = IndexToRfsp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[61]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4340,7 +4340,7 @@ func (x *IndexToRfsp) String() string {
 func (*IndexToRfsp) ProtoMessage() {}
 
 func (x *IndexToRfsp) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[61]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4353,7 +4353,7 @@ func (x *IndexToRfsp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndexToRfsp.ProtoReflect.Descriptor instead.
 func (*IndexToRfsp) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{61}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *IndexToRfsp) GetValue() int32 {
@@ -4382,7 +4382,7 @@ type NgEnbId struct {
 func (x *NgEnbId) Reset() {
 	*x = NgEnbId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[62]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4395,7 +4395,7 @@ func (x *NgEnbId) String() string {
 func (*NgEnbId) ProtoMessage() {}
 
 func (x *NgEnbId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[62]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4408,7 +4408,7 @@ func (x *NgEnbId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NgEnbId.ProtoReflect.Descriptor instead.
 func (*NgEnbId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{62}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{62}
 }
 
 func (m *NgEnbId) GetNgEnbId() isNgEnbId_NgEnbId {
@@ -4478,7 +4478,7 @@ type NrCgi struct {
 func (x *NrCgi) Reset() {
 	*x = NrCgi{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[63]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4491,7 +4491,7 @@ func (x *NrCgi) String() string {
 func (*NrCgi) ProtoMessage() {}
 
 func (x *NrCgi) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[63]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4504,7 +4504,7 @@ func (x *NrCgi) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NrCgi.ProtoReflect.Descriptor instead.
 func (*NrCgi) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{63}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *NrCgi) GetPLmnidentity() *PlmnIdentity {
@@ -4535,7 +4535,7 @@ type QosFlowIdentifier struct {
 func (x *QosFlowIdentifier) Reset() {
 	*x = QosFlowIdentifier{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[64]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[64]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4548,7 +4548,7 @@ func (x *QosFlowIdentifier) String() string {
 func (*QosFlowIdentifier) ProtoMessage() {}
 
 func (x *QosFlowIdentifier) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[64]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[64]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4561,7 +4561,7 @@ func (x *QosFlowIdentifier) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QosFlowIdentifier.ProtoReflect.Descriptor instead.
 func (*QosFlowIdentifier) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{64}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *QosFlowIdentifier) GetValue() int32 {
@@ -4587,7 +4587,7 @@ type SNssai struct {
 func (x *SNssai) Reset() {
 	*x = SNssai{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[65]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4600,7 +4600,7 @@ func (x *SNssai) String() string {
 func (*SNssai) ProtoMessage() {}
 
 func (x *SNssai) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[65]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4613,7 +4613,7 @@ func (x *SNssai) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SNssai.ProtoReflect.Descriptor instead.
 func (*SNssai) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{65}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *SNssai) GetSSt() *Sst {
@@ -4644,7 +4644,7 @@ type NgRannodeUexnApid struct {
 func (x *NgRannodeUexnApid) Reset() {
 	*x = NgRannodeUexnApid{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[66]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[66]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4657,7 +4657,7 @@ func (x *NgRannodeUexnApid) String() string {
 func (*NgRannodeUexnApid) ProtoMessage() {}
 
 func (x *NgRannodeUexnApid) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[66]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[66]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4670,7 +4670,7 @@ func (x *NgRannodeUexnApid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NgRannodeUexnApid.ProtoReflect.Descriptor instead.
 func (*NgRannodeUexnApid) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{66}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *NgRannodeUexnApid) GetValue() int64 {
@@ -4694,7 +4694,7 @@ type GnbCuCpUeE1ApId struct {
 func (x *GnbCuCpUeE1ApId) Reset() {
 	*x = GnbCuCpUeE1ApId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[67]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[67]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4707,7 +4707,7 @@ func (x *GnbCuCpUeE1ApId) String() string {
 func (*GnbCuCpUeE1ApId) ProtoMessage() {}
 
 func (x *GnbCuCpUeE1ApId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[67]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[67]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4720,7 +4720,7 @@ func (x *GnbCuCpUeE1ApId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GnbCuCpUeE1ApId.ProtoReflect.Descriptor instead.
 func (*GnbCuCpUeE1ApId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{67}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *GnbCuCpUeE1ApId) GetValue() int64 {
@@ -4744,7 +4744,7 @@ type GnbCuUpId struct {
 func (x *GnbCuUpId) Reset() {
 	*x = GnbCuUpId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[68]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4757,7 +4757,7 @@ func (x *GnbCuUpId) String() string {
 func (*GnbCuUpId) ProtoMessage() {}
 
 func (x *GnbCuUpId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[68]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4770,7 +4770,7 @@ func (x *GnbCuUpId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GnbCuUpId.ProtoReflect.Descriptor instead.
 func (*GnbCuUpId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{68}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *GnbCuUpId) GetValue() int64 {
@@ -4794,7 +4794,7 @@ type FiveGsTac struct {
 func (x *FiveGsTac) Reset() {
 	*x = FiveGsTac{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[69]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4807,7 +4807,7 @@ func (x *FiveGsTac) String() string {
 func (*FiveGsTac) ProtoMessage() {}
 
 func (x *FiveGsTac) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[69]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4820,7 +4820,7 @@ func (x *FiveGsTac) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FiveGsTac.ProtoReflect.Descriptor instead.
 func (*FiveGsTac) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{69}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *FiveGsTac) GetValue() []byte {
@@ -4844,7 +4844,7 @@ type GnbCuUeF1ApId struct {
 func (x *GnbCuUeF1ApId) Reset() {
 	*x = GnbCuUeF1ApId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[70]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[70]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4857,7 +4857,7 @@ func (x *GnbCuUeF1ApId) String() string {
 func (*GnbCuUeF1ApId) ProtoMessage() {}
 
 func (x *GnbCuUeF1ApId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[70]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[70]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4870,7 +4870,7 @@ func (x *GnbCuUeF1ApId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GnbCuUeF1ApId.ProtoReflect.Descriptor instead.
 func (*GnbCuUeF1ApId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{70}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *GnbCuUeF1ApId) GetValue() int64 {
@@ -4894,7 +4894,7 @@ type GnbDuId struct {
 func (x *GnbDuId) Reset() {
 	*x = GnbDuId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[71]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[71]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4907,7 +4907,7 @@ func (x *GnbDuId) String() string {
 func (*GnbDuId) ProtoMessage() {}
 
 func (x *GnbDuId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[71]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[71]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4920,7 +4920,7 @@ func (x *GnbDuId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GnbDuId.ProtoReflect.Descriptor instead.
 func (*GnbDuId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{71}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *GnbDuId) GetValue() int64 {
@@ -4944,7 +4944,7 @@ type NrPci struct {
 func (x *NrPci) Reset() {
 	*x = NrPci{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[72]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[72]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4957,7 +4957,7 @@ func (x *NrPci) String() string {
 func (*NrPci) ProtoMessage() {}
 
 func (x *NrPci) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[72]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[72]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4970,7 +4970,7 @@ func (x *NrPci) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NrPci.ProtoReflect.Descriptor instead.
 func (*NrPci) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{72}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *NrPci) GetValue() int32 {
@@ -4996,7 +4996,7 @@ type NrArfcn struct {
 func (x *NrArfcn) Reset() {
 	*x = NrArfcn{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[73]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[73]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5009,7 +5009,7 @@ func (x *NrArfcn) String() string {
 func (*NrArfcn) ProtoMessage() {}
 
 func (x *NrArfcn) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[73]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[73]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5022,7 +5022,7 @@ func (x *NrArfcn) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NrArfcn.ProtoReflect.Descriptor instead.
 func (*NrArfcn) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{73}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *NrArfcn) GetNRarfcn() int32 {
@@ -5053,7 +5053,7 @@ type FreqBandNrItem struct {
 func (x *FreqBandNrItem) Reset() {
 	*x = FreqBandNrItem{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[74]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[74]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5066,7 +5066,7 @@ func (x *FreqBandNrItem) String() string {
 func (*FreqBandNrItem) ProtoMessage() {}
 
 func (x *FreqBandNrItem) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[74]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[74]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5079,7 +5079,7 @@ func (x *FreqBandNrItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FreqBandNrItem.ProtoReflect.Descriptor instead.
 func (*FreqBandNrItem) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{74}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *FreqBandNrItem) GetFreqBandIndicatorNr() int32 {
@@ -5102,7 +5102,7 @@ type RicStyleName struct {
 func (x *RicStyleName) Reset() {
 	*x = RicStyleName{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[75]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[75]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5115,7 +5115,7 @@ func (x *RicStyleName) String() string {
 func (*RicStyleName) ProtoMessage() {}
 
 func (x *RicStyleName) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[75]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[75]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5128,7 +5128,7 @@ func (x *RicStyleName) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RicStyleName.ProtoReflect.Descriptor instead.
 func (*RicStyleName) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{75}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *RicStyleName) GetValue() string {
@@ -5151,7 +5151,7 @@ type PlmnIdentity struct {
 func (x *PlmnIdentity) Reset() {
 	*x = PlmnIdentity{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[76]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[76]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5164,7 +5164,7 @@ func (x *PlmnIdentity) String() string {
 func (*PlmnIdentity) ProtoMessage() {}
 
 func (x *PlmnIdentity) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[76]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[76]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5177,7 +5177,7 @@ func (x *PlmnIdentity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlmnIdentity.ProtoReflect.Descriptor instead.
 func (*PlmnIdentity) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{76}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *PlmnIdentity) GetValue() []byte {
@@ -5200,7 +5200,7 @@ type EutracellIdentity struct {
 func (x *EutracellIdentity) Reset() {
 	*x = EutracellIdentity{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[77]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[77]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5213,7 +5213,7 @@ func (x *EutracellIdentity) String() string {
 func (*EutracellIdentity) ProtoMessage() {}
 
 func (x *EutracellIdentity) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[77]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[77]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5226,7 +5226,7 @@ func (x *EutracellIdentity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EutracellIdentity.ProtoReflect.Descriptor instead.
 func (*EutracellIdentity) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{77}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *EutracellIdentity) GetValue() *asn1.BitString {
@@ -5249,7 +5249,7 @@ type NrcellIdentity struct {
 func (x *NrcellIdentity) Reset() {
 	*x = NrcellIdentity{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[78]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[78]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5262,7 +5262,7 @@ func (x *NrcellIdentity) String() string {
 func (*NrcellIdentity) ProtoMessage() {}
 
 func (x *NrcellIdentity) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[78]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[78]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5275,7 +5275,7 @@ func (x *NrcellIdentity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NrcellIdentity.ProtoReflect.Descriptor instead.
 func (*NrcellIdentity) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{78}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *NrcellIdentity) GetValue() *asn1.BitString {
@@ -5298,7 +5298,7 @@ type Ranueid struct {
 func (x *Ranueid) Reset() {
 	*x = Ranueid{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[79]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[79]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5311,7 +5311,7 @@ func (x *Ranueid) String() string {
 func (*Ranueid) ProtoMessage() {}
 
 func (x *Ranueid) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[79]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[79]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5324,7 +5324,7 @@ func (x *Ranueid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ranueid.ProtoReflect.Descriptor instead.
 func (*Ranueid) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{79}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *Ranueid) GetValue() []byte {
@@ -5347,7 +5347,7 @@ type MmeGroupId struct {
 func (x *MmeGroupId) Reset() {
 	*x = MmeGroupId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[80]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[80]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5360,7 +5360,7 @@ func (x *MmeGroupId) String() string {
 func (*MmeGroupId) ProtoMessage() {}
 
 func (x *MmeGroupId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[80]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[80]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5373,7 +5373,7 @@ func (x *MmeGroupId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MmeGroupId.ProtoReflect.Descriptor instead.
 func (*MmeGroupId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{80}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *MmeGroupId) GetValue() []byte {
@@ -5396,7 +5396,7 @@ type MmeCode struct {
 func (x *MmeCode) Reset() {
 	*x = MmeCode{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[81]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[81]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5409,7 +5409,7 @@ func (x *MmeCode) String() string {
 func (*MmeCode) ProtoMessage() {}
 
 func (x *MmeCode) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[81]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[81]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5422,7 +5422,7 @@ func (x *MmeCode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MmeCode.ProtoReflect.Descriptor instead.
 func (*MmeCode) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{81}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *MmeCode) GetValue() []byte {
@@ -5445,7 +5445,7 @@ type AmfregionId struct {
 func (x *AmfregionId) Reset() {
 	*x = AmfregionId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[82]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[82]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5458,7 +5458,7 @@ func (x *AmfregionId) String() string {
 func (*AmfregionId) ProtoMessage() {}
 
 func (x *AmfregionId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[82]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[82]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5471,7 +5471,7 @@ func (x *AmfregionId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AmfregionId.ProtoReflect.Descriptor instead.
 func (*AmfregionId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{82}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *AmfregionId) GetValue() *asn1.BitString {
@@ -5494,7 +5494,7 @@ type AmfsetId struct {
 func (x *AmfsetId) Reset() {
 	*x = AmfsetId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[83]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[83]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5507,7 +5507,7 @@ func (x *AmfsetId) String() string {
 func (*AmfsetId) ProtoMessage() {}
 
 func (x *AmfsetId) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[83]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[83]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5520,7 +5520,7 @@ func (x *AmfsetId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AmfsetId.ProtoReflect.Descriptor instead.
 func (*AmfsetId) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{83}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *AmfsetId) GetValue() *asn1.BitString {
@@ -5543,7 +5543,7 @@ type Amfpointer struct {
 func (x *Amfpointer) Reset() {
 	*x = Amfpointer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[84]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[84]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5556,7 +5556,7 @@ func (x *Amfpointer) String() string {
 func (*Amfpointer) ProtoMessage() {}
 
 func (x *Amfpointer) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[84]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[84]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5569,7 +5569,7 @@ func (x *Amfpointer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Amfpointer.ProtoReflect.Descriptor instead.
 func (*Amfpointer) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{84}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *Amfpointer) GetValue() *asn1.BitString {
@@ -5592,7 +5592,7 @@ type Sd struct {
 func (x *Sd) Reset() {
 	*x = Sd{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[85]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[85]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5605,7 +5605,7 @@ func (x *Sd) String() string {
 func (*Sd) ProtoMessage() {}
 
 func (x *Sd) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[85]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[85]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5618,7 +5618,7 @@ func (x *Sd) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Sd.ProtoReflect.Descriptor instead.
 func (*Sd) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{85}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *Sd) GetValue() []byte {
@@ -5641,7 +5641,7 @@ type Sst struct {
 func (x *Sst) Reset() {
 	*x = Sst{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[86]
+		mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[86]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5654,7 +5654,7 @@ func (x *Sst) String() string {
 func (*Sst) ProtoMessage() {}
 
 func (x *Sst) ProtoReflect() protoreflect.Message {
-	mi := &file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[86]
+	mi := &file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[86]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5667,7 +5667,7 @@ func (x *Sst) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Sst.ProtoReflect.Descriptor instead.
 func (*Sst) Descriptor() ([]byte, []int) {
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP(), []int{86}
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *Sst) GetValue() []byte {
@@ -5677,9 +5677,9 @@ func (x *Sst) GetValue() []byte {
 	return nil
 }
 
-var File_e2sm_mho_go_v2_e2sm_v2_proto protoreflect.FileDescriptor
+var File_e2smmhov2_v2_e2sm_v2_proto protoreflect.FileDescriptor
 
-var file_e2sm_mho_go_v2_e2sm_v2_proto_rawDesc = []byte{
+var file_e2smmhov2_v2_e2sm_v2_proto_rawDesc = []byte{
 	0x0a, 0x1c, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6d, 0x68, 0x6f, 0x5f, 0x67, 0x6f, 0x2f, 0x76, 0x32,
 	0x2f, 0x65, 0x32, 0x73, 0x6d, 0x5f, 0x76, 0x32, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e,
 	0x65, 0x32, 0x73, 0x6d, 0x5f, 0x6d, 0x68, 0x6f, 0x5f, 0x67, 0x6f, 0x2e, 0x76, 0x32, 0x1a, 0x1a,
@@ -6413,226 +6413,226 @@ var file_e2sm_mho_go_v2_e2sm_v2_proto_rawDesc = []byte{
 }
 
 var (
-	file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescOnce sync.Once
-	file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescData = file_e2sm_mho_go_v2_e2sm_v2_proto_rawDesc
+	file_e2smmhov2_v2_e2sm_v2_proto_rawDescOnce sync.Once
+	file_e2smmhov2_v2_e2sm_v2_proto_rawDescData = file_e2smmhov2_v2_e2sm_v2_proto_rawDesc
 )
 
-func file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescGZIP() []byte {
-	file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescOnce.Do(func() {
-		file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescData = protoimpl.X.CompressGZIP(file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescData)
+func file_e2smmhov2_v2_e2sm_v2_proto_rawDescGZIP() []byte {
+	file_e2smmhov2_v2_e2sm_v2_proto_rawDescOnce.Do(func() {
+		file_e2smmhov2_v2_e2sm_v2_proto_rawDescData = protoimpl.X.CompressGZIP(file_e2smmhov2_v2_e2sm_v2_proto_rawDescData)
 	})
-	return file_e2sm_mho_go_v2_e2sm_v2_proto_rawDescData
+	return file_e2smmhov2_v2_e2sm_v2_proto_rawDescData
 }
 
-var file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes = make([]protoimpl.MessageInfo, 87)
-var file_e2sm_mho_go_v2_e2sm_v2_proto_goTypes = []interface{}{
-	(InterfaceType)(0),                // 0: e2sm_mho_go.v2.InterfaceType
-	(MessageType)(0),                  // 1: e2sm_mho_go.v2.MessageType
-	(RrcclassLte)(0),                  // 2: e2sm_mho_go.v2.RrcclassLte
-	(RrcclassNr)(0),                   // 3: e2sm_mho_go.v2.RrcclassNr
-	(*MaxE1Apid)(nil),                 // 4: e2sm_mho_go.v2.MaxE1Apid
-	(*MaxF1Apid)(nil),                 // 5: e2sm_mho_go.v2.MaxF1Apid
-	(*MaxEarfcn)(nil),                 // 6: e2sm_mho_go.v2.MaxEarfcn
-	(*MaxNrarfcn)(nil),                // 7: e2sm_mho_go.v2.MaxNrarfcn
-	(*MaxnoofNrCellBands)(nil),        // 8: e2sm_mho_go.v2.MaxnoofNrCellBands
-	(*Cgi)(nil),                       // 9: e2sm_mho_go.v2.Cgi
-	(*CoreCpid)(nil),                  // 10: e2sm_mho_go.v2.CoreCpid
-	(*InterfaceIdentifier)(nil),       // 11: e2sm_mho_go.v2.InterfaceIdentifier
-	(*InterfaceIdNg)(nil),             // 12: e2sm_mho_go.v2.InterfaceIdNg
-	(*InterfaceIdXn)(nil),             // 13: e2sm_mho_go.v2.InterfaceIdXn
-	(*InterfaceIdF1)(nil),             // 14: e2sm_mho_go.v2.InterfaceIdF1
-	(*InterfaceIdE1)(nil),             // 15: e2sm_mho_go.v2.InterfaceIdE1
-	(*InterfaceIdS1)(nil),             // 16: e2sm_mho_go.v2.InterfaceIdS1
-	(*InterfaceIdX2)(nil),             // 17: e2sm_mho_go.v2.InterfaceIdX2
-	(*NodeType)(nil),                  // 18: e2sm_mho_go.v2.NodeType
-	(*InterfaceIdW1)(nil),             // 19: e2sm_mho_go.v2.InterfaceIdW1
-	(*InterfaceMessageId)(nil),        // 20: e2sm_mho_go.v2.InterfaceMessageId
-	(*GroupId)(nil),                   // 21: e2sm_mho_go.v2.GroupId
-	(*QoSid)(nil),                     // 22: e2sm_mho_go.v2.QoSid
-	(*RanfunctionName)(nil),           // 23: e2sm_mho_go.v2.RanfunctionName
-	(*RicFormatType)(nil),             // 24: e2sm_mho_go.v2.RicFormatType
-	(*RicStyleType)(nil),              // 25: e2sm_mho_go.v2.RicStyleType
-	(*RrcMessageId)(nil),              // 26: e2sm_mho_go.v2.RrcMessageId
-	(*RrcType)(nil),                   // 27: e2sm_mho_go.v2.RrcType
-	(*ServingCellArfcn)(nil),          // 28: e2sm_mho_go.v2.ServingCellArfcn
-	(*ServingCellPci)(nil),            // 29: e2sm_mho_go.v2.ServingCellPci
-	(*Ueid)(nil),                      // 30: e2sm_mho_go.v2.Ueid
-	(*UeidGnb)(nil),                   // 31: e2sm_mho_go.v2.UeidGnb
-	(*UeidGnbCuCpE1ApIdList)(nil),     // 32: e2sm_mho_go.v2.UeidGnbCuCpE1ApIdList
-	(*UeidGnbCuCpE1ApIdItem)(nil),     // 33: e2sm_mho_go.v2.UeidGnbCuCpE1ApIdItem
-	(*UeidGnbCuF1ApIdList)(nil),       // 34: e2sm_mho_go.v2.UeidGnbCuF1ApIdList
-	(*UeidGnbCuCpF1ApIdItem)(nil),     // 35: e2sm_mho_go.v2.UeidGnbCuCpF1ApIdItem
-	(*UeidGnbDu)(nil),                 // 36: e2sm_mho_go.v2.UeidGnbDu
-	(*UeidGnbCuUp)(nil),               // 37: e2sm_mho_go.v2.UeidGnbCuUp
-	(*UeidNgEnb)(nil),                 // 38: e2sm_mho_go.v2.UeidNgEnb
-	(*UeidNgEnbDu)(nil),               // 39: e2sm_mho_go.v2.UeidNgEnbDu
-	(*UeidEnGnb)(nil),                 // 40: e2sm_mho_go.v2.UeidEnGnb
-	(*UeidEnb)(nil),                   // 41: e2sm_mho_go.v2.UeidEnb
-	(*EnbId)(nil),                     // 42: e2sm_mho_go.v2.EnbId
-	(*GlobalEnbId)(nil),               // 43: e2sm_mho_go.v2.GlobalEnbId
-	(*Gummei)(nil),                    // 44: e2sm_mho_go.v2.Gummei
-	(*MmeUeS1ApId)(nil),               // 45: e2sm_mho_go.v2.MmeUeS1ApId
-	(*Qci)(nil),                       // 46: e2sm_mho_go.v2.Qci
-	(*SubscriberProfileIdforRfp)(nil), // 47: e2sm_mho_go.v2.SubscriberProfileIdforRfp
-	(*EnGnbId)(nil),                   // 48: e2sm_mho_go.v2.EnGnbId
-	(*EnbUeX2ApId)(nil),               // 49: e2sm_mho_go.v2.EnbUeX2ApId
-	(*EnbUeX2ApIdExtension)(nil),      // 50: e2sm_mho_go.v2.EnbUeX2ApIdExtension
-	(*EUtraArfcn)(nil),                // 51: e2sm_mho_go.v2.EUtraArfcn
-	(*EUtraPci)(nil),                  // 52: e2sm_mho_go.v2.EUtraPci
-	(*EUtraTac)(nil),                  // 53: e2sm_mho_go.v2.EUtraTac
-	(*GlobalenGnbId)(nil),             // 54: e2sm_mho_go.v2.GlobalenGnbId
-	(*NgenbCuUeW1ApId)(nil),           // 55: e2sm_mho_go.v2.NgenbCuUeW1ApId
-	(*NgenbDuId)(nil),                 // 56: e2sm_mho_go.v2.NgenbDuId
-	(*AmfUeNgapId)(nil),               // 57: e2sm_mho_go.v2.AmfUeNgapId
-	(*EutraCgi)(nil),                  // 58: e2sm_mho_go.v2.EutraCgi
-	(*FiveQi)(nil),                    // 59: e2sm_mho_go.v2.FiveQi
-	(*GlobalGnbId)(nil),               // 60: e2sm_mho_go.v2.GlobalGnbId
-	(*GlobalNgEnbId)(nil),             // 61: e2sm_mho_go.v2.GlobalNgEnbId
-	(*GlobalRannodeId)(nil),           // 62: e2sm_mho_go.v2.GlobalRannodeId
-	(*GnbId)(nil),                     // 63: e2sm_mho_go.v2.GnbId
-	(*Guami)(nil),                     // 64: e2sm_mho_go.v2.Guami
-	(*IndexToRfsp)(nil),               // 65: e2sm_mho_go.v2.IndexToRfsp
-	(*NgEnbId)(nil),                   // 66: e2sm_mho_go.v2.NgEnbId
-	(*NrCgi)(nil),                     // 67: e2sm_mho_go.v2.NrCgi
-	(*QosFlowIdentifier)(nil),         // 68: e2sm_mho_go.v2.QosFlowIdentifier
-	(*SNssai)(nil),                    // 69: e2sm_mho_go.v2.SNssai
-	(*NgRannodeUexnApid)(nil),         // 70: e2sm_mho_go.v2.NgRannodeUexnApid
-	(*GnbCuCpUeE1ApId)(nil),           // 71: e2sm_mho_go.v2.GnbCuCpUeE1ApId
-	(*GnbCuUpId)(nil),                 // 72: e2sm_mho_go.v2.GnbCuUpId
-	(*FiveGsTac)(nil),                 // 73: e2sm_mho_go.v2.FiveGsTac
-	(*GnbCuUeF1ApId)(nil),             // 74: e2sm_mho_go.v2.GnbCuUeF1ApId
-	(*GnbDuId)(nil),                   // 75: e2sm_mho_go.v2.GnbDuId
-	(*NrPci)(nil),                     // 76: e2sm_mho_go.v2.NrPci
-	(*NrArfcn)(nil),                   // 77: e2sm_mho_go.v2.NrArfcn
-	(*FreqBandNrItem)(nil),            // 78: e2sm_mho_go.v2.FreqBandNrItem
-	(*RicStyleName)(nil),              // 79: e2sm_mho_go.v2.RicStyleName
-	(*PlmnIdentity)(nil),              // 80: e2sm_mho_go.v2.PlmnIdentity
-	(*EutracellIdentity)(nil),         // 81: e2sm_mho_go.v2.EutracellIdentity
-	(*NrcellIdentity)(nil),            // 82: e2sm_mho_go.v2.NrcellIdentity
-	(*Ranueid)(nil),                   // 83: e2sm_mho_go.v2.Ranueid
-	(*MmeGroupId)(nil),                // 84: e2sm_mho_go.v2.MmeGroupId
-	(*MmeCode)(nil),                   // 85: e2sm_mho_go.v2.MmeCode
-	(*AmfregionId)(nil),               // 86: e2sm_mho_go.v2.AmfregionId
-	(*AmfsetId)(nil),                  // 87: e2sm_mho_go.v2.AmfsetId
-	(*Amfpointer)(nil),                // 88: e2sm_mho_go.v2.Amfpointer
-	(*Sd)(nil),                        // 89: e2sm_mho_go.v2.Sd
-	(*Sst)(nil),                       // 90: e2sm_mho_go.v2.Sst
+var file_e2smmhov2_v2_e2sm_v2_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_e2smmhov2_v2_e2sm_v2_proto_msgTypes = make([]protoimpl.MessageInfo, 87)
+var file_e2smmhov2_v2_e2sm_v2_proto_goTypes = []interface{}{
+	(InterfaceType)(0),                // 0: e2smmhov2.v2.InterfaceType
+	(MessageType)(0),                  // 1: e2smmhov2.v2.MessageType
+	(RrcclassLte)(0),                  // 2: e2smmhov2.v2.RrcclassLte
+	(RrcclassNr)(0),                   // 3: e2smmhov2.v2.RrcclassNr
+	(*MaxE1Apid)(nil),                 // 4: e2smmhov2.v2.MaxE1Apid
+	(*MaxF1Apid)(nil),                 // 5: e2smmhov2.v2.MaxF1Apid
+	(*MaxEarfcn)(nil),                 // 6: e2smmhov2.v2.MaxEarfcn
+	(*MaxNrarfcn)(nil),                // 7: e2smmhov2.v2.MaxNrarfcn
+	(*MaxnoofNrCellBands)(nil),        // 8: e2smmhov2.v2.MaxnoofNrCellBands
+	(*Cgi)(nil),                       // 9: e2smmhov2.v2.Cgi
+	(*CoreCpid)(nil),                  // 10: e2smmhov2.v2.CoreCpid
+	(*InterfaceIdentifier)(nil),       // 11: e2smmhov2.v2.InterfaceIdentifier
+	(*InterfaceIdNg)(nil),             // 12: e2smmhov2.v2.InterfaceIdNg
+	(*InterfaceIdXn)(nil),             // 13: e2smmhov2.v2.InterfaceIdXn
+	(*InterfaceIdF1)(nil),             // 14: e2smmhov2.v2.InterfaceIdF1
+	(*InterfaceIdE1)(nil),             // 15: e2smmhov2.v2.InterfaceIdE1
+	(*InterfaceIdS1)(nil),             // 16: e2smmhov2.v2.InterfaceIdS1
+	(*InterfaceIdX2)(nil),             // 17: e2smmhov2.v2.InterfaceIdX2
+	(*NodeType)(nil),                  // 18: e2smmhov2.v2.NodeType
+	(*InterfaceIdW1)(nil),             // 19: e2smmhov2.v2.InterfaceIdW1
+	(*InterfaceMessageId)(nil),        // 20: e2smmhov2.v2.InterfaceMessageId
+	(*GroupId)(nil),                   // 21: e2smmhov2.v2.GroupId
+	(*QoSid)(nil),                     // 22: e2smmhov2.v2.QoSid
+	(*RanfunctionName)(nil),           // 23: e2smmhov2.v2.RanfunctionName
+	(*RicFormatType)(nil),             // 24: e2smmhov2.v2.RicFormatType
+	(*RicStyleType)(nil),              // 25: e2smmhov2.v2.RicStyleType
+	(*RrcMessageId)(nil),              // 26: e2smmhov2.v2.RrcMessageId
+	(*RrcType)(nil),                   // 27: e2smmhov2.v2.RrcType
+	(*ServingCellArfcn)(nil),          // 28: e2smmhov2.v2.ServingCellArfcn
+	(*ServingCellPci)(nil),            // 29: e2smmhov2.v2.ServingCellPci
+	(*Ueid)(nil),                      // 30: e2smmhov2.v2.Ueid
+	(*UeidGnb)(nil),                   // 31: e2smmhov2.v2.UeidGnb
+	(*UeidGnbCuCpE1ApIdList)(nil),     // 32: e2smmhov2.v2.UeidGnbCuCpE1ApIdList
+	(*UeidGnbCuCpE1ApIdItem)(nil),     // 33: e2smmhov2.v2.UeidGnbCuCpE1ApIdItem
+	(*UeidGnbCuF1ApIdList)(nil),       // 34: e2smmhov2.v2.UeidGnbCuF1ApIdList
+	(*UeidGnbCuCpF1ApIdItem)(nil),     // 35: e2smmhov2.v2.UeidGnbCuCpF1ApIdItem
+	(*UeidGnbDu)(nil),                 // 36: e2smmhov2.v2.UeidGnbDu
+	(*UeidGnbCuUp)(nil),               // 37: e2smmhov2.v2.UeidGnbCuUp
+	(*UeidNgEnb)(nil),                 // 38: e2smmhov2.v2.UeidNgEnb
+	(*UeidNgEnbDu)(nil),               // 39: e2smmhov2.v2.UeidNgEnbDu
+	(*UeidEnGnb)(nil),                 // 40: e2smmhov2.v2.UeidEnGnb
+	(*UeidEnb)(nil),                   // 41: e2smmhov2.v2.UeidEnb
+	(*EnbId)(nil),                     // 42: e2smmhov2.v2.EnbId
+	(*GlobalEnbId)(nil),               // 43: e2smmhov2.v2.GlobalEnbId
+	(*Gummei)(nil),                    // 44: e2smmhov2.v2.Gummei
+	(*MmeUeS1ApId)(nil),               // 45: e2smmhov2.v2.MmeUeS1ApId
+	(*Qci)(nil),                       // 46: e2smmhov2.v2.Qci
+	(*SubscriberProfileIdforRfp)(nil), // 47: e2smmhov2.v2.SubscriberProfileIdforRfp
+	(*EnGnbId)(nil),                   // 48: e2smmhov2.v2.EnGnbId
+	(*EnbUeX2ApId)(nil),               // 49: e2smmhov2.v2.EnbUeX2ApId
+	(*EnbUeX2ApIdExtension)(nil),      // 50: e2smmhov2.v2.EnbUeX2ApIdExtension
+	(*EUtraArfcn)(nil),                // 51: e2smmhov2.v2.EUtraArfcn
+	(*EUtraPci)(nil),                  // 52: e2smmhov2.v2.EUtraPci
+	(*EUtraTac)(nil),                  // 53: e2smmhov2.v2.EUtraTac
+	(*GlobalenGnbId)(nil),             // 54: e2smmhov2.v2.GlobalenGnbId
+	(*NgenbCuUeW1ApId)(nil),           // 55: e2smmhov2.v2.NgenbCuUeW1ApId
+	(*NgenbDuId)(nil),                 // 56: e2smmhov2.v2.NgenbDuId
+	(*AmfUeNgapId)(nil),               // 57: e2smmhov2.v2.AmfUeNgapId
+	(*EutraCgi)(nil),                  // 58: e2smmhov2.v2.EutraCgi
+	(*FiveQi)(nil),                    // 59: e2smmhov2.v2.FiveQi
+	(*GlobalGnbId)(nil),               // 60: e2smmhov2.v2.GlobalGnbId
+	(*GlobalNgEnbId)(nil),             // 61: e2smmhov2.v2.GlobalNgEnbId
+	(*GlobalRannodeId)(nil),           // 62: e2smmhov2.v2.GlobalRannodeId
+	(*GnbId)(nil),                     // 63: e2smmhov2.v2.GnbId
+	(*Guami)(nil),                     // 64: e2smmhov2.v2.Guami
+	(*IndexToRfsp)(nil),               // 65: e2smmhov2.v2.IndexToRfsp
+	(*NgEnbId)(nil),                   // 66: e2smmhov2.v2.NgEnbId
+	(*NrCgi)(nil),                     // 67: e2smmhov2.v2.NrCgi
+	(*QosFlowIdentifier)(nil),         // 68: e2smmhov2.v2.QosFlowIdentifier
+	(*SNssai)(nil),                    // 69: e2smmhov2.v2.SNssai
+	(*NgRannodeUexnApid)(nil),         // 70: e2smmhov2.v2.NgRannodeUexnApid
+	(*GnbCuCpUeE1ApId)(nil),           // 71: e2smmhov2.v2.GnbCuCpUeE1ApId
+	(*GnbCuUpId)(nil),                 // 72: e2smmhov2.v2.GnbCuUpId
+	(*FiveGsTac)(nil),                 // 73: e2smmhov2.v2.FiveGsTac
+	(*GnbCuUeF1ApId)(nil),             // 74: e2smmhov2.v2.GnbCuUeF1ApId
+	(*GnbDuId)(nil),                   // 75: e2smmhov2.v2.GnbDuId
+	(*NrPci)(nil),                     // 76: e2smmhov2.v2.NrPci
+	(*NrArfcn)(nil),                   // 77: e2smmhov2.v2.NrArfcn
+	(*FreqBandNrItem)(nil),            // 78: e2smmhov2.v2.FreqBandNrItem
+	(*RicStyleName)(nil),              // 79: e2smmhov2.v2.RicStyleName
+	(*PlmnIdentity)(nil),              // 80: e2smmhov2.v2.PlmnIdentity
+	(*EutracellIdentity)(nil),         // 81: e2smmhov2.v2.EutracellIdentity
+	(*NrcellIdentity)(nil),            // 82: e2smmhov2.v2.NrcellIdentity
+	(*Ranueid)(nil),                   // 83: e2smmhov2.v2.Ranueid
+	(*MmeGroupId)(nil),                // 84: e2smmhov2.v2.MmeGroupId
+	(*MmeCode)(nil),                   // 85: e2smmhov2.v2.MmeCode
+	(*AmfregionId)(nil),               // 86: e2smmhov2.v2.AmfregionId
+	(*AmfsetId)(nil),                  // 87: e2smmhov2.v2.AmfsetId
+	(*Amfpointer)(nil),                // 88: e2smmhov2.v2.Amfpointer
+	(*Sd)(nil),                        // 89: e2smmhov2.v2.Sd
+	(*Sst)(nil),                       // 90: e2smmhov2.v2.Sst
 	(*asn1.BitString)(nil),            // 91: asn1.v1.BitString
 }
-var file_e2sm_mho_go_v2_e2sm_v2_proto_depIdxs = []int32{
-	67,  // 0: e2sm_mho_go.v2.Cgi.n_r_cgi:type_name -> e2sm_mho_go.v2.NrCgi
-	58,  // 1: e2sm_mho_go.v2.Cgi.e_utra_cgi:type_name -> e2sm_mho_go.v2.EutraCgi
-	64,  // 2: e2sm_mho_go.v2.CoreCpid.five_gc:type_name -> e2sm_mho_go.v2.Guami
-	44,  // 3: e2sm_mho_go.v2.CoreCpid.e_pc:type_name -> e2sm_mho_go.v2.Gummei
-	12,  // 4: e2sm_mho_go.v2.InterfaceIdentifier.n_g:type_name -> e2sm_mho_go.v2.InterfaceIdNg
-	13,  // 5: e2sm_mho_go.v2.InterfaceIdentifier.x_n:type_name -> e2sm_mho_go.v2.InterfaceIdXn
-	14,  // 6: e2sm_mho_go.v2.InterfaceIdentifier.f1:type_name -> e2sm_mho_go.v2.InterfaceIdF1
-	15,  // 7: e2sm_mho_go.v2.InterfaceIdentifier.e1:type_name -> e2sm_mho_go.v2.InterfaceIdE1
-	16,  // 8: e2sm_mho_go.v2.InterfaceIdentifier.s1:type_name -> e2sm_mho_go.v2.InterfaceIdS1
-	17,  // 9: e2sm_mho_go.v2.InterfaceIdentifier.x2:type_name -> e2sm_mho_go.v2.InterfaceIdX2
-	19,  // 10: e2sm_mho_go.v2.InterfaceIdentifier.w1:type_name -> e2sm_mho_go.v2.InterfaceIdW1
-	64,  // 11: e2sm_mho_go.v2.InterfaceIdNg.guami:type_name -> e2sm_mho_go.v2.Guami
-	62,  // 12: e2sm_mho_go.v2.InterfaceIdXn.global_ng_ran_id:type_name -> e2sm_mho_go.v2.GlobalRannodeId
-	62,  // 13: e2sm_mho_go.v2.InterfaceIdF1.global_ng_ran_id:type_name -> e2sm_mho_go.v2.GlobalRannodeId
-	75,  // 14: e2sm_mho_go.v2.InterfaceIdF1.g_nb_du_id:type_name -> e2sm_mho_go.v2.GnbDuId
-	62,  // 15: e2sm_mho_go.v2.InterfaceIdE1.global_ng_ran_id:type_name -> e2sm_mho_go.v2.GlobalRannodeId
-	72,  // 16: e2sm_mho_go.v2.InterfaceIdE1.g_nb_cu_up_id:type_name -> e2sm_mho_go.v2.GnbCuUpId
-	44,  // 17: e2sm_mho_go.v2.InterfaceIdS1.g_ummei:type_name -> e2sm_mho_go.v2.Gummei
-	18,  // 18: e2sm_mho_go.v2.InterfaceIdX2.node_type:type_name -> e2sm_mho_go.v2.NodeType
-	43,  // 19: e2sm_mho_go.v2.NodeType.global_enb_id:type_name -> e2sm_mho_go.v2.GlobalEnbId
-	54,  // 20: e2sm_mho_go.v2.NodeType.global_en_gnb_id:type_name -> e2sm_mho_go.v2.GlobalenGnbId
-	61,  // 21: e2sm_mho_go.v2.InterfaceIdW1.global_ng_e_nb_id:type_name -> e2sm_mho_go.v2.GlobalNgEnbId
-	56,  // 22: e2sm_mho_go.v2.InterfaceIdW1.ng_e_nb_du_id:type_name -> e2sm_mho_go.v2.NgenbDuId
-	1,   // 23: e2sm_mho_go.v2.InterfaceMessageId.message_type:type_name -> e2sm_mho_go.v2.MessageType
-	59,  // 24: e2sm_mho_go.v2.GroupId.five_gc:type_name -> e2sm_mho_go.v2.FiveQi
-	46,  // 25: e2sm_mho_go.v2.GroupId.e_pc:type_name -> e2sm_mho_go.v2.Qci
-	59,  // 26: e2sm_mho_go.v2.QoSid.five_gc:type_name -> e2sm_mho_go.v2.FiveQi
-	46,  // 27: e2sm_mho_go.v2.QoSid.e_pc:type_name -> e2sm_mho_go.v2.Qci
-	27,  // 28: e2sm_mho_go.v2.RrcMessageId.rrc_type:type_name -> e2sm_mho_go.v2.RrcType
-	2,   // 29: e2sm_mho_go.v2.RrcType.lte:type_name -> e2sm_mho_go.v2.RrcclassLte
-	3,   // 30: e2sm_mho_go.v2.RrcType.nr:type_name -> e2sm_mho_go.v2.RrcclassNr
-	77,  // 31: e2sm_mho_go.v2.ServingCellArfcn.n_r:type_name -> e2sm_mho_go.v2.NrArfcn
-	51,  // 32: e2sm_mho_go.v2.ServingCellArfcn.e_utra:type_name -> e2sm_mho_go.v2.EUtraArfcn
-	76,  // 33: e2sm_mho_go.v2.ServingCellPci.n_r:type_name -> e2sm_mho_go.v2.NrPci
-	52,  // 34: e2sm_mho_go.v2.ServingCellPci.e_utra:type_name -> e2sm_mho_go.v2.EUtraPci
-	31,  // 35: e2sm_mho_go.v2.Ueid.g_nb_ueid:type_name -> e2sm_mho_go.v2.UeidGnb
-	36,  // 36: e2sm_mho_go.v2.Ueid.g_nb_du_ueid:type_name -> e2sm_mho_go.v2.UeidGnbDu
-	37,  // 37: e2sm_mho_go.v2.Ueid.g_nb_cu_up_ueid:type_name -> e2sm_mho_go.v2.UeidGnbCuUp
-	38,  // 38: e2sm_mho_go.v2.Ueid.ng_e_nb_ueid:type_name -> e2sm_mho_go.v2.UeidNgEnb
-	39,  // 39: e2sm_mho_go.v2.Ueid.ng_e_nb_du_ueid:type_name -> e2sm_mho_go.v2.UeidNgEnbDu
-	40,  // 40: e2sm_mho_go.v2.Ueid.en_g_nb_ueid:type_name -> e2sm_mho_go.v2.UeidEnGnb
-	41,  // 41: e2sm_mho_go.v2.Ueid.e_nb_ueid:type_name -> e2sm_mho_go.v2.UeidEnb
-	57,  // 42: e2sm_mho_go.v2.UeidGnb.amf_ue_ngap_id:type_name -> e2sm_mho_go.v2.AmfUeNgapId
-	64,  // 43: e2sm_mho_go.v2.UeidGnb.guami:type_name -> e2sm_mho_go.v2.Guami
-	34,  // 44: e2sm_mho_go.v2.UeidGnb.g_nb_cu_ue_f1_ap_id_list:type_name -> e2sm_mho_go.v2.UeidGnbCuF1ApIdList
-	32,  // 45: e2sm_mho_go.v2.UeidGnb.g_nb_cu_cp_ue_e1_ap_id_list:type_name -> e2sm_mho_go.v2.UeidGnbCuCpE1ApIdList
-	83,  // 46: e2sm_mho_go.v2.UeidGnb.ran_ueid:type_name -> e2sm_mho_go.v2.Ranueid
-	70,  // 47: e2sm_mho_go.v2.UeidGnb.m_ng_ran_ue_xn_ap_id:type_name -> e2sm_mho_go.v2.NgRannodeUexnApid
-	60,  // 48: e2sm_mho_go.v2.UeidGnb.global_gnb_id:type_name -> e2sm_mho_go.v2.GlobalGnbId
-	33,  // 49: e2sm_mho_go.v2.UeidGnbCuCpE1ApIdList.value:type_name -> e2sm_mho_go.v2.UeidGnbCuCpE1ApIdItem
-	71,  // 50: e2sm_mho_go.v2.UeidGnbCuCpE1ApIdItem.g_nb_cu_cp_ue_e1_ap_id:type_name -> e2sm_mho_go.v2.GnbCuCpUeE1ApId
-	35,  // 51: e2sm_mho_go.v2.UeidGnbCuF1ApIdList.value:type_name -> e2sm_mho_go.v2.UeidGnbCuCpF1ApIdItem
-	74,  // 52: e2sm_mho_go.v2.UeidGnbCuCpF1ApIdItem.g_nb_cu_ue_f1_ap_id:type_name -> e2sm_mho_go.v2.GnbCuUeF1ApId
-	74,  // 53: e2sm_mho_go.v2.UeidGnbDu.g_nb_cu_ue_f1_ap_id:type_name -> e2sm_mho_go.v2.GnbCuUeF1ApId
-	83,  // 54: e2sm_mho_go.v2.UeidGnbDu.ran_ueid:type_name -> e2sm_mho_go.v2.Ranueid
-	71,  // 55: e2sm_mho_go.v2.UeidGnbCuUp.g_nb_cu_cp_ue_e1_ap_id:type_name -> e2sm_mho_go.v2.GnbCuCpUeE1ApId
-	83,  // 56: e2sm_mho_go.v2.UeidGnbCuUp.ran_ueid:type_name -> e2sm_mho_go.v2.Ranueid
-	57,  // 57: e2sm_mho_go.v2.UeidNgEnb.amf_ue_ngap_id:type_name -> e2sm_mho_go.v2.AmfUeNgapId
-	64,  // 58: e2sm_mho_go.v2.UeidNgEnb.guami:type_name -> e2sm_mho_go.v2.Guami
-	55,  // 59: e2sm_mho_go.v2.UeidNgEnb.ng_e_nb_cu_ue_w1_ap_id:type_name -> e2sm_mho_go.v2.NgenbCuUeW1ApId
-	70,  // 60: e2sm_mho_go.v2.UeidNgEnb.m_ng_ran_ue_xn_ap_id:type_name -> e2sm_mho_go.v2.NgRannodeUexnApid
-	61,  // 61: e2sm_mho_go.v2.UeidNgEnb.global_ng_enb_id:type_name -> e2sm_mho_go.v2.GlobalNgEnbId
-	55,  // 62: e2sm_mho_go.v2.UeidNgEnbDu.ng_e_nb_cu_ue_w1_ap_id:type_name -> e2sm_mho_go.v2.NgenbCuUeW1ApId
-	49,  // 63: e2sm_mho_go.v2.UeidEnGnb.m_e_nb_ue_x2_ap_id:type_name -> e2sm_mho_go.v2.EnbUeX2ApId
-	50,  // 64: e2sm_mho_go.v2.UeidEnGnb.m_e_nb_ue_x2_ap_id_extension:type_name -> e2sm_mho_go.v2.EnbUeX2ApIdExtension
-	43,  // 65: e2sm_mho_go.v2.UeidEnGnb.global_enb_id:type_name -> e2sm_mho_go.v2.GlobalEnbId
-	74,  // 66: e2sm_mho_go.v2.UeidEnGnb.g_nb_cu_ue_f1_ap_id:type_name -> e2sm_mho_go.v2.GnbCuUeF1ApId
-	32,  // 67: e2sm_mho_go.v2.UeidEnGnb.g_nb_cu_cp_ue_e1_ap_id_list:type_name -> e2sm_mho_go.v2.UeidGnbCuCpE1ApIdList
-	83,  // 68: e2sm_mho_go.v2.UeidEnGnb.ran_ueid:type_name -> e2sm_mho_go.v2.Ranueid
-	45,  // 69: e2sm_mho_go.v2.UeidEnb.m_me_ue_s1_ap_id:type_name -> e2sm_mho_go.v2.MmeUeS1ApId
-	44,  // 70: e2sm_mho_go.v2.UeidEnb.g_ummei:type_name -> e2sm_mho_go.v2.Gummei
-	49,  // 71: e2sm_mho_go.v2.UeidEnb.m_e_nb_ue_x2_ap_id:type_name -> e2sm_mho_go.v2.EnbUeX2ApId
-	50,  // 72: e2sm_mho_go.v2.UeidEnb.m_e_nb_ue_x2_ap_id_extension:type_name -> e2sm_mho_go.v2.EnbUeX2ApIdExtension
-	43,  // 73: e2sm_mho_go.v2.UeidEnb.global_enb_id:type_name -> e2sm_mho_go.v2.GlobalEnbId
-	91,  // 74: e2sm_mho_go.v2.EnbId.macro_e_nb_id:type_name -> asn1.v1.BitString
-	91,  // 75: e2sm_mho_go.v2.EnbId.home_e_nb_id:type_name -> asn1.v1.BitString
-	91,  // 76: e2sm_mho_go.v2.EnbId.short_macro_e_nb_id:type_name -> asn1.v1.BitString
-	91,  // 77: e2sm_mho_go.v2.EnbId.long_macro_e_nb_id:type_name -> asn1.v1.BitString
-	80,  // 78: e2sm_mho_go.v2.GlobalEnbId.p_lmnidentity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	42,  // 79: e2sm_mho_go.v2.GlobalEnbId.e_nb_id:type_name -> e2sm_mho_go.v2.EnbId
-	80,  // 80: e2sm_mho_go.v2.Gummei.p_lmn_identity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	84,  // 81: e2sm_mho_go.v2.Gummei.m_me_group_id:type_name -> e2sm_mho_go.v2.MmeGroupId
-	85,  // 82: e2sm_mho_go.v2.Gummei.m_me_code:type_name -> e2sm_mho_go.v2.MmeCode
-	91,  // 83: e2sm_mho_go.v2.EnGnbId.en_g_nb_id:type_name -> asn1.v1.BitString
-	80,  // 84: e2sm_mho_go.v2.GlobalenGnbId.p_lmn_identity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	48,  // 85: e2sm_mho_go.v2.GlobalenGnbId.en_g_nb_id:type_name -> e2sm_mho_go.v2.EnGnbId
-	80,  // 86: e2sm_mho_go.v2.EutraCgi.p_lmnidentity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	81,  // 87: e2sm_mho_go.v2.EutraCgi.e_utracell_identity:type_name -> e2sm_mho_go.v2.EutracellIdentity
-	80,  // 88: e2sm_mho_go.v2.GlobalGnbId.p_lmnidentity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	63,  // 89: e2sm_mho_go.v2.GlobalGnbId.g_nb_id:type_name -> e2sm_mho_go.v2.GnbId
-	80,  // 90: e2sm_mho_go.v2.GlobalNgEnbId.p_lmnidentity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	66,  // 91: e2sm_mho_go.v2.GlobalNgEnbId.ng_enb_id:type_name -> e2sm_mho_go.v2.NgEnbId
-	60,  // 92: e2sm_mho_go.v2.GlobalRannodeId.global_gnb_id:type_name -> e2sm_mho_go.v2.GlobalGnbId
-	61,  // 93: e2sm_mho_go.v2.GlobalRannodeId.global_ng_enb_id:type_name -> e2sm_mho_go.v2.GlobalNgEnbId
-	91,  // 94: e2sm_mho_go.v2.GnbId.g_nb_id:type_name -> asn1.v1.BitString
-	80,  // 95: e2sm_mho_go.v2.Guami.p_lmnidentity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	86,  // 96: e2sm_mho_go.v2.Guami.a_mfregion_id:type_name -> e2sm_mho_go.v2.AmfregionId
-	87,  // 97: e2sm_mho_go.v2.Guami.a_mfset_id:type_name -> e2sm_mho_go.v2.AmfsetId
-	88,  // 98: e2sm_mho_go.v2.Guami.a_mfpointer:type_name -> e2sm_mho_go.v2.Amfpointer
-	91,  // 99: e2sm_mho_go.v2.NgEnbId.macro_ng_enb_id:type_name -> asn1.v1.BitString
-	91,  // 100: e2sm_mho_go.v2.NgEnbId.short_macro_ng_enb_id:type_name -> asn1.v1.BitString
-	91,  // 101: e2sm_mho_go.v2.NgEnbId.long_macro_ng_enb_id:type_name -> asn1.v1.BitString
-	80,  // 102: e2sm_mho_go.v2.NrCgi.p_lmnidentity:type_name -> e2sm_mho_go.v2.PlmnIdentity
-	82,  // 103: e2sm_mho_go.v2.NrCgi.n_rcell_identity:type_name -> e2sm_mho_go.v2.NrcellIdentity
-	90,  // 104: e2sm_mho_go.v2.SNssai.s_st:type_name -> e2sm_mho_go.v2.Sst
-	89,  // 105: e2sm_mho_go.v2.SNssai.s_d:type_name -> e2sm_mho_go.v2.Sd
-	78,  // 106: e2sm_mho_go.v2.NrArfcn.freq_band_list_nr:type_name -> e2sm_mho_go.v2.FreqBandNrItem
-	91,  // 107: e2sm_mho_go.v2.EutracellIdentity.value:type_name -> asn1.v1.BitString
-	91,  // 108: e2sm_mho_go.v2.NrcellIdentity.value:type_name -> asn1.v1.BitString
-	91,  // 109: e2sm_mho_go.v2.AmfregionId.value:type_name -> asn1.v1.BitString
-	91,  // 110: e2sm_mho_go.v2.AmfsetId.value:type_name -> asn1.v1.BitString
-	91,  // 111: e2sm_mho_go.v2.Amfpointer.value:type_name -> asn1.v1.BitString
+var file_e2smmhov2_v2_e2sm_v2_proto_depIdxs = []int32{
+	67,  // 0: e2smmhov2.v2.Cgi.n_r_cgi:type_name -> e2smmhov2.v2.NrCgi
+	58,  // 1: e2smmhov2.v2.Cgi.e_utra_cgi:type_name -> e2smmhov2.v2.EutraCgi
+	64,  // 2: e2smmhov2.v2.CoreCpid.five_gc:type_name -> e2smmhov2.v2.Guami
+	44,  // 3: e2smmhov2.v2.CoreCpid.e_pc:type_name -> e2smmhov2.v2.Gummei
+	12,  // 4: e2smmhov2.v2.InterfaceIdentifier.n_g:type_name -> e2smmhov2.v2.InterfaceIdNg
+	13,  // 5: e2smmhov2.v2.InterfaceIdentifier.x_n:type_name -> e2smmhov2.v2.InterfaceIdXn
+	14,  // 6: e2smmhov2.v2.InterfaceIdentifier.f1:type_name -> e2smmhov2.v2.InterfaceIdF1
+	15,  // 7: e2smmhov2.v2.InterfaceIdentifier.e1:type_name -> e2smmhov2.v2.InterfaceIdE1
+	16,  // 8: e2smmhov2.v2.InterfaceIdentifier.s1:type_name -> e2smmhov2.v2.InterfaceIdS1
+	17,  // 9: e2smmhov2.v2.InterfaceIdentifier.x2:type_name -> e2smmhov2.v2.InterfaceIdX2
+	19,  // 10: e2smmhov2.v2.InterfaceIdentifier.w1:type_name -> e2smmhov2.v2.InterfaceIdW1
+	64,  // 11: e2smmhov2.v2.InterfaceIdNg.guami:type_name -> e2smmhov2.v2.Guami
+	62,  // 12: e2smmhov2.v2.InterfaceIdXn.global_ng_ran_id:type_name -> e2smmhov2.v2.GlobalRannodeId
+	62,  // 13: e2smmhov2.v2.InterfaceIdF1.global_ng_ran_id:type_name -> e2smmhov2.v2.GlobalRannodeId
+	75,  // 14: e2smmhov2.v2.InterfaceIdF1.g_nb_du_id:type_name -> e2smmhov2.v2.GnbDuId
+	62,  // 15: e2smmhov2.v2.InterfaceIdE1.global_ng_ran_id:type_name -> e2smmhov2.v2.GlobalRannodeId
+	72,  // 16: e2smmhov2.v2.InterfaceIdE1.g_nb_cu_up_id:type_name -> e2smmhov2.v2.GnbCuUpId
+	44,  // 17: e2smmhov2.v2.InterfaceIdS1.g_ummei:type_name -> e2smmhov2.v2.Gummei
+	18,  // 18: e2smmhov2.v2.InterfaceIdX2.node_type:type_name -> e2smmhov2.v2.NodeType
+	43,  // 19: e2smmhov2.v2.NodeType.global_enb_id:type_name -> e2smmhov2.v2.GlobalEnbId
+	54,  // 20: e2smmhov2.v2.NodeType.global_en_gnb_id:type_name -> e2smmhov2.v2.GlobalenGnbId
+	61,  // 21: e2smmhov2.v2.InterfaceIdW1.global_ng_e_nb_id:type_name -> e2smmhov2.v2.GlobalNgEnbId
+	56,  // 22: e2smmhov2.v2.InterfaceIdW1.ng_e_nb_du_id:type_name -> e2smmhov2.v2.NgenbDuId
+	1,   // 23: e2smmhov2.v2.InterfaceMessageId.message_type:type_name -> e2smmhov2.v2.MessageType
+	59,  // 24: e2smmhov2.v2.GroupId.five_gc:type_name -> e2smmhov2.v2.FiveQi
+	46,  // 25: e2smmhov2.v2.GroupId.e_pc:type_name -> e2smmhov2.v2.Qci
+	59,  // 26: e2smmhov2.v2.QoSid.five_gc:type_name -> e2smmhov2.v2.FiveQi
+	46,  // 27: e2smmhov2.v2.QoSid.e_pc:type_name -> e2smmhov2.v2.Qci
+	27,  // 28: e2smmhov2.v2.RrcMessageId.rrc_type:type_name -> e2smmhov2.v2.RrcType
+	2,   // 29: e2smmhov2.v2.RrcType.lte:type_name -> e2smmhov2.v2.RrcclassLte
+	3,   // 30: e2smmhov2.v2.RrcType.nr:type_name -> e2smmhov2.v2.RrcclassNr
+	77,  // 31: e2smmhov2.v2.ServingCellArfcn.n_r:type_name -> e2smmhov2.v2.NrArfcn
+	51,  // 32: e2smmhov2.v2.ServingCellArfcn.e_utra:type_name -> e2smmhov2.v2.EUtraArfcn
+	76,  // 33: e2smmhov2.v2.ServingCellPci.n_r:type_name -> e2smmhov2.v2.NrPci
+	52,  // 34: e2smmhov2.v2.ServingCellPci.e_utra:type_name -> e2smmhov2.v2.EUtraPci
+	31,  // 35: e2smmhov2.v2.Ueid.g_nb_ueid:type_name -> e2smmhov2.v2.UeidGnb
+	36,  // 36: e2smmhov2.v2.Ueid.g_nb_du_ueid:type_name -> e2smmhov2.v2.UeidGnbDu
+	37,  // 37: e2smmhov2.v2.Ueid.g_nb_cu_up_ueid:type_name -> e2smmhov2.v2.UeidGnbCuUp
+	38,  // 38: e2smmhov2.v2.Ueid.ng_e_nb_ueid:type_name -> e2smmhov2.v2.UeidNgEnb
+	39,  // 39: e2smmhov2.v2.Ueid.ng_e_nb_du_ueid:type_name -> e2smmhov2.v2.UeidNgEnbDu
+	40,  // 40: e2smmhov2.v2.Ueid.en_g_nb_ueid:type_name -> e2smmhov2.v2.UeidEnGnb
+	41,  // 41: e2smmhov2.v2.Ueid.e_nb_ueid:type_name -> e2smmhov2.v2.UeidEnb
+	57,  // 42: e2smmhov2.v2.UeidGnb.amf_ue_ngap_id:type_name -> e2smmhov2.v2.AmfUeNgapId
+	64,  // 43: e2smmhov2.v2.UeidGnb.guami:type_name -> e2smmhov2.v2.Guami
+	34,  // 44: e2smmhov2.v2.UeidGnb.g_nb_cu_ue_f1_ap_id_list:type_name -> e2smmhov2.v2.UeidGnbCuF1ApIdList
+	32,  // 45: e2smmhov2.v2.UeidGnb.g_nb_cu_cp_ue_e1_ap_id_list:type_name -> e2smmhov2.v2.UeidGnbCuCpE1ApIdList
+	83,  // 46: e2smmhov2.v2.UeidGnb.ran_ueid:type_name -> e2smmhov2.v2.Ranueid
+	70,  // 47: e2smmhov2.v2.UeidGnb.m_ng_ran_ue_xn_ap_id:type_name -> e2smmhov2.v2.NgRannodeUexnApid
+	60,  // 48: e2smmhov2.v2.UeidGnb.global_gnb_id:type_name -> e2smmhov2.v2.GlobalGnbId
+	33,  // 49: e2smmhov2.v2.UeidGnbCuCpE1ApIdList.value:type_name -> e2smmhov2.v2.UeidGnbCuCpE1ApIdItem
+	71,  // 50: e2smmhov2.v2.UeidGnbCuCpE1ApIdItem.g_nb_cu_cp_ue_e1_ap_id:type_name -> e2smmhov2.v2.GnbCuCpUeE1ApId
+	35,  // 51: e2smmhov2.v2.UeidGnbCuF1ApIdList.value:type_name -> e2smmhov2.v2.UeidGnbCuCpF1ApIdItem
+	74,  // 52: e2smmhov2.v2.UeidGnbCuCpF1ApIdItem.g_nb_cu_ue_f1_ap_id:type_name -> e2smmhov2.v2.GnbCuUeF1ApId
+	74,  // 53: e2smmhov2.v2.UeidGnbDu.g_nb_cu_ue_f1_ap_id:type_name -> e2smmhov2.v2.GnbCuUeF1ApId
+	83,  // 54: e2smmhov2.v2.UeidGnbDu.ran_ueid:type_name -> e2smmhov2.v2.Ranueid
+	71,  // 55: e2smmhov2.v2.UeidGnbCuUp.g_nb_cu_cp_ue_e1_ap_id:type_name -> e2smmhov2.v2.GnbCuCpUeE1ApId
+	83,  // 56: e2smmhov2.v2.UeidGnbCuUp.ran_ueid:type_name -> e2smmhov2.v2.Ranueid
+	57,  // 57: e2smmhov2.v2.UeidNgEnb.amf_ue_ngap_id:type_name -> e2smmhov2.v2.AmfUeNgapId
+	64,  // 58: e2smmhov2.v2.UeidNgEnb.guami:type_name -> e2smmhov2.v2.Guami
+	55,  // 59: e2smmhov2.v2.UeidNgEnb.ng_e_nb_cu_ue_w1_ap_id:type_name -> e2smmhov2.v2.NgenbCuUeW1ApId
+	70,  // 60: e2smmhov2.v2.UeidNgEnb.m_ng_ran_ue_xn_ap_id:type_name -> e2smmhov2.v2.NgRannodeUexnApid
+	61,  // 61: e2smmhov2.v2.UeidNgEnb.global_ng_enb_id:type_name -> e2smmhov2.v2.GlobalNgEnbId
+	55,  // 62: e2smmhov2.v2.UeidNgEnbDu.ng_e_nb_cu_ue_w1_ap_id:type_name -> e2smmhov2.v2.NgenbCuUeW1ApId
+	49,  // 63: e2smmhov2.v2.UeidEnGnb.m_e_nb_ue_x2_ap_id:type_name -> e2smmhov2.v2.EnbUeX2ApId
+	50,  // 64: e2smmhov2.v2.UeidEnGnb.m_e_nb_ue_x2_ap_id_extension:type_name -> e2smmhov2.v2.EnbUeX2ApIdExtension
+	43,  // 65: e2smmhov2.v2.UeidEnGnb.global_enb_id:type_name -> e2smmhov2.v2.GlobalEnbId
+	74,  // 66: e2smmhov2.v2.UeidEnGnb.g_nb_cu_ue_f1_ap_id:type_name -> e2smmhov2.v2.GnbCuUeF1ApId
+	32,  // 67: e2smmhov2.v2.UeidEnGnb.g_nb_cu_cp_ue_e1_ap_id_list:type_name -> e2smmhov2.v2.UeidGnbCuCpE1ApIdList
+	83,  // 68: e2smmhov2.v2.UeidEnGnb.ran_ueid:type_name -> e2smmhov2.v2.Ranueid
+	45,  // 69: e2smmhov2.v2.UeidEnb.m_me_ue_s1_ap_id:type_name -> e2smmhov2.v2.MmeUeS1ApId
+	44,  // 70: e2smmhov2.v2.UeidEnb.g_ummei:type_name -> e2smmhov2.v2.Gummei
+	49,  // 71: e2smmhov2.v2.UeidEnb.m_e_nb_ue_x2_ap_id:type_name -> e2smmhov2.v2.EnbUeX2ApId
+	50,  // 72: e2smmhov2.v2.UeidEnb.m_e_nb_ue_x2_ap_id_extension:type_name -> e2smmhov2.v2.EnbUeX2ApIdExtension
+	43,  // 73: e2smmhov2.v2.UeidEnb.global_enb_id:type_name -> e2smmhov2.v2.GlobalEnbId
+	91,  // 74: e2smmhov2.v2.EnbId.macro_e_nb_id:type_name -> asn1.v1.BitString
+	91,  // 75: e2smmhov2.v2.EnbId.home_e_nb_id:type_name -> asn1.v1.BitString
+	91,  // 76: e2smmhov2.v2.EnbId.short_macro_e_nb_id:type_name -> asn1.v1.BitString
+	91,  // 77: e2smmhov2.v2.EnbId.long_macro_e_nb_id:type_name -> asn1.v1.BitString
+	80,  // 78: e2smmhov2.v2.GlobalEnbId.p_lmnidentity:type_name -> e2smmhov2.v2.PlmnIdentity
+	42,  // 79: e2smmhov2.v2.GlobalEnbId.e_nb_id:type_name -> e2smmhov2.v2.EnbId
+	80,  // 80: e2smmhov2.v2.Gummei.p_lmn_identity:type_name -> e2smmhov2.v2.PlmnIdentity
+	84,  // 81: e2smmhov2.v2.Gummei.m_me_group_id:type_name -> e2smmhov2.v2.MmeGroupId
+	85,  // 82: e2smmhov2.v2.Gummei.m_me_code:type_name -> e2smmhov2.v2.MmeCode
+	91,  // 83: e2smmhov2.v2.EnGnbId.en_g_nb_id:type_name -> asn1.v1.BitString
+	80,  // 84: e2smmhov2.v2.GlobalenGnbId.p_lmn_identity:type_name -> e2smmhov2.v2.PlmnIdentity
+	48,  // 85: e2smmhov2.v2.GlobalenGnbId.en_g_nb_id:type_name -> e2smmhov2.v2.EnGnbId
+	80,  // 86: e2smmhov2.v2.EutraCgi.p_lmnidentity:type_name -> e2smmhov2.v2.PlmnIdentity
+	81,  // 87: e2smmhov2.v2.EutraCgi.e_utracell_identity:type_name -> e2smmhov2.v2.EutracellIdentity
+	80,  // 88: e2smmhov2.v2.GlobalGnbId.p_lmnidentity:type_name -> e2smmhov2.v2.PlmnIdentity
+	63,  // 89: e2smmhov2.v2.GlobalGnbId.g_nb_id:type_name -> e2smmhov2.v2.GnbId
+	80,  // 90: e2smmhov2.v2.GlobalNgEnbId.p_lmnidentity:type_name -> e2smmhov2.v2.PlmnIdentity
+	66,  // 91: e2smmhov2.v2.GlobalNgEnbId.ng_enb_id:type_name -> e2smmhov2.v2.NgEnbId
+	60,  // 92: e2smmhov2.v2.GlobalRannodeId.global_gnb_id:type_name -> e2smmhov2.v2.GlobalGnbId
+	61,  // 93: e2smmhov2.v2.GlobalRannodeId.global_ng_enb_id:type_name -> e2smmhov2.v2.GlobalNgEnbId
+	91,  // 94: e2smmhov2.v2.GnbId.g_nb_id:type_name -> asn1.v1.BitString
+	80,  // 95: e2smmhov2.v2.Guami.p_lmnidentity:type_name -> e2smmhov2.v2.PlmnIdentity
+	86,  // 96: e2smmhov2.v2.Guami.a_mfregion_id:type_name -> e2smmhov2.v2.AmfregionId
+	87,  // 97: e2smmhov2.v2.Guami.a_mfset_id:type_name -> e2smmhov2.v2.AmfsetId
+	88,  // 98: e2smmhov2.v2.Guami.a_mfpointer:type_name -> e2smmhov2.v2.Amfpointer
+	91,  // 99: e2smmhov2.v2.NgEnbId.macro_ng_enb_id:type_name -> asn1.v1.BitString
+	91,  // 100: e2smmhov2.v2.NgEnbId.short_macro_ng_enb_id:type_name -> asn1.v1.BitString
+	91,  // 101: e2smmhov2.v2.NgEnbId.long_macro_ng_enb_id:type_name -> asn1.v1.BitString
+	80,  // 102: e2smmhov2.v2.NrCgi.p_lmnidentity:type_name -> e2smmhov2.v2.PlmnIdentity
+	82,  // 103: e2smmhov2.v2.NrCgi.n_rcell_identity:type_name -> e2smmhov2.v2.NrcellIdentity
+	90,  // 104: e2smmhov2.v2.SNssai.s_st:type_name -> e2smmhov2.v2.Sst
+	89,  // 105: e2smmhov2.v2.SNssai.s_d:type_name -> e2smmhov2.v2.Sd
+	78,  // 106: e2smmhov2.v2.NrArfcn.freq_band_list_nr:type_name -> e2smmhov2.v2.FreqBandNrItem
+	91,  // 107: e2smmhov2.v2.EutracellIdentity.value:type_name -> asn1.v1.BitString
+	91,  // 108: e2smmhov2.v2.NrcellIdentity.value:type_name -> asn1.v1.BitString
+	91,  // 109: e2smmhov2.v2.AmfregionId.value:type_name -> asn1.v1.BitString
+	91,  // 110: e2smmhov2.v2.AmfsetId.value:type_name -> asn1.v1.BitString
+	91,  // 111: e2smmhov2.v2.Amfpointer.value:type_name -> asn1.v1.BitString
 	112, // [112:112] is the sub-list for method output_type
 	112, // [112:112] is the sub-list for method input_type
 	112, // [112:112] is the sub-list for extension type_name
@@ -6640,13 +6640,13 @@ var file_e2sm_mho_go_v2_e2sm_v2_proto_depIdxs = []int32{
 	0,   // [0:112] is the sub-list for field type_name
 }
 
-func init() { file_e2sm_mho_go_v2_e2sm_v2_proto_init() }
-func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
-	if File_e2sm_mho_go_v2_e2sm_v2_proto != nil {
+func init() { file_e2smmhov2_v2_e2sm_v2_proto_init() }
+func file_e2smmhov2_v2_e2sm_v2_proto_init() {
+	if File_e2smmhov2_v2_e2sm_v2_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MaxE1Apid); i {
 			case 0:
 				return &v.state
@@ -6658,7 +6658,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MaxF1Apid); i {
 			case 0:
 				return &v.state
@@ -6670,7 +6670,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MaxEarfcn); i {
 			case 0:
 				return &v.state
@@ -6682,7 +6682,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MaxNrarfcn); i {
 			case 0:
 				return &v.state
@@ -6694,7 +6694,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MaxnoofNrCellBands); i {
 			case 0:
 				return &v.state
@@ -6706,7 +6706,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Cgi); i {
 			case 0:
 				return &v.state
@@ -6718,7 +6718,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CoreCpid); i {
 			case 0:
 				return &v.state
@@ -6730,7 +6730,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdentifier); i {
 			case 0:
 				return &v.state
@@ -6742,7 +6742,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdNg); i {
 			case 0:
 				return &v.state
@@ -6754,7 +6754,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdXn); i {
 			case 0:
 				return &v.state
@@ -6766,7 +6766,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdF1); i {
 			case 0:
 				return &v.state
@@ -6778,7 +6778,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdE1); i {
 			case 0:
 				return &v.state
@@ -6790,7 +6790,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdS1); i {
 			case 0:
 				return &v.state
@@ -6802,7 +6802,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdX2); i {
 			case 0:
 				return &v.state
@@ -6814,7 +6814,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NodeType); i {
 			case 0:
 				return &v.state
@@ -6826,7 +6826,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceIdW1); i {
 			case 0:
 				return &v.state
@@ -6838,7 +6838,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InterfaceMessageId); i {
 			case 0:
 				return &v.state
@@ -6850,7 +6850,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GroupId); i {
 			case 0:
 				return &v.state
@@ -6862,7 +6862,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QoSid); i {
 			case 0:
 				return &v.state
@@ -6874,7 +6874,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RanfunctionName); i {
 			case 0:
 				return &v.state
@@ -6886,7 +6886,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RicFormatType); i {
 			case 0:
 				return &v.state
@@ -6898,7 +6898,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RicStyleType); i {
 			case 0:
 				return &v.state
@@ -6910,7 +6910,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RrcMessageId); i {
 			case 0:
 				return &v.state
@@ -6922,7 +6922,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RrcType); i {
 			case 0:
 				return &v.state
@@ -6934,7 +6934,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ServingCellArfcn); i {
 			case 0:
 				return &v.state
@@ -6946,7 +6946,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ServingCellPci); i {
 			case 0:
 				return &v.state
@@ -6958,7 +6958,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Ueid); i {
 			case 0:
 				return &v.state
@@ -6970,7 +6970,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidGnb); i {
 			case 0:
 				return &v.state
@@ -6982,7 +6982,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidGnbCuCpE1ApIdList); i {
 			case 0:
 				return &v.state
@@ -6994,7 +6994,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidGnbCuCpE1ApIdItem); i {
 			case 0:
 				return &v.state
@@ -7006,7 +7006,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidGnbCuF1ApIdList); i {
 			case 0:
 				return &v.state
@@ -7018,7 +7018,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidGnbCuCpF1ApIdItem); i {
 			case 0:
 				return &v.state
@@ -7030,7 +7030,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidGnbDu); i {
 			case 0:
 				return &v.state
@@ -7042,7 +7042,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidGnbCuUp); i {
 			case 0:
 				return &v.state
@@ -7054,7 +7054,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidNgEnb); i {
 			case 0:
 				return &v.state
@@ -7066,7 +7066,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidNgEnbDu); i {
 			case 0:
 				return &v.state
@@ -7078,7 +7078,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidEnGnb); i {
 			case 0:
 				return &v.state
@@ -7090,7 +7090,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UeidEnb); i {
 			case 0:
 				return &v.state
@@ -7102,7 +7102,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EnbId); i {
 			case 0:
 				return &v.state
@@ -7114,7 +7114,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GlobalEnbId); i {
 			case 0:
 				return &v.state
@@ -7126,7 +7126,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Gummei); i {
 			case 0:
 				return &v.state
@@ -7138,7 +7138,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MmeUeS1ApId); i {
 			case 0:
 				return &v.state
@@ -7150,7 +7150,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Qci); i {
 			case 0:
 				return &v.state
@@ -7162,7 +7162,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubscriberProfileIdforRfp); i {
 			case 0:
 				return &v.state
@@ -7174,7 +7174,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EnGnbId); i {
 			case 0:
 				return &v.state
@@ -7186,7 +7186,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EnbUeX2ApId); i {
 			case 0:
 				return &v.state
@@ -7198,7 +7198,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EnbUeX2ApIdExtension); i {
 			case 0:
 				return &v.state
@@ -7210,7 +7210,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EUtraArfcn); i {
 			case 0:
 				return &v.state
@@ -7222,7 +7222,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EUtraPci); i {
 			case 0:
 				return &v.state
@@ -7234,7 +7234,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EUtraTac); i {
 			case 0:
 				return &v.state
@@ -7246,7 +7246,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GlobalenGnbId); i {
 			case 0:
 				return &v.state
@@ -7258,7 +7258,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NgenbCuUeW1ApId); i {
 			case 0:
 				return &v.state
@@ -7270,7 +7270,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NgenbDuId); i {
 			case 0:
 				return &v.state
@@ -7282,7 +7282,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AmfUeNgapId); i {
 			case 0:
 				return &v.state
@@ -7294,7 +7294,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EutraCgi); i {
 			case 0:
 				return &v.state
@@ -7306,7 +7306,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FiveQi); i {
 			case 0:
 				return &v.state
@@ -7318,7 +7318,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GlobalGnbId); i {
 			case 0:
 				return &v.state
@@ -7330,7 +7330,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GlobalNgEnbId); i {
 			case 0:
 				return &v.state
@@ -7342,7 +7342,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GlobalRannodeId); i {
 			case 0:
 				return &v.state
@@ -7354,7 +7354,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GnbId); i {
 			case 0:
 				return &v.state
@@ -7366,7 +7366,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Guami); i {
 			case 0:
 				return &v.state
@@ -7378,7 +7378,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IndexToRfsp); i {
 			case 0:
 				return &v.state
@@ -7390,7 +7390,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NgEnbId); i {
 			case 0:
 				return &v.state
@@ -7402,7 +7402,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NrCgi); i {
 			case 0:
 				return &v.state
@@ -7414,7 +7414,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QosFlowIdentifier); i {
 			case 0:
 				return &v.state
@@ -7426,7 +7426,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SNssai); i {
 			case 0:
 				return &v.state
@@ -7438,7 +7438,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NgRannodeUexnApid); i {
 			case 0:
 				return &v.state
@@ -7450,7 +7450,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GnbCuCpUeE1ApId); i {
 			case 0:
 				return &v.state
@@ -7462,7 +7462,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GnbCuUpId); i {
 			case 0:
 				return &v.state
@@ -7474,7 +7474,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FiveGsTac); i {
 			case 0:
 				return &v.state
@@ -7486,7 +7486,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GnbCuUeF1ApId); i {
 			case 0:
 				return &v.state
@@ -7498,7 +7498,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GnbDuId); i {
 			case 0:
 				return &v.state
@@ -7510,7 +7510,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NrPci); i {
 			case 0:
 				return &v.state
@@ -7522,7 +7522,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NrArfcn); i {
 			case 0:
 				return &v.state
@@ -7534,7 +7534,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FreqBandNrItem); i {
 			case 0:
 				return &v.state
@@ -7546,7 +7546,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RicStyleName); i {
 			case 0:
 				return &v.state
@@ -7558,7 +7558,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PlmnIdentity); i {
 			case 0:
 				return &v.state
@@ -7570,7 +7570,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EutracellIdentity); i {
 			case 0:
 				return &v.state
@@ -7582,7 +7582,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NrcellIdentity); i {
 			case 0:
 				return &v.state
@@ -7594,7 +7594,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Ranueid); i {
 			case 0:
 				return &v.state
@@ -7606,7 +7606,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[80].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[80].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MmeGroupId); i {
 			case 0:
 				return &v.state
@@ -7618,7 +7618,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[81].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[81].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MmeCode); i {
 			case 0:
 				return &v.state
@@ -7630,7 +7630,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[82].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[82].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AmfregionId); i {
 			case 0:
 				return &v.state
@@ -7642,7 +7642,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[83].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[83].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AmfsetId); i {
 			case 0:
 				return &v.state
@@ -7654,7 +7654,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[84].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[84].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Amfpointer); i {
 			case 0:
 				return &v.state
@@ -7666,7 +7666,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[85].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[85].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Sd); i {
 			case 0:
 				return &v.state
@@ -7678,7 +7678,7 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 				return nil
 			}
 		}
-		file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[86].Exporter = func(v interface{}, i int) interface{} {
+		file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[86].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Sst); i {
 			case 0:
 				return &v.state
@@ -7691,15 +7691,15 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 			}
 		}
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[5].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[5].OneofWrappers = []interface{}{
 		(*Cgi_NRCgi)(nil),
 		(*Cgi_EUtraCgi)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[6].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[6].OneofWrappers = []interface{}{
 		(*CoreCpid_FiveGc)(nil),
 		(*CoreCpid_EPc)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[7].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[7].OneofWrappers = []interface{}{
 		(*InterfaceIdentifier_NG)(nil),
 		(*InterfaceIdentifier_XN)(nil),
 		(*InterfaceIdentifier_F1)(nil),
@@ -7708,32 +7708,32 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 		(*InterfaceIdentifier_X2)(nil),
 		(*InterfaceIdentifier_W1)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[14].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[14].OneofWrappers = []interface{}{
 		(*NodeType_GlobalEnbId)(nil),
 		(*NodeType_GlobalEnGnbId)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[17].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[17].OneofWrappers = []interface{}{
 		(*GroupId_FiveGc)(nil),
 		(*GroupId_EPc)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[18].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[18].OneofWrappers = []interface{}{
 		(*QoSid_FiveGc)(nil),
 		(*QoSid_EPc)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[19].OneofWrappers = []interface{}{}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[23].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[19].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[23].OneofWrappers = []interface{}{
 		(*RrcType_Lte)(nil),
 		(*RrcType_Nr)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[24].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[24].OneofWrappers = []interface{}{
 		(*ServingCellArfcn_NR)(nil),
 		(*ServingCellArfcn_EUtra)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[25].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[25].OneofWrappers = []interface{}{
 		(*ServingCellPci_NR)(nil),
 		(*ServingCellPci_EUtra)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[26].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[26].OneofWrappers = []interface{}{
 		(*Ueid_GNbUeid)(nil),
 		(*Ueid_GNbDuUeid)(nil),
 		(*Ueid_GNbCuUpUeid)(nil),
@@ -7742,51 +7742,51 @@ func file_e2sm_mho_go_v2_e2sm_v2_proto_init() {
 		(*Ueid_EnGNbUeid)(nil),
 		(*Ueid_ENbUeid)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[27].OneofWrappers = []interface{}{}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[32].OneofWrappers = []interface{}{}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[33].OneofWrappers = []interface{}{}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[34].OneofWrappers = []interface{}{}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[36].OneofWrappers = []interface{}{}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[37].OneofWrappers = []interface{}{}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[38].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[27].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[32].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[33].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[34].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[36].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[37].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[38].OneofWrappers = []interface{}{
 		(*EnbId_MacroENbId)(nil),
 		(*EnbId_HomeENbId)(nil),
 		(*EnbId_ShortMacroENbId)(nil),
 		(*EnbId_LongMacroENbId)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[44].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[44].OneofWrappers = []interface{}{
 		(*EnGnbId_EnGNbId)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[58].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[58].OneofWrappers = []interface{}{
 		(*GlobalRannodeId_GlobalGnbId)(nil),
 		(*GlobalRannodeId_GlobalNgEnbId)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[59].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[59].OneofWrappers = []interface{}{
 		(*GnbId_GNbId)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[62].OneofWrappers = []interface{}{
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[62].OneofWrappers = []interface{}{
 		(*NgEnbId_MacroNgEnbId)(nil),
 		(*NgEnbId_ShortMacroNgEnbId)(nil),
 		(*NgEnbId_LongMacroNgEnbId)(nil),
 	}
-	file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes[65].OneofWrappers = []interface{}{}
+	file_e2smmhov2_v2_e2sm_v2_proto_msgTypes[65].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_e2sm_mho_go_v2_e2sm_v2_proto_rawDesc,
+			RawDescriptor: file_e2smmhov2_v2_e2sm_v2_proto_rawDesc,
 			NumEnums:      4,
 			NumMessages:   87,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_e2sm_mho_go_v2_e2sm_v2_proto_goTypes,
-		DependencyIndexes: file_e2sm_mho_go_v2_e2sm_v2_proto_depIdxs,
-		EnumInfos:         file_e2sm_mho_go_v2_e2sm_v2_proto_enumTypes,
-		MessageInfos:      file_e2sm_mho_go_v2_e2sm_v2_proto_msgTypes,
+		GoTypes:           file_e2smmhov2_v2_e2sm_v2_proto_goTypes,
+		DependencyIndexes: file_e2smmhov2_v2_e2sm_v2_proto_depIdxs,
+		EnumInfos:         file_e2smmhov2_v2_e2sm_v2_proto_enumTypes,
+		MessageInfos:      file_e2smmhov2_v2_e2sm_v2_proto_msgTypes,
 	}.Build()
-	File_e2sm_mho_go_v2_e2sm_v2_proto = out.File
-	file_e2sm_mho_go_v2_e2sm_v2_proto_rawDesc = nil
-	file_e2sm_mho_go_v2_e2sm_v2_proto_goTypes = nil
-	file_e2sm_mho_go_v2_e2sm_v2_proto_depIdxs = nil
+	File_e2smmhov2_v2_e2sm_v2_proto = out.File
+	file_e2smmhov2_v2_e2sm_v2_proto_rawDesc = nil
+	file_e2smmhov2_v2_e2sm_v2_proto_goTypes = nil
+	file_e2smmhov2_v2_e2sm_v2_proto_depIdxs = nil
 }

@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -17,7 +17,7 @@ import (
 
 var refPerGlobalKPMnodeGnbID = "00000000  60 21 22 23 00 d4 bc 08  00 1f 00 2a              |`!\"#.......*|"
 
-func createGlobalKpmnodeGnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
+func createGlobalKpmnodeGnbID() (*e2smkpmv2.GlobalKpmnodeId, error) {
 	bs := asn1.BitString{
 		Value: []byte{0xd4, 0xbc, 0x08},
 		Len:   22,
@@ -30,10 +30,10 @@ func createGlobalKpmnodeGnbID() (*e2sm_kpm_v2_go.GlobalKpmnodeId, error) {
 	if err != nil {
 		return nil, err
 	}
-	gNbID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
+	gNbID.GetGNb().GNbCuUpId = &e2smkpmv2.GnbCuUpId{
 		Value: gNbCuUpID,
 	}
-	gNbID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
+	gNbID.GetGNb().GNbDuId = &e2smkpmv2.GnbDuId{
 		Value: gnbDuID,
 	}
 
@@ -45,13 +45,13 @@ func Test_perEncodeGlobalKpmnodeGnbID(t *testing.T) {
 	gNbID, err := createGlobalKpmnodeGnbID()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gNbID.GetGNb(), "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gNbID.GetGNb(), "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnodeGnbID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.GlobalKpmnodeGnbId{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.GlobalKpmnodeGnbId{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("GlobalKPMnodeGnbID PER - decoded\n%v", &result)
@@ -67,8 +67,8 @@ func Test_perGlobalKpmnodeGnbIDCompareBytes(t *testing.T) {
 	gNbID, err := createGlobalKpmnodeGnbID()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(gNbID.GetGNb(), "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(gNbID.GetGNb(), "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("GlobalKPMnodeGnbID PER\n%v", hex.Dump(per))
 

@@ -6,7 +6,7 @@ package encoder
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 	"github.com/onosproject/onos-lib-go/pkg/logging"
@@ -14,14 +14,14 @@ import (
 
 var log = logging.GetLogger()
 
-func PerEncodeE2SmKpmActionDefinition(ad *e2sm_kpm_v2_go.E2SmKpmActionDefinition) ([]byte, error) {
+func PerEncodeE2SmKpmActionDefinition(ad *e2smkpmv2.E2SmKpmActionDefinition) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-KPM-ActionDefinition message is\n%v", ad)
 	if err := ad.Validate(); err != nil {
 		return nil, errors.NewInvalid("error validating E2SM-KPMv2-ActionDefinition PDU %s", err.Error())
 	}
 
-	per, err := aper.MarshalWithParams(ad, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	per, err := aper.MarshalWithParams(ad, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -30,12 +30,12 @@ func PerEncodeE2SmKpmActionDefinition(ad *e2sm_kpm_v2_go.E2SmKpmActionDefinition
 	return per, nil
 }
 
-func PerDecodeE2SmKpmActionDefinition(per []byte) (*e2sm_kpm_v2_go.E2SmKpmActionDefinition, error) {
+func PerDecodeE2SmKpmActionDefinition(per []byte) (*e2smkpmv2.E2SmKpmActionDefinition, error) {
 
 	log.Debugf("Obtained E2SM-KPMv2-ActionDefinition PER bytes are\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.E2SmKpmActionDefinition{}
-	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.E2SmKpmActionDefinition{}
+	err := aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	if err != nil {
 		return nil, err
 	}

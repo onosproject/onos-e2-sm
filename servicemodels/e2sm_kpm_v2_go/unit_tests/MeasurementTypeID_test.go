@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -18,26 +18,26 @@ var refPerMeasurementTypeID65535 = "00000000  00 ff fe                          
 var refPerMeasurementTypeID65536 = "00000000  00 ff ff                                          |...|"
 var refPerMeasurementTypeID1 = "00000000  00 00 00                                          |...|"
 
-func createMeasurementTypeID() *e2sm_kpm_v2_go.MeasurementTypeId {
-	return &e2sm_kpm_v2_go.MeasurementTypeId{
+func createMeasurementTypeID() *e2smkpmv2.MeasurementTypeId {
+	return &e2smkpmv2.MeasurementTypeId{
 		Value: 123,
 	}
 }
 
-func createMeasurementTypeID65535() *e2sm_kpm_v2_go.MeasurementTypeId {
-	return &e2sm_kpm_v2_go.MeasurementTypeId{
+func createMeasurementTypeID65535() *e2smkpmv2.MeasurementTypeId {
+	return &e2smkpmv2.MeasurementTypeId{
 		Value: 65535,
 	}
 }
 
-func createMeasurementTypeID65536() *e2sm_kpm_v2_go.MeasurementTypeId {
-	return &e2sm_kpm_v2_go.MeasurementTypeId{
+func createMeasurementTypeID65536() *e2smkpmv2.MeasurementTypeId {
+	return &e2smkpmv2.MeasurementTypeId{
 		Value: 65536,
 	}
 }
 
-func createMeasurementTypeID1() *e2sm_kpm_v2_go.MeasurementTypeId {
-	return &e2sm_kpm_v2_go.MeasurementTypeId{
+func createMeasurementTypeID1() *e2smkpmv2.MeasurementTypeId {
+	return &e2smkpmv2.MeasurementTypeId{
 		Value: 1,
 	}
 }
@@ -50,7 +50,7 @@ func Test_perEncodingMeasurementTypeID(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementTypeID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementTypeId{}
+	result := e2smkpmv2.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -80,7 +80,7 @@ func Test_perEncodingMeasurementTypeID65535(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementTypeID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementTypeId{}
+	result := e2smkpmv2.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -110,7 +110,7 @@ func Test_perEncodingMeasurementTypeID65536(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementTypeID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementTypeId{}
+	result := e2smkpmv2.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
@@ -140,7 +140,7 @@ func Test_perEncodingMeasurementTypeID1(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementTypeID PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementTypeId{}
+	result := e2smkpmv2.MeasurementTypeId{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

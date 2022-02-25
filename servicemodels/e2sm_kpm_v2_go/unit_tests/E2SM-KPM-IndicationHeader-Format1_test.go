@@ -7,7 +7,7 @@ package kpmv2
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -19,7 +19,7 @@ var refPerE2SmKpmIndicationHeaderFormat1 = "00000000  7c 21 22 23 24 18 74 78  7
 	"00000010  73 6f 6d 65 54 79 70 65  06 6f 6e 66 0c 21 22 23  |someType.onf.!\"#|\n" +
 	"00000020  30 d4 bc 09 00 15 00 20                           |0...... |"
 
-func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1, error) {
+func createE2SmKpmIndicationHeaderFormat1() (*e2smkpmv2.E2SmKpmIndicationHeaderFormat1, error) {
 
 	bs := asn1.BitString{
 		Value: []byte{0xd4, 0xbc, 0x09, 0x00},
@@ -38,10 +38,10 @@ func createE2SmKpmIndicationHeaderFormat1() (*e2sm_kpm_v2_go.E2SmKpmIndicationHe
 	if err != nil {
 		return nil, err
 	}
-	globalKpmNodeID.GetGNb().GNbCuUpId = &e2sm_kpm_v2_go.GnbCuUpId{
+	globalKpmNodeID.GetGNb().GNbCuUpId = &e2smkpmv2.GnbCuUpId{
 		Value: gnbCuUpID,
 	}
-	globalKpmNodeID.GetGNb().GNbDuId = &e2sm_kpm_v2_go.GnbDuId{
+	globalKpmNodeID.GetGNb().GNbDuId = &e2smkpmv2.GnbDuId{
 		Value: gnbDuID,
 	}
 	newE2SmKpmPdu, err := pdubuilder.CreateE2SmKpmIndicationHeader(timeStamp)
@@ -58,13 +58,13 @@ func Test_perEncodingE2SmKpmIndicationHeaderFormat1(t *testing.T) {
 	ihf1, err := createE2SmKpmIndicationHeaderFormat1()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ihf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(ihf1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.E2SmKpmIndicationHeaderFormat1{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.E2SmKpmIndicationHeaderFormat1{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER - decoded\n%v", &result)
@@ -85,8 +85,8 @@ func Test_perE2SmKpmIndicationHeaderFormat1CompareBytes(t *testing.T) {
 	ihf1, err := createE2SmKpmIndicationHeaderFormat1()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(ihf1, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(ihf1, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("E2SM-KPM-IndicationHeader-Format1 PER\n%v", hex.Dump(per))
 

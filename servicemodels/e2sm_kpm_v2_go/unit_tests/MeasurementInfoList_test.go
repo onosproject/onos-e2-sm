@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -18,49 +18,49 @@ var refPerMIL = "00000000  00 00 50 00 14 01 3f ff  e0 01 02 03 43 c0 01 02  |..
 	"00000020  00 00 7a 00 01 c7 00 03  14 20                    |..z...... |"
 var refPerMILnoOptional = "00000000  00 00 10 00 14                                    |.....|"
 
-func createMeasurementInfoList() (*e2sm_kpm_v2_go.MeasurementInfoList, error) {
+func createMeasurementInfoList() (*e2smkpmv2.MeasurementInfoList, error) {
 
-	labelInfoList := &e2sm_kpm_v2_go.LabelInfoList{
-		Value: make([]*e2sm_kpm_v2_go.LabelInfoItem, 0),
+	labelInfoList := &e2smkpmv2.LabelInfoList{
+		Value: make([]*e2smkpmv2.LabelInfoItem, 0),
 	}
 
 	var br int32 = 25
 	var lmm int32 = 1
-	sum := e2sm_kpm_v2_go.SUM_SUM_TRUE
+	sum := e2smkpmv2.SUM_SUM_TRUE
 	var dbx int32 = 123
 	var dby int32 = 456
 	var dbz int32 = 789
-	plo := e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
+	plo := e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	seind := e2smkpmv2.StartEndInd_START_END_IND_END
 
-	labelInfoItem := &e2sm_kpm_v2_go.LabelInfoItem{
-		MeasLabel: &e2sm_kpm_v2_go.MeasurementLabel{
-			PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
+	labelInfoItem := &e2smkpmv2.LabelInfoItem{
+		MeasLabel: &e2smkpmv2.MeasurementLabel{
+			PlmnId: &e2smkpmv2.PlmnIdentity{
 				Value: []byte{0x01, 0x02, 0x03},
 			},
-			SliceId: &e2sm_kpm_v2_go.Snssai{
+			SliceId: &e2smkpmv2.Snssai{
 				SD:  []byte{0x01, 0x02, 0x03},
 				SSt: []byte{0x0f},
 			},
-			FiveQi: &e2sm_kpm_v2_go.FiveQi{
+			FiveQi: &e2smkpmv2.FiveQi{
 				Value: 23,
 			},
-			QFi: &e2sm_kpm_v2_go.Qfi{
+			QFi: &e2smkpmv2.Qfi{
 				Value: 62,
 			},
-			QCi: &e2sm_kpm_v2_go.Qci{
+			QCi: &e2smkpmv2.Qci{
 				Value: 24,
 			},
-			QCimax: &e2sm_kpm_v2_go.Qci{
+			QCimax: &e2smkpmv2.Qci{
 				Value: 30,
 			},
-			QCimin: &e2sm_kpm_v2_go.Qci{
+			QCimin: &e2smkpmv2.Qci{
 				Value: 1,
 			},
-			ARpmax: &e2sm_kpm_v2_go.Arp{
+			ARpmax: &e2smkpmv2.Arp{
 				Value: 15,
 			},
-			ARpmin: &e2sm_kpm_v2_go.Arp{
+			ARpmin: &e2smkpmv2.Arp{
 				Value: 1,
 			},
 			BitrateRange:     &br,
@@ -75,10 +75,10 @@ func createMeasurementInfoList() (*e2sm_kpm_v2_go.MeasurementInfoList, error) {
 	}
 	labelInfoList.Value = append(labelInfoList.Value, labelInfoItem)
 
-	list := &e2sm_kpm_v2_go.MeasurementInfoItem{
-		MeasType: &e2sm_kpm_v2_go.MeasurementType{
-			MeasurementType: &e2sm_kpm_v2_go.MeasurementType_MeasId{
-				MeasId: &e2sm_kpm_v2_go.MeasurementTypeId{
+	list := &e2smkpmv2.MeasurementInfoItem{
+		MeasType: &e2smkpmv2.MeasurementType{
+			MeasurementType: &e2smkpmv2.MeasurementType_MeasId{
+				MeasId: &e2smkpmv2.MeasurementTypeId{
 					Value: 21,
 				},
 			},
@@ -86,8 +86,8 @@ func createMeasurementInfoList() (*e2sm_kpm_v2_go.MeasurementInfoList, error) {
 		LabelInfoList: labelInfoList,
 	}
 
-	res := &e2sm_kpm_v2_go.MeasurementInfoList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
+	res := &e2smkpmv2.MeasurementInfoList{
+		Value: make([]*e2smkpmv2.MeasurementInfoItem, 0),
 	}
 	res.Value = append(res.Value, list)
 
@@ -97,20 +97,20 @@ func createMeasurementInfoList() (*e2sm_kpm_v2_go.MeasurementInfoList, error) {
 	return res, nil
 }
 
-func createMeasurementInfoListNoOptional() (*e2sm_kpm_v2_go.MeasurementInfoList, error) {
+func createMeasurementInfoListNoOptional() (*e2smkpmv2.MeasurementInfoList, error) {
 
-	list := &e2sm_kpm_v2_go.MeasurementInfoItem{
-		MeasType: &e2sm_kpm_v2_go.MeasurementType{
-			MeasurementType: &e2sm_kpm_v2_go.MeasurementType_MeasId{
-				MeasId: &e2sm_kpm_v2_go.MeasurementTypeId{
+	list := &e2smkpmv2.MeasurementInfoItem{
+		MeasType: &e2smkpmv2.MeasurementType{
+			MeasurementType: &e2smkpmv2.MeasurementType_MeasId{
+				MeasId: &e2smkpmv2.MeasurementTypeId{
 					Value: 21,
 				},
 			},
 		},
 	}
 
-	res := &e2sm_kpm_v2_go.MeasurementInfoList{
-		Value: make([]*e2sm_kpm_v2_go.MeasurementInfoItem, 0),
+	res := &e2smkpmv2.MeasurementInfoList{
+		Value: make([]*e2smkpmv2.MeasurementInfoItem, 0),
 	}
 	res.Value = append(res.Value, list)
 
@@ -125,13 +125,13 @@ func Test_perEncodeMeasurementInfoList(t *testing.T) {
 	mil, err := createMeasurementInfoList()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementInfoList{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MeasurementInfoList{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfo-List PER - decoded\n%v", &result)
@@ -161,8 +161,8 @@ func Test_perMeasurementInfoListCompareBytes(t *testing.T) {
 	mil, err := createMeasurementInfoList()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 
@@ -177,13 +177,13 @@ func Test_perEncodeMeasurementInfoListNoOptional(t *testing.T) {
 	mil, err := createMeasurementInfoListNoOptional()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementInfoList{}
-	err = aper.UnmarshalWithParams(per, &result, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MeasurementInfoList{}
+	err = aper.UnmarshalWithParams(per, &result, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementInfo-List PER - decoded\n%v", &result)
@@ -195,8 +195,8 @@ func Test_perMeasurementInfoListCompareBytesNoOptional(t *testing.T) {
 	mil, err := createMeasurementInfoListNoOptional()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mil, "", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mil, "", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfo-List PER\n%v", hex.Dump(per))
 

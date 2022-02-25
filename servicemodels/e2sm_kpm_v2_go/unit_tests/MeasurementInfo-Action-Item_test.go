@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -15,13 +15,13 @@ import (
 
 var refPerMeasurementInfoActionItem = "00000000  40 40 6f 6e 66 00 00 14                           |@@onf...|"
 
-func createMeasurementInfoActionItem() *e2sm_kpm_v2_go.MeasurementInfoActionItem {
+func createMeasurementInfoActionItem() *e2smkpmv2.MeasurementInfoActionItem {
 
-	return &e2sm_kpm_v2_go.MeasurementInfoActionItem{
-		MeasId: &e2sm_kpm_v2_go.MeasurementTypeId{
+	return &e2smkpmv2.MeasurementInfoActionItem{
+		MeasId: &e2smkpmv2.MeasurementTypeId{
 			Value: 21,
 		},
-		MeasName: &e2sm_kpm_v2_go.MeasurementTypeName{
+		MeasName: &e2smkpmv2.MeasurementTypeName{
 			Value: "onf",
 		},
 	}
@@ -35,7 +35,7 @@ func Test_perEncodingMeasurementInfoActionItem(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("MeasurementInfoActionItem PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementInfoActionItem{}
+	result := e2smkpmv2.MeasurementInfoActionItem{}
 	err = aper.UnmarshalWithParams(per, &result, "valueExt", nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

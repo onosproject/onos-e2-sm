@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,32 +17,32 @@ var refPerMeasCI = "00000000  20 00 7a 00 01 42 10 01  15 1f ff f0 01 02 03 40  
 	"00000010  40 01 02 03 00 17 68 18  00 1e 00 01 70 00 00 18  |@.....h.....p...|\n" +
 	"00000020  00 00 00 00 00 7a 00 01  c7 00 03 14 20           |.....z...... |"
 
-func createMeasurementCondItem() (*e2sm_kpm_v2_go.MeasurementCondItem, error) {
+func createMeasurementCondItem() (*e2smkpmv2.MeasurementCondItem, error) {
 
-	measCondItem := &e2sm_kpm_v2_go.MeasurementCondItem{
-		MeasType: &e2sm_kpm_v2_go.MeasurementType{
-			MeasurementType: &e2sm_kpm_v2_go.MeasurementType_MeasId{
-				MeasId: &e2sm_kpm_v2_go.MeasurementTypeId{
+	measCondItem := &e2smkpmv2.MeasurementCondItem{
+		MeasType: &e2smkpmv2.MeasurementType{
+			MeasurementType: &e2smkpmv2.MeasurementType_MeasId{
+				MeasId: &e2smkpmv2.MeasurementTypeId{
 					Value: 123,
 				},
 			},
 		},
-		MatchingCond: &e2sm_kpm_v2_go.MatchingCondList{
-			Value: make([]*e2sm_kpm_v2_go.MatchingCondItem, 0),
+		MatchingCond: &e2smkpmv2.MatchingCondList{
+			Value: make([]*e2smkpmv2.MatchingCondItem, 0),
 		},
 	}
 
-	mci1 := &e2sm_kpm_v2_go.MatchingCondItem{
-		MatchingCondItem: &e2sm_kpm_v2_go.MatchingCondItem_TestCondInfo{
-			TestCondInfo: &e2sm_kpm_v2_go.TestCondInfo{
-				TestType: &e2sm_kpm_v2_go.TestCondType{
-					TestCondType: &e2sm_kpm_v2_go.TestCondType_AMbr{
-						AMbr: e2sm_kpm_v2_go.AMBR_AMBR_TRUE,
+	mci1 := &e2smkpmv2.MatchingCondItem{
+		MatchingCondItem: &e2smkpmv2.MatchingCondItem_TestCondInfo{
+			TestCondInfo: &e2smkpmv2.TestCondInfo{
+				TestType: &e2smkpmv2.TestCondType{
+					TestCondType: &e2smkpmv2.TestCondType_AMbr{
+						AMbr: e2smkpmv2.AMBR_AMBR_TRUE,
 					},
 				},
-				TestExpr: e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
-				TestValue: &e2sm_kpm_v2_go.TestCondValue{
-					TestCondValue: &e2sm_kpm_v2_go.TestCondValue_ValueInt{
+				TestExpr: e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
+				TestValue: &e2smkpmv2.TestCondValue{
+					TestCondValue: &e2smkpmv2.TestCondValue_ValueInt{
 						ValueInt: 21,
 					},
 				},
@@ -56,39 +56,39 @@ func createMeasurementCondItem() (*e2sm_kpm_v2_go.MeasurementCondItem, error) {
 	var dbx int32 = 123
 	var dby int32 = 456
 	var dbz int32 = 789
-	sum := e2sm_kpm_v2_go.SUM_SUM_TRUE
-	plo := e2sm_kpm_v2_go.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
-	seind := e2sm_kpm_v2_go.StartEndInd_START_END_IND_END
+	sum := e2smkpmv2.SUM_SUM_TRUE
+	plo := e2smkpmv2.PreLabelOverride_PRE_LABEL_OVERRIDE_TRUE
+	seind := e2smkpmv2.StartEndInd_START_END_IND_END
 
-	mci2 := &e2sm_kpm_v2_go.MatchingCondItem{
-		MatchingCondItem: &e2sm_kpm_v2_go.MatchingCondItem_MeasLabel{
-			MeasLabel: &e2sm_kpm_v2_go.MeasurementLabel{
-				PlmnId: &e2sm_kpm_v2_go.PlmnIdentity{
+	mci2 := &e2smkpmv2.MatchingCondItem{
+		MatchingCondItem: &e2smkpmv2.MatchingCondItem_MeasLabel{
+			MeasLabel: &e2smkpmv2.MeasurementLabel{
+				PlmnId: &e2smkpmv2.PlmnIdentity{
 					Value: []byte{0x1, 0x2, 0x3},
 				},
-				SliceId: &e2sm_kpm_v2_go.Snssai{
+				SliceId: &e2smkpmv2.Snssai{
 					SD:  []byte{0x01, 0x02, 0x03},
 					SSt: []byte{0x01},
 				},
-				FiveQi: &e2sm_kpm_v2_go.FiveQi{
+				FiveQi: &e2smkpmv2.FiveQi{
 					Value: 23,
 				},
-				QFi: &e2sm_kpm_v2_go.Qfi{
+				QFi: &e2smkpmv2.Qfi{
 					Value: 52,
 				},
-				QCi: &e2sm_kpm_v2_go.Qci{
+				QCi: &e2smkpmv2.Qci{
 					Value: 24,
 				},
-				QCimax: &e2sm_kpm_v2_go.Qci{
+				QCimax: &e2smkpmv2.Qci{
 					Value: 30,
 				},
-				QCimin: &e2sm_kpm_v2_go.Qci{
+				QCimin: &e2smkpmv2.Qci{
 					Value: 1,
 				},
-				ARpmax: &e2sm_kpm_v2_go.Arp{
+				ARpmax: &e2smkpmv2.Arp{
 					Value: 15,
 				},
-				ARpmin: &e2sm_kpm_v2_go.Arp{
+				ARpmin: &e2smkpmv2.Arp{
 					Value: 1,
 				},
 				BitrateRange:     &br,
@@ -115,13 +115,13 @@ func Test_perEncodeMeasurementCondItem(t *testing.T) {
 	mci, err := createMeasurementCondItem()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.MeasurementCondItem{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.MeasurementCondItem{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("MeasurementCondItem PER - decoded\n%v", &result)
@@ -154,8 +154,8 @@ func Test_perMeasurementCondItemCompareBytes(t *testing.T) {
 	mci, err := createMeasurementCondItem()
 	assert.NilError(t, err)
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(mci, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(mci, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("MeasurementCondItem PER\n%v", hex.Dump(per))
 

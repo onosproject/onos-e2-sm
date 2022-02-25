@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
@@ -17,27 +17,27 @@ var refPerTCI = "00000000  08 40 01 15                                       |.@
 
 func Test_perEncodingTestCondInfo(t *testing.T) {
 
-	testCondInfo := &e2sm_kpm_v2_go.TestCondInfo{
-		TestType: &e2sm_kpm_v2_go.TestCondType{
-			TestCondType: &e2sm_kpm_v2_go.TestCondType_AMbr{
-				AMbr: e2sm_kpm_v2_go.AMBR_AMBR_TRUE,
+	testCondInfo := &e2smkpmv2.TestCondInfo{
+		TestType: &e2smkpmv2.TestCondType{
+			TestCondType: &e2smkpmv2.TestCondType_AMbr{
+				AMbr: e2smkpmv2.AMBR_AMBR_TRUE,
 			},
 		},
-		TestExpr: e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
-		TestValue: &e2sm_kpm_v2_go.TestCondValue{
-			TestCondValue: &e2sm_kpm_v2_go.TestCondValue_ValueInt{
+		TestExpr: e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
+		TestValue: &e2smkpmv2.TestCondValue{
+			TestCondValue: &e2smkpmv2.TestCondValue_ValueInt{
 				ValueInt: 21,
 			},
 		},
 	}
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondInfo, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondInfo, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.TestCondInfo{}
-	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	result := e2smkpmv2.TestCondInfo{}
+	err = aper.UnmarshalWithParams(per, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondInfo PER - decoded\n%v", &result)
@@ -48,22 +48,22 @@ func Test_perEncodingTestCondInfo(t *testing.T) {
 
 func Test_perTestCondInfoCompareBytes(t *testing.T) {
 
-	testCondInfo := &e2sm_kpm_v2_go.TestCondInfo{
-		TestType: &e2sm_kpm_v2_go.TestCondType{
-			TestCondType: &e2sm_kpm_v2_go.TestCondType_AMbr{
-				AMbr: e2sm_kpm_v2_go.AMBR_AMBR_TRUE,
+	testCondInfo := &e2smkpmv2.TestCondInfo{
+		TestType: &e2smkpmv2.TestCondType{
+			TestCondType: &e2smkpmv2.TestCondType_AMbr{
+				AMbr: e2smkpmv2.AMBR_AMBR_TRUE,
 			},
 		},
-		TestExpr: e2sm_kpm_v2_go.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
-		TestValue: &e2sm_kpm_v2_go.TestCondValue{
-			TestCondValue: &e2sm_kpm_v2_go.TestCondValue_ValueInt{
+		TestExpr: e2smkpmv2.TestCondExpression_TEST_COND_EXPRESSION_GREATERTHAN,
+		TestValue: &e2smkpmv2.TestCondValue{
+			TestCondValue: &e2smkpmv2.TestCondValue_ValueInt{
 				ValueInt: 21,
 			},
 		},
 	}
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	per, err := aper.MarshalWithParams(testCondInfo, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	per, err := aper.MarshalWithParams(testCondInfo, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(per))
 
@@ -78,9 +78,9 @@ func Test_stupidExperiment2(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("TestCondInfo PER\n%v", hex.Dump(perRefBytes))
 
-	//aper.ChoiceMap = e2sm_kpm_v2_go.Choicemape2smKpm
-	result := e2sm_kpm_v2_go.TestCondInfo{}
-	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt", e2sm_kpm_v2_go.Choicemape2smKpm, nil)
+	//aper.ChoiceMap = e2smkpmv2.Choicemape2smKpm
+	result := e2smkpmv2.TestCondInfo{}
+	err = aper.UnmarshalWithParams(perRefBytes, &result, "valueExt", e2smkpmv2.Choicemape2smKpm, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)
 	t.Logf("TestCondInfo PER - decoded\n%v", &result)

@@ -4,17 +4,17 @@
 package pdubuilder
 
 import (
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmKpmIndicationMessageFormat1(subscriptionID int64, measData *e2sm_kpm_v2_go.MeasurementData) (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
+func CreateE2SmKpmIndicationMessageFormat1(subscriptionID int64, measData *e2smkpmv2.MeasurementData) (*e2smkpmv2.E2SmKpmIndicationMessage, error) {
 
-	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmIndicationMessage{
-		IndicationMessageFormats: &e2sm_kpm_v2_go.IndicationMessageFormats{
-			E2SmKpmIndicationMessage: &e2sm_kpm_v2_go.IndicationMessageFormats_IndicationMessageFormat1{
-				IndicationMessageFormat1: &e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat1{
-					SubscriptId: &e2sm_kpm_v2_go.SubscriptionId{
+	e2SmKpmPdu := e2smkpmv2.E2SmKpmIndicationMessage{
+		IndicationMessageFormats: &e2smkpmv2.IndicationMessageFormats{
+			E2SmKpmIndicationMessage: &e2smkpmv2.IndicationMessageFormats_IndicationMessageFormat1{
+				IndicationMessageFormat1: &e2smkpmv2.E2SmKpmIndicationMessageFormat1{
+					SubscriptId: &e2smkpmv2.SubscriptionId{
 						Value: subscriptionID,
 					},
 					MeasData: measData,
@@ -29,14 +29,14 @@ func CreateE2SmKpmIndicationMessageFormat1(subscriptionID int64, measData *e2sm_
 	return &e2SmKpmPdu, nil
 }
 
-func CreateE2SmKpmIndicationMessageFormat2(subscriptionID int64, measCondUEList *e2sm_kpm_v2_go.MeasurementCondUeidList,
-	measData *e2sm_kpm_v2_go.MeasurementData) (*e2sm_kpm_v2_go.E2SmKpmIndicationMessage, error) {
+func CreateE2SmKpmIndicationMessageFormat2(subscriptionID int64, measCondUEList *e2smkpmv2.MeasurementCondUeidList,
+	measData *e2smkpmv2.MeasurementData) (*e2smkpmv2.E2SmKpmIndicationMessage, error) {
 
-	e2SmKpmPdu := e2sm_kpm_v2_go.E2SmKpmIndicationMessage{
-		IndicationMessageFormats: &e2sm_kpm_v2_go.IndicationMessageFormats{
-			E2SmKpmIndicationMessage: &e2sm_kpm_v2_go.IndicationMessageFormats_IndicationMessageFormat2{
-				IndicationMessageFormat2: &e2sm_kpm_v2_go.E2SmKpmIndicationMessageFormat2{
-					SubscriptId: &e2sm_kpm_v2_go.SubscriptionId{
+	e2SmKpmPdu := e2smkpmv2.E2SmKpmIndicationMessage{
+		IndicationMessageFormats: &e2smkpmv2.IndicationMessageFormats{
+			E2SmKpmIndicationMessage: &e2smkpmv2.IndicationMessageFormats_IndicationMessageFormat2{
+				IndicationMessageFormat2: &e2smkpmv2.E2SmKpmIndicationMessageFormat2{
+					SubscriptId: &e2smkpmv2.SubscriptionId{
 						Value: subscriptionID,
 					},
 					MeasCondUeidList: measCondUEList,
@@ -52,36 +52,36 @@ func CreateE2SmKpmIndicationMessageFormat2(subscriptionID int64, measCondUEList 
 	return &e2SmKpmPdu, nil
 }
 
-func CreateMeasurementRecordItemInteger(integer int64) *e2sm_kpm_v2_go.MeasurementRecordItem {
+func CreateMeasurementRecordItemInteger(integer int64) *e2smkpmv2.MeasurementRecordItem {
 
-	return &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Integer{
+	return &e2smkpmv2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Integer{
 			Integer: integer,
 		},
 	}
 }
 
-func CreateMeasurementRecordItemReal(real float64) *e2sm_kpm_v2_go.MeasurementRecordItem {
+func CreateMeasurementRecordItemReal(real float64) *e2smkpmv2.MeasurementRecordItem {
 
-	return &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_Real{
+	return &e2smkpmv2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Real{
 			Real: real,
 		},
 	}
 }
 
-func CreateMeasurementRecordItemNoValue() *e2sm_kpm_v2_go.MeasurementRecordItem {
+func CreateMeasurementRecordItemNoValue() *e2smkpmv2.MeasurementRecordItem {
 
-	return &e2sm_kpm_v2_go.MeasurementRecordItem{
-		MeasurementRecordItem: &e2sm_kpm_v2_go.MeasurementRecordItem_NoValue{
+	return &e2smkpmv2.MeasurementRecordItem{
+		MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_NoValue{
 			NoValue: 0,
 		},
 	}
 }
 
-func CreateMeasurementCondUEIDItem(measType *e2sm_kpm_v2_go.MeasurementType, mc *e2sm_kpm_v2_go.MatchingCondList) (*e2sm_kpm_v2_go.MeasurementCondUeidItem, error) {
+func CreateMeasurementCondUEIDItem(measType *e2smkpmv2.MeasurementType, mc *e2smkpmv2.MatchingCondList) (*e2smkpmv2.MeasurementCondUeidItem, error) {
 
-	measCondUEIDItem := e2sm_kpm_v2_go.MeasurementCondUeidItem{
+	measCondUEIDItem := e2smkpmv2.MeasurementCondUeidItem{
 		MeasType:     measType,
 		MatchingCond: mc,
 	}
@@ -92,10 +92,10 @@ func CreateMeasurementCondUEIDItem(measType *e2sm_kpm_v2_go.MeasurementType, mc 
 	return &measCondUEIDItem, nil
 }
 
-func CreateMatchingUEIDItem(ueID []byte) (*e2sm_kpm_v2_go.MatchingUeidItem, error) {
+func CreateMatchingUEIDItem(ueID []byte) (*e2smkpmv2.MatchingUeidItem, error) {
 
-	mueIDi := e2sm_kpm_v2_go.MatchingUeidItem{
-		UeId: &e2sm_kpm_v2_go.UeIdentity{
+	mueIDi := e2smkpmv2.MatchingUeidItem{
+		UeId: &e2smkpmv2.UeIdentity{
 			Value: ueID,
 		},
 	}
@@ -106,9 +106,9 @@ func CreateMatchingUEIDItem(ueID []byte) (*e2sm_kpm_v2_go.MatchingUeidItem, erro
 	return &mueIDi, nil
 }
 
-func CreateMeasurementDataItem(mr *e2sm_kpm_v2_go.MeasurementRecord) (*e2sm_kpm_v2_go.MeasurementDataItem, error) {
+func CreateMeasurementDataItem(mr *e2smkpmv2.MeasurementRecord) (*e2smkpmv2.MeasurementDataItem, error) {
 
-	mdi := e2sm_kpm_v2_go.MeasurementDataItem{
+	mdi := e2smkpmv2.MeasurementDataItem{
 		MeasRecord: mr,
 	}
 

@@ -6,19 +6,19 @@ package encoder
 
 import (
 	"encoding/hex"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func PerEncodeE2SmMhoIndicationMessage(im *e2sm_mho_go.E2SmMhoIndicationMessage) ([]byte, error) {
+func PerEncodeE2SmMhoIndicationMessage(im *e2smmhov2.E2SmMhoIndicationMessage) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-MHO-IndicationMessage message is\n%v", im)
 	if err := im.Validate(); err != nil {
 		return nil, errors.NewInvalid("error validating E2SM-MHO-IndicationMessage PDU %s", err.Error())
 	}
 
-	per, err := aper.MarshalWithParams(im, "choiceExt", e2sm_mho_go.MhoChoicemap, nil)
+	per, err := aper.MarshalWithParams(im, "choiceExt", e2smmhov2.MhoChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -27,12 +27,12 @@ func PerEncodeE2SmMhoIndicationMessage(im *e2sm_mho_go.E2SmMhoIndicationMessage)
 	return per, nil
 }
 
-func PerDecodeE2SmMhoIndicationMessage(per []byte) (*e2sm_mho_go.E2SmMhoIndicationMessage, error) {
+func PerDecodeE2SmMhoIndicationMessage(per []byte) (*e2smmhov2.E2SmMhoIndicationMessage, error) {
 
 	log.Debugf("Obtained E2SM-MHO-IndicationMessage PER bytes are\n%v", hex.Dump(per))
 
-	result := e2sm_mho_go.E2SmMhoIndicationMessage{}
-	err := aper.UnmarshalWithParams(per, &result, "choiceExt", e2sm_mho_go.MhoChoicemap, nil)
+	result := e2smmhov2.E2SmMhoIndicationMessage{}
+	err := aper.UnmarshalWithParams(per, &result, "choiceExt", e2smmhov2.MhoChoicemap, nil)
 	if err != nil {
 		return nil, err
 	}

@@ -7,7 +7,7 @@ package servicemodel
 import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/pdubuilder"
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"google.golang.org/protobuf/proto"
 	"gotest.tools/assert"
@@ -45,7 +45,7 @@ func TestServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
 	protoBytes, err := rsmv1TestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
 	assert.Assert(t, protoBytes != nil)
-	testIH := &e2sm_rsm_ies.E2SmRsmIndicationHeader{}
+	testIH := &e2smrsm.E2SmRsmIndicationHeader{}
 	err = proto.Unmarshal(protoBytes, testIH)
 	assert.NilError(t, err)
 	t.Logf("Decoded message is \n%v", testIH)
@@ -57,7 +57,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	ueID, err := pdubuilder.CreateUeIDAmfUeNgapID(1)
 	assert.NilError(t, err)
 
-	ulSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
+	ulSm := make([]*e2smrsm.SliceMetrics, 0)
 	ulM1, err := pdubuilder.CreateSliceMetrics(100, 100, 100, 15)
 	assert.NilError(t, err)
 	ulSm = append(ulSm, ulM1)
@@ -68,7 +68,7 @@ func TestServicemodel_IndicationMessageProtoToASN1(t *testing.T) {
 	assert.NilError(t, err)
 	ulSm = append(ulSm, ulM3)
 
-	dlSm := make([]*e2sm_rsm_ies.SliceMetrics, 0)
+	dlSm := make([]*e2smrsm.SliceMetrics, 0)
 	dlM1, err := pdubuilder.CreateSliceMetrics(91, 31, 54, 11)
 	assert.NilError(t, err)
 	dlSm = append(dlSm, dlM1)
@@ -102,7 +102,7 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 	protoBytes, err := rsmv1TestSm.IndicationMessageASN1toProto(indicationMessageAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testIM := &e2sm_rsm_ies.E2SmRsmIndicationMessage{}
+	testIM := &e2smrsm.E2SmRsmIndicationMessage{}
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded message is \n%v", testIM)
@@ -115,7 +115,7 @@ func TestServicemodel_IndicationMessageASN1toProto(t *testing.T) {
 }
 
 func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
-	supportedConfigList := make([]*e2sm_rsm_ies.SupportedSlicingConfigItem, 0)
+	supportedConfigList := make([]*e2smrsm.SupportedSlicingConfigItem, 0)
 	su, err := pdubuilder.CreateSupportedSlicingConfigItem(pdubuilder.CreateE2SmRsmCommandSliceUpdate())
 	assert.NilError(t, err)
 	supportedConfigList = append(supportedConfigList, su)
@@ -136,7 +136,7 @@ func TestServicemodel_RanFuncDescriptionProtoToASN1(t *testing.T) {
 		supportedConfigList)
 	assert.NilError(t, err)
 
-	slicingCapList := make([]*e2sm_rsm_ies.NodeSlicingCapabilityItem, 0)
+	slicingCapList := make([]*e2smrsm.NodeSlicingCapabilityItem, 0)
 	slicingCapList = append(slicingCapList, slicingCapability)
 
 	rfd, err := pdubuilder.CreateE2SmRsmRanFunctionDescription("E2SM-RSM",
@@ -168,7 +168,7 @@ func TestServicemodel_RanFuncDescriptionASN1toProto(t *testing.T) {
 	protoBytes, err := rsmv1TestSm.RanFuncDescriptionASN1toProto(ranFuncDescriptionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testRFD := &e2sm_rsm_ies.E2SmRsmRanfunctionDescription{}
+	testRFD := &e2smrsm.E2SmRsmRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, testRFD)
 	t.Logf("Decoded message is \n%v", testRFD)
 	assert.NilError(t, err)
@@ -206,7 +206,7 @@ func TestServicemodel_EventTriggerDefinitionASN1toProto(t *testing.T) {
 	protoBytes, err := rsmv1TestSm.EventTriggerDefinitionASN1toProto(eventTriggerDefinitionAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testETD := &e2sm_rsm_ies.E2SmRsmEventTriggerDefinition{}
+	testETD := &e2smrsm.E2SmRsmEventTriggerDefinition{}
 	err = proto.Unmarshal(protoBytes, testETD)
 	t.Logf("Decoded message is \n%v", testETD)
 	assert.NilError(t, err)
@@ -236,7 +236,7 @@ func TestServicemodel_ControlHeaderASN1toProto(t *testing.T) {
 	protoBytes, err := rsmv1TestSm.ControlHeaderASN1toProto(chAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testCH := &e2sm_rsm_ies.E2SmRsmControlHeader{}
+	testCH := &e2smrsm.E2SmRsmControlHeader{}
 	err = proto.Unmarshal(protoBytes, testCH)
 	assert.NilError(t, err)
 	t.Logf("Decoded message is \n%v", testCH)
@@ -252,7 +252,7 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 	bearerID1, err := pdubuilder.CreateBearerIDdrb(drbIDfourG)
 	assert.NilError(t, err)
 
-	flowMap := make([]*e2sm_rsm_ies.QoSflowLevelParameters, 0)
+	flowMap := make([]*e2smrsm.QoSflowLevelParameters, 0)
 	dqos, err := pdubuilder.CreateQosFlowLevelParametersDynamic(10, 62, 54)
 	assert.NilError(t, err)
 	flowMap = append(flowMap, dqos)
@@ -265,7 +265,7 @@ func TestServicemodel_ControlMessageProtoToASN1(t *testing.T) {
 	bearerID2, err := pdubuilder.CreateBearerIDdrb(drbIDfiveG)
 	assert.NilError(t, err)
 
-	bearerList := make([]*e2sm_rsm_ies.BearerId, 0)
+	bearerList := make([]*e2smrsm.BearerId, 0)
 	bearerList = append(bearerList, bearerID1)
 	bearerList = append(bearerList, bearerID2)
 
@@ -296,7 +296,7 @@ func TestServicemodel_ControlMessageASN1toProto(t *testing.T) {
 	protoBytes, err := rsmv1TestSm.ControlMessageASN1toProto(cmAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
 	assert.Assert(t, protoBytes != nil)
-	testCM := &e2sm_rsm_ies.E2SmRsmControlMessage{}
+	testCM := &e2smrsm.E2SmRsmControlMessage{}
 	err = proto.Unmarshal(protoBytes, testCM)
 	assert.NilError(t, err)
 	t.Logf("Decoded message is \n%v", testCM)

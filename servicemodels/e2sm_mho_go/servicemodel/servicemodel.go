@@ -10,16 +10,16 @@ import (
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/encoder"
-	e2sm_mho_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
+	e2smmhov2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go/v2/e2sm-mho-go"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 	"google.golang.org/protobuf/proto"
 )
 
 type MhoServiceModel string
 
-const smName = "e2sm_mho_go"
+const smName = "e2smmhov2"
 const smVersion = "v2"
-const moduleName = "e2sm_mho_go.so.1.0.1"
+const moduleName = "e2smmhov2.so.1.0.1"
 const smOIDMho = "1.3.6.1.4.1.53148.1.2.2.101"
 
 func (sm MhoServiceModel) ServiceModelData() types.ServiceModelData {
@@ -47,7 +47,7 @@ func (sm MhoServiceModel) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte,
 }
 
 func (sm MhoServiceModel) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_mho_go.E2SmMhoIndicationHeader)
+	protoObj := new(e2smmhov2.E2SmMhoIndicationHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoIndicationHeader %s", err)
 	}
@@ -75,7 +75,7 @@ func (sm MhoServiceModel) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte
 }
 
 func (sm MhoServiceModel) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_mho_go.E2SmMhoIndicationMessage)
+	protoObj := new(e2smmhov2.E2SmMhoIndicationMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoIndicationMessage %s", err)
 	}
@@ -103,7 +103,7 @@ func (sm MhoServiceModel) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byt
 }
 
 func (sm MhoServiceModel) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_mho_go.E2SmMhoRanfunctionDescription)
+	protoObj := new(e2smmhov2.E2SmMhoRanfunctionDescription)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoRanFunctionDescription %s", err)
 	}
@@ -131,7 +131,7 @@ func (sm MhoServiceModel) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([
 }
 
 func (sm MhoServiceModel) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_mho_go.E2SmMhoEventTriggerDefinition)
+	protoObj := new(e2smmhov2.E2SmMhoEventTriggerDefinition)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoEventTriggerDefinition %s", err)
 	}
@@ -167,7 +167,7 @@ func (sm MhoServiceModel) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, er
 }
 
 func (sm MhoServiceModel) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_mho_go.E2SmMhoControlHeader)
+	protoObj := new(e2smmhov2.E2SmMhoControlHeader)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoControlHeader %s", err)
 	}
@@ -195,7 +195,7 @@ func (sm MhoServiceModel) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, e
 }
 
 func (sm MhoServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2sm_mho_go.E2SmMhoControlMessage)
+	protoObj := new(e2smmhov2.E2SmMhoControlMessage)
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoControlMessage %s", err)
 	}
@@ -221,7 +221,7 @@ func (sm MhoServiceModel) OnSetup(request *types.OnSetupRequest) error {
 	if err != nil {
 		return err
 	}
-	ranFunctionDescription := &e2sm_mho_go.E2SmMhoRanfunctionDescription{}
+	ranFunctionDescription := &e2smmhov2.E2SmMhoRanfunctionDescription{}
 	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
 	if err != nil {
 		return err

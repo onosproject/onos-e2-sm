@@ -5,13 +5,13 @@
 package pdubuilder
 
 import (
-	e2sm_rsm_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
-	e2sm_v2_ies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
+	e2smrsm "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies"
+	e2smv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-v2-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmRsmIndicationMessageFormat1(ueID *e2sm_rsm_ies.UeIdentity, cuUeID int64, duUeID int64,
-	emmcase e2sm_rsm_ies.Emmcase, ulSm []*e2sm_rsm_ies.SliceMetrics, dlSm []*e2sm_rsm_ies.SliceMetrics) (*e2sm_rsm_ies.E2SmRsmIndicationMessage, error) {
+func CreateE2SmRsmIndicationMessageFormat1(ueID *e2smrsm.UeIdentity, cuUeID int64, duUeID int64,
+	emmcase e2smrsm.Emmcase, ulSm []*e2smrsm.SliceMetrics, dlSm []*e2smrsm.SliceMetrics) (*e2smrsm.E2SmRsmIndicationMessage, error) {
 
 	if len(ulSm) == 0 {
 		return nil, errors.NewInvalid("UL Slicing Metrics list should have at least 1 item")
@@ -21,14 +21,14 @@ func CreateE2SmRsmIndicationMessageFormat1(ueID *e2sm_rsm_ies.UeIdentity, cuUeID
 		return nil, errors.NewInvalid("DL Slicing Metrics list should have at least 1 item")
 	}
 
-	im := e2sm_rsm_ies.E2SmRsmIndicationMessage{
-		E2SmRsmIndicationMessage: &e2sm_rsm_ies.E2SmRsmIndicationMessage_IndicationMessageFormat1{
-			IndicationMessageFormat1: &e2sm_rsm_ies.E2SmRsmIndicationMessageFormat1{
+	im := e2smrsm.E2SmRsmIndicationMessage{
+		E2SmRsmIndicationMessage: &e2smrsm.E2SmRsmIndicationMessage_IndicationMessageFormat1{
+			IndicationMessageFormat1: &e2smrsm.E2SmRsmIndicationMessageFormat1{
 				UeId: ueID,
-				CuUeF1ApId: &e2sm_rsm_ies.CuUeF1ApId{
+				CuUeF1ApId: &e2smrsm.CuUeF1ApId{
 					Value: cuUeID,
 				},
-				DuUeF1ApId: &e2sm_rsm_ies.DuUeF1ApId{
+				DuUeF1ApId: &e2smrsm.DuUeF1ApId{
 					Value: duUeID,
 				},
 				EmmCase:          emmcase,
@@ -44,8 +44,8 @@ func CreateE2SmRsmIndicationMessageFormat1(ueID *e2sm_rsm_ies.UeIdentity, cuUeID
 	return &im, nil
 }
 
-func CreateE2SmRsmIndicationMessageFormat2(tt e2sm_rsm_ies.RsmEmmTriggerType, ueIDlist []*e2sm_rsm_ies.UeIdentity,
-	pt e2sm_rsm_ies.UeIdType, bearerList []*e2sm_rsm_ies.BearerId) (*e2sm_rsm_ies.E2SmRsmIndicationMessage, error) {
+func CreateE2SmRsmIndicationMessageFormat2(tt e2smrsm.RsmEmmTriggerType, ueIDlist []*e2smrsm.UeIdentity,
+	pt e2smrsm.UeIdType, bearerList []*e2smrsm.BearerId) (*e2smrsm.E2SmRsmIndicationMessage, error) {
 
 	if len(ueIDlist) == 0 {
 		return nil, errors.NewInvalid("UE ID list should contain at least 1 element. All elements of the list should be different UE identifiers")
@@ -55,9 +55,9 @@ func CreateE2SmRsmIndicationMessageFormat2(tt e2sm_rsm_ies.RsmEmmTriggerType, ue
 		return nil, errors.NewInvalid("BearerID list should have 1 to 32 items")
 	}
 
-	im := &e2sm_rsm_ies.E2SmRsmIndicationMessage{
-		E2SmRsmIndicationMessage: &e2sm_rsm_ies.E2SmRsmIndicationMessage_IndicationMessageFormat2{
-			IndicationMessageFormat2: &e2sm_rsm_ies.E2SmRsmIndicationMessageFormat2{
+	im := &e2smrsm.E2SmRsmIndicationMessage{
+		E2SmRsmIndicationMessage: &e2smrsm.E2SmRsmIndicationMessage_IndicationMessageFormat2{
+			IndicationMessageFormat2: &e2smrsm.E2SmRsmIndicationMessageFormat2{
 				TriggerType:       tt,
 				UeIdlist:          ueIDlist,
 				PrefferedUeIdtype: pt,
@@ -72,11 +72,11 @@ func CreateE2SmRsmIndicationMessageFormat2(tt e2sm_rsm_ies.RsmEmmTriggerType, ue
 	return im, nil
 }
 
-func CreateUeIDCuUeF1ApID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
+func CreateUeIDCuUeF1ApID(val int64) (*e2smrsm.UeIdentity, error) {
 
-	ueID := &e2sm_rsm_ies.UeIdentity{
-		UeIdentity: &e2sm_rsm_ies.UeIdentity_CuUeF1ApId{
-			CuUeF1ApId: &e2sm_rsm_ies.CuUeF1ApId{
+	ueID := &e2smrsm.UeIdentity{
+		UeIdentity: &e2smrsm.UeIdentity_CuUeF1ApId{
+			CuUeF1ApId: &e2smrsm.CuUeF1ApId{
 				Value: val,
 			},
 		},
@@ -88,11 +88,11 @@ func CreateUeIDCuUeF1ApID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 	return ueID, nil
 }
 
-func CreateUeIDDuUeF1ApID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
+func CreateUeIDDuUeF1ApID(val int64) (*e2smrsm.UeIdentity, error) {
 
-	ueID := &e2sm_rsm_ies.UeIdentity{
-		UeIdentity: &e2sm_rsm_ies.UeIdentity_DuUeF1ApId{
-			DuUeF1ApId: &e2sm_rsm_ies.DuUeF1ApId{
+	ueID := &e2smrsm.UeIdentity{
+		UeIdentity: &e2smrsm.UeIdentity_DuUeF1ApId{
+			DuUeF1ApId: &e2smrsm.DuUeF1ApId{
 				Value: val,
 			},
 		},
@@ -104,11 +104,11 @@ func CreateUeIDDuUeF1ApID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 	return ueID, nil
 }
 
-func CreateUeIDRanUeNgapID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
+func CreateUeIDRanUeNgapID(val int64) (*e2smrsm.UeIdentity, error) {
 
-	ueID := &e2sm_rsm_ies.UeIdentity{
-		UeIdentity: &e2sm_rsm_ies.UeIdentity_RanUeNgapId{
-			RanUeNgapId: &e2sm_rsm_ies.RanUeNgapId{
+	ueID := &e2smrsm.UeIdentity{
+		UeIdentity: &e2smrsm.UeIdentity_RanUeNgapId{
+			RanUeNgapId: &e2smrsm.RanUeNgapId{
 				Value: val,
 			},
 		},
@@ -120,11 +120,11 @@ func CreateUeIDRanUeNgapID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 	return ueID, nil
 }
 
-func CreateUeIDAmfUeNgapID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
+func CreateUeIDAmfUeNgapID(val int64) (*e2smrsm.UeIdentity, error) {
 
-	ueID := &e2sm_rsm_ies.UeIdentity{
-		UeIdentity: &e2sm_rsm_ies.UeIdentity_AmfUeNgapId{
-			AmfUeNgapId: &e2sm_v2_ies.AmfUeNgapId{
+	ueID := &e2smrsm.UeIdentity{
+		UeIdentity: &e2smrsm.UeIdentity_AmfUeNgapId{
+			AmfUeNgapId: &e2smv2.AmfUeNgapId{
 				Value: val,
 			},
 		},
@@ -136,11 +136,11 @@ func CreateUeIDAmfUeNgapID(val int64) (*e2sm_rsm_ies.UeIdentity, error) {
 	return ueID, nil
 }
 
-func CreateUeIDEnbUeS1ApID(val int32) (*e2sm_rsm_ies.UeIdentity, error) {
+func CreateUeIDEnbUeS1ApID(val int32) (*e2smrsm.UeIdentity, error) {
 
-	ueID := &e2sm_rsm_ies.UeIdentity{
-		UeIdentity: &e2sm_rsm_ies.UeIdentity_EnbUeS1ApId{
-			EnbUeS1ApId: &e2sm_rsm_ies.EnbUeS1ApId{
+	ueID := &e2smrsm.UeIdentity{
+		UeIdentity: &e2smrsm.UeIdentity_EnbUeS1ApId{
+			EnbUeS1ApId: &e2smrsm.EnbUeS1ApId{
 				Value: val,
 			},
 		},
@@ -152,15 +152,15 @@ func CreateUeIDEnbUeS1ApID(val int32) (*e2sm_rsm_ies.UeIdentity, error) {
 	return ueID, nil
 }
 
-func CreateEmmCaseAttach() e2sm_rsm_ies.Emmcase {
-	return e2sm_rsm_ies.Emmcase_EMMCASE_ATTACHED
+func CreateEmmCaseAttach() e2smrsm.Emmcase {
+	return e2smrsm.Emmcase_EMMCASE_ATTACHED
 }
 
-func CreateEmmCaseDetach() e2sm_rsm_ies.Emmcase {
-	return e2sm_rsm_ies.Emmcase_EMMCASE_DETACHED
+func CreateEmmCaseDetach() e2smrsm.Emmcase {
+	return e2smrsm.Emmcase_EMMCASE_DETACHED
 }
 
-func CreateSliceMetrics(prb int32, ueToSlice int32, bler int32, cqi int32) (*e2sm_rsm_ies.SliceMetrics, error) {
+func CreateSliceMetrics(prb int32, ueToSlice int32, bler int32, cqi int32) (*e2smrsm.SliceMetrics, error) {
 
 	if prb < 0 || prb > 100 {
 		return nil, errors.NewInvalid("PRB utilization value should be within range 0 to 100")
@@ -174,7 +174,7 @@ func CreateSliceMetrics(prb int32, ueToSlice int32, bler int32, cqi int32) (*e2s
 		return nil, errors.NewInvalid("average CQI value should be within range 0 to 15")
 	}
 
-	sm := &e2sm_rsm_ies.SliceMetrics{
+	sm := &e2smrsm.SliceMetrics{
 		PrbUtilization:    prb,
 		NumUeAssocToSlice: ueToSlice,
 		SliceLevelBler:    bler,

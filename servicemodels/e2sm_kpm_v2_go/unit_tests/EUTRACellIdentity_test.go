@@ -6,7 +6,7 @@ package kpmv2
 
 import (
 	"encoding/hex"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
@@ -16,9 +16,9 @@ import (
 
 var refPerEutraCellIdentity = "00000000  d4 bc 09 00                                       |....|"
 
-func createEutracellIdentity() *e2sm_kpm_v2_go.EutracellIdentity {
+func createEutracellIdentity() *e2smkpmv2.EutracellIdentity {
 
-	return &e2sm_kpm_v2_go.EutracellIdentity{
+	return &e2smkpmv2.EutracellIdentity{
 		Value: &asn1.BitString{
 			Value: []byte{0xd4, 0xbc, 0x09, 0x00},
 			Len:   28,
@@ -34,7 +34,7 @@ func Test_perEncodingEutracellIdentity(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("EutraCellIdentity PER\n%v", hex.Dump(per))
 
-	result := e2sm_kpm_v2_go.EutracellIdentity{}
+	result := e2smkpmv2.EutracellIdentity{}
 	err = aper.Unmarshal(per, &result, nil, nil)
 	assert.NilError(t, err)
 	//assert.Assert(t, &result != nil)

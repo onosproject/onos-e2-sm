@@ -8,7 +8,7 @@ import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/encoder"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/pdubuilder"
-	e2sm_kpm_v2_go "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
+	e2smkpmv2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2_go/v2/e2sm-kpm-v2-go"
 	hexlib "github.com/onosproject/onos-lib-go/pkg/hex"
 	"gotest.tools/assert"
 	"testing"
@@ -16,7 +16,7 @@ import (
 
 var refPerEventTriggerDefinition = "00000000  00 0e                                             |..|"
 
-func createE2SMKPMEventTriggerDefinition() (*e2sm_kpm_v2_go.E2SmKpmEventTriggerDefinition, error) {
+func createE2SMKPMEventTriggerDefinition() (*e2smkpmv2.E2SmKpmEventTriggerDefinition, error) {
 
 	var rtPeriod int64 = 15
 
