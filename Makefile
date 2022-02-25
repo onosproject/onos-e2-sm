@@ -16,11 +16,11 @@ ONOS_PROTOC_VERSION := v0.6.9
 
 BUF_VERSION := 0.52.0
 
-#build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
-#	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
+build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
+	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
 
-#build/_output/e2sm_kpm_v2.so.1.0.0: # @HELP build the e2sm_kpm_v2.so.1.0.0
-#	cd servicemodels/e2sm_kpm_v2 && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm_v2.so.1.0.0 -buildmode=plugin .
+build/_output/e2sm_kpm_v2.so.1.0.0: # @HELP build the e2sm_kpm_v2.so.1.0.0
+	cd servicemodels/e2sm_kpm_v2 && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm_v2.so.1.0.0 -buildmode=plugin .
 
 build/_output/e2sm_kpm_v2_go.so.1.0.0: # @HELP build the e2sm_kpm_v2.so.1.0.0
 	cd servicemodels/e2sm_kpm_v2_go && go build -o build/_output/e2sm_kpm_v2_go.so.1.0.0 -buildmode=plugin .
@@ -34,14 +34,14 @@ build/_output/e2sm_mho_go.so.1.0.0: # @HELP build the e2sm_mho_go.so.1.0.0
 build/_output/e2sm_rsm.so.1.0.0: # @HELP build the e2sm_rsm.so.1.0.0
 	cd servicemodels/e2sm_rsm && go build -o build/_output/e2sm_rsm.so.1.0.0 -buildmode=plugin .
 
-#build/_output/e2sm_ni.so.1.0.0: # @HELP build the e2sm_ni.so.1.0.1
-#	cd servicemodels/e2sm_ni && CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
+build/_output/e2sm_ni.so.1.0.0: # @HELP build the e2sm_ni.so.1.0.1
+	cd servicemodels/e2sm_ni && CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
 
-#build/_output/e2sm_rc_pre.so.1.0.0: # @HELP build the e2sm_rc_pre.so.1.0.1
-#	cd servicemodels/e2sm_rc_pre && CGO_ENABLED=1 go build -o build/_output/e2sm_rc_pre.so.1.0.0 -buildmode=plugin .
+build/_output/e2sm_rc_pre.so.1.0.0: # @HELP build the e2sm_rc_pre.so.1.0.1
+	cd servicemodels/e2sm_rc_pre && CGO_ENABLED=1 go build -o build/_output/e2sm_rc_pre.so.1.0.0 -buildmode=plugin .
 
-#build/_output/e2sm_mho.so.1.0.0: # @HELP build the e2sm_mho.so.1.0.1
-#	cd servicemodels/e2sm_mho && CGO_ENABLED=1 go build -o build/_output/e2sm_mho.so.1.0.0 -buildmode=plugin .
+build/_output/e2sm_mho.so.1.0.0: # @HELP build the e2sm_mho.so.1.0.1
+	cd servicemodels/e2sm_mho && CGO_ENABLED=1 go build -o build/_output/e2sm_mho.so.1.0.0 -buildmode=plugin .
 
 PHONY:build
 build: # @HELP build all libraries
@@ -55,24 +55,24 @@ build_protoc_gen_choice:
 
 test: # @HELP run the unit tests and source code validation
 test: license_check build build_protoc_gen_cgo build_protoc_gen_choice linters
-	#cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
-	#cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre_go && go test -race ./...
-	#cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_kpm_v2_go && go test -race ./...
-	#cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_mho_go && go test -race ./...
 	cd servicemodels/e2sm_rsm && go test -race ./...
 	cd servicemodels/test_sm_aper_go_lib && GODEBUG=cgocheck=0 go test -race ./...
 
 jenkins-test:  # @HELP run the unit tests and source code validation producing a junit style report for Jenkins
 jenkins-test: build-tools license_check linters
-	#cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
-	#cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
+	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
+	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_kpm_v2_go && TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
-	#cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
+	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_rc_pre_go && TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
-	#cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
+	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_mho_go && TEST_PACKAGES=./... ./../../../build-tools/build/jenkins/make-unit
 
 deps_kpm: # @HELP ensure that the required dependencies are in place
