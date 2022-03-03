@@ -5,6 +5,8 @@
 package pdubuilder
 
 import (
+	"encoding/hex"
+	kpmv2ctypes "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/kpmctypes"
 	e2sm_kpm_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm_v2/v2/e2sm-kpm-v2"
 	"gotest.tools/assert"
 	"testing"
@@ -202,4 +204,75 @@ func TestE2SmKpmActionDefinitionFormat3(t *testing.T) {
 	newE2SmKpmPdu, err := CreateE2SmKpmActionDefinitionFormat3(ricStyleType, actionDefinitionFormat3)
 	assert.NilError(t, err)
 	assert.Assert(t, newE2SmKpmPdu != nil)
+}
+
+func Test_Ray(t *testing.T) {
+	var ricStyleType int32 = 1
+	var cellObjID = "138426014550003"
+	var granularity uint32 = 1000
+	var subscriptionID int64 = 3
+
+	measName1, err := CreateMeasurementTypeMeasName("RRC.ConnEstabAtt.Sum")
+	assert.NilError(t, err)
+	measInfoItem1, err := CreateMeasurementInfoItem(measName1, nil)
+	assert.NilError(t, err)
+
+	measName2, err := CreateMeasurementTypeMeasName("RRC.ConnEstabSucc.Sum")
+	assert.NilError(t, err)
+	measInfoItem2, err := CreateMeasurementInfoItem(measName2, nil)
+	assert.NilError(t, err)
+
+	measName3, err := CreateMeasurementTypeMeasName("RRC.ConnReEstabAtt.Sum")
+	assert.NilError(t, err)
+	measInfoItem3, err := CreateMeasurementInfoItem(measName3, nil)
+	assert.NilError(t, err)
+
+	measName4, err := CreateMeasurementTypeMeasName("RRC.ConnReEstabAtt.reconfigFail")
+	assert.NilError(t, err)
+	measInfoItem4, err := CreateMeasurementInfoItem(measName4, nil)
+	assert.NilError(t, err)
+
+	measName5, err := CreateMeasurementTypeMeasName("RRC.ConnReEstabAtt.HOFail")
+	assert.NilError(t, err)
+	measInfoItem5, err := CreateMeasurementInfoItem(measName5, nil)
+	assert.NilError(t, err)
+
+	measName6, err := CreateMeasurementTypeMeasName("RRC.ConnReEstabAtt.Other")
+	assert.NilError(t, err)
+	measInfoItem6, err := CreateMeasurementInfoItem(measName6, nil)
+	assert.NilError(t, err)
+
+	measName7, err := CreateMeasurementTypeMeasName("RRC.Conn.Avg")
+	assert.NilError(t, err)
+	measInfoItem7, err := CreateMeasurementInfoItem(measName7, nil)
+	assert.NilError(t, err)
+
+	measName8, err := CreateMeasurementTypeMeasName("RRC.Conn.Max")
+	assert.NilError(t, err)
+	measInfoItem8, err := CreateMeasurementInfoItem(measName8, nil)
+	assert.NilError(t, err)
+
+	measInfoList := e2sm_kpm_v2.MeasurementInfoList{
+		Value: make([]*e2sm_kpm_v2.MeasurementInfoItem, 0),
+	}
+	measInfoList.Value = append(measInfoList.Value, measInfoItem1)
+	measInfoList.Value = append(measInfoList.Value, measInfoItem2)
+	measInfoList.Value = append(measInfoList.Value, measInfoItem3)
+	measInfoList.Value = append(measInfoList.Value, measInfoItem4)
+	measInfoList.Value = append(measInfoList.Value, measInfoItem5)
+	measInfoList.Value = append(measInfoList.Value, measInfoItem6)
+	measInfoList.Value = append(measInfoList.Value, measInfoItem7)
+	measInfoList.Value = append(measInfoList.Value, measInfoItem8)
+
+	actionDefinition, err := CreateActionDefinitionFormat1(cellObjID, &measInfoList, granularity, subscriptionID)
+	assert.NilError(t, err)
+
+	newE2SmKpmPdu, err := CreateE2SmKpmActionDefinitionFormat1(ricStyleType, actionDefinition)
+	assert.NilError(t, err)
+	assert.Assert(t, newE2SmKpmPdu != nil)
+	t.Logf("E2SM-KPM-ActionDefinition-Format1 is\n%v", newE2SmKpmPdu)
+
+	per, err := kpmv2ctypes.PerEncodeE2SmKpmActionDefinition(newE2SmKpmPdu)
+	assert.NilError(t, err)
+	t.Logf("PER bytes are\n%v", hex.Dump(per))
 }
