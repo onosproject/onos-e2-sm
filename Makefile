@@ -12,7 +12,7 @@ RAN_SIM_MOD ?= github.com/onosproject/ran-simulator
 
 ONOS_E2_SM_VERSION := latest
 ONOS_BUILD_VERSION := v1.0
-ONOS_PROTOC_VERSION := v0.6.9
+ONOS_PROTOC_VERSION := v1.0.2
 
 BUF_VERSION := 0.52.0
 
