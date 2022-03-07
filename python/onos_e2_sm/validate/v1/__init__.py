@@ -42,7 +42,7 @@ class FieldRules(betterproto.Message):
     sfixed64: "SFixed64Rules" = betterproto.message_field(12, group="type")
     bool: "BoolRules" = betterproto.message_field(13, group="type")
     string: "StringRules" = betterproto.message_field(14, group="type")
-    bytes_: "BytesRules" = betterproto.message_field(15, group="type")
+    bytes: "BytesRules" = betterproto.message_field(15, group="type")
     # Complex Field Types
     enum: "EnumRules" = betterproto.message_field(16, group="type")
     repeated: "RepeatedRules" = betterproto.message_field(18, group="type")
