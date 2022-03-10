@@ -78,4 +78,4 @@ The E2AP (E2 Application Protocol) is not a Service Model, and so is kept comple
 [O-RAN]: https://www.o-ran.org/
 
 ## How to create your own SM?
-Here you can find a tutorial on how to create your own SM.
+[Here](docs/sm-howto.md) you can find a tutorial on how to create your own SM.
