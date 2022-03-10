@@ -34,11 +34,9 @@ The implementation can be accessed as either:
 ### Key Performance Metrics (E2SM_KPM)
 This is the first E2 Service Model to be handled by SD-RAN - it is for extracting statistics from the E2Node.
 
-Currently supported version is E2SM KPM v2 (with CGo approach). E2SM KPMv2 with purely Go approach is 
-under maintenance and yet far away from the release. E2SM KPM v1 is partially implemented and not supported anymore.
+Currently supported version is E2SM KPM v2.0.3. E2SM KPM v1 is partially implemented and not supported anymore.
 
-There is also an experimental implementation of KPMv2 SM with Go-based APER library (produces APER bytes out of Protobuf). 
-This is still under verification, bugs may be expected.
+There is also an implementation of KPMv2 SM with Go-based APER library (produces APER bytes out of Protobuf).
 
 
 ### Native Interface (E2SM_NI)
@@ -47,14 +45,12 @@ While the Proto definitions have been created for this Service Model, the Go map
 ### RAN Control (E2SM_RC_PRE)
 Pre-standard E2 Service model with PCI and Neighbor relation table information from E2 Nodes.
 
-There is also an experimental implementation of RC-PRE SM with Go-based APER library. This is still under verification, 
-bugs may be expected.
+There is also an implementation of RC-PRE SM with Go-based APER library.
 
 ### Mobile HandOver (E2SM_MHO)
 E2 Service model for handling Mobile HandOver use case.
 
-There is also an experimental implementation of MHO SM with Go-based APER library. This is still under verification, 
-bugs may be expected.
+There is also an implementation of MHO SM with Go-based APER library.
 
 ### RAN Slicing (E2SM_RSM)
 E2 service model for handling RAN Slicing use case. It was implemented with Go-based APER library.
@@ -80,3 +76,6 @@ From these:
 The E2AP (E2 Application Protocol) is not a Service Model, and so is kept completely inside the `onos-e2t`.
 
 [O-RAN]: https://www.o-ran.org/
+
+## How to create your own SM?
+[Here](docs/sm-howto.md) you can find a tutorial on how to create your own SM.
