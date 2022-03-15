@@ -15,7 +15,7 @@ option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go
 
 import "validate/v1/validate.proto";
 import "asn1/v1/asn1.proto";
-import "e2smmhov2/v2/e2sm_v2.proto";
+import "e2sm_mho_go/v2/e2sm_v2.proto";
 
 // enumerated from e2sm-mho.asn1:64
 //{MHO-Trigger-Type}

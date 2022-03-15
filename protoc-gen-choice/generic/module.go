@@ -10,6 +10,7 @@ import (
 	pgs "github.com/lyft/protoc-gen-star"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"text/template"
 	"unicode"
@@ -101,21 +102,24 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
+		targetPath := ""
 		_, err := fmt.Fprintf(buf, "Processing following Proto file %v\n", f.File().InputPath().BaseName())
 		if err != nil {
 			return nil
 		}
+		targetPath = f.File().InputPath().Dir().String()
+		_, err = fmt.Fprintf(buf, "Target file Proto path pattern is %v\n", targetPath)
+		if err != nil {
+			return nil
+		}
 
-		//ToDo - rework imports better - we should stick to the only place in the directory,
-		// where we will store generated map. It is usually in the same folder as generated Protobuf in Golang. Stick to this proto and go through imports.
-		// Relatively to that proto generate a map and insert all necessary imports. Functionality is there, it just need some rework of the logic.
 		protoFilePath := ""
 		err = filepath.Walk(dir,
 			func(path string, info os.FileInfo, err error) error {
 				if err != nil {
 					return err
 				}
-				if strings.Contains(path, f.File().InputPath().BaseName()+".pb.go") && !strings.Contains(path, "/_") {
+				if strings.Contains(path, f.File().InputPath().BaseName()+".pb.go") && !strings.Contains(path, "/_") && strings.Contains(path, targetPath) {
 					protoFilePath = path
 					_, err = fmt.Fprintf(buf, "Hooray! Found file %v with path %v\n", info.Name(), path)
 					if err != nil {
@@ -132,36 +136,51 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 		}
 
-		//Composing protoFilePath to correspond to the correct input for Golang imports
-		index := strings.Index(protoFilePath, "github.com/")
-		if index == -1 {
-			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
+		if protoFilePath == "" {
+			_, err = fmt.Fprintf(buf, "ProtoFilePath is empty %v\n", protoFilePath)
 			if err != nil {
 				return nil
 			}
-		}
-		protoFilePath = protoFilePath[index:]
+			m.OverwriteCustomFile(
+				"/tmp/report.txt",
+				buf.String(),
+				0644,
+			)
 
-		//Taking out file name from the path
-		indexx := strings.LastIndex(protoFilePath, "/")
-		if indexx == -1 {
-			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
+			return m.Artifacts()
+		} else {
+
+			//Composing protoFilePath to correspond to the correct input for Golang imports
+			index := strings.Index(protoFilePath, "github.com/")
+			if index == -1 {
+				_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
+				if err != nil {
+					return nil
+				}
+			}
+			protoFilePath = protoFilePath[index:]
+
+			//Taking out file name from the path
+			indexx := strings.LastIndex(protoFilePath, "/")
+			if indexx == -1 {
+				_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
+				if err != nil {
+					return nil
+				}
+			}
+			protoFilePath = protoFilePath[:indexx]
+
+			_, err = fmt.Fprintf(buf, "Proto file path is %v\n", protoFilePath)
 			if err != nil {
 				return nil
 			}
-		}
-		protoFilePath = protoFilePath[:indexx]
-
-		_, err = fmt.Fprintf(buf, "Proto file path is %v\n", protoFilePath)
-		if err != nil {
-			return nil
 		}
 
 		if choices.ProtoFileName == "" {
-			choices.ProtoFileName = adjustProtoFileName(extractProtoFileName(f.Name().Split()[0]))
+			choices.ProtoFileName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
 		}
-		if !strings.EqualFold(choices.ProtoFileName, adjustProtoFileName(extractProtoFileName(f.Name().Split()[0]))) {
-			choices.Imports = choices.Imports + adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])) + " \"" + protoFilePath + "\"" + "\n"
+		if !strings.EqualFold(choices.ProtoFileName, adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())) {
+			choices.Imports = choices.Imports + adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()) + " \"" + protoFilePath + "\"" + "\n"
 		}
 		if choices.MapName == "" {
 			choices.MapName = adjustMapVariableName(extractProtoFileName(f.Name().Split()[0]))
@@ -206,8 +225,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 								LeafName:       msg.Name().String() + "_" + adjustOneOfLeafName(field.Name().String()),
 								FromOtherProto: false,
 							}
-							if adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])) != choices.ProtoFileName {
-								lf.OtherProtoName = adjustProtoFileName(extractProtoFileName(f.Name().Split()[0]))
+							if adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()) != choices.ProtoFileName {
+								lf.OtherProtoName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
 								lf.FromOtherProto = true
 							}
 							chItem.Leafs = append(chItem.Leafs, lf)
@@ -296,6 +315,34 @@ func adjustProtoFileName(filename string) string {
 
 	res := dashToUnderscore(filename)
 	// space for future adjustments
+	return res
+}
+
+func adjustPackageName(filename string, path string) string {
+
+	// remove redundant patterns
+	res := strings.ReplaceAll(filename, "_go", "")
+
+	//extract version number
+	index := strings.LastIndex(path, "/v")
+	version := path[index+1:]
+
+	// clarify if the version is not already present in the filename
+	present := strings.Contains(res, version)
+
+	//check if another versioning number presents in the naming - relevant for external dependencies
+	re := regexp.MustCompile(`v\d{1}`)
+	externalVersion := re.MatchString(res)
+
+	if version != "" && !present && !externalVersion {
+		res = res + version
+	}
+
+	//remove all underscores
+	res = strings.ReplaceAll(res, "_", "")
+	//remove all camel cases
+	res = strings.ToLower(res)
+
 	return res
 }
 
