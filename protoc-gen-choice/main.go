@@ -9,13 +9,12 @@ package main
 
 import (
 	pgs "github.com/lyft/protoc-gen-star"
-	pgsgo "github.com/lyft/protoc-gen-star/lang/go"
 	"github.com/onosproject/onos-e2-sm/protoc-gen-choice/generic"
 )
 
 func main() {
 	g := pgs.Init(pgs.DebugMode())
 	g.RegisterModule(generic.NewModule())
-	g.RegisterPostProcessor(pgsgo.GoFmt())
+	//g.RegisterPostProcessor(pgsgo.GoFmt())
 	g.Render()
 }
