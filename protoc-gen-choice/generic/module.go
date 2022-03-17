@@ -61,8 +61,8 @@ type canonicalLeaf struct {
 	Index         string
 	LeafName      string
 	ProtoFileName string
-	PackageName   string
-	ItemType      string // This is to store type of the CHOICE item (for correct referencing in index)
+	//PackageName   string // Not necessary, since it is located in the same folder..
+	ItemType string // This is to store type of the CHOICE item (for correct referencing in index)
 }
 
 //type canonicalChoicesList struct {
@@ -170,6 +170,58 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		return nil
 	}
 
+	// In case of canonical choice presence we should read out constants in order to compose map correctly
+	constantsList := make([]string, 0)
+	if choices.CanonicalChoicePresence {
+		for _, f := range targets {
+			// fix on .proto file with constants
+			if strings.Contains(f.Name().Split()[0], "constants") {
+				for _, msg := range f.AllMessages() {
+					// constant has only single item
+					structType := msg.Fields()[0].SourceCodeInfo().TrailingComments()
+					if structType != "" {
+						name := msg.Name().String()
+						_, err = fmt.Fprintf(buf, "Name is %v\n", name)
+						if err != nil {
+							return nil
+						}
+						_, err = fmt.Fprintf(buf, "StructType is %v\n", structType)
+						if err != nil {
+							return nil
+						}
+
+						constant := adjustCanonicalChoiceIndex(name, structType)
+						_, err = fmt.Fprintf(buf, "Constant is %v\n", constant)
+						if err != nil {
+							return nil
+						}
+						constantsList = append(constantsList, constant)
+					}
+				}
+				break
+			}
+		}
+	}
+
+	// Figuring out name of the package
+	packageName := ""
+	// We are assuming that all .proto files are located at the same directory (the last directory usually contains version number)
+	for _, f := range targets {
+		_, err = fmt.Fprintf(buf, "Obtained input path is \n%v\n", f.InputPath().Dir().String())
+		if err != nil {
+			return nil
+		}
+
+		packageName = extractDirectoryName(f.InputPath().Dir().String())
+		// Input .proto files
+		if packageName != "" {
+			choices.PackageName = dashToUnderscore(packageName)
+		} else {
+			choices.PackageName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
+		}
+		break
+	}
+
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
 		targetPath := ""
@@ -247,7 +299,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 		choices.Imports = choices.Imports + adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()) + " \"" + protoFilePath + "\"" + "\n"
 		if choices.MapName == "" {
-			choices.MapName = adjustMapVariableName(extractProtoFileName(f.Name().Split()[0]))
+			choices.MapName = adjustMapVariableName(extractPackageName(f.Name().Split()[0]))
 		}
 
 		_, err = fmt.Fprintf(buf, "MapVariableName is %v\n", choices.MapName)
@@ -284,9 +336,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			if err != nil {
 				return nil
 			}
-
 			if msg.OneOfs() != nil {
-
 				if choices.CanonicalChoicePresence && presentInCanonicalChoiceList(msg.Name().String(), canonicalChoices) {
 					//ToDo - compose canonical choice struct
 					_, err = fmt.Fprintf(buf, "------------------- Filling in canonical choice structure\n")
@@ -320,12 +370,12 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 									return nil
 								}
 
-								_, err = fmt.Fprintf(buf, "%v, OneOf field is %v\n", j+1, field.Name())
+								_, err = fmt.Fprintf(buf, "%v, OneOf field is %v\n", j+1, field.Name().String())
 								if err != nil {
 									return nil
 								}
 								lf := canonicalLeaf{
-									Index:    string(j + 1),
+									Index:    lookUpCanonicalChoiceIndex(strings.ReplaceAll(field.Name().String(), "_", ""), constantsList),
 									LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(field.Name().String()),
 								}
 								lf.ProtoFileName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
@@ -393,24 +443,6 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		if err != nil {
 			return nil
 		}
-	}
-
-	packageName := ""
-	// We are assuming that all .proto files are located at the same directory (the last directory usually contains version number)
-	for _, f := range targets {
-		_, err = fmt.Fprintf(buf, "Obtained input path is \n%v\n", f.InputPath().Dir().String())
-		if err != nil {
-			return nil
-		}
-
-		packageName = extractDirectoryName(f.InputPath().Dir().String())
-		// Input .proto files
-		if packageName != "" {
-			choices.PackageName = dashToUnderscore(packageName)
-		} else {
-			choices.PackageName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
-		}
-		break
 	}
 
 	_, err = fmt.Fprintf(buf, "Messages with CanonicalChoice ordering are:\n")
@@ -487,10 +519,18 @@ func adjustOneOfStructName(msgName string) string {
 
 func extractProtoFileName(proto string) string {
 
-	if strings.LastIndex(proto, "/") != 1 {
+	if strings.LastIndex(proto, "/") != -1 {
 		return proto[strings.LastIndex(proto, "/")+1:]
 	}
 	return proto
+}
+
+func extractPackageName(pckg string) string {
+
+	if strings.Index(pckg, "/") != -1 {
+		return pckg[:strings.Index(pckg, "/")]
+	}
+	return pckg
 }
 
 func adjustProtoFileName(filename string) string {
@@ -544,11 +584,16 @@ func adjustMapVariableName(mapName string) string {
 	//ToDo - make a workaround through regexp
 	//re := regexp.MustCompile(`v\d{1}`)
 	//mapName = re.ReplaceAllString(mapName, "")
-	//mapName = strings.ReplaceAll(mapName, "V1", "")
-	//mapName = strings.ReplaceAll(mapName, "V2", "")
-	//mapName = strings.ReplaceAll(mapName, "V3", "")
-	//mapName = strings.ReplaceAll(mapName, "V4", "")
+	mapName = strings.ReplaceAll(mapName, "V1", "")
+	mapName = strings.ReplaceAll(mapName, "v1", "")
+	mapName = strings.ReplaceAll(mapName, "V2", "")
+	mapName = strings.ReplaceAll(mapName, "v2", "")
+	mapName = strings.ReplaceAll(mapName, "V3", "")
+	mapName = strings.ReplaceAll(mapName, "v3", "")
+	mapName = strings.ReplaceAll(mapName, "V4", "")
+	mapName = strings.ReplaceAll(mapName, "v4", "")
 
+	// ToDo - this function should return the mapName with first letter in uppper case
 	return mapName
 }
 
@@ -593,4 +638,40 @@ func presentInCanonicalChoiceList(target string, list []string) bool {
 	}
 
 	return flag
+}
+
+func adjustCanonicalChoiceIndex(name string, structType string) string {
+
+	res := ""
+	// Assuming that all names start from Id which should be cut out
+	newName := name[2:]
+	//newName := strings.ReplaceAll(name, "Id", "")
+	newStructType := strings.ReplaceAll(structType, "-", "") // could contain "ID"
+
+	tmp := newStructType + newName
+	if !strings.Contains(strings.ToLower(newStructType), "id") {
+		tmp = newStructType + "ID" + newName
+	}
+
+	res = strings.ReplaceAll(tmp, "\n", "")
+	res = strings.ReplaceAll(res, "IE", "Ie")
+	res = strings.ReplaceAll(res, "Id", "ID")
+	res = strings.ReplaceAll(res, " ", "")
+	return res
+}
+
+func lookUpCanonicalChoiceIndex(name string, list []string) string {
+
+	res := ""
+	for _, item := range list {
+		if strings.Contains(strings.ToLower(item), strings.ToLower(name)) {
+			res = item
+			break
+		}
+	}
+
+	if res == "" {
+		res = "NoIndexDefined"
+	}
+	return res
 }

@@ -51,8 +51,10 @@ For E2AP Choice map generation, you should run following command under `onos-e2t
 ```bash
 protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2t/api" --proto_path="api/" --choice_out="api/e2ap/v2/" e2ap/v2/e2ap_pdu_descriptions.proto e2ap/v2/e2ap_pdu_contents.proto e2ap/v2/e2ap_ies.proto e2ap/v2/e2ap_containers.proto e2ap/v2/e2ap_constants.proto e2ap/v2/e2ap_commondatatypes.proto
 ```
-Once you run it for the first file, store choice map somewhere and run this command for the next file. Final `ChoiceMap` would be composed as a summary of output produced for each file, see
-A good example could be a `ChoiceMap` file for RSM service model, see:
+In case of canonical choice ordering, a `.proto` file with constants definition is required.
+
+In case of multiple input files, final `ChoiceMap` would be composed as a summary of output produced for each file.
+A good example is a `ChoiceMap` for RSM service model, see:
 
 `onos-e2-sm/servicemodels/e2sm_rsm/v1/e2sm-rsm-ies/choiceOptions.go`
 
