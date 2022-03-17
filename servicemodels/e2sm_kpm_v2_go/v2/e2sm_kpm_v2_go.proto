@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-package e2smkpmv2.v2;
+package e2sm_kpm_v2_go.v2;
 
 import "asn1/v1/asn1.proto";
 import "validate/v1/validate.proto";
