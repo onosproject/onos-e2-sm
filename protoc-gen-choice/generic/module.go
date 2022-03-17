@@ -527,7 +527,7 @@ func extractProtoFileName(proto string) string {
 
 func extractPackageName(pckg string) string {
 
-	if strings.Index(pckg, "/") != -1 {
+	if strings.Contains(pckg, "/") {
 		return pckg[:strings.Index(pckg, "/")]
 	}
 	return pckg
