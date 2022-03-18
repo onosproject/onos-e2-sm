@@ -61,8 +61,8 @@ type canonicalLeaf struct {
 	Index         string
 	LeafName      string
 	ProtoFileName string
-	//PackageName   string // Not necessary, since it is located in the same folder..
-	ItemType string // This is to store type of the CHOICE item (for correct referencing in index)
+	PackageName   string
+	ItemType      string // This is to store type of the CHOICE item (for correct referencing in index)
 }
 
 //type canonicalChoicesList struct {
@@ -375,8 +375,9 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 									return nil
 								}
 								lf := canonicalLeaf{
-									Index:    lookUpCanonicalChoiceIndex(strings.ReplaceAll(field.Name().String(), "_", ""), constantsList),
-									LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(field.Name().String()),
+									PackageName: extractPackageNameForCanonicalChoices(f.File().InputPath().Dir().String()),
+									Index:       lookUpCanonicalChoiceIndex(strings.ReplaceAll(field.Name().String(), "_", ""), constantsList),
+									LeafName:    msg.Name().String() + "_" + adjustOneOfLeafName(field.Name().String()),
 								}
 								lf.ProtoFileName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
 								chItem.Leafs = append(chItem.Leafs, lf)
@@ -531,6 +532,13 @@ func extractPackageName(pckg string) string {
 		return pckg[:strings.Index(pckg, "/")]
 	}
 	return pckg
+}
+
+func extractPackageNameForCanonicalChoices(path string) string {
+
+	re := regexp.MustCompile(`v\d{1}`)
+	res := re.FindString(path)
+	return res
 }
 
 func adjustProtoFileName(filename string) string {
