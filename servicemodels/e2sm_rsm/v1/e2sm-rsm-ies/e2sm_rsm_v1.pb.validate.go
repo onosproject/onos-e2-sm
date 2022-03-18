@@ -11,6 +11,7 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -31,6 +32,7 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
+	_ = sort.Sort
 )
 
 // Validate checks the field values on MaxnoofBearers with the rules defined in
@@ -69,6 +71,7 @@ func (m *MaxnoofBearers) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxnoofBearersMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -179,6 +182,7 @@ func (m *MaxnoofUes) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxnoofUesMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -288,6 +292,7 @@ func (m *MaxnoofSlices) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxnoofSlicesMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -397,6 +402,7 @@ func (m *SliceId) validate(all bool) error {
 	if len(errors) > 0 {
 		return SliceIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -506,6 +512,7 @@ func (m *SliceIdassoc) validate(all bool) error {
 	if len(errors) > 0 {
 		return SliceIdassocMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -763,6 +770,7 @@ func (m *UeIdentity) validate(all bool) error {
 	if len(errors) > 0 {
 		return UeIdentityMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -872,6 +880,7 @@ func (m *CuUeF1ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return CuUeF1ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -981,6 +990,7 @@ func (m *DuUeF1ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return DuUeF1ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1090,6 +1100,7 @@ func (m *RanUeNgapId) validate(all bool) error {
 	if len(errors) > 0 {
 		return RanUeNgapIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1199,6 +1210,7 @@ func (m *EnbUeS1ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnbUeS1ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1307,6 +1319,7 @@ func (m *Qfi) validate(all bool) error {
 	if len(errors) > 0 {
 		return QfiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1416,6 +1429,7 @@ func (m *MaxnoofSlicingNodes) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxnoofSlicingNodesMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1570,6 +1584,7 @@ func (m *NodeSlicingCapabilityItem) validate(all bool) error {
 	if len(errors) > 0 {
 		return NodeSlicingCapabilityItemMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1673,6 +1688,7 @@ func (m *SupportedSlicingConfigItem) validate(all bool) error {
 	if len(errors) > 0 {
 		return SupportedSlicingConfigItemMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1782,6 +1798,7 @@ func (m *SliceMetrics) validate(all bool) error {
 	if len(errors) > 0 {
 		return SliceMetricsMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1909,6 +1926,7 @@ func (m *E2SmRsmEventTriggerDefinition) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmEventTriggerDefinitionMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2046,6 +2064,7 @@ func (m *EventDefinitionFormats) validate(all bool) error {
 	if len(errors) > 0 {
 		return EventDefinitionFormatsMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2147,16 +2166,14 @@ func (m *E2SmRsmEventTriggerDefinitionFormat1) validate(all bool) error {
 
 	// no validation rules for TriggerType
 
-	//switch m.XReportingPeriodMs.(type) {
-	//
-	//case *E2SmRsmEventTriggerDefinitionFormat1_ReportingPeriodMs:
-	//	// no validation rules for ReportingPeriodMs
-	//
-	//}
+	if m.ReportingPeriodMs != nil {
+		// no validation rules for ReportingPeriodMs
+	}
 
 	if len(errors) > 0 {
 		return E2SmRsmEventTriggerDefinitionFormat1MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2295,6 +2312,7 @@ func (m *E2SmRsmIndicationHeader) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmIndicationHeaderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2422,16 +2440,14 @@ func (m *E2SmRsmIndicationHeaderFormat1) validate(all bool) error {
 		}
 	}
 
-	//switch m.XColletStartTime.(type) {
-	//
-	//case *E2SmRsmIndicationHeaderFormat1_ColletStartTime:
-	//	// no validation rules for ColletStartTime
-	//
-	//}
+	if m.ColletStartTime != nil {
+		// no validation rules for ColletStartTime
+	}
 
 	if len(errors) > 0 {
 		return E2SmRsmIndicationHeaderFormat1MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2600,6 +2616,7 @@ func (m *E2SmRsmIndicationMessage) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmIndicationMessageMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2880,6 +2897,7 @@ func (m *E2SmRsmIndicationMessageFormat1) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmIndicationMessageFormat1MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3076,6 +3094,7 @@ func (m *E2SmRsmIndicationMessageFormat2) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmIndicationMessageFormat2MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3177,58 +3196,51 @@ func (m *SliceParameters) validate(all bool) error {
 
 	// no validation rules for SchedulerType
 
-	//switch m.XWeight.(type) {
-	//
-	//case *SliceParameters_Weight:
-	//	// no validation rules for Weight
-	//
-	//}
-	//
-	//switch m.XQosLevel.(type) {
-	//
-	//case *SliceParameters_QosLevel:
-	//	// no validation rules for QosLevel
-	//
-	//}
-	//
-	//switch m.XScheduleInfo.(type) {
-	//
-	//case *SliceParameters_ScheduleInfo:
-
-	if all {
-		switch v := interface{}(m.GetScheduleInfo()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SliceParametersValidationError{
-					field:  "ScheduleInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, SliceParametersValidationError{
-					field:  "ScheduleInfo",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetScheduleInfo()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SliceParametersValidationError{
-				field:  "ScheduleInfo",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+	if m.Weight != nil {
+		// no validation rules for Weight
 	}
 
-	//}
+	if m.QosLevel != nil {
+		// no validation rules for QosLevel
+	}
+
+	if m.ScheduleInfo != nil {
+
+		if all {
+			switch v := interface{}(m.GetScheduleInfo()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SliceParametersValidationError{
+						field:  "ScheduleInfo",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SliceParametersValidationError{
+						field:  "ScheduleInfo",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetScheduleInfo()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SliceParametersValidationError{
+					field:  "ScheduleInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return SliceParametersMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3385,26 +3397,25 @@ func (m *SliceConfig) validate(all bool) error {
 
 	// no validation rules for SliceType
 
-	//switch m.XSliceDescription.(type) {
-	//
-	//case *SliceConfig_SliceDescription:
+	if m.SliceDescription != nil {
 
-	//if l := utf8.RuneCountInString(m.GetSliceDescription()); l < 1 || l > 160 {
-	//	err := SliceConfigValidationError{
-	//		field:  "SliceDescription",
-	//		reason: "value length must be between 1 and 160 runes, inclusive",
-	//	}
-	//	if !all {
-	//		return err
-	//	}
-	//	errors = append(errors, err)
-	//}
+		if l := utf8.RuneCountInString(m.GetSliceDescription()); l < 1 || l > 160 {
+			err := SliceConfigValidationError{
+				field:  "SliceDescription",
+				reason: "value length must be between 1 and 160 runes, inclusive",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return SliceConfigMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3534,6 +3545,7 @@ func (m *SliceDelete) validate(all bool) error {
 	if len(errors) > 0 {
 		return SliceDeleteMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3732,44 +3744,43 @@ func (m *SliceAssociate) validate(all bool) error {
 		}
 	}
 
-	//switch m.XUplinkSliceId.(type) {
-	//
-	//case *SliceAssociate_UplinkSliceId:
+	if m.UplinkSliceId != nil {
 
-	if all {
-		switch v := interface{}(m.GetUplinkSliceId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SliceAssociateValidationError{
-					field:  "UplinkSliceId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+		if all {
+			switch v := interface{}(m.GetUplinkSliceId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SliceAssociateValidationError{
+						field:  "UplinkSliceId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SliceAssociateValidationError{
+						field:  "UplinkSliceId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetUplinkSliceId()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SliceAssociateValidationError{
+				return SliceAssociateValidationError{
 					field:  "UplinkSliceId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetUplinkSliceId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SliceAssociateValidationError{
-				field:  "UplinkSliceId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return SliceAssociateMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3904,6 +3915,7 @@ func (m *BearerId) validate(all bool) error {
 	if len(errors) > 0 {
 		return BearerIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4067,6 +4079,7 @@ func (m *DrbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return DrbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4241,6 +4254,7 @@ func (m *FiveGDrbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return FiveGDrbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4405,6 +4419,7 @@ func (m *QoSflowLevelParameters) validate(all bool) error {
 	if len(errors) > 0 {
 		return QoSflowLevelParametersMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4512,6 +4527,7 @@ func (m *DynamicFiveQi) validate(all bool) error {
 	if len(errors) > 0 {
 		return DynamicFiveQiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4640,6 +4656,7 @@ func (m *NonDynamicFiveQi) validate(all bool) error {
 	if len(errors) > 0 {
 		return NonDynamicFiveQiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4770,6 +4787,7 @@ func (m *FourGDrbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return FourGDrbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4942,6 +4960,7 @@ func (m *E2SmRsmRanfunctionDescription) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmRanfunctionDescriptionMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5046,6 +5065,7 @@ func (m *E2SmRsmControlHeader) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmControlHeaderMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5275,6 +5295,7 @@ func (m *E2SmRsmControlMessage) validate(all bool) error {
 	if len(errors) > 0 {
 		return E2SmRsmControlMessageMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5373,121 +5394,113 @@ func (m *ScheduleConfig) validate(all bool) error {
 
 	var errors []error
 
-	//switch m.XLinkAdaptation.(type) {
-	//
-	//case *ScheduleConfig_LinkAdaptation:
+	if m.LinkAdaptation != nil {
 
-	if all {
-		switch v := interface{}(m.GetLinkAdaptation()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ScheduleConfigValidationError{
+		if all {
+			switch v := interface{}(m.GetLinkAdaptation()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ScheduleConfigValidationError{
+						field:  "LinkAdaptation",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ScheduleConfigValidationError{
+						field:  "LinkAdaptation",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetLinkAdaptation()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ScheduleConfigValidationError{
 					field:  "LinkAdaptation",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ScheduleConfigValidationError{
-					field:  "LinkAdaptation",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetLinkAdaptation()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ScheduleConfigValidationError{
-				field:  "LinkAdaptation",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XFeatures.(type) {
-	//
-	//case *ScheduleConfig_Features:
+	if m.Features != nil {
 
-	if all {
-		switch v := interface{}(m.GetFeatures()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ScheduleConfigValidationError{
+		if all {
+			switch v := interface{}(m.GetFeatures()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ScheduleConfigValidationError{
+						field:  "Features",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ScheduleConfigValidationError{
+						field:  "Features",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFeatures()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ScheduleConfigValidationError{
 					field:  "Features",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ScheduleConfigValidationError{
-					field:  "Features",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetFeatures()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ScheduleConfigValidationError{
-				field:  "Features",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
+	if m.CarrierAggregationCap != nil {
+		// no validation rules for CarrierAggregationCap
+	}
 
-	//switch m.XCarrierAggregationCap.(type) {
-	//
-	//case *ScheduleConfig_CarrierAggregationCap:
-	//	// no validation rules for CarrierAggregationCap
-	//
-	//}
-	//
-	//switch m.XUlPowerControl.(type) {
-	//
-	//case *ScheduleConfig_UlPowerControl:
+	if m.UlPowerControl != nil {
 
-	if all {
-		switch v := interface{}(m.GetUlPowerControl()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ScheduleConfigValidationError{
+		if all {
+			switch v := interface{}(m.GetUlPowerControl()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ScheduleConfigValidationError{
+						field:  "UlPowerControl",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ScheduleConfigValidationError{
+						field:  "UlPowerControl",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetUlPowerControl()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ScheduleConfigValidationError{
 					field:  "UlPowerControl",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ScheduleConfigValidationError{
-					field:  "UlPowerControl",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetUlPowerControl()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ScheduleConfigValidationError{
-				field:  "UlPowerControl",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return ScheduleConfigMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5584,100 +5597,75 @@ func (m *LinkAdaptation) validate(all bool) error {
 
 	var errors []error
 
-	//switch m.XCqiCap.(type) {
-	//
-	//case *LinkAdaptation_CqiCap:
-	//	// no validation rules for CqiCap
-	//
-	//}
-	//
-	//switch m.XRiCap.(type) {
-	//
-	//case *LinkAdaptation_RiCap:
-	//	// no validation rules for RiCap
-	//
-	//}
-	//
-	//switch m.XAggregationLevelCap.(type) {
-	//
-	//case *LinkAdaptation_AggregationLevelCap:
-	//	// no validation rules for AggregationLevelCap
-	//
-	//}
-	//
-	//switch m.XTargetBlerDl.(type) {
-	//
-	//case *LinkAdaptation_TargetBlerDl:
-	//	// no validation rules for TargetBlerDl
-	//
-	//}
-	//
-	//switch m.XTargetBlerUl.(type) {
-	//
-	//case *LinkAdaptation_TargetBlerUl:
-	//	// no validation rules for TargetBlerUl
-	//
-	//}
-	//
-	//switch m.XMaxMcs.(type) {
-	//
-	//case *LinkAdaptation_MaxMcs:
-	//	// no validation rules for MaxMcs
-	//
-	//}
-	//
-	//switch m.XMinMcs.(type) {
-	//
-	//case *LinkAdaptation_MinMcs:
-	//	// no validation rules for MinMcs
-	//
-	//}
-	//
-	//switch m.XTransmissionMode.(type) {
-	//
-	//case *LinkAdaptation_TransmissionMode:
-	//	// no validation rules for TransmissionMode
-	//
-	//}
-	//
-	//switch m.XHarqRetxCap.(type) {
-	//
-	//case *LinkAdaptation_HarqRetxCap:
-
-	if all {
-		switch v := interface{}(m.GetHarqRetxCap()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, LinkAdaptationValidationError{
-					field:  "HarqRetxCap",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, LinkAdaptationValidationError{
-					field:  "HarqRetxCap",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetHarqRetxCap()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return LinkAdaptationValidationError{
-				field:  "HarqRetxCap",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+	if m.CqiCap != nil {
+		// no validation rules for CqiCap
 	}
 
-	//}
+	if m.RiCap != nil {
+		// no validation rules for RiCap
+	}
+
+	if m.AggregationLevelCap != nil {
+		// no validation rules for AggregationLevelCap
+	}
+
+	if m.TargetBlerDl != nil {
+		// no validation rules for TargetBlerDl
+	}
+
+	if m.TargetBlerUl != nil {
+		// no validation rules for TargetBlerUl
+	}
+
+	if m.MaxMcs != nil {
+		// no validation rules for MaxMcs
+	}
+
+	if m.MinMcs != nil {
+		// no validation rules for MinMcs
+	}
+
+	if m.TransmissionMode != nil {
+		// no validation rules for TransmissionMode
+	}
+
+	if m.HarqRetxCap != nil {
+
+		if all {
+			switch v := interface{}(m.GetHarqRetxCap()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, LinkAdaptationValidationError{
+						field:  "HarqRetxCap",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, LinkAdaptationValidationError{
+						field:  "HarqRetxCap",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetHarqRetxCap()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LinkAdaptationValidationError{
+					field:  "HarqRetxCap",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return LinkAdaptationMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5774,23 +5762,18 @@ func (m *HarqrextCap) validate(all bool) error {
 
 	var errors []error
 
-	//switch m.XDl.(type) {
-	//
-	//case *HarqrextCap_Dl:
-	//	// no validation rules for Dl
-	//
-	//}
-	//
-	//switch m.XUl.(type) {
-	//
-	//case *HarqrextCap_Ul:
-	//	// no validation rules for Ul
-	//
-	//}
+	if m.Dl != nil {
+		// no validation rules for Dl
+	}
+
+	if m.Ul != nil {
+		// no validation rules for Ul
+	}
 
 	if len(errors) > 0 {
 		return HarqrextCapMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5886,16 +5869,14 @@ func (m *FeatureConfig) validate(all bool) error {
 
 	var errors []error
 
-	//switch m.XTtiBundling.(type) {
-	//
-	//case *FeatureConfig_TtiBundling:
-	//	// no validation rules for TtiBundling
-	//
-	//}
+	if m.TtiBundling != nil {
+		// no validation rules for TtiBundling
+	}
 
 	if len(errors) > 0 {
 		return FeatureConfigMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5992,23 +5973,18 @@ func (m *UlpowerControl) validate(all bool) error {
 
 	var errors []error
 
-	//switch m.XPuschTargetSnr.(type) {
-	//
-	//case *UlpowerControl_PuschTargetSnr:
-	//	// no validation rules for PuschTargetSnr
-	//
-	//}
-	//
-	//switch m.XPucchTargetSnr.(type) {
-	//
-	//case *UlpowerControl_PucchTargetSnr:
-	//	// no validation rules for PucchTargetSnr
-	//
-	//}
+	if m.PuschTargetSnr != nil {
+		// no validation rules for PuschTargetSnr
+	}
+
+	if m.PucchTargetSnr != nil {
+		// no validation rules for PucchTargetSnr
+	}
 
 	if len(errors) > 0 {
 		return UlpowerControlMultiError(errors)
 	}
+
 	return nil
 }
 

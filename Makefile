@@ -14,7 +14,7 @@ ONOS_E2_SM_VERSION := latest
 ONOS_BUILD_VERSION := v1.0
 ONOS_PROTOC_VERSION := v1.0.2
 
-BUF_VERSION := 0.52.0
+BUF_VERSION := 1.0.0
 
 build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
 	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
