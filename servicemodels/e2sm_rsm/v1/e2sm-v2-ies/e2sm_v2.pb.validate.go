@@ -11,6 +11,7 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -31,6 +32,7 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
+	_ = sort.Sort
 )
 
 // Validate checks the field values on MaxE1Apid with the rules defined in the
@@ -69,6 +71,7 @@ func (m *MaxE1Apid) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxE1ApidMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -178,6 +181,7 @@ func (m *MaxF1Apid) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxF1ApidMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -287,6 +291,7 @@ func (m *MaxEarfcn) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxEarfcnMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -396,6 +401,7 @@ func (m *MaxNrarfcn) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxNrarfcnMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -505,6 +511,7 @@ func (m *MaxnoofNrCellBands) validate(all bool) error {
 	if len(errors) > 0 {
 		return MaxnoofNrCellBandsMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -671,6 +678,7 @@ func (m *Cgi) validate(all bool) error {
 	if len(errors) > 0 {
 		return CgiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -835,6 +843,7 @@ func (m *CoreCpid) validate(all bool) error {
 	if len(errors) > 0 {
 		return CoreCpidMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1154,6 +1163,7 @@ func (m *InterfaceIdentifier) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdentifierMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1284,6 +1294,7 @@ func (m *InterfaceIdNg) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdNgMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1412,6 +1423,7 @@ func (m *InterfaceIdXn) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdXnMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1569,6 +1581,7 @@ func (m *InterfaceIdF1) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdF1MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1726,6 +1739,7 @@ func (m *InterfaceIdE1) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdE1MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1854,6 +1868,7 @@ func (m *InterfaceIdS1) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdS1MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -1982,6 +1997,7 @@ func (m *InterfaceIdX2) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdX2MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2147,6 +2163,7 @@ func (m *NodeType) validate(all bool) error {
 	if len(errors) > 0 {
 		return NodeTypeMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2303,6 +2320,7 @@ func (m *InterfaceIdW1) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceIdW1MultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2406,6 +2424,7 @@ func (m *InterfaceMessageId) validate(all bool) error {
 	if len(errors) > 0 {
 		return InterfaceMessageIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2572,6 +2591,7 @@ func (m *GroupId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GroupIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2735,6 +2755,7 @@ func (m *QoSid) validate(all bool) error {
 	if len(errors) > 0 {
 		return QoSidMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2863,16 +2884,14 @@ func (m *RanfunctionName) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	//switch m.XRanFunctionInstance.(type) {
-	//
-	//case *RanfunctionName_RanFunctionInstance:
-	//	// no validation rules for RanFunctionInstance
-	//
-	//}
+	if m.RanFunctionInstance != nil {
+		// no validation rules for RanFunctionInstance
+	}
 
 	if len(errors) > 0 {
 		return RanfunctionNameMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -2974,6 +2993,7 @@ func (m *RicFormatType) validate(all bool) error {
 	if len(errors) > 0 {
 		return RicFormatTypeMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3075,6 +3095,7 @@ func (m *RicStyleType) validate(all bool) error {
 	if len(errors) > 0 {
 		return RicStyleTypeMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3204,6 +3225,7 @@ func (m *RrcMessageId) validate(all bool) error {
 	if len(errors) > 0 {
 		return RrcMessageIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3311,6 +3333,7 @@ func (m *RrcType) validate(all bool) error {
 	if len(errors) > 0 {
 		return RrcTypeMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3475,6 +3498,7 @@ func (m *ServingCellArfcn) validate(all bool) error {
 	if len(errors) > 0 {
 		return ServingCellArfcnMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3640,6 +3664,7 @@ func (m *ServingCellPci) validate(all bool) error {
 	if len(errors) > 0 {
 		return ServingCellPciMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -3959,6 +3984,7 @@ func (m *Ueid) validate(all bool) error {
 	if len(errors) > 0 {
 		return UeidMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4111,184 +4137,175 @@ func (m *UeidGnb) validate(all bool) error {
 		}
 	}
 
-	//switch m.XGNbCuUeF1ApIdList.(type) {
-	//
-	//case *UeidGnb_GNbCuUeF1ApIdList:
+	if m.GNbCuUeF1ApIdList != nil {
 
-	if all {
-		switch v := interface{}(m.GetGNbCuUeF1ApIdList()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetGNbCuUeF1ApIdList()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "GNbCuUeF1ApIdList",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "GNbCuUeF1ApIdList",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGNbCuUeF1ApIdList()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidGnbValidationError{
 					field:  "GNbCuUeF1ApIdList",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
-					field:  "GNbCuUeF1ApIdList",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetGNbCuUeF1ApIdList()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidGnbValidationError{
-				field:  "GNbCuUeF1ApIdList",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XGNbCuCpUeE1ApIdList.(type) {
-	//
-	//case *UeidGnb_GNbCuCpUeE1ApIdList:
+	if m.GNbCuCpUeE1ApIdList != nil {
 
-	if all {
-		switch v := interface{}(m.GetGNbCuCpUeE1ApIdList()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetGNbCuCpUeE1ApIdList()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "GNbCuCpUeE1ApIdList",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "GNbCuCpUeE1ApIdList",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGNbCuCpUeE1ApIdList()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidGnbValidationError{
 					field:  "GNbCuCpUeE1ApIdList",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
-					field:  "GNbCuCpUeE1ApIdList",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetGNbCuCpUeE1ApIdList()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidGnbValidationError{
-				field:  "GNbCuCpUeE1ApIdList",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XRanUeid.(type) {
-	//
-	//case *UeidGnb_RanUeid:
+	if m.RanUeid != nil {
 
-	if all {
-		switch v := interface{}(m.GetRanUeid()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetRanUeid()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidGnbValidationError{
 					field:  "RanUeid",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
-					field:  "RanUeid",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidGnbValidationError{
-				field:  "RanUeid",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XMNgRanUeXnApId.(type) {
-	//
-	//case *UeidGnb_MNgRanUeXnApId:
+	if m.MNgRanUeXnApId != nil {
 
-	if all {
-		switch v := interface{}(m.GetMNgRanUeXnApId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetMNgRanUeXnApId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "MNgRanUeXnApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "MNgRanUeXnApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMNgRanUeXnApId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidGnbValidationError{
 					field:  "MNgRanUeXnApId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
-					field:  "MNgRanUeXnApId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetMNgRanUeXnApId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidGnbValidationError{
-				field:  "MNgRanUeXnApId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XGlobalGnbId.(type) {
-	//
-	//case *UeidGnb_GlobalGnbId:
+	if m.GlobalGnbId != nil {
 
-	if all {
-		switch v := interface{}(m.GetGlobalGnbId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetGlobalGnbId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "GlobalGnbId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidGnbValidationError{
+						field:  "GlobalGnbId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGlobalGnbId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidGnbValidationError{
 					field:  "GlobalGnbId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidGnbValidationError{
-					field:  "GlobalGnbId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetGlobalGnbId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidGnbValidationError{
-				field:  "GlobalGnbId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return UeidGnbMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4421,6 +4438,7 @@ func (m *UeidGnbCuCpE1ApIdList) validate(all bool) error {
 	if len(errors) > 0 {
 		return UeidGnbCuCpE1ApIdListMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4551,6 +4569,7 @@ func (m *UeidGnbCuCpE1ApIdItem) validate(all bool) error {
 	if len(errors) > 0 {
 		return UeidGnbCuCpE1ApIdItemMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4686,6 +4705,7 @@ func (m *UeidGnbCuF1ApIdList) validate(all bool) error {
 	if len(errors) > 0 {
 		return UeidGnbCuF1ApIdListMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4816,6 +4836,7 @@ func (m *UeidGnbCuCpF1ApIdItem) validate(all bool) error {
 	if len(errors) > 0 {
 		return UeidGnbCuCpF1ApIdItemMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -4943,44 +4964,43 @@ func (m *UeidGnbDu) validate(all bool) error {
 		}
 	}
 
-	//switch m.XRanUeid.(type) {
-	//
-	//case *UeidGnbDu_RanUeid:
+	if m.RanUeid != nil {
 
-	if all {
-		switch v := interface{}(m.GetRanUeid()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidGnbDuValidationError{
-					field:  "RanUeid",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+		if all {
+			switch v := interface{}(m.GetRanUeid()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidGnbDuValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidGnbDuValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidGnbDuValidationError{
+				return UeidGnbDuValidationError{
 					field:  "RanUeid",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidGnbDuValidationError{
-				field:  "RanUeid",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return UeidGnbDuMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5105,44 +5125,43 @@ func (m *UeidGnbCuUp) validate(all bool) error {
 		}
 	}
 
-	//switch m.XRanUeid.(type) {
-	//
-	//case *UeidGnbCuUp_RanUeid:
+	if m.RanUeid != nil {
 
-	if all {
-		switch v := interface{}(m.GetRanUeid()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidGnbCuUpValidationError{
-					field:  "RanUeid",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+		if all {
+			switch v := interface{}(m.GetRanUeid()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidGnbCuUpValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidGnbCuUpValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidGnbCuUpValidationError{
+				return UeidGnbCuUpValidationError{
 					field:  "RanUeid",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidGnbCuUpValidationError{
-				field:  "RanUeid",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return UeidGnbCuUpMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5296,114 +5315,109 @@ func (m *UeidNgEnb) validate(all bool) error {
 		}
 	}
 
-	//switch m.XNgENbCuUeW1ApId.(type) {
-	//
-	//case *UeidNgEnb_NgENbCuUeW1ApId:
+	if m.NgENbCuUeW1ApId != nil {
 
-	if all {
-		switch v := interface{}(m.GetNgENbCuUeW1ApId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidNgEnbValidationError{
+		if all {
+			switch v := interface{}(m.GetNgENbCuUeW1ApId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidNgEnbValidationError{
+						field:  "NgENbCuUeW1ApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidNgEnbValidationError{
+						field:  "NgENbCuUeW1ApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetNgENbCuUeW1ApId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidNgEnbValidationError{
 					field:  "NgENbCuUeW1ApId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidNgEnbValidationError{
-					field:  "NgENbCuUeW1ApId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetNgENbCuUeW1ApId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidNgEnbValidationError{
-				field:  "NgENbCuUeW1ApId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XMNgRanUeXnApId.(type) {
-	//
-	//case *UeidNgEnb_MNgRanUeXnApId:
+	if m.MNgRanUeXnApId != nil {
 
-	if all {
-		switch v := interface{}(m.GetMNgRanUeXnApId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidNgEnbValidationError{
+		if all {
+			switch v := interface{}(m.GetMNgRanUeXnApId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidNgEnbValidationError{
+						field:  "MNgRanUeXnApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidNgEnbValidationError{
+						field:  "MNgRanUeXnApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMNgRanUeXnApId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidNgEnbValidationError{
 					field:  "MNgRanUeXnApId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidNgEnbValidationError{
-					field:  "MNgRanUeXnApId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetMNgRanUeXnApId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidNgEnbValidationError{
-				field:  "MNgRanUeXnApId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XGlobalNgEnbId.(type) {
-	//
-	//case *UeidNgEnb_GlobalNgEnbId:
+	if m.GlobalNgEnbId != nil {
 
-	if all {
-		switch v := interface{}(m.GetGlobalNgEnbId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidNgEnbValidationError{
+		if all {
+			switch v := interface{}(m.GetGlobalNgEnbId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidNgEnbValidationError{
+						field:  "GlobalNgEnbId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidNgEnbValidationError{
+						field:  "GlobalNgEnbId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGlobalNgEnbId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidNgEnbValidationError{
 					field:  "GlobalNgEnbId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidNgEnbValidationError{
-					field:  "GlobalNgEnbId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetGlobalNgEnbId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidNgEnbValidationError{
-				field:  "GlobalNgEnbId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return UeidNgEnbMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5531,6 +5545,7 @@ func (m *UeidNgEnbDu) validate(all bool) error {
 	if len(errors) > 0 {
 		return UeidNgEnbDuMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5684,149 +5699,142 @@ func (m *UeidEnGnb) validate(all bool) error {
 		}
 	}
 
-	//switch m.XMENbUeX2ApIdExtension.(type) {
-	//
-	//case *UeidEnGnb_MENbUeX2ApIdExtension:
+	if m.MENbUeX2ApIdExtension != nil {
 
-	if all {
-		switch v := interface{}(m.GetMENbUeX2ApIdExtension()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetMENbUeX2ApIdExtension()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "MENbUeX2ApIdExtension",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "MENbUeX2ApIdExtension",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMENbUeX2ApIdExtension()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidEnGnbValidationError{
 					field:  "MENbUeX2ApIdExtension",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
-					field:  "MENbUeX2ApIdExtension",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetMENbUeX2ApIdExtension()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidEnGnbValidationError{
-				field:  "MENbUeX2ApIdExtension",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XGNbCuUeF1ApId.(type) {
-	//
-	//case *UeidEnGnb_GNbCuUeF1ApId:
+	if m.GNbCuUeF1ApId != nil {
 
-	if all {
-		switch v := interface{}(m.GetGNbCuUeF1ApId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetGNbCuUeF1ApId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "GNbCuUeF1ApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "GNbCuUeF1ApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGNbCuUeF1ApId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidEnGnbValidationError{
 					field:  "GNbCuUeF1ApId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
-					field:  "GNbCuUeF1ApId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetGNbCuUeF1ApId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidEnGnbValidationError{
-				field:  "GNbCuUeF1ApId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XGNbCuCpUeE1ApIdList.(type) {
-	//
-	//case *UeidEnGnb_GNbCuCpUeE1ApIdList:
+	if m.GNbCuCpUeE1ApIdList != nil {
 
-	if all {
-		switch v := interface{}(m.GetGNbCuCpUeE1ApIdList()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetGNbCuCpUeE1ApIdList()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "GNbCuCpUeE1ApIdList",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "GNbCuCpUeE1ApIdList",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGNbCuCpUeE1ApIdList()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidEnGnbValidationError{
 					field:  "GNbCuCpUeE1ApIdList",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
-					field:  "GNbCuCpUeE1ApIdList",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetGNbCuCpUeE1ApIdList()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidEnGnbValidationError{
-				field:  "GNbCuCpUeE1ApIdList",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XRanUeid.(type) {
-	//
-	//case *UeidEnGnb_RanUeid:
+	if m.RanUeid != nil {
 
-	if all {
-		switch v := interface{}(m.GetRanUeid()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
+		if all {
+			switch v := interface{}(m.GetRanUeid()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidEnGnbValidationError{
+						field:  "RanUeid",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidEnGnbValidationError{
 					field:  "RanUeid",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidEnGnbValidationError{
-					field:  "RanUeid",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetRanUeid()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidEnGnbValidationError{
-				field:  "RanUeid",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return UeidEnGnbMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -5979,114 +5987,109 @@ func (m *UeidEnb) validate(all bool) error {
 		}
 	}
 
-	//switch m.XMENbUeX2ApId.(type) {
-	//
-	//case *UeidEnb_MENbUeX2ApId:
+	if m.MENbUeX2ApId != nil {
 
-	if all {
-		switch v := interface{}(m.GetMENbUeX2ApId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidEnbValidationError{
+		if all {
+			switch v := interface{}(m.GetMENbUeX2ApId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidEnbValidationError{
+						field:  "MENbUeX2ApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidEnbValidationError{
+						field:  "MENbUeX2ApId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMENbUeX2ApId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidEnbValidationError{
 					field:  "MENbUeX2ApId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidEnbValidationError{
-					field:  "MENbUeX2ApId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetMENbUeX2ApId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidEnbValidationError{
-				field:  "MENbUeX2ApId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XMENbUeX2ApIdExtension.(type) {
-	//
-	//case *UeidEnb_MENbUeX2ApIdExtension:
+	if m.MENbUeX2ApIdExtension != nil {
 
-	if all {
-		switch v := interface{}(m.GetMENbUeX2ApIdExtension()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidEnbValidationError{
+		if all {
+			switch v := interface{}(m.GetMENbUeX2ApIdExtension()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidEnbValidationError{
+						field:  "MENbUeX2ApIdExtension",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidEnbValidationError{
+						field:  "MENbUeX2ApIdExtension",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetMENbUeX2ApIdExtension()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidEnbValidationError{
 					field:  "MENbUeX2ApIdExtension",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidEnbValidationError{
-					field:  "MENbUeX2ApIdExtension",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetMENbUeX2ApIdExtension()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidEnbValidationError{
-				field:  "MENbUeX2ApIdExtension",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+
 	}
 
-	//}
-	//
-	//switch m.XGlobalEnbId.(type) {
-	//
-	//case *UeidEnb_GlobalEnbId:
+	if m.GlobalEnbId != nil {
 
-	if all {
-		switch v := interface{}(m.GetGlobalEnbId()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UeidEnbValidationError{
+		if all {
+			switch v := interface{}(m.GetGlobalEnbId()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UeidEnbValidationError{
+						field:  "GlobalEnbId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UeidEnbValidationError{
+						field:  "GlobalEnbId",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGlobalEnbId()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UeidEnbValidationError{
 					field:  "GlobalEnbId",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UeidEnbValidationError{
-					field:  "GlobalEnbId",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetGlobalEnbId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UeidEnbValidationError{
-				field:  "GlobalEnbId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return UeidEnbMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6312,6 +6315,7 @@ func (m *EnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6468,6 +6472,7 @@ func (m *GlobalEnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GlobalEnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6652,6 +6657,7 @@ func (m *Gummei) validate(all bool) error {
 	if len(errors) > 0 {
 		return GummeiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6761,6 +6767,7 @@ func (m *MmeUeS1ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return MmeUeS1ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6869,6 +6876,7 @@ func (m *Qci) validate(all bool) error {
 	if len(errors) > 0 {
 		return QciMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -6978,6 +6986,7 @@ func (m *SubscriberProfileIdforRfp) validate(all bool) error {
 	if len(errors) > 0 {
 		return SubscriberProfileIdforRfpMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7113,6 +7122,7 @@ func (m *EnGnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnGnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7222,6 +7232,7 @@ func (m *EnbUeX2ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnbUeX2ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7331,6 +7342,7 @@ func (m *EnbUeX2ApIdExtension) validate(all bool) error {
 	if len(errors) > 0 {
 		return EnbUeX2ApIdExtensionMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7443,6 +7455,7 @@ func (m *EUtraArfcn) validate(all bool) error {
 	if len(errors) > 0 {
 		return EUtraArfcnMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7552,6 +7565,7 @@ func (m *EUtraPci) validate(all bool) error {
 	if len(errors) > 0 {
 		return EUtraPciMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7661,6 +7675,7 @@ func (m *EUtraTac) validate(all bool) error {
 	if len(errors) > 0 {
 		return EUtraTacMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7817,6 +7832,7 @@ func (m *GlobalenGnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GlobalenGnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -7927,6 +7943,7 @@ func (m *NgenbCuUeW1ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return NgenbCuUeW1ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -8037,6 +8054,7 @@ func (m *NgenbDuId) validate(all bool) error {
 	if len(errors) > 0 {
 		return NgenbDuIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -8146,6 +8164,7 @@ func (m *AmfUeNgapId) validate(all bool) error {
 	if len(errors) > 0 {
 		return AmfUeNgapIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -8302,6 +8321,7 @@ func (m *EutraCgi) validate(all bool) error {
 	if len(errors) > 0 {
 		return EutraCgiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -8410,6 +8430,7 @@ func (m *FiveQi) validate(all bool) error {
 	if len(errors) > 0 {
 		return FiveQiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -8566,6 +8587,7 @@ func (m *GlobalGnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GlobalGnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -8722,6 +8744,7 @@ func (m *GlobalNgEnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GlobalNgEnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -8887,6 +8910,7 @@ func (m *GlobalRannodeId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GlobalRannodeIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -9020,6 +9044,7 @@ func (m *GnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -9233,6 +9258,7 @@ func (m *Guami) validate(all bool) error {
 	if len(errors) > 0 {
 		return GuamiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -9342,6 +9368,7 @@ func (m *IndexToRfsp) validate(all bool) error {
 	if len(errors) > 0 {
 		return IndexToRfspMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -9536,6 +9563,7 @@ func (m *NgEnbId) validate(all bool) error {
 	if len(errors) > 0 {
 		return NgEnbIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -9691,6 +9719,7 @@ func (m *NrCgi) validate(all bool) error {
 	if len(errors) > 0 {
 		return NrCgiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -9800,6 +9829,7 @@ func (m *QosFlowIdentifier) validate(all bool) error {
 	if len(errors) > 0 {
 		return QosFlowIdentifierMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -9926,44 +9956,43 @@ func (m *SNssai) validate(all bool) error {
 		}
 	}
 
-	//switch m.XSD.(type) {
-	//
-	//case *SNssai_SD:
+	if m.SD != nil {
 
-	if all {
-		switch v := interface{}(m.GetSD()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SNssaiValidationError{
-					field:  "SD",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+		if all {
+			switch v := interface{}(m.GetSD()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SNssaiValidationError{
+						field:  "SD",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SNssaiValidationError{
+						field:  "SD",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetSD()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SNssaiValidationError{
+				return SNssaiValidationError{
 					field:  "SD",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetSD()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SNssaiValidationError{
-				field:  "SD",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
-	//}
+	}
 
 	if len(errors) > 0 {
 		return SNssaiMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10073,6 +10102,7 @@ func (m *NgRannodeUexnApid) validate(all bool) error {
 	if len(errors) > 0 {
 		return NgRannodeUexnApidMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10185,6 +10215,7 @@ func (m *GnbCuCpUeE1ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GnbCuCpUeE1ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10295,6 +10326,7 @@ func (m *GnbCuUpId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GnbCuUpIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10404,6 +10436,7 @@ func (m *FiveGsTac) validate(all bool) error {
 	if len(errors) > 0 {
 		return FiveGsTacMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10513,6 +10546,7 @@ func (m *GnbCuUeF1ApId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GnbCuUeF1ApIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10622,6 +10656,7 @@ func (m *GnbDuId) validate(all bool) error {
 	if len(errors) > 0 {
 		return GnbDuIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10730,6 +10765,7 @@ func (m *NrPci) validate(all bool) error {
 	if len(errors) > 0 {
 		return NrPciMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10874,6 +10910,7 @@ func (m *NrArfcn) validate(all bool) error {
 	if len(errors) > 0 {
 		return NrArfcnMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -10974,6 +11011,7 @@ func (m *FreqBandNrItem) validate(all bool) error {
 	if len(errors) > 0 {
 		return FreqBandNrItemMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11084,6 +11122,7 @@ func (m *RicStyleName) validate(all bool) error {
 	if len(errors) > 0 {
 		return RicStyleNameMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11193,6 +11232,7 @@ func (m *PlmnIdentity) validate(all bool) error {
 	if len(errors) > 0 {
 		return PlmnIdentityMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11320,6 +11360,7 @@ func (m *EutracellIdentity) validate(all bool) error {
 	if len(errors) > 0 {
 		return EutracellIdentityMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11450,6 +11491,7 @@ func (m *NrcellIdentity) validate(all bool) error {
 	if len(errors) > 0 {
 		return NrcellIdentityMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11550,6 +11592,7 @@ func (m *Ranueid) validate(all bool) error {
 	if len(errors) > 0 {
 		return RanueidMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11650,6 +11693,7 @@ func (m *MmeGroupId) validate(all bool) error {
 	if len(errors) > 0 {
 		return MmeGroupIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11749,6 +11793,7 @@ func (m *MmeCode) validate(all bool) error {
 	if len(errors) > 0 {
 		return MmeCodeMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -11876,6 +11921,7 @@ func (m *AmfregionId) validate(all bool) error {
 	if len(errors) > 0 {
 		return AmfregionIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -12003,6 +12049,7 @@ func (m *AmfsetId) validate(all bool) error {
 	if len(errors) > 0 {
 		return AmfsetIdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -12130,6 +12177,7 @@ func (m *Amfpointer) validate(all bool) error {
 	if len(errors) > 0 {
 		return AmfpointerMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -12229,6 +12277,7 @@ func (m *Sd) validate(all bool) error {
 	if len(errors) > 0 {
 		return SdMultiError(errors)
 	}
+
 	return nil
 }
 
@@ -12328,6 +12377,7 @@ func (m *Sst) validate(all bool) error {
 	if len(errors) > 0 {
 		return SstMultiError(errors)
 	}
+
 	return nil
 }
 
