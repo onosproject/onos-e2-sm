@@ -593,8 +593,7 @@ func adjustMapVariableName(mapName string) string {
 	mapName = strings.ReplaceAll(mapName, "V4", "")
 	mapName = strings.ReplaceAll(mapName, "v4", "")
 
-	// ToDo - this function should return the mapName with first letter in uppper case
-	return mapName
+	return strings.ToUpper(mapName[:1]) + mapName[1:]
 }
 
 func dashToUnderscore(str string) string {
