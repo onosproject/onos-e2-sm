@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-ARG PLUGIN_BUILD_VERSION=v1.0
+ARG PLUGIN_BUILD_VERSION=v2
 
 FROM onosproject/golang-build:$PLUGIN_BUILD_VERSION as pluginbuild
 ENV GO111MODULE=on
