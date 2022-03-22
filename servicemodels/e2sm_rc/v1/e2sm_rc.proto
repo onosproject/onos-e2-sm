@@ -1,0 +1,1495 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
+////////////////////// e2sm-rc-ies.proto //////////////////////
+// Protobuf generated from /e2sm_rc.asn1 by asn1c-0.9.29
+// E2SM-RC-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version1(1) e2sm(2) e2sm-RC-IEs(3) }
+
+syntax = "proto3";
+
+package e2sm_rc.v1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies";
+
+import "e2sm_rc/v1/e2sm_common_ies.proto";
+import "validate/v1/validate.proto";
+import "asn1/v1/asn1.proto";
+
+// enumerated from e2sm_rc.asn1:76
+enum LogicalOr {
+    LOGICAL_OR_TRUE = 0;
+    LOGICAL_OR_FALSE = 1;
+};
+
+// enumerated from e2sm_rc.asn1:116
+enum RrcState {
+    RRC_STATE_RRC_CONNECTED = 0;
+    RRC_STATE_RRC_INACTIVE = 1;
+    RRC_STATE_RRC_IDLE = 2;
+    RRC_STATE_ANY = 3;
+};
+
+// constant Integer from e2sm_rc.asn1:47
+// {-}
+message MaxnoofMessages {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:48
+// {-}
+message MaxnoofE2InfoChanges {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:49
+// {-}
+message MaxnoofUeinfoChanges {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:50
+// {-}
+message MaxnoofRrcstate {
+    // @inject_tag: aper:"valueLB:8,valueUB:8,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 8, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:51
+// {-}
+message MaxnoofParametersToReport {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:52
+// {-}
+message MaxnoofPolicyConditions {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:53
+// {-}
+message MaxnoofAssociatedRanparameters {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:54
+// {-}
+message MaxnoofUeid {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:55
+// {-}
+message MaxnoofCellId {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:56
+// {-}
+message MaxnoofRanoutcomeParameters {
+    // @inject_tag: aper:"valueLB:255,valueUB:255,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 255, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:57
+// {-}
+message MaxnoofParametersinStructure {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:58
+// {-}
+message MaxnoofItemsinList {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:59
+// {-}
+message MaxnoofUeinfo {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:60
+// {-}
+message MaxnoofCellInfo {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:61
+// {-}
+message MaxnoofUeeventInfo {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:62
+// {-}
+message MaxnoofRanparamTest {
+    // @inject_tag: aper:"valueLB:255,valueUB:255,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 255, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:63
+// {-}
+message MaxnoofNeighbourCell {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:64
+// {-}
+message MaxnoofRicstyles {
+    // @inject_tag: aper:"valueLB:63,valueUB:63,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:65
+// {-}
+message MaxnoofCallProcessTypes {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:66
+// {-}
+message MaxnoofCallProcessBreakpoints {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:67
+// {-}
+message MaxnoofInsertIndication {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:68
+// {-}
+message MaxnoofControlAction {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_rc.asn1:69
+// {-}
+message MaxnoofPolicyAction {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// sequence from e2sm_rc.asn1:80
+// {NeighborCell-List}
+message NeighborCellList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,choiceExt"
+    repeated NeighborCellItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_rc.asn1:81
+// {NeighborCell-Item}
+message NeighborCellItem {
+    // choice from e2sm_rc.asn1:81
+    oneof neighbor_cell_item {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        NeighborCellItemChoiceNr ran_type_choice_nr = 1 [ json_name="ranType-Choice-NR"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        NeighborCellItemChoiceEUtra ran_type_choice_eutra = 2 [ json_name="ranType-Choice-EUTRA"];
+    }
+};
+
+// sequence from e2sm_rc.asn1:87
+// {NeighborCell-Item-Choice-NR}
+message NeighborCellItemChoiceNr {
+    // @inject_tag: aper:"valueExt"
+    NrCgi n_r_cgi = 1 [ json_name="nR-CGI"];
+    NrPci n_r_pci = 2 [ json_name="nR-PCI"];
+    FiveGsTac five_gs_tac = 3 [ json_name="fiveGS-TAC"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
+    NRModeInfo n_r_mode_info = 4 [ json_name="nR-mode-info"];
+    // @inject_tag: aper:"valueExt"
+    NrfrequencyInfo n_r_freq_info = 5 [ json_name="nR-FreqInfo"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
+    X2XNEstablished x2_xn_established = 6 [ json_name="x2-Xn-established"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
+    HOValidated h_o_validated = 7 [ json_name="hO-validated"];
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 version = 8 [ json_name="version"];
+};
+
+enum NRModeInfo {
+    NR_MODE_INFO_FDD = 0;
+    NR_MODE_INFO_TDD = 1;
+}
+
+enum X2XNEstablished {
+    X2XN_ESTABLISHED_TRUE = 0;
+    X2XN_ESTABLISHED_FALSE = 1;
+}
+
+enum HOValidated {
+    HO_VALIDATED_TRUE = 0;
+    HO_VALIDATED_FALSE = 1;
+}
+
+// sequence from e2sm_rc.asn1:99
+// {NeighborCell-Item-Choice-E-UTRA}
+message NeighborCellItemChoiceEUtra {
+    // @inject_tag: aper:"valueExt"
+    EutraCgi e_utra_cgi = 1 [ json_name="eUTRA-CGI"];
+    EUtraPci e_utra_pci = 2 [ json_name="eUTRA-PCI"];
+    EUtraArfcn e_utra_arfcn = 3 [ json_name="eUTRA-ARFCN"];
+    EUtraTac e_utra_tac = 4 [ json_name="eUTRA-TAC"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
+    X2XNEstablished x2_xn_established = 5 [ json_name="x2-Xn-established"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
+    HOValidated h_o_validated = 6 [ json_name="hO-validated"];
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 version = 7 [ json_name="version"];
+};
+
+// sequence from e2sm_rc.asn1:110
+// {NeighborRelation-Info}
+message NeighborRelationInfo {
+    // @inject_tag: aper:"choiceExt"
+    ServingCellPci serving_cell_pci = 1 [ json_name="servingCellPCI"];
+    // @inject_tag: aper:"choiceExt"
+    ServingCellArfcn serving_cell_arfcn = 2 [ json_name="servingCellARFCN"];
+    NeighborCellList neighbor_cell_list = 3 [ json_name="neighborCell-List"];
+};
+
+// sequence from e2sm_rc.asn1:126
+// {EventTrigger-Cell-Info}
+message EventTriggerCellInfo {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
+    repeated EventTriggerCellInfoItem cell_info_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="cellInfo-List"];
+};
+
+// sequence from e2sm_rc.asn1:131
+// {EventTrigger-Cell-Info-Item}
+message EventTriggerCellInfoItem {
+    RicEventTriggerCellId event_trigger_cell_id = 1 [ json_name="eventTriggerCellID"];
+    // @inject_tag: aper:"choiceExt"
+    CellType cell_type = 2 [ json_name="cellType"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 3 [ json_name="logicalOR"];
+};
+
+message CellType {
+    oneof cell_type {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        EventTriggerCellInfoItemChoiceIndividual cell_type_choice_individual = 1;
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        EventTriggerCellInfoItemChoiceGroup cell_type_choice_group = 2;
+    }
+}
+
+// sequence from e2sm_rc.asn1:142
+// {EventTrigger-Cell-Info-Item-Choice-Individual}
+message EventTriggerCellInfoItemChoiceIndividual {
+    // @inject_tag: aper:"choiceExt"
+    Cgi cell_global_id = 1 [ json_name="cellGlobalID"];
+};
+
+// sequence from e2sm_rc.asn1:147
+// {EventTrigger-Cell-Info-Item-Choice-Group}
+message EventTriggerCellInfoItemChoiceGroup {
+    RanparameterTesting ran_parameter_testing = 1 [ json_name="ranParameterTesting"];
+};
+
+// sequence from e2sm_rc.asn1:154
+// {EventTrigger-UE-Info}
+message EventTriggerUeInfo {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated EventTriggerUeInfoItem ue_info_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ueInfo-List"];
+};
+
+// sequence from e2sm_rc.asn1:159
+// {EventTrigger-UE-Info-Item}
+message EventTriggerUeInfoItem {
+    RicEventTriggerUeId event_trigger_ueid = 1 [ json_name="eventTriggerUEID"];
+    // @inject_tag: aper:"choiceExt"
+    UeType ue_type = 2 [ json_name="ueType"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 3 [ json_name="logicalOR"];
+};
+
+message UeType {
+    oneof ue_type {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        EventTriggerUeInfoItemChoiceIndividual ue_type_choice_individual = 1;
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        EventTriggerUeInfoItemChoiceGroup ue_type_choice_group = 2;
+    }
+}
+
+// sequence from e2sm_rc.asn1:170
+// {EventTrigger-UE-Info-Item-Choice-Individual}
+message EventTriggerUeInfoItemChoiceIndividual {
+    // @inject_tag: aper:"choiceExt"
+    Ueid ue_id = 1 [ json_name="ueID"];
+    RanparameterTesting ran_parameter_testing = 2 [ json_name="ranParameterTesting"];
+};
+
+// sequence from e2sm_rc.asn1:176
+// {EventTrigger-UE-Info-Item-Choice-Group}
+message EventTriggerUeInfoItemChoiceGroup {
+    RanparameterTesting ran_parameter_testing = 1 [ json_name="ranParameterTesting"];
+};
+
+// sequence from e2sm_rc.asn1:183
+// {EventTrigger-UEevent-Info}
+message EventTriggerUeeventInfo {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated EventTriggerUeeventInfoItem ue_event_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ueEvent-List"];
+};
+
+// sequence from e2sm_rc.asn1:188
+// {EventTrigger-UEevent-Info-Item}
+message EventTriggerUeeventInfoItem {
+    RicEventTriggerUeeventId ue_event_id = 1 [ json_name="ueEventID"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 2 [ json_name="logicalOR"];
+};
+
+// range of Integer from e2sm_rc.asn1:200
+// {RANParameter-ID}
+message RanparameterId {
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967296,valueExt"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967296}, json_name="value"];
+};
+
+message RanparameterName {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
+    string value = 1;
+}
+
+// sequence from e2sm_rc.asn1:205
+// {RANParameter-Definition}
+message RanparameterDefinition {
+    // @inject_tag: aper:"choiceExt"
+    RanparameterDefinitionChoice ran_parameter_definition_choice = 1 [ json_name="ranParameter-Definition-Choice"];
+};
+
+// sequence from e2sm_rc.asn1:210
+// {RANParameter-Definition-Choice}
+message RanparameterDefinitionChoice {
+    // choice from e2sm_rc.asn1:210
+    oneof ranparameter_definition_choice {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        RanparameterDefinitionChoiceList choice_list = 1 [ json_name="choiceLIST"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        RanparameterDefinitionChoiceStructure choice_structure = 2 [ json_name="choiceSTRUCTURE"];
+    }
+};
+
+// sequence from e2sm_rc.asn1:216
+// {RANParameter-Definition-Choice-LIST}
+message RanparameterDefinitionChoiceList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterDefinitionChoiceListItem ran_parameter_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ranParameter-List"];
+};
+
+// sequence from e2sm_rc.asn1:221
+// {RANParameter-Definition-Choice-LIST-Item}
+message RanparameterDefinitionChoiceListItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:228
+// {RANParameter-Definition-Choice-STRUCTURE}
+message RanparameterDefinitionChoiceStructure {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterDefinitionChoiceStructureItem ran_parameter_structure = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ranParameter-STRUCTURE"];
+};
+
+// sequence from e2sm_rc.asn1:233
+// {RANParameter-Definition-Choice-STRUCTURE-Item}
+message RanparameterDefinitionChoiceStructureItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:240
+// {RANParameter-Value}
+message RanparameterValue {
+    // choice from e2sm_rc.asn1:240
+    oneof ranparameter_value {
+        bool value_boolean = 1 [ json_name="valueBoolean"];
+        int64 value_int = 2 [ json_name="valueInt"];
+        float value_real = 3 [ json_name="valueReal"];
+        asn1.v1.BitString value_bit_s = 4 [ json_name="valueBitS"];
+        bytes value_oct_s = 5 [ json_name="valueOctS"];
+        string value_printable_string = 6 [ json_name="valuePrintableString"];
+    }
+};
+
+// sequence from e2sm_rc.asn1:250
+// {RANParameter-ValueType}
+message RanparameterValueType {
+    // choice from e2sm_rc.asn1:250
+    oneof ranparameter_value_type {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        RanparameterValueTypeChoiceElementTrue ran_p_choice_element_true = 1 [ json_name="ranP-Choice-ElementTrue"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        RanparameterValueTypeChoiceElementFalse ran_p_choice_element_false = 2 [ json_name="ranP-Choice-ElementFalse"];
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        RanparameterValueTypeChoiceStructure ran_p_choice_structure = 3 [ json_name="ranP-Choice-Structure"];
+        // @inject_tag: aper:"choiceIdx:4,valueExt"
+        RanparameterValueTypeChoiceList ran_p_choice_list = 4 [ json_name="ranP-Choice-List"];
+    }
+};
+
+// sequence from e2sm_rc.asn1:260
+// {RANParameter-ValueType-Choice-ElementTrue}
+message RanparameterValueTypeChoiceElementTrue {
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValue ran_parameter_value = 1 [ json_name="ranParameter-value"];
+};
+
+// sequence from e2sm_rc.asn1:265
+// {RANParameter-ValueType-Choice-ElementFalse}
+message RanparameterValueTypeChoiceElementFalse {
+    // @inject_tag: aper:"optional,choiceExt"
+    optional RanparameterValue ran_parameter_value = 1 [ json_name="ranParameter-value"];
+};
+
+// sequence from e2sm_rc.asn1:271
+// {RANParameter-ValueType-Choice-Structure}
+message RanparameterValueTypeChoiceStructure {
+    // @inject_tag: aper:"valueExt"
+    RanparameterStructure ran_parameter_structure = 1 [ json_name="ranParameter-Structure"];
+};
+
+// sequence from e2sm_rc.asn1:276
+// {RANParameter-ValueType-Choice-List}
+message RanparameterValueTypeChoiceList {
+    // @inject_tag: aper:"valueExt"
+    RanparameterList ran_parameter_list = 1 [ json_name="ranParameter-List"];
+};
+
+// sequence from e2sm_rc.asn1:282
+// {RANParameter-STRUCTURE}
+message RanparameterStructure {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterStructureItem sequence_of_ran_parameters = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="sequence-of-ranParameters"];
+};
+
+// sequence from e2sm_rc.asn1:287
+// {RANParameter-STRUCTURE-Item}
+message RanparameterStructureItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValueType ran_parameter_value_type = 2 [ json_name="ranParameter-valueType"];
+};
+
+// sequence from e2sm_rc.asn1:293
+// {RANParameter-LIST}
+message RanparameterList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterStructure list_of_ran_parameter = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="list-of-ranParameter"];
+};
+
+// sequence from e2sm_rc.asn1:300
+// {RANParameter-Testing}
+message RanparameterTesting {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:255,valueExt"
+    repeated RanparameterTestingItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_rc.asn1:301
+// {RANParameter-TestingCondition}
+message RanparameterTestingCondition {
+    // choice from e2sm_rc.asn1:301
+    oneof ranparameter_testing_condition {
+        // @inject_tag: aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:5"
+        RanPChoiceComparison ran_p_choice_comparison = 1 [ json_name="ranP-Choice-comparison"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:3"
+        RanPChoicePresence ran_p_choice_presence = 2 [ json_name="ranP-Choice-presence"];
+    }
+};
+
+enum RanPChoiceComparison {
+    RAN_P_CHOICE_COMPARISON_EQUAL = 0;
+    RAN_P_CHOICE_COMPARISON_DIFFERENCE = 1;
+    RAN_P_CHOICE_COMPARISON_GREATERTHAN = 2;
+    RAN_P_CHOICE_COMPARISON_LESSTHAN = 3;
+    RAN_P_CHOICE_COMPARISON_CONTAINS = 4;
+    RAN_P_CHOICE_COMPARISON_STARTS_WITH = 5;
+}
+
+enum RanPChoicePresence {
+    RAN_P_CHOICE_PRESENCE_PRESENT = 0;
+    RAN_P_CHOICE_PRESENCE_CONFIGURED = 1;
+    RAN_P_CHOICE_PRESENCE_ROLLOVER = 2;
+    RAN_P_CHOICE_PRESENCE_NONZERO = 3;
+}
+
+// sequence from e2sm_rc.asn1:307
+// {RANParameter-Testing-Item}
+message RanparameterTestingItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanParameterType ran_parameter_type = 2 [ json_name="ranParameter-Type"];
+};
+
+message RanParameterType {
+    oneof ran_parameter_type {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        RanparameterTestingItemChoiceElementTrue ran_p_choice_list = 1;
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        RanparameterTestingItemChoiceStructure ran_p_choice_structure = 2;
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        RanparameterTestingItemChoiceElementTrue ran_p_choice_element_true = 3;
+        // @inject_tag: aper:"choiceIdx:4,valueExt"
+        RanparameterTestingItemChoiceElementFalse ran_p_choice_element_false = 4;
+    }
+}
+
+// sequence from e2sm_rc.asn1:319
+// {RANParameter-Testing-Item-Choice-List}
+message RanparameterTestingItemChoiceList {
+    RanparameterTestingList ran_parameter_list = 1 [ json_name="ranParameter-List"];
+};
+
+// sequence from e2sm_rc.asn1:324
+// {RANParameter-Testing-Item-Choice-Structure}
+message RanparameterTestingItemChoiceStructure {
+    RanparameterTestingStructure ran_parameter_structure = 1 [ json_name="ranParameter-Structure"];
+};
+
+// sequence from e2sm_rc.asn1:329
+// {RANParameter-Testing-Item-Choice-ElementTrue}
+message RanparameterTestingItemChoiceElementTrue {
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValue ran_parameter_value = 1 [ json_name="ranParameter-value"];
+};
+
+// sequence from e2sm_rc.asn1:334
+// {RANParameter-Testing-Item-Choice-ElementFalse}
+message RanparameterTestingItemChoiceElementFalse {
+    // @inject_tag: aper:"choiceExt"
+    RanparameterTestingCondition ran_parameter_test_condition = 1 [ json_name="ranParameter-TestCondition"];
+    // @inject_tag: aper:"optional,choiceExt"
+    optional RanparameterValue ran_parameter_value = 2 [ json_name="ranParameter-Value"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 3 [ json_name="logicalOR"];
+};
+
+// sequence from e2sm_rc.asn1:342
+// {RANParameter-Testing-LIST}
+message RanparameterTestingList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterTestingItem value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_rc.asn1:352
+// {RANParameter-Testing-STRUCTURE}
+message RanparameterTestingStructure {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterTestingItem value = 1 [ json_name="value"];
+};
+
+// range of Integer from e2sm_rc.asn1:352
+// {RAN-CallProcess-ID}
+message RanCallProcessId {
+    // @inject_tag: aper:"valueLB:1,valueUB:232,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 232}, json_name="value"];
+};
+
+// range of Integer from e2sm_rc.asn1:354
+// {RIC-CallProcessType-ID}
+message RicCallProcessTypeId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+message RicCallProcessTypeName {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
+    string value = 1;
+}
+
+// range of Integer from e2sm_rc.asn1:358
+// {RIC-CallProcessBreakpoint-ID}
+message RicCallProcessBreakpointId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+message RicCallProcessBreakpointName {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
+    string value = 1;
+}
+
+// range of Integer from e2sm_rc.asn1:362
+// {RIC-ControlAction-ID}
+message RicControlActionId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+message RicControlActionName {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
+    string value = 1;
+}
+
+// range of Integer from e2sm_rc.asn1:366
+// {RIC-EventTriggerCondition-ID}
+message RicEventTriggerConditionId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+// range of Integer from e2sm_rc.asn1:368
+// {RIC-EventTrigger-UE-ID}
+message RicEventTriggerUeId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+// range of Integer from e2sm_rc.asn1:370
+// {RIC-EventTrigger-UEevent-ID}
+message RicEventTriggerUeeventId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+// range of Integer from e2sm_rc.asn1:372
+// {RIC-EventTrigger-Cell-ID}
+message RicEventTriggerCellId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+// range of Integer from e2sm_rc.asn1:374
+// {RIC-InsertIndication-ID}
+message RicInsertIndicationId {
+    // @inject_tag: aper:"valueLB:1,valueUB:65535,valueExt"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 65535}, json_name="value"];
+};
+
+message RicInsertIndicationName {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:150,sizeExt"
+    string value = 1;
+}
+
+// sequence from e2sm_rc.asn1:379
+// {RIC-PolicyAction}
+message RicPolicyAction {
+    RicControlActionId ric_policy_action_id = 1 [ json_name="ric-PolicyAction-ID"];
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RicPolicyActionRanparameterItem ran_parameters_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ranParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:386
+// {RIC-PolicyAction-RANParameter-Item}
+message RicPolicyActionRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValueType ran_parameter_value_type = 2 [ json_name="ranParameter-valueType"];
+};
+
+// sequence from e2sm_rc.asn1:409
+// {E2SM-RC-EventTrigger}
+// @inject_tag: aper:"valueExt"
+message E2SmRcEventTrigger {
+    // @inject_tag: aper:"choiceExt"
+    RicEventTriggerFormats ric_event_trigger_formats = 1 [ json_name="ric-eventTrigger-formats"];
+};
+
+message RicEventTriggerFormats {
+    oneof ric_event_trigger_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcEventTriggerFormat1 event_trigger_format1 = 1;
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        E2SmRcEventTriggerFormat2 event_trigger_format2 = 2;
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        E2SmRcEventTriggerFormat3 event_trigger_format3 = 3;
+        // @inject_tag: aper:"choiceIdx:4,valueExt"
+        E2SmRcEventTriggerFormat4 event_trigger_format4 = 4;
+        // @inject_tag: aper:"choiceIdx:5,valueExt"
+        E2SmRcEventTriggerFormat5 event_trigger_format5 = 5;
+    }
+}
+
+// sequence from e2sm_rc.asn1:414
+// {E2SM-RC-EventTrigger-Format1}
+message E2SmRcEventTriggerFormat1 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcEventTriggerFormat1Item message_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="message-List"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerUeInfo global_associated_ueinfo = 2 [ json_name="globalAssociatedUEInfo"];
+};
+
+// sequence from e2sm_rc.asn1:420
+// {E2SM-RC-EventTrigger-Format1-Item}
+message E2SmRcEventTriggerFormat1Item {
+    RicEventTriggerConditionId ric_event_trigger_condition_id = 1 [ json_name="ric-eventTriggerCondition-ID"];
+    // @inject_tag: aper:"choiceExt"
+    MessageTypeChoice message_type = 2 [ json_name="messageType"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional MessageDirection message_direction = 3 [ json_name="messageDirection"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerUeInfo associated_ueinfo = 4 [ json_name="associatedUEInfo"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerUeeventInfo associated_ueevent = 5 [ json_name="associatedUEEvent"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 6 [ json_name="logicalOR"];
+};
+
+enum MessageDirection {
+    MESSAGE_DIRECTION_INCOMING = 0;
+    MESSAGE_DIRECTION_OUTGOING = 1;
+}
+
+// sequence from e2sm_rc.asn1:431
+// {MessageType-Choice}
+message MessageTypeChoice {
+    // choice from e2sm_rc.asn1:431
+    oneof message_type_choice {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        MessageTypeChoiceNi message_type_choice_ni = 1 [ json_name="messageType-Choice-NI"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        MessageTypeChoiceRrc message_type_choice_rrc = 2 [ json_name="messageType-Choice-RRC"];
+    }
+};
+
+// sequence from e2sm_rc.asn1:438
+// {MessageType-Choice-NI}
+message MessageTypeChoiceNi {
+    // @inject_tag: aper:"valueLB:0,valueUB:6,valueExt"
+    InterfaceType n_i_type = 1 [ json_name="nI-Type"];
+    // @inject_tag: aper:"optional,choiceExt"
+    optional InterfaceIdentifier n_i_identifier = 2 [ json_name="nI-Identifier"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional InterfaceMessageId n_i_message = 3 [ json_name="nI-Message"];
+};
+
+// sequence from e2sm_rc.asn1:445
+// {MessageType-Choice-RRC}
+message MessageTypeChoiceRrc {
+    // @inject_tag: aper:"valueExt"
+    RrcMessageId r_rc_message = 1 [ json_name="rRC-Message"];
+};
+
+// sequence from e2sm_rc.asn1:451
+// {E2SM-RC-EventTrigger-Format2}
+message E2SmRcEventTriggerFormat2 {
+    RicCallProcessTypeId ric_call_process_type_id = 1 [ json_name="ric-callProcessType-ID"];
+    RicCallProcessBreakpointId ric_call_process_breakpoint_id = 2 [ json_name="ric-callProcessBreakpoint-ID"];
+    // @inject_tag: aper:"optional"
+    optional RanparameterTesting associated_e2_node_info = 3 [ json_name="associatedE2NodeInfo"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerUeInfo associated_ueinfo = 4 [ json_name="associatedUEInfo"];
+};
+
+// sequence from e2sm_rc.asn1:460
+// {E2SM-RC-EventTrigger-Format3}
+message E2SmRcEventTriggerFormat3 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcEventTriggerFormat3Item e2_node_info_change_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="e2NodeInfoChange-List"];
+};
+
+// sequence from e2sm_rc.asn1:465
+// {E2SM-RC-EventTrigger-Format3-Item}
+message E2SmRcEventTriggerFormat3Item {
+    RicEventTriggerConditionId ric_event_trigger_condition_id = 1 [ json_name="ric-eventTriggerCondition-ID"];
+    // @inject_tag: aper:"valueLB:1,valueUB:512,valueExt"
+    int32 e2_node_info_change_id = 2 [ json_name="e2NodeInfoChange-ID"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerCellInfo associated_cell_info = 3 [ json_name="associatedCellInfo"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 4 [ json_name="logicalOR"];
+};
+
+// sequence from e2sm_rc.asn1:474
+// {E2SM-RC-EventTrigger-Format4}
+message E2SmRcEventTriggerFormat4 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcEventTriggerFormat4Item u_einfo_change_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="uEInfoChange-List"];
+};
+
+// sequence from e2sm_rc.asn1:479
+// {E2SM-RC-EventTrigger-Format4-Item}
+message E2SmRcEventTriggerFormat4Item {
+    RicEventTriggerConditionId ric_event_trigger_condition_id = 1 [ json_name="ric-eventTriggerCondition-ID"];
+    // @inject_tag: aper:"choiceExt"
+    TriggerTypeChoice trigger_type = 2 [ json_name="triggerType"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerUeInfo associated_ueinfo = 3 [ json_name="associatedUEInfo"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 4 [ json_name="logicalOR"];
+};
+
+// sequence from e2sm_rc.asn1:488
+// {TriggerType-Choice}
+message TriggerTypeChoice {
+    // choice from e2sm_rc.asn1:488
+    oneof trigger_type_choice {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        TriggerTypeChoiceRrcstate trigger_type_choice_rrcstate = 1 [ json_name="triggerType-Choice-RRCstate"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        TriggerTypeChoiceUeid trigger_type_choice_ueid = 2 [ json_name="triggerType-Choice-UEID"];
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        TriggerTypeChoiceL2state trigger_type_choice_l2state = 3 [ json_name="triggerType-Choice-L2state"];
+    }
+};
+
+// sequence from e2sm_rc.asn1:495
+// {TriggerType-Choice-RRCstate}
+message TriggerTypeChoiceRrcstate {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:8,valueExt"
+    repeated TriggerTypeChoiceRrcstateItem rrc_state_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 8}, json_name="rrcState-List"];
+};
+
+// sequence from e2sm_rc.asn1:500
+// {TriggerType-Choice-RRCstate-Item}
+message TriggerTypeChoiceRrcstateItem {
+    // @inject_tag: aper:"valueLB:0,valueUB:3,valueExt"
+    RrcState state_changed_to = 1 [ json_name="stateChangedTo"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional LogicalOr logical_or = 2 [ json_name="logicalOR"];
+};
+
+// sequence from e2sm_rc.asn1:506
+// {TriggerType-Choice-UEID}
+message TriggerTypeChoiceUeid {
+    // @inject_tag: aper:"valueLB:1,valueUB:512,valueExt"
+    int32 ue_idchange_id = 1 [ json_name="ueIDchange-ID"];
+};
+
+// sequence from e2sm_rc.asn1:511
+// {TriggerType-Choice-L2state}
+message TriggerTypeChoiceL2state {
+    RanparameterTesting associated_l2variables = 1 [ json_name="associatedL2variables"];
+};
+
+// sequence from e2sm_rc.asn1:517
+// {E2SM-RC-EventTrigger-Format5}
+message E2SmRcEventTriggerFormat5 {
+    // @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
+    OnDemand on_demand = 1 [ json_name="onDemand"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerUeInfo associated_ueinfo = 2 [ json_name="associatedUEInfo"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional EventTriggerCellInfo associated_cell_info = 3 [ json_name="associatedCellInfo"];
+};
+
+enum OnDemand {
+    ON_DEMAND_TRUE = 0;
+}
+
+// sequence from e2sm_rc.asn1:530
+// {E2SM-RC-ActionDefinition}
+// @inject_tag: aper:"valueExt"
+message E2SmRcActionDefinition {
+    RicStyleType ric_style_type = 1 [ json_name="ric-Style-Type"];
+    // @inject_tag: aper:"choiceExt"
+    RicActionDefinitionFormats ric_action_definition_formats = 2 [ json_name="ric-actionDefinition-formats"];
+};
+
+message RicActionDefinitionFormats {
+    oneof ric_action_definition_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcActionDefinitionFormat1 action_definition_format1 = 1;
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        E2SmRcActionDefinitionFormat2 action_definition_format2 = 2;
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        E2SmRcActionDefinitionFormat3 action_definition_format3 = 3;
+    }
+}
+
+// sequence from e2sm_rc.asn1:541
+// {E2SM-RC-ActionDefinition-Format1}
+message E2SmRcActionDefinitionFormat1 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcActionDefinitionFormat1Item ran_p_to_be_reported_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ranP-ToBeReported-List"];
+};
+
+// sequence from e2sm_rc.asn1:547
+// {E2SM-RC-ActionDefinition-Format1-Item}
+message E2SmRcActionDefinitionFormat1Item {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+};
+
+// sequence from e2sm_rc.asn1:553
+// {E2SM-RC-ActionDefinition-Format2}
+message E2SmRcActionDefinitionFormat2 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcActionDefinitionFormat2Item ric_policy_conditions_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ric-PolicyConditions-List"];
+};
+
+// sequence from e2sm_rc.asn1:558
+// {E2SM-RC-ActionDefinition-Format2-Item}
+message E2SmRcActionDefinitionFormat2Item {
+    // @inject_tag: aper:"valueExt"
+    RicPolicyAction ric_policy_action = 1 [ json_name="ric-PolicyAction"];
+    // @inject_tag: aper:"optional"
+    optional RanparameterTesting ric_policy_condition_definition = 2 [ json_name="ric-PolicyConditionDefinition"];
+};
+
+// sequence from e2sm_rc.asn1:564
+// {E2SM-RC-ActionDefinition-Format3}
+message E2SmRcActionDefinitionFormat3 {
+    RicInsertIndicationId ric_insert_indication_id = 1 [ json_name="ric-InsertIndication-ID"];
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcActionDefinitionFormat3Item ran_p_insert_indication_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ranP-InsertIndication-List"];
+    // @inject_tag: aper:"optional,choiceExt"
+    optional Ueid ue_id = 3 [ json_name="ueID"];
+};
+
+// sequence from e2sm_rc.asn1:572
+// {E2SM-RC-ActionDefinition-Format3-Item}
+message E2SmRcActionDefinitionFormat3Item {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+};
+
+// sequence from e2sm_rc.asn1:586
+// {E2SM-RC-IndicationHeader}
+// @inject_tag: aper:"valueExt"
+message E2SmRcIndicationHeader {
+    // @inject_tag: aper:"choiceExt"
+    RicIndicationHeaderFormats ric_indication_header_formats = 1 [ json_name="ric-indicationHeader-formats"];
+};
+
+message RicIndicationHeaderFormats {
+    oneof ric_indication_header_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcIndicationHeaderFormat1 indication_header_format1 = 1;
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        E2SmRcIndicationHeaderFormat2 indication_header_format2 = 2;
+    }
+}
+
+// sequence from e2sm_rc.asn1:591
+// {E2SM-RC-IndicationHeader-Format1}
+message E2SmRcIndicationHeaderFormat1 {
+    // @inject_tag: aper:"opptional"
+    optional RicEventTriggerConditionId ric_event_trigger_condition_id = 1 [ json_name="ric-eventTriggerCondition-ID"];
+};
+
+// sequence from e2sm_rc.asn1:596
+// {E2SM-RC-IndicationHeader-Format2}
+message E2SmRcIndicationHeaderFormat2 {
+    // @inject_tag: aper:"choiceExt"
+    Ueid ue_id = 1 [ json_name="ueID"];
+    RicStyleType ric_insert_style_type = 2 [ json_name="ric-InsertStyle-Type"];
+    RicInsertIndicationId ric_insert_indication_id = 3 [ json_name="ric-InsertIndication-ID"];
+};
+
+// sequence from e2sm_rc.asn1:615
+// {E2SM-RC-IndicationMessage}
+// @inject_tag: aper:"valueExt"
+message E2SmRcIndicationMessage {
+    // @inject_tag: aper:"choiceExt"
+    RicIndicationMessageFormats ric_indication_message_formats = 1 [ json_name="ric-indicationMessage-formats"];
+};
+
+message RicIndicationMessageFormats {
+    oneof ric_indication_message_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcIndicationMessageFormat1 indication_message_format1 = 1;
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
+        E2SmRcIndicationMessageFormat2 indication_message_format2 = 2;
+        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        E2SmRcIndicationMessageFormat3 indication_message_format3 = 3;
+        // @inject_tag: aper:"choiceIdx:4,valueExt"
+        E2SmRcIndicationMessageFormat4 indication_message_format4 = 4;
+        // @inject_tag: aper:"choiceIdx:5,valueExt"
+        E2SmRcIndicationMessageFormat5 indication_message_format5 = 5;
+    }
+}
+
+// sequence from e2sm_rc.asn1:620
+// {E2SM-RC-IndicationMessage-Format1}
+message E2SmRcIndicationMessageFormat1 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcIndicationMessageFormat1Item ran_p_reported_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ranP-Reported-List"];
+};
+
+// sequence from e2sm_rc.asn1:625
+// {E2SM-RC-IndicationMessage-Format1-Item}
+message E2SmRcIndicationMessageFormat1Item {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValueType ran_parameter_value_type = 2 [ json_name="ranParameter-valueType"];
+};
+
+// sequence from e2sm_rc.asn1:632
+// {E2SM-RC-IndicationMessage-Format2}
+message E2SmRcIndicationMessageFormat2 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcIndicationMessageFormat2Item ue_parameter_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ueParameter-List"];
+};
+
+// sequence from e2sm_rc.asn1:637
+// {E2SM-RC-IndicationMessage-Format2-Item}
+message E2SmRcIndicationMessageFormat2Item {
+    // @inject_tag: aper:"choiceExt"
+    Ueid ue_id = 1 [ json_name="ueID"];
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcIndicationMessageFormat2RanparameterItem ran_p_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ranP-List"];
+};
+
+// sequence from e2sm_rc.asn1:644
+// {E2SM-RC-IndicationMessage-Format2-RANParameter-Item}
+message E2SmRcIndicationMessageFormat2RanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValueType ran_parameter_value_type = 2 [ json_name="ranParameter-valueType"];
+};
+
+// sequence from e2sm_rc.asn1:651
+// {E2SM-RC-IndicationMessage-Format3}
+message E2SmRcIndicationMessageFormat3 {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated E2SmRcIndicationMessageFormat3Item cell_info_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="cellInfo-List"];
+};
+
+// sequence from e2sm_rc.asn1:656
+// {E2SM-RC-IndicationMessage-Format3-Item}
+message E2SmRcIndicationMessageFormat3Item {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    Cgi cell_global_id = 1 [ json_name="cellGlobal-ID"];
+    // @inject_tag: aper:"optional"
+    optional bytes cell_context_info = 2 [ json_name="cellContextInfo"];
+    // @inject_tag: aper:"optional"
+    optional bool cell_deleted = 3 [ json_name="cellDeleted"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional NeighborRelationInfo neighbor_relation_table = 4 [ json_name="neighborRelation-Table"];
+};
+
+// sequence from e2sm_rc.asn1:664
+// {E2SM-RC-IndicationMessage-Format4}
+message E2SmRcIndicationMessageFormat4 {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
+    repeated E2SmRcIndicationMessageFormat4ItemUe ue_info_list = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ueInfo-List"];
+    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
+    repeated E2SmRcIndicationMessageFormat4ItemCell cell_info_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="cellInfo-List"];
+};
+
+// sequence from e2sm_rc.asn1:671
+// {E2SM-RC-IndicationMessage-Format4-ItemUE}
+message E2SmRcIndicationMessageFormat4ItemUe {
+    // @inject_tag: aper:"choiceExt"
+    Ueid ue_id = 1 [ json_name="ueID"];
+    // @inject_tag: aper:"optional"
+    optional bytes ue_context_info = 2 [ json_name="ueContextInfo"];
+    // @inject_tag: aper:"choiceExt"
+    Cgi cell_global_id = 3 [ json_name="cellGlobal-ID"];
+};
+
+// sequence from e2sm_rc.asn1:679
+// {E2SM-RC-IndicationMessage-Format4-ItemCell}
+message E2SmRcIndicationMessageFormat4ItemCell {
+    // @inject_tag: aper:"choiceExt"
+    Cgi cell_global_id = 1 [ json_name="cellGlobal-ID"];
+    // @inject_tag: aper:"optional"
+    optional bytes cell_context_info = 2 [ json_name="cellContextInfo"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional NeighborRelationInfo neighbor_relation_table = 3 [ json_name="neighborRelation-Table"];
+};
+
+// sequence from e2sm_rc.asn1:686
+// {E2SM-RC-IndicationMessage-Format5}
+message E2SmRcIndicationMessageFormat5 {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
+    repeated E2SmRcIndicationMessageFormat5Item ran_p_requested_list = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ranP-Requested-List"];
+};
+
+// sequence from e2sm_rc.asn1:692
+// {E2SM-RC-IndicationMessage-Format5-Item}
+message E2SmRcIndicationMessageFormat5Item {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValueType ran_parameter_value_type = 2 [ json_name="ranParameter-valueType"];
+};
+
+// sequence from e2sm_rc.asn1:706
+// {E2SM-RC-CallProcessID}
+// @inject_tag: aper:"valueExt"
+message E2SmRcCallProcessId {
+    // @inject_tag: aper:"choiceExt"
+    RicCallProcessIdFormats ric_call_process_id_formats = 1 [ json_name="ric-callProcessID-formats"];
+};
+
+message RicCallProcessIdFormats {
+    oneof ric_call_process_id_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcCallProcessIdFormat1 call_process_id_format1 = 1;
+    }
+}
+
+// sequence from e2sm_rc.asn1:711
+// {E2SM-RC-CallProcessID-Format1}
+message E2SmRcCallProcessIdFormat1 {
+    RanCallProcessId ric_call_process_id = 1 [ json_name="ric-callProcess-ID"];
+};
+
+// sequence from e2sm_rc.asn1:724
+// {E2SM-RC-ControlHeader}
+// @inject_tag: aper:"valueExt"
+message E2SmRcControlHeader {
+    // @inject_tag: aper:"choiceExt"
+    RicControlHeaderFormats ric_control_header_formats = 1 [ json_name="ric-controlHeader-formats"];
+};
+
+message RicControlHeaderFormats {
+    oneof ric_control_header_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcControlHeaderFormat1 control_header_format1 = 1;
+    }
+}
+
+// sequence from e2sm_rc.asn1:729
+// {E2SM-RC-ControlHeader-Format1}
+message E2SmRcControlHeaderFormat1 {
+    // @inject_tag: aper:"choiceExt"
+    Ueid ue_id = 1 [ json_name="ueID"];
+    RicStyleType ric_style_type = 2 [ json_name="ric-Style-Type"];
+    RicControlActionId ric_control_action_id = 3 [ json_name="ric-ControlAction-ID"];
+    // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+    optional RicControlDecision ric_control_decision = 4 [ json_name="ric-ControlDecision"];
+};
+
+enum RicControlDecision {
+    RIC_CONTROL_DECISION_ACCEPT = 0;
+    RIC_CONTROL_DECISION_REJECT = 1;
+}
+
+// sequence from e2sm_rc.asn1:745
+// {E2SM-RC-ControlMessage}
+// @inject_tag: aper:"valueExt"
+message E2SmRcControlMessage {
+    // @inject_tag: aper:"choiceExt"
+    RicControlMessageFormats ric_control_message_formats = 1 [ json_name="ric-controlMessage-formats"];
+};
+
+message RicControlMessageFormats {
+    oneof ric_control_message_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcControlMessageFormat1 control_message_format1 = 1;
+    }
+}
+
+// sequence from e2sm_rc.asn1:750
+// {E2SM-RC-ControlMessage-Format1}
+message E2SmRcControlMessageFormat1 {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
+    repeated E2SmRcControlMessageFormat1Item ran_p_list = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ranP-List"];
+};
+
+// sequence from e2sm_rc.asn1:756
+// {E2SM-RC-ControlMessage-Format1-Item}
+message E2SmRcControlMessageFormat1Item {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValueType ran_parameter_value_type = 2 [ json_name="ranParameter-valueType"];
+};
+
+// sequence from e2sm_rc.asn1:770
+// {E2SM-RC-ControlOutcome}
+// @inject_tag: aper:"valueExt"
+message E2SmRcControlOutcome {
+    // @inject_tag: aper:"choiceExt"
+    RicControlOutcomeFormats ric_control_outcome_formats = 1 [ json_name="ric-controlOutcome-formats"];
+};
+
+message RicControlOutcomeFormats {
+    oneof ric_control_outcome_formats {
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
+        E2SmRcControlOutcomeFormat1 control_outcome_format1 = 1;
+    }
+}
+
+// sequence from e2sm_rc.asn1:775
+// {E2SM-RC-ControlOutcome-Format1}
+message E2SmRcControlOutcomeFormat1 {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:255,valueExt"
+    repeated E2SmRcControlOutcomeFormat1Item ran_p_list = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 255}, json_name="ranP-List"];
+};
+
+// sequence from e2sm_rc.asn1:781
+// {E2SM-RC-ControlOutcome-Format1-Item}
+message E2SmRcControlOutcomeFormat1Item {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    // @inject_tag: aper:"choiceExt"
+    RanparameterValue ran_parameter_value = 2 [ json_name="ranParameter-value"];
+};
+
+// sequence from e2sm_rc.asn1:794
+// {E2SM-RC-RANFunctionDefinition}
+message E2SmRcRanfunctionDefinition {
+    // @inject_tag: aper:"valueExt"
+    RanfunctionName ran_function_name = 1 [ json_name="ranFunction-Name"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional RanfunctionDefinitionEventTrigger ran_function_definition_event_trigger = 2 [ json_name="ranFunctionDefinition-EventTrigger"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional RanfunctionDefinitionReport ran_function_definition_report = 3 [ json_name="ranFunctionDefinition-Report"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional RanfunctionDefinitionInsert ran_function_definition_insert = 4 [ json_name="ranFunctionDefinition-Insert"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional RanfunctionDefinitionControl ran_function_definition_control = 5 [ json_name="ranFunctionDefinition-Control"];
+    // @inject_tag: aper:"optional,valueExt"
+    optional RanfunctionDefinitionPolicy ran_function_definition_policy = 6 [ json_name="ranFunctionDefinition-Policy"];
+};
+
+// sequence from e2sm_rc.asn1:809
+// {RANFunctionDefinition-EventTrigger}
+message RanfunctionDefinitionEventTrigger {
+    // @inject_tag: aper:"sizeB:1,sizeUB:63"
+    repeated RanfunctionDefinitionEventTriggerStyleItem ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-EventTriggerStyle-List"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated L2ParametersRanparameterItem ran_l2_parameters_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-L2Parameters-List"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanfunctionDefinitionEventTriggerCallProcessItem ran_call_process_types_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-CallProcessTypes-List"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated UeidentificationRanparameterItem ran_ueidentification_parameters_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-UEIdentificationParameters-List"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated CellIdentificationRanparameterItem ran_cell_identification_parameters_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-CellIdentificationParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:818
+// {RANFunctionDefinition-EventTrigger-Style-Item}
+message RanfunctionDefinitionEventTriggerStyleItem {
+    RicStyleType ric_event_trigger_style_type = 1 [ json_name="ric-EventTriggerStyle-Type"];
+    RicStyleName ric_event_trigger_style_name = 2 [ json_name="ric-EventTriggerStyle-Name"];
+    RicFormatType ric_event_trigger_format_type = 3 [ json_name="ric-EventTriggerFormat-Type"];
+};
+
+// sequence from e2sm_rc.asn1:826
+// {L2Parameters-RANParameter-Item}
+message L2ParametersRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-Name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:834
+// {UEIdentification-RANParameter-Item}
+message UeidentificationRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:842
+// {CellIdentification-RANParameter-Item}
+message CellIdentificationRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:849
+// {RANFunctionDefinition-EventTrigger-CallProcess-Item}
+message RanfunctionDefinitionEventTriggerCallProcessItem {
+    RicCallProcessTypeId call_process_type_id = 1 [ json_name="callProcessType-ID"];
+    RicCallProcessTypeName call_process_type_name = 2 [ json_name="callProcessType-Name"];
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanfunctionDefinitionEventTriggerBreakpointItem call_process_breakpoints_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="callProcessBreakpoints-List"];
+};
+
+// sequence from e2sm_rc.asn1:857
+// {RANFunctionDefinition-EventTrigger-Breakpoint-Item}
+message RanfunctionDefinitionEventTriggerBreakpointItem {
+    RicCallProcessBreakpointId call_process_breakpoint_id = 1 [ json_name="callProcessBreakpoint-ID"];
+    RicCallProcessBreakpointName call_process_breakpoint_name = 2 [ json_name="callProcessBreakpoint-Name"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated CallProcessBreakpointRanparameterItem ran_call_process_breakpoint_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-CallProcessBreakpointParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:865
+// {CallProcessBreakpoint-RANParameter-Item}
+message CallProcessBreakpointRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:878
+// {RANFunctionDefinition-Report}
+message RanfunctionDefinitionReport {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,valueExt"
+    repeated RanfunctionDefinitionReportItem ric_report_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-ReportStyle-List"];
+};
+
+// sequence from e2sm_rc.asn1:884
+// {RANFunctionDefinition-Report-Item}
+message RanfunctionDefinitionReportItem {
+    RicStyleType ric_report_style_type = 1 [ json_name="ric-ReportStyle-Type"];
+    RicStyleName ric_report_style_name = 2 [ json_name="ric-ReportStyle-Name"];
+    RicStyleType ric_supported_event_trigger_style_type = 3 [ json_name="ric-SupportedEventTriggerStyle-Type"];
+    RicFormatType ric_report_action_format_type = 4 [ json_name="ric-ReportActionFormat-Type"];
+    RicFormatType ric_indication_header_format_type = 5 [ json_name="ric-IndicationHeaderFormat-Type"];
+    RicFormatType ric_indication_message_format_type = 6 [ json_name="ric-IndicationMessageFormat-Type"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated ReportRanparameterItem ran_report_parameters_list = 7 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-ReportParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:896
+// {Report-RANParameter-Item}
+message ReportRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:909
+// {RANFunctionDefinition-Insert}
+message RanfunctionDefinitionInsert {
+    // @inject_tag: aper:"sizeLB:,sizeUB:63,valueExt"
+    repeated RanfunctionDefinitionInsertItem ric_insert_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-InsertStyle-List"];
+};
+
+// sequence from e2sm_rc.asn1:914
+// {RANFunctionDefinition-Insert-Item}
+message RanfunctionDefinitionInsertItem {
+    RicStyleType ric_insert_style_type = 1 [ json_name="ric-InsertStyle-Type"];
+    RicStyleName ric_insert_style_name = 2 [ json_name="ric-InsertStyle-Name"];
+    RicStyleType ric_supported_event_trigger_style_type = 3 [ json_name="ric-SupportedEventTriggerStyle-Type"];
+    RicFormatType ric_action_definition_format_type = 4 [ json_name="ric-ActionDefinitionFormat-Type"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanfunctionDefinitionInsertIndicationItem ric_insert_indication_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ric-InsertIndication-List"];
+    RicFormatType ric_indication_header_format_type = 6 [ json_name="ric-IndicationHeaderFormat-Type"];
+    RicFormatType ric_indication_message_format_type = 7 [ json_name="ric-IndicationMessageFormat-Type"];
+    RicFormatType ric_call_process_idformat_type = 8 [ json_name="ric-CallProcessIDFormat-Type"];
+};
+
+// sequence from e2sm_rc.asn1:927
+// {RANFunctionDefinition-Insert-Indication-Item}
+message RanfunctionDefinitionInsertIndicationItem {
+    RicInsertIndicationId ric_insert_indication_id = 1 [ json_name="ric-InsertIndication-ID"];
+    RicInsertIndicationName ric_insert_indication_name = 2 [ json_name="ric-InsertIndication-Name"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated InsertIndicationRanparameterItem ran_insert_indication_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-InsertIndicationParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:935
+// {InsertIndication-RANParameter-Item}
+message InsertIndicationRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:947
+// {RANFunctionDefinition-Control}
+message RanfunctionDefinitionControl {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,valueExt"
+    repeated RanfunctionDefinitionControlItem ric_control_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-ControlStyle-List"];
+};
+
+// sequence from e2sm_rc.asn1:953
+// {RANFunctionDefinition-Control-Item}
+message RanfunctionDefinitionControlItem {
+    RicStyleType ric_control_style_type = 1 [ json_name="ric-ControlStyle-Type"];
+    RicStyleName ric_control_style_name = 2 [ json_name="ric-ControlStyle-Name"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanfunctionDefinitionControlActionItem ric_control_action_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ric-ControlAction-List"];
+    RicFormatType ric_control_header_format_type = 4 [ json_name="ric-ControlHeaderFormat-Type"];
+    RicFormatType ric_control_message_format_type = 5 [ json_name="ric-ControlMessageFormat-Type"];
+    // @inject_tag: aper:"optional"
+    optional RicFormatType ric_call_process_idformat_type = 6 [ json_name="ric-CallProcessIDFormat-Type"];
+    RicFormatType ric_control_outcome_format_type = 7 [ json_name="ric-ControlOutcomeFormat-Type"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:255,valueExt"
+    repeated ControlOutcomeRanparameterItem ran_control_outcome_parameters_list = 8 [(validate.v1.rules).repeated = {min_items: 1, max_items: 255}, json_name="ran-ControlOutcomeParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:965
+// {ControlOutcome-RANParameter-Item}
+message ControlOutcomeRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:973
+// {RANFunctionDefinition-Control-Action-Item}
+message RanfunctionDefinitionControlActionItem {
+    RicControlActionId ric_control_action_id = 1 [ json_name="ric-ControlAction-ID"];
+    RicControlActionName ric_control_action_name = 2 [ json_name="ric-ControlAction-Name"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated ControlActionRanparameterItem ran_control_action_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-ControlActionParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:980
+// {ControlAction-RANParameter-Item}
+message ControlActionRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:993
+// {RANFunctionDefinition-Policy}
+message RanfunctionDefinitionPolicy {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,valueExt"
+    repeated RanfunctionDefinitionPolicyItem ric_policy_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-PolicyStyle-List"];
+};
+
+// sequence from e2sm_rc.asn1:998
+// {RANFunctionDefinition-Policy-Item}
+message RanfunctionDefinitionPolicyItem {
+    RicStyleType ric_policy_style_type = 1 [ json_name="ric-PolicyStyle-Type"];
+    RicStyleName ric_policy_style_name = 2 [ json_name="ric-PolicyStyle-Name"];
+    RicStyleType ric_supported_event_trigger_style_type = 3 [ json_name="ric-SupportedEventTriggerStyle-Type"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanfunctionDefinitionPolicyActionItem ric_policy_action_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ric-PolicyAction-List"];
+};
+
+// sequence from e2sm_rc.asn1:1007
+// {RANFunctionDefinition-Policy-Action-Item}
+message RanfunctionDefinitionPolicyActionItem {
+    RicControlActionId ric_policy_action_id = 1 [ json_name="ric-PolicyAction-ID"];
+    RicControlActionName ric_policy_action_name = 2 [ json_name="ric-PolicyAction-Name"];
+    RicFormatType ric_action_definition_format_type = 3 [ json_name="ric-ActionDefinitionFormat-Type"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated PolicyActionRanparameterItem ran_policy_action_parameters_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-PolicyActionParameters-List"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated PolicyConditionRanparameterItem ran_policy_condition_parameters_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-PolicyConditionParameters-List"];
+};
+
+// sequence from e2sm_rc.asn1:1017
+// {PolicyAction-RANParameter-Item}
+message PolicyActionRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};
+
+// sequence from e2sm_rc.asn1:1025
+// {PolicyCondition-RANParameter-Item}
+message PolicyConditionRanparameterItem {
+    RanparameterId ran_parameter_id = 1 [ json_name="ranParameter-ID"];
+    RanparameterName ran_parameter_name = 2 [ json_name="ranParameter-name"];
+    // @inject_tag: aper:"optional,valueExt,fromValueExt"
+    optional RanparameterDefinition ran_parameter_definition = 3 [ json_name="ranParameter-Definition"];
+};

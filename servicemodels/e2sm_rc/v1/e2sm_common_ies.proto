@@ -1,0 +1,849 @@
+/*
+SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+
+SPDX-License-Identifier: Apache-2.0
+*/
+
+////////////////////// e2sm-common-ies.proto //////////////////////
+// Protobuf generated from /e2sm_v2.asn1 by asn1c-0.9.29
+// E2SM-COMMON-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) 53148 e2(1) version1(1) e2sm(2) e2sm-COMMON-IEs(0) }
+
+syntax = "proto3";
+
+package e2sm_rc.v1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies";
+
+import "validate/v1/validate.proto";
+import "asn1/v1/asn1.proto";
+
+// enumerated from e2sm_v2.asn1:109
+// @inject_tag: aper:"valueExt"
+enum InterfaceType {
+  INTERFACE_TYPE_N_G = 0;
+  INTERFACE_TYPE_XN = 1;
+  INTERFACE_TYPE_F1 = 2;
+  INTERFACE_TYPE_E1 = 3;
+  INTERFACE_TYPE_S1 = 4;
+  INTERFACE_TYPE_X2 = 5;
+  INTERFACE_TYPE_W1 = 6;
+};
+
+// enumerated from e2sm_v2.asn1:148
+enum RrcclassLte {
+  RRCCLASS_LTE_B_CCH_BCH = 0;
+  RRCCLASS_LTE_B_CCH_BCH_MBMS = 1;
+  RRCCLASS_LTE_B_CCH_DL_SCH = 2;
+  RRCCLASS_LTE_B_CCH_DL_SCH_BR = 3;
+  RRCCLASS_LTE_B_CCH_DL_SCH_MBMS = 4;
+  RRCCLASS_LTE_M_CCH = 5;
+  RRCCLASS_LTE_P_CCH = 6;
+  RRCCLASS_LTE_DL_CCCH = 7;
+  RRCCLASS_LTE_DL_DCCH = 8;
+  RRCCLASS_LTE_UL_CCCH = 9;
+  RRCCLASS_LTE_UL_DCCH = 10;
+  RRCCLASS_LTE_S_C_MCCH = 11;
+};
+
+// enumerated from e2sm_v2.asn1:150
+enum RrcclassNr {
+  RRCCLASS_NR_B_CCH_BCH = 0;
+  RRCCLASS_NR_B_CCH_DL_SCH = 1;
+  RRCCLASS_NR_D_L_CCCH = 2;
+  RRCCLASS_NR_D_L_DCCH = 3;
+  RRCCLASS_NR_P_CCH = 4;
+  RRCCLASS_NR_U_L_CCCH = 5;
+  RRCCLASS_NR_U_L_CCCH1 = 6;
+  RRCCLASS_NR_U_L_DCCH = 7;
+};
+
+// enumerated from e2sm_v2.asn1:556
+enum NrfrequencyShift7p5khz {
+  NRFREQUENCY_SHIFT7P5KHZ_FALSE = 0;
+  NRFREQUENCY_SHIFT7P5KHZ_TRUE = 1;
+};
+
+// constant Integer from e2sm_v2.asn1:21
+// {-}
+message MaxE1Apid {
+  // @inject_tag: aper:"valueLB:65535,valueUB:65535"
+  int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name = "value"];
+};
+
+// constant Integer from e2sm_v2.asn1:22
+// {-}
+message MaxF1Apid {
+  // @inject_tag: aper:"valueLB:4,valueUB:4"
+  int32 value = 1 [(validate.v1.rules).int32.const = 4, json_name = "value"];
+};
+
+// constant Integer from e2sm_v2.asn1:25
+// {-}
+message MaxEarfcn {
+  // @inject_tag: aper:"valueLB:65535,valueUB:65535"
+  int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name = "value"];
+};
+
+// constant Integer from e2sm_v2.asn1:28
+// {-}
+message MaxNrarfcn {
+  // @inject_tag: aper:"valueLB:3279165,valueUB:3279165"
+  int32 value = 1 [(validate.v1.rules).int32.const = 3279165, json_name = "value"];
+};
+
+// constant Integer from e2sm_v2.asn1:29
+// {-}
+message MaxnoofNrCellBands {
+  // @inject_tag: aper:"valueLB:32,valueUB:32"
+  int32 value = 1 [(validate.v1.rules).int32.const = 32, json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:39
+// {CGI}
+// aper:"choiceExt"
+message Cgi {
+  // choice from e2sm_v2.asn1:39
+  oneof cgi {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    NrCgi n_r_cgi = 1 [json_name = "nR-CGI"];
+    // @inject_tag: aper:"choiceIdx:2,valueExt"
+    EutraCgi e_utra_cgi = 2 [json_name = "eUTRA-CGI"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:45
+// {CoreCPID}
+// aper:"choiceExt"
+message CoreCpid {
+  // choice from e2sm_v2.asn1:45
+  oneof core_cpid {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    Guami five_gc = 1 [json_name = "fiveGC"];
+    // @inject_tag: aper:"choiceIdx:2,valueExt"
+    Gummei e_pc = 2 [json_name = "ePC"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:51
+// {InterfaceIdentifier}
+// aper:"valueExt"
+message InterfaceIdentifier {
+  // choice from e2sm_v2.asn1:51
+  oneof interface_identifier {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    InterfaceIdNg n_g = 1 [json_name = "nG"];
+    // @inject_tag: aper:"choiceIdx:2,valueExt"
+    InterfaceIdXn x_n = 2 [json_name = "xN"];
+    // @inject_tag: aper:"choiceIdx:3,valueExt"
+    InterfaceIdF1 f1 = 3 [json_name = "f1"];
+    // @inject_tag: aper:"choiceIdx:4,valueExt"
+    InterfaceIdE1 e1 = 4 [json_name = "e1"];
+    // @inject_tag: aper:"choiceIdx:5,valueExt"
+    InterfaceIdS1 s1 = 5 [json_name = "s1"];
+    // @inject_tag: aper:"choiceIdx:6,valueExt"
+    InterfaceIdX2 x2 = 6 [json_name = "x2"];
+    // @inject_tag: aper:"choiceIdx:7,valueExt"
+    InterfaceIdW1 w1 = 7 [json_name = "w1"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:62
+// {InterfaceID-NG}
+message InterfaceIdNg {
+  // @inject_tag: aper:"valueExt"
+  Guami guami = 1 [json_name = "guami"];
+};
+
+// sequence from e2sm_v2.asn1:67
+// {InterfaceID-Xn}
+message InterfaceIdXn {
+  // @inject_tag: aper:"choiceExt"
+  GlobalNgrannodeId global_ng_ran_id = 1 [json_name = "global-NG-RAN-ID"];
+};
+
+// sequence from e2sm_v2.asn1:72
+// {InterfaceID-F1}
+message InterfaceIdF1 {
+  // @inject_tag: aper:"valueExt"
+  GlobalGnbId global_gnb_id = 1 [json_name = "globalGNB-ID"];
+  GnbDuId g_nb_du_id = 2 [json_name = "gNB-DU-ID"];
+};
+
+// sequence from e2sm_v2.asn1:78
+// {InterfaceID-E1}
+message InterfaceIdE1 {
+  // @inject_tag: aper:"valueExt"
+  GlobalGnbId global_gnb_id = 1 [json_name = "globalGNB-ID"];
+  GnbCuUpId g_nb_cu_up_id = 2 [json_name = "gNB-CU-UP-ID"];
+};
+
+// sequence from e2sm_v2.asn1:84
+// {InterfaceID-S1}
+message InterfaceIdS1 {
+  // @inject_tag: aper:"valueExt"
+  Gummei g_ummei = 1 [json_name = "gUMMEI"];
+};
+
+// sequence from e2sm_v2.asn1:93
+// {InterfaceID-X2}
+message InterfaceIdX2 {
+  // @inject_tag: aper:"choiceExt"
+  NodeType node_type = 1 [json_name = "nodeType"];
+};
+
+message NodeType {
+  oneof node_type {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    GlobalEnbId global_enb_id = 1;
+    // @inject_tag: aper:"choiceIdx:2,valueExt"
+    GlobalenGnbId global_en_gnb_id = 2;
+  }
+}
+
+// sequence from e2sm_v2.asn1:98
+// {InterfaceID-W1}
+message InterfaceIdW1 {
+  // @inject_tag: aper:"valueExt"
+  GlobalNgEnbId global_ng_e_nb_id = 1 [json_name = "global-ng-eNB-ID"];
+  NgenbDuId ng_e_nb_du_id = 2 [json_name = "ng-eNB-DU-ID"];
+};
+
+// sequence from e2sm_v2.asn1:104
+// {Interface-MessageID}
+// @inject_tag: aper:"valueExt"
+message InterfaceMessageId {
+  int32 interface_procedure_id = 1 [json_name = "interfaceProcedureID"];
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:2"
+  MessageType message_type = 2 [json_name = "messageType"];
+};
+
+enum MessageType {
+  MESSAGE_TYPE_INITIATING_MESSAGE = 0;
+  MESSAGE_TYPE_SUCCESSFUL_OUTCOME = 1;
+  MESSAGE_TYPE_UNSUCCESSFUL_OUTCOME = 3;
+}
+
+// sequence from e2sm_v2.asn1:112
+// {GroupID}
+// @inject_tag: aper:"choiceExt"
+message GroupId {
+  // choice from e2sm_v2.asn1:112
+  oneof group_id {
+    // @inject_tag: aper:"choiceIdx:1"
+    FiveQi five_gc = 1 [json_name = "fiveGC"];
+    // @inject_tag: aper:"choiceIdx:2"
+    Qci e_pc = 2 [json_name = "ePC"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:118
+// {QoSID}
+// @inject_tag: aper:"choiceExt"
+message QoSid {
+  // choice from e2sm_v2.asn1:118
+  oneof qo_sid {
+    // @inject_tag: aper:"choiceIdx:1"
+    FiveQi five_gc = 1 [json_name = "fiveGC"];
+    // @inject_tag: aper:"choiceIdx:2"
+    Qci e_pc = 2 [json_name = "ePC"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:124
+// {RANfunction-Name}
+message RanfunctionName {
+  // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
+  string ran_function_short_name = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "ranFunction-ShortName"];
+  // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:1000"
+  string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}, json_name = "ranFunction-E2SM-OID"];
+  // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
+  string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "ranFunction-Description"];
+  // @inject_tag: aper:"optional"
+  optional int32 ran_function_instance = 4 [json_name = "ranFunction-Instance"];
+};
+
+// range of Integer from e2sm_v2.asn1:133
+// {RIC-Format-Type}
+message RicFormatType {
+  int32 value = 1 [json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:135
+// {RIC-Style-Type}
+message RicStyleType {
+  int32 value = 1 [json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:131
+// {RIC-Style-Name}
+message RicStyleName {
+  // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
+  string value = 1 [json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:143
+// {RRC-MessageID}
+// @inject_tag: aper:"valueExt"
+message RrcMessageId {
+  // @inject_tag: aper:"choiceExt"
+  RrcType rrc_type = 1 [json_name = "rrcType"];
+  int64 message_id = 2 [json_name = "messageID"];
+};
+
+message RrcType {
+  oneof rrc_type {
+    // @inject_tag: aper:"choiceIdx:1,valueExt,valueLB:0,valueUB:11"
+    RrcclassLte lte = 1;
+    // @inject_tag: aper:"choiceIdx:2,valueExt,valueLB:0,valueUB:7"
+    RrcclassNr nr = 2;
+  }
+}
+
+// sequence from e2sm_v2.asn1:153
+// {ServingCell-ARFCN}
+// @inject_tag: aper:"choiceExt"
+message ServingCellArfcn {
+  // choice from e2sm_v2.asn1:153
+  oneof serving_cell_arfcn {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    NrArfcn n_r = 1 [json_name = "nR"];
+    // @inject_tag: aper:"choiceIdx:2"
+    EUtraArfcn e_utra = 2 [json_name = "eUTRA"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:159
+// {ServingCell-PCI}
+// @inject_tag: aper:"choiceExt"
+message ServingCellPci {
+  // choice from e2sm_v2.asn1:159
+  oneof serving_cell_pci {
+    // @inject_tag: aper:"choiceIdx:1"
+    NrPci n_r = 1 [json_name = "nR"];
+    // @inject_tag: aper:"choiceIdx:2"
+    EUtraPci e_utra = 2 [json_name = "eUTRA"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:166
+// {UEID}
+// @inject_tag: aper:"choiceExt"
+message Ueid {
+  // choice from e2sm_v2.asn1:166
+  oneof ueid {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    UeidGnb g_nb_ueid = 1 [json_name = "gNB-UEID"];
+    // @inject_tag: aper:"choiceIdx:2,valueExt"
+    UeidGnbDu g_nb_du_ueid = 2 [json_name = "gNB-DU-UEID"];
+    // @inject_tag: aper:"choiceIdx:3,valueExt"
+    UeidGnbCuUp g_nb_cu_up_ueid = 3 [json_name = "gNB-CU-UP-UEID"];
+    // @inject_tag: aper:"choiceIdx:4,valueExt"
+    UeidNgEnb ng_e_nb_ueid = 4 [json_name = "ng-eNB-UEID"];
+    // @inject_tag: aper:"choiceIdx:5,valueExt"
+    UeidNgEnbDu ng_e_nb_du_ueid = 5 [json_name = "ng-eNB-DU-UEID"];
+    // @inject_tag: aper:"choiceIdx:6,valueExt"
+    UeidEnGnb en_g_nb_ueid = 6 [json_name = "en-gNB-UEID"];
+    // @inject_tag: aper:"choiceIdx:7,valueExt"
+    UeidEnb e_nb_ueid = 7 [json_name = "eNB-UEID"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:177
+// {UEID-GNB}
+message UeidGnb {
+  AmfUeNgapId amf_ue_ngap_id = 1 [json_name = "amf-UE-NGAP-ID"];
+  // @inject_tag: aper:"valueExt"
+  Guami guami = 2 [json_name = "guami"];
+  // @inject_tag: aper:"optional"
+  optional UeidGnbCuF1ApIdList g_nb_cu_ue_f1_ap_id_list = 3 [json_name = "gNB-CU-UE-F1AP-ID-List"];
+  // @inject_tag: aper:"optional"
+  optional UeidGnbCuCpE1ApIdList g_nb_cu_cp_ue_e1_ap_id_list = 4 [json_name = "gNB-CU-CP-UE-E1AP-ID-List"];
+  // @inject_tag: aper:"optional"
+  optional Ranueid ran_ueid = 5 [json_name = "ran-UEID"];
+  // @inject_tag: aper:"optional"
+  optional NgRannodeUexnApid m_ng_ran_ue_xn_ap_id = 6 [json_name = "m-NG-RAN-UE-XnAP-ID"];
+  // @inject_tag: aper:"optional,valueExt"
+  optional GlobalGnbId global_gnb_id = 7 [json_name = "globalGNB-ID"];
+  // @inject_tag: aper:"optional,choiceExt,fromValueExt"
+  optional GlobalNgrannodeId global_ng_rannode_id = 8 [json_name = "globalNG-RANNode-ID"];
+};
+
+// sequence from e2sm_v2.asn1:195
+// {UEID-GNB-CU-CP-E1AP-ID-List}
+message UeidGnbCuCpE1ApIdList {
+  // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:65535"
+  repeated UeidGnbCuCpE1ApIdItem value = 1 [json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:196
+// {UEID-GNB-CU-CP-E1AP-ID-Item}
+message UeidGnbCuCpE1ApIdItem {
+  GnbCuCpUeE1ApId g_nb_cu_cp_ue_e1_ap_id = 1 [json_name = "gNB-CU-CP-UE-E1AP-ID"];
+};
+
+// sequence from e2sm_v2.asn1:202
+// {UEID-GNB-CU-F1AP-ID-List}
+message UeidGnbCuF1ApIdList {
+  // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:4"
+  repeated UeidGnbCuCpF1ApIdItem value = 1 [json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:203
+// {UEID-GNB-CU-CP-F1AP-ID-Item}
+message UeidGnbCuCpF1ApIdItem {
+  GnbCuUeF1ApId g_nb_cu_ue_f1_ap_id = 1 [json_name = "gNB-CU-UE-F1AP-ID"];
+};
+
+// sequence from e2sm_v2.asn1:208
+// {UEID-GNB-DU}
+message UeidGnbDu {
+  GnbCuUeF1ApId g_nb_cu_ue_f1_ap_id = 1 [json_name = "gNB-CU-UE-F1AP-ID"];
+  // @inject_tag: aper:"optional"
+  optional Ranueid ran_ueid = 2 [json_name = "ran-UEID"];
+};
+
+// sequence from e2sm_v2.asn1:214
+// {UEID-GNB-CU-UP}
+message UeidGnbCuUp {
+  GnbCuCpUeE1ApId g_nb_cu_cp_ue_e1_ap_id = 1 [json_name = "gNB-CU-CP-UE-E1AP-ID"];
+  // @inject_tag: aper:"optional"
+  optional Ranueid ran_ueid = 2 [json_name = "ran-UEID"];
+};
+
+// sequence from e2sm_v2.asn1:220
+// {UEID-NG-ENB}
+message UeidNgEnb {
+  AmfUeNgapId amf_ue_ngap_id = 1 [json_name = "amf-UE-NGAP-ID"];
+  // @inject_tag: aper:"valueExt"
+  Guami guami = 2 [json_name = "guami"];
+  // @inject_tag: aper:"optional"
+  optional NgenbCuUeW1ApId ng_e_nb_cu_ue_w1_ap_id = 3 [json_name = "ng-eNB-CU-UE-W1AP-ID"];
+  // @inject_tag: aper:"optional"
+  optional NgRannodeUexnApid m_ng_ran_ue_xn_ap_id = 4 [json_name = "m-NG-RAN-UE-XnAP-ID"];
+  // @inject_tag: aper:"optional,valueExt"
+  optional GlobalNgEnbId global_ng_enb_id = 5 [json_name = "globalNgENB-ID"];
+  // @inject_tag: aper:"optional,choiceExt,fromValueExt"
+  optional GlobalNgrannodeId global_ng_rannode_id = 6 [json_name = "globalNG-RANNode-ID"];
+};
+
+// sequence from e2sm_v2.asn1:235
+// {UEID-NG-ENB-DU}
+message UeidNgEnbDu {
+  NgenbCuUeW1ApId ng_e_nb_cu_ue_w1_ap_id = 1 [json_name = "ng-eNB-CU-UE-W1AP-ID"];
+};
+
+// sequence from e2sm_v2.asn1:240
+// {UEID-EN-GNB}
+message UeidEnGnb {
+  EnbUeX2ApId m_e_nb_ue_x2_ap_id = 1 [json_name = "m-eNB-UE-X2AP-ID"];
+  // @inject_tag: aper:"optional"
+  optional EnbUeX2ApIdExtension m_e_nb_ue_x2_ap_id_extension = 2 [json_name = "m-eNB-UE-X2AP-ID-Extension"];
+  // @inject_tag: aper:"valueExt"
+  GlobalEnbId global_enb_id = 3 [json_name = "globalENB-ID"];
+  // @inject_tag: aper:"optional"
+  optional GnbCuUeF1ApId g_nb_cu_ue_f1_ap_id = 4 [json_name = "gNB-CU-UE-F1AP-ID"];
+  // @inject_tag: aper:"optional"
+  optional UeidGnbCuCpE1ApIdList g_nb_cu_cp_ue_e1_ap_id_list = 5 [json_name = "gNB-CU-CP-UE-E1AP-ID-List"];
+  // @inject_tag: aper:"optional"
+  optional Ranueid ran_ueid = 6 [json_name = "ran-UEID"];
+};
+
+// sequence from e2sm_v2.asn1:252
+// {UEID-ENB}
+message UeidEnb {
+  MmeUeS1ApId m_me_ue_s1_ap_id = 1 [json_name = "mME-UE-S1AP-ID"];
+  // @inject_tag: aper:"valueExt"
+  Gummei g_ummei = 2 [json_name = "gUMMEI"];
+  // @inject_tag: aper:"optional"
+  optional EnbUeX2ApId m_e_nb_ue_x2_ap_id = 3 [json_name = "m-eNB-UE-X2AP-ID"];
+  // @inject_tag: aper:"optional"
+  optional EnbUeX2ApIdExtension m_e_nb_ue_x2_ap_id_extension = 4 [json_name = "m-eNB-UE-X2AP-ID-Extension"];
+  // @inject_tag: aper:"optional,valueExt"
+  optional GlobalEnbId global_enb_id = 5 [json_name = "globalENB-ID"];
+};
+
+// sequence from e2sm_v2.asn1:276
+// {ENB-ID}
+message EnbId {
+  // choice from e2sm_v2.asn1:276
+  oneof enb_id {
+    // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
+    asn1.v1.BitString macro_e_nb_id = 1 [json_name = "macro-eNB-ID"];
+    // @inject_tag: aper:"choiceIdx:2,sizeLB:28,sizeUB:28"
+    asn1.v1.BitString home_e_nb_id = 2 [json_name = "home-eNB-ID"];
+    // @inject_tag: aper:"choiceIdx:3,sizeLB:18,sizeUB:18,fromChoiceExt"
+    asn1.v1.BitString short_macro_e_nb_id = 3 [json_name = "short-Macro-eNB-ID"];
+    // @inject_tag: aper:"choiceIdx:4,sizeLB:21,sizeUB:21,fromChoiceExt"
+    asn1.v1.BitString long_macro_e_nb_id = 4 [json_name = "long-Macro-eNB-ID"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:285
+// {GlobalENB-ID}
+message GlobalEnbId {
+  Plmnidentity p_lmnidentity = 1 [json_name = "pLMNIdentity"];
+  // @inject_tag: aper:"choiceExt"
+  EnbId e_nb_id = 2 [json_name = "eNB-ID"];
+};
+
+// sequence from e2sm_v2.asn1:293
+// {GUMMEI}
+message Gummei {
+  Plmnidentity p_lmn_identity = 1 [json_name = "pLMN-Identity"];
+  MmeGroupId m_me_group_id = 2 [json_name = "mME-Group-ID"];
+  MmeCode m_me_code = 3 [json_name = "mME-Code"];
+};
+
+// range of Integer from e2sm_v2.asn1:306
+// {MME-UE-S1AP-ID}
+message MmeUeS1ApId {
+  // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:309
+// {QCI}
+message Qci {
+  // @inject_tag: aper:"valueLB:0,valueUB:255"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:312
+// {SubscriberProfileIDforRFP}
+message SubscriberProfileIdforRfp {
+  // @inject_tag: aper:"valueLB:1,valueUB:256"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 256}, json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:330
+// {EN-GNB-ID}
+message EnGnbId {
+  // choice from e2sm_v2.asn1:330
+  oneof en_gnb_id {
+    // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
+    asn1.v1.BitString en_g_nb_id = 1 [json_name = "en-gNB-ID"];
+  }
+};
+
+// range of Integer from e2sm_v2.asn1:335
+// {ENB-UE-X2AP-ID}
+message EnbUeX2ApId {
+  // @inject_tag: aper:"valueLB:0,valueUB:4095"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4095}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:338
+// {ENB-UE-X2AP-ID-Extension}
+message EnbUeX2ApIdExtension {
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4095"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4095}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:341
+// {E-UTRA-ARFCN}
+message EUtraArfcn {
+  // @inject_tag: aper:"valueLB:0,valueUB:65535"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 65535}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:344
+// {E-UTRA-PCI}
+message EUtraPci {
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:503"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 503}, json_name = "value"];
+};
+
+message EUtraTac {
+  // @inject_tag: aper:"sizeLB:2,sizeUB:2"
+  bytes value = 1;
+}
+
+// sequence from e2sm_v2.asn1:351
+// {GlobalenGNB-ID}
+message GlobalenGnbId {
+  Plmnidentity p_lmn_identity = 1 [json_name = "pLMN-Identity"];
+  // @inject_tag: aper:"choiceExt"
+  EnGnbId en_g_nb_id = 2 [json_name = "en-gNB-ID"];
+};
+
+// range of Integer from e2sm_v2.asn1:365
+// {NGENB-CU-UE-W1AP-ID}
+message NgenbCuUeW1ApId {
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4294967295"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:368
+// {NGENB-DU-ID}
+message NgenbDuId {
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:68719476735"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name = "value"];
+};
+
+message Amfpointer {
+  // @inject_tag: aper:"sizeLB:6,sizeUB:6"
+  asn1.v1.BitString value = 1;
+}
+
+message AmfregionId {
+  // @inject_tag: aper:"sizeLB:8,sizeUB:8"
+  asn1.v1.BitString value = 1;
+}
+
+message AmfsetId {
+  // @inject_tag: aper:"sizeLB:10,sizeUB:10"
+  asn1.v1.BitString value = 1;
+}
+
+// range of Integer from e2sm_v2.asn1:389
+// {AMF-UE-NGAP-ID}
+message AmfUeNgapId {
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:1099511627775"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 1099511627775}, json_name = "value"];
+};
+
+message EutracellIdentity {
+  // @inject_tag: aper:"sizeLB:28,sizeUB:28"
+  asn1.v1.BitString value = 1;
+}
+
+// sequence from e2sm_v2.asn1:396
+// {EUTRA-CGI}
+message EutraCgi {
+  Plmnidentity p_lmnidentity = 1 [json_name = "pLMNIdentity"];
+  EutracellIdentity e_utracell_identity = 2 [json_name = "eUTRACellIdentity"];
+};
+
+// range of Integer from e2sm_v2.asn1:402
+// {FiveQI}
+message FiveQi {
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:255"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 255}, json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:406
+// {GlobalGNB-ID}
+message GlobalGnbId {
+  Plmnidentity p_lmnidentity = 1 [json_name = "pLMNIdentity"];
+  // @inject_tag: aper:"choiceExt"
+  GnbId g_nb_id = 2 [json_name = "gNB-ID"];
+};
+
+// sequence from e2sm_v2.asn1:413
+// {GlobalNgENB-ID}
+message GlobalNgEnbId {
+  Plmnidentity p_lmnidentity = 1 [json_name = "pLMNIdentity"];
+  // @inject_tag: aper:"choiceExt"
+  NgEnbId ng_enb_id = 2 [json_name = "ngENB-ID"];
+};
+
+// sequence from e2sm_v2.asn1:421
+// {GNB-ID}
+message GnbId {
+  // choice from e2sm_v2.asn1:421
+  oneof gnb_id {
+    // @inject_tag: aper:"choiceIdx:1,sizeLB:22,sizeUB:32"
+    asn1.v1.BitString g_nb_id = 1 [json_name = "gNB-ID"];
+  }
+};
+
+// sequence from e2sm_v2.asn1:427
+// {GUAMI}
+message Guami {
+  Plmnidentity p_lmnidentity = 1 [json_name = "pLMNIdentity"];
+  AmfregionId a_mfregion_id = 2 [json_name = "aMFRegionID"];
+  AmfsetId a_mfset_id = 3 [json_name = "aMFSetID"];
+  Amfpointer a_mfpointer = 4 [json_name = "aMFPointer"];
+};
+
+// range of Integer from e2sm_v2.asn1:435
+// {IndexToRFSP}
+message IndexToRfsp {
+  // @inject_tag: aper:"valueLB:1,valueUB:256,valueExt"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 256}, json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:439
+// {NgENB-ID}
+message NgEnbId {
+  // choice from e2sm_v2.asn1:439
+  oneof ng_enb_id {
+    // @inject_tag: aper:"choiceIdx:1,sizeLB:20,sizeUB:20"
+    asn1.v1.BitString macro_ng_enb_id = 1 [json_name = "macroNgENB-ID"];
+    // @inject_tag: aper:"choiceIdx:2,sizeLB:18,sizeUB:18"
+    asn1.v1.BitString short_macro_ng_enb_id = 2 [json_name = "shortMacroNgENB-ID"];
+    // @inject_tag: aper:"choiceIdx:3,sizeLB:21,sizeUB:21"
+    asn1.v1.BitString long_macro_ng_enb_id = 3 [json_name = "longMacroNgENB-ID"];
+  }
+};
+
+message NrcellIdentity {
+  // @inject_tag: aper:"sizeLB:36,sizeUB:36"
+  asn1.v1.BitString value = 1;
+}
+
+// sequence from e2sm_v2.asn1:450
+// {NR-CGI}
+message NrCgi {
+  Plmnidentity p_lmnidentity = 1 [json_name = "pLMNIdentity"];
+  NrcellIdentity n_rcell_identity = 2 [json_name = "nRCellIdentity"];
+};
+
+// range of Integer from e2sm_v2.asn1:459
+// {QosFlowIdentifier}
+message QosFlowIdentifier {
+  // @inject_tag: aper:"valueLB:0,valueUB:63,valueExt"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 63}, json_name = "value"];
+};
+
+message Sd {
+  // @inject_tag: aper:"sizeLB:3,sizeUB:3"
+  bytes value = 1;
+}
+
+// sequence from e2sm_v2.asn1:466
+// {S-NSSAI}
+// @inject_tag: aper:"valueExt"
+message SNssai {
+  Sst s_st = 1 [json_name = "sST"];
+  // @inject_tag: aper:"optional"
+  optional Sd s_d = 2 [json_name = "sD"];
+};
+
+message Sst {
+  // @inject_tag: aper:"sizeLB:1,sizeUB:1"
+  bytes value = 1;
+}
+
+// range of Integer from e2sm_v2.asn1:483
+// {NG-RANnodeUEXnAPID}
+message NgRannodeUexnApid {
+  // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:486
+// {GlobalNGRANNodeID}
+message GlobalNgrannodeId {
+  // choice from e2sm_v2.asn1:486
+  oneof global_ngrannode_id {
+    // @inject_tag: aper:"choiceIdx:1,valueExt"
+    GlobalGnbId g_nb = 1 [json_name = "gNB"];
+    // @inject_tag: aper:"choiceIdx:2,valueExt"
+    GlobalNgEnbId ng_e_nb = 2 [json_name = "ng-eNB"];
+  }
+};
+
+// range of Integer from e2sm_v2.asn1:499
+// {GNB-CU-CP-UE-E1AP-ID}
+message GnbCuCpUeE1ApId {
+  // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:502
+// {GNB-CU-UP-ID}
+message GnbCuUpId {
+  // @inject_tag: aper:"valueLB:0,valueUB:68719476735"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name = "value"];
+};
+
+message FiveGsTac {
+  // @inject_tag: aper:"sizeLB:3,sizeUB:3"
+  bytes value = 1;
+}
+
+// sequence from e2sm_v2.asn1:518
+// {FreqBandNrItem}
+// @inject_tag: aper:"valueExt"
+message FreqBandNrItem {
+  // @inject_tag: aper:"valueExt,valueLB:1,valueUB:1024"
+  int32 freq_band_indicator_nr = 1 [json_name = "freqBandIndicatorNr"];
+};
+
+// range of Integer from e2sm_v2.asn1:524
+// {GNB-CU-UE-F1AP-ID}
+message GnbCuUeF1ApId {
+  // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4294967295"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:527
+// {GNB-DU-ID}
+message GnbDuId {
+  // @inject_tag: aper:"valueLB:0,valueUB:68719476735"
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name = "value"];
+};
+
+// range of Integer from e2sm_v2.asn1:530
+// {NR-PCI}
+message NrPci {
+  // @inject_tag: aper:"valueLB:0,valueUB:1007"
+  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 1007}, json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:534
+// {NR-ARFCN}
+message NrArfcn {
+  // @inject_tag: aper:"valueLB:0,valueUB:3279165"
+  int32 n_rarfcn = 1 [json_name = "nRARFCN"];
+};
+
+// sequence from e2sm_v2.asn1:541
+// {NRFrequencyBand-List}
+message NrfrequencyBandList {
+  // @inject_tag: aper:"sizeLB:1,sizeUB:32,valueExt"
+  repeated NrfrequencyBandItem value = 1 [json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:542
+// {NRFrequencyBandItem}
+message NrfrequencyBandItem {
+  // @inject_tag: aper:"valueExt,valueLB:1,valueUB:1024"
+  int32 freq_band_indicator_nr = 1 [json_name = "freqBandIndicatorNr"];
+  SupportedSulbandList supported_sulband_list = 2 [json_name = "supportedSULBandList"];
+};
+
+// sequence from e2sm_v2.asn1:549
+// {NRFrequencyInfo}
+// @inject_tag: aper:"valueExt"
+message NrfrequencyInfo {
+  // @inject_tag: aper:"valueExt"
+  NrArfcn nr_arfcn = 1 [json_name = "nrARFCN"];
+  NrfrequencyBandList frequency_band_list = 2 [json_name = "frequencyBand-List"];
+  // @inject_tag: aper:"optional,valueLB:0,valueUB:1,valueExt"
+  optional NrfrequencyShift7p5khz frequency_shift7p5khz = 3 [json_name = "frequencyShift7p5khz"];
+};
+
+// sequence from e2sm_v2.asn1:567
+// {SupportedSULBandList}
+message SupportedSulbandList {
+  // @inject_tag: aper:"sizeLB:0,sizeUB:32,valueExt"
+  repeated SupportedSulfreqBandItem value = 1 [json_name = "value"];
+};
+
+// sequence from e2sm_v2.asn1:568
+// {SupportedSULFreqBandItem}
+message SupportedSulfreqBandItem {
+  // @inject_tag: aper:"valueExt,valueLB:1,valueUB:1024"
+  int32 freq_band_indicator_nr = 1 [json_name = "freqBandIndicatorNr"];
+};
+
+message Ranueid {
+  // @inject_tag: aper:"sizeLB:8,sizeUB:8"
+  bytes value = 1;
+}
+
+message Plmnidentity {
+  // @inject_tag:aper:"sizeLB:3,sizeUB:3"
+  bytes value = 1;
+}
+
+message MmeGroupId {
+  // @inject_tag:aper:"sizeLB:2,sizeUB:2"
+  bytes value = 1;
+}
+
+message MmeCode {
+  // @inject_tag:aper:"sizeLB:1,sizeUB:1"
+  bytes value = 1;
+}
