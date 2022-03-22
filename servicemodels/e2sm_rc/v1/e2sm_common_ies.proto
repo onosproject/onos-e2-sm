@@ -10,8 +10,8 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-package e2sm_v2_asn1.v1;
-option go_package = "e2sm_v2_asn1/v1/e2sm-common-ies";
+package e2sm_rc.v1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies";
 
 import "validate/v1/validate.proto";
 import "asn1/v1/asn1.proto";
@@ -497,7 +497,7 @@ message Gummei {
 // {MME-UE-S1AP-ID}
 message MmeUeS1ApId {
   // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name = "value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
 };
 
 // range of Integer from e2sm_v2.asn1:309
@@ -569,7 +569,7 @@ message GlobalenGnbId {
 // {NGENB-CU-UE-W1AP-ID}
 message NgenbCuUeW1ApId {
   // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4294967295"
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name = "value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
 };
 
 // range of Integer from e2sm_v2.asn1:368
@@ -718,7 +718,7 @@ message Sst {
 // {NG-RANnodeUEXnAPID}
 message NgRannodeUexnApid {
   // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name = "value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
 };
 
 // sequence from e2sm_v2.asn1:486
@@ -737,7 +737,7 @@ message GlobalNgrannodeId {
 // {GNB-CU-CP-UE-E1AP-ID}
 message GnbCuCpUeE1ApId {
   // @inject_tag: aper:"valueLB:0,valueUB:4294967295"
-  int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name = "value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
 };
 
 // range of Integer from e2sm_v2.asn1:502
@@ -764,14 +764,14 @@ message FreqBandNrItem {
 // {GNB-CU-UE-F1AP-ID}
 message GnbCuUeF1ApId {
   // @inject_tag: aper:"valueExt,valueLB:0,valueUB:4294967295"
-  int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 4294967295}, json_name = "value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name = "value"];
 };
 
 // range of Integer from e2sm_v2.asn1:527
 // {GNB-DU-ID}
 message GnbDuId {
   // @inject_tag: aper:"valueLB:0,valueUB:68719476735"
-  int64 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 68719476735}, json_name = "value"];
+  int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name = "value"];
 };
 
 // range of Integer from e2sm_v2.asn1:530

@@ -10,10 +10,10 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-package e2sm_rc_asn1.v1;
-option go_package = "e2sm_rc_asn1/v1/e2sm-rc-ies";
+package e2sm_rc.v1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies";
 
-import "e2sm_rc_asn1/v1/e2sm-common-ies.proto";
+import "e2sm_rc/v1/e2sm_common_ies.proto";
 import "validate/v1/validate.proto";
 import "asn1/v1/asn1.proto";
 
@@ -231,18 +231,18 @@ message NeighborCellItemChoiceNr {
 };
 
 enum NRModeInfo {
-    N_R_MODE_INFO_FDD = 0;
-    N_R_MODE_INFO_TDD = 1;
+    NR_MODE_INFO_FDD = 0;
+    NR_MODE_INFO_TDD = 1;
 }
 
 enum X2XNEstablished {
-    X2_X_N_ESTABLISHED_TRUE = 0;
-    X2_X_N_ESTABLISHED_FALSE = 1;
+    X2XN_ESTABLISHED_TRUE = 0;
+    X2XN_ESTABLISHED_FALSE = 1;
 }
 
 enum HOValidated {
-    H_O_VALIDATED_TRUE = 0;
-    H_O_VALIDATED_FALSE = 1;
+    HO_VALIDATED_TRUE = 0;
+    HO_VALIDATED_FALSE = 1;
 }
 
 // sequence from e2sm_rc.asn1:99
@@ -539,8 +539,8 @@ enum RanPChoiceComparison {
 enum RanPChoicePresence {
     RAN_P_CHOICE_PRESENCE_PRESENT = 0;
     RAN_P_CHOICE_PRESENCE_CONFIGURED = 1;
-    RAN_P_CHOICE_COMPARISON_ROLLOVER = 2;
-    RAN_P_CHOICE_COMPARISON_NONZERO = 3;
+    RAN_P_CHOICE_PRESENCE_ROLLOVER = 2;
+    RAN_P_CHOICE_PRESENCE_NONZERO = 3;
 }
 
 // sequence from e2sm_rc.asn1:307
@@ -1149,7 +1149,7 @@ message E2SmRcCallProcessIdFormat1 {
 // @inject_tag: aper:"valueExt"
 message E2SmRcControlHeader {
     // @inject_tag: aper:"choiceExt"
-    RicConnrolHeaderFormats ric_control_header_formats = 1 [ json_name="ric-controlHeader-formats"];
+    RicControlHeaderFormats ric_control_header_formats = 1 [ json_name="ric-controlHeader-formats"];
 };
 
 message RicControlHeaderFormats {
