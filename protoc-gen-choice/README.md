@@ -47,11 +47,10 @@ Example of `$proto_imports`
 proto_imports=${GOPATH}/src/github.com/onosproject/onos-e2-sm/
 ```
 
-For E2AP Choice map generation, you should run following command under `onos-e2t/` folder for each Protobuf file:
+For E2AP Choice map generation, you should run following command under `onos-e2t/` directory:
 ```bash
 protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2t/api" --proto_path="api/" --choice_out="api/e2ap/v2/choiceOptions/" e2ap/v2/e2ap_pdu_descriptions.proto e2ap/v2/e2ap_pdu_contents.proto e2ap/v2/e2ap_ies.proto e2ap/v2/e2ap_containers.proto e2ap/v2/e2ap_constants.proto e2ap/v2/e2ap_commondatatypes.proto
 ```
-In case of canonical choice ordering, a `.proto` file with constants definition is required.
 
 In case of multiple input files, final `ChoiceMap` would be composed as a summary of output produced for each file.
 A good example is a `ChoiceMap` for RSM service model, see:
@@ -61,8 +60,6 @@ A good example is a `ChoiceMap` for RSM service model, see:
 To avoid cycle dependency in Go, please move file under `e2ap-pdu-descriptions` folder or any other `e2ap-*` folder with generated Protobuf.
 
 ## Known issues
-* This plugin doesn't generate a map for canonical choice ordering (this is to be done in the future)
-  * Plugin doesn't exclude artifacts which may get to the choice map output due to the presence of canonical ordering
 * This plugin assumes that the generated the output path specified in `--choice_out=` corresponds to the path of the Golang code for the first passed Protobuf file, e.g.:
   * `--choice_out="servicemodels/e2sm_mho_go/v2/" servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto servicemodels/e2sm_mho_go/v2/e2sm_v2.proto`
   * `--choice_out="servicemodels/e2sm_kpm_v2_go/v2/" servicemodels/e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto`
