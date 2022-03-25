@@ -53,8 +53,11 @@ build_protoc_gen_cgo:
 build_protoc_gen_choice:
 	cd protoc-gen-choice/ && go build -v -o ./protoc-gen-choice && go install && cd ..
 
+build_protoc_gen_builder:
+	cd protoc-gen-builder/ && go build -v -o ./protoc-gen-builder && go install && cd ..
+
 test: # @HELP run the unit tests and source code validation
-test: license_check build build_protoc_gen_cgo build_protoc_gen_choice linters
+test: license_check build build_protoc_gen_cgo build_protoc_gen_choice build_protoc_gen_builder linters
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre_go && go test -race ./...
@@ -102,6 +105,7 @@ linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-cgo/ && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-choice/ && golangci-lint run --timeout 5m && cd ..
+	#cd protoc-gen-builder/ && golangci-lint run --timeout 5m && cd ..
 
 build-tools: # @HELP install the ONOS build tools if needed
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
