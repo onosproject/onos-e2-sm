@@ -21,7 +21,8 @@ const moduleName = "choice"
 var templateDir = os.Getenv("GOPATH")
 var templates = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-choice/templates/choice.tpl")))
 
-type encoderStruct struct {
+// encoder structure carries all necessary items to generate the encoder package
+type encoder struct {
 	Logger                  bool   // this is to indicate of logger was initialized - one structure should be randomly picked and assigned a logger flag
 	Imports                 string // this is to hold all necessary imports, mainly the Protobuf which contains top-level PDUs (they're defined as PDUs with multiple formats wrapped as a nested CHOICE inside SEQUENCE)
 	ProtoName               string // this is to hold ProtobufName to refer to the same package
@@ -31,6 +32,16 @@ type encoderStruct struct {
 	CanonicalChoiceMapName  string // this is to hold canonical choice map name
 	CanonicalChoicePresence bool   // indicates whether Canonical ordering for choices is present and the map should be passed
 	Parameters              string // this is to hold all necessary parameters to pass to the message - mostly it is "choiceExt" or "valueExt"
+}
+
+// servicemodel structure carries all necessary items to generate the servicemodel package
+type servicemodel struct {
+	SmName  string // SM name
+	Imports string // this is to hold all necessary imports, mainly the Protobuf which contains top-level PDUs (they're defined as PDUs with multiple formats wrapped as a nested CHOICE inside SEQUENCE)
+}
+
+// ToDo - find out how to handle pdubuilder package generation
+type pdubuilder struct {
 }
 
 // Defines data structure to pass to enum template

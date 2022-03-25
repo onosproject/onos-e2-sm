@@ -53,8 +53,11 @@ build_protoc_gen_cgo:
 build_protoc_gen_choice:
 	cd protoc-gen-choice/ && go build -v -o ./protoc-gen-choice && go install && cd ..
 
+build_protoc_gen_builder:
+	cd protoc-gen-builder/ && go build -v -o ./protoc-gen-builder && go install && cd ..
+
 test: # @HELP run the unit tests and source code validation
-test: license_check build build_protoc_gen_cgo build_protoc_gen_choice linters
+test: license_check build build_protoc_gen_cgo build_protoc_gen_choice build_protoc_gen_builder linters
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre_go && go test -race ./...
