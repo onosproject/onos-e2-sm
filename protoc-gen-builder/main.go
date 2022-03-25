@@ -10,7 +10,7 @@ package main
 import (
 	pgs "github.com/lyft/protoc-gen-star"
 	pgsgo "github.com/lyft/protoc-gen-star/lang/go"
-	"github.com/onosproject/onos-e2-sm/protoc-gen-choice/generic"
+	"github.com/onosproject/onos-e2-sm/protoc-gen-builder/generic"
 )
 
 func main() {

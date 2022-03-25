@@ -11,9 +11,7 @@ import (
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 	{{if .Logger}}"github.com/onosproject/onos-lib-go/pkg/logging"{{end}}
 )
-
 {{if .Logger}}var log = logging.GetLogger(){{end}}
-
 func PerEncode{{.MessageName}}(msg *{{.ProtoName}}.{{.MessageName}}) ([]byte, error) {
 
 	log.Debugf("Obtained {{.MessageNameInLogging}} message is\n%v", msg)
@@ -21,7 +19,7 @@ func PerEncode{{.MessageName}}(msg *{{.ProtoName}}.{{.MessageName}}) ([]byte, er
 		return nil, errors.NewInvalid("error validating {{.MessageNameInLogging}} PDU %s", err.Error())
 	}
 
-	{{if .CanonicalChoicePresence}}per, err := aper.MarshalWithParams(msg, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, {{.ProtoName}}.{{.ChoiceMapName}}){{else}}per, err := aper.MarshalWithParams(msg, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, nil){{end}}
+	{{if .CanonicalChoicePresence}}per, err := aper.MarshalWithParams(msg, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, {{.ProtoName}}.{{.CanonicalChoiceMapName}}){{else}}per, err := aper.MarshalWithParams(msg, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, nil){{end}}
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +33,7 @@ func PerDecode{{.MessageName}}(per []byte) (*{{.ProtoName}}.{{.MessageName}}, er
 	log.Debugf("Obtained {{.MessageNameInLogging}} PER bytes are\n%v", hex.Dump(per))
 
 	result := {{.ProtoName}}.{{.MessageName}}{}
-	{{if .CanonicalChoicePresence}}err := aper.UnmarshalWithParams(per, &result, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, {{.ProtoName}}.{{.ChoiceMapName}}){{else}}err := aper.UnmarshalWithParams(per, &result, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, nil){{end}}
+	{{if .CanonicalChoicePresence}}err := aper.UnmarshalWithParams(per, &result, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, {{.ProtoName}}.{{.CanonicalChoiceMapName}}){{else}}err := aper.UnmarshalWithParams(per, &result, "{{.Parameters}}", {{.ProtoName}}.{{.ChoiceMapName}}, nil){{end}}
 	if err != nil {
 		return nil, err
 	}

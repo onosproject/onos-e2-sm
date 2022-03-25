@@ -1,5 +1,5 @@
-module github.com/onosproject/onos-e2-sm/protoc-gen-choice
+module github.com/onosproject/onos-e2-sm/protoc-gen-builder
 
 go 1.16
 
-require github.com/lyft/protoc-gen-star v0.6.0
+require github.com/lyft/protoc-gen-star v0.5.3

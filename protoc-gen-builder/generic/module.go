@@ -16,10 +16,14 @@ import (
 	"unicode"
 )
 
-const moduleName = "choice"
+const moduleName = "builder"
 
 var templateDir = os.Getenv("GOPATH")
-var templates = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-choice/templates/choice.tpl")))
+var templateEncoder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/encoder.tpl")))
+
+//var templatePdubuilder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/pdubuilder.tpl")))
+//var templateBuilder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/builder.tpl")))
+//var templateServicemodel = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/servicemodel.tpl")))
 
 // encoder structure carries all necessary items to generate the encoder package
 type encoder struct {
@@ -118,6 +122,9 @@ func (m *reportModule) Name() string {
 func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.Package) []pgs.Artifact {
 	buf := &bytes.Buffer{}
 
+	// firstly, understanding what to generate - servicemodel (E2SM) or E2AP
+	sm, _ := m.Parameters().Bool("sm")
+
 	dir, err := os.Getwd()
 	// handle err
 	if err != nil {
@@ -140,363 +147,118 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		}
 	}
 
-	choices := choiceStruct{
-		Choices:          make([]choiceMsg, 0),
-		CanonicalChoices: make([]canonicalChoiceMsg, 0),
-	}
+	// creating structure to make generate encoder
+	enc := make([]encoder, 0)
+	loggerPresence := true
+	if sm {
+		for _, f := range targets { // Input .proto files
 
-	canonicalChoices := make([]string, 0)
+			// understanding if canonical choice ordering is present
+			canonicalChoice := canonicalOrderingIsPresent(f.AllMessages())
 
-	for _, f := range targets { // Input .proto files
-		for _, msg := range f.AllMessages() {
-			_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
-			if err != nil {
-				return nil
-			}
-			for _, item := range msg.Fields() {
-				_, err = fmt.Fprintf(buf, "Item's name is %v\n", getItemType(item.Descriptor().GetTypeName()))
+			// looking for a proto path here
+			protoFilePath := lookUpProtoFilePath(dir, f.File().InputPath())
+
+			for _, msg := range f.AllMessages() {
+				_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
 				if err != nil {
 					return nil
 				}
-				_, err = fmt.Fprintf(buf, "Comments for this message are \n%v\n", item.SourceCodeInfo().LeadingComments())
+				// This indicates us that we've found top-level message
+				if strings.Contains(msg.Name().String(), "E2Sm") &&
+					!strings.Contains(msg.Name().String(), "Format") && !strings.Contains(msg.Name().String(), "Item") {
+					//msg.Name().String()
+					_, err = fmt.Fprintf(buf, "Top-level message was found!! It is %v\n", msg.Name().String())
+					if err != nil {
+						return nil
+					}
+
+					pdu := encoder{
+						ProtoName:               adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()),
+						MessageName:             msg.Name().String(),
+						MessageNameInLogging:    adjustMessageNameForLogging(msg.Name().String()),
+						ChoiceMapName:           adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "Choicemap",
+						CanonicalChoiceMapName:  adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "CanonicalChoicemap",
+						CanonicalChoicePresence: canonicalChoice,
+						Parameters:              lookUpMessageParameters(f.SourceCodeInfo().LeadingComments()),
+					}
+					if loggerPresence {
+						pdu.Logger = true
+						loggerPresence = false
+					} else {
+						pdu.Logger = false
+					}
+					pdu.Imports = pdu.ProtoName + " \"" + protoFilePath + "\"" + "\n"
+					enc = append(enc, pdu)
+				}
+			}
+		}
+	} else {
+		// There is only single top-level PDU so far, but leaving it here for future
+		for _, f := range targets { // Input .proto files
+
+			// understanding if canonical choice ordering is present
+			canonicalChoice := canonicalOrderingIsPresent(f.AllMessages())
+
+			// looking for a proto path here
+			protoFilePath := lookUpProtoFilePath(dir, f.File().InputPath())
+
+			for _, msg := range f.AllMessages() {
+				_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
 				if err != nil {
 					return nil
 				}
-				if strings.Contains(item.SourceCodeInfo().LeadingComments(), "canonicalOrder") {
-					_, err = fmt.Fprintf(buf, "----------------- Adding %v to the Canonical CHOICE map\n", getItemType(item.Descriptor().GetTypeName()))
+				// This indicates us that we've found top-level message
+				if strings.Contains(msg.Name().String(), "E2Ap") &&
+					!strings.Contains(msg.Name().String(), "Format") && !strings.Contains(msg.Name().String(), "Item") {
+					//msg.Name().String()
+					_, err = fmt.Fprintf(buf, "Top-level message was found!! It is %v\n", msg.Name().String())
 					if err != nil {
 						return nil
 					}
-					canonicalChoices = append(canonicalChoices, getItemType(item.Descriptor().GetTypeName()))
+					// Stick to the E2AP message
+					pdu := encoder{
+						Logger:                  true,
+						ProtoName:               adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()),
+						MessageName:             msg.Name().String(),
+						MessageNameInLogging:    "E2AP",
+						ChoiceMapName:           adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "Choicemap",
+						CanonicalChoiceMapName:  adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "CanonicalChoicemap",
+						CanonicalChoicePresence: canonicalChoice,
+						Parameters:              lookUpMessageParameters(f.SourceCodeInfo().LeadingComments()),
+					}
+					pdu.Imports = pdu.ProtoName + " \"" + protoFilePath + "\"" + "\n"
+					enc = append(enc, pdu)
 				}
 			}
 		}
 	}
 
-	_, err = fmt.Fprintf(buf, "Messages with CanonicalChoice ordering are:\n")
-	if err != nil {
-		return nil
-	}
-	for l, iitem := range canonicalChoices {
-		_, err = fmt.Fprintf(buf, "%v - message name is - %v\n", l, iitem)
-		if err != nil {
-			return nil
-		}
-	}
-
-	if len(canonicalChoices) > 0 {
-		choices.CanonicalChoicePresence = true
-	}
-
-	_, err = fmt.Fprintf(buf, "Canonical CHOICE presence is %v\n", choices.CanonicalChoicePresence)
-	if err != nil {
-		return nil
-	}
-
-	// In case of canonical choice presence we should read out constants in order to compose map correctly
-	constantsList := make([]string, 0)
-	if choices.CanonicalChoicePresence {
-		for _, f := range targets {
-			// fix on .proto file with constants
-			if strings.Contains(f.Name().Split()[0], "constants") {
-				for _, msg := range f.AllMessages() {
-					// constant has only single item
-					structType := msg.Fields()[0].SourceCodeInfo().TrailingComments()
-					if structType != "" {
-						name := msg.Name().String()
-						_, err = fmt.Fprintf(buf, "Name is %v\n", name)
-						if err != nil {
-							return nil
-						}
-						_, err = fmt.Fprintf(buf, "StructType is %v\n", structType)
-						if err != nil {
-							return nil
-						}
-
-						constant := adjustCanonicalChoiceIndex(name, structType)
-						_, err = fmt.Fprintf(buf, "Constant is %v\n", constant)
-						if err != nil {
-							return nil
-						}
-						constantsList = append(constantsList, constant)
-					}
-				}
-				break
-			}
-		}
-	}
-
-	// Figuring out name of the package
-	packageName := ""
-	// We are assuming that all .proto files are located at the same directory (the last directory usually contains version number)
-	for _, f := range targets {
-		_, err = fmt.Fprintf(buf, "Obtained input path is \n%v\n", f.InputPath().Dir().String())
-		if err != nil {
-			return nil
-		}
-
-		packageName = extractDirectoryName(f.InputPath().Dir().String())
-		// Input .proto files
-		if packageName != "" {
-			choices.PackageName = dashToUnderscore(packageName)
-		} else {
-			choices.PackageName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
-		}
-		break
-	}
-
-	for _, f := range targets { // Input .proto files
-		m.Push(f.Name().String()).Debug("reporting")
-		targetPath := ""
-		_, err := fmt.Fprintf(buf, "Processing following Proto file %v\n", f.File().InputPath().BaseName())
-		if err != nil {
-			return nil
-		}
-		targetPath = f.File().InputPath().Dir().String()
-		_, err = fmt.Fprintf(buf, "Target file Proto path pattern is %v\n", targetPath)
-		if err != nil {
-			return nil
-		}
-
-		protoFilePath := ""
-		err = filepath.Walk(dir,
-			func(path string, info os.FileInfo, err error) error {
-				if err != nil {
-					return err
-				}
-				if strings.Contains(path, f.File().InputPath().BaseName()+".pb.go") && !strings.Contains(path, "/_") && strings.Contains(path, targetPath) {
-					protoFilePath = path
-					_, err = fmt.Fprintf(buf, "Hooray! Found file %v with path %v\n", info.Name(), path)
-					if err != nil {
-						return nil
-					}
-				}
-
-				return nil
-			})
-		if err != nil {
-			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path.. %v\n", err)
-			if err != nil {
-				return nil
-			}
-		}
-
-		if protoFilePath == "" {
-			_, err = fmt.Fprintf(buf, "ProtoFilePath is empty %v\n", protoFilePath)
-			if err != nil {
-				return nil
-			}
-			m.OverwriteCustomFile(
-				"/tmp/report.txt",
-				buf.String(),
-				0644,
-			)
-
-			return m.Artifacts()
-		} else {
-			//Composing protoFilePath to correspond to the correct input for Golang imports
-			index := strings.Index(protoFilePath, "github.com/")
-			if index == -1 {
-				_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
-				if err != nil {
-					return nil
-				}
-			}
-			protoFilePath = protoFilePath[index:]
-
-			//Taking out file name from the path
-			indexx := strings.LastIndex(protoFilePath, "/")
-			if indexx == -1 {
-				_, err = fmt.Fprintf(buf, "Something went wrong in searching for the file path for the import..\n%v", protoFilePath)
-				if err != nil {
-					return nil
-				}
-			}
-			protoFilePath = protoFilePath[:indexx]
-
-			_, err = fmt.Fprintf(buf, "Proto file path is %v\n", protoFilePath)
-			if err != nil {
-				return nil
-			}
-		}
-
-		choices.Imports = choices.Imports + adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()) + " \"" + protoFilePath + "\"" + "\n"
-		if choices.MapName == "" {
-			choices.MapName = adjustMapVariableName(extractPackageName(f.Name().Split()[0]))
-		}
-
-		_, err = fmt.Fprintf(buf, "MapVariableName is %v\n", choices.MapName)
-		if err != nil {
-			return nil
-		}
-
-		for _, msg := range f.AllMessages() {
-			_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
-			if err != nil {
-				return nil
-			}
-			for _, item := range msg.Fields() {
-				_, err = fmt.Fprintf(buf, "Item's name is %v\n", getItemType(item.Descriptor().GetTypeName()))
-				if err != nil {
-					return nil
-				}
-				_, err = fmt.Fprintf(buf, "Comments for this message are \n%v\n", item.SourceCodeInfo().LeadingComments())
-				if err != nil {
-					return nil
-				}
-				if strings.Contains(item.SourceCodeInfo().LeadingComments(), "canonicalOrder") {
-					_, err = fmt.Fprintf(buf, "----------------- Adding %v to the Canonical CHOICE map\n", getItemType(item.Descriptor().GetTypeName()))
-					if err != nil {
-						return nil
-					}
-					canonicalChoices = append(canonicalChoices, getItemType(item.Descriptor().GetTypeName()))
-				}
-			}
-		}
-
-		for _, msg := range f.AllMessages() {
-			_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
-			if err != nil {
-				return nil
-			}
-			if msg.OneOfs() != nil {
-				if choices.CanonicalChoicePresence && presentInCanonicalChoiceList(msg.Name().String(), canonicalChoices) {
-					//ToDo - compose canonical choice struct
-					_, err = fmt.Fprintf(buf, "------------------- Filling in canonical choice structure\n")
-					if err != nil {
-						return nil
-					}
-
-					_, err = fmt.Fprintf(buf, "---- Message name is %v\n", msg.Name().String())
-					if err != nil {
-						return nil
-					}
-
-					chMsg := canonicalChoiceMsg{
-						MsgName: adjustOneOfStructName(msg.Name().String()),
-						Items:   make([]canonicalChoiceItem, 0),
-					}
-
-					for i, plg := range msg.OneOfs() {
-						if !strings.HasPrefix(plg.Name().String(), "_") {
-							_, err = fmt.Fprintf(buf, "%v OneOf name is %v\n", i+1, plg.Name())
-							if err != nil {
-								return nil
-							}
-							chItem := canonicalChoiceItem{
-								ChoiceName: plg.Name().String(),
-								Leafs:      make([]canonicalLeaf, 0),
-							}
-							for j, field := range plg.Fields() {
-								_, err = fmt.Fprintf(buf, "OneOf field (item) type (child structure) is %v\n", getItemType(field.Descriptor().GetTypeName()))
-								if err != nil {
-									return nil
-								}
-
-								_, err = fmt.Fprintf(buf, "%v, OneOf field is %v\n", j+1, field.Name().String())
-								if err != nil {
-									return nil
-								}
-								lf := canonicalLeaf{
-									PackageName: extractPackageNameForCanonicalChoices(f.File().InputPath().Dir().String()),
-									Index:       lookUpCanonicalChoiceIndex(strings.ReplaceAll(field.Name().String(), "_", ""), constantsList),
-									LeafName:    msg.Name().String() + "_" + adjustOneOfLeafName(field.Name().String()),
-								}
-								lf.ProtoFileName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
-								chItem.Leafs = append(chItem.Leafs, lf)
-							}
-							chMsg.Items = append(chMsg.Items, chItem)
-						}
-					}
-
-					_, err = fmt.Fprintf(buf, "Obtained OneOf item is \n%v\n", chMsg)
-					if err != nil {
-						return nil
-					}
-
-					choices.CanonicalChoices = append(choices.CanonicalChoices, chMsg)
-				} else {
-					chMsg := choiceMsg{
-						MsgName: adjustOneOfStructName(msg.Name().String()),
-						Items:   make([]choiceItem, 0),
-					}
-
-					for i, plg := range msg.OneOfs() {
-						if !strings.HasPrefix(plg.Name().String(), "_") {
-							_, err = fmt.Fprintf(buf, "%v OneOf name is %v\n", i+1, plg.Name())
-							if err != nil {
-								return nil
-							}
-							chItem := choiceItem{
-								ChoiceName: plg.Name().String(),
-								Leafs:      make([]leaf, 0),
-							}
-							for j, field := range plg.Fields() {
-								_, err = fmt.Fprintf(buf, "OneOf field (item) type (child structure) is %v\n", getItemType(field.Descriptor().GetTypeName()))
-								if err != nil {
-									return nil
-								}
-
-								_, err = fmt.Fprintf(buf, "%v, OneOf field is %v\n", j+1, field.Name())
-								if err != nil {
-									return nil
-								}
-								lf := leaf{
-									Index:    j + 1,
-									LeafName: msg.Name().String() + "_" + adjustOneOfLeafName(field.Name().String()),
-								}
-								lf.ProtoFileName = adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
-								chItem.Leafs = append(chItem.Leafs, lf)
-							}
-							chMsg.Items = append(chMsg.Items, chItem)
-						}
-					}
-
-					_, err = fmt.Fprintf(buf, "Obtained OneOf item is \n%v\n", chMsg)
-					if err != nil {
-						return nil
-					}
-
-					choices.Choices = append(choices.Choices, chMsg)
-				}
-			}
-		}
-
-		m.Pop()
-		_, err = fmt.Fprintf(buf, "-----------------------------------------------------------------------------------------------\n")
-		if err != nil {
-			return nil
-		}
-	}
-
-	_, err = fmt.Fprintf(buf, "Messages with CanonicalChoice ordering are:\n")
-	if err != nil {
-		return nil
-	}
-	for l, iitem := range canonicalChoices {
-		_, err = fmt.Fprintf(buf, "%v - message name is - %v\n", l, iitem)
-		if err != nil {
-			return nil
-		}
-	}
-
-	if len(canonicalChoices) > 0 {
-		choices.CanonicalChoicePresence = true
-	}
-
-	_, err = fmt.Fprintf(buf, "Canonical CHOICE presence is %v\n", choices.CanonicalChoicePresence)
+	_, err = fmt.Fprintf(buf, "We're about to start generating encoder package\nObtained structure is %v\n", enc)
 	if err != nil {
 		return nil
 	}
 
-	//Generating new .go file
-	m.OverwriteGeneratorTemplateFile("choiceOptions.go", templates.Lookup("choice.tpl"), choices)
+	//printing encoder files..
+	for _, e := range enc {
+		_, err = fmt.Fprintf(buf, "Generating template for %v with name %v\n", e.MessageName, e.MessageNameInLogging)
+		if err != nil {
+			return nil
+		}
 
-	sm, _ := m.Parameters().Bool("sm")
+		//Generating new .go file
+		m.OverwriteGeneratorTemplateFile(e.MessageNameInLogging+".go", templateEncoder.Lookup("encoder.tpl"), e)
+	}
 
 	if sm {
 		//ToDo - generate servicemodel package
 
+	}
+
+	out := m.OutputPath()
+	_, err = fmt.Fprintf(buf, "Output path is\n%v\n", out)
+	if err != nil {
+		return nil
 	}
 
 	m.OverwriteCustomFile(
@@ -711,4 +473,90 @@ func lookUpCanonicalChoiceIndex(name string, list []string) string {
 		res = "NoIndexDefined"
 	}
 	return res
+}
+
+func adjustMessageNameForLogging(name string) string {
+
+	res := ""
+	e2Name := adjustMapVariableName(extractPackageName(name))
+	if strings.Contains(strings.ToLower(name), "e2sm") {
+		tmp := "E2SM" + "-" + name[4:]
+		res = strings.ReplaceAll(tmp, e2Name, strings.ToUpper(e2Name)+"-")
+	} else if strings.Contains(strings.ToLower(name), "e2ap") {
+		//ToDo - shouldn't be valid for E2AP - leaving for future
+		tmp := "E2AP" + "-" + name[4:]
+		res = strings.ReplaceAll(tmp, e2Name, strings.ToUpper(e2Name)+"-")
+	}
+
+	return res
+}
+
+func lookUpMessageParameters(comments string) string {
+
+	res := ""
+	if strings.Contains(comments, "aper:") {
+		index1 := strings.Index(comments, "aper:\"")
+		tmp := comments[index1:]
+		index2 := strings.Index(tmp, "\"")
+		res = tmp[:index2]
+	}
+
+	return res
+}
+
+func canonicalOrderingIsPresent(files []pgs.Message) bool {
+	canonicalChoice := false
+	// understanding if there is a canonical choice presence
+	for _, msg := range files {
+		for _, item := range msg.Fields() {
+			if strings.Contains(item.SourceCodeInfo().LeadingComments(), "canonicalOrder") {
+				canonicalChoice = true
+				break
+			}
+		}
+	}
+
+	return canonicalChoice
+}
+
+func lookUpProtoFilePath(dir string, inputPath pgs.FilePath) string {
+
+	targetPath := ""
+	targetPath = inputPath.Dir().String()
+
+	protoFilePath := ""
+	err := filepath.Walk(dir,
+		func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if strings.Contains(path, inputPath.BaseName()+".pb.go") && !strings.Contains(path, "/_") && strings.Contains(path, targetPath) {
+				protoFilePath = path
+			}
+
+			return nil
+		})
+	if err != nil {
+		return "Something went wrong in searching for the file path.."
+	}
+
+	if protoFilePath == "" {
+		return "EmptyProtoFilePath"
+	} else {
+		//Composing protoFilePath to correspond to the correct input for Golang imports
+		index := strings.Index(protoFilePath, "github.com/")
+		if index == -1 {
+			return "Something went wrong in searching for the file path for the import.."
+		}
+		protoFilePath = protoFilePath[index:]
+
+		//Taking out file name from the path
+		indexx := strings.LastIndex(protoFilePath, "/")
+		if indexx == -1 {
+			return "Something went wrong in searching for the file path for the import.."
+		}
+		protoFilePath = protoFilePath[:indexx]
+	}
+
+	return protoFilePath
 }
