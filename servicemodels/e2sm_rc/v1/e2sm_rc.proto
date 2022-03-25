@@ -1237,6 +1237,7 @@ message E2SmRcControlOutcomeFormat1Item {
 
 // sequence from e2sm_rc.asn1:794
 // {E2SM-RC-RANFunctionDefinition}
+// @inject_tag: aper:"valueExt"
 message E2SmRcRanfunctionDefinition {
     // @inject_tag: aper:"valueExt"
     RanfunctionName ran_function_name = 1 [ json_name="ranFunction-Name"];

@@ -173,6 +173,11 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 						return nil
 					}
 
+					_, err = fmt.Fprintf(buf, "Comments were found, they are:\n%v\n", msg.SourceCodeInfo().LeadingComments())
+					if err != nil {
+						return nil
+					}
+
 					pdu := encoder{
 						ProtoName:               adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()),
 						MessageName:             msg.Name().String(),
@@ -180,7 +185,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 						ChoiceMapName:           adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "Choicemap",
 						CanonicalChoiceMapName:  adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "CanonicalChoicemap",
 						CanonicalChoicePresence: canonicalChoice,
-						Parameters:              lookUpMessageParameters(f.SourceCodeInfo().LeadingComments()),
+						Parameters:              lookUpMessageParameters(msg.SourceCodeInfo().LeadingComments()),
 					}
 					if loggerPresence {
 						pdu.Logger = true
@@ -225,7 +230,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 						ChoiceMapName:           adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "Choicemap",
 						CanonicalChoiceMapName:  adjustMapVariableName(extractPackageName(f.Name().Split()[0])) + "CanonicalChoicemap",
 						CanonicalChoicePresence: canonicalChoice,
-						Parameters:              lookUpMessageParameters(f.SourceCodeInfo().LeadingComments()),
+						Parameters:              lookUpMessageParameters(msg.SourceCodeInfo().LeadingComments()),
 					}
 					pdu.Imports = pdu.ProtoName + " \"" + protoFilePath + "\"" + "\n"
 					enc = append(enc, pdu)
@@ -496,7 +501,7 @@ func lookUpMessageParameters(comments string) string {
 	res := ""
 	if strings.Contains(comments, "aper:") {
 		index1 := strings.Index(comments, "aper:\"")
-		tmp := comments[index1:]
+		tmp := comments[index1+6:]
 		index2 := strings.Index(tmp, "\"")
 		res = tmp[:index2]
 	}
