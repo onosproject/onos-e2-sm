@@ -214,7 +214,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					return nil
 				}
 				// This indicates us that we've found top-level message
-				if strings.Contains(msg.Name().String(), "E2Ap") &&
+				if strings.Contains(msg.Name().String(), "E2ApPdu") &&
 					!strings.Contains(msg.Name().String(), "Format") && !strings.Contains(msg.Name().String(), "Item") {
 					//msg.Name().String()
 					_, err = fmt.Fprintf(buf, "Top-level message was found!! It is %v\n", msg.Name().String())
