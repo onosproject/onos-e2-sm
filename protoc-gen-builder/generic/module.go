@@ -40,8 +40,29 @@ type encoder struct {
 
 // servicemodel structure carries all necessary items to generate the servicemodel package
 type servicemodel struct {
-	SmName  string // SM name
-	Imports string // this is to hold all necessary imports, mainly the Protobuf which contains top-level PDUs (they're defined as PDUs with multiple formats wrapped as a nested CHOICE inside SEQUENCE)
+	PackageName  string
+	Imports      string       // this is to hold all necessary imports, mainly the Protobuf which contains top-level PDUs (they're defined as PDUs with multiple formats wrapped as a nested CHOICE inside SEQUENCE)
+	SmName       string       // SM name
+	SmVersion    string       // SM version
+	OID          string       // SM OID
+	TopLevelPdus topLevelPdus // this is to hold information about top-level PDUs
+}
+
+// topLevelPdus structure holds SM interface information for top-level PDUs
+type topLevelPdus struct {
+	IndicationHeader       topLevelPdu
+	indicationMessage      topLevelPdu
+	ControlHeader          topLevelPdu
+	ControlMessage         topLevelPdu
+	ControlOutcome         topLevelPdu
+	RanFunctionDescription topLevelPdu
+	EventTriggerDefinition topLevelPdu
+	ActionDefinition       topLevelPdu
+}
+
+type topLevelPdu struct {
+	MessageProtoName string // this is to hold Protobuf name of the message
+	IsPresent        bool   // this is to indicate if the PDU is present
 }
 
 // ToDo - find out how to handle pdubuilder package generation
