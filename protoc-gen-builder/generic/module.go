@@ -23,7 +23,7 @@ var templateEncoder = template.Must(template.ParseGlob(filepath.Join(templateDir
 
 //var templatePdubuilder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/pdubuilder.tpl")))
 //var templateBuilder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/builder.tpl")))
-//var templateServicemodel = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/servicemodel.tpl")))
+var templateServicemodel = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/servicemodel.tpl")))
 
 // encoder structure carries all necessary items to generate the encoder package
 type encoder struct {
@@ -43,9 +43,8 @@ type servicemodel struct {
 	PackageName  string
 	E2SmName     string       // E2SM name without E2 prefix and in uppercase
 	Imports      string       // this is to hold all necessary imports, mainly the Protobuf which contains top-level PDUs (they're defined as PDUs with multiple formats wrapped as a nested CHOICE inside SEQUENCE)
-	SmName       string       // SM name
+	SmName       string       // SM name composed of E2SmName and SmVersion variable both in lowercase
 	SmVersion    string       // SM version
-	ModuleName   string       // Module name composed of SmName and SmVersion variables - should be in lowercase
 	OID          string       // SM OID
 	TopLevelPdus topLevelPdus // this is to hold information about top-level PDUs
 }
@@ -53,13 +52,14 @@ type servicemodel struct {
 // topLevelPdus structure holds SM interface information for top-level PDUs
 type topLevelPdus struct {
 	IndicationHeader       topLevelPdu
-	indicationMessage      topLevelPdu
+	IndicationMessage      topLevelPdu
 	ControlHeader          topLevelPdu
 	ControlMessage         topLevelPdu
 	ControlOutcome         topLevelPdu
 	RanFunctionDescription topLevelPdu
 	EventTriggerDefinition topLevelPdu
 	ActionDefinition       topLevelPdu
+	CallProcessID          topLevelPdu
 }
 
 type topLevelPdu struct {
@@ -170,11 +170,28 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		}
 	}
 
-	// creating structure to make generate encoder
+	// creating structure to generate encoder package
 	enc := make([]encoder, 0)
 	loggerPresence := true
+
+	//creating structure to generate servicemodel package
+	smodel := servicemodel{}
+
 	if sm {
+		smBasicInfoFilled := false
 		for _, f := range targets { // Input .proto files
+
+			_, err = fmt.Fprintf(buf, "Leading target comments were found, they are:\n%v\n", f.SourceCodeInfo().LeadingDetachedComments())
+			if err != nil {
+				return nil
+			}
+
+			for _, s := range f.SourceCodeInfo().LeadingDetachedComments() {
+				_, err = fmt.Fprintf(buf, "Entity is:\n%v\n", s)
+				if err != nil {
+					return nil
+				}
+			}
 
 			// understanding if canonical choice ordering is present
 			canonicalChoice := canonicalOrderingIsPresent(f.AllMessages())
@@ -218,6 +235,15 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					}
 					pdu.Imports = pdu.ProtoName + " \"" + protoFilePath + "\"" + "\n"
 					enc = append(enc, pdu)
+
+					// filling in some information about SM
+					smodel.ParsePdu(msg.Name().String())
+					if !smBasicInfoFilled {
+						smodel.ParseSmData(f.SourceCodeInfo().LeadingDetachedComments())
+						smodel.Imports = smodel.SmName + " \"" + protoFilePath + "\"" + "\n"
+						smodel.AddEncoderImport(protoFilePath)
+						smBasicInfoFilled = true
+					}
 				}
 			}
 		}
@@ -279,8 +305,12 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	}
 
 	if sm {
-		//ToDo - generate servicemodel package
-
+		_, err = fmt.Fprintf(buf, "We're about to start generating servicemodel package\nObtained structure is %v\n", smodel)
+		if err != nil {
+			return nil
+		}
+		//Generating new .go file
+		m.OverwriteGeneratorTemplateFile("servicemodel.go", templateServicemodel.Lookup("servicemodel.tpl"), smodel)
 	}
 
 	out := m.OutputPath()
@@ -587,4 +617,123 @@ func lookUpProtoFilePath(dir string, inputPath pgs.FilePath) string {
 	}
 
 	return protoFilePath
+}
+
+func (sm *servicemodel) ParsePdu(messageName string) *servicemodel {
+
+	if strings.Contains(strings.ToLower(messageName), "indicationheader") {
+		sm.TopLevelPdus.IndicationHeader.IsPresent = true
+		sm.TopLevelPdus.IndicationHeader.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "indicationmessage") {
+		sm.TopLevelPdus.IndicationMessage.IsPresent = true
+		sm.TopLevelPdus.IndicationMessage.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "controlheader") {
+		sm.TopLevelPdus.ControlHeader.IsPresent = true
+		sm.TopLevelPdus.ControlHeader.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "controlmessage") {
+		sm.TopLevelPdus.ControlMessage.IsPresent = true
+		sm.TopLevelPdus.ControlMessage.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "controloutcome") {
+		sm.TopLevelPdus.ControlOutcome.IsPresent = true
+		sm.TopLevelPdus.ControlOutcome.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "ranfunctiondescription") || strings.Contains(strings.ToLower(messageName), "ranfunctiondefinition") {
+		sm.TopLevelPdus.RanFunctionDescription.IsPresent = true
+		sm.TopLevelPdus.RanFunctionDescription.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "eventtriggerdefinition") || strings.Contains(strings.ToLower(messageName), "eventtrigger") {
+		sm.TopLevelPdus.EventTriggerDefinition.IsPresent = true
+		sm.TopLevelPdus.EventTriggerDefinition.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "actiondefinition") {
+		sm.TopLevelPdus.ActionDefinition.IsPresent = true
+		sm.TopLevelPdus.ActionDefinition.MessageProtoName = messageName
+	}
+	if strings.Contains(strings.ToLower(messageName), "callprocessid") {
+		sm.TopLevelPdus.CallProcessID.IsPresent = true
+		sm.TopLevelPdus.CallProcessID.MessageProtoName = messageName
+	}
+
+	return sm
+}
+
+func (sm *servicemodel) ParseSmData(data []string) *servicemodel {
+
+	for _, s := range data {
+		if strings.Contains(s, "E2SM") {
+			sm.E2SmName = extractSmName(s)
+			sm.OID = extractOID(s)
+			sm.SmVersion = extractVersion(s)
+			sm.SmName = "e2sm" + strings.ToLower(sm.E2SmName) + strings.ToLower(sm.SmVersion)
+			sm.PackageName = strings.ToTitle(strings.ToLower(sm.E2SmName)) + "ServiceModel"
+			break
+		}
+	}
+
+	return sm
+}
+
+func extractSmName(str string) string {
+
+	res := ""
+	index1 := strings.LastIndex(str, "E2SM-")
+	tmp := str[index1+5:]
+	index2 := strings.Index(tmp, "-")
+
+	res = tmp[:index2]
+
+	return res
+}
+
+func extractOID(str string) string {
+
+	oid := ""
+	start := strings.Index(str, "{")
+	parse := str[start:]
+
+	for i := 1; i <= 10; i++ {
+		index1 := strings.Index(parse, "(")
+		index2 := strings.Index(parse, ")")
+
+		if i == 10 {
+			oid = oid + parse[index1+1:index2]
+		} else {
+			oid = oid + parse[index1+1:index2] + "."
+		}
+		parse = parse[index2+1:]
+	}
+
+	return oid
+}
+
+func extractVersion(str string) string {
+
+	version := ""
+
+	start := strings.Index(str, "{")
+	parse := str[start:]
+	index := strings.Index(parse, "version")
+	parse = parse[index:]
+
+	index1 := strings.Index(parse, "(")
+	index2 := strings.Index(parse, ")")
+
+	version = "v" + parse[index1+1:index2]
+	return version
+}
+
+func (sm *servicemodel) AddEncoderImport(str string) *servicemodel {
+
+	index := strings.LastIndex(str, "/")
+	str = str[:index]
+	// finding version folder
+	index = strings.LastIndex(str, "/")
+	str = str[:index]
+
+	sm.Imports = sm.Imports + "\"" + str + "/encoder\"\n"
+	return sm
 }
