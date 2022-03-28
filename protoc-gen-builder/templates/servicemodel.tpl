@@ -16,11 +16,17 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+/*
+    servicemodel package implements interface defined in:
+    https://github.com/onosproject/onos-e2t/blob/2ec06f2fde15fd765497120b15661ac8fd61d6eb/pkg/modelregistry/modelregistry.go#L43-L62
+    If any new top-level PDU occurs, then this template should be correspondingly adjusted and the interface (link above) should be extended.
+*/
+
 type {{.PackageName}} string
 
 const smName = "{{.SmName}}"
 const smVersion = "{{.SmVersion}}"
-const moduleName = "{{.SmName}}.so.1.0.1"
+const moduleName = "{{.ModuleName}}.so.1.0.1"
 const smOID = "{{.OID}}"
 
 func (sm {{.PackageName}}) ServiceModelData() types.ServiceModelData {
@@ -47,13 +53,13 @@ func (sm {{.PackageName}}) IndicationHeaderASN1toProto(asn1Bytes []byte) ([]byte
 
 	return protoBytes, nil
 	{{else}}
-	return nil, errors.NewInvalid("not implemented")
+	return nil, errors.NewInvalid("not present on {{.E2SmName}}")
 	{{end}}
 }
 
 func (sm {{.PackageName}}) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
 	{{if .TopLevelPdus.IndicationHeader.IsPresent}}
-	protoObj := new({{.SmName}}.{{.TopLevelPdus.IndicationHeader.MessageProtoName}})
+	protoObj := new({{.ModuleName}}.{{.TopLevelPdus.IndicationHeader.MessageProtoName}})
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
 		return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.IndicationHeader.MessageProtoName}} %s", err)
 	}
@@ -65,168 +71,260 @@ func (sm {{.PackageName}}) IndicationHeaderProtoToASN1(protoBytes []byte) ([]byt
 
 	return perBytes, nil
     {{else}}
-    return nil, errors.NewInvalid("not implemented")
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
     {{end}}
 }
 
 func (sm {{.PackageName}}) IndicationMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
-    {{if .TopLevelPdus.IndicationHeader.IsPresent}}
-	perBytes, err := encoder.PerDecodeE2SmMhoIndicationMessage(asn1Bytes)
+    {{if .TopLevelPdus.IndicationMessage.IsPresent}}
+	perBytes, err := encoder.PerDecode{{.TopLevelPdus.IndicationMessage.MessageProtoName}}(asn1Bytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error decoding E2SmMhoIndicationMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding {{.TopLevelPdus.IndicationMessage.MessageProtoName}} to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmMhoIndicationMessage %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to {{.TopLevelPdus.IndicationMessage.MessageProtoName}} %s", err)
 	}
 
 	return protoBytes, nil
     {{else}}
-    return nil, errors.NewInvalid("not implemented")
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
     {{end}}
 }
 
 func (sm {{.PackageName}}) IndicationMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2smmhov2.E2SmMhoIndicationMessage)
+	{{if .TopLevelPdus.IndicationHeader.IsPresent}}
+	protoObj := new({{.ModuleName}}.{{.TopLevelPdus.IndicationMessage.MessageProtoName}})
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoIndicationMessage %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.IndicationMessage.MessageProtoName}} %s", err)
 	}
 
-	perBytes, err := encoder.PerEncodeE2SmMhoIndicationMessage(protoObj)
+	perBytes, err := encoder.PerEncode{{.TopLevelPdus.IndicationMessage.MessageProtoName}}(protoObj)
 	if err != nil {
-		return nil, errors.NewInvalid("error encoding E2SmMhoIndicationMessage to PER %s", err)
+		return nil, errors.NewInvalid("error encoding {{.TopLevelPdus.IndicationMessage.MessageProtoName}} to PER %s", err)
 	}
 
 	return perBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) RanFuncDescriptionASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	perBytes, err := encoder.PerDecodeE2SmMhoRanFunctionDescription(asn1Bytes)
+    {{if .TopLevelPdus.RanFunctionDescription.IsPresent}}
+	perBytes, err := encoder.PerDecode{{.TopLevelPdus.RanFunctionDescription.MessageProtoName}}(asn1Bytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error decoding E2SmMhoRanFunctionDescription to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding {{.TopLevelPdus.RanFunctionDescription.MessageProtoName}} to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmMhoRanFunctionDescription %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to {{.TopLevelPdus.RanFunctionDescription.MessageProtoName}} %s", err)
 	}
 
 	return protoBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) RanFuncDescriptionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2smmhov2.E2SmMhoRanfunctionDescription)
+    {{if .TopLevelPdus.RanFunctionDescription.IsPresent}}
+	protoObj := new({{.ModuleName}}.{{.TopLevelPdus.RanFunctionDescription.MessageProtoName}})
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoRanFunctionDescription %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.RanFunctionDescription.MessageProtoName}} %s", err)
 	}
 
-	perBytes, err := encoder.PerEncodeE2SmMhoRanFunctionDescription(protoObj)
+	perBytes, err := encoder.PerEncode{{.TopLevelPdus.RanFunctionDescription.MessageProtoName}}(protoObj)
 	if err != nil {
-		return nil, errors.NewInvalid("error encoding E2SmMhoRanFunctionDescription to PER %s", err)
+		return nil, errors.NewInvalid("error encoding {{.TopLevelPdus.RanFunctionDescription.MessageProtoName}} to PER %s", err)
 	}
 
 	return perBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) EventTriggerDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	perBytes, err := encoder.PerDecodeE2SmMhoEventTriggerDefinition(asn1Bytes)
+    {{if .TopLevelPdus.EventTriggerDefinition.IsPresent}}
+	perBytes, err := encoder.PerDecode{{.TopLevelPdus.EventTriggerDefinition.MessageProtoName}}(asn1Bytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error decoding E2SmMhoEventTriggerDefinition to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding {{.TopLevelPdus.EventTriggerDefinition.MessageProtoName}} to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmMhoEventTriggerDefinition %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to {{.TopLevelPdus.EventTriggerDefinition.MessageProtoName}} %s", err)
 	}
 
 	return protoBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) EventTriggerDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2smmhov2.E2SmMhoEventTriggerDefinition)
+    {{if .TopLevelPdus.EventTriggerDefinition.IsPresent}}
+	protoObj := new({{.ModuleName}}.{{.TopLevelPdus.EventTriggerDefinition.MessageProtoName}})
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoEventTriggerDefinition %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.EventTriggerDefinition.MessageProtoName}} %s", err)
 	}
 
-	perBytes, err := encoder.PerEncodeE2SmMhoEventTriggerDefinition(protoObj)
+	perBytes, err := encoder.PerEncode{{.TopLevelPdus.EventTriggerDefinition.MessageProtoName}}(protoObj)
 	if err != nil {
-		return nil, errors.NewInvalid("error encoding E2SmMhoEventTriggerDefinition to PER %s", err)
+		return nil, errors.NewInvalid("error encoding {{.TopLevelPdus.EventTriggerDefinition.MessageProtoName}} to PER %s", err)
 	}
 
 	return perBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, errors.NewInvalid("not implemented on MHO")
+    {{if .TopLevelPdus.ActionDefinition.IsPresent}}
+	perBytes, err := encoder.PerDecode{{.TopLevelPdus.ActionDefinition.MessageProtoName}}(asn1Bytes)
+	if err != nil {
+		return nil, errors.NewInvalid("error decoding {{.TopLevelPdus.ActionDefinition.MessageProtoName}} to PER %s\n%v", err, hex.Dump(asn1Bytes))
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to {{.TopLevelPdus.ActionDefinition.MessageProtoName}} %s", err)
+	}
+
+	return protoBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm MhoServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, errors.NewInvalid("not implemented on MHO")
+    {{if .TopLevelPdus.ActionDefinition.IsPresent}}
+    protoObj := new({{.ModuleName}}.{{.TopLevelPdus.ActionDefinition.MessageProtoName}})
+    if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+        return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.ActionDefinition.MessageProtoName}} %s", err)
+    }
+
+    perBytes, err := encoder.PerEncode{{.TopLevelPdus.ActionDefinition.MessageProtoName}}(protoObj)
+    if err != nil {
+        return nil, errors.NewInvalid("error encoding {{.TopLevelPdus.ActionDefinition.MessageProtoName}} to PER %s", err)
+    }
+
+    return perBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) ControlHeaderASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	perBytes, err := encoder.PerDecodeE2SmMhoControlHeader(asn1Bytes)
+    {{if .TopLevelPdus.ControlHeader.IsPresent}}
+	perBytes, err := encoder.PerDecode{{.TopLevelPdus.ControlHeader.MessageProtoName}}(asn1Bytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error decoding E2SmMhoControlHeader to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding {{.TopLevelPdus.ControlHeader.MessageProtoName}} to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmMhoControlHeader %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to {{.TopLevelPdus.ControlHeader.MessageProtoName}} %s", err)
 	}
 
 	return protoBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) ControlHeaderProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2smmhov2.E2SmMhoControlHeader)
+    {{if .TopLevelPdus.ControlHeader.IsPresent}}
+	protoObj := new({{.ModuleName}}.{{.TopLevelPdus.ControlHeader.MessageProtoName}})
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoControlHeader %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.ControlHeader.MessageProtoName}} %s", err)
 	}
 
-	perBytes, err := encoder.PerEncodeE2SmMhoControlHeader(protoObj)
+	perBytes, err := encoder.PerEncode{{.TopLevelPdus.ControlHeader.MessageProtoName}}(protoObj)
 	if err != nil {
-		return nil, errors.NewInvalid("error encoding E2SmMhoControlHeader to PER %s", err)
+		return nil, errors.NewInvalid("error encoding {{.TopLevelPdus.ControlHeader.MessageProtoName}} to PER %s", err)
 	}
 
 	return perBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) ControlMessageASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	perBytes, err := encoder.PerDecodeE2SmMhoControlMessage(asn1Bytes)
+    {{if .TopLevelPdus.ControlMessage.IsPresent}}
+	perBytes, err := encoder.PerDecode{{.TopLevelPdus.ControlMessage.MessageProtoName}}(asn1Bytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error decoding E2SmMhoControlMessage to PER %s\n%v", err, hex.Dump(asn1Bytes))
+		return nil, errors.NewInvalid("error decoding {{.TopLevelPdus.ControlMessage.MessageProtoName}} to PER %s\n%v", err, hex.Dump(asn1Bytes))
 	}
 
 	protoBytes, err := proto.Marshal(perBytes)
 	if err != nil {
-		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmMhoControlMessage %s", err)
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to {{.TopLevelPdus.ControlMessage.MessageProtoName}} %s", err)
 	}
 
 	return protoBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, error) {
-	protoObj := new(e2smmhov2.E2SmMhoControlMessage)
+    {{if .TopLevelPdus.ControlMessage.IsPresent}}
+	protoObj := new({{.ModuleName}}.{{.TopLevelPdus.ControlMessage.MessageProtoName}})
 	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
-		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmMhoControlMessage %s", err)
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.ControlMessage.MessageProtoName}} %s", err)
 	}
 
-	perBytes, err := encoder.PerEncodeE2SmMhoControlMessage(protoObj)
+	perBytes, err := encoder.PerEncode{{.TopLevelPdus.ControlMessage.MessageProtoName}}(protoObj)
 	if err != nil {
-		return nil, errors.NewInvalid("error encoding E2SmMhoControlMessage to PER %s", err)
+		return nil, errors.NewInvalid("error encoding {{.TopLevelPdus.ControlMessage.MessageProtoName}} to PER %s", err)
 	}
 
 	return perBytes, nil
+	{{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, errors.NewInvalid("not implemented")
+    {{if .TopLevelPdus.ControlMessage.IsPresent}}
+	perBytes, err := encoder.PerDecode{{.TopLevelPdus.ControlMessage.MessageProtoName}}(asn1Bytes)
+	if err != nil {
+		return nil, errors.NewInvalid("error decoding {{.TopLevelPdus.ControlMessage.MessageProtoName}} to PER %s\n%v", err, hex.Dump(asn1Bytes))
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to {{.TopLevelPdus.ControlMessage.MessageProtoName}} %s", err)
+	}
+
+	return protoBytes, nil
+    {{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, errors.NewInvalid("not implemented")
+    {{if .TopLevelPdus.ControlMessage.IsPresent}}
+	protoObj := new({{.ModuleName}}.{{.TopLevelPdus.ControlMessage.MessageProtoName}})
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to {{.TopLevelPdus.ControlMessage.MessageProtoName}} %s", err)
+	}
+
+	perBytes, err := encoder.PerEncode{{.TopLevelPdus.ControlMessage.MessageProtoName}}(protoObj)
+	if err != nil {
+		return nil, errors.NewInvalid("error encoding {{.TopLevelPdus.ControlMessage.MessageProtoName}} to PER %s", err)
+	}
+
+	return perBytes, nil
+	{{else}}
+    return nil, errors.NewInvalid("not present on {{.E2SmName}}")
+    {{end}}
 }
 
 func (sm {{.PackageName}}) OnSetup(request *types.OnSetupRequest) error {
@@ -234,19 +332,21 @@ func (sm {{.PackageName}}) OnSetup(request *types.OnSetupRequest) error {
 	if err != nil {
 		return err
 	}
-	ranFunctionDescription := &e2smmhov2.E2SmMhoRanfunctionDescription{}
+	ranFunctionDescription := &{{.ModuleName}}.{{.TopLevelPdus.RanFunctionDescription.MessageProtoName}}{}
 	err = proto.Unmarshal(protoBytes, ranFunctionDescription)
 	if err != nil {
 		return err
 	}
 	serviceModels := request.ServiceModels
-	serviceModel := serviceModels[smOIDMho]
+	serviceModel := serviceModels[{{.OID}}]
 	serviceModel.Name = ranFunctionDescription.RanFunctionName.RanFunctionShortName
-	reportStyleList := ranFunctionDescription.GetE2SmMhoRanfunctionItem().GetRicReportStyleList()
 
-	ranFunction := &topoapi.MHORanFunction{}
+	// ToDo - RanFunctionDescription may vary from SM to SM and thus you'll have to adjust this function in order to extract all necessary data
+	reportStyleList := ranFunctionDescription.Get{{.TopLevelPdus.RanFunctionDescription.MessageProtoName}}Item().GetRicReportStyleList()
+
+	ranFunction := &topoapi.{{.E2SmName}}RanFunction{}
 	for _, reportStyle := range reportStyleList {
-		mhoReportStyle := &topoapi.MHOReportStyle{
+		mhoReportStyle := &topoapi.{{.E2SmName}}ReportStyle{
 			Name: reportStyle.RicReportStyleName.Value,
 			Type: reportStyle.RicReportStyleType.Value,
 		}

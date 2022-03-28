@@ -41,9 +41,11 @@ type encoder struct {
 // servicemodel structure carries all necessary items to generate the servicemodel package
 type servicemodel struct {
 	PackageName  string
+	E2SmName     string       // E2SM name without E2 prefix and in uppercase
 	Imports      string       // this is to hold all necessary imports, mainly the Protobuf which contains top-level PDUs (they're defined as PDUs with multiple formats wrapped as a nested CHOICE inside SEQUENCE)
 	SmName       string       // SM name
 	SmVersion    string       // SM version
+	ModuleName   string       // Module name composed of SmName and SmVersion variables - should be in lowercase
 	OID          string       // SM OID
 	TopLevelPdus topLevelPdus // this is to hold information about top-level PDUs
 }
