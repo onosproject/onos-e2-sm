@@ -171,7 +171,7 @@ func (sm {{.PackageName}}) ActionDefinitionASN1toProto(asn1Bytes []byte) ([]byte
 	return protoBytes, nil{{else}}return nil, errors.NewInvalid("not present on {{.E2SmName}} ({{.SmVersion}})"){{end}}
 }
 
-func (sm MhoServiceModel) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
+func (sm {{.PackageName}}) ActionDefinitionProtoToASN1(protoBytes []byte) ([]byte, error) {
     {{if .TopLevelPdus.ActionDefinition.IsPresent}}
     protoObj := new({{.SmName}}.{{.TopLevelPdus.ActionDefinition.MessageProtoName}})
     if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
