@@ -105,7 +105,7 @@ linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-cgo/ && golangci-lint run --timeout 5m && cd ..
 	cd protoc-gen-choice/ && golangci-lint run --timeout 5m && cd ..
-	#cd protoc-gen-builder/ && golangci-lint run --timeout 5m && cd ..
+	cd protoc-gen-builder/ && golangci-lint run --timeout 5m && cd ..
 
 build-tools: # @HELP install the ONOS build tools if needed
 	@if [ ! -d "../build-tools" ]; then cd .. && git clone https://github.com/onosproject/build-tools.git; fi
