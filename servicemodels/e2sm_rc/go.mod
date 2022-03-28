@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.6.7
-	github.com/gogo/protobuf v1.3.2
 	github.com/onosproject/onos-api/go v0.9.8
 	github.com/onosproject/onos-lib-go v0.8.13
 	google.golang.org/protobuf v1.28.0
@@ -18,6 +17,7 @@ require (
 	github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 // indirect
 	github.com/eapache/queue v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
+	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
