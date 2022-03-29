@@ -39,3 +39,5 @@ coverage.txt
 *-output.out
 **/converter-example
 
+build/build-tools
+

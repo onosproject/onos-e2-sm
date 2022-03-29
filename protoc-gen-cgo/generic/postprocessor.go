@@ -35,8 +35,11 @@ func (cpp copyrightPostProcessor) Match(a pgs.Artifact) bool {
 
 // Process attaches the copyright header to the top of the input bytes
 func (cpp copyrightPostProcessor) Process(in []byte) (out []byte, err error) {
-	cmt := fmt.Sprintf("// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>\n//\n" +
-		"// SPDX-License-Identifier: Apache-2.0\n")
+	// These licensing comments are split up so that the reuse licensing tool doesn't fail
+	spdxText := "// SPDX-"
+	copyrightText := spdxText + "-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>"
+	licenseText := spdxText + "-License-Identifier: Apache-2.0"
+	cmt := fmt.Sprintf("%s\n//\n%s\n", copyrightText, licenseText)
 
 	return append([]byte(cmt), in...), nil
 }
