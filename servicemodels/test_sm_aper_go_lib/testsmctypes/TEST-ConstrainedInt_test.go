@@ -73,7 +73,7 @@ func Test_perEncodingTestConstrainedInt(t *testing.T) {
 	t.Logf("TestConstrainedInt PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testConstrainedInt)
+	perNew, err := aper.Marshal(testConstrainedInt, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedInt PER (with Go APER library)\n%v", hex.Dump(perNew))
 
@@ -102,7 +102,7 @@ func Test_perEncodingTestConstrainedIntCmpr(t *testing.T) {
 	t.Logf("TestConstrainedInt PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testConstrainedInt)
+	perNew, err := aper.Marshal(testConstrainedInt, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedInt PER (with Go APER library)\n%v", hex.Dump(perNew))
 

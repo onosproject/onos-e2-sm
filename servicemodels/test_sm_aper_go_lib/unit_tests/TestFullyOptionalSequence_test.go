@@ -79,9 +79,6 @@ func createTestFullyOptionalSequence() *test_sm_ies.TestFullyOptionalSequence {
 
 func TestFullyOptionalSequence(t *testing.T) {
 
-	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
-	aper.ChoiceMap = test_sm_ies.Choicemap
-
 	for i := 0; i < 1000; i++ {
 
 		testSM := createTestFullyOptionalSequence()
@@ -91,7 +88,7 @@ func TestFullyOptionalSequence(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestFullyOptionalSequence(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.MarshalWithParams(testSM, "valueExt")
+		per, err := aper.MarshalWithParams(testSM, "valueExt", test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other

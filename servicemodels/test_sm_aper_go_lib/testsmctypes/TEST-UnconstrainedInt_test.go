@@ -49,7 +49,7 @@ func Test_perEncodingTestUnconstrainedInt(t *testing.T) {
 	t.Logf("TestUnconstrainedInt PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testUnconstrainedInt)
+	perNew, err := aper.Marshal(testUnconstrainedInt, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other

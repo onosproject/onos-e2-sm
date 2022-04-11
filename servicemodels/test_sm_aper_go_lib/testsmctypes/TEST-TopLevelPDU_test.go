@@ -333,10 +333,8 @@ func Test_perEncodingTestTopLevelPduExcludeOptional(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("TestTopLevelPDU (w/o optional) PER\n%v", hex.Dump(per))
 
-	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
-	aper.ChoiceMap = test_sm_ies.Choicemap
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.MarshalWithParams(testTopLevelPDU, "valueExt")
+	perNew, err := aper.MarshalWithParams(testTopLevelPDU, "valueExt", test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 	t.Logf("TestTopLevelPDU (w/o optional) PER\n%v", hex.Dump(perNew))
 

@@ -116,9 +116,6 @@ func createTestNestedChoicesMsg() *test_sm_ies.TestNestedChoice {
 
 func TestNestedChoices(t *testing.T) {
 
-	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
-	aper.ChoiceMap = test_sm_ies.Choicemap
-
 	for i := 1; i < 1000; i++ {
 
 		testSM := createTestNestedChoicesMsg()
@@ -128,7 +125,7 @@ func TestNestedChoices(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestNestedChoice(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.MarshalWithParams(testSM, "choiceExt")
+		per, err := aper.MarshalWithParams(testSM, "choiceExt", test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other

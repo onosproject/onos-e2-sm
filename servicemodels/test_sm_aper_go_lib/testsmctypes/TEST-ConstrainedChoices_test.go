@@ -71,10 +71,8 @@ func Test_perEncodingTestConstrainedChoices(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedChoices PER\n%v", hex.Dump(per))
 
-	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
-	aper.ChoiceMap = test_sm_ies.Choicemap
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testConstrainedChoices)
+	perNew, err := aper.Marshal(testConstrainedChoices, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other

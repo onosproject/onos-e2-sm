@@ -59,9 +59,6 @@ func createTestTopLevelPDU() (*test_sm_ies.TestTopLevelPdu, error) {
 
 func TestTopLevelPdu(t *testing.T) {
 
-	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
-	aper.ChoiceMap = test_sm_ies.Choicemap
-
 	for i := 0; i < 1000; i++ {
 
 		testSM, err := createTestTopLevelPDU()
@@ -72,7 +69,7 @@ func TestTopLevelPdu(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestTopLevelPDU(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.MarshalWithParams(testSM, "valueExt")
+		per, err := aper.MarshalWithParams(testSM, "valueExt", test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other

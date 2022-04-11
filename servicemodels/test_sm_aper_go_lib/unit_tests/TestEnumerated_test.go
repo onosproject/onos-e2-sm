@@ -23,7 +23,7 @@ func TestEnumerated(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestEnumerated(&testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.MarshalWithParams(&testSM, "valueLB:0,valueUB:5")
+		per, err := aper.MarshalWithParams(&testSM, "valueLB:0,valueUB:5", test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other

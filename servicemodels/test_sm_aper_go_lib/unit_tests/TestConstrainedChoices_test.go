@@ -116,9 +116,6 @@ func createTestConstrainedChoicesMsg() *test_sm_ies.TestConstrainedChoices {
 
 func TestConstrainedChoices(t *testing.T) {
 
-	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
-	aper.ChoiceMap = test_sm_ies.Choicemap
-
 	for i := 1; i < 1000; i++ {
 
 		testSM := createTestConstrainedChoicesMsg()
@@ -128,7 +125,7 @@ func TestConstrainedChoices(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestConstrainedChoices(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.Marshal(testSM)
+		per, err := aper.Marshal(testSM, test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other
