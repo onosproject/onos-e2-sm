@@ -104,9 +104,6 @@ func createTestChoicesMsg() *test_sm_ies.TestChoices {
 
 func TestChoices(t *testing.T) {
 
-	// Setting ChoiceMap to enable encoding with Go APER library (necessary prerequisite)
-	aper.ChoiceMap = test_sm_ies.Choicemap
-
 	for i := 1; i < 1000; i++ {
 
 		testSM := createTestChoicesMsg()
@@ -116,7 +113,7 @@ func TestChoices(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestChoices(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.Marshal(testSM)
+		per, err := aper.Marshal(testSM, test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other

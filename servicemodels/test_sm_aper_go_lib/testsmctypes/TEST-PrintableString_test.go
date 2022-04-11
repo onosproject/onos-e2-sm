@@ -94,7 +94,7 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testPrintableString)
+	perNew, err := aper.Marshal(testPrintableString, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other
@@ -120,7 +120,7 @@ func Test_perEncodingTestPrintableString(t *testing.T) {
 	t.Logf("TestPrintableString PER\n%v", hex.Dump(per2))
 
 	// Generating APER bytes with Go APER lib
-	perNew2, err := aper.Marshal(testPrintableStringExcludeOptional)
+	perNew2, err := aper.Marshal(testPrintableStringExcludeOptional, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other

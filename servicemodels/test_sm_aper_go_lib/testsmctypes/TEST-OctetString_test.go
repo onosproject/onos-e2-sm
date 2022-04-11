@@ -92,7 +92,7 @@ func Test_perEncodingTestOctetString(t *testing.T) {
 	t.Logf("TestOctetString PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testOctetString)
+	perNew, err := aper.Marshal(testOctetString, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other
@@ -118,7 +118,7 @@ func Test_perEncodingTestOctetString(t *testing.T) {
 	t.Logf("TestOctetString PER\n%v", hex.Dump(per2))
 
 	// Generating APER bytes with Go APER lib
-	perNew2, err := aper.Marshal(testOctetStringExcludeOptional)
+	perNew2, err := aper.Marshal(testOctetStringExcludeOptional, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other

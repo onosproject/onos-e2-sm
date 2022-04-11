@@ -56,7 +56,7 @@ func TestUnconstrainedIntAllOption2(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestUnconstrainedInt(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.Marshal(testSM)
+		per, err := aper.Marshal(testSM, test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other

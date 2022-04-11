@@ -99,7 +99,7 @@ func Test_perEncodingTestBitString(t *testing.T) {
 	t.Logf("TestBitString PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testBitString)
+	perNew, err := aper.Marshal(testBitString, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other

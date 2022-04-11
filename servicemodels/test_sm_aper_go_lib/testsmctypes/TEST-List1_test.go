@@ -98,7 +98,7 @@ func Test_perEncodingTestList1(t *testing.T) {
 	t.Logf("TestList1 (0 items) PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testList11)
+	perNew, err := aper.Marshal(testList11, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	t.Logf("Go APER library output: \n%v", hex.Dump(perNew))
@@ -121,7 +121,7 @@ func Test_perEncodingTestList12(t *testing.T) {
 	t.Logf("TestList1 (12 items) PER\n%v", hex.Dump(per2))
 
 	// Generating APER bytes with Go APER lib
-	perNew2, err := aper.Marshal(testList12)
+	perNew2, err := aper.Marshal(testList12, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	t.Logf("Go APER library output: \n%v", hex.Dump(perNew2))

@@ -137,7 +137,7 @@ func Test_perEncodingTestListExtensible3(t *testing.T) {
 	t.Logf("TestListExtensible3 PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.Marshal(testListExtensible3)
+	perNew, err := aper.Marshal(testListExtensible3, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other
@@ -156,7 +156,7 @@ func Test_perEncodingTestListExtensible3(t *testing.T) {
 	t.Logf("TestListExtensible3 PER\n%v", hex.Dump(per1))
 
 	// Generating APER bytes with Go APER lib
-	perNew1, err := aper.Marshal(testListExtensible31)
+	perNew1, err := aper.Marshal(testListExtensible31, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other
@@ -176,7 +176,7 @@ func Test_perEncodingTestListExtensible3(t *testing.T) {
 	t.Logf("TestListExtensible3 PER\n%v", hex.Dump(per1))
 
 	// Generating APER bytes with Go APER lib
-	perNew2, err := aper.Marshal(testListExtensible32)
+	perNew2, err := aper.Marshal(testListExtensible32, test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other

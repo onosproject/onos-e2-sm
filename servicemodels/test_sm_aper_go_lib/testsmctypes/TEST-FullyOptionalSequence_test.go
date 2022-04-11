@@ -81,7 +81,7 @@ func Test_perEncodingTestFullyOptionalSequence(t *testing.T) {
 	t.Logf("TestFullyOptionalSequence PER\n%v", hex.Dump(per))
 
 	// Generating APER bytes with Go APER lib
-	perNew, err := aper.MarshalWithParams(testFullyOptionalSequence, "valueExt")
+	perNew, err := aper.MarshalWithParams(testFullyOptionalSequence, "valueExt", test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
 
 	//Comparing bytes against each other

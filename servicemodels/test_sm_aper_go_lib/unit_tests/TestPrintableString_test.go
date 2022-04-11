@@ -106,7 +106,7 @@ func TestPrintableString(t *testing.T) {
 		perRef, err := testsmctypes.PerEncodeTestPrintableString(testSM)
 		assert.NilError(t, err)
 		// Generating APER bytes with Go APER lib
-		per, err := aper.Marshal(testSM)
+		per, err := aper.Marshal(testSM, test_sm_ies.Choicemap, nil)
 		assert.NilError(t, err)
 
 		//Comparing bytes against each other
