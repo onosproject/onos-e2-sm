@@ -6,7 +6,6 @@ export CGO_ENABLED=1
 export GO111MODULE=on
 
 E2T_MOD ?= github.com/onosproject/onos-e2t@master
-RAN_SIM_MOD ?= github.com/onosproject/ran-simulator
 
 ONOS_E2_SM_VERSION := latest
 ONOS_BUILD_VERSION := v1.0
@@ -19,7 +18,7 @@ include ./build/build-tools/make/onf-common.mk
 
 PHONY:build
 build: # @HELP build all libraries
-build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_kpm_v2.so.1.0.0 build/_output/e2sm_kpm_v2_go.so.1.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0 build/_output/e2sm_mho.so.1.0.0 build/_output/e2sm_rsm.so.1.0.0 build/_output/e2sm_rc_pre_go.so.1.0.0 build/_output/e2sm_mho_go.so.1.0.0
+build: build/_output/e2sm_kpm.so.1.0.0 build/_output/e2sm_kpm_v2.so.1.0.0 build/_output/e2sm_kpm_v2_go.so.1.0.0 build/_output/e2sm_ni.so.1.0.0 build/_output/e2sm_rc_pre.so.1.0.0 build/_output/e2sm_mho.so.1.0.0 build/_output/e2sm_rsm.so.1.0.0 build/_output/e2sm_rc_pre_go.so.1.0.0 build/_output/e2sm_mho_go.so.1.0.0 build/_output/e2sm_rc.so.1.0.0
 
 build/_output/e2sm_kpm.so.1.0.0: # @HELP build the e2sm_kpm.so.1.0.0
 	cd servicemodels/e2sm_kpm && CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
@@ -48,6 +47,9 @@ build/_output/e2sm_rc_pre.so.1.0.0: # @HELP build the e2sm_rc_pre.so.1.0.1
 build/_output/e2sm_mho.so.1.0.0: # @HELP build the e2sm_mho.so.1.0.1
 	cd servicemodels/e2sm_mho && CGO_ENABLED=1 go build -o build/_output/e2sm_mho.so.1.0.0 -buildmode=plugin .
 
+build/_output/e2sm_rc.so.1.0.0: # @HELP build the e2sm_rc.so.1.0.1
+	cd servicemodels/e2sm_rc && CGO_ENABLED=1 go build -o build/_output/e2sm_rc.so.1.0.0 -buildmode=plugin .
+
 build_protoc_gen_cgo:
 	cd protoc-gen-cgo/ && go build -v -o ./protoc-gen-cgo && cd ..
 
@@ -68,6 +70,7 @@ test: license build build_protoc_gen_cgo build_protoc_gen_choice build_protoc_ge
 	cd servicemodels/e2sm_mho_go && go test -race ./...
 	cd servicemodels/e2sm_rsm && go test -race ./...
 	cd servicemodels/test_sm_aper_go_lib && GODEBUG=cgocheck=0 go test -race ./...
+	cd servicemodels/e2sm_rc && go test -race ./...
 
 jenkins-test:  # @HELP run the unit tests and source code validation producing a junit style report for Jenkins
 jenkins-test: license sm-linters
@@ -78,24 +81,11 @@ jenkins-test: license sm-linters
 	cd servicemodels/e2sm_rc_pre_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
 	cd servicemodels/e2sm_mho_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-
-deps_kpm: # @HELP ensure that the required dependencies are in place
-	cd servicemodels/e2sm_kpm
-	go build -v -buildmode=plugin ./modelmain.go
-	bash -c "diff -u <(echo -n) <(git diff go.mod)"
-	bash -c "diff -u <(echo -n) <(git diff go.sum)"
-
-deps_rc: # @HELP ensure that the required dependencies are in place
-	cd servicemodels/e2sm_rc_pre
-	go build -v -buildmode=plugin ./modelmain.go
-	bash -c "diff -u <(echo -n) <(git diff go.mod)"
-	bash -c "diff -u <(echo -n) <(git diff go.sum)"
-
-deps_mho: # @HELP ensure that the required dependencies are in place
-	cd servicemodels/e2sm_mho && go build -v -buildmode=plugin ./modelmain.go && bash -c "diff -u <(echo -n) <(git diff go.mod)" && bash -c "diff -u <(echo -n) <(git diff go.sum)"
+	cd servicemodels/e2sm_rc && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
 
 sm-linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
+	cd servicemodels/e2sm_rc && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_kpm_v2_go && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
@@ -206,11 +196,20 @@ service-model-docker-e2sm_mho_go-1.0.0: # @HELP build e2sm_mho_go 1.0.0 plugin D
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 
+PHONY: service-model-docker-e2sm_rc-1.0.0
+service-model-docker-e2sm_rc-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Docker image
+	./build/bin/build-deps e2sm_rc ${E2T_MOD} onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
+	docker build . -f build/plugins/Dockerfile \
+			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc" \
+			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
+			-t onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
+
 images: # @HELP build all Docker images
 images: build service-model-docker-e2sm_kpm_v2_go-1.0.0 \
 	service-model-docker-e2sm_rsm-1.0.0 \
 	service-model-docker-e2sm_rc_pre_go-1.0.0 \
-	service-model-docker-e2sm_mho_go-1.0.0
+	service-model-docker-e2sm_mho_go-1.0.0 \
+	service-model-docker-e2sm_rc-1.0.0
 
 
 kind: # @HELP build Docker images and add them to the currently configured kind cluster
@@ -220,6 +219,9 @@ kind: images
 	kind load docker-image onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
 	kind load docker-image onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	kind load docker-image onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
+
+
 
 
 all: build images
@@ -229,6 +231,8 @@ publish: # @HELP publish version on github and dockerhub
 	./build/build-tools/publish-version servicemodels/e2sm_rc_pre_go/${VERSION} onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0
 	./build/build-tools/publish-version servicemodels/e2sm_mho_go/${VERSION} onosproject/service-model-docker-e2sm_mho_go-1.0.0
 	./build/build-tools/publish-version servicemodels/e2sm_rsm/${VERSION} onosproject/service-model-docker-e2sm_rsm-1.0.0
+	./build/build-tools/publish-version servicemodels/e2sm_rc/${VERSION} onosproject/service-model-docker-e2sm_rc-1.0.0
+
 
 jenkins-publish: # @HELP Jenkins calls this to publish artifacts
 	./build/bin/push-images
