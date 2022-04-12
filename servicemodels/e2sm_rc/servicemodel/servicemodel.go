@@ -329,11 +329,11 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 	
 	ranFunction := &topoapi.RCRanFunction{}
 	for _, reportStyle := range reportStyleList {
-		mhoReportStyle := &topoapi.RCReportStyle{
+		rcReportStyle := &topoapi.RCReportStyle{
 			Name: reportStyle.RicReportStyleName.Value,
 			Type: reportStyle.RicReportStyleType.Value,
 		}
-		ranFunction.ReportStyles = append(ranFunction.ReportStyles, mhoReportStyle)
+		ranFunction.ReportStyles = append(ranFunction.ReportStyles, rcReportStyle)
 	}
 
 	// TODO extract INSERT, CONTROL, and POLICY Styles
