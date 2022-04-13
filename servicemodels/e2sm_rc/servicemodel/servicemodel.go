@@ -6,7 +6,10 @@ package servicemodel
 
 import (
 	"encoding/hex"
+
+	prototypes "github.com/gogo/protobuf/types"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
+	topoapi "github.com/onosproject/onos-api/go/onos/topo"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/encoder"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
@@ -321,19 +324,23 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 	serviceModel := serviceModels[smOID]
 	serviceModel.Name = ranFunctionDescription.RanFunctionName.RanFunctionShortName
 
-	// ToDo - adjust this part
-	//reportStyleList := ranFunctionDescription.GetE2SmRcRanfunctionDefinitionItem().GetRicReportStyleList()
-	//
-	//ranFunction := &topoapi.RCRanFunction{}
-	//for _, reportStyle := range reportStyleList {
-	//	mhoReportStyle := &topoapi.RCReportStyle{
-	//		Name: reportStyle.RicReportStyleName.Value,
-	//		Type: reportStyle.RicReportStyleType.Value,
-	//	}
-	//	ranFunction.ReportStyles = append(ranFunction.ReportStyles, mhoReportStyle)
-	//}
+	reportStyleList := ranFunctionDescription.GetRanFunctionDefinitionReport().GetRicReportStyleList()
 
-	//ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
-	//serviceModel.RanFunctions = append(serviceModel.RanFunctions, ranFunctionAny)
+	ranFunction := &topoapi.RCRanFunction{}
+	for _, reportStyle := range reportStyleList {
+		rcReportStyle := &topoapi.RCReportStyle{
+			Name: reportStyle.RicReportStyleName.Value,
+			Type: reportStyle.RicReportStyleType.Value,
+		}
+		ranFunction.ReportStyles = append(ranFunction.ReportStyles, rcReportStyle)
+	}
+
+	// TODO extract INSERT, CONTROL, and POLICY Styles
+
+	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
+	if err != nil {
+		return err
+	}
+	serviceModel.RanFunctions = append(serviceModel.RanFunctions, ranFunctionAny)
 	return nil
 }
