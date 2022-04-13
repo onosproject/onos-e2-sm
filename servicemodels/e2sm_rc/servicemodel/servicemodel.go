@@ -27,7 +27,7 @@ type RCServiceModel string
 const smName = "e2smrcv1"
 const smVersion = "v1"
 const moduleName = "e2smrcv1.so.1.0.1"
-const smOID = "1.3.6.1.4.1.53148.1.1.2"
+const smOID = "1.3.6.1.4.1.53148.1.1.2.3"
 
 func (sm RCServiceModel) ServiceModelData() types.ServiceModelData {
 	smData := types.ServiceModelData{
