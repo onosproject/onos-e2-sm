@@ -554,7 +554,7 @@ message RanparameterTestingItem {
 message RanParameterType {
     oneof ran_parameter_type {
         // @inject_tag: aper:"choiceIdx:1,valueExt"
-        RanparameterTestingItemChoiceElementTrue ran_p_choice_list = 1;
+        RanparameterTestingItemChoiceList ran_p_choice_list = 1;
         // @inject_tag: aper:"choiceIdx:2,valueExt"
         RanparameterTestingItemChoiceStructure ran_p_choice_structure = 2;
         // @inject_tag: aper:"choiceIdx:3,valueExt"
