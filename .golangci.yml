@@ -16,8 +16,8 @@ linters:
 run:
   skip-dirs:
     - modelplugin
-#issues:
-#  exclude-rules:
-#    - path: pkg/southbound/e2ap/asn1cgo/TriggeringMessage.go
-#      linters:
-#        - misspell
+issues:
+  exclude-rules:
+    - path: servicemodels/test_sm_aper_go_lib/
+      linters:
+        - typecheck
