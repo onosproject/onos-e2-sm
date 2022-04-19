@@ -16,8 +16,3 @@ linters:
 run:
   skip-dirs:
     - modelplugin
-#issues:
-#  exclude-rules:
-#    - path: pkg/southbound/e2ap/asn1cgo/TriggeringMessage.go
-#      linters:
-#        - misspell
