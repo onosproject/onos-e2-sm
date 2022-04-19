@@ -4,7 +4,7 @@
 // 	protoc        v3.19.4
 // source: e2sm_rc/v1/e2sm_common_ies.proto
 
-package e2sm_common_ies
+package e2smcommonies
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"

@@ -16,8 +16,3 @@ linters:
 run:
   skip-dirs:
     - modelplugin
-issues:
-  exclude-rules:
-    - path: servicemodels/test_sm_aper_go_lib/
-      linters:
-        - typecheck
