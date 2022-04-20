@@ -25,12 +25,9 @@ func Test_E2SmRcRanfunctionDefinition(t *testing.T) {
 		RicEventTriggerStyleList: make([]*e2smrcv1.RanfunctionDefinitionEventTriggerStyleItem, 0),
 		// other parameters are optional
 	}
-	msg21, err := CreateE2SmRcRanfunctionDefinitionEventTrigger(ranFunctionShortName, ranFunctionOID, ranFunctionDescription2, eventTriggerList)
-	assert.NilError(t, err)
-	assert.Assert(t, msg21 != nil)
 
-	msg22, err := CreateE2SmRcRanfunctionDefinition(ranFunctionShortName, ranFunctionOID, ranFunctionDescription2)
+	msg2, err := CreateE2SmRcRanfunctionDefinition(ranFunctionShortName, ranFunctionOID, ranFunctionDescription2)
 	assert.NilError(t, err)
-	assert.Assert(t, msg21 != nil)
-	msg22.SetRanfunctionDefinitionEventTrigger(eventTriggerList)
+	assert.Assert(t, msg2 != nil)
+	msg2.SetRanfunctionDefinitionEventTrigger(eventTriggerList)
 }
