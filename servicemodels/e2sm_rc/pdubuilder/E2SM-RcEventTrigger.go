@@ -65,6 +65,39 @@ func CreateE2SmRcEventTriggerFormat3(e2nichl []*e2smrcv1.E2SmRcEventTriggerForma
 	return ch, nil
 }
 
+func CreateE2SmRcEventTriggerFormat4(ueInfoChangeList []*e2smrcv1.E2SmRcEventTriggerFormat4Item) (*e2smrcv1.E2SmRcEventTrigger, error) {
+
+	ch := &e2smrcv1.E2SmRcEventTrigger{
+		RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats{
+			RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats_EventTriggerFormat4{
+				EventTriggerFormat4: &e2smrcv1.E2SmRcEventTriggerFormat4{
+					UEinfoChangeList: ueInfoChangeList,
+				},
+			},
+		},
+	}
+
+	return ch, nil
+}
+
+func CreateE2SmRcEventTriggerFormat5(onDemand e2smrcv1.OnDemand, associatedUeInfo *e2smrcv1.EventTriggerUeInfo,
+	associatedCellInfo *e2smrcv1.EventTriggerCellInfo) (*e2smrcv1.E2SmRcEventTrigger, error) {
+
+	ch := &e2smrcv1.E2SmRcEventTrigger{
+		RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats{
+			RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats_EventTriggerFormat5{
+				EventTriggerFormat5: &e2smrcv1.E2SmRcEventTriggerFormat5{
+					OnDemand:           onDemand,
+					AssociatedUeinfo:   associatedUeInfo,
+					AssociatedCellInfo: associatedCellInfo,
+				},
+			},
+		},
+	}
+
+	return ch, nil
+}
+
 func CreateE2SmRcEventTriggerFormat1Item(recID int32, msgt *e2smrcv1.MessageTypeChoice, msgDir e2smrcv1.MessageDirection,
 	ueInfoList []*e2smrcv1.EventTriggerUeInfoItem, ueEventList []*e2smrcv1.EventTriggerUeeventInfoItem, lor e2smrcv1.LogicalOr) (*e2smrcv1.E2SmRcEventTriggerFormat1Item, error) {
 
@@ -522,4 +555,86 @@ func CreateEventTriggerCellInfoItem(retcID int32, cellType *e2smrcv1.CellType, l
 	}
 
 	return item, nil
+}
+
+func CreateCellTypeChoiceIndividual(cgi *e2smcommonies.Cgi) (*e2smrcv1.CellType, error) {
+
+	return &e2smrcv1.CellType{
+		CellType: &e2smrcv1.CellType_CellTypeChoiceIndividual{
+			CellTypeChoiceIndividual: &e2smrcv1.EventTriggerCellInfoItemChoiceIndividual{
+				CellGlobalId: cgi,
+			},
+		},
+	}, nil
+}
+
+func CreateCellTypeChoiceGroup(ranParameterTesting *e2smrcv1.RanparameterTesting) (*e2smrcv1.CellType, error) {
+
+	return &e2smrcv1.CellType{
+		CellType: &e2smrcv1.CellType_CellTypeChoiceGroup{
+			CellTypeChoiceGroup: &e2smrcv1.EventTriggerCellInfoItemChoiceGroup{
+				RanParameterTesting: ranParameterTesting,
+			},
+		},
+	}, nil
+}
+
+func CreateE2SmRcEventTriggerFormat4Item(recID int32, triggerType *e2smrcv1.TriggerTypeChoice, associatedUeList *e2smrcv1.EventTriggerUeInfo,
+	lor e2smrcv1.LogicalOr) (*e2smrcv1.E2SmRcEventTriggerFormat4Item, error) {
+
+	item := &e2smrcv1.E2SmRcEventTriggerFormat4Item{
+		RicEventTriggerConditionId: &e2smrcv1.RicEventTriggerConditionId{
+			Value: recID,
+		},
+		TriggerType:      triggerType,
+		AssociatedUeinfo: associatedUeList,
+		LogicalOr:        &lor,
+	}
+
+	return item, nil
+}
+
+func CreateTriggerTypeChoiceRrcstate(rrcStateList *e2smrcv1.TriggerTypeChoiceRrcstate) (*e2smrcv1.TriggerTypeChoice, error) {
+
+	return &e2smrcv1.TriggerTypeChoice{
+		TriggerTypeChoice: &e2smrcv1.TriggerTypeChoice_TriggerTypeChoiceRrcstate{
+			TriggerTypeChoiceRrcstate: rrcStateList,
+		},
+	}, nil
+}
+
+func CreateTriggerTypeChoiceUeID(ueIDchange int32) (*e2smrcv1.TriggerTypeChoice, error) {
+
+	return &e2smrcv1.TriggerTypeChoice{
+		TriggerTypeChoice: &e2smrcv1.TriggerTypeChoice_TriggerTypeChoiceUeid{
+			TriggerTypeChoiceUeid: &e2smrcv1.TriggerTypeChoiceUeid{
+				UeIdchangeId: ueIDchange,
+			},
+		},
+	}, nil
+}
+
+func CreateTriggerTypeChoiceL2State(ranParameterTesting *e2smrcv1.RanparameterTesting) (*e2smrcv1.TriggerTypeChoice, error) {
+
+	return &e2smrcv1.TriggerTypeChoice{
+		TriggerTypeChoice: &e2smrcv1.TriggerTypeChoice_TriggerTypeChoiceL2State{
+			TriggerTypeChoiceL2State: &e2smrcv1.TriggerTypeChoiceL2State{
+				AssociatedL2Variables: ranParameterTesting,
+			},
+		},
+	}, nil
+}
+
+func CreateTriggerTypeChoiceRrcstateItem(rrcState e2smrcv1.RrcState, lor e2smrcv1.LogicalOr) (*e2smrcv1.TriggerTypeChoiceRrcstateItem, error) {
+
+	item := &e2smrcv1.TriggerTypeChoiceRrcstateItem{
+		StateChangedTo: rrcState,
+		LogicalOr:      &lor,
+	}
+
+	return item, nil
+}
+
+func CreateOnDemandTrue() e2smrcv1.OnDemand {
+	return e2smrcv1.OnDemand_ON_DEMAND_TRUE
 }
