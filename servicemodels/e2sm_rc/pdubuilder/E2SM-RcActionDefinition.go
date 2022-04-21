@@ -57,7 +57,7 @@ func CreateE2SmRcActionDefinitionFormat2(rst int32, rpcl []*e2smrcv1.E2SmRcActio
 	return ad, nil
 }
 
-func CreateE2SmRcActionDefinitionFormat3(rst int32, riiID int32, rpIDl []int64, ueID *e2smcommonies.Ueid) (*e2smrcv1.E2SmRcActionDefinition, error) {
+func CreateE2SmRcActionDefinitionFormat3(rst int32, riiID int32, rpIDl []int64) (*e2smrcv1.E2SmRcActionDefinition, error) {
 
 	riil := make([]*e2smrcv1.E2SmRcActionDefinitionFormat3Item, 0)
 
@@ -81,7 +81,6 @@ func CreateE2SmRcActionDefinitionFormat3(rst int32, riiID int32, rpIDl []int64, 
 						Value: riiID,
 					},
 					RanPInsertIndicationList: riil,
-					UeId:                     ueID,
 				},
 			},
 		},
@@ -90,7 +89,7 @@ func CreateE2SmRcActionDefinitionFormat3(rst int32, riiID int32, rpIDl []int64, 
 	return ad, nil
 }
 
-func CreateE2SmRcActionDefinitionFormat2Item(rcaID int32, rpl []*e2smrcv1.RicPolicyActionRanparameterItem, rpcd *e2smrcv1.RanparameterTesting) (*e2smrcv1.E2SmRcActionDefinitionFormat2Item, error) {
+func CreateE2SmRcActionDefinitionFormat2Item(rcaID int32, rpl []*e2smrcv1.RicPolicyActionRanparameterItem) (*e2smrcv1.E2SmRcActionDefinitionFormat2Item, error) {
 
 	rpa := &e2smrcv1.RicPolicyAction{
 		RicPolicyActionId: &e2smrcv1.RicControlActionId{
@@ -100,8 +99,7 @@ func CreateE2SmRcActionDefinitionFormat2Item(rcaID int32, rpl []*e2smrcv1.RicPol
 	}
 
 	item := &e2smrcv1.E2SmRcActionDefinitionFormat2Item{
-		RicPolicyAction:              rpa,
-		RicPolicyConditionDefinition: rpcd,
+		RicPolicyAction: rpa,
 	}
 
 	return item, nil
@@ -283,14 +281,12 @@ func CreateRanParameterTypeChoiceElementTrue(rpv *e2smrcv1.RanparameterValue) (*
 	}, nil
 }
 
-func CreateRanParameterTypeChoiceElementFalse(rptc *e2smrcv1.RanparameterTestingCondition, rpv *e2smrcv1.RanparameterValue, lor e2smrcv1.LogicalOr) (*e2smrcv1.RanParameterType, error) {
+func CreateRanParameterTypeChoiceElementFalse(rptc *e2smrcv1.RanparameterTestingCondition) (*e2smrcv1.RanParameterType, error) {
 
 	return &e2smrcv1.RanParameterType{
 		RanParameterType: &e2smrcv1.RanParameterType_RanPChoiceElementFalse{
 			RanPChoiceElementFalse: &e2smrcv1.RanparameterTestingItemChoiceElementFalse{
 				RanParameterTestCondition: rptc,
-				RanParameterValue:         rpv,
-				LogicalOr:                 &lor,
 			},
 		},
 	}, nil

@@ -22,7 +22,6 @@ func CreateE2SmRcControlHeaderFormat1(ueID *e2smcommonies.Ueid, rst int32, rcaID
 					RicControlActionId: &e2smrcv1.RicControlActionId{
 						Value: rcaID,
 					},
-					RicControlDecision: &rcd,
 				},
 			},
 		},
