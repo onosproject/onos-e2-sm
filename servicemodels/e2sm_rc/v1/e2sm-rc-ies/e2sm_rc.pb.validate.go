@@ -20890,10 +20890,10 @@ func (m *RanfunctionDefinitionEventTrigger) validate(all bool) error {
 
 	}
 
-	if l := len(m.GetRanL2ParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanL2ParametersList()) > 65535 {
 		err := RanfunctionDefinitionEventTriggerValidationError{
 			field:  "RanL2ParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -20935,10 +20935,10 @@ func (m *RanfunctionDefinitionEventTrigger) validate(all bool) error {
 
 	}
 
-	if l := len(m.GetRanCallProcessTypesList()); l < 1 || l > 65535 {
+	if len(m.GetRanCallProcessTypesList()) > 65535 {
 		err := RanfunctionDefinitionEventTriggerValidationError{
 			field:  "RanCallProcessTypesList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -20980,10 +20980,10 @@ func (m *RanfunctionDefinitionEventTrigger) validate(all bool) error {
 
 	}
 
-	if l := len(m.GetRanUeidentificationParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanUeidentificationParametersList()) > 65535 {
 		err := RanfunctionDefinitionEventTriggerValidationError{
 			field:  "RanUeidentificationParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -21025,10 +21025,10 @@ func (m *RanfunctionDefinitionEventTrigger) validate(all bool) error {
 
 	}
 
-	if l := len(m.GetRanCellIdentificationParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanCellIdentificationParametersList()) > 65535 {
 		err := RanfunctionDefinitionEventTriggerValidationError{
 			field:  "RanCellIdentificationParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -22229,10 +22229,10 @@ func (m *RanfunctionDefinitionEventTriggerBreakpointItem) validate(all bool) err
 		}
 	}
 
-	if l := len(m.GetRanCallProcessBreakpointParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanCallProcessBreakpointParametersList()) > 65535 {
 		err := RanfunctionDefinitionEventTriggerBreakpointItemValidationError{
 			field:  "RanCallProcessBreakpointParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -22901,10 +22901,10 @@ func (m *RanfunctionDefinitionReportItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRanReportParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanReportParametersList()) > 65535 {
 		err := RanfunctionDefinitionReportItemValidationError{
 			field:  "RanReportParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -23506,10 +23506,10 @@ func (m *RanfunctionDefinitionInsertItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRicInsertIndicationList()); l < 1 || l > 65535 {
+	if len(m.GetRicInsertIndicationList()) > 65535 {
 		err := RanfunctionDefinitionInsertItemValidationError{
 			field:  "RicInsertIndicationList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -23801,10 +23801,10 @@ func (m *RanfunctionDefinitionInsertIndicationItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRanInsertIndicationParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanInsertIndicationParametersList()) > 65535 {
 		err := RanfunctionDefinitionInsertIndicationItemValidationError{
 			field:  "RanInsertIndicationParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -24353,10 +24353,10 @@ func (m *RanfunctionDefinitionControlItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRicControlActionList()); l < 1 || l > 65535 {
+	if len(m.GetRicControlActionList()) > 65535 {
 		err := RanfunctionDefinitionControlItemValidationError{
 			field:  "RicControlActionList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -24485,10 +24485,10 @@ func (m *RanfunctionDefinitionControlItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRanControlOutcomeParametersList()); l < 1 || l > 255 {
+	if len(m.GetRanControlOutcomeParametersList()) > 255 {
 		err := RanfunctionDefinitionControlItemValidationError{
 			field:  "RanControlOutcomeParametersList",
-			reason: "value must contain between 1 and 255 items, inclusive",
+			reason: "value must contain no more than 255 item(s)",
 		}
 		if !all {
 			return err
@@ -24921,10 +24921,10 @@ func (m *RanfunctionDefinitionControlActionItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRanControlActionParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanControlActionParametersList()) > 65535 {
 		err := RanfunctionDefinitionControlActionItemValidationError{
 			field:  "RanControlActionParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -25499,10 +25499,10 @@ func (m *RanfunctionDefinitionPolicyItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRicPolicyActionList()); l < 1 || l > 65535 {
+	if len(m.GetRicPolicyActionList()) > 65535 {
 		err := RanfunctionDefinitionPolicyItemValidationError{
 			field:  "RicPolicyActionList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -25735,10 +25735,10 @@ func (m *RanfunctionDefinitionPolicyActionItem) validate(all bool) error {
 		}
 	}
 
-	if l := len(m.GetRanPolicyActionParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanPolicyActionParametersList()) > 65535 {
 		err := RanfunctionDefinitionPolicyActionItemValidationError{
 			field:  "RanPolicyActionParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
@@ -25780,10 +25780,10 @@ func (m *RanfunctionDefinitionPolicyActionItem) validate(all bool) error {
 
 	}
 
-	if l := len(m.GetRanPolicyConditionParametersList()); l < 1 || l > 65535 {
+	if len(m.GetRanPolicyConditionParametersList()) > 65535 {
 		err := RanfunctionDefinitionPolicyActionItemValidationError{
 			field:  "RanPolicyConditionParametersList",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err

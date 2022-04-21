@@ -120,14 +120,10 @@ func CreateE2SmRcIndicationMessageFormat2RanparameterItem(ranParameterID int64, 
 	return msg, nil
 }
 
-func CreateE2SmRcIndicationMessageFormat3Item(cgi *e2smcommonies.Cgi, cellContextInfo []byte, cellDeleted bool,
-	neighborRelationTable *e2smrcv1.NeighborRelationInfo) (*e2smrcv1.E2SmRcIndicationMessageFormat3Item, error) {
+func CreateE2SmRcIndicationMessageFormat3Item(cgi *e2smcommonies.Cgi) (*e2smrcv1.E2SmRcIndicationMessageFormat3Item, error) {
 
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat3Item{
-		CellGlobalId:          cgi,
-		CellContextInfo:       cellContextInfo,
-		CellDeleted:           &cellDeleted,
-		NeighborRelationTable: neighborRelationTable,
+		CellGlobalId: cgi,
 	}
 
 	return msg, nil
@@ -372,12 +368,11 @@ func CreateEutraTac(eutraTac []byte) (*e2smcommonies.EUtraTac, error) {
 	return msg, nil
 }
 
-func CreateE2SmRcIndicationMessageFormat4ItemUe(ueID *e2smcommonies.Ueid, ueContextInfo []byte, cgi *e2smcommonies.Cgi) (*e2smrcv1.E2SmRcIndicationMessageFormat4ItemUe, error) {
+func CreateE2SmRcIndicationMessageFormat4ItemUe(ueID *e2smcommonies.Ueid, cgi *e2smcommonies.Cgi) (*e2smrcv1.E2SmRcIndicationMessageFormat4ItemUe, error) {
 
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat4ItemUe{
-		UeId:          ueID,
-		UeContextInfo: ueContextInfo,
-		CellGlobalId:  cgi,
+		UeId:         ueID,
+		CellGlobalId: cgi,
 	}
 
 	return msg, nil
@@ -386,9 +381,7 @@ func CreateE2SmRcIndicationMessageFormat4ItemUe(ueID *e2smcommonies.Ueid, ueCont
 func CreateE2SmRcIndicationMessageFormat4ItemCell(cgi *e2smcommonies.Cgi, cellContextInfo []byte, neighborRelationTable *e2smrcv1.NeighborRelationInfo) (*e2smrcv1.E2SmRcIndicationMessageFormat4ItemCell, error) {
 
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat4ItemCell{
-		CellGlobalId:          cgi,
-		CellContextInfo:       cellContextInfo,
-		NeighborRelationTable: neighborRelationTable,
+		CellGlobalId: cgi,
 	}
 
 	return msg, nil

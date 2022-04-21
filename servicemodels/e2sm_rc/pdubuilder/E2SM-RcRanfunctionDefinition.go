@@ -325,7 +325,7 @@ func CreateRanfunctionDefinitionControl(ricControlStyleList []*e2smrcv1.Ranfunct
 }
 
 func CreateRanfunctionDefinitionControlItem(ricControlStyleType int32, ricControlStyleName string, ricControlHeaderFormatType int32,
-	ricControlMessageFormatType int32, ricCallProcessIDformatType int32, ricControlOutcomeFormatType int32) (*e2smrcv1.RanfunctionDefinitionControlItem, error) {
+	ricControlMessageFormatType int32, ricControlOutcomeFormatType int32) (*e2smrcv1.RanfunctionDefinitionControlItem, error) {
 
 	msg := &e2smrcv1.RanfunctionDefinitionControlItem{
 		RicControlStyleType: &e2smcommonies.RicStyleType{
@@ -339,9 +339,6 @@ func CreateRanfunctionDefinitionControlItem(ricControlStyleType int32, ricContro
 		},
 		RicControlMessageFormatType: &e2smcommonies.RicFormatType{
 			Value: ricControlMessageFormatType,
-		},
-		RicCallProcessIdformatType: &e2smcommonies.RicFormatType{
-			Value: ricCallProcessIDformatType,
 		},
 		RicControlOutcomeFormatType: &e2smcommonies.RicFormatType{
 			Value: ricControlOutcomeFormatType,

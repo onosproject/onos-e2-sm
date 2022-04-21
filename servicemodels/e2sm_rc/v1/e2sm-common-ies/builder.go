@@ -75,3 +75,123 @@ func (m *UeidGnb) SetGlobalGnbID(plmnID []byte, gnbID *asn1.BitString) *UeidGnb 
 
 	return m
 }
+
+func (m *UeidGnbDu) SetRanUeID(ranUeID []byte) *UeidGnbDu {
+	m.RanUeid = &Ranueid{
+		Value: ranUeID,
+	}
+
+	return m
+}
+
+func (m *UeidGnbCuUp) SetRanUeID(ranUeID []byte) *UeidGnbCuUp {
+	m.RanUeid = &Ranueid{
+		Value: ranUeID,
+	}
+
+	return m
+}
+
+func (m *UeidNgEnb) SetNgENbCuUeW1ApID(ngENbCuUeW1ApID int64) *UeidNgEnb {
+	m.NgENbCuUeW1ApId = &NgenbCuUeW1ApId{
+		Value: ngENbCuUeW1ApID,
+	}
+
+	return m
+}
+
+func (m *UeidNgEnb) SetMNgRanUeXnApID(mNgRanUeXnApId int64) *UeidNgEnb {
+	m.MNgRanUeXnApId = &NgRannodeUexnApid{
+		Value: mNgRanUeXnApId,
+	}
+
+	return m
+}
+
+func (m *UeidNgEnb) SetGlobalNgEnbID(plmnID []byte, ngEnbID *NgEnbId) *UeidNgEnb {
+	m.GlobalNgEnbId = &GlobalNgEnbId{
+		PLmnidentity: &Plmnidentity{
+			Value: plmnID,
+		},
+		NgEnbId: ngEnbID,
+	}
+
+	return m
+}
+
+func (m *UeidNgEnb) SetGlobalNgRannodeID(globalNgRannodeID *GlobalNgrannodeId) *UeidNgEnb {
+	m.GlobalNgRannodeId = globalNgRannodeID
+
+	return m
+}
+
+func (m *UeidEnGnb) SetMENbUeX2ApIDExtension(mENbUeX2ApIDExtension int32) *UeidEnGnb {
+	m.MENbUeX2ApIdExtension = &EnbUeX2ApIdExtension{
+		Value: mENbUeX2ApIDExtension,
+	}
+
+	return m
+}
+
+func (m *UeidEnGnb) SetGNbCuUeF1ApID(gNbCuUeF1ApID int64) *UeidEnGnb {
+	m.GNbCuUeF1ApId = &GnbCuUeF1ApId{
+		Value: gNbCuUeF1ApID,
+	}
+
+	return m
+}
+
+func (m *UeidEnGnb) SetGNbCuCpUeE1ApIDList(gNbCuCpUeE1ApIDList *UeidGnbCuCpE1ApIdList) *UeidEnGnb {
+	m.GNbCuCpUeE1ApIdList = gNbCuCpUeE1ApIDList
+
+	return m
+}
+
+func (m *UeidEnGnb) SetRanUeID(ranUeID []byte) *UeidEnGnb {
+	m.RanUeid = &Ranueid{
+		Value: ranUeID,
+	}
+
+	return m
+}
+
+func (m *UeidEnb) SetMENbUeX2ApID(mENbUeX2ApID int32) *UeidEnb {
+	m.MENbUeX2ApId = &EnbUeX2ApId{
+		Value: mENbUeX2ApID,
+	}
+
+	return m
+}
+
+func (m *UeidEnb) SetMENbUeX2ApIDExtension(mENbUeX2ApID int32) *UeidEnb {
+	m.MENbUeX2ApIdExtension = &EnbUeX2ApIdExtension{
+		Value: mENbUeX2ApID,
+	}
+
+	return m
+}
+
+func (m *UeidEnb) SetGlobalEnbID(plmnID []byte, enbID *EnbId) *UeidEnb {
+	m.GlobalEnbId = &GlobalEnbId{
+		PLmnidentity: &Plmnidentity{
+			Value: plmnID,
+		},
+		ENbId: enbID,
+	}
+
+	return m
+}
+
+func (m *SNssai) SetSD(sd []byte) *SNssai {
+	m.SD = &Sd{
+		Value: sd,
+	}
+
+	return m
+}
+
+func (m *NrfrequencyInfo) SetFrequencyShift7P5Khz(fShift NrfrequencyShift7P5Khz) *NrfrequencyInfo {
+	m.FrequencyShift7P5Khz = &fShift
+
+	return m
+}

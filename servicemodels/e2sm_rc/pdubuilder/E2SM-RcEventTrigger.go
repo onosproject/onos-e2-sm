@@ -26,7 +26,7 @@ func CreateE2SmRcEventTriggerFormat1(msgl []*e2smrcv1.E2SmRcEventTriggerFormat1I
 	return ch, nil
 }
 
-func CreateE2SmRcEventTriggerFormat2(rcptID int32, rcpbID int32, rpt *e2smrcv1.RanparameterTesting, ueInfoList []*e2smrcv1.EventTriggerUeInfoItem) (*e2smrcv1.E2SmRcEventTrigger, error) {
+func CreateE2SmRcEventTriggerFormat2(rcptID int32, rcpbID int32) (*e2smrcv1.E2SmRcEventTrigger, error) {
 
 	ch := &e2smrcv1.E2SmRcEventTrigger{
 		RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats{
@@ -37,10 +37,6 @@ func CreateE2SmRcEventTriggerFormat2(rcptID int32, rcpbID int32, rpt *e2smrcv1.R
 					},
 					RicCallProcessBreakpointId: &e2smrcv1.RicCallProcessBreakpointId{
 						Value: rcpbID,
-					},
-					AssociatedE2NodeInfo: rpt,
-					AssociatedUeinfo: &e2smrcv1.EventTriggerUeInfo{
-						UeInfoList: ueInfoList,
 					},
 				},
 			},
@@ -80,16 +76,13 @@ func CreateE2SmRcEventTriggerFormat4(ueInfoChangeList []*e2smrcv1.E2SmRcEventTri
 	return ch, nil
 }
 
-func CreateE2SmRcEventTriggerFormat5(onDemand e2smrcv1.OnDemand, associatedUeInfo *e2smrcv1.EventTriggerUeInfo,
-	associatedCellInfo *e2smrcv1.EventTriggerCellInfo) (*e2smrcv1.E2SmRcEventTrigger, error) {
+func CreateE2SmRcEventTriggerFormat5(onDemand e2smrcv1.OnDemand) (*e2smrcv1.E2SmRcEventTrigger, error) {
 
 	ch := &e2smrcv1.E2SmRcEventTrigger{
 		RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats{
 			RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats_EventTriggerFormat5{
 				EventTriggerFormat5: &e2smrcv1.E2SmRcEventTriggerFormat5{
-					OnDemand:           onDemand,
-					AssociatedUeinfo:   associatedUeInfo,
-					AssociatedCellInfo: associatedCellInfo,
+					OnDemand: onDemand,
 				},
 			},
 		},
@@ -98,22 +91,13 @@ func CreateE2SmRcEventTriggerFormat5(onDemand e2smrcv1.OnDemand, associatedUeInf
 	return ch, nil
 }
 
-func CreateE2SmRcEventTriggerFormat1Item(recID int32, msgt *e2smrcv1.MessageTypeChoice, msgDir e2smrcv1.MessageDirection,
-	ueInfoList []*e2smrcv1.EventTriggerUeInfoItem, ueEventList []*e2smrcv1.EventTriggerUeeventInfoItem, lor e2smrcv1.LogicalOr) (*e2smrcv1.E2SmRcEventTriggerFormat1Item, error) {
+func CreateE2SmRcEventTriggerFormat1Item(recID int32, msgt *e2smrcv1.MessageTypeChoice) (*e2smrcv1.E2SmRcEventTriggerFormat1Item, error) {
 
 	item := &e2smrcv1.E2SmRcEventTriggerFormat1Item{
 		RicEventTriggerConditionId: &e2smrcv1.RicEventTriggerConditionId{
 			Value: recID,
 		},
-		MessageType:      msgt,
-		MessageDirection: &msgDir,
-		AssociatedUeinfo: &e2smrcv1.EventTriggerUeInfo{
-			UeInfoList: ueInfoList,
-		},
-		AssociatedUeevent: &e2smrcv1.EventTriggerUeeventInfo{
-			UeEventList: ueEventList,
-		},
-		LogicalOr: &lor,
+		MessageType: msgt,
 	}
 
 	return item, nil
@@ -123,12 +107,7 @@ func CreateMessageTypeChoiceNi(niType e2smcommonies.InterfaceType, niID *e2smcom
 	msgt e2smcommonies.MessageType) (*e2smrcv1.MessageTypeChoice, error) {
 
 	ni := &e2smrcv1.MessageTypeChoiceNi{
-		NIType:       niType,
-		NIIdentifier: niID,
-		NIMessage: &e2smcommonies.InterfaceMessageId{
-			InterfaceProcedureId: ipID,
-			MessageType:          msgt,
-		},
+		NIType: niType,
 	}
 
 	return &e2smrcv1.MessageTypeChoice{
@@ -479,14 +458,13 @@ func CreateMessageDirectionOutgoing() e2smrcv1.MessageDirection {
 	return e2smrcv1.MessageDirection_MESSAGE_DIRECTION_OUTGOING
 }
 
-func CreateEventTriggerUeInfoItem(retrueID int32, ueType *e2smrcv1.UeType, lor e2smrcv1.LogicalOr) (*e2smrcv1.EventTriggerUeInfoItem, error) {
+func CreateEventTriggerUeInfoItem(retrueID int32, ueType *e2smrcv1.UeType) (*e2smrcv1.EventTriggerUeInfoItem, error) {
 
 	item := &e2smrcv1.EventTriggerUeInfoItem{
 		EventTriggerUeid: &e2smrcv1.RicEventTriggerUeId{
 			Value: retrueID,
 		},
-		UeType:    ueType,
-		LogicalOr: &lor,
+		UeType: ueType,
 	}
 
 	return item, nil
@@ -515,43 +493,36 @@ func CreateUeTypeGroup(rpt *e2smrcv1.RanparameterTesting) (*e2smrcv1.UeType, err
 	}, nil
 }
 
-func CreateEventTriggerUeeventInfoItem(retrueeID int32, lor e2smrcv1.LogicalOr) (*e2smrcv1.EventTriggerUeeventInfoItem, error) {
+func CreateEventTriggerUeeventInfoItem(retrueeID int32) (*e2smrcv1.EventTriggerUeeventInfoItem, error) {
 
 	item := &e2smrcv1.EventTriggerUeeventInfoItem{
 		UeEventId: &e2smrcv1.RicEventTriggerUeeventId{
 			Value: retrueeID,
 		},
-		LogicalOr: &lor,
 	}
 
 	return item, nil
 }
 
-func CreateE2SmRcEventTriggerFormat3Item(recID int32, changeID int32, cellInfoList []*e2smrcv1.EventTriggerCellInfoItem,
-	lor e2smrcv1.LogicalOr) (*e2smrcv1.E2SmRcEventTriggerFormat3Item, error) {
+func CreateE2SmRcEventTriggerFormat3Item(recID int32, changeID int32) (*e2smrcv1.E2SmRcEventTriggerFormat3Item, error) {
 
 	item := &e2smrcv1.E2SmRcEventTriggerFormat3Item{
 		RicEventTriggerConditionId: &e2smrcv1.RicEventTriggerConditionId{
 			Value: recID,
 		},
 		E2NodeInfoChangeId: changeID,
-		AssociatedCellInfo: &e2smrcv1.EventTriggerCellInfo{
-			CellInfoList: cellInfoList,
-		},
-		LogicalOr: &lor,
 	}
 
 	return item, nil
 }
 
-func CreateEventTriggerCellInfoItem(retcID int32, cellType *e2smrcv1.CellType, lor e2smrcv1.LogicalOr) (*e2smrcv1.EventTriggerCellInfoItem, error) {
+func CreateEventTriggerCellInfoItem(retcID int32, cellType *e2smrcv1.CellType) (*e2smrcv1.EventTriggerCellInfoItem, error) {
 
 	item := &e2smrcv1.EventTriggerCellInfoItem{
 		EventTriggerCellId: &e2smrcv1.RicEventTriggerCellId{
 			Value: retcID,
 		},
-		CellType:  cellType,
-		LogicalOr: &lor,
+		CellType: cellType,
 	}
 
 	return item, nil
@@ -579,16 +550,13 @@ func CreateCellTypeChoiceGroup(ranParameterTesting *e2smrcv1.RanparameterTesting
 	}, nil
 }
 
-func CreateE2SmRcEventTriggerFormat4Item(recID int32, triggerType *e2smrcv1.TriggerTypeChoice, associatedUeList *e2smrcv1.EventTriggerUeInfo,
-	lor e2smrcv1.LogicalOr) (*e2smrcv1.E2SmRcEventTriggerFormat4Item, error) {
+func CreateE2SmRcEventTriggerFormat4Item(recID int32, triggerType *e2smrcv1.TriggerTypeChoice) (*e2smrcv1.E2SmRcEventTriggerFormat4Item, error) {
 
 	item := &e2smrcv1.E2SmRcEventTriggerFormat4Item{
 		RicEventTriggerConditionId: &e2smrcv1.RicEventTriggerConditionId{
 			Value: recID,
 		},
-		TriggerType:      triggerType,
-		AssociatedUeinfo: associatedUeList,
-		LogicalOr:        &lor,
+		TriggerType: triggerType,
 	}
 
 	return item, nil
@@ -625,11 +593,10 @@ func CreateTriggerTypeChoiceL2State(ranParameterTesting *e2smrcv1.RanparameterTe
 	}, nil
 }
 
-func CreateTriggerTypeChoiceRrcstateItem(rrcState e2smrcv1.RrcState, lor e2smrcv1.LogicalOr) (*e2smrcv1.TriggerTypeChoiceRrcstateItem, error) {
+func CreateTriggerTypeChoiceRrcstateItem(rrcState e2smrcv1.RrcState) (*e2smrcv1.TriggerTypeChoiceRrcstateItem, error) {
 
 	item := &e2smrcv1.TriggerTypeChoiceRrcstateItem{
 		StateChangedTo: rrcState,
-		LogicalOr:      &lor,
 	}
 
 	return item, nil

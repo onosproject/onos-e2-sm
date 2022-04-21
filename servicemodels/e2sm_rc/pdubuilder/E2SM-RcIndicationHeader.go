@@ -9,14 +9,14 @@ import (
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 )
 
-func CreateE2SmRcIndicationHeaderFormat1(ricEventTriggerConditionID int32) (*e2smrcv1.E2SmRcIndicationHeader, error) {
+func CreateE2SmRcIndicationHeaderFormat1() (*e2smrcv1.E2SmRcIndicationHeader, error) {
 
 	msg := &e2smrcv1.E2SmRcIndicationHeader{
 		RicIndicationHeaderFormats: &e2smrcv1.RicIndicationHeaderFormats{
 			RicIndicationHeaderFormats: &e2smrcv1.RicIndicationHeaderFormats_IndicationHeaderFormat1{
 				IndicationHeaderFormat1: &e2smrcv1.E2SmRcIndicationHeaderFormat1{
 					RicEventTriggerConditionId: &e2smrcv1.RicEventTriggerConditionId{
-						Value: ricEventTriggerConditionID,
+						//the only item is OPTIONAL
 					},
 				},
 			},
