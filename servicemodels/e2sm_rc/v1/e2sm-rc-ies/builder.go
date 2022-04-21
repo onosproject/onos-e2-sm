@@ -271,8 +271,10 @@ func (m *RanfunctionDefinitionControlItem) SetRicControlActionList(ricControlAct
 	return m
 }
 
-func (m *RanfunctionDefinitionControlItem) SetRicCallProcessIDformatType(ricCallProcessIDformatType *e2smcommonies.RicFormatType) *RanfunctionDefinitionControlItem {
-	m.RicCallProcessIdformatType = ricCallProcessIDformatType
+func (m *RanfunctionDefinitionControlItem) SetRicCallProcessIDformatType(ricCallProcessIDformatType int32) *RanfunctionDefinitionControlItem {
+	m.RicCallProcessIdformatType = &e2smcommonies.RicFormatType{
+		Value: ricCallProcessIDformatType,
+	}
 	return m
 }
 
