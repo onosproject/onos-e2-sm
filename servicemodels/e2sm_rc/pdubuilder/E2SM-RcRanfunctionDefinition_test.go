@@ -29,5 +29,5 @@ func Test_E2SmRcRanfunctionDefinition(t *testing.T) {
 	msg2, err := CreateE2SmRcRanfunctionDefinition(ranFunctionShortName, ranFunctionOID, ranFunctionDescription2)
 	assert.NilError(t, err)
 	assert.Assert(t, msg2 != nil)
-	msg2.SetRanfunctionDefinitionEventTrigger(eventTriggerList)
+	msg2.SetRanFunctionDefinitionEventTrigger(eventTriggerList)
 }
