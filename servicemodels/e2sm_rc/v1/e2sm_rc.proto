@@ -1259,13 +1259,13 @@ message RanfunctionDefinitionEventTrigger {
     // @inject_tag: aper:"sizeB:1,sizeUB:63"
     repeated RanfunctionDefinitionEventTriggerStyleItem ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-EventTriggerStyle-List"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated L2ParametersRanparameterItem ran_l2_parameters_list = 2 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-L2Parameters-List"];
+    repeated L2ParametersRanparameterItem ran_l2_parameters_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-L2Parameters-List"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated RanfunctionDefinitionEventTriggerCallProcessItem ran_call_process_types_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-CallProcessTypes-List"];
+    repeated RanfunctionDefinitionEventTriggerCallProcessItem ran_call_process_types_list = 3 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-CallProcessTypes-List"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated UeidentificationRanparameterItem ran_ueidentification_parameters_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-UEIdentificationParameters-List"];
+    repeated UeidentificationRanparameterItem ran_ueidentification_parameters_list = 4 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-UEIdentificationParameters-List"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated CellIdentificationRanparameterItem ran_cell_identification_parameters_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-CellIdentificationParameters-List"];
+    repeated CellIdentificationRanparameterItem ran_cell_identification_parameters_list = 5 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-CellIdentificationParameters-List"];
 };
 
 // sequence from e2sm_rc.asn1:818
@@ -1318,7 +1318,7 @@ message RanfunctionDefinitionEventTriggerBreakpointItem {
     RicCallProcessBreakpointId call_process_breakpoint_id = 1 [ json_name="callProcessBreakpoint-ID"];
     RicCallProcessBreakpointName call_process_breakpoint_name = 2 [ json_name="callProcessBreakpoint-Name"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated CallProcessBreakpointRanparameterItem ran_call_process_breakpoint_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-CallProcessBreakpointParameters-List"];
+    repeated CallProcessBreakpointRanparameterItem ran_call_process_breakpoint_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-CallProcessBreakpointParameters-List"];
 };
 
 // sequence from e2sm_rc.asn1:865
@@ -1347,7 +1347,7 @@ message RanfunctionDefinitionReportItem {
     RicFormatType ric_indication_header_format_type = 5 [ json_name="ric-IndicationHeaderFormat-Type"];
     RicFormatType ric_indication_message_format_type = 6 [ json_name="ric-IndicationMessageFormat-Type"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated ReportRanparameterItem ran_report_parameters_list = 7 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-ReportParameters-List"];
+    repeated ReportRanparameterItem ran_report_parameters_list = 7 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-ReportParameters-List"];
 };
 
 // sequence from e2sm_rc.asn1:896
@@ -1374,7 +1374,7 @@ message RanfunctionDefinitionInsertItem {
     RicStyleType ric_supported_event_trigger_style_type = 3 [ json_name="ric-SupportedEventTriggerStyle-Type"];
     RicFormatType ric_action_definition_format_type = 4 [ json_name="ric-ActionDefinitionFormat-Type"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated RanfunctionDefinitionInsertIndicationItem ric_insert_indication_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ric-InsertIndication-List"];
+    repeated RanfunctionDefinitionInsertIndicationItem ric_insert_indication_list = 5 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ric-InsertIndication-List"];
     RicFormatType ric_indication_header_format_type = 6 [ json_name="ric-IndicationHeaderFormat-Type"];
     RicFormatType ric_indication_message_format_type = 7 [ json_name="ric-IndicationMessageFormat-Type"];
     RicFormatType ric_call_process_idformat_type = 8 [ json_name="ric-CallProcessIDFormat-Type"];
@@ -1386,7 +1386,7 @@ message RanfunctionDefinitionInsertIndicationItem {
     RicInsertIndicationId ric_insert_indication_id = 1 [ json_name="ric-InsertIndication-ID"];
     RicInsertIndicationName ric_insert_indication_name = 2 [ json_name="ric-InsertIndication-Name"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated InsertIndicationRanparameterItem ran_insert_indication_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-InsertIndicationParameters-List"];
+    repeated InsertIndicationRanparameterItem ran_insert_indication_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-InsertIndicationParameters-List"];
 };
 
 // sequence from e2sm_rc.asn1:935
@@ -1411,14 +1411,14 @@ message RanfunctionDefinitionControlItem {
     RicStyleType ric_control_style_type = 1 [ json_name="ric-ControlStyle-Type"];
     RicStyleName ric_control_style_name = 2 [ json_name="ric-ControlStyle-Name"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated RanfunctionDefinitionControlActionItem ric_control_action_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ric-ControlAction-List"];
+    repeated RanfunctionDefinitionControlActionItem ric_control_action_list = 3 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ric-ControlAction-List"];
     RicFormatType ric_control_header_format_type = 4 [ json_name="ric-ControlHeaderFormat-Type"];
     RicFormatType ric_control_message_format_type = 5 [ json_name="ric-ControlMessageFormat-Type"];
     // @inject_tag: aper:"optional"
     optional RicFormatType ric_call_process_idformat_type = 6 [ json_name="ric-CallProcessIDFormat-Type"];
     RicFormatType ric_control_outcome_format_type = 7 [ json_name="ric-ControlOutcomeFormat-Type"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:255,valueExt"
-    repeated ControlOutcomeRanparameterItem ran_control_outcome_parameters_list = 8 [(validate.v1.rules).repeated = {min_items: 1, max_items: 255}, json_name="ran-ControlOutcomeParameters-List"];
+    repeated ControlOutcomeRanparameterItem ran_control_outcome_parameters_list = 8 [(validate.v1.rules).repeated = {min_items: 0, max_items: 255}, json_name="ran-ControlOutcomeParameters-List"];
 };
 
 // sequence from e2sm_rc.asn1:965
@@ -1436,7 +1436,7 @@ message RanfunctionDefinitionControlActionItem {
     RicControlActionId ric_control_action_id = 1 [ json_name="ric-ControlAction-ID"];
     RicControlActionName ric_control_action_name = 2 [ json_name="ric-ControlAction-Name"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated ControlActionRanparameterItem ran_control_action_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-ControlActionParameters-List"];
+    repeated ControlActionRanparameterItem ran_control_action_parameters_list = 3 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-ControlActionParameters-List"];
 };
 
 // sequence from e2sm_rc.asn1:980
@@ -1462,7 +1462,7 @@ message RanfunctionDefinitionPolicyItem {
     RicStyleName ric_policy_style_name = 2 [ json_name="ric-PolicyStyle-Name"];
     RicStyleType ric_supported_event_trigger_style_type = 3 [ json_name="ric-SupportedEventTriggerStyle-Type"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated RanfunctionDefinitionPolicyActionItem ric_policy_action_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ric-PolicyAction-List"];
+    repeated RanfunctionDefinitionPolicyActionItem ric_policy_action_list = 4 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ric-PolicyAction-List"];
 };
 
 // sequence from e2sm_rc.asn1:1007
@@ -1472,9 +1472,9 @@ message RanfunctionDefinitionPolicyActionItem {
     RicControlActionName ric_policy_action_name = 2 [ json_name="ric-PolicyAction-Name"];
     RicFormatType ric_action_definition_format_type = 3 [ json_name="ric-ActionDefinitionFormat-Type"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated PolicyActionRanparameterItem ran_policy_action_parameters_list = 4 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-PolicyActionParameters-List"];
+    repeated PolicyActionRanparameterItem ran_policy_action_parameters_list = 4 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-PolicyActionParameters-List"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
-    repeated PolicyConditionRanparameterItem ran_policy_condition_parameters_list = 5 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="ran-PolicyConditionParameters-List"];
+    repeated PolicyConditionRanparameterItem ran_policy_condition_parameters_list = 5 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-PolicyConditionParameters-List"];
 };
 
 // sequence from e2sm_rc.asn1:1017
