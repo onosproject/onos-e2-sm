@@ -8,6 +8,7 @@ import (
 	e2smcommonies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcIndicationMessageFormat1(ranPReportedList []*e2smrcv1.E2SmRcIndicationMessageFormat1Item) (*e2smrcv1.E2SmRcIndicationMessage, error) {
@@ -185,16 +186,24 @@ func CreateServingCellArfcnEUtraPci(eutraArfcn int32) (*e2smcommonies.ServingCel
 	}, nil
 }
 
-func CreateNeighborCellItemRanTypeChoiceNr(nrCgi *e2smcommonies.NrCgi, nrPci *e2smcommonies.NrPci, fiveGsTac *e2smcommonies.FiveGsTac,
+func CreateNeighborCellItemRanTypeChoiceNr(nrCgi *e2smcommonies.NrCgi, nrPci int32, fiveGsTac []byte,
 	nrModeInfo e2smrcv1.NRModeInfo, nrFreqInfo *e2smcommonies.NrfrequencyInfo, x2XnEstablished e2smrcv1.X2XNEstablished,
 	hOValidated e2smrcv1.HOValidated, version int32) (*e2smrcv1.NeighborCellItem, error) {
+
+	if len(fiveGsTac) != 3 {
+		return nil, errors.NewInvalid("CreateNeighborCellItemRanTypeChoiceNr() FiveGsTac should be of length 3 bytes, got %v", fiveGsTac)
+	}
 
 	return &e2smrcv1.NeighborCellItem{
 		NeighborCellItem: &e2smrcv1.NeighborCellItem_RanTypeChoiceNr{
 			RanTypeChoiceNr: &e2smrcv1.NeighborCellItemChoiceNr{
-				NRCgi:           nrCgi,
-				NRPci:           nrPci,
-				FiveGsTac:       fiveGsTac,
+				NRCgi: nrCgi,
+				NRPci: &e2smcommonies.NrPci{
+					Value: nrPci,
+				},
+				FiveGsTac: &e2smcommonies.FiveGsTac{
+					Value: fiveGsTac,
+				},
 				NRModeInfo:      nrModeInfo,
 				NRFreqInfo:      nrFreqInfo,
 				X2XnEstablished: x2XnEstablished,
@@ -205,17 +214,27 @@ func CreateNeighborCellItemRanTypeChoiceNr(nrCgi *e2smcommonies.NrCgi, nrPci *e2
 	}, nil
 }
 
-func CreateNeighborCellItemRanTypeChoiceEutra(eutraCgi *e2smcommonies.EutraCgi, eutraPci *e2smcommonies.EUtraPci,
-	eutraArfcn *e2smcommonies.EUtraArfcn, eutraTac *e2smcommonies.EUtraTac, x2XnEstablished e2smrcv1.X2XNEstablished,
+func CreateNeighborCellItemRanTypeChoiceEutra(eutraCgi *e2smcommonies.EutraCgi, eutraPci int32,
+	eutraArfcn int32, eutraTac []byte, x2XnEstablished e2smrcv1.X2XNEstablished,
 	hOValidated e2smrcv1.HOValidated, version int32) (*e2smrcv1.NeighborCellItem, error) {
+
+	if len(eutraTac) != 2 {
+		return nil, errors.NewInvalid("CreateNeighborCellItemRanTypeChoiceEutra() EutraTac should be of length 2 bytes, got %v", eutraTac)
+	}
 
 	return &e2smrcv1.NeighborCellItem{
 		NeighborCellItem: &e2smrcv1.NeighborCellItem_RanTypeChoiceEutra{
 			RanTypeChoiceEutra: &e2smrcv1.NeighborCellItemChoiceEUtra{
-				EUtraCgi:        eutraCgi,
-				EUtraPci:        eutraPci,
-				EUtraArfcn:      eutraArfcn,
-				EUtraTac:        eutraTac,
+				EUtraCgi: eutraCgi,
+				EUtraPci: &e2smcommonies.EUtraPci{
+					Value: eutraPci,
+				},
+				EUtraArfcn: &e2smcommonies.EUtraArfcn{
+					Value: eutraArfcn,
+				},
+				EUtraTac: &e2smcommonies.EUtraTac{
+					Value: eutraTac,
+				},
 				X2XnEstablished: x2XnEstablished,
 				HOValidated:     hOValidated,
 				Version:         version,
@@ -264,12 +283,11 @@ func CreateNRModeInfoTDD() e2smrcv1.NRModeInfo {
 	return e2smrcv1.NRModeInfo_NR_MODE_INFO_TDD
 }
 
-func CreateNrfrequencyInfo(nrArfcn *e2smcommonies.NrArfcn, nrfrequencyBandList *e2smcommonies.NrfrequencyBandList, nrfrequencyShift7P5Khz e2smcommonies.NrfrequencyShift7P5Khz) (*e2smcommonies.NrfrequencyInfo, error) {
+func CreateNrfrequencyInfo(nrArfcn *e2smcommonies.NrArfcn, nrfrequencyBandList *e2smcommonies.NrfrequencyBandList) (*e2smcommonies.NrfrequencyInfo, error) {
 
 	msg := &e2smcommonies.NrfrequencyInfo{
-		NrArfcn:              nrArfcn,
-		FrequencyBandList:    nrfrequencyBandList,
-		FrequencyShift7P5Khz: &nrfrequencyShift7P5Khz,
+		NrArfcn:           nrArfcn,
+		FrequencyBandList: nrfrequencyBandList,
 	}
 
 	return msg, nil
@@ -378,7 +396,7 @@ func CreateE2SmRcIndicationMessageFormat4ItemUe(ueID *e2smcommonies.Ueid, cgi *e
 	return msg, nil
 }
 
-func CreateE2SmRcIndicationMessageFormat4ItemCell(cgi *e2smcommonies.Cgi, cellContextInfo []byte, neighborRelationTable *e2smrcv1.NeighborRelationInfo) (*e2smrcv1.E2SmRcIndicationMessageFormat4ItemCell, error) {
+func CreateE2SmRcIndicationMessageFormat4ItemCell(cgi *e2smcommonies.Cgi) (*e2smrcv1.E2SmRcIndicationMessageFormat4ItemCell, error) {
 
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat4ItemCell{
 		CellGlobalId: cgi,
@@ -394,6 +412,372 @@ func CreateE2SmRcIndicationMessageFormat5Item(ranParameterID int64, ranParameter
 			Value: ranParameterID,
 		},
 		RanParameterValueType: ranParameterValueType,
+	}
+
+	return msg, nil
+}
+
+func CreateUeIDGNb(amf int64, plmnID []byte, amfRegionID []byte, amfSetID []byte, amfPointer []byte) (*e2smcommonies.Ueid, error) {
+
+	if len(plmnID) != 3 {
+		return nil, errors.NewInvalid("CreateUeIDGNb() PlmnID should contain only 3 bytes, got %v", len(plmnID))
+	}
+	if len(amfRegionID) != 1 {
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfRegionID should contain only 1 byte, got %v", len(amfRegionID))
+	}
+	if len(amfSetID) != 2 {
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfSetID should contain only 2 bytes, got %v", len(amfSetID))
+	}
+	if amfSetID[1]&0x3F > 0 {
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfSetID should contain only 10 bits, i.e., last 6 bits of last byte should be trailing zeros, got %v", amfSetID[1])
+	}
+	if len(amfPointer) != 1 {
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfPointer should contain only 1 byte, got %v", len(amfPointer))
+	}
+	if amfPointer[0]&0x03 > 0 {
+		return nil, errors.NewInvalid("CreateUeIDGNb() AMfSetID should contain only 6 bits, i.e., last 2 bits should be trailing zeros, got %v", amfPointer)
+	}
+
+	ueID := &e2smcommonies.Ueid{
+		Ueid: &e2smcommonies.Ueid_GNbUeid{
+			GNbUeid: &e2smcommonies.UeidGnb{
+				AmfUeNgapId: &e2smcommonies.AmfUeNgapId{
+					Value: amf,
+				},
+				Guami: &e2smcommonies.Guami{
+					PLmnidentity: &e2smcommonies.Plmnidentity{
+						Value: plmnID,
+					},
+					AMfregionId: &e2smcommonies.AmfregionId{
+						Value: &asn1.BitString{
+							Value: amfRegionID,
+							Len:   8,
+						},
+					},
+					AMfsetId: &e2smcommonies.AmfsetId{
+						Value: &asn1.BitString{
+							Value: amfSetID,
+							Len:   10,
+						},
+					},
+					AMfpointer: &e2smcommonies.Amfpointer{
+						Value: &asn1.BitString{
+							Value: amfPointer,
+							Len:   6,
+						},
+					},
+				},
+			},
+		},
+	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeIDGNb() validation of UeID failed with %v", err)
+	}
+
+	return ueID, nil
+}
+
+func CreateUeIDGnbDu(gNbCuUeF1ApID int64) (*e2smcommonies.Ueid, error) {
+
+	msg := &e2smcommonies.Ueid{
+		Ueid: &e2smcommonies.Ueid_GNbDuUeid{
+			GNbDuUeid: &e2smcommonies.UeidGnbDu{
+				GNbCuUeF1ApId: &e2smcommonies.GnbCuUeF1ApId{
+					Value: gNbCuUeF1ApID,
+				},
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeIDGnbDu() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateUeIDGnbCuUp(gNbCuCpUeE1ApID int64) (*e2smcommonies.Ueid, error) {
+
+	msg := &e2smcommonies.Ueid{
+		Ueid: &e2smcommonies.Ueid_GNbCuUpUeid{
+			GNbCuUpUeid: &e2smcommonies.UeidGnbCuUp{
+				GNbCuCpUeE1ApId: &e2smcommonies.GnbCuCpUeE1ApId{
+					Value: gNbCuCpUeE1ApID,
+				},
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeIDGnbCuUp() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateUeIDNgEnb(amf int64, plmnID []byte, amfRegionID []byte, amfSetID []byte, amfPointer []byte) (*e2smcommonies.Ueid, error) {
+
+	if len(plmnID) != 3 {
+		return nil, errors.NewInvalid("CreateUeIDNgEnb() PlmnID should contain only 3 bytes, got %v", len(plmnID))
+	}
+	if len(amfRegionID) != 1 {
+		return nil, errors.NewInvalid("CreateUeIDNgEnb() AMfRegionID should contain only 1 byte, got %v", len(amfRegionID))
+	}
+	if len(amfSetID) != 2 {
+		return nil, errors.NewInvalid("CreateUeIDNgEnb() AMfSetID should contain only 2 bytes, got %v", len(amfSetID))
+	}
+	if amfSetID[1]&0x3F > 0 {
+		return nil, errors.NewInvalid("CreateUeIDNgEnb() AMfSetID should contain only 10 bits, i.e., last 6 bits of last byte should be trailing zeros, got %v", amfSetID[1])
+	}
+	if len(amfPointer) != 1 {
+		return nil, errors.NewInvalid("CreateUeIDNgEnb() AMfPointer should contain only 1 byte, got %v", len(amfPointer))
+	}
+	if amfPointer[0]&0x03 > 0 {
+		return nil, errors.NewInvalid("CreateUeIDNgEnb() AMfSetID should contain only 6 bits, i.e., last 2 bits should be trailing zeros, got %v", amfPointer)
+	}
+
+	ueID := &e2smcommonies.Ueid{
+		Ueid: &e2smcommonies.Ueid_NgENbUeid{
+			NgENbUeid: &e2smcommonies.UeidNgEnb{
+				AmfUeNgapId: &e2smcommonies.AmfUeNgapId{
+					Value: amf,
+				},
+				Guami: &e2smcommonies.Guami{
+					PLmnidentity: &e2smcommonies.Plmnidentity{
+						Value: plmnID,
+					},
+					AMfregionId: &e2smcommonies.AmfregionId{
+						Value: &asn1.BitString{
+							Value: amfRegionID,
+							Len:   8,
+						},
+					},
+					AMfsetId: &e2smcommonies.AmfsetId{
+						Value: &asn1.BitString{
+							Value: amfSetID,
+							Len:   10,
+						},
+					},
+					AMfpointer: &e2smcommonies.Amfpointer{
+						Value: &asn1.BitString{
+							Value: amfPointer,
+							Len:   6,
+						},
+					},
+				},
+			},
+		},
+	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeIDNgEnb() validation of UeID failed with %v", err)
+	}
+
+	return ueID, nil
+}
+
+func CreateUeIDNgEnbDu(ngENbCuUeW1ApID int64) (*e2smcommonies.Ueid, error) {
+
+	msg := &e2smcommonies.Ueid{
+		Ueid: &e2smcommonies.Ueid_NgENbDuUeid{
+			NgENbDuUeid: &e2smcommonies.UeidNgEnbDu{
+				NgENbCuUeW1ApId: &e2smcommonies.NgenbCuUeW1ApId{
+					Value: ngENbCuUeW1ApID,
+				},
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeIDNgEnbDu() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateUeIDEnbGnb(mENbUeX2ApID int32, plmnID []byte, enbID *e2smcommonies.EnbId) (*e2smcommonies.Ueid, error) {
+
+	if len(plmnID) != 3 {
+		return nil, errors.NewInvalid("CreateUeIDEnbGnb() PlmnID should contain only 3 bytes, got %v", len(plmnID))
+	}
+
+	msg := &e2smcommonies.Ueid{
+		Ueid: &e2smcommonies.Ueid_EnGNbUeid{
+			EnGNbUeid: &e2smcommonies.UeidEnGnb{
+				MENbUeX2ApId: &e2smcommonies.EnbUeX2ApId{
+					Value: mENbUeX2ApID,
+				},
+				GlobalEnbId: &e2smcommonies.GlobalEnbId{
+					PLmnidentity: &e2smcommonies.Plmnidentity{
+						Value: plmnID,
+					},
+					ENbId: enbID,
+				},
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeIDEnbGnb() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateUeIDEnb(mMeUeS1ApID int64, plmnID []byte, mMeGroupID []byte, mMeCode []byte) (*e2smcommonies.Ueid, error) {
+
+	if len(plmnID) != 3 {
+		return nil, errors.NewInvalid("CreateUeIDEnb() PlmnID should contain only 3 bytes, got %v", len(plmnID))
+	}
+	if len(mMeGroupID) != 2 {
+		return nil, errors.NewInvalid("CreateUeIDEnb() MMeGroupID should contain only 2 byte, got %v", len(mMeGroupID))
+	}
+	if len(mMeCode) != 1 {
+		return nil, errors.NewInvalid("CreateUeIDEnb() MMeCode should contain only 1 byte, got %v", len(mMeCode))
+	}
+
+	ueID := &e2smcommonies.Ueid{
+		Ueid: &e2smcommonies.Ueid_ENbUeid{
+			ENbUeid: &e2smcommonies.UeidEnb{
+				MMeUeS1ApId: &e2smcommonies.MmeUeS1ApId{
+					Value: mMeUeS1ApID,
+				},
+				GUmmei: &e2smcommonies.Gummei{
+					PLmnIdentity: &e2smcommonies.Plmnidentity{
+						Value: plmnID,
+					},
+					MMeGroupId: &e2smcommonies.MmeGroupId{
+						Value: mMeGroupID,
+					},
+					MMeCode: &e2smcommonies.MmeCode{
+						Value: mMeCode,
+					},
+				},
+			},
+		},
+	}
+
+	if err := ueID.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeIDEnb() validation of UeID failed with %v", err)
+	}
+
+	return ueID, nil
+}
+
+func CreateEnbIDMacro(macroENbID []byte) (*e2smcommonies.EnbId, error) {
+
+	if macroENbID[2]&0x0F > 0 {
+		return nil, errors.NewInvalid("CreateEnbIDMacro() MacroENbID should contain only 20 bits, i.e., last 4 bits should be trailing zeros, got %v", macroENbID)
+	}
+
+	msg := &e2smcommonies.EnbId{
+		EnbId: &e2smcommonies.EnbId_MacroENbId{
+			MacroENbId: &asn1.BitString{
+				Value: nil,
+				Len:   20,
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEnbIDMacro() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateEnbIDHome(homeENbID []byte) (*e2smcommonies.EnbId, error) {
+
+	if homeENbID[3]&0x0F > 0 {
+		return nil, errors.NewInvalid("CreateEnbIDHome() HomeENbID should contain only 28 bits, i.e., last 4 bits should be trailing zeros, got %v", homeENbID)
+	}
+
+	msg := &e2smcommonies.EnbId{
+		EnbId: &e2smcommonies.EnbId_HomeENbId{
+			HomeENbId: &asn1.BitString{
+				Value: homeENbID,
+				Len:   28,
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEnbIDHome() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateEnbIDShortMacro(shortMacroENbID []byte) (*e2smcommonies.EnbId, error) {
+
+	if shortMacroENbID[2]&0x3F > 0 {
+		return nil, errors.NewInvalid("CreateEnbIDShortMacro() ShortMacroENbID should contain only 18 bits, i.e., last 6 bits should be trailing zeros, got %v", shortMacroENbID)
+	}
+
+	msg := &e2smcommonies.EnbId{
+		EnbId: &e2smcommonies.EnbId_ShortMacroENbId{
+			ShortMacroENbId: &asn1.BitString{
+				Value: shortMacroENbID,
+				Len:   18,
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEnbIDShortMacro() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateEnbIDLongMacro(longMacroENbID []byte) (*e2smcommonies.EnbId, error) {
+
+	if longMacroENbID[2]&0x07 > 0 {
+		return nil, errors.NewInvalid("CreateEnbIDLongMacro() LongMacroENbID should contain only 21 bits, i.e., last 3 bits should be trailing zeros, got %v", longMacroENbID)
+	}
+
+	msg := &e2smcommonies.EnbId{
+		EnbId: &e2smcommonies.EnbId_LongMacroENbId{
+			LongMacroENbId: &asn1.BitString{
+				Value: longMacroENbID,
+				Len:   21,
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEnbIDLongMacro() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateCgiNRCgi(nRCgi *e2smcommonies.NrCgi) (*e2smcommonies.Cgi, error) {
+
+	msg := &e2smcommonies.Cgi{
+		Cgi: &e2smcommonies.Cgi_NRCgi{
+			NRCgi: nRCgi,
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateCgiNRCgi() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateCgiEutraCgi(eUtraCgi *e2smcommonies.EutraCgi) (*e2smcommonies.Cgi, error) {
+
+	msg := &e2smcommonies.Cgi{
+		Cgi: &e2smcommonies.Cgi_EUtraCgi{
+			EUtraCgi: eUtraCgi,
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateCgiNRCgi() validation of UeID failed with %v", err)
 	}
 
 	return msg, nil

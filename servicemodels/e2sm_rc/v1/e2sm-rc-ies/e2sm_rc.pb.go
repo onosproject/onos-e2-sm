@@ -3356,27 +3356,33 @@ type isRanparameterValue_RanparameterValue interface {
 }
 
 type RanparameterValue_ValueBoolean struct {
-	ValueBoolean bool `protobuf:"varint,1,opt,name=value_boolean,json=valueBoolean,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:1"
+	ValueBoolean bool `protobuf:"varint,1,opt,name=value_boolean,json=valueBoolean,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type RanparameterValue_ValueInt struct {
-	ValueInt int64 `protobuf:"varint,2,opt,name=value_int,json=valueInt,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:2"
+	ValueInt int64 `protobuf:"varint,2,opt,name=value_int,json=valueInt,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type RanparameterValue_ValueReal struct {
-	ValueReal float32 `protobuf:"fixed32,3,opt,name=value_real,json=valueReal,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:3"
+	ValueReal float32 `protobuf:"fixed32,3,opt,name=value_real,json=valueReal,proto3,oneof" aper:"choiceIdx:3"`
 }
 
 type RanparameterValue_ValueBitS struct {
-	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:4"
+	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof" aper:"choiceIdx:4"`
 }
 
 type RanparameterValue_ValueOctS struct {
-	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:5"
+	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof" aper:"choiceIdx:5"`
 }
 
 type RanparameterValue_ValuePrintableString struct {
-	ValuePrintableString string `protobuf:"bytes,6,opt,name=value_printable_string,json=valuePrintableString,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:6"
+	ValuePrintableString string `protobuf:"bytes,6,opt,name=value_printable_string,json=valuePrintableString,proto3,oneof" aper:"choiceIdx:6"`
 }
 
 func (*RanparameterValue_ValueBoolean) isRanparameterValue_RanparameterValue() {}

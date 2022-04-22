@@ -384,42 +384,6 @@ func CreateNodeTypeEnGnbID(plmnID []byte, enGnbID *asn1.BitString) (*e2smcommoni
 	}, nil
 }
 
-func CreateEnbIDMacro(macro *asn1.BitString) (*e2smcommonies.EnbId, error) {
-
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_MacroENbId{
-			MacroENbId: macro,
-		},
-	}, nil
-}
-
-func CreateEnbIDHome(home *asn1.BitString) (*e2smcommonies.EnbId, error) {
-
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_HomeENbId{
-			HomeENbId: home,
-		},
-	}, nil
-}
-
-func CreateEnbIDShortMacro(shMacro *asn1.BitString) (*e2smcommonies.EnbId, error) {
-
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_ShortMacroENbId{
-			ShortMacroENbId: shMacro,
-		},
-	}, nil
-}
-
-func CreateEnbIDLongMacro(lMacro *asn1.BitString) (*e2smcommonies.EnbId, error) {
-
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_LongMacroENbId{
-			LongMacroENbId: lMacro,
-		},
-	}, nil
-}
-
 func CreateMessageTypeInitiatingMessage() e2smcommonies.MessageType {
 	return e2smcommonies.MessageType_MESSAGE_TYPE_INITIATING_MESSAGE
 }

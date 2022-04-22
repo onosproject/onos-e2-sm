@@ -433,11 +433,17 @@ message RanparameterDefinitionChoiceStructureItem {
 message RanparameterValue {
     // choice from e2sm_rc.asn1:240
     oneof ranparameter_value {
+        // @inject_tag: aper:"choiceIdx:1"
         bool value_boolean = 1 [ json_name="valueBoolean"];
+        // @inject_tag: aper:"choiceIdx:2"
         int64 value_int = 2 [ json_name="valueInt"];
+        // @inject_tag: aper:"choiceIdx:3"
         float value_real = 3 [ json_name="valueReal"];
+        // @inject_tag: aper:"choiceIdx:4"
         asn1.v1.BitString value_bit_s = 4 [ json_name="valueBitS"];
+        // @inject_tag: aper:"choiceIdx:5"
         bytes value_oct_s = 5 [ json_name="valueOctS"];
+        // @inject_tag: aper:"choiceIdx:6"
         string value_printable_string = 6 [ json_name="valuePrintableString"];
     }
 };
@@ -982,7 +988,7 @@ message RicIndicationHeaderFormats {
 // sequence from e2sm_rc.asn1:591
 // {E2SM-RC-IndicationHeader-Format1}
 message E2SmRcIndicationHeaderFormat1 {
-    // @inject_tag: aper:"opptional"
+    // @inject_tag: aper:"optional"
     optional RicEventTriggerConditionId ric_event_trigger_condition_id = 1 [ json_name="ric-eventTriggerCondition-ID"];
 };
 

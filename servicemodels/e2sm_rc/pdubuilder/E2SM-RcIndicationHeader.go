@@ -46,13 +46,3 @@ func CreateE2SmRcIndicationHeaderFormat2(ueID *e2smcommonies.Ueid, ricInsertStyl
 
 	return msg, nil
 }
-
-//ToDo - here is a placeholder for various CreateUeID functions
-//func CreateUeIDGNbUeID() (*e2smcommonies.Ueid, error) {
-//
-//	return &e2smcommonies.Ueid{
-//		Ueid: &e2smcommonies.Ueid_GNbUeid{
-//			GNbUeid: nil,
-//		},
-//	}, nil
-//}

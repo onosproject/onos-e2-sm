@@ -131,8 +131,10 @@ func (m *E2SmRcActionDefinitionFormat3) SetUeID(ueID *e2smcommonies.Ueid) *E2SmR
 	return m
 }
 
-func (m *E2SmRcIndicationHeaderFormat1) SetRicEventTriggerConditionID(ricEventConditionID *RicEventTriggerConditionId) *E2SmRcIndicationHeaderFormat1 {
-	m.RicEventTriggerConditionId = ricEventConditionID
+func (m *E2SmRcIndicationHeaderFormat1) SetRicEventTriggerConditionID(ricEventConditionID int32) *E2SmRcIndicationHeaderFormat1 {
+	m.RicEventTriggerConditionId = &RicEventTriggerConditionId{
+		Value: ricEventConditionID,
+	}
 	return m
 }
 
