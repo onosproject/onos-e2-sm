@@ -168,8 +168,8 @@ func (m *E2SmRcIndicationMessageFormat4ItemCell) SetNeighborRelationTable(neighb
 	return m
 }
 
-func (m *E2SmRcControlHeaderFormat1) SetRicControlDecision(ricControlDecision *RicControlDecision) *E2SmRcControlHeaderFormat1 {
-	m.RicControlDecision = ricControlDecision
+func (m *E2SmRcControlHeaderFormat1) SetRicControlDecision(ricControlDecision RicControlDecision) *E2SmRcControlHeaderFormat1 {
+	m.RicControlDecision = &ricControlDecision
 	return m
 }
 

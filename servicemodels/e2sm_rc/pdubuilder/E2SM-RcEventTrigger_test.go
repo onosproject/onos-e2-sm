@@ -101,22 +101,6 @@ func TestE2SmRcEventTriggerFormat2(t *testing.T) {
 
 	associatedUeInfo = append(associatedUeInfo, ueInfo)
 
-	messageList := make([]*e2smrcv1.E2SmRcEventTriggerFormat1Item, 0)
-
-	rrcType, err := CreateRrcTypeLte(e2smcommonies.RrcclassLte_RRCCLASS_LTE_B_CCH_BCH)
-	assert.NilError(t, err)
-
-	msgTypeChoice, err := CreateMessageTypeChoiceRrc(rrcType, 32)
-	assert.NilError(t, err)
-
-	messageItem, err := CreateE2SmRcEventTriggerFormat1Item(1, msgTypeChoice)
-	assert.NilError(t, err)
-	messageItem.SetAssociatedUeinfo(&e2smrcv1.EventTriggerUeInfo{
-		UeInfoList: associatedUeInfo,
-	}).SetMessageDirection(CreateMessageDirectionOutgoing()).SetLogicalOr(CreateLogicalOrFalse())
-
-	messageList = append(messageList, messageItem)
-
 	msg, err := CreateE2SmRcEventTriggerFormat2(12, 15)
 	assert.NilError(t, err)
 	msg.GetRicEventTriggerFormats().GetEventTriggerFormat2().SetAssociatedUeinfo(&e2smrcv1.EventTriggerUeInfo{
@@ -142,6 +126,7 @@ func TestE2SmRcEventTriggerFormat3(t *testing.T) {
 		Value: []byte{0xFF, 0xFF, 0xFF, 0xF0},
 		Len:   28,
 	})
+	assert.NilError(t, err)
 
 	cgi, err := CreateCgiEutraCgi(eutraCgi)
 	assert.NilError(t, err)
@@ -261,6 +246,7 @@ func TestE2SmRcEventTriggerFormat5(t *testing.T) {
 		Value: []byte{0xFF, 0xFF, 0xFF, 0xF0},
 		Len:   28,
 	})
+	assert.NilError(t, err)
 
 	cgi, err := CreateCgiEutraCgi(eutraCgi)
 	assert.NilError(t, err)

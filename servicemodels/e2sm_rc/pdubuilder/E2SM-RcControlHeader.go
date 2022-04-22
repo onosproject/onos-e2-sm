@@ -9,7 +9,7 @@ import (
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 )
 
-func CreateE2SmRcControlHeaderFormat1(ueID *e2smcommonies.Ueid, rst int32, rcaID int32, rcd e2smrcv1.RicControlDecision) (*e2smrcv1.E2SmRcControlHeader, error) {
+func CreateE2SmRcControlHeaderFormat1(ueID *e2smcommonies.Ueid, rst int32, rcaID int32) (*e2smrcv1.E2SmRcControlHeader, error) {
 
 	ch := &e2smrcv1.E2SmRcControlHeader{
 		RicControlHeaderFormats: &e2smrcv1.RicControlHeaderFormats{

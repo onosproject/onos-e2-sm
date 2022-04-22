@@ -129,6 +129,7 @@ func TestE2SmRcIndicationMessageFormat3(t *testing.T) {
 
 	neighborCellItem, err := CreateNeighborCellItemRanTypeChoiceNr(nrCgi, 1, []byte{0xFF, 0xFF, 0xFF}, CreateNRModeInfoFDD(),
 		nrFrequencyInfo, CreateX2XNEstablishedTrue(), CreateHOValidatedTrue(), 1)
+	assert.NilError(t, err)
 	neighborCellList = append(neighborCellList, neighborCellItem)
 
 	neighborRelationTable, err := CreateNeighborRelationInfo(servingCellPci, servingCellArfcn, &e2smrcv1.NeighborCellList{
