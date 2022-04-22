@@ -10,14 +10,13 @@ import (
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 )
 
-func CreateE2SmRcEventTriggerFormat1(msgl []*e2smrcv1.E2SmRcEventTriggerFormat1Item, etuei *e2smrcv1.EventTriggerUeInfo) (*e2smrcv1.E2SmRcEventTrigger, error) {
+func CreateE2SmRcEventTriggerFormat1(msgl []*e2smrcv1.E2SmRcEventTriggerFormat1Item) (*e2smrcv1.E2SmRcEventTrigger, error) {
 
 	ch := &e2smrcv1.E2SmRcEventTrigger{
 		RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats{
 			RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats_EventTriggerFormat1{
 				EventTriggerFormat1: &e2smrcv1.E2SmRcEventTriggerFormat1{
-					MessageList:            msgl,
-					GlobalAssociatedUeinfo: etuei,
+					MessageList: msgl,
 				},
 			},
 		},

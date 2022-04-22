@@ -86,7 +86,7 @@ func (m *E2SmRcEventTriggerFormat2) SetAssociatedUeinfo(associatedUeInfo *EventT
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat3Item) SetAssociatedE2NodeInfo(associatedCellInfo *EventTriggerCellInfo) *E2SmRcEventTriggerFormat3Item {
+func (m *E2SmRcEventTriggerFormat3Item) SetAssociatedCellInfo(associatedCellInfo *EventTriggerCellInfo) *E2SmRcEventTriggerFormat3Item {
 	m.AssociatedCellInfo = associatedCellInfo
 	return m
 }

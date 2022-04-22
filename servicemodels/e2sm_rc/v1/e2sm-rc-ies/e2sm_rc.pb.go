@@ -2078,8 +2078,8 @@ type EventTriggerCellInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
-	CellInfoList []*EventTriggerCellInfoItem `protobuf:"bytes,1,rep,name=cell_info_list,json=cellInfo-List,proto3" json:"cell_info_list,omitempty" aper:"sizeLB:0,sizeUB:65535,valueExt"`
+	// @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+	CellInfoList []*EventTriggerCellInfoItem `protobuf:"bytes,1,rep,name=cell_info_list,json=cellInfo-List,proto3" json:"cell_info_list,omitempty" aper:"sizeLB:1,sizeUB:65535,valueExt"`
 }
 
 func (x *EventTriggerCellInfo) Reset() {
@@ -6437,8 +6437,8 @@ type E2SmRcEventTriggerFormat5 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
-	OnDemand OnDemand `protobuf:"varint,1,opt,name=on_demand,json=onDemand,proto3,enum=e2sm_rc.v1.OnDemand" json:"on_demand,omitempty" aper:"valueLB:0,valueUB:1,valueExt"`
+	// @inject_tag: aper:"valueLB:0,valueUB:0,valueExt"
+	OnDemand OnDemand `protobuf:"varint,1,opt,name=on_demand,json=onDemand,proto3,enum=e2sm_rc.v1.OnDemand" json:"on_demand,omitempty" aper:"valueLB:0,valueUB:0,valueExt"`
 	// @inject_tag: aper:"optional,valueExt"
 	AssociatedUeinfo *EventTriggerUeInfo `protobuf:"bytes,2,opt,name=associated_ueinfo,json=associatedUEInfo,proto3,oneof" json:"associated_ueinfo,omitempty" aper:"optional,valueExt"`
 	// @inject_tag: aper:"optional,valueExt"
@@ -7123,8 +7123,8 @@ type E2SmRcIndicationHeaderFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"opptional"
-	RicEventTriggerConditionId *RicEventTriggerConditionId `protobuf:"bytes,1,opt,name=ric_event_trigger_condition_id,json=ric-eventTriggerCondition-ID,proto3,oneof" json:"ric_event_trigger_condition_id,omitempty" aper:"opptional"`
+	// @inject_tag: aper:"optional"
+	RicEventTriggerConditionId *RicEventTriggerConditionId `protobuf:"bytes,1,opt,name=ric_event_trigger_condition_id,json=ric-eventTriggerCondition-ID,proto3,oneof" json:"ric_event_trigger_condition_id,omitempty" aper:"optional"`
 }
 
 func (x *E2SmRcIndicationHeaderFormat1) Reset() {
