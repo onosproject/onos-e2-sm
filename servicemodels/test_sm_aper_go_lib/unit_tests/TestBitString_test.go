@@ -9,6 +9,7 @@ import (
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/testsm"
 	"gotest.tools/assert"
 	"math"
 	"math/rand"
@@ -152,4 +153,57 @@ func TestBitString(t *testing.T) {
 		assert.DeepEqual(t, per, perRef)
 	}
 	t.Logf("Testing of Test-BitString (with randomness) was successfully finished")
+}
+
+func TestBitStringExtensible(t *testing.T) {
+
+	testBS, err := createTestBitString()
+	assert.NilError(t, err)
+
+	// setting BS6 to be explicitly extended (one extra bit)
+	testBS.AttrBs6 = &asn1.BitString{
+		Value: []byte{0xFF, 0xFF, 0xFF, 0xFF, 0x80},
+		Len:   33,
+	}
+
+	// Generating APER with reference CGo approach
+	perRef, err := testsmctypes.PerEncodeTestBitString(testBS)
+	assert.NilError(t, err)
+	// Generating APER bytes with Go APER lib
+	per, err := aper.Marshal(testBS, test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perRef)
+
+	// verifying that we're able to decode the message back
+	result := &testsm.TestBitString{}
+	err = aper.Unmarshal(per, result, test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err)
+	assert.Equal(t, testBS.String(), result.String())
+
+	testBS1, err1 := createTestBitString()
+	assert.NilError(t, err1)
+
+	// setting BS6 to be explicitly extended (one extra bit)
+	testBS1.AttrBs6 = &asn1.BitString{
+		Value: []byte{0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+		Len:   40,
+	}
+
+	// Generating APER with reference CGo approach
+	perRef1, err1 := testsmctypes.PerEncodeTestBitString(testBS1)
+	assert.NilError(t, err1)
+	// Generating APER bytes with Go APER lib
+	per1, err1 := aper.Marshal(testBS1, test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err1)
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per1, perRef1)
+
+	// verifying that we're able to decode the message back
+	result1 := &testsm.TestBitString{}
+	err1 = aper.Unmarshal(per1, result1, test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err1)
+	assert.Equal(t, testBS1.String(), result1.String())
 }
