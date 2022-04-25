@@ -187,7 +187,7 @@ func TestBitStringExtensible(t *testing.T) {
 
 	// setting BS6 to be explicitly extended (one extra bit)
 	testBS1.AttrBs6 = &asn1.BitString{
-		Value: []byte{0xFF, 0xFF, 0xFF, 0xFF, 0xFF},
+		Value: []byte{0xFF, 0xFF, 0xFF, 0xFF, 0xF5},
 		Len:   40,
 	}
 
