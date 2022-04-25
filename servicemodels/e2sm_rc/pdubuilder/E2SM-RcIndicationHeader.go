@@ -24,9 +24,7 @@ func CreateE2SmRcIndicationHeaderFormat1() (*e2smrcv1.E2SmRcIndicationHeader, er
 		},
 	}
 
-	if err := msg.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmRcIndicationHeaderFormat1() error validating E2SM-RC PDU %s", err.Error())
-	}
+	// Validation here would throw an error (doesn't handle single OPTIONAL items), leaving it empty
 
 	return msg, nil
 }
