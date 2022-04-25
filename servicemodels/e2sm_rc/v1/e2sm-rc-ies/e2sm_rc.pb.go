@@ -6639,8 +6639,8 @@ type RicActionDefinitionFormats_ActionDefinitionFormat1 struct {
 }
 
 type RicActionDefinitionFormats_ActionDefinitionFormat2 struct {
-	// @inject_tag: aper:"choiceIdx:3,valueExt"
-	ActionDefinitionFormat2 *E2SmRcActionDefinitionFormat2 `protobuf:"bytes,2,opt,name=action_definition_format2,json=actionDefinitionFormat2,proto3,oneof" aper:"choiceIdx:3,valueExt"`
+	// @inject_tag: aper:"choiceIdx:2,valueExt"
+	ActionDefinitionFormat2 *E2SmRcActionDefinitionFormat2 `protobuf:"bytes,2,opt,name=action_definition_format2,json=actionDefinitionFormat2,proto3,oneof" aper:"choiceIdx:2,valueExt"`
 }
 
 type RicActionDefinitionFormats_ActionDefinitionFormat3 struct {

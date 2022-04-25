@@ -916,7 +916,7 @@ message RicActionDefinitionFormats {
     oneof ric_action_definition_formats {
         // @inject_tag: aper:"choiceIdx:1,valueExt"
         E2SmRcActionDefinitionFormat1 action_definition_format1 = 1;
-        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
         E2SmRcActionDefinitionFormat2 action_definition_format2 = 2;
         // @inject_tag: aper:"choiceIdx:3,valueExt"
         E2SmRcActionDefinitionFormat3 action_definition_format3 = 3;

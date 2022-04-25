@@ -90,7 +90,7 @@ func TestE2SmRcActionDefinitionFormat2(t *testing.T) {
 	actionItem2, err := CreateE2SmRcActionDefinitionFormat2Item(27, ricPolicyActionList)
 	assert.NilError(t, err)
 	actionItem2.SetRicPolicyConditionDefinition(ranParameterTesting)
-	//actionDefinitionItemFormat2List = append(actionDefinitionItemFormat2List, actionItem2)
+	actionDefinitionItemFormat2List = append(actionDefinitionItemFormat2List, actionItem2)
 
 	msg, err := CreateE2SmRcActionDefinitionFormat2(11, actionDefinitionItemFormat2List)
 	assert.NilError(t, err)

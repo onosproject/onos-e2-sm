@@ -9,5 +9,4 @@ require (
 	github.com/onosproject/onos-lib-go v0.8.15
 	google.golang.org/protobuf v1.28.0
 	gotest.tools v2.2.0+incompatible
-
 )
