@@ -23,6 +23,10 @@ func CreateE2SmRcIndicationMessageFormat1(ranPReportedList []*e2smrcv1.E2SmRcInd
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat1() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -38,6 +42,10 @@ func CreateE2SmRcIndicationMessageFormat2(ueParameterList []*e2smrcv1.E2SmRcIndi
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat2() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -51,6 +59,10 @@ func CreateE2SmRcIndicationMessageFormat3(cellInfoList []*e2smrcv1.E2SmRcIndicat
 				},
 			},
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat3() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -69,6 +81,10 @@ func CreateE2SmRcIndicationMessageFormat4(ueInfoList []*e2smrcv1.E2SmRcIndicatio
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat4() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -84,6 +100,10 @@ func CreateE2SmRcIndicationMessageFormat5(ranPRequestedList []*e2smrcv1.E2SmRcIn
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat5() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -96,6 +116,10 @@ func CreateE2SmRcIndicationMessageFormat1Item(ranParameterID int64, ranParameter
 		RanParameterValueType: ranParameterValueType,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat1Item() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -104,6 +128,10 @@ func CreateE2SmRcIndicationMessageFormat2Item(ueID *e2smcommonies.Ueid, ranPList
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat2Item{
 		UeId:     ueID,
 		RanPList: ranPList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat2Item() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -118,6 +146,10 @@ func CreateE2SmRcIndicationMessageFormat2RanparameterItem(ranParameterID int64, 
 		RanParameterValueType: ranParameterValueType,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat2RanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -125,6 +157,10 @@ func CreateE2SmRcIndicationMessageFormat3Item(cgi *e2smcommonies.Cgi) (*e2smrcv1
 
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat3Item{
 		CellGlobalId: cgi,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat3Item() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -139,51 +175,79 @@ func CreateNeighborRelationInfo(servingCellPci *e2smcommonies.ServingCellPci, se
 		NeighborCellList: neighborCellList,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNeighborRelationInfo() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
 func CreateServingCellPciNR(nrPci int32) (*e2smcommonies.ServingCellPci, error) {
 
-	return &e2smcommonies.ServingCellPci{
+	msg := &e2smcommonies.ServingCellPci{
 		ServingCellPci: &e2smcommonies.ServingCellPci_NR{
 			NR: &e2smcommonies.NrPci{
 				Value: nrPci,
 			},
 		},
-	}, nil
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateServingCellPciNR() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
 }
 
 func CreateServingCellPciEUtraPci(eutraPci int32) (*e2smcommonies.ServingCellPci, error) {
 
-	return &e2smcommonies.ServingCellPci{
+	msg := &e2smcommonies.ServingCellPci{
 		ServingCellPci: &e2smcommonies.ServingCellPci_EUtra{
 			EUtra: &e2smcommonies.EUtraPci{
 				Value: eutraPci,
 			},
 		},
-	}, nil
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateServingCellPciEUtraPci() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
 }
 
 func CreateServingCellArfcnNR(nrArfcn int32) (*e2smcommonies.ServingCellArfcn, error) {
 
-	return &e2smcommonies.ServingCellArfcn{
+	msg := &e2smcommonies.ServingCellArfcn{
 		ServingCellArfcn: &e2smcommonies.ServingCellArfcn_NR{
 			NR: &e2smcommonies.NrArfcn{
 				NRarfcn: nrArfcn,
 			},
 		},
-	}, nil
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateServingCellArfcnNR() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
 }
 
 func CreateServingCellArfcnEUtraPci(eutraArfcn int32) (*e2smcommonies.ServingCellArfcn, error) {
 
-	return &e2smcommonies.ServingCellArfcn{
+	msg := &e2smcommonies.ServingCellArfcn{
 		ServingCellArfcn: &e2smcommonies.ServingCellArfcn_EUtra{
 			EUtra: &e2smcommonies.EUtraArfcn{
 				Value: eutraArfcn,
 			},
 		},
-	}, nil
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateServingCellArfcnEUtraPci() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
 }
 
 func CreateNeighborCellItemRanTypeChoiceNr(nrCgi *e2smcommonies.NrCgi, nrPci int32, fiveGsTac []byte,
@@ -194,7 +258,7 @@ func CreateNeighborCellItemRanTypeChoiceNr(nrCgi *e2smcommonies.NrCgi, nrPci int
 		return nil, errors.NewInvalid("CreateNeighborCellItemRanTypeChoiceNr() FiveGsTac should be of length 3 bytes, got %v", fiveGsTac)
 	}
 
-	return &e2smrcv1.NeighborCellItem{
+	msg := &e2smrcv1.NeighborCellItem{
 		NeighborCellItem: &e2smrcv1.NeighborCellItem_RanTypeChoiceNr{
 			RanTypeChoiceNr: &e2smrcv1.NeighborCellItemChoiceNr{
 				NRCgi: nrCgi,
@@ -211,7 +275,13 @@ func CreateNeighborCellItemRanTypeChoiceNr(nrCgi *e2smcommonies.NrCgi, nrPci int
 				Version:         version,
 			},
 		},
-	}, nil
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNeighborCellItemRanTypeChoiceNr() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
 }
 
 func CreateNeighborCellItemRanTypeChoiceEutra(eutraCgi *e2smcommonies.EutraCgi, eutraPci int32,
@@ -222,7 +292,7 @@ func CreateNeighborCellItemRanTypeChoiceEutra(eutraCgi *e2smcommonies.EutraCgi, 
 		return nil, errors.NewInvalid("CreateNeighborCellItemRanTypeChoiceEutra() EutraTac should be of length 2 bytes, got %v", eutraTac)
 	}
 
-	return &e2smrcv1.NeighborCellItem{
+	msg := &e2smrcv1.NeighborCellItem{
 		NeighborCellItem: &e2smrcv1.NeighborCellItem_RanTypeChoiceEutra{
 			RanTypeChoiceEutra: &e2smrcv1.NeighborCellItemChoiceEUtra{
 				EUtraCgi: eutraCgi,
@@ -240,7 +310,13 @@ func CreateNeighborCellItemRanTypeChoiceEutra(eutraCgi *e2smcommonies.EutraCgi, 
 				Version:         version,
 			},
 		},
-	}, nil
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNeighborCellItemRanTypeChoiceEutra() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
 }
 
 func CreateNrCgi(plmnID []byte, nrcellIdentity *asn1.BitString) (*e2smcommonies.NrCgi, error) {
@@ -254,6 +330,10 @@ func CreateNrCgi(plmnID []byte, nrcellIdentity *asn1.BitString) (*e2smcommonies.
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNrCgi() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -263,6 +343,10 @@ func CreateNrPci(nrPci int32) (*e2smcommonies.NrPci, error) {
 		Value: nrPci,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNrPci() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -270,6 +354,10 @@ func CreateFiveGsTac(fiveGsTac []byte) (*e2smcommonies.FiveGsTac, error) {
 
 	msg := &e2smcommonies.FiveGsTac{
 		Value: fiveGsTac,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateFiveGsTac() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -290,6 +378,10 @@ func CreateNrfrequencyInfo(nrArfcn *e2smcommonies.NrArfcn, nrfrequencyBandList *
 		FrequencyBandList: nrfrequencyBandList,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNrfrequencyInfo() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -297,6 +389,10 @@ func CreateNrArfcn(nrArfcn int32) (*e2smcommonies.NrArfcn, error) {
 
 	msg := &e2smcommonies.NrArfcn{
 		NRarfcn: nrArfcn,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNrArfcn() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -309,6 +405,10 @@ func CreateNrfrequencyBandItem(freqBandIndicatorNr int32, supportedSulbandList *
 		SupportedSulbandList: supportedSulbandList,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNrfrequencyBandItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -316,6 +416,10 @@ func CreateSupportedSulfreqBandItem(freqBandIndicatorNr int32) (*e2smcommonies.S
 
 	msg := &e2smcommonies.SupportedSulfreqBandItem{
 		FreqBandIndicatorNr: freqBandIndicatorNr,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateSupportedSulfreqBandItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -356,6 +460,10 @@ func CreateEutraCgi(plmnID []byte, eutraCellIdentity *asn1.BitString) (*e2smcomm
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEutraCgi() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -363,6 +471,10 @@ func CreateEutraPci(eutraPci int32) (*e2smcommonies.EUtraPci, error) {
 
 	msg := &e2smcommonies.EUtraPci{
 		Value: eutraPci,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEutraPci() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -374,6 +486,10 @@ func CreateEutraArfcn(eutraArfcn int32) (*e2smcommonies.EUtraArfcn, error) {
 		Value: eutraArfcn,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEutraArfcn() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -381,6 +497,10 @@ func CreateEutraTac(eutraTac []byte) (*e2smcommonies.EUtraTac, error) {
 
 	msg := &e2smcommonies.EUtraTac{
 		Value: eutraTac,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEutraTac() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -393,6 +513,10 @@ func CreateE2SmRcIndicationMessageFormat4ItemUe(ueID *e2smcommonies.Ueid, cgi *e
 		CellGlobalId: cgi,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat4ItemUe() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -400,6 +524,10 @@ func CreateE2SmRcIndicationMessageFormat4ItemCell(cgi *e2smcommonies.Cgi) (*e2sm
 
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat4ItemCell{
 		CellGlobalId: cgi,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat4ItemCell() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -412,6 +540,10 @@ func CreateE2SmRcIndicationMessageFormat5Item(ranParameterID int64, ranParameter
 			Value: ranParameterID,
 		},
 		RanParameterValueType: ranParameterValueType,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat5Item() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil

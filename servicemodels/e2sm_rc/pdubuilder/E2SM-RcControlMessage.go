@@ -6,6 +6,7 @@ package pdubuilder
 
 import (
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcControlMessageFormat1(rpl []*e2smrcv1.E2SmRcControlMessageFormat1Item) (*e2smrcv1.E2SmRcControlMessage, error) {
@@ -20,6 +21,10 @@ func CreateE2SmRcControlMessageFormat1(rpl []*e2smrcv1.E2SmRcControlMessageForma
 		},
 	}
 
+	if err := ch.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcControlMessageFormat1() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return ch, nil
 }
 
@@ -30,6 +35,10 @@ func CreateE2SmRcControlMessageFormat1Item(rpID int64, rpvt *e2smrcv1.Ranparamet
 			Value: rpID,
 		},
 		RanParameterValueType: rpvt,
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcControlMessageFormat1Item() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return item, nil

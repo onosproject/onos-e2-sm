@@ -7,6 +7,7 @@ package pdubuilder
 import (
 	e2smcommonies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcIndicationHeaderFormat1() (*e2smrcv1.E2SmRcIndicationHeader, error) {
@@ -21,6 +22,10 @@ func CreateE2SmRcIndicationHeaderFormat1() (*e2smrcv1.E2SmRcIndicationHeader, er
 				},
 			},
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationHeaderFormat1() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -42,6 +47,10 @@ func CreateE2SmRcIndicationHeaderFormat2(ueID *e2smcommonies.Ueid, ricInsertStyl
 				},
 			},
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationHeaderFormat2() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil

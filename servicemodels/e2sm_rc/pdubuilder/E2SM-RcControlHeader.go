@@ -7,6 +7,7 @@ package pdubuilder
 import (
 	e2smcommonies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcControlHeaderFormat1(ueID *e2smcommonies.Ueid, rst int32, rcaID int32) (*e2smrcv1.E2SmRcControlHeader, error) {
@@ -25,6 +26,10 @@ func CreateE2SmRcControlHeaderFormat1(ueID *e2smcommonies.Ueid, rst int32, rcaID
 				},
 			},
 		},
+	}
+
+	if err := ch.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcControlHeaderFormat1() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return ch, nil

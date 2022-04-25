@@ -7,6 +7,7 @@ package pdubuilder
 import (
 	e2smcommonies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcRanfunctionDefinition(ranFunctionShortName string, ranFunctionOID string, ranFunctionDescription string) (*e2smrcv1.E2SmRcRanfunctionDefinition, error) {
@@ -19,6 +20,10 @@ func CreateE2SmRcRanfunctionDefinition(ranFunctionShortName string, ranFunctionO
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcRanfunctionDefinition() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -26,6 +31,10 @@ func CreateRanfunctionDefinitionEventTrigger(ricEventTriggerStyleList []*e2smrcv
 
 	msg := &e2smrcv1.RanfunctionDefinitionEventTrigger{
 		RicEventTriggerStyleList: ricEventTriggerStyleList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionEventTrigger() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -45,6 +54,10 @@ func CreateRanfunctionDefinitionEventTriggerStyleItem(ricStyleType int32, ricSty
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionEventTriggerStyleItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -59,6 +72,10 @@ func CreateL2ParametersRanparameterItem(ranParameterID int64, ranParameterName s
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateL2ParametersRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -66,6 +83,10 @@ func CreateRanparameterDefinition(ranParameterDefinitionChoice *e2smrcv1.Ranpara
 
 	msg := &e2smrcv1.RanparameterDefinition{
 		RanParameterDefinitionChoice: ranParameterDefinitionChoice,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterDefinition() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -79,6 +100,10 @@ func CreateRanparameterDefinitionChoiceList(choiceList []*e2smrcv1.RanparameterD
 				RanParameterList: choiceList,
 			},
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterDefinitionChoiceList() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -95,6 +120,10 @@ func CreateRanparameterDefinitionChoiceListItem(ranParameterID int64, ranParamet
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterDefinitionChoiceListItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -106,6 +135,10 @@ func CreateRanparameterDefinitionChoiceStructure(ranParameterStructure []*e2smrc
 				RanParameterStructure: ranParameterStructure,
 			},
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterDefinitionChoiceStructure() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -120,6 +153,10 @@ func CreateRanparameterDefinitionChoiceStructureItem(ranParameterID int64, ranPa
 		RanParameterName: &e2smrcv1.RanparameterName{
 			Value: ranParameterName,
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterDefinitionChoiceStructureItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -138,6 +175,10 @@ func CreateRanfunctionDefinitionEventTriggerCallProcessItem(callProcessTypeID in
 		CallProcessBreakpointsList: callProcessBreakpointList,
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionEventTriggerCallProcessItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -150,6 +191,10 @@ func CreateRanfunctionDefinitionEventTriggerBreakpointItem(callProcessBreakpoint
 		CallProcessBreakpointName: &e2smrcv1.RicCallProcessBreakpointName{
 			Value: callProcessBreakpointName,
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionEventTriggerBreakpointItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -166,6 +211,10 @@ func CreateCallProcessBreakpointRanparameterItem(ranParameterID int64, ranParame
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateCallProcessBreakpointRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -178,6 +227,10 @@ func CreateUeidentificationRanparameterItem(ranParameterID int64, ranParameterNa
 		RanParameterName: &e2smrcv1.RanparameterName{
 			Value: ranParameterName,
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeidentificationRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -194,6 +247,10 @@ func CreateCellIdentificationRanparameterItem(ranParameterID int64, ranParameter
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateCellIdentificationRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -201,6 +258,10 @@ func CreateRanfunctionDefinitionReport(ricReportStyleList []*e2smrcv1.Ranfunctio
 
 	msg := &e2smrcv1.RanfunctionDefinitionReport{
 		RicReportStyleList: ricReportStyleList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionReport() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -230,6 +291,10 @@ func CreateRanfunctionDefinitionReportItem(ricReportStyleType int32, ricReportSt
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionReportItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -244,6 +309,10 @@ func CreateReportRanparameterItem(ranParameterID int64, ranParameterName string)
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateReportRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -251,6 +320,10 @@ func CreateRanfunctionDefinitionInsert(ricInsertStyleList []*e2smrcv1.Ranfunctio
 
 	msg := &e2smrcv1.RanfunctionDefinitionInsert{
 		RicInsertStyleList: ricInsertStyleList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionInsert() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -284,6 +357,10 @@ func CreateRanfunctionDefinitionInsertItem(ricInsertStyleType int32, ricInsertSt
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionInsertItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -296,6 +373,10 @@ func CreateRanfunctionDefinitionInsertIndicationItem(ricInsertIndicationID int32
 		RicInsertIndicationName: &e2smrcv1.RicInsertIndicationName{
 			Value: ricInsertIndicationName,
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionInsertIndicationItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -312,6 +393,10 @@ func CreateInsertIndicationRanparameterItem(ranParameterID int64, ranParameterNa
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInsertIndicationRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -319,6 +404,10 @@ func CreateRanfunctionDefinitionControl(ricControlStyleList []*e2smrcv1.Ranfunct
 
 	msg := &e2smrcv1.RanfunctionDefinitionControl{
 		RicControlStyleList: ricControlStyleList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionControl() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -345,6 +434,10 @@ func CreateRanfunctionDefinitionControlItem(ricControlStyleType int32, ricContro
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionControlItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -357,6 +450,10 @@ func CreateRanfunctionDefinitionControlActionItem(ricControlActionID int32, ricC
 		RicControlActionName: &e2smrcv1.RicControlActionName{
 			Value: ricControlActionName,
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionControlActionItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -373,6 +470,10 @@ func CreateControlActionRanparameterItem(ranParameterID int64, ranParameterName 
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateControlActionRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -387,6 +488,10 @@ func CreateControlOutcomeRanparameterItem(ranParameterID int64, ranParameterName
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateControlOutcomeRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -394,6 +499,10 @@ func CreateRanfunctionDefinitionPolicy(ricPolicyStyleList []*e2smrcv1.Ranfunctio
 
 	msg := &e2smrcv1.RanfunctionDefinitionPolicy{
 		RicPolicyStyleList: ricPolicyStyleList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionPolicy() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -413,6 +522,10 @@ func CreateRanfunctionDefinitionPolicyItem(ricPolicyStyleType int32, ricPolicySt
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionPolicyItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -430,6 +543,10 @@ func CreateRanfunctionDefinitionPolicyActionItem(ricControlActionID int32, ricPo
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanfunctionDefinitionPolicyActionItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -444,6 +561,10 @@ func CreatePolicyActionRanparameterItem(ranParameterID int64, ranParameterName s
 		},
 	}
 
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreatePolicyActionRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return msg, nil
 }
 
@@ -456,6 +577,10 @@ func CreatePolicyConditionRanparameterItem(ranParameterID int64, ranParameterNam
 		RanParameterName: &e2smrcv1.RanparameterName{
 			Value: ranParameterName,
 		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreatePolicyConditionRanparameterItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil
