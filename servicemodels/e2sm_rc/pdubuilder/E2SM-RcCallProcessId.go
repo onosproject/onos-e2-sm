@@ -6,7 +6,7 @@ package pdubuilder
 
 import e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 
-func CreateE2smRcCallProcessIDFormat1(ranCallProcessID int32) (*e2smrcv1.E2SmRcCallProcessId, error) {
+func CreateE2SmRcCallProcessIDFormat1(ranCallProcessID int32) (*e2smrcv1.E2SmRcCallProcessId, error) {
 
 	cpID := &e2smrcv1.E2SmRcCallProcessId{
 		RicCallProcessIdFormats: &e2smrcv1.RicCallProcessIdFormats{

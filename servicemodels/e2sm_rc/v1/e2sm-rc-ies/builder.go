@@ -121,7 +121,7 @@ func (m *E2SmRcEventTriggerFormat5) SetAssociatedCellInfo(associatedCellInfo *Ev
 	return m
 }
 
-func (m *E2SmRcActionDefinitionFormat2Item) SetAssociatedCellInfo(ricPolicyConditionDefinition *RanparameterTesting) *E2SmRcActionDefinitionFormat2Item {
+func (m *E2SmRcActionDefinitionFormat2Item) SetRicPolicyConditionDefinition(ricPolicyConditionDefinition *RanparameterTesting) *E2SmRcActionDefinitionFormat2Item {
 	m.RicPolicyConditionDefinition = ricPolicyConditionDefinition
 	return m
 }

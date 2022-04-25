@@ -13,7 +13,7 @@ import (
 
 func TestE2SmRcCallProcessID(t *testing.T) {
 
-	msg, err := CreateE2smRcCallProcessIDFormat1(11)
+	msg, err := CreateE2SmRcCallProcessIDFormat1(11)
 	assert.NilError(t, err)
 
 	aper, err := encoder.PerEncodeE2SmRcCallProcessId(msg)
