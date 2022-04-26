@@ -2078,8 +2078,8 @@ type EventTriggerCellInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
-	CellInfoList []*EventTriggerCellInfoItem `protobuf:"bytes,1,rep,name=cell_info_list,json=cellInfo-List,proto3" json:"cell_info_list,omitempty" aper:"sizeLB:0,sizeUB:65535,valueExt"`
+	// @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
+	CellInfoList []*EventTriggerCellInfoItem `protobuf:"bytes,1,rep,name=cell_info_list,json=cellInfo-List,proto3" json:"cell_info_list,omitempty" aper:"sizeLB:1,sizeUB:65535,valueExt"`
 }
 
 func (x *EventTriggerCellInfo) Reset() {
@@ -3356,27 +3356,33 @@ type isRanparameterValue_RanparameterValue interface {
 }
 
 type RanparameterValue_ValueBoolean struct {
-	ValueBoolean bool `protobuf:"varint,1,opt,name=value_boolean,json=valueBoolean,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:1"
+	ValueBoolean bool `protobuf:"varint,1,opt,name=value_boolean,json=valueBoolean,proto3,oneof" aper:"choiceIdx:1"`
 }
 
 type RanparameterValue_ValueInt struct {
-	ValueInt int64 `protobuf:"varint,2,opt,name=value_int,json=valueInt,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:2"
+	ValueInt int64 `protobuf:"varint,2,opt,name=value_int,json=valueInt,proto3,oneof" aper:"choiceIdx:2"`
 }
 
 type RanparameterValue_ValueReal struct {
-	ValueReal float32 `protobuf:"fixed32,3,opt,name=value_real,json=valueReal,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:3"
+	ValueReal float32 `protobuf:"fixed32,3,opt,name=value_real,json=valueReal,proto3,oneof" aper:"choiceIdx:3"`
 }
 
 type RanparameterValue_ValueBitS struct {
-	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:4"
+	ValueBitS *asn1.BitString `protobuf:"bytes,4,opt,name=value_bit_s,json=valueBitS,proto3,oneof" aper:"choiceIdx:4"`
 }
 
 type RanparameterValue_ValueOctS struct {
-	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:5"
+	ValueOctS []byte `protobuf:"bytes,5,opt,name=value_oct_s,json=valueOctS,proto3,oneof" aper:"choiceIdx:5"`
 }
 
 type RanparameterValue_ValuePrintableString struct {
-	ValuePrintableString string `protobuf:"bytes,6,opt,name=value_printable_string,json=valuePrintableString,proto3,oneof"`
+	// @inject_tag: aper:"choiceIdx:6"
+	ValuePrintableString string `protobuf:"bytes,6,opt,name=value_printable_string,json=valuePrintableString,proto3,oneof" aper:"choiceIdx:6"`
 }
 
 func (*RanparameterValue_ValueBoolean) isRanparameterValue_RanparameterValue() {}
@@ -6431,8 +6437,8 @@ type E2SmRcEventTriggerFormat5 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
-	OnDemand OnDemand `protobuf:"varint,1,opt,name=on_demand,json=onDemand,proto3,enum=e2sm_rc.v1.OnDemand" json:"on_demand,omitempty" aper:"valueLB:0,valueUB:1,valueExt"`
+	// @inject_tag: aper:"valueLB:0,valueUB:0,valueExt"
+	OnDemand OnDemand `protobuf:"varint,1,opt,name=on_demand,json=onDemand,proto3,enum=e2sm_rc.v1.OnDemand" json:"on_demand,omitempty" aper:"valueLB:0,valueUB:0,valueExt"`
 	// @inject_tag: aper:"optional,valueExt"
 	AssociatedUeinfo *EventTriggerUeInfo `protobuf:"bytes,2,opt,name=associated_ueinfo,json=associatedUEInfo,proto3,oneof" json:"associated_ueinfo,omitempty" aper:"optional,valueExt"`
 	// @inject_tag: aper:"optional,valueExt"
@@ -6633,8 +6639,8 @@ type RicActionDefinitionFormats_ActionDefinitionFormat1 struct {
 }
 
 type RicActionDefinitionFormats_ActionDefinitionFormat2 struct {
-	// @inject_tag: aper:"choiceIdx:3,valueExt"
-	ActionDefinitionFormat2 *E2SmRcActionDefinitionFormat2 `protobuf:"bytes,2,opt,name=action_definition_format2,json=actionDefinitionFormat2,proto3,oneof" aper:"choiceIdx:3,valueExt"`
+	// @inject_tag: aper:"choiceIdx:2,valueExt"
+	ActionDefinitionFormat2 *E2SmRcActionDefinitionFormat2 `protobuf:"bytes,2,opt,name=action_definition_format2,json=actionDefinitionFormat2,proto3,oneof" aper:"choiceIdx:2,valueExt"`
 }
 
 type RicActionDefinitionFormats_ActionDefinitionFormat3 struct {
@@ -7117,8 +7123,8 @@ type E2SmRcIndicationHeaderFormat1 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"opptional"
-	RicEventTriggerConditionId *RicEventTriggerConditionId `protobuf:"bytes,1,opt,name=ric_event_trigger_condition_id,json=ric-eventTriggerCondition-ID,proto3,oneof" json:"ric_event_trigger_condition_id,omitempty" aper:"opptional"`
+	// @inject_tag: aper:"optional"
+	RicEventTriggerConditionId *RicEventTriggerConditionId `protobuf:"bytes,1,opt,name=ric_event_trigger_condition_id,json=ric-eventTriggerCondition-ID,proto3,oneof" json:"ric_event_trigger_condition_id,omitempty" aper:"optional"`
 }
 
 func (x *E2SmRcIndicationHeaderFormat1) Reset() {

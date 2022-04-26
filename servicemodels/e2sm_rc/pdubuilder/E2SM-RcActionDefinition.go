@@ -8,6 +8,7 @@ import (
 	e2smcommonies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
 func CreateE2SmRcActionDefinitionFormat1(rst int32, rpIDs []int64) (*e2smrcv1.E2SmRcActionDefinition, error) {
@@ -36,6 +37,10 @@ func CreateE2SmRcActionDefinitionFormat1(rst int32, rpIDs []int64) (*e2smrcv1.E2
 		},
 	}
 
+	if err := ad.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat1() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return ad, nil
 }
 
@@ -52,6 +57,10 @@ func CreateE2SmRcActionDefinitionFormat2(rst int32, rpcl []*e2smrcv1.E2SmRcActio
 				},
 			},
 		},
+	}
+
+	if err := ad.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat2() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return ad, nil
@@ -86,6 +95,10 @@ func CreateE2SmRcActionDefinitionFormat3(rst int32, riiID int32, rpIDl []int64) 
 		},
 	}
 
+	if err := ad.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat3() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return ad, nil
 }
 
@@ -102,6 +115,10 @@ func CreateE2SmRcActionDefinitionFormat2Item(rcaID int32, rpl []*e2smrcv1.RicPol
 		RicPolicyAction: rpa,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat2Item() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
@@ -114,51 +131,79 @@ func CreateRicPolicyActionRanParameterItem(rpID int64, rpvt *e2smrcv1.Ranparamet
 		RanParameterValueType: rpvt,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRicPolicyActionRanParameterItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
 func CreateRanparameterValueTypeChoiceElementTrue(rpv *e2smrcv1.RanparameterValue) (*e2smrcv1.RanparameterValueType, error) {
 
-	return &e2smrcv1.RanparameterValueType{
+	item := &e2smrcv1.RanparameterValueType{
 		RanparameterValueType: &e2smrcv1.RanparameterValueType_RanPChoiceElementTrue{
 			RanPChoiceElementTrue: &e2smrcv1.RanparameterValueTypeChoiceElementTrue{
 				RanParameterValue: rpv,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueTypeChoiceElementTrue() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValueTypeChoiceElementFalse(rpv *e2smrcv1.RanparameterValue) (*e2smrcv1.RanparameterValueType, error) {
 
-	return &e2smrcv1.RanparameterValueType{
+	item := &e2smrcv1.RanparameterValueType{
 		RanparameterValueType: &e2smrcv1.RanparameterValueType_RanPChoiceElementFalse{
 			RanPChoiceElementFalse: &e2smrcv1.RanparameterValueTypeChoiceElementFalse{
 				RanParameterValue: rpv,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueTypeChoiceElementFalse() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValueTypeChoiceStructure(rps *e2smrcv1.RanparameterStructure) (*e2smrcv1.RanparameterValueType, error) {
 
-	return &e2smrcv1.RanparameterValueType{
+	item := &e2smrcv1.RanparameterValueType{
 		RanparameterValueType: &e2smrcv1.RanparameterValueType_RanPChoiceStructure{
 			RanPChoiceStructure: &e2smrcv1.RanparameterValueTypeChoiceStructure{
 				RanParameterStructure: rps,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueTypeChoiceStructure() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValueTypeChoiceList(rpl *e2smrcv1.RanparameterList) (*e2smrcv1.RanparameterValueType, error) {
 
-	return &e2smrcv1.RanparameterValueType{
+	item := &e2smrcv1.RanparameterValueType{
 		RanparameterValueType: &e2smrcv1.RanparameterValueType_RanPChoiceList{
 			RanPChoiceList: &e2smrcv1.RanparameterValueTypeChoiceList{
 				RanParameterList: rpl,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueTypeChoiceList() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterStructureItem(rpID int64, rpvt *e2smrcv1.RanparameterValueType) (*e2smrcv1.RanparameterStructureItem, error) {
@@ -170,6 +215,10 @@ func CreateRanparameterStructureItem(rpID int64, rpvt *e2smrcv1.RanparameterValu
 		RanParameterValueType: rpvt,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterStructureItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
@@ -179,61 +228,101 @@ func CreateRanParameterStructure(srp []*e2smrcv1.RanparameterStructureItem) (*e2
 		SequenceOfRanParameters: srp,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanParameterStructure() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
 func CreateRanparameterValueBoolean(val bool) (*e2smrcv1.RanparameterValue, error) {
 
-	return &e2smrcv1.RanparameterValue{
+	item := &e2smrcv1.RanparameterValue{
 		RanparameterValue: &e2smrcv1.RanparameterValue_ValueBoolean{
 			ValueBoolean: val,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueBoolean() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValueInt(val int64) (*e2smrcv1.RanparameterValue, error) {
 
-	return &e2smrcv1.RanparameterValue{
+	item := &e2smrcv1.RanparameterValue{
 		RanparameterValue: &e2smrcv1.RanparameterValue_ValueInt{
 			ValueInt: val,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueInt() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValueReal(val float32) (*e2smrcv1.RanparameterValue, error) {
 
-	return &e2smrcv1.RanparameterValue{
+	item := &e2smrcv1.RanparameterValue{
 		RanparameterValue: &e2smrcv1.RanparameterValue_ValueReal{
 			ValueReal: val,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueReal() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValueBitS(val *asn1.BitString) (*e2smrcv1.RanparameterValue, error) {
 
-	return &e2smrcv1.RanparameterValue{
+	item := &e2smrcv1.RanparameterValue{
 		RanparameterValue: &e2smrcv1.RanparameterValue_ValueBitS{
 			ValueBitS: val,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueBitS() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValueOctS(val []byte) (*e2smrcv1.RanparameterValue, error) {
 
-	return &e2smrcv1.RanparameterValue{
+	item := &e2smrcv1.RanparameterValue{
 		RanparameterValue: &e2smrcv1.RanparameterValue_ValueOctS{
 			ValueOctS: val,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValueOctS() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterValuePrintableString(val string) (*e2smrcv1.RanparameterValue, error) {
 
-	return &e2smrcv1.RanparameterValue{
+	item := &e2smrcv1.RanparameterValue{
 		RanparameterValue: &e2smrcv1.RanparameterValue_ValuePrintableString{
 			ValuePrintableString: val,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterValuePrintableString() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterTestingItem(rpID int64, rpt *e2smrcv1.RanParameterType) (*e2smrcv1.RanparameterTestingItem, error) {
@@ -245,69 +334,109 @@ func CreateRanparameterTestingItem(rpID int64, rpt *e2smrcv1.RanParameterType) (
 		RanParameterType: rpt,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterTestingItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
 func CreateRanParameterTypeChoiceList(rptl *e2smrcv1.RanparameterTestingList) (*e2smrcv1.RanParameterType, error) {
 
-	return &e2smrcv1.RanParameterType{
+	item := &e2smrcv1.RanParameterType{
 		RanParameterType: &e2smrcv1.RanParameterType_RanPChoiceList{
 			RanPChoiceList: &e2smrcv1.RanparameterTestingItemChoiceList{
 				RanParameterList: rptl,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanParameterTypeChoiceList() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanParameterTypeChoiceStructure(rpts *e2smrcv1.RanparameterTestingStructure) (*e2smrcv1.RanParameterType, error) {
 
-	return &e2smrcv1.RanParameterType{
+	item := &e2smrcv1.RanParameterType{
 		RanParameterType: &e2smrcv1.RanParameterType_RanPChoiceStructure{
 			RanPChoiceStructure: &e2smrcv1.RanparameterTestingItemChoiceStructure{
 				RanParameterStructure: rpts,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanParameterTypeChoiceStructure() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanParameterTypeChoiceElementTrue(rpv *e2smrcv1.RanparameterValue) (*e2smrcv1.RanParameterType, error) {
 
-	return &e2smrcv1.RanParameterType{
+	item := &e2smrcv1.RanParameterType{
 		RanParameterType: &e2smrcv1.RanParameterType_RanPChoiceElementTrue{
 			RanPChoiceElementTrue: &e2smrcv1.RanparameterTestingItemChoiceElementTrue{
 				RanParameterValue: rpv,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanParameterTypeChoiceElementTrue() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanParameterTypeChoiceElementFalse(rptc *e2smrcv1.RanparameterTestingCondition) (*e2smrcv1.RanParameterType, error) {
 
-	return &e2smrcv1.RanParameterType{
+	item := &e2smrcv1.RanParameterType{
 		RanParameterType: &e2smrcv1.RanParameterType_RanPChoiceElementFalse{
 			RanPChoiceElementFalse: &e2smrcv1.RanparameterTestingItemChoiceElementFalse{
 				RanParameterTestCondition: rptc,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanParameterTypeChoiceElementFalse() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterTestingConditionComparison(rpcc e2smrcv1.RanPChoiceComparison) (*e2smrcv1.RanparameterTestingCondition, error) {
 
-	return &e2smrcv1.RanparameterTestingCondition{
+	item := &e2smrcv1.RanparameterTestingCondition{
 		RanparameterTestingCondition: &e2smrcv1.RanparameterTestingCondition_RanPChoiceComparison{
 			RanPChoiceComparison: rpcc,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterTestingConditionComparison() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRanparameterTestingConditionPresence(rpcc e2smrcv1.RanPChoicePresence) (*e2smrcv1.RanparameterTestingCondition, error) {
 
-	return &e2smrcv1.RanparameterTestingCondition{
+	item := &e2smrcv1.RanparameterTestingCondition{
 		RanparameterTestingCondition: &e2smrcv1.RanparameterTestingCondition_RanPChoicePresence{
 			RanPChoicePresence: rpcc,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanparameterTestingConditionPresence() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateLogicalOrTrue() e2smrcv1.LogicalOr {

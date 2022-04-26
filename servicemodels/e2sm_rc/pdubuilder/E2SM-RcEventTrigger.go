@@ -8,19 +8,23 @@ import (
 	e2smcommonies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 	"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1"
+	"github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-func CreateE2SmRcEventTriggerFormat1(msgl []*e2smrcv1.E2SmRcEventTriggerFormat1Item, etuei *e2smrcv1.EventTriggerUeInfo) (*e2smrcv1.E2SmRcEventTrigger, error) {
+func CreateE2SmRcEventTriggerFormat1(msgl []*e2smrcv1.E2SmRcEventTriggerFormat1Item) (*e2smrcv1.E2SmRcEventTrigger, error) {
 
 	ch := &e2smrcv1.E2SmRcEventTrigger{
 		RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats{
 			RicEventTriggerFormats: &e2smrcv1.RicEventTriggerFormats_EventTriggerFormat1{
 				EventTriggerFormat1: &e2smrcv1.E2SmRcEventTriggerFormat1{
-					MessageList:            msgl,
-					GlobalAssociatedUeinfo: etuei,
+					MessageList: msgl,
 				},
 			},
 		},
+	}
+
+	if err := ch.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat1() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return ch, nil
@@ -43,6 +47,10 @@ func CreateE2SmRcEventTriggerFormat2(rcptID int32, rcpbID int32) (*e2smrcv1.E2Sm
 		},
 	}
 
+	if err := ch.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat2() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return ch, nil
 }
 
@@ -56,6 +64,10 @@ func CreateE2SmRcEventTriggerFormat3(e2nichl []*e2smrcv1.E2SmRcEventTriggerForma
 				},
 			},
 		},
+	}
+
+	if err := ch.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat3() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return ch, nil
@@ -73,6 +85,10 @@ func CreateE2SmRcEventTriggerFormat4(ueInfoChangeList []*e2smrcv1.E2SmRcEventTri
 		},
 	}
 
+	if err := ch.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat4() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return ch, nil
 }
 
@@ -88,6 +104,10 @@ func CreateE2SmRcEventTriggerFormat5(onDemand e2smrcv1.OnDemand) (*e2smrcv1.E2Sm
 		},
 	}
 
+	if err := ch.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat5() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return ch, nil
 }
 
@@ -100,6 +120,10 @@ func CreateE2SmRcEventTriggerFormat1Item(recID int32, msgt *e2smrcv1.MessageType
 		MessageType: msgt,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat1Item() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
@@ -110,11 +134,17 @@ func CreateMessageTypeChoiceNi(niType e2smcommonies.InterfaceType, niID *e2smcom
 		NIType: niType,
 	}
 
-	return &e2smrcv1.MessageTypeChoice{
+	item := &e2smrcv1.MessageTypeChoice{
 		MessageTypeChoice: &e2smrcv1.MessageTypeChoice_MessageTypeChoiceNi{
 			MessageTypeChoiceNi: ni,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMessageTypeChoiceNi() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateMessageTypeChoiceRrc(rrcType *e2smcommonies.RrcType, msgID int64) (*e2smrcv1.MessageTypeChoice, error) {
@@ -126,11 +156,17 @@ func CreateMessageTypeChoiceRrc(rrcType *e2smcommonies.RrcType, msgID int64) (*e
 		},
 	}
 
-	return &e2smrcv1.MessageTypeChoice{
+	item := &e2smrcv1.MessageTypeChoice{
 		MessageTypeChoice: &e2smrcv1.MessageTypeChoice_MessageTypeChoiceRrc{
 			MessageTypeChoiceRrc: rrc,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateMessageTypeChoiceRrc() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateInterfaceTypeNG() e2smcommonies.InterfaceType {
@@ -163,7 +199,7 @@ func CreateInterfaceTypeW1() e2smcommonies.InterfaceType {
 
 func CreateInterfaceIdentifierNG(plmnID []byte, regionID *asn1.BitString, setID *asn1.BitString, pointer *asn1.BitString) (*e2smcommonies.InterfaceIdentifier, error) {
 
-	return &e2smcommonies.InterfaceIdentifier{
+	item := &e2smcommonies.InterfaceIdentifier{
 		InterfaceIdentifier: &e2smcommonies.InterfaceIdentifier_NG{
 			NG: &e2smcommonies.InterfaceIdNg{
 				Guami: &e2smcommonies.Guami{
@@ -182,23 +218,35 @@ func CreateInterfaceIdentifierNG(plmnID []byte, regionID *asn1.BitString, setID 
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInterfaceIdentifierNG() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateInterfaceIdentifierXN(gngrnID *e2smcommonies.GlobalNgrannodeId) (*e2smcommonies.InterfaceIdentifier, error) {
 
-	return &e2smcommonies.InterfaceIdentifier{
+	item := &e2smcommonies.InterfaceIdentifier{
 		InterfaceIdentifier: &e2smcommonies.InterfaceIdentifier_XN{
 			XN: &e2smcommonies.InterfaceIdXn{
 				GlobalNgRanId: gngrnID,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInterfaceIdentifierXN() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateInterfaceIdentifierF1(plmnID []byte, gnbID *asn1.BitString, duID int64) (*e2smcommonies.InterfaceIdentifier, error) {
 
-	return &e2smcommonies.InterfaceIdentifier{
+	item := &e2smcommonies.InterfaceIdentifier{
 		InterfaceIdentifier: &e2smcommonies.InterfaceIdentifier_F1{
 			F1: &e2smcommonies.InterfaceIdF1{
 				GlobalGnbId: &e2smcommonies.GlobalGnbId{
@@ -216,12 +264,18 @@ func CreateInterfaceIdentifierF1(plmnID []byte, gnbID *asn1.BitString, duID int6
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInterfaceIdentifierF1() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateInterfaceIdentifierE1(plmnID []byte, gnbID *asn1.BitString, cuupID int64) (*e2smcommonies.InterfaceIdentifier, error) {
 
-	return &e2smcommonies.InterfaceIdentifier{
+	item := &e2smcommonies.InterfaceIdentifier{
 		InterfaceIdentifier: &e2smcommonies.InterfaceIdentifier_E1{
 			E1: &e2smcommonies.InterfaceIdE1{
 				GlobalGnbId: &e2smcommonies.GlobalGnbId{
@@ -239,12 +293,18 @@ func CreateInterfaceIdentifierE1(plmnID []byte, gnbID *asn1.BitString, cuupID in
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInterfaceIdentifierE1() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateInterfaceIdentifierS1(plmnID []byte, groupID []byte, code []byte) (*e2smcommonies.InterfaceIdentifier, error) {
 
-	return &e2smcommonies.InterfaceIdentifier{
+	item := &e2smcommonies.InterfaceIdentifier{
 		InterfaceIdentifier: &e2smcommonies.InterfaceIdentifier_S1{
 			S1: &e2smcommonies.InterfaceIdS1{
 				GUmmei: &e2smcommonies.Gummei{
@@ -260,23 +320,35 @@ func CreateInterfaceIdentifierS1(plmnID []byte, groupID []byte, code []byte) (*e
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInterfaceIdentifierS1() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateInterfaceIdentifierX2(nodeType *e2smcommonies.NodeType) (*e2smcommonies.InterfaceIdentifier, error) {
 
-	return &e2smcommonies.InterfaceIdentifier{
+	item := &e2smcommonies.InterfaceIdentifier{
 		InterfaceIdentifier: &e2smcommonies.InterfaceIdentifier_X2{
 			X2: &e2smcommonies.InterfaceIdX2{
 				NodeType: nodeType,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInterfaceIdentifierX2() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateInterfaceIdentifierW1(plmnID []byte, ngEnbID *e2smcommonies.NgEnbId, duID int64) (*e2smcommonies.InterfaceIdentifier, error) {
 
-	return &e2smcommonies.InterfaceIdentifier{
+	item := &e2smcommonies.InterfaceIdentifier{
 		InterfaceIdentifier: &e2smcommonies.InterfaceIdentifier_W1{
 			W1: &e2smcommonies.InterfaceIdW1{
 				GlobalNgENbId: &e2smcommonies.GlobalNgEnbId{
@@ -290,12 +362,18 @@ func CreateInterfaceIdentifierW1(plmnID []byte, ngEnbID *e2smcommonies.NgEnbId, 
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateInterfaceIdentifierW1() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateGlobalNgrannodeIDGnb(plmnID []byte, gnbID *asn1.BitString) (*e2smcommonies.GlobalNgrannodeId, error) {
 
-	return &e2smcommonies.GlobalNgrannodeId{
+	item := &e2smcommonies.GlobalNgrannodeId{
 		GlobalNgrannodeId: &e2smcommonies.GlobalNgrannodeId_GNb{
 			GNb: &e2smcommonies.GlobalGnbId{
 				PLmnidentity: &e2smcommonies.Plmnidentity{
@@ -308,12 +386,18 @@ func CreateGlobalNgrannodeIDGnb(plmnID []byte, gnbID *asn1.BitString) (*e2smcomm
 				},
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateGlobalNgrannodeIDGnb() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateGlobalNgrannodeIDNgEnb(plmnID []byte, ngEnbID *e2smcommonies.NgEnbId) (*e2smcommonies.GlobalNgrannodeId, error) {
 
-	return &e2smcommonies.GlobalNgrannodeId{
+	item := &e2smcommonies.GlobalNgrannodeId{
 		GlobalNgrannodeId: &e2smcommonies.GlobalNgrannodeId_NgENb{
 			NgENb: &e2smcommonies.GlobalNgEnbId{
 				PLmnidentity: &e2smcommonies.Plmnidentity{
@@ -322,39 +406,63 @@ func CreateGlobalNgrannodeIDNgEnb(plmnID []byte, ngEnbID *e2smcommonies.NgEnbId)
 				NgEnbId: ngEnbID,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateGlobalNgrannodeIDNgEnb() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateNgEnbIDMacro(macro *asn1.BitString) (*e2smcommonies.NgEnbId, error) {
 
-	return &e2smcommonies.NgEnbId{
+	item := &e2smcommonies.NgEnbId{
 		NgEnbId: &e2smcommonies.NgEnbId_MacroNgEnbId{
 			MacroNgEnbId: macro,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNgEnbIDMacro() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateNgEnbIDShortMacro(shMacro *asn1.BitString) (*e2smcommonies.NgEnbId, error) {
 
-	return &e2smcommonies.NgEnbId{
+	item := &e2smcommonies.NgEnbId{
 		NgEnbId: &e2smcommonies.NgEnbId_ShortMacroNgEnbId{
 			ShortMacroNgEnbId: shMacro,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNgEnbIDShortMacro() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateNgEnbIDLongMacro(lMacro *asn1.BitString) (*e2smcommonies.NgEnbId, error) {
 
-	return &e2smcommonies.NgEnbId{
+	item := &e2smcommonies.NgEnbId{
 		NgEnbId: &e2smcommonies.NgEnbId_LongMacroNgEnbId{
 			LongMacroNgEnbId: lMacro,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNgEnbIDLongMacro() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateNodeTypeEnbID(plmnID []byte, enbID *e2smcommonies.EnbId) (*e2smcommonies.NodeType, error) {
 
-	return &e2smcommonies.NodeType{
+	item := &e2smcommonies.NodeType{
 		NodeType: &e2smcommonies.NodeType_GlobalEnbId{
 			GlobalEnbId: &e2smcommonies.GlobalEnbId{
 				PLmnidentity: &e2smcommonies.Plmnidentity{
@@ -363,12 +471,18 @@ func CreateNodeTypeEnbID(plmnID []byte, enbID *e2smcommonies.EnbId) (*e2smcommon
 				ENbId: enbID,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNodeTypeEnbID() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateNodeTypeEnGnbID(plmnID []byte, enGnbID *asn1.BitString) (*e2smcommonies.NodeType, error) {
 
-	return &e2smcommonies.NodeType{
+	item := &e2smcommonies.NodeType{
 		NodeType: &e2smcommonies.NodeType_GlobalEnGnbId{
 			GlobalEnGnbId: &e2smcommonies.GlobalenGnbId{
 				PLmnIdentity: &e2smcommonies.Plmnidentity{
@@ -381,43 +495,13 @@ func CreateNodeTypeEnGnbID(plmnID []byte, enGnbID *asn1.BitString) (*e2smcommoni
 				},
 			},
 		},
-	}, nil
-}
+	}
 
-func CreateEnbIDMacro(macro *asn1.BitString) (*e2smcommonies.EnbId, error) {
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateNodeTypeEnGnbID() error validating E2SM-RC PDU %s", err.Error())
+	}
 
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_MacroENbId{
-			MacroENbId: macro,
-		},
-	}, nil
-}
-
-func CreateEnbIDHome(home *asn1.BitString) (*e2smcommonies.EnbId, error) {
-
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_HomeENbId{
-			HomeENbId: home,
-		},
-	}, nil
-}
-
-func CreateEnbIDShortMacro(shMacro *asn1.BitString) (*e2smcommonies.EnbId, error) {
-
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_ShortMacroENbId{
-			ShortMacroENbId: shMacro,
-		},
-	}, nil
-}
-
-func CreateEnbIDLongMacro(lMacro *asn1.BitString) (*e2smcommonies.EnbId, error) {
-
-	return &e2smcommonies.EnbId{
-		EnbId: &e2smcommonies.EnbId_LongMacroENbId{
-			LongMacroENbId: lMacro,
-		},
-	}, nil
+	return item, nil
 }
 
 func CreateMessageTypeInitiatingMessage() e2smcommonies.MessageType {
@@ -434,20 +518,32 @@ func CreateMessageTypeUnsuccessfulOutcome() e2smcommonies.MessageType {
 
 func CreateRrcTypeLte(lte e2smcommonies.RrcclassLte) (*e2smcommonies.RrcType, error) {
 
-	return &e2smcommonies.RrcType{
+	item := &e2smcommonies.RrcType{
 		RrcType: &e2smcommonies.RrcType_Lte{
 			Lte: lte,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRrcTypeLte() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateRrcTypeNr(nr e2smcommonies.RrcclassNr) (*e2smcommonies.RrcType, error) {
 
-	return &e2smcommonies.RrcType{
+	item := &e2smcommonies.RrcType{
 		RrcType: &e2smcommonies.RrcType_Nr{
 			Nr: nr,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRrcTypeNr() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateMessageDirectionIncoming() e2smrcv1.MessageDirection {
@@ -467,30 +563,46 @@ func CreateEventTriggerUeInfoItem(retrueID int32, ueType *e2smrcv1.UeType) (*e2s
 		UeType: ueType,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEventTriggerUeInfoItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
 func CreateUeTypeIndividual(ueID *e2smcommonies.Ueid, rpt *e2smrcv1.RanparameterTesting) (*e2smrcv1.UeType, error) {
 
-	return &e2smrcv1.UeType{
+	item := &e2smrcv1.UeType{
 		UeType: &e2smrcv1.UeType_UeTypeChoiceIndividual{
 			UeTypeChoiceIndividual: &e2smrcv1.EventTriggerUeInfoItemChoiceIndividual{
 				UeId:                ueID,
 				RanParameterTesting: rpt,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeTypeIndividual() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateUeTypeGroup(rpt *e2smrcv1.RanparameterTesting) (*e2smrcv1.UeType, error) {
 
-	return &e2smrcv1.UeType{
+	item := &e2smrcv1.UeType{
 		UeType: &e2smrcv1.UeType_UeTypeChoiceGroup{
 			UeTypeChoiceGroup: &e2smrcv1.EventTriggerUeInfoItemChoiceGroup{
 				RanParameterTesting: rpt,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateUeTypeGroup() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateEventTriggerUeeventInfoItem(retrueeID int32) (*e2smrcv1.EventTriggerUeeventInfoItem, error) {
@@ -499,6 +611,10 @@ func CreateEventTriggerUeeventInfoItem(retrueeID int32) (*e2smrcv1.EventTriggerU
 		UeEventId: &e2smrcv1.RicEventTriggerUeeventId{
 			Value: retrueeID,
 		},
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEventTriggerUeeventInfoItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return item, nil
@@ -513,6 +629,10 @@ func CreateE2SmRcEventTriggerFormat3Item(recID int32, changeID int32) (*e2smrcv1
 		E2NodeInfoChangeId: changeID,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat3Item() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
@@ -525,29 +645,45 @@ func CreateEventTriggerCellInfoItem(retcID int32, cellType *e2smrcv1.CellType) (
 		CellType: cellType,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateEventTriggerCellInfoItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
 func CreateCellTypeChoiceIndividual(cgi *e2smcommonies.Cgi) (*e2smrcv1.CellType, error) {
 
-	return &e2smrcv1.CellType{
+	item := &e2smrcv1.CellType{
 		CellType: &e2smrcv1.CellType_CellTypeChoiceIndividual{
 			CellTypeChoiceIndividual: &e2smrcv1.EventTriggerCellInfoItemChoiceIndividual{
 				CellGlobalId: cgi,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateCellTypeChoiceIndividual() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateCellTypeChoiceGroup(ranParameterTesting *e2smrcv1.RanparameterTesting) (*e2smrcv1.CellType, error) {
 
-	return &e2smrcv1.CellType{
+	item := &e2smrcv1.CellType{
 		CellType: &e2smrcv1.CellType_CellTypeChoiceGroup{
 			CellTypeChoiceGroup: &e2smrcv1.EventTriggerCellInfoItemChoiceGroup{
 				RanParameterTesting: ranParameterTesting,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateCellTypeChoiceGroup() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateE2SmRcEventTriggerFormat4Item(recID int32, triggerType *e2smrcv1.TriggerTypeChoice) (*e2smrcv1.E2SmRcEventTriggerFormat4Item, error) {
@@ -559,44 +695,70 @@ func CreateE2SmRcEventTriggerFormat4Item(recID int32, triggerType *e2smrcv1.Trig
 		TriggerType: triggerType,
 	}
 
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcEventTriggerFormat4Item() error validating E2SM-RC PDU %s", err.Error())
+	}
+
 	return item, nil
 }
 
 func CreateTriggerTypeChoiceRrcstate(rrcStateList *e2smrcv1.TriggerTypeChoiceRrcstate) (*e2smrcv1.TriggerTypeChoice, error) {
 
-	return &e2smrcv1.TriggerTypeChoice{
+	item := &e2smrcv1.TriggerTypeChoice{
 		TriggerTypeChoice: &e2smrcv1.TriggerTypeChoice_TriggerTypeChoiceRrcstate{
 			TriggerTypeChoiceRrcstate: rrcStateList,
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateTriggerTypeChoiceRrcstate() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateTriggerTypeChoiceUeID(ueIDchange int32) (*e2smrcv1.TriggerTypeChoice, error) {
 
-	return &e2smrcv1.TriggerTypeChoice{
+	item := &e2smrcv1.TriggerTypeChoice{
 		TriggerTypeChoice: &e2smrcv1.TriggerTypeChoice_TriggerTypeChoiceUeid{
 			TriggerTypeChoiceUeid: &e2smrcv1.TriggerTypeChoiceUeid{
 				UeIdchangeId: ueIDchange,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateTriggerTypeChoiceUeID() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateTriggerTypeChoiceL2State(ranParameterTesting *e2smrcv1.RanparameterTesting) (*e2smrcv1.TriggerTypeChoice, error) {
 
-	return &e2smrcv1.TriggerTypeChoice{
+	item := &e2smrcv1.TriggerTypeChoice{
 		TriggerTypeChoice: &e2smrcv1.TriggerTypeChoice_TriggerTypeChoiceL2State{
 			TriggerTypeChoiceL2State: &e2smrcv1.TriggerTypeChoiceL2State{
 				AssociatedL2Variables: ranParameterTesting,
 			},
 		},
-	}, nil
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateTriggerTypeChoiceL2State() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
 }
 
 func CreateTriggerTypeChoiceRrcstateItem(rrcState e2smrcv1.RrcState) (*e2smrcv1.TriggerTypeChoiceRrcstateItem, error) {
 
 	item := &e2smrcv1.TriggerTypeChoiceRrcstateItem{
 		StateChangedTo: rrcState,
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateTriggerTypeChoiceRrcstateItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return item, nil

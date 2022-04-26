@@ -86,7 +86,7 @@ func (m *E2SmRcEventTriggerFormat2) SetAssociatedUeinfo(associatedUeInfo *EventT
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat3Item) SetAssociatedE2NodeInfo(associatedCellInfo *EventTriggerCellInfo) *E2SmRcEventTriggerFormat3Item {
+func (m *E2SmRcEventTriggerFormat3Item) SetAssociatedCellInfo(associatedCellInfo *EventTriggerCellInfo) *E2SmRcEventTriggerFormat3Item {
 	m.AssociatedCellInfo = associatedCellInfo
 	return m
 }
@@ -121,7 +121,7 @@ func (m *E2SmRcEventTriggerFormat5) SetAssociatedCellInfo(associatedCellInfo *Ev
 	return m
 }
 
-func (m *E2SmRcActionDefinitionFormat2Item) SetAssociatedCellInfo(ricPolicyConditionDefinition *RanparameterTesting) *E2SmRcActionDefinitionFormat2Item {
+func (m *E2SmRcActionDefinitionFormat2Item) SetRicPolicyConditionDefinition(ricPolicyConditionDefinition *RanparameterTesting) *E2SmRcActionDefinitionFormat2Item {
 	m.RicPolicyConditionDefinition = ricPolicyConditionDefinition
 	return m
 }
@@ -131,8 +131,10 @@ func (m *E2SmRcActionDefinitionFormat3) SetUeID(ueID *e2smcommonies.Ueid) *E2SmR
 	return m
 }
 
-func (m *E2SmRcIndicationHeaderFormat1) SetRicEventTriggerConditionID(ricEventConditionID *RicEventTriggerConditionId) *E2SmRcIndicationHeaderFormat1 {
-	m.RicEventTriggerConditionId = ricEventConditionID
+func (m *E2SmRcIndicationHeaderFormat1) SetRicEventTriggerConditionID(ricEventConditionID int32) *E2SmRcIndicationHeaderFormat1 {
+	m.RicEventTriggerConditionId = &RicEventTriggerConditionId{
+		Value: ricEventConditionID,
+	}
 	return m
 }
 
@@ -166,8 +168,8 @@ func (m *E2SmRcIndicationMessageFormat4ItemCell) SetNeighborRelationTable(neighb
 	return m
 }
 
-func (m *E2SmRcControlHeaderFormat1) SetRicControlDecision(ricControlDecision *RicControlDecision) *E2SmRcControlHeaderFormat1 {
-	m.RicControlDecision = ricControlDecision
+func (m *E2SmRcControlHeaderFormat1) SetRicControlDecision(ricControlDecision RicControlDecision) *E2SmRcControlHeaderFormat1 {
+	m.RicControlDecision = &ricControlDecision
 	return m
 }
 

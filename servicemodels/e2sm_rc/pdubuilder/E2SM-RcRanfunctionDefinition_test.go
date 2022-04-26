@@ -12,28 +12,28 @@ import (
 	"testing"
 )
 
-func Test_E2SmRcRanfunctionDefinition(t *testing.T) {
+func TestE2SmRcRanfunctionDefinition(t *testing.T) {
 
 	ranFunctionShortName := "E2SM-RC"
 	ranFunctionOID := "1.3.6.1.4.1.53148.1.1.2.3"
 	ranFunctionDescription1 := "empty E2SM-RC"
 
-	msg1, err := CreateE2SmRcRanfunctionDefinition(ranFunctionShortName, ranFunctionOID, ranFunctionDescription1)
+	msg, err := CreateE2SmRcRanfunctionDefinition(ranFunctionShortName, ranFunctionOID, ranFunctionDescription1)
 	assert.NilError(t, err)
-	assert.Assert(t, msg1 != nil)
-	msg1.GetRanFunctionName().SetRanFunctionInstance(1)
+	assert.Assert(t, msg != nil)
+	msg.GetRanFunctionName().SetRanFunctionInstance(1)
 
-	aper1, err := encoder.PerEncodeE2SmRcRanfunctionDefinition(msg1)
+	aper, err := encoder.PerEncodeE2SmRcRanfunctionDefinition(msg)
 	assert.NilError(t, err)
-	t.Logf("APER bytes are\n%v", hex.Dump(aper1))
+	t.Logf("APER bytes are\n%v", hex.Dump(aper))
 
-	result1, err := encoder.PerDecodeE2SmRcRanfunctionDefinition(aper1)
+	result, err := encoder.PerDecodeE2SmRcRanfunctionDefinition(aper)
 	assert.NilError(t, err)
-	t.Logf("Decoded message is\n%v", result1)
-	assert.Equal(t, msg1.String(), result1.String())
+	t.Logf("Decoded message is\n%v", result)
+	assert.Equal(t, msg.String(), result.String())
 }
 
-func Test_E2SmRcRanfunctionDefinitionEventTrigger(t *testing.T) {
+func TestE2SmRcRanfunctionDefinitionEventTrigger(t *testing.T) {
 	ranFunctionShortName := "E2SM-RC"
 	ranFunctionOID := "1.3.6.1.4.1.53148.1.1.2.3"
 	ranFunctionDescription2 := "E2SM-RC EventTrigger"
@@ -87,7 +87,7 @@ func Test_E2SmRcRanfunctionDefinitionEventTrigger(t *testing.T) {
 	assert.Equal(t, msg2.String(), result2.String())
 }
 
-func Test_E2SmRcRanfunctionDefinitionReport(t *testing.T) {
+func TestE2SmRcRanfunctionDefinitionReport(t *testing.T) {
 	ranFunctionShortName := "E2SM-RC"
 	ranFunctionOID := "1.3.6.1.4.1.53148.1.1.2.3"
 	ranFunctionDescription2 := "E2SM-RC Report"
@@ -123,7 +123,7 @@ func Test_E2SmRcRanfunctionDefinitionReport(t *testing.T) {
 	assert.Equal(t, msg2.String(), result2.String())
 }
 
-func Test_E2SmRcRanfunctionDefinitionInsert(t *testing.T) {
+func TestE2SmRcRanfunctionDefinitionInsert(t *testing.T) {
 	ranFunctionShortName := "E2SM-RC"
 	ranFunctionOID := "1.3.6.1.4.1.53148.1.1.2.3"
 	ranFunctionDescription2 := "E2SM-RC Insert"
@@ -166,7 +166,7 @@ func Test_E2SmRcRanfunctionDefinitionInsert(t *testing.T) {
 	assert.Equal(t, msg2.String(), result2.String())
 }
 
-func Test_E2SmRcRanfunctionDefinitionControl(t *testing.T) {
+func TestE2SmRcRanfunctionDefinitionControl(t *testing.T) {
 	ranFunctionShortName := "E2SM-RC"
 	ranFunctionOID := "1.3.6.1.4.1.53148.1.1.2.3"
 	ranFunctionDescription2 := "E2SM-RC Control"
@@ -206,7 +206,7 @@ func Test_E2SmRcRanfunctionDefinitionControl(t *testing.T) {
 	assert.Equal(t, msg2.String(), result2.String())
 }
 
-func Test_E2SmRcRanfunctionDefinitionPolicy(t *testing.T) {
+func TestE2SmRcRanfunctionDefinitionPolicy(t *testing.T) {
 	ranFunctionShortName := "E2SM-RC"
 	ranFunctionOID := "1.3.6.1.4.1.53148.1.1.2.3"
 	ranFunctionDescription2 := "E2SM-RC Policy"

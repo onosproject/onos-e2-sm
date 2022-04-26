@@ -274,7 +274,7 @@ message NeighborRelationInfo {
 // sequence from e2sm_rc.asn1:126
 // {EventTrigger-Cell-Info}
 message EventTriggerCellInfo {
-    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,valueExt"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
     repeated EventTriggerCellInfoItem cell_info_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="cellInfo-List"];
 };
 
@@ -433,11 +433,17 @@ message RanparameterDefinitionChoiceStructureItem {
 message RanparameterValue {
     // choice from e2sm_rc.asn1:240
     oneof ranparameter_value {
+        // @inject_tag: aper:"choiceIdx:1"
         bool value_boolean = 1 [ json_name="valueBoolean"];
+        // @inject_tag: aper:"choiceIdx:2"
         int64 value_int = 2 [ json_name="valueInt"];
+        // @inject_tag: aper:"choiceIdx:3"
         float value_real = 3 [ json_name="valueReal"];
+        // @inject_tag: aper:"choiceIdx:4"
         asn1.v1.BitString value_bit_s = 4 [ json_name="valueBitS"];
+        // @inject_tag: aper:"choiceIdx:5"
         bytes value_oct_s = 5 [ json_name="valueOctS"];
+        // @inject_tag: aper:"choiceIdx:6"
         string value_printable_string = 6 [ json_name="valuePrintableString"];
     }
 };
@@ -885,7 +891,7 @@ message TriggerTypeChoiceL2state {
 // sequence from e2sm_rc.asn1:517
 // {E2SM-RC-EventTrigger-Format5}
 message E2SmRcEventTriggerFormat5 {
-    // @inject_tag: aper:"valueLB:0,valueUB:1,valueExt"
+    // @inject_tag: aper:"valueLB:0,valueUB:0,valueExt"
     OnDemand on_demand = 1 [ json_name="onDemand"];
     // @inject_tag: aper:"optional,valueExt"
     optional EventTriggerUeInfo associated_ueinfo = 2 [ json_name="associatedUEInfo"];
@@ -910,7 +916,7 @@ message RicActionDefinitionFormats {
     oneof ric_action_definition_formats {
         // @inject_tag: aper:"choiceIdx:1,valueExt"
         E2SmRcActionDefinitionFormat1 action_definition_format1 = 1;
-        // @inject_tag: aper:"choiceIdx:3,valueExt"
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
         E2SmRcActionDefinitionFormat2 action_definition_format2 = 2;
         // @inject_tag: aper:"choiceIdx:3,valueExt"
         E2SmRcActionDefinitionFormat3 action_definition_format3 = 3;
@@ -982,7 +988,7 @@ message RicIndicationHeaderFormats {
 // sequence from e2sm_rc.asn1:591
 // {E2SM-RC-IndicationHeader-Format1}
 message E2SmRcIndicationHeaderFormat1 {
-    // @inject_tag: aper:"opptional"
+    // @inject_tag: aper:"optional"
     optional RicEventTriggerConditionId ric_event_trigger_condition_id = 1 [ json_name="ric-eventTriggerCondition-ID"];
 };
 
