@@ -373,6 +373,24 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 		ranFunction.InsertStyles = append(ranFunction.InsertStyles, rcInsertStyle)
 
 	}
+	eventTriggerStyleList := ranFunctionDescription.GetRanFunctionDefinitionEventTrigger().GetRicEventTriggerStyleList()
+	for _, eventTriggerStyle := range eventTriggerStyleList {
+		rcEventTriggerStyle := &topoapi.RCEventTriggerStyle{
+			Name:       eventTriggerStyle.RicEventTriggerStyleName.Value,
+			Type:       eventTriggerStyle.RicEventTriggerStyleType.Value,
+			FormatType: eventTriggerStyle.RicEventTriggerFormatType.Value,
+		}
+		ranFunction.EventTriggerStyles = append(ranFunction.EventTriggerStyles, rcEventTriggerStyle)
+	}
+
+	policyStyleList := ranFunctionDescription.GetRanFunctionDefinitionPolicy().GetRicPolicyStyleList()
+	for _, policyStyle := range policyStyleList {
+		rcPolicyStyle := &topoapi.RCPolicyStyle{
+			Name: policyStyle.RicPolicyStyleName.Value,
+			Type: policyStyle.RicPolicyStyleType.Value,
+		}
+		ranFunction.PolicyStyles = append(ranFunction.PolicyStyles, rcPolicyStyle)
+	}
 
 	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
 	if err != nil {

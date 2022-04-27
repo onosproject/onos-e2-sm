@@ -11,4 +11,4 @@ require (
 	gotest.tools v2.2.0+incompatible
 )
 
-replace github.com/onosproject/onos-api/go => github.com/adibrastegarnia/onos-api/go v0.9.9-0.20220426000032-3afe72d227b6
+replace github.com/onosproject/onos-api/go => /Users/arastega/go/src/github.com/onosproject/onos-api/go
