@@ -392,6 +392,33 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 		ranFunction.PolicyStyles = append(ranFunction.PolicyStyles, rcPolicyStyle)
 	}
 
+	controlStyleList := ranFunctionDescription.GetRanFunctionDefinitionControl().GetRicControlStyleList()
+	for _, controlStyle := range controlStyleList {
+		rcControlStyle := &topoapi.RCControlStyle{
+			Name:                     controlStyle.RicControlStyleName.Value,
+			Type:                     controlStyle.RicControlStyleType.Value,
+			HeaderFormatType:         controlStyle.RicControlHeaderFormatType.Value,
+			MessageFormatType:        controlStyle.RicControlMessageFormatType.Value,
+			ControlOutcomeFormatType: controlStyle.RicControlOutcomeFormatType.Value,
+		}
+
+		for _, action := range controlStyle.RicControlActionList {
+			controlAction := &topoapi.ControlAction{
+				Name: action.RicControlActionName.Value,
+				ID:   action.RicControlActionId.Value,
+			}
+			for _, ranControlParameter := range action.RanControlActionParametersList {
+				controlAction.RanParameters = append(controlAction.RanParameters, &topoapi.RANParameter{
+					Name: ranControlParameter.RanParameterName.Value,
+					ID:   int32(ranControlParameter.RanParameterId.Value),
+				})
+			}
+			rcControlStyle.ControlActions = append(rcControlStyle.ControlActions, controlAction)
+		}
+
+		ranFunction.ControlStyles = append(ranFunction.ControlStyles, rcControlStyle)
+	}
+
 	ranFunctionAny, err := prototypes.MarshalAny(ranFunction)
 	if err != nil {
 		return err
