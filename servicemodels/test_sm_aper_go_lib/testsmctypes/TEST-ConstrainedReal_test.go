@@ -65,4 +65,22 @@ func Test_perEncodingTestConstrainedReal(t *testing.T) {
 	assert.Equal(t, testConstrainedReal.GetAttrCrD(), result.GetAttrCrD())
 	assert.Equal(t, testConstrainedReal.GetAttrCrE(), result.GetAttrCrE())
 	assert.Equal(t, testConstrainedReal.GetAttrCrF(), result.GetAttrCrF())
+
+	//treating special case, when REAL is set to 0
+	//testConstrainedReal.AttrCrG = 0
+	testConstrainedReal.AttrCrF = 12345.6789
+	per1, err := perEncodeTestConstrainedReal(testConstrainedReal)
+	assert.NilError(t, err)
+	t.Logf("TestConstrainedReal PER\n%v", hex.Dump(per1))
+
+	result1, err := perDecodeTestConstrainedReal(per1)
+	assert.NilError(t, err)
+	assert.Assert(t, result1 != nil)
+	t.Logf("TestConstrainedReal PER - decoded\n%v", result1)
+	assert.Equal(t, testConstrainedReal.GetAttrCrA(), result1.GetAttrCrA())
+	assert.Equal(t, testConstrainedReal.GetAttrCrB(), result1.GetAttrCrB())
+	assert.Equal(t, testConstrainedReal.GetAttrCrC(), result1.GetAttrCrC())
+	assert.Equal(t, testConstrainedReal.GetAttrCrD(), result1.GetAttrCrD())
+	assert.Equal(t, testConstrainedReal.GetAttrCrE(), result1.GetAttrCrE())
+	assert.Equal(t, testConstrainedReal.GetAttrCrF(), result1.GetAttrCrF())
 }

@@ -7,3 +7,5 @@ require (
 	google.golang.org/protobuf v1.27.1
 	gotest.tools v2.2.0+incompatible
 )
+
+replace github.com/onosproject/onos-lib-go => ../../../onos-lib-go
