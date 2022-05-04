@@ -322,8 +322,8 @@ github.com/onosproject/onos-api/go v0.9.2/go.mod h1:0hdMkFFN2AyKLHMiJVP3ZE61QgSY
 github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go v0.8.7 h1:1G2cQ55LX77WCdox4lSJR6UZSGEBL29FhAx/CfXFD3M=
 github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho_go v0.8.7/go.mod h1:3UrJgbfEsadmLvu80cBg/NJoOOTUJD3l6SjJzNeGmww=
 github.com/onosproject/onos-lib-go v0.8.12/go.mod h1:rWssBjfhahhHQy4wW5PBUtjTPwJlXAixHxgfq/3PO3E=
-github.com/onosproject/onos-lib-go v0.8.15 h1:eeAh1yp2JegiHt7SOrKtpZ1vj9EjHb5XZ+rUFo6hxEI=
-github.com/onosproject/onos-lib-go v0.8.15/go.mod h1:rWssBjfhahhHQy4wW5PBUtjTPwJlXAixHxgfq/3PO3E=
+github.com/onosproject/onos-lib-go v0.8.16 h1:AYzCk+YJIAS2pdqWEm6P5XwSGRRbmjA5xbr6gQzAel0=
+github.com/onosproject/onos-lib-go v0.8.16/go.mod h1:rWssBjfhahhHQy4wW5PBUtjTPwJlXAixHxgfq/3PO3E=
 github.com/openconfig/gnmi v0.0.0-20200617225440-d2b4e6a45802/go.mod h1:M/EcuapNQgvzxo1DDXHK4tx3QpYM/uG4l591v33jG2A=
 github.com/openconfig/goyang v0.0.0-20200115183954-d0a48929f0ea/go.mod h1:dhXaV0JgHJzdrHi2l+w0fZrwArtXL7jEFoiqLEdmkvU=
 github.com/openconfig/ygot v0.6.0/go.mod h1:o30svNf7O0xK+R35tlx95odkDmZWS9JyWWQSmIhqwAs=
