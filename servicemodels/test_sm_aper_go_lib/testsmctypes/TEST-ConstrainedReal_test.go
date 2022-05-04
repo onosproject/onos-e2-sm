@@ -7,6 +7,7 @@ package testsmctypes
 import (
 	"encoding/hex"
 	test_sm_ies "github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib/v1/test-sm-ies"
+	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"gotest.tools/assert"
 	"testing"
 )
@@ -65,4 +66,62 @@ func Test_perEncodingTestConstrainedReal(t *testing.T) {
 	assert.Equal(t, testConstrainedReal.GetAttrCrD(), result.GetAttrCrD())
 	assert.Equal(t, testConstrainedReal.GetAttrCrE(), result.GetAttrCrE())
 	assert.Equal(t, testConstrainedReal.GetAttrCrF(), result.GetAttrCrF())
+
+	//treating special case, when REAL is set to 0
+	//testConstrainedReal.AttrCrG = 0
+	testConstrainedReal.AttrCrF = 12345.6789
+	per1, err := perEncodeTestConstrainedReal(testConstrainedReal)
+	assert.NilError(t, err)
+	t.Logf("TestConstrainedReal PER\n%v", hex.Dump(per1))
+
+	result1, err := perDecodeTestConstrainedReal(per1)
+	assert.NilError(t, err)
+	assert.Assert(t, result1 != nil)
+	t.Logf("TestConstrainedReal PER - decoded\n%v", result1)
+	assert.Equal(t, testConstrainedReal.GetAttrCrA(), result1.GetAttrCrA())
+	assert.Equal(t, testConstrainedReal.GetAttrCrB(), result1.GetAttrCrB())
+	assert.Equal(t, testConstrainedReal.GetAttrCrC(), result1.GetAttrCrC())
+	assert.Equal(t, testConstrainedReal.GetAttrCrD(), result1.GetAttrCrD())
+	assert.Equal(t, testConstrainedReal.GetAttrCrE(), result1.GetAttrCrE())
+	assert.Equal(t, testConstrainedReal.GetAttrCrF(), result1.GetAttrCrF())
+}
+
+func TestGoAperLibConstrainedReal(t *testing.T) {
+
+	var min int32 = -1000
+	var max int32 = 1000
+
+	for i := min; i < max; i++ {
+		testConstrainedReal := &test_sm_ies.TestConstrainedReal{
+			AttrCrA: CreateFloat64(float64(10), float64(100)),
+			AttrCrB: CreateFloat64(float64(10), float64(max)),
+			AttrCrC: CreateFloat64(float64(min), float64(100)),
+			AttrCrD: CreateFloat64(float64(10), float64(20)),
+			AttrCrE: CreateFloat64(float64(10), float64(10)),
+			AttrCrF: CreateFloat64(float64(10), float64(max)),
+		}
+
+		t.Logf("Encoding following message:\n%v", testConstrainedReal)
+
+		perRef, err := perEncodeTestConstrainedReal(testConstrainedReal)
+		assert.NilError(t, err)
+		t.Logf("TestUnconstrainedReal APER\n%v", hex.Dump(perRef))
+
+		per, err := aper.Marshal(testConstrainedReal, nil, nil)
+		assert.NilError(t, err)
+		t.Logf("TestConstrainedReal with Go APER library produces following APER\n%v", hex.Dump(per))
+		//assert.DeepEqual(t, perRef, per)
+
+		// looks like we can perfectly decode bytes both ways (CGo bytes with Go APER, and Go APER bytes with CGo)
+		resultRef, err := perDecodeTestConstrainedReal(per)
+		assert.NilError(t, err)
+		assert.Assert(t, resultRef != nil)
+		t.Logf("TestConstrainedReal PER - decoded\n%v", resultRef)
+
+		result := &test_sm_ies.TestConstrainedReal{}
+		err = aper.Unmarshal(perRef, result, nil, nil)
+		assert.NilError(t, err)
+		t.Logf("TestConstrainedReal PER - decoded with Go APER library\n%v", resultRef)
+		assert.Equal(t, resultRef.String(), result.String())
+	}
 }
