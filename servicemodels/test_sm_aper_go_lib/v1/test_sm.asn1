@@ -43,7 +43,6 @@ TEST-ConstrainedReal ::= SEQUENCE {
     attrCrD    REAL(10..20),
     attrCrE    REAL(10),
     attrCrF    REAL(10, ...)
-    attrCrG    REAL(-10, ...)
 }
 
 TEST-BitString ::= SEQUENCE {

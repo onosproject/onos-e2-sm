@@ -96,7 +96,7 @@ func Test_perEncoding(t *testing.T) {
 	}
 }
 
-func TestGoAperLib(t *testing.T) {
+func TestGoAperLibUnconstrainedReal(t *testing.T) {
 
 	var min int32 = -1000
 	var max int32 = 1000
@@ -115,7 +115,7 @@ func TestGoAperLib(t *testing.T) {
 
 		per, err := aper.Marshal(testUnconstrainedReal, nil, nil)
 		assert.NilError(t, err)
-		t.Logf("TestunconstrainedReal with Go APER library produces following APER\n%v", hex.Dump(per))
+		t.Logf("TestUnconstrainedReal with Go APER library produces following APER\n%v", hex.Dump(per))
 		//assert.DeepEqual(t, perRef, per)
 
 		// looks like we can perfectly decode bytes both ways (CGo bytes with Go APER, and Go APER bytes with CGo)
