@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2022-present Intel Corporation
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
 // SPDX-License-Identifier: Apache-2.0
@@ -21,7 +22,7 @@ var templateDir = os.Getenv("GOPATH")
 var templateEncoder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/encoder.tpl")))
 
 //var templatePdubuilder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/pdubuilder.tpl")))
-//var templateBuilder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/builder.tpl")))
+var templateBuilder = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/builder.tpl")))
 var templateServicemodel = template.Must(template.ParseGlob(filepath.Join(templateDir, "src/github.com/onosproject/onos-e2-sm/protoc-gen-builder/templates/servicemodel.tpl")))
 
 // encoder structure carries all necessary items to generate the encoder package
@@ -64,6 +65,19 @@ type topLevelPdus struct {
 type topLevelPdu struct {
 	MessageProtoName string // this is to hold Protobuf name of the message
 	IsPresent        bool   // this is to indicate if the PDU is present
+}
+
+type builder struct {
+	PackageName string
+	Instances   []builderInstance // set of optional items in the message
+}
+
+type builderInstance struct {
+	Instance        string
+	ItemType        string
+	ItemName        string
+	VariableName    string
+	VariableNamePtr string
 }
 
 // ToDo - find out how to handle pdubuilder package generation
@@ -131,7 +145,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	if sm {
 		smBasicInfoFilled := false
 		for _, f := range targets { // Input .proto files
-
+			m.Push(f.Name().String()).Debug("reporting")
 			_, err = fmt.Fprintf(buf, "Leading target comments were found, they are:\n%v\n", f.SourceCodeInfo().LeadingDetachedComments())
 			if err != nil {
 				return nil
@@ -194,7 +208,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	} else {
 		// There is only single top-level PDU so far, but leaving it here for future
 		for _, f := range targets { // Input .proto files
-
+			m.Push(f.Name().String()).Debug("reporting")
 			// understanding if canonical choice ordering is present
 			canonicalChoice := canonicalOrderingIsPresent(f.AllMessages())
 
@@ -231,6 +245,75 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 		}
 	}
+
+	// gathering data for builder
+	for _, f := range targets { // Input .proto files
+		m.Push(f.Name().String()).Debug("reporting")
+		// looking for a proto path here
+		//protoFilePath := lookUpProtoFilePath(dir, f.File().InputPath())
+
+		// this package should be located in the same directory as .pb.go
+		bldr := builder{
+			PackageName: adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()),
+			Instances:   make([]builderInstance, 0),
+		}
+
+		_, err = fmt.Fprintf(buf, "Processing file %v\n", f.Name().String())
+		if err != nil {
+			return nil
+		}
+
+		// iterating over messages and collecting set of OPTIONAL items
+		for _, msg := range f.AllMessages() {
+			_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
+			if err != nil {
+				return nil
+			}
+			// avoiding parsing constants
+			if !strings.Contains(msg.SourceCodeInfo().LeadingComments(), "constant") {
+				for _, dep := range msg.Fields() {
+					// This indicates us that we've found OPTIONAL item in the message
+					if strings.Contains(dep.SourceCodeInfo().LeadingComments(), "optional") {
+						_, err = fmt.Fprintf(buf, "Hooray! Found OPTIONAL item - %v\n", dep.Name().String())
+						if err != nil {
+							return nil
+						}
+						instanceName := msg.Name().String()
+						itemType := extractItemMessageType(dep.Descriptor().GetTypeName())
+						// checking if item is from other proto
+						_, err = fmt.Fprintf(buf, "Dependent item information is %v\n", dep.Package().ProtoName().String())
+						if err != nil {
+							return nil
+						}
+
+						itemName := composeItemName(dep.Name().String())
+						instance := builderInstance{
+							Instance:     instanceName,
+							ItemName:     itemName,
+							VariableName: strings.ToLower(itemName[:1]) + itemName[1:],
+						}
+						// avoiding case when it's an enumerator
+						if strings.Contains(dep.SourceCodeInfo().LeadingComments(), "valueLB:") && strings.Contains(dep.SourceCodeInfo().LeadingComments(), "valueUB:") {
+							instance.ItemType = itemType
+							instance.VariableNamePtr = "&" + instance.VariableName
+						} else {
+							instance.ItemType = "*" + itemType
+							instance.VariableNamePtr = instance.VariableName
+						}
+						bldr.Instances = append(bldr.Instances, instance)
+					}
+				}
+			}
+		}
+		_, err = fmt.Fprintf(buf, "We're about to start generating builder foo Protobuf\nObtained structure is %v\n", bldr)
+		if err != nil {
+			return nil
+		}
+		//Generating new .go file
+		m.OverwriteGeneratorTemplateFile("builder.go", templateBuilder.Lookup("builder.tpl"), bldr)
+	}
+
+	// ToDo - gathering data for pdubuilder
 
 	_, err = fmt.Fprintf(buf, "We're about to start generating encoder package\nObtained structure is %v\n", enc)
 	if err != nil {
@@ -563,4 +646,33 @@ func (sm *servicemodel) AddEncoderImport(str string) *servicemodel {
 
 	sm.Imports = sm.Imports + "\"" + str + "/encoder\"\n"
 	return sm
+}
+
+func extractItemMessageType(str string) string {
+
+	res := ""
+	index := strings.LastIndex(str, ".")
+	if index != -1 {
+		res = str[index+1:]
+	} else {
+		res = "ErrorInParsing"
+	}
+	return res
+}
+
+func composeItemName(str string) string {
+
+	// making first letter a capital one
+	res := strings.ToUpper(str[:1]) + str[1:]
+	// making every next letter following after "_" a capital one
+	i := 0
+	for {
+		i++
+		index := strings.Index(res, "_")
+		if index == -1 || i > 5 {
+			break
+		}
+		res = res[:index] + strings.ToUpper(res[index+1:index+2]) + res[index+2:]
+	}
+	return res
 }
