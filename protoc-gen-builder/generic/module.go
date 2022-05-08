@@ -80,6 +80,15 @@ type builderInstance struct {
 	VariableNamePtr string
 }
 
+type protoTree struct {
+	Tree []protoLeaf
+}
+
+type protoLeaf struct {
+	PackageName string
+	MessageName string
+}
+
 // ToDo - find out how to handle pdubuilder package generation
 //type pdubuilder struct {
 //}
@@ -246,6 +255,38 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		}
 	}
 
+	// creating list of all messages and their correspondence to certain .proto file/package
+	tree := protoTree{
+		Tree: make([]protoLeaf, 0),
+	}
+	_, err = fmt.Fprintf(buf, "There are multiple .proto files passed at input, building a simple tree of the messages")
+	if err != nil {
+		return nil
+	}
+	for _, f := range targets { // Input .proto files
+		_, err = fmt.Fprintf(buf, "Proto package name is %v\n", f.Package().ProtoName().String())
+		if err != nil {
+			return nil
+		}
+		packageName := f.Package().ProtoName().String()
+
+		_, err = fmt.Fprintf(buf, "Iterating over the messages in %v\n", f.Package().ProtoName().String())
+		if err != nil {
+			return nil
+		}
+		for _, msg := range f.AllMessages() {
+			_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
+			if err != nil {
+				return nil
+			}
+			leaf := protoLeaf{
+				PackageName: packageName,
+				MessageName: msg.Name().String(),
+			}
+			tree.Tree = append(tree.Tree, leaf)
+		}
+	}
+
 	// gathering data for builder
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
@@ -300,6 +341,14 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 							instance.ItemType = "*" + itemType
 							instance.VariableNamePtr = instance.VariableName
 						}
+
+						// checking if the message is defined in the other Protobuf file
+						otherProto := tree.fromOtherProto(f.Package().ProtoName().String(), itemName)
+						if otherProto != "" {
+							tmp := instance.ItemType
+							instance.ItemType = otherProto + "." + tmp
+						}
+
 						bldr.Instances = append(bldr.Instances, instance)
 					}
 				}
@@ -674,5 +723,22 @@ func composeItemName(str string) string {
 		}
 		res = res[:index] + strings.ToUpper(res[index+1:index+2]) + res[index+2:]
 	}
+	return res
+}
+
+// fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
+// if the message is from the same protobuf, then it returns empty string (ToDo - or maybe return something like "same")
+func (m *protoTree) fromOtherProto(refProto string, msgName string) string {
+
+	res := ""
+	for _, leaf := range m.Tree {
+		if strings.EqualFold(leaf.MessageName, msgName) {
+			if strings.EqualFold(refProto, leaf.PackageName) {
+				res = leaf.PackageName
+			}
+			break
+		}
+	}
+
 	return res
 }
