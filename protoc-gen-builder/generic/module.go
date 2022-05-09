@@ -291,7 +291,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			tree.Tree = append(tree.Tree, leaf)
 		}
 	}
-	_, err = fmt.Fprintf(buf, "Obtained Protobuf tree is following:\n%v\n", tree)
+	_, err = fmt.Fprintf(buf, "Obtained Protobuf tree:\n%v\n", tree)
 	if err != nil {
 		return nil
 	}
@@ -828,6 +828,7 @@ func (m *protoTree) getImport(packageName string) string {
 	return res
 }
 
+// extractItemMessageType function extracts type of the filed, i.e., []byte, UeID or something else
 func extractItemMessageType(message pgs.Field) string {
 
 	res := ""
