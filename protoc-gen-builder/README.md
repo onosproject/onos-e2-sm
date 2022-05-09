@@ -42,7 +42,7 @@ protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api" 
 Here are the parameters you should pass:
 - `-I="..."` specifies path to the imports included in `.proto` file(s)
 - `--plugin="..."` specifies path to your custom plugin if it is not located in one of the folders in `$PATH`. Ignore it, if you've already run `make build_protoc_gen_choice`.
-- `--builder_out="..."` specifies path where to store generated files
+- `--builder_out="..."` specifies path where to store generated files. In case of ServiceModel package generation, you should specify the root directory of the SM as a builder output directory.
 - `*.proto` is a path to the source `.proto` file(s) to process
 
 Here is a set of parameters you could pass to the plugin:
@@ -60,6 +60,20 @@ For E2AP, you should run following command under `onos-e2t/` folder:
 protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2t/api" --proto_path="api/" --builder_out="sm=false:pkg/southbound/e2ap/" e2ap/v2/e2ap_pdu_descriptions.proto e2ap/v2/e2ap_pdu_contents.proto e2ap/v2/e2ap_ies.proto e2ap/v2/e2ap_containers.proto e2ap/v2/e2ap_constants.proto e2ap/v2/e2ap_commondatatypes.proto
 ```
 ## Known issues
-* This plugin doesn't generate `servicemodel` package (this is to be done in the future)
 * This plugin doesn't generate a `pdubuilder` package (this is to be done in the future)
-  * It also doesn't generate builders for handling optional items of the message (this is to be done in the future)
+
+## Some examples of usage
+
+### Generating E2SM-RC Service Model
+```bash
+> cd onos-e2-sm/servicemodels/
+> mkdir e2sm_rc && cd e2sm_rc
+> mkdir encoder && mkdir pdubuilder && mkdir servicemodel
+> cd ../../ # get back to the root directory of ono-e2-sm repo
+> pwd
+~/go/src/github.com/onosproject/onos-e2-sm
+> proto_imports=${GOPATH}/src/github.com/onosproject/onos-e2-sm/
+> protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api" --proto_path="servicemodels/" --builder_out="sm=true:servicemodels/e2sm_rc/" servicemodels/e2sm_rc/v1/e2sm_common_ies.proto servicemodels/e2sm_rc/v1/e2sm_rc.proto
+```
+
+
