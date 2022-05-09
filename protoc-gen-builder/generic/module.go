@@ -14,6 +14,7 @@ import (
 	"regexp"
 	"strings"
 	"text/template"
+	"unicode"
 )
 
 const moduleName = "builder"
@@ -69,11 +70,13 @@ type topLevelPdu struct {
 
 type builder struct {
 	PackageName string
+	Imports     string
 	Instances   []builderInstance // set of optional items in the message
 }
 
 type builderInstance struct {
 	Instance        string
+	FunctionName    string
 	ItemType        string
 	ItemName        string
 	VariableName    string
@@ -85,8 +88,9 @@ type protoTree struct {
 }
 
 type protoLeaf struct {
-	PackageName string
-	MessageName string
+	PackageName   string
+	MessageName   string
+	ProtoFilePath string // this is to store patch for importing this item, import will be composed of PackageName and ProtoFilePath
 }
 
 // ToDo - find out how to handle pdubuilder package generation
@@ -268,7 +272,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		if err != nil {
 			return nil
 		}
-		packageName := f.Package().ProtoName().String()
+		packageName := adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
 
 		_, err = fmt.Fprintf(buf, "Iterating over the messages in %v\n", f.Package().ProtoName().String())
 		if err != nil {
@@ -280,11 +284,16 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				return nil
 			}
 			leaf := protoLeaf{
-				PackageName: packageName,
-				MessageName: msg.Name().String(),
+				PackageName:   packageName,
+				MessageName:   msg.Name().String(),
+				ProtoFilePath: lookUpProtoFilePath(dir, f.File().InputPath()),
 			}
 			tree.Tree = append(tree.Tree, leaf)
 		}
+	}
+	_, err = fmt.Fprintf(buf, "Obtained Protobuf tree is following:\n%v\n", tree)
+	if err != nil {
+		return nil
 	}
 
 	// gathering data for builder
@@ -296,6 +305,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		// this package should be located in the same directory as .pb.go
 		bldr := builder{
 			PackageName: adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()),
+			Imports:     "",
 			Instances:   make([]builderInstance, 0),
 		}
 
@@ -320,35 +330,73 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 							return nil
 						}
 						instanceName := msg.Name().String()
-						itemType := extractItemMessageType(dep.Descriptor().GetTypeName())
-						// checking if item is from other proto
-						_, err = fmt.Fprintf(buf, "Dependent item information is %v\n", dep.Package().ProtoName().String())
+						itemType := adjustFieldName(extractItemMessageType(dep))
+						// checking if the message is of type BitString (special case)
+						if strings.Contains(itemType, "BitString") {
+							bldr.Imports = bldr.Imports + "\n\"github.com/onosproject/onos-lib-go/api/asn1/v1/asn1\"\n"
+						}
+						// checking if the message is of the elementary type
+						elementaryType := false
+						elementaryType = isElementaryType(itemType)
+
+						_, err = fmt.Fprintf(buf, "Dependent item type is %v, it is elementary %v\n", itemType, elementaryType)
+						if err != nil {
+							return nil
+						}
+						_, err = fmt.Fprintf(buf, "Dependent item name is %v\n", dep.Descriptor().GetTypeName())
+						if err != nil {
+							return nil
+						}
+						_, err = fmt.Fprintf(buf, "Dependent item name is %v\n", dep.Type().ProtoType().String())
 						if err != nil {
 							return nil
 						}
 
-						itemName := composeItemName(dep.Name().String())
+						itemName := adjustFieldName(composeItemName(dep.Name().String()))
 						instance := builderInstance{
 							Instance:     instanceName,
+							FunctionName: itemName,
 							ItemName:     itemName,
+							ItemType:     itemType,
 							VariableName: strings.ToLower(itemName[:1]) + itemName[1:],
-						}
-						// avoiding case when it's an enumerator
-						if strings.Contains(dep.SourceCodeInfo().LeadingComments(), "valueLB:") && strings.Contains(dep.SourceCodeInfo().LeadingComments(), "valueUB:") {
-							instance.ItemType = itemType
-							instance.VariableNamePtr = "&" + instance.VariableName
-						} else {
-							instance.ItemType = "*" + itemType
-							instance.VariableNamePtr = instance.VariableName
 						}
 
 						// checking if the message is defined in the other Protobuf file
-						otherProto := tree.fromOtherProto(f.Package().ProtoName().String(), itemName)
+						otherProto := tree.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), itemType)
+						_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n", adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), otherProto)
+						if err != nil {
+							return nil
+						}
 						if otherProto != "" {
 							tmp := instance.ItemType
 							instance.ItemType = otherProto + "." + tmp
+							if !strings.Contains(bldr.Imports, otherProto) {
+								bldr.Imports = bldr.Imports + "\n" + tree.getImport(otherProto)
+							}
 						}
 
+						// avoiding case when it's an enumerator
+						if strings.Contains(dep.SourceCodeInfo().LeadingComments(), "valueLB:") && strings.Contains(dep.SourceCodeInfo().LeadingComments(), "valueUB:") {
+							instance.VariableNamePtr = "&" + instance.VariableName
+						} else {
+							if !elementaryType {
+								instance.ItemType = "*" + instance.ItemType
+								instance.VariableNamePtr = instance.VariableName
+							} else {
+								//treating special case
+								if !strings.Contains(instance.ItemType, "[]byte") {
+									instance.VariableNamePtr = "&" + instance.VariableName
+								} else {
+									instance.VariableNamePtr = instance.VariableName
+								}
+							}
+							// treating the case of the list
+							if strings.Contains(strings.ToLower(instance.ItemName), "list") && !strings.Contains(strings.ToLower(instance.ItemType), "list") {
+								instance.ItemType = "[]" + instance.ItemType
+							}
+						}
+						// linting some of the fields
+						instance.doLinting()
 						bldr.Instances = append(bldr.Instances, instance)
 					}
 				}
@@ -358,6 +406,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		if err != nil {
 			return nil
 		}
+
 		//Generating new .go file
 		m.OverwriteGeneratorTemplateFile("builder.go", templateBuilder.Lookup("builder.tpl"), bldr)
 	}
@@ -407,6 +456,24 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 /////////////////////////////////
 /// Here is necessary tooling ///
 /////////////////////////////////
+
+func (m *builderInstance) doLinting() *builderInstance {
+
+	m.FunctionName = doLinting(m.FunctionName)
+	m.VariableName = doLinting(m.VariableName)
+	m.VariableNamePtr = doLinting(m.VariableNamePtr)
+
+	return m
+}
+
+//ToDo - extend linting
+func doLinting(str string) string {
+
+	res := strings.ReplaceAll(str, "Id", "ID")
+	res = strings.ReplaceAll(res, "id", "ID")
+
+	return res
+}
 
 func extractProtoFileName(proto string) string {
 
@@ -697,18 +764,6 @@ func (sm *servicemodel) AddEncoderImport(str string) *servicemodel {
 	return sm
 }
 
-func extractItemMessageType(str string) string {
-
-	res := ""
-	index := strings.LastIndex(str, ".")
-	if index != -1 {
-		res = str[index+1:]
-	} else {
-		res = "ErrorInParsing"
-	}
-	return res
-}
-
 func composeItemName(str string) string {
 
 	// making first letter a capital one
@@ -718,7 +773,7 @@ func composeItemName(str string) string {
 	for {
 		i++
 		index := strings.Index(res, "_")
-		if index == -1 || i > 5 {
+		if index == -1 || i > 100 { // i > 100 is to avoid the case of infinite loops (if I forgot about something)
 			break
 		}
 		res = res[:index] + strings.ToUpper(res[index+1:index+2]) + res[index+2:]
@@ -728,15 +783,118 @@ func composeItemName(str string) string {
 
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
 // if the message is from the same protobuf, then it returns empty string (ToDo - or maybe return something like "same")
-func (m *protoTree) fromOtherProto(refProto string, msgName string) string {
+func (m *protoTree) fromOtherProto(currentProto string, msgName string) string {
 
 	res := ""
 	for _, leaf := range m.Tree {
-		if strings.EqualFold(leaf.MessageName, msgName) {
-			if strings.EqualFold(refProto, leaf.PackageName) {
+		if leaf.MessageName == msgName {
+			if currentProto != leaf.PackageName {
 				res = leaf.PackageName
 			}
 			break
+		}
+	}
+
+	return res
+}
+
+// fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
+// if the message is from the same protobuf, then it returns empty string (ToDo - or maybe return something like "same")
+func (m *protoTree) getImport(packageName string) string {
+
+	res := ""
+	for _, leaf := range m.Tree {
+		if leaf.PackageName == packageName {
+			res = leaf.PackageName + " \"" + leaf.ProtoFilePath + "\"\n"
+			break
+		}
+	}
+
+	return res
+}
+
+func extractItemMessageType(message pgs.Field) string {
+
+	res := ""
+
+	if strings.Contains(message.Type().ProtoType().String(), "MESSAGE") {
+		// ToDo - implement workaround of BitString
+		if strings.Contains(message.Descriptor().GetTypeName(), "BitString") {
+			res = "asn1.BitString"
+		}
+		index := strings.LastIndex(message.Descriptor().GetTypeName(), ".")
+		if index != -1 {
+			res = message.Descriptor().GetTypeName()[index+1:]
+		}
+	} else {
+		// message is of basic type, i.e., []byte, bool, int32
+		msgType := strings.ToLower(strings.ReplaceAll(message.Type().ProtoType().String(), "TYPE_", ""))
+		switch msgType {
+		case "enum":
+			index := strings.LastIndex(message.Descriptor().GetTypeName(), ".")
+			if index != -1 {
+				res = message.Descriptor().GetTypeName()[index+1:]
+			} else {
+				res = "ErrorInParsing:" + msgType
+			}
+		case "bool":
+			res = msgType
+		case "int32":
+			res = msgType
+		case "int64":
+			res = msgType
+		case "float32":
+			res = msgType
+		case "float64":
+			res = msgType
+		case "bytes":
+			res = "[]byte"
+		case "string":
+			res = msgType
+		default:
+			res = "ErrorInParsing:" + msgType
+		}
+	}
+
+	return res
+}
+
+func isElementaryType(msgType string) bool {
+
+	switch msgType {
+	case "bool":
+		return true
+	case "int32":
+		return true
+	case "int64":
+		return true
+	case "float":
+		return true
+	case "[]byte":
+		return true
+	case "string":
+		return true
+	default:
+		return false
+	}
+}
+
+// this function mimics what Protobuf compiler does with the naming of the Messages, in particular puts in upper case next letter after the number
+func adjustFieldName(str string) string {
+
+	res := ""
+	// flag to indicate whether the next character should be in uppercase
+	toUpper := false
+	for _, ch := range str {
+		if toUpper {
+			res = res + string(unicode.ToUpper(ch))
+		} else {
+			res = res + string(ch)
+		}
+		if unicode.IsDigit(ch) {
+			toUpper = true
+		} else {
+			toUpper = false
 		}
 	}
 
