@@ -299,8 +299,6 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	// gathering data for builder
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
-		// looking for a proto path here
-		//protoFilePath := lookUpProtoFilePath(dir, f.File().InputPath())
 
 		// this package should be located in the same directory as .pb.go
 		bldr := builder{
@@ -339,19 +337,6 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 						elementaryType := false
 						elementaryType = isElementaryType(itemType)
 
-						_, err = fmt.Fprintf(buf, "Dependent item type is %v, it is elementary %v\n", itemType, elementaryType)
-						if err != nil {
-							return nil
-						}
-						_, err = fmt.Fprintf(buf, "Dependent item name is %v\n", dep.Descriptor().GetTypeName())
-						if err != nil {
-							return nil
-						}
-						_, err = fmt.Fprintf(buf, "Dependent item name is %v\n", dep.Type().ProtoType().String())
-						if err != nil {
-							return nil
-						}
-
 						itemName := adjustFieldName(composeItemName(dep.Name().String()))
 						instance := builderInstance{
 							Instance:     instanceName,
@@ -363,7 +348,8 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 
 						// checking if the message is defined in the other Protobuf file
 						otherProto := tree.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), itemType)
-						_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n", adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), otherProto)
+						_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n",
+							adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), otherProto)
 						if err != nil {
 							return nil
 						}
@@ -407,8 +393,37 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			return nil
 		}
 
+		// looking for a proto path to locate where to store builder file
+		protoFilePath := lookUpProtoFilePath(dir, f.File().InputPath())
+		_, err = fmt.Fprintf(buf, "Protobuf file path is %v\nFile's Input path is %v\n", protoFilePath, f.File().InputPath().Dir().String())
+		if err != nil {
+			return nil
+		}
+
+		// composing builder's output path to be the same as the generated Go Protobuf is located
+		index := strings.Index(protoFilePath, f.File().InputPath().Dir().String())
+		if index == -1 {
+			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the output path to store generated builder file..")
+			if err != nil {
+				return nil
+			}
+		}
+		protoFilePath = protoFilePath[index:]
+		index = strings.Index(protoFilePath, "/")
+		if index == -1 {
+			_, err = fmt.Fprintf(buf, "Something went wrong in searching for the output path to store generated builder file..")
+			if err != nil {
+				return nil
+			}
+		}
+		outputPath := protoFilePath[index+1:]
+		_, err = fmt.Fprintf(buf, "Output file path is %v\nFile's Input path is %v\n", protoFilePath, f.File().InputPath().Dir().String())
+		if err != nil {
+			return nil
+		}
+
 		//Generating new .go file
-		m.OverwriteGeneratorTemplateFile("builder.go", templateBuilder.Lookup("builder.tpl"), bldr)
+		m.OverwriteGeneratorTemplateFile(outputPath+"/builder.go", templateBuilder.Lookup("builder.tpl"), bldr)
 	}
 
 	// ToDo - gathering data for pdubuilder
@@ -426,7 +441,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		}
 
 		//Generating new .go file
-		m.OverwriteGeneratorTemplateFile(e.MessageNameInLogging+".go", templateEncoder.Lookup("encoder.tpl"), e)
+		m.OverwriteGeneratorTemplateFile("encoder/"+e.MessageNameInLogging+".go", templateEncoder.Lookup("encoder.tpl"), e)
 	}
 
 	if sm {
@@ -435,7 +450,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			return nil
 		}
 		//Generating new .go file
-		m.OverwriteGeneratorTemplateFile("servicemodel.go", templateServicemodel.Lookup("servicemodel.tpl"), smodel)
+		m.OverwriteGeneratorTemplateFile("servicemodel/servicemodel.go", templateServicemodel.Lookup("servicemodel.tpl"), smodel)
 	}
 
 	out := m.OutputPath()
@@ -721,11 +736,11 @@ func extractOID(str string) string {
 	start := strings.Index(str, "{")
 	parse := str[start:]
 
-	for i := 1; i <= 10; i++ {
+	for i := 1; i <= 11; i++ {
 		index1 := strings.Index(parse, "(")
 		index2 := strings.Index(parse, ")")
 
-		if i == 10 {
+		if i == 11 {
 			oid = oid + parse[index1+1:index2]
 		} else {
 			oid = oid + parse[index1+1:index2] + "."
