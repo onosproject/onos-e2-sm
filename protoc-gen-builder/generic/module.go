@@ -83,13 +83,8 @@ type builderInstance struct {
 	VariableNamePtr string
 }
 
-type protoTree struct {
-	Tree []protoLeaf
-}
-
-type protoLeaf struct {
+type protoItem struct {
 	PackageName   string
-	MessageName   string
 	ProtoFilePath string // this is to store patch for importing this item, import will be composed of PackageName and ProtoFilePath
 	IsChoice      bool
 	IsEnum        bool
@@ -281,9 +276,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	}
 
 	// creating list of all messages and their correspondence to certain .proto file/package
-	tree := protoTree{
-		Tree: make([]protoLeaf, 0),
-	}
+	tree := map[string]protoItem{}
 	_, err = fmt.Fprintf(buf, "There are multiple .proto files passed at input, building a simple tree of the messages")
 	if err != nil {
 		return nil
@@ -304,9 +297,9 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			if err != nil {
 				return nil
 			}
-			leaf := protoLeaf{
+			itemName := msg.Name().String()
+			leaf := protoItem{
 				PackageName:   packageName,
-				MessageName:   msg.Name().String(),
 				ProtoFilePath: lookUpProtoFilePath(dir, f.File().InputPath()),
 			}
 
@@ -326,18 +319,17 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				leaf.IsChoice = true
 			}
 
-			tree.Tree = append(tree.Tree, leaf)
+			tree[itemName] = leaf
 		}
 
 		// processing enumerators and adding to the tree
 		for _, enum := range f.AllEnums() { // Constants
-			leaf := protoLeaf{
+			leaf := protoItem{
 				PackageName:   packageName,
-				MessageName:   enum.Name().String(),
 				ProtoFilePath: lookUpProtoFilePath(dir, f.File().InputPath()),
 				IsEnum:        true,
 			}
-			tree.Tree = append(tree.Tree, leaf)
+			tree[enum.Name().String()] = leaf
 		}
 	}
 	_, err = fmt.Fprintf(buf, "Obtained Protobuf tree:\n%v\n", tree)
@@ -396,18 +388,26 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 							VariableName: strings.ToLower(itemName[:1]) + itemName[1:],
 						}
 
+						// getting information about the item from the own Protobuf tree
+						item, ok := tree[itemType]
+						if !ok {
+							_, err = fmt.Fprintf(buf, "Couldn't find the message %v in the Protobuf tree\n", itemName)
+							if err != nil {
+								return nil
+							}
+						}
+
 						// checking if the message is defined in the other Protobuf file
-						otherProto := tree.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), itemType)
 						_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n",
-							adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), otherProto)
+							adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), item.PackageName)
 						if err != nil {
 							return nil
 						}
-						if otherProto != "" {
+						if item.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())) {
 							tmp := instance.ItemType
-							instance.ItemType = otherProto + "." + tmp
-							if !strings.Contains(bldr.Imports, otherProto) {
-								bldr.Imports = bldr.Imports + "\n" + tree.getImport(otherProto)
+							instance.ItemType = item.PackageName + "." + tmp
+							if !strings.Contains(bldr.Imports, item.PackageName) {
+								bldr.Imports = bldr.Imports + "\n" + item.getImport()
 							}
 						}
 
@@ -508,18 +508,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				for _, dep := range msg.Fields() {
 					itemName := adjustFieldName(composeItemName(dep.Name().String()))
 					itemType := adjustFieldName(extractItemMessageType(dep))
-					// checking if the message is defined in the other Protobuf file
-					otherProto := tree.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), itemType)
-					_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n",
-						adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), otherProto)
-					if err != nil {
-						return nil
-					}
-					if otherProto != "" && !isElementaryType(itemType) {
-						itemType = "*" + otherProto + "." + itemType
-					} else if !isElementaryType(itemType) {
-						itemType = "*" + packageName + "." + itemType
-					}
+
 					item := pdubuilderItem{
 						VariableName: strings.ToLower(itemName[:1]) + itemName[1:],
 						FieldName:    itemName,
@@ -528,20 +517,34 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 						IsEnum:       false,
 						IsList:       false,
 					}
-					out := tree.extractItem(itemName)
-					if out != nil {
-						leaf := out
-						if leaf.IsChoice {
-							item.IsChoice = true
-						} else if leaf.IsList {
-							item.IsList = true
-						} else if leaf.IsEnum {
-							item.IsEnum = true
-						}
-					} else {
-						_, err = fmt.Fprintf(buf, "Couldn't find message %v\n", itemName)
+
+					// getting information about the item from the own Protobuf tree
+					ie, ok := tree[itemType]
+					if !ok {
+						_, err = fmt.Fprintf(buf, "Couldn't find the message %v in the Protobuf tree\n", itemName)
 						if err != nil {
 							return nil
+						}
+					} else {
+
+						// checking if the message is defined in the other Protobuf file
+						_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n",
+							adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), ie.PackageName)
+						if err != nil {
+							return nil
+						}
+						if ie.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())) && !isElementaryType(itemType) {
+							itemType = "*" + ie.PackageName + "." + itemType
+						} else if !isElementaryType(itemType) {
+							itemType = "*" + packageName + "." + itemType
+						}
+
+						if ie.IsChoice {
+							item.IsChoice = true
+						} else if ie.IsList {
+							item.IsList = true
+						} else if ie.IsEnum {
+							item.IsEnum = true
 						}
 					}
 
@@ -928,35 +931,20 @@ func composeItemName(str string) string {
 }
 
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
-// if the message is from the same protobuf, then it returns empty string (ToDo - or maybe return something like "same")
-func (m *protoTree) fromOtherProto(currentProto string, msgName string) string {
+func (m *protoItem) fromOtherProto(currentProto string) bool {
 
-	res := ""
-	for _, leaf := range m.Tree {
-		if leaf.MessageName == msgName {
-			if currentProto != leaf.PackageName {
-				res = leaf.PackageName
-			}
-			break
-		}
+	if m.PackageName == currentProto {
+		return true
 	}
 
-	return res
+	return false
 }
 
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
 // if the message is from the same protobuf, then it returns empty string (ToDo - or maybe return something like "same")
-func (m *protoTree) getImport(packageName string) string {
+func (m *protoItem) getImport() string {
 
-	res := ""
-	for _, leaf := range m.Tree {
-		if leaf.PackageName == packageName {
-			res = leaf.PackageName + " \"" + leaf.ProtoFilePath + "\"\n"
-			break
-		}
-	}
-
-	return res
+	return m.PackageName + " \"" + m.ProtoFilePath + "\"\n"
 }
 
 // extractItemMessageType function extracts type of the filed, i.e., []byte, UeID or something else
@@ -1046,14 +1034,4 @@ func adjustFieldName(str string) string {
 	}
 
 	return res
-}
-
-func (m *protoTree) extractItem(msgName string) *protoLeaf {
-
-	for _, leaf := range m.Tree {
-		if leaf.MessageName == msgName {
-			return &leaf
-		}
-	}
-	return nil
 }

@@ -4,7 +4,9 @@
 
 package e2smcommoniesv1
 
-import ()
+import (
+e2smcommoniesv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
+)
 
 
 func (m *RanfunctionName) SetRanFunctionInstance(ranFunctionInstance int32) *RanfunctionName {
@@ -12,102 +14,102 @@ func (m *RanfunctionName) SetRanFunctionInstance(ranFunctionInstance int32) *Ran
 	return m
 }
 
-func (m *UeidGnb) SetGNbCuUeF1ApIDList(gNbCuUeF1ApIDList *UeidGnbCuF1ApIdList) *UeidGnb {
+func (m *UeidGnb) SetGNbCuUeF1ApIDList(gNbCuUeF1ApIDList *e2smcommoniesv1.UeidGnbCuF1ApIdList) *UeidGnb {
 	m.GNbCuUeF1ApIdList = gNbCuUeF1ApIDList
 	return m
 }
 
-func (m *UeidGnb) SetGNbCuCpUeE1ApIDList(gNbCuCpUeE1ApIDList *UeidGnbCuCpE1ApIdList) *UeidGnb {
+func (m *UeidGnb) SetGNbCuCpUeE1ApIDList(gNbCuCpUeE1ApIDList *e2smcommoniesv1.UeidGnbCuCpE1ApIdList) *UeidGnb {
 	m.GNbCuCpUeE1ApIdList = gNbCuCpUeE1ApIDList
 	return m
 }
 
-func (m *UeidGnb) SetRanUeID(ranUeID *Ranueid) *UeidGnb {
+func (m *UeidGnb) SetRanUeID(ranUeID *e2smcommoniesv1.Ranueid) *UeidGnb {
 	m.RanUeid = ranUeID
 	return m
 }
 
-func (m *UeidGnb) SetMNgRanUeXnApID(mNgRanUeXnApID *NgRannodeUexnApid) *UeidGnb {
+func (m *UeidGnb) SetMNgRanUeXnApID(mNgRanUeXnApID *e2smcommoniesv1.NgRannodeUexnApid) *UeidGnb {
 	m.MNgRanUeXnApId = mNgRanUeXnApID
 	return m
 }
 
-func (m *UeidGnb) SetGlobalGnbID(globalGnbID *GlobalGnbId) *UeidGnb {
+func (m *UeidGnb) SetGlobalGnbID(globalGnbID *e2smcommoniesv1.GlobalGnbId) *UeidGnb {
 	m.GlobalGnbId = globalGnbID
 	return m
 }
 
-func (m *UeidGnb) SetGlobalNgRannodeID(globalNgRannodeID *GlobalNgrannodeId) *UeidGnb {
+func (m *UeidGnb) SetGlobalNgRannodeID(globalNgRannodeID *e2smcommoniesv1.GlobalNgrannodeId) *UeidGnb {
 	m.GlobalNgRannodeId = globalNgRannodeID
 	return m
 }
 
-func (m *UeidGnbDu) SetRanUeID(ranUeID *Ranueid) *UeidGnbDu {
+func (m *UeidGnbDu) SetRanUeID(ranUeID *e2smcommoniesv1.Ranueid) *UeidGnbDu {
 	m.RanUeid = ranUeID
 	return m
 }
 
-func (m *UeidGnbCuUp) SetRanUeID(ranUeID *Ranueid) *UeidGnbCuUp {
+func (m *UeidGnbCuUp) SetRanUeID(ranUeID *e2smcommoniesv1.Ranueid) *UeidGnbCuUp {
 	m.RanUeid = ranUeID
 	return m
 }
 
-func (m *UeidNgEnb) SetNgENbCuUeW1ApID(ngENbCuUeW1ApID *NgenbCuUeW1ApId) *UeidNgEnb {
+func (m *UeidNgEnb) SetNgENbCuUeW1ApID(ngENbCuUeW1ApID *e2smcommoniesv1.NgenbCuUeW1ApId) *UeidNgEnb {
 	m.NgENbCuUeW1ApId = ngENbCuUeW1ApID
 	return m
 }
 
-func (m *UeidNgEnb) SetMNgRanUeXnApID(mNgRanUeXnApID *NgRannodeUexnApid) *UeidNgEnb {
+func (m *UeidNgEnb) SetMNgRanUeXnApID(mNgRanUeXnApID *e2smcommoniesv1.NgRannodeUexnApid) *UeidNgEnb {
 	m.MNgRanUeXnApId = mNgRanUeXnApID
 	return m
 }
 
-func (m *UeidNgEnb) SetGlobalNgEnbID(globalNgEnbID *GlobalNgEnbId) *UeidNgEnb {
+func (m *UeidNgEnb) SetGlobalNgEnbID(globalNgEnbID *e2smcommoniesv1.GlobalNgEnbId) *UeidNgEnb {
 	m.GlobalNgEnbId = globalNgEnbID
 	return m
 }
 
-func (m *UeidNgEnb) SetGlobalNgRannodeID(globalNgRannodeID *GlobalNgrannodeId) *UeidNgEnb {
+func (m *UeidNgEnb) SetGlobalNgRannodeID(globalNgRannodeID *e2smcommoniesv1.GlobalNgrannodeId) *UeidNgEnb {
 	m.GlobalNgRannodeId = globalNgRannodeID
 	return m
 }
 
-func (m *UeidEnGnb) SetMENbUeX2ApIDExtension(mENbUeX2ApIDExtension *EnbUeX2ApIdExtension) *UeidEnGnb {
+func (m *UeidEnGnb) SetMENbUeX2ApIDExtension(mENbUeX2ApIDExtension *e2smcommoniesv1.EnbUeX2ApIdExtension) *UeidEnGnb {
 	m.MENbUeX2ApIdExtension = mENbUeX2ApIDExtension
 	return m
 }
 
-func (m *UeidEnGnb) SetGNbCuUeF1ApID(gNbCuUeF1ApID *GnbCuUeF1ApId) *UeidEnGnb {
+func (m *UeidEnGnb) SetGNbCuUeF1ApID(gNbCuUeF1ApID *e2smcommoniesv1.GnbCuUeF1ApId) *UeidEnGnb {
 	m.GNbCuUeF1ApId = gNbCuUeF1ApID
 	return m
 }
 
-func (m *UeidEnGnb) SetGNbCuCpUeE1ApIDList(gNbCuCpUeE1ApIDList *UeidGnbCuCpE1ApIdList) *UeidEnGnb {
+func (m *UeidEnGnb) SetGNbCuCpUeE1ApIDList(gNbCuCpUeE1ApIDList *e2smcommoniesv1.UeidGnbCuCpE1ApIdList) *UeidEnGnb {
 	m.GNbCuCpUeE1ApIdList = gNbCuCpUeE1ApIDList
 	return m
 }
 
-func (m *UeidEnGnb) SetRanUeID(ranUeID *Ranueid) *UeidEnGnb {
+func (m *UeidEnGnb) SetRanUeID(ranUeID *e2smcommoniesv1.Ranueid) *UeidEnGnb {
 	m.RanUeid = ranUeID
 	return m
 }
 
-func (m *UeidEnb) SetMENbUeX2ApID(mENbUeX2ApID *EnbUeX2ApId) *UeidEnb {
+func (m *UeidEnb) SetMENbUeX2ApID(mENbUeX2ApID *e2smcommoniesv1.EnbUeX2ApId) *UeidEnb {
 	m.MENbUeX2ApId = mENbUeX2ApID
 	return m
 }
 
-func (m *UeidEnb) SetMENbUeX2ApIDExtension(mENbUeX2ApIDExtension *EnbUeX2ApIdExtension) *UeidEnb {
+func (m *UeidEnb) SetMENbUeX2ApIDExtension(mENbUeX2ApIDExtension *e2smcommoniesv1.EnbUeX2ApIdExtension) *UeidEnb {
 	m.MENbUeX2ApIdExtension = mENbUeX2ApIDExtension
 	return m
 }
 
-func (m *UeidEnb) SetGlobalEnbID(globalEnbID *GlobalEnbId) *UeidEnb {
+func (m *UeidEnb) SetGlobalEnbID(globalEnbID *e2smcommoniesv1.GlobalEnbId) *UeidEnb {
 	m.GlobalEnbId = globalEnbID
 	return m
 }
 
-func (m *SNssai) SetSD(sD *Sd) *SNssai {
+func (m *SNssai) SetSD(sD *e2smcommoniesv1.Sd) *SNssai {
 	m.SD = sD
 	return m
 }
