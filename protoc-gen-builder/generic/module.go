@@ -534,9 +534,9 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 							return nil
 						}
 						if ie.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())) && !isElementaryType(itemType) {
-							itemType = "*" + ie.PackageName + "." + itemType
+							item.ItemType = "*" + ie.PackageName + "." + itemType
 						} else if !isElementaryType(itemType) {
-							itemType = "*" + packageName + "." + itemType
+							item.ItemType = "*" + packageName + "." + itemType
 						}
 
 						if ie.IsChoice {
@@ -933,11 +933,7 @@ func composeItemName(str string) string {
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
 func (m *protoItem) fromOtherProto(currentProto string) bool {
 
-	if m.PackageName == currentProto {
-		return true
-	}
-
-	return false
+	return m.PackageName == currentProto
 }
 
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
