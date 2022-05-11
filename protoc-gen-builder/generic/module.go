@@ -91,6 +91,9 @@ type protoLeaf struct {
 	PackageName   string
 	MessageName   string
 	ProtoFilePath string // this is to store patch for importing this item, import will be composed of PackageName and ProtoFilePath
+	IsChoice      bool
+	IsEnum        bool
+	IsList        bool
 }
 
 type pdubuilder struct {
@@ -306,6 +309,34 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				MessageName:   msg.Name().String(),
 				ProtoFilePath: lookUpProtoFilePath(dir, f.File().InputPath()),
 			}
+
+			_, err = fmt.Fprintf(buf, "Message name is %v, oneOf items are %v, non-oneOf items are %v\n", msg.Name().String(), len(msg.OneOfs()), len(msg.NonOneOfFields()))
+			if err != nil {
+				return nil
+			}
+
+			// avoiding parsing constants && checking if this is a list
+			if !strings.Contains(msg.SourceCodeInfo().LeadingComments(), "constant") &&
+				len(msg.Fields()) == 1 && strings.Contains(strings.ToLower(msg.Name().String()), "list") {
+				leaf.IsList = msg.Fields()[0].Type().IsRepeated()
+			}
+			// avoiding parsing constants && checking if this is a oneOf (CHOICE)
+			if !strings.Contains(msg.SourceCodeInfo().LeadingComments(), "constant") &&
+				len(msg.OneOfs()) > 0 && len(msg.NonOneOfFields()) == 0 { // it also excludes the case when optional items is interpreted as a oneOf
+				leaf.IsChoice = true
+			}
+
+			tree.Tree = append(tree.Tree, leaf)
+		}
+
+		// processing enumerators and adding to the tree
+		for _, enum := range f.AllEnums() { // Constants
+			leaf := protoLeaf{
+				PackageName:   packageName,
+				MessageName:   enum.Name().String(),
+				ProtoFilePath: lookUpProtoFilePath(dir, f.File().InputPath()),
+				IsEnum:        true,
+			}
 			tree.Tree = append(tree.Tree, leaf)
 		}
 	}
@@ -452,13 +483,12 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	}
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
-		// ToDo - maybe bring back
 		// adding target file to import (all Protobuf files are linked to each other, so should be present in import)
 		// if the dependency is not required, GoFmt() post-processor will take care of it
 		// looking for a proto path here
-		//protoFilePath := lookUpProtoFilePath(dir, f.File().InputPath())
+		protoFilePath := lookUpProtoFilePath(dir, f.File().InputPath())
 		packageName := adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
-		//pdubldr.Imports = pdubldr.Imports + "\n" + packageName + " \"" + protoFilePath + "\"" + "\n"
+		pdubldr.Imports = pdubldr.Imports + "\n" + packageName + " \"" + protoFilePath + "\"" + "\n"
 
 		for _, msg := range f.AllMessages() {
 			_, err = fmt.Fprintf(buf, "Message name is %v\n", msg.Name().String())
@@ -485,12 +515,10 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					if err != nil {
 						return nil
 					}
-					if otherProto != "" {
-						tmp := itemType
-						itemType = otherProto + "." + tmp
-						if !strings.Contains(pdubldr.Imports, otherProto) {
-							pdubldr.Imports = pdubldr.Imports + "\n" + tree.getImport(otherProto)
-						}
+					if otherProto != "" && !isElementaryType(itemType) {
+						itemType = "*" + otherProto + "." + itemType
+					} else if !isElementaryType(itemType) {
+						itemType = "*" + packageName + "." + itemType
 					}
 					item := pdubuilderItem{
 						VariableName: strings.ToLower(itemName[:1]) + itemName[1:],
@@ -499,6 +527,22 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 						IsChoice:     false,
 						IsEnum:       false,
 						IsList:       false,
+					}
+					out := tree.extractItem(itemName)
+					if out != nil {
+						leaf := out
+						if leaf.IsChoice {
+							item.IsChoice = true
+						} else if leaf.IsList {
+							item.IsList = true
+						} else if leaf.IsEnum {
+							item.IsEnum = true
+						}
+					} else {
+						_, err = fmt.Fprintf(buf, "Couldn't find message %v\n", itemName)
+						if err != nil {
+							return nil
+						}
 					}
 
 					message.Items = append(message.Items, item)
@@ -1002,4 +1046,14 @@ func adjustFieldName(str string) string {
 	}
 
 	return res
+}
+
+func (m *protoTree) extractItem(msgName string) *protoLeaf {
+
+	for _, leaf := range m.Tree {
+		if leaf.MessageName == msgName {
+			return &leaf
+		}
+	}
+	return nil
 }

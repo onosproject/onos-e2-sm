@@ -1,23 +1,26 @@
-//  SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-//  SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: Apache-2.0
 
-package e2smrcies
+package e2smrcv1
 
-import e2smcommonies "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
+import (
+e2smcommoniesv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-common-ies"
+)
 
-func (m *EventTriggerCellInfoItem) SetLogicalOr(lor LogicalOr) *EventTriggerCellInfoItem {
-	m.LogicalOr = &lor
+
+func (m *EventTriggerCellInfoItem) SetLogicalOr(logicalOr LogicalOr) *EventTriggerCellInfoItem {
+	m.LogicalOr = &logicalOr
 	return m
 }
 
-func (m *EventTriggerUeInfoItem) SetLogicalOr(lor LogicalOr) *EventTriggerUeInfoItem {
-	m.LogicalOr = &lor
+func (m *EventTriggerUeInfoItem) SetLogicalOr(logicalOr LogicalOr) *EventTriggerUeInfoItem {
+	m.LogicalOr = &logicalOr
 	return m
 }
 
-func (m *EventTriggerUeeventInfoItem) SetLogicalOr(lor LogicalOr) *EventTriggerUeeventInfoItem {
-	m.LogicalOr = &lor
+func (m *EventTriggerUeeventInfoItem) SetLogicalOr(logicalOr LogicalOr) *EventTriggerUeeventInfoItem {
+	m.LogicalOr = &logicalOr
 	return m
 }
 
@@ -31,18 +34,23 @@ func (m *RanparameterDefinitionChoiceStructureItem) SetRanParameterDefinition(ra
 	return m
 }
 
-func (m *RanparameterTestingItemChoiceElementFalse) SetRanParameterValue(ranparameterValue *RanparameterValue) *RanparameterTestingItemChoiceElementFalse {
-	m.RanParameterValue = ranparameterValue
+func (m *RanparameterValueTypeChoiceElementFalse) SetRanParameterValue(ranParameterValue *RanparameterValue) *RanparameterValueTypeChoiceElementFalse {
+	m.RanParameterValue = ranParameterValue
 	return m
 }
 
-func (m *RanparameterTestingItemChoiceElementFalse) SetLogicalOr(lor LogicalOr) *RanparameterTestingItemChoiceElementFalse {
-	m.LogicalOr = &lor
+func (m *RanparameterTestingItemChoiceElementFalse) SetRanParameterValue(ranParameterValue *RanparameterValue) *RanparameterTestingItemChoiceElementFalse {
+	m.RanParameterValue = ranParameterValue
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat1) SetGlobalAssociatedUeinfo(eventTriggerUeInfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat1 {
-	m.GlobalAssociatedUeinfo = eventTriggerUeInfo
+func (m *RanparameterTestingItemChoiceElementFalse) SetLogicalOr(logicalOr LogicalOr) *RanparameterTestingItemChoiceElementFalse {
+	m.LogicalOr = &logicalOr
+	return m
+}
+
+func (m *E2SmRcEventTriggerFormat1) SetGlobalAssociatedUeinfo(globalAssociatedUeinfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat1 {
+	m.GlobalAssociatedUeinfo = globalAssociatedUeinfo
 	return m
 }
 
@@ -51,28 +59,28 @@ func (m *E2SmRcEventTriggerFormat1Item) SetMessageDirection(messageDirection Mes
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat1Item) SetAssociatedUeinfo(eventTriggerUeInfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat1Item {
-	m.AssociatedUeinfo = eventTriggerUeInfo
+func (m *E2SmRcEventTriggerFormat1Item) SetAssociatedUeinfo(associatedUeinfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat1Item {
+	m.AssociatedUeinfo = associatedUeinfo
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat1Item) SetAssociatedUeevent(eventTriggerUeeventInfo *EventTriggerUeeventInfo) *E2SmRcEventTriggerFormat1Item {
-	m.AssociatedUeevent = eventTriggerUeeventInfo
+func (m *E2SmRcEventTriggerFormat1Item) SetAssociatedUeevent(associatedUeevent *EventTriggerUeeventInfo) *E2SmRcEventTriggerFormat1Item {
+	m.AssociatedUeevent = associatedUeevent
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat1Item) SetLogicalOr(lor LogicalOr) *E2SmRcEventTriggerFormat1Item {
-	m.LogicalOr = &lor
+func (m *E2SmRcEventTriggerFormat1Item) SetLogicalOr(logicalOr LogicalOr) *E2SmRcEventTriggerFormat1Item {
+	m.LogicalOr = &logicalOr
 	return m
 }
 
-func (m *MessageTypeChoiceNi) SetNIIdentifier(interfaceIdentifier *e2smcommonies.InterfaceIdentifier) *MessageTypeChoiceNi {
-	m.NIIdentifier = interfaceIdentifier
+func (m *MessageTypeChoiceNi) SetNIIDentifier(nIIDentifier *e2smcommoniesv1.InterfaceIdentifier) *MessageTypeChoiceNi {
+	m.NIIdentifier = nIIDentifier
 	return m
 }
 
-func (m *MessageTypeChoiceNi) SetNIMessage(interfaceMessageID *e2smcommonies.InterfaceMessageId) *MessageTypeChoiceNi {
-	m.NIMessage = interfaceMessageID
+func (m *MessageTypeChoiceNi) SetNIMessage(nIMessage *e2smcommoniesv1.InterfaceMessageId) *MessageTypeChoiceNi {
+	m.NIMessage = nIMessage
 	return m
 }
 
@@ -81,8 +89,8 @@ func (m *E2SmRcEventTriggerFormat2) SetAssociatedE2NodeInfo(associatedE2NodeInfo
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat2) SetAssociatedUeinfo(associatedUeInfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat2 {
-	m.AssociatedUeinfo = associatedUeInfo
+func (m *E2SmRcEventTriggerFormat2) SetAssociatedUeinfo(associatedUeinfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat2 {
+	m.AssociatedUeinfo = associatedUeinfo
 	return m
 }
 
@@ -91,28 +99,28 @@ func (m *E2SmRcEventTriggerFormat3Item) SetAssociatedCellInfo(associatedCellInfo
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat3Item) SetLogicalOr(lor LogicalOr) *E2SmRcEventTriggerFormat3Item {
-	m.LogicalOr = &lor
+func (m *E2SmRcEventTriggerFormat3Item) SetLogicalOr(logicalOr LogicalOr) *E2SmRcEventTriggerFormat3Item {
+	m.LogicalOr = &logicalOr
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat4Item) SetAssociatedUeinfo(associatedUeInfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat4Item {
-	m.AssociatedUeinfo = associatedUeInfo
+func (m *E2SmRcEventTriggerFormat4Item) SetAssociatedUeinfo(associatedUeinfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat4Item {
+	m.AssociatedUeinfo = associatedUeinfo
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat4Item) SetLogicalOr(lor LogicalOr) *E2SmRcEventTriggerFormat4Item {
-	m.LogicalOr = &lor
+func (m *E2SmRcEventTriggerFormat4Item) SetLogicalOr(logicalOr LogicalOr) *E2SmRcEventTriggerFormat4Item {
+	m.LogicalOr = &logicalOr
 	return m
 }
 
-func (m *TriggerTypeChoiceRrcstateItem) SetLogicalOr(lor LogicalOr) *TriggerTypeChoiceRrcstateItem {
-	m.LogicalOr = &lor
+func (m *TriggerTypeChoiceRrcstateItem) SetLogicalOr(logicalOr LogicalOr) *TriggerTypeChoiceRrcstateItem {
+	m.LogicalOr = &logicalOr
 	return m
 }
 
-func (m *E2SmRcEventTriggerFormat5) SetAssociatedUeinfo(associatedUeInfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat5 {
-	m.AssociatedUeinfo = associatedUeInfo
+func (m *E2SmRcEventTriggerFormat5) SetAssociatedUeinfo(associatedUeinfo *EventTriggerUeInfo) *E2SmRcEventTriggerFormat5 {
+	m.AssociatedUeinfo = associatedUeinfo
 	return m
 }
 
@@ -126,15 +134,13 @@ func (m *E2SmRcActionDefinitionFormat2Item) SetRicPolicyConditionDefinition(ricP
 	return m
 }
 
-func (m *E2SmRcActionDefinitionFormat3) SetUeID(ueID *e2smcommonies.Ueid) *E2SmRcActionDefinitionFormat3 {
+func (m *E2SmRcActionDefinitionFormat3) SetUeID(ueID *e2smcommoniesv1.Ueid) *E2SmRcActionDefinitionFormat3 {
 	m.UeId = ueID
 	return m
 }
 
-func (m *E2SmRcIndicationHeaderFormat1) SetRicEventTriggerConditionID(ricEventConditionID int32) *E2SmRcIndicationHeaderFormat1 {
-	m.RicEventTriggerConditionId = &RicEventTriggerConditionId{
-		Value: ricEventConditionID,
-	}
+func (m *E2SmRcIndicationHeaderFormat1) SetRicEventTriggerConditionID(ricEventTriggerConditionID *RicEventTriggerConditionId) *E2SmRcIndicationHeaderFormat1 {
+	m.RicEventTriggerConditionId = ricEventTriggerConditionID
 	return m
 }
 
@@ -208,13 +214,13 @@ func (m *RanfunctionDefinitionEventTrigger) SetRanCallProcessTypesList(ranCallPr
 	return m
 }
 
-func (m *RanfunctionDefinitionEventTrigger) SetRanUeidentificationParametersList(ranUeidentificationParametersList []*UeidentificationRanparameterItem) *RanfunctionDefinitionEventTrigger {
-	m.RanUeidentificationParametersList = ranUeidentificationParametersList
+func (m *RanfunctionDefinitionEventTrigger) SetRanUeIDentificationParametersList(ranUeIDentificationParametersList []*UeidentificationRanparameterItem) *RanfunctionDefinitionEventTrigger {
+	m.RanUeidentificationParametersList = ranUeIDentificationParametersList
 	return m
 }
 
-func (m *RanfunctionDefinitionEventTrigger) SetRanCellIdentificationParametersList(ranCellIdentificationParametersList []*CellIdentificationRanparameterItem) *RanfunctionDefinitionEventTrigger {
-	m.RanCellIdentificationParametersList = ranCellIdentificationParametersList
+func (m *RanfunctionDefinitionEventTrigger) SetRanCellIDentificationParametersList(ranCellIDentificationParametersList []*CellIdentificationRanparameterItem) *RanfunctionDefinitionEventTrigger {
+	m.RanCellIdentificationParametersList = ranCellIDentificationParametersList
 	return m
 }
 
@@ -273,10 +279,8 @@ func (m *RanfunctionDefinitionControlItem) SetRicControlActionList(ricControlAct
 	return m
 }
 
-func (m *RanfunctionDefinitionControlItem) SetRicCallProcessIDformatType(ricCallProcessIDformatType int32) *RanfunctionDefinitionControlItem {
-	m.RicCallProcessIdformatType = &e2smcommonies.RicFormatType{
-		Value: ricCallProcessIDformatType,
-	}
+func (m *RanfunctionDefinitionControlItem) SetRicCallProcessIDformatType(ricCallProcessIDformatType *e2smcommoniesv1.RicFormatType) *RanfunctionDefinitionControlItem {
+	m.RicCallProcessIdformatType = ricCallProcessIDformatType
 	return m
 }
 

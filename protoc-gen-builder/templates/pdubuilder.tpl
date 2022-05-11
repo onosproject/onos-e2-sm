@@ -10,7 +10,7 @@ import (
 )
 
 {{ $inst := .Instances }}{{ range $fieldIndex, $field := $inst }}
-func Create{{.FunctionName}}({{ $inst := .Items }}{{ range $innerFieldIndex, $innerField := $inst }}{{.VariableName}} *{{.ItemType}}{{end}}) (*{{.PackageName}}.{{.FunctionOutputType}}, error) {
+func Create{{.FunctionName}}({{ $inst := .Items }}{{ range $innerFieldIndex, $innerField := $inst }}{{.VariableName}} {{.ItemType}}, {{end}}) (*{{.PackageName}}.{{.FunctionOutputType}}, error) {
 
     msg := &{{.PackageName}}.{{.FunctionOutputType}}{
     {{ $inst := .Items }}{{ range $innerFieldIndex, $innerField := $inst }}

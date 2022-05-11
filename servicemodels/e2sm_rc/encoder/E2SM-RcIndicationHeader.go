@@ -6,11 +6,11 @@ package encoder
 
 import (
 	"encoding/hex"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/choiceOptions"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
+	
 )
 
 func PerEncodeE2SmRcIndicationHeader(msg *e2smrcv1.E2SmRcIndicationHeader) ([]byte, error) {
