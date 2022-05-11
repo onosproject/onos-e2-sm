@@ -6,13 +6,16 @@ package encoder
 
 import (
 	"encoding/hex"
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/choiceOptions"
 	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
+
 var log = logging.GetLogger()
+
 func PerEncodeE2SmRcEventTrigger(msg *e2smrcv1.E2SmRcEventTrigger) ([]byte, error) {
 
 	log.Debugf("Obtained E2SM-RcEventTrigger message is\n%v", msg)
