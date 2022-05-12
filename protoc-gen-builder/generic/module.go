@@ -781,7 +781,6 @@ func (m *builderInstance) doLinting() *builderInstance {
 	return m
 }
 
-//ToDo - extend linting
 func doLinting(str string) string {
 
 	if !strings.Contains(strings.ToLower(str), "identity") {
@@ -885,7 +884,7 @@ func adjustMessageNameForLogging(name string) string {
 		tmp := "E2SM" + "-" + name[4:]
 		res = strings.ReplaceAll(tmp, e2Name, strings.ToUpper(e2Name)+"-")
 	} else if strings.Contains(strings.ToLower(name), "e2ap") {
-		//ToDo - shouldn't be valid for E2AP - leaving for future
+		//ToDo - shouldn't be always valid for E2AP - leaving for future
 		tmp := "E2AP" + "-" + name[4:]
 		res = strings.ReplaceAll(tmp, e2Name, strings.ToUpper(e2Name)+"-")
 	}
@@ -1106,7 +1105,7 @@ func (m *protoItem) fromOtherProto(currentProto string) bool {
 }
 
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
-// if the message is from the same protobuf, then it returns empty string (ToDo - or maybe return something like "same")
+// if the message is from the same protobuf, then it returns empty string
 func (m *protoItem) getImport() string {
 
 	return m.PackageName + " \"" + m.ProtoFilePath + "\"\n"
@@ -1118,7 +1117,6 @@ func extractItemMessageType(message pgs.Field) string {
 	res := ""
 
 	if strings.Contains(message.Type().ProtoType().String(), "MESSAGE") {
-		// ToDo - implement workaround of BitString
 		if strings.Contains(strings.ToLower(message.Descriptor().GetTypeName()), "bitstring") {
 			res = "asn1.BitString"
 		} else {
