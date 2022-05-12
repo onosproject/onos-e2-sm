@@ -3,7 +3,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-// ToDo: delete it (logs generation) once plugin is complete - necessity is only in debugging
 // Later on log files are stored to the /tmp/report.txt file (basically, it's ALMOST output of the Execute() function in module.go)
 
 package main
