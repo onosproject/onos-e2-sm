@@ -195,6 +195,10 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	smodel := servicemodel{}
 
 	if sm {
+		_, err = fmt.Fprintf(buf, "Gathering data for encoder and servicemodel packages generation\n")
+		if err != nil {
+			return nil
+		}
 		smBasicInfoFilled := false
 		for _, f := range targets { // Input .proto files
 			m.Push(f.Name().String()).Debug("reporting")
@@ -361,12 +365,17 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 	}
 
 	// gathering data for builder
+	_, err = fmt.Fprintf(buf, "Gathering data for builder package generation\n")
+	if err != nil {
+		return nil
+	}
 	for _, f := range targets { // Input .proto files
 		m.Push(f.Name().String()).Debug("reporting")
 
+		packageName := adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())
 		// this package should be located in the same directory as .pb.go
 		bldr := builder{
-			PackageName: adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()),
+			PackageName: packageName,
 			Imports:     "",
 			Instances:   make([]builderInstance, 0),
 		}
@@ -421,12 +430,11 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 						}
 
 						// checking if the message is defined in the other Protobuf file
-						_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n",
-							adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), ie.PackageName)
+						_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n", packageName, adjustFieldName(itemType), ie.PackageName)
 						if err != nil {
 							return nil
 						}
-						if ie.fromOtherProto(adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String())) && !elementaryType {
+						if ie.fromOtherProto(packageName) && !elementaryType {
 							tmp := instance.ItemType
 							instance.ItemType = ie.PackageName + "." + tmp
 							if !strings.Contains(bldr.Imports, ie.PackageName) {
@@ -461,7 +469,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 				}
 			}
 		}
-		_, err = fmt.Fprintf(buf, "We're about to start generating builder foo Protobuf\nObtained structure is %v\n", bldr)
+		_, err = fmt.Fprintf(buf, "We're about to start generating builder for Protobuf\nObtained structure is %v\n", bldr)
 		if err != nil {
 			return nil
 		}
@@ -499,7 +507,11 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 		m.OverwriteGeneratorTemplateFile(outputPath+"/builder.go", templateBuilder.Lookup("builder.tpl"), bldr)
 	}
 
-	// ToDo - gathering data for pdubuilder
+	// gathering data for pdubuilder
+	_, err = fmt.Fprintf(buf, "Gathering data for pdubuilder package generation\n")
+	if err != nil {
+		return nil
+	}
 	pdubldr := pdubuilder{
 		Imports:  "",
 		OneOfs:   make([]oneOf, 0),
@@ -569,8 +581,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 									}
 								} else {
 									// checking if the message is defined in the other Protobuf file
-									_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n",
-										adjustPackageName(adjustProtoFileName(extractProtoFileName(f.Name().Split()[0])), f.File().InputPath().Dir().String()), adjustFieldName(itemType), ie.PackageName)
+									_, err = fmt.Fprintf(buf, "Current package name is %v, item %v is from package %v\n", packageName, adjustFieldName(itemType), ie.PackageName)
 									if err != nil {
 										return nil
 									}
@@ -595,10 +606,6 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 								if oneOfField.Type().IsRepeated() {
 									ms.VariableType = "[]" + ms.VariableType
 								}
-							}
-							_, err = fmt.Fprintf(buf, "Gathered CHOICE structure is %v\n", ms)
-							if err != nil {
-								return nil
 							}
 							pdubldr.OneOfs = append(pdubldr.OneOfs, ms)
 						}
