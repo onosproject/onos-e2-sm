@@ -1102,7 +1102,7 @@ func composeItemName(str string) string {
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
 func (m *protoItem) fromOtherProto(currentProto string) bool {
 
-	return !(m.PackageName == currentProto)
+	return m.PackageName != currentProto
 }
 
 // fromOtherProto returns name of the Protobuf package is the message is defined in other .proto than the reference Protobuf
