@@ -60,7 +60,7 @@ For E2AP, you should run following command under `onos-e2t/` folder:
 protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2t/api" --proto_path="api/" --builder_out="sm=false:pkg/southbound/e2ap/" e2ap/v2/e2ap_pdu_descriptions.proto e2ap/v2/e2ap_pdu_contents.proto e2ap/v2/e2ap_ies.proto e2ap/v2/e2ap_containers.proto e2ap/v2/e2ap_constants.proto e2ap/v2/e2ap_commondatatypes.proto
 ```
 ## Known issues
-* This plugin doesn't generate a `pdubuilder` package (this is to be done in the future)
+* This plugin doesn't do `gofmt()` of the code - it should be done manually, see section `Examples of the usage`.
 
 ## Some examples of usage
 
@@ -76,4 +76,10 @@ protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:$
 > protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api" --proto_path="servicemodels/" --builder_out="sm=true:servicemodels/e2sm_rc/" servicemodels/e2sm_rc/v1/e2sm_common_ies.proto servicemodels/e2sm_rc/v1/e2sm_rc.proto
 ```
 
-
+If for some reason, Go formatting didn't complete successfully, disable the Go formatter on `line 20` of `onos-e2sm/protoc-gen-builder/main.go` and
+run Go formatter locally. You can do following:
+```bash
+> cd servicemodels/e2sm_rc/
+> gofmt -w .
+```
+It will format all Golang files in `e2sm_rc` directory.

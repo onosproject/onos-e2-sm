@@ -9,13 +9,12 @@ import (
     "github.com/onosproject/onos-lib-go/pkg/errors"
 )
 
-{{ $inst := .Instances }}{{ range $fieldIndex, $field := $inst }}
+{{if .MessagePresence}}{{ $inst := .Messages }}{{ range $fieldIndex, $field := $inst }}
 func Create{{.FunctionName}}({{ $inst := .Items }}{{ range $innerFieldIndex, $innerField := $inst }}{{.VariableName}} {{.ItemType}}, {{end}}) (*{{.PackageName}}.{{.FunctionOutputType}}, error) {
 
-    msg := &{{.PackageName}}.{{.FunctionOutputType}}{
-    {{ $inst := .Items }}{{ range $innerFieldIndex, $innerField := $inst }}
-    {{.FieldName}}: {{.VariableName}},
-    {{end}} }
+    msg := &{{.PackageName}}.{{.FunctionOutputType}}{}
+    {{ $inst := .Items }}{{ range $innerFieldIndex, $innerField := $inst }}msg.{{.FieldName}} = {{.VariableName}}
+    {{end}}
 
 	if err := msg.Validate(); err != nil {
 		return nil, errors.NewInvalid("Create{{.FunctionName}}() error validating PDU %s", err.Error())
@@ -23,4 +22,25 @@ func Create{{.FunctionName}}({{ $inst := .Items }}{{ range $innerFieldIndex, $in
 
 	return msg, nil
 }
-{{end}}
+{{end}}{{end}}
+
+{{if .OneOfPresence}}{{ $inst := .OneOfs }}{{ range $fieldIndex, $field := $inst }}
+func Create{{.FunctionName}}({{.VariableName}} {{.VariableType}}) (*{{.PackageName}}.{{.FunctionOutputType}}, error) {
+
+    item := &{{.PackageName}}.{{.FunctionOutputType}}{
+        {{.FunctionOutputType}}: &{{.PackageName}}.{{.FunctionOutputType}}_{{.ItemName}}{
+            {{.ItemName}}: {{.VariableName}},
+        },
+    }
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("Create{{.FunctionName}}() error validating PDU %s", err.Error())
+	}
+
+    return item, nil
+}{{end}}{{end}}
+
+{{if .EnumPresence}}{{ $inst := .Enums }}{{ range $fieldIndex, $field := $inst }}
+func Create{{.FunctionName}}() {{.FunctionOutputType}} {
+    return {{.PackageName}}.{{.Item}}
+}{{end}}{{end}}
