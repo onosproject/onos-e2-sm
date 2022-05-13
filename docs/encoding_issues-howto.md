@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2022-present Intel Corporation
+SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetworking.org>
+SPDX-License-Identifier: Apache-2.0
+-->
+
 ## How to deal with decoding problems?
 When you implement your SW in ONF’s RIC you may face some issues related to the encoding/decoding of the information 
 sent over the wire. Here is a summary of potential problems you may face.
