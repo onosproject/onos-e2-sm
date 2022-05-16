@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+
 This is an analysis of MeasurementLabel structure APER encoding per KPM v2.0.3 definition:
 https://github.com/onosproject/onos-e2-sm/blob/e6dc49d1cd9f4554e11856f1a2a0aeac33034f71/servicemodels/e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto#L181
 
