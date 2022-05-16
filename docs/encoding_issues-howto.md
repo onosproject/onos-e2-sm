@@ -184,11 +184,25 @@ Once all tags are in correct place, produced with Go APER library bytes are guar
 
 
 ### Do a bit by bit analysis
-Here are some examples
+Sometimes, doing a bit by bit analysis may help a lot. General rule is to go through the APER bytes and decode them by hand, i.e., 
+verify that all bits correspond to ASN.1 definition. Here are few examples on how to do such analysis:
+
+* An analysis of GlobalKPMnode-ID structure per KPM v2.0.3 specification can be found [here](globalKPMnodeID_analysis.txt)
+  * It describes encoding of `CHOICE` structures.
+* An analysis of MeasurementLabel structure per KPM v2.0.3 specification can be found [here](measLabel_analysis.txt)
+  * It describes encoding of `SEQUENCE` structure with multiple `OPTIONAL` items.
+* An analysis of MeasurementData (a part of IndicationMessage) per KPM v2.0.3 specification can be found [here](kpmv2_indication_message_analysis.txt)
+  * It describes encoding of lists, i.e., `SEQUENCE OF` structures.
+* An analysis of a header of RANfunction-Description per KPMv2.0.3 specification can be found [here](kpmv2_ranfunction_description_analysis.txt)
+  * It describes encoding of `SEQUENCE` structure headers.
+
+Please consider tacking a look at the links in "Some useful resources" section. It may help to understand the APER encoding flow.
 
 
-# Should I give a description to each error message which can occur while using Go APER library?
-Firstly, read the error message.
+## General steps on tackling encoding/decoding problems
+1. Read error message carefully. You may exceed the boundary or forgot to include an item.
+2. Revisit APER tags and make sure they're present in the `.pb.go` file.
+3. Do a bit by bit analysis to understand where is the root cause of the problem.
 
 
 ## Some useful resources:

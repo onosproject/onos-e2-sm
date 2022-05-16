@@ -1,0 +1,73 @@
+This is an analysis of MeasurementLabel structure APER encoding per KPM v2.0.3 definition:
+https://github.com/onosproject/onos-e2-sm/blob/e6dc49d1cd9f4554e11856f1a2a0aeac33034f71/servicemodels/e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto#L181
+
+Measurement Label PER analysis
+
+0 - indicates that MeasurementLabel is not Extended (but could potentially be)
+1 - Indicates that PLMN-ID, which is OPTIONAL, present
+1 - Indicates that Slice-ID, which is OPTIONAL, present
+1 - Indicates that FiveQI, which is OPTIONAL, present
+1 - Indicates that QFI, which is OPTIONAL, present
+1 - Indicates that QCI, which is OPTIONAL, present
+1 - Indicates that QCImax, which is OPTIONAL, present
+1 - Indicates that QCImin, which is OPTIONAL, present
+----- This gives 7f byte
+
+1 - Indicates that ARPmax, which is OPTIONAL, present
+1 - Indicates that ARPmin, which is OPTIONAL, present
+1 - Indicates that bitrateRange, which is OPTIONAL, present
+1 - Indicates that layerMU-MIMO, which is OPTIONAL, present
+1 - Indicates that SUM, which is OPTIONAL, present
+1 - Indicates that distBinX, which is OPTIONAL, present
+1 - Indicates that distBinY, which is OPTIONAL, present
+1 - Indicates that distBinZ, which is OPTIONAL, present
+----- This gives ff byte
+
+1 - Indicates that preLabelOverride, which is OPTIONAL, present
+1 - Indicates that startEndInd, which is OPTIONAL, present
+00 0000 - Octet alignment
+----- This gives c0 byte
+
+--------------------------------------------------------------------
+Next 3 bytes are dedicated to PLMN-ID since it is fixed size Octet String
+----- 01 02 03 is a value of PLMN-ID
+
+--------------------------------------------------------------------
+Next goes SNSSAI which is a structure
+0 - indicates that SNSSAI is not Extended (but could potentially be)
+1 - indicates that OPTIONAL item (SD - Octet string of size 3) is present
+--- Next goes Octet representing SST (octet string of size 1 octets), which is exactly one Octet long
+0011 1111
+00 0000 - is an Octet alignment
+----- This gives us 4f c0 bytes
+
+Next goes OPTIONAL part of SNSSAI structure - SD which is 3 byte Octet string
+----- 01 02 03 is a value of SD item in SNSSAI, which has fixed size of 3 bytes (3 Octets)
+
+--------------------------------------------------------------------
+Next goes FiveQI structure (constrained Integer which could be extended)
+0 - indicates that FiveQI value is not Extended (but could potentially be)
+-- next 3 bits carry length of a value (in bits) --> 255 need 8 bits to carry this number, 8 could be encoded with 3 bits
+000 - we need 1 byte to carry value
+0000 - Octet Alignment
+----- In result we have 00 byte
+
+Next goes value of FiveQI
+0a - corresponds to 10, which is an encoded value of FiveQI
+--------------------------------------------------------------------
+
+Now goes QFI structure
+0 - indicates that QFI value is not Extended (but could potentially be)
+--- next 3 bits carry length of a value (in bits) --> 63 need 6 bits to carry this number, 6 could be encoded with 3 bits
+111 - 
+
+
+--------------------------------------
+Now goes ARP structure
+0 - indicates that ARP(max) value is not Extended (but could potentially be)
+1110 - this is a value of ARPmax, which is 15 (14 over 1)
+0 - indicates that ARP(min) value is not Extended (but could potentially be)
+0000 - this is a value of ARPmin, which is 1 (0 over 1)
+00 0000 - Octet alignment
+----- This gives us 70 00 bytes
+
