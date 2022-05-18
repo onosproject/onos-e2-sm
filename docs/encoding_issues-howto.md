@@ -21,7 +21,7 @@ In O-RAN, encoding/decoding schema is generated with asn1c tool, which generates
 Nokia’s distribution of [asn1c](https://github.com/nokia/asn1c).
 
 [Go APER library](https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper) is fully compatible with Nokia’s
-asn1c tool (and thus **compliant with O-RAN**). It was proved with unit tests for [E2AP](https://github.com/onosproject/onos-e2t/commit/aef6613e0eb2c3d8a13aae72ea8ad4de7b7da655)
+asn1c tool (and thus **compliant with O-RAN**). It was proven with unit tests for [E2AP](https://github.com/onosproject/onos-e2t/commit/aef6613e0eb2c3d8a13aae72ea8ad4de7b7da655)
 and E2SMs ([KPMv2](https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_kpm_v2_go/unit_tests), 
 [RC-PRE](https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_rc_pre_go), 
 [MHO](https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go), 
