@@ -77,5 +77,13 @@ The E2AP (E2 Application Protocol) is not a Service Model, and so is kept comple
 
 [O-RAN]: https://www.o-ran.org/
 
-## How to create your own SM?
+# FAQ
+### - How to create your own SM?
 [Here](docs/sm-howto.md) you can find a tutorial on how to create your own SM.
+
+### - What to do if an encoding/decoding error happens?
+A comprehensive guide on how to deal with encoding/decoding errors could be found [here](docs/encoding_issues-howto.md).
+It also describes the APER tags usage within the Protobuf.
+
+### - Is there any description of the error messages produced by the Go APER library?
+Yes, a brief description of the most common error messages can be found [here](https://github.com/onosproject/onos-lib-go/blob/master/pkg/asn1/aper/README.md). 

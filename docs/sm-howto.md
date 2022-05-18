@@ -12,8 +12,7 @@ O-RAN service models are defined in ASN.1 format, as they are used to be transpo
 In the SD-RAN project, internally the near-RT RIC implementation realizes the utilization of Service Models via gRPC, therefore the need for their definition in protobuf.
 In SD-RAN, the component responsible for the “translation” of ASN.1/SCTP to protobuf/gRPC format is `onos-e2t`.
 Therefore, xApps when implemented in SD-RAN utilize the library provided by the compilation of protobuf definitions of Service Models (SMs).
-To learn more about the definition of SMs in SD-RAN have a look at the readme of `onos-e2-sm` repository:
-https://github.com/onosproject/onos-e2-sm/blob/master/README.md.
+To learn more about the definition of SMs in SD-RAN have a look at the readme of [`onos-e2-sm` repository](https://github.com/onosproject/onos-e2-sm/blob/master/README.md).
 
 This tutorial defines how to write a Service Model and provide support for it in the SD-RAN project, so it can be utilized by the xApps for instance.
 
@@ -22,11 +21,12 @@ This tutorial defines how to write a Service Model and provide support for it in
 
 ### 1. ASN.1 to Protobuf
 
-#### 1.1  You have to use the ONF's distribution of the `asn1c` tool. 
+#### 1.1  You have to use the ONF's distribution of the [`asn1c` tool](https://github.com/onosproject/asn1c). 
 
-You can find it here:
+You can find it [here](https://github.com/onosproject/asn1c):
 
 https://github.com/onosproject/asn1c
+
 
 Please, follow its installation steps.
 Once set, you can generate Protobuf out of asn1 definition using the `-B` option. The full command should look like:
@@ -44,170 +44,163 @@ Note (implementation choices):
   - SM with the CGo approach is complex on implementation and requires a lot of effort for maintenance (e.g., future upgrade of SM).
   - In CGo, Go doesn’t take care of garbage collection and memory leaks (due to the C code) may happen.
 
-- Go APER - is the Go package which implements APER encoder and decoder (https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper). 
+- Go APER - is the [Go package which implements APER encoder and decoder](https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper). 
 It is capable of converting the message in the APER bytes and decode the message from the APER bytes. This APER library is fully compatible with 
 the asn1c tool.
-  - Currently this is the best way to implement SM.
+  - Currently, this is the best way to implement SM.
 
+<br>
 
 #### 1.2 Make sure that the Protobuf messages in your generated Protobuf correspond to reference ones defined in the ASN.1 definition. 
 
 A good example is the Protobuf for MHO SM stored in `onos-e2-sm` repo.
+For this tutorial, the MHO SM is being used as a reference example. So, please use as a reference 
+[this Protobuf file](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto).
 
-For this tutorial, the MHO SM is being used as a reference example. So, please use as a reference the following Protobuf file:
-
-https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto
 
 Go APER requires the definition of tags marked as annotations in the message fields. Having these tags would help the Go APER library to correctly encode and decode the messages.
-
 Currently, the automated definition of tags is not handled by the `asn1c` tool, but this feature is going to be implemented in the future.
 
 It is necessary to insert all tags correctly, otherwise Go APER library wouldn’t be able to encode or decode the message correctly.
-
 Here are some examples:
 
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L44
+* [Tags for constrained Integer structures](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L44)
 
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L67
+* [Tags for Choices](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L67)
 
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L129
+* [Tag for Choices which could be extended](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L129)
 
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L145
+* [Tag for Optional items](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L145)
 
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L182
+* [Tags for Sequence Of (lists) or PrintableStrings (string), Octet Strings ([]byte) and BitStrings](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/v2/e2sm_mho_go.proto#L182)
 
+> Please also refer to [this](encoding_issues-howto.md) guide, which explains the APER tags usage in details.
+
+<br>
 
 #### 1.3 Add SM compilation commands into the Makefile
 
 Embed your SM in the `onos-e2-sm` Makefile script to generate Protobuf with the `make protos` command (i.e., to facilitate the translation of the 
 Protobuf to golang code, the proper references of packages are done using the makefile targets. In the case of SMs it is done using the commands 
-protoc and `protoc-go-inject-tag`).
-Here is an example:
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/build/bin/compile-protos.sh#L38-L41
+`protoc` and `protoc-go-inject-tag`). 
 
-Don’t forget to create the target that calls the injection of all tag definitions from the Protobuf to the golang pb generated code, for instance:
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/build/bin/compile-protos.sh#L42
+> [Here](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/build/bin/compile-protos.sh#L38-L41)
+is an example of how to generate a Golang driven Protobuf structures out of plain Protobuf.
+> Don’t forget to create the target that calls the injection of all tag definitions from the Protobuf to the Golang pb generated code, for instance 
+like [here](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/build/bin/compile-protos.sh#L42):
+
+<br>
 
 ##### 1.3.1 Importance of `protoc-gen-validate` plugin.
 
 You can benefit from `protoc-gen-validate` plugin, it can validate your messages and throw an error if you’ve the data inserted in your message 
 are out of range, i.e., INTEGER has an upper bound of 255, for some reason 256 is passed instead – `protoc-gen-validate` will catch this error 
-and notify you.
+and notify you. Asn1c tool already generates all necessary rules for this plugin, you only need to enable it in the compilation process. 
 
-Asn1c tool already generates all necessary rules for this plugin, you only need to enable it in the compilation process. Here is an example 
-on how to do that:
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/build/bin/compile-protos.sh#L62-L65
+> [Here](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/build/bin/compile-protos.sh#L62-L65) is an example 
+on how to do that.
 
-If it is enabled, you can then validate your messages in the following way:
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L23-L25
+> If `protoc-gen-validate` is enabled, you can then validate your messages in [this way](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L23-L25).
 
-Now you can run make protos, which will generate a Protobuf-based golang code of your SM.
+<br><br>
+Now you can run `make protos`, which will generate a Protobuf-based Golang code of your SM.
 
-The CGo way of implementing SMs is a legacy way now. A better (and easier) way to implement **E2*** is to use Go APER library:
+> The CGo way of implementing SMs is a legacy way now. A better (and easier) way to implement **E2*** is to use [Go APER library](https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper). 
+> You can refer to all SMs, the outcome of Go APER library, in the `onos-e2-sm` repo appended with **_go** to see how it's done.
 
-https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper
-
-You can refer to all SMs, the outcome of Go APER library, in the `onos-e2-sm` repo appended with **_go** to see how it's done.
-
+<br>
 
 ### 2. Create wrappers for encoder and decoder.
 
-Each SM has a specific wrapper to encode each one of its messages to APER. You can find an example here, where all the MHO SM messages have 
-defined their encoders:
+Each SM has a specific wrapper to encode each one of its messages to APER. 
+> You can find an example [here](https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go/encoder),
+> where all the MHO SM messages have defined their encoders.
 
-https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go/encoder
 
-Each definition of an SM message encoder file contains encode and decode functions associated with that message.
+Each definition of an SM message encoder file contains encode and decode functions associated with that message: 
+* For example, the encoder for MHO-ControlHeader looks [like that](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go).
+* The encoding part is being invoked [here](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L27).
+* Respectively, decoding is being done [here](https://github.com/onosproject/onos-e2-sm/blob/f7fd56fc6b0e84cf6e98490200a297bada4b3630/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L38).
 
-For example, the encoder for MHO-ControlHeader looks like that:
 
-https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go
+**Notice**: as shown in [line 24](https://github.com/onosproject/onos-e2-sm/blob/6fd4546563ed112d47a89b173abcc31982ead240/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L24)
+of the file E2SM-MHO-ControlHeader.go, there is a mandatory prerequisite for marshaling (and unmarshaling). 
+In MHO Control Header encoder look for the variable `e2smmhov2.MhoChoicemap`, [this variable](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/v2/e2sm-mho-go/choiceOptions.go)
+contains a map of all CHOICE structs, which are in your SM definition. Without that input, the encoder and decoder wouldn’t know which 
+CHOICE option they’re expected to encode or decode (marshal or unmarshal a message).
 
-The encoding part is being invoked here:
+> The file containing the choice options, as mentioned above, can be automatically generated with a [`protoc-gen-choice` plugin](../protoc-gen-choice).
+Please study carefully the [`README`](../protoc-gen-choice/README.md) in order to install and use this plugin.
 
-https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L27
 
-Respectively, decoding is being done here:
-
-https://github.com/onosproject/onos-e2-sm/blob/f7fd56fc6b0e84cf6e98490200a297bada4b3630/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L38
-
-**Notice**: as shown in line 24 of the file E2SM-MHO-ControlHeader.go, there is a mandatory prerequisite for marshaling (and unmarshaling). 
-In MHO Control Header encoder look for the variable `e2smmhov2.MhoChoicemap`, this variable contains a map of all CHOICE structs, which are 
-in your SM definition. Without that input, the encoder and decoder wouldn’t know which CHOICE option they’re expected to encode or decode 
-(marshal or unmarshal a message).
-
-https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/v2/e2sm-mho-go/choiceOptions.go
-
-The file containing the choice options, as mentioned above, can be automatically generated with a `protoc-gen-choice` plugin. Please study 
-carefully the `README` in order to install and use this plugin:
-
-https://github.com/onosproject/onos-e2-sm/tree/master/protoc-gen-choice
-
-The `protoc-gen-choice` tool is being modified to support the correct definitions of choices files, in the future this step is going to be 
-added as another target in the Makefile.
-
-Encoder/Decoder wrappers could be automatically generated via yet another protoc (Protobuf compiler) plugin modification. This implementation 
-can be defined in a future release.
-
+<br>
 
 ### 3. Create pdubuilders around it.
 
-In general, `pdubuilder` should help to create messages in a faster way (i.e., to create the header and content of a message). A myriad of 
-pdubuilders can be defined to facilitate the creation of messages. The goal of pdubuilders is to facilitate the utilization of the SM golang 
+In general, `pdubuilder` should help to create messages in a faster way (i.e., to create the header and the content of the message). A myriad of 
+pdubuilders can be defined to facilitate the creation of messages. The goal of pdubuilders is to facilitate the utilization of the SM Golang 
 code by the xApp.
-There are certain patterns, which may lead to automation of the pdubuilder creation process. Currently, this is under investigation.
 
-All MHO SM pdubuilders are stored here:
+All MHO SM pdubuilders are stored in the [`pdubuilder` directory](https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go/pdubuilder)
+of the MHO SM.
 
-https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go/pdubuilder
+To outline, here are some examples provided below:
+* Top-level `pdubuilder` for E2SM-MHO IndicationMessage [Format1](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L12)
+and [Format2](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L29)
 
-To outline, here are some examples provided below.
+* An example of [other helper functions](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L45) which create specific/complex items.
 
-Top-level `pdubuilder`
+> All `CHOICE`s deserve their own wrappers! Like the one [here](https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L58).
 
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L12
+> Some other helper functions are stored in a [builder.go](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/v2/e2sm-mho-go/builder.go). This file contains Setter functions for all `OPTIONAL` items in your SM definition.
 
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L29
-
-Create some other helper functions which create specific/complex items:
-
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L45
-
-All CHOICEs deserve their own wrappers! Like here one:
-
-https://github.com/onosproject/onos-e2-sm/blob/977f29d11e56f01a17b077f9d8c2c7fc00ab2f4f/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message.go#L58
-
-
-Some other helper functions are stored in a builder.go. This file contains Setter functions for all OPTIONAL items in your SM definition.
-
-https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/v2/e2sm-mho-go/builder.go
-
-Auto generation of this file could be automated with a yet another protoc plugin.
-
+<br>
 
 ### 4. Pack it as a plugin.
-An example could be found here:
-
-https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go/servicemodel
-
+An example could be found [here](https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go/servicemodel).
 This is an implementation of a common plugin interface. It should correspond to the rest of the SMs.
 
 > Steps 2, 3 and 4 are automated with [protoc-gen-builder](../protoc-gen-builder/README.md) plugin. Please take a look at it. It should do the majority of the work. 
-> Necessary prerequisite is correct .proto file, with all tags inserted correctly! 
 
-> If you're unsure about the correctness of the Protobuf, please visit [this](encoding_issues-howto.md) guide.
+> Necessary prerequisite is a correct `.proto` file, with all tags inserted correctly! If you're unsure about the correctness of the Protobuf, please visit [this](encoding_issues-howto.md) guide.
+
+<br>
 
 ### 5. Verify that encoding and decoding works with unit tests!
 
-This is a **fundamental** step before you can start using your SM.
-Perfectly, each unit test should verify that Go APER library is able to encode the message without any errors and decode the generated set of 
+Each unit test should verify that the Go APER library is able to encode the message without any errors and decode the generated set of 
 APER bytes. Decoded message should be completely similar to the encoded one.
-A good example of such approach could be found here:
+A good example of such approach could be found [here](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Control-Header_test.go) 
+or [here](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Indication-Message_test.go).
 
-https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/pdubuilder/E2SM-MHO-Control-Header_test.go
+> This is the most essential and a **fundamental** step before you can start using your SM!
 
+
+<br>
 
 ### 6. Publish the SM
-Add the SM definitions (service model, proto, golang, encoder, etc) to the `onos-e2-sm` repository. Similar to other SMs already contained, 
-create a golang module and push the code to the `onos-e2-sm`.
-Use the other SMs as reference to create the `go.mod` file and structure of folders/files.
+Add the SM definitions (service model, proto, Golang code, encoder, etc) to the `onos-e2-sm` repository. Similar to other SMs already contained, 
+create a Golang module and push the code to the `onos-e2-sm`.
+Use the other SMs as reference to create the [`main.go` file](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/main.go) and structure of folders/files.
+
+Please also include unit tests in the [`make test` target](https://github.com/onosproject/onos-e2-sm/blob/6fd4546563ed112d47a89b173abcc31982ead240/Makefile#L63-L73). 
+[Here](https://github.com/onosproject/onos-e2-sm/blob/6fd4546563ed112d47a89b173abcc31982ead240/Makefile#L191-L197) 
+and [here](https://github.com/onosproject/onos-e2-sm/blob/6fd4546563ed112d47a89b173abcc31982ead240/Makefile#L208-L212) is an
+example of building an SM image in a Docker container. An example of loading of an image to the KinD can be found [here](https://github.com/onosproject/onos-e2-sm/blob/6fd4546563ed112d47a89b173abcc31982ead240/Makefile#L216-L222).
+
+
+## Summary
+Wrapping up all aforesaid, the source code for the SM, for instance E2SM-RC, could be generated with following commands:
+```bash
+> cd onos-e2-sm/servicemodels/
+> mkdir e2sm_rc && cd e2sm_rc
+# Generate your Protobuf with asn1c tool and locate it in the SM folder, for instance e2sm_rc/v1/ (since it is E2SM-RC v01.01.05)
+> cd v1 && mkdir choiceOptions && cd ../
+> mkdir encoder && mkdir pdubuilder && mkdir servicemodel
+> cd ../../ # get back to the root directory of ono-e2-sm repo
+> pwd
+~/go/src/github.com/onosproject/onos-e2-sm
+> proto_imports=${GOPATH}/src/github.com/onosproject/onos-e2-sm/
+> protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api" --proto_path="servicemodels/" --choice_out="servicemodels/e2sm_rc/v1/choiceOptions/" servicemodels/e2sm_rc/v1/e2sm_common_ies.proto servicemodels/e2sm_rc/v1/e2sm_rc.proto
+> protoc -I="$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api" --proto_path="servicemodels/" --builder_out="sm=true:servicemodels/e2sm_rc/" servicemodels/e2sm_rc/v1/e2sm_common_ies.proto servicemodels/e2sm_rc/v1/e2sm_rc.proto
+```
