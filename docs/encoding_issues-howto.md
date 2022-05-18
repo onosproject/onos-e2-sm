@@ -4,6 +4,13 @@ SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetwor
 SPDX-License-Identifier: Apache-2.0
 -->
 
+ASN.1 concepts are mapped to Protobuf to work with modern code tools and make the development of Service Models 
+(and various E2* interfaces) easier. [Go APER library](https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper) 
+works with these Protobuf definitions to encode and decode information in APER format. It is a 
+[fork](https://github.com/free5gc/aper) of the free5gc project, which was significantly reworked and 
+enhanced to work with protobuf driven Go structs, rather than plain Go structs.
+
+
 # How to deal with encoding/decoding problems?
 When you integrate your SW with ONF’s RIC you may face some issues related to the encoding/decoding of the information 
 sent over the wire. Here is a summary of potential problems you may face.
@@ -13,14 +20,12 @@ APER encoding is specified in [ITU-T X.691](https://www.itu.int/ITU-T/studygroup
 In O-RAN, encoding/decoding schema is generated with asn1c tool, which generates a C code. Reference asn1c tool recommended by O-RAN is 
 Nokia’s distribution of [asn1c](https://github.com/nokia/asn1c).
 
-[Go APER library](https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper) is a [fork](https://github.com/free5gc/aper) 
-of the free5gc project, which was significantly reworked and enhanced. It is fully compatible with Nokia’s asn1c tool (and thus 
-**compliant with O-RAN**), which was proved with unit tests for E2AP and E2SMs (KPMv2, RC-PRE, MHO, Test-SM).
+[Go APER library](https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper) is fully compatible with Nokia’s
+asn1c tool (and thus **compliant with O-RAN**). It was proved with unit tests for E2AP and E2SMs (KPMv2, RC-PRE, MHO, Test-SM).
 
-#### What may case incompatibility in APER bytes?
+#### What may cause incompatibility in APER bytes?
 1. Make sure you've inserted all tags in Protobuf, so they correspond to the ASN.1 definition of your SM.
-   * If you're programming in C, take a look at the source code - you may miss to insert some APER tags in your code.
-   * If you’re programming in Golang, make sure that all tags were correctly injected into the Protobuf (wrapped with Golang, file extension is `.pb.go`). 
+   * Clarify if all tags are present in the Protobuf (wrapped with Golang, file extension is `.pb.go`). 
    If you don’t see them (tags), please revisit [tutorial on how to create your own SM](sm-howto.md).
 
 2. Enable DEBUG mode in [Go APER library](https://github.com/onosproject/onos-lib-go/tree/master/pkg/asn1/aper) and do a 
@@ -54,7 +59,7 @@ message Choice {
 > For that purpose a CHOICE map is being created with [protoc-gen-choice](../protoc-gen-choice/README.md) plugin.
 
 `CHOICE` structure can also be extensible and can contain items in its extension. This requires to put such tags as `choiceExt` and `fromChoiceExt` to indicate that the `CHOICE` can be extended and indicated which items 
-belong to its extension A good example of such structure could be found [here](https://github.com/onosproject/onos-e2t/blob/7f0b65294ecd539e15715514ba7a201b7098868f/api/e2ap/v2/e2ap_ies.proto#L307-L319).
+belong to its extension. A good example of such structure could be found [here](https://github.com/onosproject/onos-e2t/blob/7f0b65294ecd539e15715514ba7a201b7098868f/api/e2ap/v2/e2ap_ies.proto#L307-L319).
 
 * `SEQUENCE` encoding usually requires only single tag to be inserted in case it is needed. It is `valueExt`, which indicates that the `SEQUENCE` can be
 extended. If items in the extension are defined, then tag `fromValueExt` is used (see below).
