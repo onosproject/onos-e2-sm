@@ -209,7 +209,8 @@ Please consider tacking a look at the links in "Some useful resources" section. 
 
 
 ## General steps on tackling encoding/decoding problems
-1. Read error message carefully. You may exceed the boundary or forgot to include an item.
+1. Read error message carefully. You may exceed the boundary or forgot to include an item in the message.
+   * You may refer to [this guide](https://github.com/onosproject/onos-lib-go/blob/master/pkg/asn1/aper/error_list.md) to get a tip on what does certain error message mean.
 2. Revisit APER tags and make sure they're present in the `.pb.go` file.
 3. Do a bit by bit analysis to understand where is the root cause of the problem.
 

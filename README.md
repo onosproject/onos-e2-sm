@@ -86,4 +86,4 @@ A comprehensive guide on how to deal with encoding/decoding errors could be foun
 It also describes the APER tags usage within the Protobuf.
 
 ### - Is there any description of the error messages produced by the Go APER library?
-Yes, a brief description of the most common error messages can be found [here](https://github.com/onosproject/onos-lib-go/blob/master/pkg/asn1/aper/README.md). 
+Yes, a brief description of the most common error messages can be found [here](https://github.com/onosproject/onos-lib-go/blob/master/pkg/asn1/aper/error_list.md). 
