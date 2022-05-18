@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+This is an analysis of GlobalKPMnode-ID structure APER encoding per KPM v2.0.3 definition:
+https://github.com/onosproject/onos-e2-sm/blob/e6dc49d1cd9f4554e11856f1a2a0aeac33034f71/servicemodels/e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto#L278
+
+0 - valueExt (not present) for GlobalKPMnode-ID structure
+00 - choiceIdx which indicates that we have GNB choice option 
+
+--> driliing down to the GlobalKPMnode-gNB-ID structure
+0 - valueExt (not present) for GlobalKPMnode-gNB-ID structure
+1 - indicates OPTIONAL struct (GNB-CU-UP-ID) presence for GlobalKPMnode-gNB-ID structure
+1 - indicates OPTIONAL struct (GNB-DU-ID) presence for GlobalKPMnode-gNB-ID structure
+
+--> drilling down to the GlobalgNB-ID
+0 - valueExt (not present) for GlobalgNB-ID structure
+
+0 - Octet alignment
+----------------------------
+In total this byte is 0C
+
+--> drilling down to the PLMN-ID (fixed length, not extensible)
+21 22 23 - value of PLMN-ID which is fixed length and not extensible
+
+------------------------
+--> going back to the GlobalgNB-ID and drilling down to the GNB-ID-Choice
+0 - valueExt (not present) for GNB-ID-Choice structure
+0 - choiceIdx which indicates that we have gnb-ID choice option
+
+0110 - length of a BIT STRING value represented in gnb-ID
+
+00 - octet alignment
+-------------------------
+In total this byte is 18
+
+d4 bc 09 00 - value of a BIT STRING
+
+--> going back to the GlobalGnb-ID structure and starting to encode the next item
+--> encoding GNB-CU-UP-ID
+--> encoding length of GNB-CU-UP-ID, 0 corresponds to the 1 byte
+CU-UP needs 3 bits to hold the length which were appended to the end of the previous BitString (we had 4 bits unused).
+1 Byte was used for the value (21), the next Byte was holding the length of the DU-ID, which had 3 bits to describe the
+lengths, which was 000x xxxx, x is an octet alignment), the last byte was the value of DU (32).
+

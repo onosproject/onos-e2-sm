@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+This is an analysis of MeasurementData structure APER encoding per KPM v2.0.3 definition:
+https://github.com/onosproject/onos-e2-sm/blob/e6dc49d1cd9f4554e11856f1a2a0aeac33034f71/servicemodels/e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto#L548
+
+0x00 0x07 - is a size of MeasurementData structure (list)
+
+---> Drilling down to MeasurementDataItem structure
+0 - stands for SEQUENCE is not extended for MeasurementDataItem.
+1 - stands for OPTIONAL item incompleteFlag is present.
+---> Drilling down to MeasurementRecord structure
+00 - describes the length of the bytes (1, i.e., 0 above 1) which carry the length of the MeasurementRecord structure (list).
+0000 - Octet-alignment.
+
+It gives us 0x40.
+
+Next byte, 0x01, gives the length of the MeasurementRecord structure (list). It is 1, so expecting 1 item.
+
+---> Drilling Down to MeasurementRecordItem
+0 - stands for CHOICE is not extended.
+00 - is a CHOICE index, i.e., 0 -> Integer.
+0 0 - describes the length of the bytes (1, i.e., 0 above 1) which carry the INTEGER number.
+000 - Octet-alignment.
+
+It gives us 0x00.
+Next byte describes the number which is carried in MeasurementRecordItem->Integer option. It is 0x00.
+In case of MeasurementRecordItem->Integer is 5, the byte would be 0x05.
+
+We're returning to MeasurementDataItem and continuing to encode it. Next item is incompleteFlag
+
+
+0 - stands for ENUMERATED (incompleteFlag) is not extended.
+---> Value of IncompleteFlag is fixed (there is only single option, so no need to carry it -> not encoded)
+--> Drilling down to another MeasurementDataItem
+0 - stands for SEQUENCE is not extended for MeasurementDataItem.
+1 - stands for OPTIONAL item incompleteFlag is present.
+---> Drilling down to MeasurementRecord structure
+0 0 - describes the length of the bytes (1, i.e., 0 above 1) which carry the length of the MeasurementRecord structure (list).
+000 - Octet-alignment.
+
+It gives us 0x20.
+Next byte, 0x01, gives the length of the MeasurementRecord structure (list). It is 1, so expecting 1 item.

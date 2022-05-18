@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2019-present Open Networking Foundation <info@opennetworking.org>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+This is an analysis of RanFunction-Description structure APER encoding per KPM v2.0.3 definition:
+https://github.com/onosproject/onos-e2-sm/blob/e6dc49d1cd9f4554e11856f1a2a0aeac33034f71/servicemodels/e2sm_kpm_v2_go/v2/e2sm_kpm_v2_go.proto#L802
+
+Going through the KPMv2-RanFunction-Description (RFD) structure, which is of SEQUENCE type
+
+0 - valueExt is not present (i.e., value of the RFD is not extended)
+1 - ric-KPM-Node-List is OPTIONAL and present in the message
+1 - ric-EventTriggerStyle-List is OPTIONAL and present in the RFD
+1 - ric-ReportStyle-List is OPTIONAL and present in the RFD
+
+---> Drilling down to the RANfunction-Name
+0 - valueExt is not present (i.e., value of the RANfunction-Name is not extended)
+1 - ranFunction-Instance is OPTIONAL and present in the RANfunction-Name
+---> Drilling down to the ranFunction-ShortName
+0 - sizeExt is not present (i.e., size of ranFunction-ShortName, which is PrintableString, is not extended)
+
+-- At this point, length of ranFunction-ShortName is being encoded. This structure has maximum size of 150 characters, which requires 8 bits to encode the value: xxxx xxxx.
+
+0 0001 100 - stands for the constrained value 13 (it is 12 over 1, boundaries are 1 and 150), which is the length of the ranFunction-ShortName ("ORAN-E2SM-KPM" in our message) 
+0 - is an Octet-alignment
+
+
+In the end we have:
+----> first byte is 0x74 (0111 0100)
+----> second byte is 0x18 (0001 1000)
+
+
+Next byte is 0x4F, which stands for the first character of the ranFunction-ShortName, which is "O" (in ASCII table "O" is represented by 4F)
+

@@ -192,10 +192,14 @@ https://github.com/onosproject/onos-e2-sm/tree/master/servicemodels/e2sm_mho_go/
 
 This is an implementation of a common plugin interface. It should correspond to the rest of the SMs.
 
+> Steps 2, 3 and 4 are automated with [protoc-gen-builder](../protoc-gen-builder/README.md) plugin. Please take a look at it. It should do the majority of the work. 
+> Necessary prerequisite is correct .proto file, with all tags inserted correctly! 
+
+> If you're unsure about the correctness of the Protobuf, please visit [this](encoding_issues-howto.md) guide.
 
 ### 5. Verify that encoding and decoding works with unit tests!
 
-This is a fundamental step before you can start using your SM.
+This is a **fundamental** step before you can start using your SM.
 Perfectly, each unit test should verify that Go APER library is able to encode the message without any errors and decode the generated set of 
 APER bytes. Decoded message should be completely similar to the encoded one.
 A good example of such approach could be found here:
