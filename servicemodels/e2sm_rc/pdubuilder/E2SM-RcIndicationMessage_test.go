@@ -224,3 +224,44 @@ func TestE2SmRcIndicationMessageFormat5(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("Decoded message is\n%v", result)
 }
+
+func TestE2SmRcIndicationMessageFormat6(t *testing.T) {
+
+	ricInsertStyleList := make([]*e2smrcv1.E2SmRcIndicationMessageFormat6StyleItem, 0)
+
+	ricInsertIndicationList := make([]*e2smrcv1.E2SmRcIndicationMessageFormat6IndicationItem, 0)
+
+	ranPInsertIndicationList := make([]*e2smrcv1.E2SmRcIndicationMessageFormat6RanpItem, 0)
+
+	ranParameterValue, err := CreateRanparameterValueBoolean(true)
+	assert.NilError(t, err)
+
+	ranParameterValueType, err := CreateRanparameterValueTypeChoiceElementTrue(ranParameterValue)
+	assert.NilError(t, err)
+
+	ranPIndicationItem, err := CreateE2SmRcIndicationMessageFormat6RanpItem(1, ranParameterValueType)
+	assert.NilError(t, err)
+
+	ranPInsertIndicationList = append(ranPInsertIndicationList, ranPIndicationItem)
+
+	indicationItem, err := CreateE2SmRcIndicationMessageFormat6IndicationItem(1, ranPInsertIndicationList)
+	assert.NilError(t, err)
+
+	ricInsertIndicationList = append(ricInsertIndicationList, indicationItem)
+
+	styleItem, err := CreateE2SmRcIndicationMessageFormat6StyleItem(1, ricInsertIndicationList)
+	assert.NilError(t, err)
+
+	ricInsertStyleList = append(ricInsertStyleList, styleItem)
+
+	msg, err := CreateE2SmRcIndicationMessageFormat6(ricInsertStyleList)
+	assert.NilError(t, err)
+
+	aper, err := encoder.PerEncodeE2SmRcIndicationMessage(msg)
+	assert.NilError(t, err)
+	t.Logf("APER bytes are\n%v", hex.Dump(aper))
+
+	result, err := encoder.PerDecodeE2SmRcIndicationMessage(aper)
+	assert.NilError(t, err)
+	t.Logf("Decoded message is\n%v", result)
+}

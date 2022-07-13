@@ -21,6 +21,11 @@ func (m *EventTriggerUeeventInfoItem) SetLogicalOr(lor LogicalOr) *EventTriggerU
 	return m
 }
 
+func (m *EventTriggerUeInfoItemChoiceIndividual) SetRanparameterTesting(ranParameterTesting *RanparameterTesting) *EventTriggerUeInfoItemChoiceIndividual {
+	m.RanParameterTesting = ranParameterTesting
+	return m
+}
+
 func (m *RanparameterDefinitionChoiceListItem) SetRanParameterDefinition(ranParameterDefinition *RanparameterDefinition) *RanparameterDefinitionChoiceListItem {
 	m.RanParameterDefinition = ranParameterDefinition
 	return m
@@ -121,6 +126,11 @@ func (m *E2SmRcEventTriggerFormat5) SetAssociatedCellInfo(associatedCellInfo *Ev
 	return m
 }
 
+func (m *E2SmRcActionDefinitionFormat1Item) SetRanparameterDefinition(ranParameterDefinition *RanparameterDefinition) *E2SmRcActionDefinitionFormat1Item {
+	m.RanparameterDefinition = ranParameterDefinition
+	return m
+}
+
 func (m *E2SmRcActionDefinitionFormat2Item) SetRicPolicyConditionDefinition(ricPolicyConditionDefinition *RanparameterTesting) *E2SmRcActionDefinitionFormat2Item {
 	m.RicPolicyConditionDefinition = ricPolicyConditionDefinition
 	return m
@@ -131,10 +141,37 @@ func (m *E2SmRcActionDefinitionFormat3) SetUeID(ueID *e2smcommonies.Ueid) *E2SmR
 	return m
 }
 
+func (m *E2SmRcActionDefinitionFormat3Item) SetRanparameterDefinition(ranParameterDefinition *RanparameterDefinition) *E2SmRcActionDefinitionFormat3Item {
+	m.RanparameterDefinition = ranParameterDefinition
+	return m
+}
+
+func (m *E2SmRcActionDefinitionFormat4) SetUeID(ueID *e2smcommonies.Ueid) *E2SmRcActionDefinitionFormat4 {
+	m.UeId = ueID
+	return m
+}
+
+func (m *E2SmRcActionDefinitionFormat4RanpItem) SetUeID(rpd *RanparameterDefinition) *E2SmRcActionDefinitionFormat4RanpItem {
+	m.RanParameterDefinition = rpd
+	return m
+}
+
 func (m *E2SmRcIndicationHeaderFormat1) SetRicEventTriggerConditionID(ricEventConditionID int32) *E2SmRcIndicationHeaderFormat1 {
 	m.RicEventTriggerConditionId = &RicEventTriggerConditionId{
 		Value: ricEventConditionID,
 	}
+	return m
+}
+
+func (m *E2SmRcIndicationHeaderFormat3) SetRicEventTriggerConditionId(retcID int32) *E2SmRcIndicationHeaderFormat3 {
+	m.RicEventTriggerConditionId = &RicEventTriggerConditionId{
+		Value: retcID,
+	}
+	return m
+}
+
+func (m *E2SmRcIndicationHeaderFormat3) SetUeID(ueID *e2smcommonies.Ueid) *E2SmRcIndicationHeaderFormat3 {
+	m.UeId = ueID
 	return m
 }
 
@@ -169,6 +206,16 @@ func (m *E2SmRcIndicationMessageFormat4ItemCell) SetNeighborRelationTable(neighb
 }
 
 func (m *E2SmRcControlHeaderFormat1) SetRicControlDecision(ricControlDecision RicControlDecision) *E2SmRcControlHeaderFormat1 {
+	m.RicControlDecision = &ricControlDecision
+	return m
+}
+
+func (m *E2SmRcControlHeaderFormat2) SetUeID(ueID *e2smcommonies.Ueid) *E2SmRcControlHeaderFormat2 {
+	m.UeId = ueID
+	return m
+}
+
+func (m *E2SmRcControlHeaderFormat2) SetRicControlDecision(ricControlDecision RicControlDecision) *E2SmRcControlHeaderFormat2 {
 	m.RicControlDecision = &ricControlDecision
 	return m
 }
@@ -322,5 +369,10 @@ func (m *PolicyActionRanparameterItem) SetRanParameterDefinition(ranParameterDef
 
 func (m *PolicyConditionRanparameterItem) SetRanParameterDefinition(ranParameterDefinition *RanparameterDefinition) *PolicyConditionRanparameterItem {
 	m.RanParameterDefinition = ranParameterDefinition
+	return m
+}
+
+func (m *RicPolicyAction) SetRicPolicyDecision(ricPolicyDecision RicPolicyDecision) *RicPolicyAction {
+	m.RicPolicyDecision = &ricPolicyDecision
 	return m
 }

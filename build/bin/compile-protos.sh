@@ -109,7 +109,14 @@ protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
   --go_out=. \
   e2sm_rc/v1/e2sm_common_ies.proto
 
-#protoc -I=$proto_imports --validate_out=lang=go:. --proto_path=servicemodels \
+#protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
+#  --proto_path=servicemodels \
+#  --go_out=. \
+#  e2sm_ni/v1beta1/e2sm_ni_ies.proto
+#protoc-go-inject-tag -input=e2sm_ni/v1beta1/e2sm-ni-ies/e2sm_ni_ies.pb.go
+#
+#protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
+#  --validate_out=lang=go:. --proto_path=servicemodels \
 #  --go_out=. \
 #  e2sm_ni/v1beta1/e2sm_ni_ies.proto
 
@@ -132,3 +139,6 @@ rm -rf github.com
 
 cp -r servicemodels/github.com/onosproject/onos-e2-sm/* .
 rm -rf servicemodels/github.com
+
+#cp -r e2sm_ni/* ./servicemodels/
+#rm -rf e2sm_ni

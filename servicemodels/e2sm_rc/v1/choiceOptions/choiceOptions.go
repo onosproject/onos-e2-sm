@@ -71,10 +71,12 @@ var E2smRcChoicemap = map[string]map[int]reflect.Type{
 		1: reflect.TypeOf(e2smrcv1.RicActionDefinitionFormats_ActionDefinitionFormat1{}),
 		2: reflect.TypeOf(e2smrcv1.RicActionDefinitionFormats_ActionDefinitionFormat2{}),
 		3: reflect.TypeOf(e2smrcv1.RicActionDefinitionFormats_ActionDefinitionFormat3{}),
+		4: reflect.TypeOf(e2smrcv1.RicActionDefinitionFormats_ActionDefinitionFormat4{}),
 	},
 	"ric_indication_header_formats": {
 		1: reflect.TypeOf(e2smrcv1.RicIndicationHeaderFormats_IndicationHeaderFormat1{}),
 		2: reflect.TypeOf(e2smrcv1.RicIndicationHeaderFormats_IndicationHeaderFormat2{}),
+		3: reflect.TypeOf(e2smrcv1.RicIndicationHeaderFormats_IndicationHeaderFormat3{}),
 	},
 	"ric_indication_message_formats": {
 		1: reflect.TypeOf(e2smrcv1.RicIndicationMessageFormats_IndicationMessageFormat1{}),
@@ -82,18 +84,23 @@ var E2smRcChoicemap = map[string]map[int]reflect.Type{
 		3: reflect.TypeOf(e2smrcv1.RicIndicationMessageFormats_IndicationMessageFormat3{}),
 		4: reflect.TypeOf(e2smrcv1.RicIndicationMessageFormats_IndicationMessageFormat4{}),
 		5: reflect.TypeOf(e2smrcv1.RicIndicationMessageFormats_IndicationMessageFormat5{}),
+		6: reflect.TypeOf(e2smrcv1.RicIndicationMessageFormats_IndicationMessageFormat6{}),
 	},
 	"ric_call_process_id_formats": {
 		1: reflect.TypeOf(e2smrcv1.RicCallProcessIdFormats_CallProcessIdFormat1{}),
 	},
 	"ric_control_header_formats": {
 		1: reflect.TypeOf(e2smrcv1.RicControlHeaderFormats_ControlHeaderFormat1{}),
+		2: reflect.TypeOf(e2smrcv1.RicControlHeaderFormats_ControlHeaderFormat2{}),
 	},
 	"ric_control_message_formats": {
 		1: reflect.TypeOf(e2smrcv1.RicControlMessageFormats_ControlMessageFormat1{}),
+		2: reflect.TypeOf(e2smrcv1.RicControlMessageFormats_ControlMessageFormat2{}),
 	},
 	"ric_control_outcome_formats": {
 		1: reflect.TypeOf(e2smrcv1.RicControlOutcomeFormats_ControlOutcomeFormat1{}),
+		2: reflect.TypeOf(e2smrcv1.RicControlOutcomeFormats_ControlOutcomeFormat2{}),
+		3: reflect.TypeOf(e2smrcv1.RicControlOutcomeFormats_ControlOutcomeFormat3{}),
 	},
 	"cgi": {
 		1: reflect.TypeOf(e2smcommoniesv1.Cgi_NRCgi{}),

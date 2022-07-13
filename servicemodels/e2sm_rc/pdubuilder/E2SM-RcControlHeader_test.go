@@ -11,7 +11,7 @@ import (
 	"testing"
 )
 
-func TestE2SmRcControlHeader(t *testing.T) {
+func TestE2SmRcControlHeaderFormat1(t *testing.T) {
 
 	ueID, err := CreateUeIDGnbCuUp(15)
 	assert.NilError(t, err)
@@ -19,6 +19,24 @@ func TestE2SmRcControlHeader(t *testing.T) {
 	msg, err := CreateE2SmRcControlHeaderFormat1(ueID, 12, 5)
 	assert.NilError(t, err)
 	msg.GetRicControlHeaderFormats().GetControlHeaderFormat1().SetRicControlDecision(CreateRicControlDecisionAccept())
+
+	aper, err := encoder.PerEncodeE2SmRcControlHeader(msg)
+	assert.NilError(t, err)
+	t.Logf("APER bytes are\n%v", hex.Dump(aper))
+
+	result, err := encoder.PerDecodeE2SmRcControlHeader(aper)
+	assert.NilError(t, err)
+	t.Logf("Decoded message is\n%v", result)
+}
+
+func TestE2SmRcControlHeaderFormat2(t *testing.T) {
+
+	ueID, err := CreateUeIDGnbCuUp(15)
+	assert.NilError(t, err)
+
+	msg, err := CreateE2SmRcControlHeaderFormat2()
+	assert.NilError(t, err)
+	msg.GetRicControlHeaderFormats().GetControlHeaderFormat2().SetUeID(ueID).SetRicControlDecision(CreateRicControlDecisionReject())
 
 	aper, err := encoder.PerEncodeE2SmRcControlHeader(msg)
 	assert.NilError(t, err)
