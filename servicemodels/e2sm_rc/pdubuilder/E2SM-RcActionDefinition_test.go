@@ -122,3 +122,35 @@ func TestE2SmRcActionDefinitionFormat3(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("Decoded message is\n%v", result)
 }
+
+func TestE2SmRcActionDefinitionFormat4(t *testing.T) {
+
+	ranPInsertIndicationItem, err := CreateE2SmRcActionDefinitionFormat4RanpItem(153)
+	assert.NilError(t, err)
+
+	ranPInsertIndicationList := make([]*e2smrcv1.E2SmRcActionDefinitionFormat4RanpItem, 0)
+	ranPInsertIndicationList = append(ranPInsertIndicationList, ranPInsertIndicationItem)
+
+	indicationItem, err := CreateE2SmRcActionDefinitionFormat4IndicationItem(1, ranPInsertIndicationList)
+	assert.NilError(t, err)
+
+	indicationList := make([]*e2smrcv1.E2SmRcActionDefinitionFormat4IndicationItem, 0)
+	indicationList = append(indicationList, indicationItem)
+
+	ricInsertStyleItem, err := CreateE2SmRcActionDefinitionFormat4StyleItem(29, indicationList)
+	assert.NilError(t, err)
+
+	ricInsertStyleList := make([]*e2smrcv1.E2SmRcActionDefinitionFormat4StyleItem, 0)
+	ricInsertStyleList = append(ricInsertStyleList, ricInsertStyleItem)
+
+	msg, err := CreateE2SmRcActionDefinitionFormat4(5, ricInsertStyleList)
+	assert.NilError(t, err)
+
+	aper, err := encoder.PerEncodeE2SmRcActionDefinition(msg)
+	assert.NilError(t, err)
+	t.Logf("APER bytes are\n%v", hex.Dump(aper))
+
+	result, err := encoder.PerDecodeE2SmRcActionDefinition(aper)
+	assert.NilError(t, err)
+	t.Logf("Decoded message is\n%v", result)
+}

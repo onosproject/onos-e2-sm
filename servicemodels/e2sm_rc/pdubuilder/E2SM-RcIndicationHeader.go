@@ -53,3 +53,16 @@ func CreateE2SmRcIndicationHeaderFormat2(ueID *e2smcommonies.Ueid, ricInsertStyl
 
 	return msg, nil
 }
+
+func CreateE2SmRcIndicationHeaderFormat3() (*e2smrcv1.E2SmRcIndicationHeader, error) {
+
+	msg := &e2smrcv1.E2SmRcIndicationHeader{
+		RicIndicationHeaderFormats: &e2smrcv1.RicIndicationHeaderFormats{
+			RicIndicationHeaderFormats: &e2smrcv1.RicIndicationHeaderFormats_IndicationHeaderFormat3{
+				IndicationHeaderFormat3: &e2smrcv1.E2SmRcIndicationHeaderFormat3{},
+			},
+		},
+	}
+
+	return msg, nil
+}

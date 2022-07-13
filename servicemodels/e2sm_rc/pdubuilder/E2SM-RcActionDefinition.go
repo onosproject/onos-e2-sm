@@ -102,6 +102,28 @@ func CreateE2SmRcActionDefinitionFormat3(rst int32, riiID int32, rpIDl []int64) 
 	return ad, nil
 }
 
+func CreateE2SmRcActionDefinitionFormat4(rst int32, risl []*e2smrcv1.E2SmRcActionDefinitionFormat4StyleItem) (*e2smrcv1.E2SmRcActionDefinition, error) {
+
+	ad := &e2smrcv1.E2SmRcActionDefinition{
+		RicStyleType: &e2smcommonies.RicStyleType{
+			Value: rst,
+		},
+		RicActionDefinitionFormats: &e2smrcv1.RicActionDefinitionFormats{
+			RicActionDefinitionFormats: &e2smrcv1.RicActionDefinitionFormats_ActionDefinitionFormat4{
+				ActionDefinitionFormat4: &e2smrcv1.E2SmRcActionDefinitionFormat4{
+					RicInsertStyleList: risl,
+				},
+			},
+		},
+	}
+
+	if err := ad.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat4() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return ad, nil
+}
+
 func CreateE2SmRcActionDefinitionFormat2Item(rcaID int32, rpl []*e2smrcv1.RicPolicyActionRanparameterItem) (*e2smrcv1.E2SmRcActionDefinitionFormat2Item, error) {
 
 	rpa := &e2smrcv1.RicPolicyAction{
@@ -439,6 +461,53 @@ func CreateRanparameterTestingConditionPresence(rpcc e2smrcv1.RanPChoicePresence
 	return item, nil
 }
 
+func CreateE2SmRcActionDefinitionFormat4StyleItem(rst int32, riil []*e2smrcv1.E2SmRcActionDefinitionFormat4IndicationItem) (*e2smrcv1.E2SmRcActionDefinitionFormat4StyleItem, error) {
+
+	item := &e2smrcv1.E2SmRcActionDefinitionFormat4StyleItem{
+		RequestedInsertStyleType: &e2smcommonies.RicStyleType{
+			Value: rst,
+		},
+		RicInsertIndicationList: riil,
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat4StyleItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
+}
+
+func CreateE2SmRcActionDefinitionFormat4IndicationItem(riiID int32, ranpiil []*e2smrcv1.E2SmRcActionDefinitionFormat4RanpItem) (*e2smrcv1.E2SmRcActionDefinitionFormat4IndicationItem, error) {
+
+	item := &e2smrcv1.E2SmRcActionDefinitionFormat4IndicationItem{
+		RicInsertIndicationId: &e2smrcv1.RicInsertIndicationId{
+			Value: riiID,
+		},
+		RanPInsertIndicationList: ranpiil,
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat4IndicationItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
+}
+
+func CreateE2SmRcActionDefinitionFormat4RanpItem(rpID int64) (*e2smrcv1.E2SmRcActionDefinitionFormat4RanpItem, error) {
+
+	item := &e2smrcv1.E2SmRcActionDefinitionFormat4RanpItem{
+		RanParameterId: &e2smrcv1.RanparameterId{
+			Value: rpID,
+		},
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcActionDefinitionFormat4RanpItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return item, nil
+}
+
 func CreateLogicalOrTrue() e2smrcv1.LogicalOr {
 	return e2smrcv1.LogicalOr_LOGICAL_OR_TRUE
 }
@@ -485,4 +554,12 @@ func CreateRanPChoicePresenceRollover() e2smrcv1.RanPChoicePresence {
 
 func CreateRanPChoicePresenceNonzero() e2smrcv1.RanPChoicePresence {
 	return e2smrcv1.RanPChoicePresence_RAN_P_CHOICE_PRESENCE_NONZERO
+}
+
+func CreateRicPolicyDecisionAccept() e2smrcv1.RicPolicyDecision {
+	return e2smrcv1.RicPolicyDecision_RIC_POLICY_DECISION_ACCEPT
+}
+
+func CreateRicPolicyDecisionReject() e2smrcv1.RicPolicyDecision {
+	return e2smrcv1.RicPolicyDecision_RIC_POLICY_DECISION_REJECT
 }

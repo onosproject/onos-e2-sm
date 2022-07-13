@@ -42,7 +42,7 @@ Here are the parameters you should pass:
 
 Inside `$proto_imports` you should store path to the imported files in the proto - usually absolute path to the repo - 
 otherwise it would through a warning that your `--proto_path` is not relative. 
-Example of `$proto_imports`
+Example of `$proto_imports`:
 ```bash
 proto_imports=${GOPATH}/src/github.com/onosproject/onos-e2-sm/
 ```

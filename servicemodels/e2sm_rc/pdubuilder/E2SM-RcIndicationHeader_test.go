@@ -42,3 +42,21 @@ func TestE2SmRcIndicationHeaderFormat2(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("Decoded message is\n%v", result)
 }
+
+func TestE2SmRcIndicationHeaderFormat3(t *testing.T) {
+
+	ueID, err := CreateUeIDNgEnbDu(123)
+	assert.NilError(t, err)
+
+	msg, err := CreateE2SmRcIndicationHeaderFormat3()
+	assert.NilError(t, err)
+	msg.GetRicIndicationHeaderFormats().GetIndicationHeaderFormat3().SetUeID(ueID).SetRicEventTriggerConditionId(32)
+
+	aper, err := encoder.PerEncodeE2SmRcIndicationHeader(msg)
+	assert.NilError(t, err)
+	t.Logf("APER bytes are\n%v", hex.Dump(aper))
+
+	result, err := encoder.PerDecodeE2SmRcIndicationHeader(aper)
+	assert.NilError(t, err)
+	t.Logf("Decoded message is\n%v", result)
+}

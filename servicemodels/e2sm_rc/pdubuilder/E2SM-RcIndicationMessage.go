@@ -107,6 +107,25 @@ func CreateE2SmRcIndicationMessageFormat5(ranPRequestedList []*e2smrcv1.E2SmRcIn
 	return msg, nil
 }
 
+func CreateE2SmRcIndicationMessageFormat6(ricInsertStyleList []*e2smrcv1.E2SmRcIndicationMessageFormat6StyleItem) (*e2smrcv1.E2SmRcIndicationMessage, error) {
+
+	msg := &e2smrcv1.E2SmRcIndicationMessage{
+		RicIndicationMessageFormats: &e2smrcv1.RicIndicationMessageFormats{
+			RicIndicationMessageFormats: &e2smrcv1.RicIndicationMessageFormats_IndicationMessageFormat6{
+				IndicationMessageFormat6: &e2smrcv1.E2SmRcIndicationMessageFormat6{
+					RicInsertStyleList: ricInsertStyleList,
+				},
+			},
+		},
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat6() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
 func CreateE2SmRcIndicationMessageFormat1Item(ranParameterID int64, ranParameterValueType *e2smrcv1.RanparameterValueType) (*e2smrcv1.E2SmRcIndicationMessageFormat1Item, error) {
 
 	msg := &e2smrcv1.E2SmRcIndicationMessageFormat1Item{
@@ -910,6 +929,54 @@ func CreateCgiEutraCgi(eUtraCgi *e2smcommonies.EutraCgi) (*e2smcommonies.Cgi, er
 
 	if err := msg.Validate(); err != nil {
 		return nil, errors.NewInvalid("CreateCgiNRCgi() validation of UeID failed with %v", err)
+	}
+
+	return msg, nil
+}
+
+func CreateE2SmRcIndicationMessageFormat6StyleItem(indicatedInsertStyleType int32, ricInsertIndicationList []*e2smrcv1.E2SmRcIndicationMessageFormat6IndicationItem) (*e2smrcv1.E2SmRcIndicationMessageFormat6StyleItem, error) {
+
+	msg := &e2smrcv1.E2SmRcIndicationMessageFormat6StyleItem{
+		IndicatedInsertStyleType: &e2smcommonies.RicStyleType{
+			Value: indicatedInsertStyleType,
+		},
+		RicInsertIndicationList: ricInsertIndicationList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat6StyleItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateE2SmRcIndicationMessageFormat6IndicationItem(ricInsertIndicationID int32, ranPInsertIndicationList []*e2smrcv1.E2SmRcIndicationMessageFormat6RanpItem) (*e2smrcv1.E2SmRcIndicationMessageFormat6IndicationItem, error) {
+
+	msg := &e2smrcv1.E2SmRcIndicationMessageFormat6IndicationItem{
+		RicInsertIndicationId: &e2smrcv1.RicInsertIndicationId{
+			Value: ricInsertIndicationID,
+		},
+		RanPInsertIndicationList: ranPInsertIndicationList,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat6IndicationItem() error validating E2SM-RC PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateE2SmRcIndicationMessageFormat6RanpItem(ranParameterID int64, ranParameterValueType *e2smrcv1.RanparameterValueType) (*e2smrcv1.E2SmRcIndicationMessageFormat6RanpItem, error) {
+
+	msg := &e2smrcv1.E2SmRcIndicationMessageFormat6RanpItem{
+		RanParameterId: &e2smrcv1.RanparameterId{
+			Value: ranParameterID,
+		},
+		RanParameterValueType: ranParameterValueType,
+	}
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmRcIndicationMessageFormat6RanpItem() error validating E2SM-RC PDU %s", err.Error())
 	}
 
 	return msg, nil

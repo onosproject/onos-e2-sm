@@ -35,6 +35,19 @@ func CreateE2SmRcControlHeaderFormat1(ueID *e2smcommonies.Ueid, rst int32, rcaID
 	return ch, nil
 }
 
+func CreateE2SmRcControlHeaderFormat2() (*e2smrcv1.E2SmRcControlHeader, error) {
+
+	ch := &e2smrcv1.E2SmRcControlHeader{
+		RicControlHeaderFormats: &e2smrcv1.RicControlHeaderFormats{
+			RicControlHeaderFormats: &e2smrcv1.RicControlHeaderFormats_ControlHeaderFormat2{
+				ControlHeaderFormat2: &e2smrcv1.E2SmRcControlHeaderFormat2{},
+			},
+		},
+	}
+
+	return ch, nil
+}
+
 func CreateRicControlDecisionAccept() e2smrcv1.RicControlDecision {
 	return e2smrcv1.RicControlDecision_RIC_CONTROL_DECISION_ACCEPT
 }
