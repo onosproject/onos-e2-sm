@@ -25,4 +25,5 @@ protoc "-I=$proto_imports" \
     e2sm_rc_pre/v2/e2sm_rc_pre_v2.proto \
     e2sm_mho/v1/e2sm_mho.proto \
     e2sm_mho_go/v2/e2sm_mho_go.proto \
-    e2sm_kpm/v1beta1/e2sm_kpm_ies.proto
+    e2sm_kpm/v1beta1/e2sm_kpm_ies.proto \
+    e2sm_rc/v1/e2sm_rc.proto
