@@ -111,13 +111,31 @@ func CreateE2SmRcEventTriggerFormat5(onDemand e2smrcv1.OnDemand) (*e2smrcv1.E2Sm
 	return ch, nil
 }
 
-func CreateE2SmRcEventTriggerFormat1Item(recID int32, msgt *e2smrcv1.MessageTypeChoice) (*e2smrcv1.E2SmRcEventTriggerFormat1Item, error) {
+func CreateE2SmRcEventTriggerFormat1Item(recID int32, msgt *e2smrcv1.MessageTypeChoice,
+	msgDir *e2smrcv1.MessageDirection, assocUeInfo *e2smrcv1.EventTriggerUeInfo,
+	assocUeEvent *e2smrcv1.EventTriggerUeeventInfo, logicalOr *e2smrcv1.LogicalOr) (*e2smrcv1.E2SmRcEventTriggerFormat1Item, error) {
 
 	item := &e2smrcv1.E2SmRcEventTriggerFormat1Item{
 		RicEventTriggerConditionId: &e2smrcv1.RicEventTriggerConditionId{
 			Value: recID,
 		},
 		MessageType: msgt,
+	}
+
+	if msgDir != nil {
+		item.MessageDirection = msgDir
+	}
+
+	if assocUeInfo != nil {
+		item.AssociatedUeinfo = assocUeInfo
+	}
+
+	if assocUeEvent != nil {
+		item.AssociatedUeevent = assocUeEvent
+	}
+
+	if logicalOr != nil {
+		item.LogicalOr = logicalOr
 	}
 
 	if err := item.Validate(); err != nil {

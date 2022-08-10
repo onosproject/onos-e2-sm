@@ -205,7 +205,7 @@ func TestRCServicemodel_EventTriggerDefinitionProtoToASN1(t *testing.T) {
 	msgTypeChoice, err := pdubuilder.CreateMessageTypeChoiceRrc(rrcType, 32)
 	assert.NilError(t, err)
 
-	messageItem, err := pdubuilder.CreateE2SmRcEventTriggerFormat1Item(1, msgTypeChoice)
+	messageItem, err := pdubuilder.CreateE2SmRcEventTriggerFormat1Item(1, msgTypeChoice, nil, nil, nil, nil)
 	assert.NilError(t, err)
 	messageItem.SetAssociatedUeinfo(&e2smrcv1.EventTriggerUeInfo{
 		UeInfoList: associatedUeInfo,

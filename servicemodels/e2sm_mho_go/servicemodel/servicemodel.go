@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2022-present Intel Corporation
 // SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetworking.org>
 //
 // SPDX-License-Identifier: Apache-2.0
@@ -213,6 +214,14 @@ func (sm MhoServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, e
 }
 
 func (sm MhoServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, errors.NewInvalid("not implemented")
+}
+
+func (sm MhoServiceModel) CallProcessIDASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, errors.NewInvalid("not implemented")
+}
+
+func (sm MhoServiceModel) CallProcessIDProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, errors.NewInvalid("not implemented")
 }
 

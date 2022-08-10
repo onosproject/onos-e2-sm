@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2022-present Intel Corporation
 // SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetworking.org>
 //
 // SPDX-License-Identifier: Apache-2.0
@@ -195,6 +196,14 @@ func (sm Kpm2ServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, 
 }
 
 func (sm Kpm2ServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, errors.NewInvalid("not implemented on KPM")
+}
+
+func (sm Kpm2ServiceModel) CallProcessIDASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, errors.NewInvalid("not implemented on KPM")
+}
+
+func (sm Kpm2ServiceModel) CallProcessIDProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, errors.NewInvalid("not implemented on KPM")
 }
 
