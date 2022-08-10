@@ -50,7 +50,7 @@ func TestE2SmRcEventTriggerFormat1(t *testing.T) {
 	msgTypeChoice, err := CreateMessageTypeChoiceRrc(rrcType, 32)
 	assert.NilError(t, err)
 
-	messageItem, err := CreateE2SmRcEventTriggerFormat1Item(1, msgTypeChoice)
+	messageItem, err := CreateE2SmRcEventTriggerFormat1Item(1, msgTypeChoice, nil, nil, nil, nil)
 	assert.NilError(t, err)
 	messageItem.SetAssociatedUeinfo(&e2smrcv1.EventTriggerUeInfo{
 		UeInfoList: associatedUeInfo,
