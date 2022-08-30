@@ -257,19 +257,21 @@ message RanfunctionName {
   string ran_function_e2_sm_oid = 2 [(validate.v1.rules).string = {min_len: 1, max_len: 1000}, json_name = "ranFunction-E2SM-OID"];
   // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
   string ran_function_description = 3 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name = "ranFunction-Description"];
-  // @inject_tag: aper:"optional"
+  // @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:65535"
   optional int32 ran_function_instance = 4 [json_name = "ranFunction-Instance"];
 };
 
 // range of Integer from e2sm_v2.asn1:133
 // {RIC-Format-Type}
 message RicFormatType {
+  // @inject_tag: aper:"valueLB:0,valueUB:65535"
   int32 value = 1 [json_name = "value"];
 };
 
 // range of Integer from e2sm_v2.asn1:135
 // {RIC-Style-Type}
 message RicStyleType {
+  // @inject_tag: aper:"valueLB:0,valueUB:65535"
   int32 value = 1 [json_name = "value"];
 };
 
