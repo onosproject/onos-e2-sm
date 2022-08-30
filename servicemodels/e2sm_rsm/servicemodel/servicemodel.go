@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2022-present Intel Corporation
 // SPDX-FileCopyrightText: 2021-present Open Networking Foundation <info@opennetworking.org>
 //
 // SPDX-License-Identifier: Apache-2.0
@@ -213,6 +214,14 @@ func (sm RsmServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, e
 }
 
 func (sm RsmServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
+	return nil, errors.NewInvalid("not implemented on RSM")
+}
+
+func (sm RsmServiceModel) CallProcessIDASN1toProto(asn1Bytes []byte) ([]byte, error) {
+	return nil, errors.NewInvalid("not implemented on RSM")
+}
+
+func (sm RsmServiceModel) CallProcessIDProtoToASN1(protoBytes []byte) ([]byte, error) {
 	return nil, errors.NewInvalid("not implemented on RSM")
 }
 
