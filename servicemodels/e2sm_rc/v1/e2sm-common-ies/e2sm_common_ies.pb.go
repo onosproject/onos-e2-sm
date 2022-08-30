@@ -1611,8 +1611,8 @@ type RanfunctionName struct {
 	RanFunctionE2SmOid string `protobuf:"bytes,2,opt,name=ran_function_e2_sm_oid,json=ranFunction-E2SM-OID,proto3" json:"ran_function_e2_sm_oid,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:1000"`
 	// @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150"
 	RanFunctionDescription string `protobuf:"bytes,3,opt,name=ran_function_description,json=ranFunction-Description,proto3" json:"ran_function_description,omitempty" aper:"sizeExt,sizeLB:1,sizeUB:150"`
-	// @inject_tag: aper:"optional"
-	RanFunctionInstance *int32 `protobuf:"varint,4,opt,name=ran_function_instance,json=ranFunction-Instance,proto3,oneof" json:"ran_function_instance,omitempty" aper:"optional"`
+	// @inject_tag: aper:"optional,valueExt,valueLB:0,valueUB:65535"
+	RanFunctionInstance *int32 `protobuf:"varint,4,opt,name=ran_function_instance,json=ranFunction-Instance,proto3,oneof" json:"ran_function_instance,omitempty" aper:"optional,valueExt,valueLB:0,valueUB:65535"`
 }
 
 func (x *RanfunctionName) Reset() {
@@ -1682,7 +1682,8 @@ type RicFormatType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	// @inject_tag: aper:"valueLB:0,valueUB:65535"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:65535"`
 }
 
 func (x *RicFormatType) Reset() {
@@ -1731,7 +1732,8 @@ type RicStyleType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	// @inject_tag: aper:"valueLB:0,valueUB:65535"
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty" aper:"valueLB:0,valueUB:65535"`
 }
 
 func (x *RicStyleType) Reset() {
