@@ -385,9 +385,39 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 
 	policyStyleList := ranFunctionDescription.GetRanFunctionDefinitionPolicy().GetRicPolicyStyleList()
 	for _, policyStyle := range policyStyleList {
+		policyActionList := make([]*topoapi.PolicyAction, 0)
+		for _, policyAction := range policyStyle.GetRicPolicyActionList() {
+			actionRANParams := make([]*topoapi.RANParameter, 0)
+			conditionRANParams := make([]*topoapi.RANParameter, 0)
+			for _, actionRANParam := range policyAction.RanPolicyActionParametersList {
+				ranParam := &topoapi.RANParameter{
+					ID:   int32(actionRANParam.RanParameterId.Value),
+					Name: actionRANParam.RanParameterName.Value,
+				}
+				actionRANParams = append(actionRANParams, ranParam)
+			}
+
+			for _, conditionRANParam := range policyAction.RanPolicyConditionParametersList {
+				ranParam := &topoapi.RANParameter{
+					ID:   int32(conditionRANParam.RanParameterId.Value),
+					Name: conditionRANParam.RanParameterName.Value,
+				}
+				conditionRANParams = append(conditionRANParams, ranParam)
+			}
+
+			rcPolicyAction := &topoapi.PolicyAction{
+				ID:                           policyAction.RicPolicyActionId.Value,
+				Name:                         policyAction.RicPolicyActionName.Value,
+				PolicyActionRanParameters:    actionRANParams,
+				PolicyConditionRanParameters: conditionRANParams,
+			}
+			policyActionList = append(policyActionList, rcPolicyAction)
+		}
+
 		rcPolicyStyle := &topoapi.RCPolicyStyle{
-			Name: policyStyle.RicPolicyStyleName.Value,
-			Type: policyStyle.RicPolicyStyleType.Value,
+			Name:          policyStyle.RicPolicyStyleName.Value,
+			Type:          policyStyle.RicPolicyStyleType.Value,
+			PolicyActions: policyActionList,
 		}
 		ranFunction.PolicyStyles = append(ranFunction.PolicyStyles, rcPolicyStyle)
 	}
