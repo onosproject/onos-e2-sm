@@ -106,7 +106,7 @@ func decodeConstrainedChoice2(constrainedChoice2C *C.ConstrainedChoice2_t) (*tes
 			ConstrainedChoice2A: constrainedChoice2structC,
 		}
 	case C.ConstrainedChoice2_PR_constrainedChoice2B:
-		constrainedChoice2structC:= int64(binary.LittleEndian.Uint64(constrainedChoice2C.choice[0:8]))
+		constrainedChoice2structC := int64(binary.LittleEndian.Uint64(constrainedChoice2C.choice[0:8]))
 		constrainedChoice2.ConstrainedChoice2 = &test_sm_ies.ConstrainedChoice2_ConstrainedChoice2B{
 			ConstrainedChoice2B: constrainedChoice2structC,
 		}

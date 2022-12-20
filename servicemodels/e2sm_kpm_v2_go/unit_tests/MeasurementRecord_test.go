@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-//var refPerMeasRecord = "00000000  03 00 15 20 03 80 01 0b  40                       |... ....@|"
+// var refPerMeasRecord = "00000000  03 00 15 20 03 80 01 0b  40                       |... ....@|"
 var refPerMeasRecordNoReal = "00000000  02 00 15 40                                       |...@|"
 
 func createMeasurementRecord() (*e2smkpmv2.MeasurementRecord, error) {

@@ -15,7 +15,7 @@ import (
 
 var refPerMRIinteger = "00000000  00 15                                             |..|"
 
-//var refPerMRIreal = "0000000  20 03 80 01 0b                                    | ....|"
+// var refPerMRIreal = "0000000  20 03 80 01 0b                                    | ....|"
 var refPerMRInovalue = "00000000  40                                                |@|"
 
 func createMeasurementRecordItemInteger() *e2smkpmv2.MeasurementRecordItem {

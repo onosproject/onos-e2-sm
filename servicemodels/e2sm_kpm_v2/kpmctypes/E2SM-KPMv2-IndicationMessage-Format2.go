@@ -85,7 +85,7 @@ func newE2SmKpmIndicationMessageFormat2(e2SmKpmIndicationMessageFormat2 *e2sm_kp
 	}
 
 	e2SmKpmIndicationMessageFormat2C := C.E2SM_KPMv2_IndicationMessage_Format2_t{
-		subscriptID:      *subscriptIDC,
+		subscriptID: *subscriptIDC,
 		//cellObjID:        cellObjIDC,
 		//granulPeriod:     granulPeriodC,
 		measCondUEidList: *measCondUeIDListC,

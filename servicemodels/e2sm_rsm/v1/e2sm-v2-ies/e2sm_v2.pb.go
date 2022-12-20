@@ -5089,7 +5089,7 @@ func (x *FreqBandNrItem) GetFreqBandIndicatorNr() int32 {
 	return 0
 }
 
-//{RIC-Style-Name}
+// {RIC-Style-Name}
 type RicStyleName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5138,7 +5138,7 @@ func (x *RicStyleName) GetValue() string {
 	return ""
 }
 
-//{PLMN-Identity}
+// {PLMN-Identity}
 type PlmnIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5187,7 +5187,7 @@ func (x *PlmnIdentity) GetValue() []byte {
 	return nil
 }
 
-//{EUTRACellIdentity}
+// {EUTRACellIdentity}
 type EutracellIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5236,7 +5236,7 @@ func (x *EutracellIdentity) GetValue() *asn1.BitString {
 	return nil
 }
 
-//{NRCellIdentity}
+// {NRCellIdentity}
 type NrcellIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5285,7 +5285,7 @@ func (x *NrcellIdentity) GetValue() *asn1.BitString {
 	return nil
 }
 
-//{RAN-UE-ID}
+// {RAN-UE-ID}
 type Ranueid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5334,7 +5334,7 @@ func (x *Ranueid) GetValue() []byte {
 	return nil
 }
 
-//{MME-Group-ID}
+// {MME-Group-ID}
 type MmeGroupId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5383,7 +5383,7 @@ func (x *MmeGroupId) GetValue() []byte {
 	return nil
 }
 
-//{MME-Code}
+// {MME-Code}
 type MmeCode struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5432,7 +5432,7 @@ func (x *MmeCode) GetValue() []byte {
 	return nil
 }
 
-//{AMFRegionID}
+// {AMFRegionID}
 type AmfregionId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5481,7 +5481,7 @@ func (x *AmfregionId) GetValue() *asn1.BitString {
 	return nil
 }
 
-//{AMFSetID}
+// {AMFSetID}
 type AmfsetId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5530,7 +5530,7 @@ func (x *AmfsetId) GetValue() *asn1.BitString {
 	return nil
 }
 
-//{AMFPointer}
+// {AMFPointer}
 type Amfpointer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5579,7 +5579,7 @@ func (x *Amfpointer) GetValue() *asn1.BitString {
 	return nil
 }
 
-//{-}
+// {-}
 type Sd struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5628,7 +5628,7 @@ func (x *Sd) GetValue() []byte {
 	return nil
 }
 
-//{-}
+// {-}
 type Sst struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

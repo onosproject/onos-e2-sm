@@ -103,4 +103,3 @@ func decodeMeasurementInfoList(measurementInfoListC *C.MeasurementInfoList_KPMv2
 
 	return &measurementInfoList, nil
 }
-

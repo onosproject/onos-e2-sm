@@ -24,6 +24,7 @@ var response []byte
 var chanMutex = sync.RWMutex{}
 
 // Callback function of type C.asn_app_consume_bytes_f
+//
 //export consumeBytesCb
 func consumeBytesCb(buf unsafe.Pointer, size C.uint32_t, key unsafe.Pointer) C.int {
 	bytes := C.GoBytes(buf, C.int(size))

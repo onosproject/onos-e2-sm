@@ -79,7 +79,7 @@ func (TestCondExpression) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:106
-//{-}
+// {-}
 type GBR int32
 
 const (
@@ -124,7 +124,7 @@ func (GBR) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:107
-//{-}
+// {-}
 type AMBR int32
 
 const (
@@ -169,7 +169,7 @@ func (AMBR) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:108
-//{-}
+// {-}
 type ISSTAT int32
 
 const (
@@ -214,7 +214,7 @@ func (ISSTAT) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:109
-//{-}
+// {-}
 type ISCATM int32
 
 const (
@@ -259,7 +259,7 @@ func (ISCATM) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:110
-//{-}
+// {-}
 type RSRP int32
 
 const (
@@ -304,7 +304,7 @@ func (RSRP) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:111
-//{-}
+// {-}
 type RSRQ int32
 
 const (
@@ -349,7 +349,7 @@ func (RSRQ) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:272
-//{-}
+// {-}
 type IncompleteFlag int32
 
 const (
@@ -394,7 +394,7 @@ func (IncompleteFlag) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:82
-//{-}
+// {-}
 type SUM int32
 
 const (
@@ -439,7 +439,7 @@ func (SUM) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:86
-//{-}
+// {-}
 type PreLabelOverride int32
 
 const (
@@ -484,7 +484,7 @@ func (PreLabelOverride) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:87
-//{-}
+// {-}
 type StartEndInd int32
 
 const (
@@ -5876,7 +5876,7 @@ func (x *RicReportStyleItem) GetRicIndicationMessageFormatType() *RicFormatType 
 	return nil
 }
 
-//{RIC-Style-Name}
+// {RIC-Style-Name}
 type RicStyleName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5925,7 +5925,7 @@ func (x *RicStyleName) GetValue() string {
 	return ""
 }
 
-//{CellObjectID}
+// {CellObjectID}
 type CellObjectId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5974,7 +5974,7 @@ func (x *CellObjectId) GetValue() string {
 	return ""
 }
 
-//{MeasurementTypeName}
+// {MeasurementTypeName}
 type MeasurementTypeName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -6023,7 +6023,7 @@ func (x *MeasurementTypeName) GetValue() string {
 	return ""
 }
 
-//{UE-Identity}
+// {UE-Identity}
 type UeIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -6071,7 +6071,7 @@ func (x *UeIdentity) GetValue() []byte {
 	return nil
 }
 
-//{PLMN-Identity}
+// {PLMN-Identity}
 type PlmnIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -6120,7 +6120,7 @@ func (x *PlmnIdentity) GetValue() []byte {
 	return nil
 }
 
-//{TimeStamp}
+// {TimeStamp}
 type TimeStamp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -6169,7 +6169,7 @@ func (x *TimeStamp) GetValue() []byte {
 	return nil
 }
 
-//{EUTRACellIdentity}
+// {EUTRACellIdentity}
 type EutracellIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -6218,7 +6218,7 @@ func (x *EutracellIdentity) GetValue() *asn1.BitString {
 	return nil
 }
 
-//{NRCellIdentity}
+// {NRCellIdentity}
 type NrcellIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -93,7 +93,7 @@ func decodeE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescriptionC *C.E2SM_
 	ranfunctionName := decodeRanfunctionName(&e2SmMhoRanfunctionDescriptionC.ranFunction_Name)
 
 	e2SmMhoRanfunctionDescription := e2sm_mho.E2SmMhoRanfunctionDescription{
-		RanFunctionName: ranfunctionName,
+		RanFunctionName:          ranfunctionName,
 		RicEventTriggerStyleList: make([]*e2sm_mho.RicEventTriggerStyleList, 0),
 		RicReportStyleList:       make([]*e2sm_mho.RicReportStyleList, 0),
 	}

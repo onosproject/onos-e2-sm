@@ -22,7 +22,7 @@ const (
 )
 
 // enumerated from tes_sm.asn1:161
-//{TEST-Enumerated}
+// {TEST-Enumerated}
 type TestEnumerated int32
 
 const (
@@ -82,7 +82,7 @@ func (TestEnumerated) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from tes_sm.asn1:170
-//{TEST-EnumeratedExtensible}
+// {TEST-EnumeratedExtensible}
 type TestEnumeratedExtensible int32
 
 const (
@@ -141,7 +141,7 @@ func (TestEnumeratedExtensible) EnumDescriptor() ([]byte, []int) {
 	return file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescGZIP(), []int{1}
 }
 
-//{TEST-EnumeratedExtensible}
+// {TEST-EnumeratedExtensible}
 type TestFullyOptionalSequenceItem4 int32
 
 const (

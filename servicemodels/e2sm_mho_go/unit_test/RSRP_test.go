@@ -22,7 +22,7 @@ var rsrpN1234 string = "00000000  20 fb 2e                                      
 var rsrpN156 string = "00000000  20 ff 64                                          | .d|"
 var rsrpN1 string = "00000000  20 ff ff                                          | ..|"
 
-//Set of positive values
+// Set of positive values
 var rsrp0 string = "00000000  40 01 00 00                                       |@...|"
 var rsrp1 string = "00000000  40 01 00 01                                       |@...|"
 var rsrp156 string = "00000000  40 01 00 9c                                       |@...|"

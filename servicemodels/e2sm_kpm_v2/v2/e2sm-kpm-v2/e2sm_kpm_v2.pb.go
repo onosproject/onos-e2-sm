@@ -22,7 +22,7 @@ const (
 )
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn:116
-//{TestCond-Expression}
+// {TestCond-Expression}
 type TestCondExpression int32
 
 const (
@@ -79,7 +79,7 @@ func (TestCondExpression) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:106
-//{-}
+// {-}
 type GBR int32
 
 const (
@@ -124,7 +124,7 @@ func (GBR) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:107
-//{-}
+// {-}
 type AMBR int32
 
 const (
@@ -169,7 +169,7 @@ func (AMBR) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:108
-//{-}
+// {-}
 type ISSTAT int32
 
 const (
@@ -214,7 +214,7 @@ func (ISSTAT) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:109
-//{-}
+// {-}
 type ISCATM int32
 
 const (
@@ -259,7 +259,7 @@ func (ISCATM) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:110
-//{-}
+// {-}
 type RSRP int32
 
 const (
@@ -304,7 +304,7 @@ func (RSRP) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:111
-//{-}
+// {-}
 type RSRQ int32
 
 const (
@@ -349,7 +349,7 @@ func (RSRQ) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:272
-//{-}
+// {-}
 type IncompleteFlag int32
 
 const (
@@ -394,7 +394,7 @@ func (IncompleteFlag) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:82
-//{-}
+// {-}
 type SUM int32
 
 const (
@@ -439,7 +439,7 @@ func (SUM) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:86
-//{-}
+// {-}
 type PreLabelOverride int32
 
 const (
@@ -484,7 +484,7 @@ func (PreLabelOverride) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_kpm_v2.0.2-rm.asn1:87
-//{-}
+// {-}
 type StartEndInd int32
 
 const (
@@ -532,7 +532,7 @@ func (StartEndInd) EnumDescriptor() ([]byte, []int) {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:24
-//{EUTRACGI}
+// {EUTRACGI}
 type Eutracgi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -589,7 +589,7 @@ func (x *Eutracgi) GetEUtracellIdentity() *EutracellIdentity {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:30
-//{NRCGI}
+// {NRCGI}
 type Nrcgi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -646,7 +646,7 @@ func (x *Nrcgi) GetNRcellIdentity() *NrcellIdentity {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:36
-//{CellGlobalID}
+// {CellGlobalID}
 type CellGlobalId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -730,7 +730,7 @@ func (*CellGlobalId_NrCgi) isCellGlobalId_CellGlobalId() {}
 func (*CellGlobalId_EUtraCgi) isCellGlobalId_CellGlobalId() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:42
-//{SNSSAI}
+// {SNSSAI}
 type Snssai struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -787,7 +787,7 @@ func (x *Snssai) GetSD() []byte {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:47
-//{FiveQI}
+// {FiveQI}
 type FiveQi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -836,7 +836,7 @@ func (x *FiveQi) GetValue() int32 {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:49
-//{QCI}
+// {QCI}
 type Qci struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -885,7 +885,7 @@ func (x *Qci) GetValue() int32 {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:51
-//{QFI}
+// {QFI}
 type Qfi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -934,7 +934,7 @@ func (x *Qfi) GetValue() int32 {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:53
-//{ARP}
+// {ARP}
 type Arp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -983,7 +983,7 @@ func (x *Arp) GetValue() int32 {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:65
-//{GranularityPeriod}
+// {GranularityPeriod}
 type GranularityPeriod struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1032,7 +1032,7 @@ func (x *GranularityPeriod) GetValue() uint32 {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:66
-//{MeasurementType}
+// {MeasurementType}
 type MeasurementType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1116,7 +1116,7 @@ func (*MeasurementType_MeasName) isMeasurementType_MeasurementType() {}
 func (*MeasurementType_MeasId) isMeasurementType_MeasurementType() {}
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:73
-//{MeasurementTypeID}
+// {MeasurementTypeID}
 type MeasurementTypeId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1165,7 +1165,7 @@ func (x *MeasurementTypeId) GetValue() int32 {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:76
-//{MeasurementLabel}
+// {MeasurementLabel}
 type MeasurementLabel struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1342,7 +1342,7 @@ func (x *MeasurementLabel) GetStartEndInd() StartEndInd {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:96
-//{SubscriptionID}
+// {SubscriptionID}
 type SubscriptionId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1391,7 +1391,7 @@ func (x *SubscriptionId) GetValue() int64 {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:99
-//{TestCondInfo}
+// {TestCondInfo}
 type TestCondInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1456,7 +1456,7 @@ func (x *TestCondInfo) GetTestValue() *TestCondValue {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:106
-//{TestCond-Type}
+// {TestCond-Type}
 type TestCondType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1596,7 +1596,7 @@ func (*TestCondType_RSrp) isTestCondType_TestCondType() {}
 func (*TestCondType_RSrq) isTestCondType_TestCondType() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:125
-//{TestCond-Value}
+// {TestCond-Value}
 type TestCondValue struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1736,7 +1736,7 @@ func (*TestCondValue_ValueOctS) isTestCondValue_TestCondValue() {}
 func (*TestCondValue_ValuePrtS) isTestCondValue_TestCondValue() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:137
-//{GlobalKPMv2node-ID}
+// {GlobalKPMv2node-ID}
 type GlobalKpmnodeId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1848,7 +1848,7 @@ func (*GlobalKpmnodeId_NgENb) isGlobalKpmnodeId_GlobalKpmnodeId() {}
 func (*GlobalKpmnodeId_ENb) isGlobalKpmnodeId_GlobalKpmnodeId() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:145
-//{GlobalKPMv2node-gNB-ID}
+// {GlobalKPMv2node-gNB-ID}
 type GlobalKpmnodeGnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1913,7 +1913,7 @@ func (x *GlobalKpmnodeGnbId) GetGNbDuId() *GnbDuId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:152
-//{GlobalgNB-ID}
+// {GlobalgNB-ID}
 type GlobalgNbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1970,7 +1970,7 @@ func (x *GlobalgNbId) GetGnbId() *GnbIdChoice {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:157
-//{GNB-CU-UP-ID}
+// {GNB-CU-UP-ID}
 type GnbCuUpId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2019,7 +2019,7 @@ func (x *GnbCuUpId) GetValue() int64 {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:159
-//{GNB-DU-ID}
+// {GNB-DU-ID}
 type GnbDuId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2068,7 +2068,7 @@ func (x *GnbDuId) GetValue() int64 {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:162
-//{GNB-ID-Choice}
+// {GNB-ID-Choice}
 type GnbIdChoice struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2138,7 +2138,7 @@ type GnbIdChoice_GnbId struct {
 func (*GnbIdChoice_GnbId) isGnbIdChoice_GnbIdChoice() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:167
-//{GlobalKPMv2node-en-gNB-ID}
+// {GlobalKPMv2node-en-gNB-ID}
 type GlobalKpmnodeEnGnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2203,7 +2203,7 @@ func (x *GlobalKpmnodeEnGnbId) GetGNbDuId() *GnbDuId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:174
-//{GlobalenGNB-ID}
+// {GlobalenGNB-ID}
 type GlobalenGnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2260,7 +2260,7 @@ func (x *GlobalenGnbId) GetGNbId() *EngnbId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:180
-//{ENGNB-ID}
+// {ENGNB-ID}
 type EngnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2330,7 +2330,7 @@ type EngnbId_GNbId struct {
 func (*EngnbId_GNbId) isEngnbId_EngnbId() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:185
-//{GlobalKPMv2node-ng-eNB-ID}
+// {GlobalKPMv2node-ng-eNB-ID}
 type GlobalKpmnodeNgEnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2387,7 +2387,7 @@ func (x *GlobalKpmnodeNgEnbId) GetGNbDuId() *GnbDuId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:191
-//{GlobalngeNB-ID-KPMv2}
+// {GlobalngeNB-ID-KPMv2}
 type GlobalngeNbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2460,7 +2460,7 @@ func (x *GlobalngeNbId) GetLongMacroENbId() *BitString {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:199
-//{ENB-ID-Choice}
+// {ENB-ID-Choice}
 type EnbIdChoice struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2558,7 +2558,7 @@ func (*EnbIdChoice_EnbIdShortmacro) isEnbIdChoice_EnbIdChoice() {}
 func (*EnbIdChoice_EnbIdLongmacro) isEnbIdChoice_EnbIdChoice() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:206
-//{GlobalKPMv2node-eNB-ID}
+// {GlobalKPMv2node-eNB-ID}
 type GlobalKpmnodeEnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2607,7 +2607,7 @@ func (x *GlobalKpmnodeEnbId) GetGlobalENbId() *GlobalEnbId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:211
-//{GlobalENB-ID}
+// {GlobalENB-ID}
 type GlobalEnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2664,7 +2664,7 @@ func (x *GlobalEnbId) GetENbId() *EnbId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:217
-//{ENB-ID-KPMv2}
+// {ENB-ID-KPMv2}
 type EnbId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2748,7 +2748,7 @@ func (*EnbId_MacroENbId) isEnbId_EnbId() {}
 func (*EnbId_HomeENbId) isEnbId_EnbId() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:225
-//{RANfunction-Name}
+// {RANfunction-Name}
 type RanfunctionName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2821,7 +2821,7 @@ func (x *RanfunctionName) GetRanFunctionInstance() int32 {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:234
-//{RIC-Style-Type}
+// {RIC-Style-Type}
 type RicStyleType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2870,7 +2870,7 @@ func (x *RicStyleType) GetValue() int32 {
 }
 
 // range of Integer from e2sm_kpm_v2.0.2-rm.asn:242
-//{RIC-Format-Type}
+// {RIC-Format-Type}
 type RicFormatType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2919,7 +2919,7 @@ func (x *RicFormatType) GetValue() int32 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:242
-//{-}
+// {-}
 type MaxnoofKpmnodes struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2968,7 +2968,7 @@ func (x *MaxnoofKpmnodes) GetValue() int32 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:243
-//{-}
+// {-}
 type MaxnoofCells struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3017,7 +3017,7 @@ func (x *MaxnoofCells) GetValue() int32 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:244
-//{-}
+// {-}
 type MaxnoofRicstyles struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3066,7 +3066,7 @@ func (x *MaxnoofRicstyles) GetValue() int32 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:245
-//{-}
+// {-}
 type MaxnoofMeasurementInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3115,7 +3115,7 @@ func (x *MaxnoofMeasurementInfo) GetValue() int32 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:246
-//{-}
+// {-}
 type MaxnoofLabelInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3164,7 +3164,7 @@ func (x *MaxnoofLabelInfo) GetValue() int64 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:247
-//{-}
+// {-}
 type MaxnoofMeasurementRecord struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3213,7 +3213,7 @@ func (x *MaxnoofMeasurementRecord) GetValue() int32 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:248
-//{-}
+// {-}
 type MaxnoofMeasurementValue struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3262,7 +3262,7 @@ func (x *MaxnoofMeasurementValue) GetValue() int64 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:249
-//{-}
+// {-}
 type MaxnoofConditionInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3311,7 +3311,7 @@ func (x *MaxnoofConditionInfo) GetValue() int32 {
 }
 
 // constant Integer from e2sm_kpm_v2.0.2-rm.asn:250
-//{-}
+// {-}
 type MaxnoofUeid struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3360,7 +3360,7 @@ func (x *MaxnoofUeid) GetValue() int32 {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:255
-//{MeasurementInfoList}
+// {MeasurementInfoList}
 type MeasurementInfoList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3409,7 +3409,7 @@ func (x *MeasurementInfoList) GetValue() []*MeasurementInfoItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:256
-//{MeasurementInfoItem}
+// {MeasurementInfoItem}
 type MeasurementInfoItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3466,7 +3466,7 @@ func (x *MeasurementInfoItem) GetLabelInfoList() *LabelInfoList {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:263
-//{LabelInfoList}
+// {LabelInfoList}
 type LabelInfoList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3515,7 +3515,7 @@ func (x *LabelInfoList) GetValue() []*LabelInfoItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:264
-//{LabelInfoItem}
+// {LabelInfoItem}
 type LabelInfoItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3564,7 +3564,7 @@ func (x *LabelInfoItem) GetMeasLabel() *MeasurementLabel {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:270
-//{MeasurementData}
+// {MeasurementData}
 type MeasurementData struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3613,7 +3613,7 @@ func (x *MeasurementData) GetValue() []*MeasurementDataItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:271
-//{MeasurementDataItem}
+// {MeasurementDataItem}
 type MeasurementDataItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3670,7 +3670,7 @@ func (x *MeasurementDataItem) GetIncompleteFlag() IncompleteFlag {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:278
-//{MeasurementRecord}
+// {MeasurementRecord}
 type MeasurementRecord struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3719,7 +3719,7 @@ func (x *MeasurementRecord) GetValue() []*MeasurementRecordItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:279
-//{MeasurementRecordItem}
+// {MeasurementRecordItem}
 type MeasurementRecordItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3817,7 +3817,7 @@ func (*MeasurementRecordItem_Real) isMeasurementRecordItem_MeasurementRecordItem
 func (*MeasurementRecordItem_NoValue) isMeasurementRecordItem_MeasurementRecordItem() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:287
-//{MeasurementInfo-Action-List}
+// {MeasurementInfo-Action-List}
 type MeasurementInfoActionList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3866,7 +3866,7 @@ func (x *MeasurementInfoActionList) GetValue() []*MeasurementInfoActionItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:288
-//{MeasurementInfo-Action-Item}
+// {MeasurementInfo-Action-Item}
 type MeasurementInfoActionItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3923,7 +3923,7 @@ func (x *MeasurementInfoActionItem) GetMeasId() *MeasurementTypeId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:295
-//{MeasurementCondList}
+// {MeasurementCondList}
 type MeasurementCondList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3972,7 +3972,7 @@ func (x *MeasurementCondList) GetValue() []*MeasurementCondItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:296
-//{MeasurementCondItem}
+// {MeasurementCondItem}
 type MeasurementCondItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4029,7 +4029,7 @@ func (x *MeasurementCondItem) GetMatchingCond() *MatchingCondList {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:303
-//{MeasurementCondUEidList}
+// {MeasurementCondUEidList}
 type MeasurementCondUeidList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4078,7 +4078,7 @@ func (x *MeasurementCondUeidList) GetValue() []*MeasurementCondUeidItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:304
-//{MeasurementCondUEidItem}
+// {MeasurementCondUEidItem}
 type MeasurementCondUeidItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4143,7 +4143,7 @@ func (x *MeasurementCondUeidItem) GetMatchingUeidList() *MatchingUeidList {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:312
-//{MatchingCondList}
+// {MatchingCondList}
 type MatchingCondList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4192,7 +4192,7 @@ func (x *MatchingCondList) GetValue() []*MatchingCondItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:313
-//{MatchingCondItem}
+// {MatchingCondItem}
 type MatchingCondItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4276,7 +4276,7 @@ func (*MatchingCondItem_MeasLabel) isMatchingCondItem_MatchingCondItem() {}
 func (*MatchingCondItem_TestCondInfo) isMatchingCondItem_MatchingCondItem() {}
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:320
-//{MatchingUEidList}
+// {MatchingUEidList}
 type MatchingUeidList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4325,7 +4325,7 @@ func (x *MatchingUeidList) GetValue() []*MatchingUeidItem {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:321
-//{MatchingUEidItem}
+// {MatchingUEidItem}
 type MatchingUeidItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4374,7 +4374,7 @@ func (x *MatchingUeidItem) GetUeId() *UeIdentity {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:337
-//{E2SM-KPMv2-EventTriggerDefinition}
+// {E2SM-KPMv2-EventTriggerDefinition}
 type E2SmKpmEventTriggerDefinition struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4445,7 +4445,7 @@ func (*E2SmKpmEventTriggerDefinition_EventDefinitionFormat1) isE2SmKpmEventTrigg
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:342
-//{E2SM-KPMv2-EventTriggerDefinition-Format1}
+// {E2SM-KPMv2-EventTriggerDefinition-Format1}
 type E2SmKpmEventTriggerDefinitionFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4494,7 +4494,7 @@ func (x *E2SmKpmEventTriggerDefinitionFormat1) GetReportingPeriod() uint32 {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:351
-//{E2SM-KPMv2-ActionDefinition}
+// {E2SM-KPMv2-ActionDefinition}
 type E2SmKpmActionDefinition struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4601,7 +4601,7 @@ func (*E2SmKpmActionDefinition_ActionDefinitionFormat3) isE2SmKpmActionDefinitio
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:362
-//{E2SM-KPMv2-ActionDefinition-Format1}
+// {E2SM-KPMv2-ActionDefinition-Format1}
 type E2SmKpmActionDefinitionFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4674,7 +4674,7 @@ func (x *E2SmKpmActionDefinitionFormat1) GetSubscriptId() *SubscriptionId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:370
-//{E2SM-KPMv2-ActionDefinition-Format2}
+// {E2SM-KPMv2-ActionDefinition-Format2}
 type E2SmKpmActionDefinitionFormat2 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4731,7 +4731,7 @@ func (x *E2SmKpmActionDefinitionFormat2) GetSubscriptInfo() *E2SmKpmActionDefini
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:376
-//{E2SM-KPMv2-ActionDefinition-Format3}
+// {E2SM-KPMv2-ActionDefinition-Format3}
 type E2SmKpmActionDefinitionFormat3 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4804,7 +4804,7 @@ func (x *E2SmKpmActionDefinitionFormat3) GetSubscriptId() *SubscriptionId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:391
-//{E2SM-KPMv2-IndicationHeader}
+// {E2SM-KPMv2-IndicationHeader}
 type E2SmKpmIndicationHeader struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4875,7 +4875,7 @@ func (*E2SmKpmIndicationHeader_IndicationHeaderFormat1) isE2SmKpmIndicationHeade
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:396
-//{E2SM-KPMv2-IndicationHeader-Format1}
+// {E2SM-KPMv2-IndicationHeader-Format1}
 type E2SmKpmIndicationHeaderFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4964,7 +4964,7 @@ func (x *E2SmKpmIndicationHeaderFormat1) GetKpmNodeId() *GlobalKpmnodeId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:414
-//{E2SM-KPMv2-IndicationMessage}
+// {E2SM-KPMv2-IndicationMessage}
 type E2SmKpmIndicationMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5050,7 +5050,7 @@ func (*E2SmKpmIndicationMessage_IndicationMessageFormat2) isE2SmKpmIndicationMes
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:419
-//{E2SM-KPMv2-IndicationMessage-Format1}
+// {E2SM-KPMv2-IndicationMessage-Format1}
 type E2SmKpmIndicationMessageFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5131,7 +5131,7 @@ func (x *E2SmKpmIndicationMessageFormat1) GetMeasData() *MeasurementData {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:428
-//{E2SM-KPMv2-IndicationMessage-Format2}
+// {E2SM-KPMv2-IndicationMessage-Format2}
 type E2SmKpmIndicationMessageFormat2 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5212,7 +5212,7 @@ func (x *E2SmKpmIndicationMessageFormat2) GetMeasData() *MeasurementData {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:441
-//{E2SM-KPMv2-RANfunction-Description}
+// {E2SM-KPMv2-RANfunction-Description}
 type E2SmKpmRanfunctionDescription struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5285,7 +5285,7 @@ func (x *E2SmKpmRanfunctionDescription) GetRicReportStyleList() []*RicReportStyl
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:449
-//{RIC-KPMNode-Item}
+// {RIC-KPMNode-Item}
 type RicKpmnodeItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5342,7 +5342,7 @@ func (x *RicKpmnodeItem) GetCellMeasurementObjectList() []*CellMeasurementObject
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:455
-//{Cell-Measurement-Object-Item}
+// {Cell-Measurement-Object-Item}
 type CellMeasurementObjectItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5399,7 +5399,7 @@ func (x *CellMeasurementObjectItem) GetCellGlobalId() *CellGlobalId {
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:461
-//{RIC-EventTriggerStyle-Item}
+// {RIC-EventTriggerStyle-Item}
 type RicEventTriggerStyleItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5464,7 +5464,7 @@ func (x *RicEventTriggerStyleItem) GetRicEventTriggerFormatType() *RicFormatType
 }
 
 // sequence from e2sm_kpm_v2.0.2-rm.asn:468
-//{RIC-ReportStyle-Item}
+// {RIC-ReportStyle-Item}
 type RicReportStyleItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5552,7 +5552,7 @@ func (x *RicReportStyleItem) GetRicIndicationMessageFormatType() *RicFormatType 
 	return nil
 }
 
-//{RIC-Style-Name}
+// {RIC-Style-Name}
 type RicStyleName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5600,7 +5600,7 @@ func (x *RicStyleName) GetValue() string {
 	return ""
 }
 
-//{CellObjectID}
+// {CellObjectID}
 type CellObjectId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5648,7 +5648,7 @@ func (x *CellObjectId) GetValue() string {
 	return ""
 }
 
-//{MeasurementTypeName}
+// {MeasurementTypeName}
 type MeasurementTypeName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5696,7 +5696,7 @@ func (x *MeasurementTypeName) GetValue() string {
 	return ""
 }
 
-//{UE-Identity}
+// {UE-Identity}
 type UeIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5744,7 +5744,7 @@ func (x *UeIdentity) GetValue() string {
 	return ""
 }
 
-//{PLMN-Identity}
+// {PLMN-Identity}
 type PlmnIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5792,7 +5792,7 @@ func (x *PlmnIdentity) GetValue() []byte {
 	return nil
 }
 
-//{TimeStamp}
+// {TimeStamp}
 type TimeStamp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5840,7 +5840,7 @@ func (x *TimeStamp) GetValue() []byte {
 	return nil
 }
 
-//{EUTRACellIdentity}
+// {EUTRACellIdentity}
 type EutracellIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5888,7 +5888,7 @@ func (x *EutracellIdentity) GetValue() *BitString {
 	return nil
 }
 
-//{NRCellIdentity}
+// {NRCellIdentity}
 type NrcellIdentity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5936,7 +5936,7 @@ func (x *NrcellIdentity) GetValue() *BitString {
 	return nil
 }
 
-//{BIT_STRING}
+// {BIT_STRING}
 type BitString struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
