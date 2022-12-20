@@ -7,7 +7,7 @@ package kpmctypes
 import (
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/pdubuilder"
 	"gotest.tools/assert"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -36,7 +36,7 @@ func Test_xerEncodeE2SmKpmIndicationHeader(t *testing.T) {
 }
 
 func Test_perDecodeE2SmKpmIndicationHeader(t *testing.T) {
-	e2smKpmRanfunctionDescription, err := ioutil.ReadFile("../test/E2SM-KPM-Indication-Header-eNB.xml")
+	e2smKpmRanfunctionDescription, err := os.ReadFile("../test/E2SM-KPM-Indication-Header-eNB.xml")
 	assert.NilError(t, err, "Unexpected error when loading file")
 	e2SmKpmPdu, err := XerDecodeE2SmKpmIndicationHeader(e2smKpmRanfunctionDescription)
 	assert.NilError(t, err)

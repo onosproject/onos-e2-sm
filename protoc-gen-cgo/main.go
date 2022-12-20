@@ -24,7 +24,7 @@ func main() {
 
 	g.RegisterModule(generic.NewModule())
 	//g.RegisterPostProcessor(generic.NewPostProcessor()) // Probably wouldn't need in the end
-	//ToDo: Could be an issue when using latest Protobuf compiler (3.9.0) - simply comment it
+	// ToDo: Could be an issue when using latest Protobuf compiler (3.9.0) - simply comment it
 	g.RegisterPostProcessor(pgsgo.GoFmt()) // This option could cause errors while post-processing KPM model
 	// Helper tool to track what are the errors:
 	// gofmt -w generated/*.go

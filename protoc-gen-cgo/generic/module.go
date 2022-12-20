@@ -305,7 +305,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 					OneOf:           oneof,
 					Repeated:        repeated,
 					Optional:        optional,
-					//VariableName: doLinting(msg.Name().String()), //ToDo - complete integration of linters
+					//VariableName: doLinting(msg.Name().String()), // ToDo - complete integration of linters
 					//Dependencies:  deps,
 				}
 				fmt.Fprintf(buf, "%03d. Gathered Message Data -- %v\n ", i, msgData)
@@ -572,7 +572,7 @@ func decodeDataType(dataType string) string {
 		return "decodeBoolean"
 	case "int64":
 		return "decodeInteger"
-	case "message": //ToDo: isn't it pointless?? -- missing enum then
+	case "message": // ToDo: isn't it pointless?? -- missing enum then
 		return "decode" + upperCaseFirstLetter(doLinting(dataType))
 	default:
 		return "decode" + upperCaseFirstLetter(doLinting(dataType))
@@ -592,7 +592,7 @@ func encodeDataType(dataType string) string {
 		return "newBoolean"
 	case "int64":
 		return "newInteger"
-	case "message": //ToDo: isn't it pointless?? -- missing enum then
+	case "message": // ToDo: isn't it pointless?? -- missing enum then
 		return "new" + upperCaseFirstLetter(doLinting(dataType))
 	default:
 		return "new" + upperCaseFirstLetter(doLinting(dataType))
@@ -680,7 +680,7 @@ func findWithinBasicTypes(fileName string) bool {
 	return false
 }
 
-//ToDo - fix linting properly - overlapping with custom types for some reason..
+// ToDo - fix linting properly - overlapping with custom types for some reason..
 func doLinting(str string) string {
 
 	//Firstly verify if this instance should be linted - go through exceptions

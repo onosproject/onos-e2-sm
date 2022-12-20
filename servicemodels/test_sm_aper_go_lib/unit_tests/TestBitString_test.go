@@ -67,7 +67,7 @@ func createTestBitString() (*test_sm_ies.TestBitString, error) {
 
 	var bs3 *asn1.BitString
 	//need to indicate whether next value is extensible or not
-	ext := rand.Intn(1)
+	ext := rand.Intn(2)
 	if ext == 1 {
 		bs3, err = generateBitStringOfSize(uint32(20) + uint32(rand.Intn(1000)))
 		if err != nil {
@@ -98,7 +98,7 @@ func createTestBitString() (*test_sm_ies.TestBitString, error) {
 
 	var bs6 *asn1.BitString
 	//need to indicate whether next value is extensible or not
-	ext = rand.Intn(1)
+	ext = rand.Intn(2)
 	if ext == 1 {
 		bs6, err = generateBitStringOfSize(uint32(rand.Intn(32-28)+28) + uint32(rand.Intn(1000)))
 		if err != nil {
@@ -115,7 +115,7 @@ func createTestBitString() (*test_sm_ies.TestBitString, error) {
 
 	var bs7 *asn1.BitString
 	//need to indicate whether next value is extensible or not
-	optional := rand.Intn(1)
+	optional := rand.Intn(2)
 	if optional == 1 {
 		bs7, err = generateBitStringOfSize(uint32(rand.Intn(36-22) + 22))
 		if err != nil {

@@ -11,7 +11,6 @@ import (
 	"github.com/rogpeppe/go-internal/modfile"
 	"github.com/rogpeppe/go-internal/module"
 	"github.com/spf13/cobra"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -133,7 +132,7 @@ func (r *moduleResolver) resolve(model, target string) (*modfile.File, error) {
 func (r *moduleResolver) fetchMod(target string) (*modfile.File, error) {
 	localModPath := filepath.Join(target, "go.mod")
 	if _, err := os.Stat(localModPath); !os.IsNotExist(err) {
-		localModBytes, err := ioutil.ReadFile(localModPath)
+		localModBytes, err := os.ReadFile(localModPath)
 		if err != nil {
 			return nil, err
 		}
@@ -154,7 +153,7 @@ func (r *moduleResolver) fetchMod(target string) (*modfile.File, error) {
 
 	targetPath, _ := splitModPathVersion(target)
 
-	fakeModDir, err := ioutil.TempDir("", "onos-e2-sm-plugin")
+	fakeModDir, err := os.MkdirTemp("", "onos-e2-sm-plugin")
 	if err != nil {
 		return nil, err
 	}
@@ -169,7 +168,7 @@ func (r *moduleResolver) fetchMod(target string) (*modfile.File, error) {
 
 	// Write the temporary module file
 	fakeModPath := filepath.Join(fakeModDir, modFile)
-	if err := ioutil.WriteFile(fakeModPath, fakeMod, 0666); err != nil {
+	if err := os.WriteFile(fakeModPath, fakeMod, 0666); err != nil {
 		return nil, err
 	}
 
@@ -179,7 +178,7 @@ func (r *moduleResolver) fetchMod(target string) (*modfile.File, error) {
 	}
 
 	// Read the updated go.mod for the temporary module
-	fakeMod, err = ioutil.ReadFile(fakeModPath)
+	fakeMod, err = os.ReadFile(fakeModPath)
 	if err != nil {
 		return nil, err
 	}
@@ -226,7 +225,7 @@ func (r *moduleResolver) fetchMod(target string) (*modfile.File, error) {
 
 	// Read the target go.mod from the cache
 	cacheModPath := filepath.Join(modCache, "cache", "download", modPath, "@v", modVersion+".mod")
-	modBytes, err := ioutil.ReadFile(cacheModPath)
+	modBytes, err := os.ReadFile(cacheModPath)
 	if err != nil {
 		return nil, err
 	}

@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-//nolint
+// nolint
 package main
 
 import (
@@ -256,7 +256,7 @@ func (sm servicemodel) OnSetup(request *types.OnSetupRequest) error {
 	return nil
 }
 
-//ServiceModel is the exported symbol that gives an entry point to this shared module
+// ServiceModel is the exported symbol that gives an entry point to this shared module
 var ServiceModel servicemodel
 
 func bitStringToUint64(bitString []byte, bitCount int) uint64 {

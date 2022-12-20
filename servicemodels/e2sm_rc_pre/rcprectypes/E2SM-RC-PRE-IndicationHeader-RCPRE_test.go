@@ -9,7 +9,7 @@ import (
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/pdubuilder"
 	e2sm_rc_pre_v2 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/v2/e2sm-rc-pre-v2"
 	"gotest.tools/assert"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -38,7 +38,7 @@ func Test_XerEncodeE2SmRcPreIndicationHeader(t *testing.T) {
 }
 
 func Test_XerDecodeE2SmRcPreIndicationHeader(t *testing.T) {
-	E2SmRcPreRanfunctionDescription, err := ioutil.ReadFile("../test/E2SM-RC-PRE-Indication-Header-eNB.xml")
+	E2SmRcPreRanfunctionDescription, err := os.ReadFile("../test/E2SM-RC-PRE-Indication-Header-eNB.xml")
 	assert.NilError(t, err, "Unexpected error when loading file")
 	E2SmRcPrePdu, err := XerDecodeE2SmRcPreIndicationHeader(E2SmRcPreRanfunctionDescription)
 	assert.NilError(t, err)

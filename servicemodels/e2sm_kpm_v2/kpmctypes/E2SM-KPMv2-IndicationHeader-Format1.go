@@ -75,7 +75,7 @@ func newE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1 *e2sm_kpm_
 	}
 
 	e2SmKpmIndicationHeaderFormat1C := C.E2SM_KPMv2_IndicationHeader_Format1_t{
-		colletStartTime:   *colletStartTimeC,
+		colletStartTime: *colletStartTimeC,
 		//fileFormatversion: fileFormatversionC,
 		//senderName:        senderNameC,
 		//senderType:        senderTypeC,
@@ -125,7 +125,7 @@ func decodeE2SmKpmIndicationHeaderFormat1(e2SmKpmIndicationHeaderFormat1C *C.E2S
 	}
 
 	e2SmKpmIndicationHeaderFormat1 := e2sm_kpm_v2.E2SmKpmIndicationHeaderFormat1{
-		ColletStartTime:   colletStartTime,
+		ColletStartTime: colletStartTime,
 		//FileFormatversion: fileFormatversion,
 		//SenderName:        senderName,
 		//SenderType:        senderType,

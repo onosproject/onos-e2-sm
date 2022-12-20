@@ -7,12 +7,12 @@ package pdudecoder
 import (
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/mhoctypes"
 	"gotest.tools/assert"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
 func Test_DecodeE2SmMhoRanfunctionDescription(t *testing.T) {
-	e2smMhoRanfunctionDescription, err := ioutil.ReadFile("../test/E2SM-MHO-RANfunction-Description.xml")
+	e2smMhoRanfunctionDescription, err := os.ReadFile("../test/E2SM-MHO-RANfunction-Description.xml")
 	assert.NilError(t, err, "Unexpected error when loading file")
 	e2SmMhoPdu, err := mhoctypes.XerDecodeE2SmMhoRanfunctionDescription(e2smMhoRanfunctionDescription)
 	assert.NilError(t, err)

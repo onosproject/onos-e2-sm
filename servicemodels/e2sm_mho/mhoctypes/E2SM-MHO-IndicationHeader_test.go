@@ -9,7 +9,7 @@ import (
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"gotest.tools/assert"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -37,7 +37,7 @@ func Test_XerEncodeE2SmMhoIndicationHeader(t *testing.T) {
 }
 
 func Test_XerDecodeE2SmMhoIndicationHeader(t *testing.T) {
-	E2SmMhoRanfunctionDescription, err := ioutil.ReadFile("../test/E2SM-MHO-Indication-Header-eNB.xml")
+	E2SmMhoRanfunctionDescription, err := os.ReadFile("../test/E2SM-MHO-Indication-Header-eNB.xml")
 	assert.NilError(t, err, "Unexpected error when loading file")
 	E2SmMhoPdu, err := XerDecodeE2SmMhoIndicationHeader(E2SmMhoRanfunctionDescription)
 	assert.NilError(t, err)

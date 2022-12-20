@@ -7,7 +7,7 @@ package mhoctypes
 import (
 	"encoding/hex"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
@@ -57,7 +57,7 @@ func Test_xerEncodingE2SmMhoMeasurementReportItem(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoMeasurementReportItem XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoMeasurementReportItem.GetCgi(), result.GetCgi())
 	assert.Equal(t, e2SmMhoMeasurementReportItem.GetRsrp().GetValue(), result.GetRsrp().GetValue())
 
@@ -77,7 +77,7 @@ func Test_perEncodingE2SmMhoMeasurementReportItem(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoMeasurementReportItem PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoMeasurementReportItem.GetCgi(), result.GetCgi())
 	assert.Equal(t, e2SmMhoMeasurementReportItem.GetRsrp().GetValue(), result.GetRsrp().GetValue())
 

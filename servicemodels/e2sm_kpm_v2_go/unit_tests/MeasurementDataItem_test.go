@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-//var refPerMDIfull = "00000000  00 03 00 15 20 09 80 d0  16 33 33 33 33 33 33 40  |.... ....333333@|"
+// var refPerMDIfull = "00000000  00 03 00 15 20 09 80 d0  16 33 33 33 33 33 33 40  |.... ....333333@|"
 var refPerMDInoRealnoOptional = "00000000  00 02 00 15 40                                    |....@|"
 var refPerMDInoReal = "00000000  40 02 00 15 40                                    |@...@|"
 

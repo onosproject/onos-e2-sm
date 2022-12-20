@@ -7,12 +7,12 @@ package pdudecoder
 import (
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_kpm/kpmctypes"
 	"gotest.tools/assert"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
 func Test_DecodeE2SmKpmRanfunctionDescription(t *testing.T) {
-	e2smKpmRanfunctionDescription, err := ioutil.ReadFile("../test/E2SM-KPM-RANfunction-Description.xml")
+	e2smKpmRanfunctionDescription, err := os.ReadFile("../test/E2SM-KPM-RANfunction-Description.xml")
 	assert.NilError(t, err, "Unexpected error when loading file")
 	e2SmKpmPdu, err := kpmctypes.XerDecodeE2SmKpmRanfunctionDescription(e2smKpmRanfunctionDescription)
 	assert.NilError(t, err)

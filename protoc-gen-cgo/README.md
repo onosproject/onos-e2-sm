@@ -71,7 +71,7 @@ enum RtPeriodIe {
 
 ## Additional changes by hand
 Generated code covers only some part of the work (thankfully big one). Somehow some changes by hand should be done. 
-Majority of them has been covered with `//ToDo` comments inserted into generated code. In the first step please address all of them.
+Majority of them has been covered with `// ToDo` comments inserted into generated code. In the first step please address all of them.
 
 #### CGo code
 The most tricky part is to verify that all basic structures are encoded correctly (like SNSSAI, TimeStamp and others). Please go through each

@@ -62,7 +62,7 @@ func perDecodeRanfunctionName(bytes []byte) (*e2sm_mho.RanfunctionName, error) {
 func newRanfunctionName(ranfunctionName *e2sm_mho.RanfunctionName) *C.RANfunction_Name_t {
 
 	ranFunctionShortNameC, _ := newPrintableString(ranfunctionName.GetRanFunctionShortName())
-	ranFunctionE2SmOidC, _  := newPrintableString(ranfunctionName.GetRanFunctionE2SmOid())
+	ranFunctionE2SmOidC, _ := newPrintableString(ranfunctionName.GetRanFunctionE2SmOid())
 	ranFunctionDescriptionC, _ := newPrintableString(ranfunctionName.GetRanFunctionDescription())
 	//ranFunctionInstanceC := (C.long)(ranfunctionName.RanFunctionInstance)
 

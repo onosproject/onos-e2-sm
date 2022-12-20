@@ -15,7 +15,7 @@ import "C"
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -76,8 +76,8 @@ func newE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1 *e2sm_mh
 	if err != nil {
 		return nil, fmt.Errorf("newUeIdentity() %s", err.Error())
 	}
-	measReportC := new(C.struct_E2SM_MHO_IndicationMessage_Format1__measReport)      //ToDo - verify correctness of the variable's name
-	for _, measReportItem := range e2SmMhoIndicationMessageFormat1.GetMeasReport() { //ToDo - Verify if GetSmth() function is called correctly
+	measReportC := new(C.struct_E2SM_MHO_IndicationMessage_Format1__measReport)      // ToDo - verify correctness of the variable's name
+	for _, measReportItem := range e2SmMhoIndicationMessageFormat1.GetMeasReport() { // ToDo - Verify if GetSmth() function is called correctly
 		measReportItemC, err := newE2SmMhoMeasurementReportItem(measReportItem)
 		if err != nil {
 			return nil, fmt.Errorf("newE2SmMhoMeasurementReportItem() %s", err.Error())
@@ -87,7 +87,7 @@ func newE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1 *e2sm_mh
 		}
 	}
 
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+	// ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	e2SmMhoIndicationMessageFormat1C.ueID = *ueIDC
 	e2SmMhoIndicationMessageFormat1C.measReport = *measReportC
 
@@ -98,9 +98,9 @@ func decodeE2SmMhoIndicationMessageFormat1(e2SmMhoIndicationMessageFormat1C *C.E
 
 	var err error
 	e2SmMhoIndicationMessageFormat1 := e2sm_mho.E2SmMhoIndicationMessageFormat1{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
+		// ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		//UeId: ueId,
-		MeasReport: make([]*e2sm_mho.E2SmMhoMeasurementReportItem, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
+		MeasReport: make([]*e2sm_mho.E2SmMhoMeasurementReportItem, 0), // ToDo - Check if protobuf structure is implemented correctly (mainly naming)
 
 	}
 

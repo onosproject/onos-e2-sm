@@ -48,8 +48,8 @@ func createE2SmMhoRanfunctionDescriptionMsg() (*e2sm_mho.E2SmMhoRanfunctionDescr
 
 	//e2SmMhoRanfunctionDescription := e2sm_mho.E2SmMhoRanfunctionDescription{
 	//	RanFunctionName:          nil,
-	//	RicEventTriggerStyleList: make([]*e2sm_mho.RicEventTriggerStyleList, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
-	//	RicReportStyleList:       make([]*e2sm_mho.RicReportStyleList, 0),       //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
+	//	RicEventTriggerStyleList: make([]*e2sm_mho.RicEventTriggerStyleList, 0), // ToDo - Check if protobuf structure is implemented correctly (mainly naming)
+	//	RicReportStyleList:       make([]*e2sm_mho.RicReportStyleList, 0),       // ToDo - Check if protobuf structure is implemented correctly (mainly naming)
 
 	//}
 
@@ -66,19 +66,19 @@ func Test_XerEncodingE2SmMhoRanfunctionDescription(t *testing.T) {
 
 	xer, err := XerEncodeE2SmMhoRanfunctionDescription(e2SmMhoRanfunctionDescription)
 	assert.NilError(t, err)
-	assert.Equal(t, 1275, len(xer)) //ToDo - adjust length of the XER encoded message
+	assert.Equal(t, 1275, len(xer)) // ToDo - adjust length of the XER encoded message
 	t.Logf("E2SmMhoRanfunctionDescription XER\n%s", string(xer))
 
 	result, err := XerDecodeE2SmMhoRanfunctionDescription(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoRanfunctionDescription XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoRanfunctionDescription.GetRanFunctionName(), result.GetRanFunctionName())
 
-	assert.Equal(t, 1, len(result.GetRicEventTriggerStyleList())) //ToDo - adjust length of a list
+	assert.Equal(t, 1, len(result.GetRicEventTriggerStyleList())) // ToDo - adjust length of a list
 	//assert.DeepEqual(t, e2SmMhoRanfunctionDescription.GetRicEventTriggerStyleList(), result.GetRicEventTriggerStyleList())
-	assert.Equal(t, 1, len(result.GetRicReportStyleList())) //ToDo - adjust length of a list
+	assert.Equal(t, 1, len(result.GetRicReportStyleList())) // ToDo - adjust length of a list
 	//assert.DeepEqual(t, e2SmMhoRanfunctionDescription.GetRicReportStyleList(), result.GetRicReportStyleList())
 
 }
@@ -97,12 +97,12 @@ func Test_PerEncodingE2SmMhoRanfunctionDescription(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoRanfunctionDescription PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoRanfunctionDescription.GetRanFunctionName(), result.GetRanFunctionName())
 
-	assert.Equal(t, 1, len(result.GetRicEventTriggerStyleList())) //ToDo - adjust length of a list
+	assert.Equal(t, 1, len(result.GetRicEventTriggerStyleList())) // ToDo - adjust length of a list
 	//assert.DeepEqual(t, e2SmMhoRanfunctionDescription.GetRicEventTriggerStyleList(), result.GetRicEventTriggerStyleList())
-	assert.Equal(t, 1, len(result.GetRicReportStyleList())) //ToDo - adjust length of a list
+	assert.Equal(t, 1, len(result.GetRicReportStyleList())) // ToDo - adjust length of a list
 	//assert.DeepEqual(t, e2SmMhoRanfunctionDescription.GetRicReportStyleList(), result.GetRicReportStyleList())
 
 }

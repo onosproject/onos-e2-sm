@@ -7,14 +7,14 @@ package mhoctypes
 import (
 	"encoding/hex"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
 
 func createE2SmMhoIndicationMessageFormat2Msg() (*e2sm_mho.E2SmMhoIndicationMessageFormat2, error) {
 
-	// e2SmMhoIndicationMessageFormat2 := pdubuilder.CreateE2SmMhoIndicationMessageFormat2() //ToDo - fill in arguments here(if this function exists
+	// e2SmMhoIndicationMessageFormat2 := pdubuilder.CreateE2SmMhoIndicationMessageFormat2() // ToDo - fill in arguments here(if this function exists
 
 	e2SmMhoIndicationMessageFormat2 := e2sm_mho.E2SmMhoIndicationMessageFormat2{
 		UeId:      &e2sm_mho.UeIdentity{Value: "1234"},
@@ -34,14 +34,14 @@ func Test_xerEncodingE2SmMhoIndicationMessageFormat2(t *testing.T) {
 
 	xer, err := xerEncodeE2SmMhoIndicationMessageFormat2(e2SmMhoIndicationMessageFormat2)
 	assert.NilError(t, err)
-	assert.Equal(t, 139, len(xer)) //ToDo - adjust length of the XER encoded message
+	assert.Equal(t, 139, len(xer)) // ToDo - adjust length of the XER encoded message
 	t.Logf("E2SmMhoIndicationMessageFormat2 XER\n%s", string(xer))
 
 	result, err := xerDecodeE2SmMhoIndicationMessageFormat2(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoIndicationMessageFormat2 XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoIndicationMessageFormat2.GetUeId(), result.GetUeId())
 	//assert.Equal(t, e2SmMhoIndicationMessageFormat2.GetRrcStatus(), result.GetRrcStatus())
 
@@ -61,7 +61,7 @@ func Test_perEncodingE2SmMhoIndicationMessageFormat2(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoIndicationMessageFormat2 PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoIndicationMessageFormat2.GetUeId(), result.GetUeId())
 	//assert.Equal(t, e2SmMhoIndicationMessageFormat2.GetRrcStatus(), result.GetRrcStatus())
 

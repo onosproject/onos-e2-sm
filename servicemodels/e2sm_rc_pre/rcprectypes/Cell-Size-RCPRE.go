@@ -17,7 +17,7 @@ import (
 	"unsafe"
 )
 
-//ToDo: Solve "Cannot convert cellSizeC (type _Ctype_long) to type unsafe.Pointer"
+// ToDo: Solve "Cannot convert cellSizeC (type _Ctype_long) to type unsafe.Pointer"
 func xerEncodeCellSize(cellSize e2sm_rc_pre_v2.CellSize) ([]byte, error) {
 	cellSizeC, err := newCellSize(cellSize)
 	if err != nil {
@@ -44,7 +44,7 @@ func perEncodeCellSize(cellSize e2sm_rc_pre_v2.CellSize) ([]byte, error) {
 	return bytes, nil
 }
 
-//ToDo: Decide what to return instead of nil, which cannot be returned since return value is not a pointer anymore
+// ToDo: Decide what to return instead of nil, which cannot be returned since return value is not a pointer anymore
 func xerDecodeCellSize(bytes []byte) (e2sm_rc_pre_v2.CellSize, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_Cell_Size_RCPRE)
 	if err != nil {

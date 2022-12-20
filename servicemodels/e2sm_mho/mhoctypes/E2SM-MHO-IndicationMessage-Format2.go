@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-IndicationMessage-Format2.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-IndicationMessage-Format2.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -82,7 +82,7 @@ func newE2SmMhoIndicationMessageFormat2(e2SmMhoIndicationMessageFormat2 *e2sm_mh
 		return nil, fmt.Errorf("newRrcstatus() %s", err.Error())
 	}
 
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+	// ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	e2SmMhoIndicationMessageFormat2C.ueID = *ueIDC
 	e2SmMhoIndicationMessageFormat2C.rrcStatus = *rrcStatusC
 
@@ -93,7 +93,7 @@ func decodeE2SmMhoIndicationMessageFormat2(e2SmMhoIndicationMessageFormat2C *C.E
 
 	var err error
 	e2SmMhoIndicationMessageFormat2 := e2sm_mho.E2SmMhoIndicationMessageFormat2{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
+		// ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		//UeId: ueId,
 		//RrcStatus: rrcStatus,
 

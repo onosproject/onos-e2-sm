@@ -24,7 +24,7 @@ func CreateE2SmRcPreControlOutcome(elementList []*e2smrcprev2.RanparameterItem) 
 	return &e2smRcPrePdu, nil
 }
 
-//CreateE2SmRcPreControlOutcomeEmpty is used just to generate signature, in case it is needed
+// CreateE2SmRcPreControlOutcomeEmpty is used just to generate signature, in case it is needed
 func CreateE2SmRcPreControlOutcomeEmpty() (*e2smrcprev2.E2SmRcPreControlOutcome, error) {
 
 	e2smRcPrePdu := e2smrcprev2.E2SmRcPreControlOutcome{

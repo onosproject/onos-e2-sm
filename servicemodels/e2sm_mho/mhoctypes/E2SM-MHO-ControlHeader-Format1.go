@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-ControlHeader-Format1.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-ControlHeader-Format1.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -81,7 +81,7 @@ func newE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1 *e2sm_mho.E2SmMh
 		return nil, fmt.Errorf("newRicControlMessagePriority() %s", err.Error())
 	}
 
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+	// ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	e2SmMhoControlHeaderFormat1C.rc_command = *rcCommandC
 	e2SmMhoControlHeaderFormat1C.ric_Control_Message_Priority = ricControlMessagePriorityC
 
@@ -92,7 +92,7 @@ func decodeE2SmMhoControlHeaderFormat1(e2SmMhoControlHeaderFormat1C *C.E2SM_MHO_
 	// TODO TODO
 	var err error
 	e2SmMhoControlHeaderFormat1 := e2sm_mho.E2SmMhoControlHeaderFormat1{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
+		// ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		//RcCommand: rcCommand,
 		//RicControlMessagePriority: ricControlMessagePriority,
 

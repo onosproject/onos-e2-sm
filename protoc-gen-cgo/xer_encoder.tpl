@@ -9,7 +9,7 @@ package {{.PackageName}}ctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "-IndicationMessage.h" //ToDo - fill in correct IndicationMessage dependency here
+//#include "-IndicationMessage.h" // ToDo - fill in correct IndicationMessage dependency here
 //extern int consumeBytesCb(void* p0, uint32_t p1, void* p2);
 import "C"
 import (

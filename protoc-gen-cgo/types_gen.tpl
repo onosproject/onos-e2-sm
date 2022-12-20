@@ -7,7 +7,7 @@ package {{.ProtoFileName}}
 type {{.GlobalName}}Builder interface {
 New{{.GlobalName}}()
 Get{{.GlobalName}}()
-//ToDo - check whether generated Set & Get functions correspond to actual Protobuf structure
+// ToDo - check whether generated Set & Get functions correspond to actual Protobuf structure
 {{if .Optional}}{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
 Set{{doLinting .FieldName}}()
 Get{{doLinting .FieldName}}()
@@ -28,7 +28,7 @@ func (b *{{.MessageName}}) Get{{.GlobalName}}() *{{.MessageName}} {
 return b
 }
 
-//ToDo - check whether generated Set & Get functions correspond to actual Protobuf structure
+// ToDo - check whether generated Set & Get functions correspond to actual Protobuf structure
 {{if .Optional}}{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
 func (b *{{.MessageName}}) Set{{doLinting .FieldName}}(input *{{upperCaseFirstLetter .FieldName}}) *{{.MessageName}} {
 b.{{upperCaseFirstLetter .FieldName}} = input

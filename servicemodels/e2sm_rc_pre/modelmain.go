@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-//nolint
+// nolint
 package main
 
 import (

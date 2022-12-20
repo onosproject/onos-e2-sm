@@ -23,7 +23,7 @@ const (
 )
 
 // enumerated from e2sm_rc_pre_v2.asn:50
-//{Cell-Size}
+// {Cell-Size}
 type CellSize int32
 
 const (
@@ -77,7 +77,7 @@ func (CellSize) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_rc_pre_v2.asn:106
-//{RANparameter-Type}
+// {RANparameter-Type}
 type RanparameterType int32
 
 const (
@@ -137,7 +137,7 @@ func (RanparameterType) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_rc_pre_v2.asn:116
-//{RC-PRE-Trigger-Type}
+// {RC-PRE-Trigger-Type}
 type RcPreTriggerType int32
 
 const (
@@ -185,7 +185,7 @@ func (RcPreTriggerType) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm_rc_pre_v2.asn:202
-//{RC-PRE-Command}
+// {RC-PRE-Command}
 type RcPreCommand int32
 
 const (
@@ -230,7 +230,7 @@ func (RcPreCommand) EnumDescriptor() ([]byte, []int) {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:22
-//{EUTRACGI}
+// {EUTRACGI}
 type Eutracgi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -287,7 +287,7 @@ func (x *Eutracgi) GetEUtracellIdentity() *EutracellIdentity {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:28
-//{NRCGI}
+// {NRCGI}
 type Nrcgi struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -344,7 +344,7 @@ func (x *Nrcgi) GetNRcellIdentity() *NrcellIdentity {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:34
-//{CellGlobalID}
+// {CellGlobalID}
 type CellGlobalId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -430,7 +430,7 @@ func (*CellGlobalId_NrCgi) isCellGlobalId_CellGlobalId() {}
 func (*CellGlobalId_EUtraCgi) isCellGlobalId_CellGlobalId() {}
 
 // range of Integer from e2sm_rc_pre_v2.asn:40
-//{EARFCN}
+// {EARFCN}
 type Earfcn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -480,7 +480,7 @@ func (x *Earfcn) GetValue() int32 {
 }
 
 // range of Integer from e2sm_rc_pre_v2.asn:41
-//{NRARFCN}
+// {NRARFCN}
 type Nrarfcn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -530,7 +530,7 @@ func (x *Nrarfcn) GetValue() int32 {
 }
 
 // range of Integer from e2sm_rc_pre_v2.asn:42
-//{PCI}
+// {PCI}
 type Pci struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -580,7 +580,7 @@ func (x *Pci) GetValue() int32 {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:45
-//{ARFCN}
+// {ARFCN}
 type Arfcn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -666,7 +666,7 @@ func (*Arfcn_EArfcn) isArfcn_Arfcn() {}
 func (*Arfcn_NrArfcn) isArfcn_Arfcn() {}
 
 // constant Integer from e2sm_rc_pre_v2.asn:59
-//{-}
+// {-}
 type MaxofMessageProtocolTests struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -715,7 +715,7 @@ func (x *MaxofMessageProtocolTests) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:60
-//{-}
+// {-}
 type MaxofRicstyles struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -764,7 +764,7 @@ func (x *MaxofRicstyles) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:61
-//{-}
+// {-}
 type MaxPlmn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -813,7 +813,7 @@ func (x *MaxPlmn) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:62
-//{-}
+// {-}
 type MaxNr struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -862,7 +862,7 @@ func (x *MaxNr) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:63
-//{-}
+// {-}
 type MaxEarfcn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -911,7 +911,7 @@ func (x *MaxEarfcn) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:64
-//{-}
+// {-}
 type MaxNrarfcn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -960,7 +960,7 @@ func (x *MaxNrarfcn) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:65
-//{-}
+// {-}
 type MaxPci struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1009,7 +1009,7 @@ func (x *MaxPci) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:66
-//{-}
+// {-}
 type MaxPciRange struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1058,7 +1058,7 @@ func (x *MaxPciRange) GetValue() int32 {
 }
 
 // constant Integer from e2sm_rc_pre_v2.asn:67
-//{-}
+// {-}
 type MaxofRanparameters struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1107,7 +1107,7 @@ func (x *MaxofRanparameters) GetValue() int32 {
 }
 
 // range of Integer from e2sm_rc_pre_v2.asn:70
-//{RIC-Style-Type}
+// {RIC-Style-Type}
 type RicStyleType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1157,7 +1157,7 @@ func (x *RicStyleType) GetValue() int32 {
 }
 
 // range of Integer from e2sm_rc_pre_v2.asn:77
-//{RIC-Format-Type}
+// {RIC-Format-Type}
 type RicFormatType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1207,7 +1207,7 @@ func (x *RicFormatType) GetValue() int32 {
 }
 
 // range of Integer from e2sm_rc_pre_v2.asn:79
-//{RIC-Control-Message-Priority}
+// {RIC-Control-Message-Priority}
 type RicControlMessagePriority struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1257,7 +1257,7 @@ func (x *RicControlMessagePriority) GetValue() int32 {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:80
-//{RANparameter-Item}
+// {RANparameter-Item}
 type RanparameterItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1306,7 +1306,7 @@ func (x *RanparameterItem) GetRanParameterId() *RanparameterId {
 }
 
 // range of Integer from e2sm_rc_pre_v2.asn:84
-//{RANparameter-ID}
+// {RANparameter-ID}
 type RanparameterId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1356,7 +1356,7 @@ func (x *RanparameterId) GetValue() int32 {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:87
-//{RANparameter-Value}
+// {RANparameter-Value}
 type RanparameterValue struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1502,7 +1502,7 @@ func (*RanparameterValue_ValueOctS) isRanparameterValue_RanparameterValue() {}
 func (*RanparameterValue_ValuePrtS) isRanparameterValue_RanparameterValue() {}
 
 // sequence from e2sm_rc_pre_v2.asn:97
-//{RANparameterDef-Item}
+// {RANparameterDef-Item}
 type RanparameterDefItem struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1568,7 +1568,7 @@ func (x *RanparameterDefItem) GetRanParameterType() RanparameterType {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:130
-//{E2SM-RC-PRE-EventTriggerDefinition}
+// {E2SM-RC-PRE-EventTriggerDefinition}
 type E2SmRcPreEventTriggerDefinition struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1686,7 +1686,7 @@ func (*EventTriggerDefinitionFormats_EventDefinitionFormat1) isEventTriggerDefin
 }
 
 // sequence from e2sm_rc_pre_v2.asn:135
-//{E2SM-RC-PRE-EventTriggerDefinition-Format1}
+// {E2SM-RC-PRE-EventTriggerDefinition-Format1}
 type E2SmRcPreEventTriggerDefinitionFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1745,7 +1745,7 @@ func (x *E2SmRcPreEventTriggerDefinitionFormat1) GetReportingPeriodMs() int64 {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:146
-//{E2SM-RC-PRE-IndicationHeader}
+// {E2SM-RC-PRE-IndicationHeader}
 type E2SmRcPreIndicationHeader struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1817,7 +1817,7 @@ func (*E2SmRcPreIndicationHeader_IndicationHeaderFormat1) isE2SmRcPreIndicationH
 }
 
 // sequence from e2sm_rc_pre_v2.asn:152
-//{E2SM-RC-PRE-IndicationHeader-Format1} -- the only instance is OPTIONAL - any reason to treat it differently?
+// {E2SM-RC-PRE-IndicationHeader-Format1} -- the only instance is OPTIONAL - any reason to treat it differently?
 type E2SmRcPreIndicationHeaderFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1867,7 +1867,7 @@ func (x *E2SmRcPreIndicationHeaderFormat1) GetCgi() *CellGlobalId {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:162
-//{E2SM-RC-PRE-IndicationMessage}
+// {E2SM-RC-PRE-IndicationMessage}
 type E2SmRcPreIndicationMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1955,7 +1955,7 @@ func (*E2SmRcPreIndicationMessage_IndicationMessageFormat1) isE2SmRcPreIndicatio
 }
 
 // sequence from e2sm_rc_pre_v2.asn:169
-//{E2SM-RC-PRE-IndicationMessage-Format1}
+// {E2SM-RC-PRE-IndicationMessage-Format1}
 type E2SmRcPreIndicationMessageFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2030,7 +2030,7 @@ func (x *E2SmRcPreIndicationMessageFormat1) GetNeighbors() []*Nrt {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:177
-//{NRT}
+// {NRT}
 type Nrt struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2105,7 +2105,7 @@ func (x *Nrt) GetPci() *Pci {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:190
-//{E2SM-RC-PRE-ControlHeader}
+// {E2SM-RC-PRE-ControlHeader}
 type E2SmRcPreControlHeader struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2177,7 +2177,7 @@ func (*E2SmRcPreControlHeader_ControlHeaderFormat1) isE2SmRcPreControlHeader_E2S
 }
 
 // sequence from e2sm_rc_pre_v2.asn:196
-//{E2SM-RC-PRE-ControlHeader-Format1}
+// {E2SM-RC-PRE-ControlHeader-Format1}
 type E2SmRcPreControlHeaderFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2245,7 +2245,7 @@ func (x *E2SmRcPreControlHeaderFormat1) GetRicControlMessagePriority() *RicContr
 }
 
 // sequence from e2sm_rc_pre_v2.asn:211
-//{E2SM-RC-PRE-ControlMessage}
+// {E2SM-RC-PRE-ControlMessage}
 type E2SmRcPreControlMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2316,7 +2316,7 @@ type E2SmRcPreControlMessage_ControlMessage struct {
 func (*E2SmRcPreControlMessage_ControlMessage) isE2SmRcPreControlMessage_E2SmRcPreControlMessage() {}
 
 // sequence from e2sm_rc_pre_v2.asn:217
-//{E2SM-RC-PRE-ControlMessage-Format1}
+// {E2SM-RC-PRE-ControlMessage-Format1}
 type E2SmRcPreControlMessageFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2446,7 +2446,7 @@ func (*E2SmRcPreControlOutcome_ControlOutcomeFormat1) isE2SmRcPreControlOutcome_
 }
 
 // sequence from e2sm_rc_pre_v2.asn:234
-//{E2SM-RC-PRE-ControlOutcome-Format1}
+// {E2SM-RC-PRE-ControlOutcome-Format1}
 type E2SmRcPreControlOutcomeFormat1 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2496,7 +2496,7 @@ func (x *E2SmRcPreControlOutcomeFormat1) GetOutcomeElementList() []*Ranparameter
 }
 
 // sequence from e2sm_rc_pre_v2.asn:244
-//{E2SM-RC-PRE-RANfunction-Description}
+// {E2SM-RC-PRE-RANfunction-Description}
 type E2SmRcPreRanfunctionDescription struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2555,7 +2555,7 @@ func (x *E2SmRcPreRanfunctionDescription) GetE2SmRcPreRanfunctionItem() *E2SmRcP
 }
 
 // sequence from e2sm_rc_pre_v2.asn:254
-//{RANfunction-Name}
+// {RANfunction-Name}
 type RanfunctionName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2632,7 +2632,7 @@ func (x *RanfunctionName) GetRanFunctionInstance() int32 {
 }
 
 // sequence from e2sm_rc_pre_v2.asn:262
-//{RIC-EventTriggerStyle-List}
+// {RIC-EventTriggerStyle-List}
 type RicEventTriggerStyleList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2697,7 +2697,7 @@ func (x *RicEventTriggerStyleList) GetRicEventTriggerFormatType() *RicFormatType
 }
 
 // sequence from e2sm_rc_pre_v2.asn:269
-//{RIC-ReportStyle-List}
+// {RIC-ReportStyle-List}
 type RicReportStyleList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2769,7 +2769,7 @@ func (x *RicReportStyleList) GetRicIndicationMessageFormatType() *RicFormatType 
 	return nil
 }
 
-//{RANparameter-Name}
+// {RANparameter-Name}
 type RanparameterName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2818,7 +2818,7 @@ func (x *RanparameterName) GetValue() string {
 	return ""
 }
 
-//{RIC-Style-Name}
+// {RIC-Style-Name}
 type RicStyleName struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3011,7 +3011,7 @@ func (x *NrcellIdentity) GetValue() *asn1.BitString {
 	return nil
 }
 
-//{E2SM-RC-PRE-RANfunction-Item001}
+// {E2SM-RC-PRE-RANfunction-Item001}
 type E2SmRcPreRanfunctionDescription_E2SmRcPreRanfunctionItem001 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

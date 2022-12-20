@@ -53,7 +53,7 @@ func createTestConstrainedChoicesMsg() *test_sm_ies.TestConstrainedChoices {
 
 	// Seeding randomizer first
 	rand.Seed(time.Now().UnixNano())
-	ch2 := rand.Intn(1)
+	ch2 := rand.Intn(2)
 	switch ch2 {
 	case 0:
 		testChoices.ConstrainedChoice2 = &test_sm_ies.ConstrainedChoice2{

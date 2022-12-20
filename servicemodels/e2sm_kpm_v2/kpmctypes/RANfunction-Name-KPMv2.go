@@ -95,7 +95,6 @@ func newRanfunctionName(ranfunctionName *e2sm_kpm_v2.RanfunctionName) (*C.RANfun
 		ranfunctionNameC.ranFunction_Instance = &rfi
 	}
 
-
 	return &ranfunctionNameC, nil
 }
 

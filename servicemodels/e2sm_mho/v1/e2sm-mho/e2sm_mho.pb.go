@@ -22,7 +22,7 @@ const (
 )
 
 // enumerated from e2sm-mho.asn1:64
-//{MHO-Trigger-Type}
+// {MHO-Trigger-Type}
 type MhoTriggerType int32
 
 const (
@@ -73,7 +73,7 @@ func (MhoTriggerType) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm-mho.asn1:134
-//{RRCStatus}
+// {RRCStatus}
 type Rrcstatus int32
 
 const (
@@ -124,7 +124,7 @@ func (Rrcstatus) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from e2sm-mho.asn1:154
-//{MHO-Command}
+// {MHO-Command}
 type MhoCommand int32
 
 const (
@@ -283,7 +283,7 @@ func (x *Nrcgi) GetNRcellIdentity() *NrcellIdentity {
 }
 
 // sequence from e2sm-mho.asn1:33
-//{CellGlobalID}
+// {CellGlobalID}
 type CellGlobalId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -416,7 +416,7 @@ func (x *Rsrp) GetValue() int32 {
 }
 
 // constant Integer from e2sm-mho.asn1:48
-//{-}
+// {-}
 type MaxofMessageProtocolTests struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -465,7 +465,7 @@ func (x *MaxofMessageProtocolTests) GetValue() int32 {
 }
 
 // constant Integer from e2sm-mho.asn1:49
-//{-}
+// {-}
 type MaxofRicstyles struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -514,7 +514,7 @@ func (x *MaxofRicstyles) GetValue() int32 {
 }
 
 // constant Integer from e2sm-mho.asn1:50
-//{-}
+// {-}
 type MaxPlmn struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -563,7 +563,7 @@ func (x *MaxPlmn) GetValue() int32 {
 }
 
 // constant Integer from e2sm-mho.asn1:51
-//{-}
+// {-}
 type MaxNr struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -661,7 +661,7 @@ func (x *RicStyleType) GetValue() int32 {
 }
 
 // range of Integer from e2sm-mho.asn1:61
-//{RIC-Format-Type}
+// {RIC-Format-Type}
 type RicFormatType struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -22,7 +22,7 @@ import (
 //    if err != nil {
 //        return nil, err
 //    }
-//    bytes, err := encodeXer(&C.asn_DEF_MHO_Command, unsafe.Pointer(mhoCommandCP)) //ToDo - change name of C-encoder tag
+//    bytes, err := encodeXer(&C.asn_DEF_MHO_Command, unsafe.Pointer(mhoCommandCP)) // ToDo - change name of C-encoder tag
 //    if err != nil {
 //        return nil, fmt.Errorf("xerEncodeMhoCommand() %s", err.Error())
 //    }
@@ -30,16 +30,16 @@ import (
 //}
 
 func PerEncodeMhoCommand(mhoCommand *e2sm_mho.MhoCommand) ([]byte, error) {
-    mhoCommandCP, err := newMhoCommand(mhoCommand)
-    if err != nil {
-        return nil, err
-    }
+	mhoCommandCP, err := newMhoCommand(mhoCommand)
+	if err != nil {
+		return nil, err
+	}
 
-    bytes, err := encodePerBuffer(&C.asn_DEF_MHO_Command, unsafe.Pointer(mhoCommandCP))
-    if err != nil {
-        return nil, fmt.Errorf("perEncodeMhoCommand() %s", err.Error())
-    }
-    return bytes, nil
+	bytes, err := encodePerBuffer(&C.asn_DEF_MHO_Command, unsafe.Pointer(mhoCommandCP))
+	if err != nil {
+		return nil, fmt.Errorf("perEncodeMhoCommand() %s", err.Error())
+	}
+	return bytes, nil
 }
 
 //func xerDecodeMhoCommand(bytes []byte) (*e2sm_mho.MhoCommand, error) {
@@ -50,7 +50,7 @@ func PerEncodeMhoCommand(mhoCommand *e2sm_mho.MhoCommand) ([]byte, error) {
 //    if unsafePtr == nil {
 //        return nil, fmt.Errorf("pointer decoded from XER is nil")
 //    }
-//    return decodeMhoCommand((*C.MHO_Command_t)(unsafePtr)) //ToDo - change name of C-struct
+//    return decodeMhoCommand((*C.MHO_Command_t)(unsafePtr)) // ToDo - change name of C-struct
 //}
 
 //func perDecodeMhoCommand(bytes []byte) (*e2sm_mho.MhoCommand, error) {
@@ -66,25 +66,25 @@ func PerEncodeMhoCommand(mhoCommand *e2sm_mho.MhoCommand) ([]byte, error) {
 
 func newMhoCommand(mhoCommand *e2sm_mho.MhoCommand) (*C.MHO_Command_t, error) {
 	var ret C.MHO_Command_t
-    switch *mhoCommand {
-    case e2sm_mho.MhoCommand_MHO_COMMAND_INITIATE_HANDOVER:
-        ret = C.MHO_Command_initiateHandover //ToDo - double-check correctness of the name
-    default:
-        return nil, fmt.Errorf("unexpected MhoCommand %v", mhoCommand)
-    }
+	switch *mhoCommand {
+	case e2sm_mho.MhoCommand_MHO_COMMAND_INITIATE_HANDOVER:
+		ret = C.MHO_Command_initiateHandover // ToDo - double-check correctness of the name
+	default:
+		return nil, fmt.Errorf("unexpected MhoCommand %v", mhoCommand)
+	}
 
 	return &ret, nil
 }
 
 func decodeMhoCommand(mhoCommandC *C.MHO_Command_t) (*e2sm_mho.MhoCommand, error) {
 
-	//ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
+	// ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
 	mhoCommand := e2sm_mho.MhoCommand(int32(*mhoCommandC))
 
 	return &mhoCommand, nil
 }
 
-//func decodeMhoCommandBytes(array [8]byte) (*e2sm_mho.MhoCommand, error) { //ToDo - Check addressing correct structure in Protobuf
+//func decodeMhoCommandBytes(array [8]byte) (*e2sm_mho.MhoCommand, error) { // ToDo - Check addressing correct structure in Protobuf
 //    mhoCommandC := (*C.MHO_Command_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
 //
 //    return decodeMhoCommand(mhoCommandC)

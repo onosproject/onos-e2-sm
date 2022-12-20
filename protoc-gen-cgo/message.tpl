@@ -9,14 +9,14 @@ package {{.PackageName}}ctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "{{underscoreToDash .CstructName}}.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
-{{if .Repeated}}//#include ".h" //ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
+//#include "{{underscoreToDash .CstructName}}.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+{{if .Repeated}}//#include ".h" // ToDo - include correct .h file for corresponding C-struct of "Repeated" field or other anonymous structure defined in .h file
 import "C"{{else}}import "C"
 {{end}}
 import (
     "fmt"
     "encoding/binary"
-    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.ProtoFileName}}{{.FullPackageName}}" //ToDo - Make imports more dynamic
+    {{.ProtoFileName}} "github.com/onosproject/onos-e2-sm/servicemodels/{{.ProtoFileName}}{{.FullPackageName}}" // ToDo - Make imports more dynamic
     "unsafe"
 )
 
@@ -79,7 +79,7 @@ var err error
 {{lowCaseFirstLetter .GlobalName}}C := C.{{dashToUnderscore .CstructName}}_t{}
 {{if .Repeated}}{{ template "REPEATED_ENCODE" . }}{{end}}
 {{if .Optional}}{{ template "OPTIONAL_ENCODE" . }}{{end}}
-//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file{{ $optionalFields := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields }}
+// ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file{{ $optionalFields := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields }}
 {{if not .Optionality}}{{lowCaseFirstLetter .GlobalName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C{{end}}{{end}}
 {{ $repeatedFields := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields }}{{lowCaseFirstLetter .GlobalName}}C.{{.CstructLeafName}} = {{lowCaseFirstLetter .FieldName}}C
 {{end}}
@@ -98,9 +98,9 @@ func decode{{.GlobalName}}({{lowCaseFirstLetter .GlobalName}}C *C.{{dashToUnders
 {{if .OneOf}}{{ template "ONEOF_DECODE" . }}{{else}}
 var err error
 {{lowCaseFirstLetter .GlobalName}} := {{.ProtoFileName}}.{{.MessageName}}{
-//ToDo - check whether pointers passed correctly with regard to Protobuf's definition{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
+// ToDo - check whether pointers passed correctly with regard to Protobuf's definition{{ $optionalFields1 := .FieldList.OptionalField }}{{ range $fieldIndex, $field := $optionalFields1 }}
 //{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .FieldName}},{{end}}
-{{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}{{upperCaseFirstLetter .FieldName}}: make([]*{{.ProtoFileName}}.{{.DataType}}, 0), //ToDo - Check if protobuf structure is implemented correctly (mainly naming)
+{{ $repeatedFields1 := .FieldList.RepeatedField }}{{ range $fieldIndex, $field := $repeatedFields1 }}{{upperCaseFirstLetter .FieldName}}: make([]*{{.ProtoFileName}}.{{.DataType}}, 0), // ToDo - Check if protobuf structure is implemented correctly (mainly naming)
 {{end}}
 {{ $oneOfFields1 := .FieldList.OneOfField }}{{ range $fieldIndex, $field := $oneOfFields1 }} //{{upperCaseFirstLetter .FieldName}}: {{lowCaseFirstLetter .FieldName}}, {{end}}}
 {{if .Optional}}{{ template "OPTIONAL_DECODE" . }}{{end}}
@@ -116,12 +116,12 @@ var err error
 
 {{ define "ONEOF_ENCODE" }}
 {{ $fields := .FieldList.OneOfField }}
-var pr C.{{dashToUnderscore .CstructName}}_PR //ToDo - verify correctness of the name
-choiceC := [8]byte{} //ToDo - Check if number of bytes is sufficient
+var pr C.{{dashToUnderscore .CstructName}}_PR // ToDo - verify correctness of the name
+choiceC := [8]byte{} // ToDo - Check if number of bytes is sufficient
 
 switch choice := {{lowCaseFirstLetter .GlobalName}}.{{.MessageName}}.(type) { {{ range $fieldIndex, $field := $fields }}
 case *{{.ProtoFileName}}.{{.MessageName}}_{{upperCaseFirstLetter .FieldName}}:
-pr = C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}} //ToDo - Check if it's correct PR's name
+pr = C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}} // ToDo - Check if it's correct PR's name
 
 im, err := {{encodeDataType .DataType}}(choice.{{upperCaseFirstLetter .FieldName}})
 if err != nil {
@@ -140,8 +140,8 @@ choice:  choiceC,
 {{ define "REPEATED_ENCODE" }}{{ $fields := .FieldList.RepeatedField }}
 {{ range $fieldIndex, $field := $fields }}
 {{if .Optionality}}{{template "OPTIONALITY_ENCODE_BEGIN" . }}{{end}}
-{{lowCaseFirstLetter .FieldName}}C := new(C.struct_{{dashToUnderscore .CstructName}}__{{.CstructLeafName}}) //ToDo - verify correctness of the variable's name
-for _, {{lowCaseFirstLetter .FieldName}}Item := range {{lowCaseFirstLetter .VariableName}}.Get{{upperCaseFirstLetter .FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
+{{lowCaseFirstLetter .FieldName}}C := new(C.struct_{{dashToUnderscore .CstructName}}__{{.CstructLeafName}}) // ToDo - verify correctness of the variable's name
+for _, {{lowCaseFirstLetter .FieldName}}Item := range {{lowCaseFirstLetter .VariableName}}.Get{{upperCaseFirstLetter .FieldName}}() { // ToDo - Verify if GetSmth() function is called correctly
 {{lowCaseFirstLetter .FieldName}}ItemC, err := {{encodeDataType .DataType}}({{lowCaseFirstLetter .FieldName}}Item)
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
@@ -154,8 +154,8 @@ return nil, err
 
 {{ define "REPEATED_ENCODE_SINGLE" }}{{ $fields := .FieldList.RepeatedField }}
 {{ range $fieldIndex, $field := $fields }}
-{{lowCaseFirstLetter .VariableName}}C := new(C.{{dashToUnderscore .CstructName}}_t) //ToDo - verify correctness of the variable's name
-for _, ie := range {{lowCaseFirstLetter .VariableName}}.Get{{upperCaseFirstLetter .FieldName}}() { //ToDo - Verify if GetSmth() function is called correctly
+{{lowCaseFirstLetter .VariableName}}C := new(C.{{dashToUnderscore .CstructName}}_t) // ToDo - verify correctness of the variable's name
+for _, ie := range {{lowCaseFirstLetter .VariableName}}.Get{{upperCaseFirstLetter .FieldName}}() { // ToDo - Verify if GetSmth() function is called correctly
 ieC, err := {{encodeDataType .DataType}}(ie)
 if err != nil {
 return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
@@ -189,7 +189,7 @@ return nil, fmt.Errorf("{{encodeDataType .DataType}}() %s", err.Error())
 
 switch {{lowCaseFirstLetter .GlobalName}}C.present { {{ range $fieldIndex, $field := $fields }}
 case C.{{dashToUnderscore .CstructName}}_PR_{{dashToUnderscore .CstructLeafName}}:
-{{lowCaseFirstLetter .GlobalName}}structC, err := {{decodeDataType .DataType}}Bytes({{lowCaseFirstLetter .VariableName}}C.choice) //ToDo - Verify if decodeSmthBytes function exists
+{{lowCaseFirstLetter .GlobalName}}structC, err := {{decodeDataType .DataType}}Bytes({{lowCaseFirstLetter .VariableName}}C.choice) // ToDo - Verify if decodeSmthBytes function exists
 if err != nil {
 return nil, fmt.Errorf("{{decodeDataType .DataType}}Bytes() %s", err.Error())
 }

@@ -22,7 +22,7 @@ import (
 //		return nil, err
 //	}
 //
-//	bytes, err := encodeXer(&C.asn_DEF_RRCStatus, unsafe.Pointer(rrcstatusCP)) //ToDo - change name of C-encoder tag
+//	bytes, err := encodeXer(&C.asn_DEF_RRCStatus, unsafe.Pointer(rrcstatusCP)) // ToDo - change name of C-encoder tag
 //	if err != nil {
 //		return nil, fmt.Errorf("xerEncodeRrcstatus() %s", err.Error())
 //	}
@@ -50,7 +50,7 @@ import (
 //	if unsafePtr == nil {
 //		return nil, fmt.Errorf("pointer decoded from XER is nil")
 //	}
-//	return decodeRrcstatus((*C.RRCStatus_t)(unsafePtr)) //ToDo - change name of C-struct
+//	return decodeRrcstatus((*C.RRCStatus_t)(unsafePtr)) // ToDo - change name of C-struct
 //}
 //
 //func perDecodeRrcstatus(bytes []byte) (*e2sm_mho.Rrcstatus, error) {
@@ -68,11 +68,11 @@ func newRrcstatus(rrcstatus *e2sm_mho.Rrcstatus) (*C.RRCStatus_t, error) {
 	var ret C.RRCStatus_t
 	switch *rrcstatus {
 	case e2sm_mho.Rrcstatus_RRCSTATUS_CONNECTED:
-		ret = C.RRCStatus_connected //ToDo - double-check correctness of the name
+		ret = C.RRCStatus_connected // ToDo - double-check correctness of the name
 	case e2sm_mho.Rrcstatus_RRCSTATUS_INACTIVE:
-		ret = C.RRCStatus_inactive //ToDo - double-check correctness of the name
+		ret = C.RRCStatus_inactive // ToDo - double-check correctness of the name
 	case e2sm_mho.Rrcstatus_RRCSTATUS_IDLE:
-		ret = C.RRCStatus_idle //ToDo - double-check correctness of the name
+		ret = C.RRCStatus_idle // ToDo - double-check correctness of the name
 	default:
 		return nil, fmt.Errorf("unexpected Rrcstatus %v", rrcstatus)
 	}
@@ -82,7 +82,7 @@ func newRrcstatus(rrcstatus *e2sm_mho.Rrcstatus) (*C.RRCStatus_t, error) {
 
 func decodeRrcstatus(rrcstatusC *C.RRCStatus_t) (*e2sm_mho.Rrcstatus, error) {
 
-	//ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
+	// ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
 	rrcstatus := e2sm_mho.Rrcstatus(int32(*rrcstatusC))
 
 	return &rrcstatus, nil

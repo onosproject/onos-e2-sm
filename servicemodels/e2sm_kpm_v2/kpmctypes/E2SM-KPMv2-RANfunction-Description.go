@@ -76,7 +76,7 @@ func newE2SmKpmRanfunctionDescription(e2SmKpmRanfunctionDescription *e2sm_kpm_v2
 	}
 
 	e2SmKpmRanfunctionDescriptionC := C.E2SM_KPMv2_RANfunction_Description_t{
-		ranFunction_Name:           *ranFunctionNameC,
+		ranFunction_Name: *ranFunctionNameC,
 		//ric_KPM_Node_List:          ricKpmNodeListC,
 		//ric_EventTriggerStyle_List: ricEventTriggerStyleListC,
 		//ric_ReportStyle_List:       ricReportStyleListC,

@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-//var refPerMeasRecord = "00000000  03 00 15 20 03 80 01 0b  40                       |... ....@|"
+// var refPerMeasRecord = "00000000  03 00 15 20 03 80 01 0b  40                       |... ....@|"
 var refPerMeasRecordNoReal = "00000000  02 00 15 40                                       |...@|"
 
 func createMeasurementRecord() (*e2smkpmv2.MeasurementRecord, error) {
@@ -28,7 +28,7 @@ func createMeasurementRecord() (*e2smkpmv2.MeasurementRecord, error) {
 	}
 	res.Value = append(res.Value, item1)
 
-	//ToDo - bring back once handling of REAL types is implemented
+	// ToDo - bring back once handling of REAL types is implemented
 	//item2 := &e2smkpmv2.MeasurementRecordItem{
 	//	MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Real{
 	//		Real: 22,
