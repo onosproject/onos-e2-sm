@@ -42,7 +42,7 @@ func TestPrintableString(t *testing.T) {
 
 		var ps3 []rune
 		//need to indicate whether next value is extensible or not
-		ext := rand.Intn(1)
+		ext := rand.Intn(2)
 		if ext == 1 {
 			for j := 1; j <= 2+rand.Int(); j++ {
 				ps3 = append(ps3, createRandomAsciiChar())
@@ -64,7 +64,7 @@ func TestPrintableString(t *testing.T) {
 		testSM.AttrPs4 = string(ps4)
 
 		var ps5 []rune
-		//for j := 2; j <= 2 + rand.Intn(1); j++ {
+		//for j := 2; j <= 2 + rand.Intn(2); j++ {
 		//For some reason, testsmctypes encoder doesn't like anything less than 3 characters
 		for j := 1; j <= 3; j++ {
 			ps5 = append(ps5, createRandomAsciiChar())
@@ -73,7 +73,7 @@ func TestPrintableString(t *testing.T) {
 
 		var ps6 []rune
 		//need to indicate whether next value is extensible or not
-		ext = rand.Intn(1)
+		ext = rand.Intn(2)
 		if ext == 1 {
 			// Limiting it on 1000 on purpose, otherwise test scenario would take too long
 			for j := 1; j <= 3+rand.Intn(1000); j++ {
@@ -89,7 +89,7 @@ func TestPrintableString(t *testing.T) {
 		}
 
 		var ps7 []rune
-		optional := rand.Intn(1)
+		optional := rand.Intn(2)
 		if optional == 1 {
 			for j := 2; j <= 2+rand.Intn(4); j++ {
 				ps7 = append(ps7, createRandomAsciiChar())

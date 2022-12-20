@@ -9,6 +9,7 @@ import (
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
 	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho"
 	"gotest.tools/assert"
+	"os"
 	"testing"
 )
 
