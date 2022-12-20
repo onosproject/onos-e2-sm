@@ -78,7 +78,7 @@ func Test_xerEncodingE2SmMhoControlMessageFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoControlMessageFormat1 XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoControlMessageFormat1.GetServingCgi(), result.GetServingCgi())
 	//assert.Equal(t, e2SmMhoControlMessageFormat1.GetUedId(), result.GetUedId())
 	//assert.Equal(t, e2SmMhoControlMessageFormat1.GetTargetCgi(), result.GetTargetCgi())
@@ -99,7 +99,7 @@ func Test_perEncodingE2SmMhoControlMessageFormat1(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoControlMessageFormat1 PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.Equal(t, e2SmMhoControlMessageFormat1.GetServingCgi(), result.GetServingCgi())
 	//assert.Equal(t, e2SmMhoControlMessageFormat1.GetUedId(), result.GetUedId())
 	//assert.Equal(t, e2SmMhoControlMessageFormat1.GetTargetCgi(), result.GetTargetCgi())

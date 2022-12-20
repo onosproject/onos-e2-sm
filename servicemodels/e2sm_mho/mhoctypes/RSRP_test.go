@@ -7,14 +7,14 @@ package mhoctypes
 import (
 	"encoding/hex"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
 
 func createRsrpMsg(rsrpVal int32) (*e2sm_mho.Rsrp, error) {
 
-	// rsrp := pdubuilder.CreateRsrp() //ToDo - fill in arguments here(if this function exists
+	// rsrp := pdubuilder.CreateRsrp() // ToDo - fill in arguments here(if this function exists
 
 	rsrp := e2sm_mho.Rsrp{
 		Value: rsrpVal,
@@ -40,7 +40,7 @@ func Test_xerEncodingRsrp(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("Rsrp XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	assert.Equal(t, rsrp.GetValue(), result.GetValue())
 
 }
@@ -59,7 +59,7 @@ func Test_perEncodingRsrp(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("Rsrp PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	assert.Equal(t, rsrp.GetValue(), result.GetValue())
 
 }

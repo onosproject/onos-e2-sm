@@ -22,7 +22,7 @@ import (
 //		return nil, err
 //	}
 //
-//	bytes, err := encodeXer(&C.asn_DEF_MHO_Trigger_Type, unsafe.Pointer(mhoTriggerTypeCP)) //ToDo - change name of C-encoder tag
+//	bytes, err := encodeXer(&C.asn_DEF_MHO_Trigger_Type, unsafe.Pointer(mhoTriggerTypeCP)) // ToDo - change name of C-encoder tag
 //	if err != nil {
 //		return nil, fmt.Errorf("xerEncodeMhoTriggerType() %s", err.Error())
 //	}
@@ -50,7 +50,7 @@ import (
 //	if unsafePtr == nil {
 //		return nil, fmt.Errorf("pointer decoded from XER is nil")
 //	}
-//	return decodeMhoTriggerType((*C.MHO_Trigger_Type_t)(unsafePtr)) //ToDo - change name of C-struct
+//	return decodeMhoTriggerType((*C.MHO_Trigger_Type_t)(unsafePtr)) // ToDo - change name of C-struct
 //}
 //
 //func perDecodeMhoTriggerType(bytes []byte) (*e2sm_mho.MhoTriggerType, error) {
@@ -68,11 +68,11 @@ func newMhoTriggerType(mhoTriggerType *e2sm_mho.MhoTriggerType) (*C.MHO_Trigger_
 	var ret C.MHO_Trigger_Type_t
 	switch *mhoTriggerType {
 	case e2sm_mho.MhoTriggerType_MHO_TRIGGER_TYPE_PERIODIC:
-		ret = C.MHO_Trigger_Type_periodic //ToDo - double-check correctness of the name
+		ret = C.MHO_Trigger_Type_periodic // ToDo - double-check correctness of the name
 	case e2sm_mho.MhoTriggerType_MHO_TRIGGER_TYPE_UPON_RCV_MEAS_REPORT:
-		ret = C.MHO_Trigger_Type_upon_rcv_meas_report //ToDo - double-check correctness of the name
+		ret = C.MHO_Trigger_Type_upon_rcv_meas_report // ToDo - double-check correctness of the name
 	case e2sm_mho.MhoTriggerType_MHO_TRIGGER_TYPE_UPON_CHANGE_RRC_STATUS:
-		ret = C.MHO_Trigger_Type_upon_change_rrc_status //ToDo - double-check correctness of the name
+		ret = C.MHO_Trigger_Type_upon_change_rrc_status // ToDo - double-check correctness of the name
 	default:
 		return nil, fmt.Errorf("unexpected MhoTriggerType %v", mhoTriggerType)
 	}
@@ -82,13 +82,13 @@ func newMhoTriggerType(mhoTriggerType *e2sm_mho.MhoTriggerType) (*C.MHO_Trigger_
 
 func decodeMhoTriggerType(mhoTriggerTypeC *C.MHO_Trigger_Type_t) (*e2sm_mho.MhoTriggerType, error) {
 
-	//ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
+	// ToDo: int32 shouldn't be valid all the time -- investigate in data type conversion (casting) more
 	mhoTriggerType := e2sm_mho.MhoTriggerType(int32(*mhoTriggerTypeC))
 
 	return &mhoTriggerType, nil
 }
 
-//func decodeMhoTriggerTypeBytes(array [8]byte) (*e2sm_mho.MhoTriggerType, error) { //ToDo - Check addressing correct structure in Protobuf
+//func decodeMhoTriggerTypeBytes(array [8]byte) (*e2sm_mho.MhoTriggerType, error) { // ToDo - Check addressing correct structure in Protobuf
 //	mhoTriggerTypeC := (*C.MHO_Trigger_Type_t)(unsafe.Pointer(uintptr(binary.LittleEndian.Uint64(array[0:]))))
 //
 //	return decodeMhoTriggerType(mhoTriggerTypeC)

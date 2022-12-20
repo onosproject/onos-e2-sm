@@ -9,12 +9,12 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-MeasurementReportItem.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-MeasurementReportItem.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
 import "C"
 
 import (
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -81,7 +81,7 @@ func newE2SmMhoMeasurementReportItem(e2SmMhoMeasurementReportItem *e2sm_mho.E2Sm
 		return nil, fmt.Errorf("newRsrp() %s", err.Error())
 	}
 
-	//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+	// ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 	e2SmMhoMeasurementReportItemC.cgi = *cgiC
 	e2SmMhoMeasurementReportItemC.rsrp = *rsrpC
 
@@ -92,7 +92,7 @@ func decodeE2SmMhoMeasurementReportItem(e2SmMhoMeasurementReportItemC *C.E2SM_MH
 
 	var err error
 	e2SmMhoMeasurementReportItem := e2sm_mho.E2SmMhoMeasurementReportItem{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
+		// ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		//Cgi: cgi,
 		//Rsrp: rsrp,
 

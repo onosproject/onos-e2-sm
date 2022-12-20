@@ -94,7 +94,7 @@ func decodeE2SmKpmEventTriggerDefinitionFormat1(e2SmKpmEventTriggerDefinitionFor
 	ieCount := int(e2SmKpmEventTriggerDefinitionFormat1C.policyTest_List.list.count)
 	//fmt.Printf("RanFunctionListC %T List %T %v Array %T %v Deref %v\n", rflC, rflC.list, rflC.list, rflC.list.array, *rflC.list.array, *(rflC.list.array))
 	for i := 0; i < ieCount; i++ {
-		//ToDo: policyTest_List is defined as a POINTER!! Could cause a problem there
+		// ToDo: policyTest_List is defined as a POINTER!! Could cause a problem there
 		offset := unsafe.Sizeof(unsafe.Pointer(*e2SmKpmEventTriggerDefinitionFormat1C.policyTest_List.list.array)) * uintptr(i)
 		policyTestItemC := *(**C.Trigger_ConditionIE_Item_t)(unsafe.Pointer(uintptr(unsafe.Pointer(e2SmKpmEventTriggerDefinitionFormat1C.policyTest_List.list.array)) + offset))
 		//fmt.Printf("Value %T %p %v\n", rfiIeC, rfiIeC, rfiIeC)

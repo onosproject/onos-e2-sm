@@ -7,7 +7,7 @@ package mhoctypes
 import (
 	"encoding/hex"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
@@ -67,7 +67,7 @@ func Test_xerEncodingE2SmMhoIndicationMessage(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoIndicationMessage XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	//assert.DeepEqual(t, e2SmMhoIndicationMessage.GetIndicationMessageFormat1().GetValue(), result.GetIndicationMessageFormat1().GetValue())
 	//assert.DeepEqual(t, e2SmMhoIndicationMessage.GetIndicationMessageFormat2().GetValue(), result.GetIndicationMessageFormat2().GetValue())
 
@@ -87,7 +87,7 @@ func Test_perEncodingE2SmMhoIndicationMessage(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("E2SmMhoIndicationMessage PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 
 	//This one if for OneOf fields
 

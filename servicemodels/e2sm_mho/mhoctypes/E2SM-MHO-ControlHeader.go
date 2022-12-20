@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-ControlHeader.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-ControlHeader.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -69,12 +69,12 @@ func PerDecodeE2SmMhoControlHeader(bytes []byte) (*e2sm_mho.E2SmMhoControlHeader
 
 func newE2SmMhoControlHeader(e2SmMhoControlHeader *e2sm_mho.E2SmMhoControlHeader) (*C.E2SM_MHO_ControlHeader_t, error) {
 
-	var pr C.E2SM_MHO_ControlHeader_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}               //ToDo - Check if number of bytes is sufficient
+	var pr C.E2SM_MHO_ControlHeader_PR // ToDo - verify correctness of the name
+	choiceC := [8]byte{}               // ToDo - Check if number of bytes is sufficient
 
 	switch choice := e2SmMhoControlHeader.E2SmMhoControlHeader.(type) {
 	case *e2sm_mho.E2SmMhoControlHeader_ControlHeaderFormat1:
-		pr = C.E2SM_MHO_ControlHeader_PR_controlHeader_Format1 //ToDo - Check if it's correct PR's name
+		pr = C.E2SM_MHO_ControlHeader_PR_controlHeader_Format1 // ToDo - Check if it's correct PR's name
 
 		im, err := newE2SmMhoControlHeaderFormat1(choice.ControlHeaderFormat1)
 		if err != nil {
@@ -99,7 +99,7 @@ func decodeE2SmMhoControlHeader(e2SmMhoControlHeaderC *C.E2SM_MHO_ControlHeader_
 
 	switch e2SmMhoControlHeaderC.present {
 	case C.E2SM_MHO_ControlHeader_PR_controlHeader_Format1:
-		e2SmMhoControlHeaderstructC, err := decodeE2SmMhoControlHeaderFormat1Bytes(e2SmMhoControlHeaderC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		e2SmMhoControlHeaderstructC, err := decodeE2SmMhoControlHeaderFormat1Bytes(e2SmMhoControlHeaderC.choice) // ToDo - Verify if decodeSmthBytes function exists
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoControlHeaderFormat1Bytes() %s", err.Error())
 		}

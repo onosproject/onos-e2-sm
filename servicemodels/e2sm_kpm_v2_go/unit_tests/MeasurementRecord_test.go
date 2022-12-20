@@ -28,7 +28,7 @@ func createMeasurementRecord() (*e2smkpmv2.MeasurementRecord, error) {
 	}
 	res.Value = append(res.Value, item1)
 
-	//ToDo - bring back once handling of REAL types is implemented
+	// ToDo - bring back once handling of REAL types is implemented
 	//item2 := &e2smkpmv2.MeasurementRecordItem{
 	//	MeasurementRecordItem: &e2smkpmv2.MeasurementRecordItem_Real{
 	//		Real: 22,

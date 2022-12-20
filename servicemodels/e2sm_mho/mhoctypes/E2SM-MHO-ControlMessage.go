@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-ControlMessage.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-ControlMessage.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -69,12 +69,12 @@ func PerDecodeE2SmMhoControlMessage(bytes []byte) (*e2sm_mho.E2SmMhoControlMessa
 
 func newE2SmMhoControlMessage(e2SmMhoControlMessage *e2sm_mho.E2SmMhoControlMessage) (*C.E2SM_MHO_ControlMessage_t, error) {
 
-	var pr C.E2SM_MHO_ControlMessage_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}                //ToDo - Check if number of bytes is sufficient
+	var pr C.E2SM_MHO_ControlMessage_PR // ToDo - verify correctness of the name
+	choiceC := [8]byte{}                // ToDo - Check if number of bytes is sufficient
 
 	switch choice := e2SmMhoControlMessage.E2SmMhoControlMessage.(type) {
 	case *e2sm_mho.E2SmMhoControlMessage_ControlMessageFormat1:
-		pr = C.E2SM_MHO_ControlMessage_PR_controlMessage_Format1 //ToDo - Check if it's correct PR's name
+		pr = C.E2SM_MHO_ControlMessage_PR_controlMessage_Format1 // ToDo - Check if it's correct PR's name
 
 		im, err := newE2SmMhoControlMessageFormat1(choice.ControlMessageFormat1)
 		if err != nil {
@@ -99,7 +99,7 @@ func decodeE2SmMhoControlMessage(e2SmMhoControlMessageC *C.E2SM_MHO_ControlMessa
 
 	switch e2SmMhoControlMessageC.present {
 	case C.E2SM_MHO_ControlMessage_PR_controlMessage_Format1:
-		e2SmMhoControlMessagestructC, err := decodeE2SmMhoControlMessageFormat1Bytes(e2SmMhoControlMessageC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		e2SmMhoControlMessagestructC, err := decodeE2SmMhoControlMessageFormat1Bytes(e2SmMhoControlMessageC.choice) // ToDo - Verify if decodeSmthBytes function exists
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoControlMessageFormat1Bytes() %s", err.Error())
 		}

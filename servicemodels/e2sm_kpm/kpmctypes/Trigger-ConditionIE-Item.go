@@ -17,7 +17,7 @@ import (
 	"unsafe"
 )
 
-//ToDo: Solve "Cannot convert rtPeriodIeC (type _Ctype_long) to type unsafe.Pointer
+// ToDo: Solve "Cannot convert rtPeriodIeC (type _Ctype_long) to type unsafe.Pointer
 func xerEncodeTriggerConditionIeItem(triggerConditionIeItem *e2sm_kpm_ies.TriggerConditionIeItem) ([]byte, error) {
 	triggerConditionIeItemCP, err := newTriggerConditionIeItem(triggerConditionIeItem)
 	if err != nil {

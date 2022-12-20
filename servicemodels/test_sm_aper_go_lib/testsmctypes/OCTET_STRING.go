@@ -27,7 +27,7 @@ func newOctetString(msg []byte) (*C.OCTET_STRING_t, error) {
 func decodeOctetString(octC *C.OCTET_STRING_t) ([]byte, error) {
 
 	if octC == nil {
-		return nil, nil //ToDo - should it return error that OctetString is empty one?
+		return nil, nil // ToDo - should it return error that OctetString is empty one?
 	}
 	bytes := C.GoBytes(unsafe.Pointer(octC.buf), C.int(octC.size))
 	return bytes, nil

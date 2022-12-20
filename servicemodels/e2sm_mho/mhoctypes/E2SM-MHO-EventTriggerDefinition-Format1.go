@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-EventTriggerDefinition-Format1.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-EventTriggerDefinition-Format1.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -72,19 +72,19 @@ func newE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFormat
 	var err error
 	e2SmMhoEventTriggerDefinitionFormat1C := C.E2SM_MHO_EventTriggerDefinition_Format1_t{}
 
-    triggerTypeC, err := newMhoTriggerType(&e2SmMhoEventTriggerDefinitionFormat1.TriggerType)
-    if err != nil {
-        return nil, fmt.Errorf("newMhoTriggerType() %s", err.Error())
-    }
+	triggerTypeC, err := newMhoTriggerType(&e2SmMhoEventTriggerDefinitionFormat1.TriggerType)
+	if err != nil {
+		return nil, fmt.Errorf("newMhoTriggerType() %s", err.Error())
+	}
 
-    //instance is optional
-    if e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs != -1 {
+	//instance is optional
+	if e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs != -1 {
 
-        reportingPeriodMsC := C.long(e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs)
-        e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms = &reportingPeriodMsC
-    }
-    //ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
-    e2SmMhoEventTriggerDefinitionFormat1C.triggerType = *triggerTypeC
+		reportingPeriodMsC := C.long(e2SmMhoEventTriggerDefinitionFormat1.ReportingPeriodMs)
+		e2SmMhoEventTriggerDefinitionFormat1C.reportingPeriod_ms = &reportingPeriodMsC
+	}
+	// ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+	e2SmMhoEventTriggerDefinitionFormat1C.triggerType = *triggerTypeC
 
 	return &e2SmMhoEventTriggerDefinitionFormat1C, nil
 }
@@ -93,7 +93,7 @@ func decodeE2SmMhoEventTriggerDefinitionFormat1(e2SmMhoEventTriggerDefinitionFor
 
 	var err error
 	e2SmMhoEventTriggerDefinitionFormat1 := e2sm_mho.E2SmMhoEventTriggerDefinitionFormat1{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
+		// ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		//TriggerType: triggerType,
 		//ReportingPeriodMs: reportingPeriodMs,
 

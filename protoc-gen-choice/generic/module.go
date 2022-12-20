@@ -338,7 +338,7 @@ func (m *reportModule) Execute(targets map[string]pgs.File, pkgs map[string]pgs.
 			}
 			if msg.OneOfs() != nil {
 				if choices.CanonicalChoicePresence && presentInCanonicalChoiceList(msg.Name().String(), canonicalChoices) {
-					//ToDo - compose canonical choice struct
+					// ToDo - compose canonical choice struct
 					_, err = fmt.Fprintf(buf, "------------------- Filling in canonical choice structure\n")
 					if err != nil {
 						return nil
@@ -589,7 +589,7 @@ func adjustMapVariableName(mapName string) string {
 		}
 	}
 	mapName = strings.ReplaceAll(mapName, "Go", "")
-	//ToDo - make a workaround through regexp
+	// ToDo - make a workaround through regexp
 	//re := regexp.MustCompile(`v\d{1}`)
 	//mapName = re.ReplaceAllString(mapName, "")
 	mapName = strings.ReplaceAll(mapName, "V1", "")

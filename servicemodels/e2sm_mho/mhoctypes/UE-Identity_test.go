@@ -7,14 +7,14 @@ package mhoctypes
 import (
 	"encoding/hex"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
 
 func createUeIdentityMsg(ueIdentityValue string) (*e2sm_mho.UeIdentity, error) {
 
-	// ueIdentity := pdubuilder.CreateUeIdentity() //ToDo - fill in arguments here(if this function exists
+	// ueIdentity := pdubuilder.CreateUeIdentity() // ToDo - fill in arguments here(if this function exists
 
 	ueIdentity := e2sm_mho.UeIdentity{
 		Value: ueIdentityValue,
@@ -33,14 +33,14 @@ func Test_xerEncodingUeIdentity(t *testing.T) {
 
 	xer, err := xerEncodeUeIdentity(ueIdentity)
 	assert.NilError(t, err)
-	assert.Equal(t, 39, len(xer)) //ToDo - adjust length of the XER encoded message
+	assert.Equal(t, 39, len(xer)) // ToDo - adjust length of the XER encoded message
 	t.Logf("UeIdentity XER\n%s", string(xer))
 
 	result, err := xerDecodeUeIdentity(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("UeIdentity XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	assert.Equal(t, ueIdentity.GetValue(), result.GetValue())
 
 }
@@ -59,7 +59,7 @@ func Test_perEncodingUeIdentity(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("UeIdentity PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	assert.Equal(t, ueIdentity.GetValue(), result.GetValue())
 
 }

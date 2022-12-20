@@ -90,7 +90,7 @@ func newE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3 *e2sm_kpm_
 	}
 
 	e2SmKpmActionDefinitionFormat3C := C.E2SM_KPMv2_ActionDefinition_Format3_t{
-		//ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
+		// ToDo - check whether pointers passed correctly with regard to C-struct's definition .h file
 		cellObjID:    *cellObjIDC,
 		measCondList: *measCondListC,
 		granulPeriod: *granulPeriodC,
@@ -123,7 +123,7 @@ func decodeE2SmKpmActionDefinitionFormat3(e2SmKpmActionDefinitionFormat3C *C.E2S
 	}
 
 	e2SmKpmActionDefinitionFormat3 := e2sm_kpm_v2.E2SmKpmActionDefinitionFormat3{
-		//ToDo - check whether pointers passed correctly with regard to Protobuf's definition
+		// ToDo - check whether pointers passed correctly with regard to Protobuf's definition
 		CellObjId:    cellObjID,
 		MeasCondList: measCondList,
 		GranulPeriod: granulPeriod,

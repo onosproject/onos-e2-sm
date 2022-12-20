@@ -8,14 +8,14 @@ import (
 	"encoding/hex"
 	"fmt"
 	pdubuilder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/pdubuilder"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"gotest.tools/assert"
 	"testing"
 )
 
 func createRicControlMessagePriorityMsg() (*e2sm_mho.RicControlMessagePriority, error) {
 
-	// ricControlMessagePriority := pdubuilder.CreateRicControlMessagePriority() //ToDo - fill in arguments here(if this function exists
+	// ricControlMessagePriority := pdubuilder.CreateRicControlMessagePriority() // ToDo - fill in arguments here(if this function exists
 
 	ricControlMessagePriority := e2sm_mho.RicControlMessagePriority{
 		Value: nil,
@@ -34,14 +34,14 @@ func Test_xerEncodingRicControlMessagePriority(t *testing.T) {
 
 	xer, err := xerEncodeRicControlMessagePriority(ricControlMessagePriority)
 	assert.NilError(t, err)
-	assert.Equal(t, 1, len(xer)) //ToDo - adjust length of the XER encoded message
+	assert.Equal(t, 1, len(xer)) // ToDo - adjust length of the XER encoded message
 	t.Logf("RicControlMessagePriority XER\n%s", string(xer))
 
 	result, err := xerDecodeRicControlMessagePriority(xer)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("RicControlMessagePriority XER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	assert.Equal(t, ricControlMessagePriority.GetValue(), result.GetValue())
 
 }
@@ -60,7 +60,7 @@ func Test_perEncodingRicControlMessagePriority(t *testing.T) {
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("RicControlMessagePriority PER - decoded\n%v", result)
-	//ToDo - adjust field's verification
+	// ToDo - adjust field's verification
 	assert.Equal(t, ricControlMessagePriority.GetValue(), result.GetValue())
 
 }

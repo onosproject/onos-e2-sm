@@ -9,13 +9,13 @@ package mhoctypes
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <assert.h>
-//#include "E2SM-MHO-IndicationMessage.h" //ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
+//#include "E2SM-MHO-IndicationMessage.h" // ToDo - if there is an anonymous C-struct option, it would require linking additional C-struct file definition (the one above or before)
 import "C"
 
 import (
 	"encoding/binary"
 	"fmt"
-	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" //ToDo - Make imports more dynamic
+	e2sm_mho "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_mho/v1/e2sm-mho" // ToDo - Make imports more dynamic
 	"unsafe"
 )
 
@@ -69,12 +69,12 @@ func PerDecodeE2SmMhoIndicationMessage(bytes []byte) (*e2sm_mho.E2SmMhoIndicatio
 
 func newE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMhoIndicationMessage) (*C.E2SM_MHO_IndicationMessage_t, error) {
 
-	var pr C.E2SM_MHO_IndicationMessage_PR //ToDo - verify correctness of the name
-	choiceC := [8]byte{}                   //ToDo - Check if number of bytes is sufficient
+	var pr C.E2SM_MHO_IndicationMessage_PR // ToDo - verify correctness of the name
+	choiceC := [8]byte{}                   // ToDo - Check if number of bytes is sufficient
 
 	switch choice := e2SmMhoIndicationMessage.E2SmMhoIndicationMessage.(type) {
 	case *e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat1:
-		pr = C.E2SM_MHO_IndicationMessage_PR_indicationMessage_Format1 //ToDo - Check if it's correct PR's name
+		pr = C.E2SM_MHO_IndicationMessage_PR_indicationMessage_Format1 // ToDo - Check if it's correct PR's name
 
 		im, err := newE2SmMhoIndicationMessageFormat1(choice.IndicationMessageFormat1)
 		if err != nil {
@@ -82,7 +82,7 @@ func newE2SmMhoIndicationMessage(e2SmMhoIndicationMessage *e2sm_mho.E2SmMhoIndic
 		}
 		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *e2sm_mho.E2SmMhoIndicationMessage_IndicationMessageFormat2:
-		pr = C.E2SM_MHO_IndicationMessage_PR_indicationMessage_Format2 //ToDo - Check if it's correct PR's name
+		pr = C.E2SM_MHO_IndicationMessage_PR_indicationMessage_Format2 // ToDo - Check if it's correct PR's name
 
 		im, err := newE2SmMhoIndicationMessageFormat2(choice.IndicationMessageFormat2)
 		if err != nil {
@@ -107,7 +107,7 @@ func decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC *C.E2SM_MHO_Indica
 
 	switch e2SmMhoIndicationMessageC.present {
 	case C.E2SM_MHO_IndicationMessage_PR_indicationMessage_Format1:
-		e2SmMhoIndicationMessagestructC, err := decodeE2SmMhoIndicationMessageFormat1Bytes(e2SmMhoIndicationMessageC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		e2SmMhoIndicationMessagestructC, err := decodeE2SmMhoIndicationMessageFormat1Bytes(e2SmMhoIndicationMessageC.choice) // ToDo - Verify if decodeSmthBytes function exists
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoIndicationMessageFormat1Bytes() %s", err.Error())
 		}
@@ -115,7 +115,7 @@ func decodeE2SmMhoIndicationMessage(e2SmMhoIndicationMessageC *C.E2SM_MHO_Indica
 			IndicationMessageFormat1: e2SmMhoIndicationMessagestructC,
 		}
 	case C.E2SM_MHO_IndicationMessage_PR_indicationMessage_Format2:
-		e2SmMhoIndicationMessagestructC, err := decodeE2SmMhoIndicationMessageFormat2Bytes(e2SmMhoIndicationMessageC.choice) //ToDo - Verify if decodeSmthBytes function exists
+		e2SmMhoIndicationMessagestructC, err := decodeE2SmMhoIndicationMessageFormat2Bytes(e2SmMhoIndicationMessageC.choice) // ToDo - Verify if decodeSmthBytes function exists
 		if err != nil {
 			return nil, fmt.Errorf("decodeE2SmMhoIndicationMessageFormat2Bytes() %s", err.Error())
 		}

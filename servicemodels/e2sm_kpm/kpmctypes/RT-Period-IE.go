@@ -17,7 +17,7 @@ import (
 	"unsafe"
 )
 
-//ToDo: Solve "Cannot convert rtPeriodIeC (type _Ctype_long) to type unsafe.Pointer"
+// ToDo: Solve "Cannot convert rtPeriodIeC (type _Ctype_long) to type unsafe.Pointer"
 func xerEncodeRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) ([]byte, error) {
 	rtPeriodIeC, err := newRtPeriodIe(rtPeriodIe)
 	if err != nil {
@@ -44,7 +44,7 @@ func perEncodeRtPeriodIe(rtPeriodIe e2sm_kpm_ies.RtPeriodIe) ([]byte, error) {
 	return bytes, nil
 }
 
-//ToDo: Decide what to return instead of nil, which cannot be returned since return value is not a pointer anymore
+// ToDo: Decide what to return instead of nil, which cannot be returned since return value is not a pointer anymore
 func xerDecodeRtPeriodIe(bytes []byte) (e2sm_kpm_ies.RtPeriodIe, error) {
 	unsafePtr, err := decodeXer(bytes, &C.asn_DEF_RT_Period_IE)
 	if err != nil {

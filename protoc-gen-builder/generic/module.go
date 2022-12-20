@@ -856,7 +856,7 @@ func adjustMapVariableName(mapName string) string {
 		}
 	}
 	mapName = strings.ReplaceAll(mapName, "Go", "")
-	//ToDo - make a workaround through regexp
+	// ToDo - make a workaround through regexp
 	//re := regexp.MustCompile(`v\d{1}`)
 	//mapName = re.ReplaceAllString(mapName, "")
 	mapName = strings.ReplaceAll(mapName, "V1", "")
@@ -884,7 +884,7 @@ func adjustMessageNameForLogging(name string) string {
 		tmp := "E2SM" + "-" + name[4:]
 		res = strings.ReplaceAll(tmp, e2Name, strings.ToUpper(e2Name)+"-")
 	} else if strings.Contains(strings.ToLower(name), "e2ap") {
-		//ToDo - shouldn't be always valid for E2AP - leaving for future
+		// ToDo - shouldn't be always valid for E2AP - leaving for future
 		tmp := "E2AP" + "-" + name[4:]
 		res = strings.ReplaceAll(tmp, e2Name, strings.ToUpper(e2Name)+"-")
 	}
