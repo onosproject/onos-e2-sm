@@ -8,12 +8,12 @@ import (
 	"encoding/hex"
 	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc_pre/rcprectypes"
 	"gotest.tools/assert"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
 func Test_DecodeE2SmRcPreRanfunctionDescription(t *testing.T) {
-	e2smRcPreRanfunctionDescription, err := ioutil.ReadFile("../test/E2SM-RC-PRE-RANfunction-Description.xml")
+	e2smRcPreRanfunctionDescription, err := os.ReadFile("../test/E2SM-RC-PRE-RANfunction-Description.xml")
 	assert.NilError(t, err, "Unexpected error when loading file")
 	e2SmRcPrePdu, err := rcprectypes.XerDecodeE2SmRcPreRanfunctionDescription(e2smRcPreRanfunctionDescription)
 	assert.NilError(t, err)
