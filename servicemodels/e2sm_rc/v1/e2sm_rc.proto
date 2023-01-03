@@ -383,8 +383,8 @@ message EventTriggerUeeventInfoItem {
 // range of Integer from e2sm_rc.asn1:200
 // {RANParameter-ID}
 message RanparameterId {
-    // @inject_tag: aper:"valueLB:1,valueUB:4294967296,valueExt"
-    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967296}, json_name="value"];
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295,valueExt"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
 };
 
 message RanparameterName {
@@ -510,8 +510,8 @@ message RanparameterValueTypeChoiceList {
 // sequence from e2sm_rc.asn1:282
 // {RANParameter-STRUCTURE}
 message RanparameterStructure {
-    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
-    repeated RanparameterStructureItem sequence_of_ran_parameters = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="sequence-of-ranParameters"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterStructureItem sequence_of_ran_parameters = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="sequence-of-ranParameters"];
 };
 
 // sequence from e2sm_rc.asn1:287
@@ -632,8 +632,8 @@ message RanparameterTestingStructure {
 // range of Integer from e2sm_rc.asn1:352
 // {RAN-CallProcess-ID}
 message RanCallProcessId {
-    // @inject_tag: aper:"valueLB:1,valueUB:232,valueExt"
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 232}, json_name="value"];
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295,valueExt"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from e2sm_rc.asn1:354
@@ -1454,7 +1454,7 @@ message E2SmRcRanfunctionDefinition {
 // sequence from e2sm_rc.asn1:809
 // {RANFunctionDefinition-EventTrigger}
 message RanfunctionDefinitionEventTrigger {
-    // @inject_tag: aper:"sizeB:1,sizeUB:63"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63"
     repeated RanfunctionDefinitionEventTriggerStyleItem ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-EventTriggerStyle-List"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
     repeated L2ParametersRanparameterItem ran_l2_parameters_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-L2Parameters-List"];
@@ -1560,7 +1560,7 @@ message ReportRanparameterItem {
 // sequence from e2sm_rc.asn1:909
 // {RANFunctionDefinition-Insert}
 message RanfunctionDefinitionInsert {
-    // @inject_tag: aper:"sizeLB:,sizeUB:63,valueExt"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,valueExt"
     repeated RanfunctionDefinitionInsertItem ric_insert_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-InsertStyle-List"];
 };
 

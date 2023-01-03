@@ -11,10 +11,11 @@ import (
 	prototypes "github.com/gogo/protobuf/types"
 	types "github.com/onosproject/onos-api/go/onos/e2t/e2sm"
 	topoapi "github.com/onosproject/onos-api/go/onos/topo"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/encoder"
-	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
 	"google.golang.org/protobuf/proto"
+
+	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/encoder"
+	e2smrcv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_rc/v1/e2sm-rc-ies"
 )
 
 /*
@@ -337,7 +338,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 		ranParameters := make([]*topoapi.RANParameter, 0)
 		for _, ranParameter := range reportStyleRANParameters {
 			ranParameters = append(ranParameters, &topoapi.RANParameter{
-				ID:   int32(ranParameter.RanParameterId.Value),
+				ID:   int64(ranParameter.RanParameterId.Value),
 				Name: ranParameter.RanParameterName.Value,
 			})
 		}
@@ -362,7 +363,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 			insertIndicationRANParameters := make([]*topoapi.RANParameter, 0)
 			for _, indicationParameter := range insertIndication.RanInsertIndicationParametersList {
 				insertIndicationRANParameters = append(insertIndicationRANParameters, &topoapi.RANParameter{
-					ID:   int32(indicationParameter.RanParameterId.Value),
+					ID:   int64(indicationParameter.RanParameterId.Value),
 					Name: indicationParameter.RanParameterName.Value,
 				})
 			}
@@ -391,7 +392,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 			conditionRANParams := make([]*topoapi.RANParameter, 0)
 			for _, actionRANParam := range policyAction.RanPolicyActionParametersList {
 				ranParam := &topoapi.RANParameter{
-					ID:   int32(actionRANParam.RanParameterId.Value),
+					ID:   int64(actionRANParam.RanParameterId.Value),
 					Name: actionRANParam.RanParameterName.Value,
 				}
 				actionRANParams = append(actionRANParams, ranParam)
@@ -399,7 +400,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 
 			for _, conditionRANParam := range policyAction.RanPolicyConditionParametersList {
 				ranParam := &topoapi.RANParameter{
-					ID:   int32(conditionRANParam.RanParameterId.Value),
+					ID:   int64(conditionRANParam.RanParameterId.Value),
 					Name: conditionRANParam.RanParameterName.Value,
 				}
 				conditionRANParams = append(conditionRANParams, ranParam)
@@ -440,7 +441,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 			for _, ranControlParameter := range action.RanControlActionParametersList {
 				controlAction.RanParameters = append(controlAction.RanParameters, &topoapi.RANParameter{
 					Name: ranControlParameter.RanParameterName.Value,
-					ID:   int32(ranControlParameter.RanParameterId.Value),
+					ID:   int64(ranControlParameter.RanParameterId.Value),
 				})
 			}
 			rcControlStyle.ControlActions = append(rcControlStyle.ControlActions, controlAction)

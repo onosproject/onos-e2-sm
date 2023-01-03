@@ -56,3 +56,6 @@ require (
 	gopkg.in/ini.v1 v1.63.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
+
+# since related change in onos-api isn't mereged, hence echo the local path of onos-api, which has related change of Ranparameter 
+replace github.com/onosproject/onos-api/go  => ../onos-api/go
