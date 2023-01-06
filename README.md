@@ -73,7 +73,7 @@ From these:
 > This is because it takes skeleton file from `/usr/local/share/asn1c`
 > regardless of where it is run from.
 
-The E2AP (E2 Application Protocol) is not a Service Model, and so is kept completely inside the `onos-e2t`.
+### The E2AP (E2 Application Protocol) is not a Service Model, and so is kept completely inside the `onos-e2t`, see [here](https://github.com/onosproject/onos-e2t/blob/master/api/e2ap/README.md).
 
 [O-RAN]: https://www.o-ran.org/
 
