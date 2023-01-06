@@ -10,4 +10,6 @@ mkdir -p build/_input
 rm -rf build/_input/$1
 cp -r servicemodels/$1 build/_input/$1
 go run github.com/onosproject/onos-e2-sm/cmd/onos-e2-sm gen-deps $1 --target $2 > build/_input/$1/go.mod
+# since related change in onos-api isn't mereged, hence echo your absolute path of onos-api, which has related change for Ranparameter 
+echo "replace github.com/onosproject/onos-api/go  => ../../../../onos-api/go" >> build/_input/$1/go.mod
 cd build/_input/$1 && go mod tidy && go mod vendor && cd ../..
