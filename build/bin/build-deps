@@ -10,4 +10,5 @@ mkdir -p build/_input
 rm -rf build/_input/$1
 cp -r servicemodels/$1 build/_input/$1
 go run github.com/onosproject/onos-e2-sm/cmd/onos-e2-sm gen-deps $1 --target $2 > build/_input/$1/go.mod
+echo "replace github.com/onosproject/onos-api/go  => github.com/onosproject/onos-api/go v0.10.16" >> build/_input/$1/go.mod
 cd build/_input/$1 && go mod tidy && go mod vendor && cd ../..

@@ -5617,10 +5617,10 @@ func (m *RanparameterId) validate(all bool) error {
 
 	var errors []error
 
-	if val := m.GetValue(); val < 1 || val > 4294967296 {
+	if val := m.GetValue(); val < 1 || val > 4294967295 {
 		err := RanparameterIdValidationError{
 			field:  "Value",
-			reason: "value must be inside range [1, 4294967296]",
+			reason: "value must be inside range [1, 4294967295]",
 		}
 		if !all {
 			return err
@@ -9683,10 +9683,10 @@ func (m *RanCallProcessId) validate(all bool) error {
 
 	var errors []error
 
-	if val := m.GetValue(); val < 1 || val > 232 {
+	if val := m.GetValue(); val < 1 || val > 4294967295 {
 		err := RanCallProcessIdValidationError{
 			field:  "Value",
-			reason: "value must be inside range [1, 232]",
+			reason: "value must be inside range [1, 4294967295]",
 		}
 		if !all {
 			return err
