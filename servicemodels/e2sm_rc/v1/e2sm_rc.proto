@@ -510,8 +510,8 @@ message RanparameterValueTypeChoiceList {
 // sequence from e2sm_rc.asn1:282
 // {RANParameter-STRUCTURE}
 message RanparameterStructure {
-    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,valueExt"
-    repeated RanparameterStructureItem sequence_of_ran_parameters = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="sequence-of-ranParameters"];
+    // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
+    repeated RanparameterStructureItem sequence_of_ran_parameters = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="sequence-of-ranParameters"];
 };
 
 // sequence from e2sm_rc.asn1:287

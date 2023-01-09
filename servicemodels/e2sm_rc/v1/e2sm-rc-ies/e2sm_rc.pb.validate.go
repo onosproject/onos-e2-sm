@@ -7745,10 +7745,10 @@ func (m *RanparameterStructure) validate(all bool) error {
 
 	var errors []error
 
-	if l := len(m.GetSequenceOfRanParameters()); l < 1 || l > 65535 {
+	if len(m.GetSequenceOfRanParameters()) > 65535 {
 		err := RanparameterStructureValidationError{
 			field:  "SequenceOfRanParameters",
-			reason: "value must contain between 1 and 65535 items, inclusive",
+			reason: "value must contain no more than 65535 item(s)",
 		}
 		if !all {
 			return err
