@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.4.1
 	github.com/gogo/protobuf v1.3.2
-	github.com/onosproject/onos-api/go v0.7.110
+	github.com/onosproject/onos-api/go v0.10.16
 	google.golang.org/protobuf v1.26.0
 	gotest.tools v2.2.0+incompatible
 )
