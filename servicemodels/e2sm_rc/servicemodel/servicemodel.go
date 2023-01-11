@@ -338,7 +338,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 		ranParameters := make([]*topoapi.RANParameter, 0)
 		for _, ranParameter := range reportStyleRANParameters {
 			ranParameters = append(ranParameters, &topoapi.RANParameter{
-				ID:   int64(ranParameter.RanParameterId.Value),
+				ID:   ranParameter.RanParameterId.Value,
 				Name: ranParameter.RanParameterName.Value,
 			})
 		}
@@ -363,7 +363,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 			insertIndicationRANParameters := make([]*topoapi.RANParameter, 0)
 			for _, indicationParameter := range insertIndication.RanInsertIndicationParametersList {
 				insertIndicationRANParameters = append(insertIndicationRANParameters, &topoapi.RANParameter{
-					ID:   int64(indicationParameter.RanParameterId.Value),
+					ID:   indicationParameter.RanParameterId.Value,
 					Name: indicationParameter.RanParameterName.Value,
 				})
 			}
@@ -392,7 +392,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 			conditionRANParams := make([]*topoapi.RANParameter, 0)
 			for _, actionRANParam := range policyAction.RanPolicyActionParametersList {
 				ranParam := &topoapi.RANParameter{
-					ID:   int64(actionRANParam.RanParameterId.Value),
+					ID:   actionRANParam.RanParameterId.Value,
 					Name: actionRANParam.RanParameterName.Value,
 				}
 				actionRANParams = append(actionRANParams, ranParam)
@@ -400,7 +400,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 
 			for _, conditionRANParam := range policyAction.RanPolicyConditionParametersList {
 				ranParam := &topoapi.RANParameter{
-					ID:   int64(conditionRANParam.RanParameterId.Value),
+					ID:   conditionRANParam.RanParameterId.Value,
 					Name: conditionRANParam.RanParameterName.Value,
 				}
 				conditionRANParams = append(conditionRANParams, ranParam)
@@ -441,7 +441,7 @@ func (sm RCServiceModel) OnSetup(request *types.OnSetupRequest) error {
 			for _, ranControlParameter := range action.RanControlActionParametersList {
 				controlAction.RanParameters = append(controlAction.RanParameters, &topoapi.RANParameter{
 					Name: ranControlParameter.RanParameterName.Value,
-					ID:   int64(ranControlParameter.RanParameterId.Value),
+					ID:   ranControlParameter.RanParameterId.Value,
 				})
 			}
 			rcControlStyle.ControlActions = append(rcControlStyle.ControlActions, controlAction)
