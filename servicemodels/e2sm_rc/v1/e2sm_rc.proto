@@ -383,8 +383,8 @@ message EventTriggerUeeventInfoItem {
 // range of Integer from e2sm_rc.asn1:200
 // {RANParameter-ID}
 message RanparameterId {
-    // @inject_tag: aper:"valueLB:1,valueUB:4294967296,valueExt"
-    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967296}, json_name="value"];
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295,valueExt"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
 };
 
 message RanparameterName {
@@ -632,8 +632,8 @@ message RanparameterTestingStructure {
 // range of Integer from e2sm_rc.asn1:352
 // {RAN-CallProcess-ID}
 message RanCallProcessId {
-    // @inject_tag: aper:"valueLB:1,valueUB:232,valueExt"
-    int32 value = 1 [(validate.v1.rules).int32 = {gte: 1, lte: 232}, json_name="value"];
+    // @inject_tag: aper:"valueLB:1,valueUB:4294967295,valueExt"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 1, lte: 4294967295}, json_name="value"];
 };
 
 // range of Integer from e2sm_rc.asn1:354

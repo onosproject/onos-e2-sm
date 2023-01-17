@@ -36,7 +36,7 @@ func TestRCServicemodel_IndicationHeaderProtoToASN1(t *testing.T) {
 }
 
 func TestRCServicemodel_IndicationHeaderASN1toProto(t *testing.T) {
-	indicationHeaderAsn1Bytes := []byte{0x24, 0x00, 0x7b, 0x01, 0x01, 0x00, 0x00, 0x00}
+	indicationHeaderAsn1Bytes := []byte{0x24, 0x00, 0x7b, 0x00, 0x01, 0x00, 0x00, 0x00}
 
 	protoBytes, err := rcTestSm.IndicationHeaderASN1toProto(indicationHeaderAsn1Bytes)
 	assert.NilError(t, err, "unexpected error converting asn1Bytes to protoBytes")
@@ -449,7 +449,7 @@ func TestRCServiceModel_CallProcessIDProtoToASN1(t *testing.T) {
 }
 
 func TestRCServicemodel_CallProcessIDASN1toProto(t *testing.T) {
-	callProcessIDAsn1 := []byte{0x00, 0xa0}
+	callProcessIDAsn1 := []byte{0x00, 0x0a}
 
 	protoBytes, err := rcTestSm.CallProcessIDASN1toProto(callProcessIDAsn1)
 	assert.NilError(t, err, "unexpected error converting protoBytes to asn1Bytes")
@@ -459,5 +459,5 @@ func TestRCServicemodel_CallProcessIDASN1toProto(t *testing.T) {
 	err = proto.Unmarshal(protoBytes, testIM)
 	assert.NilError(t, err)
 	t.Logf("Decoded RC-CallProcessID is \n%v", testIM)
-	assert.Equal(t, testIM.GetRicCallProcessIdFormats().GetCallProcessIdFormat1().GetRicCallProcessId().GetValue(), int32(11))
+	assert.Equal(t, testIM.GetRicCallProcessIdFormats().GetCallProcessIdFormat1().GetRicCallProcessId().GetValue(), int64(11))
 }
