@@ -6,14 +6,14 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v0.6.7
 	github.com/gogo/protobuf v1.3.2
 	github.com/onosproject/onos-api/go v0.10.16
-	github.com/onosproject/onos-lib-go v0.10.6
+	github.com/onosproject/onos-lib-go v0.10.8
 	google.golang.org/protobuf v1.28.0
 	gotest.tools v2.2.0+incompatible
 )
 
 require (
 	github.com/Shopify/sarama v1.38.0 // indirect
-	github.com/atomix/runtime/sdk v0.7.4 // indirect
+	github.com/atomix/atomix/api v0.8.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/eapache/go-resiliency v1.3.0 // indirect
 	github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 // indirect
@@ -60,3 +60,5 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/onosproject/onos-lib-go => ../../../onos-lib-go

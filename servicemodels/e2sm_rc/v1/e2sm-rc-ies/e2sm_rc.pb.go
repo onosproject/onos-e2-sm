@@ -10401,8 +10401,8 @@ type RanfunctionDefinitionEventTrigger struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @inject_tag: aper:"sizeLB:1,sizeUB:63"
-	RicEventTriggerStyleList []*RanfunctionDefinitionEventTriggerStyleItem `protobuf:"bytes,1,rep,name=ric_event_trigger_style_list,json=ric-EventTriggerStyle-List,proto3" json:"ric_event_trigger_style_list,omitempty" aper:"sizeLB:1,sizeUB:63"`
+	// @inject_tag: aper:"sizeLB:1,sizeUB:63,valueExt"
+	RicEventTriggerStyleList []*RanfunctionDefinitionEventTriggerStyleItem `protobuf:"bytes,1,rep,name=ric_event_trigger_style_list,json=ric-EventTriggerStyle-List,proto3" json:"ric_event_trigger_style_list,omitempty" aper:"sizeLB:1,sizeUB:63,valueExt"`
 	// @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
 	RanL2ParametersList []*L2ParametersRanparameterItem `protobuf:"bytes,2,rep,name=ran_l2_parameters_list,json=ran-L2Parameters-List,proto3" json:"ran_l2_parameters_list,omitempty" aper:"optional,sizeLB:1,sizeUB:65535,valueExt"`
 	// @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
