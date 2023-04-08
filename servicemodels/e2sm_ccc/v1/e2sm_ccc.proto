@@ -1,0 +1,1064 @@
+////////////////////// e2sm-ccc-ies.proto //////////////////////
+// Protobuf generated from /e2sm_ccc.asn1 by asn1c-0.9.29
+// E2SM-CCC-IEs { iso(1) identified-organization(3) dod(6) internet(1) private(4) enterprise(1) oran(53148) e2(1) version1(1) e2sm(2) e2sm-CCC-IEs(103) }
+
+syntax = "proto3";
+
+package e2sm_ccc.v1;
+option go_package = "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-ccc-ies";
+
+import "e2sm_ccc/v1/e2sm_common_ies.proto";
+import "validate/v1/validate.proto";
+import "google/protobuf/empty.proto";
+
+// enumerated from e2sm_ccc.asn1:125
+enum CellState {
+    CELL_STATE_IDLE = 0;
+    CELL_STATE_INACTIVE = 1;
+    CELL_STATE_ACTIVE = 2;
+};
+
+// enumerated from e2sm_ccc.asn1:127
+enum CyclicPrefix {
+    CYCLIC_PREFIX_NORMAL = 0;
+    CYCLIC_PREFIX_EXTENDED = 1;
+};
+
+// enumerated from e2sm_ccc.asn1:130
+enum BwpContext {
+    BWP_CONTEXT_DL = 0;
+    BWP_CONTEXT_UL = 1;
+    BWP_CONTEXT_SUL = 2;
+};
+
+// enumerated from e2sm_ccc.asn1:132
+enum IsInitialBwp {
+    IS_INITIAL_BWP_INITIAL = 0;
+    IS_INITIAL_BWP_OTHER = 1;
+};
+
+// enumerated from e2sm_ccc.asn1:135
+enum IndicationReason {
+    INDICATION_REASON_UPON_SUBSCRIPTION = 0;
+    INDICATION_REASON_UPON_CHANGE = 1;
+    INDICATION_REASON_PERIODIC = 2;
+};
+
+// enumerated from e2sm_ccc.asn1:137
+enum ChangeType {
+    CHANGE_TYPE_NONE = 0;
+    CHANGE_TYPE_MODIFICATION = 1;
+    CHANGE_TYPE_ADDITION = 2;
+    CHANGE_TYPE_DELETION = 3;
+};
+
+// enumerated from e2sm_ccc.asn1:139
+enum ReportType {
+    REPORT_TYPE_ALL = 0;
+    REPORT_TYPE_CHANGE = 1;
+};
+
+// enumerated from e2sm_ccc.asn1:141
+enum ResourceType {
+    RESOURCE_TYPE_PRB_UL = 0;
+    RESOURCE_TYPE_PRB_DL = 1;
+    RESOURCE_TYPE_DRB = 2;
+    RESOURCE_TYPE_RRC = 3;
+};
+
+// enumerated from e2sm_ccc.asn1:143
+enum SchedulerType {
+    SCHEDULER_TYPE_ROUND_ROBIN = 0;
+    SCHEDULER_TYPE_PROPORTIONALLY_FAIR = 1;
+    SCHEDULER_TYPE_QOS_BASED = 2;
+};
+
+// enumerated from e2sm_ccc.asn1:148
+enum SsbPeriodicity {
+    SSB_PERIODICITY_N5 = 0;
+    SSB_PERIODICITY_N10 = 1;
+    SSB_PERIODICITY_N20 = 2;
+    SSB_PERIODICITY_N40 = 3;
+    SSB_PERIODICITY_N80 = 4;
+    SSB_PERIODICITY_N160 = 5;
+};
+
+// enumerated from e2sm_ccc.asn1:150
+enum SsbDuration {
+    SSB_DURATION_N1 = 0;
+    SSB_DURATION_N2 = 1;
+    SSB_DURATION_N3 = 2;
+    SSB_DURATION_N4 = 3;
+    SSB_DURATION_N5 = 4;
+};
+
+// enumerated from e2sm_ccc.asn1:152
+enum SsbSubCarrierSpacing {
+    SSB_SUB_CARRIER_SPACING_N15 = 0;
+    SSB_SUB_CARRIER_SPACING_N30 = 1;
+    SSB_SUB_CARRIER_SPACING_N120 = 2;
+    SSB_SUB_CARRIER_SPACING_N240 = 3;
+};
+
+// enumerated from e2sm_ccc.asn1:154
+enum SubCarrierSpacing {
+    SUB_CARRIER_SPACING_N15 = 0;
+    SUB_CARRIER_SPACING_N30 = 1;
+    SUB_CARRIER_SPACING_N60 = 2;
+    SUB_CARRIER_SPACING_N120 = 3;
+};
+
+// constant Integer from e2sm_ccc.asn1:42
+// {-}
+message MaxnoofPlmninfo {
+    // @inject_tag: aper:"valueLB:65536,valueUB:65536,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65536, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:43
+// {-}
+message MaxnoofRrmpolicyMember {
+    // @inject_tag: aper:"valueLB:65536,valueUB:65536,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65536, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:44
+// {-}
+message MaxnoofConfigurationsReported {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:45
+// {-}
+message MaxnoofCellsReported {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:46
+// {-}
+message MaxnoofCells {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:47
+// {-}
+message MaxnoofCellsRanFunctionDefinition {
+    // @inject_tag: aper:"valueLB:1024,valueUB:1024,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:48
+// {-}
+message MaxnoofConfigurations {
+    // @inject_tag: aper:"valueLB:1024,valueUB:1024,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:49
+// {-}
+message MaxnoofAttributes {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:50
+// {-}
+message MaxnoofRicstyles {
+    // @inject_tag: aper:"valueLB:63,valueUB:63,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:51
+// {-}
+message MaxnoofEventTriggerStyles {
+    // @inject_tag: aper:"valueLB:63,valueUB:63,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 63, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:52
+// {-}
+message MaxnoofNodeLevelConfigStructures {
+    // @inject_tag: aper:"valueLB:256,valueUB:256,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 256, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:53
+// {-}
+message MaxnoofAttributesToReport {
+    // @inject_tag: aper:"valueLB:65535,valueUB:65535,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 65535, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:54
+// {-}
+message MaxnoofConfigurationsToReportFormat1 {
+    // @inject_tag: aper:"valueLB:256,valueUB:256,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 256, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:55
+// {-}
+message MaxnoofConfigurationsToReportFormat2 {
+    // @inject_tag: aper:"valueLB:1024,valueUB:1024,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:57
+// {-}
+message MaxnoofBwp {
+    // @inject_tag: aper:"valueLB:256,valueUB:256,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 256, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:58
+// {-}
+message MaxNrofPhysicalResourceBlocks {
+    // @inject_tag: aper:"valueLB:550,valueUB:550,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 550, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:59
+// {-}
+message MaxnoofSliceItems {
+    // @inject_tag: aper:"valueLB:1024,valueUB:1024,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:60
+// {-}
+message MinSizeGgnbId {
+    // @inject_tag: aper:"valueLB:30,valueUB:30,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 30, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:61
+// {-}
+message MaxSizeGgnbId {
+    // @inject_tag: aper:"valueLB:44,valueUB:44,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 44, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:62
+// {-}
+message MaxnoofGgnbId {
+    // @inject_tag: aper:"valueLB:1024,valueUB:1024,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:63
+// {-}
+message MinSizeGenbId {
+    // @inject_tag: aper:"valueLB:26,valueUB:26,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 26, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:64
+// {-}
+message MaxSizeGenbId {
+    // @inject_tag: aper:"valueLB:37,valueUB:37,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 37, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:65
+// {-}
+message MaxnoofGenbId {
+    // @inject_tag: aper:"valueLB:1024,valueUB:1024,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 1024, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:66
+// {-}
+message MinBandwidth {
+    // @inject_tag: aper:"valueLB:5,valueUB:5,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 5, json_name="value"];
+};
+
+// constant Integer from e2sm_ccc.asn1:67
+// {-}
+message MaxBandwidth {
+    // @inject_tag: aper:"valueLB:400,valueUB:400,"
+    int32 value = 1 [(validate.v1.rules).int32.const = 400, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:77
+// {GnbId}
+message GnbId {
+    // @inject_tag: aper:"valueLB:0,valueUB:4294967295,"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 4294967295}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:79
+// {GnbIdLength}
+message GnbIdLength {
+    // @inject_tag: aper:"valueLB:22,valueUB:32,"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 22, lte: 32}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:81
+// {GnbName}
+message GnbName {
+    // @inject_tag: aper:"sizeExt,sizeLB:1,sizeUB:150,"
+    string value = 1 [(validate.v1.rules).string = {min_len: 1, max_len: 150}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:83
+// {GnbDuId}
+message GnbDuId {
+    // @inject_tag: aper:"valueLB:0,valueUB:68719476735,"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:85
+// {GnbCuUpId}
+message GnbCuUpId {
+    // @inject_tag: aper:"valueLB:0,valueUB:68719476735,"
+    int64 value = 1 [(validate.v1.rules).int64 = {gte: 0, lte: 68719476735}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:89
+// {SnssaiList}
+message SnssaiList {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:1024,"
+    repeated SNSsai value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:91
+// {PlmnIdList}
+message PlmnIdList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65536,"
+    repeated Plmnidentity value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65536}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:92
+// {PlmnInfo}
+message PlmnInfo {
+    Plmnidentity plmn_id = 1 [ json_name="plmnId"];
+    // @inject_tag: aper:"optional,valueExt,"
+    optional SNSsai snssai = 2 [ json_name="snssai"];
+};
+
+// sequence from e2sm_ccc.asn1:101
+// {PlmnInfoList}
+message PlmnInfoList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65536,"
+    repeated PlmnInfo value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65536}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:101
+// {GGnbId}
+message GgnbId {
+    // @inject_tag: aper:"sizeLB:30,sizeUB:44,"
+    bytes value = 1 [(validate.v1.rules).bytes = {min_len: 30, max_len: 44}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:106
+// {GEnbId}
+message GenbId {
+    // @inject_tag: aper:"sizeLB:26,sizeUB:37,"
+    bytes value = 1 [(validate.v1.rules).bytes = {min_len: 26, max_len: 37}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:110
+// {GGnbIdList}
+message GgnbIdList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:1024,"
+    repeated GgnbId value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:112
+// {GEnbIdList}
+message GenbIdList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:1024,"
+    repeated GenbId value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:112
+// {NrPci}
+message NrPci {
+    // @inject_tag: aper:"valueLB:0,valueUB:503,"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 503}, json_name="value"];
+};
+
+// range of Integer from e2sm_ccc.asn1:114
+// {NrTac}
+message NrTac {
+    // @inject_tag: aper:"valueLB:0,valueUB:16777215,"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 16777215}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:117
+// {Tai}
+message Tai {
+    Plmnidentity plmn_id = 1 [ json_name="plmnId"];
+    NrTac nr_tac = 2 [ json_name="nrTac"];
+};
+
+// sequence from e2sm_ccc.asn1:161
+// {RrmPolicyMember}
+message RrmPolicyMember {
+    Plmnidentity plmn_id = 1 [ json_name="plmnId"];
+    // @inject_tag: aper:"valueExt,"
+    SNSsai snssai = 2 [ json_name="snssai"];
+};
+
+// sequence from e2sm_ccc.asn1:167
+// {RrmPolicyMemberList}
+message RrmPolicyMemberList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65536,"
+    repeated RrmPolicyMember value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65536}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:168
+// {O-GnbCuCpFunction}
+message OGnbCuCpFunction {
+    GnbId gnb_id = 1 [ json_name="gnbId"];
+    GnbIdLength gnb_id_length = 2 [ json_name="gnbIdLength"];
+    GnbName gnb_cu_name = 3 [ json_name="gnbCuName"];
+    Plmnidentity plmn_id = 4 [ json_name="plmnId"];
+    GenbIdList x2_exclude_list = 5 [ json_name="x2ExcludeList"];
+    GgnbIdList xn_exclude_list = 6 [ json_name="xnExcludeList"];
+    GenbIdList x2_include_list = 7 [ json_name="x2IncludeList"];
+    GgnbIdList xn_include_list = 8 [ json_name="xnIncludeList"];
+    GenbIdList x2_xn_hoexclude_list = 9 [ json_name="x2XnHOExcludeList"];
+};
+
+// sequence from e2sm_ccc.asn1:182
+// {O-GnbCuUpFunction}
+message OGnbCuUpFunction {
+    GnbId gnb_id = 1 [ json_name="gnbId"];
+    GnbIdLength gnb_id_length = 2 [ json_name="gnbIdLength"];
+    GnbCuUpId gnb_cu_up_id = 3 [ json_name="gnbCuUpId"];
+    PlmnInfoList plmn_info_list = 4 [ json_name="plmnInfoList"];
+};
+
+// sequence from e2sm_ccc.asn1:189
+// {O-GnbDuFunction}
+message OGnbDuFunction {
+    GnbDuId gnb_du_id = 1 [ json_name="gnbDuId"];
+    GnbName gnb_du_name = 2 [ json_name="gnbDuName"];
+    GnbId gnb_id = 3 [ json_name="gnbId"];
+    GnbIdLength gnb_id_length = 4 [ json_name="gnbIdLength"];
+};
+
+// range of Integer from e2sm_ccc.asn1:199
+// {CellLocalId}
+message CellLocalId {
+    // @inject_tag: aper:"valueLB:0,valueUB:16383,"
+    int32 value = 1 [(validate.v1.rules).int32 = {gte: 0, lte: 16383}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:202
+// {O-NrCellCu}
+message ONrCellCu {
+    CellLocalId cell_local_id = 1 [ json_name="cellLocalId"];
+    PlmnInfoList plmn_info_list = 2 [ json_name="plmnInfoList"];
+};
+
+// sequence from e2sm_ccc.asn1:208
+// {BwpList}
+message BwpList {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:256,"
+    repeated OBwp value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 256}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:209
+// {O-NrCellDu}
+message ONrCellDu {
+    CellLocalId cell_local_id = 1 [ json_name="cellLocalId"];
+    // @inject_tag: aper:"valueLB:0,valueUB:2,"
+    CellState cell_state = 2 [ json_name="cellState"];
+    PlmnInfoList plmn_info_list = 3 [ json_name="plmnInfoList"];
+    NrPci nr_pci = 4 [ json_name="nrPci"];
+    NrTac nr_tac = 5 [ json_name="nrTac"];
+    // @inject_tag: aper:"valueLB:0,valueUB:3279165,"
+    int32 arfcn_dl = 6 [ json_name="arfcnDL"];
+    // @inject_tag: aper:"valueLB:0,valueUB:3279165,"
+    int32 arfcn_ul = 7 [ json_name="arfcnUL"];
+    // @inject_tag: aper:"valueLB:0,valueUB:3279165,"
+    int32 arfcn_sul = 8 [ json_name="arfcnSUL"];
+    // @inject_tag: aper:"valueLB:5,valueUB:400,"
+    int32 b_schannel_bw_dl = 9 [ json_name="bSChannelBwDL"];
+    // @inject_tag: aper:"valueLB:0,valueUB:3279165,"
+    int32 ssb_frequency = 10 [ json_name="ssbFrequency"];
+    // @inject_tag: aper:"valueLB:0,valueUB:5,"
+    SsbPeriodicity ssb_periodicity = 11 [ json_name="ssbPeriodicity"];
+    // @inject_tag: aper:"valueLB:0,valueUB:3,"
+    SsbSubCarrierSpacing ssb_sub_carrier_spacing = 12 [ json_name="ssbSubCarrierSpacing"];
+    // @inject_tag: aper:"valueLB:0,valueUB:159,"
+    int32 ssb_offset = 13 [ json_name="ssbOffset"];
+    // @inject_tag: aper:"valueLB:0,valueUB:4,"
+    SsbDuration ssb_duration = 14 [ json_name="ssbDuration"];
+    // @inject_tag: aper:"valueLB:5,valueUB:400,"
+    int32 b_schannel_bw_ul = 15 [ json_name="bSChannelBwUL"];
+    // @inject_tag: aper:"valueLB:5,valueUB:400,"
+    int32 b_schannel_bw_sul = 16 [ json_name="bSChannelBwSUL"];
+    BwpList bwp_list = 17 [ json_name="bwpList"];
+};
+
+// sequence from e2sm_ccc.asn1:229
+// {O-RRMPolicyRatio}
+message ORRmpolicyRatio {
+    // @inject_tag: aper:"valueLB:0,valueUB:3,"
+    ResourceType resource_type = 1 [ json_name="resourceType"];
+    // @inject_tag: aper:"valueExt,valueLB:0,valueUB:2,"
+    SchedulerType scheduler_type = 2 [ json_name="schedulerType"];
+    RrmPolicyMemberList r_rmpolicy_member_list = 3 [ json_name="rRMPolicyMemberList"];
+    // @inject_tag: aper:"valueLB:0,valueUB:100,"
+    int32 r_rmpolicy_max_ratio = 4 [ json_name="rRMPolicyMaxRatio"];
+    // @inject_tag: aper:"valueLB:0,valueUB:100,"
+    int32 r_rmpolicy_min_ratio = 5 [ json_name="rRMPolicyMinRatio"];
+    // @inject_tag: aper:"valueLB:0,valueUB:100,"
+    int32 r_rmpolicy_dedicated_ratio = 6 [ json_name="rRMPolicyDedicatedRatio"];
+};
+
+// sequence from e2sm_ccc.asn1:238
+// {O-Bwp}
+message OBwp {
+    // @inject_tag: aper:"valueLB:0,valueUB:2,"
+    BwpContext bwp_context = 1 [ json_name="bwpContext"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1,"
+    IsInitialBwp is_initial_bwp = 2 [ json_name="isInitialBwp"];
+    // @inject_tag: aper:"valueLB:0,valueUB:3,"
+    SubCarrierSpacing sub_carrier_spacing = 3 [ json_name="subCarrierSpacing"];
+    // @inject_tag: aper:"valueLB:0,valueUB:1,"
+    CyclicPrefix cyclic_prefix = 4 [ json_name="cyclicPrefix"];
+    // @inject_tag: aper:"valueLB:0,valueUB:550,"
+    int32 start_rb = 5 [ json_name="startRB"];
+    // @inject_tag: aper:"valueLB:0,valueUB:550,"
+    int32 number_of_rbs = 6 [ json_name="numberOfRBs"];
+};
+
+// sequence from e2sm_ccc.asn1:247
+// {E2SM-CCC-RAN-Configuration-Structure}
+message E2SmCCcRAnConfigurationStructure {
+    // choice from e2sm_ccc.asn1:247
+    oneof e2_sm_ccc_ran_configuration_structure {
+        // @inject_tag: aper:"choiceIdx:1,"
+        OGnbCuCpFunction o_gnb_cu_cp_function = 1 [ json_name="o-GnbCuCpFunction"];
+        // @inject_tag: aper:"choiceIdx:2,"
+        OGnbCuUpFunction o_gnb_cu_up_function = 2 [ json_name="o-GnbCuUpFunction"];
+        // @inject_tag: aper:"choiceIdx:3,"
+        OGnbDuFunction o_gnb_du_function = 3 [ json_name="o-GnbDuFunction"];
+        // @inject_tag: aper:"choiceIdx:4,"
+        ONrCellCu o_nr_cell_cu = 4 [ json_name="o-NrCellCu"];
+        // @inject_tag: aper:"choiceIdx:5,"
+        ONrCellDu o_nr_cell_du = 5 [ json_name="o-NrCellDu"];
+        // @inject_tag: aper:"choiceIdx:6,"
+        ORRmpolicyRatio o_rrmpolicy_ratio = 6 [ json_name="o-RRMPolicyRatio"];
+        // @inject_tag: aper:"choiceIdx:7,"
+        OBwp o_bwp = 7 [ json_name="o-Bwp"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:260
+// {E2SM-CCC-RIC-Indication-Header}
+message E2SmCCcRIcIndicationHeader {
+    // @inject_tag: aper:"choiceExt,"
+    IndicationHeaderFormat indication_header_format = 1 [ json_name="indicationHeaderFormat"];
+};
+
+// sequence from e2sm_ccc.asn1:263
+// @inject_tag: aper:"choiceExt"
+// {IndicationHeaderFormat}
+message IndicationHeaderFormat {
+    // choice from e2sm_ccc.asn1:263
+    oneof indication_header_format {
+        // @inject_tag: aper:"choiceIdx:1,"
+        E2SmCCcIndicationHeaderFormat1 e2_sm_ccc_indication_header_format1 = 1 [ json_name="e2SM-CCC-IndicationHeaderFormat1"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:268
+// {E2SM-CCC-IndicationHeaderFormat1}
+message E2SmCCcIndicationHeaderFormat1 {
+    // @inject_tag: aper:"valueLB:0,valueUB:2,"
+    IndicationReason indication_reason = 1 [ json_name="indicationReason"];
+    // @inject_tag: aper:"sizeLB:8,sizeUB:8,"
+    bytes event_time = 2 [(validate.v1.rules).bytes = {min_len: 8, max_len: 8}, json_name="eventTime"];
+};
+
+// sequence from e2sm_ccc.asn1:276
+// {E2SM-CCC-RIC-Indication-Message}
+message E2SmCCcRIcIndicationMessage {
+    IndicationMessageFormat indication_message_format = 1 [ json_name="indicationMessageFormat"];
+};
+
+// sequence from e2sm_ccc.asn1:279
+// {IndicationMessageFormat}
+message IndicationMessageFormat {
+    // choice from e2sm_ccc.asn1:279
+    oneof indication_message_format {
+        // @inject_tag: aper:"choiceIdx:1,"
+        E2SmCCcIndicationMessageFormat1 e2_sm_ccc_indication_message_format1 = 1 [ json_name="e2SM-CCC-IndicationMessageFormat1"];
+        // @inject_tag: aper:"choiceIdx:2,"
+        E2SmCCcIndicationMessageFormat2 e2_sm_ccc_indication_message_format2 = 2 [ json_name="e2SM-CCC-IndicationMessageFormat2"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:285
+// {E2SM-CCC-IndicationMessageFormat1}
+message E2SmCCcIndicationMessageFormat1 {
+    ListOfConfigurationsReported list_of_configuration_structures_reported = 1 [ json_name="listOfConfigurationStructuresReported"];
+};
+
+// sequence from e2sm_ccc.asn1:289
+// {ListOfConfigurationsReported}
+message ListOfConfigurationsReported {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,"
+    repeated ConfigurationStructure value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:290
+// {ConfigurationStructure}
+message ConfigurationStructure {
+    // @inject_tag: aper:"valueLB:0,valueUB:3,"
+    ChangeType change_type = 1 [ json_name="changeType"];
+    RanConfigurationStructureName ran_configuration_structure_name = 2 [ json_name="ranConfigurationStructureName"];
+    ValuesOfAttributes values_of_attributes = 3 [ json_name="valuesOfAttributes"];
+    // @inject_tag: aper:"optional,"
+    optional ValuesOfAttributes old_values_of_attributes = 4 [ json_name="oldValuesOfAttributes"];
+};
+
+// range of Integer from e2sm_ccc.asn1:304
+// {RanConfigurationStructureName}
+message RanConfigurationStructureName {
+    // @inject_tag: aper:"sizeLB:5,sizeUB:17,"
+    bytes value = 1 [(validate.v1.rules).bytes = {min_len: 5, max_len: 17}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:308
+// {ValuesOfAttributes}
+message ValuesOfAttributes {
+    E2SmCCcRAnConfigurationStructure ran_configuration_structure = 1 [ json_name="ranConfigurationStructure"];
+};
+
+// sequence from e2sm_ccc.asn1:312
+// {E2SM-CCC-IndicationMessageFormat2}
+message E2SmCCcIndicationMessageFormat2 {
+    ListOfCellsReported list_of_cells_reported = 1 [ json_name="listOfCellsReported"];
+};
+
+// sequence from e2sm_ccc.asn1:316
+// {ListOfCellsReported}
+message ListOfCellsReported {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,"
+    repeated CellReported value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:317
+// {CellReported}
+message CellReported {
+    CellGlobalId cell_global_id = 1 [ json_name="cellGlobalId"];
+    ListOfConfigurationsReported list_of_configuration_structures_reported = 2 [ json_name="listOfConfigurationStructuresReported"];
+};
+
+// sequence from e2sm_ccc.asn1:322
+// {CellGlobalId}
+message CellGlobalId {
+    // choice from e2sm_ccc.asn1:322
+    oneof cell_global_id {
+        // @inject_tag: aper:"choiceIdx:1,valueExt,"
+        NrCGi n_r_cgi = 1 [ json_name="nR-CGI"];
+        // @inject_tag: aper:"choiceIdx:2,valueExt,"
+        EutraCGi e_utra_cgi = 2 [ json_name="eUTRA-CGI"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:330
+// {E2SM-CCC-RIC-Control-Header}
+message E2SmCCcRIcControlHeader {
+    // @inject_tag: aper:"choiceExt,"
+    ControlHeaderFormat control_header_format = 1 [ json_name="controlHeaderFormat"];
+};
+
+// sequence from e2sm_ccc.asn1:333
+// @inject_tag: aper:"choiceExt"
+// {ControlHeaderFormat}
+message ControlHeaderFormat {
+    // choice from e2sm_ccc.asn1:333
+    oneof control_header_format {
+        // @inject_tag: aper:"choiceIdx:1,"
+        E2SmCCcControlHeaderFormat1 e2_sm_ccc_control_header_format1 = 1 [ json_name="e2SM-CCC-ControlHeaderFormat1"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:339
+// {E2SM-CCC-ControlHeaderFormat1}
+message E2SmCCcControlHeaderFormat1 {
+    RicStyleType ric_style_type = 1 [ json_name="ricStyleType"];
+};
+
+// sequence from e2sm_ccc.asn1:345
+// {E2SM-CCC-RIC-Control-Message}
+message E2SmCCcRIcControlMessage {
+    ControlMessageFormat control_message_format = 1 [ json_name="controlMessageFormat"];
+};
+
+// sequence from e2sm_ccc.asn1:348
+// {ControlMessageFormat}
+message ControlMessageFormat {
+    // choice from e2sm_ccc.asn1:348
+    oneof control_message_format {
+        // @inject_tag: aper:"choiceIdx:1,"
+        E2SmCCcControlMessageFormat1 e2_sm_ccc_control_message_format1 = 1 [ json_name="e2SM-CCC-ControlMessageFormat1"];
+        // @inject_tag: aper:"choiceIdx:2,"
+        E2SmCCcControlMessageFormat2 e2_sm_ccc_control_message_format2 = 2 [ json_name="e2SM-CCC-ControlMessageFormat2"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:354
+// {E2SM-CCC-ControlMessageFormat1}
+message E2SmCCcControlMessageFormat1 {
+    ListOfConfigurationStructures list_of_configuration_structures = 1 [ json_name="listOfConfigurationStructures"];
+};
+
+// sequence from e2sm_ccc.asn1:358
+// {ListOfConfigurationStructures}
+message ListOfConfigurationStructures {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,"
+    repeated ConfigurationStructureWrite value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:359
+// {ConfigurationStructureWrite}
+message ConfigurationStructureWrite {
+    RanConfigurationStructureName ran_configuration_structure_name = 1 [ json_name="ranConfigurationStructureName"];
+    ValuesOfAttributes old_values_of_attributes = 2 [ json_name="oldValuesOfAttributes"];
+    ValuesOfAttributes new_values_of_attributes = 3 [ json_name="newValuesOfAttributes"];
+};
+
+// sequence from e2sm_ccc.asn1:366
+// {E2SM-CCC-ControlMessageFormat2}
+message E2SmCCcControlMessageFormat2 {
+    ListOfCells list_of_cells_reported = 1 [ json_name="listOfCellsReported"];
+};
+
+// sequence from e2sm_ccc.asn1:370
+// {ListOfCells}
+message ListOfCells {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:65535,"
+    repeated CellControlled value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 65535}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:371
+// {CellControlled}
+message CellControlled {
+    CellGlobalId cell_global_id = 1 [ json_name="cellGlobalId"];
+    ListOfConfigurationStructures list_of_configuration_structures = 2 [ json_name="listOfConfigurationStructures"];
+};
+
+// sequence from e2sm_ccc.asn1:378
+// {E2SM-CCC-RANFunctionDefinition}
+message E2SmCCcRAnfunctionDefinition {
+    // @inject_tag: aper:"valueExt,"
+    RanfunctionName ran_function_name = 1 [ json_name="ranFunctionName"];
+    // @inject_tag: aper:"optional,"
+    optional ListOfSupportedRanconfigurationStructures list_of_supported_node_level_configuration_structures = 2 [ json_name="listOfSupportedNodeLevelConfigurationStructures"];
+    // @inject_tag: aper:"optional,"
+    optional ListOfCellsForRanfunctionDefinition list_of_cells_for_ranfunction_definition = 3 [ json_name="listOfCellsForRANFunctionDefinition"];
+};
+
+// sequence from e2sm_ccc.asn1:385
+// {ListOfSupportedRANConfigurationStructures}
+message ListOfSupportedRanconfigurationStructures {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:1024,"
+    repeated RanconfigurationStructure value = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 1024}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:386
+// {RANConfigurationStructure}
+message RanconfigurationStructure {
+    RanConfigurationStructureName ran_configuration_structure_name = 1 [ json_name="ranConfigurationStructureName"];
+    // @inject_tag: aper:"optional,"
+    optional ListOfSupportedAttributes list_of_supported_attributes = 2 [ json_name="listOfSupportedAttributes"];
+};
+
+// sequence from e2sm_ccc.asn1:392
+// {ListOfSupportedAttributes}
+message ListOfSupportedAttributes {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,"
+    repeated Attribute value = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:393
+// {Attribute}
+message Attribute {
+    AttributeName attribute_name = 1 [ json_name="attributeName"];
+    Ricservices supported_services = 2 [ json_name="supportedServices"];
+};
+
+// sequence from e2sm_ccc.asn1:398
+// {RICServices}
+message Ricservices {
+    // @inject_tag: aper:"optional,"
+    optional EventTrigger event_trigger = 1 [ json_name="eventTrigger"];
+    // @inject_tag: aper:"optional,"
+    optional ReportService report_service = 2 [ json_name="reportService"];
+    // @inject_tag: aper:"optional,valueExt,"
+    optional InsertService insert_service = 3 [ json_name="insertService"];
+    // @inject_tag: aper:"optional,"
+    optional ControlService control_service = 4 [ json_name="controlService"];
+    // @inject_tag: aper:"optional,valueExt,"
+    optional PolicyService policy_service = 5 [ json_name="policyService"];
+};
+
+// sequence from e2sm_ccc.asn1:407
+// {EventTrigger}
+message EventTrigger {
+    ListOfSupportedEventTriggerStyles list_of_supported_event_trigger_styles = 1 [ json_name="listOfSupportedEventTriggerStyles"];
+};
+
+// sequence from e2sm_ccc.asn1:411
+// {ListOfSupportedEventTriggerStyles}
+message ListOfSupportedEventTriggerStyles {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,"
+    repeated EventTriggerStyle value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:412
+// {EventTriggerStyle}
+message EventTriggerStyle {
+    RicStyleType event_trigger_style_type = 1 [ json_name="eventTriggerStyleType"];
+    RicStyleName event_trigger_style_name = 2 [ json_name="eventTriggerStyleName"];
+    RicFormatType event_trigger_format_type = 3 [ json_name="eventTriggerFormatType"];
+};
+
+// sequence from e2sm_ccc.asn1:419
+// {ReportService}
+message ReportService {
+    ListOfSupportedReportStyles list_of_supported_report_styles = 1 [ json_name="listOfSupportedReportStyles"];
+};
+
+// sequence from e2sm_ccc.asn1:423
+// {ListOfSupportedReportStyles}
+message ListOfSupportedReportStyles {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,"
+    repeated ReportStyle value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:424
+// {ReportStyle}
+message ReportStyle {
+    RicStyleType report_service_style_type = 1 [ json_name="reportServiceStyleType"];
+    RicStyleName report_service_style_name = 2 [ json_name="reportServiceStyleName"];
+    ListOfSupportedEventTriggerStylesForReportStyle list_of_supported_event_trigger_styles_for_report_style = 3 [ json_name="listOfSupportedEventTriggerStylesForReportStyle"];
+    RicFormatType report_service_action_definition_format_type = 4 [ json_name="reportServiceActionDefinitionFormatType"];
+    RicFormatType report_service_indication_header_format_type = 5 [ json_name="reportServiceIndicationHeaderFormatType"];
+    RicFormatType report_service_indication_message_format_type = 6 [ json_name="reportServiceIndicationMessageFormatType"];
+};
+
+// sequence from e2sm_ccc.asn1:434
+// {ListOfSupportedEventTriggerStylesForReportStyle}
+message ListOfSupportedEventTriggerStylesForReportStyle {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,"
+    repeated EventTriggerStyleType value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:436
+// {EventTriggerStyleType}
+message EventTriggerStyleType {
+    RicStyleType event_trigger_style_type = 1 [ json_name="eventTriggerStyleType"];
+};
+
+// sequence from e2sm_ccc.asn1:440
+// @inject_tag: aper:"valueExt"
+// {InsertService}
+message InsertService {
+    google.protobuf.Empty value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:444
+// {ControlService}
+message ControlService {
+    ListOfSupportedControlStyles list_of_supported_control_styles = 1 [ json_name="listOfSupportedControlStyles"];
+};
+
+// sequence from e2sm_ccc.asn1:448
+// {ListOfSupportedControlStyles}
+message ListOfSupportedControlStyles {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,"
+    repeated ControlStyle value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:449
+// {ControlStyle}
+message ControlStyle {
+    RicStyleType control_service_style_type = 1 [ json_name="controlServiceStyleType"];
+    RicStyleName control_service_style_name = 2 [ json_name="controlServiceStyleName"];
+    RicFormatType control_service_header_format_type = 3 [ json_name="controlServiceHeaderFormatType"];
+    RicFormatType control_service_message_format_type = 4 [ json_name="controlServiceMessageFormatType"];
+    // @inject_tag: aper:"optional,"
+    optional RicFormatType ric_call_process_idformat_type = 5 [ json_name="ricCallProcessIDFormatType"];
+    RicFormatType control_service_control_outcome_format_type = 6 [ json_name="controlServiceControlOutcomeFormatType"];
+};
+
+// sequence from e2sm_ccc.asn1:459
+// @inject_tag: aper:"valueExt"
+// {PolicyService}
+message PolicyService {
+    google.protobuf.Empty value = 1 [ json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:463
+// {ListOfCellsForRANFunctionDefinition}
+message ListOfCellsForRanfunctionDefinition {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:1024,"
+    repeated CellForRanfunctionDefinition value = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 1024}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:464
+// {CellForRANFunctionDefinition}
+message CellForRanfunctionDefinition {
+    CellGlobalId cell_global_id = 1 [ json_name="cellGlobalID"];
+    // @inject_tag: aper:"optional,"
+    optional ListOfSupportedRanconfigurationStructures list_of_supported_cell_level_ranconfiguration_structures = 2 [ json_name="listOfSupportedCellLevelRANConfigurationStructures"];
+};
+
+// sequence from e2sm_ccc.asn1:472
+// {E2SM-CCC-RICEventTriggerDefinition}
+message E2SmCCcRIceventTriggerDefinition {
+    EventTriggerDefinitionFormat event_trigger_definition_format = 1 [ json_name="eventTriggerDefinitionFormat"];
+};
+
+// sequence from e2sm_ccc.asn1:475
+// {EventTriggerDefinitionFormat}
+message EventTriggerDefinitionFormat {
+    // choice from e2sm_ccc.asn1:475
+    oneof event_trigger_definition_format {
+        // @inject_tag: aper:"choiceIdx:1,"
+        E2SmCCcEventTriggerDefinitionFormat1 e2_sm_ccc_event_trigger_definition_format1 = 1 [ json_name="e2SM-CCC-EventTriggerDefinition-Format1"];
+        // @inject_tag: aper:"choiceIdx:2,"
+        E2SmCCcEventTriggerDefinitionFormat2 e2_sm_ccc_event_trigger_definition_format2 = 2 [ json_name="e2SM-CCC-EventTriggerDefinition-Format2"];
+        // @inject_tag: aper:"choiceIdx:3,"
+        E2SmCCcEventTriggerDefinitionFormat3 e2_sm_ccc_event_trigger_definition_format3 = 3 [ json_name="e2SM-CCC-EventTriggerDefinition-Format3"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:482
+// {E2SM-CCC-EventTriggerDefinition-Format1}
+message E2SmCCcEventTriggerDefinitionFormat1 {
+    ListOfRanconfigurationStructuresForEventTrigger list_of_node_level_configuration_structures_for_event_trigger = 1 [ json_name="listOfNodeLevelConfigurationStructuresForEventTrigger"];
+};
+
+// sequence from e2sm_ccc.asn1:486
+// {ListOfRANConfigurationStructuresForEventTrigger}
+message ListOfRanconfigurationStructuresForEventTrigger {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:256,"
+    repeated RanconfigurationStructureForEventTrigger value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 256}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:487
+// {RANConfigurationStructureForEventTrigger}
+message RanconfigurationStructureForEventTrigger {
+    RanConfigurationStructureName ran_configuration_structure_name = 1 [ json_name="ranConfigurationStructureName"];
+    // @inject_tag: aper:"optional,"
+    optional ListOfAttributes list_of_attributes = 2 [ json_name="listOfAttributes"];
+};
+
+// sequence from e2sm_ccc.asn1:493
+// {ListOfAttributes}
+message ListOfAttributes {
+    // @inject_tag: aper:"sizeLB:0,sizeUB:65535,"
+    repeated AttributeName value = 1 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:495
+// {E2SM-CCC-EventTriggerDefinition-Format2}
+message E2SmCCcEventTriggerDefinitionFormat2 {
+    ListOfCellLevelConfigurationStructuresForEventTrigger list_of_cell_level_configuration_structures_for_event_trigger = 1 [ json_name="listOfCellLevelConfigurationStructuresForEventTrigger"];
+};
+
+// sequence from e2sm_ccc.asn1:499
+// {ListOfCellLevelConfigurationStructuresForEventTrigger}
+message ListOfCellLevelConfigurationStructuresForEventTrigger {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:1024,"
+    repeated CellLevelConfigurationStructureForEventTrigger value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:500
+// {CellLevelConfigurationStructureForEventTrigger}
+message CellLevelConfigurationStructureForEventTrigger {
+    CellGlobalId cell_global_id = 1 [ json_name="cellGlobalId"];
+    ListOfRanconfigurationStructuresForEventTrigger list_of_ranconfiguration_structures_for_event_trigger = 2 [ json_name="listOfRANConfigurationStructuresForEventTrigger"];
+};
+
+// range of Integer from e2sm_ccc.asn1:511
+// {AttributeName}
+message AttributeName {
+    // @inject_tag: aper:"sizeLB:15,sizeUB:17,"
+    bytes value = 1 [(validate.v1.rules).bytes = {min_len: 15, max_len: 17}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:515
+// {E2SM-CCC-EventTriggerDefinition-Format3}
+message E2SmCCcEventTriggerDefinitionFormat3 {
+    // @inject_tag: aper:"valueLB:10,valueUB:4294967295,"
+    int32 period = 1 [ json_name="period"];
+};
+
+// sequence from e2sm_ccc.asn1:520
+// {E2SM-CCC-RICActionDefinition}
+message E2SmCCcRIcactionDefinition {
+    RicStyleType ric_style_type = 1 [ json_name="ricStyleType"];
+    ActionDefinitionFormat action_definition_format = 2 [ json_name="actionDefinitionFormat"];
+};
+
+// sequence from e2sm_ccc.asn1:525
+// {ActionDefinitionFormat}
+message ActionDefinitionFormat {
+    // choice from e2sm_ccc.asn1:525
+    oneof action_definition_format {
+        // @inject_tag: aper:"choiceIdx:1,"
+        E2SmCCcActionDefinitionFormat1 e2_sm_ccc_action_definition_format1 = 1 [ json_name="e2SM-CCC-ActionDefinitionFormat1"];
+        // @inject_tag: aper:"choiceIdx:2,"
+        E2SmCCcActionDefinitionFormat2 e2_sm_ccc_action_definition_format2 = 2 [ json_name="e2SM-CCC-ActionDefinitionFormat2"];
+    }
+};
+
+// sequence from e2sm_ccc.asn1:531
+// {E2SM-CCC-ActionDefinitionFormat1}
+message E2SmCCcActionDefinitionFormat1 {
+    ListOfRanconfigurationStructuresForAdf list_of_node_level_ranconfiguration_structures_for_adf = 1 [ json_name="listOfNodeLevelRANConfigurationStructuresForADF"];
+};
+
+// sequence from e2sm_ccc.asn1:535
+// {ListOfRANConfigurationStructuresForADF}
+message ListOfRanconfigurationStructuresForAdf {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:256,"
+    repeated RanconfigurationStructureForAdf value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 256}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:536
+// {RANConfigurationStructureForADF}
+message RanconfigurationStructureForAdf {
+    // @inject_tag: aper:"valueLB:0,valueUB:1,"
+    ReportType report_type = 1 [ json_name="reportType"];
+    RanConfigurationStructureName ran_configuration_structure_name = 2 [ json_name="ranConfigurationStructureName"];
+    // @inject_tag: aper:"optional,"
+    optional ListOfAttributes list_of_attributes = 3 [ json_name="listOfAttributes"];
+};
+
+// sequence from e2sm_ccc.asn1:543
+// {E2SM-CCC-ActionDefinitionFormat2}
+message E2SmCCcActionDefinitionFormat2 {
+    ListOfCellConfigurationsToBeReportedForAdf list_of_cell_configurations_to_be_reported_for_adf = 1 [ json_name="listOfCellConfigurationsToBeReportedForADF"];
+};
+
+// sequence from e2sm_ccc.asn1:547
+// {ListOfCellConfigurationsToBeReportedForADF}
+message ListOfCellConfigurationsToBeReportedForAdf {
+    // @inject_tag: aper:"sizeLB:1,sizeUB:1024,"
+    repeated CellConfigurationToBeReportedForAdf value = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 1024}, json_name="value"];
+};
+
+// sequence from e2sm_ccc.asn1:548
+// {CellConfigurationToBeReportedForADF}
+message CellConfigurationToBeReportedForAdf {
+    // @inject_tag: aper:"optional,"
+    optional CellGlobalId cell_global_id = 1 [ json_name="cellGlobalId"];
+    // @inject_tag: aper:"optional,"
+    optional ListOfRanconfigurationStructuresForAdf list_of_cell_level_ranconfiguration_structures_for_adf = 2 [ json_name="listOfCellLevelRANConfigurationStructuresForADF"];
+};

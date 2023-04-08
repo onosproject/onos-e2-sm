@@ -1,0 +1,554 @@
+-- SPDX-FileCopyrightText: 2023-present Intel Corporation
+-- SPDX-License-Identifier: Apache-2.0
+
+-- ASN1START
+--*************************************************************
+--
+-- E2SM-CCC - E2 Service Model for Ran Slicing Management
+-- Source: O-RAN.WG3.E2SM-CCC-v01.00
+-- Information Element Definitions
+--
+-- **************************************************************
+
+E2SM-CCC-IEs {
+iso(1) identified-organization(3) dod(6) internet(1) private(4)
+enterprise(1) oran(53148) e2(1) version1 (1) e2sm(2) e2sm-CCC-IEs (103)}
+
+DEFINITIONS AUTOMATIC TAGS ::=
+
+BEGIN
+
+-- **************************************************************
+-- IMPORTS FROM E2SM-COMMON-IEs
+-- **************************************************************
+IMPORTS
+    CGI,        -- GA: `CellGlobalId` is known as `CGI` in E2SM
+    S-NSSAI,
+    PLMNIdentity,
+    RIC-Style-Type,
+    RIC-Style-Name,
+    RIC-Format-Type,
+	RANfunction-Name
+
+FROM E2SM-COMMON-IEs;
+
+
+
+-- **************************************************************
+--
+-- Lists
+--
+-- **************************************************************
+maxnoofPLMNInfo	                        INTEGER ::= 65536
+maxnoofRRMPolicyMember                  INTEGER ::= 65536
+maxnoofConfigurationsReported           INTEGER ::= 65535
+maxnoofCellsReported                    INTEGER ::= 65535
+maxnoofCells                            INTEGER ::= 65535
+maxnoofCellsRanFunctionDefinition       INTEGER ::= 1024    -- GA: Make maxnoofCells -> maxnoofCellsRanFunctionDefinition due to conflicting values
+maxnoofConfigurations                   INTEGER ::= 1024
+maxnoofAttributes                       INTEGER ::= 65535
+maxnoofRICStyles                        INTEGER ::= 63
+maxnoofEventTriggerStyles               INTEGER ::= 63
+maxnoofNodeLevelConfigStructures        INTEGER ::= 256
+maxnoofAttributesToReport               INTEGER ::= 65535
+maxnoofConfigurationsToReportFormat1    INTEGER ::= 256
+maxnoofConfigurationsToReportFormat2    INTEGER ::= 1024
+maxnoofPLMNInfo						    INTEGER ::= 65536
+maxnoofBWP     						    INTEGER ::= 256
+maxNrofPhysicalResourceBlocks           INTEGER ::= 550     -- Value taken from 28.541
+maxnoofSliceItems					    INTEGER ::= 1024    -- Value taken from 38.413
+minSizeGGnbId                           INTEGER ::= 30      -- GA: Assumed min value
+maxSizeGGnbId                           INTEGER ::= 44      -- GA: Assumed max value
+maxnoofGGnbId                           INTEGER ::= 1024    -- GA: Assumed max value
+minSizeGEnbId                           INTEGER ::= 26      -- GA: Assumed min value
+maxSizeGEnbId                           INTEGER ::= 37      -- GA: Assumed max value
+maxnoofGEnbId                           INTEGER ::= 1024    -- GA: Assumed max value
+minBandwidth                            INTEGER ::= 5       -- GA: Based on 38.104 sec. 5.3 BS channel bandwidth (not taking into account CA)
+maxBandwidth                            INTEGER ::= 400     -- GA: Based on 38.104 sec. 5.3 BS channel bandwidth (not taking into account CA)
+
+
+
+-- **************************************************************
+--
+-- Information Element Definitions
+--
+-- **************************************************************
+
+GnbId ::= INTEGER (0..4294967295)        -- GA: JSON indicates STRING, but 28.541 indicates INTEGER (0..4294967295)
+
+GnbIdLength ::= INTEGER (22..32)
+
+GnbName ::= PrintableString (SIZE(1..150, ...))
+
+GnbDuId ::= INTEGER (0..68719476735)
+
+GnbCuUpId ::= INTEGER (0..68719476735)
+
+SnssaiList ::= SEQUENCE (SIZE(1..maxnoofSliceItems)) OF S-NSSAI     -- GA: Not referenced in spec and not used
+
+PlmnIdList ::= SEQUENCE (SIZE(1..maxnoofPLMNInfo)) OF PLMNIdentity
+
+PlmnInfo ::= SEQUENCE {
+	plmnId		        PLMNIdentity,
+	snssai		        S-NSSAI         OPTIONAL        -- Present if network slicing feature is supported
+}
+
+PlmnInfoList ::= SEQUENCE (SIZE(1..maxnoofPLMNInfo)) OF PlmnInfo
+
+-- GA: As per the description in 28.541 the pattern is: <mcc><mnc>-<gNBIdLength>-<gNBId>
+-- "type": "string",
+-- "pattern": "^[0-9]{3}[0-9]{2,3}-(22|23|24|25|26|27|28|29|30|31|32)-[0-9]{1,10}"
+GGnbId ::= OCTET STRING (SIZE(minSizeGGnbId..maxSizeGGnbId))
+
+-- GA: As per the description in 28.541 the pattern is: <mcc><mnc>-<eNBIdLength>-<eNBId>
+-- "type": "string",
+-- "pattern": "^[0-9]{3}[0-9]{2,3}-(18|20|21|22)-[0-9]{1,7}"
+GEnbId ::= OCTET STRING (SIZE(minSizeGEnbId..maxSizeGEnbId))
+
+GGnbIdList ::= SEQUENCE (SIZE(1..maxnoofGGnbId)) OF GGnbId
+
+GEnbIdList ::= SEQUENCE (SIZE(1..maxnoofGEnbId)) OF GEnbId
+
+NrPci ::= INTEGER (0..503)
+
+NrTac ::= INTEGER (0..16777215)
+
+Tai ::= SEQUENCE {
+	plmnId		PLMNIdentity,
+	nrTac		NrTac
+}
+
+--- ****************************************************************************
+--- GA: TO REVIEW: BEGIN
+--- JSON: "type": "string"
+--- ****************************************************************************
+CellState ::= ENUMERATED {idle, inactive, active}
+
+CyclicPrefix ::= ENUMERATED {normal, extended}          -- This is how SPEC/text shows
+-- CyclicPrefix ::= ENUMERATED {15, 30, 60, 120}            ---- This is how JSON shows
+
+BwpContext ::= ENUMERATED {dl, ul, sul}
+
+IsInitialBwp ::= ENUMERATED {initial, other}            -- This is how SPEC/text shows
+-- IsInitialBwp ::= ENUMERATED {"INITIAL", "OTHER", "SUL"}  ---- This is how JSON shows
+
+IndicationReason ::= ENUMERATED {uponSubscription, uponChange, periodic}
+
+ChangeType ::= ENUMERATED {none, modification, addition, deletion}
+
+ReportType ::= ENUMERATED {all, change}
+
+ResourceType ::= ENUMERATED {prbUl, prbDl, drb, rrc}  -- GA: Spec JSON indicates "STRING" but text indicates "ENUM"
+
+SchedulerType ::= ENUMERATED {roundRobin, proportionallyFair, qosBased, ...}  -- GA: Not part of the Spec
+
+--- ****************************************************************************
+--- JSON: "type": "integer"
+--- ****************************************************************************
+SsbPeriodicity ::= ENUMERATED {n5, n10, n20, n40, n80, n160}
+
+SsbDuration ::= ENUMERATED {n1, n2, n3, n4, n5}
+
+SsbSubCarrierSpacing ::= ENUMERATED {n15, n30, n120, n240}
+
+SubCarrierSpacing ::= ENUMERATED {n15, n30, n60, n120}      -- GA: Spec JSON indicates "INTEGER" but text indicates "ENUM"
+
+--- ****************************************************************************
+--- GA: TO REVIEW: END
+--- ****************************************************************************
+
+RrmPolicyMember ::= SEQUENCE {
+	plmnId		        PLMNIdentity,
+	snssai		        S-NSSAI
+}
+
+RrmPolicyMemberList ::= SEQUENCE (SIZE(1..maxnoofRRMPolicyMember)) OF RrmPolicyMember
+
+O-GnbCuCpFunction ::= SEQUENCE {
+    gnbId               GnbId,
+    gnbIdLength         GnbIdLength,
+    gnbCuName           GnbName,
+    plmnId              PLMNIdentity,
+    -- x2ExcludeList       GGnbIdList,      ---- GA: As per 28.541, it should be GEnbIdList
+    x2ExcludeList       GEnbIdList,
+    xnExcludeList       GGnbIdList,
+    -- x2IncludeList       GGnbIdList,      ---- GA: As per 28.541, it should be GEnbIdList
+    x2IncludeList       GEnbIdList,
+    xnIncludeList       GGnbIdList,
+    x2XnHOExcludeList   GEnbIdList          -- GA: Not sure whether this is correct, I could not find it in 28.541
+}
+
+O-GnbCuUpFunction ::= SEQUENCE {
+    gnbId           GnbId,
+    gnbIdLength     GnbIdLength,
+    gnbCuUpId       GnbCuUpId,
+    plmnInfoList    PlmnInfoList
+}
+
+O-GnbDuFunction ::= SEQUENCE {
+    gnbDuId         GnbDuId,
+    gnbDuName       GnbName,
+    gnbId           GnbId,
+    gnbIdLength     GnbIdLength
+}
+
+-- GA: As per the description in 28.541 that indicates "gNBId" and "cellLocalId"
+-- make the NCI (NR Cell Identity). So, CellLocalId can be between [0, 2^4] and
+-- [0, 2^14] ranges because gNBId is [2^22, 2^32] and NCI is [0, 2^36]
+-- NRCellIdentity ::= BIT STRING (SIZE(36))
+CellLocalId ::= INTEGER (0..16383)
+
+O-NrCellCu ::= SEQUENCE {
+    cellLocalId     CellLocalId,
+    plmnInfoList    PlmnInfoList
+}
+
+BwpList ::= SEQUENCE (SIZE(1..maxnoofBWP)) OF O-Bwp
+
+O-NrCellDu ::= SEQUENCE {
+    cellLocalId             CellLocalId,
+    cellState               CellState,
+    plmnInfoList            PlmnInfoList,
+    nrPci                   NrPci,
+    nrTac                   NrTac,
+    arfcnDL                 INTEGER (0..3279165),
+    arfcnUL                 INTEGER (0..3279165),
+    arfcnSUL                INTEGER (0..3279165),
+    bSChannelBwDL           INTEGER (minBandwidth..maxBandwidth),
+    ssbFrequency            INTEGER (0..3279165),
+    ssbPeriodicity          SsbPeriodicity,
+    ssbSubCarrierSpacing    SsbSubCarrierSpacing,
+    ssbOffset               INTEGER (0..159),
+    ssbDuration             SsbDuration,
+    bSChannelBwUL           INTEGER (minBandwidth..maxBandwidth),
+    bSChannelBwSUL          INTEGER (minBandwidth..maxBandwidth),
+    bwpList                 BwpList
+}
+
+O-RRMPolicyRatio ::= SEQUENCE {
+    resourceType                ResourceType,
+    schedulerType               SchedulerType,      -- GA: Not part of the Spec
+    rRMPolicyMemberList         RrmPolicyMemberList,
+    rRMPolicyMaxRatio           INTEGER (0..100),
+    rRMPolicyMinRatio           INTEGER (0..100),
+    rRMPolicyDedicatedRatio     INTEGER (0..100)
+}
+
+O-Bwp ::= SEQUENCE {
+    bwpContext              BwpContext,
+    isInitialBwp            IsInitialBwp,
+    subCarrierSpacing       SubCarrierSpacing,
+    cyclicPrefix            CyclicPrefix,
+    startRB                 INTEGER (0..maxNrofPhysicalResourceBlocks),
+    numberOfRBs             INTEGER (0..maxNrofPhysicalResourceBlocks)
+}
+
+E2SM-CCC-RAN-Configuration-Structure ::= CHOICE {
+    o-GnbCuCpFunction       O-GnbCuCpFunction,
+    o-GnbCuUpFunction       O-GnbCuUpFunction,
+    o-GnbDuFunction         O-GnbDuFunction,
+    o-NrCellCu              O-NrCellCu,
+    o-NrCellDu              O-NrCellDu,
+    o-RRMPolicyRatio        O-RRMPolicyRatio,
+    o-Bwp                   O-Bwp
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RIC-Indication-Header ::= SEQUENCE {
+E2SM-CCC-RIC-Indication-Header ::= SEQUENCE {
+    indicationHeaderFormat          IndicationHeaderFormat
+}
+
+IndicationHeaderFormat ::= CHOICE {
+    e2SM-CCC-IndicationHeaderFormat1        E2SM-CCC-IndicationHeaderFormat1,
+    ...
+}
+
+E2SM-CCC-IndicationHeaderFormat1 ::= SEQUENCE {
+    indicationReason        IndicationReason,
+    eventTime               OCTET STRING (8)    --- GA: As per Spec, it carries UTC time (64-bit timestamp)
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RIC-Indication-Message ::= SEQUENCE {
+E2SM-CCC-RIC-Indication-Message ::= SEQUENCE {
+    indicationMessageFormat                     IndicationMessageFormat
+}
+
+IndicationMessageFormat ::= CHOICE {
+    e2SM-CCC-IndicationMessageFormat1           E2SM-CCC-IndicationMessageFormat1,
+    e2SM-CCC-IndicationMessageFormat2           E2SM-CCC-IndicationMessageFormat2
+}
+
+E2SM-CCC-IndicationMessageFormat1 ::= SEQUENCE {
+    listOfConfigurationStructuresReported       ListOfConfigurationsReported
+}
+
+ListOfConfigurationsReported ::= SEQUENCE (SIZE(1..maxnoofConfigurationsReported)) OF ConfigurationStructure
+
+ConfigurationStructure ::= SEQUENCE {
+    changeType                          ChangeType,
+    ranConfigurationStructureName       RanConfigurationStructureName,
+    valuesOfAttributes                  ValuesOfAttributes,
+    oldValuesOfAttributes               ValuesOfAttributes             OPTIONAL
+}
+
+-- GA: Predefined RAN Configuration Structure Names are:
+-- O-GNBDUFunction          15 Bytes
+-- O-GNBCUCPFunction        17 Bytes
+-- O-GNBCUUPFunction        17 Bytes
+-- O-RRMPolicyRatio         16 Bytes
+-- O-NRCellCU               10 Bytes
+-- O-NRCellDU               10 Bytes
+-- O-BWP                     5 Bytes
+RanConfigurationStructureName ::= OCTET STRING (SIZE(5..17))
+
+ValuesOfAttributes ::= SEQUENCE {
+    ranConfigurationStructure       E2SM-CCC-RAN-Configuration-Structure
+}
+
+E2SM-CCC-IndicationMessageFormat2 ::= SEQUENCE {
+    listOfCellsReported             ListOfCellsReported
+}
+
+ListOfCellsReported ::= SEQUENCE (SIZE(1..maxnoofCellsReported)) OF CellReported
+
+CellReported ::= SEQUENCE {
+    cellGlobalId                                CellGlobalId,
+    listOfConfigurationStructuresReported       ListOfConfigurationsReported
+}
+
+CellGlobalId ::= CHOICE {
+     nR-CGI                         NR-CGI,
+     eUTRA-CGI                      EUTRA-CGI
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RIC-Control-Header ::= SEQUENCE {
+E2SM-CCC-RIC-Control-Header ::= SEQUENCE {
+    controlHeaderFormat                 ControlHeaderFormat
+}
+
+ControlHeaderFormat ::= CHOICE {
+    e2SM-CCC-ControlHeaderFormat1       E2SM-CCC-ControlHeaderFormat1,
+    ...
+}
+
+E2SM-CCC-ControlHeaderFormat1 ::= SEQUENCE {
+    ricStyleType                        RIC-Style-Type
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RIC-Control-Message ::= SEQUENCE {
+E2SM-CCC-RIC-Control-Message ::= SEQUENCE {
+    controlMessageFormat                        ControlMessageFormat
+}
+
+ControlMessageFormat ::= CHOICE {
+    e2SM-CCC-ControlMessageFormat1              E2SM-CCC-ControlMessageFormat1,
+    e2SM-CCC-ControlMessageFormat2              E2SM-CCC-ControlMessageFormat2
+}
+
+E2SM-CCC-ControlMessageFormat1 ::= SEQUENCE {
+    listOfConfigurationStructures               ListOfConfigurationStructures
+}
+
+ListOfConfigurationStructures ::= SEQUENCE (SIZE(1..maxnoofConfigurationsReported)) OF ConfigurationStructureWrite
+
+ConfigurationStructureWrite ::= SEQUENCE {
+    ranConfigurationStructureName               RanConfigurationStructureName,
+    oldValuesOfAttributes                       ValuesOfAttributes,
+    newValuesOfAttributes                       ValuesOfAttributes
+}
+
+E2SM-CCC-ControlMessageFormat2 ::= SEQUENCE {
+    listOfCellsReported                         ListOfCells
+}
+
+ListOfCells ::= SEQUENCE (SIZE(1..maxnoofCells)) OF CellControlled
+
+CellControlled ::= SEQUENCE {
+    cellGlobalId                                CellGlobalId,
+    listOfConfigurationStructures               ListOfConfigurationStructures
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RANFunctionDefinition ::= SEQUENCE {
+E2SM-CCC-RANFunctionDefinition ::= SEQUENCE {
+    ranFunctionName                                     RANfunction-Name,
+    listOfSupportedNodeLevelConfigurationStructures     ListOfSupportedRANConfigurationStructures   OPTIONAL,
+    listOfCellsForRANFunctionDefinition                 ListOfCellsForRANFunctionDefinition         OPTIONAL
+}
+
+ListOfSupportedRANConfigurationStructures ::= SEQUENCE (SIZE(0..maxnoofConfigurations)) OF RANConfigurationStructure
+
+RANConfigurationStructure ::= SEQUENCE {
+    ranConfigurationStructureName                   RanConfigurationStructureName,
+    listOfSupportedAttributes                       ListOfSupportedAttributes           OPTIONAL
+}
+
+ListOfSupportedAttributes ::= SEQUENCE (SIZE(0..maxnoofAttributes)) OF Attribute
+
+Attribute ::= SEQUENCE {
+    attributeName                                   AttributeName,
+    supportedServices                               RICServices
+}
+
+RICServices ::= SEQUENCE {
+    eventTrigger                                    EventTrigger        OPTIONAL,
+    reportService                                   ReportService       OPTIONAL,
+    insertService                                   InsertService       OPTIONAL,
+    controlService                                  ControlService      OPTIONAL,
+    policyService                                   PolicyService       OPTIONAL
+}
+
+EventTrigger ::= SEQUENCE {
+    listOfSupportedEventTriggerStyles           ListOfSupportedEventTriggerStyles
+}
+
+ListOfSupportedEventTriggerStyles ::= SEQUENCE (SIZE(1..maxnoofRICStyles)) OF EventTriggerStyle
+
+EventTriggerStyle ::= SEQUENCE {
+    eventTriggerStyleType                       RIC-Style-Type,
+    eventTriggerStyleName                       RIC-Style-Name,
+    eventTriggerFormatType                      RIC-Format-Type
+}
+
+ReportService ::= SEQUENCE {
+    listOfSupportedReportStyles                 ListOfSupportedReportStyles
+}
+
+ListOfSupportedReportStyles ::= SEQUENCE (SIZE(1..maxnoofRICStyles)) OF ReportStyle
+
+ReportStyle ::= SEQUENCE {
+    reportServiceStyleType                              RIC-Style-Type,
+    reportServiceStyleName                              RIC-Style-Name,
+    listOfSupportedEventTriggerStylesForReportStyle     ListOfSupportedEventTriggerStylesForReportStyle,
+    reportServiceActionDefinitionFormatType             RIC-Format-Type,
+    reportServiceIndicationHeaderFormatType             RIC-Format-Type,
+    reportServiceIndicationMessageFormatType            RIC-Format-Type
+}
+
+ListOfSupportedEventTriggerStylesForReportStyle ::= SEQUENCE (SIZE(1..maxnoofEventTriggerStyles)) OF EventTriggerStyleType
+
+EventTriggerStyleType ::= SEQUENCE {
+    eventTriggerStyleType                               RIC-Style-Type
+}
+
+InsertService ::= SEQUENCE {
+    ...
+}
+
+ControlService ::= SEQUENCE {
+    listOfSupportedControlStyles                        ListOfSupportedControlStyles
+}
+
+ListOfSupportedControlStyles ::= SEQUENCE (SIZE(1..maxnoofRICStyles)) OF ControlStyle
+
+ControlStyle ::= SEQUENCE {
+    controlServiceStyleType                             RIC-Style-Type,
+    controlServiceStyleName                             RIC-Style-Name,
+    controlServiceHeaderFormatType                      RIC-Format-Type,
+    controlServiceMessageFormatType                     RIC-Format-Type,
+    ricCallProcessIDFormatType                          RIC-Format-Type        OPTIONAL,
+    controlServiceControlOutcomeFormatType              RIC-Format-Type
+}
+
+PolicyService ::= SEQUENCE {
+    ...
+}
+
+ListOfCellsForRANFunctionDefinition ::= SEQUENCE (SIZE(0..maxnoofCellsRanFunctionDefinition)) OF CellForRANFunctionDefinition
+
+CellForRANFunctionDefinition ::= SEQUENCE {
+    cellGlobalID                                            CellGlobalId,
+    listOfSupportedCellLevelRANConfigurationStructures      ListOfSupportedRANConfigurationStructures       OPTIONAL
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RICEventTriggerDefinition ::= SEQUENCE {
+E2SM-CCC-RICEventTriggerDefinition ::= SEQUENCE {
+    eventTriggerDefinitionFormat                    EventTriggerDefinitionFormat
+}
+
+EventTriggerDefinitionFormat ::= CHOICE {
+    e2SM-CCC-EventTriggerDefinition-Format1         E2SM-CCC-EventTriggerDefinition-Format1,
+    e2SM-CCC-EventTriggerDefinition-Format2         E2SM-CCC-EventTriggerDefinition-Format2,
+    e2SM-CCC-EventTriggerDefinition-Format3         E2SM-CCC-EventTriggerDefinition-Format3
+}
+
+E2SM-CCC-EventTriggerDefinition-Format1 ::= SEQUENCE {
+    listOfNodeLevelConfigurationStructuresForEventTrigger       ListOfRANConfigurationStructuresForEventTrigger
+}
+
+ListOfRANConfigurationStructuresForEventTrigger ::= SEQUENCE (SIZE(1..maxnoofNodeLevelConfigStructures)) OF RANConfigurationStructureForEventTrigger
+
+RANConfigurationStructureForEventTrigger ::= SEQUENCE {
+    ranConfigurationStructureName                   RanConfigurationStructureName,
+    listOfAttributes                                ListOfAttributes       OPTIONAL
+}
+
+ListOfAttributes ::= SEQUENCE (SIZE(0..maxnoofAttributesToReport)) OF AttributeName
+
+E2SM-CCC-EventTriggerDefinition-Format2 ::= SEQUENCE {
+    listOfCellLevelConfigurationStructuresForEventTrigger       ListOfCellLevelConfigurationStructuresForEventTrigger
+}
+
+ListOfCellLevelConfigurationStructuresForEventTrigger ::= SEQUENCE (SIZE(1..maxnoofCellsRanFunctionDefinition)) OF CellLevelConfigurationStructureForEventTrigger
+
+CellLevelConfigurationStructureForEventTrigger ::= SEQUENCE {
+    cellGlobalId                                        CellGlobalId,
+    listOfRANConfigurationStructuresForEventTrigger     ListOfRANConfigurationStructuresForEventTrigger
+}
+
+-- GA: (Double check) Specifies the name of the attribute under the RAN Configuration
+--     Structure that will trigger the event upon change. Valid attributes for each
+--     node-level RAN Configuration Structure are defined in 8.8.1
+-- O-GNBDUFunction          15 Bytes
+-- O-GNBCUCPFunction        17 Bytes
+-- O-GNBCUUPFunction        17 Bytes
+-- O-RRMPolicyRatio         16 Bytes
+AttributeName ::= OCTET STRING (SIZE(15..17))
+
+E2SM-CCC-EventTriggerDefinition-Format3 ::= SEQUENCE {
+    period                                          INTEGER (10..4294967295)
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RICActionDefinition ::= SEQUENCE {
+E2SM-CCC-RICActionDefinition ::= SEQUENCE {
+    ricStyleType                                    RIC-Style-Type,
+    actionDefinitionFormat                          ActionDefinitionFormat
+}
+
+ActionDefinitionFormat ::= CHOICE {
+    e2SM-CCC-ActionDefinitionFormat1                E2SM-CCC-ActionDefinitionFormat1,
+    e2SM-CCC-ActionDefinitionFormat2                E2SM-CCC-ActionDefinitionFormat2
+}
+
+E2SM-CCC-ActionDefinitionFormat1 ::= SEQUENCE {
+    listOfNodeLevelRANConfigurationStructuresForADF     ListOfRANConfigurationStructuresForADF
+}
+
+ListOfRANConfigurationStructuresForADF ::= SEQUENCE (SIZE(1..maxnoofConfigurationsToReportFormat1)) OF RANConfigurationStructureForADF
+
+RANConfigurationStructureForADF ::= SEQUENCE {
+    reportType                                      ReportType,
+    ranConfigurationStructureName                   RanConfigurationStructureName,
+    listOfAttributes                                ListOfAttributes            OPTIONAL
+}
+
+E2SM-CCC-ActionDefinitionFormat2 ::= SEQUENCE {
+    listOfCellConfigurationsToBeReportedForADF          ListOfCellConfigurationsToBeReportedForADF
+}
+
+ListOfCellConfigurationsToBeReportedForADF ::= SEQUENCE (SIZE(1..maxnoofConfigurationsToReportFormat2)) OF CellConfigurationToBeReportedForADF
+
+CellConfigurationToBeReportedForADF ::= SEQUENCE {
+    cellGlobalId                                        CellGlobalId                                OPTIONAL,
+    listOfCellLevelRANConfigurationStructuresForADF     ListOfRANConfigurationStructuresForADF      OPTIONAL
+}
+
+END
+
+-- ASN1STOP
