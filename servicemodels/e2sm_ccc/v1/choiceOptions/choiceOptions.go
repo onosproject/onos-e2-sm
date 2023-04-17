@@ -11,14 +11,14 @@ import (
 )
 
 var E2smCccChoicemap = map[string]map[int]reflect.Type{
-	"e2_sm_ccc_ran_configuration_structure": {
-		1: reflect.TypeOf(e2smcccv1.E2SmCCcRAnConfigurationStructure_OGnbCuCpFunction{}),
-		2: reflect.TypeOf(e2smcccv1.E2SmCCcRAnConfigurationStructure_OGnbCuUpFunction{}),
-		3: reflect.TypeOf(e2smcccv1.E2SmCCcRAnConfigurationStructure_OGnbDuFunction{}),
-		4: reflect.TypeOf(e2smcccv1.E2SmCCcRAnConfigurationStructure_ONrCellCu{}),
-		5: reflect.TypeOf(e2smcccv1.E2SmCCcRAnConfigurationStructure_ONrCellDu{}),
-		6: reflect.TypeOf(e2smcccv1.E2SmCCcRAnConfigurationStructure_ORrmpolicyRatio{}),
-		7: reflect.TypeOf(e2smcccv1.E2SmCCcRAnConfigurationStructure_OBwp{}),
+	"ran_configuration_structure": {
+		1: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbCuCpFunction{}),
+		2: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbCuUpFunction{}),
+		3: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbDuFunction{}),
+		4: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ONrCellCu{}),
+		5: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ONrCellDu{}),
+		6: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ORrmpolicyRatio{}),
+		7: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OBwp{}),
 	},
 	"indication_header_format": {
 		1: reflect.TypeOf(e2smcccv1.IndicationHeaderFormat_E2SmCccIndicationHeaderFormat1{}),

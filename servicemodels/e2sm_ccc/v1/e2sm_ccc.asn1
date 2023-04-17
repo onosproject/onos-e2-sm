@@ -243,7 +243,9 @@ O-Bwp ::= SEQUENCE {
     numberOfRBs             INTEGER (0..maxNrofPhysicalResourceBlocks)
 }
 
-E2SM-CCC-RAN-Configuration-Structure ::= CHOICE {
+-- GA: Remove "E2SM-CCC-" from message name to avoid bineg recognized as top-level message by the ONF's protobuf plugin
+-- E2SM-CCC-RAN-Configuration-Structure ::= CHOICE {
+RAN-Configuration-Structure ::= CHOICE {
     o-GnbCuCpFunction       O-GnbCuCpFunction,
     o-GnbCuUpFunction       O-GnbCuUpFunction,
     o-GnbDuFunction         O-GnbDuFunction,
@@ -304,7 +306,7 @@ ConfigurationStructure ::= SEQUENCE {
 RanConfigurationStructureName ::= OCTET STRING (SIZE(5..17))
 
 ValuesOfAttributes ::= SEQUENCE {
-    ranConfigurationStructure       E2SM-CCC-RAN-Configuration-Structure
+    ranConfigurationStructure       RAN-Configuration-Structure
 }
 
 E2SM-CCC-IndicationMessageFormat2 ::= SEQUENCE {

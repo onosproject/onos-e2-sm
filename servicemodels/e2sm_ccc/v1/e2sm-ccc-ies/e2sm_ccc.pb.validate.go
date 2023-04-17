@@ -6891,38 +6891,37 @@ var _ interface {
 	ErrorName() string
 } = OBwpValidationError{}
 
-// Validate checks the field values on E2SmCCcRAnConfigurationStructure with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *E2SmCCcRAnConfigurationStructure) Validate() error {
+// Validate checks the field values on RanConfigurationStructure with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RanConfigurationStructure) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on E2SmCCcRAnConfigurationStructure with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// E2SmCCcRAnConfigurationStructureMultiError, or nil if none found.
-func (m *E2SmCCcRAnConfigurationStructure) ValidateAll() error {
+// ValidateAll checks the field values on RanConfigurationStructure with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RanConfigurationStructureMultiError, or nil if none found.
+func (m *RanConfigurationStructure) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
+func (m *RanConfigurationStructure) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	switch m.E2SmCccRanConfigurationStructure.(type) {
+	switch m.RanConfigurationStructure.(type) {
 
-	case *E2SmCCcRAnConfigurationStructure_OGnbCuCpFunction:
+	case *RanConfigurationStructure_OGnbCuCpFunction:
 
 		if all {
 			switch v := interface{}(m.GetOGnbCuCpFunction()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OGnbCuCpFunction",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6930,7 +6929,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OGnbCuCpFunction",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6939,7 +6938,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetOGnbCuCpFunction()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return E2SmCCcRAnConfigurationStructureValidationError{
+				return RanConfigurationStructureValidationError{
 					field:  "OGnbCuCpFunction",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -6947,13 +6946,13 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		}
 
-	case *E2SmCCcRAnConfigurationStructure_OGnbCuUpFunction:
+	case *RanConfigurationStructure_OGnbCuUpFunction:
 
 		if all {
 			switch v := interface{}(m.GetOGnbCuUpFunction()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OGnbCuUpFunction",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6961,7 +6960,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OGnbCuUpFunction",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6970,7 +6969,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetOGnbCuUpFunction()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return E2SmCCcRAnConfigurationStructureValidationError{
+				return RanConfigurationStructureValidationError{
 					field:  "OGnbCuUpFunction",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -6978,13 +6977,13 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		}
 
-	case *E2SmCCcRAnConfigurationStructure_OGnbDuFunction:
+	case *RanConfigurationStructure_OGnbDuFunction:
 
 		if all {
 			switch v := interface{}(m.GetOGnbDuFunction()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OGnbDuFunction",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -6992,7 +6991,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OGnbDuFunction",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7001,7 +7000,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetOGnbDuFunction()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return E2SmCCcRAnConfigurationStructureValidationError{
+				return RanConfigurationStructureValidationError{
 					field:  "OGnbDuFunction",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -7009,13 +7008,13 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		}
 
-	case *E2SmCCcRAnConfigurationStructure_ONrCellCu:
+	case *RanConfigurationStructure_ONrCellCu:
 
 		if all {
 			switch v := interface{}(m.GetONrCellCu()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "ONrCellCu",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7023,7 +7022,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "ONrCellCu",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7032,7 +7031,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetONrCellCu()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return E2SmCCcRAnConfigurationStructureValidationError{
+				return RanConfigurationStructureValidationError{
 					field:  "ONrCellCu",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -7040,13 +7039,13 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		}
 
-	case *E2SmCCcRAnConfigurationStructure_ONrCellDu:
+	case *RanConfigurationStructure_ONrCellDu:
 
 		if all {
 			switch v := interface{}(m.GetONrCellDu()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "ONrCellDu",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7054,7 +7053,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "ONrCellDu",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7063,7 +7062,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetONrCellDu()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return E2SmCCcRAnConfigurationStructureValidationError{
+				return RanConfigurationStructureValidationError{
 					field:  "ONrCellDu",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -7071,13 +7070,13 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		}
 
-	case *E2SmCCcRAnConfigurationStructure_ORrmpolicyRatio:
+	case *RanConfigurationStructure_ORrmpolicyRatio:
 
 		if all {
 			switch v := interface{}(m.GetORrmpolicyRatio()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "ORrmpolicyRatio",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7085,7 +7084,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "ORrmpolicyRatio",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7094,7 +7093,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetORrmpolicyRatio()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return E2SmCCcRAnConfigurationStructureValidationError{
+				return RanConfigurationStructureValidationError{
 					field:  "ORrmpolicyRatio",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -7102,13 +7101,13 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		}
 
-	case *E2SmCCcRAnConfigurationStructure_OBwp:
+	case *RanConfigurationStructure_OBwp:
 
 		if all {
 			switch v := interface{}(m.GetOBwp()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OBwp",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7116,7 +7115,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, E2SmCCcRAnConfigurationStructureValidationError{
+					errors = append(errors, RanConfigurationStructureValidationError{
 						field:  "OBwp",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -7125,7 +7124,7 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetOBwp()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return E2SmCCcRAnConfigurationStructureValidationError{
+				return RanConfigurationStructureValidationError{
 					field:  "OBwp",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -7136,20 +7135,19 @@ func (m *E2SmCCcRAnConfigurationStructure) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return E2SmCCcRAnConfigurationStructureMultiError(errors)
+		return RanConfigurationStructureMultiError(errors)
 	}
 
 	return nil
 }
 
-// E2SmCCcRAnConfigurationStructureMultiError is an error wrapping multiple
-// validation errors returned by
-// E2SmCCcRAnConfigurationStructure.ValidateAll() if the designated
-// constraints aren't met.
-type E2SmCCcRAnConfigurationStructureMultiError []error
+// RanConfigurationStructureMultiError is an error wrapping multiple validation
+// errors returned by RanConfigurationStructure.ValidateAll() if the
+// designated constraints aren't met.
+type RanConfigurationStructureMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m E2SmCCcRAnConfigurationStructureMultiError) Error() string {
+func (m RanConfigurationStructureMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -7158,12 +7156,11 @@ func (m E2SmCCcRAnConfigurationStructureMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m E2SmCCcRAnConfigurationStructureMultiError) AllErrors() []error { return m }
+func (m RanConfigurationStructureMultiError) AllErrors() []error { return m }
 
-// E2SmCCcRAnConfigurationStructureValidationError is the validation error
-// returned by E2SmCCcRAnConfigurationStructure.Validate if the designated
-// constraints aren't met.
-type E2SmCCcRAnConfigurationStructureValidationError struct {
+// RanConfigurationStructureValidationError is the validation error returned by
+// RanConfigurationStructure.Validate if the designated constraints aren't met.
+type RanConfigurationStructureValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -7171,24 +7168,24 @@ type E2SmCCcRAnConfigurationStructureValidationError struct {
 }
 
 // Field function returns field value.
-func (e E2SmCCcRAnConfigurationStructureValidationError) Field() string { return e.field }
+func (e RanConfigurationStructureValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e E2SmCCcRAnConfigurationStructureValidationError) Reason() string { return e.reason }
+func (e RanConfigurationStructureValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e E2SmCCcRAnConfigurationStructureValidationError) Cause() error { return e.cause }
+func (e RanConfigurationStructureValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e E2SmCCcRAnConfigurationStructureValidationError) Key() bool { return e.key }
+func (e RanConfigurationStructureValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e E2SmCCcRAnConfigurationStructureValidationError) ErrorName() string {
-	return "E2SmCCcRAnConfigurationStructureValidationError"
+func (e RanConfigurationStructureValidationError) ErrorName() string {
+	return "RanConfigurationStructureValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e E2SmCCcRAnConfigurationStructureValidationError) Error() string {
+func (e RanConfigurationStructureValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -7200,14 +7197,14 @@ func (e E2SmCCcRAnConfigurationStructureValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sE2SmCCcRAnConfigurationStructure.%s: %s%s",
+		"invalid %sRanConfigurationStructure.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = E2SmCCcRAnConfigurationStructureValidationError{}
+var _ error = RanConfigurationStructureValidationError{}
 
 var _ interface {
 	Field() string
@@ -7215,7 +7212,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = E2SmCCcRAnConfigurationStructureValidationError{}
+} = RanConfigurationStructureValidationError{}
 
 // Validate checks the field values on E2SmCCcRIcIndicationHeader with the
 // rules defined in the proto definition for this message. If any rules are

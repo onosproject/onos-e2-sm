@@ -6,7 +6,6 @@ package encoder
 
 import (
 	"encoding/hex"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/choiceOptions"
 	e2smcccv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-ccc-ies"
 
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"

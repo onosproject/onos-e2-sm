@@ -6,12 +6,14 @@ package encoder
 
 import (
 	"encoding/hex"
-	"github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/choiceOptions"
 	e2smcccv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-ccc-ies"
 
 	"github.com/onosproject/onos-lib-go/pkg/asn1/aper"
 	"github.com/onosproject/onos-lib-go/pkg/errors"
+	"github.com/onosproject/onos-lib-go/pkg/logging"
 )
+
+var log = logging.GetLogger()
 
 func PerEncodeE2SmCCcRIcIndicationHeader(msg *e2smcccv1.E2SmCCcRIcIndicationHeader) ([]byte, error) {
 

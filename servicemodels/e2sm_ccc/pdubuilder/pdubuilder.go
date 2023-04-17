@@ -1215,7 +1215,7 @@ func CreateRanConfigurationStructureName(value []byte) (*e2smcccv1.RanConfigurat
 	return msg, nil
 }
 
-func CreateValuesOfAttributes(ranConfigurationStructure *e2smcccv1.E2SmCCcRAnConfigurationStructure) (*e2smcccv1.ValuesOfAttributes, error) {
+func CreateValuesOfAttributes(ranConfigurationStructure *e2smcccv1.RanConfigurationStructure) (*e2smcccv1.ValuesOfAttributes, error) {
 
 	msg := &e2smcccv1.ValuesOfAttributes{}
 	msg.RanConfigurationStructure = ranConfigurationStructure
@@ -2319,100 +2319,100 @@ func CreateGlobalNgrannodeIDNgENb(ngENb *e2smcommoniesv1.GlobalNgEnbID) (*e2smco
 
 	return item, nil
 }
-func CreateE2SmCCcRAnConfigurationStructureOGnbCuCpFunction(oGnbCuCpFunction *e2smcccv1.OGnbCuCpFunction) (*e2smcccv1.E2SmCCcRAnConfigurationStructure, error) {
+func CreateRanConfigurationStructureOGnbCuCpFunction(oGnbCuCpFunction *e2smcccv1.OGnbCuCpFunction) (*e2smcccv1.RanConfigurationStructure, error) {
 
-	item := &e2smcccv1.E2SmCCcRAnConfigurationStructure{
-		E2SmCCcRAnConfigurationStructure: &e2smcccv1.E2SmCCcRAnConfigurationStructure_OGnbCuCpFunction{
+	item := &e2smcccv1.RanConfigurationStructure{
+		RanConfigurationStructure: &e2smcccv1.RanConfigurationStructure_OGnbCuCpFunction{
 			OGnbCuCpFunction: oGnbCuCpFunction,
 		},
 	}
 
 	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmCCcRAnConfigurationStructureOGnbCuCpFunction() error validating PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateRanConfigurationStructureOGnbCuCpFunction() error validating PDU %s", err.Error())
 	}
 
 	return item, nil
 }
-func CreateE2SmCCcRAnConfigurationStructureOGnbCuUpFunction(oGnbCuUpFunction *e2smcccv1.OGnbCuUpFunction) (*e2smcccv1.E2SmCCcRAnConfigurationStructure, error) {
+func CreateRanConfigurationStructureOGnbCuUpFunction(oGnbCuUpFunction *e2smcccv1.OGnbCuUpFunction) (*e2smcccv1.RanConfigurationStructure, error) {
 
-	item := &e2smcccv1.E2SmCCcRAnConfigurationStructure{
-		E2SmCCcRAnConfigurationStructure: &e2smcccv1.E2SmCCcRAnConfigurationStructure_OGnbCuUpFunction{
+	item := &e2smcccv1.RanConfigurationStructure{
+		RanConfigurationStructure: &e2smcccv1.RanConfigurationStructure_OGnbCuUpFunction{
 			OGnbCuUpFunction: oGnbCuUpFunction,
 		},
 	}
 
 	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmCCcRAnConfigurationStructureOGnbCuUpFunction() error validating PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateRanConfigurationStructureOGnbCuUpFunction() error validating PDU %s", err.Error())
 	}
 
 	return item, nil
 }
-func CreateE2SmCCcRAnConfigurationStructureOGnbDuFunction(oGnbDuFunction *e2smcccv1.OGnbDuFunction) (*e2smcccv1.E2SmCCcRAnConfigurationStructure, error) {
+func CreateRanConfigurationStructureOGnbDuFunction(oGnbDuFunction *e2smcccv1.OGnbDuFunction) (*e2smcccv1.RanConfigurationStructure, error) {
 
-	item := &e2smcccv1.E2SmCCcRAnConfigurationStructure{
-		E2SmCCcRAnConfigurationStructure: &e2smcccv1.E2SmCCcRAnConfigurationStructure_OGnbDuFunction{
+	item := &e2smcccv1.RanConfigurationStructure{
+		RanConfigurationStructure: &e2smcccv1.RanConfigurationStructure_OGnbDuFunction{
 			OGnbDuFunction: oGnbDuFunction,
 		},
 	}
 
 	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmCCcRAnConfigurationStructureOGnbDuFunction() error validating PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateRanConfigurationStructureOGnbDuFunction() error validating PDU %s", err.Error())
 	}
 
 	return item, nil
 }
-func CreateE2SmCCcRAnConfigurationStructureONrCellCu(oNrCellCu *e2smcccv1.ONrCellCu) (*e2smcccv1.E2SmCCcRAnConfigurationStructure, error) {
+func CreateRanConfigurationStructureONrCellCu(oNrCellCu *e2smcccv1.ONrCellCu) (*e2smcccv1.RanConfigurationStructure, error) {
 
-	item := &e2smcccv1.E2SmCCcRAnConfigurationStructure{
-		E2SmCCcRAnConfigurationStructure: &e2smcccv1.E2SmCCcRAnConfigurationStructure_ONrCellCu{
+	item := &e2smcccv1.RanConfigurationStructure{
+		RanConfigurationStructure: &e2smcccv1.RanConfigurationStructure_ONrCellCu{
 			ONrCellCu: oNrCellCu,
 		},
 	}
 
 	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmCCcRAnConfigurationStructureONrCellCu() error validating PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateRanConfigurationStructureONrCellCu() error validating PDU %s", err.Error())
 	}
 
 	return item, nil
 }
-func CreateE2SmCCcRAnConfigurationStructureONrCellDu(oNrCellDu *e2smcccv1.ONrCellDu) (*e2smcccv1.E2SmCCcRAnConfigurationStructure, error) {
+func CreateRanConfigurationStructureONrCellDu(oNrCellDu *e2smcccv1.ONrCellDu) (*e2smcccv1.RanConfigurationStructure, error) {
 
-	item := &e2smcccv1.E2SmCCcRAnConfigurationStructure{
-		E2SmCCcRAnConfigurationStructure: &e2smcccv1.E2SmCCcRAnConfigurationStructure_ONrCellDu{
+	item := &e2smcccv1.RanConfigurationStructure{
+		RanConfigurationStructure: &e2smcccv1.RanConfigurationStructure_ONrCellDu{
 			ONrCellDu: oNrCellDu,
 		},
 	}
 
 	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmCCcRAnConfigurationStructureONrCellDu() error validating PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateRanConfigurationStructureONrCellDu() error validating PDU %s", err.Error())
 	}
 
 	return item, nil
 }
-func CreateE2SmCCcRAnConfigurationStructureORrmpolicyRatio(oRrmpolicyRatio *e2smcccv1.ORRmpolicyRatio) (*e2smcccv1.E2SmCCcRAnConfigurationStructure, error) {
+func CreateRanConfigurationStructureORrmpolicyRatio(oRrmpolicyRatio *e2smcccv1.ORRmpolicyRatio) (*e2smcccv1.RanConfigurationStructure, error) {
 
-	item := &e2smcccv1.E2SmCCcRAnConfigurationStructure{
-		E2SmCCcRAnConfigurationStructure: &e2smcccv1.E2SmCCcRAnConfigurationStructure_ORrmpolicyRatio{
+	item := &e2smcccv1.RanConfigurationStructure{
+		RanConfigurationStructure: &e2smcccv1.RanConfigurationStructure_ORrmpolicyRatio{
 			ORrmpolicyRatio: oRrmpolicyRatio,
 		},
 	}
 
 	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmCCcRAnConfigurationStructureORrmpolicyRatio() error validating PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateRanConfigurationStructureORrmpolicyRatio() error validating PDU %s", err.Error())
 	}
 
 	return item, nil
 }
-func CreateE2SmCCcRAnConfigurationStructureOBwp(oBwp *e2smcccv1.OBwp) (*e2smcccv1.E2SmCCcRAnConfigurationStructure, error) {
+func CreateRanConfigurationStructureOBwp(oBwp *e2smcccv1.OBwp) (*e2smcccv1.RanConfigurationStructure, error) {
 
-	item := &e2smcccv1.E2SmCCcRAnConfigurationStructure{
-		E2SmCCcRAnConfigurationStructure: &e2smcccv1.E2SmCCcRAnConfigurationStructure_OBwp{
+	item := &e2smcccv1.RanConfigurationStructure{
+		RanConfigurationStructure: &e2smcccv1.RanConfigurationStructure_OBwp{
 			OBwp: oBwp,
 		},
 	}
 
 	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateE2SmCCcRAnConfigurationStructureOBwp() error validating PDU %s", err.Error())
+		return nil, errors.NewInvalid("CreateRanConfigurationStructureOBwp() error validating PDU %s", err.Error())
 	}
 
 	return item, nil
