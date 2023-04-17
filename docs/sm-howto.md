@@ -122,6 +122,7 @@ Each definition of an SM message encoder file contains encode and decode functio
 * The encoding part is being invoked [here](https://github.com/onosproject/onos-e2-sm/blob/master/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L27).
 * Respectively, decoding is being done [here](https://github.com/onosproject/onos-e2-sm/blob/f7fd56fc6b0e84cf6e98490200a297bada4b3630/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L38).
 
+> Please also note, that it is expected that each **top-level** message starts from `E2Sm`, otherwise the `protoc-gen-builder` plugin will assume that there are no top-level messages defined.
 
 **Notice**: as shown in [line 24](https://github.com/onosproject/onos-e2-sm/blob/6fd4546563ed112d47a89b173abcc31982ead240/servicemodels/e2sm_mho_go/encoder/E2SM-MHO-ControlHeader.go#L24)
 of the file E2SM-MHO-ControlHeader.go, there is a mandatory prerequisite for marshaling (and unmarshaling). 
