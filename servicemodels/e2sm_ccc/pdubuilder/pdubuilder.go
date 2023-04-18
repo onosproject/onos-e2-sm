@@ -955,19 +955,6 @@ func CreateNrTac(value int32) (*e2smcccv1.NrTac, error) {
 	return msg, nil
 }
 
-func CreateTai(plmnID *e2smcommoniesv1.Plmnidentity, nrTac *e2smcccv1.NrTac) (*e2smcccv1.Tai, error) {
-
-	msg := &e2smcccv1.Tai{}
-	msg.PlmnId = plmnID
-	msg.NrTac = nrTac
-
-	if err := msg.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateTai() error validating PDU %s", err.Error())
-	}
-
-	return msg, nil
-}
-
 func CreateRrmPolicyMember(plmnID *e2smcommoniesv1.Plmnidentity, snssai *e2smcommoniesv1.SNSsai) (*e2smcccv1.RrmPolicyMember, error) {
 
 	msg := &e2smcccv1.RrmPolicyMember{}
@@ -1080,10 +1067,12 @@ func CreateBwpList(value []*e2smcccv1.OBwp) (*e2smcccv1.BwpList, error) {
 	return msg, nil
 }
 
-func CreateONrCellDu(cellLocalID *e2smcccv1.CellLocalId, cellState e2smcccv1.CellState, plmnInfoList *e2smcccv1.PlmnInfoList, nrPci *e2smcccv1.NrPci, nrTac *e2smcccv1.NrTac, arfcnDl int32, arfcnUl int32, arfcnSul int32, bSchannelBwDl int32, ssbFrequency int32, ssbPeriodicity e2smcccv1.SsbPeriodicity, ssbSubCarrierSpacing e2smcccv1.SsbSubCarrierSpacing, ssbOffset int32, ssbDuration e2smcccv1.SsbDuration, bSchannelBwUl int32, bSchannelBwSul int32, bwpList *e2smcccv1.BwpList) (*e2smcccv1.ONrCellDu, error) {
+func CreateONrCellDu(cellLocalID *e2smcccv1.CellLocalId, operationalState e2smcccv1.OperationalState, administrativeState e2smcccv1.AdministrativeState, cellState e2smcccv1.CellState, plmnInfoList *e2smcccv1.PlmnInfoList, nrPci *e2smcccv1.NrPci, nrTac *e2smcccv1.NrTac, arfcnDl int32, arfcnUl int32, arfcnSul int32, bSchannelBwDl int32, ssbFrequency int32, ssbPeriodicity e2smcccv1.SsbPeriodicity, ssbSubCarrierSpacing e2smcccv1.SsbSubCarrierSpacing, ssbOffset int32, ssbDuration e2smcccv1.SsbDuration, bSchannelBwUl int32, bSchannelBwSul int32, bwpList *e2smcccv1.BwpList) (*e2smcccv1.ONrCellDu, error) {
 
 	msg := &e2smcccv1.ONrCellDu{}
 	msg.CellLocalId = cellLocalID
+	msg.OperationalState = operationalState
+	msg.AdministrativeState = administrativeState
 	msg.CellState = cellState
 	msg.PlmnInfoList = plmnInfoList
 	msg.NrPci = nrPci
@@ -1647,19 +1636,6 @@ func CreateListOfCellLevelConfigurationStructuresForEventTrigger(value []*e2smcc
 	return msg, nil
 }
 
-func CreateCellLevelConfigurationStructureForEventTrigger(cellGlobalID *e2smcccv1.CellGlobalId, listOfRanconfigurationStructuresForEventTrigger *e2smcccv1.ListOfRanconfigurationStructuresForEventTrigger) (*e2smcccv1.CellLevelConfigurationStructureForEventTrigger, error) {
-
-	msg := &e2smcccv1.CellLevelConfigurationStructureForEventTrigger{}
-	msg.CellGlobalId = cellGlobalID
-	msg.ListOfRanconfigurationStructuresForEventTrigger = listOfRanconfigurationStructuresForEventTrigger
-
-	if err := msg.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateCellLevelConfigurationStructureForEventTrigger() error validating PDU %s", err.Error())
-	}
-
-	return msg, nil
-}
-
 func CreateAttributeName(value []byte) (*e2smcccv1.AttributeName, error) {
 
 	msg := &e2smcccv1.AttributeName{}
@@ -1740,6 +1716,83 @@ func CreateListOfCellConfigurationsToBeReportedForAdf(value []*e2smcccv1.CellCon
 
 	if err := msg.Validate(); err != nil {
 		return nil, errors.NewInvalid("CreateListOfCellConfigurationsToBeReportedForAdf() error validating PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateE2SmCCcRIcControlOutcome(controlOutcomeFormat *e2smcccv1.ControlOutcomeFormat) (*e2smcccv1.E2SmCCcRIcControlOutcome, error) {
+
+	msg := &e2smcccv1.E2SmCCcRIcControlOutcome{}
+	msg.ControlOutcomeFormat = controlOutcomeFormat
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmCCcRIcControlOutcome() error validating PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateE2SmCCcControlOutcomeFormat1(receivedTimestamp []byte, ranConfigurationStructuresAcceptedList *e2smcccv1.RanConfigurationStructuresAcceptedList, ranConfigurationStructuresFailedList *e2smcccv1.RanConfigurationStructuresFailedList) (*e2smcccv1.E2SmCCcControlOutcomeFormat1, error) {
+
+	msg := &e2smcccv1.E2SmCCcControlOutcomeFormat1{}
+	msg.ReceivedTimestamp = receivedTimestamp
+	msg.RanConfigurationStructuresAcceptedList = ranConfigurationStructuresAcceptedList
+	msg.RanConfigurationStructuresFailedList = ranConfigurationStructuresFailedList
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateE2SmCCcControlOutcomeFormat1() error validating PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateRanConfigurationStructuresAcceptedList(value []*e2smcccv1.ConfigurationStructureAccepted) (*e2smcccv1.RanConfigurationStructuresAcceptedList, error) {
+
+	msg := &e2smcccv1.RanConfigurationStructuresAcceptedList{}
+	msg.Value = value
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanConfigurationStructuresAcceptedList() error validating PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateRanConfigurationStructuresFailedList(value []*e2smcccv1.ConfigurationStructureFailed) (*e2smcccv1.RanConfigurationStructuresFailedList, error) {
+
+	msg := &e2smcccv1.RanConfigurationStructuresFailedList{}
+	msg.Value = value
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateRanConfigurationStructuresFailedList() error validating PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateConfigurationStructureFailed(ranConfigurationStructureName *e2smcccv1.RanConfigurationStructureName, oldValuesOfAttributes *e2smcccv1.ValuesOfAttributes, requestedValuesOfAttributes *e2smcccv1.ValuesOfAttributes, cause e2smcccv1.Cause) (*e2smcccv1.ConfigurationStructureFailed, error) {
+
+	msg := &e2smcccv1.ConfigurationStructureFailed{}
+	msg.RanConfigurationStructureName = ranConfigurationStructureName
+	msg.OldValuesOfAttributes = oldValuesOfAttributes
+	msg.RequestedValuesOfAttributes = requestedValuesOfAttributes
+	msg.Cause = cause
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateConfigurationStructureFailed() error validating PDU %s", err.Error())
+	}
+
+	return msg, nil
+}
+
+func CreateListOfCellsForControlOutcome(value []*e2smcccv1.CellControlOutcome) (*e2smcccv1.ListOfCellsForControlOutcome, error) {
+
+	msg := &e2smcccv1.ListOfCellsForControlOutcome{}
+	msg.Value = value
+
+	if err := msg.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateListOfCellsForControlOutcome() error validating PDU %s", err.Error())
 	}
 
 	return msg, nil
@@ -2599,6 +2652,34 @@ func CreateActionDefinitionFormatE2SmCccActionDefinitionFormat2(e2SmCccActionDef
 
 	return item, nil
 }
+func CreateControlOutcomeFormatE2SmCccControlOutcomeFormat1(e2SmCccControlOutcomeFormat1 *e2smcccv1.E2SmCCcControlOutcomeFormat1) (*e2smcccv1.ControlOutcomeFormat, error) {
+
+	item := &e2smcccv1.ControlOutcomeFormat{
+		ControlOutcomeFormat: &e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat1{
+			E2SmCccControlOutcomeFormat1: e2SmCccControlOutcomeFormat1,
+		},
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateControlOutcomeFormatE2SmCccControlOutcomeFormat1() error validating PDU %s", err.Error())
+	}
+
+	return item, nil
+}
+func CreateControlOutcomeFormatE2SmCccControlOutcomeFormat2(e2SmCccControlOutcomeFormat2 *e2smcccv1.E2SmCCcControlOutcomeFormat2) (*e2smcccv1.ControlOutcomeFormat, error) {
+
+	item := &e2smcccv1.ControlOutcomeFormat{
+		ControlOutcomeFormat: &e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat2{
+			E2SmCccControlOutcomeFormat2: e2SmCccControlOutcomeFormat2,
+		},
+	}
+
+	if err := item.Validate(); err != nil {
+		return nil, errors.NewInvalid("CreateControlOutcomeFormatE2SmCccControlOutcomeFormat2() error validating PDU %s", err.Error())
+	}
+
+	return item, nil
+}
 
 func CreateMessageTypeInterfaceMessageIdInitiatingMessage() e2smcommoniesv1.MessageTypeInterfaceMessageId {
 	return e2smcommoniesv1.MessageTypeInterfaceMessageId_MESSAGE_TYPE_INTERFACE_MESSAGE_ID_INITIATING_MESSAGE
@@ -2753,17 +2834,32 @@ func CreateReportTypeAll() e2smcccv1.ReportType {
 func CreateReportTypeChange() e2smcccv1.ReportType {
 	return e2smcccv1.ReportType_REPORT_TYPE_CHANGE
 }
-func CreateResourceTypePrbUl() e2smcccv1.ResourceType {
-	return e2smcccv1.ResourceType_RESOURCE_TYPE_PRB_UL
-}
 func CreateResourceTypePrbDl() e2smcccv1.ResourceType {
 	return e2smcccv1.ResourceType_RESOURCE_TYPE_PRB_DL
+}
+func CreateResourceTypePrbUl() e2smcccv1.ResourceType {
+	return e2smcccv1.ResourceType_RESOURCE_TYPE_PRB_UL
 }
 func CreateResourceTypeDrb() e2smcccv1.ResourceType {
 	return e2smcccv1.ResourceType_RESOURCE_TYPE_DRB
 }
 func CreateResourceTypeRrc() e2smcccv1.ResourceType {
 	return e2smcccv1.ResourceType_RESOURCE_TYPE_RRC
+}
+func CreateOperationalStateEnabled() e2smcccv1.OperationalState {
+	return e2smcccv1.OperationalState_OPERATIONAL_STATE_ENABLED
+}
+func CreateOperationalStateDisabled() e2smcccv1.OperationalState {
+	return e2smcccv1.OperationalState_OPERATIONAL_STATE_DISABLED
+}
+func CreateAdministrativeStateLocked() e2smcccv1.AdministrativeState {
+	return e2smcccv1.AdministrativeState_ADMINISTRATIVE_STATE_LOCKED
+}
+func CreateAdministrativeStateShuttingdown() e2smcccv1.AdministrativeState {
+	return e2smcccv1.AdministrativeState_ADMINISTRATIVE_STATE_SHUTTINGDOWN
+}
+func CreateAdministrativeStateUnlocked() e2smcccv1.AdministrativeState {
+	return e2smcccv1.AdministrativeState_ADMINISTRATIVE_STATE_UNLOCKED
 }
 func CreateSchedulerTypeRoundRobin() e2smcccv1.SchedulerType {
 	return e2smcccv1.SchedulerType_SCHEDULER_TYPE_ROUND_ROBIN
@@ -2773,6 +2869,24 @@ func CreateSchedulerTypeProportionallyFair() e2smcccv1.SchedulerType {
 }
 func CreateSchedulerTypeQosBased() e2smcccv1.SchedulerType {
 	return e2smcccv1.SchedulerType_SCHEDULER_TYPE_QOS_BASED
+}
+func CreateCauseNotSupported() e2smcccv1.Cause {
+	return e2smcccv1.Cause_CAUSE_NOT_SUPPORTED
+}
+func CreateCauseNotAvailable() e2smcccv1.Cause {
+	return e2smcccv1.Cause_CAUSE_NOT_AVAILABLE
+}
+func CreateCauseIncompatibleState() e2smcccv1.Cause {
+	return e2smcccv1.Cause_CAUSE_INCOMPATIBLE_STATE
+}
+func CreateCauseJsonError() e2smcccv1.Cause {
+	return e2smcccv1.Cause_CAUSE_JSON_ERROR
+}
+func CreateCauseSemanticError() e2smcccv1.Cause {
+	return e2smcccv1.Cause_CAUSE_SEMANTIC_ERROR
+}
+func CreateCauseUnspecified() e2smcccv1.Cause {
+	return e2smcccv1.Cause_CAUSE_UNSPECIFIED
 }
 func CreateSsbPeriodicityN5() e2smcccv1.SsbPeriodicity {
 	return e2smcccv1.SsbPeriodicity_SSB_PERIODICITY_N5

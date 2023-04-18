@@ -47,6 +47,10 @@ var E2smCccChoicemap = map[string]map[int]reflect.Type{
 		1: reflect.TypeOf(e2smcccv1.ActionDefinitionFormat_E2SmCccActionDefinitionFormat1{}),
 		2: reflect.TypeOf(e2smcccv1.ActionDefinitionFormat_E2SmCccActionDefinitionFormat2{}),
 	},
+	"control_outcome_format": {
+		1: reflect.TypeOf(e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat1{}),
+		2: reflect.TypeOf(e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat2{}),
+	},
 	"cgi": {
 		1: reflect.TypeOf(e2smcommoniesv1.Cgi_NRCgi{}),
 		2: reflect.TypeOf(e2smcommoniesv1.Cgi_EUtraCgi{}),

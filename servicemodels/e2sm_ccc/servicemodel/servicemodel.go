@@ -249,11 +249,33 @@ func (sm CCCServiceModel) ControlMessageProtoToASN1(protoBytes []byte) ([]byte, 
 }
 
 func (sm CCCServiceModel) ControlOutcomeASN1toProto(asn1Bytes []byte) ([]byte, error) {
-	return nil, errors.NewInvalid("not present on CCC (v1)")
+
+	perBytes, err := encoder.PerDecodeE2SmCCcRIcControlOutcome(asn1Bytes)
+	if err != nil {
+		return nil, errors.NewInvalid("error decoding E2SmCCcRIcControlOutcome to PER %s\n%v", err, hex.Dump(asn1Bytes))
+	}
+
+	protoBytes, err := proto.Marshal(perBytes)
+	if err != nil {
+		return nil, errors.NewInvalid("error marshalling asn1Bytes to E2SmCCcRIcControlOutcome %s", err)
+	}
+
+	return protoBytes, nil
 }
 
 func (sm CCCServiceModel) ControlOutcomeProtoToASN1(protoBytes []byte) ([]byte, error) {
-	return nil, errors.NewInvalid("not present on CCC (v1)")
+
+	protoObj := new(e2smcccv1.E2SmCCcRIcControlOutcome)
+	if err := proto.Unmarshal(protoBytes, protoObj); err != nil {
+		return nil, errors.NewInvalid("error unmarshalling protoBytes to E2SmCCcRIcControlOutcome %s", err)
+	}
+
+	perBytes, err := encoder.PerEncodeE2SmCCcRIcControlOutcome(protoObj)
+	if err != nil {
+		return nil, errors.NewInvalid("error encoding E2SmCCcRIcControlOutcome to PER %s", err)
+	}
+
+	return perBytes, nil
 }
 
 func (sm CCCServiceModel) CallProcessIDASN1toProto(asn1Bytes []byte) ([]byte, error) {

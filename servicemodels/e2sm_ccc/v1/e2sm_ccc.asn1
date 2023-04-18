@@ -5,7 +5,7 @@
 --*************************************************************
 --
 -- E2SM-CCC - E2 Service Model for Ran Slicing Management
--- Source: O-RAN.WG3.E2SM-CCC-v01.00
+-- Source: O-RAN.WG3.E2SM-CCC-R003-v01.01
 -- Information Element Definitions
 --
 -- **************************************************************
@@ -63,6 +63,9 @@ maxnoofGGnbId                           INTEGER ::= 1024    -- GA: Assumed max v
 minSizeGEnbId                           INTEGER ::= 26      -- GA: Assumed min value
 maxSizeGEnbId                           INTEGER ::= 37      -- GA: Assumed max value
 maxnoofGEnbId                           INTEGER ::= 1024    -- GA: Assumed max value
+maxnoofConfigurationStructuresAccepted  INTEGER ::= 1024    -- GA: Assumed max value
+maxnoofConfigurationStructuresFailed    INTEGER ::= 1024    -- GA: Assumed max value
+maxnoofCellControlOutcome               INTEGER ::= 1024    -- GA: Assumed max value
 minBandwidth                            INTEGER ::= 5       -- GA: Based on 38.104 sec. 5.3 BS channel bandwidth (not taking into account CA)
 maxBandwidth                            INTEGER ::= 400     -- GA: Based on 38.104 sec. 5.3 BS channel bandwidth (not taking into account CA)
 
@@ -74,7 +77,7 @@ maxBandwidth                            INTEGER ::= 400     -- GA: Based on 38.1
 --
 -- **************************************************************
 
-GnbId ::= INTEGER (0..4294967295)        -- GA: JSON indicates STRING, but 28.541 indicates INTEGER (0..4294967295)
+GnbId ::= INTEGER (0..4294967295)
 
 GnbIdLength ::= INTEGER (22..32)
 
@@ -113,10 +116,7 @@ NrPci ::= INTEGER (0..503)
 
 NrTac ::= INTEGER (0..16777215)
 
-Tai ::= SEQUENCE {
-	plmnId		PLMNIdentity,
-	nrTac		NrTac
-}
+
 
 --- ****************************************************************************
 --- GA: TO REVIEW: BEGIN
@@ -138,9 +138,15 @@ ChangeType ::= ENUMERATED {none, modification, addition, deletion}
 
 ReportType ::= ENUMERATED {all, change}
 
-ResourceType ::= ENUMERATED {prbUl, prbDl, drb, rrc}  -- GA: Spec JSON indicates "STRING" but text indicates "ENUM"
+ResourceType ::= ENUMERATED {prbDl, prbUl, drb, rrc}  -- GA: Spec JSON indicates "STRING" but text indicates "ENUM"
+
+OperationalState ::= ENUMERATED {enabled, disabled}  -- GA: Spec JSON indicates "STRING" but text indicates "ENUM"
+
+AdministrativeState ::= ENUMERATED {locked, shuttingdown, unlocked}  -- GA: Spec JSON indicates "STRING" but text indicates "ENUM"
 
 SchedulerType ::= ENUMERATED {roundRobin, proportionallyFair, qosBased, ...}  -- GA: Not part of the Spec
+
+Cause ::= ENUMERATED {notSupported, notAvailable, incompatibleState, jsonError, semanticError, unspecified}  -- GA: Spec JSON indicates "STRING" but text indicates "ENUM"
 
 --- ****************************************************************************
 --- JSON: "type": "integer"
@@ -207,6 +213,8 @@ BwpList ::= SEQUENCE (SIZE(1..maxnoofBWP)) OF O-Bwp
 
 O-NrCellDu ::= SEQUENCE {
     cellLocalId             CellLocalId,
+    operationalState        OperationalState,
+    administrativeState     AdministrativeState,
     cellState               CellState,
     plmnInfoList            PlmnInfoList,
     nrPci                   NrPci,
@@ -499,18 +507,23 @@ E2SM-CCC-EventTriggerDefinition-Format2 ::= SEQUENCE {
 ListOfCellLevelConfigurationStructuresForEventTrigger ::= SEQUENCE (SIZE(1..maxnoofCellsRanFunctionDefinition)) OF CellLevelConfigurationStructureForEventTrigger
 
 CellLevelConfigurationStructureForEventTrigger ::= SEQUENCE {
-    cellGlobalId                                        CellGlobalId,
+    cellGlobalId                                        CellGlobalId        OPTIONAL,
     listOfRANConfigurationStructuresForEventTrigger     ListOfRANConfigurationStructuresForEventTrigger
 }
 
--- GA: (Double check) Specifies the name of the attribute under the RAN Configuration
---     Structure that will trigger the event upon change. Valid attributes for each
---     node-level RAN Configuration Structure are defined in 8.8.1
--- O-GNBDUFunction          15 Bytes
--- O-GNBCUCPFunction        17 Bytes
--- O-GNBCUUPFunction        17 Bytes
--- O-RRMPolicyRatio         16 Bytes
-AttributeName ::= OCTET STRING (SIZE(15..17))
+-- GA: As per the spec, This IE defines the name of a given attribute which are
+--     defined for each RAN Configuration Structure in Section 8.8 (Attribute Definitions).
+-- 8.8.1 Attribute Definitions for Node-Level RAN Configuration Structures
+-- 8.8.1.1 O-GNBDUFunction             15 Bytes
+-- 8.8.1.2 O-GNBCUCPFunction           17 Bytes
+-- 8.8.1.3 O-GNBCUUPFunction           17 Bytes
+-- 8.8.1.4 O-RRMPolicyRatio            16 Bytes
+-- 8.8.2 Attribute Definitions for Cell-Level RAN Configuration Structures
+-- 8.8.2.1 O-NRCellCU                  10 Bytes
+-- 8.8.2.2 O-NRCellDU                  10 Bytes
+-- 8.8.2.3 O-BWP                        5 Bytes
+-- 8.8.2.4 O-RRMPolicyRatio            16 Bytes
+AttributeName ::= OCTET STRING (SIZE(5..17))
 
 E2SM-CCC-EventTriggerDefinition-Format3 ::= SEQUENCE {
     period                                          INTEGER (10..4294967295)
@@ -549,6 +562,54 @@ ListOfCellConfigurationsToBeReportedForADF ::= SEQUENCE (SIZE(1..maxnoofConfigur
 CellConfigurationToBeReportedForADF ::= SEQUENCE {
     cellGlobalId                                        CellGlobalId                                OPTIONAL,
     listOfCellLevelRANConfigurationStructuresForADF     ListOfRANConfigurationStructuresForADF      OPTIONAL
+}
+
+-- GA: Append "E2SM-CCC-" to message name to aling with the ONF's protobuf plugin
+-- RICActionDefinition ::= SEQUENCE {
+E2SM-CCC-RIC-Control-Outcome ::= SEQUENCE {
+    controlOutcomeFormat                            ControlOutcomeFormat
+}
+
+ControlOutcomeFormat ::= CHOICE {
+    e2SM-CCC-ControlOutcomeFormat1                  E2SM-CCC-ControlOutcomeFormat1,
+    e2SM-CCC-ControlOutcomeFormat2                  E2SM-CCC-ControlOutcomeFormat2
+}
+
+E2SM-CCC-ControlOutcomeFormat1 ::= SEQUENCE {
+    receivedTimestamp                           OCTET STRING (8),    --- GA: As per Spec, it carries UTC time (64-bit timestamp)
+    ranConfigurationStructuresAcceptedList      RanConfigurationStructuresAcceptedList,
+    ranConfigurationStructuresFailedList        RanConfigurationStructuresFailedList
+}
+
+RanConfigurationStructuresAcceptedList ::= SEQUENCE (SIZE(1..maxnoofConfigurationStructuresAccepted)) OF ConfigurationStructureAccepted
+
+ConfigurationStructureAccepted ::= SEQUENCE {
+    ranConfigurationStructureName           RanConfigurationStructureName,
+    oldValuesOfAttributes                   ValuesOfAttributes,
+    currentValuesOfAttributes               ValuesOfAttributes,
+    appliedTimestamp                        OCTET STRING (8)        OPTIONAL    --- GA: As per Spec, it carries UTC time (64-bit timestamp)
+}
+
+RanConfigurationStructuresFailedList ::= SEQUENCE (SIZE(1..maxnoofConfigurationStructuresFailed)) OF ConfigurationStructureFailed
+
+ConfigurationStructureFailed ::= SEQUENCE {
+    ranConfigurationStructureName           RanConfigurationStructureName,
+    oldValuesOfAttributes                   ValuesOfAttributes,
+    requestedValuesOfAttributes             ValuesOfAttributes,
+    cause                                   Cause
+}
+
+E2SM-CCC-ControlOutcomeFormat2 ::= SEQUENCE {
+    receivedTimestamp                   OCTET STRING (8)        OPTIONAL,    --- GA: As per Spec, it carries UTC time (64-bit timestamp)
+    listOfCellsForControlOutcome        ListOfCellsForControlOutcome
+}
+
+ListOfCellsForControlOutcome ::= SEQUENCE (SIZE(1..maxnoofCellControlOutcome)) OF CellControlOutcome
+
+CellControlOutcome ::= SEQUENCE {
+    cellGlobalId                                    CellGlobalId,
+    ranConfigurationStructuresAcceptedList          RanConfigurationStructuresAcceptedList      OPTIONAL,
+    ranConfigurationStructuresFailedList            RanConfigurationStructuresFailedList        OPTIONAL
 }
 
 END

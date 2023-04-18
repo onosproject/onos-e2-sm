@@ -73,6 +73,11 @@ func (m *RanconfigurationStructureForEventTrigger) SetListOfAttributes(listOfAtt
 	return m
 }
 
+func (m *CellLevelConfigurationStructureForEventTrigger) SetCellGlobalID(cellGlobalID *CellGlobalId) *CellLevelConfigurationStructureForEventTrigger {
+	m.CellGlobalId = cellGlobalID
+	return m
+}
+
 func (m *RanconfigurationStructureForAdf) SetListOfAttributes(listOfAttributes *ListOfAttributes) *RanconfigurationStructureForAdf {
 	m.ListOfAttributes = listOfAttributes
 	return m
@@ -85,5 +90,25 @@ func (m *CellConfigurationToBeReportedForAdf) SetCellGlobalID(cellGlobalID *Cell
 
 func (m *CellConfigurationToBeReportedForAdf) SetListOfCellLevelRanconfigurationStructuresForAdf(listOfCellLevelRanconfigurationStructuresForAdf *ListOfRanconfigurationStructuresForAdf) *CellConfigurationToBeReportedForAdf {
 	m.ListOfCellLevelRanconfigurationStructuresForAdf = listOfCellLevelRanconfigurationStructuresForAdf
+	return m
+}
+
+func (m *ConfigurationStructureAccepted) SetAppliedTimestamp(appliedTimestamp []byte) *ConfigurationStructureAccepted {
+	m.AppliedTimestamp = appliedTimestamp
+	return m
+}
+
+func (m *E2SmCCcControlOutcomeFormat2) SetReceivedTimestamp(receivedTimestamp []byte) *E2SmCCcControlOutcomeFormat2 {
+	m.ReceivedTimestamp = receivedTimestamp
+	return m
+}
+
+func (m *CellControlOutcome) SetRanConfigurationStructuresAcceptedList(ranConfigurationStructuresAcceptedList *RanConfigurationStructuresAcceptedList) *CellControlOutcome {
+	m.RanConfigurationStructuresAcceptedList = ranConfigurationStructuresAcceptedList
+	return m
+}
+
+func (m *CellControlOutcome) SetRanConfigurationStructuresFailedList(ranConfigurationStructuresFailedList *RanConfigurationStructuresFailedList) *CellControlOutcome {
+	m.RanConfigurationStructuresFailedList = ranConfigurationStructuresFailedList
 	return m
 }
