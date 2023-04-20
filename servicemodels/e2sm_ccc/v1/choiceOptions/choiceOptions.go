@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+// SPDX-FileCopyrightText: 2023-present Intel Corporation
 //
 // SPDX-License-Identifier: Apache-2.0
 
@@ -11,46 +11,6 @@ import (
 )
 
 var E2smCccChoicemap = map[string]map[int]reflect.Type{
-	"ran_configuration_structure": {
-		1: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbCuCpFunction{}),
-		2: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbCuUpFunction{}),
-		3: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbDuFunction{}),
-		4: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ONrCellCu{}),
-		5: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ONrCellDu{}),
-		6: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ORrmpolicyRatio{}),
-		7: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OBwp{}),
-	},
-	"indication_header_format": {
-		1: reflect.TypeOf(e2smcccv1.IndicationHeaderFormat_E2SmCccIndicationHeaderFormat1{}),
-	},
-	"indication_message_format": {
-		1: reflect.TypeOf(e2smcccv1.IndicationMessageFormat_E2SmCccIndicationMessageFormat1{}),
-		2: reflect.TypeOf(e2smcccv1.IndicationMessageFormat_E2SmCccIndicationMessageFormat2{}),
-	},
-	"cell_global_id": {
-		1: reflect.TypeOf(e2smcccv1.CellGlobalId_NRCgi{}),
-		2: reflect.TypeOf(e2smcccv1.CellGlobalId_EUtraCgi{}),
-	},
-	"control_header_format": {
-		1: reflect.TypeOf(e2smcccv1.ControlHeaderFormat_E2SmCccControlHeaderFormat1{}),
-	},
-	"control_message_format": {
-		1: reflect.TypeOf(e2smcccv1.ControlMessageFormat_E2SmCccControlMessageFormat1{}),
-		2: reflect.TypeOf(e2smcccv1.ControlMessageFormat_E2SmCccControlMessageFormat2{}),
-	},
-	"event_trigger_definition_format": {
-		1: reflect.TypeOf(e2smcccv1.EventTriggerDefinitionFormat_E2SmCccEventTriggerDefinitionFormat1{}),
-		2: reflect.TypeOf(e2smcccv1.EventTriggerDefinitionFormat_E2SmCccEventTriggerDefinitionFormat2{}),
-		3: reflect.TypeOf(e2smcccv1.EventTriggerDefinitionFormat_E2SmCccEventTriggerDefinitionFormat3{}),
-	},
-	"action_definition_format": {
-		1: reflect.TypeOf(e2smcccv1.ActionDefinitionFormat_E2SmCccActionDefinitionFormat1{}),
-		2: reflect.TypeOf(e2smcccv1.ActionDefinitionFormat_E2SmCccActionDefinitionFormat2{}),
-	},
-	"control_outcome_format": {
-		1: reflect.TypeOf(e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat1{}),
-		2: reflect.TypeOf(e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat2{}),
-	},
 	"cgi": {
 		1: reflect.TypeOf(e2smcommoniesv1.Cgi_NRCgi{}),
 		2: reflect.TypeOf(e2smcommoniesv1.Cgi_EUtraCgi{}),
@@ -121,5 +81,45 @@ var E2smCccChoicemap = map[string]map[int]reflect.Type{
 	"global_ngrannode_id": {
 		1: reflect.TypeOf(e2smcommoniesv1.GlobalNgrannodeId_GNb{}),
 		2: reflect.TypeOf(e2smcommoniesv1.GlobalNgrannodeId_NgENb{}),
+	},
+	"ran_configuration_structure": {
+		1: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbCuCpFunction{}),
+		2: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbCuUpFunction{}),
+		3: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OGnbDuFunction{}),
+		4: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ONrCellCu{}),
+		5: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ONrCellDu{}),
+		6: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_ORrmpolicyRatio{}),
+		7: reflect.TypeOf(e2smcccv1.RanConfigurationStructure_OBwp{}),
+	},
+	"indication_header_format": {
+		1: reflect.TypeOf(e2smcccv1.IndicationHeaderFormat_E2SmCccIndicationHeaderFormat1{}),
+	},
+	"indication_message_format": {
+		1: reflect.TypeOf(e2smcccv1.IndicationMessageFormat_E2SmCccIndicationMessageFormat1{}),
+		2: reflect.TypeOf(e2smcccv1.IndicationMessageFormat_E2SmCccIndicationMessageFormat2{}),
+	},
+	"cell_global_id": {
+		1: reflect.TypeOf(e2smcccv1.CellGlobalId_NRCgi{}),
+		2: reflect.TypeOf(e2smcccv1.CellGlobalId_EUtraCgi{}),
+	},
+	"control_header_format": {
+		1: reflect.TypeOf(e2smcccv1.ControlHeaderFormat_E2SmCccControlHeaderFormat1{}),
+	},
+	"control_message_format": {
+		1: reflect.TypeOf(e2smcccv1.ControlMessageFormat_E2SmCccControlMessageFormat1{}),
+		2: reflect.TypeOf(e2smcccv1.ControlMessageFormat_E2SmCccControlMessageFormat2{}),
+	},
+	"event_trigger_definition_format": {
+		1: reflect.TypeOf(e2smcccv1.EventTriggerDefinitionFormat_E2SmCccEventTriggerDefinitionFormat1{}),
+		2: reflect.TypeOf(e2smcccv1.EventTriggerDefinitionFormat_E2SmCccEventTriggerDefinitionFormat2{}),
+		3: reflect.TypeOf(e2smcccv1.EventTriggerDefinitionFormat_E2SmCccEventTriggerDefinitionFormat3{}),
+	},
+	"action_definition_format": {
+		1: reflect.TypeOf(e2smcccv1.ActionDefinitionFormat_E2SmCccActionDefinitionFormat1{}),
+		2: reflect.TypeOf(e2smcccv1.ActionDefinitionFormat_E2SmCccActionDefinitionFormat2{}),
+	},
+	"control_outcome_format": {
+		1: reflect.TypeOf(e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat1{}),
+		2: reflect.TypeOf(e2smcccv1.ControlOutcomeFormat_E2SmCccControlOutcomeFormat2{}),
 	},
 }

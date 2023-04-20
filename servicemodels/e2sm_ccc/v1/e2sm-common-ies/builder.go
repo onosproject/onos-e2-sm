@@ -1,8 +1,8 @@
-// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+// SPDX-FileCopyrightText: 2023-present Intel Corporation
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package e2smcommoniesv1
+package e2sm_common_ies
 
 import ()
 
@@ -111,7 +111,7 @@ func (m *SNSsai) SetSD(sD *Sd) *SNSsai {
 	return m
 }
 
-func (m *NrfrequencyInfo) SetFrequencyShift7P5Khz(frequencyShift7P5Khz.NrfrequencyShift7P5Khz) *NrfrequencyInfo {
+func (m *NrfrequencyInfo) SetFrequencyShift7P5Khz(frequencyShift7P5Khz NrfrequencyShift7P5Khz) *NrfrequencyInfo {
 	m.FrequencyShift7P5Khz = &frequencyShift7P5Khz
 	return m
 }

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+// SPDX-FileCopyrightText: 2023-present Intel Corporation
 //
 // SPDX-License-Identifier: Apache-2.0
 
@@ -1504,17 +1504,18 @@ func CreateEventTriggerStyleType(eventTriggerStyleType *e2smcommoniesv1.RicStyle
 	return msg, nil
 }
 
-func CreateInsertService(value Empty) (*e2smcccv1.InsertService, error) {
-
-	msg := &e2smcccv1.InsertService{}
-	msg.Value = value
-
-	if err := msg.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateInsertService() error validating PDU %s", err.Error())
-	}
-
-	return msg, nil
-}
+// GA: Disable this function due to "empty" value
+// func CreateInsertService(value Empty) (*e2smcccv1.InsertService, error) {
+//
+// 	msg := &e2smcccv1.InsertService{}
+// 	msg.Value = value
+//
+// 	if err := msg.Validate(); err != nil {
+// 		return nil, errors.NewInvalid("CreateInsertService() error validating PDU %s", err.Error())
+// 	}
+//
+// 	return msg, nil
+// }
 
 func CreateControlService(listOfSupportedControlStyles *e2smcccv1.ListOfSupportedControlStyles) (*e2smcccv1.ControlService, error) {
 
@@ -1540,17 +1541,18 @@ func CreateListOfSupportedControlStyles(value []*e2smcccv1.ControlStyle) (*e2smc
 	return msg, nil
 }
 
-func CreatePolicyService(value Empty) (*e2smcccv1.PolicyService, error) {
-
-	msg := &e2smcccv1.PolicyService{}
-	msg.Value = value
-
-	if err := msg.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreatePolicyService() error validating PDU %s", err.Error())
-	}
-
-	return msg, nil
-}
+// GA: Disable this function due to "empty" value
+// func CreatePolicyService(value Empty) (*e2smcccv1.PolicyService, error) {
+//
+// 	msg := &e2smcccv1.PolicyService{}
+// 	msg.Value = value
+//
+// 	if err := msg.Validate(); err != nil {
+// 		return nil, errors.NewInvalid("CreatePolicyService() error validating PDU %s", err.Error())
+// 	}
+//
+// 	return msg, nil
+// }
 
 func CreateListOfCellsForRanfunctionDefinition(value []*e2smcccv1.CellForRanfunctionDefinition) (*e2smcccv1.ListOfCellsForRanfunctionDefinition, error) {
 
@@ -2064,62 +2066,6 @@ func CreateRrcTypeRrcMessageIDNR(nR e2smcommoniesv1.RrcclassNR) (*e2smcommoniesv
 
 	return item, nil
 }
-func CreateServingCellARfcnNR(nR *e2smcommoniesv1.NrARfcn) (*e2smcommoniesv1.ServingCellARfcn, error) {
-
-	item := &e2smcommoniesv1.ServingCellARfcn{
-		ServingCellARfcn: &e2smcommoniesv1.ServingCellARfcn_NR{
-			NR: nR,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateServingCellARfcnNR() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateServingCellARfcnEUtra(eUtra *e2smcommoniesv1.EUTraARfcn) (*e2smcommoniesv1.ServingCellARfcn, error) {
-
-	item := &e2smcommoniesv1.ServingCellARfcn{
-		ServingCellARfcn: &e2smcommoniesv1.ServingCellARfcn_EUtra{
-			EUtra: eUtra,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateServingCellARfcnEUtra() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateServingCellPCiNR(nR *e2smcommoniesv1.NrPCi) (*e2smcommoniesv1.ServingCellPCi, error) {
-
-	item := &e2smcommoniesv1.ServingCellPCi{
-		ServingCellPCi: &e2smcommoniesv1.ServingCellPCi_NR{
-			NR: nR,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateServingCellPCiNR() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateServingCellPCiEUtra(eUtra *e2smcommoniesv1.EUTraPCi) (*e2smcommoniesv1.ServingCellPCi, error) {
-
-	item := &e2smcommoniesv1.ServingCellPCi{
-		ServingCellPCi: &e2smcommoniesv1.ServingCellPCi_EUtra{
-			EUtra: eUtra,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateServingCellPCiEUtra() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
 func CreateUeIDGNbUeID(gNbUeID *e2smcommoniesv1.UeidGNb) (*e2smcommoniesv1.Ueid, error) {
 
 	item := &e2smcommoniesv1.Ueid{
@@ -2214,132 +2160,6 @@ func CreateUeIDENbUeID(eNbUeID *e2smcommoniesv1.UeidENb) (*e2smcommoniesv1.Ueid,
 
 	if err := item.Validate(); err != nil {
 		return nil, errors.NewInvalid("CreateUeIDENbUeID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateEnbIDMacroENbID(macroENbID *asn1.BitString) (*e2smcommoniesv1.EnbID, error) {
-
-	item := &e2smcommoniesv1.EnbID{
-		EnbID: &e2smcommoniesv1.EnbID_MacroENbId{
-			MacroENbId: macroENbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateEnbIDMacroENbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateEnbIDHomeENbID(homeENbID *asn1.BitString) (*e2smcommoniesv1.EnbID, error) {
-
-	item := &e2smcommoniesv1.EnbID{
-		EnbID: &e2smcommoniesv1.EnbID_HomeENbId{
-			HomeENbId: homeENbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateEnbIDHomeENbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateEnbIDShortMacroENbID(shortMacroENbID *asn1.BitString) (*e2smcommoniesv1.EnbID, error) {
-
-	item := &e2smcommoniesv1.EnbID{
-		EnbID: &e2smcommoniesv1.EnbID_ShortMacroENbId{
-			ShortMacroENbId: shortMacroENbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateEnbIDShortMacroENbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateEnbIDLongMacroENbID(longMacroENbID *asn1.BitString) (*e2smcommoniesv1.EnbID, error) {
-
-	item := &e2smcommoniesv1.EnbID{
-		EnbID: &e2smcommoniesv1.EnbID_LongMacroENbId{
-			LongMacroENbId: longMacroENbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateEnbIDLongMacroENbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateEnGNbIDEnGNbID(enGNbID *asn1.BitString) (*e2smcommoniesv1.EnGNbID, error) {
-
-	item := &e2smcommoniesv1.EnGNbID{
-		EnGNbID: &e2smcommoniesv1.EnGNbID_EnGNbId{
-			EnGNbId: enGNbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateEnGNbIDEnGNbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateGnbIDGNbID(gNbID *asn1.BitString) (*e2smcommoniesv1.GnbID, error) {
-
-	item := &e2smcommoniesv1.GnbID{
-		GnbID: &e2smcommoniesv1.GnbID_GNbId{
-			GNbId: gNbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateGnbIDGNbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateNgEnbIDMacroNgEnbID(macroNgEnbID *asn1.BitString) (*e2smcommoniesv1.NgEnbID, error) {
-
-	item := &e2smcommoniesv1.NgEnbID{
-		NgEnbID: &e2smcommoniesv1.NgEnbID_MacroNgEnbId{
-			MacroNgEnbId: macroNgEnbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateNgEnbIDMacroNgEnbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateNgEnbIDShortMacroNgEnbID(shortMacroNgEnbID *asn1.BitString) (*e2smcommoniesv1.NgEnbID, error) {
-
-	item := &e2smcommoniesv1.NgEnbID{
-		NgEnbID: &e2smcommoniesv1.NgEnbID_ShortMacroNgEnbId{
-			ShortMacroNgEnbId: shortMacroNgEnbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateNgEnbIDShortMacroNgEnbID() error validating PDU %s", err.Error())
-	}
-
-	return item, nil
-}
-func CreateNgEnbIDLongMacroNgEnbID(longMacroNgEnbID *asn1.BitString) (*e2smcommoniesv1.NgEnbID, error) {
-
-	item := &e2smcommoniesv1.NgEnbID{
-		NgEnbID: &e2smcommoniesv1.NgEnbID_LongMacroNgEnbId{
-			LongMacroNgEnbId: longMacroNgEnbID,
-		},
-	}
-
-	if err := item.Validate(); err != nil {
-		return nil, errors.NewInvalid("CreateNgEnbIDLongMacroNgEnbID() error validating PDU %s", err.Error())
 	}
 
 	return item, nil

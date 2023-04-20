@@ -1,8 +1,8 @@
-// SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
+// SPDX-FileCopyrightText: 2023-present Intel Corporation
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package e2smcccv1
+package e2sm_ccc_ies
 
 import (
 	e2smcommoniesv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-common-ies"
