@@ -66,6 +66,8 @@ message TestConstrainedInt {
     int32 attr_ci_e = 5 [json_name = "attrCiE"];
     // @inject_tag: aper:"valueLB:10"
     int32 attr_ci_f = 6 [json_name = "attrCiF"];
+    // @inject_tag: aper:"valueLB:10,valueExt"
+    int32 attr_ci_g = 7 [json_name = "attrCiG"];
 };
 
 // sequence from tes_sm.asn1:29
@@ -368,4 +370,32 @@ message TestTopLevelPdu {
     TestListExtensible3 opt6 = 6 [json_name = "opt6"];
     // @inject_tag: aper:"valueLB:0,valueUB:5,valueExt"
     TestEnumeratedExtensible opt7 = 7 [json_name = "opt7"];
+};
+
+message TestExtension1 {
+    int32 item1 = 1 [json_name = "item1"];
+    // @inject_tag: aper:"optional,sizeLB:3,sizeUB:7"
+    optional bytes item2 = 2 [json_name = "item2"];
+    // @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+    optional EnumThree ext1 = 3 [json_name = "ext1"];
+}
+
+message TestExtension2 {
+    int32 item1 = 1 [json_name = "item1"];
+    // @inject_tag: aper:"optional,sizeLB:3,sizeUB:7"
+    optional bytes item2 = 2 [json_name = "item2"];
+    // @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+    optional EnumThree ext1 = 3 [json_name = "ext1"];
+    // @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+    optional EnumThree ext2 = 4 [json_name = "ext2"];
+    // @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+    optional EnumThree ext3 = 5 [json_name = "ext3"];
+    // @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+    optional EnumThree ext4 = 6 [json_name = "ext4"];
+}
+
+enum EnumThree {
+    ENUM_THREE_ONE = 0;
+    ENUM_THREE_TWO = 1;
+    ENUM_THREE_THREE = 2;
 };

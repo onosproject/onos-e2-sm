@@ -200,4 +200,21 @@ TEST-TopLevelPDU ::= SEQUENCE {
     ...
 }
 
+TEST-Extension1 ::= SEQUENCE {
+    item1   INTEGER,
+    item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ...,
+    ext1    ENUMERATED{one, two, three} OPTIONAL
+}
+
+TEST-Extension2 ::= SEQUENCE {
+    item1   INTEGER,
+    item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ...,
+    ext1    ENUMERATED{one, two, three} OPTIONAL,
+    ext2    ENUMERATED{one, two, three} OPTIONAL,
+    ext3    ENUMERATED{one, two, three} OPTIONAL,
+    ext4    ENUMERATED{one, two, three} OPTIONAL
+}
+
 END

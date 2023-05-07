@@ -22,7 +22,7 @@ const (
 )
 
 // enumerated from tes_sm.asn1:161
-// {TEST-Enumerated}
+//{TEST-Enumerated}
 type TestEnumerated int32
 
 const (
@@ -82,7 +82,7 @@ func (TestEnumerated) EnumDescriptor() ([]byte, []int) {
 }
 
 // enumerated from tes_sm.asn1:170
-// {TEST-EnumeratedExtensible}
+//{TEST-EnumeratedExtensible}
 type TestEnumeratedExtensible int32
 
 const (
@@ -141,7 +141,7 @@ func (TestEnumeratedExtensible) EnumDescriptor() ([]byte, []int) {
 	return file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescGZIP(), []int{1}
 }
 
-// {TEST-EnumeratedExtensible}
+//{TEST-EnumeratedExtensible}
 type TestFullyOptionalSequenceItem4 int32
 
 const (
@@ -186,6 +186,55 @@ func (x TestFullyOptionalSequenceItem4) Number() protoreflect.EnumNumber {
 // Deprecated: Use TestFullyOptionalSequenceItem4.Descriptor instead.
 func (TestFullyOptionalSequenceItem4) EnumDescriptor() ([]byte, []int) {
 	return file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescGZIP(), []int{2}
+}
+
+type EnumThree int32
+
+const (
+	EnumThree_ENUM_THREE_ONE   EnumThree = 0
+	EnumThree_ENUM_THREE_TWO   EnumThree = 1
+	EnumThree_ENUM_THREE_THREE EnumThree = 2
+)
+
+// Enum value maps for EnumThree.
+var (
+	EnumThree_name = map[int32]string{
+		0: "ENUM_THREE_ONE",
+		1: "ENUM_THREE_TWO",
+		2: "ENUM_THREE_THREE",
+	}
+	EnumThree_value = map[string]int32{
+		"ENUM_THREE_ONE":   0,
+		"ENUM_THREE_TWO":   1,
+		"ENUM_THREE_THREE": 2,
+	}
+)
+
+func (x EnumThree) Enum() *EnumThree {
+	p := new(EnumThree)
+	*p = x
+	return p
+}
+
+func (x EnumThree) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EnumThree) Descriptor() protoreflect.EnumDescriptor {
+	return file_test_sm_aper_go_lib_v1_test_sm_proto_enumTypes[3].Descriptor()
+}
+
+func (EnumThree) Type() protoreflect.EnumType {
+	return &file_test_sm_aper_go_lib_v1_test_sm_proto_enumTypes[3]
+}
+
+func (x EnumThree) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EnumThree.Descriptor instead.
+func (EnumThree) EnumDescriptor() ([]byte, []int) {
+	return file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescGZIP(), []int{3}
 }
 
 // sequence from tes_sm.asn1:15
@@ -262,10 +311,10 @@ type TestConstrainedInt struct {
 	AttrCiD int32 `protobuf:"varint,4,opt,name=attr_ci_d,json=attrCiD,proto3" json:"attr_ci_d,omitempty" aper:"valueUB:100"`
 	// @inject_tag: aper:"valueLB:10,valueUB:20"
 	AttrCiE int32 `protobuf:"varint,5,opt,name=attr_ci_e,json=attrCiE,proto3" json:"attr_ci_e,omitempty" aper:"valueLB:10,valueUB:20"`
-	// @inject_tag: aper:"valueLB:10,valueUB:10"
-	AttrCiF int32 `protobuf:"varint,6,opt,name=attr_ci_f,json=attrCiF,proto3" json:"attr_ci_f,omitempty" aper:"valueLB:10,valueUB:10"`
-	// @inject_tag: aper:"valueLB:10,valueUB:10,valueExt"
-	AttrCiG int32 `protobuf:"varint,7,opt,name=attr_ci_g,json=attrCiG,proto3" json:"attr_ci_g,omitempty" aper:"valueLB:10,valueUB:10,valueExt"`
+	// @inject_tag: aper:"valueLB:10"
+	AttrCiF int32 `protobuf:"varint,6,opt,name=attr_ci_f,json=attrCiF,proto3" json:"attr_ci_f,omitempty" aper:"valueLB:10"`
+	// @inject_tag: aper:"valueLB:10,valueExt"
+	AttrCiG int32 `protobuf:"varint,7,opt,name=attr_ci_g,json=attrCiG,proto3" json:"attr_ci_g,omitempty" aper:"valueLB:10,valueExt"`
 }
 
 func (x *TestConstrainedInt) Reset() {
@@ -423,8 +472,8 @@ type TestConstrainedReal struct {
 	AttrCrD float64 `protobuf:"fixed64,4,opt,name=attr_cr_d,json=attrCrD,proto3" json:"attr_cr_d,omitempty" aper:"valueLB:10,valueUB:20"`
 	// @inject_tag: aper:"valueLB:10,valueUB:10"
 	AttrCrE float64 `protobuf:"fixed64,5,opt,name=attr_cr_e,json=attrCrE,proto3" json:"attr_cr_e,omitempty" aper:"valueLB:10,valueUB:10"`
-	// @inject_tag: aper:"valueLB:10"
-	AttrCrF float64 `protobuf:"fixed64,6,opt,name=attr_cr_f,json=attrCrF,proto3" json:"attr_cr_f,omitempty" aper:"valueLB:10"`
+	// @inject_tag: aper:"valueLB:10,valueUB:10,valueExt"
+	AttrCrF float64 `protobuf:"fixed64,6,opt,name=attr_cr_f,json=attrCrF,proto3" json:"attr_cr_f,omitempty" aper:"valueLB:10,valueUB:10,valueExt"`
 }
 
 func (x *TestConstrainedReal) Reset() {
@@ -2356,6 +2405,154 @@ func (x *TestTopLevelPdu) GetOpt7() TestEnumeratedExtensible {
 	return TestEnumeratedExtensible_TEST_ENUMERATED_EXTENSIBLE_ENUM1
 }
 
+type TestExtension1 struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Item1 int32 `protobuf:"varint,1,opt,name=item1,proto3" json:"item1,omitempty"`
+	// @inject_tag: aper:"optional,sizeLB:3,sizeUB:7"
+	Item2 []byte `protobuf:"bytes,2,opt,name=item2,proto3,oneof" json:"item2,omitempty" aper:"optional,sizeLB:3,sizeUB:7"`
+	// @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+	Ext1 *EnumThree `protobuf:"varint,3,opt,name=ext1,proto3,enum=test_sm_aper_go_lib.v1.EnumThree,oneof" json:"ext1,omitempty" aper:"fromValueExt,optional,valueLB:0,valueUB:2"`
+}
+
+func (x *TestExtension1) Reset() {
+	*x = TestExtension1{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[28]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TestExtension1) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TestExtension1) ProtoMessage() {}
+
+func (x *TestExtension1) ProtoReflect() protoreflect.Message {
+	mi := &file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[28]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TestExtension1.ProtoReflect.Descriptor instead.
+func (*TestExtension1) Descriptor() ([]byte, []int) {
+	return file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *TestExtension1) GetItem1() int32 {
+	if x != nil {
+		return x.Item1
+	}
+	return 0
+}
+
+func (x *TestExtension1) GetItem2() []byte {
+	if x != nil {
+		return x.Item2
+	}
+	return nil
+}
+
+func (x *TestExtension1) GetExt1() EnumThree {
+	if x != nil && x.Ext1 != nil {
+		return *x.Ext1
+	}
+	return EnumThree_ENUM_THREE_ONE
+}
+
+type TestExtension2 struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Item1 int32 `protobuf:"varint,1,opt,name=item1,proto3" json:"item1,omitempty"`
+	// @inject_tag: aper:"optional,sizeLB:3,sizeUB:7"
+	Item2 []byte `protobuf:"bytes,2,opt,name=item2,proto3,oneof" json:"item2,omitempty" aper:"optional,sizeLB:3,sizeUB:7"`
+	// @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+	Ext1 *EnumThree `protobuf:"varint,3,opt,name=ext1,proto3,enum=test_sm_aper_go_lib.v1.EnumThree,oneof" json:"ext1,omitempty" aper:"fromValueExt,optional,valueLB:0,valueUB:2"`
+	// @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+	Ext2 *EnumThree `protobuf:"varint,4,opt,name=ext2,proto3,enum=test_sm_aper_go_lib.v1.EnumThree,oneof" json:"ext2,omitempty" aper:"fromValueExt,optional,valueLB:0,valueUB:2"`
+	// @inject_tag: aper:"fromValueExt,optional,valueLB:0,valueUB:2"
+	Ext3 *EnumThree `protobuf:"varint,5,opt,name=ext3,proto3,enum=test_sm_aper_go_lib.v1.EnumThree,oneof" json:"ext3,omitempty" aper:"fromValueExt,optional,valueLB:0,valueUB:2"`
+}
+
+func (x *TestExtension2) Reset() {
+	*x = TestExtension2{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[29]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TestExtension2) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TestExtension2) ProtoMessage() {}
+
+func (x *TestExtension2) ProtoReflect() protoreflect.Message {
+	mi := &file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[29]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TestExtension2.ProtoReflect.Descriptor instead.
+func (*TestExtension2) Descriptor() ([]byte, []int) {
+	return file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *TestExtension2) GetItem1() int32 {
+	if x != nil {
+		return x.Item1
+	}
+	return 0
+}
+
+func (x *TestExtension2) GetItem2() []byte {
+	if x != nil {
+		return x.Item2
+	}
+	return nil
+}
+
+func (x *TestExtension2) GetExt1() EnumThree {
+	if x != nil && x.Ext1 != nil {
+		return *x.Ext1
+	}
+	return EnumThree_ENUM_THREE_ONE
+}
+
+func (x *TestExtension2) GetExt2() EnumThree {
+	if x != nil && x.Ext2 != nil {
+		return *x.Ext2
+	}
+	return EnumThree_ENUM_THREE_ONE
+}
+
+func (x *TestExtension2) GetExt3() EnumThree {
+	if x != nil && x.Ext3 != nil {
+		return *x.Ext3
+	}
+	return EnumThree_ENUM_THREE_ONE
+}
+
 var File_test_sm_aper_go_lib_v1_test_sm_proto protoreflect.FileDescriptor
 
 var file_test_sm_aper_go_lib_v1_test_sm_proto_rawDesc = []byte{
@@ -2657,7 +2854,34 @@ var file_test_sm_aper_go_lib_v1_test_sm_proto_rawDesc = []byte{
 	0x72, 0x5f, 0x67, 0x6f, 0x5f, 0x6c, 0x69, 0x62, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x73, 0x74,
 	0x45, 0x6e, 0x75, 0x6d, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x45, 0x78, 0x74, 0x65, 0x6e, 0x73,
 	0x69, 0x62, 0x6c, 0x65, 0x52, 0x04, 0x6f, 0x70, 0x74, 0x37, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x6f,
-	0x70, 0x74, 0x32, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x6f, 0x70, 0x74, 0x35, 0x2a, 0xb2, 0x01, 0x0a,
+	0x70, 0x74, 0x32, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x6f, 0x70, 0x74, 0x35, 0x22, 0x90, 0x01, 0x0a,
+	0x0e, 0x54, 0x65, 0x73, 0x74, 0x45, 0x78, 0x74, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x31, 0x12,
+	0x14, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x31, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05,
+	0x69, 0x74, 0x65, 0x6d, 0x31, 0x12, 0x19, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x32, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0c, 0x48, 0x00, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x32, 0x88, 0x01, 0x01,
+	0x12, 0x3a, 0x0a, 0x04, 0x65, 0x78, 0x74, 0x31, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x21,
+	0x2e, 0x74, 0x65, 0x73, 0x74, 0x5f, 0x73, 0x6d, 0x5f, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x67, 0x6f,
+	0x5f, 0x6c, 0x69, 0x62, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x54, 0x68, 0x72, 0x65,
+	0x65, 0x48, 0x01, 0x52, 0x04, 0x65, 0x78, 0x74, 0x31, 0x88, 0x01, 0x01, 0x42, 0x08, 0x0a, 0x06,
+	0x5f, 0x69, 0x74, 0x65, 0x6d, 0x32, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x65, 0x78, 0x74, 0x31, 0x22,
+	0x9a, 0x02, 0x0a, 0x0e, 0x54, 0x65, 0x73, 0x74, 0x45, 0x78, 0x74, 0x65, 0x6e, 0x73, 0x69, 0x6f,
+	0x6e, 0x32, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x31, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x31, 0x12, 0x19, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d,
+	0x32, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x48, 0x00, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x32,
+	0x88, 0x01, 0x01, 0x12, 0x3a, 0x0a, 0x04, 0x65, 0x78, 0x74, 0x31, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0e, 0x32, 0x21, 0x2e, 0x74, 0x65, 0x73, 0x74, 0x5f, 0x73, 0x6d, 0x5f, 0x61, 0x70, 0x65, 0x72,
+	0x5f, 0x67, 0x6f, 0x5f, 0x6c, 0x69, 0x62, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x54,
+	0x68, 0x72, 0x65, 0x65, 0x48, 0x01, 0x52, 0x04, 0x65, 0x78, 0x74, 0x31, 0x88, 0x01, 0x01, 0x12,
+	0x3a, 0x0a, 0x04, 0x65, 0x78, 0x74, 0x32, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x21, 0x2e,
+	0x74, 0x65, 0x73, 0x74, 0x5f, 0x73, 0x6d, 0x5f, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x67, 0x6f, 0x5f,
+	0x6c, 0x69, 0x62, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x54, 0x68, 0x72, 0x65, 0x65,
+	0x48, 0x02, 0x52, 0x04, 0x65, 0x78, 0x74, 0x32, 0x88, 0x01, 0x01, 0x12, 0x3a, 0x0a, 0x04, 0x65,
+	0x78, 0x74, 0x33, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x21, 0x2e, 0x74, 0x65, 0x73, 0x74,
+	0x5f, 0x73, 0x6d, 0x5f, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x67, 0x6f, 0x5f, 0x6c, 0x69, 0x62, 0x2e,
+	0x76, 0x31, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x54, 0x68, 0x72, 0x65, 0x65, 0x48, 0x03, 0x52, 0x04,
+	0x65, 0x78, 0x74, 0x33, 0x88, 0x01, 0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x69, 0x74, 0x65, 0x6d,
+	0x32, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x65, 0x78, 0x74, 0x31, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x65,
+	0x78, 0x74, 0x32, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x65, 0x78, 0x74, 0x33, 0x2a, 0xb2, 0x01, 0x0a,
 	0x0e, 0x54, 0x65, 0x73, 0x74, 0x45, 0x6e, 0x75, 0x6d, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x12,
 	0x19, 0x0a, 0x15, 0x54, 0x45, 0x53, 0x54, 0x5f, 0x45, 0x4e, 0x55, 0x4d, 0x45, 0x52, 0x41, 0x54,
 	0x45, 0x44, 0x5f, 0x45, 0x4e, 0x55, 0x4d, 0x31, 0x10, 0x00, 0x12, 0x19, 0x0a, 0x15, 0x54, 0x45,
@@ -2692,10 +2916,15 @@ var file_test_sm_aper_go_lib_v1_test_sm_proto_rawDesc = []byte{
 	0x45, 0x4e, 0x43, 0x45, 0x5f, 0x49, 0x54, 0x45, 0x4d, 0x34, 0x5f, 0x4f, 0x4e, 0x45, 0x10, 0x00,
 	0x12, 0x2a, 0x0a, 0x26, 0x54, 0x45, 0x53, 0x54, 0x5f, 0x46, 0x55, 0x4c, 0x4c, 0x59, 0x5f, 0x4f,
 	0x50, 0x54, 0x49, 0x4f, 0x4e, 0x41, 0x4c, 0x5f, 0x53, 0x45, 0x51, 0x55, 0x45, 0x4e, 0x43, 0x45,
-	0x5f, 0x49, 0x54, 0x45, 0x4d, 0x34, 0x5f, 0x54, 0x57, 0x4f, 0x10, 0x01, 0x42, 0x24, 0x5a, 0x22,
-	0x74, 0x65, 0x73, 0x74, 0x5f, 0x73, 0x6d, 0x5f, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x67, 0x6f, 0x5f,
-	0x6c, 0x69, 0x62, 0x2f, 0x76, 0x31, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2d, 0x73, 0x6d, 0x2d, 0x69,
-	0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x5f, 0x49, 0x54, 0x45, 0x4d, 0x34, 0x5f, 0x54, 0x57, 0x4f, 0x10, 0x01, 0x2a, 0x49, 0x0a, 0x09,
+	0x45, 0x6e, 0x75, 0x6d, 0x54, 0x68, 0x72, 0x65, 0x65, 0x12, 0x12, 0x0a, 0x0e, 0x45, 0x4e, 0x55,
+	0x4d, 0x5f, 0x54, 0x48, 0x52, 0x45, 0x45, 0x5f, 0x4f, 0x4e, 0x45, 0x10, 0x00, 0x12, 0x12, 0x0a,
+	0x0e, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x54, 0x48, 0x52, 0x45, 0x45, 0x5f, 0x54, 0x57, 0x4f, 0x10,
+	0x01, 0x12, 0x14, 0x0a, 0x10, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x54, 0x48, 0x52, 0x45, 0x45, 0x5f,
+	0x54, 0x48, 0x52, 0x45, 0x45, 0x10, 0x02, 0x42, 0x24, 0x5a, 0x22, 0x74, 0x65, 0x73, 0x74, 0x5f,
+	0x73, 0x6d, 0x5f, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x67, 0x6f, 0x5f, 0x6c, 0x69, 0x62, 0x2f, 0x76,
+	0x31, 0x2f, 0x74, 0x65, 0x73, 0x74, 0x2d, 0x73, 0x6d, 0x2d, 0x69, 0x65, 0x73, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2710,81 +2939,88 @@ func file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescGZIP() []byte {
 	return file_test_sm_aper_go_lib_v1_test_sm_proto_rawDescData
 }
 
-var file_test_sm_aper_go_lib_v1_test_sm_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_test_sm_aper_go_lib_v1_test_sm_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_test_sm_aper_go_lib_v1_test_sm_proto_goTypes = []interface{}{
 	(TestEnumerated)(0),                 // 0: test_sm_aper_go_lib.v1.TestEnumerated
 	(TestEnumeratedExtensible)(0),       // 1: test_sm_aper_go_lib.v1.TestEnumeratedExtensible
 	(TestFullyOptionalSequenceItem4)(0), // 2: test_sm_aper_go_lib.v1.TestFullyOptionalSequenceItem4
-	(*TestUnconstrainedInt)(nil),        // 3: test_sm_aper_go_lib.v1.TestUnconstrainedInt
-	(*TestConstrainedInt)(nil),          // 4: test_sm_aper_go_lib.v1.TestConstrainedInt
-	(*TestUnconstrainedReal)(nil),       // 5: test_sm_aper_go_lib.v1.TestUnconstrainedReal
-	(*TestConstrainedReal)(nil),         // 6: test_sm_aper_go_lib.v1.TestConstrainedReal
-	(*TestBitString)(nil),               // 7: test_sm_aper_go_lib.v1.TestBitString
-	(*TestChoices)(nil),                 // 8: test_sm_aper_go_lib.v1.TestChoices
-	(*Choice1)(nil),                     // 9: test_sm_aper_go_lib.v1.Choice1
-	(*Choice2)(nil),                     // 10: test_sm_aper_go_lib.v1.Choice2
-	(*Choice3)(nil),                     // 11: test_sm_aper_go_lib.v1.Choice3
-	(*Choice4)(nil),                     // 12: test_sm_aper_go_lib.v1.Choice4
-	(*TestConstrainedChoices)(nil),      // 13: test_sm_aper_go_lib.v1.TestConstrainedChoices
-	(*ConstrainedChoice1)(nil),          // 14: test_sm_aper_go_lib.v1.ConstrainedChoice1
-	(*ConstrainedChoice2)(nil),          // 15: test_sm_aper_go_lib.v1.ConstrainedChoice2
-	(*ConstrainedChoice3)(nil),          // 16: test_sm_aper_go_lib.v1.ConstrainedChoice3
-	(*ConstrainedChoice4)(nil),          // 17: test_sm_aper_go_lib.v1.ConstrainedChoice4
-	(*TestNestedChoice)(nil),            // 18: test_sm_aper_go_lib.v1.TestNestedChoice
-	(*TestOctetString)(nil),             // 19: test_sm_aper_go_lib.v1.TestOctetString
-	(*TestPrintableString)(nil),         // 20: test_sm_aper_go_lib.v1.TestPrintableString
-	(*TestList1)(nil),                   // 21: test_sm_aper_go_lib.v1.TestList1
-	(*Item)(nil),                        // 22: test_sm_aper_go_lib.v1.Item
-	(*TestList2)(nil),                   // 23: test_sm_aper_go_lib.v1.TestList2
-	(*ItemExtensible)(nil),              // 24: test_sm_aper_go_lib.v1.ItemExtensible
-	(*TestFullyOptionalSequence)(nil),   // 25: test_sm_aper_go_lib.v1.TestFullyOptionalSequence
-	(*TestListExtensible1)(nil),         // 26: test_sm_aper_go_lib.v1.TestListExtensible1
-	(*TestListExtensible2)(nil),         // 27: test_sm_aper_go_lib.v1.TestListExtensible2
-	(*TestListExtensible3)(nil),         // 28: test_sm_aper_go_lib.v1.TestListExtensible3
-	(*TestList3)(nil),                   // 29: test_sm_aper_go_lib.v1.TestList3
-	(*TestTopLevelPdu)(nil),             // 30: test_sm_aper_go_lib.v1.TestTopLevelPdu
-	(*asn1.BitString)(nil),              // 31: asn1.v1.BitString
+	(EnumThree)(0),                      // 3: test_sm_aper_go_lib.v1.EnumThree
+	(*TestUnconstrainedInt)(nil),        // 4: test_sm_aper_go_lib.v1.TestUnconstrainedInt
+	(*TestConstrainedInt)(nil),          // 5: test_sm_aper_go_lib.v1.TestConstrainedInt
+	(*TestUnconstrainedReal)(nil),       // 6: test_sm_aper_go_lib.v1.TestUnconstrainedReal
+	(*TestConstrainedReal)(nil),         // 7: test_sm_aper_go_lib.v1.TestConstrainedReal
+	(*TestBitString)(nil),               // 8: test_sm_aper_go_lib.v1.TestBitString
+	(*TestChoices)(nil),                 // 9: test_sm_aper_go_lib.v1.TestChoices
+	(*Choice1)(nil),                     // 10: test_sm_aper_go_lib.v1.Choice1
+	(*Choice2)(nil),                     // 11: test_sm_aper_go_lib.v1.Choice2
+	(*Choice3)(nil),                     // 12: test_sm_aper_go_lib.v1.Choice3
+	(*Choice4)(nil),                     // 13: test_sm_aper_go_lib.v1.Choice4
+	(*TestConstrainedChoices)(nil),      // 14: test_sm_aper_go_lib.v1.TestConstrainedChoices
+	(*ConstrainedChoice1)(nil),          // 15: test_sm_aper_go_lib.v1.ConstrainedChoice1
+	(*ConstrainedChoice2)(nil),          // 16: test_sm_aper_go_lib.v1.ConstrainedChoice2
+	(*ConstrainedChoice3)(nil),          // 17: test_sm_aper_go_lib.v1.ConstrainedChoice3
+	(*ConstrainedChoice4)(nil),          // 18: test_sm_aper_go_lib.v1.ConstrainedChoice4
+	(*TestNestedChoice)(nil),            // 19: test_sm_aper_go_lib.v1.TestNestedChoice
+	(*TestOctetString)(nil),             // 20: test_sm_aper_go_lib.v1.TestOctetString
+	(*TestPrintableString)(nil),         // 21: test_sm_aper_go_lib.v1.TestPrintableString
+	(*TestList1)(nil),                   // 22: test_sm_aper_go_lib.v1.TestList1
+	(*Item)(nil),                        // 23: test_sm_aper_go_lib.v1.Item
+	(*TestList2)(nil),                   // 24: test_sm_aper_go_lib.v1.TestList2
+	(*ItemExtensible)(nil),              // 25: test_sm_aper_go_lib.v1.ItemExtensible
+	(*TestFullyOptionalSequence)(nil),   // 26: test_sm_aper_go_lib.v1.TestFullyOptionalSequence
+	(*TestListExtensible1)(nil),         // 27: test_sm_aper_go_lib.v1.TestListExtensible1
+	(*TestListExtensible2)(nil),         // 28: test_sm_aper_go_lib.v1.TestListExtensible2
+	(*TestListExtensible3)(nil),         // 29: test_sm_aper_go_lib.v1.TestListExtensible3
+	(*TestList3)(nil),                   // 30: test_sm_aper_go_lib.v1.TestList3
+	(*TestTopLevelPdu)(nil),             // 31: test_sm_aper_go_lib.v1.TestTopLevelPdu
+	(*TestExtension1)(nil),              // 32: test_sm_aper_go_lib.v1.TestExtension1
+	(*TestExtension2)(nil),              // 33: test_sm_aper_go_lib.v1.TestExtension2
+	(*asn1.BitString)(nil),              // 34: asn1.v1.BitString
 }
 var file_test_sm_aper_go_lib_v1_test_sm_proto_depIdxs = []int32{
-	31, // 0: test_sm_aper_go_lib.v1.TestBitString.attr_bs1:type_name -> asn1.v1.BitString
-	31, // 1: test_sm_aper_go_lib.v1.TestBitString.attr_bs2:type_name -> asn1.v1.BitString
-	31, // 2: test_sm_aper_go_lib.v1.TestBitString.attr_bs3:type_name -> asn1.v1.BitString
-	31, // 3: test_sm_aper_go_lib.v1.TestBitString.attr_bs4:type_name -> asn1.v1.BitString
-	31, // 4: test_sm_aper_go_lib.v1.TestBitString.attr_bs5:type_name -> asn1.v1.BitString
-	31, // 5: test_sm_aper_go_lib.v1.TestBitString.attr_bs6:type_name -> asn1.v1.BitString
-	31, // 6: test_sm_aper_go_lib.v1.TestBitString.attr_bs7:type_name -> asn1.v1.BitString
-	9,  // 7: test_sm_aper_go_lib.v1.TestChoices.choice1:type_name -> test_sm_aper_go_lib.v1.Choice1
-	10, // 8: test_sm_aper_go_lib.v1.TestChoices.choice2:type_name -> test_sm_aper_go_lib.v1.Choice2
-	11, // 9: test_sm_aper_go_lib.v1.TestChoices.choice3:type_name -> test_sm_aper_go_lib.v1.Choice3
-	12, // 10: test_sm_aper_go_lib.v1.TestChoices.choice4:type_name -> test_sm_aper_go_lib.v1.Choice4
-	14, // 11: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice1:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice1
-	15, // 12: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice2:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice2
-	16, // 13: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice3:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice3
-	17, // 14: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice4:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice4
-	11, // 15: test_sm_aper_go_lib.v1.TestNestedChoice.option1:type_name -> test_sm_aper_go_lib.v1.Choice3
-	16, // 16: test_sm_aper_go_lib.v1.TestNestedChoice.option2:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice3
-	17, // 17: test_sm_aper_go_lib.v1.TestNestedChoice.option3:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice4
-	22, // 18: test_sm_aper_go_lib.v1.TestList1.value:type_name -> test_sm_aper_go_lib.v1.Item
-	31, // 19: test_sm_aper_go_lib.v1.Item.item2:type_name -> asn1.v1.BitString
-	24, // 20: test_sm_aper_go_lib.v1.TestList2.value:type_name -> test_sm_aper_go_lib.v1.ItemExtensible
+	34, // 0: test_sm_aper_go_lib.v1.TestBitString.attr_bs1:type_name -> asn1.v1.BitString
+	34, // 1: test_sm_aper_go_lib.v1.TestBitString.attr_bs2:type_name -> asn1.v1.BitString
+	34, // 2: test_sm_aper_go_lib.v1.TestBitString.attr_bs3:type_name -> asn1.v1.BitString
+	34, // 3: test_sm_aper_go_lib.v1.TestBitString.attr_bs4:type_name -> asn1.v1.BitString
+	34, // 4: test_sm_aper_go_lib.v1.TestBitString.attr_bs5:type_name -> asn1.v1.BitString
+	34, // 5: test_sm_aper_go_lib.v1.TestBitString.attr_bs6:type_name -> asn1.v1.BitString
+	34, // 6: test_sm_aper_go_lib.v1.TestBitString.attr_bs7:type_name -> asn1.v1.BitString
+	10, // 7: test_sm_aper_go_lib.v1.TestChoices.choice1:type_name -> test_sm_aper_go_lib.v1.Choice1
+	11, // 8: test_sm_aper_go_lib.v1.TestChoices.choice2:type_name -> test_sm_aper_go_lib.v1.Choice2
+	12, // 9: test_sm_aper_go_lib.v1.TestChoices.choice3:type_name -> test_sm_aper_go_lib.v1.Choice3
+	13, // 10: test_sm_aper_go_lib.v1.TestChoices.choice4:type_name -> test_sm_aper_go_lib.v1.Choice4
+	15, // 11: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice1:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice1
+	16, // 12: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice2:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice2
+	17, // 13: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice3:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice3
+	18, // 14: test_sm_aper_go_lib.v1.TestConstrainedChoices.constrained_choice4:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice4
+	12, // 15: test_sm_aper_go_lib.v1.TestNestedChoice.option1:type_name -> test_sm_aper_go_lib.v1.Choice3
+	17, // 16: test_sm_aper_go_lib.v1.TestNestedChoice.option2:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice3
+	18, // 17: test_sm_aper_go_lib.v1.TestNestedChoice.option3:type_name -> test_sm_aper_go_lib.v1.ConstrainedChoice4
+	23, // 18: test_sm_aper_go_lib.v1.TestList1.value:type_name -> test_sm_aper_go_lib.v1.Item
+	34, // 19: test_sm_aper_go_lib.v1.Item.item2:type_name -> asn1.v1.BitString
+	25, // 20: test_sm_aper_go_lib.v1.TestList2.value:type_name -> test_sm_aper_go_lib.v1.ItemExtensible
 	2,  // 21: test_sm_aper_go_lib.v1.TestFullyOptionalSequence.item4:type_name -> test_sm_aper_go_lib.v1.TestFullyOptionalSequenceItem4
-	22, // 22: test_sm_aper_go_lib.v1.TestListExtensible1.value:type_name -> test_sm_aper_go_lib.v1.Item
-	24, // 23: test_sm_aper_go_lib.v1.TestListExtensible2.value:type_name -> test_sm_aper_go_lib.v1.ItemExtensible
-	25, // 24: test_sm_aper_go_lib.v1.TestListExtensible3.value:type_name -> test_sm_aper_go_lib.v1.TestFullyOptionalSequence
-	25, // 25: test_sm_aper_go_lib.v1.TestList3.value:type_name -> test_sm_aper_go_lib.v1.TestFullyOptionalSequence
-	3,  // 26: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt1:type_name -> test_sm_aper_go_lib.v1.TestUnconstrainedInt
-	6,  // 27: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt2:type_name -> test_sm_aper_go_lib.v1.TestConstrainedReal
-	18, // 28: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt3:type_name -> test_sm_aper_go_lib.v1.TestNestedChoice
-	7,  // 29: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt4:type_name -> test_sm_aper_go_lib.v1.TestBitString
-	19, // 30: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt5:type_name -> test_sm_aper_go_lib.v1.TestOctetString
-	28, // 31: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt6:type_name -> test_sm_aper_go_lib.v1.TestListExtensible3
+	23, // 22: test_sm_aper_go_lib.v1.TestListExtensible1.value:type_name -> test_sm_aper_go_lib.v1.Item
+	25, // 23: test_sm_aper_go_lib.v1.TestListExtensible2.value:type_name -> test_sm_aper_go_lib.v1.ItemExtensible
+	26, // 24: test_sm_aper_go_lib.v1.TestListExtensible3.value:type_name -> test_sm_aper_go_lib.v1.TestFullyOptionalSequence
+	26, // 25: test_sm_aper_go_lib.v1.TestList3.value:type_name -> test_sm_aper_go_lib.v1.TestFullyOptionalSequence
+	4,  // 26: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt1:type_name -> test_sm_aper_go_lib.v1.TestUnconstrainedInt
+	7,  // 27: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt2:type_name -> test_sm_aper_go_lib.v1.TestConstrainedReal
+	19, // 28: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt3:type_name -> test_sm_aper_go_lib.v1.TestNestedChoice
+	8,  // 29: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt4:type_name -> test_sm_aper_go_lib.v1.TestBitString
+	20, // 30: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt5:type_name -> test_sm_aper_go_lib.v1.TestOctetString
+	29, // 31: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt6:type_name -> test_sm_aper_go_lib.v1.TestListExtensible3
 	1,  // 32: test_sm_aper_go_lib.v1.TestTopLevelPdu.opt7:type_name -> test_sm_aper_go_lib.v1.TestEnumeratedExtensible
-	33, // [33:33] is the sub-list for method output_type
-	33, // [33:33] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	3,  // 33: test_sm_aper_go_lib.v1.TestExtension1.ext1:type_name -> test_sm_aper_go_lib.v1.EnumThree
+	3,  // 34: test_sm_aper_go_lib.v1.TestExtension2.ext1:type_name -> test_sm_aper_go_lib.v1.EnumThree
+	3,  // 35: test_sm_aper_go_lib.v1.TestExtension2.ext2:type_name -> test_sm_aper_go_lib.v1.EnumThree
+	3,  // 36: test_sm_aper_go_lib.v1.TestExtension2.ext3:type_name -> test_sm_aper_go_lib.v1.EnumThree
+	37, // [37:37] is the sub-list for method output_type
+	37, // [37:37] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_test_sm_aper_go_lib_v1_test_sm_proto_init() }
@@ -3129,6 +3365,30 @@ func file_test_sm_aper_go_lib_v1_test_sm_proto_init() {
 				return nil
 			}
 		}
+		file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TestExtension1); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TestExtension2); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[4].OneofWrappers = []interface{}{}
 	file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[6].OneofWrappers = []interface{}{
@@ -3173,13 +3433,15 @@ func file_test_sm_aper_go_lib_v1_test_sm_proto_init() {
 	file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[21].OneofWrappers = []interface{}{}
 	file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[22].OneofWrappers = []interface{}{}
 	file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[27].OneofWrappers = []interface{}{}
+	file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[28].OneofWrappers = []interface{}{}
+	file_test_sm_aper_go_lib_v1_test_sm_proto_msgTypes[29].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_test_sm_aper_go_lib_v1_test_sm_proto_rawDesc,
-			NumEnums:      3,
-			NumMessages:   28,
+			NumEnums:      4,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

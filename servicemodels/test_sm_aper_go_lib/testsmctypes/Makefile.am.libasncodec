@@ -28,7 +28,9 @@ ASN_MODULE_SRCS=	\
 	./TEST-List3.c	\
 	./TEST-Enumerated.c	\
 	./TEST-EnumeratedExtensible.c	\
-	./TEST-TopLevelPDU.c
+	./TEST-TopLevelPDU.c	\
+	./TEST-Extension1.c	\
+	./TEST-Extension2.c
 
 ASN_MODULE_HDRS=	\
 	./TEST-UnconstrainedInt.h	\
@@ -60,7 +62,9 @@ ASN_MODULE_HDRS=	\
 	./TEST-List3.h	\
 	./TEST-Enumerated.h	\
 	./TEST-EnumeratedExtensible.h	\
-	./TEST-TopLevelPDU.h
+	./TEST-TopLevelPDU.h	\
+	./TEST-Extension1.h	\
+	./TEST-Extension2.h
 
 ASN_MODULE_HDRS+=./OPEN_TYPE.h
 ASN_MODULE_SRCS+=./OPEN_TYPE.c
