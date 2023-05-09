@@ -14,37 +14,11 @@
 /* Including external dependencies */
 #include "NativeInteger.h"
 #include "OCTET_STRING.h"
-#include "NativeEnumerated.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/* Dependencies */
-typedef enum TEST_Extension2__ext1 {
-	TEST_Extension2__ext1_one	= 0,
-	TEST_Extension2__ext1_two	= 1,
-	TEST_Extension2__ext1_three	= 2
-} e_TEST_Extension2__ext1;
-
-typedef long	 TEST_Extension2__ext1_t;
-
-typedef enum TEST_Extension2__ext2 {
-	TEST_Extension2__ext2_one	= 0,
-	TEST_Extension2__ext2_two	= 1,
-	TEST_Extension2__ext2_three	= 2
-} e_TEST_Extension2__ext2;
-
-typedef long	 TEST_Extension2__ext2_t;
-
-typedef enum TEST_Extension2__ext3 {
-	TEST_Extension2__ext3_one	= 0,
-	TEST_Extension2__ext3_two	= 1,
-	TEST_Extension2__ext3_three	= 2
-} e_TEST_Extension2__ext3;
-
-typedef long	 TEST_Extension2__ext3_t;
 
 /* TEST-Extension2 */
 typedef struct TEST_Extension2 {
@@ -54,18 +28,21 @@ typedef struct TEST_Extension2 {
 	 * This type is extensible,
 	 * possible extensions are below.
 	 */
-	TEST_Extension2__ext1_t	*ext1;	/* OPTIONAL */
-	TEST_Extension2__ext2_t	*ext2;	/* OPTIONAL */
-	TEST_Extension2__ext3_t	*ext3;	/* OPTIONAL */
+	OCTET_STRING_t	*ext1;	/* OPTIONAL */
+	OCTET_STRING_t	*ext2;	/* OPTIONAL */
+	OCTET_STRING_t	*ext3;	/* OPTIONAL */
+	OCTET_STRING_t	*ext4;	/* OPTIONAL */
+	OCTET_STRING_t	*ext5;	/* OPTIONAL */
+	OCTET_STRING_t	*ext6;	/* OPTIONAL */
+	OCTET_STRING_t	*ext7;	/* OPTIONAL */
+	OCTET_STRING_t	*ext8;	/* OPTIONAL */
+	OCTET_STRING_t	*ext9;	/* OPTIONAL */
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
 } TEST_Extension2_t;
 
 /* Implementation */
-/* extern asn_TYPE_descriptor_t asn_DEF_ext1_5;	// (Use -fall-defs-global to expose) */
-/* extern asn_TYPE_descriptor_t asn_DEF_ext2_9;	// (Use -fall-defs-global to expose) */
-/* extern asn_TYPE_descriptor_t asn_DEF_ext3_13;	// (Use -fall-defs-global to expose) */
 extern asn_TYPE_descriptor_t asn_DEF_TEST_Extension2;
 
 #ifdef __cplusplus

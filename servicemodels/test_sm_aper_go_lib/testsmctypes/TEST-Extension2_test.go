@@ -14,16 +14,20 @@ func createTestExtension2Msg() (*test_sm_ies.TestExtension2, error) {
 
 	var ie1 int32 = 32
 	ie2 := []byte{0xF0, 0xB9, 0x32}
-	ext1 := test_sm_ies.EnumThree_ENUM_THREE_THREE
-	ext2 := test_sm_ies.EnumThree_ENUM_THREE_THREE
-	ext3 := test_sm_ies.EnumThree_ENUM_THREE_THREE
+	ext1 := []byte{0xF0, 0xB9, 0x32, 0x77, 0xFF}
 
 	testExtension2 := test_sm_ies.TestExtension2{
 		Item1: ie1,
 		Item2: ie2,
-		Ext1:  &ext1,
-		Ext2:  &ext2,
-		Ext3:  &ext3,
+		//Ext1:  ext1,
+		Ext2: ext1,
+		Ext3: ext1,
+		Ext4: ext1,
+		Ext5: ext1,
+		Ext6: ext1,
+		Ext7: ext1,
+		Ext8: ext1,
+		Ext9: ext1,
 	}
 
 	return &testExtension2, nil
@@ -44,8 +48,15 @@ func Test_xerEncodingTestExtension2(t *testing.T) {
 	t.Logf("TestExtension2 XER - decoded\n%v", result)
 	assert.Equal(t, testExtension2.GetItem1(), result.GetItem1())
 	assert.DeepEqual(t, testExtension2.GetItem2(), result.GetItem2())
-	assert.Equal(t, testExtension2.GetExt1(), result.GetExt1())
-	assert.Equal(t, testExtension2.GetExt2(), result.GetExt2())
+	assert.DeepEqual(t, testExtension2.GetExt1(), result.GetExt1())
+	assert.DeepEqual(t, testExtension2.GetExt2(), result.GetExt2())
+	assert.DeepEqual(t, testExtension2.GetExt3(), result.GetExt3())
+	assert.DeepEqual(t, testExtension2.GetExt4(), result.GetExt4())
+	assert.DeepEqual(t, testExtension2.GetExt5(), result.GetExt5())
+	assert.DeepEqual(t, testExtension2.GetExt6(), result.GetExt6())
+	assert.DeepEqual(t, testExtension2.GetExt7(), result.GetExt7())
+	assert.DeepEqual(t, testExtension2.GetExt8(), result.GetExt8())
+	assert.DeepEqual(t, testExtension2.GetExt9(), result.GetExt9())
 }
 
 func Test_perEncodingTestExtension2(t *testing.T) {
@@ -70,6 +81,13 @@ func Test_perEncodingTestExtension2(t *testing.T) {
 	t.Logf("TestExtension2 PER - decoded\n%v", result)
 	assert.Equal(t, testExtension2.GetItem1(), result.GetItem1())
 	assert.DeepEqual(t, testExtension2.GetItem2(), result.GetItem2())
-	assert.Equal(t, testExtension2.GetExt1(), result.GetExt1())
-	assert.Equal(t, testExtension2.GetExt2(), result.GetExt2())
+	assert.DeepEqual(t, testExtension2.GetExt1(), result.GetExt1())
+	assert.DeepEqual(t, testExtension2.GetExt2(), result.GetExt2())
+	assert.DeepEqual(t, testExtension2.GetExt3(), result.GetExt3())
+	assert.DeepEqual(t, testExtension2.GetExt4(), result.GetExt4())
+	assert.DeepEqual(t, testExtension2.GetExt5(), result.GetExt5())
+	assert.DeepEqual(t, testExtension2.GetExt6(), result.GetExt6())
+	assert.DeepEqual(t, testExtension2.GetExt7(), result.GetExt7())
+	assert.DeepEqual(t, testExtension2.GetExt8(), result.GetExt8())
+	assert.DeepEqual(t, testExtension2.GetExt9(), result.GetExt9())
 }

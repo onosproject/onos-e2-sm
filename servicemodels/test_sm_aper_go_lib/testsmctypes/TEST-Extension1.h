@@ -14,21 +14,11 @@
 /* Including external dependencies */
 #include "NativeInteger.h"
 #include "OCTET_STRING.h"
-#include "NativeEnumerated.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/* Dependencies */
-typedef enum TEST_Extension1__ext1 {
-	TEST_Extension1__ext1_one	= 0,
-	TEST_Extension1__ext1_two	= 1,
-	TEST_Extension1__ext1_three	= 2
-} e_TEST_Extension1__ext1;
-
-typedef long	 TEST_Extension1__ext1_t;
 
 /* TEST-Extension1 */
 typedef struct TEST_Extension1 {
@@ -38,14 +28,13 @@ typedef struct TEST_Extension1 {
 	 * This type is extensible,
 	 * possible extensions are below.
 	 */
-	TEST_Extension1__ext1_t	*ext1;	/* OPTIONAL */
+	OCTET_STRING_t	*ext1;	/* OPTIONAL */
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
 } TEST_Extension1_t;
 
 /* Implementation */
-/* extern asn_TYPE_descriptor_t asn_DEF_ext1_5;	// (Use -fall-defs-global to expose) */
 extern asn_TYPE_descriptor_t asn_DEF_TEST_Extension1;
 
 #ifdef __cplusplus

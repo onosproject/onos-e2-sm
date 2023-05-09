@@ -204,17 +204,22 @@ TEST-Extension1 ::= SEQUENCE {
     item1   INTEGER,
     item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
     ...,
-    ext1    ENUMERATED{one, two, three} OPTIONAL
+    ext1    OCTET STRING (SIZE(3..7)) OPTIONAL
 }
 
 TEST-Extension2 ::= SEQUENCE {
     item1   INTEGER,
     item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
     ...,
-    ext1    ENUMERATED{one, two, three} OPTIONAL,
-    ext2    ENUMERATED{one, two, three} OPTIONAL,
-    ext3    ENUMERATED{one, two, three} OPTIONAL,
-    ext4    ENUMERATED{one, two, three} OPTIONAL
+    ext1    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext2    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext3    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext4    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext5    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext6    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext7    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext8    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext9    OCTET STRING (SIZE(3..7)) OPTIONAL
 }
 
 END

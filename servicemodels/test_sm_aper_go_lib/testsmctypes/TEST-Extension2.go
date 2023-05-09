@@ -80,51 +80,76 @@ func newTestExtension2(testExtension2 *test_sm_ies.TestExtension2) (*C.TEST_Exte
 	}
 
 	if testExtension2.Ext1 != nil {
-		var ext1C C.TEST_Extension2__ext1_t
-		switch *testExtension2.Ext1 {
-		case test_sm_ies.EnumThree_ENUM_THREE_ONE:
-			ext1C = C.TEST_Extension2__ext1_one
-		case test_sm_ies.EnumThree_ENUM_THREE_TWO:
-			ext1C = C.TEST_Extension2__ext1_two
-		case test_sm_ies.EnumThree_ENUM_THREE_THREE:
-			ext1C = C.TEST_Extension2__ext1_three
-		default:
-			return nil, fmt.Errorf("unexpected TestExtension2 Ext1 %v", testExtension2.Ext1)
+		ext1C, err := newOctetString(testExtension2.GetExt1())
+		if err != nil {
+			return nil, err
 		}
-
-		testExtension2C.ext1 = &ext1C
+		testExtension2C.ext1 = ext1C
 	}
 
 	if testExtension2.Ext2 != nil {
-		var ext2C C.TEST_Extension2__ext2_t
-		switch *testExtension2.Ext2 {
-		case test_sm_ies.EnumThree_ENUM_THREE_ONE:
-			ext2C = C.TEST_Extension2__ext2_one
-		case test_sm_ies.EnumThree_ENUM_THREE_TWO:
-			ext2C = C.TEST_Extension2__ext2_two
-		case test_sm_ies.EnumThree_ENUM_THREE_THREE:
-			ext2C = C.TEST_Extension2__ext2_three
-		default:
-			return nil, fmt.Errorf("unexpected TestExtension2 Ext2 %v", testExtension2.Ext2)
+		ext2C, err := newOctetString(testExtension2.GetExt2())
+		if err != nil {
+			return nil, err
 		}
-
-		testExtension2C.ext2 = &ext2C
+		testExtension2C.ext2 = ext2C
 	}
 
 	if testExtension2.Ext3 != nil {
-		var ext3C C.TEST_Extension2__ext3_t
-		switch *testExtension2.Ext3 {
-		case test_sm_ies.EnumThree_ENUM_THREE_ONE:
-			ext3C = C.TEST_Extension2__ext3_one
-		case test_sm_ies.EnumThree_ENUM_THREE_TWO:
-			ext3C = C.TEST_Extension2__ext3_two
-		case test_sm_ies.EnumThree_ENUM_THREE_THREE:
-			ext3C = C.TEST_Extension2__ext3_three
-		default:
-			return nil, fmt.Errorf("unexpected TestExtension2 Ext3 %v", testExtension2.Ext3)
+		ext3C, err := newOctetString(testExtension2.GetExt3())
+		if err != nil {
+			return nil, err
+		}
+		testExtension2C.ext3 = ext3C
+	}
+
+	if testExtension2.Ext4 != nil {
+		ext4C, err := newOctetString(testExtension2.GetExt4())
+		if err != nil {
+			return nil, err
+		}
+		testExtension2C.ext4 = ext4C
+	}
+
+	if testExtension2.Ext5 != nil {
+		ext5C, err := newOctetString(testExtension2.GetExt5())
+		if err != nil {
+			return nil, err
+		}
+		testExtension2C.ext5 = ext5C
+	}
+
+	if testExtension2.Ext6 != nil {
+		ext6C, err := newOctetString(testExtension2.GetExt6())
+		if err != nil {
+			return nil, err
+		}
+		testExtension2C.ext6 = ext6C
+	}
+
+	if testExtension2.Ext7 != nil {
+		ext7C, err := newOctetString(testExtension2.GetExt7())
+		if err != nil {
+			return nil, err
+		}
+		testExtension2C.ext7 = ext7C
+	}
+
+	if testExtension2.Ext8 != nil {
+		ext8C, err := newOctetString(testExtension2.GetExt8())
+		if err != nil {
+			return nil, err
+		}
+		testExtension2C.ext8 = ext8C
+	}
+
+	if testExtension2.Ext9 != nil {
+		ext9C, err := newOctetString(testExtension2.GetExt9())
+		if err != nil {
+			return nil, err
 		}
 
-		testExtension2C.ext3 = &ext3C
+		testExtension2C.ext9 = ext9C
 	}
 
 	return &testExtension2C, nil
@@ -145,18 +170,66 @@ func decodeTestExtension2(testExtension2C *C.TEST_Extension2_t) (*test_sm_ies.Te
 	}
 
 	if testExtension2C.ext1 != nil {
-		ext1 := test_sm_ies.EnumThree(int32(*testExtension2C.ext1))
-		testExtension2.Ext1 = &ext1
+		testExtension2.Ext1, err = decodeOctetString(testExtension2C.ext1)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	if testExtension2C.ext2 != nil {
-		ext2 := test_sm_ies.EnumThree(int32(*testExtension2C.ext2))
-		testExtension2.Ext2 = &ext2
+		testExtension2.Ext2, err = decodeOctetString(testExtension2C.ext2)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	if testExtension2C.ext3 != nil {
-		ext3 := test_sm_ies.EnumThree(int32(*testExtension2C.ext3))
-		testExtension2.Ext3 = &ext3
+		testExtension2.Ext3, err = decodeOctetString(testExtension2C.ext3)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if testExtension2C.ext4 != nil {
+		testExtension2.Ext4, err = decodeOctetString(testExtension2C.ext4)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if testExtension2C.ext5 != nil {
+		testExtension2.Ext5, err = decodeOctetString(testExtension2C.ext5)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if testExtension2C.ext6 != nil {
+		testExtension2.Ext6, err = decodeOctetString(testExtension2C.ext6)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if testExtension2C.ext7 != nil {
+		testExtension2.Ext7, err = decodeOctetString(testExtension2C.ext7)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if testExtension2C.ext8 != nil {
+		testExtension2.Ext8, err = decodeOctetString(testExtension2C.ext8)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if testExtension2C.ext9 != nil {
+		testExtension2.Ext9, err = decodeOctetString(testExtension2C.ext9)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &testExtension2, nil

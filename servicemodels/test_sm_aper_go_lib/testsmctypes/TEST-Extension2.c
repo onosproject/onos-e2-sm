@@ -7,18 +7,6 @@
 
 #include "TEST-Extension2.h"
 
-/*
- * This type is implemented using NativeEnumerated,
- * so here we adjust the DEF accordingly.
- */
-/*
- * This type is implemented using NativeEnumerated,
- * so here we adjust the DEF accordingly.
- */
-/*
- * This type is implemented using NativeEnumerated,
- * so here we adjust the DEF accordingly.
- */
 static int
 memb_item2_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
@@ -45,143 +33,290 @@ memb_item2_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	}
 }
 
-static asn_per_constraints_t asn_PER_type_ext1_constr_5 CC_NOTUSED = {
-	{ APC_CONSTRAINED,	 2,  2,  0,  2 }	/* (0..2) */,
-	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
-	0, 0	/* No PER value map */
-};
-static asn_per_constraints_t asn_PER_type_ext2_constr_9 CC_NOTUSED = {
-	{ APC_CONSTRAINED,	 2,  2,  0,  2 }	/* (0..2) */,
-	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
-	0, 0	/* No PER value map */
-};
-static asn_per_constraints_t asn_PER_type_ext3_constr_13 CC_NOTUSED = {
-	{ APC_CONSTRAINED,	 2,  2,  0,  2 }	/* (0..2) */,
-	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
-	0, 0	/* No PER value map */
-};
+static int
+memb_ext1_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext2_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext3_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext4_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext5_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext6_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext7_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext8_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
+static int
+memb_ext9_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
 static asn_per_constraints_t asn_PER_memb_item2_constr_3 CC_NOTUSED = {
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
 	0, 0	/* No PER value map */
 };
-static const asn_INTEGER_enum_map_t asn_MAP_ext1_value2enum_5[] = {
-	{ 0,	3,	"one" },
-	{ 1,	3,	"two" },
-	{ 2,	5,	"three" }
+static asn_per_constraints_t asn_PER_memb_ext1_constr_5 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static const unsigned int asn_MAP_ext1_enum2value_5[] = {
-	0,	/* one(0) */
-	2,	/* three(2) */
-	1	/* two(1) */
+static asn_per_constraints_t asn_PER_memb_ext2_constr_6 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static const asn_INTEGER_specifics_t asn_SPC_ext1_specs_5 = {
-	asn_MAP_ext1_value2enum_5,	/* "tag" => N; sorted by tag */
-	asn_MAP_ext1_enum2value_5,	/* N => "tag"; sorted by N */
-	3,	/* Number of elements in the maps */
-	0,	/* Enumeration is not extensible */
-	1,	/* Strict enumeration */
-	0,	/* Native long size */
-	0
+static asn_per_constraints_t asn_PER_memb_ext3_constr_7 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static const ber_tlv_tag_t asn_DEF_ext1_tags_5[] = {
-	(ASN_TAG_CLASS_CONTEXT | (2 << 2)),
-	(ASN_TAG_CLASS_UNIVERSAL | (10 << 2))
+static asn_per_constraints_t asn_PER_memb_ext4_constr_8 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static /* Use -fall-defs-global to expose */
-asn_TYPE_descriptor_t asn_DEF_ext1_5 = {
-	"ext1",
-	"ext1",
-	&asn_OP_NativeEnumerated,
-	asn_DEF_ext1_tags_5,
-	sizeof(asn_DEF_ext1_tags_5)
-		/sizeof(asn_DEF_ext1_tags_5[0]) - 1, /* 1 */
-	asn_DEF_ext1_tags_5,	/* Same as above */
-	sizeof(asn_DEF_ext1_tags_5)
-		/sizeof(asn_DEF_ext1_tags_5[0]), /* 2 */
-	{ 0, &asn_PER_type_ext1_constr_5, NativeEnumerated_constraint },
-	0, 0,	/* Defined elsewhere */
-	&asn_SPC_ext1_specs_5	/* Additional specs */
+static asn_per_constraints_t asn_PER_memb_ext5_constr_9 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-
-static const asn_INTEGER_enum_map_t asn_MAP_ext2_value2enum_9[] = {
-	{ 0,	3,	"one" },
-	{ 1,	3,	"two" },
-	{ 2,	5,	"three" }
+static asn_per_constraints_t asn_PER_memb_ext6_constr_10 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static const unsigned int asn_MAP_ext2_enum2value_9[] = {
-	0,	/* one(0) */
-	2,	/* three(2) */
-	1	/* two(1) */
+static asn_per_constraints_t asn_PER_memb_ext7_constr_11 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static const asn_INTEGER_specifics_t asn_SPC_ext2_specs_9 = {
-	asn_MAP_ext2_value2enum_9,	/* "tag" => N; sorted by tag */
-	asn_MAP_ext2_enum2value_9,	/* N => "tag"; sorted by N */
-	3,	/* Number of elements in the maps */
-	0,	/* Enumeration is not extensible */
-	1,	/* Strict enumeration */
-	0,	/* Native long size */
-	0
+static asn_per_constraints_t asn_PER_memb_ext8_constr_12 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static const ber_tlv_tag_t asn_DEF_ext2_tags_9[] = {
-	(ASN_TAG_CLASS_CONTEXT | (3 << 2)),
-	(ASN_TAG_CLASS_UNIVERSAL | (10 << 2))
+static asn_per_constraints_t asn_PER_memb_ext9_constr_13 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static /* Use -fall-defs-global to expose */
-asn_TYPE_descriptor_t asn_DEF_ext2_9 = {
-	"ext2",
-	"ext2",
-	&asn_OP_NativeEnumerated,
-	asn_DEF_ext2_tags_9,
-	sizeof(asn_DEF_ext2_tags_9)
-		/sizeof(asn_DEF_ext2_tags_9[0]) - 1, /* 1 */
-	asn_DEF_ext2_tags_9,	/* Same as above */
-	sizeof(asn_DEF_ext2_tags_9)
-		/sizeof(asn_DEF_ext2_tags_9[0]), /* 2 */
-	{ 0, &asn_PER_type_ext2_constr_9, NativeEnumerated_constraint },
-	0, 0,	/* Defined elsewhere */
-	&asn_SPC_ext2_specs_9	/* Additional specs */
-};
-
-static const asn_INTEGER_enum_map_t asn_MAP_ext3_value2enum_13[] = {
-	{ 0,	3,	"one" },
-	{ 1,	3,	"two" },
-	{ 2,	5,	"three" }
-};
-static const unsigned int asn_MAP_ext3_enum2value_13[] = {
-	0,	/* one(0) */
-	2,	/* three(2) */
-	1	/* two(1) */
-};
-static const asn_INTEGER_specifics_t asn_SPC_ext3_specs_13 = {
-	asn_MAP_ext3_value2enum_13,	/* "tag" => N; sorted by tag */
-	asn_MAP_ext3_enum2value_13,	/* N => "tag"; sorted by N */
-	3,	/* Number of elements in the maps */
-	0,	/* Enumeration is not extensible */
-	1,	/* Strict enumeration */
-	0,	/* Native long size */
-	0
-};
-static const ber_tlv_tag_t asn_DEF_ext3_tags_13[] = {
-	(ASN_TAG_CLASS_CONTEXT | (4 << 2)),
-	(ASN_TAG_CLASS_UNIVERSAL | (10 << 2))
-};
-static /* Use -fall-defs-global to expose */
-asn_TYPE_descriptor_t asn_DEF_ext3_13 = {
-	"ext3",
-	"ext3",
-	&asn_OP_NativeEnumerated,
-	asn_DEF_ext3_tags_13,
-	sizeof(asn_DEF_ext3_tags_13)
-		/sizeof(asn_DEF_ext3_tags_13[0]) - 1, /* 1 */
-	asn_DEF_ext3_tags_13,	/* Same as above */
-	sizeof(asn_DEF_ext3_tags_13)
-		/sizeof(asn_DEF_ext3_tags_13[0]), /* 2 */
-	{ 0, &asn_PER_type_ext3_constr_13, NativeEnumerated_constraint },
-	0, 0,	/* Defined elsewhere */
-	&asn_SPC_ext3_specs_13	/* Additional specs */
-};
-
 static asn_TYPE_member_t asn_MBR_TEST_Extension2_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct TEST_Extension2, item1),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
@@ -192,7 +327,7 @@ static asn_TYPE_member_t asn_MBR_TEST_Extension2_1[] = {
 		0, 0, /* No default value */
 		"item1"
 		},
-	{ ATF_POINTER, 4, offsetof(struct TEST_Extension2, item2),
+	{ ATF_POINTER, 10, offsetof(struct TEST_Extension2, item2),
 		(ASN_TAG_CLASS_CONTEXT | (1 << 2)),
 		-1,	/* IMPLICIT tag at current level */
 		&asn_DEF_OCTET_STRING,
@@ -201,35 +336,89 @@ static asn_TYPE_member_t asn_MBR_TEST_Extension2_1[] = {
 		0, 0, /* No default value */
 		"item2"
 		},
-	{ ATF_POINTER, 3, offsetof(struct TEST_Extension2, ext1),
+	{ ATF_POINTER, 9, offsetof(struct TEST_Extension2, ext1),
 		(ASN_TAG_CLASS_CONTEXT | (2 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_ext1_5,
+		&asn_DEF_OCTET_STRING,
 		0,
-		{ 0, 0, 0 },
+		{ 0, &asn_PER_memb_ext1_constr_5,  memb_ext1_constraint_1 },
 		0, 0, /* No default value */
 		"ext1"
 		},
-	{ ATF_POINTER, 2, offsetof(struct TEST_Extension2, ext2),
+	{ ATF_POINTER, 8, offsetof(struct TEST_Extension2, ext2),
 		(ASN_TAG_CLASS_CONTEXT | (3 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_ext2_9,
+		&asn_DEF_OCTET_STRING,
 		0,
-		{ 0, 0, 0 },
+		{ 0, &asn_PER_memb_ext2_constr_6,  memb_ext2_constraint_1 },
 		0, 0, /* No default value */
 		"ext2"
 		},
-	{ ATF_POINTER, 1, offsetof(struct TEST_Extension2, ext3),
+	{ ATF_POINTER, 7, offsetof(struct TEST_Extension2, ext3),
 		(ASN_TAG_CLASS_CONTEXT | (4 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_ext3_13,
+		&asn_DEF_OCTET_STRING,
 		0,
-		{ 0, 0, 0 },
+		{ 0, &asn_PER_memb_ext3_constr_7,  memb_ext3_constraint_1 },
 		0, 0, /* No default value */
 		"ext3"
 		},
+	{ ATF_POINTER, 6, offsetof(struct TEST_Extension2, ext4),
+		(ASN_TAG_CLASS_CONTEXT | (5 << 2)),
+		-1,	/* IMPLICIT tag at current level */
+		&asn_DEF_OCTET_STRING,
+		0,
+		{ 0, &asn_PER_memb_ext4_constr_8,  memb_ext4_constraint_1 },
+		0, 0, /* No default value */
+		"ext4"
+		},
+	{ ATF_POINTER, 5, offsetof(struct TEST_Extension2, ext5),
+		(ASN_TAG_CLASS_CONTEXT | (6 << 2)),
+		-1,	/* IMPLICIT tag at current level */
+		&asn_DEF_OCTET_STRING,
+		0,
+		{ 0, &asn_PER_memb_ext5_constr_9,  memb_ext5_constraint_1 },
+		0, 0, /* No default value */
+		"ext5"
+		},
+	{ ATF_POINTER, 4, offsetof(struct TEST_Extension2, ext6),
+		(ASN_TAG_CLASS_CONTEXT | (7 << 2)),
+		-1,	/* IMPLICIT tag at current level */
+		&asn_DEF_OCTET_STRING,
+		0,
+		{ 0, &asn_PER_memb_ext6_constr_10,  memb_ext6_constraint_1 },
+		0, 0, /* No default value */
+		"ext6"
+		},
+	{ ATF_POINTER, 3, offsetof(struct TEST_Extension2, ext7),
+		(ASN_TAG_CLASS_CONTEXT | (8 << 2)),
+		-1,	/* IMPLICIT tag at current level */
+		&asn_DEF_OCTET_STRING,
+		0,
+		{ 0, &asn_PER_memb_ext7_constr_11,  memb_ext7_constraint_1 },
+		0, 0, /* No default value */
+		"ext7"
+		},
+	{ ATF_POINTER, 2, offsetof(struct TEST_Extension2, ext8),
+		(ASN_TAG_CLASS_CONTEXT | (9 << 2)),
+		-1,	/* IMPLICIT tag at current level */
+		&asn_DEF_OCTET_STRING,
+		0,
+		{ 0, &asn_PER_memb_ext8_constr_12,  memb_ext8_constraint_1 },
+		0, 0, /* No default value */
+		"ext8"
+		},
+	{ ATF_POINTER, 1, offsetof(struct TEST_Extension2, ext9),
+		(ASN_TAG_CLASS_CONTEXT | (10 << 2)),
+		-1,	/* IMPLICIT tag at current level */
+		&asn_DEF_OCTET_STRING,
+		0,
+		{ 0, &asn_PER_memb_ext9_constr_13,  memb_ext9_constraint_1 },
+		0, 0, /* No default value */
+		"ext9"
+		},
 };
-static const int asn_MAP_TEST_Extension2_oms_1[] = { 1, 2, 3, 4 };
+static const int asn_MAP_TEST_Extension2_oms_1[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 static const ber_tlv_tag_t asn_DEF_TEST_Extension2_tags_1[] = {
 	(ASN_TAG_CLASS_UNIVERSAL | (16 << 2))
 };
@@ -238,15 +427,21 @@ static const asn_TYPE_tag2member_t asn_MAP_TEST_Extension2_tag2el_1[] = {
     { (ASN_TAG_CLASS_CONTEXT | (1 << 2)), 1, 0, 0 }, /* item2 */
     { (ASN_TAG_CLASS_CONTEXT | (2 << 2)), 2, 0, 0 }, /* ext1 */
     { (ASN_TAG_CLASS_CONTEXT | (3 << 2)), 3, 0, 0 }, /* ext2 */
-    { (ASN_TAG_CLASS_CONTEXT | (4 << 2)), 4, 0, 0 } /* ext3 */
+    { (ASN_TAG_CLASS_CONTEXT | (4 << 2)), 4, 0, 0 }, /* ext3 */
+    { (ASN_TAG_CLASS_CONTEXT | (5 << 2)), 5, 0, 0 }, /* ext4 */
+    { (ASN_TAG_CLASS_CONTEXT | (6 << 2)), 6, 0, 0 }, /* ext5 */
+    { (ASN_TAG_CLASS_CONTEXT | (7 << 2)), 7, 0, 0 }, /* ext6 */
+    { (ASN_TAG_CLASS_CONTEXT | (8 << 2)), 8, 0, 0 }, /* ext7 */
+    { (ASN_TAG_CLASS_CONTEXT | (9 << 2)), 9, 0, 0 }, /* ext8 */
+    { (ASN_TAG_CLASS_CONTEXT | (10 << 2)), 10, 0, 0 } /* ext9 */
 };
 static asn_SEQUENCE_specifics_t asn_SPC_TEST_Extension2_specs_1 = {
 	sizeof(struct TEST_Extension2),
 	offsetof(struct TEST_Extension2, _asn_ctx),
 	asn_MAP_TEST_Extension2_tag2el_1,
-	5,	/* Count of tags in the map */
+	11,	/* Count of tags in the map */
 	asn_MAP_TEST_Extension2_oms_1,	/* Optional members */
-	1, 3,	/* Root/Additions */
+	1, 9,	/* Root/Additions */
 	2,	/* First extension addition */
 };
 asn_TYPE_descriptor_t asn_DEF_TEST_Extension2 = {
@@ -261,7 +456,7 @@ asn_TYPE_descriptor_t asn_DEF_TEST_Extension2 = {
 		/sizeof(asn_DEF_TEST_Extension2_tags_1[0]), /* 1 */
 	{ 0, 0, SEQUENCE_constraint },
 	asn_MBR_TEST_Extension2_1,
-	5,	/* Elements count */
+	11,	/* Elements count */
 	&asn_SPC_TEST_Extension2_specs_1	/* Additional specs */
 };
 

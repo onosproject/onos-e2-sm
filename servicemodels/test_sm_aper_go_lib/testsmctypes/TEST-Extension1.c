@@ -7,10 +7,6 @@
 
 #include "TEST-Extension1.h"
 
-/*
- * This type is implemented using NativeEnumerated,
- * so here we adjust the DEF accordingly.
- */
 static int
 memb_item2_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
@@ -37,55 +33,42 @@ memb_item2_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
 	}
 }
 
-static asn_per_constraints_t asn_PER_type_ext1_constr_5 CC_NOTUSED = {
-	{ APC_CONSTRAINED,	 2,  2,  0,  2 }	/* (0..2) */,
-	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
-	0, 0	/* No PER value map */
-};
+static int
+memb_ext1_constraint_1(const asn_TYPE_descriptor_t *td, const void *sptr,
+			asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+	const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
+	size_t size;
+	
+	if(!sptr) {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: value not given (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+	
+	size = st->size;
+	
+	if((size >= 3 && size <= 7)) {
+		/* Constraint check succeeded */
+		return 0;
+	} else {
+		ASN__CTFAIL(app_key, td, sptr,
+			"%s: constraint failed (%s:%d)",
+			td->name, __FILE__, __LINE__);
+		return -1;
+	}
+}
+
 static asn_per_constraints_t asn_PER_memb_item2_constr_3 CC_NOTUSED = {
 	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
 	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
 	0, 0	/* No PER value map */
 };
-static const asn_INTEGER_enum_map_t asn_MAP_ext1_value2enum_5[] = {
-	{ 0,	3,	"one" },
-	{ 1,	3,	"two" },
-	{ 2,	5,	"three" }
+static asn_per_constraints_t asn_PER_memb_ext1_constr_5 CC_NOTUSED = {
+	{ APC_UNCONSTRAINED,	-1, -1,  0,  0 },
+	{ APC_CONSTRAINED,	 3,  3,  3,  7 }	/* (SIZE(3..7)) */,
+	0, 0	/* No PER value map */
 };
-static const unsigned int asn_MAP_ext1_enum2value_5[] = {
-	0,	/* one(0) */
-	2,	/* three(2) */
-	1	/* two(1) */
-};
-static const asn_INTEGER_specifics_t asn_SPC_ext1_specs_5 = {
-	asn_MAP_ext1_value2enum_5,	/* "tag" => N; sorted by tag */
-	asn_MAP_ext1_enum2value_5,	/* N => "tag"; sorted by N */
-	3,	/* Number of elements in the maps */
-	0,	/* Enumeration is not extensible */
-	1,	/* Strict enumeration */
-	0,	/* Native long size */
-	0
-};
-static const ber_tlv_tag_t asn_DEF_ext1_tags_5[] = {
-	(ASN_TAG_CLASS_CONTEXT | (2 << 2)),
-	(ASN_TAG_CLASS_UNIVERSAL | (10 << 2))
-};
-static /* Use -fall-defs-global to expose */
-asn_TYPE_descriptor_t asn_DEF_ext1_5 = {
-	"ext1",
-	"ext1",
-	&asn_OP_NativeEnumerated,
-	asn_DEF_ext1_tags_5,
-	sizeof(asn_DEF_ext1_tags_5)
-		/sizeof(asn_DEF_ext1_tags_5[0]) - 1, /* 1 */
-	asn_DEF_ext1_tags_5,	/* Same as above */
-	sizeof(asn_DEF_ext1_tags_5)
-		/sizeof(asn_DEF_ext1_tags_5[0]), /* 2 */
-	{ 0, &asn_PER_type_ext1_constr_5, NativeEnumerated_constraint },
-	0, 0,	/* Defined elsewhere */
-	&asn_SPC_ext1_specs_5	/* Additional specs */
-};
-
 static asn_TYPE_member_t asn_MBR_TEST_Extension1_1[] = {
 	{ ATF_NOFLAGS, 0, offsetof(struct TEST_Extension1, item1),
 		(ASN_TAG_CLASS_CONTEXT | (0 << 2)),
@@ -108,9 +91,9 @@ static asn_TYPE_member_t asn_MBR_TEST_Extension1_1[] = {
 	{ ATF_POINTER, 1, offsetof(struct TEST_Extension1, ext1),
 		(ASN_TAG_CLASS_CONTEXT | (2 << 2)),
 		-1,	/* IMPLICIT tag at current level */
-		&asn_DEF_ext1_5,
+		&asn_DEF_OCTET_STRING,
 		0,
-		{ 0, 0, 0 },
+		{ 0, &asn_PER_memb_ext1_constr_5,  memb_ext1_constraint_1 },
 		0, 0, /* No default value */
 		"ext1"
 		},

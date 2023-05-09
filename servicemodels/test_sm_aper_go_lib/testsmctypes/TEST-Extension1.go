@@ -80,19 +80,12 @@ func newTestExtension1(testExtension1 *test_sm_ies.TestExtension1) (*C.TEST_Exte
 	}
 
 	if testExtension1.Ext1 != nil {
-		var ext1C C.TEST_Extension1__ext1_t
-		switch *testExtension1.Ext1 {
-		case test_sm_ies.EnumThree_ENUM_THREE_ONE:
-			ext1C = C.TEST_Extension1__ext1_one
-		case test_sm_ies.EnumThree_ENUM_THREE_TWO:
-			ext1C = C.TEST_Extension1__ext1_two
-		case test_sm_ies.EnumThree_ENUM_THREE_THREE:
-			ext1C = C.TEST_Extension1__ext1_three
-		default:
-			return nil, fmt.Errorf("unexpected TestExtension1 Ext1 %v", testExtension1.Ext1)
+		ext1C, err := newOctetString(testExtension1.GetExt1())
+		if err != nil {
+			return nil, err
 		}
 
-		testExtension1C.ext1 = &ext1C
+		testExtension1C.ext1 = ext1C
 	}
 
 	return &testExtension1C, nil
@@ -113,8 +106,10 @@ func decodeTestExtension1(testExtension1C *C.TEST_Extension1_t) (*test_sm_ies.Te
 	}
 
 	if testExtension1C.ext1 != nil {
-		ext1 := test_sm_ies.EnumThree(int32(*testExtension1C.ext1))
-		testExtension1.Ext1 = &ext1
+		testExtension1.Ext1, err = decodeOctetString(testExtension1C.ext1)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &testExtension1, nil
