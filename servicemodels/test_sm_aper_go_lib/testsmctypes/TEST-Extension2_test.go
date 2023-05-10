@@ -19,15 +19,15 @@ func createTestExtension2Msg() (*test_sm_ies.TestExtension2, error) {
 	testExtension2 := test_sm_ies.TestExtension2{
 		Item1: ie1,
 		Item2: ie2,
-		//Ext1:  ext1,
-		Ext2: ext1,
-		Ext3: ext1,
-		Ext4: ext1,
-		Ext5: ext1,
-		Ext6: ext1,
-		Ext7: ext1,
-		Ext8: ext1,
-		Ext9: ext1,
+		Ext1:  ext1,
+		Ext2:  ext1,
+		Ext3:  ext1,
+		Ext4:  ext1,
+		Ext5:  ext1,
+		Ext6:  ext1,
+		Ext7:  ext1,
+		Ext8:  ext1,
+		Ext9:  ext1,
 	}
 
 	return &testExtension2, nil
