@@ -56,6 +56,14 @@ func Test_perEncodingTestConstrainedReal(t *testing.T) {
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedReal PER\n%v", hex.Dump(per))
 
+	// Generating APER bytes with Go APER lib
+	perNew, err := aper.Marshal(testConstrainedReal, test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err)
+	t.Logf("TestConstrainedReal PER (with Go APER library)\n%v", hex.Dump(perNew))
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per, perNew)
+
 	result, err := perDecodeTestConstrainedReal(per)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
@@ -67,12 +75,18 @@ func Test_perEncodingTestConstrainedReal(t *testing.T) {
 	assert.Equal(t, testConstrainedReal.GetAttrCrE(), result.GetAttrCrE())
 	assert.Equal(t, testConstrainedReal.GetAttrCrF(), result.GetAttrCrF())
 
-	//treating special case, when REAL is set to 0
-	//testConstrainedReal.AttrCrG = 0
 	testConstrainedReal.AttrCrF = 12345.6789
 	per1, err := perEncodeTestConstrainedReal(testConstrainedReal)
 	assert.NilError(t, err)
 	t.Logf("TestConstrainedReal PER\n%v", hex.Dump(per1))
+
+	// Generating APER bytes with Go APER lib
+	perNew1, err := aper.Marshal(testConstrainedReal, test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err)
+	t.Logf("TestConstrainedReal PER (with Go APER library)\n%v", hex.Dump(perNew1))
+
+	//Comparing bytes against each other
+	assert.DeepEqual(t, per1, perNew1)
 
 	result1, err := perDecodeTestConstrainedReal(per1)
 	assert.NilError(t, err)

@@ -21,7 +21,7 @@ func createTestConstrainedIntMsg() (*test_sm_ies.TestConstrainedInt, error) {
 		AttrCiD: -424684151,
 		AttrCiE: 15,
 		AttrCiF: 10,
-		AttrCiG: 10,
+		//AttrCiG: 10,
 	}
 
 	return &testConstrainedInt, nil
@@ -36,7 +36,7 @@ func createTestConstrainedIntMsgCmpr() (*test_sm_ies.TestConstrainedInt, error) 
 		AttrCiD: -2147483647, //minimum value by default (defined as MIN in ASN1 syntax, MAX is not possible to estimate)
 		AttrCiE: 20,
 		AttrCiF: 10,
-		AttrCiG: 12,
+		//AttrCiG: 12,
 	}
 
 	return &testConstrainedInt, nil

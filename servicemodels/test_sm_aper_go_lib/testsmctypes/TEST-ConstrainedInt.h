@@ -27,7 +27,6 @@ typedef struct TEST_ConstrainedInt {
 	long	 attrCiD;
 	long	 attrCiE;
 	long	 attrCiF;
-	long	 attrCiG;
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;

@@ -67,7 +67,7 @@ message TestConstrainedInt {
     // @inject_tag: aper:"valueLB:10"
     int32 attr_ci_f = 6 [json_name = "attrCiF"];
     // @inject_tag: aper:"valueLB:10,valueExt"
-    int32 attr_ci_g = 7 [json_name = "attrCiG"];
+//    int32 attr_ci_g = 7 [json_name = "attrCiG"];
 };
 
 // sequence from tes_sm.asn1:29

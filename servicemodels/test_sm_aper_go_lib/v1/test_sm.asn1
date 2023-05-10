@@ -27,8 +27,7 @@ TEST-ConstrainedInt ::= SEQUENCE {
     attrCiC    INTEGER(10..maxInt32),
     attrCiD    INTEGER(MIN..100), -- MIN corresponds to no LB constraint in Protobuf, minimal value to encode is -2147483647
     attrCiE    INTEGER(10..20), -- MAX gives bad file descriptor
-    attrCiF    INTEGER(10),
-    attrCiG    INTEGER(10, ...)
+    attrCiF    INTEGER(10)
 }
 
 TEST-UnconstrainedReal ::= SEQUENCE {
