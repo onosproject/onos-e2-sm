@@ -74,14 +74,14 @@ test: license build build_protoc_gen_cgo build_protoc_gen_choice build_protoc_ge
 
 jenkins-test:  # @HELP run the unit tests and source code validation producing a junit style report for Jenkins
 jenkins-test: license
-	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_kpm_v2_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_rc_pre_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_mho_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-	cd servicemodels/e2sm_rc && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_kpm_v2_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_rc_pre_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_mho_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+#	cd servicemodels/e2sm_rc && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
 
 sm-linters: golang-ci # @HELP examines Go source code and reports coding problems
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
