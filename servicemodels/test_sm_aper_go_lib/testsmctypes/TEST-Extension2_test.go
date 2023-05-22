@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: (C) 2023 Intel Corporation
-// SPDX-License-Identifier: LicenseRef-Intel
+// SPDX-License-Identifier: Apache-2.0
 
 package testsmctypes
 
@@ -91,4 +91,9 @@ func Test_perEncodingTestExtension2(t *testing.T) {
 	assert.DeepEqual(t, testExtension2.GetExt7(), result.GetExt7())
 	assert.DeepEqual(t, testExtension2.GetExt8(), result.GetExt8())
 	assert.DeepEqual(t, testExtension2.GetExt9(), result.GetExt9())
+
+	resultRef := &test_sm_ies.TestExtension2{}
+	err = aper.UnmarshalWithParams(per, resultRef, "valueExt", test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err)
+	assert.Equal(t, result.String(), resultRef.String())
 }

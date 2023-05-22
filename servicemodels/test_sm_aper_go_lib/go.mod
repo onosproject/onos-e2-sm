@@ -3,14 +3,13 @@ module github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib
 go 1.18
 
 require (
-	github.com/onosproject/onos-lib-go v0.10.13
+	github.com/onosproject/onos-lib-go v0.10.18
 	google.golang.org/protobuf v1.28.0
 	gotest.tools v2.2.0+incompatible
 )
 
 require (
 	github.com/Shopify/sarama v1.31.1 // indirect
-	github.com/atomix/atomix-go-framework v0.10.0 // indirect
 	github.com/atomix/atomix/api v0.8.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/eapache/go-resiliency v1.2.0 // indirect
