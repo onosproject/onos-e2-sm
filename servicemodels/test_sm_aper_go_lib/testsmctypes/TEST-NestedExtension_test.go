@@ -61,6 +61,7 @@ func Test_perEncodingTestNestedExtension(t *testing.T) {
 	// Generating APER bytes with Go APER lib
 	perNew, err := aper.MarshalWithParams(testNestedExtension, "valueExt", test_sm_ies.Choicemap, nil)
 	assert.NilError(t, err)
+	t.Logf("TEST-NestedExtension with Go APER library PER\n%v", hex.Dump(perNew))
 
 	//Comparing bytes against each other
 	assert.DeepEqual(t, per, perNew)
