@@ -80,7 +80,7 @@ func newAChoice(achoice *test_sm_ies.Achoice) (*C.AChoice_t, error) {
 		if err != nil {
 			return nil, err
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	case *test_sm_ies.Achoice_Ch2:
 		pr = C.AChoice_PR_ch2
 
@@ -88,7 +88,7 @@ func newAChoice(achoice *test_sm_ies.Achoice) (*C.AChoice_t, error) {
 		if err != nil {
 			return nil, err
 		}
-		binary.LittleEndian.PutUint64(choiceC[0:], uint64(im))
+		binary.LittleEndian.PutUint64(choiceC[0:], uint64(uintptr(unsafe.Pointer(im))))
 	default:
 		return nil, fmt.Errorf("newAChoice() %T not yet implemented", t)
 	}
@@ -107,7 +107,7 @@ func decodeAChoice(achoiceC *C.AChoice_t) (*test_sm_ies.Achoice, error) {
 
 	switch achoiceC.present {
 	case C.AChoice_PR_ch1:
-		ch1C, err := decodeAList(achoiceC.choice)
+		ch1C, err := decodeAListBytes(achoiceC.choice)
 		if err != nil {
 			return nil, err
 		}
@@ -115,7 +115,7 @@ func decodeAChoice(achoiceC *C.AChoice_t) (*test_sm_ies.Achoice, error) {
 			Ch1: ch1C,
 		}
 	case C.AChoice_PR_ch2:
-		ch2C, err := decodeAStruct(achoiceC.choice)
+		ch2C, err := decodeAStructBytes(achoiceC.choice)
 		if err != nil {
 			return nil, err
 		}

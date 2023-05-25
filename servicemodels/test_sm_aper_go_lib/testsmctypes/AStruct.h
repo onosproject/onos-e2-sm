@@ -15,6 +15,7 @@
 #include "asn_SEQUENCE_OF.h"
 #include "constr_SEQUENCE_OF.h"
 #include "constr_SEQUENCE.h"
+#include "TEST-NestedExtension.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -65,9 +65,9 @@ func PerDecodeTestNestedExtension(bytes []byte) (*test_sm_ies.TestNestedExtensio
 	return decodeTestNestedExtension((*C.TEST_NestedExtension_t)(unsafePtr))
 }
 
-func newTestNestedExtension(testNestedExt *test_sm_ies.TestNestedExtension) (*C.TEST_NestedCExtension_t, error) {
+func newTestNestedExtension(testNestedExt *test_sm_ies.TestNestedExtension) (*C.TEST_NestedExtension_t, error) {
 
-	testNestedExtC := C.TEST_NestedChoice_t{
+	testNestedExtC := C.TEST_NestedExtension_t{
 		item1: C.long(testNestedExt.GetItem1()),
 	}
 
@@ -75,8 +75,9 @@ func newTestNestedExtension(testNestedExt *test_sm_ies.TestNestedExtension) (*C.
 	if err != nil {
 		return nil, err
 	}
-	testNestedExtC.item2 = item2C
+	testNestedExtC.item2 = *item2C
 
+	// extension part, which is also optional
 	if testNestedExt.Ch != nil {
 		chC, err := newAChoice(testNestedExt.GetCh())
 		if err != nil {
@@ -95,18 +96,19 @@ func decodeTestNestedExtension(testNestedExtC *C.TEST_NestedExtension_t) (*test_
 
 	testNestedExt.Item1 = int32(testNestedExtC.item1)
 
-	testNestedExt.Item2, err = decodeOctetString(testNestedExtC.item2)
+	testNestedExt.Item2, err = decodeOctetString(&testNestedExtC.item2)
 	if err != nil {
 		return nil, err
 	}
 
+	// extension part, which is also optional
 	if testNestedExtC.ch != nil {
-		testNestedExt.Ch, err = decodeAChoice(testNestedExtC.item2)
+		testNestedExt.Ch, err = decodeAChoice(testNestedExtC.ch)
 		if err != nil {
 			return nil, err
 		}
 
 	}
 
-	return testNestedExtension, nil
+	return testNestedExt, nil
 }
