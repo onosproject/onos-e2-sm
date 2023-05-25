@@ -66,7 +66,7 @@ func Test_perEncodingTestNestedExtension(t *testing.T) {
 	//Comparing bytes against each other
 	assert.DeepEqual(t, per, perNew)
 
-	result, err := PerDecodeTestNestedExtension(per)
+	result, err := PerDecodeTestNestedExtension(perNew)
 	assert.NilError(t, err)
 	assert.Assert(t, result != nil)
 	t.Logf("TEST-NestedExtension PER - decoded\n%v", result)
@@ -78,4 +78,11 @@ func Test_perEncodingTestNestedExtension(t *testing.T) {
 	assert.DeepEqual(t, testNestedExtension.GetCh().GetCh2().GetItem()[0].GetItem2(), result.GetCh().GetCh2().GetItem()[0].GetItem2())
 	assert.Equal(t, testNestedExtension.GetCh().GetCh2().GetItem()[1].GetItem1(), result.GetCh().GetCh2().GetItem()[1].GetItem1())
 	assert.DeepEqual(t, testNestedExtension.GetCh().GetCh2().GetItem()[1].GetItem2(), result.GetCh().GetCh2().GetItem()[1].GetItem2())
+
+	result1 := &test_sm_ies.TestNestedExtension{}
+	err = aper.UnmarshalWithParams(per, result1, "valueExt", test_sm_ies.Choicemap, nil)
+	assert.NilError(t, err)
+	t.Logf("Decoded TEST-NestedExtension from PER is\n%v", result1)
+
+	assert.Equal(t, result.String(), result1.String())
 }
