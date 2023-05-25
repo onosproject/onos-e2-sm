@@ -2683,13 +2683,13 @@ type isAchoice_Achoice interface {
 }
 
 type Achoice_Ch1 struct {
-	// @inject_tag: aper:"valueExt"
-	Ch1 *Alist `protobuf:"bytes,1,opt,name=ch1,proto3,oneof" aper:"valueExt"`
+	// @inject_tag: aper:"choiceIdx:1,valueExt"
+	Ch1 *Alist `protobuf:"bytes,1,opt,name=ch1,proto3,oneof" aper:"choiceIdx:1,valueExt"`
 }
 
 type Achoice_Ch2 struct {
-	// @inject_tag: aper:"valueExt"
-	Ch2 *Astruct `protobuf:"bytes,2,opt,name=ch2,proto3,oneof" aper:"valueExt"`
+	// @inject_tag: aper:"choiceIdx:2,valueExt"
+	Ch2 *Astruct `protobuf:"bytes,2,opt,name=ch2,proto3,oneof" aper:"choiceIdx:2,valueExt"`
 }
 
 func (*Achoice_Ch1) isAchoice_Achoice() {}

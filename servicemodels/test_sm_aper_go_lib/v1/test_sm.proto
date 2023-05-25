@@ -414,9 +414,9 @@ message TestNestedExtension {
 
 message Achoice {
     oneof achoice {
-        // @inject_tag: aper:"valueExt"
+        // @inject_tag: aper:"choiceIdx:1,valueExt"
         Alist ch1 = 1 [json_name = "ch1"];
-        // @inject_tag: aper:"valueExt"
+        // @inject_tag: aper:"choiceIdx:2,valueExt"
         Astruct ch2 = 2 [json_name = "ch2"];
     }
 }
