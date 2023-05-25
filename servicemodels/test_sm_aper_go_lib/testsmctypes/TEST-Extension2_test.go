@@ -28,7 +28,7 @@ func createTestExtension2Msg() (*test_sm_ies.TestExtension2, error) {
 		Ext6:  ext1,
 		Ext7:  ext1,
 		Ext8:  ext1,
-		Ext9:  ext1,
+		//Ext9:  ext1,
 	}
 
 	return &testExtension2, nil

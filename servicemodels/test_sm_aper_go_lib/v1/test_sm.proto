@@ -403,3 +403,30 @@ message TestExtension2 {
     // @inject_tag: aper:"fromValueExt,optional,sizeLB:3,sizeUB:7"
     optional bytes ext9 = 11 [json_name = "ext9"];
 }
+
+message TestNestedExtension {
+    int32 item1 = 1 [json_name = "item1"];
+    // @inject_tag: aper:"sizeLB:3,sizeUB:7"
+    bytes item2 = 2 [json_name = "item2"];
+    // @inject_tag: aper:"optional,choiceExt,fromValueExt"
+    optional Achoice ch = 3 [json_name = "ch"];
+}
+
+message Achoice {
+    oneof achoice {
+        // @inject_tag: aper:"valueExt"
+        Alist ch1 = 1 [json_name = "ch1"];
+        // @inject_tag: aper:"valueExt"
+        Astruct ch2 = 2 [json_name = "ch2"];
+    }
+}
+
+message Alist {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:5"
+    repeated TestNestedExtension item = 1 [json_name = "item"];
+}
+
+message Astruct {
+    // @inject_tag: aper:"valueExt,sizeLB:1,sizeUB:5"
+    repeated TestNestedExtension item = 1 [json_name = "item"];
+}

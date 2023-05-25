@@ -221,4 +221,27 @@ TEST-Extension2 ::= SEQUENCE {
     ext9    OCTET STRING (SIZE(3..7)) OPTIONAL
 }
 
+TEST-NestedExtension ::= SEQUENCE {
+    item1   INTEGER,
+    item2   OCTET STRING(SIZE(3..7)),
+    ...,
+    ch      AChoice     OPTIONAL
+}
+
+AChoice ::= CHOICE {
+    ch1     AList,
+    ch2     AStruct,
+    ...
+}
+
+AList ::= SEQUENCE {
+    item    SEQUENCE (SIZE(1..5)) OF TEST-NestedExtension,
+    ...
+}
+
+AStruct ::= SEQUENCE {
+    item    SEQUENCE (SIZE(1..5)) OF TEST-NestedExtension,
+    ...
+}
+
 END
