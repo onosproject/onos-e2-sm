@@ -6,7 +6,7 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v0.6.7
 	github.com/gogo/protobuf v1.3.2
 	github.com/onosproject/onos-api/go v0.10.16
-	github.com/onosproject/onos-lib-go v0.10.18
+	github.com/onosproject/onos-lib-go v0.10.19
 	google.golang.org/protobuf v1.28.0
 	gotest.tools v2.2.0+incompatible
 )
@@ -60,5 +60,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-replace github.com/onosproject/onos-lib-go => ../../../onos-lib-go

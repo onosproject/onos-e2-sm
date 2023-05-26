@@ -3,7 +3,7 @@ module github.com/onosproject/onos-e2-sm/servicemodels/test_sm_aper_go_lib
 go 1.18
 
 require (
-	github.com/onosproject/onos-lib-go v0.10.18
+	github.com/onosproject/onos-lib-go v0.10.19
 	google.golang.org/protobuf v1.28.0
 	gotest.tools v2.2.0+incompatible
 )
@@ -55,5 +55,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
-
-replace github.com/onosproject/onos-lib-go => ../../../onos-lib-go
