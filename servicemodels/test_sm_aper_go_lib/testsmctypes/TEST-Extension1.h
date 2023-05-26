@@ -5,40 +5,41 @@
  * 	`asn1c -fcompound-names -fincludes-quoted -fno-include-deps -findirect-choice -gen-PER -no-gen-OER -D.`
  */
 
-#ifndef	_TEST_ConstrainedInt_H_
-#define	_TEST_ConstrainedInt_H_
+#ifndef	_TEST_Extension1_H_
+#define	_TEST_Extension1_H_
 
 
 #include "asn_application.h"
 
 /* Including external dependencies */
 #include "NativeInteger.h"
+#include "OCTET_STRING.h"
 #include "constr_SEQUENCE.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* TEST-ConstrainedInt */
-typedef struct TEST_ConstrainedInt {
-	long	 attrCiA;
-	long	 attrCiB;
-	unsigned long	 attrCiC;
-	long	 attrCiD;
-	long	 attrCiE;
-	long	 attrCiF;
+/* TEST-Extension1 */
+typedef struct TEST_Extension1 {
+	long	 item1;
+	OCTET_STRING_t	*item2;	/* OPTIONAL */
+	/*
+	 * This type is extensible,
+	 * possible extensions are below.
+	 */
+	OCTET_STRING_t	*ext1;	/* OPTIONAL */
 	
 	/* Context for parsing across buffer boundaries */
 	asn_struct_ctx_t _asn_ctx;
-} TEST_ConstrainedInt_t;
+} TEST_Extension1_t;
 
 /* Implementation */
-/* extern asn_TYPE_descriptor_t asn_DEF_attrCiC_4;	// (Use -fall-defs-global to expose) */
-extern asn_TYPE_descriptor_t asn_DEF_TEST_ConstrainedInt;
+extern asn_TYPE_descriptor_t asn_DEF_TEST_Extension1;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* _TEST_ConstrainedInt_H_ */
+#endif	/* _TEST_Extension1_H_ */
 #include "asn_internal.h"

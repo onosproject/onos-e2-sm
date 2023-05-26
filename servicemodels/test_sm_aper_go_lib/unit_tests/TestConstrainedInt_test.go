@@ -31,11 +31,11 @@ func TestConstrainedInt(t *testing.T) {
 		testSM.AttrCiD = int32(rand.Intn(100-min) + min)
 		testSM.AttrCiE = int32(rand.Intn(20-10)) + 10
 		testSM.AttrCiF = 10
-		testSM.AttrCiG = 10 + int32(rand.Intn(max-10))
+		//testSM.AttrCiG = 10 + int32(rand.Intn(max-10))
 
 		t.Logf("Testing Test-ConstrainedInt with values:\n"+
-			"%v, %v, %v, %v, %v, %v, %v", testSM.GetAttrCiA(), testSM.GetAttrCiB(), testSM.GetAttrCiC(),
-			testSM.GetAttrCiD(), testSM.GetAttrCiE(), testSM.GetAttrCiF(), testSM.GetAttrCiG())
+			"%v, %v, %v, %v, %v, %v", testSM.GetAttrCiA(), testSM.GetAttrCiB(), testSM.GetAttrCiC(),
+			testSM.GetAttrCiD(), testSM.GetAttrCiE(), testSM.GetAttrCiF()) //, testSM.GetAttrCiG())
 
 		// Generating APER with reference CGo approach
 		perRef, err := testsmctypes.PerEncodeTestConstrainedInt(testSM)

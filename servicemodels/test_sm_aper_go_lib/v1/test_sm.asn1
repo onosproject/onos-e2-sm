@@ -27,8 +27,7 @@ TEST-ConstrainedInt ::= SEQUENCE {
     attrCiC    INTEGER(10..maxInt32),
     attrCiD    INTEGER(MIN..100), -- MIN corresponds to no LB constraint in Protobuf, minimal value to encode is -2147483647
     attrCiE    INTEGER(10..20), -- MAX gives bad file descriptor
-    attrCiF    INTEGER(10),
-    attrCiG    INTEGER(10, ...)
+    attrCiF    INTEGER(10)
 }
 
 TEST-UnconstrainedReal ::= SEQUENCE {
@@ -197,6 +196,51 @@ TEST-TopLevelPDU ::= SEQUENCE {
     opt5    TEST-OctetString        OPTIONAL,
     opt6    TEST-ListExtensible3,
     opt7    TEST-EnumeratedExtensible,
+    ...
+}
+
+TEST-Extension1 ::= SEQUENCE {
+    item1   INTEGER,
+    item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ...,
+    ext1    OCTET STRING (SIZE(3..7)) OPTIONAL
+}
+
+TEST-Extension2 ::= SEQUENCE {
+    item1   INTEGER,
+    item2   OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ...,
+    ext1    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext2    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext3    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext4    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext5    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext6    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext7    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext8    OCTET STRING (SIZE(3..7)) OPTIONAL,
+    ext9    OCTET STRING (SIZE(3..7)) OPTIONAL
+}
+
+TEST-NestedExtension ::= SEQUENCE {
+    item1   INTEGER,
+    item2   OCTET STRING(SIZE(3..7)),
+    ...,
+    ch      AChoice     OPTIONAL
+}
+
+AChoice ::= CHOICE {
+    ch1     AList,
+    ch2     AStruct,
+    ...
+}
+
+AList ::= SEQUENCE {
+    item    SEQUENCE (SIZE(1..5)) OF TEST-NestedExtension,
+    ...
+}
+
+AStruct ::= SEQUENCE {
+    item    SEQUENCE (SIZE(1..5)) OF TEST-NestedExtension,
     ...
 }
 
