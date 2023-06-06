@@ -16,6 +16,8 @@ extern struct asn_TYPE_descriptor_s asn_DEF_TEST_ListExtensible2;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_List3;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_Enumerated;
 extern struct asn_TYPE_descriptor_s asn_DEF_TEST_TopLevelPDU;
+extern struct asn_TYPE_descriptor_s asn_DEF_TEST_Extension1;
+extern struct asn_TYPE_descriptor_s asn_DEF_TEST_Extension2;
 
 
 struct asn_TYPE_descriptor_s *asn_pdu_collection[] = {
@@ -32,6 +34,8 @@ struct asn_TYPE_descriptor_s *asn_pdu_collection[] = {
 	&asn_DEF_TEST_List3,	
 	&asn_DEF_TEST_Enumerated,	
 	&asn_DEF_TEST_TopLevelPDU,	
+	&asn_DEF_TEST_Extension1,	
+	&asn_DEF_TEST_Extension2,	
 	0
 };
 

@@ -1454,7 +1454,7 @@ message E2SmRcRanfunctionDefinition {
 // sequence from e2sm_rc.asn1:809
 // {RANFunctionDefinition-EventTrigger}
 message RanfunctionDefinitionEventTrigger {
-    // @inject_tag: aper:"sizeLB:1,sizeUB:63"
+    // @inject_tag: aper:"sizeLB:1,sizeUB:63,valueExt"
     repeated RanfunctionDefinitionEventTriggerStyleItem ric_event_trigger_style_list = 1 [(validate.v1.rules).repeated = {min_items: 1, max_items: 63}, json_name="ric-EventTriggerStyle-List"];
     // @inject_tag: aper:"optional,sizeLB:1,sizeUB:65535,valueExt"
     repeated L2ParametersRanparameterItem ran_l2_parameters_list = 2 [(validate.v1.rules).repeated = {min_items: 0, max_items: 65535}, json_name="ran-L2Parameters-List"];
