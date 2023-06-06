@@ -203,8 +203,8 @@ github.com/mitchellh/mapstructure v1.4.3 h1:OVowDSCllw/YjdLkam3/sm7wEtOy59d8ndGg
 github.com/mitchellh/mapstructure v1.4.3/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
 github.com/onosproject/onos-api/go v0.10.16 h1:q2teRIBvKL0Z/04VmTTb48EwfSmfzadLk+DR8bjsu2o=
 github.com/onosproject/onos-api/go v0.10.16/go.mod h1:R882+8UcxQBLpCopnnbBnemXtJ77UXnL2I1y5yHbq10=
-github.com/onosproject/onos-lib-go v0.10.19 h1:gM6V8AznJd67EPIc27lw6/sjN35H2u+0aOyvPCquz+g=
-github.com/onosproject/onos-lib-go v0.10.19/go.mod h1:hld8H1f5mIi2Yrcx+mQ1WIHH8Id5Rtv77i0aBsvUX0I=
+github.com/onosproject/onos-lib-go v0.10.22 h1:OgrWe23v+pTKf89GSZZso8tKL9j3LfJAaAtAWu4X83o=
+github.com/onosproject/onos-lib-go v0.10.22/go.mod h1:hld8H1f5mIi2Yrcx+mQ1WIHH8Id5Rtv77i0aBsvUX0I=
 github.com/pelletier/go-toml v1.9.4 h1:tjENF6MfZAg8e4ZmZTeWaWiT2vXtsoO6+iuOjFhECwM=
 github.com/pelletier/go-toml v1.9.4/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
 github.com/pelletier/go-toml/v2 v2.0.0-beta.8 h1:dy81yyLYJDwMTifq24Oi/IslOslRrDSb3jwDggjz3Z0=
