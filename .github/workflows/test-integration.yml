@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2023 Intel Corporation
+
+name: Test integration
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: make build
+  
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: make test
+
+  Jenkins-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Jenkins tests
+        run: |
+          export GOPATH="$HOME/go/"
+          export PATH=$PATH:$GOPATH/bin
+          go install github.com/golang/mock/mockgen@v1.6.0
+          go install github.com/jstemmer/go-junit-report@latest
+          go install github.com/boumenot/gocover-cobertura@latest
+          make jenkins-test
+
+  sm-linters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: sm-linters
+        run: make sm-linters
+  
+  buflint:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+     - name: buflint 
+       run: make buflint
+
+  protos:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+     - name: protos
+       run: make protos
+
+  protos-py:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+     - name: protos-py
+       run: make protos-py
+
+  docker:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+     - name: docker-build
+       run: make images
+
+
+
+
+
