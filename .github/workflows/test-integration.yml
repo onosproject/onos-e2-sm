@@ -56,12 +56,8 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v2
-     - name: Run a multi-line script
-       shell: bash 
-       run: |
-          perl -E 'say "Is STDOUT a TTY?: ", -t STDOUT ? "yes" : "no"'
      - name: buflint 
-       run: docker run -it \
+       run: docker run -T \
                     -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
                     -v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
                     -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
