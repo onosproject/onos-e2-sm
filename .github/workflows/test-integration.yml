@@ -46,6 +46,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
       - name: sm-linters
         run: make sm-linters
   
