@@ -57,6 +57,7 @@ jobs:
    steps:
      - uses: actions/checkout@v2
      - name: buflint 
+       shell: pwsh 
        run: docker run -t \
                     -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
                     -v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
