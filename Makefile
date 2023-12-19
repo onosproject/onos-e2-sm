@@ -107,7 +107,7 @@ buflint: #@HELP run the "buf check lint" command on the proto files in 'api'
 
 protos: # @HELP compile the protobuf files (using protoc-go Docker)
 protos: buflint
-	docker run -it \
+	docker run  \
 		-v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
 		-v `pwd`/../onos-lib-go:/go/src/github.com/onosproject/onos-lib-go \
 		-w /go/src/github.com/onosproject/onos-e2-sm \
@@ -116,7 +116,7 @@ protos: buflint
 
 protos-py: # @HELP compile the protobuf files for python (using protoc-go Docker)
 protos-py:
-	docker run -it \
+	docker run  \
 		-v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
 		-v `pwd`/../onos-lib-go:/go/src/github.com/onosproject/onos-lib-go \
 		-w /go/src/github.com/onosproject/onos-e2-sm \
