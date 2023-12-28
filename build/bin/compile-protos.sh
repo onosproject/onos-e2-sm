@@ -109,6 +109,28 @@ protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
   --go_out=. \
   e2sm_rc/v1/e2sm_common_ies.proto
 
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
+  --proto_path=servicemodels \
+  --go_out=./servicemodels/ \
+  e2sm_ccc/v1/e2sm_ccc.proto e2sm_ccc/v1/e2sm_common_ies.proto
+protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-ccc-ies/e2sm_ccc.pb.go
+
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
+  --validate_out=lang=go:. --proto_path=servicemodels \
+  --go_out=. \
+  e2sm_ccc/v1/e2sm_ccc.proto
+
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
+  --proto_path=servicemodels \
+  --go_out=./servicemodels/ \
+  e2sm_ccc/v1/e2sm_common_ies.proto
+protoc-go-inject-tag -input=servicemodels/github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-common-ies/e2sm_common_ies.pb.go
+
+protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api \
+  --validate_out=lang=go:. --proto_path=servicemodels \
+  --go_out=. \
+  e2sm_ccc/v1/e2sm_common_ies.proto
+
 #protoc -I=$proto_imports:${GOPATH}/src/github.com/onosproject/onos-lib-go/api:${GOPATH}/src/github.com/onosproject/onos-e2-sm/servicemodels \
 #  --proto_path=servicemodels \
 #  --go_out=. \
