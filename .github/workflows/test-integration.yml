@@ -56,8 +56,12 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v2
+     - uses: actions/setup-go@v2
+       with: 
+         go-version: 1.18
      - name: buflint 
-       run: docker run \
+       run: |
+         docker run -it \
                     -v ${{ github.workspace }}:/go/src/github.com/onosproject/onos-e2-sm \
                     -v ${{ github.workspace }}/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
                     -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
