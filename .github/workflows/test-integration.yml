@@ -51,13 +51,17 @@ jobs:
           version: v1.54
       - name: sm-linters
         run: make sm-linters
-  
+        
   buflint:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v2
      - name: buflint 
-       run: docker run -v "`pwd`":/go/src/github.com/onosproject/onos-e2-sm -v "`pwd`/../onos-lib-go/api/asn1":/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels bufbuild/buf:${BUF_VERSION} lint
+       run: docker run \
+                    -v ${{ github.workspace }}:/go/src/github.com/onosproject/onos-e2-sm \
+                    -v ${{ github.workspace }}/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
+                    -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
+                    bufbuild/buf:${BUF_VERSION} lint
 
   protos:
    runs-on: ubuntu-latest
