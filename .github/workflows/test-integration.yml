@@ -58,8 +58,8 @@ jobs:
      - name: buflint 
        run: |
          docker run \
-                   -v ${{ github.workspace }}:/go/src/github.com/onosproject/onos-e2-sm 
-                   -v ${{ github.workspace }}/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 
+                   -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm 
+                   -v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 
                    -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels 
                     bufbuild/buf:${BUF_VERSION} lint
 
