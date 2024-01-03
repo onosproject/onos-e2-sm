@@ -56,11 +56,13 @@ jobs:
    steps:
      - uses: actions/checkout@v2
      - name: buflint 
+       env:
+        BUF_VERSION: 1.0.0  
        run: |
-         docker run \
-                   -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm 
-                   -v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 
-                   -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels 
+         docker run -it \
+                   -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
+                   -v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \ 
+                   -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
                     bufbuild/buf:${BUF_VERSION} lint
 
   protos:
