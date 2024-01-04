@@ -61,8 +61,8 @@ jobs:
        run: |
          sudo mkdir -p /go/src/github.com/onosproject
          cd /go/src/github.com/onosproject
-         sudo git clone https://github.com/Agarwal-Shivansh/onos-lib-go.git
-         sudo git clone https://github.com/Agarwal-Shivansh/onos-e2-sm.git
+         sudo git clone https://github.com/onosproject/onos-e2-sm.git
+         sudo git clone https://github.com/onosproject/onos-lib-go.git
          cd /go/src/github.com/onosproject/onos-e2-sm
          docker run \
                    -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
