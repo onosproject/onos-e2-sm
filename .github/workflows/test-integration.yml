@@ -95,7 +95,21 @@ jobs:
    steps:
      - uses: actions/checkout@v4
      - name: protos-py
-       run: make protos-py
+       env:
+        ONOS_PROTOC_VERSION: v1.0.2
+       run: |
+         sudo mkdir -p /go/src/github.com/onosproject
+         cd /go/src/github.com/onosproject
+         sudo git clone https://github.com/onosproject/onos-e2-sm.git
+         sudo git clone https://github.com/onosproject/onos-lib-go.git
+         cd /go/src/github.com/onosproject/onos-e2-sm
+         docker run \
+                   -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
+                   -v `pwd`/../onos-lib-go:/go/src/github.com/onosproject/onos-lib-go \
+                   -w /go/src/github.com/onosproject/onos-e2-sm \
+                   --entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos-py.sh \
+                   onosproject/protoc-go:${ONOS_PROTOC_VERSION}        
+        
 
   docker:
    runs-on: ubuntu-latest
