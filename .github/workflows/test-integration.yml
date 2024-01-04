@@ -60,7 +60,9 @@ jobs:
         BUF_VERSION: 1.0.0   
        run: |
          sudo mkdir -p /go/src/github.com/onosproject
-         cd /go/src/github.com/onosproject
+         git clone https://github.com/Agarwal-Shivansh/onos-lib-go.git
+         git clone https://github.com/Agarwal-Shivansh/onos-e2-sm.git
+         cd /go/src/github.com/onosproject/onos-e2-sm
          docker run \
                    -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
                    -v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
