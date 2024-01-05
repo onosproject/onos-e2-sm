@@ -49,7 +49,20 @@ jobs:
         with:
           version: v1.54
       - name: sm-linters
-        run: make sm-linters
+        run: |
+          	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_rc && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_kpm_v2_go && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_rc_pre_go && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_mho && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/e2sm_rsm && golangci-lint run --timeout 5m && cd ..
+          	cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m && cd ..
+          	cd protoc-gen-cgo/ && golangci-lint run --timeout 5m && cd ..
+          	cd protoc-gen-choice/ && golangci-lint run --timeout 5m && cd ..
+          	cd protoc-gen-builder/ && golangci-lint run --timeout 5m && cd ..          
         
   buflint:
    runs-on: ubuntu-latest
