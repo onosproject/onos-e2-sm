@@ -50,8 +50,8 @@ jobs:
           version: v1.54
       - name: sm-linters
         run: |
-          	# golangci-lint --version | grep 1.52.2 || curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b `go env GOPATH`/bin v1.52.2
-            cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
+          	golangci-lint --version | grep 1.52.2 || curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b `go env GOPATH`/bin v1.52.2
+                cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
           	cd servicemodels/e2sm_rc && golangci-lint run --timeout 5m && cd ..
           	cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
           	cd servicemodels/e2sm_kpm_v2_go && golangci-lint run --timeout 5m && cd ..
