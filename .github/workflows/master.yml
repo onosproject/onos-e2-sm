@@ -19,6 +19,150 @@ jobs:
         run: |
           cd servicemodels/e2sm_kpm
           CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
+
+  build-e2sm_kpm_v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_kpm_v2
+          CGO_ENABLED=1 go build -o build/_output/e2sm_kpm_v2.so.1.0.0 -buildmode=plugin .
+
+  build-e2sm_kpm_v2_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_kpm_v2_go
+          go build -o build/_output/e2sm_kpm_v2_go.so.1.0.0 -buildmode=plugin .
+          
+  build-e2sm_rc_pre_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_rc_pre_go
+          go build -o build/_output/e2sm_rc_pre_go.so.1.0.0 -buildmode=plugin .
+ 
+  build-e2sm_mho_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_mho_go
+          go build -o build/_output/e2sm_mho_go.so.1.0.0 -buildmode=plugin .
+ 
+  build-e2sm_rsm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_rsm
+          go build -o build/_output/e2sm_rsm.so.1.0.0 -buildmode=plugin .
+
+  build-e2sm_ni:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_ni
+          CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
+  
+  build-e2sm_rc_pre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_rc_pre
+          CGO_ENABLED=1 go build -o build/_output/e2sm_rc_pre.so.1.0.0 -buildmode=plugin .
+
+  build-e2sm_mho:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_mho
+          CGO_ENABLED=1 go build -o build/_output/e2sm_mho.so.1.0.0 -buildmode=plugin .
+
+  build-e2sm_rc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_rc
+          CGO_ENABLED=1 go build -o build/_output/e2sm_rc.so.1.0.0 -buildmode=plugin .
+  
+  build-protoc_gen_cgo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd protoc-gen-cgo/
+          go build -v -o ./protoc-gen-cgo && cd ..
+
+  build-protoc_gen_choice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd protoc-gen-choice/
+          go build -v -o ./protoc-gen-choice && go install && cd ..
+
+  build-protoc_gen_builder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: |
+          cd protoc-gen-builder/
+          go build -v -o ./protoc-gen-builder && go install && cd ..
   
   unit-tests:
     runs-on: ubuntu-latest
@@ -45,7 +189,7 @@ jobs:
   buflint:
    runs-on: ubuntu-latest
    steps:
-     - uses: actions/checkout@v2
+     - uses: actions/checkout@v4
      - name: buflint 
        env:
          BUF_VERSION: 1.0.0   
