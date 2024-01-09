@@ -8,12 +8,17 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-e2sm-kpm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
       - name: Build
-        run: make build
+        run: |
+          cd servicemodels/e2sm_kpm
+          CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
   
   unit-tests:
     runs-on: ubuntu-latest
