@@ -10,7 +10,7 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "docker"
-    directory: "/"
+    directory: "/build/plugins/"
     schedule:
       interval: "daily"
 
