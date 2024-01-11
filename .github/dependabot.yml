@@ -18,3 +18,73 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+      
+  - package-ecosystem: "gomod"
+    directory: "/protoc-gen-builder/"
+    schedule:
+      interval: "daily"
+      
+  - package-ecosystem: "gomod"
+    directory: "/protoc-gen-cgo/"
+    schedule:
+      interval: "daily"
+      
+  - package-ecosystem: "gomod"
+    directory: "/protoc-gen-choice/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_mho_go/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_kpm_v2/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_kpm_v2_go/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_mho/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_ni/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_rc_pre/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_rsm/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_kpm/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_rc_pre_go/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/e2sm_rc/"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/test_sm_aper_go_lib/"
+    schedule:
+      interval: "daily"
