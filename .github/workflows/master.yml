@@ -172,7 +172,8 @@ jobs:
         with:
           version: v1.54
       - name: Unit tests
-        run: make test
+        run: |
+          cd servicemodels/e2sm_rc && go test -race ./...
 
   sm-linters:
     runs-on: ubuntu-latest
