@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2023 Intel Corporation
+# Copyright 2024 Intel Corporation
 name: Test integration
 on:
   push:
@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  build-e2sm-kpm:
+  build-e2sm_kpm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -138,7 +138,7 @@ jobs:
       - name: Build
         run: |
           cd protoc-gen-cgo/
-          go build -v -o ./protoc-gen-cgo && cd ..
+          go build -v -o ./protoc-gen-cgo
 
   build-protoc_gen_choice:
     runs-on: ubuntu-latest
@@ -150,7 +150,7 @@ jobs:
       - name: Build
         run: |
           cd protoc-gen-choice/
-          go build -v -o ./protoc-gen-choice && go install && cd ..
+          go build -v -o ./protoc-gen-choice && go install
 
   build-protoc_gen_builder:
     runs-on: ubuntu-latest
@@ -162,7 +162,7 @@ jobs:
       - name: Build
         run: |
           cd protoc-gen-builder/
-          go build -v -o ./protoc-gen-builder && go install && cd ..
+          go build -v -o ./protoc-gen-builder && go install
   
   unit-tests:
     runs-on: ubuntu-latest
@@ -173,7 +173,6 @@ jobs:
           version: v1.54
       - name: Unit tests
         run: make test
-
 
   sm-linters:
     runs-on: ubuntu-latest
@@ -190,9 +189,9 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v4
-     - name: buflint 
+     - name: buflint
        env:
-         BUF_VERSION: 1.0.0   
+         BUF_VERSION: 1.0.0
        run: |
          sudo mkdir -p /go/src/github.com/onosproject
          cd /go/src/github.com/onosproject
@@ -211,7 +210,7 @@ jobs:
      - uses: actions/checkout@v4
      - name: protos
        env:
-         ONOS_PROTOC_VERSION: v1.0.2  
+         ONOS_PROTOC_VERSION: v1.0.2
        run: |
          sudo mkdir -p /go/src/github.com/onosproject
          cd /go/src/github.com/onosproject
@@ -243,7 +242,7 @@ jobs:
            -v `pwd`/../onos-lib-go:/go/src/github.com/onosproject/onos-lib-go \
            -w /go/src/github.com/onosproject/onos-e2-sm \
            --entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos-py.sh \
-           onosproject/protoc-go:${ONOS_PROTOC_VERSION}        
+           onosproject/protoc-go:${ONOS_PROTOC_VERSION}
         
   docker:
    runs-on: ubuntu-latest
@@ -251,10 +250,3 @@ jobs:
      - uses: actions/checkout@v4
      - name: docker-build
        run: make images
-  clean:
-   runs-on: ubuntu-latest
-   steps:
-     - uses: actions/checkout@v4
-     - name: Cleanup Docker images
-       run: |
-         docker image prune -af
