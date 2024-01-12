@@ -275,7 +275,7 @@ jobs:
         run: |
           cd servicemodels/test_sm_aper_go_lib/testsmctypes && GODEBUG=cgocheck=0 go test -race ./...
           
-  sm-linters:
+  sm-linters-e2sm_kpm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -285,6 +285,138 @@ jobs:
       - name: sm-linters
         run: |
           cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rc && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_kpm_v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_kpm_v2_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_kpm_v2_go && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_ni:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rc_pre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rc_pre_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rc_pre_go && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_mho:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_mho && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rsm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rsm && golangci-lint run --timeout 5m
+
+  sm-linters-test_sm_aper_go_lib:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m
+
+  sm-linters-protoc-gen-cgo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd protoc-gen-cgo/ && golangci-lint run --timeout 5m
+
+  sm-linters-protoc-gen-choice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd protoc-gen-choice/ && golangci-lint run --timeout 5m
+
+  sm-linters-protoc-gen-builder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: sm-linters
+        run: |
+          cd protoc-gen-builder/ && golangci-lint run --timeout 5m
         
   buflint:
    runs-on: ubuntu-latest
