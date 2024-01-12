@@ -165,7 +165,7 @@ jobs:
           cd protoc-gen-builder/
           go build -v -o ./protoc-gen-builder && go install
   
-  unit-tests:
+  unit-tests-e2sm_rc:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -176,6 +176,105 @@ jobs:
         run: |
           cd servicemodels/e2sm_rc && go test -race ./...
 
+  unit-tests-e2sm_kpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
+
+  unit-tests-e2sm_rc_pre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
+
+  unit-tests-e2sm_rc_pre_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_rc_pre_go && go test -race ./...
+
+  unit-tests-e2sm_kpm_v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
+
+  unit-tests-e2sm_kpm_v2_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_kpm_v2_go && go test -race ./...
+
+  unit-tests-e2sm_mho:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 go test -race ./...
+
+  unit-tests-e2sm_mho_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_mho_go && go test -race ./...
+
+  unit-tests-e2sm_rsm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/e2sm_rsm && go test -race ./...
+
+  unit-tests-test_sm_aper_go_lib:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.54
+      - name: Unit tests
+        run: |
+          cd servicemodels/test_sm_aper_go_lib/testsmctypes && GODEBUG=cgocheck=0 go test -race ./...
+          
   sm-linters:
     runs-on: ubuntu-latest
     steps:
