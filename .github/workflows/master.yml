@@ -484,7 +484,6 @@ jobs:
      - name: docker-build
        run: |
          cd servicemodels/e2sm_kpm_v2_go && go build -o build/_output/e2sm_kpm_v2_go.so.1.0.0 -buildmode=plugin .
-         ./build/bin/build-deps e2sm_kpm_v2_go github.com/onosproject/onos-e2t@master onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:latest
          docker build . -f build/plugins/Dockerfile \
                          --build-arg PLUGIN_MAKE_TARGET="e2sm_kpm_v2_go" \
                          --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
