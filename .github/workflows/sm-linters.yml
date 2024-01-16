@@ -1,0 +1,166 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2024 Intel Corporation
+name: Test integration
+on:
+  push:
+    branches:
+      - master
+      - GHA-integration
+  pull_request:
+
+jobs:
+  sm-linters-e2sm_kpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rc && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_kpm_v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_kpm_v2_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_kpm_v2_go && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_ni:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_ni && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rc_pre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rc_pre && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rc_pre_go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rc_pre_go && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_mho:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_mho && golangci-lint run --timeout 5m
+
+  sm-linters-e2sm_rsm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/e2sm_rsm && golangci-lint run --timeout 5m
+
+  sm-linters-test_sm_aper_go_lib:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd servicemodels/test_sm_aper_go_lib && golangci-lint run --timeout 5m
+
+  sm-linters-protoc-gen-cgo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd protoc-gen-cgo/ && golangci-lint run --timeout 5m
+
+  sm-linters-protoc-gen-choice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd protoc-gen-choice/ && golangci-lint run --timeout 5m
+
+  sm-linters-protoc-gen-builder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: golangci/golangci-lint-action@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: sm-linters
+        run: |
+          cd protoc-gen-builder/ && golangci-lint run --timeout 5m

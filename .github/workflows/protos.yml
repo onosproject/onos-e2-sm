@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2024 Intel Corporation
+name: Test integration
+on:
+  push:
+    branches:
+      - master
+      - GHA-integration
+  pull_request:
+
+jobs:
+  protos:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+     - name: protos
+       env:
+         ONOS_PROTOC_VERSION: v1.0.2
+       run: |
+         cd ..
+         sudo git clone https://github.com/onosproject/onos-lib-go.git
+         cd onos-e2-sm
+         docker run \
+           -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
+           -v `pwd`/../onos-lib-go:/go/src/github.com/onosproject/onos-lib-go \
+           -w /go/src/github.com/onosproject/onos-e2-sm \
+           --entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos.sh \
+           onosproject/protoc-go:${ONOS_PROTOC_VERSION}
+
+  protos-py:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+     - name: protos-py
+       env:
+         ONOS_PROTOC_VERSION: v1.0.2
+       run: |
+         cd ..
+         sudo git clone https://github.com/onosproject/onos-lib-go.git
+         cd onos-e2-sm
+         docker run \
+           -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
+           -v `pwd`/../onos-lib-go:/go/src/github.com/onosproject/onos-lib-go \
+           -w /go/src/github.com/onosproject/onos-e2-sm \
+           --entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos-py.sh \
+           onosproject/protoc-go:${ONOS_PROTOC_VERSION}
