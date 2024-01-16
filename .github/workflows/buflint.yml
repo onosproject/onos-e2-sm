@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2024 Intel Corporation
-name: Test integration
+name: Buflint
 on:
   push:
     branches:
       - master
-      - GHA-integration
   pull_request:
 
 jobs:
