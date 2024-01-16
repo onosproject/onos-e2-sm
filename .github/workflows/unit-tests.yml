@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2024 Intel Corporation
-name: Test integration
+name: Unit-tests
 on:
   push:
     branches:
       - master
-      - GHA-integration
   pull_request:
 
 jobs:
