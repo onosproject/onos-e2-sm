@@ -26,7 +26,6 @@ updates:
     directory: "/protoc-gen-cgo/"
     schedule:
       interval: "weekly"
-      
   - package-ecosystem: "gomod"
     directory: "/protoc-gen-choice/"
     schedule:
