@@ -18,14 +18,17 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+
   - package-ecosystem: "gomod"
     directory: "/protoc-gen-builder/"
     schedule:
       interval: "weekly"
+
   - package-ecosystem: "gomod"
     directory: "/protoc-gen-cgo/"
     schedule:
       interval: "weekly"
+
   - package-ecosystem: "gomod"
     directory: "/protoc-gen-choice/"
     schedule:
