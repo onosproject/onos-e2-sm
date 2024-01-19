@@ -25,7 +25,7 @@ jobs:
             -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
             bufbuild/buf:$BUF_VERSION lint
 
-  sm-linters-e2sm_kpm:
+  e2sm_kpm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,7 +40,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_kpm_v2:
+  e2sm_kpm_v2:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -55,7 +55,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_kpm_v2_go:
+  e2sm_kpm_v2_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -70,7 +70,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_rc:
+  e2sm_rc:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -85,7 +85,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_rc_pre:
+  e2sm_rc_pre:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -100,7 +100,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_rc_pre_go:
+  e2sm_rc_pre_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -115,7 +115,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_mho:
+  e2sm_mho:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -130,7 +130,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_ni:
+  e2sm_ni:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -145,7 +145,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-e2sm_rsm:
+  e2sm_rsm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -160,7 +160,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-test_sm_aper_go_lib:
+  test_sm_aper_go_lib:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -175,7 +175,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-protoc-gen-cgo:
+  protoc-gen-cgo:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -190,7 +190,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-protoc-gen-choice:
+  protoc-gen-choice:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -205,7 +205,7 @@ jobs:
           version: latest
           args: -v --config ./.golangci.yml
 
-  sm-linters-protoc-gen-builder:
+  protoc-gen-builder:
     runs-on: ubuntu-latest
     defaults:
       run:

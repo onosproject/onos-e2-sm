@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  unit-tests-e2sm_kpm:
+  e2sm_kpm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -22,7 +22,7 @@ jobs:
       - name: Unit tests
         run: GODEBUG=cgocheck=0 go test -race ./...
 
-  unit-tests-e2sm_kpm_v2:
+  e2sm_kpm_v2:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -36,7 +36,7 @@ jobs:
       - name: Unit tests
         run: GODEBUG=cgocheck=0 go test -race ./...
 
-  unit-tests-e2sm_kpm_v2_go:
+  e2sm_kpm_v2_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -50,7 +50,7 @@ jobs:
       - name: Unit tests
         run: go test -race ./...
 
-  unit-tests-e2sm_rc:
+  e2sm_rc:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -64,7 +64,7 @@ jobs:
       - name: Unit tests
         run: go test -race ./...
 
-  unit-tests-e2sm_rc_pre:
+  e2sm_rc_pre:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -78,7 +78,7 @@ jobs:
       - name: Unit tests
         run: GODEBUG=cgocheck=0 go test -race ./...
 
-  unit-tests-e2sm_rc_pre_go:
+  e2sm_rc_pre_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -92,7 +92,7 @@ jobs:
       - name: Unit tests
         run: go test -race ./...
 
-  unit-tests-e2sm_mho:
+  e2sm_mho:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -106,7 +106,7 @@ jobs:
       - name: Unit tests
         run: GODEBUG=cgocheck=0 go test -race ./...
 
-  unit-tests-e2sm_mho_go:
+  e2sm_mho_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -120,7 +120,7 @@ jobs:
       - name: Unit tests
         run: go test -race ./...
 
-  unit-tests-e2sm_rsm:
+  e2sm_rsm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -134,7 +134,7 @@ jobs:
       - name: Unit tests
         run: go test -race ./...
 
-  unit-tests-test_sm_aper_go_lib:
+  test_sm_aper_go_lib:
     runs-on: ubuntu-latest
     defaults:
       run:

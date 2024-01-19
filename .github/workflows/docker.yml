@@ -12,7 +12,7 @@ env:
   ONOS_E2_SM_VERSION: latest
 
 jobs:
-  docker-e2sm_kpm_v2_go:
+  e2sm_kpm_v2_go:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
           --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
           -t onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:$ONOS_E2_SM_VERSION
 
-  docker-e2sm_rc:
+  e2sm_rc:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
           --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
           -t onosproject/service-model-docker-e2sm_rc-1.0.0:$ONOS_E2_SM_VERSION
 
-  docker-e2sm_rc_pre_go:
+  e2sm_rc_pre_go:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +48,7 @@ jobs:
           --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
           -t onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:$ONOS_E2_SM_VERSION
 
-  docker-e2sm_mho_go:
+  e2sm_mho_go:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -60,7 +60,7 @@ jobs:
           --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
           -t onosproject/service-model-docker-e2sm_mho_go-1.0.0:$ONOS_E2_SM_VERSION
 
-  docker-e2sm_rsm:
+  e2sm_rsm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

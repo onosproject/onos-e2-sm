@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  build-e2sm_kpm:
+  e2sm_kpm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_kpm_v2:
+  e2sm_kpm_v2:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -34,7 +34,7 @@ jobs:
       - name: Build
         run: CGO_ENABLED=1 go build -o build/_output/e2sm_kpm_v2.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_kpm_v2_go:
+  e2sm_kpm_v2_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -47,7 +47,7 @@ jobs:
       - name: Build
         run: go build -o build/_output/e2sm_kpm_v2_go.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_rc:
+  e2sm_rc:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -60,7 +60,7 @@ jobs:
       - name: Build
         run: CGO_ENABLED=1 go build -o build/_output/e2sm_rc.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_rc_pre:
+  e2sm_rc_pre:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -73,7 +73,7 @@ jobs:
       - name: Build
         run: CGO_ENABLED=1 go build -o build/_output/e2sm_rc_pre.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_rc_pre_go:
+  e2sm_rc_pre_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -86,7 +86,7 @@ jobs:
       - name: Build
         run: go build -o build/_output/e2sm_rc_pre_go.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_mho:
+  e2sm_mho:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -99,7 +99,7 @@ jobs:
       - name: Build
         run: CGO_ENABLED=1 go build -o build/_output/e2sm_mho.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_mho_go:
+  e2sm_mho_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -112,7 +112,7 @@ jobs:
       - name: Build
         run: go build -o build/_output/e2sm_mho_go.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_ni:
+  e2sm_ni:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -125,7 +125,7 @@ jobs:
       - name: Build
         run: CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
 
-  build-e2sm_rsm:
+  e2sm_rsm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -138,7 +138,7 @@ jobs:
       - name: Build
         run: go build -o build/_output/e2sm_rsm.so.1.0.0 -buildmode=plugin .
 
-  build-protoc_gen_cgo:
+  protoc_gen_cgo:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -151,7 +151,7 @@ jobs:
       - name: Build
         run: go build -v -o ./protoc-gen-cgo
 
-  build-protoc_gen_choice:
+  protoc_gen_choice:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -164,7 +164,7 @@ jobs:
       - name: Build
         run: go build -v -o ./protoc-gen-choice && go install
 
-  build-protoc_gen_builder:
+  protoc_gen_builder:
     runs-on: ubuntu-latest
     defaults:
       run:
