@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2024 Intel Corporation
-name: Build
+name: Linters
 on:
   push:
     branches:
@@ -8,7 +8,24 @@ on:
   pull_request:
 
 jobs:
-  build-e2sm_kpm:
+  buflint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: buflint
+        env:
+          BUF_VERSION: 1.0.0
+        run: |
+          cd ..
+          git clone https://github.com/onosproject/onos-lib-go.git
+          cd onos-e2-sm
+          docker run \
+            -v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
+            -v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
+            -w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
+            bufbuild/buf:$BUF_VERSION lint
+
+  sm-linters-e2sm_kpm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -18,10 +35,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_kpm_v2:
+  sm-linters-e2sm_kpm_v2:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -31,10 +50,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: CGO_ENABLED=1 go build -o build/_output/e2sm_kpm_v2.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_kpm_v2_go:
+  sm-linters-e2sm_kpm_v2_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -44,10 +65,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: go build -o build/_output/e2sm_kpm_v2_go.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_rc:
+  sm-linters-e2sm_rc:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -57,10 +80,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: CGO_ENABLED=1 go build -o build/_output/e2sm_rc.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_rc_pre:
+  sm-linters-e2sm_rc_pre:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -70,10 +95,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: CGO_ENABLED=1 go build -o build/_output/e2sm_rc_pre.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_rc_pre_go:
+  sm-linters-e2sm_rc_pre_go:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -83,10 +110,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: go build -o build/_output/e2sm_rc_pre_go.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_mho:
+  sm-linters-e2sm_mho:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -96,23 +125,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: CGO_ENABLED=1 go build -o build/_output/e2sm_mho.so.1.0.0 -buildmode=plugin .
-
-  build-e2sm_mho_go:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./servicemodels/e2sm_mho_go
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: golangci/golangci-lint-action@v3.7.0
         with:
-          go-version-file: 'go.mod'
-      - name: Build
-        run: go build -o build/_output/e2sm_mho_go.so.1.0.0 -buildmode=plugin .
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_ni:
+  sm-linters-e2sm_ni:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -122,10 +140,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: CGO_ENABLED=1 go build -o build/_output/e2sm_ni.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-e2sm_rsm:
+  sm-linters-e2sm_rsm:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -135,10 +155,27 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: go build -o build/_output/e2sm_rsm.so.1.0.0 -buildmode=plugin .
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
 
-  build-protoc_gen_cgo:
+  sm-linters-test_sm_aper_go_lib:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./servicemodels/test_sm_aper_go_lib
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../../.golangci.yml
+
+  sm-linters-protoc-gen-cgo:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -148,10 +185,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: go build -v -o ./protoc-gen-cgo
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../.golangci.yml
 
-  build-protoc_gen_choice:
+  sm-linters-protoc-gen-choice:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -161,10 +200,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: go build -v -o ./protoc-gen-choice && go install
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../.golangci.yml
 
-  build-protoc_gen_builder:
+  sm-linters-protoc-gen-builder:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -174,5 +215,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: Build
-        run: go build -v -o ./protoc-gen-builder && go install
+      - uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: latest
+          args: -v --config ../.golangci.yml
