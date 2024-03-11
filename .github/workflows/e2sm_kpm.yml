@@ -8,7 +8,7 @@ on:
       - GHA-integration
   pull_request:
 jobs:
-  build-e2sm_kpm:
+  e2sm_kpm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,11 +19,11 @@ jobs:
         run: |
           cd servicemodels/e2sm_kpm
           CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
-      # - name: Lint
-      # - uses: golangci/golangci-lint-action@v4.0.0
-      #   with:
-      #     version: latest
-      #     args: -v --config ./.golangci.yml --timeout=15m
+      - name: Lint
+      - uses: golangci/golangci-lint-action@v4.0.0
+        with:
+          version: latest
+          args: -v --config ./.golangci.yml --timeout=15m
       # - name: Unit tests
       #   run: |
       #     cd servicemodels/e2sm_kpm go test -race ./...
