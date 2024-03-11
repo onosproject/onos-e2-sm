@@ -28,8 +28,7 @@ jobs:
           args: -v --config ./.golangci.yml --timeout=15m
 
       - name: Unit tests
-        run: |
-          cd servicemodels/e2sm_kpm go test -race ./...
+        run: cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 
       - name: reuse lint
         uses: fsfe/reuse-action@v3
