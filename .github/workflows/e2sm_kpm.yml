@@ -15,10 +15,10 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      # - name: Build
-      #   run: |
-      #     cd servicemodels/e2sm_kpm
-      #     CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
+      - name: Build
+        run: |
+          cd servicemodels/e2sm_kpm
+          CGO_ENABLED=1 go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
       # - name: Lint
       # - uses: golangci/golangci-lint-action@v4.0.0
       #   with:
