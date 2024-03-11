@@ -1,42 +1,35 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2024 Intel Corporation
-name: e2sm_kpm
+name: Build
 on:
   push:
     branches:
       - master
       - GHA-integration
   pull_request:
-
 jobs:
-  e2sm_kpm:
+  build-e2sm_kpm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-          
       - name: Build
         run: |
           cd servicemodels/e2sm_kpm
-          go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
-
+          go build build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
       - name: Lint
       - uses: golangci/golangci-lint-action@v4.0.0
         with:
           version: latest
           args: -v --config ./.golangci.yml --timeout=15m
-
       - name: Unit tests
         run: |
           cd servicemodels/e2sm_kpm go test -race ./...
-
       - name: reuse lint
         uses: fsfe/reuse-action@v3
-
       - name: FOSSA scan
         uses: fossa-contrib/fossa-action@v3
         with:
-          fossa-api-key: 6d304c09a3ec097ba4517724e4a4d17d        
-                       
+          fossa-api-key: 6d304c09a3ec097ba4517724e4a4d17d
