@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2024 Intel Corporation
 
-name: protoc_gen_cgo
+name: protoc_gen_builder
 on:
   push:
     branches:
@@ -10,18 +10,18 @@ on:
   pull_request:
 
 jobs:
-  protoc_gen_cgo:
+  protoc_gen_builder:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./protoc-gen-cgo
+        working-directory: ./protoc-gen-builder
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
       - name: Build
-        run: go build -v -o ./protoc-gen-cgo
+        run: go build -v -o ./protoc-gen-builder
 
       - name: Unit tests
         run: go test -race ./...

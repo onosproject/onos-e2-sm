@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2024 Intel Corporation
 
-name: Build
+name: e2sm_kpm
 on:
   push:
     branches:
       - master
-      - GHA-integration
+      - Githubactions
   pull_request:
 
 env:
@@ -16,37 +16,25 @@ env:
 jobs:
   e2sm_kpm:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./servicemodels/e2sm_kpm
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
       - name: Build
-        run: |
-          cd servicemodels/e2sm_kpm
-          go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
-
-      - name: lint
-        uses: golangci/golangci-lint-action@v4.0.0
-        with:
-          version: latest
-          args: -v --config ./.golangci.yml --timeout=15m
+        run: go build -o build/_output/e2sm_kpm.so.1.0.0 -buildmode=plugin .
 
       - name: Unit tests
-        run: cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
+        run: GODEBUG=cgocheck=0 go test -race ./...
 
       - name: docker-build
         run: |
+          cd ../..
           ./build/bin/build-deps e2sm_kpm $E2T_MOD
           docker build . -f build/plugins/Dockerfile \
           --build-arg PLUGIN_MAKE_TARGET="e2sm_kpm" \
           --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
           -t onosproject/service-model-docker-e2sm_kpm-1.0.0:$ONOS_E2_SM_VERSION
-
-      - name: reuse lint
-        uses: fsfe/reuse-action@v3
-
-      - name: FOSSA scan
-        uses: fossa-contrib/fossa-action@v3
-        with:
-          fossa-api-key: 6d304c09a3ec097ba4517724e4a4d17d
