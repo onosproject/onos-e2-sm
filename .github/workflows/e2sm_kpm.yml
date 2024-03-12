@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2024 Intel Corporation
+
 name: Build
 on:
   push:
@@ -8,8 +9,12 @@ on:
       - GHA-integration
   pull_request:
 
+env:
+  E2T_MOD: github.com/onosproject/onos-e2t@master
+  ONOS_E2_SM_VERSION: latest
+
 jobs:
-  build-e2sm_kpm:
+  e2sm_kpm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,6 +34,14 @@ jobs:
 
       - name: Unit tests
         run: cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
+
+      - name: docker-build
+        run: |
+          ./build/bin/build-deps e2sm_kpm $E2T_MOD
+          docker build . -f build/plugins/Dockerfile \
+          --build-arg PLUGIN_MAKE_TARGET="e2sm_kpm" \
+          --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
+          -t onosproject/service-model-docker-e2sm_kpm-1.0.0:$ONOS_E2_SM_VERSION
 
       - name: reuse lint
         uses: fsfe/reuse-action@v3

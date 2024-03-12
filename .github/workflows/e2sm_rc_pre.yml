@@ -10,7 +10,7 @@ on:
   pull_request:
 
 jobs:
-  e2sm_kpm_v2:
+  e2sm_rc_pre:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,8 +19,8 @@ jobs:
           go-version-file: 'go.mod'
       - name: Build
         run: |
-          cd servicemodels/e2sm_kpm
-          go build -o build/_output/e2sm_kpm_v2.so.1.0.0 -buildmode=plugin .
+          cd servicemodels/e2sm_rc_pre
+          go build -o build/_output/e2sm_rc_pre.so.1.0.0 -buildmode=plugin .
 
       - name: lint
         uses: golangci/golangci-lint-action@v4.0.0
@@ -29,15 +29,15 @@ jobs:
           args: -v --config ./.golangci.yml --timeout=15m
 
       - name: Unit tests
-        run: cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 go test -race ./...
+        run: cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
 
       - name: docker-build
         run: |
-          ./build/bin/build-deps e2sm_kpm_v2 $E2T_MOD onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:$ONOS_E2_SM_VERSION
+          ./build/bin/build-deps e2sm_rc_pre $E2T_MOD
           docker build . -f build/plugins/Dockerfile \
-          --build-arg PLUGIN_MAKE_TARGET="e2sm_kpm_v2" \
+          --build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre" \
           --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-          -t onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:$ONOS_E2_SM_VERSION
+          -t onosproject/service-model-docker-e2sm_rc_pre-1.0.0:$ONOS_E2_SM_VERSION
 
       - name: reuse lint
         uses: fsfe/reuse-action@v3
