@@ -37,4 +37,3 @@ jobs:
           --build-arg PLUGIN_MAKE_TARGET="e2sm_kpm_v2" \
           --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
           -t onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:$ONOS_E2_SM_VERSION
-
