@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2024 Intel Corporation
+
+name: e2sm_rc_pre_go
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+env:
+  E2T_MOD: github.com/onosproject/onos-e2t@master
+  ONOS_E2_SM_VERSION: latest
+
+jobs:
+  e2sm_rc_pre_go:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./servicemodels/e2sm_rc_pre_go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: go build -o build/_output/e2sm_rc_pre_go.so.1.0.0 -buildmode=plugin .
+
+      - name: Unit tests
+        run: go test -race ./...
+
+      - name: docker-build
+        run: |
+          cd ../..
+          ./build/bin/build-deps e2sm_rc_pre_go $E2T_MOD
+          docker build . -f build/plugins/Dockerfile \
+          --build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre_go" \
+          --build-arg PLUGIN_MAKE_VERSION="1.0.0" \
+          -t onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:$ONOS_E2_SM_VERSION

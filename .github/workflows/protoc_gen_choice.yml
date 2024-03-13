@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2024 Intel Corporation
+
+name: protoc_gen_choice
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  protoc_gen_choice:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./protoc-gen-choice
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: go build -v -o ./protoc-gen-choice
+
+      - name: Unit tests
+        run: go test -race ./...
+
