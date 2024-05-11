@@ -20,7 +20,7 @@ RUN cd /go/src/github.com/onosproject/ran-simulator && \
 CGO_ENABLED=1 go build -o build/_output/${PLUGIN_MAKE_TARGET}.so.${PLUGIN_MAKE_VERSION} \
 -buildmode=plugin github.com/onosproject/onos-e2-sm/servicemodels/${PLUGIN_MAKE_TARGET}
 
-FROM alpine:3.12
+FROM alpine:3.19
 ARG PLUGIN_MAKE_TARGET
 ARG PLUGIN_MAKE_VERSION
 COPY --from=pluginbuild /go/src/github.com/onosproject/ran-simulator/build/_output/${PLUGIN_MAKE_TARGET}.so.${PLUGIN_MAKE_VERSION} /
