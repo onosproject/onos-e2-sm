@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/onosproject/onos-lib-go v0.10.25
 	github.com/rogpeppe/go-internal v1.12.0
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 )
 
 require (
