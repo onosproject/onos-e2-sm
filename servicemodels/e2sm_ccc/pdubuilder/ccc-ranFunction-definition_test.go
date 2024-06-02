@@ -15,4 +15,6 @@ func TestCreateListOfCellsForRanfunctionDefinition(t *testing.T) {
 	result, err := CreateListOfCellsForRanfunctionDefinition(value)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }

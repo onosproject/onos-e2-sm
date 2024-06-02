@@ -6,6 +6,7 @@ package pdubuilder
 import (
 	"testing"
 
+	encoder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/encoder"
 	e2smcccv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-ccc-ies"
 	"github.com/stretchr/testify/assert"
 )
@@ -13,6 +14,18 @@ import (
 func TestCreateE2SmCCcRIceventTriggerDefinition(t *testing.T) {
 	eventTriggerDefinitionFormat := &e2smcccv1.EventTriggerDefinitionFormat{}
 	result, err := CreateE2SmCCcRIceventTriggerDefinition(eventTriggerDefinitionFormat)
+
+	encodedMsg, err := encoder.PerEncodeE2SmCCcRIceventTriggerDefinition(result)
+	assert.NoError(t, err)
+	assert.NotNil(t, encodedMsg)
+	decodedMsg, err := encoder.PerDecodeE2SmCCcRIceventTriggerDefinition(encodedMsg)
+	assert.NoError(t, err)
+	assert.NotNil(t, decodedMsg)
+	assert.Equal(t, result, decodedMsg)
+	assert.NoError(t, err)
+	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 }
@@ -28,6 +41,9 @@ func TestCreateE2SmCCcEventTriggerDefinitionFormat1(t *testing.T) {
 	result, err := CreateE2SmCCcEventTriggerDefinitionFormat1(listOfNodeLevelConfigurationStructuresForEventTrigger)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
+
 }
 
 func TestCreateListOfRanconfigurationStructuresForEventTrigger(t *testing.T) {
@@ -38,6 +54,9 @@ func TestCreateListOfRanconfigurationStructuresForEventTrigger(t *testing.T) {
 	result, err := CreateListOfRanconfigurationStructuresForEventTrigger(value)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+
+	err = result.Validate()
+	assert.NoError(t, err)
 }
 
 func TestCreateRanConfigurationStructureName(t *testing.T) {
@@ -45,6 +64,8 @@ func TestCreateRanConfigurationStructureName(t *testing.T) {
 	result, err := CreateRanConfigurationStructureName(value)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }
 
 func TestCreateListOfAttributes(t *testing.T) {
@@ -52,6 +73,8 @@ func TestCreateListOfAttributes(t *testing.T) {
 	result, err := CreateListOfAttributes(value)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }
 
 func TestCreateAttributeName(t *testing.T) {
@@ -59,6 +82,8 @@ func TestCreateAttributeName(t *testing.T) {
 	result, err := CreateAttributeName(value)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }
 
 func TestCreateE2SmCCcEventTriggerDefinitionFormat3(t *testing.T) {
@@ -66,6 +91,8 @@ func TestCreateE2SmCCcEventTriggerDefinitionFormat3(t *testing.T) {
 	result, err := CreateE2SmCCcEventTriggerDefinitionFormat3(period)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }
 
 func TestCreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat1(t *testing.T) {
@@ -73,6 +100,8 @@ func TestCreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat1(
 	result, err := CreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat1(e2SmCccEventTriggerDefinitionFormat1)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }
 
 func TestCreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat2(t *testing.T) {
@@ -80,6 +109,8 @@ func TestCreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat2(
 	result, err := CreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat2(e2SmCccEventTriggerDefinitionFormat2)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }
 
 func TestCreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat3(t *testing.T) {
@@ -88,4 +119,6 @@ func TestCreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat3(
 	result, err := CreateEventTriggerDefinitionFormatE2SmCccEventTriggerDefinitionFormat3(e2SmCccEventTriggerDefinitionFormat3)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+	err = result.Validate()
+	assert.NoError(t, err)
 }

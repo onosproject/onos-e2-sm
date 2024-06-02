@@ -6,6 +6,7 @@ package pdubuilder
 import (
 	"testing"
 
+	encoder "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/encoder"
 	e2smcccv1 "github.com/onosproject/onos-e2-sm/servicemodels/e2sm_ccc/v1/e2sm-ccc-ies"
 	"github.com/stretchr/testify/assert"
 )
@@ -15,6 +16,14 @@ func TestCreateE2SmCCcRIcControlMessage(t *testing.T) {
 	result, err := CreateE2SmCCcRIcControlMessage(controlMessageFormat)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
+
+	encodedMsg, err := encoder.PerEncodeE2SmCCcRIcControlMessage(result)
+	assert.NoError(t, err)
+	assert.NotNil(t, encodedMsg)
+	decodedMsg, err := encoder.PerDecodeE2SmCCcRIcControlMessage(encodedMsg)
+	assert.NoError(t, err)
+	assert.NotNil(t, decodedMsg)
+
 }
 
 func TestCreateE2SmCCcControlMessageFormat1(t *testing.T) {
