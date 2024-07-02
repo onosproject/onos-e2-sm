@@ -95,15 +95,15 @@ jobs:
         env:
           DOCKER_TAG: latest
         run: |
-          ONOS_O1T_VERSION=${{ env.DOCKER_TAG }} make docker-build
-          ONOS_O1T_VERSION=${{ env.DOCKER_TAG }} make docker-push
+          ONOS_E2_SM_VERSION=${{ env.DOCKER_TAG }} make docker-build
+          ONOS_E2_SM_VERSION=${{ env.DOCKER_TAG }} make docker-push
       - name: Build and push Docker image with tag
         if: needs.version-check.outputs.dev_version == 'false'
         env:
           DOCKER_TAG: v${{ needs.version-check.outputs.target_version }}
         run: |
-          ONOS_O1T_VERSION=${{ env.DOCKER_TAG }} make docker-build
-          ONOS_O1T_VERSION=${{ env.DOCKER_TAG }} make docker-push
+          ONOS_E2_SM_VERSION=${{ env.DOCKER_TAG }} make docker-build
+          ONOS_E2_SM_VERSION=${{ env.DOCKER_TAG }} make docker-push
 
   bump-up-version:
     runs-on: ubuntu-latest
