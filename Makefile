@@ -7,14 +7,15 @@ export GO111MODULE=on
 
 E2T_MOD ?= github.com/onosproject/onos-e2t@master
 
-ONOS_E2_SM_VERSION := latest
+ONOS_E2_SM_VERSION ?= latest
 ONOS_BUILD_VERSION := v1.0
 ONOS_PROTOC_VERSION := v1.0.2
 
 BUF_VERSION := 1.0.0
 
-build-tools:=$(shell if [ ! -d "./build/build-tools" ]; then cd build && git clone https://github.com/onosproject/build-tools.git; fi)
-include ./build/build-tools/make/onf-common.mk
+GOLANG_CI_VERSION := v1.52.2
+
+all: build docker-build
 
 PHONY:build
 build: # @HELP build all libraries
@@ -60,7 +61,7 @@ build_protoc_gen_builder:
 	cd protoc-gen-builder/ && go build -v -o ./protoc-gen-builder && go install && cd ..
 
 test: # @HELP run the unit tests and source code validation
-test: license build build_protoc_gen_cgo build_protoc_gen_choice build_protoc_gen_builder
+test: build build_protoc_gen_cgo build_protoc_gen_choice build_protoc_gen_builder lint license
 	cd servicemodels/e2sm_rc && go test -race ./...
 	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 go test -race ./...
 	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 go test -race ./...
@@ -72,18 +73,16 @@ test: license build build_protoc_gen_cgo build_protoc_gen_choice build_protoc_ge
 	cd servicemodels/e2sm_rsm && go test -race ./...
 	cd servicemodels/test_sm_aper_go_lib/testsmctypes && GODEBUG=cgocheck=0 go test -race ./...
 
-jenkins-test:  # @HELP run the unit tests and source code validation producing a junit style report for Jenkins
-jenkins-test: license
-#	cd servicemodels/e2sm_kpm && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-#	cd servicemodels/e2sm_kpm_v2 && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-#	cd servicemodels/e2sm_kpm_v2_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-#	cd servicemodels/e2sm_rc_pre && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-#	cd servicemodels/e2sm_rc_pre_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-#	cd servicemodels/e2sm_mho && GODEBUG=cgocheck=0 TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-#	cd servicemodels/e2sm_mho_go && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
-#	cd servicemodels/e2sm_rc && TEST_PACKAGES=./... ./../../build/build-tools/build/jenkins/make-unit
+license: # @HELP run license checks
+	rm -rf venv
+	python3 -m venv venv
+	. ./venv/bin/activate;\
+	python3 -m pip install --upgrade pip;\
+	python3 -m pip install reuse;\
+	reuse lint
 
-sm-linters: golang-ci # @HELP examines Go source code and reports coding problems
+lint: buflint # @HELP examines Go source code and reports coding problems
+	golangci-lint --version | grep $(GOLANG_CI_VERSION) || curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b `go env GOPATH`/bin $(GOLANG_CI_VERSION)
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rc && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_kpm_v2 && golangci-lint run --timeout 5m && cd ..
@@ -123,7 +122,10 @@ protos-py:
 		--entrypoint /go/src/github.com/onosproject/onos-e2-sm/build/bin/compile-protos-py.sh \
 		onosproject/protoc-go:${ONOS_PROTOC_VERSION}
 
-PHONY: service-model-docker-e2sm_kpm-1.0.0
+docker-build: # @HELP build all Docker images
+docker-build: build service-model-docker-e2sm_kpm_v2_go-1.0.0 service-model-docker-e2sm_rsm-1.0.0 service-model-docker-e2sm_rc_pre_go-1.0.0 service-model-docker-e2sm_mho_go-1.0.0 service-model-docker-e2sm_rc-1.0.0
+
+PHONY: service-model-docker-e2sm_kpm-1.0.0 docker-push-service-model-docker-e2sm_kpm-1.0.0
 service-model-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_kpm ${E2T_MOD}
 	docker build . -f build/plugins/Dockerfile \
@@ -131,7 +133,10 @@ service-model-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin Docker 
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
 
-PHONY: service-model-docker-e2sm_kpm_v2-1.0.0
+docker-push-service-model-docker-e2sm_kpm-1.0.0: # @HELP push e2sm_kpm 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
+
+PHONY: service-model-docker-e2sm_kpm_v2-1.0.0 docker-push-service-model-docker-e2sm_kpm_v2-1.0.0
 service-model-docker-e2sm_kpm_v2-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_kpm_v2 ${E2T_MOD} onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 	docker build . -f build/plugins/Dockerfile \
@@ -139,7 +144,10 @@ service-model-docker-e2sm_kpm_v2-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin D
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
 
-PHONY: service-model-docker-e2sm_kpm_v2_go-1.0.0
+docker-push-service-model-docker-e2sm_kpm_v2-1.0.0: # @HELP push e2sm_kpm_v2 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
+
+PHONY: service-model-docker-e2sm_kpm_v2_go-1.0.0 docker-push-service-model-docker-e2sm_kpm_v2_go-1.0.0
 service-model-docker-e2sm_kpm_v2_go-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_kpm_v2_go ${E2T_MOD} onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
 	docker build . -f build/plugins/Dockerfile \
@@ -147,7 +155,10 @@ service-model-docker-e2sm_kpm_v2_go-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugi
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
 
-PHONY: service-model-docker-e2sm_rsm-1.0.0
+docker-push-service-model-docker-e2sm_kpm_v2_go-1.0.0: # @HELP push e2sm_kpm_v2 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
+
+PHONY: service-model-docker-e2sm_rsm-1.0.0 docker-push-service-model-docker-e2sm_rsm-1.0.0
 service-model-docker-e2sm_rsm-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_rsm ${E2T_MOD} onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
 	docker build . -f build/plugins/Dockerfile \
@@ -155,7 +166,10 @@ service-model-docker-e2sm_rsm-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Dock
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
 
-PHONY: service-model-docker-e2sm_ni-1.0.0
+docker-push-service-model-docker-e2sm_rsm-1.0.0: # @HELP push e2sm_kpm_v2 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
+
+PHONY: service-model-docker-e2sm_ni-1.0.0 docker-push-service-model-docker-e2sm_ni-1.0.0
 service-model-docker-e2sm_ni-1.0.0: # @HELP build e2sm_ni 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_ni ${E2T_MOD}
 	docker build . -f build/plugins/Dockerfile \
@@ -163,13 +177,19 @@ service-model-docker-e2sm_ni-1.0.0: # @HELP build e2sm_ni 1.0.0 plugin Docker im
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
 
-PHONY: service-model-docker-e2sm_rc_pre-1.0.0
+docker-push-service-model-docker-e2sm_ni-1.0.0: # @HELP push e2sm_ni 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
+
+PHONY: service-model-docker-e2sm_rc_pre-1.0.0 docker-push-service-model-docker-e2sm_rc_pre-1.0.0
 service-model-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_rc_pre ${E2T_MOD}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+
+docker-push-service-model-docker-e2sm_rc_pre-1.0.0: # @HELP push e2sm_rc_pre 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
 
 PHONY: service-model-docker-e2sm_rc_pre_go-1.0.0
 service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Docker image
@@ -179,6 +199,9 @@ service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 pl
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
 
+docker-push-service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP push e2sm_rc_pre_go 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
+
 PHONY: service-model-docker-e2sm_mho-1.0.0
 service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_mho ${E2T_MOD}
@@ -187,8 +210,10 @@ service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker 
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 
+docker-push-service-model-docker-e2sm_mho-1.0.0: # @HELP push e2sm_mho 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
 
-PHONY: service-model-docker-e2sm_mho_go-1.0.0
+PHONY: service-model-docker-e2sm_mho_go-1.0.0 docker-push-service-model-docker-e2sm_mho_go-1.0.0
 service-model-docker-e2sm_mho_go-1.0.0: # @HELP build e2sm_mho_go 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_mho_go ${E2T_MOD} onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 	docker build . -f build/plugins/Dockerfile \
@@ -196,7 +221,10 @@ service-model-docker-e2sm_mho_go-1.0.0: # @HELP build e2sm_mho_go 1.0.0 plugin D
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
 
-PHONY: service-model-docker-e2sm_rc-1.0.0
+docker-push-service-model-docker-e2sm_mho_go-1.0.0: # @HELP push e2sm_mho_go 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+
+PHONY: service-model-docker-e2sm_rc-1.0.0 docker-push-service-model-docker-e2sm_rc-1.0.0
 service-model-docker-e2sm_rc-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Docker image
 	./build/bin/build-deps e2sm_rc ${E2T_MOD} onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
 	docker build . -f build/plugins/Dockerfile \
@@ -204,42 +232,24 @@ service-model-docker-e2sm_rc-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Do
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
 			-t onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
 
-images: # @HELP build all Docker images
-images: build service-model-docker-e2sm_kpm_v2_go-1.0.0 \
-	service-model-docker-e2sm_rsm-1.0.0 \
-	service-model-docker-e2sm_rc_pre_go-1.0.0 \
-	service-model-docker-e2sm_mho_go-1.0.0 \
-	service-model-docker-e2sm_rc-1.0.0
+docker-push-service-model-docker-e2sm_rc-1.0.0: # @HELP push e2sm_rc_pre_go 1.0.0 plugin Docker image
+	docker push onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
 
+docker-push: # @HELP push all Docker images
+docker-push: docker-push-service-model-docker-e2sm_kpm_v2_go-1.0.0 docker-push-service-model-docker-e2sm_rsm-1.0.0 docker-push-service-model-docker-e2sm_rc_pre_go-1.0.0 docker-push-service-model-docker-e2sm_mho_go-1.0.0 docker-push-service-model-docker-e2sm_rc-1.0.0
 
-kind: # @HELP build Docker images and add them to the currently configured kind cluster
-kind: images
-	@if [ "`kind get clusters`" = '' ]; then echo "no kind cluster found" && exit 1; fi
-	kind load docker-image onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
-	kind load docker-image onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
+check-version: # @HELP check version is duplicated
+	./build/bin/version_check.sh all
 
+help:
+	@grep -E '^.*: *# *@HELP' $(MAKEFILE_LIST) \
+    | sort \
+    | awk ' \
+        BEGIN {FS = ": *# *@HELP"}; \
+        {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}; \
+    '
 
-
-
-all: build images
-
-publish: # @HELP publish version on github and dockerhub
-	./build/build-tools/publish-version servicemodels/e2sm_kpm_v2_go/${VERSION} onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0
-	./build/build-tools/publish-version servicemodels/e2sm_rc_pre_go/${VERSION} onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0
-	./build/build-tools/publish-version servicemodels/e2sm_mho_go/${VERSION} onosproject/service-model-docker-e2sm_mho_go-1.0.0
-	./build/build-tools/publish-version servicemodels/e2sm_rsm/${VERSION} onosproject/service-model-docker-e2sm_rsm-1.0.0
-	./build/build-tools/publish-version servicemodels/e2sm_rc/${VERSION} onosproject/service-model-docker-e2sm_rc-1.0.0
-
-
-jenkins-publish: # @HELP Jenkins calls this to publish artifacts
-	./build/bin/push-images
-	./build/build-tools/release-merge-commit
-
-clean:: # @HELP remove all the build artifacts
-	rm -rf ./build/_output ./vendor ./cmd/onos-e2-sm/onos-e2-sm ./cmd/onos/onos
-	rm -fr servicemodels/*/vendor
-	go clean -testcache github.com/onosproject/onos-e2-sm/...
-
+clean: # @HELP remove all the build artifacts
+	rm -rf ./build/_output ./build/_input ./vendor ./cmd/onos-e2-sm/onos-e2-sm ./cmd/onos/onos
+	rm -fr servicemodels/*/vendor servicemodels/*/build/_output
+	go clean github.com/onosproject/onos-e2-sm/...
