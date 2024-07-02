@@ -81,7 +81,7 @@ license: # @HELP run license checks
 	python3 -m pip install reuse;\
 	reuse lint
 
-lint: buflint # @HELP examines Go source code and reports coding problems
+lint: # @HELP examines Go source code and reports coding problems
 	golangci-lint --version | grep $(GOLANG_CI_VERSION) || curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b `go env GOPATH`/bin $(GOLANG_CI_VERSION)
 	cd servicemodels/e2sm_kpm && golangci-lint run --timeout 5m && cd ..
 	cd servicemodels/e2sm_rc && golangci-lint run --timeout 5m && cd ..
@@ -98,7 +98,7 @@ lint: buflint # @HELP examines Go source code and reports coding problems
 	cd protoc-gen-builder/ && golangci-lint run --timeout 5m && cd ..
 
 buflint: #@HELP run the "buf check lint" command on the proto files in 'api'
-	docker run \
+	docker run -it \
 		-v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
 		-v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
 		-w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
