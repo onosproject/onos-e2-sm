@@ -98,7 +98,7 @@ lint: buflint # @HELP examines Go source code and reports coding problems
 	cd protoc-gen-builder/ && golangci-lint run --timeout 5m && cd ..
 
 buflint: #@HELP run the "buf check lint" command on the proto files in 'api'
-	docker run -it \
+	docker run \
 		-v `pwd`:/go/src/github.com/onosproject/onos-e2-sm \
 		-v `pwd`/../onos-lib-go/api/asn1:/go/src/github.com/onosproject/onos-e2-sm/servicemodels/asn1 \
 		-w /go/src/github.com/onosproject/onos-e2-sm/servicemodels \
