@@ -53,7 +53,7 @@ jobs:
           for sm in $(find servicemodels -name go.mod)
           do
             chart_dir=$(dirname $sm)
-            $tag_name=$(echo $chart_dir/v${{ needs.version-check.outputs.target_version }})
+            tag_name=$(echo $chart_dir/v${{ needs.version-check.outputs.target_version }})
             curl -L \
               -X POST \
               -H "Accept: application/vnd.github+json" \
