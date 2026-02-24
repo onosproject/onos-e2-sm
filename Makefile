@@ -8,6 +8,19 @@ export GO111MODULE=on
 E2T_MOD ?= github.com/onosproject/onos-e2t@master
 
 ONOS_E2_SM_VERSION ?= latest
+DOCKER_TAG          ?= ${ONOS_E2_SM_VERSION}
+DOCKER_REPOSITORY   ?= onosproject/
+DOCKER_REGISTRY     ?= ""
+DOCKER_IMAGENAME_E2SM_KPM        := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_kpm-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_KPM_V2     := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_kpm_v2-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_KPM_V2_GO  := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_kpm_v2_go-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_RSM        := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_rsm-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_NI         := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_ni-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_RC_PRE     := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_rc_pre-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_RC_PRE_GO  := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_rc_pre_go-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_MHO        := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_mho-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_MHO_GO     := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_mho_go-1.0.0:${DOCKER_TAG}
+DOCKER_IMAGENAME_E2SM_RC         := ${DOCKER_REGISTRY}${DOCKER_REPOSITORY}service-model-docker-e2sm_rc-1.0.0:${DOCKER_TAG}
 ONOS_BUILD_VERSION := v1.0
 ONOS_PROTOC_VERSION := v1.0.2
 
@@ -131,43 +144,43 @@ service-model-docker-e2sm_kpm-1.0.0: # @HELP build e2sm_kpm 1.0.0 plugin Docker 
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_kpm" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_KPM}
 
 docker-push-service-model-docker-e2sm_kpm-1.0.0: # @HELP push e2sm_kpm 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_kpm-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_KPM}
 
 PHONY: service-model-docker-e2sm_kpm_v2-1.0.0 docker-push-service-model-docker-e2sm_kpm_v2-1.0.0
 service-model-docker-e2sm_kpm_v2-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
-	./build/bin/build-deps e2sm_kpm_v2 ${E2T_MOD} onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
+	./build/bin/build-deps e2sm_kpm_v2 ${E2T_MOD} ${DOCKER_IMAGENAME_E2SM_KPM_V2}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_kpm_v2" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_KPM_V2}
 
 docker-push-service-model-docker-e2sm_kpm_v2-1.0.0: # @HELP push e2sm_kpm_v2 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_kpm_v2-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_KPM_V2}
 
 PHONY: service-model-docker-e2sm_kpm_v2_go-1.0.0 docker-push-service-model-docker-e2sm_kpm_v2_go-1.0.0
 service-model-docker-e2sm_kpm_v2_go-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
-	./build/bin/build-deps e2sm_kpm_v2_go ${E2T_MOD} onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
+	./build/bin/build-deps e2sm_kpm_v2_go ${E2T_MOD} ${DOCKER_IMAGENAME_E2SM_KPM_V2_GO}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_kpm_v2_go" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_KPM_V2_GO}
 
 docker-push-service-model-docker-e2sm_kpm_v2_go-1.0.0: # @HELP push e2sm_kpm_v2 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_kpm_v2_go-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_KPM_V2_GO}
 
 PHONY: service-model-docker-e2sm_rsm-1.0.0 docker-push-service-model-docker-e2sm_rsm-1.0.0
 service-model-docker-e2sm_rsm-1.0.0: # @HELP build e2sm_kpm_v2 1.0.0 plugin Docker image
-	./build/bin/build-deps e2sm_rsm ${E2T_MOD} onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
+	./build/bin/build-deps e2sm_rsm ${E2T_MOD} ${DOCKER_IMAGENAME_E2SM_RSM}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rsm" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_RSM}
 
 docker-push-service-model-docker-e2sm_rsm-1.0.0: # @HELP push e2sm_kpm_v2 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_rsm-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_RSM}
 
 PHONY: service-model-docker-e2sm_ni-1.0.0 docker-push-service-model-docker-e2sm_ni-1.0.0
 service-model-docker-e2sm_ni-1.0.0: # @HELP build e2sm_ni 1.0.0 plugin Docker image
@@ -175,10 +188,10 @@ service-model-docker-e2sm_ni-1.0.0: # @HELP build e2sm_ni 1.0.0 plugin Docker im
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_ni" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_NI}
 
 docker-push-service-model-docker-e2sm_ni-1.0.0: # @HELP push e2sm_ni 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_ni-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_NI}
 
 PHONY: service-model-docker-e2sm_rc_pre-1.0.0 docker-push-service-model-docker-e2sm_rc_pre-1.0.0
 service-model-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin Docker image
@@ -186,21 +199,21 @@ service-model-docker-e2sm_rc_pre-1.0.0: # @HELP build e2sm_rc_pre 1.0.0 plugin D
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_RC_PRE}
 
 docker-push-service-model-docker-e2sm_rc_pre-1.0.0: # @HELP push e2sm_rc_pre 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_rc_pre-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_RC_PRE}
 
 PHONY: service-model-docker-e2sm_rc_pre_go-1.0.0
 service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Docker image
-	./build/bin/build-deps e2sm_rc_pre_go ${E2T_MOD} onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
+	./build/bin/build-deps e2sm_rc_pre_go ${E2T_MOD} ${DOCKER_IMAGENAME_E2SM_RC_PRE_GO}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc_pre_go" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_RC_PRE_GO}
 
 docker-push-service-model-docker-e2sm_rc_pre_go-1.0.0: # @HELP push e2sm_rc_pre_go 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_rc_pre_go-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_RC_PRE_GO}
 
 PHONY: service-model-docker-e2sm_mho-1.0.0
 service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker image
@@ -208,32 +221,32 @@ service-model-docker-e2sm_mho-1.0.0: # @HELP build e2sm_mho 1.0.0 plugin Docker 
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_mho" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_MHO}
 
 docker-push-service-model-docker-e2sm_mho-1.0.0: # @HELP push e2sm_mho 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_mho-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_MHO}
 
 PHONY: service-model-docker-e2sm_mho_go-1.0.0 docker-push-service-model-docker-e2sm_mho_go-1.0.0
 service-model-docker-e2sm_mho_go-1.0.0: # @HELP build e2sm_mho_go 1.0.0 plugin Docker image
-	./build/bin/build-deps e2sm_mho_go ${E2T_MOD} onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	./build/bin/build-deps e2sm_mho_go ${E2T_MOD} ${DOCKER_IMAGENAME_E2SM_MHO_GO}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_mho_go" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_MHO_GO}
 
 docker-push-service-model-docker-e2sm_mho_go-1.0.0: # @HELP push e2sm_mho_go 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_mho_go-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_MHO_GO}
 
 PHONY: service-model-docker-e2sm_rc-1.0.0 docker-push-service-model-docker-e2sm_rc-1.0.0
 service-model-docker-e2sm_rc-1.0.0: # @HELP build e2sm_rc_pre_go 1.0.0 plugin Docker image
-	./build/bin/build-deps e2sm_rc ${E2T_MOD} onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
+	./build/bin/build-deps e2sm_rc ${E2T_MOD} ${DOCKER_IMAGENAME_E2SM_RC}
 	docker build . -f build/plugins/Dockerfile \
 			--build-arg PLUGIN_MAKE_TARGET="e2sm_rc" \
 			--build-arg PLUGIN_MAKE_VERSION="1.0.0" \
-			-t onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
+			-t ${DOCKER_IMAGENAME_E2SM_RC}
 
 docker-push-service-model-docker-e2sm_rc-1.0.0: # @HELP push e2sm_rc_pre_go 1.0.0 plugin Docker image
-	docker push onosproject/service-model-docker-e2sm_rc-1.0.0:${ONOS_E2_SM_VERSION}
+	docker push ${DOCKER_IMAGENAME_E2SM_RC}
 
 docker-push: # @HELP push all Docker images
 docker-push: docker-push-service-model-docker-e2sm_kpm_v2_go-1.0.0 docker-push-service-model-docker-e2sm_rsm-1.0.0 docker-push-service-model-docker-e2sm_rc_pre_go-1.0.0 docker-push-service-model-docker-e2sm_mho_go-1.0.0 docker-push-service-model-docker-e2sm_rc-1.0.0
